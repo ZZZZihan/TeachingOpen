@@ -1,0 +1,24 @@
+{
+  "recovery": {
+    "tables": 69,
+    "changed_tables": [
+      "sys_log"
+    ],
+    "non_audit_equal": true,
+    "attachments_equal": true,
+    "audit_rows_before": 3807,
+    "audit_rows_after": 3967
+  },
+  "integration_before_switch": {
+    "tables": 69,
+    "changed_tables": [],
+    "non_audit_equal": true,
+    "attachments_equal": true,
+    "audit_rows_before": 3043,
+    "audit_rows_after": 3043
+  },
+  "original_source": {
+    "files": 5731,
+    "equal": true
+  }
+}

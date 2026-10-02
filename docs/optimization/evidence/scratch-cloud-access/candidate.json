@@ -1,0 +1,52 @@
+{
+  "product_commit": "c2a4cb7f11752e77a09f1bd4f18f11d679d82864",
+  "base_commit": "c41b8ba615bee4d17dec290035fc25da9cb77540",
+  "base_pr": "https://github.com/ZZZZihan/TeachingOpen/pull/35",
+  "jar_sha256": "ba9a03697641afdb8ee1781ab20848e1865fdfa4ee4c1c1ac317156f7efcb72f",
+  "bundle_manifest_sha256": "9a4b79ad972f17c61d082209c7bcd4e866a54e3be054021f9659da204ac242f6",
+  "frontend_source_commit": "8881cbe524526d39bf835cd8b433d385579f2ca1",
+  "frontend_build_commit": "7a0fe014d5de5c68335461321d8c1c1aa0553257",
+  "frontend_rebuilt": false,
+  "tests": {
+    "legacy_reproduction": 14,
+    "scratch_cloud": 52,
+    "related_regressions": 469,
+    "current_real_total": 521,
+    "python_tool_checks": 42
+  },
+  "stopped_ports": {
+    "13336": true,
+    "16409": true,
+    "18131": true,
+    "18132": true
+  },
+  "data_preservation": {
+    "recovery": {
+      "tables": 69,
+      "changed_tables": [
+        "sys_log"
+      ],
+      "non_audit_equal": true,
+      "attachments_equal": true,
+      "audit_rows_before": 3807,
+      "audit_rows_after": 3967
+    },
+    "integration_before_switch": {
+      "tables": 69,
+      "changed_tables": [],
+      "non_audit_equal": true,
+      "attachments_equal": true,
+      "audit_rows_before": 3043,
+      "audit_rows_after": 3043
+    },
+    "original_source": {
+      "files": 5731,
+      "equal": true
+    }
+  },
+  "browser_e2e": false,
+  "shipped_scratch_client_verified": false,
+  "production_changed": false,
+  "remote_merged": false,
+  "scope": "Backend cloud-variable authorization and mutations only; client integration and Redis disaster recovery remain pending."
+}
