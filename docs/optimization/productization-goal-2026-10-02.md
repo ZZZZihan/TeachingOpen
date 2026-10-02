@@ -85,7 +85,6 @@
 | [#1](https://github.com/ZZZZihan/TeachingOpen/pull/1) | 产品化目标与逐项 PR 规则 | 文档链接、差异自检；无应用改动 |
 | [#2](https://github.com/ZZZZihan/TeachingOpen/pull/2) | 修复 Oracle JDBC 坐标，恢复后端编译打包 | 基于 main，提交 `6d798ac`；独立工作区干净构建三模块成功，Java 测试被父 POM 跳过；未连接 Oracle |
 | [#3](https://github.com/ZZZZihan/TeachingOpen/pull/3) | 禁用第三方登录时应用仍可启动 | 基于 #2，提交 `0748a32`；独立构建通过，修复前缺少工厂 Bean 退出，修复后真实健康/课程接口成功；未验证真实第三方认证 |
-
 | [#4](https://github.com/ZZZZihan/TeachingOpen/pull/4) | 可并行、可恢复的独立开发环境 | 基于 #3，提交 `8c1827d`；新建 69 表、5 个合成账号，真实准备/就绪及停止重启检查通过，修复端口关闭后立即重启失败；不是备份恢复验收 |
 | [#5](https://github.com/ZZZZihan/TeachingOpen/pull/5) | 未登录、无效和退出后凭证返回 HTTP 401 | 基于 #4，提交 `57d2a08`；干净构建成功，实际验证码/登录/退出的前后对照各 7 项符合预期；未验证完整角色/附件权限 |
 | [#6](https://github.com/ZZZZihan/TeachingOpen/pull/6) | 公共入口布局、默认品牌与导航、缺配置回退 | 独立基于 main，提交 `c8f46ed`；锁文件安装、32 项受控检查、显式 ESLint、构建通过；真实后端浏览器 390/768/1440 默认首页及课程页、键盘导航等 10 项通过；自定义配置及暖缓存首页兼容已检查，含 14 张截图 |
