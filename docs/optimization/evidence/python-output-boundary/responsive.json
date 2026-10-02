@@ -1,0 +1,29 @@
+[
+  {
+    "document": 1440,
+    "noticeVisible": true,
+    "outputHeight": 400,
+    "outputTop": 116,
+    "outputWidth": 480,
+    "scrollHeight": 7899,
+    "viewport": 1440
+  },
+  {
+    "document": 768,
+    "noticeVisible": true,
+    "outputHeight": 400,
+    "outputTop": 640,
+    "outputWidth": 466.734375,
+    "scrollHeight": 8193,
+    "viewport": 768
+  },
+  {
+    "document": 390,
+    "noticeVisible": true,
+    "outputHeight": 400,
+    "outputTop": 640,
+    "outputWidth": 369.9921875,
+    "scrollHeight": 10378,
+    "viewport": 390
+  }
+]
