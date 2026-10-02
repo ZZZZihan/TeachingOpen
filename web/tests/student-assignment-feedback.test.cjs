@@ -7,7 +7,7 @@ const flush = () => new Promise(resolve => setImmediate(resolve))
 function mount () {
   const source = readFileSync(resolve(__dirname, '../src/views/account/course/MyAdditionalWorkList.vue'), 'utf8')
   const requests = []; const opened = []; const files = []
-  const ctx = { component: null, URL, TeachingWorkSubmitModal: {}, window: { location: { origin: 'http://local.test' }, open: (...args) => opened.push(args) }, getFilePrevew: value => { if (value === '/broken.doc') throw new Error('broken-config'); return value }, getAction: (url, params) => new Promise((resolve, reject) => requests.push({ url, params, resolve, reject })) }
+  const ctx = { component: null, URL, URLSearchParams, TeachingWorkSubmitModal: {}, window: { location: { origin: 'http://local.test' }, open: (...args) => opened.push(args) }, getFilePrevew: value => { if (value === '/broken.doc') throw new Error('broken-config'); return value }, getAction: (url, params) => new Promise((resolve, reject) => requests.push({ url, params, resolve, reject })) }
   vm.createContext(ctx); vm.runInContext(source.match(/<script>([\s\S]*?)<\/script>/)[1].replace(/^import .*$/gm, '').replace('export default', 'component ='), ctx)
   const c = ctx.component; const i = { ...c.data(), $refs: { submitModal: { open: value => files.push(value) } }, $set: (o, k, v) => { o[k] = v } }
   for (const [k,v] of Object.entries(c.methods)) i[k] = v.bind(i)
@@ -63,4 +63,12 @@ test('文件作业继续提交保留作品 ID 和名称，重做保留更新目�
   h.i.toAdditionalWork(row,false); assert.equal(h.files[0].id,'saved'); assert.equal(h.files[0].workName,'我的观察'); assert.equal(h.files[0].additionalId,'task')
   h.i.toAdditionalWork(row,true); assert.equal(h.files[1].id,'saved'); assert.equal(h.files[1].workName,'任务')
   h.i.toAdditionalWork({...row,mineWorkStatus:2},false); assert.equal(h.files.length,2)
+})
+
+test('Python 继续与重做均保留 ID；名称和模板查询参数完整往返', () => {
+  const h=mount(),row={...work,codeType:4,mineWorkId:'saved',mineWorkStatus:1,workName:'任务 & 100%',mineWorkName:'我的 + 作品',mineWorkUrl:'/mine.py?a=1&b=2',workUrl_url:'/template.py?x=a+b&y=2'}
+  h.i.toAdditionalWork(row,false);let p=new URL(h.opened[0][0],'http://fixture').searchParams
+  assert.equal(p.get('workId'),'saved');assert.equal(p.get('workName'),row.mineWorkName);assert.equal(p.get('workFile'),row.mineWorkUrl)
+  h.i.toAdditionalWork(row,true);p=new URL(h.opened[1][0],'http://fixture').searchParams
+  assert.equal(p.get('workId'),'saved');assert.equal(p.get('workName'),row.workName);assert.equal(p.get('workFile'),row.workUrl_url);assert.equal(p.get('resetTemplate'),'1')
 })

@@ -1,0 +1,83 @@
+{
+  "scope": "Actual inherited Vue/Ace/Skulpt editor and production bridge; loopback-only synthetic HTTP service; no platform credentials or real browser login.",
+  "observations": [
+    {
+      "case": "baseline-template",
+      "observed": "Encoded workFile was ignored: default turtle example and empty title appeared."
+    },
+    {
+      "case": "baseline-no-config",
+      "observed": "Actual submit raised CONFIG.domianURL null TypeError, with no upload."
+    },
+    {
+      "case": "template-loaded",
+      "observed": "Encoded workFile loads fixture code and title 我的练习 & 100%."
+    },
+    {
+      "case": "first-save",
+      "observed": "Actual Ace paste and submit produced saved-2 and updated address workId."
+    },
+    {
+      "case": "second-save",
+      "observed": "Renaming and changing code retained saved-2. Slow-submit disabled name and submit."
+    },
+    {
+      "case": "reopen",
+      "observed": "Reload displayed second title and second code from saved-2."
+    },
+    {
+      "case": "load-error",
+      "observed": "503 info response showed retry and disabled submit; no default example was substituted."
+    },
+    {
+      "case": "load-retry",
+      "observed": "Restored fixture service; retry reopened saved-2 and its code."
+    },
+    {
+      "case": "save-error",
+      "observed": "Failed business submit showed recoverable error and retained new code."
+    },
+    {
+      "case": "save-retry",
+      "observed": "Restored service; retry used same registered file and work ID; reload returned new code."
+    },
+    {
+      "case": "execution",
+      "observed": "Reopened code ran in actual Skulpt UI and printed 失败重试后保留的代码 and 72."
+    },
+    {
+      "case": "responsive",
+      "observed": "At 1440/768/390, document and body widths equaled viewport; 390 overflow menu exposed title and submit and successfully submitted."
+    },
+    {
+      "case": "session-error",
+      "observed": "HTTP 401 showed login/permission guidance while retaining code and releasing busy state."
+    },
+    {
+      "case": "course-template",
+      "observed": "A separately opened encoded course url loaded the expected fixture code."
+    }
+  ],
+  "widths": [
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "bodyWidth": 1440
+    },
+    {
+      "width": 768,
+      "documentWidth": 768,
+      "bodyWidth": 768
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "bodyWidth": 390
+    }
+  ],
+  "limits": [
+    "Real Java API was checked separately by CLI; no authenticated browser E2E.",
+    "Local export menu was clicked but browser download event timed out; no browser download acceptance. Current-code export is covered by component contract test.",
+    "No real Qiniu upload; mocked SDK protocol only."
+  ]
+}
