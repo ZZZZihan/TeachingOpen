@@ -1,0 +1,135 @@
+PASS anonymous management list
+PASS anonymous management add
+PASS anonymous management edit
+PASS anonymous management delete
+PASS anonymous management deleteBatch
+PASS anonymous management sendWork
+PASS anonymous management exportXls
+PASS anonymous management importExcel
+PASS anonymous denied management preserves rows and files
+PASS student_a management list
+PASS student_a management add
+PASS student_a management edit
+PASS student_a management delete
+PASS student_a management deleteBatch
+PASS student_a management sendWork
+PASS student_a management exportXls
+PASS student_a management importExcel
+PASS student_a denied management preserves rows and files
+PASS student_b management list
+PASS student_b management add
+PASS student_b management edit
+PASS student_b management delete
+PASS student_b management deleteBatch
+PASS student_b management sendWork
+PASS student_b management exportXls
+PASS student_b management importExcel
+PASS student_b denied management preserves rows and files
+PASS anonymous private queryById
+PASS other student private queryById
+PASS other class teacher private queryById
+PASS student_a authorized private queryById
+PASS teacher_a authorized private queryById
+PASS admin authorized private queryById
+PASS anonymous private queryTeachingWorkCorrectByMainId
+PASS other student private queryTeachingWorkCorrectByMainId
+PASS other class teacher private queryTeachingWorkCorrectByMainId
+PASS student_a authorized private queryTeachingWorkCorrectByMainId
+PASS teacher_a authorized private queryTeachingWorkCorrectByMainId
+PASS admin authorized private queryTeachingWorkCorrectByMainId
+PASS anonymous private queryTeachingWorkCommentByMainId
+PASS other student private queryTeachingWorkCommentByMainId
+PASS other class teacher private queryTeachingWorkCommentByMainId
+PASS student_a authorized private queryTeachingWorkCommentByMainId
+PASS teacher_a authorized private queryTeachingWorkCommentByMainId
+PASS admin authorized private queryTeachingWorkCommentByMainId
+PASS teacher A cannot read out-of-scope b
+PASS teacher A cannot edit out-of-scope b
+PASS teacher A cannot delete out-of-scope b
+PASS teacher A cannot read out-of-scope multi
+PASS teacher A cannot edit out-of-scope multi
+PASS teacher A cannot delete out-of-scope multi
+PASS teacher A cannot read out-of-scope wrong
+PASS teacher A cannot edit out-of-scope wrong
+PASS teacher A cannot delete out-of-scope wrong
+PASS teacher cannot create cross-class owner
+PASS teacher cannot import unscoped workbook
+PASS mixed class delete rejected before first mutation
+PASS mixed recipients rejected before first write
+PASS foreign source cannot be sent to own class
+PASS all resource denials preserve business rows and attachment bytes
+PASS teacher_a scoped list
+PASS teacher_a list applies class and owner boundary
+PASS teacher_a scoped XLS export
+PASS teacher_a decoded XLS cells match class boundary
+PASS teacher_b scoped list
+PASS teacher_b list applies class and owner boundary
+PASS teacher_b scoped XLS export
+PASS teacher_b decoded XLS cells match class boundary
+PASS admin scoped list
+PASS admin list applies class and owner boundary
+PASS admin scoped XLS export
+PASS admin decoded XLS cells match class boundary
+PASS foreign-only export selection produces no foreign work
+PASS selections cannot bypass export scope
+PASS foreign department filter stays within teacher scope
+PASS foreign filter does not expose class B rows
+PASS teacher reads descendant-class work
+PASS owner reads own work in second class
+PASS teacher feedback allowed for own class
+PASS feedback preserves original owner class assignment and creator
+PASS feedback and comment persisted
+PASS owner reads saved feedback
+PASS owner receives actual saved score and comment
+PASS teacher sends to authorized class member
+PASS authorized send persists target owner
+PASS same-name overwrite outside teacher class denied
+PASS denied send preserves every potential overwrite target
+PASS teacher_a creates managed work
+PASS teacher_a create persisted
+PASS teacher_a edits managed work
+PASS teacher_a edit persisted
+PASS teacher_a reads managed work
+PASS teacher_a deletes managed work
+PASS teacher_a delete persisted
+PASS teacher_a recreates for batch delete
+PASS teacher_a batch deletes managed work
+PASS teacher_a batch delete persisted
+PASS admin creates managed work
+PASS admin create persisted
+PASS admin edits managed work
+PASS admin edit persisted
+PASS admin reads managed work
+PASS admin deletes managed work
+PASS admin delete persisted
+PASS admin recreates for batch delete
+PASS admin batch deletes managed work
+PASS admin batch delete persisted
+PASS admin empty import reaches existing validation
+PASS admin management list available
+PASS admin export available
+PASS dev creates managed work
+PASS dev create persisted
+PASS dev edits managed work
+PASS dev edit persisted
+PASS dev reads managed work
+PASS dev deletes managed work
+PASS dev delete persisted
+PASS dev recreates for batch delete
+PASS dev batch deletes managed work
+PASS dev batch delete persisted
+PASS dev empty import reaches existing validation
+PASS dev management list available
+PASS dev export available
+PASS teacher without managed classes denied list
+PASS teacher without managed classes denied exportXls
+PASS teacher without managed classes denied queryById
+PASS teacher deletes own probe attachment
+PASS allowed deletion removes owned work and child rows
+PASS unrelated class attachment retained
+PASS teacher B deletes own unshared attachment
+PASS authorized unshared deletion removes attachment bytes and file row
+PASS all original business class role and daily-log rows restored
+PASS teacher managed class restored
+PASS all original attachment bytes restored
+134/134 checks passed
