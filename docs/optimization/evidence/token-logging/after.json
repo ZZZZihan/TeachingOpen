@@ -1,0 +1,62 @@
+{
+  "observed_utc": "2026-10-02T16:12:22.891770+00:00",
+  "jar_sha256": "ccb4f4732ac91b4b27ab8ee43b41bd7d735a4a641cedb314c5cefcd916bc8889",
+  "expected_legacy": false,
+  "scope": "real HTTP authentication, owned Redis cache JWT expiry/refresh, DEBUG and INFO log observation, logout and revocation; no log excerpts or credentials exported",
+  "passed": 13,
+  "total": 13,
+  "cases": [
+    {
+      "case": "valid synthetic session reads assigned unit",
+      "passed": true
+    },
+    {
+      "case": "owned session cache contains an expired signed JWT",
+      "passed": true
+    },
+    {
+      "case": "expired cache JWT refresh keeps assigned unit accessible",
+      "passed": true
+    },
+    {
+      "case": "refresh writes a live JWT and positive cache lifetime",
+      "passed": true
+    },
+    {
+      "case": "next request still authenticates after refresh",
+      "passed": true
+    },
+    {
+      "case": "actual logout succeeds and removes session cache",
+      "passed": true
+    },
+    {
+      "case": "logged-out credential remains rejected",
+      "passed": true
+    },
+    {
+      "case": "DEBUG authentication event actually observed",
+      "passed": true
+    },
+    {
+      "case": "INFO refresh event actually observed",
+      "passed": true
+    },
+    {
+      "case": "authentication log token exposure matches candidate",
+      "passed": true
+    },
+    {
+      "case": "refresh log token exposure matches candidate",
+      "passed": true
+    },
+    {
+      "case": "captured request log credential exposure matches candidate",
+      "passed": true
+    },
+    {
+      "case": "no password material in captured request log",
+      "passed": true
+    }
+  ]
+}

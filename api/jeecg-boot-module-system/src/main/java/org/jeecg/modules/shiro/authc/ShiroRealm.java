@@ -115,7 +115,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		}
 
 		// 查询用户信息
-		log.debug("———校验token是否有效————checkUserTokenIsEffect——————— "+ token);
+		log.debug("checkUserTokenIsEffect: checking authentication token");
         LoginUser loginUser = sysBaseAPI.getUserByName(username);
 		if (loginUser == null) {
 			throw new AuthenticationException("用户不存在!");
@@ -154,7 +154,7 @@ public class ShiroRealm extends AuthorizingRealm {
 				// 设置超时时间
 				redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, newAuthorization);
 				redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME);
-                log.info("——————————用户在线操作，更新token保证不掉线—————————jwtTokenRefresh——————— "+ token);
+                log.info("jwtTokenRefresh: refreshed active session");
 			}
             //update-begin--Author:scott  Date:20191005  for：解决每次请求，都重写redis中 token缓存问题
 //			else {
