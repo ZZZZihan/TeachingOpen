@@ -286,6 +286,6 @@
     "pull_request": "https://github.com/ZZZZihan/TeachingOpen/pull/34",
     "product_commit": "10a3f167b90fe4f270792e035985c4a38aedb305",
     "scope": "Notification first-frame identity, outbound token validation, multi-session cleanup, test sender roles and no payload logs. Scratch cloudData and other announcement REST authorization remain open.",
-    "same_origin_local_proxy": "Actual HTTP 400 on Upgrade at 18112; next independent fix required."
+    "same_origin_local_proxy": "Resolved by PR35 c41b8ba; 71/71 real proxy checks plus 42 Python checks repeated on local integration 8881cbe. Browser login/UI and Scratch cloud-data authorization remain pending."
   }
 }
