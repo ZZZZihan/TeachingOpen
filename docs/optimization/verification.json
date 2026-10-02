@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-02",
+  "node": "26.7.0",
+  "npm": "11.19.0",
+  "checks": {
+    "test": {
+      "exitCode": 0,
+      "pass": 32,
+      "fail": 0,
+      "course": 13,
+      "startup": 18,
+      "reactiveVueHeader": 1
+    },
+    "lintChanged": {
+      "exitCode": 0,
+      "files": 4
+    },
+    "productionBuild": {
+      "exitCode": 0,
+      "warnings": 5
+    },
+    "proFindingsBefore": {
+      "pass": 25,
+      "fail": 6
+    },
+    "browser": {
+      "backend": "local synthetic API",
+      "nonLocalRequests": "blocked",
+      "finalCases": [
+        "mixed cache plus 403",
+        "403 retry does not mount",
+        "16s late403 removes menu and cache",
+        "authorization recovery",
+        "course failure/retry/filter"
+      ]
+    }
+  },
+  "evidenceLimits": [
+    "controlled method tests",
+    "actual Vue2 reactivity",
+    "actual browser with synthetic API",
+    "no real Java backend or role acceptance",
+    "no post-fix Pro approval"
+  ],
+  "sourceSha256": {
+    "web/src/main.js": "a5525c3f8b3d87580201d7ee5e68ff92ef987b50c233fde143bb8dddf64326ab",
+    "web/src/utils/startup.js": "8feeab2d1e5e3298885c33465f5799330a06a6bc46f811037d0fc71f3c542200",
+    "web/src/views/home/CourseList.vue": "ab06bb904e38cc436aa524b88d070c41660a95712e193e81d81bc8c28d517552",
+    "web/src/views/home/modules/Header.vue": "1bc4bb40e80ae10530ee91eb60a2e90401d73de326a36fe4a001fd3cd86015f7",
+    "web/tests/startup.test.cjs": "2b2b14f49894ed4bd259f6ff0eb82cffb36639214379841d963f8991e4a2eb93",
+    "web/tests/course-list.test.cjs": "0b3292fd86c2d06793d94a1a589b09ced70e41b05028988fade5a5bfb36792ce",
+    "web/tests/header-menu.test.cjs": "d07d097d26e5d35f6a2d7bd0029822ebb35a6e1670942efffc57a0760877e642",
+    "web/tests/browser-fixture.py": "2050adb68f4c108f4f69a5c809deeb7b153415d1f7d37f5d2e1d4afe6ce8b675",
+    "web/package-lock.json": "100033635ce1d01f5ee7b8cd1385bc958edde7ad5686d441d205b49ea7e78e74"
+  },
+  "artifactSha256": {
+    "tests.txt": "7ceacbff655b60b37127befbf22673a87f8f888a462f39f74cafe2f6d14dcc6c",
+    "startup-recovered.png": "6b27d2bdec23383a159d1f77443efc738656a922c91f193459bb74947f1af585",
+    "startup-error-after.png": "4b794bf7376289a6a6ed9c2988549c72aae59ba80e5224a547f3ddffd99ad696",
+    "build.txt": "f26807c1f30d78e976aa02ebf0b2ba30ad2ea3926cf8179c645f366c748d08d8",
+    "install-round1.txt": "bf560117437ca99f0166ce0268d978258b557c465cb52dfb377cfeb9dede2934",
+    "pro-findings-before.txt": "3e307a8c5aca9c70c0232fa20e0ecef58b67b7ecc147bd14afe18b5d4f3b4d28",
+    "lint.txt": "a099e9022889b94940664cac6d1c62f6a8e931c6ad2fcce38bff7f97780300fa",
+    "course-filter-recovered.png": "0c23ab1391afa5a693945befc46b2d7b9952bf643949070f1255c3a6eb4bd280",
+    "header-menu-before.txt": "b6955a5cce556efbc5766c6ebb13841d552809d310b04440a3727bb962ef41ba",
+    "startup-before.png": "9bf587e2d6d136beef31c3ac4f3f9d6a95a6c06519a19fdb4892a8ae546447ea",
+    "startup-final.png": "6b27d2bdec23383a159d1f77443efc738656a922c91f193459bb74947f1af585"
+  },
+  "rawArtifactSha256BeforeWhitespaceNormalization": {
+    "tests.txt": "7ceacbff655b60b37127befbf22673a87f8f888a462f39f74cafe2f6d14dcc6c",
+    "build.txt": "dde4910bf5fbfdd16eb3422c87faf121e35b2359222d094bc38a019ff8c7ad5d",
+    "install-round1.txt": "bf560117437ca99f0166ce0268d978258b557c465cb52dfb377cfeb9dede2934",
+    "pro-findings-before.txt": "60561cf933291a295041df2268e95e778deab0aef2c780f35bf798062bc82674",
+    "lint.txt": "9fa2c18339d6e4727952b54339afffa1e56c548b616bdd79e70169ae536e1424",
+    "header-menu-before.txt": "ec1ea5e8a3aaa7b6f319926de5f29e150c6142062f268e63d219a0dea0eadc31"
+  },
+  "logNormalization": "Published text log copies remove only trailing whitespace and blank EOF lines; original local baseline logs preserved."
+}

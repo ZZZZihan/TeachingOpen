@@ -22,6 +22,8 @@ module.exports = {
     // 生产环境取消 console.log
     if (process.env.NODE_ENV === 'production') {
       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+      // Terser 1.x hashes its disk cache with MD4, unavailable in modern OpenSSL.
+      config.optimization.minimizer[0].options.cache = false
     }
   },
   chainWebpack: (config) => {

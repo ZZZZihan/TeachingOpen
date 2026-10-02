@@ -23,79 +23,82 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import TMenu from '@/components/menu/tmenu'
-import { getFileAccessHttpUrl } from "@/api/manage"
+import { getFileAccessHttpUrl } from '@/api/manage'
 export default {
-  components: {
-    TMenu,
-  },
-  data() {
-    return {
-      menus: [],
-      logo: '/logo.png',
-      logo2: '/logo.png',
-      avatarUrl: '/logo.png',
-      menuFixed: false
-    }
-  },
-  created() {
-    this.menus = this.$store.getters.menuList
-    if (this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain) {
-      this.logo = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo
-      this.avatarUrl = this.logo
-    }
-    if (this.$store.getters.sysConfig.logo2 && this.$store.getters.sysConfig.qiniuDomain) {
-      this.logo2 = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo2
-    }
-    if (this.$store.getters.sysConfig.avatar && this.$store.getters.sysConfig.qiniuDomain) {
-       this.avatarUrl = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.avatar
-    }
-    if(this.getFileAccessHttpUrl(this.avatar())){
-      this.avatarUrl = this.getFileAccessHttpUrl(this.avatar())
-    } 
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll)
-  },
-  methods:{
-    ...mapActions(["Logout"]),
-    ...mapGetters(['nickname', 'avatar', 'userInfo']),
-    getFileAccessHttpUrl,
-    handleScroll(){
-      let scrollTop = document.documentElement.scrollTop
-      if (scrollTop >= 105) {
-        this.menuFixed = true
-      } else {
-        this.menuFixed = false
-      }
+    components: {
+        TMenu
     },
-    enter() {
-      this.$router.push('/account/center')
+    data () {
+        return {
+            logo: '/logo.png',
+            logo2: '/logo.png',
+            avatarUrl: '/logo.png',
+            menuFixed: false
+        }
     },
-    handleLogout() {
-      const that = this;
-      this.$confirm({
-        title: "提示",
-        content: "真的要注销登录吗 ?",
-        onOk() {
-          return that
-            .Logout({})
-            .then(() => {
-              window.location.reload()
-            })
-            .catch((err) => {
-              that.$message.error({
-                title: "错误",
-                description: err.message,
-              });
-            });
+    computed: {
+        menus () {
+            return this.$store.state.user.menuList || []
+        }
+    },
+    created () {
+        if (this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain) {
+            this.logo = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo
+            this.avatarUrl = this.logo
+        }
+        if (this.$store.getters.sysConfig.logo2 && this.$store.getters.sysConfig.qiniuDomain) {
+            this.logo2 = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo2
+        }
+        if (this.$store.getters.sysConfig.avatar && this.$store.getters.sysConfig.qiniuDomain) {
+            this.avatarUrl = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.avatar
+        }
+        if (this.getFileAccessHttpUrl(this.avatar())) {
+            this.avatarUrl = this.getFileAccessHttpUrl(this.avatar())
+        }
+    },
+    mounted () {
+        window.addEventListener('scroll', this.handleScroll)
+    },
+    beforeDestroy () {
+        window.removeEventListener('scroll', this.handleScroll)
+    },
+    methods: {
+        ...mapActions(['Logout']),
+        ...mapGetters(['nickname', 'avatar', 'userInfo']),
+        getFileAccessHttpUrl,
+        handleScroll () {
+            let scrollTop = document.documentElement.scrollTop
+            if (scrollTop >= 105) {
+                this.menuFixed = true
+            } else {
+                this.menuFixed = false
+            }
         },
-        onCancel() {},
-      });
-    },
-  }
+        enter () {
+            this.$router.push('/account/center')
+        },
+        handleLogout () {
+            const that = this
+            this.$confirm({
+                title: '提示',
+                content: '真的要注销登录吗 ?',
+                onOk () {
+                    return that
+                        .Logout({})
+                        .then(() => {
+                            window.location.reload()
+                        })
+                        .catch((err) => {
+                            that.$message.error({
+                                title: '错误',
+                                description: err.message
+                            })
+                        })
+                },
+                onCancel () {}
+            })
+        }
+    }
 }
 </script>
 

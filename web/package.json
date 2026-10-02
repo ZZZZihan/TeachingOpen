@@ -2,11 +2,15 @@
   "name": "vue-antd-jeecg",
   "version": "2.2.0",
   "private": true,
+  "packageManager": "npm@11.19.0",
   "scripts": {
-    "pre": "yarn --registry https://registry.npm.taobao.org || cnpm install || npm install --registry https://registry.npm.taobao.org ",
+    "pre": "npm ci --ignore-scripts --no-audit --no-fund",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lint:course": "eslint --no-ignore src/views/home/CourseList.vue",
+    "lint:changed": "eslint --no-ignore src/views/home/CourseList.vue src/main.js src/utils/startup.js src/views/home/modules/Header.vue",
+    "test": "node --test tests/*.test.cjs"
   },
   "dependencies": {
     "@antv/data-set": "^0.11.2",
