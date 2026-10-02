@@ -1,0 +1,177 @@
+{
+  "observed_utc": "2026-10-02T19:58:42.770816+00:00",
+  "candidate_commit": "418028107176889a89c6c0ea1459949808c56050",
+  "base_commit": "8d3a3fe78ec1015cf4c04e5fa16fdc46aa0034e5",
+  "base_pr": 21,
+  "scope": "Actual UnitViewModal and JModal, authored local media and real checked-in Scratch player; synthetic API, no authenticated application shell.",
+  "checks": {
+    "frontend_tests": {
+      "passed": 82,
+      "total": 82,
+      "new": 12
+    },
+    "modified_vue_lint": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "player_script_syntax": true,
+    "production_build_exit": 0,
+    "existing_build_warnings": 6,
+    "built_files": 4871,
+    "dist_path_hashes_aggregate_sha256": "c1251e7683a56698d17376107894a3c6466839f70010488178a155ca7bdd9285",
+    "diff_check": true
+  },
+  "source_files_sha256": {
+    "web/public/js/common.js": "695cc8acf3ee03adeea79ecceb77c695879628bda9f71dcbce4a459319fa8cf6",
+    "web/public/scratch3/index.html": "14c76ed3cbb1780e881a7ed7e74e863c9b07d18fb8ce50e1573709ec95535b9b",
+    "web/public/scratch3/player-layout.js": "e7ccdb0b0a906d8849bd66e86226b5177f5f48f3c0e9253dffad68458dcee48f",
+    "web/public/scratch3/player.html": "1e72e1d6d0674de63b0bdb39ff0ac190883f36900353ef9d38fb560492fad936",
+    "web/public/scratchjr/editor.html": "2123e4763a854260dfcb9594874806996b701800e4f4c968c011f82657a1768a",
+    "web/src/views/account/course/modules/UnitViewModal.vue": "cf15fdb263b624b58acce54dbdf17d34c6adee439c9972c2f8f722265a457cf5",
+    "web/tests/learning-reader.test.cjs": "f906e7dab4eedcaced26570a03ee329721d4413ab0f67fb706779a646ed188ad",
+    "web/tests/reader-preview/assets/lesson-notes.txt": "d3c30f4c451bca4c9d9064a1e75d2438237f59b81144d58a5dd102279e05e3ae",
+    "web/tests/reader-preview/assets/lesson.mp4": "a13e04078b6d1a7aa52bec79aea4a8beeec7d5911d88c02931df84180b363dd0",
+    "web/tests/reader-preview/assets/lesson.sb3": "364e5d9d8afc0d6fa1c95819e9ffa1784c96233dabb960386eb22932deea869f",
+    "web/tests/reader-preview/build.cjs": "dbdbb520826a4a6904f66393e0da3d3fd4830c11c4b32eba3c6b5d03e077f6b0",
+    "web/tests/reader-preview/entry.js": "7a2a0a1ac2b9d0ac4ec4aaabfeb054934f09bb0c414ccc01fde1f0021e09976d",
+    "web/tests/reader-preview/fixtures.js": "de33357cd404ea53615d6bd66cf6fdb3eecbb69b8644e8fcb6717eff109c2e07",
+    "web/tests/reader-preview/preview.css": "58c5eb8df3f7077549e2911606df9ff30bd76990b47f0b696135031ac692e23f",
+    "web/tests/reader-preview/resize.js": "aa737be2dd58983f8d61d6ca23fad5e1663fc5af184dc5c72950cc75ee72402f",
+    "web/tests/scratch-player-layout.test.cjs": "e586ec3dffd41c2b9277dfa081b1a74061bdb2870647f270e1f3815b8006d19e"
+  },
+  "browser_observations": [
+    {
+      "case": "Video starts, completes ten seconds and seeks using native timeline",
+      "result": "played at 0.23545 s; timeline click produced 5.014792 s paused; duration 10 s. Authored local file, not protected or long-video streaming."
+    },
+    {
+      "case": "Switching to course content unloads media",
+      "result": "0 video nodes and 0 iframe nodes; course content remains readable"
+    },
+    {
+      "case": "Closing case modal unloads media",
+      "result": "0 video nodes and 0 iframe nodes after close"
+    },
+    {
+      "case": "Scratch authored SB3 loads instead of default project",
+      "result": "Coral circle on dark stage rendered by actual checked-in engine"
+    },
+    {
+      "case": "Resize same case without reload",
+      "viewports": [
+        390,
+        1440,
+        768,
+        390
+      ],
+      "player_document_loads": 1,
+      "geometry": [
+        {
+          "viewport": 1440,
+          "document_width": 1440,
+          "frame": [
+            720,
+            588
+          ],
+          "iframe_body": [
+            720,
+            586
+          ],
+          "canvas": [
+            715.76,
+            537.88
+          ]
+        },
+        {
+          "viewport": 768,
+          "document_width": 768,
+          "frame": [
+            416,
+            360
+          ],
+          "iframe_body": [
+            416,
+            357
+          ],
+          "canvas": [
+            413.55,
+            310.78
+          ]
+        },
+        {
+          "viewport": 390,
+          "document_width": 390,
+          "frame": [
+            338,
+            302
+          ],
+          "iframe_body": [
+            338,
+            299
+          ],
+          "canvas": [
+            336.01,
+            252.51
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Scratch fullscreen enter and exit",
+      "result": "Native fullscreen entered; wrapper transforms cleared, canvas 1325 x 994 at 1440 x 1050; exit restores reader and responsive stage"
+    },
+    {
+      "case": "Actual missing video 404 then recovery at same URL",
+      "result": "Error message and retry shown; after restoring authored bytes and clicking retry duration 10, readyState 4. Temporary recover.mp4 removed afterward."
+    },
+    {
+      "case": "Empty unit",
+      "result": "No video or practice button; explicit missing-content, description and resources messages"
+    },
+    {
+      "case": "Resource link",
+      "result": "Opened local lesson-notes.txt in a new tab; authored text confirmed, tab closed"
+    },
+    {
+      "case": "Before/after layout",
+      "result": "Actual old/new readers at 1440 and 390. Old narrow sidebar clips practice text; new stacks sidebar below content. Neither old nor new page has document-level horizontal overflow."
+    }
+  ],
+  "screenshot_sha256": {
+    "after-case-1440.png": "6e4027f75ce6f3af11e580c0e29e0e6e4c18b8f6a987c91e1596b18ceae11f2d",
+    "after-case-390.png": "dc6300abc5f73aa5f1eadfc200be76514bf53ab9276807caffaae26261f0d592",
+    "after-case-768.png": "c4b2a974ea3fd73b4b1f7d90f845fa857ad180e209df9516b1276390104966ff",
+    "after-content-1440.png": "ceafba572097ed6646194a8275b917965b177a47b2f6266cdd5e7f928e5ad2fb",
+    "after-empty-390.png": "a6f14fd0d1ebe4ae03d33349d4800a47b073972a2f39423d34670cd5fcd3d770",
+    "after-video-1440.png": "8ad04dc13dab282412ebcd187d75e39b6e61c8133a9444a083ec426631237a2d",
+    "after-video-390.png": "2f9940d52f76b8c631dd1a9ef2dda9ebb58ef2aa80d7d6a0efca6d1931638608",
+    "after-video-error-390.png": "27eeb32f6a2b2e56787336950d296f9cab77ed03990a0c9118ab927c14e42ab7",
+    "after-video-recovered-390.png": "7ade975cdd5510320008e00472daf231dad253aa8dd15e34b5da7325ae358db6",
+    "before-video-1440.png": "0987ecabc59d94e36e3d78413dd8f4309bb86c511a48730e54b1f1a8ff3343ef",
+    "before-video-390.png": "a000faf936fb8a13cc6abec0056561d99c28e47311884cdfb4904213e9e7cbf6"
+  },
+  "original_source": {
+    "files": 5634,
+    "changed": 0
+  },
+  "backend_health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "cleanup": {
+    "comparison_server_18115_stopped": true,
+    "comparison_and_resource_tabs_closed": true,
+    "viewport_overrides_cleared": true,
+    "recovery_fixture_removed": true
+  },
+  "limits": [
+    "Engineering self-check, not independent review or user visual acceptance.",
+    "No authenticated student flow, backend unit log persistence, protected media cookie or role integration acceptance.",
+    "No Scratch/ScratchJr/Python save/reopen/submit acceptance; SB3 fixture verifies loading/rendering only.",
+    "Rich HTML source 3, third-party media, office preview, complex projects and touch drag behavior not browser-tested here.",
+    "Player layout uses stable class prefixes of checked-in bundle; recheck after replacing engine. Canvas is scaled visually without changing VM or reloading, so enlarging a narrow initial canvas can soften its rendering.",
+    "Full repository lint is not clean; only modified reader Vue lint and new player JS syntax checked.",
+    "No new backend build or backend suites this stage; no GitHub merges or deployment."
+  ]
+}
