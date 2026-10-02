@@ -1,5 +1,9 @@
 window.version = 'TO2.8'
 window.urlParams = function (paramName) {
+  // New lesson links opt into standard query decoding. Preserve legacy raw links.
+  if (/[?&]queryEncoding=uri(?:&|$)/.test(window.location.search) && typeof URLSearchParams !== 'undefined') {
+    return new URLSearchParams(window.location.search).get(paramName) || ''
+  }
   var reg = new RegExp('[?&]' + paramName + '=([^&]*)[&]?', 'i')
   var paramVal = window.location.search.match(reg)
   if(paramVal == null) return ''
