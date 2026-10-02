@@ -1,0 +1,13 @@
+{
+  "jar_sha256": "2d0990f58c30eee0a72485d9178979c529107b56d34c4cb953572efad52270eb",
+  "expected": "missing-factory",
+  "port": 18093,
+  "profile": "dev,localtest",
+  "justauth_enabled": false,
+  "healthy": false,
+  "public_courses": false,
+  "missing_factory_failure": true,
+  "process_exit_code": 1,
+  "probe_process_stopped": true,
+  "passed": true
+}
