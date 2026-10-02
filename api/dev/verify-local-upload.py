@@ -88,6 +88,9 @@ def verify(args):
                     if not (path.is_relative_to(uploads.resolve()) or path.is_relative_to(outside.resolve())):
                         raise RuntimeError('Unexpected test upload destination')
                     owned.append(path)
+                    if not args.expect_legacy:
+                        relative = str(path.relative_to(uploads))
+                        file_ids.extend(sql("SELECT id FROM sys_file WHERE file_path='" + relative.replace("'", "''") + "'").splitlines())
                 return response.status, payload
 
         def rejected(name, fields, **kwargs):
@@ -193,6 +196,10 @@ def verify(args):
                     output = subprocess.check_output([str(java), '-cp', str(temp) + ':' + classpath, 'VerifyLocalUploadFailure', str(temp / 'fault-files')], text=True)
                     for fault in (0, 1, 2):
                         check('packaged streaming fault ' + str(fault) + ' cleans partial bytes', 'PASS streaming fault ' + str(fault) + ':' in output)
+            # New candidates register ownership at upload time; remove only rows
+            # belonging to this run before checking the original snapshot.
+            for ident in file_ids:
+                sql("DELETE FROM sys_file WHERE id='" + ident + "'")
             check('upload does not silently change existing file or work records', tables() == original_tables)
             jar_hash = api.jar_sha256
         finally:

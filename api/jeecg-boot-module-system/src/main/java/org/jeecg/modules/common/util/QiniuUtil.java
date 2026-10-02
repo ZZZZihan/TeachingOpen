@@ -64,6 +64,18 @@ public class QiniuUtil {
         }
     }
 
+    public boolean fileExists(String key) {
+        BucketManager manager = new BucketManager(Auth.create(QiniuConfig.key, QiniuConfig.secret),
+                new Configuration(Zone.autoZone()));
+        try {
+            manager.stat(QiniuConfig.bucket, key);
+            return true;
+        } catch (QiniuException error) {
+            if (error.code() == 612) return false;
+            throw new org.jeecg.common.exception.JeecgBootException("暂时无法核验上传文件，请稍后重试");
+        }
+    }
+
     /**
      * 通过key删除七牛文件
      * @param key

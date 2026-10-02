@@ -50,17 +50,19 @@ window.getWorkInfo = function(workId, cb) {
 }
 
 window.getQiniuToken = function() {
+  window.qiniuUploadPrefix = '';
+  if (typeof getSysConfig !== 'function' || getSysConfig('uploadType') !== 'qiniu') return undefined;
   var qn_token;
   $.ajax({
     url: '/api/common/qiniu/getToken',
     beforeSend: function(request) {
-      request.setRequestHeader('X-Access-Token', $.cookie('ACCESS_TOKEN'))
+      request.setRequestHeader('X-Access-Token', getUserToken())
     },
     async: false,
     success: function(res) {
-      console.log(res)
-      if (res.code == 200) {
+      if (res.success && res.code == 200 && res.keyPrefix) {
         qn_token = res.result
+        window.qiniuUploadPrefix = res.keyPrefix
       } else {
         //alert(res.message)
       }

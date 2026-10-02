@@ -1,0 +1,49 @@
+{
+  "observed_utc": "2026-10-02T17:52:35.589903+00:00",
+  "jar_sha256": "b5998be119428e00ed3d5469cbcb311175a8104eb2cd983f37362dcb981e2c1b",
+  "expected_legacy": true,
+  "passed": 10,
+  "total": 10,
+  "cases": [
+    {
+      "case": "legacy student list exposes other uploader record",
+      "passed": true
+    },
+    {
+      "case": "legacy student reads other file path",
+      "passed": true
+    },
+    {
+      "case": "legacy student claims foreign physical path",
+      "passed": true
+    },
+    {
+      "case": "legacy student forges creator and deletion state",
+      "passed": true
+    },
+    {
+      "case": "legacy student edits another file metadata",
+      "passed": true
+    },
+    {
+      "case": "legacy student deletes foreign bytes by ID",
+      "passed": true
+    },
+    {
+      "case": "legacy student deletes foreign bytes by path",
+      "passed": true
+    },
+    {
+      "case": "legacy mixed batch deletes other owner too",
+      "passed": true
+    },
+    {
+      "case": "original file and work rows restored",
+      "passed": true
+    },
+    {
+      "case": "original upload bytes restored",
+      "passed": true
+    }
+  ]
+}
