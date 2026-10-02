@@ -1,0 +1,7 @@
+{
+  "application_entries_checked": 937,
+  "changed_application_entries": [
+    "BOOT-INF/classes/org/jeecg/modules/message/websocket/TestController.class",
+    "BOOT-INF/classes/org/jeecg/modules/message/websocket/WebSocket.class"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396",
+  "expected_legacy": false,
+  "cases": [
+    {
+      "case": "normal multipart succeeds with exact bytes",
+      "passed": true
+    },
+    {
+      "case": "part count multipart rejected before file/record writes",
+      "passed": true
+    },
+    {
+      "case": "part header multipart rejected before file/record writes",
+      "passed": true
+    },
+    {
+      "case": "recovery multipart succeeds with exact bytes",
+      "passed": true
+    },
+    {
+      "case": "WebSocket upgrade has HTTP 101 and matching accept",
+      "passed": true
+    },
+    {
+      "case": "WebSocket masked ping receives matching pong",
+      "passed": true
+    },
+    {
+      "case": "WebSocket close handshake completes",
+      "passed": true
+    },
+    {
+      "case": "all non-audit-log tables restored",
+      "passed": true
+    },
+    {
+      "case": "all original attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 9,
+  "total": 9,
+  "scope": "Bounded multipart inputs below 10 KB and actual WebSocket protocol on synthetic localhost. Not a CVE exploit test, WebSocket authorization, HTTP/2, TLS or load test."
+}

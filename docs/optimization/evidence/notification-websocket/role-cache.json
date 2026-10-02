@@ -1,0 +1,60 @@
+{
+  "observed_utc": "2026-10-02T23:19:09.522879+00:00",
+  "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396",
+  "expected_legacy": false,
+  "configured_redis_database": 1,
+  "scope": "real synthetic login/logout, database role change and Redis cache readback; no explicit eviction within the tested transition; no production role-editor acceptance",
+  "passed": 11,
+  "total": 11,
+  "cases": [
+    {
+      "case": "admin management allowed before role change",
+      "passed": true
+    },
+    {
+      "case": "permission cache stored in expected database",
+      "passed": true,
+      "database": 1
+    },
+    {
+      "case": "no duplicate permission cache in other database",
+      "passed": true
+    },
+    {
+      "case": "synthetic account now has only teacher role",
+      "passed": true
+    },
+    {
+      "case": "actual logout succeeds",
+      "passed": true
+    },
+    {
+      "case": "logout cache result matches candidate",
+      "passed": true,
+      "stale_cache_remains": false
+    },
+    {
+      "case": "fresh login enforces expected role state",
+      "passed": true,
+      "http_status": 200,
+      "code": 510,
+      "management_allowed": false
+    },
+    {
+      "case": "restored admin can manage after fresh login",
+      "passed": true
+    },
+    {
+      "case": "final logout clears configured permission cache",
+      "passed": true
+    },
+    {
+      "case": "original admin role restored",
+      "passed": true
+    },
+    {
+      "case": "test principal permission caches removed",
+      "passed": true
+    }
+  ]
+}
