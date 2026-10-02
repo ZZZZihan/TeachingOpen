@@ -72,3 +72,13 @@ test('Python 继续与重做均保留 ID；名称和模板查询参数完整往�
   h.i.toAdditionalWork(row,true);p=new URL(h.opened[1][0],'http://fixture').searchParams
   assert.equal(p.get('workId'),'saved');assert.equal(p.get('workName'),row.workName);assert.equal(p.get('workFile'),row.workUrl_url);assert.equal(p.get('resetTemplate'),'1')
 })
+
+test('两种 Scratch 入口携带已有 ID，继续与重做完整编码模板和名称', () => {
+  for (const codeType of [1,2]) {
+    const h=mount(),row={...work,codeType,mineWorkId:'saved',mineWorkStatus:0,workName:'任务 & 100%',mineWorkName:'我的 + 作品',mineWorkUrl_url:'/mine.sb3?a=1&b=2',workUrl_url:'/template.sb3?q=a+b&x=2'}
+    h.i.toAdditionalWork(row,false);let u=new URL(h.opened[0][0],'http://fixture'),p=u.searchParams
+    assert.equal(u.pathname,'/scratch3/index.html');assert.equal(p.get('workId'),'saved');assert.equal(p.get('workName'),row.mineWorkName);assert.equal(p.get('workFile'),row.mineWorkUrl_url)
+    h.i.toAdditionalWork(row,true);p=new URL(h.opened[1][0],'http://fixture').searchParams
+    assert.equal(p.get('workId'),'saved');assert.equal(p.get('workFile'),row.workUrl_url);assert.equal(p.get('resetTemplate'),'1');assert.equal(h.opened[1][2],'noopener,noreferrer')
+  }
+})
