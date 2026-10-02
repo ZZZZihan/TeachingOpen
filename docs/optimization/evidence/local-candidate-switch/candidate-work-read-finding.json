@@ -1,0 +1,8 @@
+{
+  "finding": "Reading studentWorkInfo updates work modification actor/time via generic updateById",
+  "reproduced_actor_change": "fixture_admin to fixture_student_a",
+  "view_counter_incremented": true,
+  "audit_timestamp_changed": true,
+  "controlled_probe_restored_all_three_columns": true,
+  "application_fix_included": false
+}

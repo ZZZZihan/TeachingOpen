@@ -13,9 +13,11 @@ from uuid import uuid4
 from local_runtime import load_ports, assert_database, assert_app_config
 
 
-def run(runtime, java_home, action, log_name):
+def run(runtime, java_home, action, log_name, jar=None):
     api = Path(__file__).resolve().parents[1]
-    jar = api / "jeecg-boot-module-system/target/teaching-open-2.8.0.jar"
+    packaged = jar is not None
+    jar = jar or api / "jeecg-boot-module-system/target/teaching-open-2.8.0.jar"
+    config_arg = "--spring.config.additional-location=file:" + str(runtime / "config") + "/"
     pid_file = runtime / "backend.pid"
     if action == "stop":
         if not pid_file.exists():
@@ -25,7 +27,7 @@ def run(runtime, java_home, action, log_name):
         result = subprocess.run(["ps", "-p", str(pid), "-o", "command="], capture_output=True, text=True)
         if result.returncode:
             print("Recorded backend has already exited")
-        elif str(jar) not in result.stdout or "--spring.profiles.active=dev,localtest" not in result.stdout:
+        elif str(jar) not in result.stdout or "--spring.profiles.active=dev,localtest" not in result.stdout or config_arg not in result.stdout:
             raise RuntimeError("PID belongs to another process; refusing to stop it")
         else:
             os.kill(pid, signal.SIGTERM)
@@ -50,7 +52,7 @@ def run(runtime, java_home, action, log_name):
         raise RuntimeError("Log name must be a file directly inside the runtime logs directory")
     log.parent.mkdir(parents=True, exist_ok=True)
     with os.fdopen(os.open(log, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "wb") as out:
-        process = subprocess.Popen([str(java_home / "bin/java"), "-Xms256m", "-Xmx1g", "-jar", str(jar), "--spring.profiles.active=dev,localtest", "--spring.config.additional-location=file:" + str(runtime / "config") + "/"], cwd=jar.parent, stdout=out, stderr=subprocess.STDOUT, start_new_session=True)
+        process = subprocess.Popen([str(java_home / "bin/java"), "-Xms256m", "-Xmx1g", "-jar", str(jar), "--spring.profiles.active=dev,localtest", config_arg], cwd=runtime / "webapp" if packaged else jar.parent, stdout=out, stderr=subprocess.STDOUT, start_new_session=True)
     pid_file.write_text(str(process.pid) + "\n")
     (runtime / "backend-process.json").write_text(json.dumps({"pid": process.pid, "jar_path": str(jar), "jar_sha256": hashlib.sha256(jar.read_bytes()).hexdigest(), "profile": "dev,localtest", "log_path": str(log)}, indent=2) + "\n")
     print("Started task backend PID", process.pid)

@@ -1,0 +1,78 @@
+{
+  "generated_utc": "2026-10-02T22:37:25.985959+00:00",
+  "product_commit": "204a0e9b0419e4cf29908269d3c5e8ef2431f043",
+  "base_commit": "fd1cd542ad71148580249b230ac4c1e2b7d66792",
+  "product_files_sha256": {
+    "api/dev/candidate-local.py": "93213f25268b5132a6fc747c0b0051fc520c9ab64d2769b7e4d4a44d1910d9bb",
+    "api/dev/local_candidate.py": "9d5ca70e5f622481e3d9a01e57bd3a13842fe5309553b2540f2c28cf5b3cb057",
+    "api/dev/run-backend.py": "e99e0d1576bd6cedfff5991c7cd3819c561c01b82d88eceba63f063c45dec3ed",
+    "api/dev/test_local_candidate.py": "27e8325ac0ba4d68e490ee800c45b596d48bd1a1ec8d304ad869f5537014a5db"
+  },
+  "unit_tests": {
+    "passed": 30,
+    "total": 30,
+    "new": 15
+  },
+  "business_phases": 5,
+  "business_checks_per_phase": 26,
+  "business_checks_total": 130,
+  "frontend_previous_build": {
+    "exit_code": 0,
+    "warnings": 6,
+    "log_sha256": "e24a9a7741eeb8dd69e14e14d294eecd4a9703e49bee847d163588c5ae62c482",
+    "reused_locked_dependencies": true,
+    "clean_install_rerun": false
+  },
+  "current_frontend_dist_matches_previously_verified": true,
+  "artifacts": {
+    "candidate-a": {
+      "manifest_sha256": "4b28822b71911449e61813b9bf2f87b771f0b907ddf70b964b99e287ab2ced8a",
+      "files": 4885,
+      "jar_sha256": "85f7746a3ae4b143f1a4ca4e5c043e11c81bf7d69f32c72b7dbaa190f6a0e85c",
+      "provenance": {
+        "backend_commit": "c38c9c1352bfc671d317b072d638955cf4207267",
+        "frontend_commit": "c7d2a214cb4af410db30fb45746b8ca59096fc37"
+      },
+      "fault_injection": null
+    },
+    "candidate-b": {
+      "manifest_sha256": "2617aabc9a683c467a364de34975bf27e414d21cb5f62ef9209bd6b1b1a74547",
+      "files": 4887,
+      "jar_sha256": "85f7746a3ae4b143f1a4ca4e5c043e11c81bf7d69f32c72b7dbaa190f6a0e85c",
+      "provenance": {
+        "backend_commit": "c38c9c1352bfc671d317b072d638955cf4207267",
+        "frontend_commit": "b30f597524347de7de7f1ce2f22d5f9dc4ecc9dc"
+      },
+      "fault_injection": null
+    },
+    "candidate-fault": {
+      "manifest_sha256": "281784eca0c5fe93c62b0afe6491dae69d50585a505f61492073870ff56e689d",
+      "files": 4887,
+      "jar_sha256": "df48999db0231aa81caca704bac1a8f97a23d23f439cbb77e842f2c90a0eb4d3",
+      "provenance": {
+        "backend_commit": "c38c9c1352bfc671d317b072d638955cf4207267",
+        "frontend_commit": "b30f597524347de7de7f1ce2f22d5f9dc4ecc9dc"
+      },
+      "fault_injection": "Private test copy: application class intentionally invalid; not a source-built candidate"
+    }
+  },
+  "source_files_preserved": 5634,
+  "source_health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "restored_services_stopped": true,
+  "closed_ports": {
+    "13336": true,
+    "16409": true,
+    "18131": true,
+    "18132": true
+  },
+  "data_and_bundles_retained": true,
+  "whole_target_database_unchanged": false,
+  "work_read_audit_field_finding_pending": true,
+  "browser_e2e": false,
+  "production_changed": false,
+  "remote_merged": false
+}

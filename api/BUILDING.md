@@ -117,7 +117,48 @@ python3 api/dev/verify-recovered-business.py --runtime "$TEACHING_RESTORED" \
 
 快照含数据库、用户密码散列及合成账号口令，必须保留在权限 700 的本机私有目录，不提交 Git、不复制到共享成果。SHA-256 清单检测意外损坏，不提供来源认证或加密。只恢复本任务自己创建、可信的快照。工具拒绝附件符号链接、特殊文件，以及包含视图、触发器、存储过程或事件的定制数据库，避免静默漏备份；空附件目录不参与文件摘要。恢复失败时保留新目录及其服务用于诊断，不覆盖、回滚或删除其他环境，也不自动启动应用。
 
-业务检查使用真实 HTTP 合成账号登录，读取恢复后的课程、作品和附件，验证拒绝路径；会产生正常认证审计日志，作品查看计数在结束时复原。它不是浏览器验收。完成演练后可用上述停止命令停掉新环境，数据仍保留。此次实际恢复、故障拒绝和源环境保护结果见 [恢复演练记录](../docs/optimization/local-backup-restore-pr.md)。异机灾备、定时保留策略、候选版本切换与回退另行验证。
+业务检查使用真实 HTTP 合成账号登录，读取恢复后的课程、作品和附件，验证拒绝路径；会产生正常认证审计日志，作品查看计数在结束时复原。后续切换演练发现，现有作品详情接口还会改写 `update_time/update_by`；这个脚本目前未复原这两个字段，不能据此声称目标全库不变。该业务问题另行修复。它不是浏览器验收。完成演练后可用上述停止命令停掉新环境，数据仍保留。此次实际恢复、故障拒绝和源环境保护结果见 [恢复演练记录](../docs/optimization/local-backup-restore-pr.md)。异机灾备、定时保留策略另行验证，本地候选切换见下节。
+
+## 冻结候选包、切换与回退
+
+`candidate-local.py` 面向专用的本机合成环境，把已经构建的 JAR、前端和本地代理复制到新的候选目录；文件摘要和来源工作区提交写入清单，目录/文件设为仅所有者可读（目录可进入）。它不构建、不证明产物来自某次构建，也不签名；先核对对应构建记录和产物摘要。候选目录必须是 `.devspace/` 的新直接子目录，源工作区必须干净。运行配置和凭据仍留在运行目录，不放进候选包。
+
+前置条件：已按本文件准备隔离数据库/Redis和构建工具；运行环境的应用端口没有由其他方式启动的进程。如果普通 `run-backend.py` 或手动前端还在运行，先通过原工作区的停止方式处理，工具不会接管未知进程。保留至少前后两份候选，不覆盖正在运行或用于回退的包。
+
+```sh
+# 在含本 PR 脚本的源码 worktree 根目录执行，数据库/Redis 已启动。
+# 路径按实际工作区调整。两份 web/dist 必须分别构建并有对应构建记录。
+TEACHING_BACKEND_REPO="$TEACHING_WORKSPACE/.devspace/worktrees/assignment-list-contract"
+TEACHING_OLD_WEB="$TEACHING_WORKSPACE/.devspace/worktrees/candidate-switch-previous"
+TEACHING_NEW_WEB="$TEACHING_WORKSPACE/.devspace/worktrees/product-candidate"
+TEACHING_OLD_BUNDLE="$TEACHING_WORKSPACE/.devspace/release-old-new"
+TEACHING_NEW_BUNDLE="$TEACHING_WORKSPACE/.devspace/release-new-new"
+
+python3 api/dev/candidate-local.py package --runtime "$TEACHING_RUNTIME" \
+  --bundle "$TEACHING_OLD_BUNDLE" --backend-repo "$TEACHING_BACKEND_REPO" --frontend-repo "$TEACHING_OLD_WEB"
+python3 api/dev/candidate-local.py package --runtime "$TEACHING_RUNTIME" \
+  --bundle "$TEACHING_NEW_BUNDLE" --backend-repo "$TEACHING_BACKEND_REPO" --frontend-repo "$TEACHING_NEW_WEB"
+python3 api/dev/candidate-local.py activate --runtime "$TEACHING_RUNTIME" \
+  --bundle "$TEACHING_OLD_BUNDLE" --java-home "$TEACHING_JAVA"
+python3 api/dev/candidate-local.py activate --runtime "$TEACHING_RUNTIME" \
+  --bundle "$TEACHING_NEW_BUNDLE" --java-home "$TEACHING_JAVA"
+python3 api/dev/candidate-local.py rollback --runtime "$TEACHING_RUNTIME" --java-home "$TEACHING_JAVA"
+python3 api/dev/candidate-local.py status --runtime "$TEACHING_RUNTIME"
+```
+
+每次切换先校验目标及上一候选全部文件摘要、运行环境归属和表结构。表结构比较忽略自增计数器，不执行迁移、数据库回滚或兼容性推断；不同结构拒绝切换。进程 PID、启动时间、命令中的候选/配置路径，以及真实监听端口的 PID 都要匹配；先检查两个进程，再停止其中任何一个。操作锁阻止并发切换，候选状态用原子替换保存。
+
+切换会短暂停服务。新后端须健康 UP，新前端须提供字节匹配的 HTML，才记录 ready；这不是业务验收，随后应跑真实业务检查。新候选启动失败时尝试恢复上一候选，成功也返回失败状态/非零退出码，表示请求的新版本没有上线。若恢复同样失败，保留 `recovery-required` 及新旧引用，按私有日志检查。`--timeout` 是每次后端启动的等待秒数，默认 45，范围 1–120；过短会同时影响失败后的恢复。
+
+控制脚本被终止后，先查看 `status` 的 recorded 与 observed（实时进程/端口）。如果记录为 switching 或 recovery-required，明确恢复到中断前的版本：
+
+```sh
+python3 api/dev/candidate-local.py recover --runtime "$TEACHING_RUNTIME" --java-home "$TEACHING_JAVA"
+python3 api/dev/candidate-local.py stop --runtime "$TEACHING_RUNTIME" --java-home "$TEACHING_JAVA"
+python3 api/dev/stop-local.py --runtime "$TEACHING_RUNTIME"
+```
+
+演练覆盖了新后端 PID 已记录、就绪前终止控制脚本的场景；没有证明任意时刻断电或强杀都能自动恢复。进程刚创建但 PID 尚未写入等窗口需要人工核对，工具拒绝停止未知进程。新方式在 `runtime/webapp` 中运行冻结 JAR，使遗留相对日志目录落在本环境的 `logs/`；原普通启动命令保持原工作目录。快照、数据库、附件不会随版本回退而回退。实际范围、五阶段业务检查和发现的作品审计字段问题见 [候选切换演练](../docs/optimization/local-candidate-switch-pr.md)。
 
 ## 课程管理权限检查
 

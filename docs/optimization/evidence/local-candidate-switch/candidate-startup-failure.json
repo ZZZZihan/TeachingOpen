@@ -1,0 +1,65 @@
+{
+  "step": "actual Java startup failure restores A",
+  "seconds": 15.616,
+  "failure": {
+    "status": "failed_rolled_back",
+    "active": {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-a",
+      "manifest_sha256": "4b28822b71911449e61813b9bf2f87b771f0b907ddf70b964b99e287ab2ced8a"
+    },
+    "reason": "Candidate backend exited before readiness"
+  },
+  "before": {
+    "recorded": {
+      "status": "ready",
+      "active": {
+        "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-a",
+        "manifest_sha256": "4b28822b71911449e61813b9bf2f87b771f0b907ddf70b964b99e287ab2ced8a"
+      },
+      "previous": {
+        "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-b",
+        "manifest_sha256": "2617aabc9a683c467a364de34975bf27e414d21cb5f62ef9209bd6b1b1a74547"
+      }
+    },
+    "observed": {
+      "backend": {
+        "pid": 66529,
+        "listening": true
+      },
+      "frontend": {
+        "pid": 66599,
+        "listening": true
+      }
+    },
+    "both_processes_listening": true
+  },
+  "after": {
+    "recorded": {
+      "status": "ready",
+      "active": {
+        "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-a",
+        "manifest_sha256": "4b28822b71911449e61813b9bf2f87b771f0b907ddf70b964b99e287ab2ced8a"
+      },
+      "previous": {
+        "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-b",
+        "manifest_sha256": "2617aabc9a683c467a364de34975bf27e414d21cb5f62ef9209bd6b1b1a74547"
+      },
+      "last_failed": {
+        "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-fault",
+        "manifest_sha256": "281784eca0c5fe93c62b0afe6491dae69d50585a505f61492073870ff56e689d"
+      }
+    },
+    "observed": {
+      "backend": {
+        "pid": 67233,
+        "listening": true
+      },
+      "frontend": {
+        "pid": 67330,
+        "listening": true
+      }
+    },
+    "both_processes_listening": true
+  },
+  "proxied_backend_health": "UP"
+}
