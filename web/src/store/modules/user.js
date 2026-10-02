@@ -150,7 +150,6 @@ const user = {
             const version = state.sessionVersion
             const response = await axios({ url: '/sys/permission/getUserPermissionByToken',
                 method: 'get',
-                params: { token },
                 localError: true,
                 skipSessionNotice: true,
                 timeout: 15000 })

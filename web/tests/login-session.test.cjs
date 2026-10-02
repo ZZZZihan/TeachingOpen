@@ -106,6 +106,8 @@ test('logout after refresh sends persisted token and synchronously clears roles,
 })
 test('empty menus are accepted; malformed permission data does not overwrite existing auth', async () => {
   const h = userHarness(); const p = h.store.dispatch('GetPermissionList')
+  assert.equal(h.calls.permission[0].options.params, undefined)
+  assert.equal(JSON.stringify(h.calls.permission[0].options).includes('fixture-token'), false)
   h.calls.permission[0].resolve({ success: true, result: { menu: [], auth: [], allAuth: [] } }); await p
   assert.equal(h.store.state.user.permissionList.length, 0); assert.equal(h.session.get('USER_AUTH'), '[]')
   for (const result of [null, { menu: null }, { menu: [], auth: {}, allAuth: [] }]) {
