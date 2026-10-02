@@ -1,0 +1,18 @@
+{
+  "files_sha256": {
+    "candidate-a-business.json": "85c3cfeec3d3446a9aa6b31cb04310e7d4800d656c51988ff4229e16efe5a0bc",
+    "candidate-automatic-recovery-business.json": "85c3cfeec3d3446a9aa6b31cb04310e7d4800d656c51988ff4229e16efe5a0bc",
+    "candidate-b-business.json": "85c3cfeec3d3446a9aa6b31cb04310e7d4800d656c51988ff4229e16efe5a0bc",
+    "candidate-integrity-rejection.json": "e8377539895ed46876a44e71abae2e9e54b0ea3ff8f7a91780026f2bd8f0d1d1",
+    "candidate-interrupted-recovery-business.json": "85c3cfeec3d3446a9aa6b31cb04310e7d4800d656c51988ff4229e16efe5a0bc",
+    "candidate-interrupted-recovery.json": "d504c77d55a5b77ed62650cb8aaa21ea2d2e580a2247ac88ed4472e5f7654fff",
+    "candidate-manual-rollback-business.json": "85c3cfeec3d3446a9aa6b31cb04310e7d4800d656c51988ff4229e16efe5a0bc",
+    "candidate-manual-rollback.json": "b835b4c950c5e74f98c79852e6bf5a2723556951055bdcc8eae061425f81105b",
+    "candidate-startup-failure.json": "8635230fa176c88dc5317d0a6eb221cf55a912ac42d95dbfa16024289d085d1d",
+    "candidate-switch-preservation.json": "e3e26d45db51621248d534ac86563f6ce1cdd7fa7b8a735c471156ebdfbb2e08",
+    "candidate-switch-success.json": "3cbb745dddf44d37d1819e63b55cb7d7c74121d6259b8dea139cc4899eceaa5f",
+    "candidate-work-read-finding.json": "c8bd68988b2f4704644745f598abf049995bc09971d5c41471fdc3065710d306",
+    "drill.json": "b948f797f275fa3b5cbbe5103abcaa5447e0893c6da70b7ea1045c5e7679dcfa",
+    "python-tests.txt": "8b0d0e7a2507efec1acd97f3b3d7fb049611bcd59f42846730f93002ee8b5d4f"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "tables_checked": 69,
+  "tables_changed_from_before": [
+    "sys_log",
+    "teaching_work"
+  ],
+  "unchanged_tables": 67,
+  "work_content_matches_snapshot_source_excluding_read_updated_columns": true,
+  "work_excluded_columns": [
+    "view_num",
+    "update_time",
+    "update_by"
+  ],
+  "work_audit_changes_retained_from_five_business_phases": true,
+  "audit_rows_before": 3009,
+  "audit_rows_after": 3071,
+  "attachments_unchanged": true,
+  "source_all_tables_and_attachments_unchanged": true,
+  "first_all_business_tables_unchanged_assertion": "failed on teaching_work; investigated and documented, not counted as pass"
+}
