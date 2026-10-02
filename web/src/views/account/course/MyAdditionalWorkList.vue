@@ -164,10 +164,10 @@ export default {
         },
         toAdditionalWork (item, reset) {
             if (!this.canEdit(item)) return
-            var workUrl
             switch (item.codeType) {
             case 1:
-            case 2: {
+            case 2:
+            case 3: {
                 const params = new URLSearchParams({ queryEncoding: 'uri',
                     scene: 'additional',
                     additionalId: item.additionalWorkId,
@@ -176,17 +176,9 @@ export default {
                     workName: !reset && item.mineWorkName ? item.mineWorkName : item.workName,
                     workFile: (reset ? item.workUrl_url : item.mineWorkUrl_url || item.mineWorkUrl || item.workUrl_url) || '',
                     resetTemplate: reset ? '1' : '' })
-                window.open('/scratch3/index.html?' + params.toString(), '_blank', 'noopener,noreferrer')
+                window.open((item.codeType === 3 ? '/scratchjr/editor.html?' : '/scratch3/index.html?') + params.toString(), '_blank', 'noopener,noreferrer')
                 return
             }
-            case 3:
-                workUrl = '/scratchjr/editor.html?scene=additional&mode=edit&additionalId=' +
-            item.additionalWorkId +
-            '&departId=' +
-            item.departId +
-            '&workName=' +
-            item.workName
-                break
             case 4: {
                 const params = new URLSearchParams({ queryEncoding: 'uri',
                     scene: 'additional',
@@ -209,15 +201,7 @@ export default {
                     departId: item.departId,
                     workType: 0
                 })
-                return
             }
-
-            if (!reset && item.mineWorkUrl) {
-                workUrl += '&workFile=' + item.mineWorkUrl
-            } else {
-                workUrl += '&workFile=' + item.workUrl_url
-            }
-            window.open(workUrl, '_blank', 'noopener,noreferrer')
         }
     }
 }

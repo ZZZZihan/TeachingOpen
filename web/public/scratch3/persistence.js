@@ -1,4 +1,4 @@
-/* Readable persistence boundary for the inherited Scratch VM. */
+/* Shared save/load state machine for the inherited Scratch and ScratchJr engines. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory()
   else root.ScratchPersistence = factory()
@@ -6,7 +6,7 @@
   'use strict'
   function query(search) {
     var params = new URLSearchParams(search), standard = params.get('queryEncoding') === 'uri', result = {}
-    ;['workId', 'unitId', 'departId', 'additionalId', 'workName', 'scene', 'workFile', 'resetTemplate'].forEach(function (key) {
+    ;['workId', 'unitId', 'departId', 'additionalId', 'workName', 'scene', 'workFile', 'resetTemplate', 'pmd5', 'mode'].forEach(function (key) {
       var match = search.match(new RegExp('[?&]' + key + '=([^&]*)'))
       var value = standard ? params.get(key) : match && match[1]
       if (!standard && value && (key !== 'workFile' || !/^(https?:\/\/|\/)/.test(value))) {
@@ -33,10 +33,10 @@
       if (state.busy) return false
       state.busy = true; state.ready = false; notify('loading', '正在打开作品…')
       try {
-        var title = context.workName || 'Scratch 作品', url = context.workFile || './static/project.sb3'
+        var title = context.workName || options.defaultTitle || 'Scratch 作品', url = context.workFile || options.defaultFile || './static/project.sb3'
         if (state.workId && context.resetTemplate !== '1') {
           var info = await options.info(state.workId)
-          if (!info || !info.workFileKey_url || !['1', '2'].includes(String(info.workType))) throw new Error('作品信息不完整或类型不匹配')
+          if (!info || !info.workFileKey_url || !(options.acceptedTypes || ['1', '2']).includes(String(info.workType))) throw new Error('作品信息不完整或类型不匹配')
           title = info.workName || title; url = info.workFileKey_url
           context.unitId = info.courseId || ''; context.additionalId = info.additionalId || ''; context.departId = info.departId || ''
         } else if (!context.workFile && context.unitId) {
@@ -67,7 +67,7 @@
         var uploaded = await options.upload(title, snapshot)
         if (!uploaded || !uploaded.project || !uploaded.cover) throw new Error('作品文件登记不完整')
         var result = await options.submit({ id: state.workId, workName: title, workFile: uploaded.project, workCover: uploaded.cover,
-          workType: 2, workStatus: status, courseId: context.unitId || '', additionalId: context.additionalId || '', departId: context.departId || '',
+          workType: options.workType || 2, workStatus: status, courseId: context.unitId || '', additionalId: context.additionalId || '', departId: context.departId || '',
           workScene: context.unitId ? 'course' : context.additionalId ? 'additional' : 'create', hasCloudData: Boolean(snapshot.hasCloudData) })
         if (!result || !result.id) throw new Error('服务器未返回作品编号，请到我的作品核对后重试')
         state.workId = result.id; context.resetTemplate = ''; state.dirty = false

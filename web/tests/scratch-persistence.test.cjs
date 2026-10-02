@@ -67,3 +67,10 @@ test('基线复现：旧页面第二次先上传封面，会携带上次项目 I
  ctx.requestUpload(1);requests[2].cb({success:true,message:'new.jpg'})
  assert.equal(writes.length,2);assert.equal(writes[1].workCover,'new.jpg');assert.equal(writes[1].workFile,'old.sb3')
 })
+
+test('ScratchJr 使用独立类型与默认模板，不能打开 Scratch 项目后误覆盖',async()=>{
+ const options={workType:3,acceptedTypes:['3'],defaultTitle:'ScratchJr 作品',defaultFile:'./project.sjr'}
+ let h=harness({},options);await h.session.load();assert.deepEqual(h.opened[0],['./project.sjr','ScratchJr 作品']);await h.session.save(0);assert.equal(h.bodies[0].workType,3)
+ h=harness({workId:'wrong'},options);assert.equal(await h.session.load(),false);assert.equal(h.opened.length,0)
+ h=harness({workId:'owned',pmd5:'stale'}, {...options,info:async()=>({workType:3,workName:'SJR',workFileKey_url:'/saved.sjr',courseId:'unit'})});await h.session.load();await h.session.save(1);assert.equal(h.opened[0][0],'/saved.sjr');assert.equal(h.bodies[0].courseId,'unit');assert.equal(h.bodies[0].workScene,'course')
+})

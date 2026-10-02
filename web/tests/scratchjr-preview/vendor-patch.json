@@ -1,0 +1,30 @@
+{
+  "baseCommit": "45dd581e03054a2609a1aba80464cb44e0f8594b",
+  "originalSha256": "0289504cde02076bca672271432e92a367b7f109407840a8ab2b3d931221c297",
+  "replacements": [
+    [
+      "key:\"getProjectSjr\",value:",
+      "key:\"getProjectName\",value:function(){return r.default.metadata.name}},{key:\"setProjectName\",value:function(t){r.default.metadata.name=t;var n=document.forms.projectname;n&&n.myproject&&(n.myproject.value=t)}},{key:\"getProjectSjr\",value:"
+    ],
+    [
+      "key:\"changed\",set:function(e){C=e}",
+      "key:\"changed\",set:function(e){C=e,e&&window.JrConfig&&window.JrConfig.onChanged&&window.JrConfig.onChanged()}"
+    ],
+    [
+      "var h=function(t){e.handleTextFieldSave(!0),r.default.onHold=!0",
+      "var h=function(t){if(window.JrConfig&&window.JrConfig.requestSave){t.preventDefault(),e.handleTextFieldSave(!0),window.JrConfig.requestSave();return}e.handleTextFieldSave(!0),r.default.onHold=!0"
+    ],
+    [
+      "key:\"init\",value:function(){o.default.init(),s=o.default,fcn&&fcn()}",
+      "key:\"init\",value:function(e){o.default.init(),s=o.default,e&&e()}"
+    ],
+    [
+      "key:\"waitForInterface\",value:function(t){null==g?((i.isAndroid&&\"undefined\"==typeof AndroidInterface||i.isiOS&&\"object\"!==a(window.tablet))&&setTimeout((function(){e.waitForInterface(t)}),100),(g=s.default).init(),t&&t()):t()}",
+      "key:\"waitForInterface\",value:function(t){null==g&&(g=s.default).init(),t&&t()}"
+    ],
+    [
+      "e.onHold=!1,t(n,f.default.zipFileName)",
+      "e.onHold=!1,l.default.close(),t(n,f.default.zipFileName)"
+    ]
+  ]
+}
