@@ -1,200 +1,212 @@
 package org.jeecg.modules.message.websocket;
 
 import com.alibaba.fastjson.JSONObject;
-import lombok.extern.slf4j.Slf4j;
-import org.jeecg.common.constant.CacheConstant;
 import org.jeecg.common.system.vo.LoginUser;
-import org.jeecg.common.util.RedisUtil;
 import org.jeecg.common.util.SpringContextUtils;
 import org.jeecg.modules.shiro.authc.ShiroRealm;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.service.ITeachingWorkService;
+import org.jeecg.modules.teaching.service.TeachingAccessService;
 import org.springframework.stereotype.Component;
-
+import javax.websocket.CloseReason;
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+/** Scratch newline JSON, bound to one readable work and verified identity. */
 @Component
-@Slf4j
-@ServerEndpoint("/websocket/scratch/cloudData") //此注解相当于设置访问URL
+@ServerEndpoint("/websocket/scratch/cloudData")
 public class ScratchWebSocket {
-
-    private RedisUtil getRedisUtil(){
-        return SpringContextUtils.getBean(RedisUtil.class);
-    }
-    private ShiroRealm getShiroRealm(){
-        return SpringContextUtils.getBean(ShiroRealm.class);
-    }
-    private ITeachingWorkService getTeachingWork(){return (ITeachingWorkService) SpringContextUtils.getBean("TeachingWorkServiceImpl");}
-
-    
+    private static final CopyOnWriteArraySet<ScratchWebSocket> subscribers = new CopyOnWriteArraySet<>();
     private Session session;
-    private String projectId;
+    private volatile String projectId;
     private String token;
-    
-    private static CopyOnWriteArraySet<ScratchWebSocket> webSockets =new CopyOnWriteArraySet<>();
-    private static Map<String, List<Session>> sessionPool = new HashMap<String,List<Session>>(); // 作品ID，sessions
-    
+    private String userId;
+    private boolean closed;
+    private final ArrayDeque<String> outbound = new ArrayDeque<>();
+    private int queuedCharacters;
+
     @OnOpen
     public void onOpen(Session session) {
-        try {
-			this.session = session;
-			webSockets.add(this);
-			log.info("【scratch websocket消息】有新的连接，总数为:"+webSockets.size());
-		} catch (Exception e) {
-		}
+        this.session = session;
+        session.setMaxTextMessageBufferSize(16384);
+        session.setMaxIdleTimeout(10000);
+        session.getAsyncRemote().setSendTimeout(5000);
     }
-    
-    @OnClose
-    public void onClose() {
-        try {
-			webSockets.remove(this);
-            String username = "";
-            if (token != null){
-                LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
-                username = loginUser.getUsername();
-            }
-            String key = getKey(username, projectId);
-			if (sessionPool.containsKey(key)){
-			    sessionPool.get(key).remove(this.session);
-            }
-			log.info("【scratch websocket消息】连接断开，总数为:"+webSockets.size());
-		} catch (Exception e) {
-		}
-    }
-    
+
     @OnMessage
     public void onMessage(String message) {
-    	log.info("【scratch websocket消息】收到客户端消息:"+message);
-    	JSONObject req = JSONObject.parseObject(message);
-    	String method = req.getString("method");
-    	this.projectId = req.getString("project_id");
-    	String user = req.getString("user");
-        String name = req.getString("name");
-        String value = req.getString("value");
-        this.token = req.getString("token");
-        try{
-            switch (method){
-                case "handshake":
-                    this.handshake();
-                    break;
-                case "create":
-                    this.create(name, value);
-                    break;
-                case "set":
-                    this.set(name, value);
-                    break;
-                case "delete":
-                    this.delete(name);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            this.sendAck(name, "FAIL");
-        }
-    }
-
-    private void handshake(){
-        //读取变量
-        String username = "";
-        if (token != null){
-            LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
-            username = loginUser.getUsername();
-        }
-        String key = getKey(username, projectId);
-        Map<Object, Object> map = getRedisUtil().hmget(key);
-        String res = "";
-        for (Map.Entry<Object, Object> e: map.entrySet()){
-            JSONObject obj = new JSONObject();
-            obj.put("method", "set");
-            obj.put("project_id", projectId);
-            obj.put("name", e.getKey());
-            obj.put("value", e.getValue());
-            res = res + obj.toJSONString() + "\n";
-        }
-        if (sessionPool.containsKey(key)){
-            sessionPool.get(key).add(this.session);
-        }else{
-            List<Session> sessions = new ArrayList<>();
-            sessions.add(this.session);
-            sessionPool.put(key, sessions);
-        }
-        session.getAsyncRemote().sendText(res);
-    }
-
-    private void create(String name, String value){
-        //作品的作者才可以创建变量
-        LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
-        TeachingWork work = getTeachingWork().getById(projectId);
-        //创建变量
-        if (loginUser.getId().equals(work.getUserId())) {
-            getRedisUtil().hset(getKey(loginUser.getUsername(), projectId), name, value);
-            this.sendAck(name, "OK");
-        }else{
-            this.sendAck(name, "FAIL");
-        }
-    }
-
-    private void set(String name, String value){
-        String username = "";
-        if (token != null){
-            LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
-            username = loginUser.getUsername();
-        }
-        String key = getKey(username, projectId);
-        //设置变量
-        getRedisUtil().hset(key,name, value);
-        if (sessionPool.containsKey(key)){
-            List<Session> sessions = sessionPool.get(key);
-            String res = "";
-            JSONObject obj = new JSONObject();
-            obj.put("method", "set");
-            obj.put("project_id", projectId);
-            obj.put("name", name);
-            obj.put("value", value);
-            res = res + obj.toJSONString() + "\n";
-            for (Session session: sessions){
-                if (session.isOpen()){
-                    session.getAsyncRemote().sendText(res);
+        String update = null;
+        String project = null;
+        synchronized (this) {
+            if (closed) return;
+            try {
+                JSONObject request = JSONObject.parseObject(message);
+                if (request == null) throw new IllegalArgumentException();
+                String method = text(request, "method");
+                String requestedProject = text(request, "project_id");
+                String credential = text(request, "token");
+                if (credential != null && credential.isEmpty()) credential = null;
+                if (requestedProject == null || !requestedProject.matches("[A-Za-z0-9_-]{1,64}")
+                        || "create".equals(requestedProject) || (credential != null && credential.length() > 4096)) {
+                    reject(CloseReason.CloseCodes.VIOLATED_POLICY); return;
                 }
+                if (projectId == null) {
+                    if (!"handshake".equals(method)) throw new IllegalArgumentException();
+                    token = credential;
+                    LoginUser user = authenticatedUser();
+                    userId = user == null ? null : user.getId();
+                    projectId = requestedProject;
+                } else if (!projectId.equals(requestedProject) || !Objects.equals(token, credential)) {
+                    reject(CloseReason.CloseCodes.VIOLATED_POLICY); return;
+                }
+                LoginUser user = authenticatedUser();
+                TeachingWork work = readableWork(user);
+                if (work == null) { reject(CloseReason.CloseCodes.VIOLATED_POLICY); return; }
+                project = projectId;
+                if ("handshake".equals(method)) {
+                    // Register under the connection monitor before reading so a concurrent
+                    // update waits for this snapshot rather than missing this subscriber.
+                    subscribers.add(this);
+                    Map<Object, Object> snapshot = store().snapshot(projectId);
+                    // Validate legacy state before sending; never silently truncate it.
+                    for (Map.Entry<Object, Object> entry : snapshot.entrySet()) {
+                        validateName((String) entry.getKey()); validateValue(entry.getValue());
+                    }
+                    session.setMaxIdleTimeout(90000);
+                    for (Map.Entry<Object, Object> entry : snapshot.entrySet()) {
+                        send(variable(projectId, (String) entry.getKey(), String.valueOf(entry.getValue())));
+                    }
+                    ack(null, "OK");
+                } else {
+                    if (!subscribers.contains(this)) throw new IllegalArgumentException();
+                    String name = text(request, "name"); validateName(name);
+                    boolean owner = user != null && user.getId().equals(work.getUserId());
+                    if (user == null || (!owner && !"set".equals(method))) { ack(name, "FAIL"); return; }
+                    String value = null, newName = null;
+                    if ("set".equals(method) || "create".equals(method)) value = validateValue(request.get("value"));
+                    else if ("rename".equals(method)) { newName = text(request, "new_name"); validateName(newName); }
+                    else if (!"delete".equals(method)) throw new IllegalArgumentException();
+                    long result = store().mutate(projectId, method, name, value, newName, owner);
+                    ack(name, result == 0 ? "FAIL" : "OK");
+                    if (result == 1 && ("set".equals(method) || "create".equals(method))) update = variable(projectId, name, value);
+                }
+            } catch (org.apache.shiro.authc.AuthenticationException | com.alibaba.fastjson.JSONException | IllegalArgumentException failure) {
+                reject(CloseReason.CloseCodes.VIOLATED_POLICY);
+            } catch (RuntimeException failure) {
+                // No raw frames, credentials, values or stack traces in logs.
+                reject(CloseReason.CloseCodes.UNEXPECTED_CONDITION);
             }
         }
+        // Do not acquire another connection's monitor while holding this one.
+        if (update != null) for (ScratchWebSocket subscriber : subscribers) subscriber.deliver(project, update);
     }
 
-    private void delete(String name){
-        //作品的作者才可以删除变量
-        LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
-        TeachingWork work = getTeachingWork().getById(projectId);
-        //创建变量
-        if (loginUser.getId().equals(work.getUserId())) {
-            //删除变量
-            getRedisUtil().hdel(getKey(loginUser.getUsername(), projectId), name);
+    private LoginUser authenticatedUser() {
+        if (token == null) return null;
+        LoginUser user = SpringContextUtils.getBean(ShiroRealm.class).checkUserTokenIsEffect(token);
+        if (user == null || (userId != null && !userId.equals(user.getId()))) throw new IllegalArgumentException();
+        return user;
+    }
+
+    private TeachingWork readableWork(LoginUser user) {
+        TeachingWork work = SpringContextUtils.getBean(ITeachingWorkService.class).getById(projectId);
+        if (work == null || !("1".equals(work.getWorkType()) || "2".equals(work.getWorkType()))) return null;
+        return SpringContextUtils.getBean(TeachingAccessService.class).canReadCommunityWork(work, user) ? work : null;
+    }
+
+    private ScratchCloudStore store() { return SpringContextUtils.getBean(ScratchCloudStore.class); }
+
+    private synchronized void deliver(String project, String update) {
+        if (closed || !Objects.equals(projectId, project)) return;
+        try {
+            if (readableWork(authenticatedUser()) == null) { reject(CloseReason.CloseCodes.VIOLATED_POLICY); return; }
+            send(update);
+        } catch (RuntimeException failure) { reject(CloseReason.CloseCodes.VIOLATED_POLICY); }
+    }
+
+    private synchronized void send(String message) {
+        if (closed || !session.isOpen()) { onClose(); return; }
+        if (outbound.size() >= 128 || queuedCharacters + message.length() > 524288) {
+            reject(CloseReason.CloseCodes.UNEXPECTED_CONDITION); return;
+        }
+        outbound.addLast(message);
+        queuedCharacters += message.length();
+        if (outbound.size() == 1) sendNext();
+    }
+
+    private void sendNext() {
+        try {
+            // A slow receiver may have queued messages when a work is withdrawn
+            // or its token is revoked. Recheck before each actual async send.
+            if (closed || outbound.isEmpty()) return;
+            if (readableWork(authenticatedUser()) == null) {
+                reject(CloseReason.CloseCodes.VIOLATED_POLICY); return;
+            }
+            session.getAsyncRemote().sendText(outbound.peekFirst(), result -> {
+                synchronized (ScratchWebSocket.this) {
+                    if (closed) return;
+                    if (!result.isOK()) { reject(CloseReason.CloseCodes.UNEXPECTED_CONDITION); return; }
+                    queuedCharacters -= outbound.removeFirst().length();
+                    if (!outbound.isEmpty()) sendNext();
+                }
+            });
+        } catch (org.apache.shiro.authc.AuthenticationException | IllegalArgumentException failure) {
+            reject(CloseReason.CloseCodes.VIOLATED_POLICY);
+        } catch (RuntimeException failure) { reject(CloseReason.CloseCodes.UNEXPECTED_CONDITION); }
+    }
+
+    private void ack(String name, String reply) {
+        JSONObject message = new JSONObject();
+        message.put("method", "ack"); message.put("name", name); message.put("reply", reply);
+        send(message.toJSONString() + "\n");
+    }
+
+    private static String variable(String project, String name, String value) {
+        JSONObject message = new JSONObject();
+        message.put("method", "set"); message.put("project_id", project); message.put("name", name); message.put("value", value);
+        return message.toJSONString() + "\n";
+    }
+
+    private static String text(JSONObject request, String key) {
+        Object value = request.get(key);
+        if (value != null && !(value instanceof String)) throw new IllegalArgumentException();
+        return (String) value;
+    }
+
+    private static void validateName(String name) {
+        if (name == null || name.trim().isEmpty() || name.length() > 128 || name.indexOf('\0') >= 0) throw new IllegalArgumentException();
+    }
+
+    private static String validateValue(Object value) {
+        if (!(value instanceof String) && !(value instanceof Number)) throw new IllegalArgumentException();
+        String result = String.valueOf(value);
+        if (result.length() > 1024) throw new IllegalArgumentException();
+        return result;
+    }
+
+    private synchronized void reject(CloseReason.CloseCode code) {
+        onClose();
+        if (session != null && session.isOpen()) {
+            try { session.close(new CloseReason(code, "Cloud session unavailable")); }
+            catch (IOException ignored) { /* Already disconnected. */ }
         }
     }
 
-
-    //创建变量的回调
-    private void sendAck(String name, String reply){
-        JSONObject obj = new JSONObject();
-        obj.put("method", "ack");
-        obj.put("name", name);
-        obj.put("reply", reply);
-        session.getAsyncRemote().sendText(obj.toJSONString());
+    @OnClose
+    public synchronized void onClose() {
+        closed = true; subscribers.remove(this); token = null; userId = null;
+        outbound.clear(); queuedCharacters = 0;
     }
 
-    private String getKey(String username, String key){
-//        if ("create".equals(key)){
-//            return CacheConstant.SCRATCH_CLOUD + username + ":" + key;
-//        }else{
-            return CacheConstant.SCRATCH_CLOUD + key;
-//        }
-    }
-    
+    @OnError
+    public void onError(Throwable failure) { reject(CloseReason.CloseCodes.UNEXPECTED_CONDITION); }
 }

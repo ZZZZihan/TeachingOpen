@@ -1,0 +1,16 @@
+{
+  "after.json": "93069398c131384991b9e678b5e05f339fb93dd62fd3e6fb0c02975cb74ebf12",
+  "before.json": "c4a6256856facc7f818334df23dbfdcc5e2d8ec257e834fc603e471a6e8b18aa",
+  "build.txt": "324d8b49833c367bf41bc65cad9d6ce9fbf25444bfdc4b8ad6316821cf82bfd9",
+  "candidate.json": "5adc47a33735370eb52774251ad07ce62e7c1a9bf4fc4815b560212ae729c05e",
+  "data-preservation.json": "8a28ae444903c37766ceaae5c195678057573eaf6c594af83e25873ca30515af",
+  "jar-diff.json": "c164cb0671890ea6a7ee73ab9b45ae160108b08fd6f4ae4d99c2fd9d39351d29",
+  "python-tests.txt": "c8fbb9eaaa7493d8c4c8f5cced16fcebff2fe0d0b863b2489d5cf95cf11d0e29",
+  "regression-community-work.json": "0a64006e0d0c2f45eede70dd8e3c738d9b8a9ade2b1a181dddef0d09d08a48ed",
+  "regression-container-http.json": "43b4a9757dc16af11cf1283577eb5d81f52458451eda9182f3d830217dcebf22",
+  "regression-frontend-http.json": "26c64471da05c118f501adf010a518d4374f53dacfdd9272252866dcb2c43b5b",
+  "regression-notification-client.json": "92ca3ac96e5845a0b4bc0fa830e8f13911851b7a610620671fdabbf19541f152",
+  "regression-notification-websocket.json": "b3c3217f36baa16d9f5011d2e96d515f5f3f3a66a747ee146707456354f7792d",
+  "regression-recovered-business.json": "efd8137ffb996e8bfff4553d6680dd0a17398299d25a7134ff62d670978b3530",
+  "regression-work-management.json": "84b14dd9c97ecc9642058b26187b4ec27e58b5b177ec3150279989644bafe6a0"
+}
