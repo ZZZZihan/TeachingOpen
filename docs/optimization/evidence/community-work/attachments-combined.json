@@ -1,0 +1,174 @@
+{
+  "observed_utc": "2026-10-02T17:27:49.400565+00:00",
+  "jar_sha256": "bdb450061cfcdaf8a8e2b47beacf26ad32f312cbca2d3302ca8f4eae3c94d70d",
+  "expected_legacy": false,
+  "passed": 41,
+  "total": 41,
+  "cases": [
+    {
+      "case": "source real send",
+      "passed": true
+    },
+    {
+      "case": "recipient reads sent copy",
+      "passed": true
+    },
+    {
+      "case": "real send shares both source file IDs",
+      "passed": true
+    },
+    {
+      "case": "file and cover readable before deletion",
+      "passed": true
+    },
+    {
+      "case": "teacher deletes source",
+      "passed": true
+    },
+    {
+      "case": "source and child rows deleted while recipient remains",
+      "passed": true
+    },
+    {
+      "case": "recipient file and cover retain metadata and exact HTTP bytes",
+      "passed": true
+    },
+    {
+      "case": "delete final recipient copy",
+      "passed": true
+    },
+    {
+      "case": "last reference reclaims file and cover",
+      "passed": true
+    },
+    {
+      "case": "repeat deletion is harmless",
+      "passed": true
+    },
+    {
+      "case": "reverse real send",
+      "passed": true
+    },
+    {
+      "case": "delete recipient before source",
+      "passed": true
+    },
+    {
+      "case": "source survives reverse deletion and same-ID cover",
+      "passed": true
+    },
+    {
+      "case": "delete remaining source with same-ID cover",
+      "passed": true
+    },
+    {
+      "case": "same-ID file and cover reclaimed once",
+      "passed": true
+    },
+    {
+      "case": "delete subset batch with duplicate ID",
+      "passed": true
+    },
+    {
+      "case": "cross-field reference outside batch retains attachment",
+      "passed": true
+    },
+    {
+      "case": "delete final batch reference",
+      "passed": true
+    },
+    {
+      "case": "final batch reclaims metadata and bytes",
+      "passed": true
+    },
+    {
+      "case": "all shared copies deleted in one batch",
+      "passed": true
+    },
+    {
+      "case": "all-copy batch reclaims shared file",
+      "passed": true
+    },
+    {
+      "case": "student_a unauthorized deletion rejected",
+      "passed": true
+    },
+    {
+      "case": "teacher_b unauthorized deletion rejected",
+      "passed": true
+    },
+    {
+      "case": "teacher_a unauthorized deletion rejected",
+      "passed": true
+    },
+    {
+      "case": "denied single and mixed batch preserve all rows and bytes",
+      "passed": true
+    },
+    {
+      "case": "injected batch database failure returns an error",
+      "passed": true
+    },
+    {
+      "case": "failed batch restores works feedback comments metadata and bytes",
+      "passed": true
+    },
+    {
+      "case": "retry batch after removing database failure",
+      "passed": true
+    },
+    {
+      "case": "successful retry reclaims both attachments",
+      "passed": true
+    },
+    {
+      "case": "work deletion commits despite attachment I/O failure",
+      "passed": true
+    },
+    {
+      "case": "failed cleanup preserves metadata and directory contents",
+      "passed": true
+    },
+    {
+      "case": "delete work whose file is already missing",
+      "passed": true
+    },
+    {
+      "case": "already missing object metadata is reclaimed",
+      "passed": true
+    },
+    {
+      "case": "delete work with an aliased physical file",
+      "passed": true
+    },
+    {
+      "case": "aliased recipient retains metadata and readable bytes",
+      "passed": true
+    },
+    {
+      "case": "work with unknown file storage can be deleted",
+      "passed": true
+    },
+    {
+      "case": "unknown storage remains available for diagnosis",
+      "passed": true
+    },
+    {
+      "case": "empty attachments are harmless",
+      "passed": true
+    },
+    {
+      "case": "original work feedback comment and file rows restored",
+      "passed": true
+    },
+    {
+      "case": "original file bytes restored",
+      "passed": true
+    },
+    {
+      "case": "temporary failure trigger removed",
+      "passed": true
+    }
+  ],
+  "scope": "actual synthetic HTTP/login/send/delete, MySQL rollback injection and local attachment bytes; no browser editor, Qiniu, concurrent writer or global file API acceptance"
+}

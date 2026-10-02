@@ -242,14 +242,21 @@ export default {
       this.loadingMore = true
       getAction('/teaching/teachingWork/getWorkComments', { workId: this.workId, page: this.commentsPage }).then(
         (res) => {
-          this.loadingMore = false
+          if (!res.success || !Array.isArray(res.result)) {
+            this.commentsPage -= 1
+            return
+          }
           if (res.result.length == 0 && this.commentsPage > 1) {
             this.$message.info('已加载完啦！')
           } else {
             this.comments = this.comments.concat(res.result)
           }
         }
-      )
+      ).catch(() => {
+        this.commentsPage -= 1
+      }).finally(() => {
+        this.loadingMore = false
+      })
     },
     comment() {
       if (this.commentContent != '') {

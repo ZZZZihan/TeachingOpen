@@ -13,6 +13,7 @@ import org.crazycake.shiro.RedisManager;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.shiro.authc.ShiroRealm;
 import org.jeecg.modules.shiro.authc.aop.JwtFilter;
+import org.jeecg.modules.shiro.authc.aop.OptionalJwtFilter;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -153,11 +154,11 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/sys/dict/getDictItems/**", "anon");
 		//社区
 		filterChainDefinitionMap.put("/teaching/teachingWork/userInfo", "anon");
-		filterChainDefinitionMap.put("/teaching/teachingWork/studentWorkInfo", "anon");
+		filterChainDefinitionMap.put("/teaching/teachingWork/studentWorkInfo", "optionalJwt");
 		filterChainDefinitionMap.put("/teaching/teachingWork/greatWork", "anon");
-		filterChainDefinitionMap.put("/teaching/teachingWork/starWork", "anon");
+		filterChainDefinitionMap.put("/teaching/teachingWork/starWork", "optionalJwt");
 		filterChainDefinitionMap.put("/teaching/teachingWork/leaderboard", "anon");
-		filterChainDefinitionMap.put("/teaching/teachingWork/getWorkComments", "anon");
+		filterChainDefinitionMap.put("/teaching/teachingWork/getWorkComments", "optionalJwt");
 		filterChainDefinitionMap.put("/teaching/teachingCourse/getHomeCourse", "anon");
 
 		filterChainDefinitionMap.put("/teaching/teachingNews/newsList", "anon");
@@ -169,6 +170,7 @@ public class ShiroConfig {
 		// 添加自己的过滤器并且取名为jwt
 		Map<String, Filter> filterMap = new HashMap<String, Filter>(1);
 		filterMap.put("jwt", new JwtFilter());
+		filterMap.put("optionalJwt", new OptionalJwtFilter());
 		shiroFilterFactoryBean.setFilters(filterMap);
 		// <!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边
 		filterChainDefinitionMap.put("/**", "jwt");

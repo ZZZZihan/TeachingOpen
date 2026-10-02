@@ -60,6 +60,15 @@ public class TeachingAccessService {
         requireManageWork(work);
     }
 
+    /** Sharing a detail URL does not publish a draft or a graded submission. */
+    public void requireCommunityWork(TeachingWork work) {
+        if (work == null || !Integer.valueOf(0).equals(work.getDelFlag())) {
+            throw new UnauthorizedException("作品不存在或无访问权限");
+        }
+        if ("3".equals(work.getWorkStatus()) || "4".equals(work.getWorkStatus())) return;
+        requireReadWork(work);
+    }
+
     /** Apply the same owner and class boundary before list pagination or export. */
     public void limitManagedWorks(QueryWrapper<?> query) {
         if (isAdministrator()) return;

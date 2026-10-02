@@ -296,8 +296,17 @@ public class TeachingWorkController extends BaseController {
 	public Result<?> greatWorkList(@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize){
 		IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), new QueryWrapper<StudentWorkModel>()
-				.eq("teaching_work.work_status", 2), null);
+				.eq("teaching_work.work_status", "4").eq("teaching_work.del_flag", 0), null);
+		removePublicGrading(pageList);
 		return Result.ok(pageList);
+	}
+
+	private void removePublicGrading(IPage<StudentWorkModel> page) {
+		// This mapper also serves the private teacher/student work lists.
+		page.getRecords().forEach(work -> {
+			work.setTeacherComment(null);
+			work.setScore(null);
+		});
 	}
 
 	 @ApiOperation(value = "点赞作品")
@@ -305,6 +314,7 @@ public class TeachingWorkController extends BaseController {
 	 public Result starWork(@RequestParam(name = "workId") String workId, HttpServletRequest request) {
 		 Result<TeachingWork> result = new Result<TeachingWork>();
 		 TeachingWork teachingWork = teachingWorkService.getById(workId);
+		 teachingAccessService.requireCommunityWork(teachingWork);
 		 if (teachingWork == null) {
 			 result.error500("未找到对作业");
 		 } else {
@@ -337,7 +347,7 @@ public class TeachingWorkController extends BaseController {
 									  @RequestParam(required = false) String userId, //用户ID
 									  HttpServletRequest request) {
 		 QueryWrapper<StudentWorkModel> queryWrapper = new QueryWrapper<StudentWorkModel>();
-		 queryWrapper.ge("teaching_work.work_status", 3);
+		 queryWrapper.in("teaching_work.work_status", "3", "4").eq("teaching_work.del_flag", 0);
 		 queryWrapper.eq(StringUtils.isNotBlank(userId), "teaching_work.user_id", userId);
 		 queryWrapper.eq(workStatus!=null, "teaching_work.work_status", workStatus);
 		 switch (orderBy){
@@ -353,11 +363,13 @@ public class TeachingWorkController extends BaseController {
 		 }
 
 		 IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper, null);
+		 removePublicGrading(pageList);
 		 return Result.ok(pageList);
 	 }
 
 	 @GetMapping("/studentWorkInfo")
 	 public DictResult<StudentWorkModel> studentWorkInfo(@RequestParam(name = "workId") String workId){
+		 teachingAccessService.requireCommunityWork(teachingWorkService.getById(workId));
 		 DictResult<StudentWorkModel> result = new DictResult<StudentWorkModel>();
 		 StudentWorkModel teachingWork = teachingWorkService.studentWorkInfo(workId);
 		 if (teachingWork == null) {
@@ -384,6 +396,7 @@ public class TeachingWorkController extends BaseController {
 	 public DictResult<?> getWorkComment(@RequestParam String workId,
 									 @RequestParam(defaultValue = "1") Integer page,
 									 @RequestParam(defaultValue = "10") Integer pageSize){
+		 teachingAccessService.requireCommunityWork(teachingWorkService.getById(workId));
 		 DictResult<List<WorkCommentModel>> result = new DictResult<>();
 		 List<WorkCommentModel> comments = teachingWorkCommentService.getWorkComments(workId, page, pageSize);
 		 result.setResult(comments);
@@ -392,7 +405,7 @@ public class TeachingWorkController extends BaseController {
 
 	 @PostMapping(value = "/saveComment")
 	 public Result saveComment(@RequestBody TeachingWorkComment comment, HttpServletRequest request) {
-		 String ip = IPUtils.getIpAddr(request);
+		 teachingAccessService.requireCommunityWork(teachingWorkService.getById(comment.getWorkId()));
 		 String userId = getCurrentUser().getId();
 		 TeachingWorkComment c = new TeachingWorkComment();
 		 c.setWorkId(comment.getWorkId());

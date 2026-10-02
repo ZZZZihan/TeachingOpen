@@ -35,6 +35,10 @@ window.getWorkInfo = function(workId, cb) {
   $.ajax({
     url: '/api/teaching/teachingWork/studentWorkInfo',
     data: { workId: workId },
+    beforeSend: function (request) {
+      var token = getUserToken()
+      if (token) request.setRequestHeader('X-Access-Token', token)
+    },
     success: function (res) {
       if (res.code == 0) {
         cb(res.result)
