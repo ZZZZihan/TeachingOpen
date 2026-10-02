@@ -1,0 +1,25 @@
+{
+  "runtime": "backend-runtime-pr4",
+  "mysql_port": 13316,
+  "course_fields_match_backup": true,
+  "restored_course_fields": [
+    {
+      "id": "fixture_course_a",
+      "course_type": "1",
+      "course_cover": null,
+      "course_category": "1"
+    },
+    {
+      "id": "fixture_course_b",
+      "course_type": "1",
+      "course_cover": null,
+      "course_category": "1"
+    }
+  ],
+  "dict_rows": 0,
+  "dict_item_rows": 0,
+  "dictionary_cache_keys_cleared": 6,
+  "http_course_total": 2,
+  "http_dictionary_options_after_cleanup": 0,
+  "temporary_cover_files_absent": true
+}

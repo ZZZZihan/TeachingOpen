@@ -1,0 +1,36 @@
+{
+  "base_pr": 6,
+  "base_commit": "17f4a7cbdd23c8fad81dc1ac4c82a0a26e3e5f6f",
+  "controlled_tests": {
+    "passed": 40,
+    "total": 40,
+    "new_filter_tests": 4
+  },
+  "eslint_changed_source_files": 2,
+  "eslint_errors": 0,
+  "eslint_warnings": 0,
+  "build_exit_code": 0,
+  "browser_observations_checked": 14,
+  "source_sha256": {
+    "web/src/views/home/CourseList.vue": "ba9a5490d8b0d93a6e73e972cfc4508aff1a9ff3bc641a9f6cf655260935d0d4",
+    "web/src/views/home/modules/CourseFilters.vue": "38e600bfa2c2169eb451a15cb273c404880862aa61ddf7a984aaacfaf1b6b2b7",
+    "web/tests/course-list.test.cjs": "1901871c02d0a993d5e1351060cd68d0e588505248b833cb737fcf15f9e7f6d9",
+    "web/tests/course-filters.test.cjs": "66971e73b1ea18936b16c16395d9946fb1ea79964d5988329c161581ceff500e"
+  },
+  "dist_entry_sha256": "f8d7d50fe7fbb1329166d8fe0c719684cec73b0332a34624768f90f644e3a2b0",
+  "dist_files_count": 4866,
+  "dist_manifest_sha256": "ee7c373879759b91990a5c5c5858e64881a64535948c78fc987c7ef38bbcce90",
+  "log_sha256": {
+    "course-discovery-tests.log": "164424eaf22c0f41ea30c4ce21aa1493fc5c82077c1985e8383322d342eac6b3",
+    "course-discovery-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "course-discovery-build.log": "5113c0ba9f8d0c9e76688a4622082c347ec5c161a9d01cd9f4ef72871f589056"
+  },
+  "backend_jar_sha256": "f80ff81aead130311d14801cabbe7747333f670037409f96cc7ee1530d3e0626",
+  "limitations": [
+    "Local synthetic public course discovery only; not complete learning or role workflow acceptance",
+    "Before screenshots use original PR6 c8f46ed; after screenshots include revised PR6 17f4a7c surroundings",
+    "Shared card cover handling is verified in PR6 refinement evidence; not a new PR7 implementation",
+    "Existing global HTTP interceptor emits duplicate generic notifications during backend outage",
+    "User visual acceptance is pending; existing CSS order, asset size and Browserslist build warnings remain"
+  ]
+}

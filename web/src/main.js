@@ -114,9 +114,7 @@ const start = async () => {
         router,
         store,
         created () {
-            if (sysConfig.brandName) {
-                window.document.title = sysConfig.brandName
-            }
+            window.document.title = (sysConfig.brandName || '').trim() || 'TeachingOpen'
             if (sysConfig.customJS) {
                 let script = document.createElement('script')
                 script.type = 'text/javascript'

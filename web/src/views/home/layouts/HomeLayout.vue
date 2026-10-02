@@ -1,216 +1,82 @@
 <template>
-  <div
-    class="container"
-    :style="{
-      backgroundColor: sysConfig.homeBgColor,
-      backgroundImage: sysConfig.file_homeBg ? 'url(' + getFileAccessHttpUrl(sysConfig.file_homeBg) + ')' : '',
-      backgroundRepeat: sysConfig.homeBgRepeat ? sysConfig.homeBgRepeat : '',
-    }"
-  >
-    <a-layout>
-      <a-layout-header>
-        <Header />
-      </a-layout-header>
-      <a-layout>
-        <a-layout-content>
-          <a-row type="flex" justify="space-between">
-            <a-col :xs="24" :sm="16" :md="16" :lg="16" :xl="18">
-              <Banner />
-            </a-col>
-            <a-col :xs="24" :sm="8" :md="8" :lg="8" :xl="6">
-              <div class="user-enter">
-                <div v-if="token">
-                  <a-avatar shape="square" class="avatar" :size="100" :src="avatarUrl" />
-                  <h3>欢迎您，{{ nickname() }}</h3>
-                  <a-button type="primary" class="btn-my-work" @click="enter(1)">我的作品</a-button>
-                  <a-divider type="vertical"></a-divider>
-                  <a-button type="primary" class="btn-my-course" @click="enter(2)">我的课程</a-button>
-                </div>
-                <div v-else>
-                  <a-avatar shape="square" class="avatar" :size="100" :src="logo2" />
-                  <h3 class="welcome">欢迎来到{{ brandName }}</h3>
-                  <a-button type="dashed" @click="enter(0)">登录/注册</a-button>
-                </div>
-              </div>
-            </a-col>
-          </a-row>
-          <router-view />
-        </a-layout-content>
-      </a-layout>
-      <a-layout-footer>
-        <Footer />
-      </a-layout-footer>
-    </a-layout>
+  <div class="public-layout" :style="backgroundStyle">
+    <a class="skip-link" href="#public-content">跳到主要内容</a>
+    <Header />
+    <main id="public-content" class="public-content" tabindex="-1">
+      <section v-if="showIntro" class="welcome-panel" :class="{ 'has-banner': hasBanner }" aria-labelledby="welcome-title">
+        <div class="welcome-copy">
+          <p class="eyebrow">TEACHINGOPEN · 人工智能与编程</p>
+          <h1 id="welcome-title">学好人工智能，<br /><span>从动手开始。</span></h1>
+          <p class="welcome-description">选择课程，理解知识，完成自己的编程作品。<br />在这里，把学习落实到每一次实践。</p>
+          <div class="welcome-actions">
+            <router-link class="primary-action" to="/courseList">浏览课程 <a-icon type="arrow-right" /></router-link>
+            <router-link class="secondary-action" :to="isLoggedIn ? '/teaching/mineCourse/cardList' : '/user/login'">{{ isLoggedIn ? '我的课程' : '登录，继续学习' }}</router-link>
+          </div>
+        </div>
+        <Banner v-if="hasBanner" class="welcome-banner" />
+        <div v-else class="learning-path" aria-label="学习路径">
+          <p class="path-caption">从课程，到自己的作品</p>
+          <p class="path-line">理解一个概念。</p>
+          <p class="path-line">写出一段代码。</p>
+          <p class="path-line">完成一件作品。</p>
+        </div>
+      </section>
+      <CoursePreview v-if="showIntro && $route.path === '/index'" />
+      <router-view />
+    </main>
+    <Footer />
   </div>
 </template>
-
 <script>
 import Vue from 'vue'
-import { getAction, getFileAccessHttpUrl } from '@/api/manage'
+import { getFileAccessHttpUrl } from '@/api/manage'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
-import { mapActions, mapGetters } from 'vuex'
 import Header from '../modules/Header'
 import Banner from '../modules/Banner'
 import Footer from '../modules/Footer'
-import UserEnter from '../modules/UserEnter'
-
+import CoursePreview from '../modules/CoursePreview'
 export default {
-  name: 'HomeLayout',
-  components: {
-    Header,
-    Footer,
-    UserEnter,
-    Banner,
-  },
-  data() {
-    return {
-      brandName: this.$store.getters.sysConfig.brandName,
-      logo: '/logo.png',
-      logo2: '/logo.png',
-      avatarUrl: '/logo.png',
-      token: '',
-      sysConfig: {},
-    }
-  },
-  created() {
-    this.token = Vue.ls.get(ACCESS_TOKEN)
-    this.sysConfig = this.$store.getters.sysConfig
-    if (this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain) {
-      this.logo = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo
-    }
-    if (this.$store.getters.sysConfig.logo2 && this.$store.getters.sysConfig.qiniuDomain) {
-      this.logo2 = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo2
-      this.avatarUrl = this.logo
-    }
-    if (this.$store.getters.sysConfig.avatar && this.$store.getters.sysConfig.qiniuDomain) {
-      this.avatarUrl = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.avatar
-    }
-    if (this.getFileAccessHttpUrl(this.avatar())) {
-      this.avatarUrl = this.getFileAccessHttpUrl(this.avatar())
-    }
-  },
-  methods: {
-    getFileAccessHttpUrl,
-    ...mapActions(['Logout']),
-    ...mapGetters(['nickname', 'avatar', 'userInfo']),
-    enter(type) {
-      switch (type) {
-        case 0:
-          this.$router.push('/user/login')
-          break
-        case 1:
-          this.$router.push('/account/center')
-          break
-        case 2:
-          this.$router.push('/teaching/mineCourse/cardList')
-          break
-        default:
-          this.$router.push('/account/center')
-          break
-      }
-    },
-    changeAccount() {
-      const that = this
-      this.$confirm({
-        title: '提示',
-        content: '确定要退出当前账号并登录新的账号吗 ?',
-        onOk() {
-          return that
-            .Logout({})
-            .then(() => {
-              window.location.href = '/user/login'
-            })
-            .catch((err) => {
-              that.$message.error({
-                title: '错误',
-                description: err.message,
-              })
-            })
+    name: 'HomeLayout',
+    components: { Header, Banner, Footer, CoursePreview },
+    computed: {
+        sysConfig () { return this.$store.getters.sysConfig || {} },
+        isLoggedIn () { return Boolean(this.$store.state.user.token || Vue.ls.get(ACCESS_TOKEN)) },
+        showIntro () {
+            return this.$route.path === '/home' || (this.$route.path === '/index' && !this.sysConfig._homeHtml)
         },
-        onCancel() {},
-      })
-    },
-    toEditor(type) {
-      switch (type) {
-        case 1:
-          window.open('/scratch3/index.html?scene=create')
-          break
-        case 2:
-          window.open('/scratchjr/home.html')
-          break
-        case 3:
-          window.open('/python/index.html')
-          break
-      }
-    },
-    _isMobile() {
-      return (
-        navigator.userAgent.match(
-          /(phone|pad|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
-        ) != null
-      )
-    },
-  },
+        hasBanner () { return Boolean((this.sysConfig.banner || '').trim()) },
+        backgroundStyle () {
+            return {
+                backgroundColor: this.sysConfig.homeBgColor || '',
+                backgroundImage: this.sysConfig.file_homeBg ? 'url(' + getFileAccessHttpUrl(this.sysConfig.file_homeBg) + ')' : '',
+                backgroundRepeat: this.sysConfig.homeBgRepeat || 'no-repeat'
+            }
+        }
+    }
 }
 </script>
-
-<style lang="less" scoped>
-.container {
-  background: url(/img/bg_blue.png) no-repeat;
-  background-color: #f6f6f6;
-  background-size: 100% auto;
-}
-.ant-layout-header,
-.ant-layout-content,
-.ant-layout-sider,
-.ant-layout-sider-children,
-.ant-layout-footer {
-  background: transparent;
-}
-.ant-layout {
-  background: transparent;
-  min-height: calc(100vh - 200px);
-}
-.ant-layout-header {
-  height: auto;
-  min-height: 50px;
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 0;
-  /deep/.banner {
-    border-radius: 10px;
-    overflow: hidden;
-  }
-}
-
-.ant-layout-has-sider {
-  max-width: 1600px;
-  min-width: 800px;
-  margin: -100px auto 0;
-}
-.ant-layout-sider {
-  z-index: 99;
-}
-.ant-layout-content {
-  padding: 20px 20px 0 20px;
-  max-width: 1300px;
-  width: 100%;
-  margin: 0 auto;
-  .user-enter {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 20px;
-    width: 250px;
-    min-height: 300px;
-    text-align: center;
-    line-height: 50px;
-    float: right;
-    padding: 30px 20px;
-  }
-}
-.ant-layout-sider {
-  margin-left: 30px;
-  max-width: 300px !important;
-  width: 300px !important;
-}
+<style scoped lang="less">
+.public-layout { min-height: 100vh; display: flex; flex-direction: column; background: #f7f8fa; background-size: 100% auto; color: #20252b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+.public-content { width: 100%; max-width: 1280px; margin: 0 auto; padding: 36px 40px 64px; flex: 1; }
+.skip-link { position: absolute; top: -100px; left: 20px; padding: 12px 20px; background: #fff; border: 2px solid #bd424d; z-index: 1000; }
+.skip-link:focus { top: 8px; }
+.welcome-panel { display: grid; grid-template-columns: 1.6fr 1fr; gap: 64px; align-items: center; padding: 40px 48px; margin-bottom: 48px; background: #172d38; border-radius: 5px; }
+.eyebrow { color: #bfcbd0; font-size: 11px; letter-spacing: 2px; margin: 0 0 24px; }
+.welcome-copy h1 { font-size: clamp(36px, 3.6vw, 50px); font-weight: 600; line-height: 1.4; letter-spacing: -1px; color: #fff; margin: 0 0 24px; }
+.welcome-copy h1 span { color: #fff; }
+.welcome-description { font-size: 14px; line-height: 1.9; color: #b8c6ce; margin: 0 0 30px; }
+.welcome-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 26px; }
+.primary-action { display: inline-flex; align-items: center; gap: 28px; padding: 13px 22px; border: 1px solid #c84a55; border-radius: 4px; background: #c84a55; color: #fff; font-weight: 500; }
+.primary-action:hover { background: #b43b46; border-color: #b43b46; color: #fff; }
+.secondary-action { color: #fff; padding: 8px 0; border-bottom: 1px solid #768b98; font-size: 13px; }
+.secondary-action:hover { color: #fff; border-color: #fff; }
+a:focus-visible { outline: 2px solid #e47883; outline-offset: 5px; }
+.learning-path { padding-left: 34px; border-left: 1px solid #40535e; }
+.path-caption { margin: 0 0 28px; color: #df8d95; font-size: 10px; letter-spacing: 2px; }
+.path-line { color: #c3d0d6; font-size: 20px; line-height: 1.8; font-weight: 400; margin: 0 0 16px; }
+.path-line:last-child { margin: 0; }
+.welcome-banner { min-width: 0; }
+@media (max-width: 1000px) { .welcome-panel { gap: 32px; padding: 40px 36px; grid-template-columns: 1.4fr 1fr; } .welcome-copy h1 { font-size: 38px; } .learning-path { padding-left: 24px; } .path-line { font-size: 16px; } }
+@media (max-width: 900px) { .public-content { padding: 28px 28px 48px; } .welcome-panel.has-banner { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .public-content { padding: 22px 20px 40px; } .welcome-panel { grid-template-columns: 1fr; padding: 32px 26px; gap: 0; margin-bottom: 36px; } .welcome-copy h1 { font-size: 33px; line-height: 1.45; margin-bottom: 20px; } .eyebrow { font-size: 9px; letter-spacing: 1px; margin-bottom: 22px; } .welcome-description { font-size: 13px; margin-bottom: 26px; } .welcome-actions { gap: 20px; } .primary-action { padding: 11px 16px; gap: 16px; } .secondary-action { font-size: 12px; } .learning-path { display: none; } }
 </style>

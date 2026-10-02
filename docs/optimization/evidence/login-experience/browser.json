@@ -1,0 +1,84 @@
+{
+  "environment": "127.0.0.1:18112 -> PR18 backend 18111, synthetic local data",
+  "observations": [
+    {
+      "check": "responsive",
+      "captchaLoaded": true,
+      "height": 844,
+      "progress": false,
+      "scrollWidth": 382,
+      "width": 390
+    },
+    {
+      "check": "responsive",
+      "captchaLoaded": true,
+      "height": 1024,
+      "progress": false,
+      "scrollWidth": 760,
+      "width": 768
+    },
+    {
+      "check": "responsive",
+      "captchaLoaded": true,
+      "height": 1000,
+      "progress": false,
+      "scrollWidth": 1432,
+      "width": 1440
+    },
+    {
+      "check": "empty-form",
+      "errors": [
+        "请输入账号。",
+        "请输入密码。",
+        "请输入验证码。"
+      ],
+      "focus": "login-username"
+    },
+    {
+      "check": "captcha-network-failure",
+      "message": "验证码未能加载，请点击重试。",
+      "submitEnabled": false
+    },
+    {
+      "check": "captcha-retry",
+      "message": "看不清？点击图片或换一张。",
+      "submitEnabled": true
+    },
+    {
+      "check": "keyboard-empty-submit",
+      "focus": "login-username"
+    },
+    {
+      "check": "password-toggle",
+      "type": "text"
+    },
+    {
+      "check": "password-recovery-390",
+      "scrollWidth": 382,
+      "width": 390
+    },
+    {
+      "check": "form-labels",
+      "inputs": [
+        {
+          "autocomplete": "username",
+          "id": "login-username",
+          "label": "账号"
+        },
+        {
+          "autocomplete": "current-password",
+          "id": "login-password",
+          "label": "密码"
+        },
+        {
+          "autocomplete": "off",
+          "id": "login-captcha",
+          "label": "验证码"
+        }
+      ]
+    }
+  ],
+  "captcha_completion": "not attempted; confirmation pending",
+  "authenticated_browser_flows": "not yet verified",
+  "network_overrides": "removed"
+}

@@ -1,0 +1,23 @@
+{
+  "observed_utc": "2026-10-02T19:20:34.192215+00:00",
+  "previous_frontend_commit": "086e8349354a889004b21e0daccb7912342fb80b",
+  "backend_required_pr": 20,
+  "backend_jar_sha256": "c76dfb9032b92eb6f4bf86ef152e16fadc7504436b81fe1e4d49990f6883738f",
+  "source_sha256": {
+    "web/src/store/modules/user.js": "1c7e33257364ad1ec5ce14dcfa44667be8271d5ad1b542c063a14ece7f0443f0",
+    "web/tests/login-session.test.cjs": "3bc422955859200348a7ade516f578dd8972a5e8c2d9c16701af26ef231cd37a"
+  },
+  "change": "Permission request omits URL credential; current token is still captured to reject stale account responses. Requires PR20 backend.",
+  "tests_passed": 59,
+  "tests_total": 59,
+  "eslint_changed_store": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "build_exit": 0,
+  "build_warnings": "6 existing CSS-order/asset-size warnings; outdated Browserslist data",
+  "built_files": 4866,
+  "dist_path_hashes_aggregate_sha256": "c479e6d16a254c8200b0c6d25532f2a1b106f10427e07e5c56d690da90f125c1",
+  "browser": "Previous screenshots/10 observations belong to 086e834 + PR18. No new authenticated browser acceptance; CAPTCHA confirmation remains pending.",
+  "ui_source_changed": false
+}

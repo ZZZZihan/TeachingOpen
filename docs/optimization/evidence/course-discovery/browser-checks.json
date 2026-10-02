@@ -1,0 +1,103 @@
+{
+  "environment": "isolated real backend 18101 and built frontend 18102; synthetic fixtures only",
+  "checks": [
+    {
+      "cards": 2,
+      "categoryOptions": 3,
+      "phase": "initial",
+      "typeOptions": 3,
+      "width": 1440
+    },
+    {
+      "phase": "category",
+      "cards": [
+        "合成测试课程b"
+      ]
+    },
+    {
+      "phase": "combined-empty",
+      "cards": 0
+    },
+    {
+      "cards": 2,
+      "category": "",
+      "name": "",
+      "phase": "empty-reset",
+      "type": ""
+    },
+    {
+      "phase": "type",
+      "cards": [
+        "合成测试课程a"
+      ]
+    },
+    {
+      "phase": "name-search",
+      "cards": [
+        "合成测试课程a"
+      ]
+    },
+    {
+      "phase": "name-empty",
+      "cards": 0
+    },
+    {
+      "phase": "keyboard-detail",
+      "description": "仅用于本地验收",
+      "left": 8,
+      "right": 382,
+      "width": 390
+    },
+    {
+      "phase": "anonymous-login-redirect",
+      "url": "http://127.0.0.1:18102/user/login?redirect=%2Fteaching%2FmineCourse%2FcourseUnitCard%3Fid%3Dfixture_course_a"
+    },
+    {
+      "categoryDisabled": true,
+      "courseError": "课程加载失败，请重试。\n\n重新加载",
+      "filterError": "部分筛选选项加载失败，仍可按名称搜索。 重试选项",
+      "loading": false,
+      "phase": "backend-down",
+      "typeDisabled": true
+    },
+    {
+      "cards": 2,
+      "categoryDisabled": false,
+      "categoryOptions": 3,
+      "errors": 0,
+      "phase": "backend-recovered",
+      "typeDisabled": false,
+      "typeOptions": 3
+    },
+    {
+      "check": "final-build-restored-fixtures-390",
+      "passed": true,
+      "cards": 2,
+      "categoryOptions": 1,
+      "filterWidth": 342,
+      "scrollWidth": 382,
+      "typeOptions": 1,
+      "width": 390
+    },
+    {
+      "check": "final-build-restored-fixtures-768",
+      "passed": true,
+      "cards": 2,
+      "categoryOptions": 1,
+      "filterWidth": 704,
+      "scrollWidth": 760,
+      "typeOptions": 1,
+      "width": 768
+    },
+    {
+      "check": "final-build-restored-fixtures-1440",
+      "passed": true,
+      "cards": 2,
+      "categoryOptions": 1,
+      "filterWidth": 220,
+      "scrollWidth": 1432,
+      "typeOptions": 1,
+      "width": 1440
+    }
+  ]
+}
