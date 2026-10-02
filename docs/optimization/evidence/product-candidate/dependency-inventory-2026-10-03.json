@@ -269,7 +269,7 @@
     {
       "component": "Application WebSocket handlers",
       "evidence": "WebSocket.java uses userId path to subscribe; ScratchWebSocket logs whole incoming messages and uses token/project IDs in onMessage. ShiroConfig permits websocket paths.",
-      "assessment": "Source evidence only for subscription authorization/logging concerns; no private message read or identity bypass experiment yet. Prioritize isolated reproduction; Tomcat transport smoke does not verify application authorization."
+      "assessment": "Initial source concern subsequently reproduced and backend remediations delivered in PR34/PR36, with local proxy PR35. See remediation entries; shipped Scratch integration, broader REST authorization and capacity remain pending."
     }
   ],
   "tomcat_remediation": {
@@ -285,7 +285,15 @@
   "notification_remediation": {
     "pull_request": "https://github.com/ZZZZihan/TeachingOpen/pull/34",
     "product_commit": "10a3f167b90fe4f270792e035985c4a38aedb305",
-    "scope": "Notification first-frame identity, outbound token validation, multi-session cleanup, test sender roles and no payload logs. Scratch cloudData and other announcement REST authorization remain open.",
-    "same_origin_local_proxy": "Resolved by PR35 c41b8ba; 71/71 real proxy checks plus 42 Python checks repeated on local integration 8881cbe. Browser login/UI and Scratch cloud-data authorization remain pending."
+    "scope": "Notification first-frame identity, outbound token validation, multi-session cleanup, test sender roles and no payload logs. Scratch backend subsequently addressed in PR36; other announcement REST authorization remains open.",
+    "same_origin_local_proxy": "Resolved by PR35 c41b8ba; 71/71 real proxy checks and 42 Python checks on integration 8881cbe. Notification and HTTP checks repeated with PR36 backend; browser login/UI and shipped Scratch client remain pending."
+  },
+  "scratch_cloud_remediation": {
+    "pull_request": "https://github.com/ZZZZihan/TeachingOpen/pull/36",
+    "product_commit": "c2a4cb7f11752e77a09f1bd4f18f11d679d82864",
+    "candidate_commit": "082813c47db020fdc02c6d30ba340457d00cef1a",
+    "jar_sha256": "ba9a03697641afdb8ee1781ab20848e1865fdfa4ee4c1c1ac317156f7efcb72f",
+    "scope": "Real legacy 14/14 reproduction, corrected backend 52/52 plus related 469/469 on isolated final JAR; 114/114 relevant checks repeated after local integration. Immutable project/identity, work visibility, outbound revalidation, bounded serialized send, atomic Redis mutations, no raw token/value logs.",
+    "remaining": "Shipped Scratch provider/editor integration (host port, unsaved/sample identity, token and reconnect lifecycle), multi-instance ordering, cross-store authorization/write race, slow-client/load tests and Redis data backup/restore remain pending."
   }
 }
