@@ -21,7 +21,7 @@ class Socket:
         self.sock = socket.create_connection(('127.0.0.1', port), timeout=5)
         key = base64.b64encode(os.urandom(16)).decode()
         request = ('GET /api/websocket/' + quote(user, safe='') + ' HTTP/1.1\r\nHost: 127.0.0.1:' + str(port)
-                   + '\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: ' + key + '\r\n\r\n')
+                   + '\r\nOrigin: http://127.0.0.1:' + str(port) + '\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: ' + key + '\r\n\r\n')
         self.sock.sendall(request.encode())
         header = b''
         while not header.endswith(b'\r\n\r\n') and len(header) < 16384:
@@ -97,7 +97,7 @@ def verify(args):
             api.login(actor)
 
         def connect(user='fixture_student_a', actor=None, raw_token=None):
-            ws = Socket(api.ports['backend'], user)
+            ws = Socket(api.ports['frontend' if args.via_frontend else 'backend'], user)
             stack.callback(ws.close)
             if actor or raw_token is not None:
                 ws.send({'type': 'authenticate', 'token': raw_token if raw_token is not None else api.tokens[actor]})
@@ -201,7 +201,7 @@ def verify(args):
         after = database_inventory(api.runtime)
         check('all non-audit-log database tables unchanged', all(before[t] == after[t] for t in before if t != 'sys_log'))
         check('all original attachment bytes unchanged', file_inventory(api.runtime / 'uploads') == files)
-        result = {'jar_sha256': api.jar_sha256, 'expected_legacy': args.expect_legacy, 'cases': cases,
+        result = {'jar_sha256': api.jar_sha256, 'expected_legacy': args.expect_legacy, 'via_frontend': args.via_frontend, 'cases': cases,
                   'passed': sum(c['passed'] for c in cases), 'total': len(cases),
                   'scope': 'Actual local synthetic WebSocket and HTTP notification delivery; no external or real-user messages. Notification endpoint only, not Scratch cloud data or all announcement REST authorization.'}
     private_write(args.output, json.dumps(result, indent=2) + '\n')
@@ -214,4 +214,5 @@ if __name__ == '__main__':
     parser.add_argument('--jar', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--expect-legacy', action='store_true')
+    parser.add_argument('--via-frontend', action='store_true', help='Connect notification sockets through the runtime frontend proxy')
     raise SystemExit(0 if verify(parser.parse_args()) else 1)

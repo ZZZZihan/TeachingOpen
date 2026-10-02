@@ -27,6 +27,8 @@ def verify(args):
         print(('PASS ' if passed else 'FAIL ') + name, flush=True)
 
     with FixtureApi(args.runtime, args.jar) as api:
+        if args.via_frontend:
+            api.ports['backend'] = api.ports['frontend']
         folder = api.runtime / 'uploads' / PREFIX
         if folder.exists() or sql(api.runtime, "SELECT COUNT(*) FROM teachingopen_dev.sys_file WHERE file_path LIKE '" + PREFIX + "/%'") != '0':
             raise RuntimeError('Container probe files already exist')
@@ -114,7 +116,7 @@ def verify(args):
         after = database_inventory(api.runtime)
         check('all non-audit-log tables restored', all(before[t] == after[t] for t in before if t != 'sys_log'))
         check('all original attachment bytes unchanged', file_inventory(api.runtime / 'uploads') == files)
-    result = {'jar_sha256': jar_hash, 'expected_legacy': args.expect_legacy, 'cases': cases,
+    result = {'jar_sha256': jar_hash, 'expected_legacy': args.expect_legacy, 'via_frontend': args.via_frontend, 'cases': cases,
               'passed': sum(x['passed'] for x in cases), 'total': len(cases),
               'scope': 'Bounded multipart inputs below 10 KB and actual WebSocket protocol on synthetic localhost. Not a CVE exploit test, WebSocket authorization, HTTP/2, TLS or load test.'}
     private_write(args.output, json.dumps(result, indent=2) + '\n')
@@ -127,4 +129,5 @@ if __name__ == '__main__':
     parser.add_argument('--jar', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--expect-legacy', action='store_true')
+    parser.add_argument('--via-frontend', action='store_true', help='Route HTTP and WebSocket probes through the runtime frontend')
     raise SystemExit(0 if verify(parser.parse_args()) else 1)
