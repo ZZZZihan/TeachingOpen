@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false" style="width: 130%;text-align: center;margin-left:-10%">
+  <a-card :bordered="false" class="password-recovery">
     <a-steps class="steps" :current="currentTab">
       <a-step title="用户账户"/>
       <a-step title="手机验证"/>
@@ -16,51 +16,54 @@
 </template>
 
 <script>
-  import Step1 from './Step1'
-  import Step2 from './Step2'
-  import Step3 from './Step3'
-  import Step4 from './Step4'
+import Step1 from './Step1'
+import Step2 from './Step2'
+import Step3 from './Step3'
+import Step4 from './Step4'
 
-  export default {
-    name: "Alteration",
+export default {
+    name: 'Alteration',
     components: {
-      Step1,
-      Step2,
-      Step3,
-      Step4
+        Step1,
+        Step2,
+        Step3,
+        Step4
     },
-    data() {
-      return {
-        description: '将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。',
-        currentTab: 0,
-        userList: {},
-        // form
-        form: null,
-      }
+    data () {
+        return {
+            description: '将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。',
+            currentTab: 0,
+            userList: {},
+            // form
+            form: null
+        }
     },
     methods: {
 
-      // handler
-      nextStep(data) {
-        this.userList = data;
-        if (this.currentTab < 4) {
-          this.currentTab += 1
+        // handler
+        nextStep (data) {
+            this.userList = data
+            if (this.currentTab < 4) {
+                this.currentTab += 1
+            }
+        },
+        prevStep (data) {
+            this.userList = data
+            if (this.currentTab > 0) {
+                this.currentTab -= 1
+            }
+        },
+        finish () {
+            this.currentTab = 0
         }
-      },
-      prevStep(data) {
-        this.userList = data;
-        if (this.currentTab > 0) {
-          this.currentTab -= 1
-        }
-      },
-      finish() {
-        this.currentTab = 0
-      }
     }
-  }
+}
 </script>
 
 <style lang="less" scoped>
+  .password-recovery { width: 100%; text-align: center; }
+  .password-recovery /deep/ .ant-card-body { padding: 0; }
+  .password-recovery /deep/ img { max-width: 100%; }
   .steps {
     max-width: 750px;
     margin: 16px auto;

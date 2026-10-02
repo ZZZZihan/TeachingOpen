@@ -1,0 +1,55 @@
+{
+  "base_sha": "4dfcec81b0742de480c7631264f89b932893e23f",
+  "source_sha256": {
+    "web/src/api/login.js": "1ae69c794f68652bac471c2e1c99db2b4e2f25fe03253b86c5c588794c8db01a",
+    "web/src/components/layouts/UserLayout.vue": "a79bc56651c819820da4abc68fcd4674d2d0ae87eb93c4772ed283a7214b6b55",
+    "web/src/config/router.config.js": "e1a7255f69213bb72125e95dc29f6b685baf73bf97158c588f661285308d710f",
+    "web/src/permission.js": "86cc0c58c8d7fb31f734d125e294a5794e324c78ec0d31fdd659a0442e46b0ea",
+    "web/src/router/index.js": "37c71b38ac0139ecc1655a9daef643c4018e5f288313d912f569e303ca159ac3",
+    "web/src/store/modules/user.js": "e8ba2ce184440605f68ed5fe76756f3c1031ff71104124b8d179dc2406fe987c",
+    "web/src/utils/request.js": "efe3197d2bd35c7187c45bd34ca05f8c78735c04183661897db4ef87f6023008",
+    "web/src/views/user/Alteration.vue": "acd2c7002fcf85fe4fe05e7accbafd2822a0cdaf55c668f14aa48db75b97f15a",
+    "web/src/views/user/Login.vue": "296b1e8cccc3a299c45985eb58f88c8570f265a23cb539e3592b7cce3f0e7aac",
+    "web/src/utils/session.js": "657c91e00a577c82df34d457ec0a03c70a1acdfb96ea4a37393478772faf3aa5",
+    "web/src/views/user/SessionRecovery.vue": "ca4feb771c9277fa6a88aa467c554839afa61cbf945180dde1e73de608a1225d",
+    "web/tests/login-session.test.cjs": "4d90941cdd889ca596b8901126fb973d95e2cb822c13f07607e347c72b70e6a8"
+  },
+  "package_sha256": "0fdc2238f5472009263410b756793e625852e48f71930ff20a15c1ff783d9e9c",
+  "lock_sha256": "100033635ce1d01f5ee7b8cd1385bc958edde7ad5686d441d205b49ea7e78e74",
+  "built_files": 4866,
+  "dist_tree_sha256": "d814e6e8cab05bc9c753fcf572cd816cbc3c50b0fa16e1f1c90fdf7cc5bc5e83",
+  "index_html_sha256": "9604aa54b8a724d73d1363b261e040c8876b39b77e6efb7b33a8dd72160db479",
+  "backend_pr": 18,
+  "backend_jar_sha256": "b7715c0c4bdaeb6531e952d3240b80ff4b727743930d0a2213ceede3b66371a8",
+  "checks": {
+    "frontend_tests": 59,
+    "new_login_session_tests": 19,
+    "eslint_files": 11,
+    "eslint_errors": 0,
+    "eslint_warnings": 0,
+    "build_exit": 0,
+    "build_warnings": [
+      "4 legacy CSS ordering warnings",
+      "asset size",
+      "entrypoint size",
+      "outdated caniuse-lite"
+    ],
+    "browser_observations": 10,
+    "captcha_login_confirmation": "pending",
+    "authenticated_browser_acceptance": false
+  },
+  "protected_source_files": 5634,
+  "protected_source_changes": 0,
+  "evidence_sha256": {
+    "before-behavior.json": "4d9e42455021ee84a69600358d98fc92c2289390dd879169ae5ef4ae1fefd56c",
+    "tests.txt": "653e8e0aac7068dfbeb812edf07fb498d1ca967c72d37d488c96fdcbbf27dc90",
+    "before-login-390.png": "eb73f06f0a25d12869f121dc4b91b5ae0ea887158fdf1ace32e215056a5ffa05",
+    "password-recovery-390.png": "3afb1c2b81a7953bbd7fcbd43f08d39f98434a3d8c780ef7869ad2de0b8aaa60",
+    "before-login-1440.png": "5e98bdef3c85392f1a6a7b8e2caee8561eb362306935e26ecbca17c4c385933b",
+    "after-login-1440.png": "b2f25659ce7bda67e18b75eaeccf8b11e5adbce0ca4c54a6c5d5196f5a1cdbe5",
+    "captcha-unavailable-390.png": "bb8925c94952ce8e4cbebe89474cbcfcc70cb0a0483364c0c689c7ed9e878096",
+    "browser.json": "b843abc91878e2807cde9f0cc3c2c02435f055b14519bc3565d159920da3e0db",
+    "after-login-390.png": "92ff676275e0d0b8452953e9a50a104a478c7913a8501da817730bde39626deb",
+    "after-login-768.png": "88c84cc1b2087931fb563fc9379a1598f0d0d5bed449a9ef74af1d4042ea01cc"
+  }
+}
