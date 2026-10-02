@@ -135,6 +135,11 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	}
 
 	@Override
+	public boolean incrementViewCount(String workId) {
+		return this.baseMapper.incrementViewCount(workId) == 1;
+	}
+
+	@Override
 	public Page<StudentWorkModel> listWorkModel(Page<StudentWorkModel> page, QueryWrapper<StudentWorkModel> queryWrapper,List<String> deptIds) {
 		return page.setRecords(this.baseMapper.listWorkModel(page, queryWrapper,deptIds));
 	}

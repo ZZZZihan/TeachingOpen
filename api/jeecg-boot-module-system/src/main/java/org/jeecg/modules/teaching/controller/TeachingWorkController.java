@@ -386,13 +386,9 @@ public class TeachingWorkController extends BaseController {
 		 teachingAccessService.requireCommunityWork(teachingWorkService.getById(workId));
 		 DictResult<StudentWorkModel> result = new DictResult<StudentWorkModel>();
 		 StudentWorkModel teachingWork = teachingWorkService.studentWorkInfo(workId);
-		 if (teachingWork == null) {
+		 if (teachingWork == null || !teachingWorkService.incrementViewCount(workId)) {
 			 result.error500("未找到对作业");
 		 } else {
-		 	TeachingWork work = new TeachingWork();
-		 	work.setId(teachingWork.getId());
-		 	work.setViewNum(teachingWork.getViewNum() + 1);
-		 	teachingWorkService.updateById(work);
 			 result.setResult(teachingWork);
 			 result.setSuccess(true);
 		 }
