@@ -1,0 +1,14 @@
+{
+  "tables_checked": 69,
+  "changed_tables": [
+    "sys_log"
+  ],
+  "all_68_non_audit_tables_equal": true,
+  "sys_log_rows_before": 3710,
+  "sys_log_rows_after": 3786,
+  "attachments_equal": true,
+  "source_database_equal": true,
+  "source_attachments_equal": true,
+  "original_source_files_checked": 5634,
+  "original_source_changed_files": []
+}

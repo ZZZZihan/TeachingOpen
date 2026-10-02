@@ -1,0 +1,23 @@
+{
+  "before": [
+    {
+      "file": "HeaderNotice.vue",
+      "errors": 212,
+      "warnings": 211
+    }
+  ],
+  "after": [
+    {
+      "file": "HeaderNotice.vue",
+      "errors": 122,
+      "warnings": 148
+    }
+  ],
+  "helper_final": [
+    {
+      "file": "notificationSocket.js",
+      "errors": 0,
+      "warnings": 0
+    }
+  ]
+}

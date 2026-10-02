@@ -1,109 +1,156 @@
 package org.jeecg.modules.message.websocket;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.CopyOnWriteArraySet;
+import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
+import org.jeecg.common.constant.WebsocketConst;
+import org.jeecg.common.system.vo.LoginUser;
+import org.jeecg.common.util.SpringContextUtils;
+import org.jeecg.modules.shiro.authc.ShiroRealm;
+import org.springframework.stereotype.Component;
 
+import javax.websocket.CloseReason;
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
+import java.util.concurrent.CopyOnWriteArraySet;
 
-import org.jeecg.common.constant.WebsocketConst;
-import org.springframework.stereotype.Component;
-
-import com.alibaba.fastjson.JSONObject;
-
-import lombok.extern.slf4j.Slf4j;
-
-/**
- * @Author scott
- * @Date 2019/11/29 9:41
- * @Description: 此注解相当于设置访问URL
- */
+/** Notification subscriptions are registered only after authenticating the first frame. */
 @Component
 @Slf4j
-@ServerEndpoint("/websocket/{userId}") //此注解相当于设置访问URL
+@ServerEndpoint("/websocket/{userId}")
 public class WebSocket {
-    
+    private static final CopyOnWriteArraySet<WebSocket> subscribers = new CopyOnWriteArraySet<>();
     private Session session;
-    
-    private static CopyOnWriteArraySet<WebSocket> webSockets =new CopyOnWriteArraySet<>();
-    private static Map<String,Session> sessionPool = new HashMap<String,Session>();
-    
+    private String requestedUserId;
+    private volatile String userId;
+    private String token;
+    private boolean closed;
+
     @OnOpen
-    public void onOpen(Session session, @PathParam(value="userId")String userId) {
-        try {
-			this.session = session;
-			webSockets.add(this);
-			sessionPool.put(userId, session);
-			log.info("【websocket消息】有新的连接，总数为:"+webSockets.size());
-		} catch (Exception e) {
-		}
+    public void onOpen(Session session, @PathParam("userId") String requestedUserId) {
+        this.session = session;
+        this.requestedUserId = requestedUserId;
+        session.setMaxTextMessageBufferSize(8192);
+        session.setMaxIdleTimeout(10000);
     }
-    
-    @OnClose
-    public void onClose() {
-        try {
-			webSockets.remove(this);
-			log.info("【websocket消息】连接断开，总数为:"+webSockets.size());
-		} catch (Exception e) {
-		}
-    }
-    
+
     @OnMessage
-    public void onMessage(String message) {
-        //todo 现在有个定时任务刷，应该去掉
-    	log.debug("【websocket消息】收到客户端消息:"+message);
-    	JSONObject obj = new JSONObject();
-    	obj.put(WebsocketConst.MSG_CMD, WebsocketConst.CMD_CHECK);//业务类型
-    	obj.put(WebsocketConst.MSG_TXT, "心跳响应");//消息内容
-    	session.getAsyncRemote().sendText(obj.toJSONString());
-    }
-    
-    // 此为广播消息
-    public void sendAllMessage(String message) {
-    	log.info("【websocket消息】广播消息:"+message);
-        for(WebSocket webSocket : webSockets) {
-            try {
-            	if(webSocket.session.isOpen()) {
-            		webSocket.session.getAsyncRemote().sendText(message);
-            	}
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    
-    // 此为单点消息
-    public void sendOneMessage(String userId, String message) {
-        Session session = sessionPool.get(userId);
-        if (session != null&&session.isOpen()) {
-            try {
-            	log.info("【websocket消息】 单点消息:"+message);
-                session.getAsyncRemote().sendText(message);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    
-    // 此为单点消息(多人)
-    public void sendMoreMessage(String[] userIds, String message) {
-    	for(String userId:userIds) {
-    		Session session = sessionPool.get(userId);
-            if (session != null&&session.isOpen()) {
-                try {
-                	log.info("【websocket消息】 单点消息:"+message);
-                    session.getAsyncRemote().sendText(message);
-                } catch (Exception e) {
-                    e.printStackTrace();
+    public synchronized void onMessage(String message) {
+        if (closed) return;
+        try {
+            if (token == null) {
+                JSONObject auth = JSONObject.parseObject(message);
+                if (auth == null || !"authenticate".equals(auth.getString("type"))) {
+                    reject();
+                    return;
                 }
+                String credential = auth.getString("token");
+                if (credential == null || credential.isEmpty() || credential.length() > 4096) {
+                    reject();
+                    return;
+                }
+                LoginUser user = realm().checkUserTokenIsEffect(credential);
+                if (user == null || !user.getId().equals(requestedUserId)) {
+                    reject();
+                    return;
+                }
+                token = credential;
+                userId = user.getId();
+                session.setMaxIdleTimeout(60000);
+                subscribers.add(this);
+                JSONObject reply = new JSONObject();
+                reply.put("cmd", "authenticated");
+                // The credential never appears in a URL, acknowledgement or log.
+                session.getAsyncRemote().sendText(reply.toJSONString());
+            } else if ("HeartBeat".equals(message) && active()) {
+                JSONObject reply = new JSONObject();
+                reply.put(WebsocketConst.MSG_CMD, WebsocketConst.CMD_CHECK);
+                reply.put(WebsocketConst.MSG_TXT, "心跳响应");
+                session.getAsyncRemote().sendText(reply.toJSONString());
+            } else {
+                reject();
             }
-    	}
-        
+        } catch (RuntimeException failure) {
+            // Invalid payloads, credentials and unavailable authentication fail closed.
+            reject();
+        }
     }
-    
+
+    private ShiroRealm realm() {
+        return SpringContextUtils.getBean(ShiroRealm.class);
+    }
+
+    private boolean active() {
+        if (session == null || !session.isOpen() || token == null || userId == null) {
+            reject();
+            return false;
+        }
+        try {
+            LoginUser current = realm().checkUserTokenIsEffect(token);
+            if (current != null && userId.equals(current.getId())) return true;
+        } catch (RuntimeException failure) {
+            // Logout/expiry and authentication failures stop subsequent delivery.
+        }
+        reject();
+        return false;
+    }
+
+    private synchronized void deliver(String message) {
+        if (!active()) return;
+        try {
+            session.getAsyncRemote().sendText(message, result -> {
+                if (!result.isOK()) reject();
+            });
+        } catch (RuntimeException failure) {
+            reject();
+        }
+    }
+
+    private synchronized void reject() {
+        closed = true;
+        subscribers.remove(this);
+        token = null;
+        userId = null;
+        if (session != null && session.isOpen()) {
+            try {
+                session.close(new CloseReason(CloseReason.CloseCodes.VIOLATED_POLICY, "Notification session unavailable"));
+            } catch (IOException ignored) {
+                log.debug("Notification connection already unavailable");
+            }
+        }
+    }
+
+    @OnClose
+    public synchronized void onClose() {
+        closed = true;
+        subscribers.remove(this);
+        token = null;
+        userId = null;
+    }
+
+    @OnError
+    public void onError(Throwable failure) {
+        reject();
+    }
+
+    public void sendAllMessage(String message) {
+        for (WebSocket subscriber : subscribers) subscriber.deliver(message);
+    }
+
+    public void sendOneMessage(String targetUserId, String message) {
+        if (targetUserId == null) return;
+        for (WebSocket subscriber : subscribers) {
+            if (targetUserId.equals(subscriber.userId)) subscriber.deliver(message);
+        }
+    }
+
+    public void sendMoreMessage(String[] userIds, String message) {
+        if (userIds == null) return;
+        for (String targetUserId : userIds) sendOneMessage(targetUserId, message);
+    }
 }

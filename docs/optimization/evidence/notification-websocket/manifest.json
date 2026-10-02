@@ -1,0 +1,18 @@
+{
+  "auth-status.json": "fbd48c8ed9d3d30f2ce4fb2203d0d28f67272df31cb64ccd34384f5c4a98b7d3",
+  "build.txt": "9695e3b3ec4fee8641f189c4a91463e5c4e82f3b371a042cf0b801319dca3623",
+  "candidate.json": "88af8564bd8abf2246357011b5071346bdae2b84f20130dd88dc621a0d4d66b9",
+  "client.json": "e775d1769f1f21480e8825799ec356224b806c7858144e00680f9c21b1fb539c",
+  "container-http.json": "79dfe9403518d12ccf9c361c5be2081d6068918cc59efaecb2835016bcbe6e39",
+  "data-preservation.json": "7dc2ab66d1649c96d42d45f02c7aec6c80ea8f14cd3862cb85939b6091a99c4a",
+  "fixed.json": "8aaafa9f667c8033e4f24c2014a91ceafe2d8e57d59eb2b1740379a1feb4f544",
+  "frontend-build.txt": "3c7b6db2a252dc134f383c33dab715aad480e1b47edfc0b54afafc9f01be0915",
+  "frontend-tests.txt": "8e0ee5255cb304269c304161a16fbceccaf0d64644ea1efc8bb777dc5ae331a8",
+  "legacy.json": "e4f62125a770a368f3991d703f6b6ff3dfbb9aafc67be3b668783114199f9d3d",
+  "lint-summary.json": "1db703e5b473a0ab887a5ac75a9c54f4c38a972c3a06fe5aa15c4dcfabd9bcec",
+  "packaged-diff.json": "33fab6a80ce20d01d2555d1453256e50908fb200e508db0cbae2245f15ac8f29",
+  "permission-menu.json": "24e766cd25aeb9b8ab24d6a28804e0e023186339c22caf3884b09c51e1da699a",
+  "recovered-business.json": "9afd52b86faacb6fbe9983b83db069a22b05bb6035d163ff8c276780f123ab5c",
+  "regressions.json": "2479aaec3dfddf3843b1e290e7111fcf46bf3a19021e1ca4793c91bb05e62894",
+  "role-cache.json": "632c8b7ae380a2923ccfa37f35c13e4ac025b6d0b6dfa036fec01d24a18b749e"
+}
