@@ -1,0 +1,22 @@
+{
+  "cases": [
+    {
+      "case": "existing actual restore target rejected without database writes",
+      "passed": true
+    },
+    {
+      "case": "corrupt actual dump rejected before any target created",
+      "passed": true
+    },
+    {
+      "case": "source all-table inventory unchanged after restored business reads",
+      "passed": true
+    },
+    {
+      "case": "source attachment bytes unchanged after restored business reads",
+      "passed": true
+    }
+  ],
+  "passed": 4,
+  "total": 4
+}

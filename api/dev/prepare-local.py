@@ -18,7 +18,7 @@ def private_file(path, content):
         file.write(content)
 
 
-def prepare(runtime, tools, ports):
+def prepare(runtime, tools, ports, seed_fixtures=True):
     api = Path(__file__).resolve().parents[1]
     if runtime.parent.name != ".devspace" or runtime.exists():
         raise RuntimeError("Use a new direct child of .devspace; existing data is never overwritten")
@@ -76,7 +76,8 @@ def prepare(runtime, tools, ports):
     private_file(runtime / "schema-only.sql", schema)
     with (runtime / "schema-only.sql").open() as file:
         subprocess.run([str(mysql), "--defaults-extra-file=" + str(runtime / "config/mysql-admin-client.cnf"), "teachingopen_dev"], stdin=file, check=True)
-    subprocess.run(["python3", str(api / "dev/seed-fixtures.py"), "--runtime", str(runtime), "--java-home", str(java_home)], check=True)
+    if seed_fixtures:
+        subprocess.run(["python3", str(api / "dev/seed-fixtures.py"), "--runtime", str(runtime), "--java-home", str(java_home)], check=True)
     print("Fresh isolated runtime ready:", runtime)
 
 

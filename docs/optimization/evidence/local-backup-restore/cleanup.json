@@ -1,0 +1,11 @@
+{
+  "restored_services_stopped": true,
+  "closed_ports": {
+    "13336": true,
+    "16409": true,
+    "18131": true,
+    "18132": true
+  },
+  "restored_data_and_snapshot_retained": true,
+  "source_backend_healthy": true
+}
