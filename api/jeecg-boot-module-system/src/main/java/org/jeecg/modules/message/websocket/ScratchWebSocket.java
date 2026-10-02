@@ -99,7 +99,7 @@ public class ScratchWebSocket {
                     ack(name, result == 0 ? "FAIL" : "OK");
                     if (result == 1 && ("set".equals(method) || "create".equals(method))) update = variable(projectId, name, value);
                 }
-            } catch (org.apache.shiro.authc.AuthenticationException | IllegalArgumentException failure) {
+            } catch (org.apache.shiro.authc.AuthenticationException | com.alibaba.fastjson.JSONException | IllegalArgumentException failure) {
                 reject(CloseReason.CloseCodes.VIOLATED_POLICY);
             } catch (RuntimeException failure) {
                 // No raw frames, credentials, values or stack traces in logs.
@@ -145,6 +145,12 @@ public class ScratchWebSocket {
 
     private void sendNext() {
         try {
+            // A slow receiver may have queued messages when a work is withdrawn
+            // or its token is revoked. Recheck before each actual async send.
+            if (closed || outbound.isEmpty()) return;
+            if (readableWork(authenticatedUser()) == null) {
+                reject(CloseReason.CloseCodes.VIOLATED_POLICY); return;
+            }
             session.getAsyncRemote().sendText(outbound.peekFirst(), result -> {
                 synchronized (ScratchWebSocket.this) {
                     if (closed) return;
@@ -153,6 +159,8 @@ public class ScratchWebSocket {
                     if (!outbound.isEmpty()) sendNext();
                 }
             });
+        } catch (org.apache.shiro.authc.AuthenticationException | IllegalArgumentException failure) {
+            reject(CloseReason.CloseCodes.VIOLATED_POLICY);
         } catch (RuntimeException failure) { reject(CloseReason.CloseCodes.UNEXPECTED_CONDITION); }
     }
 
