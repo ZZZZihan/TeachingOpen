@@ -1,0 +1,809 @@
+{
+  "mode": "normal",
+  "reads": [
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "load-error"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    },
+    {
+      "workId": "saved-2",
+      "mode": "normal"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    }
+  ],
+  "uploads": [
+    {
+      "path": "fixture/1.png",
+      "name": "我的 ScratchJr 练习 & 100%.png",
+      "sha256": "4388561d62f48b0e23c4b31a6cdab29ba0c6b41fe327d0698256c069ec5ea1b6",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/2.sjr",
+      "name": "我的 ScratchJr 练习 & 100%.sjr",
+      "sha256": "7006eb91c76ab148f075314821a9e5b1c0695fc45e6738914308b9f8db9be8c8",
+      "failed": false,
+      "project_name": "我的 ScratchJr 练习 & 100%",
+      "project_json": {
+        "pages": [
+          "page 1"
+        ],
+        "currentPage": "page 1",
+        "page 1": {
+          "textstartat": 36,
+          "sprites": [
+            "猫猫 1"
+          ],
+          "num": 1,
+          "lastSprite": "猫猫 1",
+          "猫猫 1": {
+            "shown": true,
+            "type": "sprite",
+            "md5": "Cat.svg",
+            "id": "猫猫 1",
+            "flip": false,
+            "name": "猫猫",
+            "angle": 0,
+            "scale": 0.5,
+            "speed": 2,
+            "defaultScale": 0.5,
+            "sounds": [
+              "pop.mp3"
+            ],
+            "xcoor": 359.33538461538467,
+            "ycoor": 144.55384615384614,
+            "cx": 47,
+            "cy": 52,
+            "w": 94,
+            "h": 104,
+            "homex": 359.33538461538467,
+            "homey": 144.55384615384614,
+            "homescale": 0.5,
+            "homeshown": true,
+            "homeflip": false,
+            "scripts": [
+              [
+                [
+                  "forward",
+                  1,
+                  474.97846153846154,
+                  35.44615384615385
+                ]
+              ]
+            ]
+          },
+          "layers": [
+            "猫猫 1"
+          ]
+        }
+      }
+    },
+    {
+      "path": "fixture/3.png",
+      "name": "森林漫步 · 第二版 & 100%.png",
+      "sha256": "724fddaafa50b6e453511c5f3c982fe707edd34a7319c1869ed6e5bb630916c3",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/4.sjr",
+      "name": "森林漫步 · 第二版 & 100%.sjr",
+      "sha256": "4c74407f7284f2d6887d93dcb4f89c32e357b2c012112952f70d7dacf6373584",
+      "failed": false,
+      "project_name": "森林漫步 · 第二版 & 100%",
+      "project_json": {
+        "pages": [
+          "page 1"
+        ],
+        "currentPage": "page 1",
+        "page 1": {
+          "textstartat": 36,
+          "sprites": [
+            "猫猫 1"
+          ],
+          "num": 1,
+          "lastSprite": "猫猫 1",
+          "猫猫 1": {
+            "shown": true,
+            "type": "sprite",
+            "md5": "Cat.svg",
+            "id": "猫猫 1",
+            "flip": false,
+            "name": "猫猫",
+            "angle": 0,
+            "scale": 0.5,
+            "speed": 2,
+            "defaultScale": 0.5,
+            "sounds": [
+              "pop.mp3"
+            ],
+            "xcoor": 120.66461538461542,
+            "ycoor": 122.10461538461537,
+            "cx": 47,
+            "cy": 52,
+            "w": 94,
+            "h": 104,
+            "homex": 120.66461538461542,
+            "homey": 122.10461538461537,
+            "homescale": 0.5,
+            "homeshown": true,
+            "homeflip": false,
+            "scripts": [
+              [
+                [
+                  "forward",
+                  1,
+                  474.97846153846154,
+                  35.44615384615385
+                ]
+              ]
+            ]
+          },
+          "layers": [
+            "猫猫 1"
+          ]
+        }
+      }
+    },
+    {
+      "path": "fixture/5.sjr",
+      "name": "森林漫步 · 第二版 & 100%.sjr",
+      "sha256": "b555cb2d0ac08f482de54a737c7f76d7f6c3dc3b189f805deb3720badaa0e189",
+      "failed": false,
+      "project_name": "森林漫步 · 第二版 & 100%",
+      "project_json": {
+        "pages": [
+          "page 1"
+        ],
+        "currentPage": "page 1",
+        "page 1": {
+          "textstartat": 36,
+          "sprites": [
+            "猫猫 1"
+          ],
+          "num": 1,
+          "lastSprite": "猫猫 1",
+          "猫猫 1": {
+            "shown": true,
+            "type": "sprite",
+            "md5": "Cat.svg",
+            "id": "猫猫 1",
+            "flip": false,
+            "name": "猫猫",
+            "angle": 0,
+            "scale": 0.5,
+            "speed": 2,
+            "defaultScale": 0.5,
+            "sounds": [
+              "pop.mp3"
+            ],
+            "xcoor": 120.66461538461542,
+            "ycoor": 122.10461538461537,
+            "cx": 47,
+            "cy": 52,
+            "w": 94,
+            "h": 104,
+            "homex": 120.66461538461542,
+            "homey": 122.10461538461537,
+            "homescale": 0.5,
+            "homeshown": true,
+            "homeflip": false,
+            "scripts": [
+              [
+                [
+                  "forward",
+                  1,
+                  474.97846153846154,
+                  35.44615384615385
+                ]
+              ]
+            ]
+          },
+          "layers": [
+            "猫猫 1"
+          ]
+        }
+      }
+    },
+    {
+      "path": "fixture/6.png",
+      "name": "森林漫步 · 第二版 & 100%.png",
+      "sha256": "724fddaafa50b6e453511c5f3c982fe707edd34a7319c1869ed6e5bb630916c3",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/7.sjr",
+      "name": "森林漫步 · 第二版 & 100%.sjr",
+      "sha256": "db018838b7f25ef37860d1b8bd85d839b623ee40dc3c23589891d0138e822f1b",
+      "failed": false,
+      "project_name": "森林漫步 · 第二版 & 100%",
+      "project_json": {
+        "pages": [
+          "page 1"
+        ],
+        "currentPage": "page 1",
+        "page 1": {
+          "textstartat": 36,
+          "sprites": [
+            "猫猫 1"
+          ],
+          "num": 1,
+          "lastSprite": "猫猫 1",
+          "猫猫 1": {
+            "shown": true,
+            "type": "sprite",
+            "md5": "Cat.svg",
+            "id": "猫猫 1",
+            "flip": false,
+            "name": "猫猫",
+            "angle": 0,
+            "scale": 0.5,
+            "speed": 2,
+            "defaultScale": 0.5,
+            "sounds": [
+              "pop.mp3"
+            ],
+            "xcoor": 120.66461538461542,
+            "ycoor": 122.10461538461537,
+            "cx": 47,
+            "cy": 52,
+            "w": 94,
+            "h": 104,
+            "homex": 120.66461538461542,
+            "homey": 122.10461538461537,
+            "homescale": 0.5,
+            "homeshown": true,
+            "homeflip": false,
+            "scripts": [
+              [
+                [
+                  "forward",
+                  1,
+                  474.97846153846154,
+                  35.44615384615385
+                ]
+              ]
+            ]
+          },
+          "layers": [
+            "猫猫 1"
+          ]
+        }
+      }
+    },
+    {
+      "path": "fixture/8.png",
+      "name": "森林漫步 · 第二版 & 100%.png",
+      "sha256": "724fddaafa50b6e453511c5f3c982fe707edd34a7319c1869ed6e5bb630916c3",
+      "failed": true,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/9.sjr",
+      "name": "森林漫步 · 第二版 & 100%.sjr",
+      "sha256": "d83eef2b7c6321c459dec910a3c4586574463a66a7e608a2156a5bb4adc1716c",
+      "failed": false,
+      "project_name": "森林漫步 · 第二版 & 100%",
+      "project_json": {
+        "pages": [
+          "page 1"
+        ],
+        "currentPage": "page 1",
+        "page 1": {
+          "textstartat": 36,
+          "sprites": [
+            "猫猫 1"
+          ],
+          "num": 1,
+          "lastSprite": "猫猫 1",
+          "猫猫 1": {
+            "shown": true,
+            "type": "sprite",
+            "md5": "Cat.svg",
+            "id": "猫猫 1",
+            "flip": false,
+            "name": "猫猫",
+            "angle": 0,
+            "scale": 0.5,
+            "speed": 2,
+            "defaultScale": 0.5,
+            "sounds": [
+              "pop.mp3"
+            ],
+            "xcoor": 120.66461538461542,
+            "ycoor": 122.10461538461537,
+            "cx": 47,
+            "cy": 52,
+            "w": 94,
+            "h": 104,
+            "homex": 120.66461538461542,
+            "homey": 122.10461538461537,
+            "homescale": 0.5,
+            "homeshown": true,
+            "homeflip": false,
+            "scripts": [
+              [
+                [
+                  "forward",
+                  1,
+                  474.97846153846154,
+                  35.44615384615385
+                ]
+              ]
+            ]
+          },
+          "layers": [
+            "猫猫 1"
+          ]
+        }
+      }
+    },
+    {
+      "path": "fixture/10.png",
+      "name": "森林漫步 · 第二版 & 100%.png",
+      "sha256": "724fddaafa50b6e453511c5f3c982fe707edd34a7319c1869ed6e5bb630916c3",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/11.sjr",
+      "name": "森林漫步 · 第二版 & 100%.sjr",
+      "sha256": "c7718efc1ca53a3853accb2ac0825d98ba060e9f91a396927e8cc366703d25a9",
+      "failed": false,
+      "project_name": "森林漫步 · 第二版 & 100%",
+      "project_json": {
+        "pages": [
+          "page 1"
+        ],
+        "currentPage": "page 1",
+        "page 1": {
+          "textstartat": 36,
+          "sprites": [
+            "猫猫 1"
+          ],
+          "num": 1,
+          "lastSprite": "猫猫 1",
+          "猫猫 1": {
+            "shown": true,
+            "type": "sprite",
+            "md5": "Cat.svg",
+            "id": "猫猫 1",
+            "flip": false,
+            "name": "猫猫",
+            "angle": 0,
+            "scale": 0.5,
+            "speed": 2,
+            "defaultScale": 0.5,
+            "sounds": [
+              "pop.mp3"
+            ],
+            "xcoor": 120.66461538461542,
+            "ycoor": 122.10461538461537,
+            "cx": 47,
+            "cy": 52,
+            "w": 94,
+            "h": 104,
+            "homex": 120.66461538461542,
+            "homey": 122.10461538461537,
+            "homescale": 0.5,
+            "homeshown": true,
+            "homeflip": false,
+            "scripts": [
+              [
+                [
+                  "forward",
+                  1,
+                  474.97846153846154,
+                  35.44615384615385
+                ]
+              ]
+            ]
+          },
+          "layers": [
+            "猫猫 1"
+          ]
+        }
+      }
+    },
+    {
+      "path": "fixture/12.png",
+      "name": "森林漫步 · 第二版 & 100%.png",
+      "sha256": "724fddaafa50b6e453511c5f3c982fe707edd34a7319c1869ed6e5bb630916c3",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/13.sjr",
+      "name": "课程小练习 · 已保存.sjr",
+      "sha256": "81af5ff6556f45cb9720e0efea037dff8b3a8c216f27743d49637639c71fdd41",
+      "failed": false,
+      "project_name": "课程小练习 · 已保存",
+      "project_json": {
+        "pages": [
+          "page 1"
+        ],
+        "currentPage": "page 1",
+        "page 1": {
+          "textstartat": 36,
+          "sprites": [],
+          "num": 1,
+          "layers": []
+        }
+      }
+    },
+    {
+      "path": "fixture/14.png",
+      "name": "课程小练习 · 已保存.png",
+      "sha256": "146b0c26fd8952335fef2a5dc19710ebf22be168bec5bdf5afa8a7e440563885",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/15.sjr",
+      "name": "森林漫步 · 第二版 & 100%.sjr",
+      "sha256": "9ddf6628f9c48491d72a958e88dde003f5b3cb69ddbe3ef6cf196369a115c2d9",
+      "failed": false,
+      "project_name": "森林漫步 · 第二版 & 100%",
+      "project_json": {
+        "pages": [
+          "page 1"
+        ],
+        "currentPage": "page 1",
+        "page 1": {
+          "textstartat": 36,
+          "sprites": [
+            "猫猫 1"
+          ],
+          "num": 1,
+          "lastSprite": "猫猫 1",
+          "猫猫 1": {
+            "shown": true,
+            "type": "sprite",
+            "md5": "Cat.svg",
+            "id": "猫猫 1",
+            "flip": false,
+            "name": "猫猫",
+            "angle": 0,
+            "scale": 0.5,
+            "speed": 2,
+            "defaultScale": 0.5,
+            "sounds": [
+              "pop.mp3"
+            ],
+            "xcoor": 120.66461538461542,
+            "ycoor": 122.10461538461537,
+            "cx": 47,
+            "cy": 52,
+            "w": 94,
+            "h": 104,
+            "homex": 120.66461538461542,
+            "homey": 122.10461538461537,
+            "homescale": 0.5,
+            "homeshown": true,
+            "homeflip": false,
+            "scripts": [
+              [
+                [
+                  "forward",
+                  1,
+                  474.97846153846154,
+                  35.44615384615385
+                ]
+              ]
+            ]
+          },
+          "layers": [
+            "猫猫 1"
+          ]
+        }
+      }
+    },
+    {
+      "path": "fixture/16.png",
+      "name": "森林漫步 · 第二版 & 100%.png",
+      "sha256": "724fddaafa50b6e453511c5f3c982fe707edd34a7319c1869ed6e5bb630916c3",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    }
+  ],
+  "registrations": [
+    {
+      "fileType": 2,
+      "fileName": "我的 ScratchJr 练习 & 100%.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/1.png",
+      "fileLocation": 1,
+      "id": "file-1",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "我的 ScratchJr 练习 & 100%.sjr",
+      "fileTag": "学生作业-sjr",
+      "filePath": "fixture/2.sjr",
+      "fileLocation": 1,
+      "id": "file-2",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "森林漫步 · 第二版 & 100%.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/3.png",
+      "fileLocation": 1,
+      "id": "file-3",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "森林漫步 · 第二版 & 100%.sjr",
+      "fileTag": "学生作业-sjr",
+      "filePath": "fixture/4.sjr",
+      "fileLocation": 1,
+      "id": "file-4",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "森林漫步 · 第二版 & 100%.sjr",
+      "fileTag": "学生作业-sjr",
+      "filePath": "fixture/5.sjr",
+      "fileLocation": 1,
+      "id": "file-5",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "森林漫步 · 第二版 & 100%.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/6.png",
+      "fileLocation": 1,
+      "id": "file-6",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "森林漫步 · 第二版 & 100%.sjr",
+      "fileTag": "学生作业-sjr",
+      "filePath": "fixture/7.sjr",
+      "fileLocation": 1,
+      "id": "file-7",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "森林漫步 · 第二版 & 100%.sjr",
+      "fileTag": "学生作业-sjr",
+      "filePath": "fixture/9.sjr",
+      "fileLocation": 1,
+      "id": "file-8",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "森林漫步 · 第二版 & 100%.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/10.png",
+      "fileLocation": 1,
+      "id": "file-9",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "森林漫步 · 第二版 & 100%.sjr",
+      "fileTag": "学生作业-sjr",
+      "filePath": "fixture/11.sjr",
+      "fileLocation": 1,
+      "id": "file-10",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "森林漫步 · 第二版 & 100%.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/12.png",
+      "fileLocation": 1,
+      "id": "file-11",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "课程小练习 · 已保存.sjr",
+      "fileTag": "学生作业-sjr",
+      "filePath": "fixture/13.sjr",
+      "fileLocation": 1,
+      "id": "file-12",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "课程小练习 · 已保存.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/14.png",
+      "fileLocation": 1,
+      "id": "file-13",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "森林漫步 · 第二版 & 100%.sjr",
+      "fileTag": "学生作业-sjr",
+      "filePath": "fixture/15.sjr",
+      "fileLocation": 1,
+      "id": "file-14",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "森林漫步 · 第二版 & 100%.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/16.png",
+      "fileLocation": 1,
+      "id": "file-15",
+      "failed": false
+    }
+  ],
+  "submissions": [
+    {
+      "id": "seed-work",
+      "workName": "我的 ScratchJr 练习 & 100%",
+      "workFile": "file-2",
+      "workCover": "file-1",
+      "workType": 3,
+      "workStatus": 0,
+      "courseId": "",
+      "additionalId": "task-scratchjr",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "hasCloudData": false,
+      "failed": false
+    },
+    {
+      "id": "seed-work",
+      "workName": "森林漫步 · 第二版 & 100%",
+      "workFile": "file-4",
+      "workCover": "file-3",
+      "workType": 3,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-scratchjr",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "hasCloudData": false,
+      "failed": false
+    },
+    {
+      "id": "seed-work",
+      "workName": "森林漫步 · 第二版 & 100%",
+      "workFile": "file-5",
+      "workCover": "file-6",
+      "workType": 3,
+      "workStatus": 0,
+      "courseId": "",
+      "additionalId": "task-scratchjr",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "hasCloudData": false,
+      "failed": false
+    },
+    {
+      "id": "seed-work",
+      "workName": "森林漫步 · 第二版 & 100%",
+      "workFile": "file-8",
+      "workCover": "file-9",
+      "workType": 3,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-scratchjr",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "hasCloudData": false,
+      "failed": true
+    },
+    {
+      "id": "seed-work",
+      "workName": "森林漫步 · 第二版 & 100%",
+      "workFile": "file-10",
+      "workCover": "file-11",
+      "workType": 3,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-scratchjr",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "hasCloudData": false,
+      "failed": false
+    },
+    {
+      "id": "",
+      "workName": "课程小练习 · 已保存",
+      "workFile": "file-12",
+      "workCover": "file-13",
+      "workType": 3,
+      "workStatus": 0,
+      "courseId": "unit-fixture",
+      "additionalId": "",
+      "departId": "",
+      "workScene": "course",
+      "hasCloudData": false,
+      "failed": false
+    },
+    {
+      "id": "seed-work",
+      "workName": "森林漫步 · 第二版 & 100%",
+      "workFile": "file-14",
+      "workCover": "file-15",
+      "workType": 3,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-scratchjr",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "hasCloudData": false,
+      "failed": false
+    }
+  ],
+  "works": {
+    "seed-work": {
+      "id": "seed-work",
+      "workName": "森林漫步 · 第二版 & 100%",
+      "workFile": "file-14",
+      "workCover": "file-15",
+      "workType": 3,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-scratchjr",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "hasCloudData": false,
+      "workFileKey_url": "/fixture/15.sjr"
+    },
+    "saved-2": {
+      "id": "saved-2",
+      "workName": "课程小练习 · 已保存",
+      "workFile": "file-12",
+      "workCover": "file-13",
+      "workType": 3,
+      "workStatus": 0,
+      "courseId": "unit-fixture",
+      "additionalId": "",
+      "departId": "",
+      "workScene": "course",
+      "hasCloudData": false,
+      "workFileKey_url": "/fixture/13.sjr"
+    }
+  }
+}

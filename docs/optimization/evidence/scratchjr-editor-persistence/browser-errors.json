@@ -1,0 +1,11 @@
+{
+  "baseline": [
+    {
+      "level": "error",
+      "message": "ReferenceError: fcn is not defined\n    at e.value (http://127.0.0.1:18122/scratchjr/app.bundle.js?v=1:8:135583)\n    at e.value (http://127.0.0.1:18122/scratchjr/app.bundle.js?v=1:1:29583)\n    at n (http://127.0.0.1:18122/scratchjr/app.bundle.js?v=1:8:30707)\n    at http://127.0.0.1:18122/scratchjr/app.bundle.js?v=1:8:32353\n    at http://127.0.0.1:18122/scratchjr/app.bundle.js?v=1:1:127139\n    at n.onreadystatechange (http://127.0.0.1:18122/scratchjr/app.bundle.js?v=1:1:37636)",
+      "timestamp": "2026-10-02T21:32:03.638Z",
+      "url": "http://127.0.0.1:18122/scratchjr/app.bundle.js?v=1"
+    }
+  ],
+  "candidate": []
+}

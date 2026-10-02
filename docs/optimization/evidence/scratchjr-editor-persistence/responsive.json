@@ -1,0 +1,83 @@
+[
+  {
+    "canvasHost": {
+      "bottom": 911,
+      "height": 768,
+      "left": 208,
+      "right": 1232,
+      "top": 143,
+      "width": 1024,
+      "x": 208,
+      "y": 143
+    },
+    "documentWidth": 1440,
+    "status": "作品已打开，可以继续编辑。",
+    "submit": {
+      "bottom": 68.5,
+      "height": 42,
+      "left": 1318,
+      "right": 1412,
+      "top": 26.5,
+      "width": 94,
+      "x": 1318,
+      "y": 26.5
+    },
+    "width": 1440,
+    "workspaceScroll": 1440,
+    "workspaceWidth": 1440
+  },
+  {
+    "canvasHost": {
+      "bottom": 947.3984375,
+      "height": 768,
+      "left": 0,
+      "right": 1024,
+      "top": 179.3984375,
+      "width": 1024,
+      "x": 0,
+      "y": 179.3984375
+    },
+    "documentWidth": 768,
+    "status": "作品已打开，可以继续编辑。",
+    "submit": {
+      "bottom": 66.5,
+      "height": 42,
+      "left": 654,
+      "right": 748,
+      "top": 24.5,
+      "width": 94,
+      "x": 654,
+      "y": 24.5
+    },
+    "width": 768,
+    "workspaceScroll": 1024,
+    "workspaceWidth": 768
+  },
+  {
+    "canvasHost": {
+      "bottom": 1038.8984375,
+      "height": 768,
+      "left": 0,
+      "right": 1024,
+      "top": 270.8984375,
+      "width": 1024,
+      "x": 0,
+      "y": 270.8984375
+    },
+    "documentWidth": 390,
+    "status": "作品已打开，可以继续编辑。",
+    "submit": {
+      "bottom": 166.5,
+      "height": 42,
+      "left": 200,
+      "right": 370,
+      "top": 124.5,
+      "width": 170,
+      "x": 200,
+      "y": 124.5
+    },
+    "width": 390,
+    "workspaceScroll": 1024,
+    "workspaceWidth": 390
+  }
+]
