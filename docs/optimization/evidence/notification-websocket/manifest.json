@@ -14,5 +14,6 @@
   "permission-menu.json": "24e766cd25aeb9b8ab24d6a28804e0e023186339c22caf3884b09c51e1da699a",
   "recovered-business.json": "9afd52b86faacb6fbe9983b83db069a22b05bb6035d163ff8c276780f123ab5c",
   "regressions.json": "2479aaec3dfddf3843b1e290e7111fcf46bf3a19021e1ca4793c91bb05e62894",
-  "role-cache.json": "632c8b7ae380a2923ccfa37f35c13e4ac025b6d0b6dfa036fec01d24a18b749e"
+  "role-cache.json": "632c8b7ae380a2923ccfa37f35c13e4ac025b6d0b6dfa036fec01d24a18b749e",
+  "proxy-limit.json": "826e3dfdeb590791c00fe3f6ef17a4a2ca149491d9594953bbdf478431bc4e91"
 }
