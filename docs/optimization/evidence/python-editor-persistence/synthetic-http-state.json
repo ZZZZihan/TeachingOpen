@@ -1,0 +1,207 @@
+{
+  "mode": "normal",
+  "reads": [
+    {
+      "workId": "saved-2",
+      "mode": "normal"
+    },
+    {
+      "workId": "saved-2",
+      "mode": "load-error"
+    },
+    {
+      "workId": "saved-2",
+      "mode": "normal"
+    },
+    {
+      "workId": "saved-2",
+      "mode": "normal"
+    },
+    {
+      "workId": "saved-2",
+      "mode": "unauthorized"
+    }
+  ],
+  "uploads": [
+    {
+      "path": "fixture/1.py",
+      "name": "我的练习 & 100%.py",
+      "sha256": "92f708508e2486134960fb9f820d7288bae43c8272e82b46b11f5525ffc8425e",
+      "failed": false
+    },
+    {
+      "path": "fixture/2.py",
+      "name": "第二次保存 + 同一作品.py",
+      "sha256": "f8d3649cb0537351ecd8caac345ae43a375b3c6119aeb35fba07e05944b2aa13",
+      "failed": false
+    },
+    {
+      "path": "fixture/3.py",
+      "name": "第二次保存 + 同一作品.py",
+      "sha256": "049b542f8c38788368147099090728a7f088bbe257d15648507ec354e17b4453",
+      "failed": false
+    },
+    {
+      "path": "fixture/4.py",
+      "name": "第二次保存 + 同一作品.py",
+      "sha256": "049b542f8c38788368147099090728a7f088bbe257d15648507ec354e17b4453",
+      "failed": false
+    },
+    {
+      "path": "fixture/5.py",
+      "name": "第二次保存 + 同一作品.py",
+      "sha256": "049b542f8c38788368147099090728a7f088bbe257d15648507ec354e17b4453",
+      "failed": false
+    }
+  ],
+  "registrations": [
+    {
+      "fileType": 2,
+      "fileName": "我的练习 & 100%.py",
+      "fileTag": "学生作业-python",
+      "filePath": "fixture/1.py",
+      "fileLocation": 1,
+      "id": "file-1",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "第二次保存 + 同一作品.py",
+      "fileTag": "学生作业-python",
+      "filePath": "fixture/2.py",
+      "fileLocation": 1,
+      "id": "file-2",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "第二次保存 + 同一作品.py",
+      "fileTag": "学生作业-python",
+      "filePath": "fixture/3.py",
+      "fileLocation": 1,
+      "id": "file-3",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "第二次保存 + 同一作品.py",
+      "fileTag": "学生作业-python",
+      "filePath": "fixture/4.py",
+      "fileLocation": 1,
+      "id": "file-4",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "第二次保存 + 同一作品.py",
+      "fileTag": "学生作业-python",
+      "filePath": "fixture/5.py",
+      "fileLocation": 1,
+      "id": "file-5",
+      "failed": false
+    }
+  ],
+  "submissions": [
+    {
+      "id": "",
+      "workName": "我的练习 & 100%",
+      "workFile": "file-1",
+      "workCover": "",
+      "workType": 4,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-python",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "failed": false
+    },
+    {
+      "id": "saved-2",
+      "workName": "第二次保存 + 同一作品",
+      "workFile": "file-2",
+      "workCover": "",
+      "workType": 4,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-python",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "failed": false
+    },
+    {
+      "id": "saved-2",
+      "workName": "第二次保存 + 同一作品",
+      "workFile": "file-3",
+      "workCover": "",
+      "workType": 4,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-python",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "failed": true
+    },
+    {
+      "id": "saved-2",
+      "workName": "第二次保存 + 同一作品",
+      "workFile": "file-3",
+      "workCover": "",
+      "workType": 4,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-python",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "failed": false
+    },
+    {
+      "id": "saved-2",
+      "workName": "第二次保存 + 同一作品",
+      "workFile": "file-4",
+      "workCover": "",
+      "workType": 4,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-python",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "failed": false
+    },
+    {
+      "id": "saved-2",
+      "workName": "第二次保存 + 同一作品",
+      "workFile": "file-5",
+      "workCover": "",
+      "workType": 4,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-python",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "failed": false
+    }
+  ],
+  "works": {
+    "seed-work": {
+      "id": "seed-work",
+      "workName": "我的练习 & 100%",
+      "workType": "4",
+      "workFileKey_url": "/fixtures/seed.py?revision=1&label=a+b",
+      "additionalId": "task-python",
+      "departId": "class-fixture"
+    },
+    "saved-2": {
+      "id": "saved-2",
+      "workName": "第二次保存 + 同一作品",
+      "workFile": "file-5",
+      "workCover": "",
+      "workType": 4,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-python",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "workFileKey_url": "/fixture/5.py"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "product_commit": "a181d8f75ee728991bc0b1baa4900f42454752c0",
+  "base": "7ab1dd5dacc957f308acca44fe34b16dd09fd512",
+  "frontend_tests": {
+    "passed": 121,
+    "total": 121
+  },
+  "real_backend_checks": {
+    "passed": 18,
+    "total": 18
+  },
+  "browser_scope": "Production editor plus synthetic HTTP; real API checked separately",
+  "production_build": "success; 6 existing warnings",
+  "authenticated_browser_e2e": false,
+  "real_qiniu": false,
+  "sha256": {
+    "docs/optimization/evidence/python-editor-persistence/after-1440.png": "1896df01e2b82ccdf312ea17592325db2bd7699d12ea538ec8f15a72a8dc154c",
+    "docs/optimization/evidence/python-editor-persistence/after-390-menu.png": "ec9f26825384de40fedac93c1c905f70964b8511f25231c4b071f7c7851ff903",
+    "docs/optimization/evidence/python-editor-persistence/after-390.png": "a69ce789b53eb03adc86502eb402ac4b4c97c350c6c0b826c11898d45fb45d60",
+    "docs/optimization/evidence/python-editor-persistence/after-768.png": "50e10ef5611e3aab513127f3ed4545533be94d5194170475b15a8afa7497ecec",
+    "docs/optimization/evidence/python-editor-persistence/before-load.png": "af14a568e90190fd5bdb781dba497521f45137f205e197b0a02837d97eec3a85",
+    "docs/optimization/evidence/python-editor-persistence/browser-observations.json": "0629f74384f2dfdcbf14ddf2d451f7415e222b2e6d547e9ead35a13fb4149a35",
+    "docs/optimization/evidence/python-editor-persistence/frontend-tests.txt": "8f87d0a29bb738dbf8ef103a640a8332246d3762d3129fbb117bc2f8e9462718",
+    "docs/optimization/evidence/python-editor-persistence/lint.txt": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "docs/optimization/evidence/python-editor-persistence/load-error.png": "59f72f47759817422a67511c0e493d89fb0e614868b68e22340eb888a231f6ca",
+    "docs/optimization/evidence/python-editor-persistence/production-build.txt": "3cad0b5c4184c2a8fa2fdba44bbbffcbe390d90e5b7406c61147e61f43b7e4bf",
+    "docs/optimization/evidence/python-editor-persistence/real-backend.json": "44933fbbbb511aa4034c6905bf6a0c3003e07b97d59e5b8a6ad5f9508c4329a8",
+    "docs/optimization/evidence/python-editor-persistence/real-backend.txt": "d83dae3dee7002ea922400d2b1c7627390520583a3491b9cebbc976a00426244",
+    "docs/optimization/evidence/python-editor-persistence/save-error.png": "3b96135114cf6d182426c6de7d263df170a17e1cdfa1b40436118084ee519f5c",
+    "docs/optimization/evidence/python-editor-persistence/session-error.png": "924d845feeae4f30988d155c3091f056a2a8bc21a381877d9d8e9d48eb3ccc7a",
+    "docs/optimization/evidence/python-editor-persistence/synthetic-http-state.json": "381a68ca1fc1187c100c3d64ad53590839d8b1d37c13fd9428b8f5d8cc874491"
+  }
+}
