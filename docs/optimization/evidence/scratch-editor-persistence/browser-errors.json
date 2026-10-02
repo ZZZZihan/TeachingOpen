@@ -1,0 +1,14 @@
+[
+  {
+    "level": "error",
+    "message": "URIError: URI malformed\n    at decodeURIComponent (<anonymous>)\n    at http://127.0.0.1:18121/scratch3/index.html?queryEncoding=uri&workName=100%25&workFile=%2Ffixtures%2Fsample.sb3:24:29",
+    "timestamp": "2026-10-02T21:11:48.410Z",
+    "url": "http://127.0.0.1:18121/scratch3/index.html?queryEncoding=uri&workName=100%25&workFile=%2Ffixtures%2Fsample.sb3"
+  },
+  {
+    "level": "error",
+    "message": "TypeError: Cannot read properties of undefined (reading 'session')\n    at t.default (http://127.0.0.1:18121/scratch3/chunks/gui.js:1:1502)\n    at 898 (http://127.0.0.1:18121/scratch3/chunks/gui.js:1:2691)\n    at r (http://127.0.0.1:18121/scratch3/lib.min.js:1:561)\n    at o (http://127.0.0.1:18121/scratch3/lib.min.js:1:430)\n    at Array.t [as push] (http://127.0.0.1:18121/scratch3/lib.min.js:1:293)\n    at http://127.0.0.1:18121/scratch3/chunks/gui.js:1:61",
+    "timestamp": "2026-10-02T21:11:48.600Z",
+    "url": "http://127.0.0.1:18121/scratch3/chunks/gui.js"
+  }
+]

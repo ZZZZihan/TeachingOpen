@@ -1,0 +1,115 @@
+{
+  "jar_sha256": "85f7746a3ae4b143f1a4ca4e5c043e11c81bf7d69f32c72b7dbaa190f6a0e85c",
+  "cases": [
+    {
+      "case": "actual login supplies media cookie",
+      "passed": true
+    },
+    {
+      "case": "anonymous editor submission rejected",
+      "passed": true
+    },
+    {
+      "case": "upload exact Scratch bytes version1.sb3",
+      "passed": true
+    },
+    {
+      "case": "register matching owned Scratch file version1.sb3",
+      "passed": true
+    },
+    {
+      "case": "upload exact Scratch bytes version1.png",
+      "passed": true
+    },
+    {
+      "case": "register matching owned Scratch file version1.png",
+      "passed": true
+    },
+    {
+      "case": "real backend saves version 1",
+      "passed": true
+    },
+    {
+      "case": "same work ID after version 1",
+      "passed": true
+    },
+    {
+      "case": "reopen metadata retains name type and file 1",
+      "passed": true
+    },
+    {
+      "case": "media-cookie-only project download equals browser bytes 1",
+      "passed": true
+    },
+    {
+      "case": "media-cookie-only cover download equals browser bytes 1",
+      "passed": true
+    },
+    {
+      "case": "upload exact Scratch bytes version2.sb3",
+      "passed": true
+    },
+    {
+      "case": "register matching owned Scratch file version2.sb3",
+      "passed": true
+    },
+    {
+      "case": "upload exact Scratch bytes version2.png",
+      "passed": true
+    },
+    {
+      "case": "register matching owned Scratch file version2.png",
+      "passed": true
+    },
+    {
+      "case": "real backend saves version 2",
+      "passed": true
+    },
+    {
+      "case": "same work ID after version 2",
+      "passed": true
+    },
+    {
+      "case": "reopen metadata retains name type and file 2",
+      "passed": true
+    },
+    {
+      "case": "media-cookie-only project download equals browser bytes 2",
+      "passed": true
+    },
+    {
+      "case": "media-cookie-only cover download equals browser bytes 2",
+      "passed": true
+    },
+    {
+      "case": "rename did not create duplicate work",
+      "passed": true
+    },
+    {
+      "case": "other student cannot reopen private submission",
+      "passed": true
+    },
+    {
+      "case": "work file and history rows restored",
+      "passed": true
+    },
+    {
+      "case": "original upload bytes restored",
+      "passed": true
+    }
+  ],
+  "passed": 24,
+  "total": 24,
+  "scope": "Real Java API and file HTTP; no authenticated browser acceptance.",
+  "before_rows": {
+    "teaching_work": "9069046430dfa04773c09cfdd6655e98ad6c34abd0d4adcb89e351189d093e5b",
+    "sys_file": "a5b768354fdf8a30e7dd331871e29f287436abf109fb751d35745c43cbf363f3",
+    "sys_data_log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "after_rows": {
+    "teaching_work": "9069046430dfa04773c09cfdd6655e98ad6c34abd0d4adcb89e351189d093e5b",
+    "sys_file": "a5b768354fdf8a30e7dd331871e29f287436abf109fb751d35745c43cbf363f3",
+    "sys_data_log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "files_restored": true
+}
