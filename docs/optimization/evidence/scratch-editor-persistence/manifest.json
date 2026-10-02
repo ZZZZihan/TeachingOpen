@@ -25,7 +25,7 @@
     "lint.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "load-failure.png": "5c14fe0b86aa37603b5f895d51713bc11330309b5170bc2ebfb0d39c3e239958",
     "preservation.json": "cd4debc4659d7c42bca83a3e7c0501747704dfc22283851978f6e9df496d956f",
-    "production-build.txt": "699ac3c32b848c35c892dbcc29a6c43a3d041199fa14ee7f567cacf83a513764",
+    "production-build.txt": "63492c8a6d2eb721a71573f20e3010020b31fb106e6cb1c84c277bc34d31c462",
     "real-backend.json": "a615cb2c2da9ca311497e7e43f1107bbf2c6e52bffae9d62855819bf709c6bf1",
     "real-backend.txt": "833a94896dc2831056c47806ad591ce3a95a873172af61d18aac935221474b55",
     "responsive.json": "d6b422ff9b4899666ecc9fa73e66e67fb2035cfb3366c4b3ba797873b439570a",
@@ -40,5 +40,6 @@
   "browser_observations": 15,
   "real_api_cases": 24,
   "authenticated_browser_e2e": false,
-  "review_type": "engineering self-check, not independent review or user acceptance"
+  "review_type": "engineering self-check, not independent review or user acceptance",
+  "log_format": "Text build log has trailing whitespace trimmed; output content and results unchanged."
 }
