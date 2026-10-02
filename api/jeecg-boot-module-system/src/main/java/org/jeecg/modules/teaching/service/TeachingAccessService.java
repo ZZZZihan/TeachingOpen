@@ -7,6 +7,8 @@ import org.apache.shiro.authz.UnauthorizedException;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysUserDepartService;
+import org.jeecg.modules.system.service.ISysUserService;
+import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -23,6 +26,7 @@ public class TeachingAccessService {
     @Autowired private ITeachingCourseDeptService courseDeptService;
     @Autowired private ISysDepartService departService;
     @Autowired private ISysUserDepartService userDepartService;
+    @Autowired private ISysUserService userService;
 
     public LoginUser currentUser() {
         return (LoginUser) SecurityUtils.getSubject().getPrincipal();
@@ -67,6 +71,25 @@ public class TeachingAccessService {
         }
         if ("3".equals(work.getWorkStatus()) || "4".equals(work.getWorkStatus())) return;
         requireReadWork(work);
+    }
+
+    /** WebSocket callbacks have no request-bound Shiro Subject. Recheck current
+     * roles and class scope using the identity verified for this connection. */
+    public boolean canReadCommunityWork(TeachingWork work, LoginUser user) {
+        if (work == null || !Integer.valueOf(0).equals(work.getDelFlag())) return false;
+        if ("3".equals(work.getWorkStatus()) || "4".equals(work.getWorkStatus())) return true;
+        if (user == null) return false;
+        if (Objects.equals(user.getId(), work.getUserId())) return true;
+        Set<String> roles = userService.getUserRolesSet(user.getUsername());
+        if (roles.contains("admin") || roles.contains("dev")) return true;
+        if (!roles.contains("teacher")) return false;
+        SysUser current = userService.getById(user.getId());
+        if (current == null || StringUtils.isBlank(current.getDepartIds())) return false;
+        List<String> managed = departService.getMySubDepIdsByDepId(current.getDepartIds());
+        if (managed == null || managed.isEmpty()
+                || (StringUtils.isNotBlank(work.getDepartId()) && !managed.contains(work.getDepartId()))) return false;
+        List<String> ownerDeparts = userDepartService.userDepartIds(work.getUserId());
+        return ownerDeparts != null && ownerDeparts.stream().anyMatch(managed::contains);
     }
 
     /** Apply the same owner and class boundary before list pagination or export. */
