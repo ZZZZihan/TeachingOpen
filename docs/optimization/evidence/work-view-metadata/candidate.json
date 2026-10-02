@@ -1,0 +1,43 @@
+{
+  "observed_utc": "2026-10-02T22:49:40.062549+00:00",
+  "source_commit": "03297e3e9153b079663981a73a07c04eb3ab5c2b",
+  "jar_sha256": "3ac73c633fd337d85f15e388182d37f2928939f2ba67cccc6765cd2074865b37",
+  "packaged_jar_sha256": "3ac73c633fd337d85f15e388182d37f2928939f2ba67cccc6765cd2074865b37",
+  "bundle_manifest_sha256": "45a570b1c41beace97f96626f11cceb770ef2db55ac55640616dcb1561b182b8",
+  "source_files_sha256": {
+    "api/dev/verify-recovered-business.py": "b60f8de2cd4e8af77f2a1c9d89f28af7738bafec19299d8789aeecf70ff51686",
+    "api/dev/verify-work-views.py": "c4183d5863f530601825e8f76cbed8ec0f8985c246805bf5b22c19abab0ef8e3",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingWorkController.java": "a8361bf55022a6cec65f16e26239cb089d9f1bf6a86dfdf9e2f17a35bbf00712",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/mapper/TeachingWorkMapper.java": "bf33518a9fc1e926a7246935dfaad42d4b4da66d9bae5c1a823ac7aa34802437",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/mapper/xml/TeachingWorkMapper.xml": "11252ddbced849b4b921c22d540ecd33b5293248b016b20c829fead53c9e4c3f",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/ITeachingWorkService.java": "2f64282f8ed82cd03f8d41840b8b7018d0549c0cb5aa871a1b0777f24d20b099",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/impl/TeachingWorkServiceImpl.java": "83467ef2085f1e1f0aed724bbee2526a8c57f8a57213f6bb64f653af868e6279"
+  },
+  "backend_java": "Zulu OpenJDK 8u504",
+  "maven": "3.9.16",
+  "build_command": "mvn -B -s dev/maven-settings.xml -Dmaven.repo.local=<workspace>/.devspace/backend-runtime/m2 clean package",
+  "build_exit_code": 0,
+  "maven_java_tests": "skipped by existing parent POM",
+  "legacy_jar_sha256": "85f7746a3ae4b143f1a4ca4e5c043e11c81bf7d69f32c72b7dbaa190f6a0e85c",
+  "new_http_checks": 415,
+  "original_and_probe_files_preserved": true,
+  "runtime_ports_closed": {
+    "13336": true,
+    "16409": true,
+    "18131": true,
+    "18132": true
+  },
+  "candidate_state": {
+    "status": "stopped",
+    "active": {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-view-fix",
+      "manifest_sha256": "45a570b1c41beace97f96626f11cceb770ef2db55ac55640616dcb1561b182b8"
+    },
+    "previous": {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-a",
+      "manifest_sha256": "4b28822b71911449e61813b9bf2f87b771f0b907ddf70b964b99e287ab2ced8a"
+    }
+  },
+  "ui_changed": false,
+  "browser_e2e": false
+}

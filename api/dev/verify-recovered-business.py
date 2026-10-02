@@ -4,11 +4,12 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 from local_http import FixtureApi
-from local_recovery import inspect_snapshot, private_write, sha256, sql, file_inventory
+from local_recovery import inspect_snapshot, private_write, sha256, sql, file_inventory, quote
 
 
 def verify(args):
@@ -33,6 +34,15 @@ def verify(args):
         view_counts = {suffix: sql(args.runtime, "SELECT IFNULL(view_num,'NULL') FROM teachingopen_dev.teaching_work WHERE id='fixture_work_" + suffix + "'") for suffix in ('a', 'b')}
         if any(not (v == 'NULL' or v.isdecimal()) for v in view_counts.values()):
             raise RuntimeError('Expected the two original synthetic works')
+        def audit_values(suffix):
+            return sql(args.runtime, "SELECT IFNULL(HEX(CAST(update_by AS BINARY)),'NULL'),IFNULL(HEX(CAST(update_time AS BINARY)),'NULL') FROM teachingopen_dev.teaching_work WHERE id='fixture_work_" + suffix + "'").split('\t')
+
+        original_audit = {suffix: audit_values(suffix) for suffix in view_counts}
+        if any(len(values) != 2 or any(v != 'NULL' and not re.fullmatch('[0-9A-F]*', v) for v in values) for values in original_audit.values()):
+            raise RuntimeError('Unexpected original work audit fields')
+        columns = [line.split('\t')[0] for line in sql(args.runtime, 'SHOW COLUMNS FROM teachingopen_dev.teaching_work').splitlines()]
+        work_query = "SELECT 'ROW'," + ','.join("IFNULL(HEX(CAST(" + quote(c) + " AS BINARY)),'~')" for c in columns) + ' FROM teachingopen_dev.teaching_work ORDER BY id'
+        original_work_hash = hashlib.sha256(sql(args.runtime, work_query).encode()).hexdigest()
         try:
             cookies = {}
             for actor in ('admin', 'teacher_a', 'teacher_b', 'student_a', 'student_b'):
@@ -70,11 +80,16 @@ def verify(args):
                 with download:
                     check('private restored attachment denied ' + str(actor), download.status in (401, 403, 404) and b'synthetic work a' not in download.read())
             check('restored work views persist in target database', sql(args.runtime, "SELECT view_num FROM teachingopen_dev.teaching_work WHERE id='fixture_work_a'") == str((0 if view_counts['a'] == 'NULL' else int(view_counts['a'])) + 3))
+            for suffix, values in original_audit.items():
+                check('work modification actor and time unchanged by reads ' + suffix, audit_values(suffix) == values)
         finally:
-            # Business reads deliberately increment view counters; restore those
-            # counters. Normal authentication audit logs remain in the new target.
+            # Preserve the baseline even when testing a regressed backend. Check
+            # audit fields before cleanup rather than masking the regression.
             for suffix, count in view_counts.items():
-                sql(args.runtime, "UPDATE teachingopen_dev.teaching_work SET view_num=" + count + " WHERE id='fixture_work_" + suffix + "'")
+                assignments = [field + '=' + ('NULL' if value == 'NULL' else "UNHEX('" + value + "')")
+                               for field, value in zip(('update_by', 'update_time'), original_audit[suffix])]
+                sql(args.runtime, "UPDATE teachingopen_dev.teaching_work SET view_num=" + count + ',' + ','.join(assignments) + " WHERE id='fixture_work_" + suffix + "'")
+        check('all work columns and rows unchanged after counter cleanup', hashlib.sha256(sql(args.runtime, work_query).encode()).hexdigest() == original_work_hash)
         check('attachment files unchanged by business reads', file_inventory(args.runtime / 'uploads') == manifest['uploads'])
         result = {'jar_sha256': api.jar_sha256, 'snapshot_manifest_sha256': restored['snapshot_manifest_sha256'], 'cases': cases, 'total': len(cases), 'passed': sum(x['passed'] for x in cases), 'business_read_verified': all(x['passed'] for x in cases), 'browser_e2e': False, 'audit_logs_retained': True}
     private_write(args.output, json.dumps(result, indent=2) + '\n')

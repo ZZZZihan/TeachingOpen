@@ -20,6 +20,8 @@ public interface TeachingWorkMapper extends BaseMapper<TeachingWork> {
 
     StudentWorkModel studentWorkInfo(@Param("workId") String workId);
 
+    int incrementViewCount(@Param("workId") String workId);
+
     List<StudentWorkModel> listWorkModel(Page<StudentWorkModel> page, @Param("ew") QueryWrapper<StudentWorkModel> queryWrapper,
                                          @Param("deptIds") List<String> deptIds);
 
