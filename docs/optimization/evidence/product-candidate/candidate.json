@@ -1,0 +1,64 @@
+{
+  "observed_utc": "2026-10-02T19:25:31.465857+00:00",
+  "local_candidate_commit": "1cd2c5790b90c40b7293f12e7c3cf3ed23b9bd0d",
+  "local_branch": "integration/product-candidate",
+  "worktree": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate",
+  "merged_sources": {
+    "pr19": "54b34492427adb118de4b9f58c92dfd997b2f5c2",
+    "pr20": "bad0e272969d0b0543381ba61276d68f03393950"
+  },
+  "api_tree": "5e7b90630dbebb4cda00d625f4c357d25a33a52a",
+  "web_tree": "91a938a91c59b1ddeae5e0f4f3be39c11aec71a8",
+  "backend": {
+    "running_jar_sha256": "c76dfb9032b92eb6f4bf86ef152e16fadc7504436b81fe1e4d49990f6883738f",
+    "source_tree_matches_pr20": true,
+    "new_backend_build_or_suite_rerun_this_stage": false
+  },
+  "frontend": {
+    "tests_passed": 68,
+    "tests_total": 68,
+    "lint_files": 11,
+    "lint_errors": 0,
+    "lint_warnings": 0,
+    "lint_scope": "PR19 changed Vue/JS files; old API and other legacy files are not globally lint-clean",
+    "build_exit": 0,
+    "existing_build_warnings": 6,
+    "built_files": 4866,
+    "dist_path_hashes_aggregate_sha256": "626df00a984d899bc0601a7ec87773436d5ccc9a2f3f8d1bfa8501bea65e6309"
+  },
+  "merge_resolution": "Only user store conflicted: use exact PR19 54b3449 store, preserving session checks and no query token. PR20 test action context now includes state. No new product behavior invented by merge.",
+  "browser_observations": [
+    {
+      "case": "Combined login page renders labels and actual backend captcha image",
+      "passed": true,
+      "viewport_width": 1440,
+      "document_scroll_width": 1432,
+      "captcha_loaded": true
+    },
+    {
+      "case": "Public course list receives two actual synthetic courses and opens course introduction",
+      "passed": true,
+      "course_count": 2
+    },
+    {
+      "case": "Anonymous lesson entry reaches login preserving complete target query",
+      "passed": true,
+      "target": "/teaching/mineCourse/courseUnitCard?id=fixture_course_a",
+      "warn_error_logs": 0
+    }
+  ],
+  "original_source_files": 5634,
+  "original_source_changes": 0,
+  "backend_health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "limits": [
+    "Local Git integration only; GitHub PRs not merged or deployed",
+    "No authenticated browser login: action-time CAPTCHA confirmation still pending",
+    "No complete student/teacher/admin/editor acceptance",
+    "Original PR19 screenshots and browser checks remain bound to their original candidate",
+    "Learning page redesign, performance, recovery and dependency work still incomplete"
+  ]
+}
