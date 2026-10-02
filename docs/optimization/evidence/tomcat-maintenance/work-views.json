@@ -1,0 +1,258 @@
+{
+  "observed_utc": "2026-10-02T23:04:19.995383+00:00",
+  "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+  "expected_legacy": false,
+  "concurrent_reads": [
+    {
+      "actor": "anonymous",
+      "workers": 1,
+      "requests": 16,
+      "successful_responses": 16,
+      "persisted_increment": 16
+    },
+    {
+      "actor": "anonymous",
+      "workers": 8,
+      "requests": 64,
+      "successful_responses": 64,
+      "persisted_increment": 64
+    },
+    {
+      "actor": "student_a",
+      "workers": 16,
+      "requests": 96,
+      "successful_responses": 96,
+      "persisted_increment": 96
+    }
+  ],
+  "original_work_rows_sha256": "45f759025b1205ad4b2a7be35d84f74f375d462d1cdf3883f4c1146750c9a73c",
+  "cases": [
+    {
+      "case": "student_a private detail succeeds and one view persists",
+      "passed": true
+    },
+    {
+      "case": "student_a private response keeps existing pre-increment count and attachment contract",
+      "passed": true
+    },
+    {
+      "case": "student_a private content and other counters unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a private all non-view columns unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a private detail succeeds and one view persists",
+      "passed": true
+    },
+    {
+      "case": "teacher_a private response keeps existing pre-increment count and attachment contract",
+      "passed": true
+    },
+    {
+      "case": "teacher_a private content and other counters unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a private all non-view columns unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin private detail succeeds and one view persists",
+      "passed": true
+    },
+    {
+      "case": "admin private response keeps existing pre-increment count and attachment contract",
+      "passed": true
+    },
+    {
+      "case": "admin private content and other counters unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin private all non-view columns unchanged",
+      "passed": true
+    },
+    {
+      "case": "None public detail succeeds and one view persists",
+      "passed": true
+    },
+    {
+      "case": "None public response keeps existing pre-increment count and attachment contract",
+      "passed": true
+    },
+    {
+      "case": "None public content and other counters unchanged",
+      "passed": true
+    },
+    {
+      "case": "None public all non-view columns unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b public detail succeeds and one view persists",
+      "passed": true
+    },
+    {
+      "case": "student_b public response keeps existing pre-increment count and attachment contract",
+      "passed": true
+    },
+    {
+      "case": "student_b public content and other counters unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b public all non-view columns unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b public detail succeeds and one view persists",
+      "passed": true
+    },
+    {
+      "case": "teacher_b public response keeps existing pre-increment count and attachment contract",
+      "passed": true
+    },
+    {
+      "case": "teacher_b public content and other counters unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b public all non-view columns unchanged",
+      "passed": true
+    },
+    {
+      "case": "None featured detail succeeds and one view persists",
+      "passed": true
+    },
+    {
+      "case": "None featured response keeps existing pre-increment count and attachment contract",
+      "passed": true
+    },
+    {
+      "case": "None featured content and other counters unchanged",
+      "passed": true
+    },
+    {
+      "case": "None featured all non-view columns unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a featured detail succeeds and one view persists",
+      "passed": true
+    },
+    {
+      "case": "student_a featured response keeps existing pre-increment count and attachment contract",
+      "passed": true
+    },
+    {
+      "case": "student_a featured content and other counters unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a featured all non-view columns unchanged",
+      "passed": true
+    },
+    {
+      "case": "None denied private without changing work rows",
+      "passed": true
+    },
+    {
+      "case": "student_b denied private without changing work rows",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied private without changing work rows",
+      "passed": true
+    },
+    {
+      "case": "None denied deleted without changing work rows",
+      "passed": true
+    },
+    {
+      "case": "student_a denied deleted without changing work rows",
+      "passed": true
+    },
+    {
+      "case": "admin denied deleted without changing work rows",
+      "passed": true
+    },
+    {
+      "case": "None denied missing without changing work rows",
+      "passed": true
+    },
+    {
+      "case": "student_a denied missing without changing work rows",
+      "passed": true
+    },
+    {
+      "case": "admin denied missing without changing work rows",
+      "passed": true
+    },
+    {
+      "case": "malformed credential denied without effects",
+      "passed": true
+    },
+    {
+      "case": "empty credential denied without effects",
+      "passed": true
+    },
+    {
+      "case": "1 workers None all HTTP detail reads succeed",
+      "passed": true
+    },
+    {
+      "case": "1 workers None persists every successful view",
+      "passed": true
+    },
+    {
+      "case": "1 workers None all non-view columns unchanged",
+      "passed": true
+    },
+    {
+      "case": "8 workers None all HTTP detail reads succeed",
+      "passed": true
+    },
+    {
+      "case": "8 workers None persists every successful view",
+      "passed": true
+    },
+    {
+      "case": "8 workers None all non-view columns unchanged",
+      "passed": true
+    },
+    {
+      "case": "16 workers student_a all HTTP detail reads succeed",
+      "passed": true
+    },
+    {
+      "case": "16 workers student_a persists every successful view",
+      "passed": true
+    },
+    {
+      "case": "16 workers student_a all non-view columns unchanged",
+      "passed": true
+    },
+    {
+      "case": "failed counter write returns no successful detail and preserves all rows",
+      "passed": true
+    },
+    {
+      "case": "detail succeeds again after counter failure removed",
+      "passed": true
+    },
+    {
+      "case": "all original work columns and rows restored",
+      "passed": true
+    },
+    {
+      "case": "all original attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "total": 56,
+  "passed": 56,
+  "scope": "Real synthetic HTTP/login/MySQL, dedicated temporary works; pre-increment response contract, metadata, authorization, concurrent count and failed write. No browser, capacity or concurrent publish/delete acceptance."
+}

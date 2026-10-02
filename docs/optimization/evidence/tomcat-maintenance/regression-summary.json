@@ -1,0 +1,104 @@
+[
+  {
+    "suite": "course-management",
+    "exit_code": 0,
+    "passed": 188,
+    "total": 188,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68"
+  },
+  {
+    "suite": "learning-units",
+    "exit_code": 0,
+    "passed": 80,
+    "total": 80,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68"
+  },
+  {
+    "suite": "work-management",
+    "exit_code": 2
+  },
+  {
+    "suite": "work-management",
+    "exit_code": 0,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+    "passed": 134,
+    "total": 134
+  },
+  {
+    "suite": "work-submission",
+    "exit_code": 0,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+    "passed": 95,
+    "total": 95
+  },
+  {
+    "suite": "community-work",
+    "exit_code": 0,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+    "passed": 235,
+    "total": 235
+  },
+  {
+    "suite": "local-upload",
+    "exit_code": 0,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+    "passed": 46,
+    "total": 46
+  },
+  {
+    "suite": "file-ownership",
+    "exit_code": 0,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+    "passed": 76,
+    "total": 76
+  },
+  {
+    "suite": "local-download",
+    "exit_code": 0,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+    "passed": 88,
+    "total": 88
+  },
+  {
+    "suite": "assignment-list",
+    "exit_code": 0,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+    "passed": 48,
+    "total": 48
+  },
+  {
+    "suite": "permission-menu",
+    "exit_code": 0,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+    "passed": 34,
+    "total": 34
+  },
+  {
+    "suite": "role-cache",
+    "exit_code": 0,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+    "passed": 11,
+    "total": 11
+  },
+  {
+    "suite": "work-views",
+    "exit_code": 0,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+    "total": 56,
+    "passed": 56
+  },
+  {
+    "suite": "auth-status",
+    "exit_code": 0,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+    "passed": 7,
+    "total": 7
+  },
+  {
+    "suite": "recovered-business",
+    "exit_code": 0,
+    "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+    "total": 29,
+    "passed": 29
+  }
+]
