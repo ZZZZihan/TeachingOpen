@@ -1,0 +1,58 @@
+{
+  "observed_utc": "2026-10-02T16:45:09.447962+00:00",
+  "jar_sha256": "8a6edbc4b8404ca50a670d97dc0000294c9958dd3aa1bb277e101cfa5da09cdb",
+  "expected_legacy": true,
+  "passed": 12,
+  "total": 12,
+  "cases": [
+    {
+      "case": "source real send",
+      "passed": true
+    },
+    {
+      "case": "recipient reads sent copy",
+      "passed": true
+    },
+    {
+      "case": "real send shares both source file IDs",
+      "passed": true
+    },
+    {
+      "case": "file and cover readable before deletion",
+      "passed": true
+    },
+    {
+      "case": "teacher deletes source",
+      "passed": true
+    },
+    {
+      "case": "source and child rows deleted while recipient remains",
+      "passed": true
+    },
+    {
+      "case": "legacy source deletion loses recipient file and cover",
+      "passed": true
+    },
+    {
+      "case": "injected batch database failure returns an error",
+      "passed": true
+    },
+    {
+      "case": "legacy rollback restores work but loses attachments",
+      "passed": true
+    },
+    {
+      "case": "original work feedback comment and file rows restored",
+      "passed": true
+    },
+    {
+      "case": "original file bytes restored",
+      "passed": true
+    },
+    {
+      "case": "temporary failure trigger removed",
+      "passed": true
+    }
+  ],
+  "scope": "actual synthetic HTTP/login/send/delete, MySQL rollback injection and local attachment bytes; no browser editor, Qiniu, concurrent writer or global file API acceptance"
+}

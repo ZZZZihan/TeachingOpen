@@ -234,7 +234,7 @@ def verify(args):
                 followups.append({'issue': 'Deleting a sent source may remove the recipient shared attachment',
                                   'recipient_still_references_source_file': sql("SELECT COUNT(*) FROM teaching_work WHERE work_name='work-probe-a' AND user_id='fixture_teacher_a' AND work_file='" + PREFIX + "file_a'") == '1',
                                   'shared_attachment_missing': not (api.runtime / 'uploads/work-probe-a.txt').exists(),
-                                  'status': 'separate attachment-lifecycle fix pending; not a permission-pass claim'})
+                                  'status': 'observation on this candidate only; dedicated attachment-lifecycle checks cover preservation and reclamation'})
                 allowed('teacher B deletes own unshared attachment', 'DELETE', 'delete?id=' + PREFIX + 'b', 'teacher_b')
                 check('authorized unshared deletion removes attachment bytes and file row', not (api.runtime / 'uploads/work-probe-b.txt').exists() and sql("SELECT COUNT(*) FROM sys_file WHERE id='" + PREFIX + "file_b'") == '0')
             jar_hash = api.jar_sha256

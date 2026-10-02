@@ -6,7 +6,7 @@ import org.jeecg.modules.system.entity.SysDepart;
 import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.mapper.SysDepartMapper;
 import org.jeecg.modules.system.mapper.SysUserMapper;
-import org.jeecg.modules.system.service.ISysFileService;
+import org.jeecg.modules.teaching.service.TeachingWorkAttachmentService;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
 import org.jeecg.modules.teaching.entity.TeachingWorkComment;
@@ -22,6 +22,8 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationAdapter;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
@@ -47,7 +49,7 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	@Autowired
 	private TeachingWorkCommentMapper teachingWorkCommentMapper;
 	@Autowired
-	private ISysFileService sysFileService;
+	private TeachingWorkAttachmentService workAttachmentService;
 
 
 	@Override
@@ -105,10 +107,18 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 		}
 		teachingWorkCorrectMapper.deleteByMainId(id);
 		teachingWorkCommentMapper.deleteByMainId(id);
-		//删除文件
-		sysFileService.deleteWithFile(work.getWorkCover());
-		sysFileService.deleteWithFile(work.getWorkFile());
 		teachingWorkMapper.deleteById(id);
+		// Sent copies share these IDs. Never remove bytes before the whole delete
+		// transaction (including a batch and its feedback rows) has committed.
+		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			@Override
+			public void afterCommit() {
+				workAttachmentService.cleanupAfterWorkDeletion(work.getWorkCover());
+				if (!Objects.equals(work.getWorkCover(), work.getWorkFile())) {
+					workAttachmentService.cleanupAfterWorkDeletion(work.getWorkFile());
+				}
+			}
+		});
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import java.io.File;
+import java.nio.file.Files;
 
 /**
  * @Description: 文件管理
@@ -32,24 +33,30 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
         if (file == null){
             return true;
         }
-        if (file.getFileLocation()==2){
+        if (Integer.valueOf(2).equals(file.getFileLocation())){
             if (qiniuUtil.deleteFileByKey(file.getFilePath())){
                 this.removeById(id);
                 return true;
             }else{
                 return false;
             }
-        }else if (file.getFileLocation()==1){
+        }else if (Integer.valueOf(1).equals(file.getFileLocation())){
             try {
-                File savedFile = new File(uploadpath + File.separator + file.getFilePath());
-                savedFile.delete();
+                if (file.getFilePath() == null || file.getFilePath().trim().isEmpty()) return false;
+                File root = new File(uploadpath).getCanonicalFile();
+                File savedFile = new File(root, file.getFilePath()).getCanonicalFile();
+                if (!savedFile.toPath().startsWith(root.toPath()) || savedFile.equals(root)
+                        || (savedFile.exists() && !savedFile.isFile())) return false;
+                // A missing object is already reclaimed; an I/O failure must keep
+                // its metadata for a later retry instead of silently losing it.
+                Files.deleteIfExists(savedFile.toPath());
                 this.removeById(id);
                 return true;
             }catch (Exception e){
                 return false;
             }
         }
-        return true;
+        return false;
     }
 
     @Override

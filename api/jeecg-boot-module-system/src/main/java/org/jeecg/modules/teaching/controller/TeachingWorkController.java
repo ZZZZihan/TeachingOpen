@@ -586,8 +586,6 @@ public class TeachingWorkController extends BaseController {
 		TeachingWork work = this.teachingWorkService.getById(id);
 		if (work != null){
 			teachingAccessService.requireManageWork(work);
-			sysFileService.deleteWithFile(work.getWorkFile());
-			sysFileService.deleteWithFile(work.getWorkCover());
 			teachingWorkService.delMain(id);
 		}
 		return Result.ok("删除成功!");
@@ -608,10 +606,6 @@ public class TeachingWorkController extends BaseController {
 		List<TeachingWork> workList = this.teachingWorkService.list(new QueryWrapper<TeachingWork>().in("id", idList));
 		// Check the whole batch before any file or row is deleted.
 		for (TeachingWork work: workList) teachingAccessService.requireManageWork(work);
-		for (TeachingWork work: workList){
-			sysFileService.deleteWithFile(work.getWorkFile());
-			sysFileService.deleteWithFile(work.getWorkCover());
-		}
 		this.teachingWorkService.delBatchMain(idList);
 		return Result.ok("批量删除成功！");
 	}
