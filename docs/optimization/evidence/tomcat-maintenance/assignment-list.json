@@ -1,0 +1,229 @@
+{
+  "observed_utc": "2026-10-02T23:04:14.365024+00:00",
+  "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+  "expected_legacy": false,
+  "passed": 48,
+  "total": 48,
+  "cases": [
+    {
+      "case": "student_a list {'submit': 'false'}",
+      "passed": true
+    },
+    {
+      "case": "student_a list {}",
+      "passed": true
+    },
+    {
+      "case": "student_a list {'departId': 'fixture_class_b'}",
+      "passed": true
+    },
+    {
+      "case": "only visible assigned pending or draft tasks",
+      "passed": true
+    },
+    {
+      "case": "all task list excludes foreign withdrawn ended substring empty",
+      "passed": true
+    },
+    {
+      "case": "foreign department filter returns empty",
+      "passed": true
+    },
+    {
+      "case": "student_a list {'departId': 'fixture_class_a'}",
+      "passed": true
+    },
+    {
+      "case": "owned department filter matches visible tasks",
+      "passed": true
+    },
+    {
+      "case": "student_a list {'userId': 'fixture_student_b'}",
+      "passed": true
+    },
+    {
+      "case": "supplied user ID cannot select another identity",
+      "passed": true
+    },
+    {
+      "case": "student_a list {'departId': \"fixture_class_a' OR 1=1\"}",
+      "passed": true
+    },
+    {
+      "case": "unknown department does not expand scope",
+      "passed": true
+    },
+    {
+      "case": "student_a list {'submit': 'true'}",
+      "passed": true
+    },
+    {
+      "case": "submission filter includes submitted and graded",
+      "passed": true
+    },
+    {
+      "case": "student_a list {'submit': 'true', 'status': 1}",
+      "passed": true
+    },
+    {
+      "case": "specific submitted status",
+      "passed": true
+    },
+    {
+      "case": "student_a list {'submit': 'true', 'status': 2}",
+      "passed": true
+    },
+    {
+      "case": "zero score and private feedback retained",
+      "passed": true
+    },
+    {
+      "case": "other owner work and feedback not joined",
+      "passed": true
+    },
+    {
+      "case": "deleted submission becomes unsubmitted task without stale file",
+      "passed": true
+    },
+    {
+      "case": "admin list {}",
+      "passed": true
+    },
+    {
+      "case": "no class membership returns empty",
+      "passed": true
+    },
+    {
+      "case": "student_b list {}",
+      "passed": true
+    },
+    {
+      "case": "student_b list {}",
+      "passed": true
+    },
+    {
+      "case": "other student sees own class task without A submission",
+      "passed": true
+    },
+    {
+      "case": "anonymous or invalid credential rejected",
+      "passed": true
+    },
+    {
+      "case": "anonymous or invalid credential rejected",
+      "passed": true
+    },
+    {
+      "case": "list responses not cached",
+      "passed": true
+    },
+    {
+      "case": "local raw and decorated URL agree",
+      "passed": true
+    },
+    {
+      "case": "student_a returned local URL access",
+      "passed": true
+    },
+    {
+      "case": "student_b returned local URL access",
+      "passed": true
+    },
+    {
+      "case": "missing file has no fabricated download URL",
+      "passed": true
+    },
+    {
+      "case": "student_a list {}",
+      "passed": true
+    },
+    {
+      "case": "existing shared task retains saved work class",
+      "passed": true
+    },
+    {
+      "case": "student_a list {'departId': 'fixture_class_b'}",
+      "passed": true
+    },
+    {
+      "case": "filter B contains only B work and eligible tasks",
+      "passed": true
+    },
+    {
+      "case": "student_a list {}",
+      "passed": true
+    },
+    {
+      "case": "stored location chooses cloud URL without local prefix",
+      "passed": true
+    },
+    {
+      "case": "student_a list {}",
+      "passed": true
+    },
+    {
+      "case": "unknown storage has no guessed URL",
+      "passed": true
+    },
+    {
+      "case": "query failure is retryable generic 503",
+      "passed": true
+    },
+    {
+      "case": "student_a list {}",
+      "passed": true
+    },
+    {
+      "case": "same session reads after database recovery",
+      "passed": true
+    },
+    {
+      "case": "student_a list {}",
+      "passed": true
+    },
+    {
+      "case": "deleted class no longer contributes assignments",
+      "passed": true
+    },
+    {
+      "case": "original rows restored",
+      "passed": true
+    },
+    {
+      "case": "original files restored",
+      "passed": true
+    },
+    {
+      "case": "fault table removed",
+      "passed": true
+    }
+  ],
+  "observed": {
+    "unsubmitted_ids": [
+      "deleted",
+      "draft",
+      "pending"
+    ],
+    "all_ids": [
+      "deleted",
+      "draft",
+      "graded",
+      "missingfile",
+      "pending",
+      "shared",
+      "submitted"
+    ],
+    "foreign_filter_ids": [],
+    "local_file_response": {
+      "mineWorkName": "assignment-probe-work-submitted",
+      "mineWorkStatus": 1,
+      "mineWorkId": "fixture_aprobe_w_submitted",
+      "mineWorkDepartId": "fixture_class_a",
+      "mineWorkUrl": "/api/sys/common/static/assignment-probe%20%23%20report.txt",
+      "mineWorkCover": "/api/sys/common/static/assignment-probe%20%23%20report.txt",
+      "mineWorkUrl_url": "/api/sys/common/static/assignment-probe%20%23%20report.txt",
+      "mineWorkCover_url": "/api/sys/common/static/assignment-probe%20%23%20report.txt"
+    }
+  },
+  "scope": "Actual local synthetic authenticated HTTP, SQL, file bytes; cloud URL formatting only, no browser or real Qiniu upload acceptance."
+}

@@ -1,0 +1,26 @@
+{
+  "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+  "artifacts": [
+    {
+      "artifact": "tomcat-embed-core",
+      "version": "9.0.122",
+      "sha512": "42e432c1eaeab50f5f84bb34d2566fa1ec0d94e6ec48f112fb5fdceb854572935658c763e7caaa9e99b0490e8fba86d307de1049cd973ff47ff5fd82cf9263ff",
+      "verified_against": "https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-core/9.0.122/tomcat-embed-core-9.0.122.jar.sha512",
+      "size": 3747150
+    },
+    {
+      "artifact": "tomcat-embed-el",
+      "version": "9.0.122",
+      "sha512": "38f7dff49528c61834bee4588d5471cdd3c5637fd1cc7e4186176e20c8697e796358501f40af44cec51add3b70684f2e560ec6f3ca762ae6b3844c0751ed97f0",
+      "verified_against": "https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-el/9.0.122/tomcat-embed-el-9.0.122.jar.sha512",
+      "size": 263640
+    },
+    {
+      "artifact": "tomcat-embed-websocket",
+      "version": "9.0.122",
+      "sha512": "922ac2cf9ab38c524610c3fabcd5bd8c0e867781be4b8570b7540114188f81ac69085a01c98be4b5fc4273f65fc082b1ce9bc1972c8b8451737620bc390dc351",
+      "verified_against": "https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-websocket/9.0.122/tomcat-embed-websocket-9.0.122.jar.sha512",
+      "size": 292159
+    }
+  ]
+}
