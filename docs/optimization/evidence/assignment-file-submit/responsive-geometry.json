@@ -1,0 +1,32 @@
+[
+  {
+    "document": 768,
+    "modal": {
+      "height": 674.9765625,
+      "right": 664,
+      "width": 560,
+      "x": 104
+    },
+    "viewport": 768
+  },
+  {
+    "document": 390,
+    "modal": {
+      "height": 652.9765625,
+      "right": 382,
+      "width": 374,
+      "x": 8
+    },
+    "viewport": 390
+  },
+  {
+    "document": 1440,
+    "modal": {
+      "height": 674.9765625,
+      "right": 1000,
+      "width": 560,
+      "x": 440
+    },
+    "viewport": 1440
+  }
+]

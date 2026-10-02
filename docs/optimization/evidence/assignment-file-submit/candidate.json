@@ -1,0 +1,121 @@
+{
+  "observed_utc": "2026-10-02T20:20:27.662650+00:00",
+  "candidate_commit": "c532e52f7c5c1c5bc80f912c62eccb40b96451c7",
+  "base_commit": "1bd5fecc9f634612cca7180d7211148ecb8ea1dd",
+  "base_pr": 22,
+  "backend_dependency_pr": 20,
+  "browser_before_commit": "78f8b350f150422dbdbdd59488523a9e33295cd5",
+  "scope": "One assignment file submission lifecycle and its form presentation",
+  "checks": {
+    "frontend_tests": {
+      "passed": 95,
+      "total": 95,
+      "new": 13
+    },
+    "modified_source_lint": {
+      "files": 3,
+      "errors": 0,
+      "warnings": 0
+    },
+    "production_build_exit": 0,
+    "existing_build_warnings": 6,
+    "built_files": 4871,
+    "dist_path_hashes_aggregate_sha256": "bf6fb2d299ad9093978b640801483e312a74fc53657ba44473b414971e27ae36",
+    "dist_hash_serialization": "UTF-8 json.dumps(path_to_sha256, sort_keys=True, separators=(comma,colon))",
+    "diff_check": true
+  },
+  "source_files_sha256": {
+    "web/src/views/account/course/MyAdditionalWorkList.vue": "53e33ee1232ff909a90f911df09d0e2f13e3f1c8db00ac1e654f8b92c7f837f3",
+    "web/src/views/teaching/modules/TeachingWorkSubmitModal.vue": "3ebf12e79b2b2026646eb559337bf1b52afe774a4cd7f6c3d15dbbf2af24ffd0",
+    "web/src/views/teaching/modules/assignmentFileUpload.js": "38722f3112c9e50e4d51244876b0a2dc88878868c2d6817d25d2ec1e6f637317",
+    "web/tests/assignment-file-submit.test.cjs": "fd9793e2bfef860f2a6476c991479a11932decd7d225656c6dccb7affeff0674",
+    "web/tests/assignment-preview/api.js": "713419815819063badf0ce8c08581ca2e07ee09eabced4da365131af78e34f0d",
+    "web/tests/assignment-preview/assets/observation-report.txt": "7c581d08b98f0bb32d833fbd7729b2a09a3b1b7befc383bf80d3ef050ef0591c",
+    "web/tests/assignment-preview/assets/second-report.txt": "5dfe3d2eb9fb40c7eefb109641a0fb45ef24a3ff3b3a381883f3b2b1871efdf9",
+    "web/tests/assignment-preview/bootstrap.js": "4b099f190296c08a48395a3828e6a55d2ff65975dc25425f745181bc22f33330",
+    "web/tests/assignment-preview/build.cjs": "0c29ccdaf7b55eb0ff51c93dd2dceca5dd3150f2f8dc445d6c7d622836423f76",
+    "web/tests/assignment-preview/entry.js": "a7c596e3d32d1f3c66f5a5628b75f9e2184649972d37c37f06b4d7409181f42f",
+    "web/tests/assignment-preview/preview.css": "4fe0815ded0315abd6bd34d9cb940c3e29da9e9a59751fcef6c32d55d9e22294",
+    "web/tests/assignment-preview/server.py": "101586827fbdc01b45c74525c2853104293c3688beaa957f712f05423a597989"
+  },
+  "browser_observations": [
+    {
+      "case": "Old dialog cancellation then different assignment",
+      "result": "Browser submitted task-b using file registered for task-a; before-http.json records file ID and workStatus 1.",
+      "evidence": "before-http.json"
+    },
+    {
+      "case": "New dialog cancellation then different assignment; removed ready file",
+      "result": "Both attempts showed missing-file error and sent no submission.",
+      "evidence": "after-no-stale-http.json"
+    },
+    {
+      "case": "Registration business failure",
+      "result": "File remained selected, displayed retry/error and did not become ready. After fixture fault reset, retry reached ready."
+    },
+    {
+      "case": "Submission business failure and retry",
+      "result": "Same registered file preserved. Later successful request used same file ID, trimmed assignment title and workStatus 1; success event observed exactly once.",
+      "evidence": "after-recovery-http.json"
+    },
+    {
+      "case": "Slow submission",
+      "result": "Submit, cancel, change and remove controls disabled; close icon absent. One successful request and one success event; duplicate invocation separately covered by component test."
+    },
+    {
+      "case": "Remove during slow upload",
+      "result": "Selection cleared immediately. After late upload response, missing-file error persisted; no registration for canceled upload and no task-b submission.",
+      "evidence": "after-recovery-http.json"
+    },
+    {
+      "case": "Responsive actual modal",
+      "result": "390/768/1440 document widths equal viewport; modal contained horizontally.",
+      "evidence": "responsive-geometry.json"
+    },
+    {
+      "case": "Browser errors/warnings",
+      "result": "Tab developer log empty for error/warn at final inspection."
+    }
+  ],
+  "evidence_files_sha256": {
+    "after-cancel-upload-390.png": "9b913216b0dc42773af21495e13721699b07a7464225175ea2634b83406b5030",
+    "after-empty-1440.png": "41a5d641f919b4661db863853177eba513f487fabea9c382db9c8bc339a17eed",
+    "after-no-stale-file-390.png": "9b913216b0dc42773af21495e13721699b07a7464225175ea2634b83406b5030",
+    "after-no-stale-http.json": "df1a8a9901c150f0e477120c9d414590f09b8c4f5bb401b20910a5e7a7fd2570",
+    "after-ready-1440.png": "6b8daa7c96fc3838519857b6a820963440e33be5412ebcd503793c8ab42a6310",
+    "after-ready-390.png": "2e82569588a03098f6547c8658284605bf8be1d6fdb9032f3126bffa29feeb35",
+    "after-ready-768.png": "87ecff1cabbd339464b1ef0fdc761b6c92355e41ce21e91c536fec188619a848",
+    "after-recovery-http.json": "f7b44ee4bc44490a7a4a973c52ee522256b17412615a3ab7a86764d9263a35a4",
+    "after-registration-error-390.png": "555786a90ccd2b83fb72b981d8998ce650874c0f956abd123360588f44116b3f",
+    "after-submit-error-390.png": "da588f6ce99b04c6d4ad87203a343cfb4ef0265c8a62eee1f722139702306496",
+    "after-submit-error-http.json": "092a167778eb9ea4b6471ed9bb0b2d59ca02c93edf9a299ed5fa1da98448475b",
+    "after-submit-success-390.png": "4da2f5d8bc4ce665f0c6c808dd269cd621d6db5d550e488b7489fb7f3e88a8d9",
+    "after-submitting-390.png": "40ed9978f950c88973fa05900d8e79aaa9a2bfa3206585b4ee76431f7ba47bb8",
+    "before-empty-1440.png": "1ffa9367d95d03530c5f6884c9a271e7957c7add310b9ea8e167f0e899ab5844",
+    "before-http.json": "bf533a528531894e4df31235a5919e5306a5a00312d3ada6d1a7c6ad67bf3aa1",
+    "before-stale-file-390.png": "e1ed7d04d127eed90a16ef75fb7227d82bf54234cac50975bc80c008bba7e2c5",
+    "responsive-geometry.json": "35221140e9969e91f37e481dc098cf2493e88a3711814987fa9ca3eb76aed401"
+  },
+  "original_source_files": 5634,
+  "original_source_changes": 0,
+  "backend_health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "cleanup": {
+    "old_comparison_server_18117_stopped": true,
+    "browser_viewport_restored": true,
+    "preview_18116_loopback_only": true,
+    "real_application_database_writes": false
+  },
+  "limitations": [
+    "Actual Vue dialog, Ant Design and upload adapter; API alias sends real HTTP to loopback synthetic service. No platform login, real database, real role authorization or production data.",
+    "Parent @ok refresh and request race recovery verified in source/component tests; actual parent page refresh not browser-accepted.",
+    "Qiniu credential/key isolation tested with controlled responses only; no real cloud upload.",
+    "Cancel/remove clears dialog selection and stops accepting late responses, but does not delete already transferred or registered files. No orphan garbage collection added.",
+    "Network failure may follow an already accepted server write; message asks to check list. Client guard is not server exactly-once delivery.",
+    "Generic JUpload and Scratch/ScratchJr/Python editor flows are not changed or accepted by this PR.",
+    "Backend contracts require PR20 lineage including PR14 work submission and PR17 file registration. Full authenticated end-to-end acceptance remains pending."
+  ]
+}

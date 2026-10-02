@@ -1,0 +1,35 @@
+{
+  "mode": "normal",
+  "uploads": [
+    {
+      "path": "fixture/1/observation-report.txt",
+      "name": "observation-report.txt",
+      "size": 133,
+      "sha256": "7c581d08b98f0bb32d833fbd7729b2a09a3b1b7befc383bf80d3ef050ef0591c",
+      "failed": false
+    }
+  ],
+  "registrations": [
+    {
+      "fileName": "observation-report.txt",
+      "filePath": "fixture/1/observation-report.txt",
+      "fileLocation": 1,
+      "fileTag": "后台上传",
+      "id": "fixture-file-1",
+      "failed": false
+    }
+  ],
+  "submissions": [
+    {
+      "id": "",
+      "workName": "第二份作业：设计一个智能助手",
+      "workFile": "fixture-file-1",
+      "departId": "class-fixture",
+      "additionalId": "task-b",
+      "workType": 0,
+      "workUrl": "fixture/1/observation-report.txt",
+      "workStatus": 1,
+      "failed": false
+    }
+  ]
+}
