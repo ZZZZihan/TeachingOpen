@@ -1,0 +1,6 @@
+{
+  "status_line": "HTTP/1.0 400 Bad Request",
+  "frontend_port": 18132,
+  "expected_defect_reproduced": true,
+  "scope": "Original frozen runner with PR34 real backend; valid WS13 handshake, no auth frame or credential sent"
+}

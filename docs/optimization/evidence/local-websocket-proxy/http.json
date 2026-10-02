@@ -1,0 +1,61 @@
+{
+  "cases": [
+    {
+      "case": "real login through proxy preserves media cookie student_a",
+      "passed": true
+    },
+    {
+      "case": "real login through proxy preserves media cookie student_b",
+      "passed": true
+    },
+    {
+      "case": "authenticated course GET through proxy",
+      "passed": true
+    },
+    {
+      "case": "owner cookie-only media bytes and cache policy",
+      "passed": true
+    },
+    {
+      "case": "protected media Range bytes and headers",
+      "passed": true
+    },
+    {
+      "case": "anonymous media request denied through proxy",
+      "passed": true
+    },
+    {
+      "case": "other student media request denied through proxy",
+      "passed": true
+    },
+    {
+      "case": "unchanged static/SPA bytes /index.html",
+      "passed": true
+    },
+    {
+      "case": "unchanged static/SPA bytes /index",
+      "passed": true
+    },
+    {
+      "case": "unchanged static/SPA bytes /user/login",
+      "passed": true
+    },
+    {
+      "case": "missing static resource remains 404",
+      "passed": true
+    },
+    {
+      "case": "all non-audit tables unchanged",
+      "passed": true
+    },
+    {
+      "case": "all attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 13,
+  "total": 13,
+  "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396",
+  "index_sha256": "a5b1fba9890e1682bdcf8b866d7edbbf3aadaf712a408244cb99c9b87c6c148b",
+  "scope": "Actual synthetic CLI login and HTTP through the frontend; not browser authentication or UI acceptance"
+}

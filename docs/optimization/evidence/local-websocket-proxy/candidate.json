@@ -1,0 +1,31 @@
+{
+  "product_commit": "a99f0ec3440071300730ddf12f48674d40619392",
+  "base_commit": "20f52ca13df1d8649cace5927651b5b194f8a0c8",
+  "base_pr": "https://github.com/ZZZZihan/TeachingOpen/pull/34",
+  "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396",
+  "jar_source_commit": "10a3f167b90fe4f270792e035985c4a38aedb305",
+  "runner_sha256": "f730ca9fe77b196b60a1f8d0af56592321bb74f0f1bac5ab2c1883dc3b3a020b",
+  "bundle_manifest_sha256": "1dd78f5150c4b72c3ecd9b72cb0d4e06a458bf60dfdf981687eee103679ae9db",
+  "frozen_frontend_commit": "0caaab3bb03f2fe433cd946823bd19b7089c791c",
+  "frontend_build_code_commit": "7a0fe014d5de5c68335461321d8c1c1aa0553257",
+  "frontend_files": 4884,
+  "builds_repeated": false,
+  "artifact_note": "Existing exact PR34 JAR and previously built integration dist reused; old reproduction used the older notification bundle frontend. No frontend visual or Java source changes in this patch.",
+  "tests": {
+    "controlled_python": 42,
+    "new_transport_tests": 12,
+    "real_notification": 44,
+    "real_node_client": 5,
+    "real_http_container": 9,
+    "real_frontend_http": 13,
+    "real_total": 71
+  },
+  "stopped_ports": {
+    "13336": true,
+    "16409": true,
+    "18131": true,
+    "18132": true
+  },
+  "browser_e2e": false,
+  "production_changed": false
+}

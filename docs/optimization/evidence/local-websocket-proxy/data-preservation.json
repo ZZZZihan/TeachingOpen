@@ -1,0 +1,16 @@
+{
+  "tables_checked": 69,
+  "changed_tables": [
+    "sys_log"
+  ],
+  "all_non_audit_tables_equal": true,
+  "sys_log_rows_before": 3786,
+  "sys_log_rows_after": 3807,
+  "attachments_equal": true,
+  "source_database_equal": true,
+  "source_attachments_equal": true,
+  "original_source_files_checked": 5731,
+  "original_source_files_equal": true,
+  "neutral_proxy_log_only": true,
+  "proxy_log_sha256": "6dcb82148530a8645c51cded2c7ab2e69eca8538405006418ab4448e92d8994f"
+}
