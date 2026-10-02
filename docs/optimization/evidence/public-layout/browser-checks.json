@@ -1,0 +1,187 @@
+{
+  "observedUtc": "2026-10-02T14:49:44.343Z",
+  "backend": "PR #5 candidate f80ff81aead130311d14801cabbe7747333f670037409f96cc7ee1530d3e0626; real synthetic data",
+  "developmentObservations": [
+    {
+      "phase": "before",
+      "page": "courseList",
+      "scrollWidth": 382,
+      "width": 390
+    },
+    {
+      "phase": "before",
+      "page": "courseList",
+      "scrollWidth": 760,
+      "width": 768
+    },
+    {
+      "phase": "after",
+      "page": "index",
+      "brand": "TeachingOpen",
+      "headings": [
+        "从好奇开始，让想法成为作品。"
+      ],
+      "scrollWidth": 1432,
+      "title": "TeachingOpen",
+      "width": 1440
+    },
+    {
+      "phase": "after",
+      "page": "index",
+      "scrollWidth": 760,
+      "width": 768
+    },
+    {
+      "phase": "after",
+      "page": "index",
+      "scrollWidth": 382,
+      "width": 390
+    },
+    {
+      "case": "keyboard opens mobile navigation",
+      "passed": true
+    },
+    {
+      "case": "mobile navigation routes and closes",
+      "passed": true
+    },
+    {
+      "phase": "after",
+      "page": "courseList",
+      "mainTop": 73,
+      "scrollWidth": 382,
+      "welcomeCount": 0,
+      "width": 390
+    },
+    {
+      "phase": "after",
+      "page": "courseList",
+      "mainTop": 73,
+      "scrollWidth": 760,
+      "welcomeCount": 0,
+      "width": 768
+    },
+    {
+      "phase": "after",
+      "page": "courseList",
+      "mainTop": 81,
+      "scrollWidth": 1432,
+      "welcomeCount": 0,
+      "width": 1440
+    },
+    {
+      "case": "skip link focuses main",
+      "passed": true
+    },
+    {
+      "case": "login link reaches existing login page",
+      "passed": true
+    },
+    {
+      "case": "custom brand, footer, banner and failed logo",
+      "bannerImages": 3,
+      "brand": "合成学校学习中心",
+      "footer": "合成学校 · 自定义页脚",
+      "logoFallback": true,
+      "scrollWidth": 382,
+      "width": 390
+    },
+    {
+      "case": "custom mobile menu",
+      "passed": true
+    },
+    {
+      "case": "custom menu reaches courses",
+      "passed": true
+    },
+    {
+      "case": "configured home HTML keeps priority",
+      "introCount": 0,
+      "phase": "intermediate build before Index.vue repair",
+      "passed": false,
+      "finding": "welcome hidden but cached Index component showed no custom heading; repaired and retested below"
+    },
+    {
+      "case": "final build removes stale custom home after warm refresh",
+      "passed": true
+    },
+    {
+      "case": "final build displays custom home after warm refresh",
+      "passed": true
+    },
+    {
+      "case": "fixtures removed restores default content",
+      "passed": true
+    }
+  ],
+  "finalDefaultChecks": [
+    {
+      "page": "index",
+      "brand": "TeachingOpen",
+      "heading": "从好奇开始，让想法成为作品。",
+      "scrollWidth": 1432,
+      "title": "TeachingOpen",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "page": "index",
+      "brand": "TeachingOpen",
+      "heading": "从好奇开始，让想法成为作品。",
+      "scrollWidth": 760,
+      "title": "TeachingOpen",
+      "width": 768,
+      "passed": true
+    },
+    {
+      "page": "index",
+      "brand": "TeachingOpen",
+      "heading": "从好奇开始，让想法成为作品。",
+      "scrollWidth": 382,
+      "title": "TeachingOpen",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "case": "keyboard menu opens",
+      "passed": true
+    },
+    {
+      "case": "menu routes and closes",
+      "passed": true
+    },
+    {
+      "page": "courseList",
+      "introCount": 0,
+      "mainTop": 73,
+      "scrollWidth": 382,
+      "width": 390,
+      "passed": true
+    },
+    {
+      "page": "courseList",
+      "introCount": 0,
+      "mainTop": 73,
+      "scrollWidth": 760,
+      "width": 768,
+      "passed": true
+    },
+    {
+      "page": "courseList",
+      "introCount": 0,
+      "mainTop": 81,
+      "scrollWidth": 1432,
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "case": "keyboard skip to main",
+      "passed": true
+    },
+    {
+      "case": "login route",
+      "passed": true
+    }
+  ],
+  "scope": "anonymous public layout, configuration compatibility, responsive geometry, keyboard navigation; not authenticated business or human acceptance"
+}
