@@ -1,0 +1,28 @@
+{
+  "base_head": "2e0c1831a234c138c4c6873b56f5060e3a80aec8",
+  "validation_scope": "isolated worktree; existing project dependency cache; compile and package only",
+  "command": "JAVA_HOME=<project Java 8> <project Maven 3.9.16>/bin/mvn -B -s <project settings.xml> clean package",
+  "exit_code": 0,
+  "summary": [
+    "[INFO] Tests are skipped.",
+    "[INFO] Tests are skipped.",
+    "[INFO] jeecg-boot-parent .................................. SUCCESS [  0.162 s]",
+    "[INFO] jeecg-boot-base-common ............................. SUCCESS [  3.035 s]",
+    "[INFO] teaching-open ...................................... SUCCESS [  5.249 s]",
+    "[INFO] BUILD SUCCESS",
+    "[INFO] Finished at: 2026-10-02T22:10:47+08:00"
+  ],
+  "pom_sha256": "f76a48ce4e25084feab2a76eb5ff545ce2eb21b03fab1481652821b0b058e0d3",
+  "jar_sha256": "2d0990f58c30eee0a72485d9178979c529107b56d34c4cb953572efad52270eb",
+  "build_log_sha256": "80010c0004b9db5c77dbc0f7f5e917d8f7da42158efa1918f0c54aaa9018ddef",
+  "central_head_checks": [
+    {
+      "url": "https://repo.maven.apache.org/maven2/com/oracle/ojdbc6/11.2.0.3/ojdbc6-11.2.0.3.pom",
+      "http_status": 404
+    },
+    {
+      "url": "https://repo.maven.apache.org/maven2/com/oracle/database/jdbc/ojdbc6/11.2.0.4/ojdbc6-11.2.0.4.pom",
+      "http_status": 200
+    }
+  ]
+}
