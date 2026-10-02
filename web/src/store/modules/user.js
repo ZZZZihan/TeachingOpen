@@ -128,9 +128,7 @@ const user = {
     // 获取用户信息
     GetPermissionList({ commit }) {
       return new Promise((resolve, reject) => {
-        let v_token = Vue.ls.get(ACCESS_TOKEN);
-        let params = {token:v_token};
-        queryPermissionsByUser(params).then(response => {
+        queryPermissionsByUser().then(response => {
           const menuData = response.result.menu;
           const authData = response.result.auth;
           const allAuthData = response.result.allAuth;

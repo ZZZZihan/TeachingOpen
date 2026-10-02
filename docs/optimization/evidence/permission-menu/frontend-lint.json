@@ -1,0 +1,16 @@
+{
+  "baseline": {
+    "errorCount": 392,
+    "warningCount": 282
+  },
+  "candidate": {
+    "errorCount": 380,
+    "warningCount": 280
+  },
+  "files": [
+    "web/src/api/api.js",
+    "web/src/store/modules/user.js"
+  ],
+  "scope": "Legacy file lint remains failing. Per-rule counts must not increase; no broad formatting rewrite.",
+  "new_rule_count_increases": {}
+}

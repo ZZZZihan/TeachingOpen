@@ -1,0 +1,105 @@
+{
+  "observed_utc": "2026-10-02T19:10:06.896326+00:00",
+  "jar_sha256": "b7715c0c4bdaeb6531e952d3240b80ff4b727743930d0a2213ceede3b66371a8",
+  "expected_legacy": true,
+  "scope": "actual HTTP, authentication, role/department SQL fixtures, bounded configuration failure, private log scan; no browser login or administrative menu-editor acceptance",
+  "passed": 23,
+  "total": 23,
+  "cases": [
+    {
+      "case": "header-only request without URL credential",
+      "passed": true,
+      "http_status": 200
+    },
+    {
+      "case": "legacy empty menu reproduces failure",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "student_a menu response succeeds with legacy parameter",
+      "passed": true
+    },
+    {
+      "case": "admin menu response succeeds with legacy parameter",
+      "passed": true
+    },
+    {
+      "case": "teacher_a menu response succeeds with legacy parameter",
+      "passed": true
+    },
+    {
+      "case": "admin assigned dashboard and controls retained",
+      "passed": true
+    },
+    {
+      "case": "teacher role menu and controls retained",
+      "passed": true
+    },
+    {
+      "case": "student role and department menus combined",
+      "passed": true
+    },
+    {
+      "case": "hidden child and cache configuration preserved",
+      "passed": true
+    },
+    {
+      "case": "deleted menu and disabled/deleted assigned controls excluded",
+      "passed": true
+    },
+    {
+      "case": "global button configuration retains status and excludes deleted",
+      "passed": true
+    },
+    {
+      "case": "student_b menu response succeeds with legacy parameter",
+      "passed": true
+    },
+    {
+      "case": "department menu is not shared with another student",
+      "passed": true
+    },
+    {
+      "case": "query other account selects another identity in legacy code",
+      "passed": true
+    },
+    {
+      "case": "query invalid signature selects another identity in legacy code",
+      "passed": true
+    },
+    {
+      "case": "anonymous is denied by real authentication",
+      "passed": true
+    },
+    {
+      "case": "query-only credential is denied by real authentication",
+      "passed": true
+    },
+    {
+      "case": "invalid header with valid query is denied by real authentication",
+      "passed": true
+    },
+    {
+      "case": "read and denied requests preserve permission tables",
+      "passed": true
+    },
+    {
+      "case": "logged-out header cannot use another query credential",
+      "passed": true
+    },
+    {
+      "case": "menu request credential exposure matches candidate",
+      "passed": true
+    },
+    {
+      "case": "no login password exported to captured logs",
+      "passed": true
+    },
+    {
+      "case": "all original permission tables restored byte-for-byte",
+      "passed": true
+    }
+  ]
+}

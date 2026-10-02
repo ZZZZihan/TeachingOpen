@@ -5,10 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.constant.CommonConstant;
-import org.jeecg.common.system.util.JwtUtil;
+import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.MD5Util;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.system.entity.SysDepartPermission;
@@ -22,6 +23,7 @@ import org.jeecg.modules.system.util.PermissionDataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -192,27 +194,23 @@ public class SysPermissionController {
 //	}
 
 	/**
-	 * 查询用户拥有的菜单权限和按钮权限（根据TOKEN）
+	 * 查询当前已认证用户的菜单及按钮权限。保留旧路径，忽略旧 token 查询参数。
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/getUserPermissionByToken", method = RequestMethod.GET)
-	public Result<?> getUserPermissionByToken(@RequestParam(name = "token", required = true) String token) {
+	public Result<?> getUserPermissionByToken(HttpServletResponse response) {
+		response.setHeader("Cache-Control", "no-store");
 		Result<JSONObject> result = new Result<JSONObject>();
 		try {
-			if (oConvertUtils.isEmpty(token)) {
-				return Result.error("TOKEN不允许为空！");
+			Object principal = SecurityUtils.getSubject().getPrincipal();
+			if (!(principal instanceof LoginUser)) {
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+				return Result.error(401, "请重新登录。");
 			}
-			log.info(" ------ 通过令牌获取用户拥有的访问菜单 ---- TOKEN ------ " + token);
-			String username = JwtUtil.getUsername(token);
+			String username = ((LoginUser) principal).getUsername();
 			List<SysPermission> metaList = sysPermissionService.queryByUser(username);
-			//添加首页路由
-			//update-begin-author:taoyan date:20200211 for: TASK #3368 【路由缓存】首页的缓存设置有问题，需要根据后台的路由配置来实现是否缓存
-			if(!PermissionDataUtil.hasIndexPage(metaList)){
-                SysPermission indexMenu = sysPermissionService.list(new LambdaQueryWrapper<SysPermission>().eq(SysPermission::getComponent,"dashboard/Index")).get(0);
-				metaList.add(0,indexMenu);
-			}
-			//update-end-author:taoyan date:20200211 for: TASK #3368 【路由缓存】首页的缓存设置有问题，需要根据后台的路由配置来实现是否缓存
+			// 没有菜单是合法配置；首页与其他页面一样按既有权限查询结果返回。
 			JSONObject json = new JSONObject();
 			JSONArray menujsonArray = new JSONArray();
 			this.getPermissionJsonArray(menujsonArray, metaList, null);
@@ -235,8 +233,9 @@ public class SysPermissionController {
 			result.setResult(json);
 			result.success("查询成功");
 		} catch (Exception e) {
-			result.error500("查询失败:" + e.getMessage());  
-			log.error(e.getMessage(), e);
+			log.error("加载当前用户权限失败", e);
+			response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+			return Result.error(503, "权限信息暂时不可用，请稍后重试。");
 		}
 		return result;
 	}
