@@ -5,21 +5,23 @@
     <main id="public-content" class="public-content" tabindex="-1">
       <section v-if="showIntro" class="welcome-panel" :class="{ 'has-banner': hasBanner }" aria-labelledby="welcome-title">
         <div class="welcome-copy">
-          <p class="eyebrow">探索 · 学习 · 创作</p>
-          <h1 id="welcome-title">从好奇开始，<br />让想法成为作品。</h1>
-          <p class="welcome-description">在课程中学习人工智能与编程，在动手实践中发现更多可能。</p>
+          <p class="eyebrow">TEACHINGOPEN · 人工智能与编程</p>
+          <h1 id="welcome-title">学好人工智能，<br /><span>从动手开始。</span></h1>
+          <p class="welcome-description">选择课程，理解知识，完成自己的编程作品。<br />在这里，把学习落实到每一次实践。</p>
           <div class="welcome-actions">
-            <router-link class="primary-action" to="/courseList">探索课程 <a-icon type="arrow-right" /></router-link>
+            <router-link class="primary-action" to="/courseList">浏览课程 <a-icon type="arrow-right" /></router-link>
             <router-link class="secondary-action" :to="isLoggedIn ? '/teaching/mineCourse/cardList' : '/user/login'">{{ isLoggedIn ? '我的课程' : '登录，继续学习' }}</router-link>
           </div>
         </div>
         <Banner v-if="hasBanner" class="welcome-banner" />
         <div v-else class="learning-path" aria-label="学习路径">
-          <div class="path-step"><span class="step-icon"><a-icon type="compass" /></span><div><strong>发现兴趣</strong><p>选择想要探索的课程</p></div><span class="step-number">01</span></div>
-          <div class="path-step"><span class="step-icon"><a-icon type="experiment" /></span><div><strong>动手实践</strong><p>跟随单元学习与练习</p></div><span class="step-number">02</span></div>
-          <div class="path-step"><span class="step-icon"><a-icon type="bulb" /></span><div><strong>表达创意</strong><p>用编程完成自己的作品</p></div><span class="step-number">03</span></div>
+          <p class="path-caption">从课程，到自己的作品</p>
+          <p class="path-line">理解一个概念。</p>
+          <p class="path-line">写出一段代码。</p>
+          <p class="path-line">完成一件作品。</p>
         </div>
       </section>
+      <CoursePreview v-if="showIntro && $route.path === '/index'" />
       <router-view />
     </main>
     <Footer />
@@ -32,9 +34,10 @@ import { ACCESS_TOKEN } from '@/store/mutation-types'
 import Header from '../modules/Header'
 import Banner from '../modules/Banner'
 import Footer from '../modules/Footer'
+import CoursePreview from '../modules/CoursePreview'
 export default {
     name: 'HomeLayout',
-    components: { Header, Banner, Footer },
+    components: { Header, Banner, Footer, CoursePreview },
     computed: {
         sysConfig () { return this.$store.getters.sysConfig || {} },
         isLoggedIn () { return Boolean(this.$store.state.user.token || Vue.ls.get(ACCESS_TOKEN)) },
@@ -53,38 +56,27 @@ export default {
 }
 </script>
 <style scoped lang="less">
-.public-layout { min-height: 100vh; display: flex; flex-direction: column; background: #f5f7fb; background-size: 100% auto; color: #24334a; }
-.public-content { width: 100%; max-width: 1260px; margin: 0 auto; padding: 32px 24px 48px; flex: 1; }
-.skip-link { position: absolute; top: -100px; left: 20px; padding: 12px 20px; background: #fff; border: 2px solid #245bd6; border-radius: 8px; z-index: 1000; }
+.public-layout { min-height: 100vh; display: flex; flex-direction: column; background: #f7f8fa; background-size: 100% auto; color: #20252b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+.public-content { width: 100%; max-width: 1280px; margin: 0 auto; padding: 36px 40px 64px; flex: 1; }
+.skip-link { position: absolute; top: -100px; left: 20px; padding: 12px 20px; background: #fff; border: 2px solid #bd424d; z-index: 1000; }
 .skip-link:focus { top: 8px; }
-.welcome-panel { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: center; padding: 48px; margin-bottom: 32px; background: #eaf1ff; border: 1px solid #dce6fa; border-radius: 20px; }
-.eyebrow { color: #245bd6; font-size: 13px; font-weight: 700; letter-spacing: 3px; margin-bottom: 20px; }
-.welcome-copy h1 { font-size: clamp(30px, 3.2vw, 44px); font-weight: 700; line-height: 1.35; letter-spacing: -1px; color: #162d53; margin: 0 0 18px; }
-.welcome-description { max-width: 360px; font-size: 16px; line-height: 1.8; color: #536581; margin-bottom: 28px; }
-.welcome-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
-.primary-action { display: inline-flex; align-items: center; gap: 20px; padding: 13px 20px; border-radius: 9px; background: #245bd6; color: #fff; font-weight: 600; }
-.primary-action:hover { background: #1749b8; }
-.secondary-action { color: #344e79; font-weight: 500; }
-a:focus-visible { outline: 3px solid #7194e4; outline-offset: 4px; }
-.learning-path { display: flex; flex-direction: column; gap: 12px; }
-.path-step { display: flex; align-items: center; gap: 16px; padding: 20px; background: #fff; border: 1px solid #e2e9f5; border-radius: 12px; }
-.step-icon { display: grid; place-items: center; width: 44px; height: 44px; background: #f0f5ff; color: #245bd6; border-radius: 12px; font-size: 22px; flex-shrink: 0; }
-.path-step strong { color: #213c65; font-size: 16px; font-weight: 600; }
-.path-step p { color: #65738a; margin: 4px 0 0; font-size: 13px; }
-.step-number { margin-left: auto; color: #95a6be; font-size: 14px; letter-spacing: 1px; }
+.welcome-panel { display: grid; grid-template-columns: 1.6fr 1fr; gap: 64px; align-items: center; padding: 40px 48px; margin-bottom: 48px; background: #172d38; border-radius: 5px; }
+.eyebrow { color: #bfcbd0; font-size: 11px; letter-spacing: 2px; margin: 0 0 24px; }
+.welcome-copy h1 { font-size: clamp(36px, 3.6vw, 50px); font-weight: 600; line-height: 1.4; letter-spacing: -1px; color: #fff; margin: 0 0 24px; }
+.welcome-copy h1 span { color: #fff; }
+.welcome-description { font-size: 14px; line-height: 1.9; color: #b8c6ce; margin: 0 0 30px; }
+.welcome-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 26px; }
+.primary-action { display: inline-flex; align-items: center; gap: 28px; padding: 13px 22px; border: 1px solid #c84a55; border-radius: 4px; background: #c84a55; color: #fff; font-weight: 500; }
+.primary-action:hover { background: #b43b46; border-color: #b43b46; color: #fff; }
+.secondary-action { color: #fff; padding: 8px 0; border-bottom: 1px solid #768b98; font-size: 13px; }
+.secondary-action:hover { color: #fff; border-color: #fff; }
+a:focus-visible { outline: 2px solid #e47883; outline-offset: 5px; }
+.learning-path { padding-left: 34px; border-left: 1px solid #40535e; }
+.path-caption { margin: 0 0 28px; color: #df8d95; font-size: 10px; letter-spacing: 2px; }
+.path-line { color: #c3d0d6; font-size: 20px; line-height: 1.8; font-weight: 400; margin: 0 0 16px; }
+.path-line:last-child { margin: 0; }
 .welcome-banner { min-width: 0; }
-@media (max-width: 900px) {
-  .welcome-panel { padding: 32px; gap: 24px; }
-  .welcome-panel.has-banner { grid-template-columns: 1fr; }
-  .path-step { padding: 16px; gap: 12px; }
-  .step-number { display: none; }
-}
-@media (max-width: 600px) {
-  .public-content { padding: 24px 16px 32px; }
-  .welcome-panel { grid-template-columns: 1fr; padding: 28px 24px; border-radius: 16px; }
-  .welcome-description { font-size: 15px; }
-  .welcome-actions { gap: 16px; }
-  .learning-path { gap: 10px; }
-  .path-step { padding: 14px; }
-}
+@media (max-width: 1000px) { .welcome-panel { gap: 32px; padding: 40px 36px; grid-template-columns: 1.4fr 1fr; } .welcome-copy h1 { font-size: 38px; } .learning-path { padding-left: 24px; } .path-line { font-size: 16px; } }
+@media (max-width: 900px) { .public-content { padding: 28px 28px 48px; } .welcome-panel.has-banner { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .public-content { padding: 22px 20px 40px; } .welcome-panel { grid-template-columns: 1fr; padding: 32px 26px; gap: 0; margin-bottom: 36px; } .welcome-copy h1 { font-size: 33px; line-height: 1.45; margin-bottom: 20px; } .eyebrow { font-size: 9px; letter-spacing: 1px; margin-bottom: 22px; } .welcome-description { font-size: 13px; margin-bottom: 26px; } .welcome-actions { gap: 20px; } .primary-action { padding: 11px 16px; gap: 16px; } .secondary-action { font-size: 12px; } .learning-path { display: none; } }
 </style>

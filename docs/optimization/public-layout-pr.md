@@ -1,43 +1,45 @@
-# 公共入口布局与缺配置回退
+# 公共入口与课程首页
 
-日期：2026-10-02。基于 `main` 的 `2e0c183`，不依赖后端 PR 的代码改动；本次实际浏览器联调使用 #5 的本地后端候选和独立合成数据。
+日期：2026-10-02。基于 `main` 的 `2e0c183`，不依赖后端 PR 的代码改动；本地联调使用 #5 的真实后端和独立合成数据。
 
-## 用户可见变化
+## 最终行为
 
-缺少品牌、菜单和首页 HTML 时，原公共入口缺少清晰导航，首页只有一张欢迎卡；课程页也会先显示约 300px 的欢迎区。现在提供默认 TeachingOpen 品牌、首页/探索课程/创作社区导航、页脚以及完整的首页学习入口。课程、作品列表和资讯页直接呈现各自内容，不再重复渲染欢迎区。
+没有配置品牌、菜单或首页 HTML 时，默认页面提供完整导航、学习入口、页脚与可操作的公开课程。首页请求第一页最多三门公开课程，名称、简介和分类取自原有接口；卡片打开课程详情，并通过既有登录跳转进入课程。课程请求失败后停止加载、展示重试入口，离开页面后迟到响应不再修改组件状态。
 
-默认视觉统一为浅底、深色文字、蓝色主操作。手机和平板使用可展开导航；菜单切换页面后收起，键盘可以操作菜单和“跳到主要内容”。默认文档标题与品牌一致。配置了品牌和 Logo 时继续使用配置，Logo 加载失败回退到图标和文字；已有自定义菜单、Banner、页脚和首页 HTML 保留。
+用户认为第一版蓝色圆角卡片视觉廉价，因此本轮依据 [DeepLearning.AI 首页](https://www.deeplearning.ai/) 与 [课程目录](https://www.deeplearning.ai/courses) 重新组织信息和视觉：白色导航、深色主入口、少量珊瑚红操作色、细边框和真实课程内容。没有封面或图片失效时采用完整文字卡片，不放大面积通用占位图。没有讲师、课时、评分等数据时不编造字段。这里参考信息层级和课程呈现方式，没有复制其品牌素材。
 
-自检中发现首页组件把配置复制到初始数据后不再跟随后台刷新，导致自定义首页在暖缓存路径短暂变成空白。本次改为响应式读取，真实配置从无到有、从有到无都重新验证。浏览器标题仍遵循原有的启动时设置方式，后台品牌刷新后下一次完整加载更新标题；不将其描述为实时配置编辑器。
+手机和平板保留折叠菜单、键盘操作和“跳到主要内容”。配置品牌、Logo、菜单、Banner、页脚与首页 HTML 的路径仍保留；Logo 失败回退为文字标识。首页配置采用响应式 getter，原暖缓存配置切换空白问题的修复也保留。品牌标题仍在完整加载时刷新。
 
-## 真实验证范围
+## 当前候选验证
 
-- 在独立工作区固定锁文件安装通过，既有 32/32 项课程/启动/菜单受控检查通过；五个变更源码文件显式 ESLint 通过，生产构建成功。没有增加依赖。构建仍有既有 CSS 顺序、包体积和 Browserslist 数据过期提示。
-- 最终构建在真实本地后端验证默认首页及课程页的 390、768、1440 CSS 像素宽度；六种组合均无横向溢出。键盘菜单展开、选择课程后关闭、跳转主要内容和进入登录页也通过，共 10 项默认页面检查。
-- 在同一独立数据库插入本轮自建的公开配置，检查自定义菜单路由、品牌、失效 Logo 回退、Banner、页脚、自定义首页 HTML。发现的暖缓存空白问题保留在中间观察记录中，修复后双向配置切换通过。
-- 只删除本轮插入的配置 ID，配置/菜单表恢复原先的 0/0 条；没有改动主开发环境。测试浏览器临时尺寸已恢复。
+- 固定锁文件安装沿用首版成功结果，没有变更依赖。当前 36/36 项受控检查通过，其中新增四项首页课程请求检查，覆盖重复请求、失败重试、非法响应和销毁后迟到请求。
+- 五个变更 Vue 文件显式 ESLint 通过，生产构建退出码 0。仍有既有 CSS 顺序、包体积、Browserslist 数据过期提示，未在 UI PR 内进行框架升级。
+- 最终构建接真实 18101 后端，首页 390/768/1440 三种宽度无横向溢出；实际返回两门合成课程。手机键盘展开导航、首页课程详情和保留目标课程的匿名登录跳转通过。
+- 实际停止并恢复本轮独立后端：首页出现课程错误及重试入口，恢复后点击重试重新显示两门课程。原 18091 开发环境未用于该故障实验。
+- 合成课程配置一个不存在的封面、一个真实本地图片：失效图片被移除，有效图片正常加载，两门课程内容都可读。仅本轮临时文件和字段在检查后恢复，记录见清理证据。
 
-这是匿名公共布局和配置兼容性的工程自检，不是完整三角色浏览器业务、人工审美验收或生产验收。课程卡片的封面缺失、课程筛选布局、登录页面本身及作品详情页的旧容器样式继续由后续独立 PR 处理。本 PR 没有宣称这些页面已经统一完成。
+这是本 Agent 的本地工程自检。新版视觉尚待用户审阅，完整角色流程、登录页面自身视觉、原课程目录改版、编辑器与媒体业务仍由后续 PR 完成。服务中断还会触发旧全局拦截器的重复“系统提示”，已记录为后续异常体验问题，不把本页重试通过称为全站异常体验完成。
 
-证据：[构建、源码与产物摘要](evidence/public-layout/candidate.json)、[浏览器记录](evidence/public-layout/browser-checks.json)、[配置清理](evidence/public-layout/config-cleanup.json)。截图只包含合成课程和本轮合成配置。
+最终证据：[候选摘要](evidence/public-layout-refinement/candidate.json)、[浏览器观察](evidence/public-layout-refinement/browser-checks.json)、[合成附件与字段清理](evidence/public-layout-refinement/fixture-cleanup.json)。共核对九项浏览器观察，含三尺寸、菜单、详情、登录跳转、故障、恢复、混合封面。
 
-## 前后截图
+## 截图
 
-| 页面 | 改版前 | 改版后 |
+| 范围 | 第一版（用户已否定其视觉） | 当前修订 |
 | --- | --- | --- |
-| 首页，1440px | [查看](evidence/public-layout/before-index-1440.png) | [查看](evidence/public-layout/after-index-1440.png) |
-| 课程页，1440px | [查看](evidence/public-layout/before-course-1440.png) | [查看](evidence/public-layout/after-course-1440.png) |
-| 课程页，768px | [查看](evidence/public-layout/before-course-768.png) | [查看](evidence/public-layout/after-course-768.png) |
-| 课程页，390px | [查看](evidence/public-layout/before-course-390.png) | [查看](evidence/public-layout/after-course-390.png) |
+| 首页 1440px | [旧候选](evidence/public-layout/after-index-1440.png) | [当前](evidence/public-layout-refinement/index-1440.png) |
+| 首页 768px | [旧候选](evidence/public-layout/after-index-768.png) | [当前](evidence/public-layout-refinement/index-768.png) |
+| 首页 390px | [旧候选](evidence/public-layout/after-index-390.png) | [当前](evidence/public-layout-refinement/index-390.png) |
 
-新版首页：
+![当前首页](evidence/public-layout-refinement/index-1440.png)
 
-![新版首页](evidence/public-layout/after-index-1440.png)
+[真实后端中断](evidence/public-layout-refinement/failure-390.png) · [有效与失效封面](evidence/public-layout-refinement/mixed-covers-1440.png)。图片中的课程、附件和配置均为隔离合成环境数据。
 
-[手机版首页](evidence/public-layout/after-index-390.png) · [平板首页](evidence/public-layout/after-index-768.png) · [手机导航](evidence/public-layout/after-menu-390.png) · [自定义配置手机截图](evidence/public-layout/after-configured-390.png) · [自定义首页](evidence/public-layout/after-custom-home-1440.png)
+## 既有证据与边界
+
+`evidence/public-layout/` 保留提交 `c8f46ed` 的首版证据，包含原始 main 的改版前截图、32 项受控检查、10 项默认页面检查，以及品牌/Logo/自定义菜单/Banner/页脚/首页 HTML/暖缓存切换检查和恢复证明。这些是此前候选的记录，本次没有重跑完整自定义配置矩阵；不要把历史截图或旧摘要当作本轮视觉验收结果。
 
 ## 复现与回退
 
-在 `web/` 按 BUILDING.md 执行固定锁文件安装、`npm test`、显式检查变更文件及 `npm run build`。可使用 #4 提供的 `serve-frontend.py --dist <本分支>/web/dist --runtime <独立合成环境>` 联调，浏览器访问 `/index` 和 `/courseList`。准备缺配置及上述自定义配置两组状态，核对截图、导航和暖缓存刷新；测试后恢复本轮配置，不能使用生产数据库。
+在 `web/` 按 BUILDING.md 安装固定锁文件、运行 `npm test`、显式 ESLint 与 `npm run build`。可使用 #4 的 `serve-frontend.py --dist <本分支>/web/dist --runtime <独立合成环境>`，访问 `/index`，核对课程接口、详情、失败重试及三个尺寸。故障和临时附件仅在受所有权检查保护的合成环境执行，测试后恢复字段与文件。
 
-不修改数据库结构、API 或权限。回退本 PR 后重新构建前端即可恢复原公共布局；当前其他分支和主源码改动保留。
+未修改数据库结构、API 或权限。回退本 PR 后重新构建前端即可恢复原公共布局；不覆盖原源码工作区的未提交成果，不自动合并或部署。

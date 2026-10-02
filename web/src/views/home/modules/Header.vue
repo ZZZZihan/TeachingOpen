@@ -3,7 +3,7 @@
     <div class="header-inner">
       <router-link class="brand" to="/index" :aria-label="brandName + '首页'">
         <img v-if="logoUrl && !logoFailed" class="brand-logo" :src="logoUrl" alt="" @error="logoFailed = true" />
-        <span v-else class="brand-mark" aria-hidden="true"><a-icon type="read" /></span>
+        <span v-else class="brand-mark" aria-hidden="true">T<span>•</span></span>
         <span class="brand-name">{{ brandName }}</span>
       </router-link>
       <button
@@ -88,46 +88,28 @@ export default {
 }
 </script>
 <style scoped lang="less">
-.public-header { background: #fff; border-bottom: 1px solid #e6eaf0; color: #24334a; }
-.header-inner { max-width: 1260px; min-height: 80px; padding: 16px 24px; margin: auto; display: flex; align-items: center; gap: 40px; line-height: 1.5; }
-.brand { display: flex; align-items: center; gap: 12px; min-width: 0; color: #15243e; flex-shrink: 0; }
-.brand-name { font-size: 20px; font-weight: 700; letter-spacing: -.5px; max-width: 260px; overflow-wrap: anywhere; }
-.brand-mark { width: 40px; height: 40px; display: grid; place-items: center; color: #fff; background: #245bd6; border-radius: 12px; font-size: 23px; flex-shrink: 0; }
+.public-header { background: #fff; border-bottom: 1px solid #e1e4e8; color: #20252b; }
+.header-inner { max-width: 1280px; min-height: 80px; padding: 16px 40px; margin: auto; display: flex; align-items: center; gap: 64px; line-height: 1.5; }
+.brand { display: flex; align-items: center; gap: 12px; min-width: 0; color: #20252b; flex-shrink: 0; }
+.brand-name { font-size: 21px; font-weight: 600; letter-spacing: -.8px; max-width: 260px; overflow-wrap: anywhere; }
+.brand-mark { display: inline-flex; align-items: baseline; color: #c84a55; font-family: Georgia, serif; font-size: 36px; font-weight: 700; line-height: 1; letter-spacing: -5px; padding-right: 5px; flex-shrink: 0; }
+.brand-mark span { color: #c84a55; font-size: 25px; }
 .brand-logo { max-width: 100px; max-height: 40px; object-fit: contain; }
 .header-nav { flex: 1; min-width: 0; }
-.default-menu { display: flex; gap: 10px; }
-.default-menu a { color: #516079; padding: 10px 14px; border-radius: 8px; white-space: nowrap; font-weight: 500; }
-.default-menu a:hover, .default-menu a.is-active { color: #245bd6; background: #edf3ff; }
+.default-menu { display: flex; gap: 32px; }
+.default-menu a { color: #626d78; padding: 9px 0; border-bottom: 1px solid transparent; white-space: nowrap; font-size: 14px; }
+.default-menu a:hover, .default-menu a.is-active { color: #20252b; border-color: #20252b; }
 .configured-menu { border: 0; background: transparent; }
-.configured-menu /deep/ .ant-menu-item > a, .configured-menu /deep/ .ant-menu-submenu-title > a { color: #344764; }
-.account-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-.account-link { color: #344764; display: flex; align-items: center; gap: 6px; }
+.configured-menu /deep/ .ant-menu-item > a, .configured-menu /deep/ .ant-menu-submenu-title > a { color: #45515e; }
+.account-actions { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.account-link { color: #45515e; display: flex; align-items: center; gap: 6px; }
 .account-link span { max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.login-link { padding: 10px 16px; border-radius: 8px; background: #245bd6; color: #fff; font-weight: 600; white-space: nowrap; }
-.login-link:hover { background: #1749b8; }
-.logout-button, .menu-toggle { border: 1px solid #d8e0ed; background: #fff; border-radius: 8px; padding: 8px 10px; color: #516079; cursor: pointer; }
+.login-link { display: inline-flex; align-items: center; gap: 18px; padding: 10px 18px; border: 1px solid #c84a55; border-radius: 3px; color: #c84a55; font-size: 13px; white-space: nowrap; }
+.login-link:hover { background: #f7f8fa; color: #a93540; border-color: #c84a55; }
+.logout-button, .menu-toggle { border: 1px solid #e1e4e8; background: transparent; border-radius: 3px; padding: 8px 10px; color: #596775; cursor: pointer; }
 .menu-toggle { display: none; }
-a:focus-visible, button:focus-visible { outline: 3px solid #7194e4; outline-offset: 3px; }
-@media (max-width: 1100px) { .header-inner { gap: 20px; } .brand-name { max-width: 210px; } }
-@media (max-width: 900px) {
-  .header-inner { gap: 12px; flex-wrap: wrap; padding: 14px 20px; min-height: 72px; }
-  .brand { flex: 1; }
-  .brand-name { font-size: 18px; max-width: 100%; }
-  .menu-toggle { display: block; order: 3; width: 40px; height: 40px; }
-  .account-actions { order: 2; }
-  .header-nav { display: none; order: 4; flex-basis: 100%; }
-  .header-nav.is-open { display: block; padding-top: 12px; border-top: 1px solid #e6eaf0; }
-  .default-menu { flex-direction: column; gap: 4px; }
-}
-@media (max-width: 480px) {
-  .header-inner { padding: 12px 16px; gap: 8px; }
-  .brand { gap: 8px; }
-  .brand-mark { width: 32px; height: 32px; border-radius: 9px; font-size: 19px; }
-  .brand-logo { max-width: 40px; max-height: 32px; }
-  .brand-name { font-size: 16px; }
-  .login-link { padding: 9px 10px; font-size: 13px; }
-  .login-link .anticon { display: none; }
-  .account-actions { gap: 6px; }
-  .account-link span { max-width: 55px; }
-}
+a:focus-visible, button:focus-visible { outline: 2px solid #c84a55; outline-offset: 4px; }
+@media (max-width: 1100px) { .header-inner { gap: 30px; } .brand-name { max-width: 210px; } .default-menu { gap: 24px; } }
+@media (max-width: 900px) { .header-inner { gap: 12px; flex-wrap: wrap; padding: 18px 28px; min-height: 80px; } .brand { flex: 1; } .brand-name { font-size: 19px; max-width: 100%; } .menu-toggle { display: block; order: 3; width: 38px; height: 38px; } .account-actions { order: 2; } .header-nav { display: none; order: 4; flex-basis: 100%; } .header-nav.is-open { display: block; padding-top: 12px; border-top: 1px solid #e1e4e8; } .default-menu { flex-direction: column; gap: 2px; } .default-menu a { padding: 12px 0; } }
+@media (max-width: 480px) { .header-inner { padding: 16px 22px; gap: 10px; } .brand { gap: 8px; } .brand-mark { font-size: 28px; } .brand-mark span { font-size: 20px; } .brand-logo { max-width: 32px; max-height: 32px; } .brand-name { font-size: 17px; } .login-link { padding: 8px 10px; font-size: 12px; } .login-link .anticon { display: none; } .account-actions { gap: 6px; } .account-link span { max-width: 55px; } }
 </style>
