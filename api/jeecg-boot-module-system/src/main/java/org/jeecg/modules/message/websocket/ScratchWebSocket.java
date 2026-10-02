@@ -16,6 +16,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -30,12 +31,15 @@ public class ScratchWebSocket {
     private String token;
     private String userId;
     private boolean closed;
+    private final ArrayDeque<String> outbound = new ArrayDeque<>();
+    private int queuedCharacters;
 
     @OnOpen
     public void onOpen(Session session) {
         this.session = session;
         session.setMaxTextMessageBufferSize(16384);
         session.setMaxIdleTimeout(10000);
+        session.getAsyncRemote().setSendTimeout(5000);
     }
 
     @OnMessage
@@ -129,11 +133,27 @@ public class ScratchWebSocket {
         } catch (RuntimeException failure) { reject(CloseReason.CloseCodes.VIOLATED_POLICY); }
     }
 
-    private void send(String message) {
-        if (!session.isOpen()) { onClose(); return; }
-        session.getAsyncRemote().sendText(message, result -> {
-            if (!result.isOK()) reject(CloseReason.CloseCodes.UNEXPECTED_CONDITION);
-        });
+    private synchronized void send(String message) {
+        if (closed || !session.isOpen()) { onClose(); return; }
+        if (outbound.size() >= 128 || queuedCharacters + message.length() > 524288) {
+            reject(CloseReason.CloseCodes.UNEXPECTED_CONDITION); return;
+        }
+        outbound.addLast(message);
+        queuedCharacters += message.length();
+        if (outbound.size() == 1) sendNext();
+    }
+
+    private void sendNext() {
+        try {
+            session.getAsyncRemote().sendText(outbound.peekFirst(), result -> {
+                synchronized (ScratchWebSocket.this) {
+                    if (closed) return;
+                    if (!result.isOK()) { reject(CloseReason.CloseCodes.UNEXPECTED_CONDITION); return; }
+                    queuedCharacters -= outbound.removeFirst().length();
+                    if (!outbound.isEmpty()) sendNext();
+                }
+            });
+        } catch (RuntimeException failure) { reject(CloseReason.CloseCodes.UNEXPECTED_CONDITION); }
     }
 
     private void ack(String name, String reply) {
@@ -174,7 +194,10 @@ public class ScratchWebSocket {
     }
 
     @OnClose
-    public synchronized void onClose() { closed = true; subscribers.remove(this); token = null; userId = null; }
+    public synchronized void onClose() {
+        closed = true; subscribers.remove(this); token = null; userId = null;
+        outbound.clear(); queuedCharacters = 0;
+    }
 
     @OnError
     public void onError(Throwable failure) { reject(CloseReason.CloseCodes.UNEXPECTED_CONDITION); }

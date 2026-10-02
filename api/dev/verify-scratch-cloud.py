@@ -163,6 +163,8 @@ def verify(args):
                 check('class reassignment stops former teacher receiver',has(private_peer.drain(),close=1008))
                 api.request('GET','/sys/logout','student_a'); actor.command('set',name='score',value='logged-out')
                 check('logout rejects subsequent writes',has(actor.drain(),close=1008) and value(ids['private'])==json.dumps('class-changed'))
+                sender,_=connect('public','admin'); sender.command('set',name='score',value='authorized-after-logout'); sender.drain()
+                check('logout also stops outbound delivery to old receiver',has(owner.drain(),close=1008))
                 api.login('student_a'); tokens.append(api.tokens['student_a'])
                 # Data-operation error fails closed, then a new connection can retry.
                 failure, _=connect('private','student_a'); old=value(ids['private']);api.cache('DEL',key(ids['private']));api.cache('SET',key(ids['private']),'fixture-wrong-type')
@@ -176,6 +178,16 @@ def verify(args):
                     if isinstance(payload,str):bad.send(payload)
                     else:bad.command(payload.pop('method'),**payload)
                     check('invalid payload denied '+label,has(bad.drain(),close=1008) and value(ids['private'])==previous)
+                database_failure,_=connect('private','student_a'); previous=value(ids['private'])
+                if sql(api.runtime, "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='teachingopen_dev' AND table_name='fixture_cloud_probe_table'")!='0': raise RuntimeError('Probe fault table exists')
+                sql(api.runtime, 'RENAME TABLE teachingopen_dev.teaching_work TO teachingopen_dev.fixture_cloud_probe_table')
+                try:
+                    database_failure.command('set',name='score',value='database-unavailable')
+                    check('work lookup database failure denies before Redis mutation',has(database_failure.drain(),close=1011) and value(ids['private'])==previous)
+                finally:
+                    sql(api.runtime,'RENAME TABLE teachingopen_dev.fixture_cloud_probe_table TO teachingopen_dev.teaching_work')
+                restored,messages=connect('private','student_a');restored.command('set',name='score',value='database-recovered')
+                check('new connection works after database recovery',has(messages,reply='OK') and has(restored.drain(),reply='OK') and value(ids['private'])==json.dumps('database-recovered'))
                 # Concurrent rename uses separate sockets; only one destination can win.
                 race1,_=connect('capacity','student_a');race2,_=connect('capacity','student_a')
                 with ThreadPoolExecutor(max_workers=2) as pool:
