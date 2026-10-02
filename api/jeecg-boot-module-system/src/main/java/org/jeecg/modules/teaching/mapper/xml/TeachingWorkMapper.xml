@@ -31,28 +31,28 @@
 
     <select id="userAdditionalWork" resultType="org.jeecg.modules.teaching.model.AdditionalWorkModel">
         select a.*, a.id additionalWorkId,
-        w.id mineWorkId, w.work_name mineWorkName, w.work_status mineWorkStatus,
+        w.id mineWorkId, w.work_name mineWorkName, w.work_status mineWorkStatus, w.depart_id mineWorkDepartId,
         w.work_file mineWorkUrl,
         w.work_cover mineWorkCover,
         c.score, c.comment
         from teaching_additional_work a
-        left join teaching_work w on w.additional_id = a.id and w.user_id = #{userId}
+        left join teaching_work w on w.additional_id = a.id and w.user_id = #{userId} and w.del_flag = 0
         left join teaching_work_correct c on c.work_id = w.id
         where
         a.status=1 and
         <foreach collection="departIds" index="index" item="id" open="(" separator=" or " close=")">
-            a.work_dept like CONCAT('%',#{id},'%')
+            FIND_IN_SET(#{id}, REPLACE(REPLACE(REPLACE(REPLACE(a.work_dept, ' ', ''), CHAR(9), ''), CHAR(10), ''), CHAR(13), '')) &gt; 0
         </foreach>
         <if test="submit==true">
             and w.work_status >= 1
         </if>
         <if test="submit==false">
-            and w.id is null or w.work_status <![CDATA[<]]> 1
+            and (w.id is null or COALESCE(w.work_status, 0) <![CDATA[<]]> 1)
         </if>
         <if test="submit==true and status != null">
             and w.work_status = #{status}
         </if>
-        order by a.create_time desc
+        order by a.create_time desc, a.id, w.id
     </select>
 
 </mapper>

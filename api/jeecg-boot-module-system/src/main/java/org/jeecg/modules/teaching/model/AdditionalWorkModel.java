@@ -26,10 +26,13 @@ public class AdditionalWorkModel {
     private String mineWorkId;
     private String mineWorkName;
     private Integer mineWorkStatus;
-    @FileUrl
+    private String mineWorkDepartId;
+    // Resolved from sys_file storage location by the controller. Applying the
+    // generic path decorator here would prefix an already resolved URL twice.
     private String mineWorkUrl;
-    @FileUrl
     private String mineWorkCover;
+    public String getMineWorkUrl_url() { return mineWorkUrl; }
+    public String getMineWorkCover_url() { return mineWorkCover; }
     private String departId;
     private String departName;
     private String comment;

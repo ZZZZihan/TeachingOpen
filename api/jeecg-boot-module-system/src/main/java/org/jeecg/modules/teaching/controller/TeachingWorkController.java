@@ -51,6 +51,8 @@ import org.jeecgframework.poi.excel.entity.ImportParams;
 import org.jeecgframework.poi.excel.view.JeecgEntityExcelView;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.util.UriUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -59,6 +61,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -97,6 +100,8 @@ public class TeachingWorkController extends BaseController {
 	private Ow365Util ow365Util;
 	 @Autowired
 	 private ISysFileService sysFileService;
+	 @Value("${jeecg.path.staticDomain}")
+	 private String localFileDomain;
 	 @Autowired
 	 private ITeachingDepartDayLogService teachingDepartDayLogService;
 	 @Autowired
@@ -166,29 +171,38 @@ public class TeachingWorkController extends BaseController {
 	 public DictResult<List<AdditionalWorkModel>> mineAdditionalWork(
 			 @RequestParam(required = false) String departId,
 			 @RequestParam(required = false) Boolean submit,
-			 @RequestParam(required = false) Integer status) {
+			 @RequestParam(required = false) Integer status, HttpServletResponse response) {
+		 response.setHeader("Cache-Control", "no-store");
 		 DictResult<List<AdditionalWorkModel>> result = new DictResult<>();
 		 String userId = getCurrentUser().getId();
-		 List<AdditionalWorkModel> list = teachingWorkService.userAdditionalWork(userId, departId, submit, status);
-		 for (AdditionalWorkModel work : list) {
-			 if (StringUtils.isNotBlank(work.getMineWorkUrl())){
-				 SysFile file = sysFileService.getById(work.getMineWorkUrl());
-				 if (file != null && StringUtils.isNotBlank(file.getFilePath())){
-					 work.setMineWorkUrl(QiniuConfig.domain + "/" + file.getFilePath());
+		 try {
+			 List<AdditionalWorkModel> list = teachingWorkService.userAdditionalWork(userId, departId, submit, status);
+			 for (AdditionalWorkModel work : list) {
+				 work.setMineWorkUrl(assignmentFileUrl(work.getMineWorkUrl()));
+				 work.setMineWorkCover(assignmentFileUrl(work.getMineWorkCover()));
+				 if (StringUtils.isNotBlank(work.getWorkDocumentUrl())) {
+					 work.setWorkDocumentUrl(ow365Util.getFileUrlStr(work.getWorkDocumentUrl()));
 				 }
 			 }
-			 if (StringUtils.isNotBlank(work.getMineWorkCover())){
-				 SysFile file = sysFileService.getById(work.getMineWorkCover());
-				 if (file != null && StringUtils.isNotBlank(file.getFilePath())){
-					 work.setMineWorkCover(QiniuConfig.domain + "/" + file.getFilePath());
-				 }
-			 }
-			 if(StringUtils.isNotBlank(work.getWorkDocumentUrl())){
-				 work.setWorkDocumentUrl(ow365Util.getFileUrlStr(work.getWorkDocumentUrl()));
-			 }
+			 result.setResult(list);
+		 } catch (RuntimeException error) {
+			 log.error("加载学生作业列表失败", error);
+			 response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+			 result.setSuccess(false);
+			 result.setCode(503);
+			 result.setMessage("作业列表暂时不可用，请稍后重试。");
 		 }
-		 result.setResult(list);
 		 return result;
+	 }
+
+	 private String assignmentFileUrl(String fileId) {
+		 if (StringUtils.isBlank(fileId)) return "";
+		 SysFile file = sysFileService.getById(fileId);
+		 if (file == null || StringUtils.isBlank(file.getFilePath())) return "";
+		 String domain = Integer.valueOf(1).equals(file.getFileLocation()) ? localFileDomain
+				 : Integer.valueOf(2).equals(file.getFileLocation()) ? QiniuConfig.domain : "";
+		 if (StringUtils.isBlank(domain)) return "";
+		 return domain.replaceAll("/+$", "") + "/" + UriUtils.encodePath(file.getFilePath(), StandardCharsets.UTF_8);
 	 }
 
 	 /**
