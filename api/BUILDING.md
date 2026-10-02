@@ -97,3 +97,5 @@ python3 api/dev/verify-course-management.py --runtime "$TEACHING_RUNTIME" \
 ```
 
 脚本校验实际 JAR、数据库和缓存归属后，执行真实登录、管理请求及数据/附件核对；只写本次探针数据，结束后恢复业务表和测试角色。角色切换会清理该合成账号在隔离 Redis 中的权限缓存，不用于生产。导入只检查权限及空文件请求校验，完整角色页面尚未验收。行为、源码摘要及已知缓存问题见 [课程管理 PR 记录](../docs/optimization/course-management-pr.md)。
+
+权限缓存数据库不一致问题在当前后续候选中已修复。可运行 `python3 api/dev/verify-role-cache.py --runtime "$TEACHING_RUNTIME" --output "$TEACHING_RUNTIME/role-cache-check.json"` 检查实际缓存位置、退出清理及角色变化后的重新登录；被测转换期间不直接清理缓存。范围与结果见 [权限缓存 PR 记录](../docs/optimization/role-cache-pr.md)。

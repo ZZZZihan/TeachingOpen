@@ -47,6 +47,9 @@ public class ShiroConfig {
     @Value("${spring.redis.password}")
     private String redisPassword;
 
+    @Value("${spring.redis.database:0}")
+    private int redisDatabase;
+
 	/**
 	 * Filter Chain定义说明 
 	 * 
@@ -256,6 +259,7 @@ public class ShiroConfig {
         RedisManager redisManager = new RedisManager();
 		redisManager.setHost(host);
 		redisManager.setPort(oConvertUtils.getInt(port));
+		redisManager.setDatabase(redisDatabase);
 		redisManager.setTimeout(0);
         if (!StringUtils.isEmpty(redisPassword)) {
             redisManager.setPassword(redisPassword);
