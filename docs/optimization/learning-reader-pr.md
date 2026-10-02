@@ -34,7 +34,7 @@ node web/tests/reader-preview/build.cjs /tmp/teaching-reader-after
 python3 -m http.server 18114 --bind 127.0.0.1 --directory /tmp/teaching-reader-after
 ```
 
-访问 `http://127.0.0.1:18114/`。预览使用真实阅读器/JModal，但 `getAction` 和文件辅助函数是明确的本机替身；没有应用外壳、账号或后端代理。媒体素材位于 `web/tests/reader-preview/assets/`，是本任务自制的无音频 MP4、简单 SB3 与文本。静态编辑器目录只读链接到分支资源，不写进生产构建。
+访问 `http://127.0.0.1:18114/`。预览使用真实阅读器/JModal，但 `getAction` 和文件辅助函数是明确的本机替身；没有应用外壳、账号或后端代理。媒体素材位于 `web/tests/reader-preview/assets/`，是本任务自制的无音频 MP4、简单 SB3 与文本。静态编辑器目录只读链接到分支资源；测试入口和 API 替身不进入生产构建。
 
 旧组件对照可用 `node web/tests/reader-preview/build.cjs /tmp/teaching-reader-before 8d3a3fe`，再启动不同端口。此对照替换旧 Vue 阅读器，静态编辑器仍取当前分支；本次旧版截图只对照视频布局。
 
