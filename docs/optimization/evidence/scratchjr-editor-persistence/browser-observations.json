@@ -1,0 +1,97 @@
+{
+  "scope": "Actual browser with loopback synthetic HTTP; no platform login or authorization acceptance.",
+  "cases": [
+    {
+      "case": "旧版平台 ID 重开",
+      "observed": "地址变成本机 pmd5，未请求 studentWorkInfo；before-state.json reads 为空，before-work-id.png 是空项目。",
+      "passed": true
+    },
+    {
+      "case": "平台作品载入",
+      "observed": "新实例显示服务器名称 我的 ScratchJr 练习 & 100%，单份舞台，没有旧 fcn 启动错误。",
+      "passed": true
+    },
+    {
+      "case": "实际积木编辑",
+      "observed": "通过角色库添加 Cat.svg，拖动角色并从运动类别拖入 forward 积木。",
+      "passed": true
+    },
+    {
+      "case": "草稿保存",
+      "observed": "真实生成 SJR/PNG；SJR 保存猫坐标 x=359.33538461538467 和 forward 脚本，workStatus=0。",
+      "passed": true
+    },
+    {
+      "case": "草稿刷新重开",
+      "observed": "刷新后的 UI 恢复角色位置、名称和 forward 积木。",
+      "passed": true
+    },
+    {
+      "case": "慢速第二次提交",
+      "observed": "移动到 x=120.66461538461542，改名 森林漫步 · 第二版 & 100%；延迟 SJR 上传时两按钮和名称禁用，舞台被隔离；只提交该轮两个新文件 ID，作品 ID 仍 seed-work。",
+      "passed": true
+    },
+    {
+      "case": "第二版重开",
+      "observed": "刷新从服务器恢复新名称、第二版角色位置和脚本。",
+      "passed": true
+    },
+    {
+      "case": "三种屏宽",
+      "observed": "1440/768/390 的 documentWidth 等于 viewport；1024×768 画布内部滚动，保存操作在视口中；最终截图已目视检查。",
+      "passed": true
+    },
+    {
+      "case": "390 宽保存",
+      "observed": "窄屏实际点击保存，页面返回草稿已保存，服务器记录第三次成功提交。",
+      "passed": true
+    },
+    {
+      "case": "封面失败",
+      "observed": "SJR 成功而 PNG 失败时提交计数不增加；显示错误并保留编辑区。",
+      "passed": true
+    },
+    {
+      "case": "业务失败",
+      "observed": "文件成功但 submit 失败，保留上一份服务器作品文件，UI 不报成功。",
+      "passed": true
+    },
+    {
+      "case": "401",
+      "observed": "上传返回 401，显示重新登录/无权提示，没有追加业务提交。",
+      "passed": true
+    },
+    {
+      "case": "失败恢复",
+      "observed": "恢复 normal 后原页重试成功，ID 保持 seed-work。",
+      "passed": true
+    },
+    {
+      "case": "读取失败恢复",
+      "observed": "503 时禁止保存且不挂载空白编辑器；恢复后点击重新打开，完整项目恢复。",
+      "passed": true
+    },
+    {
+      "case": "课程新建及重开",
+      "observed": "unitId 读取课程模板，改名并保存，地址获得 saved-2；刷新后读取该 ID，courseId=unit-fixture 保持。",
+      "passed": true
+    },
+    {
+      "case": "预览入口",
+      "observed": "mode=look 打开含 & 和 + 的编码文件地址，显示猫与积木；名称不可改且没有提交按钮。",
+      "passed": true
+    },
+    {
+      "case": "本机旧作兼容",
+      "observed": "从已观察的 pmd5 打开原生本机项目，恢复实际保存的名称、猫和积木。",
+      "passed": true
+    },
+    {
+      "case": "原生云保存",
+      "observed": "实际点击原生作品菜单的 保存到云端，进入平台忙状态并成功提交同一 ID；最终刷新重开正常。",
+      "passed": true
+    }
+  ],
+  "passed": 18,
+  "total": 18
+}
