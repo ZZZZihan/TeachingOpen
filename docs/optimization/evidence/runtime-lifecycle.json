@@ -1,0 +1,26 @@
+{
+  "checks": {
+    "spa_route": true,
+    "configured_backend_proxy": true,
+    "unavailable_backend_returns_502": true,
+    "mysql_stopped": true,
+    "redis_stopped": true,
+    "backend_stopped": true,
+    "original_backend_still_up": true,
+    "restart_preserves_rows_and_files": true,
+    "existing_directory_refused": true,
+    "refusal_preserves_rows_and_files": true,
+    "temporary_frontend_stopped": true
+  },
+  "passed": 11,
+  "total": 11,
+  "retained_fixture_digest": {
+    "rows_sha256": "868241cd559804b7efbd09eddd144d5a842ff3e881da2bbda6e9640ac8de9c7f",
+    "attachments": {
+      "fixture-work-a.txt": "b8e97693f377c4c50d46ae42c5c8a46053d0b56e01da2952991dfe0d2b776b2a",
+      "fixture-work-b.txt": "9e8a7284e1eec1ca3c2dd11ce741382cf02f463312d6af5bd948c765a84d29d8"
+    }
+  },
+  "scope": "isolated runtime lifecycle and HTTP proxy; not business permission acceptance",
+  "earlier_failure": "immediate restart preflight raised EADDRINUSE; aligned SO_REUSEADDR and waited for closed listeners before retry"
+}

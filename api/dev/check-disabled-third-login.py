@@ -10,12 +10,14 @@ import tempfile
 import time
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
+from local_runtime import assert_database, load_ports
 
 
 def check(args):
     runtime = args.runtime.resolve()
     jar = args.jar.resolve()
     config = runtime / "config/application-localtest.properties"
+    ports = load_ports(runtime)
     if not config.is_file() or config.stat().st_mode & 0o077:
         raise RuntimeError("Expected private local fixture configuration")
     properties = {}
@@ -27,23 +29,18 @@ def check(args):
         "server.address": "127.0.0.1",
         "server.servlet.context-path": "/api",
         "spring.redis.host": "127.0.0.1",
-        "spring.redis.port": "16379",
+        "spring.redis.port": str(ports["redis"]),
         "spring.quartz.auto-startup": "false",
     }
     if any(properties.get(key) != value for key, value in required.items()):
         raise RuntimeError("Refusing a configuration outside the local fixture")
     url = properties.get("spring.datasource.dynamic.datasource.master.url", "")
-    if not url.startswith("jdbc:mysql://127.0.0.1:13306/teachingopen_dev?"):
+    if not url.startswith("jdbc:mysql://127.0.0.1:" + str(ports["mysql"]) + "/teachingopen_dev?"):
         raise RuntimeError("Refusing a database outside the local fixture")
     accounts = json.loads((runtime / "fixture-accounts.json").read_text())
     if set(accounts) != {"fixture_admin", "fixture_teacher_a", "fixture_teacher_b", "fixture_student_a", "fixture_student_b"}:
         raise RuntimeError("Unexpected fixture account manifest")
-    mysql = [str(runtime / "tools/mysql-8.4.6-macos15-arm64/bin/mysql"),
-             "--defaults-extra-file=" + str(runtime / "config/mysql-admin-client.cnf"),
-             "--batch", "--skip-column-names", "teachingopen_dev", "-e"]
-    actual = subprocess.check_output(mysql + ["SELECT CONCAT(@@datadir,'|',@@port,'|',COUNT(*),'|',SUM(username LIKE 'fixture_%')) FROM sys_user"], text=True).strip()
-    if actual != str(runtime / "mysql-data") + "/|13306|5|5":
-        raise RuntimeError("Actual database does not match isolated synthetic fixture")
+    assert_database(runtime)
     with socket.socket() as probe:
         probe.bind(("127.0.0.1", args.port))
     evidence_dir = Path(tempfile.mkdtemp(prefix="disabled-login-", dir=runtime))
