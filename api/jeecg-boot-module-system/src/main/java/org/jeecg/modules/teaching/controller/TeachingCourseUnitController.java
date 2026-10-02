@@ -20,8 +20,8 @@ import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.teaching.entity.TeachingCourseUnit;
 import org.jeecg.modules.teaching.model.CourseUnitModel;
 import org.jeecg.modules.teaching.model.CourseUnitWorkModel;
-import org.jeecg.modules.teaching.service.ITeachingCourseDeptService;
 import org.jeecg.modules.teaching.service.ITeachingCourseUnitService;
+import org.jeecg.modules.teaching.service.TeachingAccessService;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -51,7 +51,7 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	@Autowired
 	private ITeachingCourseUnitService teachingCourseUnitService;
 	@Autowired
-	private ITeachingCourseDeptService teachingCourseDeptService;
+	private TeachingAccessService teachingAccessService;
 	 @Autowired
 	 private ISysFileService sysFileService;
 	 @Autowired
@@ -66,9 +66,8 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 								@RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
 								HttpServletRequest req) throws Exception {
 		 //验证权限
-		 if (!teachingCourseDeptService.checkCoursePermission(courseId, getCurrentUser().getId())){
-			 return Result.error("无课程权限");
-		 }
+		 teachingAccessService.requireCourse(courseId);
+		 LoginUser user = getCurrentUser();
 
 		 QueryWrapper<CourseUnitModel> queryWrapper = new QueryWrapper<>();
 		 queryWrapper.eq("course_id", courseId);
@@ -77,17 +76,12 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 		 IPage<CourseUnitModel> pageList = teachingCourseUnitService.getCourseUnitList(page, queryWrapper);
 
 		 for (CourseUnitModel model: pageList.getRecords()){
+			 applyStudentVisibility(model, user);
 			 if(StringUtils.isNotBlank(model.getCoursePpt())){
 				 model.setCoursePpt(ow365Util.getFileUrlStr(model.getCoursePpt()));
 			 }
 			 if(StringUtils.isNotBlank(model.getCoursePlan())){
 				 model.setCoursePlan(ow365Util.getFileUrlStr(model.getCoursePlan()));
-			 }
-		 	if (getCurrentUser().getUserIdentity() == null || getCurrentUser().getUserIdentity().equals(1)){
-				 model.setCourseVideo(model.getShowCourseVideo()?model.getCourseVideo(): null);
-				 model.setCourseCase(model.getShowCourseCase()?model.getCourseCase(): null);
-				 model.setCoursePlan(model.getShowCoursePlan()?model.getCoursePlan(): null);
-				 model.setCoursePpt(model.getShowCoursePpt()?model.getCoursePpt(): null);
 			 }
 		 }
 		 return Result.ok(pageList);
@@ -124,17 +118,26 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	 public DictResult<CourseUnitWorkModel> getUnitWorkInfo(@RequestParam String unitId) {
 		 DictResult<CourseUnitWorkModel> result = new DictResult<CourseUnitWorkModel>();
 		 LoginUser user = getCurrentUser();
-		 if (user == null){
-			 //未登录
-		 }
 		 CourseUnitWorkModel teachingCourseUnit = teachingCourseUnitService.getCourseWorkUnit(unitId, user.getId());
 		 if(teachingCourseUnit==null) {
 			 result.error500("未找到对应实体");
 		 }else {
+			 teachingAccessService.requireCourse(teachingCourseUnit.getCourseId());
+			 applyStudentVisibility(teachingCourseUnit, user);
 			 result.setResult(teachingCourseUnit);
 			 result.setSuccess(true);
 		 }
 		 return result;
+	 }
+
+	 /** Apply the same display switches to the learning list and editor detail. */
+	 private void applyStudentVisibility(TeachingCourseUnit unit, LoginUser user) {
+		 if (user.getUserIdentity() == null || Integer.valueOf(1).equals(user.getUserIdentity())) {
+			 unit.setCourseVideo(Boolean.TRUE.equals(unit.getShowCourseVideo()) ? unit.getCourseVideo() : null);
+			 unit.setCourseCase(Boolean.TRUE.equals(unit.getShowCourseCase()) ? unit.getCourseCase() : null);
+			 unit.setCoursePlan(Boolean.TRUE.equals(unit.getShowCoursePlan()) ? unit.getCoursePlan() : null);
+			 unit.setCoursePpt(Boolean.TRUE.equals(unit.getShowCoursePpt()) ? unit.getCoursePpt() : null);
+		 }
 	 }
 	
 	/**

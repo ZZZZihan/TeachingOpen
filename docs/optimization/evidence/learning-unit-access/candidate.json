@@ -1,0 +1,28 @@
+{
+  "base_pr": 9,
+  "base_commit": "0a21e33f8faee573ec7695d93a638c7b87ece1a6",
+  "build_exit_code": 0,
+  "java_tests": "skipped by parent POM",
+  "unit_before_checks": 9,
+  "unit_after_checks": 80,
+  "combined_course_checks": 188,
+  "combined_cache_checks": 11,
+  "jar_sha256": "dc2f4004bcfe9a8c6abc16a97f2b0accb179b6b02bafd1a358378ab707899c9b",
+  "source_sha256": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingCourseUnitController.java": "75968dd543a8d60dfb55f438e8fb0f8ca7c1b35376f0fc12a362a7dcedad239c",
+    "api/dev/verify-learning-units.py": "329cfb076b0eaeec35f7c4b5d4039789462e4bf7481ffbe463a4b4e5020788dd"
+  },
+  "evidence_sha256": {
+    "before.json": "ee014c5333678fafeb3d5ab07de2d752adb9c47ec38fe7e93d6bfda7aa589e9a",
+    "after.json": "f9a52394928e10832ddb4620825ebacbd3f271d03002510842be6e52a8d94344",
+    "course-management-combined.json": "a4c6030d9142a9e35e21c8adcca47e5fe65b17ded360512b6dae886273659494",
+    "role-cache-combined.json": "4f8940f3df25887bbab3e6581fd586cad2dc00ae64d78d4c52cc08d627cadcbc"
+  },
+  "build_log_sha256": "c971400b6e4e1e76eff59ab06d41c1f74655f15c1c052bec2c6a8f747d3d743e",
+  "limitations": [
+    "Four existing student display switches; no new answer-release policy",
+    "No browser editor save/reopen acceptance",
+    "Direct attachment-download authorization remains separate",
+    "No production changes or database schema changes"
+  ]
+}
