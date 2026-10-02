@@ -2,7 +2,7 @@
 
 这组工具用于从源码构建并建立仅含合成数据的本地环境。已经验证的平台是 macOS arm64；不是生产部署脚本，也没有证明 Linux、Intel Mac、Windows 或生产定制包兼容性。
 
-当前分支包含后端构建及禁用第三方登录的启动修复。课程/作业权限修复在后续 PR 中交付，此处的健康与环境检查不代表业务或权限已验收。
+当前分支包含后端构建、启动、认证响应及课程管理角色限制。单元详情、作业等资源权限仍在后续 PR 交付；健康与环境检查不代表业务或权限已验收。
 
 ## 工具与构建
 
@@ -86,3 +86,14 @@ python3 api/dev/verify-environment.py --runtime "$TEACHING_RUNTIME" \
 ```
 
 本轮还保留了 [环境与重启结果](../docs/optimization/local-runtime-pr.md)。后续切换源码分支时，先用旧 worktree 的停止脚本停止其后端，再从新 worktree 构建并启动；不要覆盖正在运行的 JAR。若要使用已有数据之外的新 fixture，另建环境。
+
+## 课程管理权限检查
+
+在新建合成环境启动本候选后运行：
+
+```sh
+python3 api/dev/verify-course-management.py --runtime "$TEACHING_RUNTIME" \
+  --output "$TEACHING_RUNTIME/course-management-check.json"
+```
+
+脚本校验实际 JAR、数据库和缓存归属后，执行真实登录、管理请求及数据/附件核对；只写本次探针数据，结束后恢复业务表和测试角色。角色切换会清理该合成账号在隔离 Redis 中的权限缓存，不用于生产。导入只检查权限及空文件请求校验，完整角色页面尚未验收。行为、源码摘要及已知缓存问题见 [课程管理 PR 记录](../docs/optimization/course-management-pr.md)。

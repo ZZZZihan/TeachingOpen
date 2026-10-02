@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.authz.annotation.Logical;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jeecg.common.api.vo.Result;
@@ -48,6 +50,7 @@ import org.jeecg.common.aspect.annotation.AutoLog;
  */
 @Api(tags="班级课程表")
 @RestController
+@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 @RequestMapping("/teaching/teachingCourseDept")
 @Slf4j
 public class TeachingCourseDeptController extends JeecgController<TeachingCourseDept, ITeachingCourseDeptService> {

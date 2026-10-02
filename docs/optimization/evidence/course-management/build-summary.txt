@@ -1,0 +1,13 @@
+[INFO] Replacing main artifact with repackaged archive
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for jeecg-boot-parent 2.8.0:
+[INFO] 
+[INFO] jeecg-boot-parent .................................. SUCCESS [  0.143 s]
+[INFO] jeecg-boot-base-common ............................. SUCCESS [  2.676 s]
+[INFO] teaching-open ...................................... SUCCESS [  5.098 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  8.052 s
+[INFO] Finished at: 2026-10-02T23:50:39+08:00
+[INFO] ------------------------------------------------------------------------

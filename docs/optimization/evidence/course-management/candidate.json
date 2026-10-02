@@ -1,0 +1,38 @@
+{
+  "base_commit": "57d2a0819db8eb870f22592e2854299368b8e729",
+  "base_pr": 5,
+  "build_exit_code": 0,
+  "java_tests": "skipped by parent POM; actual HTTP verification executed separately",
+  "http_checks": {
+    "before_expected_legacy": 9,
+    "after_passed": 188,
+    "after_total": 188,
+    "scope": "25 administrator-only endpoints and one course detail endpoint shared with learners"
+  },
+  "jar_sha256": "4fad0e6c4b919bf35b86eb45694f7c26ef8aa5fc6bc12ef5178f0e35b30d830a",
+  "source_sha256": {
+    "api/dev/verify-course-management.py": "0109d8b9e5b9dc2ad489c20a3e1220c385f3885394619ec74630e436fa33471f",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/TeachingAccessService.java": "aef3f71ffdb5943ecd32ee28f97ac9fdd27fddf6a84bbb0873f35e0732ae4cae",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingCourseController.java": "4ac1e93a3d9fae2ff6107fa707376c1e56e8aece3b9836a2925bfad991942f86",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingCourseDeptController.java": "1c3e98c38641805ed79fe25fcbb1be9278d30ad6396ef9fbee01149494e1fa11",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingCourseUnitController.java": "60f44cf4196aebd750025301b698cc2c39647e528669cd68c0f4f2c70e40d39b"
+  },
+  "evidence_sha256": {
+    "before.json": "3e093772cbcf12760199703d316fefb0e1bbc82b6b157e220df4e7a034232ec4",
+    "after.json": "42652df7df72dda260b90f21f2b26a6d043bb184e590a236b3da4f0d0b47c087",
+    "source-role-policy.json": "e8873951ece880c1ecfbba31f6ad955ece705c927e4681d8d09d7cef87f4f897"
+  },
+  "log_sha256": {
+    "course-management-build.log": "7ec3ab26a8edac5f1894f21854099d04d831535e327a6d1348ddd942c12cc27a",
+    "course-management-before.log": "f073288bbe8394e1b73a9051f2751ed436b957d2e3deb51de48edc29dd8cb867",
+    "course-management-after.log": "6462d8f26cffcaf77cacdbcede962d8522458625cc7b17f3b22e24f2c2fc7c24",
+    "course-role-prepare.log": "3617a2563fdf52ece6badf1a87b81c4aea63b477e404ee342946a8ae2a5a6a08"
+  },
+  "limitations": [
+    "No complete student/teacher/admin browser workflow acceptance",
+    "Import permission gate and empty multipart only; no valid workbook import",
+    "Shiro Redis DB mismatch causes stale role cache after logout; test-only exact fixture cache eviction used, separate fix required",
+    "Export has XLS OLE2 bytes but no Content-Type header; cell contents not checked",
+    "Learning-unit, assignment, public-work and attachment access beyond these routes remain pending"
+  ]
+}
