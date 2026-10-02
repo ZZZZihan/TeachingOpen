@@ -1,0 +1,135 @@
+{
+  "observed_utc": "2026-10-02T19:36:13.657435+00:00",
+  "source_commit": "492b327e351056d792a74c84c3237093d2092571",
+  "base_commit": "54b34492427adb118de4b9f58c92dfd997b2f5c2",
+  "frontend_tests": {
+    "passed": 70,
+    "total": 70,
+    "new_cases": 11
+  },
+  "lint": {
+    "production_files": 3,
+    "errors": 0,
+    "warnings": 0
+  },
+  "build": {
+    "exit_code": 0,
+    "existing_warnings": 6,
+    "dist_aggregate_sha256": "f7b685c33432730b3c84e0b16441bd4849d76f72a6d5dcab0d62b64832e4dc53"
+  },
+  "files_sha256": {
+    "web/src/views/account/course/CourseListCard.vue": "fc1779078d3c0606f184ac27f5546cbc9bfa20a4de569dc3f3ff483add3413d6",
+    "web/src/views/account/course/CourseUnitListCard.vue": "2247d5e58fb14be1be3bde7028c2246ddc716e7c199ca22f3970650c134257cc",
+    "web/src/views/account/course/learningPresentation.js": "f3d3a679e21012d6ae25f960b795d66beef33abb82ce27817e81bccbcd660e12",
+    "web/src/views/account/course/styles/learning-entry.less": "b6a90b781216b93fe6c5c431f227f6cebbd9a7aaf048c6dd985be70b293154d6",
+    "web/tests/learning-entry.test.cjs": "993d795df8db43eb84ee9f97a641748f0681c175fdb5072c7287f7b7fe5cc7ed",
+    "web/tests/learning-preview/build.cjs": "e2234b15eedaf333de3cbb493d00d4de7328155338f73ec0f658f2a4a43477a0",
+    "web/tests/learning-preview/entry.js": "ff54e0736c130eafe7f63e33a91afb2ba721ef45870fbe8cdfcc64c761675938",
+    "web/tests/learning-preview/fixtures.js": "3700cb4dd647b726545a4d141599586e77a37c38d731a6f23fbf70366e44146b",
+    "web/tests/learning-preview/preview.css": "d13927baff8afb31a7cfa30870619294c4dfa9148e93ac151b94410f591757d4",
+    "web/tests/learning-preview/reader-stub.js": "b6cd7608b46eade0163a9593a40a2ba56db1d1aa31ecc13dee0824b5331a86c1"
+  },
+  "browser_evidence_class": "Controlled Vue component preview with synthetic data; API, authenticated shell and reader replaced. Not logged-in product acceptance.",
+  "browser_observations": [
+    {
+      "case": "courses responsive component",
+      "viewport_width": 390,
+      "document_scroll_width": 390,
+      "passed": true
+    },
+    {
+      "case": "courses responsive component",
+      "viewport_width": 768,
+      "document_scroll_width": 768,
+      "passed": true
+    },
+    {
+      "case": "courses responsive component",
+      "viewport_width": 1440,
+      "document_scroll_width": 1440,
+      "passed": true
+    },
+    {
+      "case": "units responsive component",
+      "viewport_width": 390,
+      "document_scroll_width": 390,
+      "passed": true
+    },
+    {
+      "case": "units responsive component",
+      "viewport_width": 768,
+      "document_scroll_width": 768,
+      "passed": true
+    },
+    {
+      "case": "units responsive component",
+      "viewport_width": 1440,
+      "document_scroll_width": 1440,
+      "passed": true
+    },
+    {
+      "case": "Failed course cover removed without broken image",
+      "passed": true
+    },
+    {
+      "case": "Course introduction opens with actual component action and stub dialog",
+      "passed": true
+    },
+    {
+      "case": "Unit button passes selected unit to stub reader",
+      "passed": true
+    },
+    {
+      "case": "Unit heading opens stub reader with Enter",
+      "passed": true
+    },
+    {
+      "case": "Controlled error displays recovery; retry restores five units",
+      "passed": true
+    },
+    {
+      "case": "Empty response shows zero-unit state",
+      "passed": true
+    },
+    {
+      "case": "Pending response shows loading status",
+      "passed": true
+    }
+  ],
+  "baseline": {
+    "source_commit": "54b34492427adb118de4b9f58c92dfd997b2f5c2",
+    "same_preview_data": true,
+    "courses_viewport_width": 390,
+    "courses_document_scroll_width": 440
+  },
+  "screenshots_sha256": {
+    "after-courses-1440.jpg": "8183a4bfb1499ceab3b05defe0f46b58a081f6bd9626e78cf27a7a7796c02d37",
+    "after-courses-390.jpg": "19021f73b49beb5c95055ead15ca65af5bae36e612acdf7ba9875264389daf3a",
+    "after-courses-768.jpg": "0a5eddf6ec956a3e49876849b28c6a4b1481210b4bcd691f8ca3071c5c1cecb6",
+    "after-empty.jpg": "7ad8e5080a07b31f54ce1e5eda556fd7b4210091b22d372c307f09cd2c15d7ea",
+    "after-error.jpg": "03878816ed01c733d376287fd2837e6e683730aad784fbec3596eb08c1f3e3ce",
+    "after-units-1440.jpg": "335e51628a62f0cd4fd32ee5fc254c1b4be175ed8d1dba6eabbf3f1428310e03",
+    "after-units-390.jpg": "6b93381d03745fc53cc7149c19aefde3687097ca24adb889e2f9e5b73a1da389",
+    "after-units-768.jpg": "93b777f2fa7cb17a467e20c4c8b966aa1f68e4057e40c1b849663dbed3f45dce",
+    "before-courses-1440.jpg": "f06be59eb428cc432c2c3fac17e706bccabdd7cafa2217c14e876604a9a902c7",
+    "before-courses-390.jpg": "7be0864a61f230635b6f3f857907845256c8a4b95cd11a7bf08f16d059e2907d",
+    "before-units-1440.jpg": "5846d63869c9979ac9bef44ab4ed3d13525d9d37dded7c5ef272d143114f5058",
+    "before-units-390.jpg": "8fbec481bd5eac88a140539b58af6c14fae1f98e69e838f6e616b95f6fef7432"
+  },
+  "original_source": {
+    "files": 5634,
+    "changes": 0
+  },
+  "limits": [
+    "Draft until authenticated API/menu/layout and actual reader entry validated",
+    "Existing map reader/modal media/editor not redesigned or accepted",
+    "No user aesthetic acceptance or production acceptance",
+    "70 checks apply to frontend branch based on PR19; not combined candidate tests",
+    "Preview shell is a test wrapper, not actual authenticated application navigation"
+  ],
+  "preview": {
+    "url": "http://127.0.0.1:18113/#/teaching/mineCourse/courseUnitCard?id=preview-a",
+    "baseline_server_18114_stopped": true,
+    "viewport_override_reset": true
+  }
+}
