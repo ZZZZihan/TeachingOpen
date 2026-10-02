@@ -1,0 +1,62 @@
+{
+  "observed_utc": "2026-10-02T16:26:24.281011+00:00",
+  "jar_sha256": "ccb4f4732ac91b4b27ab8ee43b41bd7d735a4a641cedb314c5cefcd916bc8889",
+  "expected_legacy": true,
+  "scope": "actual synthetic HTTP/DB/files and decoded XLS cells; empty import gate only; no browser role or editor acceptance",
+  "passed": 13,
+  "total": 13,
+  "cases": [
+    {
+      "case": "student reads another owner work before fix",
+      "passed": true
+    },
+    {
+      "case": "teacher reads other class feedback before fix",
+      "passed": true
+    },
+    {
+      "case": "student edits other work before fix",
+      "passed": true
+    },
+    {
+      "case": "unauthorized student write persisted",
+      "passed": true
+    },
+    {
+      "case": "teacher list before fix",
+      "passed": true
+    },
+    {
+      "case": "multi-class owner leaks class B work into teacher A list before fix",
+      "passed": true
+    },
+    {
+      "case": "teacher export before fix",
+      "passed": true
+    },
+    {
+      "case": "teacher export leaks other owner class B work before fix",
+      "passed": true
+    },
+    {
+      "case": "teacher deletes other class work before fix",
+      "passed": true
+    },
+    {
+      "case": "unauthorized deletion removed work and attachment",
+      "passed": true
+    },
+    {
+      "case": "all original business class role and daily-log rows restored",
+      "passed": true
+    },
+    {
+      "case": "teacher managed class restored",
+      "passed": true
+    },
+    {
+      "case": "all original attachment bytes restored",
+      "passed": true
+    }
+  ]
+}
