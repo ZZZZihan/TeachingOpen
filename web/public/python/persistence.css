@@ -1,0 +1,21 @@
+.persistence-bar { min-height: 46px; display: flex; align-items: center; gap: 20px; padding: 10px 24px; border-bottom: 1px solid #dbe2e5; background: #f8faf9; color: #42545b; font: 13px/1.6 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+.persistence-label { color: #173f43; font-size: 12px; font-weight: 700; letter-spacing: .06em; white-space: nowrap; }
+#persistence-status { flex: 1; }
+#persistence-status[data-phase='load-error'], #persistence-status[data-phase='save-error'] { color: #9a422a; }
+#persistence-status[data-phase='saved'] { color: #1b6652; }
+#retry-load { padding: 6px 12px; background: white; border: 1px solid #80959b; border-radius: 4px; color: #173f43; cursor: pointer; }
+#retry-load:focus-visible { outline: 2px solid #173f43; outline-offset: 3px; }
+#app .ant-layout-content { min-width: 0; }
+#app .ant-layout-content .ace_editor { height: calc(100vh - 120px) !important; }
+#app .ant-layout-sider { max-width: 40% !important; min-width: 0 !important; }
+#app #output { white-space: pre-wrap; overflow-wrap: anywhere; }
+@media (max-width: 780px) {
+  .persistence-bar { padding: 8px 12px; gap: 12px; flex-wrap: wrap; }
+  #app .ant-layout-header { height: auto !important; min-height: 50px; }
+  #app .ant-menu-horizontal { display: flex; flex-wrap: wrap; }
+  #app .ant-menu-horizontal > .ant-menu-item, #app .ant-menu-horizontal > .ant-menu-submenu { padding: 0 10px; }
+  #app .ant-layout-has-sider { flex-direction: column; }
+  #app .ant-layout-content .ace_editor { height: 50vh !important; }
+  #app .ant-layout-sider { width: 100% !important; max-width: 100% !important; flex: auto !important; }
+  #app #mycanvas, #app #output { max-width: 100%; overflow: auto; }
+}

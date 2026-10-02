@@ -192,15 +192,19 @@ export default {
             '&workName=' +
             item.workName
                 break
-            case 4:
-                workUrl =
-            '/python/index.html?scene=additional&lang=turtle&additionalId=' +
-            item.additionalWorkId +
-            '&departId=' +
-            item.departId +
-            '&workName=' +
-            item.workName
-                break
+            case 4: {
+                const params = new URLSearchParams({ queryEncoding: 'uri',
+                    scene: 'additional',
+                    lang: 'turtle',
+                    additionalId: item.additionalWorkId,
+                    departId: item.departId,
+                    workId: item.mineWorkId || '',
+                    workName: !reset && item.mineWorkName ? item.mineWorkName : item.workName,
+                    workFile: (reset ? item.workUrl_url : item.mineWorkUrl_url || item.mineWorkUrl || item.workUrl_url) || '',
+                    resetTemplate: reset ? '1' : '' })
+                window.open('/python/index.html?' + params.toString(), '_blank', 'noopener,noreferrer')
+                return
+            }
             default:
                 // workUrl = item.workUrl_url
                 this.$refs.submitModal.open({
