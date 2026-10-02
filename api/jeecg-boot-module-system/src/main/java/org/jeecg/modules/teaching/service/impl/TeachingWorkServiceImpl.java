@@ -186,30 +186,31 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 
 	@Override
 	public List<AdditionalWorkModel> userAdditionalWork(String userId, String departId, Boolean submit, Integer status) {
-		//有2个问题：
-		// 1.如果学生班级有相同课程，那么学生提交的作业无法区分班级
-		// 2.如果布置的作业同时在学生的两个班级，那么班级名无法区分
-
-		List<SysDepart> mineClassrooms = new ArrayList<>();
-		mineClassrooms = sysDepartMapper.queryUserClassroom(userId);
-		if (!StringUtils.isEmpty(departId)){
-			mineClassrooms.stream().filter(sysDepart -> sysDepart.getId().equals(departId));
-		}
-		if(mineClassrooms == null || mineClassrooms.size()==0){
-			return new ArrayList<>();
-		}
-		List departIds = mineClassrooms.stream().map(SysDepart::getId).collect(Collectors.toList());
-		List<AdditionalWorkModel> additionalWorkModels = this.baseMapper.userAdditionalWork(userId, departIds, submit, status);
-		//step 封装班级信息
-		for (AdditionalWorkModel workModel: additionalWorkModels){
-			for (SysDepart depart: mineClassrooms){
-				if (workModel.getWorkDept().contains(depart.getId())){
-					workModel.setDepartId(depart.getId());
-					workModel.setDepartName(depart.getDepartName());
-				}
+		List<SysDepart> memberships = sysDepartMapper.queryUserClassroom(userId);
+		if (memberships == null) return Collections.emptyList();
+		List<SysDepart> classrooms = memberships.stream()
+				.filter(depart -> !"1".equals(depart.getDelFlag()))
+				.filter(depart -> !StringUtils.hasText(departId) || depart.getId().equals(departId.trim()))
+				.sorted(Comparator.comparing(SysDepart::getId)).collect(Collectors.toList());
+		if (classrooms.isEmpty()) return Collections.emptyList();
+		List<String> departIds = classrooms.stream().map(SysDepart::getId).collect(Collectors.toList());
+		List<AdditionalWorkModel> rows = this.baseMapper.userAdditionalWork(userId, departIds, submit, status);
+		List<AdditionalWorkModel> result = new ArrayList<>();
+		for (AdditionalWorkModel row : rows) {
+			Set<String> assigned = Arrays.stream(row.getWorkDept().split(","))
+					.map(String::trim).collect(Collectors.toSet());
+			// Keep the saved work's class, as the submission service does. An
+			// assignment shared with another class must not rebind that work.
+			Optional<SysDepart> classroom = classrooms.stream().filter(depart -> assigned.contains(depart.getId()))
+					.filter(depart -> !StringUtils.hasText(row.getMineWorkDepartId()) || depart.getId().equals(row.getMineWorkDepartId()))
+					.findFirst();
+			if (classroom.isPresent()) {
+				row.setDepartId(classroom.get().getId());
+				row.setDepartName(classroom.get().getDepartName());
+				result.add(row);
 			}
 		}
-		return additionalWorkModels;
+		return result;
 	}
 
 }

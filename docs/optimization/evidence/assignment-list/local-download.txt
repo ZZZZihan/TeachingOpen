@@ -1,0 +1,89 @@
+PASS login issues media cookie admin
+PASS login issues media cookie student_a
+PASS login issues media cookie student_b
+PASS login issues media cookie teacher_a
+PASS login issues media cookie teacher_b
+PASS private GET denied None
+PASS private HEAD denied None
+PASS private range denied None
+PASS private GET denied student_b
+PASS private HEAD denied student_b
+PASS private range denied student_b
+PASS private GET denied teacher_b
+PASS private HEAD denied teacher_b
+PASS private range denied teacher_b
+PASS private permitted student_a
+PASS private permitted teacher_a
+PASS private permitted admin
+PASS case-insensitive database lookup cannot alias a key
+PASS external symlink denied None
+PASS external symlink denied admin
+PASS internal symlink denied
+PASS unregistered orphan denied
+PASS admin may recover legacy orphan
+PASS media cookie is HttpOnly same-site host-only path-scoped
+PASS cookie-only image-style request permitted
+PASS foreign header overrides owner cookie
+PASS invalid header does not fall back to cookie
+PASS media cookie cannot authorize normal API
+PASS range bytes=0-4
+PASS range bytes=5-
+PASS range bytes=-6
+PASS range bytes=2-999
+PASS range bytes=-999
+PASS range bytes=-99999999999999999999999
+PASS range bytes=2-99999999999999999999999
+PASS invalid/unsatisfiable bytes=999-
+PASS invalid/unsatisfiable bytes=-0
+PASS invalid/unsatisfiable bytes=9-2
+PASS invalid/unsatisfiable bytes=bad
+PASS invalid/unsatisfiable bytes=9999999999999999999999999999-
+PASS unsupported/conditional range sends full entity {'Range': 'items=0-4'}
+PASS unsupported/conditional range sends full entity {'Range': 'bytes=0-1,3-4'}
+PASS unsupported/conditional range sends full entity {'Range': 'bytes=0-4', 'If-Range': '"old-version"'}
+PASS HEAD ignores range and sends no body
+PASS empty file downloads
+PASS empty range is unsatisfiable
+PASS safe delivery png
+PASS safe delivery mp4
+PASS safe delivery pdf
+PASS safe delivery svg
+PASS safe delivery html
+PASS safe delivery js
+PASS published work anonymous bytes
+PASS unpublish immediately denies anonymous range
+PASS home course cover remains public
+PASS substring course reference is not permission
+PASS external URL is not local permission
+PASS deleted home course cannot grant public access
+PASS non-shared unauthorized course is denied
+PASS enrolled student reads visible unit video
+PASS foreign student denied unit video
+PASS anonymous denied unit video
+PASS deleted unit cannot grant media access
+PASS hidden unit video denied student
+PASS null visibility remains hidden
+PASS authorized unit rich-text media
+PASS private rich-text media denied foreign student
+PASS enabled configuration image public
+PASS disabled configuration does not expose file
+PASS published news media public
+PASS draft news media denied
+PASS assigned additional-work starter readable
+PASS unassigned student denied starter
+PASS closed additional-work starter denied
+PASS owner can reopen historical attachment
+PASS class teacher can read historical attachment
+PASS foreign teacher denied history
+PASS publishing current work does not publish history
+PASS history name mentioning file is not authority
+PASS invalid/missing path refuses bytes ../download-probe-outside.txt
+PASS invalid/missing path refuses bytes %2e%2e/download-probe-outside.txt
+PASS invalid/missing path refuses bytes %5cprivate.txt
+PASS invalid/missing path refuses bytes missing.txt
+PASS invalid/missing path refuses bytes private.txt,
+PASS logout expires media cookie
+PASS revoked cookie rejected
+PASS fixture rows restored
+PASS probe files and links removed
+88/88 checks passed

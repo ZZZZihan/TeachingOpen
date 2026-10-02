@@ -1,0 +1,86 @@
+{
+  "observed_utc": "2026-10-02T20:34:49.524303+00:00",
+  "candidate_commit": "3eada950e4681cb86d787ee07d7233c1e3589058",
+  "base_commit": "bad0e272969d0b0543381ba61276d68f03393950",
+  "base_pr": 20,
+  "jar_sha256": "85f7746a3ae4b143f1a4ca4e5c043e11c81bf7d69f32c72b7dbaa190f6a0e85c",
+  "previous_jar_sha256": "c76dfb9032b92eb6f4bf86ef152e16fadc7504436b81fe1e4d49990f6883738f",
+  "checks": {
+    "before": {
+      "passed": 12,
+      "total": 12
+    },
+    "after": {
+      "passed": 48,
+      "total": 48
+    },
+    "work-submission": {
+      "passed": 95,
+      "total": 95
+    },
+    "work-management": {
+      "passed": 134,
+      "total": 134
+    },
+    "local-download": {
+      "passed": 88,
+      "total": 88
+    }
+  },
+  "build": {
+    "command": "mvn -B -s dev/maven-settings.xml -Dmaven.repo.local=<existing isolated cache> clean package",
+    "exit": 0,
+    "modules": 3,
+    "java_tests_skipped_by_parent_pom": true,
+    "java_version": "Zulu 8.96.0.205 / Java 8u504",
+    "maven_version": "3.9.16",
+    "frontend_changed": false,
+    "frontend_build_rerun": false
+  },
+  "source_files_sha256": {
+    "api/dev/verify-assignment-list.py": "51f344c80a5e21df6f7873310ad6ab5ab60875fb9824192b33648b0c19ad23e9",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingWorkController.java": "bae96d20b0ba4faf0be5b1fdc4c923dc12cf4e350cda5d82ce516c2947b4add0",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/mapper/xml/TeachingWorkMapper.xml": "c1df05943e3a3b13d5e1fb043792087800db5bec8ff37bc8f86b991f54b48109",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/model/AdditionalWorkModel.java": "4de1c9371b80e9a5b8228baa6aa400f8b375dda6386a1f65b2d1f54d9901cc14",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/impl/TeachingWorkServiceImpl.java": "0f68d3d783f23177d2335dd27e412863b77bef1b370652b63676b55089669862"
+  },
+  "evidence_files_sha256": {
+    "after.json": "d1a38d65ab5ad07c6913e49e81b1038191ada8417578e05ea2df8b44609cd98f",
+    "after.txt": "6c53200e2cf9347281fb55881dbc01a6e3f6c21d7e75cf9e2f3fb22a21cfe9db",
+    "backend-build.txt": "b4811d40ec0506389664d1155fa4e4b96a0513dd0f3c017f7c0e12c80f741184",
+    "before.json": "bc659b7d7aca4885645d07918bb6a204ca006b90e117af4d9b83c4aafe02ec38",
+    "local-download.json": "768b46e2470f5880f169145b0b3b9b5c3040177523a112c609de2d15407c9e6f",
+    "local-download.txt": "a93618a2f9a15995c3e3b37b419cb99a7e227bd3fc84b8f5d7c207f4a46e2960",
+    "work-management.json": "dddd3f7882aed4abdec00e6929b56d1312c68c84efc7481adc56a764e8633489",
+    "work-management.txt": "853e251a9654990375ce3e367742f612b574aeace836cccc669707966b8ee421",
+    "work-submission.json": "65e7f7b2db8811b3a7b05b9397e84dc846a2bf71a47ee026f89077eae8f66508",
+    "work-submission.txt": "34aa2117ca36cacc0712c4a55b8cfff9080d0c978bb615e284a47c253b319b8e"
+  },
+  "cleanup": {
+    "original_table_snapshots_restored": true,
+    "original_file_bytes_restored": true,
+    "original_class_categories_restored_to_2": true,
+    "fault_table_removed": true,
+    "synthetic_user_file_work_counts": [
+      5,
+      2,
+      2
+    ]
+  },
+  "original_source_files": 5634,
+  "original_source_changes": 0,
+  "backend_health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "limitations": [
+    "No UI changes or browser login/workflow acceptance in this PR.",
+    "Stored Qiniu location selects its URL; no request to real Qiniu or Office preview.",
+    "General-purpose fixture class category is 2. Verifier temporarily uses actual class category 3, then restores it. Full role browser fixtures must explicitly provision class categories.",
+    "Legacy class-bound work is retained only in its eligible saved class; historical orphaned work remains outside this class-task list. No data migration.",
+    "Assignment task list remains an array and has no new server pagination or deduplication policy for duplicate historical works.",
+    "Only listed suites rerun on this JAR; other historical suite results are not new candidate evidence.",
+    "No GitHub merge, deployment or production change."
+  ]
+}

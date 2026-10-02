@@ -1,0 +1,50 @@
+PASS student_a list {'submit': 'false'}
+PASS student_a list {}
+PASS student_a list {'departId': 'fixture_class_b'}
+{"all_ids": ["deleted", "draft", "graded", "missingfile", "pending", "shared", "submitted"], "foreign_filter_ids": [], "unsubmitted_ids": ["deleted", "draft", "pending"]}
+PASS only visible assigned pending or draft tasks
+PASS all task list excludes foreign withdrawn ended substring empty
+PASS foreign department filter returns empty
+PASS student_a list {'departId': 'fixture_class_a'}
+PASS owned department filter matches visible tasks
+PASS student_a list {'userId': 'fixture_student_b'}
+PASS supplied user ID cannot select another identity
+PASS student_a list {'departId': "fixture_class_a' OR 1=1"}
+PASS unknown department does not expand scope
+PASS student_a list {'submit': 'true'}
+PASS submission filter includes submitted and graded
+PASS student_a list {'submit': 'true', 'status': 1}
+PASS specific submitted status
+PASS student_a list {'submit': 'true', 'status': 2}
+PASS zero score and private feedback retained
+PASS other owner work and feedback not joined
+PASS deleted submission becomes unsubmitted task without stale file
+PASS admin list {}
+PASS no class membership returns empty
+PASS student_b list {}
+PASS student_b list {}
+PASS other student sees own class task without A submission
+PASS anonymous or invalid credential rejected
+PASS anonymous or invalid credential rejected
+PASS list responses not cached
+PASS local raw and decorated URL agree
+PASS student_a returned local URL access
+PASS student_b returned local URL access
+PASS missing file has no fabricated download URL
+PASS student_a list {}
+PASS existing shared task retains saved work class
+PASS student_a list {'departId': 'fixture_class_b'}
+PASS filter B contains only B work and eligible tasks
+PASS student_a list {}
+PASS stored location chooses cloud URL without local prefix
+PASS student_a list {}
+PASS unknown storage has no guessed URL
+PASS query failure is retryable generic 503
+PASS student_a list {}
+PASS same session reads after database recovery
+PASS student_a list {}
+PASS deleted class no longer contributes assignments
+PASS original rows restored
+PASS original files restored
+PASS fault table removed
+48/48 checks passed

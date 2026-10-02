@@ -1,0 +1,96 @@
+PASS anonymous submission rejected
+PASS anonymous submission rejected preserves rows files and submission cache
+PASS student_a cannot submit another owner ID
+PASS student_a cannot submit another owner ID preserves rows files and submission cache
+PASS teacher_a cannot submit another owner ID
+PASS teacher_a cannot submit another owner ID preserves rows files and submission cache
+PASS admin cannot submit another owner ID
+PASS admin cannot submit another owner ID preserves rows files and submission cache
+PASS missing explicit ID cannot become a new work
+PASS missing explicit ID cannot become a new work preserves rows files and submission cache
+PASS other class course rejected
+PASS other class course rejected preserves rows files and submission cache
+PASS missing course unit rejected
+PASS missing course unit rejected preserves rows files and submission cache
+PASS assignment b rejected
+PASS assignment b rejected preserves rows files and submission cache
+PASS assignment unpublished rejected
+PASS assignment unpublished rejected preserves rows files and submission cache
+PASS assignment ended rejected
+PASS assignment ended rejected preserves rows files and submission cache
+PASS assignment substring rejected
+PASS assignment substring rejected preserves rows files and submission cache
+PASS assignment empty rejected
+PASS assignment empty rejected preserves rows files and submission cache
+PASS assignment missing rejected
+PASS assignment missing rejected preserves rows files and submission cache
+PASS mixed task identities rejected
+PASS mixed task identities rejected preserves rows files and submission cache
+PASS owner cannot rebind task
+PASS owner cannot rebind task preserves rows files and submission cache
+PASS owner cannot add a second task
+PASS owner cannot add a second task preserves rows files and submission cache
+PASS student cannot set status 2
+PASS student cannot set status 2 preserves rows files and submission cache
+PASS student cannot set status 3
+PASS student cannot set status 3 preserves rows files and submission cache
+PASS student cannot set status 4
+PASS student cannot set status 4 preserves rows files and submission cache
+PASS student cannot set status -1
+PASS student cannot set status -1 preserves rows files and submission cache
+PASS student cannot set status 99
+PASS student cannot set status 99 preserves rows files and submission cache
+PASS new foreign file rejected
+PASS new foreign file rejected preserves rows files and submission cache
+PASS foreign cover rejected
+PASS foreign cover rejected preserves rows files and submission cache
+PASS unregistered file rejected
+PASS unregistered file rejected preserves rows files and submission cache
+PASS personal creation ignores protected fields
+PASS new owner audit fields and counters are server controlled
+PASS owner saves course draft with spoofed metadata
+PASS existing identity audit origin and counters preserved
+PASS draft does not increment daily submission or reserve cache
+PASS history records actual previous version
+PASS course submit with omitted task fields retains original task
+PASS server resolves course class and submitted status
+PASS retry without work ID updates same assigned work
+PASS sequential retry keeps one course work and one submission count
+PASS editor/file payload type 2
+PASS editor/file payload type 3
+PASS editor/file payload type 4
+PASS editor/file payload type 0
+PASS file modal payload submits assigned work
+PASS assignment class and scene are derived
+PASS choose an eligible class on a multi-class assignment
+PASS eligible selected class stored
+PASS multi-class retry cannot transfer existing work
+PASS existing assignment class remains stable
+PASS revoked assignment membership prevents later update
+PASS revoked assignment membership prevents later update preserves rows files and submission cache
+PASS unassigned shared course accepts personal practice
+PASS shared practice does not invent a class
+PASS class-bound shared work saves while assigned
+PASS shared visibility cannot bypass revoked class binding
+PASS shared visibility cannot bypass revoked class binding preserves rows files and submission cache
+PASS deleted unit rejects submission
+PASS deleted unit rejects submission preserves rows files and submission cache
+PASS personal name collision cannot overwrite course work
+PASS course work identity survives personal-name collision
+PASS owned sent copy can retain shared source attachment
+PASS legitimate shared attachment preserved
+PASS saved course work reopens through actual owner API
+PASS reopened attachment exact HTTP bytes
+PASS injected update failure reports failure
+PASS storage error response contains no SQL diagnostics
+PASS failed update rolls back work history metrics and cache
+PASS retry succeeds after database failure removed
+PASS daily-record failure reports failure instead of partial success
+PASS daily-record error response contains no SQL diagnostics
+PASS daily-record failure rolls back new work and leaves no cache reservation
+PASS retry new submission after daily-record failure
+PASS all original business and history rows restored
+PASS all original file bytes restored
+PASS all original submission cache memberships restored
+PASS temporary database failure trigger removed
+95/95 checks passed
