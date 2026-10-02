@@ -1,0 +1,20 @@
+.learning-entry { max-width: 1160px; margin: 0 auto; padding: 36px 24px 64px; color: #172d38; }
+.learning-entry * { box-sizing: border-box; }
+.learning-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding-bottom: 32px; margin-bottom: 30px; border-bottom: 1px solid #dce2e5; }
+.learning-eyebrow { margin: 0 0 12px; color: #87505c; font-size: 11px; line-height: 1.7; font-weight: 600; letter-spacing: 1.2px; }
+.learning-heading h1 { font-size: 36px; line-height: 1.35; font-weight: 600; letter-spacing: -.7px; margin: 0 0 16px; color: #172d38; overflow-wrap: anywhere; }
+.learning-lead { color: #62727c; line-height: 1.9; max-width: 720px; margin: 0; overflow-wrap: anywhere; }
+.learning-section-heading { display: flex; justify-content: space-between; gap: 20px; align-items: baseline; margin: 0 0 20px; }
+.learning-section-heading h2 { font-size: 19px; color: #172d38; font-weight: 600; margin: 0; }
+.learning-count { font-size: 12px; color: #62727c; flex-shrink: 0; }
+.learning-text-link { border: 0; background: transparent; padding: 0; color: #596d78; font: inherit; font-size: 13px; cursor: pointer; flex-shrink: 0; }
+.learning-text-link:hover { color: #a73542; }
+.learning-button { display: inline-flex; justify-content: center; align-items: center; gap: 16px; padding: 12px 20px; min-height: 44px; border: 1px solid #b63e4b; border-radius: 3px; background: #b63e4b; color: #fff; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; }
+.learning-button:hover { color: #fff; background: #9d3340; border-color: #9d3340; }
+.learning-button:disabled { cursor: wait; opacity: .7; }
+.learning-entry a:focus-visible, .learning-entry button:focus-visible { outline: 2px solid #b63e4b; outline-offset: 4px; }
+.learning-state { padding: 60px 24px; text-align: center; border: 1px solid #e0e5e8; background: #fff; }
+.learning-state h3 { color: #172d38; font-size: 21px; margin: 16px 0 10px; }
+.learning-state p:not(.learning-eyebrow) { color: #62727c; line-height: 1.9; margin-bottom: 24px; }
+.learning-state .learning-eyebrow { margin: 0; }
+@media (max-width: 640px) { .learning-entry { padding: 22px 12px 40px; } .learning-heading { align-items: flex-start; flex-direction: column; padding-bottom: 24px; gap: 18px; margin-bottom: 24px; } .learning-heading h1 { font-size: 28px; } .learning-state { padding: 40px 20px; } }
