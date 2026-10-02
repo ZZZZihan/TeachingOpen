@@ -1,0 +1,101 @@
+{
+  "mode": "normal",
+  "uploads": [
+    {
+      "path": "fixture/1/observation-report.txt",
+      "name": "observation-report.txt",
+      "size": 133,
+      "sha256": "7c581d08b98f0bb32d833fbd7729b2a09a3b1b7befc383bf80d3ef050ef0591c",
+      "failed": false
+    }
+  ],
+  "registrations": [
+    {
+      "fileName": "observation-report.txt",
+      "filePath": "fixture/1/observation-report.txt",
+      "fileLocation": 1,
+      "fileTag": "学生作业",
+      "id": "fixture-file-1",
+      "failed": false
+    }
+  ],
+  "submissions": [
+    {
+      "id": "",
+      "additionalId": "task-a",
+      "departId": "class-fixture",
+      "courseId": "",
+      "workName": "观察身边的人工智能",
+      "workType": "0",
+      "workFile": "fixture-file-1",
+      "workStatus": 1,
+      "failed": false
+    }
+  ],
+  "list_reads": [
+    {
+      "submit": "false",
+      "mode": "normal"
+    },
+    {
+      "submit": "true",
+      "mode": "normal"
+    },
+    {
+      "submit": "true",
+      "mode": "list-error"
+    },
+    {
+      "submit": "true",
+      "mode": "normal"
+    },
+    {
+      "submit": "true",
+      "mode": "empty"
+    },
+    {
+      "submit": "",
+      "mode": "empty"
+    },
+    {
+      "submit": "",
+      "mode": "many"
+    },
+    {
+      "submit": "",
+      "mode": "normal"
+    },
+    {
+      "submit": "false",
+      "mode": "normal"
+    },
+    {
+      "submit": "false",
+      "mode": "normal"
+    },
+    {
+      "submit": "true",
+      "mode": "normal"
+    },
+    {
+      "submit": "",
+      "mode": "normal"
+    },
+    {
+      "submit": "",
+      "mode": "list-error"
+    },
+    {
+      "submit": "",
+      "mode": "normal"
+    },
+    {
+      "submit": "",
+      "mode": "normal"
+    },
+    {
+      "submit": "true",
+      "mode": "normal"
+    }
+  ]
+}

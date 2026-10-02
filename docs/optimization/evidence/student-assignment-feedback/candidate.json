@@ -1,0 +1,77 @@
+{
+  "observed_utc": "2026-10-02T20:48:28.940305+00:00",
+  "candidate_commit": "e9ec65e875c0d187c16fe53e51562d61b29e84c1",
+  "base_pr": 23,
+  "base_commit": "95f5bfe179a7eefe86ca7a2fd41423bc7ba87191",
+  "backend_dependency_pr": 24,
+  "source_files_sha256": {
+    "web/src/views/account/course/MyAdditionalWorkList.vue": "2100bd4df86adcbca25cca944b0a8bf0706f1ac476987997698d7d2e02a7da37",
+    "web/tests/student-assignment-feedback.test.cjs": "de83c98646b2ca4f79dc11e87770640615ebe82e34494d6ceea187a53be22b98",
+    "web/tests/task-preview/server.py": "82a8206fd5bb5c1dec5cf2d247531d86387ec0b5b61439e21890d1f51d7cda73",
+    "web/tests/task-preview/preview.css": "b83c3ff6e67ed0c9fe1b4f6963793e14d5500078838c26b8d7ec112c47fc69ed",
+    "web/tests/task-preview/.gitignore": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b",
+    "web/tests/task-preview/dict-stub.js": "813134b2bb47f84c29a9d3cc34538f37fef68e3b7e0e97645b1cab5263a5ffcd",
+    "web/tests/task-preview/build.cjs": "ecad1ea0181706896e365cabbac3115cce68ffdad5224acf3c98fbe98450eba8",
+    "web/tests/task-preview/stubs.js": "9e143bb2b6e0f4fa4a62280289e9c601dc4c81a656daa048fc83d0a45c81ca81",
+    "web/tests/task-preview/api.js": "31d08fc029063d5548c2a6e203608bbe7731af44f27ef7c13fa60241e8990404",
+    "web/tests/task-preview/entry.js": "c9444b0aba7b1875bbee0fc0fe41d6ed02e22f8d46ecf9610e0a2fd6c2c1c225"
+  },
+  "checks": {
+    "frontend_tests_passed": 103,
+    "frontend_tests_total": 103,
+    "new_tests": 8,
+    "lint_files": 1,
+    "lint_errors": 0,
+    "lint_warnings": 0,
+    "production_build_exit": 0,
+    "existing_build_warnings": 6,
+    "node": "v26.7.0"
+  },
+  "browser": {
+    "observations": 14,
+    "screenshots": 8,
+    "widths": [
+      390,
+      768,
+      1440
+    ],
+    "actual_components": [
+      "MyAdditionalWorkList",
+      "TeachingWorkSubmitModal",
+      "assignmentFileUpload"
+    ],
+    "fixture_limits": "Synthetic loopback HTTP, authored text files, synthetic navigation shell; old dict filter and device mixin replaced only in preview. No platform authentication or real business database.",
+    "server_port": 18118,
+    "comparison_port_18119_stopped": true,
+    "temporary_viewport_reset": true
+  },
+  "build": {
+    "files": 4871,
+    "dist_path_hashes_aggregate_sha256": "99d1a2ca3d8a446d54bfcae0e164ee3a7bfa45a7b61f8a813165d40f2816825f",
+    "log_normalization": "Trailing whitespace stripped; diagnostic text unchanged"
+  },
+  "evidence_files_sha256": {
+    "production-build.txt": "d6d6f3dfd902d8c3c0c58b7d3c28ea8179e29389c7b58f6c6221e27c147998d6",
+    "browser-observations.json": "0e83c0a873e781e4abddec421d724fd5c3a7a00f7e4125b7d0760901c7914f46",
+    "frontend-tests.txt": "ca37822de665db2a108363e2bd7906d4c0e0b25102d3e5bf773e491d8ccc5219",
+    "before-390.png": "523e8a2e3b4d280403408f701590628cf6a9b765e2a21771aad0f0ac3223031c",
+    "before-768.png": "5af21a24d42b6911b034a95d9c5cab83f47ffd8e2f959e3f694f6940e86bf86b",
+    "before-1440.png": "fed240ba4642c2eae4a3faeaad8a1ba960e10c2d1a8809fefd8a917b50c80e6f",
+    "error-1440.png": "19a6367e449b3ebbf1019f4223fe615a00fbff24d30490ae755911de096fae3f",
+    "synthetic-http-state.json": "2676f392d6c14b245fb07f63580b64e2bb1cdf58e74cf859b67beea730b4459b",
+    "lint.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "after-768.png": "54325677c149d2ec6b276f3734d8fff97e6a0292914cb3d495fc9bb7dc753278",
+    "after-390.png": "206435f6209d1cb248fa49cf608e86581464932579774c222266cc4a981e3860",
+    "after-1440.png": "db89c3bebce4678d4c27258bfd0e20d1db02e4d6f0d0084e67f20da1f56cf383",
+    "submission-refreshed-1440.png": "6782d0a9cb08be7518adf60cf8237958cefd5a815cf180a33b88304269b1f1e5"
+  },
+  "original_source_files_unchanged": 5634,
+  "limits": [
+    "Draft pending real authenticated list/feedback/submission acceptance and human visual review.",
+    "No backend changes or backend suite rerun in this PR. Requires PR24 assignment list contract.",
+    "Legacy editor query concatenation, missing workId, and Python/ScratchJr template decoding need dedicated correction and actual save/reopen checks. Editor URL building unchanged here; no editor acceptance claim.",
+    "Office preview and real cloud attachment requests untested.",
+    "Client pagination retains server array response; no backend pagination added.",
+    "No GitHub merge or production change."
+  ]
+}
