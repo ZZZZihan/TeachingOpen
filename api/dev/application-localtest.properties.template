@@ -52,3 +52,6 @@ logging.level.org.jeecg.modules.system.mapper=WARN
 logging.level.org.jeecg.modules.teaching.mapper=WARN
 logging.level.org.jeecg.modules.wechat.mapper=WARN
 logging.level.org.jeecg.modules.shiro=WARN
+
+# Browser cookies do not distinguish ports; isolate concurrent local candidates.
+jeecg.media.cookie-name=teaching_media_@BACKEND_PORT@

@@ -19,6 +19,10 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public class JwtFilter extends BasicHttpAuthenticationFilter {
+    protected final MediaCookie mediaCookie;
+    public JwtFilter(MediaCookie cookie) { this.mediaCookie = cookie; }
+    protected String token(HttpServletRequest request) { return request.getHeader(DefContants.X_ACCESS_TOKEN); }
+
 
 	/**
 	 * 执行登录认证
@@ -54,11 +58,12 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 	@Override
 	protected boolean executeLogin(ServletRequest request, ServletResponse response) {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-		String token = httpServletRequest.getHeader(DefContants.X_ACCESS_TOKEN);
+		String token = token(httpServletRequest);
 
 		JwtToken jwtToken = new JwtToken(token);
 		// 提交给realm进行登入，如果错误他会抛出异常并被捕获
 		getSubject(request, response).login(jwtToken);
+        mediaCookie.write(httpServletRequest, (HttpServletResponse) response, token, false);
 		// 如果没有抛出异常则代表登入成功，返回true
 		return true;
 	}

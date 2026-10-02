@@ -59,6 +59,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @Service
 public class SysBaseApiImpl implements ISysBaseAPI {
+    @Autowired private org.jeecg.modules.system.service.LocalDownloadAccessService localDownloads;
+
+    @Override
+    public int localDownloadStatus(String path) { return localDownloads.status(path); }
+
 	@Autowired
 	private org.jeecg.modules.system.service.ISysFileService uploadedFileService;
 

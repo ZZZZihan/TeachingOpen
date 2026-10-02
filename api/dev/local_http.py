@@ -46,6 +46,7 @@ class FixtureApi:
         except HTTPError as error:
             response = error
         with response:
+            self.last_response_headers = response.headers
             content_type = response.headers.get("Content-Type", "")
             raw = response.read()
             try:

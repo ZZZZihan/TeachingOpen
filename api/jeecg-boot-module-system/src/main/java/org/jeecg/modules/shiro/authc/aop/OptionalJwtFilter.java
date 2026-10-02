@@ -7,6 +7,7 @@ import org.jeecg.modules.shiro.vo.DefContants;
 
 /** Public work readers may be anonymous; a supplied credential must still be valid. */
 public class OptionalJwtFilter extends JwtFilter {
+    public OptionalJwtFilter(MediaCookie cookie) { super(cookie); }
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         if (((HttpServletRequest) request).getHeader(DefContants.X_ACCESS_TOKEN) == null) {

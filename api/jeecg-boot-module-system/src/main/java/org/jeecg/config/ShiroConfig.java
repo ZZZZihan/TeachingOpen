@@ -13,6 +13,8 @@ import org.crazycake.shiro.RedisManager;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.shiro.authc.ShiroRealm;
 import org.jeecg.modules.shiro.authc.aop.JwtFilter;
+import org.jeecg.modules.shiro.authc.aop.MediaCookie;
+import org.jeecg.modules.shiro.authc.aop.MediaJwtFilter;
 import org.jeecg.modules.shiro.authc.aop.OptionalJwtFilter;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,15 +61,17 @@ public class ShiroConfig {
 	 * 3、部分过滤器可指定参数，如perms，roles
 	 */
 	@Bean("shiroFilter")
-	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, MediaCookie mediaCookie) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 		// 拦截器
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+        // Must precede configurable exclusions and generic extension allowlists.
+        filterChainDefinitionMap.put("/sys/common/static/**", "mediaJwt");
 		if(oConvertUtils.isNotEmpty(excludeUrls)){
 			String[] permissionUrl = excludeUrls.split(",");
 			for(String url : permissionUrl){
-				filterChainDefinitionMap.put(url,"anon");
+				if (!"/sys/common/static/**".equals(url)) filterChainDefinitionMap.put(url,"anon");
 			}
 		}
 
@@ -89,7 +93,6 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/sys/user/phoneVerification", "anon");//用户忘记密码验证手机号
 		filterChainDefinitionMap.put("/sys/user/passwordChange", "anon");//用户更改密码
 		filterChainDefinitionMap.put("/auth/2step-code", "anon");//登录验证码
-		filterChainDefinitionMap.put("/sys/common/static/**", "anon");//图片预览 &下载文件不限制token
 		filterChainDefinitionMap.put("/sys/common/pdf/**", "anon");//pdf预览
 		filterChainDefinitionMap.put("/generic/**", "anon");//pdf预览需要文件
 		filterChainDefinitionMap.put("/", "anon");
@@ -169,8 +172,9 @@ public class ShiroConfig {
 
 		// 添加自己的过滤器并且取名为jwt
 		Map<String, Filter> filterMap = new HashMap<String, Filter>(1);
-		filterMap.put("jwt", new JwtFilter());
-		filterMap.put("optionalJwt", new OptionalJwtFilter());
+		filterMap.put("jwt", new JwtFilter(mediaCookie));
+		filterMap.put("optionalJwt", new OptionalJwtFilter(mediaCookie));
+		filterMap.put("mediaJwt", new MediaJwtFilter(mediaCookie));
 		shiroFilterFactoryBean.setFilters(filterMap);
 		// <!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边
 		filterChainDefinitionMap.put("/**", "jwt");

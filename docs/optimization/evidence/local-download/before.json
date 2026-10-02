@@ -1,0 +1,41 @@
+{
+  "observed_utc": "2026-10-02T18:25:29.270915+00:00",
+  "jar_sha256": "25b87ef3a4d7775af60c9fc1be6f150e5756223f203d096e1ba0a04cb38057a2",
+  "expected_legacy": true,
+  "passed": 8,
+  "total": 8,
+  "cases": [
+    {
+      "case": "legacy private download allowed None",
+      "passed": true
+    },
+    {
+      "case": "legacy private download allowed student_b",
+      "passed": true
+    },
+    {
+      "case": "legacy private download allowed teacher_b",
+      "passed": true
+    },
+    {
+      "case": "legacy anonymous HEAD exposes size",
+      "passed": true
+    },
+    {
+      "case": "legacy anonymous range exposes bytes",
+      "passed": true
+    },
+    {
+      "case": "legacy follows external symlink",
+      "passed": true
+    },
+    {
+      "case": "fixture rows restored",
+      "passed": true
+    },
+    {
+      "case": "probe files and links removed",
+      "passed": true
+    }
+  ]
+}

@@ -43,6 +43,7 @@ import java.util.*;
 @Api(tags="用户登录")
 @Slf4j
 public class LoginController {
+    @Autowired private org.jeecg.modules.shiro.authc.aop.MediaCookie mediaCookie;
 	@Autowired
 	private ISysUserService sysUserService;
 	@Autowired
@@ -130,6 +131,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/logout")
 	public Result<Object> logout(HttpServletRequest request,HttpServletResponse response) {
+		mediaCookie.write(request, response, "", true);
 		//用户退出逻辑
 	    String token = request.getHeader(DefContants.X_ACCESS_TOKEN);
 	    if(oConvertUtils.isEmpty(token)) {
@@ -387,6 +389,7 @@ public class LoginController {
 			obj.put("multi_depart", 2);
 		}
 		obj.put("token", token);
+        mediaCookie.issue(token);
 		obj.put("userInfo", sysUser);
 		obj.put("sysAllDictItems", sysDictService.queryAllDictItems());
 		result.setResult(obj);
@@ -482,6 +485,7 @@ public class LoginController {
 		redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME);
 		//token 信息
 		obj.put("token", token);
+        mediaCookie.issue(token);
 		result.setResult(obj);
 		result.setSuccess(true);
 		result.setCode(200);
