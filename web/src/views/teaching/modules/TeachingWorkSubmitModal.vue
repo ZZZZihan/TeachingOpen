@@ -56,7 +56,7 @@ export default {
     },
     handleOk() {
       if (this.workInfo.workFile) {
-        postAction('/teaching/teachingWork/submit', this.workInfo).then((res) => {
+        postAction('/teaching/teachingWork/submit', { ...this.workInfo, workStatus: 1 }).then((res) => {
           if (res.success) {
             this.$message.success('上传成功')
             this.visible = false

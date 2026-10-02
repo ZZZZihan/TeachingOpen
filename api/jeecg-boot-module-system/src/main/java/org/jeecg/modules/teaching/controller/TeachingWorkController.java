@@ -1,6 +1,5 @@
 package org.jeecg.modules.teaching.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -10,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.authz.annotation.Logical;
 import org.jeecg.common.api.vo.DictResult;
@@ -17,6 +17,7 @@ import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.aspect.annotation.PermissionData;
 import org.jeecg.common.constant.CacheConstant;
+import org.jeecg.common.exception.JeecgBootException;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.IPUtils;
@@ -28,7 +29,6 @@ import org.jeecg.modules.common.util.Ow365Util;
 import org.jeecg.modules.common.util.QiniuUtil;
 import org.jeecg.modules.system.entity.SysFile;
 import org.jeecg.modules.system.entity.SysUser;
-import org.jeecg.modules.system.service.ISysDataLogService;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.system.service.ISysUserService;
@@ -42,6 +42,7 @@ import org.jeecg.modules.teaching.model.StudentWorkModel;
 import org.jeecg.modules.teaching.model.WorkCommentModel;
 import org.jeecg.modules.teaching.service.*;
 import org.jeecg.modules.teaching.vo.StudentWorkSendVO;
+import org.jeecg.modules.teaching.vo.StudentWorkSubmission;
 import org.jeecg.modules.teaching.vo.TeachingWorkPage;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
 import org.jeecgframework.poi.excel.def.NormalExcelConstants;
@@ -77,6 +78,8 @@ public class TeachingWorkController extends BaseController {
 	@Autowired
 	private TeachingAccessService teachingAccessService;
 	@Autowired
+	private TeachingWorkSubmissionService workSubmissionService;
+	@Autowired
 	private ITeachingWorkService teachingWorkService;
 	@Autowired
 	private ITeachingWorkCorrectService teachingWorkCorrectService;
@@ -86,8 +89,6 @@ public class TeachingWorkController extends BaseController {
 	private ISysUserService sysUserService;
 	@Autowired
 	private ISysDepartService sysDepartService;
-	@Autowired
-	private ISysDataLogService sysDataLogService;
 	@Autowired
 	private RedisUtil redisUtil;
 	@Autowired
@@ -100,8 +101,6 @@ public class TeachingWorkController extends BaseController {
 	 private ITeachingDepartDayLogService teachingDepartDayLogService;
 	 @Autowired
 	 private ITeachingAdditionalWorkService teachingAdditionalWorkService;
-	 @Autowired
-	 private ITeachingCourseUnitService teachingCourseUnitService;
 
 	 @GetMapping("userInfo")
 	 public Result<?> getUserInfo(@RequestParam String userId){
@@ -194,75 +193,23 @@ public class TeachingWorkController extends BaseController {
 
 	 /**
 	  * 提交作业
-	  * @param teachingWork
+	  * @param submission
 	  *
 	  * @return
 	  */
 	 @PostMapping(value = "/submit")
-	 public Result<TeachingWork> add(@RequestBody TeachingWork teachingWork) {
-		 Result<TeachingWork> result = new Result<TeachingWork>();
+	 public Result<TeachingWork> submit(@RequestBody StudentWorkSubmission submission) {
+		 Result<TeachingWork> result = new Result<>();
 		 try {
-			 List<TeachingWork> oldWorks = new ArrayList<>();
-			 if (isNotEmpty(teachingWork.getId())){
-				oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>() {{
-					put("user_id", getCurrentUser().getId());
-					put("id", teachingWork.getId());
-				}});
-			 }else if (isNotEmpty(teachingWork.getAdditionalId())) {
-				 oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>() {{
-					 put("user_id", getCurrentUser().getId());
-					 put("additional_id", teachingWork.getAdditionalId());
-				 }});
-			 }else if(isNotEmpty(teachingWork.getCourseId())){
-				 oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>() {{
-					 put("user_id", getCurrentUser().getId());
-					 put("course_id", teachingWork.getCourseId());
-				 }});
-			 }else{
-				 oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>(){{
-					 put("work_name", teachingWork.getWorkName());
-					 put("user_id", getCurrentUser().getId());
-					 put("work_type", teachingWork.getWorkType());
-				 }});
-			 }
-			 teachingWork.setId(null);
-			 teachingWork.setUserId(getCurrentUser().getId());
-			 if (StringUtils.isNotBlank(teachingWork.getCourseId())){
-				 String departId = teachingCourseUnitService.getUserDepartIdByUnitId(getCurrentUser().getId(), teachingWork.getCourseId());
-				 teachingWork.setDepartId(departId);
-			 }
-			 if (!oldWorks.isEmpty()){
-				 teachingWork.setId(oldWorks.get(0).getId());
-				 teachingWork.setCreateTime(new Date());
-				 //teachingWork.setUpdateTime(new Date());
-				 result.setResult(teachingWork);
-				 result.success("更新成功！");
-				 //保留原作品的历史记录
-				 sysDataLogService.addDataLog("teaching_work", teachingWork.getId(), JSONObject.toJSONString(teachingWork));
-			 }else{
-				 result.setResult(teachingWork);
-				 result.success("添加成功！");
-			 }
-			 teachingWorkService.saveOrUpdate(teachingWork);
-
-			 //班级每日教学记录
-			 if (isNotEmpty(teachingWork.getAdditionalId()) && isNotEmpty(teachingWork.getDepartId())){
-				 String key = String.format("departLog:addiWorkSubmit:%s", teachingWork.getDepartId());
-				 if (!redisUtil.sHasKey(key, teachingWork.getId())) {
-					 redisUtil.sSet(key, teachingWork.getId());
-					 teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.ADDITIONAL_WORK_SUBMIT_COUNT);
-				 }
-			 }
-			 if (isNotEmpty(teachingWork.getCourseId()) && isNotEmpty(teachingWork.getDepartId())){
-				 String key = String.format("departLog:courseWorkSubmit:%s", teachingWork.getDepartId());
-				 if (!redisUtil.sHasKey(key, teachingWork.getId())) {
-					 redisUtil.sSet(key, teachingWork.getId());
-					 teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.COURSE_WORK_SUBMIT_COUNT);
-				 }
-			 }
-		 } catch (Exception e) {
-			 log.error(e.getMessage(),e);
-			 result.error500("系统内部错误");
+			 result.setResult(workSubmissionService.submit(submission));
+			 result.success("保存成功！");
+		 } catch (AuthorizationException | JeecgBootException error) {
+			 throw error;
+		 } catch (RuntimeException error) {
+			 // The service proxy has rolled back before this catch. Keep storage
+			 // diagnostics in server logs, not in a student's API response.
+			 log.error("作品保存失败", error);
+			 result.error500("作品保存失败，请稍后重试");
 		 }
 		 return result;
 	 }
