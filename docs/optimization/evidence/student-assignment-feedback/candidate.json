@@ -47,10 +47,11 @@
   },
   "build": {
     "files": 4871,
-    "dist_path_hashes_aggregate_sha256": "99d1a2ca3d8a446d54bfcae0e164ee3a7bfa45a7b61f8a813165d40f2816825f"
+    "dist_path_hashes_aggregate_sha256": "99d1a2ca3d8a446d54bfcae0e164ee3a7bfa45a7b61f8a813165d40f2816825f",
+    "log_normalization": "Trailing whitespace stripped; diagnostic text unchanged"
   },
   "evidence_files_sha256": {
-    "production-build.txt": "3ee992f2c91d63b3bb953e6df24f59cfa8ad44dfe66b2254d552ff187505e300",
+    "production-build.txt": "d6d6f3dfd902d8c3c0c58b7d3c28ea8179e29389c7b58f6c6221e27c147998d6",
     "browser-observations.json": "0e83c0a873e781e4abddec421d724fd5c3a7a00f7e4125b7d0760901c7914f46",
     "frontend-tests.txt": "ca37822de665db2a108363e2bd7906d4c0e0b25102d3e5bf773e491d8ccc5219",
     "before-390.png": "523e8a2e3b4d280403408f701590628cf6a9b765e2a21771aad0f0ac3223031c",
