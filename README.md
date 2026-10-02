@@ -5,6 +5,8 @@
 - [本轮结果与证据](docs/optimization/2026-10-02.md)
 - [固定安装、测试和构建命令](web/BUILDING.md)
 - [Pro审查原文](docs/optimization/pro-review-2026-10-02.md)
+- [产品化目标、验收条件与逐项 PR 路线](docs/optimization/productization-goal-2026-10-02.md)
+- [本项目 PR 交付规则](AGENTS.md)
 
 下方保留上游项目说明，在线体验和默认账号属于上游示例。部署前必须配置独立运行环境与凭据；此仓库不包含本任务的生产说明PDF、生产数据库、用户上传资料或本机登录凭据。
 
