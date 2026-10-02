@@ -1,0 +1,554 @@
+{
+  "observed_utc": "2026-10-02T17:42:31.136040+00:00",
+  "jar_sha256": "b5998be119428e00ed3d5469cbcb311175a8104eb2cd983f37362dcb981e2c1b",
+  "expected_legacy": false,
+  "scope": "actual synthetic HTTP/DB/files and decoded XLS cells; empty import gate only; no browser role or editor acceptance",
+  "passed": 134,
+  "total": 134,
+  "cases": [
+    {
+      "case": "anonymous management list",
+      "passed": true
+    },
+    {
+      "case": "anonymous management add",
+      "passed": true
+    },
+    {
+      "case": "anonymous management edit",
+      "passed": true
+    },
+    {
+      "case": "anonymous management delete",
+      "passed": true
+    },
+    {
+      "case": "anonymous management deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "anonymous management sendWork",
+      "passed": true
+    },
+    {
+      "case": "anonymous management exportXls",
+      "passed": true
+    },
+    {
+      "case": "anonymous management importExcel",
+      "passed": true
+    },
+    {
+      "case": "anonymous denied management preserves rows and files",
+      "passed": true
+    },
+    {
+      "case": "student_a management list",
+      "passed": true
+    },
+    {
+      "case": "student_a management add",
+      "passed": true
+    },
+    {
+      "case": "student_a management edit",
+      "passed": true
+    },
+    {
+      "case": "student_a management delete",
+      "passed": true
+    },
+    {
+      "case": "student_a management deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "student_a management sendWork",
+      "passed": true
+    },
+    {
+      "case": "student_a management exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a management importExcel",
+      "passed": true
+    },
+    {
+      "case": "student_a denied management preserves rows and files",
+      "passed": true
+    },
+    {
+      "case": "student_b management list",
+      "passed": true
+    },
+    {
+      "case": "student_b management add",
+      "passed": true
+    },
+    {
+      "case": "student_b management edit",
+      "passed": true
+    },
+    {
+      "case": "student_b management delete",
+      "passed": true
+    },
+    {
+      "case": "student_b management deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "student_b management sendWork",
+      "passed": true
+    },
+    {
+      "case": "student_b management exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_b management importExcel",
+      "passed": true
+    },
+    {
+      "case": "student_b denied management preserves rows and files",
+      "passed": true
+    },
+    {
+      "case": "anonymous private queryById",
+      "passed": true
+    },
+    {
+      "case": "other student private queryById",
+      "passed": true
+    },
+    {
+      "case": "other class teacher private queryById",
+      "passed": true
+    },
+    {
+      "case": "student_a authorized private queryById",
+      "passed": true
+    },
+    {
+      "case": "teacher_a authorized private queryById",
+      "passed": true
+    },
+    {
+      "case": "admin authorized private queryById",
+      "passed": true
+    },
+    {
+      "case": "anonymous private queryTeachingWorkCorrectByMainId",
+      "passed": true
+    },
+    {
+      "case": "other student private queryTeachingWorkCorrectByMainId",
+      "passed": true
+    },
+    {
+      "case": "other class teacher private queryTeachingWorkCorrectByMainId",
+      "passed": true
+    },
+    {
+      "case": "student_a authorized private queryTeachingWorkCorrectByMainId",
+      "passed": true
+    },
+    {
+      "case": "teacher_a authorized private queryTeachingWorkCorrectByMainId",
+      "passed": true
+    },
+    {
+      "case": "admin authorized private queryTeachingWorkCorrectByMainId",
+      "passed": true
+    },
+    {
+      "case": "anonymous private queryTeachingWorkCommentByMainId",
+      "passed": true
+    },
+    {
+      "case": "other student private queryTeachingWorkCommentByMainId",
+      "passed": true
+    },
+    {
+      "case": "other class teacher private queryTeachingWorkCommentByMainId",
+      "passed": true
+    },
+    {
+      "case": "student_a authorized private queryTeachingWorkCommentByMainId",
+      "passed": true
+    },
+    {
+      "case": "teacher_a authorized private queryTeachingWorkCommentByMainId",
+      "passed": true
+    },
+    {
+      "case": "admin authorized private queryTeachingWorkCommentByMainId",
+      "passed": true
+    },
+    {
+      "case": "teacher A cannot read out-of-scope b",
+      "passed": true
+    },
+    {
+      "case": "teacher A cannot edit out-of-scope b",
+      "passed": true
+    },
+    {
+      "case": "teacher A cannot delete out-of-scope b",
+      "passed": true
+    },
+    {
+      "case": "teacher A cannot read out-of-scope multi",
+      "passed": true
+    },
+    {
+      "case": "teacher A cannot edit out-of-scope multi",
+      "passed": true
+    },
+    {
+      "case": "teacher A cannot delete out-of-scope multi",
+      "passed": true
+    },
+    {
+      "case": "teacher A cannot read out-of-scope wrong",
+      "passed": true
+    },
+    {
+      "case": "teacher A cannot edit out-of-scope wrong",
+      "passed": true
+    },
+    {
+      "case": "teacher A cannot delete out-of-scope wrong",
+      "passed": true
+    },
+    {
+      "case": "teacher cannot create cross-class owner",
+      "passed": true
+    },
+    {
+      "case": "teacher cannot import unscoped workbook",
+      "passed": true
+    },
+    {
+      "case": "mixed class delete rejected before first mutation",
+      "passed": true
+    },
+    {
+      "case": "mixed recipients rejected before first write",
+      "passed": true
+    },
+    {
+      "case": "foreign source cannot be sent to own class",
+      "passed": true
+    },
+    {
+      "case": "all resource denials preserve business rows and attachment bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a scoped list",
+      "passed": true
+    },
+    {
+      "case": "teacher_a list applies class and owner boundary",
+      "passed": true
+    },
+    {
+      "case": "teacher_a scoped XLS export",
+      "passed": true
+    },
+    {
+      "case": "teacher_a decoded XLS cells match class boundary",
+      "passed": true
+    },
+    {
+      "case": "teacher_b scoped list",
+      "passed": true
+    },
+    {
+      "case": "teacher_b list applies class and owner boundary",
+      "passed": true
+    },
+    {
+      "case": "teacher_b scoped XLS export",
+      "passed": true
+    },
+    {
+      "case": "teacher_b decoded XLS cells match class boundary",
+      "passed": true
+    },
+    {
+      "case": "admin scoped list",
+      "passed": true
+    },
+    {
+      "case": "admin list applies class and owner boundary",
+      "passed": true
+    },
+    {
+      "case": "admin scoped XLS export",
+      "passed": true
+    },
+    {
+      "case": "admin decoded XLS cells match class boundary",
+      "passed": true
+    },
+    {
+      "case": "foreign-only export selection produces no foreign work",
+      "passed": true
+    },
+    {
+      "case": "selections cannot bypass export scope",
+      "passed": true
+    },
+    {
+      "case": "foreign department filter stays within teacher scope",
+      "passed": true
+    },
+    {
+      "case": "foreign filter does not expose class B rows",
+      "passed": true
+    },
+    {
+      "case": "teacher reads descendant-class work",
+      "passed": true
+    },
+    {
+      "case": "owner reads own work in second class",
+      "passed": true
+    },
+    {
+      "case": "teacher feedback allowed for own class",
+      "passed": true
+    },
+    {
+      "case": "feedback preserves original owner class assignment and creator",
+      "passed": true
+    },
+    {
+      "case": "feedback and comment persisted",
+      "passed": true
+    },
+    {
+      "case": "owner reads saved feedback",
+      "passed": true
+    },
+    {
+      "case": "owner receives actual saved score and comment",
+      "passed": true
+    },
+    {
+      "case": "teacher sends to authorized class member",
+      "passed": true
+    },
+    {
+      "case": "authorized send persists target owner",
+      "passed": true
+    },
+    {
+      "case": "same-name overwrite outside teacher class denied",
+      "passed": true
+    },
+    {
+      "case": "denied send preserves every potential overwrite target",
+      "passed": true
+    },
+    {
+      "case": "teacher_a creates managed work",
+      "passed": true
+    },
+    {
+      "case": "teacher_a create persisted",
+      "passed": true
+    },
+    {
+      "case": "teacher_a edits managed work",
+      "passed": true
+    },
+    {
+      "case": "teacher_a edit persisted",
+      "passed": true
+    },
+    {
+      "case": "teacher_a reads managed work",
+      "passed": true
+    },
+    {
+      "case": "teacher_a deletes managed work",
+      "passed": true
+    },
+    {
+      "case": "teacher_a delete persisted",
+      "passed": true
+    },
+    {
+      "case": "teacher_a recreates for batch delete",
+      "passed": true
+    },
+    {
+      "case": "teacher_a batch deletes managed work",
+      "passed": true
+    },
+    {
+      "case": "teacher_a batch delete persisted",
+      "passed": true
+    },
+    {
+      "case": "admin creates managed work",
+      "passed": true
+    },
+    {
+      "case": "admin create persisted",
+      "passed": true
+    },
+    {
+      "case": "admin edits managed work",
+      "passed": true
+    },
+    {
+      "case": "admin edit persisted",
+      "passed": true
+    },
+    {
+      "case": "admin reads managed work",
+      "passed": true
+    },
+    {
+      "case": "admin deletes managed work",
+      "passed": true
+    },
+    {
+      "case": "admin delete persisted",
+      "passed": true
+    },
+    {
+      "case": "admin recreates for batch delete",
+      "passed": true
+    },
+    {
+      "case": "admin batch deletes managed work",
+      "passed": true
+    },
+    {
+      "case": "admin batch delete persisted",
+      "passed": true
+    },
+    {
+      "case": "admin empty import reaches existing validation",
+      "passed": true
+    },
+    {
+      "case": "admin management list available",
+      "passed": true
+    },
+    {
+      "case": "admin export available",
+      "passed": true
+    },
+    {
+      "case": "dev creates managed work",
+      "passed": true
+    },
+    {
+      "case": "dev create persisted",
+      "passed": true
+    },
+    {
+      "case": "dev edits managed work",
+      "passed": true
+    },
+    {
+      "case": "dev edit persisted",
+      "passed": true
+    },
+    {
+      "case": "dev reads managed work",
+      "passed": true
+    },
+    {
+      "case": "dev deletes managed work",
+      "passed": true
+    },
+    {
+      "case": "dev delete persisted",
+      "passed": true
+    },
+    {
+      "case": "dev recreates for batch delete",
+      "passed": true
+    },
+    {
+      "case": "dev batch deletes managed work",
+      "passed": true
+    },
+    {
+      "case": "dev batch delete persisted",
+      "passed": true
+    },
+    {
+      "case": "dev empty import reaches existing validation",
+      "passed": true
+    },
+    {
+      "case": "dev management list available",
+      "passed": true
+    },
+    {
+      "case": "dev export available",
+      "passed": true
+    },
+    {
+      "case": "teacher without managed classes denied list",
+      "passed": true
+    },
+    {
+      "case": "teacher without managed classes denied exportXls",
+      "passed": true
+    },
+    {
+      "case": "teacher without managed classes denied queryById",
+      "passed": true
+    },
+    {
+      "case": "teacher deletes own probe attachment",
+      "passed": true
+    },
+    {
+      "case": "allowed deletion removes owned work and child rows",
+      "passed": true
+    },
+    {
+      "case": "unrelated class attachment retained",
+      "passed": true
+    },
+    {
+      "case": "teacher B deletes own unshared attachment",
+      "passed": true
+    },
+    {
+      "case": "authorized unshared deletion removes attachment bytes and file row",
+      "passed": true
+    },
+    {
+      "case": "all original business class role and daily-log rows restored",
+      "passed": true
+    },
+    {
+      "case": "teacher managed class restored",
+      "passed": true
+    },
+    {
+      "case": "all original attachment bytes restored",
+      "passed": true
+    }
+  ],
+  "known_followups": [
+    {
+      "issue": "Deleting a sent source may remove the recipient shared attachment",
+      "recipient_still_references_source_file": true,
+      "shared_attachment_missing": false,
+      "status": "observation on this candidate only; dedicated attachment-lifecycle checks cover preservation and reclamation"
+    }
+  ]
+}

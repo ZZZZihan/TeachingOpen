@@ -72,6 +72,15 @@ public class CommonController {
 		Result<?> result = new Result<>();
 		String savePath = "";
 		String bizPath = request.getParameter("biz");
+		String editorPath = request.getParameter("bizPath");
+		if (oConvertUtils.isNotEmpty(bizPath) && oConvertUtils.isNotEmpty(editorPath)
+				&& !bizPath.equals(editorPath)) {
+			return Result.error("上传目录参数不一致");
+		}
+		if (oConvertUtils.isEmpty(bizPath)) bizPath = editorPath;
+		if (!(request instanceof MultipartHttpServletRequest)) {
+			return Result.error("请选择上传文件");
+		}
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		MultipartFile file = multipartRequest.getFile("file");// 获取上传文件对象
 		if(oConvertUtils.isEmpty(bizPath)){
@@ -93,9 +102,17 @@ public class CommonController {
 				result.setSuccess(true);
 				return result;
 			}else{
-				savePath = this.uploadLocal(file,bizPath);
+				try {
+					savePath = LocalFileUpload.save(uploadpath, bizPath, file);
+				} catch (IllegalArgumentException invalidUpload) {
+					return Result.error(invalidUpload.getMessage());
+				} catch (IOException failure) {
+					log.warn("Local upload failed", failure);
+					return Result.error("文件上传失败，请稍后重试");
+				}
 			}
 		}else{
+			if (file == null) return Result.error("请选择上传文件");
 			savePath = sysBaseAPI.upload(file,bizPath,uploadType);
 		}
 		if(oConvertUtils.isNotEmpty(savePath)){
@@ -106,46 +123,6 @@ public class CommonController {
 			result.setSuccess(false);
 		}
 		return result;
-	}
-
-	/**
-	 * 本地文件上传
-	 * @param mf 文件
-	 * @param bizPath  自定义路径
-	 * @return
-	 */
-	private String uploadLocal(MultipartFile mf,String bizPath){
-		try {
-			String ctxPath = uploadpath;
-			String fileName = null;
-			File file = new File(ctxPath + File.separator + bizPath + File.separator );
-			if (!file.exists()) {
-				file.mkdirs();// 创建文件根目录
-			}
-			String orgName = mf.getOriginalFilename();// 获取文件名
-			orgName = CommonUtils.getFileName(orgName);
-			if(orgName.indexOf(".")!=-1){
-				fileName = UUIDGenerator.generate() + orgName.substring(orgName.indexOf("."));
-			}else{
-				fileName = UUIDGenerator.generate();
-			}
-			String savePath = file.getPath() + File.separator + fileName;
-			File savefile = new File(savePath);
-			FileCopyUtils.copy(mf.getBytes(), savefile);
-			String dbpath = null;
-			if(oConvertUtils.isNotEmpty(bizPath)){
-				dbpath = bizPath + File.separator + fileName;
-			}else{
-				dbpath = fileName;
-			}
-			if (dbpath.contains("\\")) {
-				dbpath = dbpath.replace("\\", "/");
-			}
-			return dbpath;
-		} catch (IOException e) {
-			log.error(e.getMessage(), e);
-		}
-		return "";
 	}
 
 //	@PostMapping(value = "/upload2")
