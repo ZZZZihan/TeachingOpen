@@ -33,16 +33,26 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 		try {
 			executeLogin(request, response);
 			return true;
-		} catch (Exception e) {
-			throw new AuthenticationException("Token失效，请重新登录", e);
+		} catch (AuthenticationException e) {
+			return false;
 		}
+	}
+
+	@Override
+	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		httpResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+		httpResponse.setCharacterEncoding("UTF-8");
+		httpResponse.setContentType("application/json");
+		httpResponse.getWriter().write("{\"success\":false,\"code\":401,\"message\":\"Token失效，请重新登录\"}");
+		return false;
 	}
 
 	/**
 	 *
 	 */
 	@Override
-	protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
+	protected boolean executeLogin(ServletRequest request, ServletResponse response) {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		String token = httpServletRequest.getHeader(DefContants.X_ACCESS_TOKEN);
 
