@@ -8,21 +8,24 @@
         v-model="queryParam.status"
         :trigger-change="true"
         :defaultDictOptions="[{title: '全部', text: '全部', description:'', value: ''},
-                        {title: '未提交', text: '未提交', description:'', value: 'false'},
-                        {title: '已提交', text: '已提交', description:'', value: 'true'}]"
+                              {title: '未提交', text: '未提交', description:'', value: 'false'},
+                              {title: '已提交', text: '已提交', description:'', value: 'true'}]"
       />
     </a-card>
     <a-divider />
     <a-card :bordered="false">
-      <a-list item-layout="horizontal" :dataSource="datasource" :pagination="pagination">
+      <a-alert v-if="listError" type="error" showIcon message="作业列表暂时无法更新">
+        <template slot="description">请检查网络后重试。<a-button size="small" @click="getList">重新加载</a-button></template>
+      </a-alert>
+      <a-list item-layout="horizontal" :dataSource="datasource" :pagination="pagination" :loading="loading">
         <a-list-item slot="renderItem" slot-scope="work">
           <a-list-item-meta>
             <img class="work-cover" slot="avatar" :src="work.workCover_url" alt="" />
             <template slot="title" class="title" href="#">
-              <h3>{{ work.workName }} <a-tag color="blue">{{work.codeType_dictText}}</a-tag></h3>
+              <h3>{{ work.workName }} <a-tag color="blue">{{ work.codeType_dictText }}</a-tag></h3>
             </template>
             <template slot="description">
-              <pre class="work-desc">{{work.workDesc}}</pre>
+              <pre class="work-desc">{{ work.workDesc }}</pre>
               <div class="work-info">
                 <a-tag>班级：{{ work.departName }}</a-tag>
                 <a-divider type="vertical" />
@@ -33,137 +36,146 @@
           <div slot="extra" class="btns">
             <a-tooltip>
               <template slot="title">
-                <p>{{work.comment}}</p>
+                <p>{{ work.comment }}</p>
               </template>
               <a-rate v-if="work.score" :disabled="true" :value="work.score" />
             </a-tooltip>
             <a-button v-if="work.workDocumentUrl" @click="openWorkFile(work.workDocumentUrl)">作业资料</a-button>
             <!-- <a-divider v-if="work.workDocumentUrl != null" type="vertical" /> -->
-            <a-button type="primary" :disabled="work.mineWorkStatus > 1" @click="toAdditionalWork(work, false)"> {{work.mineWorkStatus==null?'去做作业':'修改作业'}} </a-button>
+            <a-button type="primary" :disabled="work.mineWorkStatus > 1" @click="toAdditionalWork(work, false)"> {{ work.mineWorkStatus==null?'去做作业':'修改作业' }} </a-button>
             <a-divider v-if="work.mineWorkStatus != null && work.mineWorkStatus < 2" type="vertical" />
             <a-button type="primary" v-if="work.mineWorkStatus != null && work.mineWorkStatus < 2" @click="toAdditionalWork(work, true)"> 重做 </a-button>
           </div>
         </a-list-item>
       </a-list>
     </a-card>
-    <TeachingWorkSubmitModal ref="submitModal"/>
+    <TeachingWorkSubmitModal ref="submitModal" @ok="getList"/>
   </div>
 </template>
 
 <script>
-import { getAction } from '@/api/manage'
+import { getAction, getFilePrevew } from '@/api/manage'
 import { mixinDevice } from '@/utils/mixin.js'
 import JDictSelectTag from '@/components/dict/JDictSelectTag.vue'
 import TeachingWorkSubmitModal from '@/views/teaching/modules/TeachingWorkSubmitModal'
-import { getFileAccessHttpUrl, getFilePrevew } from '@/api/manage'
 
 export default {
-  mixins: [mixinDevice],
-  components: {
-    JDictSelectTag,
-    TeachingWorkSubmitModal
-  },
-  data() {
-    return {
-      datasource: [],
-      pagination: {
-        onChange: (page) => {
-          console.log(page)
-        },
-        pageSize: 8,
-      },
-      loading: true,
-      queryParam: {status:'false'},
-    }
-  },
-  created() {
-    this.getList()
-  },
-  methods: {
-    getFilePrevew,
-    getList() {
-      this.loading = true
-      this.datasource = []
-      getAction('/teaching/teachingWork/mineAdditionalWork', {
-        pageSize: 999,
-        submit: this.queryParam.status
-      }).then((res) => {
-        console.log(res)
-        if (res.success) {
-          this.datasource = res.result
+    mixins: [mixinDevice],
+    components: {
+        JDictSelectTag,
+        TeachingWorkSubmitModal
+    },
+    data () {
+        return {
+            datasource: [],
+            pagination: {
+                onChange: (page) => {
+                    console.log(page)
+                },
+                pageSize: 8
+            },
+            loading: true,
+            listError: false,
+            listVersion: 0,
+            queryParam: { status: 'false' }
         }
-        this.loading = false
-      })
     },
-     handleChangeStatus(v) {
-      this.queryParam.status = v.target.value
-      this.getList()
+    created () {
+        this.getList()
     },
-    openWorkFile(workUrl) {
-      if(workUrl.startsWith('aes')||workUrl.endsWith('ppt')||workUrl.endsWith('pptx')||workUrl.endsWith('doc')||workUrl.endsWith('docx')||workUrl.endsWith('xls')||workUrl.endsWith('xlsx')){
-        window.open(getFilePrevew(workUrl))
-      }else{
-        window.open(workUrl)
-      }
+    beforeDestroy () {
+        this.listVersion += 1
     },
-    toAdditionalWork(item, reset) {
-      console.log(item);
-      var workUrl
-      switch (item.codeType) {
-        case 1:
-          workUrl =
+    methods: {
+        getFilePrevew,
+        getList () {
+            const version = ++this.listVersion
+            this.loading = true
+            this.listError = false
+            this.datasource = []
+            return getAction('/teaching/teachingWork/mineAdditionalWork', {
+                pageSize: 999,
+                submit: this.queryParam.status
+            }).then((res) => {
+                if (version !== this.listVersion) return
+                if (!res || !res.success || !Array.isArray(res.result)) throw new Error('Invalid assignment list')
+                this.datasource = res.result
+            }).catch(() => {
+                if (version === this.listVersion) this.listError = true
+            }).finally(() => {
+                if (version === this.listVersion) this.loading = false
+            })
+        },
+        handleChangeStatus (v) {
+            this.queryParam.status = v.target.value
+            this.getList()
+        },
+        openWorkFile (workUrl) {
+            if (workUrl.startsWith('aes') || workUrl.endsWith('ppt') || workUrl.endsWith('pptx') || workUrl.endsWith('doc') || workUrl.endsWith('docx') || workUrl.endsWith('xls') || workUrl.endsWith('xlsx')) {
+                window.open(getFilePrevew(workUrl))
+            } else {
+                window.open(workUrl)
+            }
+        },
+        toAdditionalWork (item, reset) {
+            console.log(item)
+            var workUrl
+            switch (item.codeType) {
+            case 1:
+                workUrl =
             '/scratch3/index.html?scene=additional&additionalId=' +
             item.additionalWorkId +
             '&departId=' +
             item.departId +
             '&workName=' +
             item.workName
-          break
-        case 2:
-          workUrl =
+                break
+            case 2:
+                workUrl =
             '/scratch3/index.html?scene=additional&additionalId=' +
             item.additionalWorkId +
             '&departId=' +
             item.departId +
             '&workName=' +
             item.workName
-          break
-        case 3:
-          workUrl = '/scratchjr/editor.html?scene=additional&mode=edit&additionalId='+
+                break
+            case 3:
+                workUrl = '/scratchjr/editor.html?scene=additional&mode=edit&additionalId=' +
             item.additionalWorkId +
             '&departId=' +
             item.departId +
             '&workName=' +
             item.workName
-          break
-        case 4:
-          workUrl =
+                break
+            case 4:
+                workUrl =
             '/python/index.html?scene=additional&lang=turtle&additionalId=' +
             item.additionalWorkId +
             '&departId=' +
             item.departId +
             '&workName=' +
             item.workName
-          break
-        default:
-          //workUrl = item.workUrl_url
-          this.$refs.submitModal.open({
-            workName:item.workName,
-            additionalId: item.additionalWorkId,
-            departId: item.departId,
-            workType:0
-           })
-          return
-      }
+                break
+            default:
+                // workUrl = item.workUrl_url
+                this.$refs.submitModal.open({
+                    id: item.mineWorkId || '',
+                    workName: !reset && item.mineWorkName ? item.mineWorkName : item.workName,
+                    additionalId: item.additionalWorkId,
+                    departId: item.departId,
+                    workType: 0
+                })
+                return
+            }
 
-      if(!reset && item.mineWorkUrl){
-        workUrl += "&workFile=" + item.mineWorkUrl;
-      }else{
-          workUrl += "&workFile=" + item.workUrl_url;
-      }
-      window.open(workUrl)
-    },
-  },
+            if (!reset && item.mineWorkUrl) {
+                workUrl += '&workFile=' + item.mineWorkUrl
+            } else {
+                workUrl += '&workFile=' + item.workUrl_url
+            }
+            window.open(workUrl)
+        }
+    }
 }
 </script>
 
