@@ -1,0 +1,6 @@
+{
+  "source_files_checked": 5634,
+  "source_files_changed": [],
+  "scope": "loopback fixture browser; no database or real API writes this PR",
+  "original_ui_http_status": 200
+}

@@ -1,0 +1,32 @@
+{
+  "index.html": {
+    "sha256": "2157487df5b395713545f51bae6082e0a8ec42c6c3c8fe84f77132558a511a9d",
+    "bytes": 1312,
+    "source_build_fixture_http_equal": true
+  },
+  "player.html": {
+    "sha256": "57f39c4004d7455ac42dabdf34a6b41616219c2909c53f3b1e7aebc5baa2600f",
+    "bytes": 698,
+    "source_build_fixture_http_equal": true
+  },
+  "output.js": {
+    "sha256": "93fb2cf5cddd604f03ef724e5aac7f6479afe196b17f7be82864049acd795482",
+    "bytes": 2385,
+    "source_build_fixture_http_equal": true
+  },
+  "output.css": {
+    "sha256": "dd262037ab03eee631ea9c152639c89105964af625be62faa808bf65b9059207",
+    "bytes": 555,
+    "source_build_fixture_http_equal": true
+  },
+  "static/js/app.js": {
+    "sha256": "737d67e8412ae79eeae3b9bb2412fe7d13518aba76024dadad93b5e54401842c",
+    "bytes": 981078,
+    "source_build_fixture_http_equal": true
+  },
+  "static/js/appPlayer.js": {
+    "sha256": "2bb033a7762902ad586db47a6a0b57cf455c3b10ee07c3dd390f07db2670ea11",
+    "bytes": 978586,
+    "source_build_fixture_http_equal": true
+  }
+}

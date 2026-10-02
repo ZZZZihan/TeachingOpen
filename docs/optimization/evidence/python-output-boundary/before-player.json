@@ -1,0 +1,7 @@
+{
+  "children": [
+    "STRONG"
+  ],
+  "html": "<strong data-output-probe=\"literal\">HTML 必须保持原样</strong>\n&lt;b&gt; 3 &lt; 5 &amp; 8 &gt; 2\n中文与符号：你好 😀\n42\n",
+  "text": "HTML 必须保持原样\n<b> 3 < 5 & 8 > 2\n中文与符号：你好 😀\n42\n"
+}
