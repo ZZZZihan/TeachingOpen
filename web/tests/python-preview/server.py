@@ -2,6 +2,7 @@
 Run: python3 web/tests/python-preview/server.py --port 18120 --directory web/public
 """
 import argparse, hashlib, json, threading, time
+from pathlib import Path
 from email.parser import BytesParser
 from email.policy import default
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -10,9 +11,11 @@ from urllib.parse import urlparse, parse_qs
 parser = argparse.ArgumentParser()
 parser.add_argument('--port', type=int, required=True)
 parser.add_argument('--directory', required=True)
+parser.add_argument('--seed-file', help='Self-authored Python fixture; defaults to persistence smoke program')
 args = parser.parse_args()
 lock = threading.Lock()
 seed = 'print("Python persistence fixture")\nprint(6 * 7)\n'
+if args.seed_file: seed = Path(args.seed_file).read_text(encoding='utf-8')
 state = {'mode': 'normal', 'reads': [], 'uploads': [], 'registrations': [], 'submissions': [], 'works': {
     'seed-work': {'id': 'seed-work', 'workName': '我的练习 & 100%', 'workType': '4', 'workFileKey_url': '/fixtures/seed.py?revision=1&label=a+b', 'additionalId': 'task-python', 'departId': 'class-fixture'}}}
 files = {'/fixtures/seed.py': seed.encode()}
