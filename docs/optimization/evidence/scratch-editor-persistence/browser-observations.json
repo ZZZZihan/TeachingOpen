@@ -1,0 +1,87 @@
+{
+  "scope": "Actual inherited Scratch VM and UI with loopback-only synthetic HTTP; no platform auth or business database. External telemetry/cloud blocked by fixture CSP.",
+  "baseline": {
+    "commit": "e772f0212885f01878ba9acc828686c4a30cf1d4",
+    "result": "Literal percent name caused URIError and blank page; screenshot before-load.png."
+  },
+  "observations": [
+    {
+      "case": "encoded_title",
+      "observed": "Old percent-name URL now opens the actual Scratch project and literal 100% title.",
+      "passed": true
+    },
+    {
+      "case": "draft_version_one",
+      "observed": "Actual title input and sprite x=100 saved; SB3 contains x=100; PNG signature valid; returned saved-2; status 0.",
+      "passed": true
+    },
+    {
+      "case": "slow_second_save",
+      "observed": "Four-second project transfer kept both save buttons disabled and editor inert.",
+      "passed": true
+    },
+    {
+      "case": "paired_second_version",
+      "observed": "Actual x=-80 and renamed title saved with fresh matching project/cover IDs; cover SHA changed; same saved-2; status 1.",
+      "passed": true
+    },
+    {
+      "case": "refresh_latest",
+      "observed": "Browser reload read saved-2 metadata and actual VM displayed latest title and x=-80.",
+      "passed": true
+    },
+    {
+      "case": "cover_failure",
+      "observed": "Failed cover upload produced no third submission; editable project and retry buttons remained.",
+      "passed": true
+    },
+    {
+      "case": "cover_retry",
+      "observed": "Restored normal service; native submit action succeeded, then refreshed latest saved project.",
+      "passed": true
+    },
+    {
+      "case": "responsive",
+      "observed": "1440/768/390 document widths match viewport. At 768/390 only workspace scrolls at 1024; support notice visible; top controls enabled.",
+      "passed": true
+    },
+    {
+      "case": "mobile_save",
+      "observed": "Native save click at 390 succeeded and retained same work ID.",
+      "passed": true
+    },
+    {
+      "case": "load_failure",
+      "observed": "Actual metadata 503 after reload: visible error/retry, both save controls disabled, editor inert.",
+      "passed": true
+    },
+    {
+      "case": "load_retry",
+      "observed": "Restored service and clicked retry: actual VM reopened x=-80 and existing title.",
+      "passed": true
+    },
+    {
+      "case": "submit_failure",
+      "observed": "Business failure after uploads retained x=-80 and showed save incomplete; no success claim.",
+      "passed": true
+    },
+    {
+      "case": "unauthorized",
+      "observed": "Actual HTTP 401 uploads showed login/permission recovery message, unlocked editor and buttons.",
+      "passed": true
+    },
+    {
+      "case": "save_recovery",
+      "observed": "Restored service and clicked submit: same saved-2 updated successfully.",
+      "passed": true
+    },
+    {
+      "case": "course_open_save_reopen",
+      "observed": "Course unit fixture opens named project, saves with courseId=course-fixture and scene=course, refresh reopens saved-3.",
+      "passed": true
+    }
+  ],
+  "passed": 15,
+  "total": 15,
+  "authenticated_browser_e2e": false
+}

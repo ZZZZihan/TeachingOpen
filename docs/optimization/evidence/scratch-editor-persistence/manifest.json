@@ -1,0 +1,45 @@
+{
+  "product_commit": "9866188d067e4b5bd5447980df781fd6fb718569",
+  "base_commit": "e772f0212885f01878ba9acc828686c4a30cf1d4",
+  "product_sha256": {
+    "web/public/scratch3/index.html": "3337440761d00f5ece29c38896be8686871bc8596355006dd9879c45ee8f479c",
+    "web/public/scratch3/persistence.js": "1e9e5d618f142004e3787b00ab874f7fd8ecc3e26ef2fa372db97141dab51aaf",
+    "web/public/scratch3/editor-bridge.js": "a8e9667a2e4fe2eddc091658fd056ae89465a7f359839587e673a471e7fe369b",
+    "web/public/scratch3/persistence.css": "feb475594df60be6c7d7c9b7696fc7d470507e7dc5c4b7e95081c85bde51e2a1",
+    "web/public/scratch3/lib.min.js": "64aec4d6caf19f0c1a793df5445f591b7fc8914f3e0ef2c7000d075544bbf176",
+    "web/public/scratch3/chunks/gui.js": "fba23efa32acef68f3f216820d7cfa0fd82d9cea319e2852a30bc5725f5c5167",
+    "web/src/views/account/course/MyAdditionalWorkList.vue": "8cebb57fb4d4bed593d2eeecb8b0f4bcde4c7360e606596038b81fdea7df4d90"
+  },
+  "evidence_sha256": {
+    "after-1440.png": "3ead2c35a976b29c70ec9d8834867ea031baaafa45dcaa05ab42ee5cc2515bd6",
+    "after-390.png": "bf0bfe3dc995d762fde340ac72ae21adf739eacd8b4af104e623d36126322e95",
+    "after-768.png": "5983ccb24e545fa5fe11b233931a00fa9d52366e335816f174b80aeaeceee974",
+    "before-load.png": "3feda1912fecb9ee4717bef2018d9e6dc8a6111eabab9fffbd45ab50bc9636b7",
+    "browser-errors.json": "09c3da9ebda072060bf070d09e880e5dbf7a8a52eeef47d4e6b6ce3ce3deab64",
+    "browser-files/version1.png": "a2541c3e4002754d6d494a335439e5ff40280778c1147c8ba5fd1fe12a5ec673",
+    "browser-files/version1.sb3": "2bd2f20df8d0adc3beb940a13269b60ba7c678396a6d2fba58e017af0d292c73",
+    "browser-files/version2.png": "a8ffd68110887fc7320895a691cf69c1789705273da9a739bcbf38fa88dd2e22",
+    "browser-files/version2.sb3": "4171149a383a975ab1851482184b1ccb7ef6d7440ecf9770e1be1b04dcbb67cf",
+    "browser-observations.json": "75502ef30c4db359eceeea3fd7341251de3cc2a4d069b54b95d3526ff9b1842e",
+    "frontend-tests.txt": "d528f4317b9633718ff2a43ad994b1a0d60cf9f7a1e2ab95b259fec332fbfa2b",
+    "lint.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "load-failure.png": "5c14fe0b86aa37603b5f895d51713bc11330309b5170bc2ebfb0d39c3e239958",
+    "preservation.json": "cd4debc4659d7c42bca83a3e7c0501747704dfc22283851978f6e9df496d956f",
+    "production-build.txt": "63492c8a6d2eb721a71573f20e3010020b31fb106e6cb1c84c277bc34d31c462",
+    "real-backend.json": "a615cb2c2da9ca311497e7e43f1107bbf2c6e52bffae9d62855819bf709c6bf1",
+    "real-backend.txt": "833a94896dc2831056c47806ad591ce3a95a873172af61d18aac935221474b55",
+    "responsive.json": "d6b422ff9b4899666ecc9fa73e66e67fb2035cfb3366c4b3ba797873b439570a",
+    "synthetic-http-state.json": "174d2f639358bac8885935c8963d6eb84b5aacb1c9aa42da4b2e2420ece97b8b",
+    "upload-failure.png": "3c9620fc9e3be7626362ec55b897f6749d30e212f8d3e369facc96fd752543a8"
+  },
+  "frontend_tests": {
+    "passed": 138,
+    "total": 138,
+    "new": 17
+  },
+  "browser_observations": 15,
+  "real_api_cases": 24,
+  "authenticated_browser_e2e": false,
+  "review_type": "engineering self-check, not independent review or user acceptance",
+  "log_format": "Text build log has trailing whitespace trimmed; output content and results unchanged."
+}

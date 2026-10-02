@@ -167,23 +167,18 @@ export default {
             var workUrl
             switch (item.codeType) {
             case 1:
-                workUrl =
-            '/scratch3/index.html?scene=additional&additionalId=' +
-            item.additionalWorkId +
-            '&departId=' +
-            item.departId +
-            '&workName=' +
-            item.workName
-                break
-            case 2:
-                workUrl =
-            '/scratch3/index.html?scene=additional&additionalId=' +
-            item.additionalWorkId +
-            '&departId=' +
-            item.departId +
-            '&workName=' +
-            item.workName
-                break
+            case 2: {
+                const params = new URLSearchParams({ queryEncoding: 'uri',
+                    scene: 'additional',
+                    additionalId: item.additionalWorkId,
+                    departId: item.departId,
+                    workId: item.mineWorkId || '',
+                    workName: !reset && item.mineWorkName ? item.mineWorkName : item.workName,
+                    workFile: (reset ? item.workUrl_url : item.mineWorkUrl_url || item.mineWorkUrl || item.workUrl_url) || '',
+                    resetTemplate: reset ? '1' : '' })
+                window.open('/scratch3/index.html?' + params.toString(), '_blank', 'noopener,noreferrer')
+                return
+            }
             case 3:
                 workUrl = '/scratchjr/editor.html?scene=additional&mode=edit&additionalId=' +
             item.additionalWorkId +

@@ -1,0 +1,53 @@
+[
+  {
+    "documentWidth": 1440,
+    "images": [
+      {
+        "naturalWidth": 64,
+        "src": "./static/favicon.ico"
+      }
+    ],
+    "noticeVisible": false,
+    "saveEnabled": true,
+    "status": "作品已打开，可以继续编辑。",
+    "submitEnabled": true,
+    "title": "Scratch 第二版 & 100%",
+    "width": 1440,
+    "workspaceScrollWidth": 1440,
+    "workspaceWidth": 1440
+  },
+  {
+    "documentWidth": 768,
+    "images": [
+      {
+        "naturalWidth": 64,
+        "src": "./static/favicon.ico"
+      }
+    ],
+    "noticeVisible": true,
+    "saveEnabled": true,
+    "status": "作品已打开，可以继续编辑。",
+    "submitEnabled": true,
+    "title": "Scratch 第二版 & 100%",
+    "width": 768,
+    "workspaceScrollWidth": 1024,
+    "workspaceWidth": 768
+  },
+  {
+    "documentWidth": 390,
+    "images": [
+      {
+        "naturalWidth": 64,
+        "src": "./static/favicon.ico"
+      }
+    ],
+    "noticeVisible": true,
+    "saveEnabled": true,
+    "status": "作品已打开，可以继续编辑。",
+    "submitEnabled": true,
+    "title": "Scratch 第二版 & 100%",
+    "width": 390,
+    "workspaceScrollWidth": 1024,
+    "workspaceWidth": 390
+  }
+]
