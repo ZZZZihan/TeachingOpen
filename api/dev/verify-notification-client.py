@@ -11,12 +11,13 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--runtime', type=Path, required=True)
 parser.add_argument('--jar', type=Path, required=True)
 parser.add_argument('--output', type=Path, required=True)
+parser.add_argument('--via-frontend', action='store_true', help='Use the runtime same-origin proxy for WebSocket and HTTP sends')
 args = parser.parse_args()
 with FixtureApi(args.runtime, args.jar) as api:
     before, files = database_inventory(api.runtime), file_inventory(api.runtime / 'uploads')
     api.login('admin'); api.login('student_a')
     script = Path(__file__).resolve().parents[2] / 'web/tests/notification-client-live.mjs'
-    process = subprocess.run(['node', str(script)], input=json.dumps({'baseUrl': 'http://127.0.0.1:' + str(api.ports['backend']) + '/api',
+    process = subprocess.run(['node', str(script)], input=json.dumps({'baseUrl': 'http://127.0.0.1:' + str(api.ports['frontend' if args.via_frontend else 'backend']) + '/api',
                               'userId': 'fixture_student_a', 'token': api.tokens['student_a'], 'adminToken': api.tokens['admin']}),
                              capture_output=True, text=True, timeout=20)
     if process.returncode:
@@ -24,6 +25,7 @@ with FixtureApi(args.runtime, args.jar) as api:
         raise RuntimeError('Live notification client failed with exit ' + str(process.returncode))
     result = json.loads(process.stdout)
     result['jar_sha256'] = api.jar_sha256
+    result['via_frontend'] = args.via_frontend
     after = database_inventory(api.runtime)
     result['cases'].append({'case': 'all non-audit-log tables unchanged', 'passed': all(before[t] == after[t] for t in before if t != 'sys_log')})
     result['cases'].append({'case': 'all attachment bytes unchanged', 'passed': files == file_inventory(api.runtime / 'uploads')})
