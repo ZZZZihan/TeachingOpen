@@ -53,7 +53,7 @@ test('store menu loading keeps menu and button data without forwarding a URL cre
   for (const key of ['USER_AUTH', 'SYS_BUTTON_AUTH']) h.context[key] = key
   h.context.sessionStorage = { setItem: (key, value) => writes.set(key, value) }
   vm.runInContext(stripImports(source('store/modules/user.js')).replace('export default user', 'this.user = user'), h.context)
-  const response = await h.context.user.actions.GetPermissionList({ commit: (...args) => commits.push(args) })
+  const response = await h.context.user.actions.GetPermissionList({ state: h.context.user.state, commit: (...args) => commits.push(args) })
   assert.equal(response, h.response)
   assert.equal(commits[0][0], 'SET_PERMISSIONLIST')
   assert.equal(commits[0][1], h.response.result.menu)
