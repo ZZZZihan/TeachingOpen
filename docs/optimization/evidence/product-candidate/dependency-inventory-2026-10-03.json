@@ -281,5 +281,11 @@
     "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
     "official_source": "https://tomcat.apache.org/security-9.html",
     "scope": "Only the three embedded Tomcat artifacts; other inventory entries remain unresolved followups."
+  },
+  "notification_remediation": {
+    "pull_request": "https://github.com/ZZZZihan/TeachingOpen/pull/34",
+    "product_commit": "10a3f167b90fe4f270792e035985c4a38aedb305",
+    "scope": "Notification first-frame identity, outbound token validation, multi-session cleanup, test sender roles and no payload logs. Scratch cloudData and other announcement REST authorization remain open.",
+    "same_origin_local_proxy": "Actual HTTP 400 on Upgrade at 18112; next independent fix required."
   }
 }

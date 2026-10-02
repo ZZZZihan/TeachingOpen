@@ -1,0 +1,72 @@
+{
+  "generated_utc": "2026-10-02T23:24:20.969332+00:00",
+  "source_commit": "0caaab3bb03f2fe433cd946823bd19b7089c791c",
+  "tested_code_commit": "7a0fe014d5de5c68335461321d8c1c1aa0553257",
+  "previous_commit": "6ffbaf364f2a7f87b41bfd3cbd0650839f6057e1",
+  "integrated_pr": "https://github.com/ZZZZihan/TeachingOpen/pull/34",
+  "pr_head": "20f52ca13df1d8649cace5927651b5b194f8a0c8",
+  "api_tree": "5c74542519a39ef4882aef6f3e0beb57f272ac5e",
+  "web_tree": "dc434125f306aab68e0d12e79a500364d5d33f8f",
+  "api_tree_equals_tested_pr": true,
+  "web_tree_equals_built_and_tested_code_commit": true,
+  "frontend_tests": {
+    "passed": 179,
+    "total": 179
+  },
+  "frontend_build_exit_code": 0,
+  "frontend_build_existing_warnings": 6,
+  "frontend_lint": "new helper 0/0; HeaderNotice 122 errors / 148 warnings against baseline 212 / 211",
+  "candidate_real_checks": {
+    "notification_socket": 44,
+    "actual_node_client": 5,
+    "passed": 49,
+    "total": 49
+  },
+  "isolated_pr_checks": {
+    "passed": 139,
+    "total": 139,
+    "scope": "Not fully repeated on integration"
+  },
+  "backend_pid": 7035,
+  "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396",
+  "jar_provenance": "Exact clean-built product 10a3f16 JAR; later additions are probes and evidence only",
+  "frontend_dist_files": 4884,
+  "dist_inventory_sha256": "d3002c8a5e21996d780f33f1b327210aac0eaf12f1f17a603dfc174866ccb2c2",
+  "http_assets": {
+    "/index.html": "a5b1fba9890e1682bdcf8b866d7edbbf3aadaf712a408244cb99c9b87c6c148b",
+    "/js/app.f75d88dd.js": "ec1de4c26557b893d39b69bed2219be670f6eea09dec9c941cfe25bcc0cc59fc"
+  },
+  "anonymous_protected_proxy_status": 401,
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "business_data_preservation": {
+    "tables_checked": 69,
+    "changed_tables": [
+      "sys_log"
+    ],
+    "all_68_business_tables_equal": true,
+    "attachments_equal": true,
+    "sys_log_rows_before": 3008,
+    "sys_log_rows_after": 3022
+  },
+  "same_origin_websocket_proxy": {
+    "verified_working": false,
+    "observed_http_status": 400,
+    "existing_limitation": true,
+    "next_independent_fix": true
+  },
+  "notification_ui_auto_enabled": false,
+  "browser_e2e": false,
+  "remote_merged": false,
+  "production_changed": false,
+  "evidence_sha256": {
+    "notification-websocket.json": "8aaafa9f667c8033e4f24c2014a91ceafe2d8e57d59eb2b1740379a1feb4f544",
+    "notification-client.json": "e775d1769f1f21480e8825799ec356224b806c7858144e00680f9c21b1fb539c",
+    "notification-proxy-limit.json": "826e3dfdeb590791c00fe3f6ef17a4a2ca149491d9594953bbdf478431bc4e91",
+    "notification-frontend-tests.txt": "b98f4fb89021f8e21e74de9a6b4d4bdd34a6c11497a147f0488ca39ff408e711",
+    "notification-frontend-build.txt": "158cb95de3d01c7468b35184cfa070a40e62217c3c707530081cec69e93095ee"
+  }
+}
