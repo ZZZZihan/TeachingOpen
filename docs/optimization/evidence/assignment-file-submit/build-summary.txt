@@ -1,0 +1,4 @@
+npm test: 95/95, exit 0
+3 modified source files ESLint: 0 errors / 0 warnings, exit 0
+npm run build: exit 0; 6 existing warnings (CSS order and asset/entrypoint size)
+No dependency or backend changes. No fresh dependency installation claimed.

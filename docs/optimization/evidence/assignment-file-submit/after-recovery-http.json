@@ -1,0 +1,128 @@
+{
+  "mode": "normal",
+  "uploads": [
+    {
+      "path": "fixture/1/observation-report.txt",
+      "name": "observation-report.txt",
+      "size": 133,
+      "sha256": "7c581d08b98f0bb32d833fbd7729b2a09a3b1b7befc383bf80d3ef050ef0591c",
+      "failed": false
+    },
+    {
+      "path": "fixture/2/observation-report.txt",
+      "name": "observation-report.txt",
+      "size": 133,
+      "sha256": "7c581d08b98f0bb32d833fbd7729b2a09a3b1b7befc383bf80d3ef050ef0591c",
+      "failed": false
+    },
+    {
+      "path": "fixture/3/second-report.txt",
+      "name": "second-report.txt",
+      "size": 74,
+      "sha256": "5dfe3d2eb9fb40c7eefb109641a0fb45ef24a3ff3b3a381883f3b2b1871efdf9",
+      "failed": false
+    },
+    {
+      "path": "fixture/4/observation-report.txt",
+      "name": "observation-report.txt",
+      "size": 133,
+      "sha256": "7c581d08b98f0bb32d833fbd7729b2a09a3b1b7befc383bf80d3ef050ef0591c",
+      "failed": false
+    },
+    {
+      "path": "fixture/5/observation-report.txt",
+      "name": "observation-report.txt",
+      "size": 133,
+      "sha256": "7c581d08b98f0bb32d833fbd7729b2a09a3b1b7befc383bf80d3ef050ef0591c",
+      "failed": false
+    },
+    {
+      "path": "fixture/6/second-report.txt",
+      "name": "second-report.txt",
+      "size": 74,
+      "sha256": "5dfe3d2eb9fb40c7eefb109641a0fb45ef24a3ff3b3a381883f3b2b1871efdf9",
+      "failed": false
+    },
+    {
+      "path": "fixture/7/second-report.txt",
+      "name": "second-report.txt",
+      "size": 74,
+      "sha256": "5dfe3d2eb9fb40c7eefb109641a0fb45ef24a3ff3b3a381883f3b2b1871efdf9",
+      "failed": false
+    }
+  ],
+  "registrations": [
+    {
+      "fileName": "observation-report.txt",
+      "filePath": "fixture/1/observation-report.txt",
+      "fileLocation": 1,
+      "fileTag": "学生作业",
+      "id": "fixture-file-1",
+      "failed": false
+    },
+    {
+      "fileName": "observation-report.txt",
+      "filePath": "fixture/2/observation-report.txt",
+      "fileLocation": 1,
+      "fileTag": "学生作业",
+      "id": "fixture-file-2",
+      "failed": false
+    },
+    {
+      "fileName": "second-report.txt",
+      "filePath": "fixture/3/second-report.txt",
+      "fileLocation": 1,
+      "fileTag": "学生作业",
+      "id": "fixture-file-3",
+      "failed": false
+    },
+    {
+      "fileName": "observation-report.txt",
+      "filePath": "fixture/4/observation-report.txt",
+      "fileLocation": 1,
+      "fileTag": "学生作业",
+      "id": "fixture-file-4",
+      "failed": true
+    },
+    {
+      "fileName": "observation-report.txt",
+      "filePath": "fixture/5/observation-report.txt",
+      "fileLocation": 1,
+      "fileTag": "学生作业",
+      "id": "fixture-file-5",
+      "failed": false
+    },
+    {
+      "fileName": "second-report.txt",
+      "filePath": "fixture/7/second-report.txt",
+      "fileLocation": 1,
+      "fileTag": "学生作业",
+      "id": "fixture-file-6",
+      "failed": false
+    }
+  ],
+  "submissions": [
+    {
+      "id": "",
+      "additionalId": "task-a",
+      "departId": "class-fixture",
+      "courseId": "",
+      "workName": "观察报告：身边的人工智能",
+      "workType": "0",
+      "workFile": "fixture-file-5",
+      "workStatus": 1,
+      "failed": true
+    },
+    {
+      "id": "",
+      "additionalId": "task-a",
+      "departId": "class-fixture",
+      "courseId": "",
+      "workName": "观察报告：身边的人工智能",
+      "workType": "0",
+      "workFile": "fixture-file-5",
+      "workStatus": 1,
+      "failed": false
+    }
+  ]
+}
