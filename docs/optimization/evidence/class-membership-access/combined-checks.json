@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-04",
+  "branch_tools": {
+    "ran": 42,
+    "passed": 42,
+    "skipped": 0,
+    "exit_code": 0
+  },
+  "integration_tools": {
+    "ran": 121,
+    "passed": 120,
+    "skipped": 1,
+    "exit_code": 0
+  },
+  "integration_frontend": {
+    "ran": 581,
+    "passed": 581,
+    "skipped": 0,
+    "exit_code": 0
+  },
+  "combined_frontend_http": [
+    13,
+    13
+  ],
+  "proxy_resources": [
+    24,
+    24
+  ],
+  "private_copy_readonly": [
+    12,
+    12
+  ],
+  "frontend_rebuilt": false,
+  "combination_tested_at": "032f5d50641fe53351ad608bf0079fce2e9080a9"
+}

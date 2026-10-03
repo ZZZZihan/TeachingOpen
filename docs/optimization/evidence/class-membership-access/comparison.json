@@ -1,0 +1,29 @@
+{
+  "old": [
+    28,
+    82
+  ],
+  "new": [
+    82,
+    82
+  ],
+  "identical_script_sha256": "b9b6c0c3f90b28f67cd353ebdf95a584abb90dfe0a11714200205c6abaf86053",
+  "identical_case_names": true,
+  "new_faults_reached": 7,
+  "restoration_old": {
+    "table_count": 69,
+    "non_audit_table_count": 68,
+    "same_table_set": true,
+    "changed_schemas": [],
+    "changed_non_audit_tables": [],
+    "attachments_equal": true
+  },
+  "restoration_new": {
+    "table_count": 69,
+    "non_audit_table_count": 68,
+    "same_table_set": true,
+    "changed_schemas": [],
+    "changed_non_audit_tables": [],
+    "attachments_equal": true
+  }
+}

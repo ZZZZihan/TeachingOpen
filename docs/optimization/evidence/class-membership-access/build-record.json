@@ -1,0 +1,21 @@
+{
+  "started_at_utc": "2026-10-03T15:58:12.085858+00:00",
+  "finished_at_utc": "2026-10-03T15:58:21.447973+00:00",
+  "cwd": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-membership-access/api",
+  "command": [
+    "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/apache-maven-3.9.16/bin/mvn",
+    "-B",
+    "-s",
+    "dev/maven-settings.xml",
+    "-Dmaven.repo.local=/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/m2",
+    "clean",
+    "package",
+    "-DskipTests"
+  ],
+  "java_home": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home",
+  "exit_code": 0,
+  "baseline": "c923ea03a0c5a75cb8f36dee1e90f6587702c0d6",
+  "source_manifest_same_before_and_after": true,
+  "source_files": 1031,
+  "tests_skipped": true
+}
