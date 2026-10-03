@@ -282,6 +282,10 @@ public class TeachingWorkController extends BaseController {
 		queryWrapper.eq(null != studentWorkModel.getUsername(), "teaching_work.create_by", studentWorkModel.getUsername())
 				.like(null != studentWorkModel.getWorkName(), "work_name", studentWorkModel.getWorkName())
 				.like(null != studentWorkModel.getRealname(), "realname", studentWorkModel.getRealname());
+		// These text fields already have their intended LIKE predicates above.
+		// Do not let the generic generator append equality to the fuzzy filters.
+		studentWorkModel.setWorkName(null);
+		studentWorkModel.setRealname(null);
 		QueryGenerator.installMplus(queryWrapper, studentWorkModel, req.getParameterMap());
 		//获取时间参数
 		Map<String, String[]> param = req.getParameterMap();

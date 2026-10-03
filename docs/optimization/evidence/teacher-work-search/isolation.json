@@ -1,0 +1,20 @@
+{
+  "invariance": {
+    "recovery-a": {
+      "non_audit_tables_unchanged": true,
+      "uploads_unchanged": true
+    },
+    "course-role-runtime": {
+      "non_audit_tables_unchanged": true,
+      "uploads_unchanged": true
+    }
+  },
+  "jar_sha256": "d89ef0667d90854195792b30d2af4b469738bb86c65498bd7c68ce350aeb3ac8",
+  "changed_jar_entries": [
+    "BOOT-INF/classes/org/jeecg/modules/teaching/controller/TeachingWorkController.class",
+    "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar"
+  ],
+  "nested_changes": {
+    "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar": []
+  }
+}
