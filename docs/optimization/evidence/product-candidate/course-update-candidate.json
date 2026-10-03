@@ -1,0 +1,74 @@
+{
+  "candidate_commit": "7e04947e73529d6b2ab1e9f8ef229c41c4987c86",
+  "api_tree": "37aa15d47970b22d94aa910dd152a4858c10bae7",
+  "web_tree": "f4a46b3a71e238ee98c86fbf038247b63e5e6b06",
+  "pr": 43,
+  "product_commit": "2d937f90145a49b0199b13704d9046d2e35c14c1",
+  "delivery_commit": "3fb70f1919289d777ccffe936f3a7a8b889a749b",
+  "checks": {
+    "api": {
+      "passed": 85,
+      "total": 85,
+      "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364"
+    },
+    "form": {
+      "passed": 24,
+      "total": 24,
+      "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364"
+    }
+  },
+  "preserved": {
+    "non_audit_tables": 68,
+    "uploads": true,
+    "original_source_files": 5731,
+    "original_source_unchanged": true
+  },
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "artifacts": {
+    "frontend_unchanged": true,
+    "files": 4880,
+    "source_commit": "88aad02bf706fd4820a05e6f505eea9d3204f378",
+    "http": [
+      {
+        "asset": "index.html",
+        "matches_manifest": true
+      },
+      {
+        "asset": "js/polyfill.js",
+        "matches_manifest": true
+      },
+      {
+        "asset": "js/common.js",
+        "matches_manifest": true
+      },
+      {
+        "asset": "js/chunk-vendors.a2dd1501.js",
+        "matches_manifest": true
+      },
+      {
+        "asset": "js/app.8bf7bf7b.js",
+        "matches_manifest": true
+      },
+      {
+        "asset": "js/chunk-4df55040.f0510e7f.js",
+        "matches_manifest": true
+      },
+      {
+        "asset": "js/chunk-c4521220.4444b807.js",
+        "matches_manifest": true
+      }
+    ],
+    "backend": {
+      "pid": 82413,
+      "jar_path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-update-outcome/api/jeecg-boot-module-system/target/teaching-open-2.8.0.jar",
+      "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+      "profile": "dev,localtest",
+      "log_path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/course-role-runtime/logs/backend-eb808c741876.log"
+    }
+  },
+  "scope": "Fresh 85 course-update and 24 existing form API checks on integrated candidate. Frontend source/tree and 4880 built files unchanged; 7 HTTP assets rechecked. No new frontend build/browser rerun, no authenticated role browser acceptance."
+}
