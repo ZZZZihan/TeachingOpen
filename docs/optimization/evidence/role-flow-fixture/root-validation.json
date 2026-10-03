@@ -1,0 +1,37 @@
+{
+  "recorded_utc": "2026-10-03T07:21:44.070371+00:00",
+  "base_commit": "5f896ac572ec637bb3d4a92223d7c699e6b30182",
+  "pure_author_tests": 15,
+  "root_all_dev_tests": {
+    "discovered": 79,
+    "passed": 78,
+    "skipped": 1,
+    "exit_code": 0
+  },
+  "actual_api_preflight": {
+    "passed": 22,
+    "total": 22,
+    "exit_code": 0,
+    "probe_sha256": "f6e7215805b551ee06bfea9624e892d3b7087ffd6ce9e2d6422ea5bf37297c0b"
+  },
+  "backend": {
+    "port": 18149,
+    "pid": 33557,
+    "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364"
+  },
+  "frontend": {
+    "port": 18150,
+    "pid": 33973,
+    "candidate": "e08cb55767e4c70023f0c3677809839bd135af8b",
+    "web_tree": "3a29ce07efe47f080860ecc72509d4ecf02f769e",
+    "same_existing_dist": true
+  },
+  "browser_login_or_acceptance": false,
+  "new_user_creation_covered": false,
+  "production_operations": false,
+  "source_sha256": {
+    "api/dev/role_flow_fixture.py": "2cb63d80d12c90ac505ed0d62c7168ac2fe26ea3f8af98ad68e3993cc12cf303",
+    "api/dev/seed-role-flows.py": "f05a39e13344fbf380aa1040102dcbb90ef2781e50d08e04e6f1916a8fb34cab",
+    "api/dev/test_role_flow_fixture.py": "857f51750d9d7748833195846f795ba2214e89aac00aa4920b13b293aef22ca4"
+  }
+}

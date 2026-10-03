@@ -1,0 +1,99 @@
+{
+  "scope": "Synthetic actual API login/menu/unit/protected resource preflight; no browser login or editor/media playback acceptance",
+  "phase": "complete",
+  "completed": true,
+  "error_type": null,
+  "passed": 22,
+  "total": 22,
+  "cases": [
+    {
+      "case": "admin receives exact registered role routes",
+      "passed": true
+    },
+    {
+      "case": "admin button permissions stay within role",
+      "passed": true
+    },
+    {
+      "case": "teacher_a receives exact registered role routes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a button permissions stay within role",
+      "passed": true
+    },
+    {
+      "case": "teacher_b receives exact registered role routes",
+      "passed": true
+    },
+    {
+      "case": "teacher_b button permissions stay within role",
+      "passed": true
+    },
+    {
+      "case": "student_a receives exact registered role routes",
+      "passed": true
+    },
+    {
+      "case": "student_a button permissions stay within role",
+      "passed": true
+    },
+    {
+      "case": "student_b receives exact registered role routes",
+      "passed": true
+    },
+    {
+      "case": "student_b button permissions stay within role",
+      "passed": true
+    },
+    {
+      "case": "student A assigned course set",
+      "passed": true
+    },
+    {
+      "case": "student B excludes class A course",
+      "passed": true
+    },
+    {
+      "case": "three real editor unit types and hidden teacher plan",
+      "passed": true
+    },
+    {
+      "case": "cross class unit read rejected",
+      "passed": true
+    },
+    {
+      "case": "authorized resource byte match lesson.mp4",
+      "passed": true
+    },
+    {
+      "case": "authorized resource byte match starter.sb3",
+      "passed": true
+    },
+    {
+      "case": "authorized resource byte match starter.sjr",
+      "passed": true
+    },
+    {
+      "case": "authorized resource byte match starter.py",
+      "passed": true
+    },
+    {
+      "case": "authorized resource byte match learning-notes.txt",
+      "passed": true
+    },
+    {
+      "case": "authorized video range bytes",
+      "passed": true
+    },
+    {
+      "case": "cross class media read rejected",
+      "passed": true
+    },
+    {
+      "case": "read preflight preserves teaching configuration and assets",
+      "passed": true
+    }
+  ],
+  "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364"
+}

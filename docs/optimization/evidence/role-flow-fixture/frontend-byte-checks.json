@@ -1,0 +1,27 @@
+{
+  "checks": [
+    {
+      "path": "index.html",
+      "http": 200,
+      "dist_bytes_equal": true
+    },
+    {
+      "path": "js/common.js",
+      "http": 200,
+      "dist_bytes_equal": true
+    },
+    {
+      "path": "python/persistence.js",
+      "http": 200,
+      "dist_bytes_equal": true
+    },
+    {
+      "path": "scratch3/persistence.js",
+      "http": 200,
+      "dist_bytes_equal": true
+    }
+  ],
+  "new_frontend_build": false,
+  "frontend_tests_reused": 305,
+  "unchanged_web_tree": "3a29ce07efe47f080860ecc72509d4ecf02f769e"
+}
