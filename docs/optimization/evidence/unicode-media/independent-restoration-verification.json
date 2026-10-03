@@ -1,0 +1,6 @@
+{
+  "scope": "Read-only restoration verification following both independent observation attempts",
+  "complete_business_rows_and_schemas_match_post_main_candidate_except_sys_log": true,
+  "complete_attachments_match_post_main_candidate": true,
+  "probe_lock_removed": true
+}

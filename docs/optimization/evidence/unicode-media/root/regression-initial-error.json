@@ -1,0 +1,8 @@
+{
+  "suite": "local-upload",
+  "exit_code": 1,
+  "cause": "root runner omitted required --java-home for exact-JAR streaming-failure Java probes",
+  "raw_log": "local-upload.log",
+  "product_changed": false,
+  "evidence_overwritten": false
+}

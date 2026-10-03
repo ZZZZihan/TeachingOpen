@@ -1,0 +1,95 @@
+{
+  "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "regression": [
+    {
+      "suite": "auth-status",
+      "passed": 7,
+      "total": 7,
+      "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7"
+    },
+    {
+      "suite": "local-download",
+      "passed": 88,
+      "total": 88,
+      "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7"
+    },
+    {
+      "suite": "local-upload-final",
+      "passed": 46,
+      "total": 46,
+      "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7"
+    },
+    {
+      "suite": "file-ownership",
+      "passed": 76,
+      "total": 76,
+      "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7"
+    },
+    {
+      "suite": "learning-units",
+      "passed": 80,
+      "total": 80,
+      "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7"
+    },
+    {
+      "suite": "notification-websocket",
+      "passed": 44,
+      "total": 44,
+      "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7"
+    },
+    {
+      "suite": "scratch-cloud",
+      "passed": 52,
+      "total": 52,
+      "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7"
+    }
+  ],
+  "regression_passed": 393,
+  "regression_total": 393,
+  "tool_tests": {
+    "passed": 42,
+    "total": 42,
+    "exit_code": 0
+  },
+  "build": {
+    "exit_code": 0,
+    "surefire_skipped": true
+  },
+  "context": {
+    "passed": 49,
+    "total": 49
+  },
+  "independent_filter_matrix": {
+    "passed": 70,
+    "total": 70,
+    "scope": "synthetic servlet fields calling real packaged filter; not container/DB"
+  },
+  "browser": {
+    "scope": "anonymous real course-list DOM and actual same-origin backend image; no login or token injection",
+    "page_url": "http://127.0.0.1:18170/courseList",
+    "media_http_status": 200,
+    "image_complete": true,
+    "natural_width": 320,
+    "natural_height": 180,
+    "source_sha256": "0bc0610637895302de347bce0d7a1f5d76fee6721e64cd2e6ca071acf04b3080",
+    "console_error": "existing external errlog.js blocked by unchanged CSP",
+    "new_visual_design": false,
+    "screenshot": "unicode-course-card.png",
+    "cleanup": "browser-fixture-cleanup.json"
+  },
+  "tooling_attempts": [
+    {
+      "command": "playwright-cli network",
+      "outcome": "unsupported command; used requests --static; browser request evidence captured"
+    },
+    {
+      "command": "initial local-upload regression",
+      "outcome": "missing --java-home; partial run not counted, supplied required arg and reran complete 46/46"
+    }
+  ],
+  "production_copy_scope": {
+    "existing_course_asset_paths": 297,
+    "non_ascii_paths": 0,
+    "real_contents_published": false
+  }
+}
