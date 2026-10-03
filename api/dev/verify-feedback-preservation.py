@@ -38,7 +38,11 @@ def verify(args):
             if allowed:
                 check('edit accepted: ' + ','.join(body), status == 200 and result and result.get('success'))
             else:
-                check('edit denied for ' + str(actor), status in (401, 403) and not (result and result.get('success')))
+                # Existing Shiro business denials use HTTP 200 / code 510;
+                # missing authentication is HTTP 401 / code 401.
+                check('edit denied for ' + str(actor), status == (200 if actor else 401)
+                      and result and result.get('success') is False
+                      and result.get('code') == (510 if actor else 401) and not result.get('result'))
             return status, result
         try:
             for actor in ('teacher_a', 'teacher_b', 'student_a', 'admin'):

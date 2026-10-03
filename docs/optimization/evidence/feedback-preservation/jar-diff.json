@@ -1,0 +1,9 @@
+{
+  "old_sha256": "ba9a03697641afdb8ee1781ab20848e1865fdfa4ee4c1c1ac317156f7efcb72f",
+  "new_sha256": "b87319a8e411d8f48c37de9e5589c486460c5c5f0306d8f5026281b5737a9b09",
+  "changed_entries": [
+    "BOOT-INF/classes/org/jeecg/modules/teaching/service/impl/TeachingWorkServiceImpl.class",
+    "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar"
+  ],
+  "common_jar_inner_contents_equal": true
+}
