@@ -2,6 +2,7 @@ package org.jeecg.modules.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -108,6 +109,62 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		this.removeByIds(Arrays.asList(userIds.split(",")));
 		return false;
 	}
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(value = CacheConstant.SYS_USERS_CACHE, allEntries = true)
+    public void updateUserStatus(String userIds, String status, String operatorId) {
+        if (operatorId == null || operatorId.trim().isEmpty()) {
+            throw new IllegalArgumentException("权限不足");
+        }
+        String normalizedStatus = status == null ? "" : status.trim();
+        if (!"1".equals(normalizedStatus) && !"2".equals(normalizedStatus)) {
+            throw new IllegalArgumentException("用户状态只能为1或2");
+        }
+        Integer targetStatus = Integer.valueOf(normalizedStatus);
+        Set<String> ids = new TreeSet<>();
+        if (userIds != null) {
+            for (String id : userIds.split(",")) {
+                String normalizedId = id.trim();
+                if (!normalizedId.isEmpty()) {
+                    ids.add(normalizedId);
+                }
+            }
+        }
+        if (ids.isEmpty()) {
+            throw new IllegalArgumentException("请选择要操作的用户");
+        }
+
+        // Lock the whole batch before validation so concurrent status writes cannot
+        // turn a successful batch into a partial update or a false zero-row result.
+        List<SysUser> users = userMapper.selectList(new LambdaQueryWrapper<SysUser>()
+                .in(SysUser::getId, ids).orderByAsc(SysUser::getId).last("FOR UPDATE"));
+        if (users.size() != ids.size()) {
+            throw new IllegalArgumentException("未找到全部目标用户");
+        }
+        int operatorLevel = getUserRoleLevel(operatorId);
+        List<String> changedIds = new ArrayList<>();
+        for (SysUser user : users) {
+            if ("admin".equals(user.getUsername())) {
+                throw new IllegalArgumentException("管理员账号不允许此操作");
+            }
+            if (operatorLevel < getUserRoleLevel(user.getId())) {
+                throw new IllegalArgumentException("权限不足");
+            }
+            if (!targetStatus.equals(user.getStatus())) {
+                changedIds.add(user.getId());
+            }
+        }
+        if (!changedIds.isEmpty()) {
+            int updated = userMapper.update(new SysUser().setStatus(targetStatus),
+                    new LambdaUpdateWrapper<SysUser>().in(SysUser::getId, changedIds));
+            if (updated != changedIds.size()) {
+                throw new IllegalStateException("用户状态更新失败");
+            }
+        }
+        // Even an idempotent request must evict an older cached LoginUser.
+        // The configured transaction-aware CacheManager clears after commit.
+    }
 
 	@Override
 	public SysUser getUserByName(String username) {

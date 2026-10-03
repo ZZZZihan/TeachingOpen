@@ -1,0 +1,19 @@
+{
+  "old_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "new_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+  "added": [],
+  "removed": [],
+  "changed": [
+    "BOOT-INF/classes/org/jeecg/modules/shiro/authc/ShiroRealm.class",
+    "BOOT-INF/classes/org/jeecg/modules/system/controller/SysUserController.class",
+    "BOOT-INF/classes/org/jeecg/modules/system/service/ISysUserService.class",
+    "BOOT-INF/classes/org/jeecg/modules/system/service/impl/SysUserServiceImpl.class",
+    "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar"
+  ],
+  "external_library_count": 209,
+  "internal_common_payload_entries": 111,
+  "internal_common_payload_equal": true,
+  "external_libraries_equal": 208,
+  "application_classes_total": 462,
+  "application_classes_changed": 4
+}

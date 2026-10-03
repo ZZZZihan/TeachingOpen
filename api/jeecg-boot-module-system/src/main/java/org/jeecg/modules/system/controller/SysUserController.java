@@ -7,7 +7,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
@@ -299,28 +298,25 @@ public class SysUserController extends BaseController {
 	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/frozenBatch", method = RequestMethod.PUT)
 	public Result<SysUser> frozenBatch(@RequestBody JSONObject jsonObject) {
+		SecurityUtils.getSubject().checkPermission("user:status");
 		Result<SysUser> result = new Result<SysUser>();
 		try {
-			String ids = jsonObject.getString("ids");
-			String status = jsonObject.getString("status");
-			String[] arr = ids.split(",");
-			for (String id : arr) {
-				if(oConvertUtils.isNotEmpty(id)) {
-                    if (lessThanUserRoleLevel(id)){
-                        result.error500("权限不足");
-                        return result;
-                    }
-					this.sysUserService.update(new SysUser().setStatus(Integer.parseInt(status)),
-							new UpdateWrapper<SysUser>().lambda().eq(SysUser::getId,id));
-				}
+			LoginUser operator = getCurrentUser();
+			if (operator == null) {
+				return result.error500("权限不足");
 			}
+			if (jsonObject == null) {
+				return result.error500("请求参数不能为空");
+			}
+			sysUserService.updateUserStatus(jsonObject.getString("ids"),
+					jsonObject.getString("status"), operator.getId());
+			return result.success("操作成功!");
+		} catch (IllegalArgumentException e) {
+			return result.error500(e.getMessage());
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			result.error500("操作失败"+e.getMessage());
+			log.error("冻结或解冻用户失败", e);
+			return result.error500("操作失败");
 		}
-		result.success("操作成功!");
-		return result;
-
     }
 
     @RequestMapping(value = "/queryById", method = RequestMethod.GET)
