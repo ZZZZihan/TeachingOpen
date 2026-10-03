@@ -1,0 +1,13 @@
+{
+  "main_probe_sha256": "f97fa6e661460da30a80c0e582cf150795823c8775207ae66c491189b46663d9",
+  "sources": {
+    "api/dev/verify-encoded-media-references.py": "f97fa6e661460da30a80c0e582cf150795823c8775207ae66c491189b46663d9",
+    "api/dev/verify-unicode-media.py": "3bac3af26370e5313c256b6d16813889a38daebaf683a591d8159e4382657f25",
+    "api/dev/local_http.py": "6d7aa60a8141d4fa5d4ff19ce26da5127d9cf23bd167b4bd6e9b08a34c0cc54c",
+    "api/dev/local_recovery.py": "9d91a1b2b26166efaab23e912225107780199f811b202fce0d6a4b93fd7095af",
+    "api/dev/local_runtime.py": "3da053aec48dad58c77b8c4a7ad1aa11562f1f586edea4cf3ce6c92d7583bee8"
+  },
+  "frozen_probe": "probe-corrected.py",
+  "previous_frozen_probe": "probe.py",
+  "change": "Only prevent fixture byte overwrite; uppercase spelling is a reference/request key, not a separately-created file. The same 113 behavioral expectations are retained."
+}

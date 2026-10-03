@@ -1,0 +1,16 @@
+{
+  "source_base_commit": "152aaef2231c1282df39055350db93aafe89a818",
+  "started_at": "2026-10-03T13:11:19.911808+00:00",
+  "completed_at": "2026-10-03T13:11:30.412397+00:00",
+  "product_source_sha256": "4d52841396608e5ed7d0ff51ce33c4a58956d6e6c2fbf1730a052256919c7aca",
+  "source_manifest_sha256": "17f0d6e3b652791d25d9ff3331f83d9a5a3fde2de528f14a3d6e799ff3ab30a3",
+  "tests_executed": false,
+  "test_warning": "-DskipTests and the parent POM skip Java test execution; BUILD SUCCESS is compilation/package evidence only.",
+  "exit_code": 0,
+  "source_unchanged_during_build": true,
+  "prior_pr56_jar_sha256_before": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "prior_pr56_jar_sha256_after": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "prior_pr56_jar_preserved": true,
+  "build_log_sha256": "5a6a0352d7c5051a462d98f71335202d73e9547126d0f3d6296cf2fb123329d8",
+  "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42"
+}
