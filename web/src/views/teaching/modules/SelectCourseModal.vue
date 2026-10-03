@@ -5,6 +5,7 @@
       :title="title"
       :width="1000"
       :visible="visible"
+      :okButtonProps="{props: {disabled: loading || !!loadError || selectedRowKeys.length === 0}}"
       @ok="handleOk"
       @cancel="handleCancel"
       cancelText="关闭">
@@ -22,7 +23,7 @@
             </a-col>
             <a-col :span="8">
                     <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-                      <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+                      <a-button type="primary" :loading="loading" @click="searchQuery" icon="search">查询</a-button>
                     </span>
             </a-col>
 
@@ -31,6 +32,9 @@
       </div>
       <!-- table区域-begin -->
       <div>
+        <a-alert v-if="loadError" type="error" show-icon style="margin-bottom: 16px">
+          <span slot="message">{{ loadError }} <a @click="loadData()">重试</a></span>
+        </a-alert>
         <a-table
           size="small"
           bordered
@@ -40,7 +44,7 @@
           :pagination="ipagination"
           :loading="loading"
           :scroll="{ y: 240 }"
-          :rowSelection="{selectedRowKeys: selectedRowKeys,onSelectAll:onSelectAll,onSelect:onSelect,onChange: onSelectChange}"
+          :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
           @change="handleTableChange">
 
         </a-table>
@@ -63,6 +67,11 @@
         title: "选择课程",
         names: [],
         visible: false,
+        departId: '',
+        contextVersion: null,
+        sessionVersion: 0,
+        listRequestId: 0,
+        loadError: '',
         placement: 'right',
         description: '',
         // 查询条件
@@ -138,7 +147,7 @@
         },
         loading: false,
         selectedRowKeys: [],
-        selectedRows: [],
+        selectionRows: [],
         url: {
           list: "/teaching/teachingCourse/list",
         }
@@ -147,38 +156,87 @@
     created() {
       // this.loadData();
     },
+    beforeDestroy() {
+      this.handleCancel()
+    },
     methods: {
-      show(departId){
+      show(departId, contextVersion){
+        this.sessionVersion++
+        this.listRequestId++
+        this.departId = departId || ''
+        this.contextVersion = contextVersion
+        this.queryParam = { departId: this.departId }
+        this.onClearSelected()
+        this.dataSource1 = []
+        this.dataSource2 = []
+        this.ipagination.current = 1
+        this.ipagination.total = 0
+        this.loading = false
+        this.loadError = ''
         this.visible = true
-        this.queryParam.departId = departId
-        this.loadData(1);
+        return this.loadData(1);
       },
       searchQuery() {
         this.loadData(1);
       },
       handleCancel() {
-        this.visible = false;
+        this.sessionVersion++
+        this.listRequestId++
+        this.visible = false
+        this.loading = false
+        this.loadError = ''
+        this.departId = ''
+        this.onClearSelected()
+        this.dataSource1 = []
+        this.dataSource2 = []
+        this.ipagination.current = 1
+        this.ipagination.total = 0
       },
       handleOk() {
-        this.dataSource2 = this.selectedRowKeys;
-        console.log("data:" + this.dataSource2);
-        this.$emit("selectFinished", this.dataSource2);
-        this.visible = false;
+        if (!this.visible || !this.departId || this.loading || this.loadError) return
+        if (this.selectedRowKeys.length === 0) {
+          this.$message.warning('请选择课程！')
+          return
+        }
+        const selection = {
+          deptId: this.departId,
+          contextVersion: this.contextVersion,
+          courseIdList: this.selectedRowKeys.slice()
+        }
+        this.handleCancel()
+        this.$emit("selectFinished", selection)
       },
       add() {
-        this.visible = true;
+        return this.show(this.departId, this.contextVersion)
       },
       loadData(arg) {
+        if (!this.visible || !this.departId) return
         //加载数据 若传入参数1则加载第一页的内容
         if (arg === 1) {
           this.ipagination.current = 1;
         }
-        var params = this.getQueryParams();//查询条件
-        getAction(this.url.list, params).then((res) => {
-          if (res.success) {
+        const sessionVersion = this.sessionVersion
+        const departId = this.departId
+        const requestId = ++this.listRequestId
+        const params = Object.assign({}, this.getQueryParams(), { departId })
+        this.loading = true
+        this.loadError = ''
+        this.dataSource1 = []
+        this.ipagination.total = 0
+        this.onClearSelected()
+        const isCurrent = () => this.visible && sessionVersion === this.sessionVersion && requestId === this.listRequestId && departId === this.departId
+        return getAction(this.url.list, params).then((res) => {
+          if (!isCurrent()) return
+          if (res && res.success === true && res.result && this.isValidRecords(res.result.records)) {
             this.dataSource1 = res.result.records;
-            this.ipagination.total = res.result.total;
+            this.ipagination.total = Number(res.result.total) || 0;
+          } else {
+            this.loadError = '课程列表加载失败，请重试。'
           }
+        }).catch(() => {
+          if (isCurrent()) this.loadError = '课程列表加载失败，请重试。'
+        }).finally(() => {
+          if (isCurrent()) this.loading = false
         })
       },
       getQueryParams() {
@@ -191,44 +249,20 @@
       getQueryField() {
         //TODO 字段权限控制
       },
-      onSelectAll(selected, selectedRows, changeRows) {
-        if (selected === true) {
-          for (var a = 0; a < changeRows.length; a++) {
-            this.dataSource2.push(changeRows[a]);
-          }
-        } else {
-          for (var b = 0; b < changeRows.length; b++) {
-            this.dataSource2.splice(this.dataSource2.indexOf(changeRows[b]), 1);
-          }
-        }
-        // console.log(selected, selectedRows, changeRows);
-      },
-      onSelect(record, selected) {
-        if (selected === true) {
-          this.dataSource2.push(record);
-        } else {
-          var index = this.dataSource2.indexOf(record);
-          //console.log();
-          if (index >= 0) {
-            this.dataSource2.splice(this.dataSource2.indexOf(record), 1);
-          }
-
-        }
+      isValidRecords(records) {
+        return Array.isArray(records) && records.every(row => row && typeof row === 'object' && !Array.isArray(row) && (typeof row.id === 'string' || typeof row.id === 'number') && row.id !== '')
       },
       onSelectChange(selectedRowKeys, selectedRows) {
-        this.selectedRowKeys = selectedRowKeys;
-        this.selectionRows = selectedRows;
+        if (!this.visible || this.loading || this.loadError || !selectedRowKeys.every(id => this.dataSource1.some(row => row.id === id))) return
+        this.selectedRowKeys = selectedRowKeys.slice();
+        this.selectionRows = selectedRows.slice();
       },
       onClearSelected() {
         this.selectedRowKeys = [];
         this.selectionRows = [];
       },
-      handleDelete: function (record) {
-        this.dataSource2.splice(this.dataSource2.indexOf(record), 1);
-      },
       handleTableChange(pagination, filters, sorter) {
         //分页、排序、筛选变化时触发
-        console.log(sorter);
         //TODO 筛选
         if (Object.keys(sorter).length > 0) {
           this.isorter.column = sorter.field;
