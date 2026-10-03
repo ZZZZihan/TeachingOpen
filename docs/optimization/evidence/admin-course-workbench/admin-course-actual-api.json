@@ -1,0 +1,157 @@
+{
+  "passed": 37,
+  "total": 37,
+  "cases": [
+    {
+      "case": "admin course fixture created",
+      "passed": true
+    },
+    {
+      "case": "admin unit fixture created 0",
+      "passed": true
+    },
+    {
+      "case": "admin unit fixture created 1",
+      "passed": true
+    },
+    {
+      "case": "admin unit fixture created 2",
+      "passed": true
+    },
+    {
+      "case": "admin unit fixture created 3",
+      "passed": true
+    },
+    {
+      "case": "admin unit fixture created 4",
+      "passed": true
+    },
+    {
+      "case": "admin unit fixture created 5",
+      "passed": true
+    },
+    {
+      "case": "admin unit fixture created 6",
+      "passed": true
+    },
+    {
+      "case": "admin unit fixture created 7",
+      "passed": true
+    },
+    {
+      "case": "admin unit fixture created 8",
+      "passed": true
+    },
+    {
+      "case": "admin unit fixture created 9",
+      "passed": true
+    },
+    {
+      "case": "admin unit fixture created 10",
+      "passed": true
+    },
+    {
+      "case": "admin unit fixture created 11",
+      "passed": true
+    },
+    {
+      "case": "course filter and zero order listing",
+      "passed": true
+    },
+    {
+      "case": "course row preserves full edit content and boolean flags",
+      "passed": true
+    },
+    {
+      "case": "unit list accepts sort createTime:asc",
+      "passed": true
+    },
+    {
+      "case": "unit list accepts sort createTime:desc",
+      "passed": true
+    },
+    {
+      "case": "unit list accepts sort orderNum:asc",
+      "passed": true
+    },
+    {
+      "case": "unit order values match asc",
+      "passed": true
+    },
+    {
+      "case": "unit list accepts sort orderNum:desc",
+      "passed": true
+    },
+    {
+      "case": "unit order values match desc",
+      "passed": true
+    },
+    {
+      "case": "unit pagination retains course filter",
+      "passed": true
+    },
+    {
+      "case": "actual management response includes parent course name",
+      "passed": true
+    },
+    {
+      "case": "unit row preserves fields for existing edit modal",
+      "passed": true
+    },
+    {
+      "case": "unit exact name filter remains compatible",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse management still denied to teacher_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse management still denied to student_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse management still denied to None",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse actual selected export has OLE2 workbook bytes",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit management still denied to teacher_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit management still denied to student_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit management still denied to None",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit actual selected export has OLE2 workbook bytes",
+      "passed": true
+    },
+    {
+      "case": "unit batch deletion succeeds",
+      "passed": true
+    },
+    {
+      "case": "deleting final page leaves ten records for page recovery",
+      "passed": true
+    },
+    {
+      "case": "all 68 non-audit tables restored",
+      "passed": true
+    },
+    {
+      "case": "attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "exception": null,
+  "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "scope": "Actual Java/MySQL with isolated synthetic API authentication, separate from component browser checks; not authenticated full application, workbook content, or actual spreadsheet import acceptance."
+}

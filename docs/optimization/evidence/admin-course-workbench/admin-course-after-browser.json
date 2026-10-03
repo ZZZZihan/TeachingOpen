@@ -1,0 +1,978 @@
+{
+  "cases": [
+    {
+      "case": "course no page or workbench horizontal overflow 1440",
+      "passed": true,
+      "detail": {
+        "width": 1360,
+        "scrollWidth": 1360,
+        "documentWidth": 1440
+      }
+    },
+    {
+      "case": "course row maintenance actions fit screen 1440",
+      "passed": true,
+      "detail": [
+        {
+          "left": 1224.5,
+          "right": 1323.5,
+          "width": 99
+        },
+        {
+          "left": 1236.5,
+          "right": 1262.5,
+          "width": 26
+        },
+        {
+          "left": 1285.5,
+          "right": 1311.5,
+          "width": 26
+        }
+      ]
+    },
+    {
+      "case": "course no page or workbench horizontal overflow 768",
+      "passed": true,
+      "detail": {
+        "width": 768,
+        "scrollWidth": 768,
+        "documentWidth": 768
+      }
+    },
+    {
+      "case": "course row maintenance actions fit screen 768",
+      "passed": true,
+      "detail": [
+        {
+          "left": 633,
+          "right": 727,
+          "width": 94
+        },
+        {
+          "left": 642.5,
+          "right": 668.5,
+          "width": 26
+        },
+        {
+          "left": 691.5,
+          "right": 717.5,
+          "width": 26
+        }
+      ]
+    },
+    {
+      "case": "course no page or workbench horizontal overflow 390",
+      "passed": true,
+      "detail": {
+        "width": 390,
+        "scrollWidth": 390,
+        "documentWidth": 390
+      }
+    },
+    {
+      "case": "course row maintenance actions fit screen 390",
+      "passed": true,
+      "detail": [
+        {
+          "left": 46,
+          "right": 140,
+          "width": 94
+        },
+        {
+          "left": 162,
+          "right": 188,
+          "width": 26
+        },
+        {
+          "left": 208,
+          "right": 234,
+          "width": 26
+        }
+      ]
+    },
+    {
+      "case": "course next page sends page two",
+      "passed": true
+    },
+    {
+      "case": "course Enter submits name and resets page one",
+      "passed": true,
+      "detail": {
+        "method": "GET",
+        "path": "/teaching/teachingCourse/list",
+        "params": {
+          "courseName": "合成课程 2",
+          "column": "createTime",
+          "order": "desc",
+          "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+          "pageNo": "1",
+          "pageSize": "10"
+        },
+        "mode": "normal"
+      }
+    },
+    {
+      "case": "course refresh keeps applied query and visible draft",
+      "passed": true
+    },
+    {
+      "case": "course reset clears name input",
+      "passed": true
+    },
+    {
+      "case": "course query preserves chosen page size",
+      "passed": true
+    },
+    {
+      "case": "course sort submits API column and order",
+      "passed": true
+    },
+    {
+      "case": "course slow request shows loading and hides old rows",
+      "passed": true
+    },
+    {
+      "case": "course list-error has recoverable error and retained draft",
+      "passed": true
+    },
+    {
+      "case": "course list-error retry returns rows",
+      "passed": true
+    },
+    {
+      "case": "course network-error has recoverable error and retained draft",
+      "passed": true
+    },
+    {
+      "case": "course network-error retry returns rows",
+      "passed": true
+    },
+    {
+      "case": "course malformed has recoverable error and retained draft",
+      "passed": true
+    },
+    {
+      "case": "course malformed retry returns rows",
+      "passed": true
+    },
+    {
+      "case": "course empty state gives maintenance guidance",
+      "passed": true
+    },
+    {
+      "case": "course add entry retained",
+      "passed": true
+    },
+    {
+      "case": "course edit passes record ID",
+      "passed": true
+    },
+    {
+      "case": "course course_type dictionary entry retained",
+      "passed": true
+    },
+    {
+      "case": "course course_category dictionary entry retained",
+      "passed": true
+    },
+    {
+      "case": "course manages units through existing route and ID",
+      "passed": true
+    },
+    {
+      "case": "course select-all exposes batch delete",
+      "passed": true
+    },
+    {
+      "case": "course selection can be cleared",
+      "passed": true
+    },
+    {
+      "case": "course export produces XLS download",
+      "passed": true
+    },
+    {
+      "case": "course delete failure retains record and exposes outcome warning",
+      "passed": true
+    },
+    {
+      "case": "course deletion disables repeated row action",
+      "passed": true
+    },
+    {
+      "case": "course one slow deletion and refreshed list",
+      "passed": true
+    },
+    {
+      "case": "unit no page or workbench horizontal overflow 1440",
+      "passed": true,
+      "detail": {
+        "width": 1360,
+        "scrollWidth": 1360,
+        "documentWidth": 1440
+      }
+    },
+    {
+      "case": "unit row maintenance actions fit screen 1440",
+      "passed": true,
+      "detail": [
+        {
+          "left": 1235,
+          "right": 1313,
+          "width": 78
+        },
+        {
+          "left": 1261,
+          "right": 1287,
+          "width": 26
+        }
+      ]
+    },
+    {
+      "case": "unit no page or workbench horizontal overflow 768",
+      "passed": true,
+      "detail": {
+        "width": 768,
+        "scrollWidth": 768,
+        "documentWidth": 768
+      }
+    },
+    {
+      "case": "unit row maintenance actions fit screen 768",
+      "passed": true,
+      "detail": [
+        {
+          "left": 643,
+          "right": 717,
+          "width": 74
+        },
+        {
+          "left": 667,
+          "right": 693,
+          "width": 26
+        }
+      ]
+    },
+    {
+      "case": "unit no page or workbench horizontal overflow 390",
+      "passed": true,
+      "detail": {
+        "width": 390,
+        "scrollWidth": 390,
+        "documentWidth": 390
+      }
+    },
+    {
+      "case": "unit row maintenance actions fit screen 390",
+      "passed": true,
+      "detail": [
+        {
+          "left": 46,
+          "right": 120,
+          "width": 74
+        },
+        {
+          "left": 142,
+          "right": 168,
+          "width": 26
+        }
+      ]
+    },
+    {
+      "case": "unit next page sends page two",
+      "passed": true
+    },
+    {
+      "case": "unit Enter submits name and resets page one",
+      "passed": true,
+      "detail": {
+        "method": "GET",
+        "path": "/teaching/teachingCourseUnit/list",
+        "params": {
+          "unitName": "合成单元 1",
+          "column": "createTime",
+          "order": "desc",
+          "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+          "pageNo": "1",
+          "pageSize": "10"
+        },
+        "mode": "normal"
+      }
+    },
+    {
+      "case": "unit refresh keeps applied query and visible draft",
+      "passed": true
+    },
+    {
+      "case": "unit reset clears name input",
+      "passed": true
+    },
+    {
+      "case": "unit query preserves chosen page size",
+      "passed": true
+    },
+    {
+      "case": "unit sort submits API column and order",
+      "passed": true
+    },
+    {
+      "case": "unit slow request shows loading and hides old rows",
+      "passed": true
+    },
+    {
+      "case": "unit list-error has recoverable error and retained draft",
+      "passed": true
+    },
+    {
+      "case": "unit list-error retry returns rows",
+      "passed": true
+    },
+    {
+      "case": "unit network-error has recoverable error and retained draft",
+      "passed": true
+    },
+    {
+      "case": "unit network-error retry returns rows",
+      "passed": true
+    },
+    {
+      "case": "unit malformed has recoverable error and retained draft",
+      "passed": true
+    },
+    {
+      "case": "unit malformed retry returns rows",
+      "passed": true
+    },
+    {
+      "case": "unit empty state gives maintenance guidance",
+      "passed": true
+    },
+    {
+      "case": "unit add entry retained",
+      "passed": true
+    },
+    {
+      "case": "unit edit passes record ID",
+      "passed": true
+    },
+    {
+      "case": "unit native file upload entry retained",
+      "passed": true
+    },
+    {
+      "case": "unit actual upload reaches only synthetic import fixture",
+      "passed": true
+    },
+    {
+      "case": "unit select-all exposes batch delete",
+      "passed": true
+    },
+    {
+      "case": "unit selection can be cleared",
+      "passed": true
+    },
+    {
+      "case": "unit export produces XLS download",
+      "passed": true
+    },
+    {
+      "case": "unit delete failure retains record and exposes outcome warning",
+      "passed": true
+    },
+    {
+      "case": "unit deletion disables repeated row action",
+      "passed": true
+    },
+    {
+      "case": "unit one slow deletion and refreshed list",
+      "passed": true
+    },
+    {
+      "case": "actual Vue and Ant controls have no render errors or uncaught exceptions",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "passed": 62,
+  "total": 62,
+  "shots": [
+    "output/playwright/admin-course-after-course-1440.png",
+    "output/playwright/admin-course-after-course-768.png",
+    "output/playwright/admin-course-after-course-390.png",
+    "output/playwright/admin-course-after-course-390-footer.png",
+    "output/playwright/admin-course-after-course-loading.png",
+    "output/playwright/admin-course-after-course-error.png",
+    "output/playwright/admin-course-after-course-empty.png",
+    "output/playwright/admin-course-after-course-delete-error.png",
+    "output/playwright/admin-course-after-unit-1440.png",
+    "output/playwright/admin-course-after-unit-768.png",
+    "output/playwright/admin-course-after-unit-390.png",
+    "output/playwright/admin-course-after-unit-390-footer.png",
+    "output/playwright/admin-course-after-unit-loading.png",
+    "output/playwright/admin-course-after-unit-error.png",
+    "output/playwright/admin-course-after-unit-empty.png",
+    "output/playwright/admin-course-after-unit-delete-error.png"
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "kind": "course",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "2",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "courseName": "合成课程 2",
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "courseName": "合成课程 2",
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "20"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "20"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "slow-list"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "list-error"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "network-error"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "malformed"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "empty"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "courseId": "synthetic-course-1",
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/exportXls",
+          "params": {},
+          "mode": "normal"
+        },
+        {
+          "method": "DELETE",
+          "path": "/teaching/teachingCourse/delete",
+          "params": {
+            "id": "synthetic-course-1"
+          },
+          "mode": "delete-error"
+        },
+        {
+          "method": "DELETE",
+          "path": "/teaching/teachingCourse/delete",
+          "params": {
+            "id": "synthetic-course-1"
+          },
+          "mode": "slow-delete"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourse/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "slow-delete"
+        }
+      ]
+    },
+    {
+      "kind": "unit",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "2",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "unitName": "合成单元 1",
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "unitName": "合成单元 1",
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "20"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "20"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "createTime",
+            "order": "desc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "slow-list"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "list-error"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "network-error"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "malformed"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "empty"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "IMPORT",
+          "path": "/teaching/teachingCourseUnit/importExcel",
+          "synthetic": true,
+          "bytes": 256
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "normal"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/exportXls",
+          "params": {},
+          "mode": "normal"
+        },
+        {
+          "method": "DELETE",
+          "path": "/teaching/teachingCourseUnit/delete",
+          "params": {
+            "id": "synthetic-unit-1"
+          },
+          "mode": "delete-error"
+        },
+        {
+          "method": "DELETE",
+          "path": "/teaching/teachingCourseUnit/delete",
+          "params": {
+            "id": "synthetic-unit-1"
+          },
+          "mode": "slow-delete"
+        },
+        {
+          "method": "GET",
+          "path": "/teaching/teachingCourseUnit/list",
+          "params": {
+            "column": "orderNum",
+            "order": "asc",
+            "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+            "pageNo": "1",
+            "pageSize": "10"
+          },
+          "mode": "slow-delete"
+        }
+      ]
+    }
+  ],
+  "limitation": "Synthetic component/browser checks, not authenticated end-to-end acceptance or real database validation.",
+  "tested_phase": "Before the last stale batch-confirmation guard; its affected flow is checked separately after the final change."
+}

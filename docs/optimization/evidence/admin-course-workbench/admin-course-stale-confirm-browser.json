@@ -1,0 +1,55 @@
+{
+  "cases": [
+    {
+      "case": "same unit component route change clears old selection",
+      "passed": true
+    },
+    {
+      "case": "stale route confirmation dispatches no DELETE",
+      "passed": true
+    },
+    {
+      "case": "new course scope remains visible after declining old confirmation",
+      "passed": true
+    },
+    {
+      "case": "stale confirmation guard has no uncaught browser exception",
+      "passed": true
+    }
+  ],
+  "passed": 4,
+  "total": 4,
+  "shots": [
+    "output/playwright/admin-course-after-unit-stale-confirm.png"
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/teaching/teachingCourseUnit/list",
+      "params": {
+        "courseId": "synthetic-course-1",
+        "column": "createTime",
+        "order": "desc",
+        "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+        "pageNo": "1",
+        "pageSize": "10"
+      },
+      "mode": "normal"
+    },
+    {
+      "method": "GET",
+      "path": "/teaching/teachingCourseUnit/list",
+      "params": {
+        "courseId": "synthetic-course-2",
+        "column": "createTime",
+        "order": "desc",
+        "field": "id,unitName,unitIntro,unitCover,courseId,courseName,courseWorkType,courseWorkType_dictText,courseVideo,courseVideoSource,showCourseVideo,courseCase,showCourseCase,coursePpt,showCoursePpt,coursePlan,showCoursePlan,courseWork,courseWorkAnswer,mapX,mapY,mediaContent,orderNum,createBy,createTime",
+        "pageNo": "1",
+        "pageSize": "10"
+      },
+      "mode": "normal"
+    }
+  ],
+  "limitation": "Only the synthetic loopback server; actual Vue/Ant confirm and route watcher."
+}

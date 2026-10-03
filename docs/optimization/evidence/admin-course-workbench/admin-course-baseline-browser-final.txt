@@ -1,0 +1,30 @@
+### Result
+{"observations":[{"kind":"course","width":1440,"documentScrollWidth":1440,"rows":20},{"kind":"course","width":768,"documentScrollWidth":768,"rows":20},{"kind":"course","width":390,"documentScrollWidth":390,"rows":20},{"kind":"unit","width":1440,"documentScrollWidth":1440,"rows":20},{"kind":"unit","width":768,"documentScrollWidth":768,"rows":20},{"kind":"unit","width":390,"documentScrollWidth":390,"rows":20}],"shots":["output/playwright/admin-course-before-course-1440.png","output/playwright/admin-course-before-course-768.png","output/playwright/admin-course-before-course-390.png","output/playwright/admin-course-before-unit-1440.png","output/playwright/admin-course-before-unit-768.png","output/playwright/admin-course-before-unit-390.png"],"initialRouteListRequests":[{"method":"GET","path":"/teaching/teachingCourseUnit/list","params":{"column":"createTime","order":"desc","field":"id,,,unitName,unitIntro,unitCover,courseName,courseWorkType_dictText,createBy,createTime,orderNum,action","pageNo":"1","pageSize":"10"},"mode":"normal"},{"method":"GET","path":"/teaching/teachingCourseUnit/list","params":{"courseId":"synthetic-course-1","column":"createTime","order":"desc","field":"id,,,unitName,unitIntro,unitCover,courseName,courseWorkType_dictText,createBy,createTime,orderNum,action","pageNo":"1","pageSize":"10"},"mode":"normal"}],"limitations":"Actual old Vue lists and mixin; only synthetic loopback API, dictionary/department controls and maintenance-entry stubs."}
+### Ran Playwright code
+```js
+await (async page => {
+  const out = 'output/playwright', base = 'http://127.0.0.1:18137', observations = [], shots = []
+  await page.request.post(base + '/__reset')
+  for (const kind of ['course', 'unit']) {
+    await page.goto(base + '/before/#/' + (kind === 'course' ? 'courses' : 'course/courseUnit'))
+    await page.locator('.ant-table-tbody tr').first().waitFor()
+    for (const width of [1440, 768, 390]) {
+      await page.setViewportSize({ width, height: 1000 })
+      const filename = `${out}/admin-course-before-${kind}-${width}.png`
+      await page.screenshot({ path: filename, fullPage: true }); shots.push(filename)
+      observations.push({ kind, width, documentScrollWidth: await page.evaluate(() => document.documentElement.scrollWidth), rows: await page.locator('.ant-table-tbody tr').count() })
+    }
+  }
+  await page.request.post(base + '/__reset')
+  await page.goto(base + '/before/?phase=initial-route#/course/courseUnit?courseId=synthetic-course-1')
+  await page.locator('.ant-table-tbody tr').first().waitFor()
+  await page.waitForTimeout(200)
+  const state = await (await page.request.get(base + '/__state')).json()
+  const calls = state.requests.filter(r => r.path.endsWith('CourseUnit/list'))
+  if (calls.length !== 2 || calls.filter(r => !r.params.courseId).length !== 1 || calls.filter(r => r.params.courseId === 'synthetic-course-1').length !== 1) throw new Error('Expected real baseline duplicate route list requests')
+  return { observations, shots, initialRouteListRequests: calls, limitations: 'Actual old Vue lists and mixin; only synthetic loopback API, dictionary/department controls and maintenance-entry stubs.' }
+}
+)(page);
+```
+### Events
+- New console entries: .playwright-cli/console-2026-10-03T05-37-15-364Z.log#L20-L34
