@@ -1,0 +1,8 @@
+{
+  "scope": "root owned static in-memory preview only",
+  "pid": 57169,
+  "port": 18180,
+  "port_closed": true,
+  "process_alive": false,
+  "retained_artifacts": true
+}

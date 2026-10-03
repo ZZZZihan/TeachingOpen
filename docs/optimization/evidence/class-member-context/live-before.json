@@ -1,0 +1,578 @@
+{
+  "cases": [
+    {
+      "case": "A clear confirmation after switching to B sends no removeAll",
+      "passed": false
+    },
+    {
+      "case": "stale clear preserves B teacher and student in DB",
+      "passed": false,
+      "member_count": 0
+    },
+    {
+      "case": "stale clear preserves A members in DB",
+      "passed": true
+    },
+    {
+      "case": "A pending batch confirmation after switching to B sends no delete",
+      "passed": false
+    },
+    {
+      "case": "stale batch preserves the shared user B association in DB",
+      "passed": false
+    },
+    {
+      "case": "stale batch preserves the A association in DB",
+      "passed": true
+    },
+    {
+      "case": "A selected keys are unusable when batch menu is opened in B",
+      "passed": false
+    },
+    {
+      "case": "batch menu after class switch preserves shared B relation in DB",
+      "passed": false
+    },
+    {
+      "case": "A modal after switching to B sends no stale add",
+      "passed": false
+    },
+    {
+      "case": "switched selector does not attach A student to B in DB",
+      "passed": false
+    },
+    {
+      "case": "closed A modal reopened in B sends no stale add",
+      "passed": false
+    },
+    {
+      "case": "reopened selector does not attach A student to B in DB",
+      "passed": false
+    },
+    {
+      "case": "normal B list contains its teacher and student only",
+      "passed": true
+    },
+    {
+      "case": "normal B selection adds an existing user through real HTTP and DB",
+      "passed": true
+    },
+    {
+      "case": "normal B single cancellation removes only that relation in DB",
+      "passed": true
+    },
+    {
+      "case": "normal B batch cancellation removes current student and preserves teacher",
+      "passed": true
+    },
+    {
+      "case": "normal B clear removes its remaining relations and preserves A/accounts",
+      "passed": true
+    },
+    {
+      "case": "actual low-level cancellation returns a business refusal",
+      "passed": true,
+      "business_code": 500
+    },
+    {
+      "case": "refused cancellation preserves the full relation matrix in DB",
+      "passed": true
+    },
+    {
+      "case": "refused cancellation displays a warning/error without success",
+      "passed": true
+    },
+    {
+      "case": "method launcher completed without infrastructure errors",
+      "passed": true
+    },
+    {
+      "case": "69 schemas 68 non-audit row sets and all attachments restored",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "kind": "transport",
+      "value": "Actual SFC/JeecgListMixin methods with legal CLI synthetic login, real HTTP, immediate read-only DB checks; confirmation/ref facades do not test Vue/AntD rendering."
+    },
+    {
+      "kind": "requests",
+      "total": 73,
+      "operations": [
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/list",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/role/queryMySubRole",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/list",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/role/queryMySubRole",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "DELETE",
+          "route": "/sys/user/deleteUserInDepartBatch",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/list",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/role/queryMySubRole",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "DELETE",
+          "route": "/sys/user/deleteUserInDepartBatch",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/list",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/role/queryMySubRole",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/list",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/role/queryMySubRole",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/list",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/role/queryMySubRole",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "DELETE",
+          "route": "/sys/user/deleteUserInDepart",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "DELETE",
+          "route": "/sys/user/deleteUserInDepartBatch",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepart/removeAll",
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "POST",
+          "route": "/sys/user/editSysDepartWithUser",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/list",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/role/queryMySubRole",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/user/departUserList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "DELETE",
+          "route": "/sys/user/deleteUserInDepart",
+          "success": false,
+          "code": 500
+        }
+      ]
+    }
+  ],
+  "source_hashes": {
+    "web/src/utils/util.js": "345808587091ffd401f4c1cd7ebac55655db9439b02d9eae5aa6cb56176da6db",
+    "web/src/mixins/JeecgListMixin.js": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+    "web/src/views/system/modules/SelectUserModal.vue": "e7d8e22239e72bb15008eb77260f4ff436d1c65ffacfebb93b63e93f2f078491",
+    "web/src/views/system/modules/DeptUserInfo.vue": "dc02e0c1b6b5317e6485dc7b5365d9b86a4a469f99e7ffa64707972334c38f65"
+  },
+  "source_ref": "8f58b32362899047da0136e41278368fd26c88f0",
+  "exit_code": 1,
+  "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+  "wrapper_sha256": "5808ff2a29b4d321c428d65f46ce54a128cfd6f98de5b82f90d48d0d71f04bd5",
+  "probe_sha256": "e3f912d9fa63557ae2bf56a470b6ff2a1226ac876c3515bcc402f576cabd80b6",
+  "scope": "Actual SFC/Mixin methods, owned real HTTP and immediate read-only DB checks; browser rendering excluded",
+  "observations_not_fixed": [
+    {
+      "case": "student direct removeAll request on owned synthetic class",
+      "actor_role": "student",
+      "http_status": 200,
+      "business_success": true,
+      "before_member_count": 2,
+      "after_member_count": 0,
+      "accounts_preserved": true,
+      "boundary": "Frozen backend behavior; not fixed or included in frontend assertion total."
+    }
+  ],
+  "restoration": {
+    "table_count": 69,
+    "non_audit_table_count": 68,
+    "same_table_set": true,
+    "changed_schemas": [],
+    "changed_non_audit_tables": [],
+    "all_attachment_entries_equal": true
+  },
+  "total": 22,
+  "passed": 12
+}

@@ -1,0 +1,29 @@
+{
+  "runtime": "class-member-context-1003",
+  "fresh_prepare_completed": true,
+  "owned_pids": {
+    "backend": 58019,
+    "mysql": 57617,
+    "redis": 57622
+  },
+  "alive": {
+    "backend": true,
+    "mysql": true,
+    "redis": true
+  },
+  "listeners": {
+    "13372": true,
+    "16445": true,
+    "18178": true,
+    "18179": false
+  },
+  "health": {
+    "status": 200,
+    "body": {
+      "status": "UP"
+    }
+  },
+  "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+  "frontend_started": false,
+  "boundary": "Fresh synthetic schema-only database and five owned accounts; no existing runtime was reused."
+}

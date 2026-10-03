@@ -1,0 +1,31 @@
+{
+  "evidence_policy": "No production content or credentials. Raw artifact retained privately. Published text only strips trailing whitespace, keeps failures and counts.",
+  "raw_text_sha256": {
+    "adjacent-round1.tap": "9d27eb52983fef5bb3a7096ee99c911466c1d6d24089aed05e9d71f6f71a1bc5",
+    "candidate-four-sfc-round1.tap": "7edee41b5f0787cae81db37b5f559ec8441ed8bc2f2c5d5389b79c6b81873df5",
+    "candidate-partial-64-round2.tap": "7b175ba0810aeafffe9c08e3c378b639aab7e5c28d9ad1dc2e0d5fee9e7a8f7d",
+    "candidate-partial-round1.tap": "73448ca85c64366ef478b425cf72580ca2b35f69ae92b99d5f6335e41244834b",
+    "full-round1.tap": "ef4d2ff9d99d4f7539f9beec787915ad321a694c585955517f6af32db7ea2aa9",
+    "integration-build.log": "719082570230f66ff4db24b1497e7afc3ba166d39ff97a7e9d15ba7959ad1684",
+    "integration-tests.log": "b35821f1cb4ae5b47a6f915ccb8b0687f1cbead0952f6a21b50a4819a76ae397",
+    "old-core-49.tap": "ea5f5aaaa048738e687e26290ad4e33e80a2c0d43c32da453acaccc8d87be49b",
+    "old-expanded-61.tap": "cc06fe7b0d1098d0673cb623211730807429323d1e905f4359075a9f56b1adab",
+    "old-expanded-round1.tap": "40335fcff552eb6b91c580614d5aa7fb8e4055697e23f8cd6fbdcba099a2ccfe",
+    "old-frozen-64.tap": "7611dfe1df5185ad5e2413ef34169069d12b99579a0babb0e37e4a07c952672a",
+    "preview-baseline-build.log": "9ce19b4984f0bf6d1cbf6a7adef70c5b44df812957f0ff254a52604bf1bed9a1",
+    "preview-baseline-cleared-b.txt": "d56cb581a74ca89f74a0c56ce8005f619eeba06c27a4f2a9ff6e42c9c9d16045",
+    "preview-final-build.log": "9ce19b4984f0bf6d1cbf6a7adef70c5b44df812957f0ff254a52604bf1bed9a1",
+    "preview-final-legacy-selector.txt": "df592ba41b5093a06ddc57cb5d9ccd39854db7d54b74fecc647c596a3c18aee9",
+    "preview-final-role-save.txt": "97256d2cd32abc02bc2bff8f79799f39a1a22d171c553a9073deb8ffe2eb533c",
+    "preview-final-stale-editor.txt": "6aa5ae69b7f688ef1b5430dc3290e809bb72ebf23d74bfc0aecc9737f600b321",
+    "preview-final-user-edit.txt": "b21ec92183288d10189020422419091329e8594d0a3a9293747a0e354eba14bc",
+    "preview-frozen-build.log": "9ce19b4984f0bf6d1cbf6a7adef70c5b44df812957f0ff254a52604bf1bed9a1",
+    "preview-frozen-role-save.txt": "99b85446fef556625c30cb596c5c832e53181289b547e1c52d9aa011d7acd55c",
+    "preview-frozen-stale-editor.txt": "4af5a65215f554096de751687e0ed3703a47a99dea358da3eef87efa72dde2f4",
+    "preview-frozen-user-edit.txt": "fee7f9771417f64e5183cc9e055bb88623364258347e797561bf6c5df2ce6e0f",
+    "preview-initial-add-b.txt": "2161f3ac15f0c9ca38aeb4b3be7a56be814cdaa22e75be4805dadcc8006aa178",
+    "preview-initial-build.log": "9ce19b4984f0bf6d1cbf6a7adef70c5b44df812957f0ff254a52604bf1bed9a1",
+    "preview-initial-normal-remove.txt": "773cc2bd729c6e03e0d0b98e6b1b57aff000a8d8dcba322a822368c52e926dd2",
+    "preview-initial-stale-clear.txt": "bd440cbf610a5f2c531afebe684631b37bf885c1418ab11fe2aa361c866921fb"
+  }
+}

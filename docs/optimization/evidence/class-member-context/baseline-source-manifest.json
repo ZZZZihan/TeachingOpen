@@ -1,0 +1,9 @@
+{
+  "scope": "Actual member SFCs and list mixin. Memory API; position/department/avatar helpers substituted. Not authenticated E2E.",
+  "sha256": {
+    "src/views/system/modules/DeptUserInfo.vue": "dc02e0c1b6b5317e6485dc7b5365d9b86a4a469f99e7ffa64707972334c38f65",
+    "src/views/system/modules/SelectUserModal.vue": "e7d8e22239e72bb15008eb77260f4ff436d1c65ffacfebb93b63e93f2f078491",
+    "src/views/system/modules/UserModal.vue": "0e32f625da56d1ed65e7f5e6ef928f1b1a024f7a628c4b947606784fa5ff96d3",
+    "src/views/system/modules/DeptRoleUserModal.vue": "16610793b07af94710346aa4f693862db80e8d6df7c0fb406c849bd0827fe1b7"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "base": "8f58b32362899047da0136e41278368fd26c88f0",
+  "evidenceClass": "Actual SFC and actual inherited mixin methods, controlled synthetic promises; no service or database",
+  "clear": {
+    "promptClass": "class-a",
+    "currentClass": "class-b",
+    "request": {
+      "method": "GET",
+      "url": "/sys/sysDepart/removeAll",
+      "data": {
+        "id": "class-b"
+      }
+    }
+  },
+  "bulk": {
+    "promptClass": "class-a",
+    "currentClass": "class-b",
+    "selectedUserIds": [
+      "user-a"
+    ],
+    "request": {
+      "method": "DELETE",
+      "url": "/sys/user/deleteUserInDepartBatch",
+      "data": {
+        "depId": "class-b",
+        "userIds": "user-a,"
+      }
+    }
+  },
+  "add": {
+    "initialSelectorClass": "class-a",
+    "currentClass": "class-b",
+    "emitted": [
+      "selectFinished",
+      [
+        "user-a"
+      ]
+    ],
+    "request": {
+      "method": "POST",
+      "url": "/sys/user/editSysDepartWithUser",
+      "data": {
+        "depId": "class-b",
+        "userIdList": [
+          "user-a"
+        ]
+      }
+    }
+  },
+  "listRace": {
+    "currentClass": "class-b",
+    "visibleUserIds": [
+      "user-a"
+    ]
+  }
+}

@@ -1,0 +1,561 @@
+{
+  "integration_built_tested_at": "3a18de7854b2b96b22f6f71a658cac9aeeb075f4",
+  "files": 4893,
+  "bytes": 211568970,
+  "manifest_sha256": "9d7589a49ebfceced30d3daf452f13094727bf160c04ff84295c09030c9c3005",
+  "changed_or_added": [
+    "css/chunk-00c97493.546a2aa6.css",
+    "css/chunk-114bb9d4.79c50e69.css",
+    "css/chunk-194374b3.f129e419.css",
+    "css/chunk-3e58d502.a76f4840.css",
+    "css/chunk-51bdb774.5b065727.css",
+    "css/chunk-64e9f4d9.00b9f146.css",
+    "css/chunk-6fd0967e.c21797cc.css",
+    "css/chunk-7e170d67.de46b51b.css",
+    "css/chunk-eba63c02.fdb58424.css",
+    "index.html",
+    "js/app.0798f1e4.js",
+    "js/app.0798f1e4.js.gz",
+    "js/chunk-00c97493.a9ca1a4e.js",
+    "js/chunk-00c97493.a9ca1a4e.js.gz",
+    "js/chunk-114bb9d4.d85d0f4d.js",
+    "js/chunk-114bb9d4.d85d0f4d.js.gz",
+    "js/chunk-194374b3.56c08830.js",
+    "js/chunk-3e58d502.d667a763.js",
+    "js/chunk-3e58d502.d667a763.js.gz",
+    "js/chunk-51bdb774.60175c5a.js",
+    "js/chunk-51bdb774.60175c5a.js.gz",
+    "js/chunk-64e9f4d9.437547da.js",
+    "js/chunk-64e9f4d9.437547da.js.gz",
+    "js/chunk-6fd0967e.30e65d20.js",
+    "js/chunk-6fd0967e.30e65d20.js.gz",
+    "js/chunk-7e170d67.e19b5155.js",
+    "js/chunk-7e170d67.e19b5155.js.gz",
+    "js/chunk-eba63c02.bc88ca16.js",
+    "js/chunk-eba63c02.bc88ca16.js.gz",
+    "js/chunk-vendors.13f7ce24.js",
+    "js/chunk-vendors.13f7ce24.js.gz"
+  ],
+  "removed": [
+    "css/chunk-2c361c6a.e0407047.css",
+    "css/chunk-2c5e648d.55dc3012.css",
+    "css/chunk-39e07799.27189445.css",
+    "css/chunk-3f4e60be.8efec51a.css",
+    "css/chunk-56c51fc2.8f26d986.css",
+    "css/chunk-5f8975e0.c6333b3d.css",
+    "css/chunk-7323d47b.4951a5a5.css",
+    "css/chunk-7cc18e5b.0c6b51fd.css",
+    "css/chunk-fe7380b8.220561ef.css",
+    "js/app.54ca7f99.js",
+    "js/app.54ca7f99.js.gz",
+    "js/chunk-2c361c6a.ca07b09e.js",
+    "js/chunk-2c361c6a.ca07b09e.js.gz",
+    "js/chunk-2c5e648d.b99b7457.js",
+    "js/chunk-2c5e648d.b99b7457.js.gz",
+    "js/chunk-39e07799.bd308520.js",
+    "js/chunk-39e07799.bd308520.js.gz",
+    "js/chunk-3f4e60be.f4538e19.js",
+    "js/chunk-56c51fc2.47a90477.js",
+    "js/chunk-56c51fc2.47a90477.js.gz",
+    "js/chunk-5f8975e0.154aef56.js",
+    "js/chunk-5f8975e0.154aef56.js.gz",
+    "js/chunk-7323d47b.31c68647.js",
+    "js/chunk-7323d47b.31c68647.js.gz",
+    "js/chunk-7cc18e5b.1480e8ef.js",
+    "js/chunk-7cc18e5b.1480e8ef.js.gz",
+    "js/chunk-fe7380b8.eeb641ac.js",
+    "js/chunk-fe7380b8.eeb641ac.js.gz",
+    "js/chunk-vendors.a2dd1501.js",
+    "js/chunk-vendors.a2dd1501.js.gz"
+  ],
+  "proxy_checks": [
+    {
+      "port": 18112,
+      "path": "css/app.34569fa6.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-00c97493.546a2aa6.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-114bb9d4.79c50e69.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-194374b3.f129e419.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-3e58d502.a76f4840.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-51bdb774.5b065727.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-64e9f4d9.00b9f146.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-6fd0967e.c21797cc.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-7e170d67.de46b51b.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-eba63c02.fdb58424.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-vendors.0626b6c1.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "index.html",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/app.0798f1e4.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-00c97493.a9ca1a4e.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-114bb9d4.d85d0f4d.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-194374b3.56c08830.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-3e58d502.d667a763.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-51bdb774.60175c5a.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-64e9f4d9.437547da.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-6fd0967e.30e65d20.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-7e170d67.e19b5155.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-eba63c02.bc88ca16.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-vendors.13f7ce24.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/common.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/polyfill.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "logo.png",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/app.34569fa6.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-00c97493.546a2aa6.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-114bb9d4.79c50e69.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-194374b3.f129e419.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-3e58d502.a76f4840.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-51bdb774.5b065727.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-64e9f4d9.00b9f146.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-6fd0967e.c21797cc.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-7e170d67.de46b51b.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-eba63c02.fdb58424.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-vendors.0626b6c1.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "index.html",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/app.0798f1e4.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-00c97493.a9ca1a4e.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-114bb9d4.d85d0f4d.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-194374b3.56c08830.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-3e58d502.d667a763.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-51bdb774.60175c5a.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-64e9f4d9.437547da.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-6fd0967e.30e65d20.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-7e170d67.e19b5155.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-eba63c02.bc88ca16.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-vendors.13f7ce24.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/common.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/polyfill.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "logo.png",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/app.34569fa6.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-00c97493.546a2aa6.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-114bb9d4.79c50e69.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-194374b3.f129e419.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-3e58d502.a76f4840.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-51bdb774.5b065727.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-64e9f4d9.00b9f146.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-6fd0967e.c21797cc.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-7e170d67.de46b51b.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-eba63c02.fdb58424.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-vendors.0626b6c1.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "index.html",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/app.0798f1e4.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-00c97493.a9ca1a4e.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-114bb9d4.d85d0f4d.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-194374b3.56c08830.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-3e58d502.d667a763.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-51bdb774.60175c5a.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-64e9f4d9.437547da.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-6fd0967e.30e65d20.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-7e170d67.e19b5155.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-eba63c02.bc88ca16.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-vendors.13f7ce24.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/common.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/polyfill.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "logo.png",
+      "status": 200,
+      "byte_match": true
+    }
+  ],
+  "backend_health": [
+    {
+      "port": 18111,
+      "status": 200,
+      "health": "UP"
+    },
+    {
+      "port": 18141,
+      "status": 200,
+      "health": "UP"
+    },
+    {
+      "port": 18149,
+      "status": 200,
+      "health": "UP"
+    }
+  ],
+  "previous_dist_byte_match": true,
+  "previous_dist_manifest_sha256": "66f23ebe401355d3c3c39cf65501c6f4eef8e2f839aeb68b6ff88aa64b3d8060",
+  "build_warnings": 12
+}

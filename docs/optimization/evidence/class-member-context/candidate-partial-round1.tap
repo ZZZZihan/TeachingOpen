@@ -1,0 +1,662 @@
+TAP version 13
+# Browserslist: caniuse-lite is outdated. Please run:
+#   npx update-browserslist-db@latest
+#   Why you should do it regularly: https://github.com/browserslist/update-db\#readme
+# Subtest: opening B clears A selected users, stale list and pagination before B response
+ok 1 - opening B clears A selected users, stale list and pagination before B response
+  ---
+  duration_ms: 161.522209
+  type: 'test'
+  ...
+# Subtest: batchDel captured in A cannot dispatch after switch B
+ok 2 - batchDel captured in A cannot dispatch after switch B
+  ---
+  duration_ms: 28.673042
+  type: 'test'
+  ...
+# Subtest: batchDel captured in A cannot dispatch after reopen A
+ok 3 - batchDel captured in A cannot dispatch after reopen A
+  ---
+  duration_ms: 24.461
+  type: 'test'
+  ...
+# Subtest: batchDel captured in A cannot dispatch after clear
+ok 4 - batchDel captured in A cannot dispatch after clear
+  ---
+  duration_ms: 25.185583
+  type: 'test'
+  ...
+# Subtest: handleRemoveAll captured in A cannot dispatch after switch B
+ok 5 - handleRemoveAll captured in A cannot dispatch after switch B
+  ---
+  duration_ms: 23.635584
+  type: 'test'
+  ...
+# Subtest: handleRemoveAll captured in A cannot dispatch after reopen A
+ok 6 - handleRemoveAll captured in A cannot dispatch after reopen A
+  ---
+  duration_ms: 25.425875
+  type: 'test'
+  ...
+# Subtest: handleRemoveAll captured in A cannot dispatch after clear
+ok 7 - handleRemoveAll captured in A cannot dispatch after clear
+  ---
+  duration_ms: 31.28025
+  type: 'test'
+  ...
+# Subtest: row captured in A cannot dispatch after switch B
+ok 8 - row captured in A cannot dispatch after switch B
+  ---
+  duration_ms: 19.82125
+  type: 'test'
+  ...
+# Subtest: row captured in A cannot dispatch after reopen A
+ok 9 - row captured in A cannot dispatch after reopen A
+  ---
+  duration_ms: 19.809042
+  type: 'test'
+  ...
+# Subtest: row captured in A cannot dispatch after clear
+ok 10 - row captured in A cannot dispatch after clear
+  ---
+  duration_ms: 18.395375
+  type: 'test'
+  ...
+# Subtest: control: normal B batchDel preserves the backend contract and refreshes B
+ok 11 - control: normal B batchDel preserves the backend contract and refreshes B
+  ---
+  duration_ms: 23.746292
+  type: 'test'
+  ...
+# Subtest: control: normal B handleRemoveAll preserves the backend contract and refreshes B
+ok 12 - control: normal B handleRemoveAll preserves the backend contract and refreshes B
+  ---
+  duration_ms: 17.54075
+  type: 'test'
+  ...
+# Subtest: control: normal B row preserves the backend contract and refreshes B
+ok 13 - control: normal B row preserves the backend contract and refreshes B
+  ---
+  duration_ms: 20.780334
+  type: 'test'
+  ...
+# Subtest: changed user selection invalidates a bulk confirmation before dispatch
+ok 14 - changed user selection invalidates a bulk confirmation before dispatch
+  ---
+  duration_ms: 17.374834
+  type: 'test'
+  ...
+# Subtest: late A checkbox event cannot inject foreign user IDs into B cancellation
+ok 15 - late A checkbox event cannot inject foreign user IDs into B cancellation
+  ---
+  duration_ms: 21.334542
+  type: 'test'
+  ...
+# Subtest: B batchDel ignores repeated clicks and duplicate confirmation callbacks
+ok 16 - B batchDel ignores repeated clicks and duplicate confirmation callbacks
+  ---
+  duration_ms: 17.127125
+  type: 'test'
+  ...
+# Subtest: B handleRemoveAll ignores repeated clicks and duplicate confirmation callbacks
+ok 17 - B handleRemoveAll ignores repeated clicks and duplicate confirmation callbacks
+  ---
+  duration_ms: 22.0135
+  type: 'test'
+  ...
+# Subtest: B row ignores repeated clicks and duplicate confirmation callbacks
+ok 18 - B row ignores repeated clicks and duplicate confirmation callbacks
+  ---
+  duration_ms: 17.586958
+  type: 'test'
+  ...
+# Subtest: older A confirmation cannot release or submit an active B confirmation
+ok 19 - older A confirmation cannot release or submit an active B confirmation
+  ---
+  duration_ms: 20.272958
+  type: 'test'
+  ...
+# Subtest: late A list success cannot overwrite B user list or count
+ok 20 - late A list success cannot overwrite B user list or count
+  ---
+  duration_ms: 17.259333
+  type: 'test'
+  ...
+# Subtest: newer member query within B wins when older response arrives last
+ok 21 - newer member query within B wins when older response arrives last
+  ---
+  duration_ms: 18.1715
+  type: 'test'
+  ...
+# Subtest: late A list network cannot publish a notice or unlock B pending read
+ok 22 - late A list network cannot publish a notice or unlock B pending read
+  ---
+  duration_ms: 17.019625
+  type: 'test'
+  ...
+# Subtest: current B member list network resets busy state and can retry in B
+ok 23 - current B member list network resets busy state and can retry in B
+  ---
+  duration_ms: 18.54275
+  type: 'test'
+  ...
+# Subtest: late A list business cannot publish a notice or unlock B pending read
+ok 24 - late A list business cannot publish a notice or unlock B pending read
+  ---
+  duration_ms: 16.391167
+  type: 'test'
+  ...
+# Subtest: current B member list business resets busy state and can retry in B
+ok 25 - current B member list business resets busy state and can retry in B
+  ---
+  duration_ms: 21.849458
+  type: 'test'
+  ...
+# Subtest: late member list after clear cannot repopulate an inactive panel
+ok 26 - late member list after clear cannot repopulate an inactive panel
+  ---
+  duration_ms: 16.511292
+  type: 'test'
+  ...
+# Subtest: late member list after destroy cannot repopulate an inactive panel
+ok 27 - late member list after destroy cannot repopulate an inactive panel
+  ---
+  duration_ms: 19.922209
+  type: 'test'
+  ...
+# Subtest: malformed member rows never enter selection or cancellation and allow a valid retry
+ok 28 - malformed member rows never enter selection or cancellation and allow a valid retry
+  ---
+  duration_ms: 16.104709
+  type: 'test'
+  ...
+# Subtest: already dispatched A batchDel response (true) cannot refresh or deselect B
+ok 29 - already dispatched A batchDel response (true) cannot refresh or deselect B
+  ---
+  duration_ms: 20.771125
+  type: 'test'
+  ...
+# Subtest: already dispatched A batchDel response (false) cannot refresh or deselect B
+ok 30 - already dispatched A batchDel response (false) cannot refresh or deselect B
+  ---
+  duration_ms: 17.309333
+  type: 'test'
+  ...
+# Subtest: already dispatched A handleRemoveAll response (true) cannot refresh or deselect B
+ok 31 - already dispatched A handleRemoveAll response (true) cannot refresh or deselect B
+  ---
+  duration_ms: 20.338833
+  type: 'test'
+  ...
+# Subtest: already dispatched A handleRemoveAll response (false) cannot refresh or deselect B
+ok 32 - already dispatched A handleRemoveAll response (false) cannot refresh or deselect B
+  ---
+  duration_ms: 17.690333
+  type: 'test'
+  ...
+# Subtest: already dispatched A row response (true) cannot refresh or deselect B
+ok 33 - already dispatched A row response (true) cannot refresh or deselect B
+  ---
+  duration_ms: 22.52575
+  type: 'test'
+  ...
+# Subtest: already dispatched A row response (false) cannot refresh or deselect B
+ok 34 - already dispatched A row response (false) cannot refresh or deselect B
+  ---
+  duration_ms: 17.885416
+  type: 'test'
+  ...
+# Subtest: selector reopened in B clears A selected users, table and query before its response
+not ok 35 - selector reopened in B clears A selected users, table and query before its response
+  ---
+  duration_ms: 20.350125
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:264:1'
+  failureType: 'testCodeFailure'
+  error: 'this.$refs.selectUserModal.show is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Object.handleAddUserDepart (evalmachine.<anonymous>:220:36)
+    openSelector (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:122:7)
+    selectorReady (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:128:41)
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:265:56)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: old selector emission from A cannot add A users to B
+not ok 36 - old selector emission from A cannot add A users to B
+  ---
+  duration_ms: 16.783625
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:271:1'
+  failureType: 'testCodeFailure'
+  error: 'this.$refs.selectUserModal.show is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Object.handleAddUserDepart (evalmachine.<anonymous>:220:36)
+    openSelector (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:122:7)
+    selectorReady (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:128:41)
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:272:56)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: control: a normal B selector confirmation adds only selected B users and refreshes B
+not ok 37 - control: a normal B selector confirmation adds only selected B users and refreshes B
+  ---
+  duration_ms: 21.565083
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:276:1'
+  failureType: 'testCodeFailure'
+  error: 'this.$refs.selectUserModal.show is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Object.handleAddUserDepart (evalmachine.<anonymous>:220:36)
+    openSelector (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:122:7)
+    selectorReady (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:128:41)
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:277:56)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late A selector list cannot replace the B selectable-user table
+not ok 38 - late A selector list cannot replace the B selectable-user table
+  ---
+  duration_ms: 16.0995
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:281:1'
+  failureType: 'testCodeFailure'
+  error: 'this.$refs.selectUserModal.show is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Object.handleAddUserDepart (evalmachine.<anonymous>:220:36)
+    openSelector (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:122:7)
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:282:60)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: selector cannot emit IDs absent from its current displayed users
+not ok 39 - selector cannot emit IDs absent from its current displayed users
+  ---
+  duration_ms: 20.083
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:286:1'
+  failureType: 'testCodeFailure'
+  error: 'this.$refs.selectUserModal.show is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Object.handleAddUserDepart (evalmachine.<anonymous>:220:36)
+    openSelector (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:122:7)
+    selectorReady (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:128:41)
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:287:56)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: a repeated selector OK or replayed B emission cannot dispatch duplicate additions
+not ok 40 - a repeated selector OK or replayed B emission cannot dispatch duplicate additions
+  ---
+  duration_ms: 17.042708
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:291:1'
+  failureType: 'testCodeFailure'
+  error: 'this.$refs.selectUserModal.show is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Object.handleAddUserDepart (evalmachine.<anonymous>:220:36)
+    openSelector (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:122:7)
+    selectorReady (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:128:41)
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:292:56)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: legacy selector add() preserves its ordinary array event contract
+ok 41 - legacy selector add() preserves its ordinary array event contract
+  ---
+  duration_ms: 1.37775
+  type: 'test'
+  ...
+# Subtest: legacy selector direct visible entry still emits an array and clears a previous session
+not ok 42 - legacy selector direct visible entry still emits an array and clears a previous session
+  ---
+  duration_ms: 1.213333
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:301:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   'user-a'
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0: 'user-a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:306:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: B bulk cancellation network releases its lock and accepts a fresh confirmation
+ok 43 - B bulk cancellation network releases its lock and accepts a fresh confirmation
+  ---
+  duration_ms: 18.92
+  type: 'test'
+  ...
+# Subtest: B bulk cancellation business releases its lock and accepts a fresh confirmation
+ok 44 - B bulk cancellation business releases its lock and accepts a fresh confirmation
+  ---
+  duration_ms: 16.175666
+  type: 'test'
+  ...
+# Subtest: A user add validation completing after switch B cannot submit or close B's editor
+not ok 45 - A user add validation completing after switch B cannot submit or close B's editor
+  ---
+  duration_ms: 18.687083
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:319:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:322:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: control: normal B user add submits its original identity and class and emits a compatible OK
+not ok 46 - control: normal B user add submits its original identity and class and emits a compatible OK
+  ---
+  duration_ms: 38.3135
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:324:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+
+      assert.ok(write)
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:327:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: A user edit validation completing after switch B cannot submit or close B's editor
+not ok 47 - A user edit validation completing after switch B cannot submit or close B's editor
+  ---
+  duration_ms: 18.72925
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:319:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:322:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: control: normal B user edit submits its original identity and class and emits a compatible OK
+ok 48 - control: normal B user edit submits its original identity and class and emits a compatible OK
+  ---
+  duration_ms: 17.002792
+  type: 'test'
+  ...
+# Subtest: late A user department and role reads cannot overwrite B editor identity or assignments
+not ok 49 - late A user department and role reads cannot overwrite B editor identity or assignments
+  ---
+  duration_ms: 17.7925
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:332:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      [
+        'class-b',
+    +   'class-a'
+      ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'class-b'
+  actual:
+    0: 'class-b'
+    1: 'class-a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:340:75)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: queued user form nextTick after clear cannot fill or revive the closed A editor
+not ok 50 - queued user form nextTick after clear cannot fill or revive the closed A editor
+  ---
+  duration_ms: 16.373916
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:342:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:344:88)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: already dispatched A user edit completion cannot close B form or refresh B membership
+not ok 51 - already dispatched A user edit completion cannot close B form or refresh B membership
+  ---
+  duration_ms: 19.293208
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:346:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:349:76)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: legacy UserModal edit(record) preserves ordinary user management save and zero-argument OK
+ok 52 - legacy UserModal edit(record) preserves ordinary user management save and zero-argument OK
+  ---
+  duration_ms: 1.167292
+  type: 'test'
+  ...
+# Subtest: A role assignment opened before switch B cannot save after switch, and normal B assignment still works
+not ok 53 - A role assignment opened before switch B cannot save after switch, and normal B assignment still works
+  ---
+  duration_ms: 15.635375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:356:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:358:57)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late A assigned-role and available-role reads cannot replace B role selections
+not ok 54 - late A assigned-role and available-role reads cannot replace B role selections
+  ---
+  duration_ms: 18.940417
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:362:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      [
+    +   'role-a'
+    -   'role-b'
+      ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'role-b'
+  actual:
+    0: 'role-a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:367:25)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: already dispatched A role save completion cannot close a newly opened B assignment
+not ok 55 - already dispatched A role save completion cannot close a newly opened B assignment
+  ---
+  duration_ms: 17.14675
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:369:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    false !== true
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:372:32)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: legacy role add(record, departId) preserves the ordinary request and zero-argument OK
+ok 56 - legacy role add(record, departId) preserves the ordinary request and zero-argument OK
+  ---
+  duration_ms: 0.938
+  type: 'test'
+  ...
+# Subtest: queued A import transport is refused after switch B before sending any upload
+not ok 57 - queued A import transport is refused after switch B before sending any upload
+  ---
+  duration_ms: 19.068834
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:379:1'
+  failureType: 'testCodeFailure'
+  error: 'this.$delete is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Object.handleImportRequest (evalmachine.<anonymous>:264:29)
+    transportImport (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:160:31)
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:381:24)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late A import completion cannot notify, clear selection or refresh B membership
+not ok 58 - late A import completion cannot notify, clear selection or refresh B membership
+  ---
+  duration_ms: 16.222416
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:383:1'
+  failureType: 'testCodeFailure'
+  error: 'this.$delete is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Object.handleImportExcel (evalmachine.<anonymous>:279:14)
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:386:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: control: B import preserves its class action and successful feedback refreshes B
+not ok 59 - control: B import preserves its class action and successful feedback refreshes B
+  ---
+  duration_ms: 19.144459
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:389:1'
+  failureType: 'testCodeFailure'
+  error: 'this.$delete is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Object.handleImportExcel (evalmachine.<anonymous>:279:14)
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:392:44)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: current B import failure permits another upload without stale A completion unlocking it
+not ok 60 - current B import failure permits another upload without stale A completion unlocking it
+  ---
+  duration_ms: 16.769875
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:395:1'
+  failureType: 'testCodeFailure'
+  error: 'this.$delete is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    Object.handleImportExcel (evalmachine.<anonymous>:279:14)
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:398:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+1..60
+# tests 60
+# suites 0
+# pass 40
+# fail 20
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1359.680167

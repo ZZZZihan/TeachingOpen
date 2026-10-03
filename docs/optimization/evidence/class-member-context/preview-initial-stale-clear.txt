@@ -1,0 +1,85 @@
+- main:
+  - paragraph: 本机合成组件验证 · 实际 Vue / Ant Design 成员组件 · API 为内存替代 · 未登录平台
+  - heading "班级成员管理" [level=1]
+  - navigation:
+    - button "班级 A":
+      - generic: 班级 A
+    - button "班级 B":
+      - generic: 班级 B
+    - button "取消班级选择":
+      - generic: 取消班级选择
+    - button "5 秒后切换 B":
+      - generic: 5 秒后切换 B
+    - checkbox "慢响应"
+    - text: 慢响应
+    - checkbox "模拟失败"
+    - text: 模拟失败
+  - heading "合成班级 B" [level=2]
+  - generic: "账号:"
+  - textbox "请输入账号"
+  - generic: "姓名:"
+  - textbox "请输入姓名"
+  - 'button "icon: search 查询"':
+    - 'generic "icon: search"':
+    - generic: 查询
+  - 'button "icon: reload 重置"':
+    - 'generic "icon: reload"':
+    - generic: 重置
+  - 'button "icon: plus 添加已有用户"':
+    - 'generic "icon: plus"':
+    - generic: 添加已有用户
+  - 'button "icon: plus 新建用户"':
+    - 'generic "icon: plus"':
+    - generic: 新建用户
+  - 'button "icon: import 导入学生"':
+    - 'button "icon: import 导入学生"':
+      - 'generic "icon: import"':
+      - generic: 导入学生
+  - 'button "icon: delete 清空班级"':
+    - 'generic "icon: delete"':
+    - generic: 清空班级
+  - generic: 已选择 0项 清空
+  - table:
+    - rowgroup:
+      - row "用户账号 用户名称 部门 性别 电话 操作":
+        - columnheader:
+          - checkbox
+        - columnheader "用户账号":
+          - generic: 用户账号
+        - columnheader "用户名称":
+          - generic: 用户名称
+        - columnheader "部门":
+          - generic: 部门
+        - columnheader "性别":
+          - generic: 性别
+        - columnheader "电话":
+          - generic: 电话
+        - columnheader "操作":
+          - generic: 操作
+    - rowgroup:
+      - 'row "sample_b 合成学生 B 合成班级 男 编辑 更多 icon: down"':
+        - cell:
+          - checkbox
+        - cell "sample_b"
+        - cell "合成学生 B"
+        - cell "合成班级"
+        - cell "男"
+        - cell
+        - 'cell "编辑 更多 icon: down"':
+          - text: 编辑
+          - separator
+          - text: 更多
+          - 'generic "icon: down"':
+  - list:
+    - listitem: 1-1 共1条
+    - listitem "Previous Page":
+      - 'generic "icon: left"':
+    - listitem "1":
+      - generic: "1"
+    - listitem "Next Page":
+      - 'generic "icon: right"':
+    - combobox:
+      - generic "10 / page"
+      - 'generic "icon: down"':
+  - generic "合成 API 请求记录"
+  - generic: "[ { \"method\": \"get\", \"url\": \"/sys/user/departUserList\", \"data\": { \"column\": \"createTime\", \"order\": \"desc\", \"field\": \"id,,username,realname,orgCode,sex_dictText,phone,action\", \"pageNo\": 1, \"pageSize\": 10, \"depId\": \"class-a\" } }, { \"method\": \"get\", \"url\": \"/sys/user/departUserList\", \"data\": { \"column\": \"createTime\", \"order\": \"desc\", \"field\": \"id,,username,realname,orgCode,sex_dictText,phone,action\", \"pageNo\": 1, \"pageSize\": 10, \"depId\": \"class-b\" } } ]"
