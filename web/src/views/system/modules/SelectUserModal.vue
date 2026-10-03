@@ -5,6 +5,7 @@
       :title="title"
       :width="1000"
       :visible="visible"
+      :okButtonProps="{props: {disabled: loading || !!loadError || selectedRowKeys.length === 0}}"
       @ok="handleOk"
       @cancel="handleCancel"
       cancelText="关闭">
@@ -40,6 +41,12 @@
       </div>
       <!-- table区域-begin -->
       <div>
+        <a-alert v-if="loadError" type="error" show-icon style="margin-bottom: 16px">
+          <span slot="message">{{ loadError }} <a @click="loadData()">重试</a></span>
+        </a-alert>
+        <a-alert v-if="roleError" type="warning" show-icon style="margin-bottom: 16px">
+          <span slot="message">{{ roleError }} <a @click="initialRoleList()">重试角色选项</a></span>
+        </a-alert>
         <a-table
           size="small"
           bordered
@@ -49,7 +56,7 @@
           :pagination="ipagination"
           :loading="loading"
           :scroll="{ y: 240 }"
-          :rowSelection="{selectedRowKeys: selectedRowKeys,onSelectAll:onSelectAll,onSelect:onSelect,onChange: onSelectChange}"
+          :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
           @change="handleTableChange">
 
         </a-table>
@@ -73,6 +80,14 @@
         title: "添加已有用户",
         names: [],
         visible: false,
+        sessionActive: false,
+        sessionVersion: 0,
+        listRequestId: 0,
+        roleRequestId: 0,
+        selectionContext: null,
+        loadError: '',
+        roleError: '',
+        roleLoading: false,
         placement: 'right',
         description: '',
         // 查询条件
@@ -114,7 +129,7 @@
             dataIndex: 'roleNames',
             width: 180,
             customRender: function(value){
-              return value?value.join():"--"
+              return Array.isArray(value)?value.join():"--"
             }
           },
           {
@@ -123,7 +138,7 @@
             dataIndex: 'departNames',
             width: 180,
             customRender: function(value){
-              return value?value.join():"--"
+              return Array.isArray(value)?value.join():"--"
             }
           },
         ],
@@ -168,113 +183,125 @@
         },
         loading: false,
         selectedRowKeys: [],
-        selectedRows: [],
+        selectionRows: [],
         url: {
           list: "/sys/user/list",
         }
       }
     },
-    created() {
-      this.loadData();
-      this.initialRoleList();
+    watch: {
+      visible(value) {
+        if (value && !this.sessionActive) this.show()
+        else if (!value && this.sessionActive) this.handleCancel()
+      }
     },
+    beforeDestroy() { this.handleCancel() },
     methods: {
-      initialRoleList(){
-        queryMySubRole().then((res)=>{
-          if(res.success){
-            this.roleList = res.result;
-          }else{
-            console.log(res.message);
-          }
-        });
+      show(context) {
+        this.sessionVersion++
+        this.listRequestId++
+        this.roleRequestId++
+        this.sessionActive = true
+        this.selectionContext = context ? Object.assign({}, context) : null
+        this.queryParam = {}
+        this.onClearSelected()
+        this.dataSource1 = []
+        this.dataSource2 = []
+        this.roleList = []
+        this.ipagination.current = 1
+        this.ipagination.total = 0
+        this.loadError = ''
+        this.roleError = ''
+        this.visible = true
+        return Promise.all([this.loadData(1), this.initialRoleList()])
       },
-      searchQuery() {
-        this.loadData(1);
+      add() { return this.show() },
+      initialRoleList() {
+        if (!this.visible || !this.sessionActive) return
+        const sessionVersion = this.sessionVersion
+        const requestId = ++this.roleRequestId
+        this.roleLoading = true
+        this.roleError = ''
+        const isCurrent = () => this.visible && sessionVersion === this.sessionVersion && requestId === this.roleRequestId
+        return queryMySubRole().then(res => {
+          if (!isCurrent()) return
+          if (res && res.success === true && this.isValidRecords(res.result)) this.roleList = res.result
+          else this.roleError = '角色选项加载失败，可重试或按账号查询。'
+        }).catch(() => {
+          if (isCurrent()) this.roleError = '角色选项加载失败，可重试或按账号查询。'
+        }).finally(() => { if (isCurrent()) this.roleLoading = false })
       },
-      searchReset() {
-        this.queryParam = {};
-        this.loadData(1);
-      },
+      searchQuery() { return this.loadData(1) },
+      searchReset() { this.queryParam = {}; return this.loadData(1) },
       handleCancel() {
-        this.visible = false;
+        this.sessionVersion++
+        this.listRequestId++
+        this.roleRequestId++
+        this.visible = false
+        this.sessionActive = false
+        this.selectionContext = null
+        this.loading = false
+        this.roleLoading = false
+        this.loadError = ''
+        this.roleError = ''
+        this.onClearSelected()
+        this.dataSource1 = []
+        this.dataSource2 = []
+        this.ipagination.current = 1
+        this.ipagination.total = 0
       },
       handleOk() {
-        this.dataSource2 = this.selectedRowKeys;
-        console.log("data:" + this.dataSource2);
-        this.$emit("selectFinished", this.dataSource2);
-        this.visible = false;
-      },
-      add() {
-        this.visible = true;
+        if (!this.visible || !this.sessionActive || this.loading || this.loadError || !this.selectedRowKeys.length) return
+        const ids = this.selectedRowKeys.slice()
+        const payload = this.selectionContext ? Object.assign({}, this.selectionContext, { userIdList: ids }) : ids
+        this.handleCancel()
+        this.$emit('selectFinished', payload)
       },
       loadData(arg) {
-        //加载数据 若传入参数1则加载第一页的内容
-        if (arg === 1) {
-          this.ipagination.current = 1;
-        }
-        var params = this.getQueryParams();//查询条件
-        getAction(this.url.list, params).then((res) => {
-          if (res.success) {
-            this.dataSource1 = res.result.records;
-            this.ipagination.total = res.result.total;
-          }
-        })
+        if (!this.visible || !this.sessionActive) return
+        if (arg === 1) this.ipagination.current = 1
+        const sessionVersion = this.sessionVersion
+        const requestId = ++this.listRequestId
+        const params = this.getQueryParams()
+        this.loading = true
+        this.loadError = ''
+        this.dataSource1 = []
+        this.ipagination.total = 0
+        this.onClearSelected()
+        const isCurrent = () => this.visible && sessionVersion === this.sessionVersion && requestId === this.listRequestId
+        return getAction(this.url.list, params).then(res => {
+          if (!isCurrent()) return
+          if (res && res.success === true && res.result && this.isValidRecords(res.result.records)) {
+            this.dataSource1 = res.result.records
+            this.ipagination.total = Number(res.result.total) || 0
+          } else this.loadError = '用户列表加载失败，请重试。'
+        }).catch(() => { if (isCurrent()) this.loadError = '用户列表加载失败，请重试。' })
+          .finally(() => { if (isCurrent()) this.loading = false })
+      },
+      isValidRecords(records) {
+        return Array.isArray(records) && records.every(row => row && typeof row === 'object' && !Array.isArray(row) && (typeof row.id === 'string' || typeof row.id === 'number') && row.id !== '')
       },
       getQueryParams() {
-        var param = Object.assign({}, this.queryParam, this.isorter);
-        param.field = this.getQueryField();
-        param.pageNo = this.ipagination.current;
-        param.pageSize = this.ipagination.pageSize;
-        return filterObj(param);
+        const params = Object.assign({}, this.queryParam, this.isorter)
+        params.field = this.getQueryField()
+        params.pageNo = this.ipagination.current
+        params.pageSize = this.ipagination.pageSize
+        return filterObj(params)
       },
-      getQueryField() {
-        //TODO 字段权限控制
+      getQueryField() {},
+      onSelectChange(keys, rows) {
+        if (!this.visible || this.loading || this.loadError || !keys.every(id => this.dataSource1.some(row => row.id === id))) return
+        this.selectedRowKeys = keys.slice()
+        this.selectionRows = rows.slice()
       },
-      onSelectAll(selected, selectedRows, changeRows) {
-        if (selected === true) {
-          for (var a = 0; a < changeRows.length; a++) {
-            this.dataSource2.push(changeRows[a]);
-          }
-        } else {
-          for (var b = 0; b < changeRows.length; b++) {
-            this.dataSource2.splice(this.dataSource2.indexOf(changeRows[b]), 1);
-          }
-        }
-        // console.log(selected, selectedRows, changeRows);
-      },
-      onSelect(record, selected) {
-        if (selected === true) {
-          this.dataSource2.push(record);
-        } else {
-          var index = this.dataSource2.indexOf(record);
-          //console.log();
-          if (index >= 0) {
-            this.dataSource2.splice(this.dataSource2.indexOf(record), 1);
-          }
-
-        }
-      },
-      onSelectChange(selectedRowKeys, selectedRows) {
-        this.selectedRowKeys = selectedRowKeys;
-        this.selectionRows = selectedRows;
-      },
-      onClearSelected() {
-        this.selectedRowKeys = [];
-        this.selectionRows = [];
-      },
-      handleDelete: function (record) {
-        this.dataSource2.splice(this.dataSource2.indexOf(record), 1);
-      },
+      onClearSelected() { this.selectedRowKeys = []; this.selectionRows = [] },
       handleTableChange(pagination, filters, sorter) {
-        //分页、排序、筛选变化时触发
-        console.log(sorter);
-        //TODO 筛选
         if (Object.keys(sorter).length > 0) {
-          this.isorter.column = sorter.field;
-          this.isorter.order = "ascend" == sorter.order ? "asc" : "desc"
+          this.isorter.column = sorter.field
+          this.isorter.order = sorter.order === 'ascend' ? 'asc' : 'desc'
         }
-        this.ipagination = pagination;
-        this.loadData();
+        this.ipagination = pagination
+        return this.loadData()
       }
     }
   }
