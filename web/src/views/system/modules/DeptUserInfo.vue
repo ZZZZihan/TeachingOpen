@@ -27,19 +27,22 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator" :md="24" :sm="24" style="margin-top: -15px">
       <!--<a-button @click="handleEdit" type="primary" icon="edit" style="margin-top: 16px">用户编辑</a-button>-->
-      <a-button @click="handleAddUserDepart" type="primary" icon="plus">添加已有用户</a-button>
-      <a-button @click="handleAdd" type="primary" icon="plus" style="margin-top: 16px">新建用户</a-button>
+      <a-button @click="handleAddUserDepart" :disabled="operationsDisabled" type="primary" icon="plus">添加已有用户</a-button>
+      <a-button @click="handleAdd" :disabled="operationsDisabled" type="primary" icon="plus" style="margin-top: 16px">新建用户</a-button>
       <a-upload
         name="file"
         :showUploadList="false"
         :multiple="false"
         :headers="tokenHeader"
         :action="url.importStudentUrl"
+        :disabled="operationsDisabled"
+        :beforeUpload="beforeImportUpload"
+        :customRequest="handleImportRequest"
         @change="handleImportExcel"
       >
-        <a-button type="primary" icon="import">导入学生</a-button>
+        <a-button :disabled="operationsDisabled" type="primary" icon="import">导入学生</a-button>
       </a-upload>
-      <a-button @click="handleRemoveAll" type="default" icon="delete" style="margin-top: 16px">清空班级</a-button>
+      <a-button @click="handleRemoveAll" :disabled="operationsDisabled" type="default" icon="delete" style="margin-top: 16px">清空班级</a-button>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel">
@@ -47,7 +50,7 @@
             取消关联
           </a-menu-item>
         </a-menu>
-        <a-button style="margin-left: 8px"> 批量操作
+        <a-button :disabled="operationsDisabled" style="margin-left: 8px"> 批量操作
           <a-icon type="down"/>
         </a-button>
       </a-dropdown>
@@ -55,6 +58,10 @@
 
     <!-- table区域-begin -->
     <div>
+      <a-alert v-if="listError || actionError" type="error" show-icon style="margin-bottom: 16px">
+        <span slot="message">{{ listError || actionError }} <a @click="loadData()">刷新重试</a></span>
+      </a-alert>
+      <p v-if="importReport">{{ importReport.message }} <a v-if="importReport.url" :href="importReport.url" target="_blank" rel="noopener noreferrer">下载导入明细</a></p>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
         <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{
         selectedRowKeys.length }}</a>项
@@ -69,14 +76,14 @@
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
-        :loading="loading"
+        :loading="loading || mutationLoading || importLoading"
         :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
         @change="handleTableChange">
 
 
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a :disabled="operationsDisabled" @click="handleEdit(record)">编辑</a>
 
           <a-divider type="vertical"/>
 
@@ -94,9 +101,7 @@
               </a-menu-item>
 
               <a-menu-item>
-                <a-popconfirm title="确定取消与选中部门关联吗?" @confirm="() => handleDelete(record.id)">
-                  <a>取消关联</a>
-                </a-popconfirm>
+                <a :disabled="operationsDisabled" @click="confirmDelete(record)">取消关联</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -119,6 +124,7 @@
   import {getAction, postAction, deleteAction} from '@/api/manage'
   import SelectUserModal from './SelectUserModal'
   import UserModal from './UserModal'
+  import uploadRequest from 'ant-design-vue/es/vc-upload/src/request'
   import DeptRoleUserModal from './DeptRoleUserModal'
 
   export default {
@@ -133,6 +139,18 @@
       return {
         description: '用户信息',
         currentDeptId: '',
+        currentDept: {},
+        contextVersion: 0,
+        listRequestId: 0,
+        writeRequestId: 0,
+        selectionVersion: 0,
+        mutationLoading: false,
+        importLoading: false,
+        importContexts: {},
+        importReport: null,
+        listError: '',
+        actionError: '',
+        membershipPrompt: null,
         // 表头
         columns: [{
             title: '用户账号',
@@ -179,182 +197,225 @@
     created() {
     },
 
+    computed: {
+      operationsDisabled() {
+        return !this.currentDeptId || this.loading || this.mutationLoading || this.importLoading || !!this.listError
+      }
+    },
+    beforeDestroy() { this.clearList() },
     methods: {
-      searchReset() {
-        this.queryParam = {}
-        this.loadData(1);
-      },
+      searchReset() { this.queryParam = {}; return this.loadData(1) },
       loadData(arg) {
-        if (!this.url.list) {
-          this.$message.error("请设置url.list属性!")
-          return
-        }
-        //加载数据 若传入参数1则加载第一页的内容
-        if (arg === 1) {
-          this.ipagination.current = 1;
-        }
-        //if (this.currentDeptId === '') return;
-        let params = this.getQueryParams();//查询条件
-        params.depId = this.currentDeptId;
-        getAction(this.url.list, params).then((res) => {
-          if (res.success && res.result) {
-            this.dataSource = res.result.records;
-            this.ipagination.total = res.result.total;
-          }
-        })
+        if (!this.currentDeptId) return
+        if (arg === 1) this.ipagination.current = 1
+        const context = this.captureContext()
+        const requestId = ++this.listRequestId
+        const params = Object.assign({}, this.getQueryParams(), { depId: context.deptId })
+        this.loading = true
+        this.listError = ''
+        this.actionError = ''
+        this.dataSource = []
+        this.ipagination.total = 0
+        this.onClearSelected()
+        const isCurrent = () => this.isCurrentContext(context) && requestId === this.listRequestId
+        return getAction(this.url.list, params).then(res => {
+          if (!isCurrent()) return
+          if (res && res.success === true && res.result && this.isValidRecords(res.result.records)) {
+            this.dataSource = res.result.records
+            this.ipagination.total = Number(res.result.total) || 0
+          } else this.listError = '成员列表加载失败，请重试。'
+        }).catch(() => {
+          if (isCurrent()) this.listError = '成员列表加载失败，请重试。'
+        }).finally(() => { if (isCurrent()) this.loading = false })
       },
-      batchDel: function () {
-
-        if (!this.url.deleteBatch) {
-          this.$message.error("请设置url.deleteBatch属性!")
-          return
-        }
-        if (!this.currentDeptId) {
-          this.$message.error("未选中任何部门，无法取消部门与用户的关联!")
-          return
-        }
-
-        if (this.selectedRowKeys.length <= 0) {
-          this.$message.warning('请选择一条记录！');
-          return;
-        } else {
-          var ids = "";
-          for (var a = 0; a < this.selectedRowKeys.length; a++) {
-            ids += this.selectedRowKeys[a] + ",";
-          }
-          var that = this;
-          console.log(this.currentDeptId);
-          this.$confirm({
-            title: "确认取消",
-            content: "是否取消用户与选中部门的关联?",
-            onOk: function () {
-              deleteAction(that.url.deleteBatch, {depId: that.currentDeptId, userIds: ids}).then((res) => {
-                if (res.success) {
-                  that.$message.success("删除用户与选中部门关系成功！");
-                  that.loadData();
-                  that.onClearSelected();
-                } else {
-                  that.$message.warning(res.message);
-                }
-              });
-            }
-          });
-        }
+      captureContext() { return { deptId: this.currentDeptId, contextVersion: this.contextVersion } },
+      modalContext() {
+        const context = this.captureContext()
+        context.isCurrent = () => this.isCurrentContext(context)
+        return context
       },
-      handleRemoveAll(){
-        if (this.currentDeptId == '') {
-          this.$message.error('请选择一个部门!')
-          return
-        }
-        let that = this
-        this.$confirm({
-          title: '确认清空班级',
-          content: '清空班级内所有学生，此操作不会删除学生账号',
-          onOk: function () {
-            getAction(that.url.removeAll, { id: that.currentDeptId}).then((res) => {
-              if (res.success) {
-                that.$message.success('清空完成！')
-                that.loadData()
-                that.onClearSelected()
-              } else {
-                that.$message.warning(res.message)
-              }
-            })
-          },
-        })
+      isCurrentContext(context) {
+        return !!context && !!context.deptId && context.deptId === this.currentDeptId && context.contextVersion === this.contextVersion
       },
-      handleDelete: function (id) {
-        if (!this.url.delete) {
-          this.$message.error("请设置url.delete属性!")
-          return
-        }
-        if (!this.currentDeptId) {
-          this.$message.error("未选中任何部门，无法取消部门与用户的关联!")
-          return
-        }
-
-        var that = this;
-        deleteAction(that.url.delete, {depId: this.currentDeptId, userId: id}).then((res) => {
-          if (res.success) {
-            that.$message.success("删除用户与选中部门关系成功！");
-            if (this.selectedRowKeys.length>0){
-               for(let i =0; i<this.selectedRowKeys.length;i++){
-                   if (this.selectedRowKeys[i] == id){
-                     this.selectedRowKeys.splice(i,1);
-                     break;
-                   }
-               }
-            }
-            that.loadData();
-          } else {
-            that.$message.warning(res.message);
-          }
-        });
+      isValidRecords(records) {
+        return Array.isArray(records) && records.every(row => row && typeof row === 'object' && !Array.isArray(row) && (typeof row.id === 'string' || typeof row.id === 'number') && row.id !== '')
       },
-      open(record) {
-        //console.log(record);
-        this.currentDeptId = record.id;
-        this.url.importStudentUrl = '/api/sys/user/importStudent?departIds='+record.id
-        this.loadData(1);
+      isCurrentUser(record) { return !!record && this.dataSource.indexOf(record) !== -1 },
+      onSelectChange(keys, rows) {
+        if (this.operationsDisabled || !keys.every(id => this.dataSource.some(row => row.id === id))) return
+        this.selectedRowKeys = keys.slice()
+        this.selectionRows = rows.slice()
+        this.selectionVersion++
       },
-      clearList() {
-        this.currentDeptId = '';
-        this.dataSource = [];
+      onClearSelected() { this.selectedRowKeys = []; this.selectionRows = []; this.selectionVersion++ },
+      open(record) { this.resetContext(record); return this.loadData(1) },
+      clearList() { this.resetContext() },
+      resetContext(record) {
+        this.contextVersion++
+        this.listRequestId++
+        this.currentDept = Object.assign({}, record || {})
+        this.currentDeptId = record && record.id ? record.id : ''
+        this.url.importStudentUrl = '/api/sys/user/importStudent?departIds=' + encodeURIComponent(this.currentDeptId)
+        this.queryParam = {}
+        this.dataSource = []
+        this.onClearSelected()
+        this.ipagination.current = 1
+        this.ipagination.total = 0
+        this.loading = false
+        this.mutationLoading = false
+        this.importLoading = false
+        this.importReport = null
+        this.listError = ''
+        this.actionError = ''
+        this.membershipPrompt = null
+        if (this.$refs.selectUserModal) this.$refs.selectUserModal.handleCancel()
+        if (this.$refs.modalForm) this.$refs.modalForm.close()
+        if (this.$refs.deptRoleUser) this.$refs.deptRoleUser.close()
       },
       hasSelectDept() {
-        if (this.currentDeptId == '') {
-          this.$message.error("请选择一个部门!")
-          return false;
-        }
-        return true;
+        if (!this.currentDeptId) { this.$message.error('请选择一个部门!'); return false }
+        return true
       },
-      handleAddUserDepart() {
-        if (this.currentDeptId == '' ) {
-          this.$message.error("请选择一个部门!")
-        } else {
-          this.$refs.selectUserModal.visible = true;
-        }
+      batchDel() {
+        if (this.operationsDisabled || this.membershipPrompt) return
+        if (!this.selectedRowKeys.length) { this.$message.warning('请选择成员！'); return }
+        const snapshot = Object.assign(this.captureContext(), { kind: 'batch', userIds: this.selectedRowKeys.slice(), selectionVersion: this.selectionVersion })
+        this.openMembershipPrompt(snapshot, '确认取消关联', '是否取消选中成员与该班级的关联?')
       },
-      handleEdit: function (record) {
-        this.$refs.modalForm.title = "编辑";
-        this.$refs.modalForm.departDisabled = true;
-        this.$refs.modalForm.disableSubmit = false;
-        this.$refs.modalForm.edit(record);
+      handleRemoveAll() {
+        if (this.operationsDisabled || this.membershipPrompt) return
+        const snapshot = Object.assign(this.captureContext(), { kind: 'all' })
+        this.openMembershipPrompt(snapshot, '确认清空班级', '清空班级内所有成员，此操作不会删除用户账号。')
       },
-      handleAdd: function () {
-        if (this.currentDeptId == '') {
-          this.$message.error("请选择一个部门!")
-        } else {
-          this.$refs.modalForm.departDisabled = true;
-          this.$refs.modalForm.userDepartModel.departIdList = [this.currentDeptId];  //传入一个部门id
-          this.$refs.modalForm.add();
-          this.$refs.modalForm.title = "新增";
-        }
+      confirmDelete(record) {
+        if (this.operationsDisabled || this.membershipPrompt || !this.isCurrentUser(record)) return
+        const snapshot = Object.assign(this.captureContext(), { kind: 'one', userIds: [record.id], record })
+        this.openMembershipPrompt(snapshot, '确认取消关联', '是否取消此成员与该班级的关联?')
       },
-      selectOK(data) {
-        let params = {};
-        params.depId = this.currentDeptId;
-        params.userIdList = [];
-        for (var a = 0; a < data.length; a++) {
-          params.userIdList.push(data[a]);
-        }
-        console.log(params);
-        postAction(this.url.edit, params).then((res) => {
-          if (res.success) {
-            this.$message.success(res.message);
-            this.loadData();
-          } else {
-            this.$message.warning(res.message);
-          }
+      openMembershipPrompt(snapshot, title, content) {
+        this.membershipPrompt = snapshot
+        this.$confirm({ title, content: `班级“${this.currentDept.departName || snapshot.deptId}”：${content}`,
+          onOk: () => {
+            if (this.membershipPrompt !== snapshot) return
+            this.membershipPrompt = null
+            return this.applyMembershipRemoval(snapshot)
+          },
+          onCancel: () => { if (this.membershipPrompt === snapshot) this.membershipPrompt = null }
         })
       },
-      handleDeptRole(record){
-        if(this.currentDeptId != ''){
-          this.$refs.deptRoleUser.add(record,this.currentDeptId);
-          this.$refs.deptRoleUser.title = "部门角色分配";
-        }else{
-          this.$message.warning("请先选择一个部门!");
+      handleDelete(id, snapshot) {
+        if (!snapshot || snapshot.kind !== 'one' || snapshot.userIds[0] !== id) return
+        return this.applyMembershipRemoval(snapshot)
+      },
+      applyMembershipRemoval(snapshot) {
+        const ids = snapshot.userIds || []
+        const sameSelection = snapshot.kind !== 'batch' || (snapshot.selectionVersion === this.selectionVersion && ids.length === this.selectedRowKeys.length && ids.every(id => this.selectedRowKeys.indexOf(id) !== -1))
+        const validUsers = snapshot.kind === 'all' || (ids.length > 0 && ids.every(id => this.dataSource.some(row => row.id === id)))
+        if (!this.isCurrentContext(snapshot) || !sameSelection || !validUsers || (snapshot.kind === 'one' && !this.isCurrentUser(snapshot.record))) {
+          this.$message.warning('班级或成员选择已变化，请重新确认。')
+          return
         }
+        if (this.operationsDisabled) return
+        if (snapshot.kind === 'all') return this.runMembershipWrite(snapshot, this.url.removeAll, { id: snapshot.deptId }, 'get', '班级已清空')
+        if (snapshot.kind === 'batch') return this.runMembershipWrite(snapshot, this.url.deleteBatch, { depId: snapshot.deptId, userIds: ids.join(',') + ',' }, 'delete', '成员关联已取消')
+        return this.runMembershipWrite(snapshot, this.url.delete, { depId: snapshot.deptId, userId: ids[0] }, 'delete', '成员关联已取消')
+      },
+      runMembershipWrite(context, url, params, method, message) {
+        const requestId = ++this.writeRequestId
+        this.mutationLoading = true
+        this.actionError = ''
+        const isCurrent = () => this.isCurrentContext(context) && requestId === this.writeRequestId
+        const request = method === 'delete' ? deleteAction : (method === 'get' ? getAction : postAction)
+        return request(url, params).then(res => {
+          if (!isCurrent()) return
+          if (res && res.success === true) {
+            this.$message.success(message)
+            return this.loadData()
+          }
+          this.actionError = '操作未成功，请重试。'
+        }).catch(() => {
+          if (isCurrent()) this.actionError = '未能确认操作结果，请刷新成员列表核对后重试。'
+        }).finally(() => { if (isCurrent()) this.mutationLoading = false })
+      },
+      handleAddUserDepart() {
+        if (this.operationsDisabled) return
+        this.$refs.selectUserModal.show(this.captureContext())
+      },
+      selectOK(data) {
+        if (!this.isCurrentContext(data)) { this.$message.warning('班级已变化，请重新选择成员。'); return }
+        if (this.operationsDisabled || !Array.isArray(data.userIdList) || !data.userIdList.length) return
+        return this.runMembershipWrite(this.captureContext(), this.url.edit, { depId: data.deptId, userIdList: data.userIdList.slice() }, 'post', '成员已加入班级')
+      },
+      handleEdit(record) {
+        if (this.operationsDisabled || !this.isCurrentUser(record)) return
+        const modal = this.$refs.modalForm
+        modal.title = '编辑'; modal.departDisabled = true; modal.disableSubmit = false
+        modal.edit(record, this.modalContext())
+      },
+      handleDetail(record) {
+        if (this.operationsDisabled || !this.isCurrentUser(record)) return
+        const modal = this.$refs.modalForm
+        modal.title = '用户详情'; modal.departDisabled = true; modal.disableSubmit = true
+        modal.edit(record, this.modalContext())
+      },
+      handleAdd() {
+        if (this.operationsDisabled) return
+        const modal = this.$refs.modalForm
+        modal.departDisabled = true; modal.disableSubmit = false
+        modal.userDepartModel = { userId: '', departIdList: [this.currentDeptId] }
+        modal.add(this.modalContext()); modal.title = '新增'
+      },
+      modalFormOk(context) { if (this.isCurrentContext(context)) return this.loadData() },
+      handleDeptRole(record) {
+        if (this.operationsDisabled || !this.isCurrentUser(record)) return
+        this.$refs.deptRoleUser.add(record, this.currentDeptId, this.modalContext())
+        this.$refs.deptRoleUser.title = '部门角色分配'
+      },
+      beforeImportUpload(file) {
+        if (this.operationsDisabled || this.membershipPrompt || !file || !file.uid) return false
+        this.$set(this.importContexts, file.uid, Object.assign(this.captureContext(), { url: this.url.importStudentUrl, sent: false }))
+        this.importLoading = true
+        this.actionError = ''
+        this.importReport = null
+        return true
+      },
+      handleImportRequest(options) {
+        const file = options.file || {}
+        const context = this.importContexts[file.uid]
+        if (!this.isCurrentContext(context)) {
+          if (context) this.$delete(this.importContexts, file.uid)
+          options.onError(new Error('班级已变化，请重新选择导入文件。'))
+          return { abort() {} }
+        }
+        context.sent = true
+        return uploadRequest(Object.assign({}, options, { action: context.url }))
+      },
+      handleImportExcel(info) {
+        if (!info || !info.file) return
+        const file = info.file
+        const context = this.importContexts[file.uid]
+        if (!context) return
+        const current = this.isCurrentContext(context)
+        if (file.status === 'uploading') { if (current) this.importLoading = true; return }
+        if (['done', 'error', 'removed'].indexOf(file.status) === -1) return
+        this.$delete(this.importContexts, file.uid)
+        if (!current) return
+        this.importLoading = false
+        if (file.status === 'removed') return
+        if (file.status === 'error' || !file.response || file.response.success !== true) {
+          this.actionError = '导入未能确认完成，请核对文件、网络和成员列表后重试。'
+          return
+        }
+        if (file.response.code === 201) {
+          const result = file.response.result || {}
+          let url = ''
+          try {
+            const candidate = new URL((window._CONFIG['domianURL'] || '') + (result.fileUrl || ''), window.location.origin)
+            if (result.fileUrl && ['http:', 'https:'].indexOf(candidate.protocol) !== -1 && !candidate.username && !candidate.password) url = candidate.href
+          } catch (error) {}
+          this.importReport = { message: '导入已处理，请核对明细中的失败记录。', url }
+        } else this.$message.success('成员已导入')
+        return this.loadData()
       }
     }
   }
