@@ -114,7 +114,7 @@ const start = async () => {
         router,
         store,
         created () {
-            window.document.title = (sysConfig.brandName || '').trim() || 'TeachingOpen'
+            window.document.title = (sysConfig.brandName || '').trim() || '天津工业大学 · 人工智能教学平台'
             if (sysConfig.customJS) {
                 let script = document.createElement('script')
                 script.type = 'text/javascript'
