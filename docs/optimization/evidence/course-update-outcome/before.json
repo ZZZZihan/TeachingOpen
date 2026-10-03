@@ -1,0 +1,280 @@
+{
+  "expected_legacy": true,
+  "jar_sha256": "d89ef0667d90854195792b30d2af4b469738bb86c65498bd7c68ce350aeb3ac8",
+  "passed": 40,
+  "total": 40,
+  "exception": null,
+  "cases": [
+    {
+      "case": "fixture creation fixture_update_course",
+      "passed": true
+    },
+    {
+      "case": "fixture creation fixture_update_unit_a",
+      "passed": true
+    },
+    {
+      "case": "fixture creation fixture_update_unit_b",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse existing row updates",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse new content persisted",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse identical update remains successful",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse legacy missing target falsely succeeds",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse missing target really absent",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied teacher_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied update preserves rows teacher_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied teacher_b",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied update preserves rows teacher_b",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied student_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied update preserves rows student_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied None",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied update preserves rows None",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit existing row updates",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit new content persisted",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit identical update remains successful",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit legacy missing target falsely succeeds",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit missing target really absent",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied teacher_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied update preserves rows teacher_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied teacher_b",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied update preserves rows teacher_b",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied student_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied update preserves rows student_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied None",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied update preserves rows None",
+      "passed": true
+    },
+    {
+      "case": "valid map batch succeeds",
+      "passed": true
+    },
+    {
+      "case": "both map positions persisted",
+      "passed": true
+    },
+    {
+      "case": "map batch preserves names visibility and parent",
+      "passed": true
+    },
+    {
+      "case": "identical map batch remains successful",
+      "passed": true
+    },
+    {
+      "case": "legacy missing last batch falsely succeeds",
+      "passed": true
+    },
+    {
+      "case": "legacy partial map update persists last",
+      "passed": true
+    },
+    {
+      "case": "legacy missing first batch falsely succeeds",
+      "passed": true
+    },
+    {
+      "case": "legacy partial map update persists first",
+      "passed": true
+    },
+    {
+      "case": "single update retained course flags and order",
+      "passed": true
+    },
+    {
+      "case": "all non-audit tables restored",
+      "passed": true
+    },
+    {
+      "case": "all attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 401,
+      "code": 401,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 401,
+      "code": 401,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 200,
+      "success": true
+    }
+  ],
+  "scope": "Real synthetic Java/MySQL HTTP and rollback; legacy observations are defect reproduction, not fixed acceptance. No authenticated browser or concurrent-edit version control."
+}

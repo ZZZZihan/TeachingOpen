@@ -1,0 +1,12 @@
+{
+  "old_sha256": "d89ef0667d90854195792b30d2af4b469738bb86c65498bd7c68ce350aeb3ac8",
+  "new_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "changed_entries": [
+    "BOOT-INF/classes/org/jeecg/modules/teaching/controller/TeachingCourseController.class",
+    "BOOT-INF/classes/org/jeecg/modules/teaching/controller/TeachingCourseUnitController.class",
+    "BOOT-INF/classes/org/jeecg/modules/teaching/service/ITeachingCourseUnitService.class",
+    "BOOT-INF/classes/org/jeecg/modules/teaching/service/impl/TeachingCourseUnitServiceImpl.class",
+    "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar"
+  ],
+  "common_jar_internal_changes": []
+}

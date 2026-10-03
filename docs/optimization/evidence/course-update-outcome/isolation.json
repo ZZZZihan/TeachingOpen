@@ -1,0 +1,24 @@
+{
+  "recovery-a": {
+    "non_audit_tables": 68,
+    "unchanged": true,
+    "attachments_unchanged": true,
+    "all_tables_unchanged": false
+  },
+  "course-role-runtime": {
+    "non_audit_tables": 68,
+    "unchanged": true,
+    "attachments_unchanged": true,
+    "all_tables_unchanged": true
+  },
+  "original_source": {
+    "files": 5731,
+    "unchanged": true
+  },
+  "exercise_ports_closed": {
+    "13336": true,
+    "16409": true,
+    "18131": true,
+    "18132": true
+  }
+}
