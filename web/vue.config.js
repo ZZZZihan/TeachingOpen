@@ -27,6 +27,9 @@ module.exports = {
     }
   },
   chainWebpack: (config) => {
+    // Load lazy route assets when visited instead of prefetching every async chunk.
+    config.plugins.delete('prefetch')
+
     config.resolve.alias
       .set('@$', resolve('src'))
       .set('@api', resolve('src/api'))
