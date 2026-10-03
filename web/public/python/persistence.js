@@ -28,24 +28,55 @@
     var state = { phase: 'idle', ready: false, busy: false, message: '', workId: context.workId || '' }
     var version = 0, prepared = null
     function notify(phase, message) { state.phase = phase; state.message = message; options.notify(Object.assign({}, state)) }
+    function hasFile(value) { return typeof value === 'string' && Boolean(value.trim()) }
+    async function readUnit(id) {
+      if (typeof options.unit !== 'function') throw new Error('课程信息暂时不可用')
+      var unit = await options.unit(id)
+      if (!unit || typeof unit !== 'object') throw new Error('课程信息暂时不可用')
+      if (unit.id && String(unit.id) !== String(id)) throw new Error('课程单元信息不一致')
+      if (unit.courseWorkType !== undefined && unit.courseWorkType !== null && unit.courseWorkType !== '' && String(unit.courseWorkType) !== '4') throw new Error('课程练习类型不匹配')
+      if (unit.mineWorkId !== undefined && unit.mineWorkId !== null && typeof unit.mineWorkId !== 'string') throw new Error('课程作品编号不可用')
+      return unit
+    }
+    async function readWork(id) {
+      var info = await options.info(id)
+      if (!info || !hasFile(info.workFileKey_url) || String(info.workType) !== '4') throw new Error('作品信息不完整或类型不匹配')
+      if (info.id && String(info.id) !== String(id)) throw new Error('作品编号与读取结果不一致')
+      return info
+    }
     async function load() {
       if (state.busy) return false
       var turn = ++version
       state.ready = false; state.busy = true; notify('loading', '正在打开作品…')
       try {
         var title = context.workName || '', url = context.workFile || context.url || './static/defaultPython.py'
-        if (state.workId && context.resetTemplate !== '1') {
-          var info = await options.info(state.workId)
-          if (!info || !info.workFileKey_url || String(info.workType) !== '4') throw new Error('作品信息不完整或类型不匹配')
-          title = info.workName || ''
-          url = info.workFileKey_url
-          context.unitId = info.courseId || ''; context.additionalId = info.additionalId || ''; context.departId = info.departId || ''
+        var workId = state.workId, reset = context.resetTemplate === '1', next = Object.assign({}, context), unit, info
+        var fromUnit = !workId && Boolean(context.unitId)
+        // An entry URL is a template hint, never evidence that the student's course work is absent.
+        if (fromUnit) {
+          unit = await readUnit(context.unitId)
+          workId = unit.mineWorkId || ''
+        }
+        if (workId) {
+          info = await readWork(workId)
+          if (fromUnit && String(info.courseId || '') !== String(context.unitId)) throw new Error('作品与课程单元不一致')
+          if (reset && (context.unitId && String(info.courseId || '') !== String(context.unitId) || context.additionalId && String(info.additionalId || '') !== String(context.additionalId))) throw new Error('原作品与重做任务不一致')
+          next.unitId = info.courseId || ''; next.additionalId = info.additionalId || ''; next.departId = info.departId || ''
+          if (!reset) { title = info.workName || ''; url = info.workFileKey_url }
+          else if (next.unitId && !unit) unit = await readUnit(next.unitId)
+          else if (!next.unitId && !hasFile(context.workFile || context.url)) throw new Error('重做模板文件不可用')
+        }
+        if (unit && (!workId || reset)) {
+          if (!hasFile(unit.courseWork_url)) throw new Error('课程尚未提供练习文件')
+          title = context.workName || unit.unitName || title; url = unit.courseWork_url
         }
         var code = await options.text(url)
         if (turn !== version) return false
         if (typeof code !== 'string') throw new Error('作品内容不可用')
         await options.apply(title, code)
         if (turn !== version) return false
+        // A failed read/apply must not turn a later retry into an unrelated workId entry.
+        context = next; state.workId = workId
         state.ready = true; state.busy = false
         notify('ready', state.workId && context.resetTemplate !== '1' ? '作品已打开' : '可以开始编写代码')
         return true
@@ -53,7 +84,7 @@
         if (turn !== version) return false
         state.busy = false
         var detail = String(error && error.message || '程序文件尚未打开').replace(/[。；;\s]+$/, '')
-        notify('load-error', '未能打开作品。' + detail + '。' + (/重试|重新加载|重新打开/.test(detail) ? '当前内容已保留。' : '当前内容已保留，请重新打开作品。'))
+        notify('load-error', '未能打开作品。' + detail + '。' + (/重试|重新加载|重新打开/.test(detail) ? '当前内容已保留。' : '当前内容已保留，请重试。'))
         return false
       }
     }
