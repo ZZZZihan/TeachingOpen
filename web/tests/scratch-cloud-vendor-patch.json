@@ -1,0 +1,7 @@
+{
+  "before_sha256": "64aec4d6caf19f0c1a793df5445f591b7fc8914f3e0ef2c7000d075544bbf176",
+  "after_sha256": "83a7bb1e001957303c4f609879d094886d1f4c51235161f3c9d9e2e2d28abf40",
+  "find": "this.enable&&e.vm.runtime.hasCloudData()",
+  "replace": "this.enable&&!window.scratchConfig.cloudData.managed&&e.vm.runtime.hasCloudData()",
+  "purpose": "Opt-in managed provider disables vendor sockets while retaining cloud-variable creation UI."
+}

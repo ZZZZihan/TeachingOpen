@@ -1,7 +1,7 @@
-/* API, VM and accessible status controls; no changes to the vendor bundle. */
+/* API, VM and accessible persistence controls; cloud lifecycle lives in cloud-client.js. */
 (function () {
   'use strict'
-  var session, vm, started = false
+  var session, vm, cloud, started = false
   var params = window.ScratchPersistence.query(window.location.search)
   function token() { try { return window.getUserToken() || '' } catch (error) { return '' } }
   function networkError(status) { return new Error(status === 401 || status === 403 ? '登录已失效或无权操作，请重新登录后再试' : '网络或服务暂时不可用') }
@@ -100,14 +100,14 @@
     editor.setAttribute('aria-busy', String(state.busy))
     document.getElementById('editor-unavailable').hidden = state.ready && !state.busy
   }
-  function setCloud(id) { if (id) window.scratch.setCloudId(id) }
+  function setCloud(id) { if (cloud) cloud.bind(id) }
   function start() {
     if (started) return
     started = true; clearTimeout(bootTimer)
     session = window.ScratchPersistence.create({ params: params, title: function () { return window.scratch.getProjectName() }, capture: capture, upload: upload,
       info: async function (id) { return (await request('/teaching/teachingWork/studentWorkInfo?workId=' + encodeURIComponent(id))).result },
       unit: async function (id) { return (await request('/teaching/teachingCourseUnit/getUnitWorkInfo?unitId=' + encodeURIComponent(id))).result },
-      open: async function (url, title) { var bytes = await readProject(url); try { await vm.loadProject(bytes) } catch (error) { throw new Error('Scratch 无法读取这个项目文件') } window.scratch.setProjectName(title) },
+      open: async function (url, title) { if (cloud) cloud.requestCloseConnection(); var bytes = await readProject(url); try { await vm.loadProject(bytes) } catch (error) { throw new Error('Scratch 无法读取这个项目文件') } window.scratch.setProjectName(title) },
       opened: setCloud,
       submit: async function (body) { return (await request('/teaching/teachingWork/submit', body)).result },
       saved: function (id) {
@@ -132,5 +132,6 @@
     document.getElementById('persistence-status').textContent = '编辑器未能启动。请检查网络后重新打开。'
     var retry = document.getElementById('retry-load'); retry.hidden = false; retry.onclick = function () { window.location.reload() }
   }, 60000)
-  window.TeachingScratch = { initialize: function (value) { vm = value; window.vm = value }, start: start }
+  window.TeachingScratch = { initialize: function (value) { vm = value; window.vm = value; cloud = window.TeachingScratchCloud.mount(vm, { getToken: token, seed: true }) }, start: start,
+    localCloud: function () { if (cloud) cloud.requestCloseConnection() } }
 })()

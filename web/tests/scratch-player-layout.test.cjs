@@ -25,3 +25,12 @@ test('Scratch player: resize preserves stage and overlays, fullscreen releases o
   listeners.get('pagehide')({ persisted: true }); assert.equal(disconnected, 0)
   listeners.get('pagehide')({ persisted: false }); assert.equal(disconnected, 2); assert.equal(listeners.has('resize'), false)
 })
+
+test('cloud status gets reserved height and stage remains centered inside viewport', () => {
+  const stage = { offsetWidth: 1280, offsetHeight: 960, className: 'stage_stage_hash' }; const wrapper = { style: {} }; const area = { clientWidth: 1280, style: {}, getBoundingClientRect: () => ({ top: 44 }) }; const bar = { offsetHeight: 28 }
+  let queued
+  const root = { querySelector: selector => selector.includes('stage_stage_') ? stage : selector.includes('canvas-wrapper') ? area : wrapper }
+  const context = { window: { innerHeight: 720, requestAnimationFrame: fn => { queued = fn }, addEventListener () {}, removeEventListener () {} }, document: { getElementById: id => id === 'scratch' ? root : bar }, MutationObserver: class { observe () {} }, ResizeObserver: class { observe () {} } }
+  vm.runInNewContext(readFileSync(resolve(__dirname, '../public/scratch3/player-layout.js'), 'utf8'), context); queued()
+  assert.equal(wrapper.style.transform, 'scale(' + (640 / 960) + ')'); assert.equal(area.style.height, '640px'); assert.ok(parseFloat(wrapper.style.marginLeft) > 200)
+})
