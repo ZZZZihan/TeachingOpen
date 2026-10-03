@@ -1,0 +1,21 @@
+{
+  "owned_pids": {
+    "backend": 58019,
+    "mysql": 57617,
+    "redis": 57622
+  },
+  "alive": {
+    "backend": false,
+    "mysql": false,
+    "redis": false
+  },
+  "listeners": {
+    "13372": false,
+    "16445": false,
+    "18178": false,
+    "18179": false
+  },
+  "passed": true,
+  "runtime_retained": true,
+  "frontend_started": false
+}

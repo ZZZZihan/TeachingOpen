@@ -1,0 +1,17 @@
+[
+  {
+    "bodyWidth": 412,
+    "scrollWidth": 411,
+    "width": 390
+  },
+  {
+    "bodyWidth": 768,
+    "scrollWidth": 768,
+    "width": 768
+  },
+  {
+    "bodyWidth": 1440,
+    "scrollWidth": 1440,
+    "width": 1440
+  }
+]
