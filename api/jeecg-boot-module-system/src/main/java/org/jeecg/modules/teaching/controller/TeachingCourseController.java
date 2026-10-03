@@ -142,7 +142,12 @@ public class TeachingCourseController extends JeecgController<TeachingCourse, IT
 	@PutMapping(value = "/edit")
 	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> edit(@RequestBody TeachingCourse teachingCourse) {
-		teachingCourseService.updateById(teachingCourse);
+		if (teachingCourse == null || StringUtils.isBlank(teachingCourse.getId())) {
+			return Result.error(400, "请提供课程 ID");
+		}
+		if (!teachingCourseService.updateById(teachingCourse)) {
+			return Result.error(404, "课程已不存在，请刷新后重试");
+		}
 		return Result.ok("编辑成功!");
 	}
 	

@@ -1,0 +1,1060 @@
+{
+  "observed_utc": "2026-10-03T02:15:01.111057+00:00",
+  "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "base_url": "http://127.0.0.1:18131/api",
+  "expected_legacy": false,
+  "scope": "real HTTP login, role gates, database and attachments; import role gate only, not workbook import; no full role UI acceptance",
+  "captcha_method": "real HTTP generation; read only task-owned synthetic Redis",
+  "protected_routes": 26,
+  "administrator_only_routes": 25,
+  "passed": 188,
+  "total": 188,
+  "cases": [
+    {
+      "case": "anonymous denied GET /teaching/teachingCourse/list",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied GET /teaching/teachingCourse/queryById",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied POST /teaching/teachingCourse/add",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied PUT /teaching/teachingCourse/edit",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied DELETE /teaching/teachingCourse/delete",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied DELETE /teaching/teachingCourse/deleteBatch",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied GET /teaching/teachingCourse/exportXls",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied POST /teaching/teachingCourse/importExcel",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied GET /teaching/teachingCourseUnit/list",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied GET /teaching/teachingCourseUnit/queryById",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied POST /teaching/teachingCourseUnit/add",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied PUT /teaching/teachingCourseUnit/edit",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied DELETE /teaching/teachingCourseUnit/delete",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied DELETE /teaching/teachingCourseUnit/deleteBatch",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied GET /teaching/teachingCourseUnit/exportXls",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied POST /teaching/teachingCourseUnit/importExcel",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied PUT /teaching/teachingCourseUnit/editBatch",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied GET /teaching/teachingCourseDept/list",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied GET /teaching/teachingCourseDept/queryById",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied POST /teaching/teachingCourseDept/add",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied PUT /teaching/teachingCourseDept/edit",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied DELETE /teaching/teachingCourseDept/delete",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied DELETE /teaching/teachingCourseDept/deleteBatch",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied GET /teaching/teachingCourseDept/exportXls",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied POST /teaching/teachingCourseDept/importExcel",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied POST /teaching/teachingCourseDept/addOrUpdate",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous denied requests preserve every course/unit/assignment/file row",
+      "passed": true
+    },
+    {
+      "case": "anonymous denied deletes preserve attachment bytes",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /teaching/teachingCourse/list",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied GET /teaching/teachingCourse/queryById",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied POST /teaching/teachingCourse/add",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied PUT /teaching/teachingCourse/edit",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied DELETE /teaching/teachingCourse/delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied DELETE /teaching/teachingCourse/deleteBatch",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied GET /teaching/teachingCourse/exportXls",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied POST /teaching/teachingCourse/importExcel",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied GET /teaching/teachingCourseUnit/list",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied GET /teaching/teachingCourseUnit/queryById",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied POST /teaching/teachingCourseUnit/add",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied PUT /teaching/teachingCourseUnit/edit",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied DELETE /teaching/teachingCourseUnit/delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied DELETE /teaching/teachingCourseUnit/deleteBatch",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied GET /teaching/teachingCourseUnit/exportXls",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied POST /teaching/teachingCourseUnit/importExcel",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied PUT /teaching/teachingCourseUnit/editBatch",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied GET /teaching/teachingCourseDept/list",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied GET /teaching/teachingCourseDept/queryById",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied POST /teaching/teachingCourseDept/add",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied PUT /teaching/teachingCourseDept/edit",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied DELETE /teaching/teachingCourseDept/delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied DELETE /teaching/teachingCourseDept/deleteBatch",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied GET /teaching/teachingCourseDept/exportXls",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied POST /teaching/teachingCourseDept/importExcel",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied POST /teaching/teachingCourseDept/addOrUpdate",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied requests preserve every course/unit/assignment/file row",
+      "passed": true
+    },
+    {
+      "case": "student_a denied deletes preserve attachment bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /teaching/teachingCourse/list",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied GET /teaching/teachingCourse/queryById",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied POST /teaching/teachingCourse/add",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied PUT /teaching/teachingCourse/edit",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied DELETE /teaching/teachingCourse/delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied DELETE /teaching/teachingCourse/deleteBatch",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied GET /teaching/teachingCourse/exportXls",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied POST /teaching/teachingCourse/importExcel",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied GET /teaching/teachingCourseUnit/list",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied GET /teaching/teachingCourseUnit/queryById",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied POST /teaching/teachingCourseUnit/add",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied PUT /teaching/teachingCourseUnit/edit",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied DELETE /teaching/teachingCourseUnit/delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied DELETE /teaching/teachingCourseUnit/deleteBatch",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied GET /teaching/teachingCourseUnit/exportXls",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied POST /teaching/teachingCourseUnit/importExcel",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied PUT /teaching/teachingCourseUnit/editBatch",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied GET /teaching/teachingCourseDept/list",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied GET /teaching/teachingCourseDept/queryById",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied POST /teaching/teachingCourseDept/add",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied PUT /teaching/teachingCourseDept/edit",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied DELETE /teaching/teachingCourseDept/delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied DELETE /teaching/teachingCourseDept/deleteBatch",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied GET /teaching/teachingCourseDept/exportXls",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied POST /teaching/teachingCourseDept/importExcel",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied POST /teaching/teachingCourseDept/addOrUpdate",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied requests preserve every course/unit/assignment/file row",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied deletes preserve attachment bytes",
+      "passed": true
+    },
+    {
+      "case": "anonymous public courses still readable",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "student_a public courses still readable",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "teacher_a public courses still readable",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "student_a assigned course entry remains available",
+      "passed": true,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "student_a assigned learning units remain available",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "student_a assigned course detail remains available",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "student_a other class course detail denied",
+      "passed": true
+    },
+    {
+      "case": "teacher_a assigned course entry remains available",
+      "passed": true,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "teacher_a assigned learning units remain available",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "teacher_a assigned course detail remains available",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "teacher_a other class course detail denied",
+      "passed": true
+    },
+    {
+      "case": "student_a shared course detail remains available",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "teacher_a shared course detail remains available",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin creates course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin course creation persisted",
+      "passed": true
+    },
+    {
+      "case": "admin lists course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin reads course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin edits course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin course edit persisted",
+      "passed": true
+    },
+    {
+      "case": "admin exports course",
+      "passed": true,
+      "http_status": 200,
+      "code": null
+    },
+    {
+      "case": "admin empty import reaches existing validation course",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "admin deletes course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin course deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "admin recreates course for batch delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin batch deletes course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin course batch deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "admin creates unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin unit creation persisted",
+      "passed": true
+    },
+    {
+      "case": "admin lists unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin reads unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin edits unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin unit edit persisted",
+      "passed": true
+    },
+    {
+      "case": "admin exports unit",
+      "passed": true,
+      "http_status": 200,
+      "code": null
+    },
+    {
+      "case": "admin empty import reaches existing validation unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "admin edits unit batch",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin unit batch persisted",
+      "passed": true
+    },
+    {
+      "case": "admin deletes unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin unit deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "admin recreates unit for batch delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin batch deletes unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin unit batch deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "admin creates assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin assignment creation persisted",
+      "passed": true
+    },
+    {
+      "case": "admin lists assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin reads assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin edits assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin assignment edit persisted",
+      "passed": true
+    },
+    {
+      "case": "admin exports assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": null
+    },
+    {
+      "case": "admin empty import reaches existing validation assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "admin assigns course to class",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin course assignment persisted",
+      "passed": true
+    },
+    {
+      "case": "admin deletes assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin assignment deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "admin recreates assignment for batch delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin batch deletes assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin assignment batch deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "former admin with only teacher role denied after fixture cache eviction and fresh login",
+      "passed": true
+    },
+    {
+      "case": "dev exercise uses only dev role",
+      "passed": true
+    },
+    {
+      "case": "dev creates course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev course creation persisted",
+      "passed": true
+    },
+    {
+      "case": "dev lists course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev reads course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev edits course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev course edit persisted",
+      "passed": true
+    },
+    {
+      "case": "dev exports course",
+      "passed": true,
+      "http_status": 200,
+      "code": null
+    },
+    {
+      "case": "dev empty import reaches existing validation course",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "dev deletes course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev course deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "dev recreates course for batch delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev batch deletes course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev course batch deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "dev creates unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev unit creation persisted",
+      "passed": true
+    },
+    {
+      "case": "dev lists unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev reads unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev edits unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev unit edit persisted",
+      "passed": true
+    },
+    {
+      "case": "dev exports unit",
+      "passed": true,
+      "http_status": 200,
+      "code": null
+    },
+    {
+      "case": "dev empty import reaches existing validation unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "dev edits unit batch",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev unit batch persisted",
+      "passed": true
+    },
+    {
+      "case": "dev deletes unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev unit deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "dev recreates unit for batch delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev batch deletes unit",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev unit batch deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "dev creates assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev assignment creation persisted",
+      "passed": true
+    },
+    {
+      "case": "dev lists assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev reads assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev edits assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev assignment edit persisted",
+      "passed": true
+    },
+    {
+      "case": "dev exports assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": null
+    },
+    {
+      "case": "dev empty import reaches existing validation assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "dev assigns course to class",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev course assignment persisted",
+      "passed": true
+    },
+    {
+      "case": "dev deletes assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev assignment deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "dev recreates assignment for batch delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev batch deletes assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev assignment batch deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "all original course/unit/assignment/file rows restored",
+      "passed": true
+    },
+    {
+      "case": "synthetic admin role restored and temporary dev role removed",
+      "passed": true
+    },
+    {
+      "case": "all original attachment bytes preserved and probe removed",
+      "passed": true
+    }
+  ]
+}
