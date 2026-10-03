@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.AutoLog;
@@ -24,7 +25,6 @@ import org.jeecg.common.util.ImportExcelUtil;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.common.controller.BaseController;
 import org.jeecg.modules.system.entity.SysDepart;
-import org.jeecg.modules.system.entity.SysUserDepart;
 import org.jeecg.modules.system.model.DepartIdModel;
 import org.jeecg.modules.system.model.SysDepartTreeModel;
 import org.jeecg.modules.system.service.ISysDepartService;
@@ -72,9 +72,10 @@ public class SysDepartController extends BaseController {
 	public RedisTemplate<String, Object> redisTemplate;
 
 	@AutoLog("清空班级")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	@GetMapping("removeAll")
 	public Result<?> removeAll(@RequestParam String id){
-		sysUserDepartService.remove(new QueryWrapper<SysUserDepart>().lambda().eq(SysUserDepart::getDepId, id));
+		sysUserDepartService.clearDepartUsers(id);
 		return Result.ok();
 	}
 

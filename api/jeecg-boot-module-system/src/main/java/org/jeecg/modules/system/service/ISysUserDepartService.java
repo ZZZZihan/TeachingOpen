@@ -18,6 +18,21 @@ import com.baomidou.mybatisplus.extension.service.IService;
  *
  */
 public interface ISysUserDepartService extends IService<SysUserDepart> {
+
+	/**
+	 * 管理员添加已有用户到指定部门，全部目标有效后统一写入；已有关系保持幂等。
+	 */
+	void addUsersToDepart(String depId, List<String> userIds);
+
+	/**
+	 * 管理员移除指定部门的用户关系及这些用户在该部门的角色关系。
+	 */
+	void removeUsersFromDepart(String depId, List<String> userIds);
+
+	/**
+	 * 管理员清空指定部门的成员，沿用单删/批删的用户角色等级约束。
+	 */
+	void clearDepartUsers(String depId);
 	
 
 	/**
