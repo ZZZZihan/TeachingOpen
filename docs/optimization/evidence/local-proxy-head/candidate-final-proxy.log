@@ -1,0 +1,113 @@
+test_api_head_does_not_invent_content_length (test_frontend_proxy.FrontendProxyTest.test_api_head_does_not_invent_content_length) ... HEAD api
+HEAD api
+HEAD api
+HEAD api
+HEAD api
+ok
+test_api_head_error_responses_keep_status_and_length_without_body (test_frontend_proxy.FrontendProxyTest.test_api_head_error_responses_keep_status_and_length_without_body) ... GET api
+HEAD api
+GET api
+HEAD api
+GET api
+HEAD api
+ok
+test_api_head_local_errors_do_not_send_body (test_frontend_proxy.FrontendProxyTest.test_api_head_local_errors_do_not_send_body) ... HEAD api
+HEAD api
+HEAD api
+HEAD api
+HEAD api
+HEAD api
+HEAD api
+HEAD api
+ok
+test_api_head_preserves_representation_headers_without_body (test_frontend_proxy.FrontendProxyTest.test_api_head_preserves_representation_headers_without_body) ... GET api
+HEAD api
+ok
+test_api_head_preserves_upstream_range_metadata (test_frontend_proxy.FrontendProxyTest.test_api_head_preserves_upstream_range_metadata) ... GET api
+HEAD api
+GET api
+HEAD api
+ok
+test_backend_disconnect_closes_client (test_frontend_proxy.FrontendProxyTest.test_backend_disconnect_closes_client) ... GET api
+ok
+test_client_disconnect_closes_upstream (test_frontend_proxy.FrontendProxyTest.test_client_disconnect_closes_upstream) ... GET api
+ok
+test_error_responses_keep_local_csp (test_frontend_proxy.FrontendProxyTest.test_error_responses_keep_local_csp) ... GET static
+GET static
+GET api
+GET api
+ok
+test_foreign_origin_is_rejected_before_backend (test_frontend_proxy.FrontendProxyTest.test_foreign_origin_is_rejected_before_backend) ... GET api
+GET api
+ok
+test_fragmented_http_body_is_not_truncated (test_frontend_proxy.FrontendProxyTest.test_fragmented_http_body_is_not_truncated) ... POST api
+ok
+test_handshake_and_early_frames_preserved (test_frontend_proxy.FrontendProxyTest.test_handshake_and_early_frames_preserved) ... GET api
+ok
+test_idle_connection_is_reaped (test_frontend_proxy.FrontendProxyTest.test_idle_connection_is_reaped) ... GET api
+ok
+test_invalid_upgrade_requests_do_not_reach_backend (test_frontend_proxy.FrontendProxyTest.test_invalid_upgrade_requests_do_not_reach_backend) ... GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+POST api
+POST api
+GET api
+GET api
+ok
+test_large_stream_and_concurrent_connection (test_frontend_proxy.FrontendProxyTest.test_large_stream_and_concurrent_connection) ... GET api
+GET api
+ok
+test_missing_backend_fails_and_recovers (test_frontend_proxy.FrontendProxyTest.test_missing_backend_fails_and_recovers) ... GET api
+GET api
+GET api
+ok
+test_nonbrowser_client_without_origin_is_supported (test_frontend_proxy.FrontendProxyTest.test_nonbrowser_client_without_origin_is_supported) ... GET api
+ok
+test_ordinary_http_and_static_routes_keep_contract (test_frontend_proxy.FrontendProxyTest.test_ordinary_http_and_static_routes_keep_contract) ... GET api
+GET static
+GET static
+ok
+test_static_and_spa_head_match_get_without_body (test_frontend_proxy.FrontendProxyTest.test_static_and_spa_head_match_get_without_body) ... GET static
+HEAD static
+GET static
+HEAD static
+GET static
+HEAD static
+GET static
+HEAD static
+GET static
+HEAD static
+GET static
+HEAD static
+ok
+test_static_head_conditional_and_missing_responses (test_frontend_proxy.FrontendProxyTest.test_static_head_conditional_and_missing_responses) ... GET static
+GET static
+HEAD static
+GET static
+GET static
+HEAD static
+HEAD static
+ok
+test_upstream_refusal_and_invalid_handshakes (test_frontend_proxy.FrontendProxyTest.test_upstream_refusal_and_invalid_handshakes) ... GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 9.274s
+
+OK

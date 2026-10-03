@@ -1,0 +1,155 @@
+{
+  "created_at": "2026-10-03T20:51:29.689693+08:00",
+  "branch": "fix/local-proxy-head",
+  "base_commit": "a60d2b456bb312a1212d0905f521184639c011a5",
+  "author": {
+    "model": "GPT-6.1-sol",
+    "reasoning_effort": "ultra",
+    "fast_parameter_available": false
+  },
+  "python_version": "3.14.7",
+  "evidence_class": "author controlled loopback and raw TCP regression",
+  "source_files": {
+    "api/dev/serve-frontend.py": "d765e08c8bcbb09b315e21e82d432d8f1938e037a93edee30d9fb7b23db33af2",
+    "api/dev/test_frontend_proxy.py": "1c0f38832c6649124af13db58933d49d34206137eda03d552759ffde212b80de",
+    "docs/optimization/local-proxy-head.md": "1b0ec7fb4562e723ff08810f71275e0962007bab6a73d662f5422fd7ab0ec8cb"
+  },
+  "checks": [
+    {
+      "name": "baseline-existing",
+      "command": "python3 -m unittest discover -s api/dev -p 'test_frontend_proxy.py' -v",
+      "exit_code": 0,
+      "reported_test_methods": 13,
+      "failure_instances": 0,
+      "error_instances": 0,
+      "skipped": 0,
+      "failed_methods": [],
+      "error_methods": [],
+      "passed_methods": 13,
+      "duration_seconds": 8.983,
+      "log": "baseline-existing.log",
+      "log_sha256": "4407e7c16ea16629ead105d0098a4d71ae7e07be12becef68dd4e6e5932c290d",
+      "product_sha256": "03b717118c4d6a3e888f863143df8b127536c8f073a08adfa40836b7dd4a700f",
+      "test_sha256": "9590037714f6f9be2dd2602a114e18a44fefb04aa06c893f385edf28495e7693"
+    },
+    {
+      "name": "baseline-final",
+      "command": "python3 -m unittest discover -s BASELINE_COPY -p 'test_frontend_proxy.py' -v",
+      "exit_code": 1,
+      "reported_test_methods": 20,
+      "failure_instances": 13,
+      "error_instances": 0,
+      "skipped": 0,
+      "failed_methods": [
+        "test_api_head_does_not_invent_content_length",
+        "test_api_head_error_responses_keep_status_and_length_without_body",
+        "test_api_head_local_errors_do_not_send_body",
+        "test_api_head_preserves_representation_headers_without_body",
+        "test_api_head_preserves_upstream_range_metadata",
+        "test_static_and_spa_head_match_get_without_body"
+      ],
+      "error_methods": [],
+      "passed_methods": 14,
+      "duration_seconds": 9.06,
+      "log": "baseline-final.log",
+      "log_sha256": "ce49d886729d5c1a33e4958274734efa83099d41e78e444980c9397f20ed9f3f",
+      "product_sha256": "03b717118c4d6a3e888f863143df8b127536c8f073a08adfa40836b7dd4a700f",
+      "test_sha256": "1c0f38832c6649124af13db58933d49d34206137eda03d552759ffde212b80de"
+    },
+    {
+      "name": "candidate-initial-proxy",
+      "command": "python3 -m unittest discover -s api/dev -p 'test_frontend_proxy.py' -v",
+      "exit_code": 1,
+      "reported_test_methods": 20,
+      "failure_instances": 0,
+      "error_instances": 1,
+      "skipped": 0,
+      "failed_methods": [],
+      "error_methods": [
+        "test_api_head_local_errors_do_not_send_body"
+      ],
+      "passed_methods": 19,
+      "duration_seconds": 11.173,
+      "log": "candidate-initial-proxy.log",
+      "log_sha256": "f671060841a681359b1568b72d704a81220a425f374e377075ffdb9edffb1beb",
+      "product_sha256": "d765e08c8bcbb09b315e21e82d432d8f1938e037a93edee30d9fb7b23db33af2",
+      "test_sha256": "6b0fc4c7096e10cee7bf3a445014ef119475929cb21b4512e4cbe4215b0d35c1"
+    },
+    {
+      "name": "candidate-initial-dev-suite",
+      "command": "python3 -m unittest discover -s api/dev -p 'test_*.py'",
+      "exit_code": 1,
+      "reported_test_methods": 106,
+      "failure_instances": 0,
+      "error_instances": 1,
+      "skipped": 1,
+      "failed_methods": [],
+      "error_methods": [
+        "test_api_head_local_errors_do_not_send_body"
+      ],
+      "passed_methods": 104,
+      "duration_seconds": 11.44,
+      "log": "candidate-initial-dev-suite.log",
+      "log_sha256": "193437a41c33f3c254eb31619eebba8c81b9d0f68cf7864d07fb30c0cd050ffa",
+      "product_sha256": "d765e08c8bcbb09b315e21e82d432d8f1938e037a93edee30d9fb7b23db33af2",
+      "test_sha256": "6b0fc4c7096e10cee7bf3a445014ef119475929cb21b4512e4cbe4215b0d35c1"
+    },
+    {
+      "name": "candidate-final-proxy",
+      "command": "python3 -m unittest discover -s api/dev -p 'test_frontend_proxy.py' -v",
+      "exit_code": 0,
+      "reported_test_methods": 20,
+      "failure_instances": 0,
+      "error_instances": 0,
+      "skipped": 0,
+      "failed_methods": [],
+      "error_methods": [],
+      "passed_methods": 20,
+      "duration_seconds": 9.274,
+      "log": "candidate-final-proxy.log",
+      "log_sha256": "d50316cc796f493f5cefdc3c95afc81f666446c82d3b9502f766fbdbc35b95a3",
+      "product_sha256": "d765e08c8bcbb09b315e21e82d432d8f1938e037a93edee30d9fb7b23db33af2",
+      "test_sha256": "1c0f38832c6649124af13db58933d49d34206137eda03d552759ffde212b80de"
+    },
+    {
+      "name": "candidate-final-dev-suite",
+      "command": "python3 -m unittest discover -s api/dev -p 'test_*.py'",
+      "exit_code": 0,
+      "reported_test_methods": 106,
+      "failure_instances": 0,
+      "error_instances": 0,
+      "skipped": 1,
+      "failed_methods": [],
+      "error_methods": [],
+      "passed_methods": 105,
+      "duration_seconds": 9.576,
+      "log": "candidate-final-dev-suite.log",
+      "log_sha256": "a6766b7069fc460b159cd878536c22ad6117efe8c67a5f809205c31046ef78a7",
+      "product_sha256": "d765e08c8bcbb09b315e21e82d432d8f1938e037a93edee30d9fb7b23db33af2",
+      "test_sha256": "1c0f38832c6649124af13db58933d49d34206137eda03d552759ffde212b80de"
+    }
+  ],
+  "compile_check": {
+    "command": "python3 -m py_compile api/dev/serve-frontend.py api/dev/test_frontend_proxy.py",
+    "exit_code": 0
+  },
+  "diff_check": {
+    "command": "git diff --check",
+    "exit_code": 0
+  },
+  "scope": {
+    "fixed_ports_used": [],
+    "runtime_changed": false,
+    "java_changed": false,
+    "jar_changed": false,
+    "committed": false,
+    "pushed": false,
+    "pull_request_created": false,
+    "production_deployed": false,
+    "independent_review": "root to coordinate",
+    "real_java_integration": "root to coordinate"
+  },
+  "fixture_correction": "Only the unavailable backend HEAD fixture limits actual urllib connection timeout to 0.2s; product remains 30s. Initial failures preserved.",
+  "baseline_copy": "git show a60d2b4:api/dev/serve-frontend.py plus byte-identical final test and local_runtime.py",
+  "snapshot_test_runtime_configured": false
+}

@@ -1,0 +1,103 @@
+...HEAD api
+HEAD api
+HEAD api
+HEAD api
+HEAD api
+.GET api
+HEAD api
+GET api
+HEAD api
+GET api
+HEAD api
+.EHEAD api
+HEAD api
+GET api
+HEAD api
+.GET api
+HEAD api
+GET api
+HEAD api
+.GET api
+.GET api
+.GET static
+GET static
+GET api
+GET api
+.GET api
+GET api
+.POST api
+.GET api
+.GET api
+.GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+POST api
+POST api
+GET api
+GET api
+.GET api
+GET api
+.GET api
+GET api
+GET api
+.GET api
+.GET api
+GET static
+GET static
+.GET static
+HEAD static
+GET static
+HEAD static
+GET static
+HEAD static
+GET static
+HEAD static
+GET static
+HEAD static
+GET static
+HEAD static
+.GET static
+GET static
+HEAD static
+GET static
+GET static
+HEAD static
+HEAD static
+.GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+...................................................s................................
+======================================================================
+ERROR: test_api_head_local_errors_do_not_send_body (test_frontend_proxy.FrontendProxyTest.test_api_head_local_errors_do_not_send_body)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/local-proxy-head/api/dev/test_frontend_proxy.py", line 267, in test_api_head_local_errors_do_not_send_body
+    status, headers, body = self.http_response('HEAD', '/api/media')
+                            ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/local-proxy-head/api/dev/test_frontend_proxy.py", line 168, in http_response
+    response = head(conn)
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/local-proxy-head/api/dev/test_frontend_proxy.py", line 37, in head
+    result += exact(conn, 1)
+              ~~~~~^^^^^^^^^
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/local-proxy-head/api/dev/test_frontend_proxy.py", line 27, in exact
+    chunk = conn.recv(size - len(result))
+TimeoutError: timed out
+
+----------------------------------------------------------------------
+Ran 106 tests in 11.440s
+
+FAILED (errors=1, skipped=1)
