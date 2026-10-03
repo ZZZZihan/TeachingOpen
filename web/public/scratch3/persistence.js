@@ -29,23 +29,52 @@
     var context = Object.assign({}, options.params)
     var state = { ready: false, busy: false, dirty: false, phase: 'idle', message: '', workId: context.workId || '' }
     function notify(phase, message) { state.phase = phase; state.message = message; options.notify(Object.assign({}, state)) }
+    function accepts(type) { return (options.acceptedTypes || ['1', '2']).includes(String(type)) }
+    function hasFile(value) { return typeof value === 'string' && Boolean(value.trim()) }
+    async function readUnit(id) {
+      if (typeof options.unit !== 'function') throw new Error('课程信息暂时不可用')
+      var unit = await options.unit(id)
+      if (!unit || typeof unit !== 'object') throw new Error('课程信息暂时不可用')
+      if (unit.id && String(unit.id) !== String(id)) throw new Error('课程单元信息不一致')
+      if (unit.courseWorkType !== undefined && unit.courseWorkType !== null && unit.courseWorkType !== '' && !accepts(unit.courseWorkType)) throw new Error('课程练习类型不匹配')
+      if (unit.mineWorkId !== undefined && unit.mineWorkId !== null && typeof unit.mineWorkId !== 'string') throw new Error('课程作品编号不可用')
+      return unit
+    }
+    async function readWork(id) {
+      var info = await options.info(id)
+      if (!info || !hasFile(info.workFileKey_url) || !accepts(info.workType)) throw new Error('作品信息不完整或类型不匹配')
+      if (info.id && String(info.id) !== String(id)) throw new Error('作品编号与读取结果不一致')
+      return info
+    }
     async function load() {
       if (state.busy) return false
       state.busy = true; state.ready = false; notify('loading', '正在打开作品…')
       try {
         var title = context.workName || options.defaultTitle || 'Scratch 作品', url = context.workFile || options.defaultFile || './static/project.sb3'
-        if (state.workId && context.resetTemplate !== '1') {
-          var info = await options.info(state.workId)
-          if (!info || !info.workFileKey_url || !(options.acceptedTypes || ['1', '2']).includes(String(info.workType))) throw new Error('作品信息不完整或类型不匹配')
-          title = info.workName || title; url = info.workFileKey_url
-          context.unitId = info.courseId || ''; context.additionalId = info.additionalId || ''; context.departId = info.departId || ''
-        } else if (!context.workFile && context.unitId) {
-          var unit = await options.unit(context.unitId)
-          if (!unit || !unit.courseWork_url) throw new Error('课程尚未提供练习文件')
+        var workId = state.workId, reset = context.resetTemplate === '1', next = Object.assign({}, context), unit, info
+        var fromUnit = !workId && Boolean(context.unitId)
+        // Course links carry template URLs, but only this lookup can establish that no saved work exists.
+        if (fromUnit) {
+          unit = await readUnit(context.unitId)
+          workId = unit.mineWorkId || ''
+        }
+        if (workId) {
+          info = await readWork(workId)
+          if (fromUnit && String(info.courseId || '') !== String(context.unitId)) throw new Error('作品与课程单元不一致')
+          if (reset && (context.unitId && String(info.courseId || '') !== String(context.unitId) || context.additionalId && String(info.additionalId || '') !== String(context.additionalId))) throw new Error('原作品与重做任务不一致')
+          next.unitId = info.courseId || ''; next.additionalId = info.additionalId || ''; next.departId = info.departId || ''
+          if (!reset) { title = info.workName || title; url = info.workFileKey_url }
+          else if (next.unitId && !unit) unit = await readUnit(next.unitId)
+          else if (!next.unitId && !hasFile(context.workFile)) throw new Error('重做模板文件不可用')
+        }
+        if (unit && (!workId || reset)) {
+          if (!hasFile(unit.courseWork_url)) throw new Error('课程尚未提供练习文件')
           title = context.workName || unit.unitName || title; url = unit.courseWork_url
         }
         await options.open(url, title)
-        options.opened(state.workId)
+        options.opened(workId)
+        // Commit identity and task metadata only after the chosen file has opened successfully.
+        context = next; state.workId = workId
         state.ready = true; state.busy = false; state.dirty = context.resetTemplate === '1'
         notify('ready', state.dirty ? '已打开原始模板；保存后将更新这份作业。' : '作品已打开，可以继续编辑。')
         return true

@@ -74,6 +74,7 @@
     editor.$set(editor, 'persistBusy', true); editor.$set(editor, 'persistReady', false)
     session = window.PythonPersistence.create({ params: params,
       info: async function (id) { return (await request('/teaching/teachingWork/studentWorkInfo?workId=' + encodeURIComponent(id))).result },
+      unit: async function (id) { return (await request('/teaching/teachingCourseUnit/getUnitWorkInfo?unitId=' + encodeURIComponent(id))).result },
       text: readText, upload: upload, submit: async function (body) { return (await request('/teaching/teachingWork/submit', body)).result },
       apply: async function (title, code) {
         var current = host
