@@ -1,0 +1,52 @@
+{
+  "base_commit": "f906f8e782795ddd670725e85ffa4ea1756b665c",
+  "purpose": "Load only the page-specific Vue entry, delegate source loading and actual application to the shared helper, guard Run until ready, and remove the inherited delayed CodeMirror setter. Preserve PR52 execution and prior persistence/output/URL patches.",
+  "files": [
+    {
+      "path": "web/public/python/static/js/app.js",
+      "before_sha256": "7fe0ead2ed4816056f809db42ea4b442c9c573d3c1217317f0a996d743904e4f",
+      "after_sha256": "34fb61d7c5a5637d3756deda0f0f3ef92c8576d7d992fc925fd2d5c8b3bec392",
+      "replacements": [
+        {
+          "before": "created:function(){if(window.TeachingPython){var t=this;this.$nextTick(function(){window.TeachingPython.mount(t)})}else{var t=this,e=this.urlParam(\"url\");e?this.downloadFile(e):this.downloadFile(\"./static/defaultPython.py\"),window.document.addEventListener(\"loadPorject\",function(e){console.log(\"load project:\"),console.log(e.detail),t.projectName=e.detail.projectName,t.downloadFile(e.detail.url)}),window.document.addEventListener(\"setUserInfo\",function(e){console.log(\"set user info:\"),console.log(e.detail),t.username=e.detail.username,e.detail.avatar&&(t.avatar=e.detail.avatar)})}}",
+          "after": "created:function(){var t=this;this.$nextTick(function(){window.TeachingPython.mount(t)})}"
+        },
+        {
+          "before": "runit:function(){return window.TeachingPythonExecution.run(this.getCode())}",
+          "after": "runit:function(){if(this.persistReady&&!this.persistBusy)return window.TeachingPythonExecution.run(this.getCode())}"
+        },
+        {
+          "before": "n(\"a-button\",{attrs:{type:\"primary\"},on:{click:t.runit}}",
+          "after": "n(\"a-button\",{attrs:{type:\"primary\",disabled:t.persistBusy||!t.persistReady},on:{click:t.runit}}"
+        },
+        {
+          "before": "setCodeContent:function(t){var e=this;setTimeout(function(){t?e.coder.setValue(t):e.coder.setValue(\"\")},300)}",
+          "after": "setCodeContent:function(t){this.code=t||\"\",this.coder&&this.coder.setValue(this.code)}"
+        }
+      ]
+    },
+    {
+      "path": "web/public/python/static/js/appPlayer.js",
+      "before_sha256": "604e61b6ba09f8c42354037efae4327492778024e3ef7ca0e75c6d915172b5c0",
+      "after_sha256": "6e972a3abdc8a06947ba364c12b7128a568438824c725b163b49ac8f2eb1d5e1",
+      "replacements": [
+        {
+          "before": "data:function(){return{code:\"\",out:\"\"}},mounted:function(){var t=this.urlParam(\"url\");t&&this.downloadFile(t)}",
+          "after": "data:function(){return{code:\"\",out:\"\",sourceBusy:!0,sourceReady:!1}},mounted:function(){window.PythonSourceLoading.mountPreview(this)}"
+        },
+        {
+          "before": "runit:function(){return window.TeachingPythonExecution.run(this.code)}",
+          "after": "runit:function(){if(this.sourceReady&&!this.sourceBusy)return window.TeachingPythonExecution.run(this.code)}"
+        },
+        {
+          "before": "n(\"a-button\",{attrs:{type:\"primary\"},on:{click:t.runit}}",
+          "after": "n(\"a-button\",{attrs:{type:\"primary\",disabled:t.sourceBusy||!t.sourceReady},on:{click:t.runit}}"
+        },
+        {
+          "before": "setCodeContent:function(t){var e=this;setTimeout(function(){t?e.coder.setValue(t):e.coder.setValue(\"\")},300)}",
+          "after": "setCodeContent:function(t){this.code=t||\"\",this.coder&&this.coder.setValue(this.code)}"
+        }
+      ]
+    }
+  ]
+}

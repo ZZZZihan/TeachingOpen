@@ -195,6 +195,9 @@ function actualComponent (bundle, environment) {
     $refs: { codeEditor: { getCodeContent: () => 'print("fresh Ace")', setCodeContent () {} } },
     $nextTick: callback => callback()
   }
+  // Execution-only fixtures start with an already loaded source. Loading gates
+  // are exercised independently through the real page/helper entry fixture.
+  if ('sourceReady' in instance) { instance.sourceReady = true; instance.sourceBusy = false }
   for (const [name, method] of Object.entries(component.methods)) instance[name] = method.bind(instance)
   return { component, instance, notifications }
 }

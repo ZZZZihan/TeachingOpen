@@ -5,14 +5,13 @@ const persistence=require('../public/python/persistence.js')
 const flush=()=>new Promise(r=>setImmediate(r))
 async function mount(overrides={}){
  const h={calls:[],token:'session-a',cloud:[],history:[],readOnly:[],events:{},nodes:{'persistence-status':{dataset:{}},'retry-load':{}},content:'print(42)'}
- const host={projectName:'',code:'',$refs:{codeEditor:{editor:{setReadOnly:v=>h.readOnly.push(v)},$watch(){}}},$set:(o,k,v)=>{o[k]=v},$watch(){},setCode:v=>{host.code=v},getCode:()=>host.code}
- const context={URL,URLSearchParams,Blob,FormData,Promise,setTimeout,clearTimeout,PythonPersistence:persistence,document:{getElementById:id=>h.nodes[id]},location:{search:'?workId=existing',href:'http://fixture.test/python/index.html?workId=existing'},history:{replaceState:(s,t,url)=>h.history.push(url)},getUserToken:()=>h.token,uuid:()=> 'fixture-uuid',addEventListener:(name,fn)=>{h.events[name]=fn},qiniu:{region:{z0:{}},upload:(...args)=>{h.cloud.push(args);return {subscribe:observer=>{observer.complete({key:args[1]});return {unsubscribe(){}}}}}},$: {ajax:o=>{
+ const host={projectName:'',code:'',$refs:{codeEditor:{editor:{getValue:()=>host.code,setValue:v=>{host.code=v},setReadOnly:v=>h.readOnly.push(v)},getCodeContent:()=>host.code,$watch(){}}},$set:(o,k,v)=>{o[k]=v},$watch(){},$nextTick:fn=>setTimeout(fn,0),setCode:v=>{host.code=v},getCode:()=>host.code}
+ const context={URL,URLSearchParams,Blob,FormData,AbortController,Promise,setTimeout,clearTimeout,PythonPersistence:persistence,document:{getElementById:id=>h.nodes[id]},location:{search:'?workId=existing',href:'http://fixture.test/python/index.html?workId=existing'},history:{replaceState:(s,t,url)=>h.history.push(url)},getUserToken:()=>h.token,uuid:()=> 'fixture-uuid',addEventListener:(name,fn)=>{h.events[name]=fn},fetch:(url,settings)=>{h.calls.push({url,...settings});return Promise.resolve({ok:true,status:200,headers:{get:()=>overrides.mime||'text/plain'},text:()=>Promise.resolve(h.content)})},qiniu:{region:{z0:{}},upload:(...args)=>{h.cloud.push(args);return {subscribe:observer=>{observer.complete({key:args[1]});return {unsubscribe(){}}}}}},$: {ajax:o=>{
   h.calls.push(o)
   const response=overrides.response&&overrides.response(o)
   if(response==='error'){o.error({status:401});return}
   if(response!==undefined){o.success(response,'success',{getResponseHeader:()=> 'text/plain'});return}
   if(o.url.includes('studentWorkInfo'))o.success({code:0,success:true,result:{id:'existing',workType:4,workName:'作品',workFileKey_url:'http://files.test/code.py'}})
-  else if(o.url==='http://files.test/code.py')o.success(h.content,'success',{getResponseHeader:()=>overrides.mime||'text/plain'})
   else if(o.url.includes('getCurrentConfig'))o.success({code:0,result:{uploadType:overrides.cloud?'qiniu':'local',qiniuArea:'z0'}})
   else if(o.url.includes('getToken'))o.success({code:200,success:true,result:'fixture-cloud-credential',keyPrefix:'server-owned/'})
   else if(o.url.endsWith('/upload'))o.success({success:true,message:'python/upload.py'})
@@ -20,7 +19,7 @@ async function mount(overrides={}){
   else if(o.url.endsWith('/submit'))o.success({code:200,success:true,result:{id:'existing'}})
   else throw new Error('Unexpected request '+o.url)
  }}}
- context.window=context;vm.createContext(context);vm.runInContext(fs.readFileSync(path.join(__dirname,'../public/python/editor-bridge.js'),'utf8'),context);context.TeachingPython.mount(host);await flush()
+ context.window=context;vm.createContext(context);vm.runInContext(fs.readFileSync(path.join(__dirname,'../public/python/source-loading.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(__dirname,'../public/python/editor-bridge.js'),'utf8'),context);context.TeachingPython.mount(host);for(let i=0;i<10&&host.persistBusy;i++)await new Promise(r=>setTimeout(r,5))
  return {...h,h,host,context}
 }
 test('桥接没有 CONFIG 缓存也可本地上传、登记、提交；每次 API 使用当前令牌',async()=>{
@@ -29,7 +28,7 @@ test('桥接没有 CONFIG 缓存也可本地上传、登记、提交；每次 AP
  assert.equal(h.calls.find(o=>o.url==='http://files.test/code.py').headers,undefined);assert.equal(writes[0].url,'/api/sys/common/upload');assert.equal(JSON.parse(writes[2].data).workFile,'file-owned');assert.match(h.history[0],/workId=existing/)
 })
 test('文件返回 HTML 登录页不会作为代码载入；401 有明确提示且解除忙状态',async()=>{
- const bad=await mount({mime:'text/html'});assert.equal(bad.host.persistReady,false);assert.equal(bad.host.code,'');assert.match(bad.h.nodes['persistence-status'].textContent,/文件格式/)
+ const bad=await mount({mime:'text/html'});assert.equal(bad.host.persistReady,false);assert.equal(bad.host.code,'');assert.match(bad.h.nodes['persistence-status'].textContent,/不是程序文件/)
  const h=await mount({response:o=>o.url.includes('getCurrentConfig')?'error':undefined});await h.context.submitCode('作品','print(1)');assert.equal(h.host.persistBusy,false);assert.match(h.h.nodes['persistence-status'].textContent,/登录已失效/);assert.equal(h.h.calls.some(o=>o.url.endsWith('/submit')),false)
 })
 test('文件登记路径不匹配、业务失败不能进入提交成功状态',async()=>{

@@ -14,7 +14,7 @@ function readSource (file) {
     : fs.readFileSync(path.join(repository, file), 'utf8')
 }
 
-function player (bundle, href) {
+function legacyPlayer (bundle, href) {
   const source = readSource('web/public/python/static/js/' + bundle + '.js')
   const marker = 'c={name:"PythonEditor"'
   assert.equal(source.split(marker).length - 1, 1, 'locate one actual bundled PythonEditor')
@@ -43,6 +43,19 @@ function player (bundle, href) {
   return {
     component, instance, requested, applied, events, ticks,
     start () { component.created.call(instance); component.mounted.call(instance) }
+  }
+}
+
+function player (bundle, href) {
+  if (sourceRef) return legacyPlayer(bundle, href)
+  // Each component is exercised through its own shipped HTML/helper entry. The
+  // shared URL parser is still executed from the actual bundled method.
+  const h = require('../python-source-loading/harness.cjs').page(bundle === 'app' ? 'index' : 'player', { href: new URL(href, origin).href, autoResponse: true, body: 'print("URL fixture loaded")\n' })
+  const host = h.actual()
+  return {
+    ...host, applied: h.applied,
+    get requested () { return h.requests.map(value => value.url) },
+    async start () { h.start(); await h.pump(() => ['ready', 'load-error'].includes(h.phase())) }
   }
 }
 

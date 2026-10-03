@@ -56,12 +56,18 @@ test('both HTML entry points load output helper before vendor bundles and share 
   assert.ok(html.indexOf('src="./output.js"')>=0);assert.ok(html.indexOf('src="./output.js"')<html.indexOf('src=./static/js/manifest.js'));assert.match(html,/href="\.\/output.css"/)
  }
 })
-test('execution and URL substitutions reverse before the six output substitutions and preserve every historical vendor base',()=>{
+test('source-loading, execution and URL substitutions reverse before the six output substitutions and preserve every historical vendor base',()=>{
+ const sourcePatch=require('./python-source-loading/vendor-patch.json')
  const framePatch=require('./python-execution-frame/vendor-patch.json')
  const urlPatch=require('./python-preview-url/vendor-patch.json')
  const patch=require('./python-output-preview/vendor-patch.json')
  for(const file of patch.files){
   let source=fs.readFileSync(path.join(__dirname,'../..',file.path),'utf8')
+  const sourceFile=sourcePatch.files.find(value=>value.path===file.path)
+  assert.ok(sourceFile,'the source-loading patch records each changed Python bundle')
+  assert.equal(crypto.createHash('sha256').update(source).digest('hex'),sourceFile.after_sha256)
+  for(const {before,after} of sourceFile.replacements){assert.equal(source.split(after).length-1,1);source=source.replace(after,before)}
+  assert.equal(crypto.createHash('sha256').update(source).digest('hex'),sourceFile.before_sha256)
   const frameFile=framePatch.files.find(value=>value.path===file.path)
   assert.ok(frameFile,'the execution patch records each changed Python bundle')
   assert.equal(crypto.createHash('sha256').update(source).digest('hex'),frameFile.after_sha256)

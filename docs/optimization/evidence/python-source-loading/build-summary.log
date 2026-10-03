@@ -1,0 +1,18 @@
+Command: npm run build
+Exit code: 0
+Browserslist: caniuse-lite is outdated. Please run:
+ WARNING  Compiled with 12 warnings6:01:13 PM
+ warning
+ warning
+ warning
+ warning
+ warning
+ warning
+ warning
+ warning
+ warning
+ warning
+ warning
+ warning
+ DONE  Build complete. The dist directory is ready to be deployed.
+17 Python dist resources match final source manifest.

@@ -44,14 +44,16 @@
         var code = await options.text(url)
         if (turn !== version) return false
         if (typeof code !== 'string') throw new Error('作品内容不可用')
-        options.apply(title, code)
+        await options.apply(title, code)
+        if (turn !== version) return false
         state.ready = true; state.busy = false
         notify('ready', state.workId && context.resetTemplate !== '1' ? '作品已打开' : '可以开始编写代码')
         return true
       } catch (error) {
         if (turn !== version) return false
         state.busy = false
-        notify('load-error', '未能打开作品。' + error.message + '；请重试，避免覆盖原作品。')
+        var detail = String(error && error.message || '程序文件尚未打开').replace(/[。；;\s]+$/, '')
+        notify('load-error', '未能打开作品。' + detail + '。' + (/重试|重新加载|重新打开/.test(detail) ? '当前内容已保留。' : '当前内容已保留，请重新打开作品。'))
         return false
       }
     }

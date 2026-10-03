@@ -16,9 +16,12 @@ args = parser.parse_args()
 lock = threading.Lock()
 seed = 'print("Python persistence fixture")\nprint(6 * 7)\n'
 if args.seed_file: seed = Path(args.seed_file).read_text(encoding='utf-8')
-state = {'mode': 'normal', 'reads': [], 'uploads': [], 'registrations': [], 'submissions': [], 'works': {
+state = {'mode': 'normal', 'reads': [], 'sourceReads': [], 'sourceAttempts': 0, 'uploads': [], 'registrations': [], 'submissions': [], 'works': {
     'seed-work': {'id': 'seed-work', 'workName': '我的练习 & 100%', 'workType': '4', 'workFileKey_url': '/fixtures/seed.py?revision=1&label=a+b', 'additionalId': 'task-python', 'departId': 'class-fixture'}}}
 files = {'/fixtures/seed.py': seed.encode()}
+files.update({'/fixtures/slow.py': seed.encode(), '/fixtures/empty.py': b'',
+              '/fixtures/html.py': b'<!doctype html><title>Synthetic file error</title>',
+              '/fixtures/json.py': b'{"message":"Synthetic file error"}'})
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *a, **kw): super().__init__(*a, directory=args.directory, **kw)
@@ -33,6 +36,9 @@ class Handler(SimpleHTTPRequestHandler):
         if path == '/__state':
             with lock: data = json.loads(json.dumps(state))
             self.respond(data); return
+        if path == '/__source_loading_probe.js':
+            probe = Path(__file__).resolve().parents[1] / 'python-source-loading' / 'browser-probe.js'
+            self.respond(probe.read_bytes(), mime='text/javascript; charset=utf-8'); return
         if path == '/api/sys/config/getCurrentConfig':
             self.respond({'code': 0, 'success': True, 'result': {'uploadType': 'local'}}); return
         if path == '/api/teaching/teachingWork/studentWorkInfo':
@@ -42,8 +48,28 @@ class Handler(SimpleHTTPRequestHandler):
             if mode == 'load-error': self.respond({'success': False}, 503); return
             self.respond({'code': 0, 'success': bool(work), 'result': work}); return
         with lock: data = files.get(path)
+        if path.startswith('/fixtures/') or path.startswith('/fixture/') or path.endswith('.py'):
+            with lock:
+                state['sourceAttempts'] += 1
+                attempt = state['sourceAttempts']
+                record = {'url': self.path, 'mode': mode, 'attempt': attempt, 'status': 200 if data is not None or path.endswith('defaultPython.py') else 404}
+                state['sourceReads'].append(record)
+            if mode == 'slow-source' or path == '/fixtures/slow.py': time.sleep(1.2)
+            if mode == 'source-404':
+                record['status'] = 404; self.respond(b'Synthetic missing Python file', 404, 'text/plain; charset=utf-8'); return
+            if (mode == 'source-once-error' and attempt == 1) or mode == 'source-error':
+                record['status'] = 503; self.respond(b'Synthetic source failure', 503, 'text/plain; charset=utf-8'); return
+            if mode == 'source-html' or path == '/fixtures/html.py':
+                self.respond(files['/fixtures/html.py'], mime='text/html; charset=utf-8'); return
+            if mode == 'source-json' or path == '/fixtures/json.py':
+                self.respond(files['/fixtures/json.py'], mime='application/json; charset=utf-8'); return
+            if mode == 'source-empty' or path == '/fixtures/empty.py':
+                self.respond(b'', mime='text/plain; charset=utf-8'); return
+            if path.startswith('/fixtures/') and data is None:
+                self.respond(b'Synthetic missing Python file', 404, 'text/plain; charset=utf-8'); return
         if data is not None:
-            if mode == 'file-error': self.respond({'success': False}, 503); return
+            if mode == 'file-error':
+                record['status'] = 503; self.respond({'success': False}, 503); return
             self.respond(data, mime='text/plain; charset=utf-8'); return
         super().do_GET()
     def do_POST(self):
@@ -53,9 +79,12 @@ class Handler(SimpleHTTPRequestHandler):
         with lock: mode = state['mode']
         if path == '/__mode':
             next_mode = json.loads(raw)['mode']
-            if next_mode not in ['normal', 'load-error', 'file-error', 'slow-load', 'upload-error', 'registration-error', 'submit-error', 'slow-submit', 'unauthorized']:
+            if next_mode not in ['normal', 'load-error', 'file-error', 'slow-load', 'upload-error', 'registration-error', 'submit-error', 'slow-submit', 'unauthorized',
+                                 'slow-source', 'source-404', 'source-error', 'source-once-error', 'source-html', 'source-json', 'source-empty']:
                 self.respond({'success': False}, 400); return
-            with lock: state['mode'] = next_mode
+            with lock:
+                state['mode'] = next_mode
+                state['sourceAttempts'] = 0
             self.respond({'success': True}); return
         if mode == 'unauthorized': self.respond({'success': False}, 401); return
         if path == '/api/sys/common/upload':

@@ -1,0 +1,16 @@
+{
+  "base": "f906f8e782795ddd670725e85ffa4ea1756b665c",
+  "branch": "fix/python-source-loading",
+  "scope": "Read-only baseline preparation. No product edits, service, browser, test suite or polling. Final implementation remains pending freeze.",
+  "sha256": {
+    "web/public/python/editor-bridge.js": "a21bee1e59339a4cbade2381651977c820c90f4c2ab75c803d29ea6a1f5f2f6b",
+    "web/public/python/persistence.js": "8c4e4e50ec5b4e1976da77a847f434fed0b0a0480a816cb0fdbf211ffb8a9ed4",
+    "web/public/python/index.html": "b176f75c1c87a76459435dda8cf9a069db541263c14f4a50c1177416aba5367f",
+    "web/public/python/player.html": "a0f8596168e9aaee37b928ba3c26895f3c707adb647e37cf69caade5336dc4cb",
+    "web/public/python/runner-loader.js": "912a1b32c74a045d6e92938001798a671c7d55caa2d27cf85f05d664712e38bc",
+    "web/public/python/static/js/app.js": "7fe0ead2ed4816056f809db42ea4b442c9c573d3c1217317f0a996d743904e4f",
+    "web/public/python/static/js/appPlayer.js": "604e61b6ba09f8c42354037efae4327492778024e3ef7ca0e75c6d915172b5c0",
+    "web/public/python/static/js/vendor.js": "ed339dcbdc8bcf0a8b224a2181c5eb506caedddd534511a620fdf985f18429c8",
+    "web/public/python/static/js/manifest.js": "144c0b4c0cceafedbea4ea8b084041c54d116dbd22d9767e77891ab20e05d3d9"
+  }
+}

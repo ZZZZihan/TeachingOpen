@@ -371,8 +371,9 @@ test('both public entry points load coordinator before the component bundles and
   for (const page of ['index', 'player']) {
     const html = readSource('web/public/python/' + page + '.html')
     assert.ok(html.indexOf('./execution.js') >= 0)
-    assert.ok(html.indexOf('./execution.js') < html.indexOf('./static/js/appPlayer.js'))
-    assert.ok(html.indexOf('./execution.js') < html.indexOf('./static/js/app.js'))
+    const entry = './static/js/' + (page === 'index' ? 'app' : 'appPlayer') + '.js'
+    assert.ok(html.indexOf(entry) >= 0)
+    assert.ok(html.indexOf('./execution.js') < html.indexOf(entry))
   }
 })
 

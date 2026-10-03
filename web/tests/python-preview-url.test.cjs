@@ -12,14 +12,14 @@ const files = [
   ['relative file without initial slash', 'fixtures/seed.py?revision=1&label=a+b']
 ]
 
-test('both HTML entry points load the real query helper before both prebuilt Python bundles', () => {
+test('both HTML entry points load the real query helper before their one page-specific Python bundle', () => {
   for (const page of ['index', 'player']) {
     const html = readSource('web/public/python/' + page + '.html')
     const scripts = [...html.matchAll(/<script\b[^>]*\bsrc=(?:"([^"]+)"|'([^']+)'|([^\s>]+))/g)].map(match => match[1] || match[2] || match[3])
     assert.equal(scripts.filter(value => value === './persistence.js').length, 1, page + ' includes one shared query helper')
-    for (const bundle of ['appPlayer', 'app']) {
-      assert.ok(scripts.indexOf('./persistence.js') < scripts.indexOf('./static/js/' + bundle + '.js'), page + ' loads the helper before ' + bundle)
-    }
+    const entry = './static/js/' + (page === 'index' ? 'app' : 'appPlayer') + '.js'
+    assert.deepEqual(scripts.filter(value => /^\.\/static\/js\/app(?:Player)?\.js$/.test(value)), [entry])
+    assert.ok(scripts.indexOf('./persistence.js') < scripts.indexOf(entry), page + ' loads the helper before its entry')
   }
 })
 
@@ -32,15 +32,15 @@ test('all three actual callers mark modern Python links for one standard outer d
 
 for (const name of ['teacher', 'course', 'community']) {
   for (const [label, file] of files) {
-    test(name + ' actual caller reaches both actual Python component downloads: ' + label, async () => {
+    test(name + ' actual caller reaches preview and editor source downloads: ' + label, async () => {
       const href = caller(name).link(file)
       const expected = name === 'community' ? file : new URL(file, origin).href
       assert.ok(href.startsWith('/python/player.html?'), 'actual caller produces a Python player link')
       for (const bundle of ['appPlayer', 'app']) {
         const h = player(bundle, href)
         assert.equal(h.instance.urlParam('url'), expected, bundle + ' decodes the entire outer query value once')
-        h.start(); await flush()
-        assert.deepEqual(h.requested, [expected], bundle + ' requests precisely the caller file')
+        await h.start()
+        assert.deepEqual(h.requested, [new URL(expected, new URL(href, origin)).href], bundle + ' requests precisely the caller file')
         assert.equal(h.instance.code, 'print("URL fixture loaded")\n')
         assert.deepEqual(h.applied, ['print("URL fixture loaded")\n'], bundle + ' applies the downloaded bytes to Ace')
       }
@@ -61,15 +61,15 @@ for (const bundle of ['appPlayer', 'app']) {
     const params = new URLSearchParams({ queryEncoding: 'uri', lang: 'turtle', url: first }); params.append('url', second)
     const h = player(bundle, '/python/player.html?' + params)
     assert.equal(h.instance.urlParam('url'), first)
-    h.start(); await flush(); assert.deepEqual(h.requested, [first])
+    await h.start(); assert.deepEqual(h.requested, [new URL(first, origin).href])
   })
 
-  test(bundle + ' missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters', async () => {
+  test(bundle + ' missing and empty URL preserve editor template fallback and preview no-source feedback without using fragment-only parameters', async () => {
     for (const href of ['/python/player.html', '/python/player.html?lang=turtle', '/python/player.html?url=', '/python/player.html?url=&url=/ignored.py', '/python/player.html#?url=/fragment.py']) {
       const h = player(bundle, href)
       assert.equal(h.instance.urlParam('url'), 0, 'missing or empty first value has the established sentinel')
-      h.start(); await flush()
-      assert.deepEqual(h.requested, bundle === 'appPlayer' ? [] : ['./static/defaultPython.py'])
+      await h.start()
+      assert.deepEqual(h.requested, bundle === 'appPlayer' ? [] : [origin + '/python/static/defaultPython.py'])
     }
   })
 
@@ -84,7 +84,7 @@ for (const bundle of ['appPlayer', 'app']) {
       const h = player(bundle, href)
       assert.doesNotThrow(() => h.instance.urlParam('url'))
       assert.equal(h.instance.urlParam('url'), expected)
-      h.start(); await flush(); assert.deepEqual(h.requested, [expected])
+      await h.start(); assert.deepEqual(h.requested, [new URL(expected, new URL(href, origin)).href])
     }
   })
 
@@ -99,7 +99,7 @@ for (const bundle of ['appPlayer', 'app']) {
     ]) {
       const h = player(bundle, '/python/player.html?lang=turtle&url=' + file)
       assert.equal(h.instance.urlParam('url'), file)
-      h.start(); await flush(); assert.deepEqual(h.requested, [file])
+      await h.start(); assert.deepEqual(h.requested, [new URL(file, origin + '/python/player.html').href])
     }
   })
 
@@ -112,7 +112,7 @@ for (const bundle of ['appPlayer', 'app']) {
     ]) {
       const h = player(bundle, '/python/player.html?url=' + encodeURIComponent(file))
       assert.equal(h.instance.urlParam('url'), file)
-      h.start(); await flush(); assert.deepEqual(h.requested, [file])
+      await h.start(); assert.deepEqual(h.requested, [new URL(file, origin + '/python/player.html').href])
     }
   })
 }
