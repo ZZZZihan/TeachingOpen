@@ -1,0 +1,1 @@
+export default { data: () => ({ visible: false }), template: '<a-modal :visible="visible" title="合成账号选择（外围组件替身）" @cancel="visible=false" @ok="visible=false; $emit(\'selectFinished\',[\'fixture-recipient\'])"><p>仅向预览夹具发送，真实账号选择器未在组件预览中验证。</p></a-modal>' }
