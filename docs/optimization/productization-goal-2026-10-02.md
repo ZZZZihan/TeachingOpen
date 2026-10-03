@@ -2,7 +2,7 @@
 
 日期：2026-10-02（Asia/Shanghai）
 
-最新状态（2026-10-03）：PR #53 Python 文件单次加载、失败重试与就绪保护已交付可审阅，提交 `8f5bf1e`，基于 #52。最新本地候选 `37a0cc553feb1ff065d1aeba40eb3c3263e551f2`，组合前端 **389/389** 与新构建通过（12项既有warning），保持0 prefetch / 4 preload。18112/18142/18150各22个HTTP资源与新dist一致；两个Python入口在三个实际CSP代理上均只读一次文件，运行、绘图与清空通过，pageerror为空。18142匿名课程/社区/登录表单导航通过，三个后端仍健康且未重启。#53分支369/369、新专项22/22、实际Chromium14功能/6布局与合成HTTP保存重开通过。Shiro实际1.7.0及升级/EOL边界已形成只读评估，尚未实施维护；认证三角色、人工视觉和生产验收等仍待完成，Goal active。下方旧候选为阶段历史，以文末及最新聚合记录为准。
+最新状态（2026-10-03）：PR #54 Shiro Java8过渡维护已交付可审阅，提交 `c1ab0f80e1179ee4f81c3e1865741bf6a6fc159b`，基于#43。组合候选 `3ef17b8035c7ca11360fca584dd1e51f186f0547`；三个本机预览后端已切至精确232508…JAR并健康UP，真实课程副本重新验证12/12，三角色夹具基础认证7/7，组合工具113通过/1可选MySQL跳过。前端4893文件与#53产物逐字相同，三个代理各7初始资源匹配；18142匿名首页/课程/社区/登录表单重新走通。维护分支752/752及真实context49/49，但新增HTTP15/16：正常冻结账号后旧JWT仍成功的既有缓存缺陷已在旧新包各5/6复现，未修，优先作为下一独立PR。Shiro1.13仍EOL；认证三角色全流程、人工视觉和受支持平台迁移等仍待完成，Goal active。下方旧候选为阶段历史，以文末和最新聚合记录为准。
 
 ## 目标
 
@@ -453,3 +453,12 @@ Worker审计随后定位到浏览器实现依据：Chromium官方 `worker_thread
 并行[Shiro只读评估](shiro-maintenance-assessment-2026-10-03.md)从当前JAR重新核对12模块均1.7.0，1.x/2.x已EOL；Java8下1.13只可作为过渡，仍须验证MVC/filter/dispatcher及不需要的rememberMe。Shiro3要求平台迁移，不能直接改版本，也没有将版本范围等同可利用性证明。本轮不改依赖、不建空PR；下一独立项按评估先做隔离兼容性验证。完整认证三角色/媒体/保存、人工视觉评阅和依赖维护未完成，Goal保持active。
 
 本轮收尾：按PID与命令核对后停止临时18159/PID9285、18160/PID11869，专用python-source-root浏览器已关闭；长期18112/18142/18150、教师18133与管理员18137保留，其他任务18152未动。原始失败/调试证据仍在私有目录。请求在Codex打开18142返回queued，不据此声称用户已看到。
+
+
+2026-10-03 Shiro 维护交付：[#54](https://github.com/ZZZZihan/TeachingOpen/pull/54) 可审阅、已附加，提交 `c1ab0f80e1179ee4f81c3e1865741bf6a6fc159b`，基于#43。指定GPT-6.1-sol/Ultra子Agent分别完成实现、测试和独立只读复核，Fast无独立工具参数。12个Apache Shiro模块1.7→1.13、关闭rememberMe、同一FactoryBean增加规范名称并保留旧别名。未导入Shiro BOM；14个Spring Framework5.1.5、Boot2.1.3、Tomcat9.0.122保持，encoder1.2.2→1.2.3，其他195个外部库逐字相同，462个应用class仅ShiroConfig变化。精确JAR SHA `232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e`。全新合成环境Java8 clean package、环境9/9、工具42/42、十套真实HTTP/DB/WebSocket752/752；Surefire明确跳过。真实context49/49，实际四种分派JWT拒绝且私有test servlet执行0；INCLUDE外层HTTP200带401拒绝正文，不能写成全部HTTP401。主业务mapper602，Swagger自有活跃表1，继承getter零的误判已纠正。BOM混版、缺工厂名、context39/40、43/49及close后JVM退出超时记录均保留。详见 [实现、专项和独立审查](https://github.com/ZZZZihan/TeachingOpen/blob/c1ab0f80e1179ee4f81c3e1865741bf6a6fc159b/docs/optimization/shiro-maintenance-pr.md)。
+
+新增HTTP15/16仍有红项：SQL禁用热缓存身份后旧JWT仍HTTP200，窄复核3/4；正常管理员frozenBatch旧PR43与新包各5/6，同样DB status2后旧JWT仍成功，两次均恢复。八相关应用类和MyBatis库同字节，getUserByName缓存默认6小时，冻结入口无缓存失效，故当前有限流程已证实为既有缺陷。下一独立PR修复冻结/恢复缓存失效，并实际复现与验证非法状态、失败不假成功、批次原子性；后两项目前主要为静态发现，不能当作已测缺陷。单次缓存失效也不泛称并发强一致。中文媒体文件新包仍拒绝，新旧默认nonASCII规则均启用，但未做同路径HTTP对照或中文文件支持验收。Shiro1.13仍为EOL过渡，受支持的平台迁移待单独推进。
+
+本地组合 `3ef17b8035c7ca11360fca584dd1e51f186f0547`，API tree `fb1c63809789c9d132a6c5e3d85d7db70a363b63`，web tree `5cc4536c7647aed1458cb18bc20e92f0af88e924`不变。组合Java源码/资源/POM与#54完全相同，工具重新运行114项：113通过、1可选MySQL跳过。按PID/配置/哈希守卫切换三个本机后端，18111/PID44139、18149/PID44219、18141/PID44512均200UP；旧#43JAR保留。前端4893文件211466267字节，清单SHA `453a9f32aeb0f3d534146e790ae62ab49bae4c23405127c640cc6ce86e0d6065`逐字未变，各代理7初始资源相符；此前389/389和build属于#53，本轮未重复。18142实际Chromium首页→课程列表3门→社区三编辑器入口→登录表单通过，未填写凭据/验证码。原有外部errlog被CSP拒绝1条，未称零console error。
+
+新包在Z820私有来源副本上完成严格guard和匿名课程检查12/12，包含公开集、分页/筛选、管理拒绝和3封面字节，7业务表前后摘要相同。真实正文/SQL/路径/截图不进PR。三角色夹具基础实际HTTP认证和退出7/7，不替代完整认证浏览器。最新 [组合记录](evidence/product-candidate/shiro-maintenance-candidate.json)、[组合工具日志](evidence/product-candidate/shiro-maintenance-candidate-tests.log)、[匿名页面摘要](evidence/product-candidate/shiro-maintenance-candidate-browser.json)。仅停止本次13366/16439/18165/18166，DEBUG配置逐字还原，shiro-candidate浏览器关闭，私有数据/失败证据保留。长期18112/18142/18150、教师18133和管理员18137保留，其他任务18152未动。主源码未写入，历史5731文件摘要本轮未重验。无GitHub合并或生产变更；账号冻结、完整角色/编辑器、人工视觉及受支持平台等仍待完成，Goal active。
