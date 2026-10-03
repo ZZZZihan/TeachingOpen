@@ -1,0 +1,237 @@
+{
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15",
+  "url": "http://127.0.0.1:18160/python/player.html?queryEncoding=uri&lang=turtle&url=%2Ffixtures%2Fseed.py",
+  "results": [
+    {
+      "name": "actual component finite Python2 and literal HTML output",
+      "pass": true,
+      "elapsedMs": 484,
+      "evidence": {
+        "output": "42\n<img src=x onerror=alert(1)> &lt;b&gt; 中文\n",
+        "sandbox": "allow-scripts",
+        "state": {
+          "runId": "ef99fdfef2bece18b8a7670780536189",
+          "pendingRunId": null,
+          "state": "completed",
+          "remainingMs": 29983
+        },
+        "frameRect": {
+          "width": 1278,
+          "height": 360
+        }
+      }
+    },
+    {
+      "name": "input waits and submits through parent form",
+      "pass": true,
+      "elapsedMs": 804,
+      "evidence": {
+        "before": {
+          "runId": "311372c8e00ef7c9d642892d97574b6f",
+          "pendingRunId": null,
+          "state": "waiting-input",
+          "remainingMs": 29983
+        },
+        "after": {
+          "runId": "311372c8e00ef7c9d642892d97574b6f",
+          "pendingRunId": null,
+          "state": "waiting-input",
+          "remainingMs": 29983
+        },
+        "output": "hello 测试输入\n",
+        "formHidden": true
+      }
+    },
+    {
+      "name": "cancel input destroys old frame and a rerun succeeds",
+      "pass": true,
+      "elapsedMs": 3464,
+      "evidence": {
+        "output": "fresh after cancel\n",
+        "state": {
+          "runId": "35536961ba3ee25be33d8a0ee230498f",
+          "pendingRunId": null,
+          "state": "completed",
+          "remainingMs": 29985
+        }
+      }
+    },
+    {
+      "name": "repeated run replaces a sleeping runner",
+      "pass": true,
+      "elapsedMs": 4128,
+      "evidence": {
+        "output": "fresh after replace\n",
+        "state": {
+          "runId": "371e009e62b42cd893fd18c76f1cbc27",
+          "pendingRunId": null,
+          "state": "completed",
+          "remainingMs": 29985
+        }
+      }
+    },
+    {
+      "name": "bounded 500ms JS busy work leaves parent timer and Stop usable",
+      "pass": true,
+      "elapsedMs": 3924,
+      "evidence": {
+        "heartbeats": [
+          32,
+          64,
+          96,
+          128,
+          160,
+          193,
+          224,
+          256,
+          288,
+          320,
+          353,
+          384,
+          416,
+          448,
+          480,
+          513,
+          544,
+          576,
+          608,
+          640,
+          672,
+          704,
+          736,
+          768,
+          800,
+          832,
+          864,
+          896,
+          928,
+          960,
+          992,
+          1024,
+          1056,
+          1088,
+          1120,
+          1152,
+          1184,
+          1216,
+          1248,
+          1280,
+          1312,
+          1344,
+          1376,
+          1408,
+          1440,
+          1472,
+          1504,
+          1536,
+          1568,
+          1601,
+          1632,
+          1664,
+          1696,
+          1728,
+          1760,
+          1792,
+          1824,
+          1856,
+          1888,
+          1920,
+          1952,
+          1984,
+          2016,
+          2048,
+          2080,
+          2113,
+          2144,
+          2177,
+          2208,
+          2240,
+          2272,
+          2304,
+          2336,
+          2368,
+          2401,
+          2432,
+          2464,
+          2496,
+          2528,
+          2561,
+          2592,
+          2624,
+          2656,
+          2688,
+          2720,
+          2753,
+          2784,
+          2816,
+          2848,
+          2880,
+          2912,
+          2944,
+          2976,
+          3008,
+          3040,
+          3072,
+          3104,
+          3136,
+          3168,
+          3200,
+          3232,
+          3264,
+          3296,
+          3328,
+          3360,
+          3392,
+          3425,
+          3456,
+          3488,
+          3520,
+          3552,
+          3584,
+          3617,
+          3648,
+          3680,
+          3712,
+          3744,
+          3776,
+          3808,
+          3840,
+          3872,
+          3904
+        ],
+        "stoppedAtMs": 701,
+        "stoppedAtEpochMs": 1791019369919,
+        "state": {
+          "runId": null,
+          "pendingRunId": null,
+          "state": "stopped",
+          "remainingMs": 0
+        },
+        "cpuTermination": "unverified",
+        "evidenceLimit": "Require external CLI console FRAME_PROBE_BUSY_ENTERED and FRAME_PROBE_BUSY_DONE timestamps. Frame removal and missing output do not establish CPU termination.",
+        "externalConsole": {
+          "entered": "[   63732ms] [LOG] FRAME_PROBE_BUSY_ENTERED at=1791019369853 elapsed=20 iterations=319290 @ :0",
+          "done": null
+        }
+      }
+    },
+    {
+      "name": "turtle square, text and undo use runner DOM",
+      "pass": true,
+      "elapsedMs": 831,
+      "evidence": {
+        "output": "turtle finished\n",
+        "state": {
+          "runId": "c6b1570bf5f834e4dd5c102ab57446dc",
+          "pendingRunId": null,
+          "state": "completed",
+          "remainingMs": 29610
+        },
+        "opaqueFramePresent": true,
+        "evidenceLimit": "Canvas pixels and interaction require the accompanying browser screenshot / key-mouse probe."
+      }
+    }
+  ],
+  "passed": 6,
+  "failed": 0
+}

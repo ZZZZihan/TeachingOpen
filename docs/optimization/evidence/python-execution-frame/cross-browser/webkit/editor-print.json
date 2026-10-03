@@ -1,0 +1,12 @@
+{
+  "url": "http://127.0.0.1:18160/python/index.html?workId=seed-work",
+  "output": "42\nEDITOR_AUDIT_OK\n",
+  "state": {
+    "runId": "5dfa892a22759dfcb869e305435271b2",
+    "pendingRunId": null,
+    "state": "completed",
+    "remainingMs": 29984
+  },
+  "sandbox": "allow-scripts",
+  "saveButtonPresent": true
+}

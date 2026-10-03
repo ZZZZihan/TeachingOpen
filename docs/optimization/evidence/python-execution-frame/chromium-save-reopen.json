@@ -1,0 +1,46 @@
+{
+  "pass": true,
+  "savedUrl": "http://127.0.0.1:18160/python/index.html?queryEncoding=uri&workId=seed-work",
+  "reopened": {
+    "code": "print \"Saved Worker fixture\"\nprint 6 * 7\n",
+    "title": "执行隔离保存回归"
+  },
+  "output": "Saved Worker fixture\n42\n",
+  "uploads": [
+    {
+      "path": "fixture/1.py",
+      "name": "执行隔离保存回归.py",
+      "sha256": "6427f4e79b1c45859c19380d4d083df1ea3174b10290cdb5e8ca962ecde660f8",
+      "failed": false
+    }
+  ],
+  "registrations": [
+    {
+      "fileType": 2,
+      "fileName": "执行隔离保存回归.py",
+      "fileTag": "学生作业-python",
+      "filePath": "fixture/1.py",
+      "fileLocation": 1,
+      "id": "file-1",
+      "failed": false
+    }
+  ],
+  "submissions": [
+    {
+      "id": "seed-work",
+      "workName": "执行隔离保存回归",
+      "workFile": "file-1",
+      "workCover": "",
+      "workType": 4,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-python",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "failed": false
+    }
+  ],
+  "sameWorks": true,
+  "pageErrors": [],
+  "scope": "Actual editor UI and Worker against self-authored synthetic HTTP fixture; no login or real Java save."
+}
