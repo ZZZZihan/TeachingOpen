@@ -15,6 +15,8 @@
   </button>
 </template>
 <script>
+import { courseSummaryText } from './courseSummaryText'
+
 export default {
     name: 'CourseCard',
     props: { course: { type: Object, required: true } },
@@ -22,11 +24,7 @@ export default {
     computed: {
         summary () {
             // This remains interpolated text; course HTML is never executed in cards.
-            return String(this.course.courseDesc || '')
-                .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '')
-                .replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ')
-                .replace(/&amp;/gi, '&').replace(/&lt;/gi, '<').replace(/&gt;/gi, '>')
-                .replace(/\s+/g, ' ').trim()
+            return courseSummaryText(this.course.courseDesc)
         }
     },
     watch: { 'course.courseCover_url' () { this.coverFailed = false } }
@@ -41,7 +39,21 @@ export default {
 .course-info { display: flex; flex-direction: column; width: 100%; padding: 26px; flex: 1; }
 .course-category { color: #7b5362; font-size: 11px; letter-spacing: .5px; margin-bottom: 16px; }
 .course-title { display: block; font-size: 21px; font-weight: 600; color: #202c37; line-height: 1.5; overflow-wrap: anywhere; }
-.course-summary { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; color: #687684; font-size: 13px; line-height: 1.9; margin: 14px 0 26px; }
+.course-summary {
+  /* Autoprefixer 6 removes box-orient without this rule-local switch. */
+  /* autoprefixer: off */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: 5.7em;
+  flex-shrink: 0;
+  overflow-wrap: anywhere;
+  color: #687684;
+  font-size: 13px;
+  line-height: 1.9;
+  margin: 14px 0 26px;
+}
 .course-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: auto; padding-top: 18px; border-top: 1px solid #edf0f2; color: #687684; font-size: 11px; }
 .course-action { display: inline-flex; align-items: center; gap: 16px; color: #74256a; font-size: 12px; }
 @media (max-width: 600px) { .course-card-button { min-height: 236px; } .course-info { padding: 24px; } .course-title { font-size: 20px; } }
