@@ -1,0 +1,33 @@
+{
+  "baseline_ref": "fbf8097f0616cb865ce6ee109ca806b42f4767ef",
+  "final_product_sha256": {
+    "web/src/views/teaching/TeachingCourseList.vue": "082b0fd45c5c0e036380130b8c3e282c599581b4d8c5d2da642808d6e777e353",
+    "web/src/views/teaching/TeachingCourseUnitList.vue": "543c88b64dade17faa0366e4e19fbb6e97e82f8f53c95f7d1343589b9e7ce1d7",
+    "web/src/views/teaching/course-workbench.less": "51986d75dc6db0270be6fa856e536af8c8289cc4813cda6b0c0b87c40c2b4ded"
+  },
+  "method_behavior": {
+    "exit_code": 0,
+    "passed": 57,
+    "total": 57,
+    "baseline_reproductions": 9,
+    "candidate_behavior_cases": 48
+  },
+  "browser_main": {
+    "cli_exit_code": 0,
+    "passed": 62,
+    "total": 62,
+    "unexpected_render_errors": 0,
+    "phase": "Before the last stale batch-confirmation guard; its affected flow is checked separately after the final change."
+  },
+  "browser_affected_confirmation": {
+    "cli_exit_code": 0,
+    "passed": 4,
+    "total": 4,
+    "phase": "Final product; route changes while actual Ant batch confirmation remains open"
+  },
+  "baseline_browser": {
+    "cli_exit_code": 0,
+    "screenshots": 6
+  },
+  "scope": "Synthetic loopback-only components and controlled method requests. No real login, token injection, database access, production end-to-end acceptance, XLS content validation or real import validation."
+}

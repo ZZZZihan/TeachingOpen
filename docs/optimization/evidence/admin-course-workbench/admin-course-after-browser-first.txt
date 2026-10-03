@@ -1,0 +1,100 @@
+### Result
+{"cases":[{"case":"course no page or workbench horizontal overflow 1440","passed":true,"detail":{"width":1360,"scrollWidth":1360,"documentWidth":1440}},{"case":"course row maintenance actions fit screen 1440","passed":true,"detail":[{"left":1224.5,"right":1323.5,"width":99},{"left":1236.5,"right":1262.5,"width":26},{"left":1285.5,"right":1311.5,"width":26}]},{"case":"course no page or workbench horizontal overflow 768","passed":true,"detail":{"width":768,"scrollWidth":768,"documentWidth":768}},{"case":"course row maintenance actions fit screen 768","passed":true,"detail":[{"left":633,"right":727,"width":94},{"left":642.5,"right":668.5,"width":26},{"left":691.5,"right":717.5,"width":26}]},{"case":"course no page or workbench horizontal overflow 390","passed":true,"detail":{"width":390,"scrollWidth":390,"documentWidth":390}},{"case":"course row maintenance actions fit screen 390","passed":true,"detail":[{"left":46,"right":140,"width":94},{"left":162,"right":188,"width":26},{"left":208,"right":234,"width":26}]},{"case":"course next page sends page two","passed":true},{"case":"course Enter submits name and resets page one","passed":true,"detail":{"method":"GET","path":"/teaching/teachingCourse/list","params":{"courseName":"合成课程 2","column":"createTime","order":"desc","field":"id,courseName,courseType,courseCategory,courseType_dictText,courseCategory_dictText,isShared,showHome,departIds,departIds_dictText,courseCover,courseMap,courseDesc,courseIcon,showType,orderNum,createBy,createTime","pageNo":"1","pageSize":"10"},"mode":"normal"}},{"case":"course refresh keeps applied query and visible draft","passed":true},{"case":"course reset clears name input","passed":true},{"case":"course query preserves chosen page size","passed":true},{"case":"course sort submits API column and order","passed":true},{"case":"course slow request shows loading and hides old rows","passed":true},{"case":"course list-error has recoverable error and retained draft","passed":true},{"case":"course list-error retry returns rows","passed":true},{"case":"course network-error has recoverable error and retained draft","passed":true},{"case":"course network-error retry returns rows","passed":true},{"case":"course malformed has recoverable error and retained draft","passed":true},{"case":"course malformed retry returns rows","passed":true},{"case":"course empty state gives maintenance guidance","passed":true},{"case":"course add entry retained","passed":true},{"case":"course edit passes record ID","passed":true},{"case":"course course_type dictionary entry retained","passed":true},{"case":"course course_category dictionary entry retained","passed":true},{"case":"course manages units through existing route and ID","passed":true},{"case":"course select-all exposes batch delete","passed":true},{"case":"course selection can be cleared","passed":true},{"case":"course export produces XLS download","passed":true}],"passed":28,"total":28,"shots":["output/playwright/admin-course-after-course-1440.png","output/playwright/admin-course-after-course-768.png","output/playwright/admin-course-after-course-390.png","output/playwright/admin-course-after-course-390-footer.png","output/playwright/admin-course-after-course-loading.png","output/playwright/admin-course-after-course-error.png","output/playwright/admin-course-after-course-empty.png"],"errors":[],"error":"TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.course-action-error') to be visible\u001b[22m\n"}
+### Ran Playwright code
+```js
+await (async page => {
+  const base = 'http://127.0.0.1:18137', out = 'output/playwright', cases = [], shots = [], errors = [], requests = []
+  const check = (name, ok, detail) => { cases.push({ case: name, passed: !!ok, detail }); if (!ok) throw new Error(name + (detail ? ': ' + JSON.stringify(detail) : '')) }
+  const captureError = error => errors.push(String(error))
+  const captureConsole = message => { if (message.type() === 'error' && /Vue warn|TypeError|Error in render|Unhandled/i.test(message.text())) errors.push(message.text()) }
+  page.on('pageerror', captureError); page.on('console', captureConsole)
+  const apiMode = value => page.request.post(base + '/__mode', { data: { mode: value } })
+  const ready = async () => { await page.getByTestId('list-loading').waitFor({ state: 'hidden' }); await page.locator('.course-row').first().waitFor() }
+  const state = async () => (await page.request.get(base + '/__state')).json()
+  const shot = async (name, fullPage = false) => { const filename = `${out}/admin-course-${name}.png`; await page.screenshot({ path: filename, fullPage }); shots.push(filename) }
+  try {
+    for (const kind of ['course', 'unit']) {
+      await page.request.post(base + '/__reset')
+      await page.setViewportSize({ width: 1440, height: 1000 })
+      await page.goto(base + '/after/?phase=browser-' + kind + '#/' + (kind === 'course' ? 'courses' : 'course/courseUnit'))
+      await ready()
+      for (const width of [1440, 768, 390]) {
+        await page.setViewportSize({ width, height: 1000 }); await shot(`after-${kind}-${width}`)
+        const geometry = await page.locator('.course-workbench').evaluate(e => ({ width: e.clientWidth, scrollWidth: e.scrollWidth, documentWidth: document.documentElement.scrollWidth }))
+        check(`${kind} no page or workbench horizontal overflow ${width}`, geometry.documentWidth <= width && geometry.scrollWidth <= geometry.width + 1, geometry)
+        const actions = await page.locator('.course-row').first().locator('[data-testid="edit-record"], [data-testid="delete-record"], [data-testid="manage-units"]').evaluateAll(nodes => nodes.map(e => ({ left: e.getBoundingClientRect().left, right: e.getBoundingClientRect().right, width: e.getBoundingClientRect().width })))
+        check(`${kind} row maintenance actions fit screen ${width}`, actions.length === (kind === 'course' ? 3 : 2) && actions.every(e => e.width > 0 && e.left >= 0 && e.right <= width), actions)
+      }
+      await page.getByTestId('page-size').scrollIntoViewIfNeeded(); await shot(`after-${kind}-390-footer`)
+      await page.setViewportSize({ width: 1440, height: 1000 })
+      await page.getByTestId('next-page').click(); await ready()
+      let current = await state(); check(`${kind} next page sends page two`, current.requests.at(-1).params.pageNo === '2')
+      const field = page.getByTestId(kind === 'course' ? 'course-name-filter' : 'unit-name-filter')
+      const query = kind === 'course' ? '合成课程 2' : '合成单元 1'
+      await field.fill(query); await field.press('Enter'); await ready()
+      current = await state(); check(`${kind} Enter submits name and resets page one`, current.requests.at(-1).params[kind === 'course' ? 'courseName' : 'unitName'] === query && current.requests.at(-1).params.pageNo === '1', current.requests.at(-1))
+      await field.fill('尚未提交的合成输入'); await page.getByTestId('refresh-list').click(); await ready()
+      current = await state(); check(`${kind} refresh keeps applied query and visible draft`, current.requests.at(-1).params[kind === 'course' ? 'courseName' : 'unitName'] === query && await field.inputValue() === '尚未提交的合成输入')
+      await page.getByTestId('query-reset').click(); await ready(); check(`${kind} reset clears name input`, await field.inputValue() === '')
+      await page.getByTestId('page-size').selectOption('20'); await ready(); await page.getByTestId('query-submit').click(); await ready()
+      current = await state(); check(`${kind} query preserves chosen page size`, current.requests.at(-1).params.pageSize === '20')
+      await page.getByTestId('page-size').selectOption('10'); await ready()
+      await page.getByTestId('list-sort').selectOption('orderNum:asc'); await ready(); current = await state()
+      check(`${kind} sort submits API column and order`, current.requests.at(-1).params.column === 'orderNum' && current.requests.at(-1).params.order === 'asc')
+      await apiMode('slow-list'); await page.getByTestId('refresh-list').click(); await page.getByTestId('list-loading').waitFor(); await shot(`after-${kind}-loading`)
+      check(`${kind} slow request shows loading and hides old rows`, await page.locator('.course-row').count() === 0 && await page.getByTestId('export-list').isDisabled())
+      await ready(); await apiMode('normal')
+      for (const failure of ['list-error', 'network-error', 'malformed']) {
+        await field.fill('失败后保留的合成输入'); await apiMode(failure); await page.getByTestId('refresh-list').click(); await page.getByTestId('list-error').waitFor()
+        if (failure === 'list-error') await shot(`after-${kind}-error`)
+        check(`${kind} ${failure} has recoverable error and retained draft`, await field.inputValue() === '失败后保留的合成输入' && await page.locator('.course-row').count() === 0 && !/SQL/.test(await page.getByTestId('list-error').textContent()))
+        await apiMode('normal'); await page.getByTestId('retry-list').click(); await ready()
+        check(`${kind} ${failure} retry returns rows`, await page.locator('.course-row').count() === 10)
+      }
+      await apiMode('empty'); await page.getByTestId('refresh-list').click(); await page.getByTestId('list-empty').waitFor(); await shot(`after-${kind}-empty`)
+      check(`${kind} empty state gives maintenance guidance`, await page.getByTestId('list-empty').getByRole('button').count() === 1)
+      await apiMode('normal'); await page.getByTestId('query-reset').click(); await ready()
+      await page.getByTestId(kind === 'course' ? 'add-course' : 'add-unit').click(); await page.getByText('合成新增入口', { exact: true }).waitFor(); check(`${kind} add entry retained`, true)
+      await page.getByRole('button', { name: '关闭合成入口', exact: true }).click(); await page.getByRole('dialog').waitFor({ state: 'hidden' })
+      await page.getByTestId('edit-record').first().click(); await page.getByText(/合成编辑入口 synthetic-/).waitFor(); check(`${kind} edit passes record ID`, true)
+      await page.getByRole('button', { name: '关闭合成入口', exact: true }).click(); await page.getByRole('dialog').waitFor({ state: 'hidden' })
+      if (kind === 'course') {
+        for (const [name, code] of [['课程性质管理', 'course_type'], ['课程分类管理', 'course_category']]) {
+          await page.getByRole('button', { name, exact: true }).click(); await page.getByText('合成字典入口 ' + code, { exact: true }).waitFor(); check(`course ${code} dictionary entry retained`, true)
+          await page.getByRole('button', { name: '关闭合成入口', exact: true }).click(); await page.getByRole('dialog').waitFor({ state: 'hidden' })
+        }
+        await page.getByTestId('manage-units').first().click(); await ready(); current = await state()
+        check('course manages units through existing route and ID', page.url().includes('/course/courseUnit?courseId=synthetic-course-1') && current.requests.at(-1).params.courseId === 'synthetic-course-1')
+        await page.goto(base + '/after/?phase=course-return#/courses'); await ready()
+      } else {
+        check('unit native file upload entry retained', await page.getByTestId('import-list').isVisible() && await page.locator('input[type="file"]').count() === 1)
+        const imported = page.waitForResponse(r => r.url().endsWith('/teaching/teachingCourseUnit/importExcel'))
+        await page.locator('input[type="file"]').setInputFiles({ name: 'synthetic-admin-units.xls', mimeType: 'application/vnd.ms-excel', buffer: Buffer.from('synthetic upload; no real workbook/database') })
+        await imported; await ready(); current = await state()
+        check('unit actual upload reaches only synthetic import fixture', current.requests.some(r => r.method === 'IMPORT' && r.synthetic))
+      }
+      await page.getByTestId('select-all').check(); check(`${kind} select-all exposes batch delete`, await page.getByTestId('batch-delete').isVisible())
+      await page.getByTestId('clear-selection').click(); check(`${kind} selection can be cleared`, !await page.getByTestId('select-all').isChecked())
+      const download = page.waitForEvent('download'); await page.getByTestId('export-list').click(); const file = await download; check(`${kind} export produces XLS download`, file.suggestedFilename().endsWith('.xls'))
+      await apiMode('delete-error'); await page.getByTestId('delete-record').first().click(); await page.getByRole('button', { name: '删除', exact: true }).last().click(); await page.locator('.course-action-error').waitFor(); await shot(`after-${kind}-delete-error`)
+      check(`${kind} delete failure retains record and exposes outcome warning`, await page.locator('.course-row').count() === 10 && /未能确认删除成功/.test(await page.locator('.course-action-error').textContent()))
+      await apiMode('slow-delete'); await page.getByTestId('delete-record').first().click(); await page.getByRole('button', { name: '删除', exact: true }).last().click()
+      await page.getByTestId('delete-record').first().waitFor({ state: 'visible' }); check(`${kind} deletion disables repeated row action`, await page.getByTestId('delete-record').first().isDisabled())
+      await page.waitForTimeout(2300); await ready(); current = await state()
+      check(`${kind} one slow deletion and refreshed list`, current.requests.filter(r => r.method === 'DELETE' && r.mode === 'slow-delete').length === 1 && !await page.locator('[data-record-id="synthetic-' + kind + '-1"]').count())
+      requests.push({ kind, requests: current.requests })
+    }
+    check('actual Vue and Ant controls have no render errors or uncaught exceptions', errors.length === 0, errors)
+    return { cases, passed: cases.length, total: cases.length, shots, errors, requests, limitation: 'Synthetic component/browser checks, not authenticated end-to-end acceptance or real database validation.' }
+  } catch (error) { return { cases, passed: cases.filter(c => c.passed).length, total: cases.length, shots, errors, error: String(error) } }
+  finally { page.off('pageerror', captureError); page.off('console', captureConsole) }
+}
+)(page);
+```
+### Page
+- Page URL: http://127.0.0.1:18137/after/?phase=course-return#/courses
+- Page Title: 管理员课程工作台 · 本机合成组件预览
+### Events
+- New console entries: .playwright-cli/console-2026-10-03T05-43-08-527Z.log#L201-L217
+- Downloading file 课程.xls ...
+- Downloaded file 课程.xls to ".playwright-cli/课程.xls"

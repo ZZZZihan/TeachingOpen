@@ -1,0 +1,10 @@
+{
+  "ref": "working-tree",
+  "sourceHashes": {
+    "TeachingCourseList.vue": "082b0fd45c5c0e036380130b8c3e282c599581b4d8c5d2da642808d6e777e353",
+    "TeachingCourseUnitList.vue": "543c88b64dade17faa0366e4e19fbb6e97e82f8f53c95f7d1343589b9e7ce1d7",
+    "src/mixins/JeecgListMixin.js": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+    "src/views/teaching/course-workbench.less": "51986d75dc6db0270be6fa856e536af8c8289cc4813cda6b0c0b87c40c2b4ded"
+  },
+  "scope": "Actual course/unit list SFCs and shared list mixin. Vue/Ant are real; API, dict/depart and maintenance entry controls are synthetic replacements."
+}

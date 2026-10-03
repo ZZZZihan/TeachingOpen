@@ -1,0 +1,195 @@
+[     144ms] [INFO] Download the Vue Devtools extension for a better development experience:
+https://github.com/vuejs/vue-devtools @ http://127.0.0.1:18137/after/preview.js:132839
+[     144ms] [INFO] You are running Vue in development mode.
+Make sure to turn on production mode when deploying for production.
+See more tips at https://vuejs.org/guide/deployment.html @ http://127.0.0.1:18137/after/preview.js:132847
+[     148ms] [ERROR] [Vue warn]: Error in render: "TypeError: Cannot read properties of undefined (reading 'propsData')"
+
+found in
+
+---> <ATooltip>
+       <APopconfirm>
+         <TeachingCourseList> at src/views/teaching/TeachingCourseList.vue
+           <Root> @ http://127.0.0.1:18137/after/preview.js:128618
+[     148ms] [ERROR] TypeError: Cannot read properties of undefined (reading 'propsData')
+    at VueComponent.getDisabledCompatibleChildren (http://127.0.0.1:18137/after/preview.js:35121:39)
+    at Proxy.render (http://127.0.0.1:18137/after/preview.js:35206:22)
+    at Vue._render (http://127.0.0.1:18137/after/preview.js:126049:28)
+    at VueComponent.updateComponent (http://127.0.0.1:18137/after/preview.js:126595:27)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Watcher.get (http://127.0.0.1:18137/after/preview.js:127681:33)
+    at new Watcher (http://127.0.0.1:18137/after/preview.js:127671:51)
+    at mountComponent (http://127.0.0.1:18137/after/preview.js:126612:5)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:132828:12)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:135392:18)
+    at init (http://127.0.0.1:18137/after/preview.js:128421:19) @ http://127.0.0.1:18137/after/preview.js:127283
+[     149ms] [ERROR] [Vue warn]: Error in render: "TypeError: Cannot read properties of undefined (reading 'propsData')"
+
+found in
+
+---> <ATooltip>
+       <APopconfirm>
+         <TeachingCourseList> at src/views/teaching/TeachingCourseList.vue
+           <Root> @ http://127.0.0.1:18137/after/preview.js:128618
+[     149ms] [ERROR] TypeError: Cannot read properties of undefined (reading 'propsData')
+    at VueComponent.getDisabledCompatibleChildren (http://127.0.0.1:18137/after/preview.js:35121:39)
+    at Proxy.render (http://127.0.0.1:18137/after/preview.js:35206:22)
+    at Vue._render (http://127.0.0.1:18137/after/preview.js:126049:28)
+    at VueComponent.updateComponent (http://127.0.0.1:18137/after/preview.js:126595:27)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Watcher.get (http://127.0.0.1:18137/after/preview.js:127681:33)
+    at new Watcher (http://127.0.0.1:18137/after/preview.js:127671:51)
+    at mountComponent (http://127.0.0.1:18137/after/preview.js:126612:5)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:132828:12)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:135392:18)
+    at init (http://127.0.0.1:18137/after/preview.js:128421:19) @ http://127.0.0.1:18137/after/preview.js:127283
+[     150ms] [ERROR] [Vue warn]: Error in render: "TypeError: Cannot read properties of undefined (reading 'propsData')"
+
+found in
+
+---> <ATooltip>
+       <APopconfirm>
+         <TeachingCourseList> at src/views/teaching/TeachingCourseList.vue
+           <Root> @ http://127.0.0.1:18137/after/preview.js:128618
+[     150ms] [ERROR] TypeError: Cannot read properties of undefined (reading 'propsData')
+    at VueComponent.getDisabledCompatibleChildren (http://127.0.0.1:18137/after/preview.js:35121:39)
+    at Proxy.render (http://127.0.0.1:18137/after/preview.js:35206:22)
+    at Vue._render (http://127.0.0.1:18137/after/preview.js:126049:28)
+    at VueComponent.updateComponent (http://127.0.0.1:18137/after/preview.js:126595:27)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Watcher.get (http://127.0.0.1:18137/after/preview.js:127681:33)
+    at new Watcher (http://127.0.0.1:18137/after/preview.js:127671:51)
+    at mountComponent (http://127.0.0.1:18137/after/preview.js:126612:5)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:132828:12)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:135392:18)
+    at init (http://127.0.0.1:18137/after/preview.js:128421:19) @ http://127.0.0.1:18137/after/preview.js:127283
+[     150ms] [ERROR] [Vue warn]: Error in render: "TypeError: Cannot read properties of undefined (reading 'propsData')"
+
+found in
+
+---> <ATooltip>
+       <APopconfirm>
+         <TeachingCourseList> at src/views/teaching/TeachingCourseList.vue
+           <Root> @ http://127.0.0.1:18137/after/preview.js:128618
+[     150ms] [ERROR] TypeError: Cannot read properties of undefined (reading 'propsData')
+    at VueComponent.getDisabledCompatibleChildren (http://127.0.0.1:18137/after/preview.js:35121:39)
+    at Proxy.render (http://127.0.0.1:18137/after/preview.js:35206:22)
+    at Vue._render (http://127.0.0.1:18137/after/preview.js:126049:28)
+    at VueComponent.updateComponent (http://127.0.0.1:18137/after/preview.js:126595:27)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Watcher.get (http://127.0.0.1:18137/after/preview.js:127681:33)
+    at new Watcher (http://127.0.0.1:18137/after/preview.js:127671:51)
+    at mountComponent (http://127.0.0.1:18137/after/preview.js:126612:5)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:132828:12)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:135392:18)
+    at init (http://127.0.0.1:18137/after/preview.js:128421:19) @ http://127.0.0.1:18137/after/preview.js:127283
+[     151ms] [ERROR] [Vue warn]: Error in render: "TypeError: Cannot read properties of undefined (reading 'propsData')"
+
+found in
+
+---> <ATooltip>
+       <APopconfirm>
+         <TeachingCourseList> at src/views/teaching/TeachingCourseList.vue
+           <Root> @ http://127.0.0.1:18137/after/preview.js:128618
+[     151ms] [ERROR] TypeError: Cannot read properties of undefined (reading 'propsData')
+    at VueComponent.getDisabledCompatibleChildren (http://127.0.0.1:18137/after/preview.js:35121:39)
+    at Proxy.render (http://127.0.0.1:18137/after/preview.js:35206:22)
+    at Vue._render (http://127.0.0.1:18137/after/preview.js:126049:28)
+    at VueComponent.updateComponent (http://127.0.0.1:18137/after/preview.js:126595:27)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Watcher.get (http://127.0.0.1:18137/after/preview.js:127681:33)
+    at new Watcher (http://127.0.0.1:18137/after/preview.js:127671:51)
+    at mountComponent (http://127.0.0.1:18137/after/preview.js:126612:5)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:132828:12)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:135392:18)
+    at init (http://127.0.0.1:18137/after/preview.js:128421:19) @ http://127.0.0.1:18137/after/preview.js:127283
+[     151ms] [ERROR] [Vue warn]: Error in render: "TypeError: Cannot read properties of undefined (reading 'propsData')"
+
+found in
+
+---> <ATooltip>
+       <APopconfirm>
+         <TeachingCourseList> at src/views/teaching/TeachingCourseList.vue
+           <Root> @ http://127.0.0.1:18137/after/preview.js:128618
+[     151ms] [ERROR] TypeError: Cannot read properties of undefined (reading 'propsData')
+    at VueComponent.getDisabledCompatibleChildren (http://127.0.0.1:18137/after/preview.js:35121:39)
+    at Proxy.render (http://127.0.0.1:18137/after/preview.js:35206:22)
+    at Vue._render (http://127.0.0.1:18137/after/preview.js:126049:28)
+    at VueComponent.updateComponent (http://127.0.0.1:18137/after/preview.js:126595:27)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Watcher.get (http://127.0.0.1:18137/after/preview.js:127681:33)
+    at new Watcher (http://127.0.0.1:18137/after/preview.js:127671:51)
+    at mountComponent (http://127.0.0.1:18137/after/preview.js:126612:5)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:132828:12)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:135392:18)
+    at init (http://127.0.0.1:18137/after/preview.js:128421:19) @ http://127.0.0.1:18137/after/preview.js:127283
+[     152ms] [ERROR] [Vue warn]: Error in render: "TypeError: Cannot read properties of undefined (reading 'propsData')"
+
+found in
+
+---> <ATooltip>
+       <APopconfirm>
+         <TeachingCourseList> at src/views/teaching/TeachingCourseList.vue
+           <Root> @ http://127.0.0.1:18137/after/preview.js:128618
+[     152ms] [ERROR] TypeError: Cannot read properties of undefined (reading 'propsData')
+    at VueComponent.getDisabledCompatibleChildren (http://127.0.0.1:18137/after/preview.js:35121:39)
+    at Proxy.render (http://127.0.0.1:18137/after/preview.js:35206:22)
+    at Vue._render (http://127.0.0.1:18137/after/preview.js:126049:28)
+    at VueComponent.updateComponent (http://127.0.0.1:18137/after/preview.js:126595:27)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Watcher.get (http://127.0.0.1:18137/after/preview.js:127681:33)
+    at new Watcher (http://127.0.0.1:18137/after/preview.js:127671:51)
+    at mountComponent (http://127.0.0.1:18137/after/preview.js:126612:5)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:132828:12)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:135392:18)
+    at init (http://127.0.0.1:18137/after/preview.js:128421:19) @ http://127.0.0.1:18137/after/preview.js:127283
+[     152ms] [ERROR] [Vue warn]: Error in render: "TypeError: Cannot read properties of undefined (reading 'propsData')"
+
+found in
+
+---> <ATooltip>
+       <APopconfirm>
+         <TeachingCourseList> at src/views/teaching/TeachingCourseList.vue
+           <Root> @ http://127.0.0.1:18137/after/preview.js:128618
+[     152ms] [ERROR] TypeError: Cannot read properties of undefined (reading 'propsData')
+    at VueComponent.getDisabledCompatibleChildren (http://127.0.0.1:18137/after/preview.js:35121:39)
+    at Proxy.render (http://127.0.0.1:18137/after/preview.js:35206:22)
+    at Vue._render (http://127.0.0.1:18137/after/preview.js:126049:28)
+    at VueComponent.updateComponent (http://127.0.0.1:18137/after/preview.js:126595:27)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Watcher.get (http://127.0.0.1:18137/after/preview.js:127681:33)
+    at new Watcher (http://127.0.0.1:18137/after/preview.js:127671:51)
+    at mountComponent (http://127.0.0.1:18137/after/preview.js:126612:5)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:132828:12)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:135392:18)
+    at init (http://127.0.0.1:18137/after/preview.js:128421:19) @ http://127.0.0.1:18137/after/preview.js:127283
+[     153ms] [ERROR] [Vue warn]: Error in render: "TypeError: Cannot read properties of undefined (reading 'propsData')"
+
+found in
+
+---> <ATooltip>
+       <APopconfirm>
+         <TeachingCourseList> at src/views/teaching/TeachingCourseList.vue
+           <Root> @ http://127.0.0.1:18137/after/preview.js:128618
+[     153ms] [ERROR] TypeError: Cannot read properties of undefined (reading 'propsData')
+    at VueComponent.getDisabledCompatibleChildren (http://127.0.0.1:18137/after/preview.js:35121:39)
+    at Proxy.render (http://127.0.0.1:18137/after/preview.js:35206:22)
+    at Vue._render (http://127.0.0.1:18137/after/preview.js:126049:28)
+    at VueComponent.updateComponent (http://127.0.0.1:18137/after/preview.js:126595:27)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Watcher.get (http://127.0.0.1:18137/after/preview.js:127681:33)
+    at new Watcher (http://127.0.0.1:18137/after/preview.js:127671:51)
+    at mountComponent (http://127.0.0.1:18137/after/preview.js:126612:5)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:132828:12)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:135392:18)
+    at init (http://127.0.0.1:18137/after/preview.js:128421:19) @ http://127.0.0.1:18137/after/preview.js:127283
+[     153ms] [ERROR] [Vue warn]: Error in render: "TypeError: Cannot read properties of undefined (reading 'propsData')"
+
+found in
+
+---> <ATooltip>
+       <APopconfirm>
+         <TeachingCourseList> at src/views/teaching/TeachingCourseList.vue
+           <Root> @ http://127.0.0.1:18137/after/preview.js:128618
+[     153ms] [ERROR] TypeError: Cannot read properties of undefined (reading 'propsData')
+    at VueComponent.getDisabledCompatibleChildren (http://127.0.0.1:18137/after/preview.js:35121:39)
+    at Proxy.render (http://127.0.0.1:18137/after/preview.js:35206:22)
+    at Vue._render (http://127.0.0.1:18137/after/preview.js:126049:28)
+    at VueComponent.updateComponent (http://127.0.0.1:18137/after/preview.js:126595:27)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Watcher.get (http://127.0.0.1:18137/after/preview.js:127681:33)
+    at new Watcher (http://127.0.0.1:18137/after/preview.js:127671:51)
+    at mountComponent (http://127.0.0.1:18137/after/preview.js:126612:5)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:132828:12)
+    at ../../course-discovery/web/node_modules/vue/dist/vue.esm.js.Vue.$mount (http://127.0.0.1:18137/after/preview.js:135392:18)
+    at init (http://127.0.0.1:18137/after/preview.js:128421:19) @ http://127.0.0.1:18137/after/preview.js:127283
