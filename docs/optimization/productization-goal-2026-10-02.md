@@ -2,7 +2,7 @@
 
 日期：2026-10-02（Asia/Shanghai）
 
-最新状态（2026-10-03）：PR #50 已交付 Python 预览 URL 编码与旧链接兼容修复。当前本地候选 `59d512d`，本轮组合前端338/338、生产构建成功（12项既有类型警告），独立集成定向46/46。实际组合播放器完成教师/课程/社区三个入口生成链接的加载、运行、清空、重跑；使用自建HTTP样例，不能替代认证角色浏览器验收。三个前端18112/18142/18150各9个HTTP资源与新dist逐字节一致，三个后端健康；旧dist保留，Java/服务未重启。生产来源副本18142与三角色夹具18150持续可用。Python执行隔离只有有界实验，产品未实现；其余验收条件仍待完成。PR均未远端合并，Goal active。下方旧候选为阶段历史，以文末及最新聚合记录为准。
+最新状态（2026-10-03）：PR #51 首页按需加载、#52 Python Worker 执行隔离均已交付为可审阅 PR。当前本地候选 `2533f669909afdaa059a9ec91179cd4967e2a899`，组合前端 **367/367** 与新构建通过（12项既有warning）；保留#51的0 prefetch / 4 preload。三个前端18112/18142/18150各18个HTTP资源与新dist逐字节一致，两个Python入口分别在三个实际CSP代理上完成绘图、Stop、重跑、输入、clear，无pageerror；18142匿名课程/社区/登录表单导航通过。三个后端健康，Java/代理未重启，旧dist已保留。生产来源私有副本18142与三角色夹具18150持续可用。#52分支另有347项测试、三浏览器短流程、六组宽度事件和合成API保存重开证据；CPU终止有界实验单独记录，不承诺瞬时中断或强资源沙箱。完整认证角色与人工视觉评阅等仍待完成，Goal active；PR均未远端合并或生产部署。下方旧候选为阶段历史，以文末及最新聚合记录为准。
 
 ## 目标
 
@@ -427,3 +427,16 @@ root实际组合dist通过自建HTTP夹具，三个调用方生成的链接均�
 
 
 Worker审计随后定位到浏览器实现依据：Chromium官方 `worker_thread.cc` 在精确140.0.7339.16与154.0.8037.93版本均设置2秒强制终止延迟，Terminate先排退出任务。因此500ms loop在调用后继续完成证实“非即时CPU归零”，不能作为Worker无法最终终止的判据，也不是仅Playwright调试异常（独立无CDP新profile同样观察）。官方来源： https://chromium.googlesource.com/chromium/src/+/154.0.8037.93/third_party/blink/renderer/core/workers/worker_thread.cc 。原反例全部保留，后续仅将隔离单Worker的有限忙循环延长到3500ms并观察4500ms，control/stop成对比较，绝不使用无限循环。此时最终跨浏览器结果仍在执行，尚未声称通过。产品增加结束后的短启动节流并保留最后一次重跑请求，时间窗口是抑制重跑叠加的措施，不是线程死亡测量。
+
+
+2026-10-03 Python Worker 执行隔离交付：[#52](https://github.com/ZZZZihan/TeachingOpen/pull/52) 可审阅、已附加，提交 `f906f8e782795ddd670725e85ffa4ea1756b665c`，基于#50。学生程序在Worker执行，父页保留编辑/保存和输入，可信opaque绘图区只接收固定turtle协议。Stop原生终止、关闭结果通道并经2500ms启动节流后确认；连续运行仅启动最后一次请求。30秒主程序/回调计算预算暂停输入等待，5分钟运行保留期明确显示。沿用Python2/旧Skulpt与turtle，两个bundle仅精确替换runit/clear。
+
+实现、测试、只读review和跨浏览器由用户指定GPT-6.1-sol/Ultra子Agent并行，Fast没有独立开关。review先发现circle省略steps和write(move)同步任务放大、主done遇回调input丢失三项，作者修复、永久断言与同序列独立窄复核通过。完整分支347/347、专项72/72、hash稳定，构建12旧warnings。root真实Chromium两入口各6/6、390/768/1440六组无溢出及懒绘图鼠标/键盘/像素；实际提交自写作品后重开代码/名称一致且输出42（合成HTTP保存，非真实Java角色保存）。两入口canary与connect-src拒绝有实际浏览器证据，不泛化所有网络/内存隔离。
+
+独立实际WebKit26.5/Firefox148播放器各6/6、可见蓝色方形和文字、Stop→重跑→clear、编辑入口输出42通过，12文件前后hash稳定、11个served产品资源一致。Firefox缓存协议兼容设置与旧unreachable警告保留，WebKit不是Safari人工验收。原500ms循环自然结束不能判Worker不可最终终止：官方Chromium固定源码有2秒强制退出宽限；独立三浏览器3500ms control/Stop和root实际freeze1播放器成对实验证明本次有限负载最终中断且父页响应。Chrome Stop后进度约延续至2000ms，不称瞬时CPU归零；后续freeze2回调/限额修复没有重复重载实验。原iframe失败及CLI未保存离开确认导致的未完成探针留私有记录，最终布局改用独立自建页面完整返回结果。详见 [#52说明](https://github.com/ZZZZihan/TeachingOpen/blob/feature/python-execution-frame/docs/optimization/python-execution-frame-pr.md)。
+
+本地无冲突组合 `2533f669909afdaa059a9ec91179cd4967e2a899`，API tree仍 `201408ca4eef6ce37a217f699329cf7146f9d71a`，web tree `d0563ef84f04063a2888d3df25175eed25d4b95f`。组合另跑367/367及build，4891文件211457943字节，清单SHA `46324f35000237ad28f06e391770fdb03221ae9114188ff2a80334e47671d52e`；旧dist保留 `.devspace/python-execution-previous-dist`。18112/18142/18150各18资源匹配、实际CSP下两个Python入口共六场景运行/画布/Stop/input/clear通过；18142首页→课程→社区→登录表单通过，只有表单显示，未填写或绕过验证码。18111/18141/18149健康200/UP，同#43JAR SHA `c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364`重新核验，服务未重启。原源码未编辑，5731文件摘要一致为历史证据，本轮未重验。
+
+[组合汇总](evidence/product-candidate/python-execution-candidate.json)、[367项结果](evidence/product-candidate/python-execution-candidate-tests.log)、[实际执行入口](evidence/product-candidate/python-execution-candidate-browser.log)、[匿名导航](evidence/product-candidate/python-execution-candidate-navigation.log)、[构建摘要](evidence/product-candidate/python-execution-build-summary.log)与探针已记录。GitHub未合并、生产未修改；完整认证三角色/媒体/保存和人工视觉评阅、依赖维护仍有后续门槛，Goal active。
+
+收尾：本轮root临时18159/18160按PID/命令核对后停止，python-frame-root浏览器已关闭；独立Agent的18161/18164均无监听。长期18112/18142/18150及教师18133、管理员18137保留，其他任务18152未动。原始测试及失败证据保留。
