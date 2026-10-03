@@ -1,0 +1,65 @@
+async page => {
+  const results=[];
+  const check=(name,passed,details={})=>{results.push({name,passed,...details});if(!passed)throw new Error(name)};
+  const mode=async value=>{await page.request.post('http://127.0.0.1:18133/__mode',{data:{mode:value}})};
+  const state=async()=>await (await page.request.get('http://127.0.0.1:18133/__state')).json();
+  const start=async value=>{await mode(value);await page.goto('http://127.0.0.1:18133/');};
+  await page.request.post('http://127.0.0.1:18133/__reset');
+  try {
+  await page.setViewportSize({width:1440,height:1000});
+  await start('normal'); await page.getByRole('button',{name:'开始批改'}).first().waitFor();
+  await page.getByRole('searchbox',{name:'作品名称'}).fill('人工智能');
+  await page.getByRole('button',{name:'已批改',exact:true}).click();
+  await page.getByRole('button',{name:'查看批改'}).first().waitFor();
+  check('unsubmitted search text stays out of status-only query',await page.locator('.work-row').count()===1 && !(await state()).reads.filter(x=>x.path.endsWith('/list')).at(-1).query.workName);
+  await page.getByRole('button',{name:'待批改',exact:true}).click();
+  await page.getByRole('button',{name:'查询',exact:true}).click();
+  await page.getByRole('heading',{name:'观察身边的人工智能'}).waitFor();
+  check('explicit search narrows visible work',await page.locator('.work-row').count()===1);
+  await mode('list-error');await page.getByRole('button',{name:'刷新列表'}).click();
+  await page.getByRole('heading',{name:'作业列表暂时无法读取'}).waitFor();
+  check('list failure clears stale rows and preserves filter',await page.locator('.work-row').count()===0 && await page.getByRole('searchbox',{name:'作品名称'}).inputValue()==='人工智能');
+  await page.screenshot({path:'output/playwright/teacher-list-error.png',fullPage:true});
+  await mode('normal');await page.getByRole('button',{name:'重新加载',exact:true}).click();await page.getByRole('button',{name:'开始批改'}).first().waitFor();
+  check('retry recovers same filtered list',await page.locator('.work-row').count()===1);
+  await start('grade-error');await page.getByRole('button',{name:'开始批改'}).first().click();await page.getByRole('heading',{name:'暂时无法读取这份作业'}).waitFor();
+  check('unread grading cannot be overwritten',await page.getByRole('button',{name:'保存批改',exact:true}).count()===0);
+  await page.screenshot({path:'output/playwright/teacher-grading-read-error.png',fullPage:true});
+  await mode('normal');await page.getByRole('button',{name:'重新读取',exact:true}).click();await page.getByRole('textbox',{name:'评语',exact:true}).waitFor();
+  check('grading read retry restores form',await page.getByRole('button',{name:'保存批改',exact:true}).isEnabled());
+  await start('comments-error');await page.getByRole('button',{name:'开始批改'}).first().click();await page.getByRole('textbox',{name:'评语',exact:true}).waitFor();await page.locator('.grading-discussion summary').click();
+  await page.getByText('讨论暂时无法读取，评分保存会保留原讨论。',{exact:true}).waitFor();
+  check('discussion failure is separate from grading read',await page.getByRole('button',{name:'保存批改',exact:true}).isEnabled());
+  await mode('normal');await page.getByRole('button',{name:'重试',exact:true}).click();await page.getByText('老师，我在第二次尝试里调整了步骤，想请您看看。',{exact:true}).waitFor();
+  check('discussion retries in place',await page.locator('.grading-discussion article').count()===1);
+  await page.getByRole('radio',{name:'0',exact:true}).check();await page.getByRole('textbox',{name:'评语',exact:true}).fill('请补充观察记录。');
+  check('comment field has database-compatible maximum',await page.getByRole('textbox',{name:'评语',exact:true}).getAttribute('maxlength')==='512');
+  await mode('save-error');await page.getByRole('button',{name:'保存批改',exact:true}).click();await page.locator('.grading-error').waitFor();
+  check('failed save retains zero and feedback',await page.getByRole('radio',{name:'0',exact:true}).isChecked() && await page.getByRole('textbox',{name:'评语',exact:true}).inputValue()==='请补充观察记录。');
+  await page.screenshot({path:'output/playwright/teacher-grading-save-error.png',fullPage:true});
+  const writes=(await state()).writes.length;await mode('slow-save');await page.getByRole('button',{name:'保存批改',exact:true}).click();
+  await page.getByRole('button',{name:'保存中…',exact:true}).waitFor();
+  check('in-flight save disables repeated submission and close',await page.getByRole('button',{name:'保存中…',exact:true}).isDisabled() && await page.getByRole('button',{name:'Close',exact:true}).count()===0);
+  await page.keyboard.press('Escape');check('escape cannot close in-flight save',await page.getByRole('dialog',{name:'作业批改',exact:true}).isVisible());
+  await page.getByRole('dialog',{name:'作业批改',exact:true}).waitFor({state:'hidden'});await page.getByText('2 份作品',{exact:true}).waitFor();
+  const saved=(await state()).writes.slice(writes);check('one successful retry sends zero and omits discussion',saved.length===1 && saved[0].body.teachingWorkCorrectList[0].score===0 && !('teachingWorkCommentList' in saved[0].body));
+  await mode('normal');await page.getByRole('button',{name:'已批改',exact:true}).click();await page.getByRole('button',{name:'查看批改'}).first().click();await page.getByRole('textbox',{name:'评语',exact:true}).waitFor();
+  check('reopening reads saved zero and feedback',await page.getByRole('radio',{name:'0',exact:true}).isChecked() && await page.getByRole('textbox',{name:'评语',exact:true}).inputValue()==='请补充观察记录。');
+  await page.getByRole('textbox',{name:'评语',exact:true}).fill('还未保存的意见');await page.getByRole('button',{name:'取消',exact:true}).click();await page.getByText('放弃尚未保存的批改？',{exact:true}).waitFor();
+  await page.getByRole('button',{name:'继续批改',exact:true}).click();check('cancel confirmation preserves unsaved input',await page.getByRole('textbox',{name:'评语',exact:true}).inputValue()==='还未保存的意见');
+  await page.getByRole('button',{name:'取消',exact:true}).click();await page.getByRole('button',{name:'放弃修改',exact:true}).click();await page.getByRole('dialog',{name:'作业批改',exact:true}).waitFor({state:'hidden'});
+  await page.getByRole('button',{name:'预览作品',exact:true}).first().click();await page.locator('.work-preview iframe').waitFor();
+  check('Scratch preview uses work id',new URL(await page.locator('.work-preview iframe').getAttribute('src'),'http://127.0.0.1:18133').searchParams.get('workId')==='preview-0');
+  await page.waitForFunction(()=>!document.querySelector('.teacher-preview-dialog .ant-modal').className.includes('zoom'));
+  for (const width of [1440,768,390]) {await page.setViewportSize({width,height:1000});const box=await page.locator('.teacher-preview-dialog .ant-modal-content').boundingBox();check('preview dialog fits '+width,box.x>=0 && box.x+box.width<=width+1,{box});}
+  await page.setViewportSize({width:1440,height:1000});
+  await page.getByRole('button',{name:'Close',exact:true}).click();await page.locator('.work-preview iframe').waitFor({state:'detached'});check('close unmounts preview iframe',await page.locator('iframe').count()===0);
+  await page.getByRole('button',{name:'预览作品',exact:true}).nth(1).click();await page.getByRole('link',{name:'打开作品文件'}).waitFor();check('file preview has safe external link and no iframe',await page.getByRole('link',{name:'打开作品文件'}).getAttribute('rel')==='noopener noreferrer' && await page.locator('iframe').count()===0);
+  await page.getByRole('button',{name:'Close',exact:true}).click();
+  await start('many');await page.getByRole('button',{name:'下一页',exact:true}).click();await page.getByText('第 2 / 3 页 · 共 23 份',{exact:true}).waitFor();check('server pagination displays real total',await page.locator('.work-row').count()===10);
+  await page.getByRole('button',{name:'导出列表',exact:true}).click();await page.getByText('未能导出作品，请检查网络或访问权限后重试。',{exact:true}).waitFor();check('JSON export failure is shown instead of downloaded as workbook',true);
+  await start('empty');await page.getByRole('heading',{name:'当前没有待批改的作业'}).waitFor();await page.screenshot({path:'output/playwright/teacher-empty.png',fullPage:true});check('empty list shows recovery option',await page.getByRole('button',{name:'查看全部作品',exact:true}).isVisible());
+  await start('normal');await page.setViewportSize({width:390,height:1000});await page.getByRole('button',{name:'开始批改'}).first().click();await page.getByRole('radio',{name:'0',exact:true}).focus();await page.keyboard.press('ArrowRight');check('keyboard selects next score',await page.getByRole('radio',{name:'1',exact:true}).isChecked());
+  return {results};
+  } catch(error) {return {results,error:String(error)};}
+}
