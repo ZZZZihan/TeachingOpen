@@ -1,0 +1,20 @@
+test_active_listener_or_any_application_history_refuses (test_role_flow_fixture.ColdRuntimeGuards.test_active_listener_or_any_application_history_refuses) ... ok
+test_completed_or_incomplete_one_shot_state_refuses (test_role_flow_fixture.ColdRuntimeGuards.test_completed_or_incomplete_one_shot_state_refuses) ... ok
+test_valid_only_with_fresh_private_runtime (test_role_flow_fixture.ColdRuntimeGuards.test_valid_only_with_fresh_private_runtime) ... ok
+test_wrong_datadir_guard_runs_and_external_config_is_rejected (test_role_flow_fixture.ColdRuntimeGuards.test_wrong_datadir_guard_runs_and_external_config_is_rejected) ... ok
+test_wrong_runtime_name_permissions_symlink_and_existing_ports (test_role_flow_fixture.ColdRuntimeGuards.test_wrong_runtime_name_permissions_symlink_and_existing_ports) ... ok
+test_empty_org_rule_and_published_class_task (test_role_flow_fixture.FixtureRecords.test_empty_org_rule_and_published_class_task) ... ok
+test_five_accounts_roles_and_old_work_relations_stay_exact (test_role_flow_fixture.FixtureRecords.test_five_accounts_roles_and_old_work_relations_stay_exact) ... ok
+test_fixed_mutations_use_hex_text_and_no_ddl_or_source_execution (test_role_flow_fixture.FixtureRecords.test_fixed_mutations_use_hex_text_and_no_ddl_or_source_execution) ... ok
+test_new_columns_and_required_values_refuse (test_role_flow_fixture.FixtureRecords.test_new_columns_and_required_values_refuse) ... ok
+test_original_seed_cannot_add_sql_or_expressions (test_role_flow_fixture.FixtureRecords.test_original_seed_cannot_add_sql_or_expressions) ... ok
+test_real_permission_registration_and_minimum_role_boundaries (test_role_flow_fixture.FixtureRecords.test_real_permission_registration_and_minimum_role_boundaries) ... ok
+test_resources_are_local_registered_visible_and_valid (test_role_flow_fixture.FixtureRecords.test_resources_are_local_registered_visible_and_valid) ... ok
+test_seed_round_trip_and_all_column_defaults (test_role_flow_fixture.FixtureRecords.test_seed_round_trip_and_all_column_defaults) ... ok
+test_unexpected_business_data_and_modified_fields_refuse (test_role_flow_fixture.FixtureRecords.test_unexpected_business_data_and_modified_fields_refuse) ... ok
+test_unknown_account_and_duplicate_id_are_rejected (test_role_flow_fixture.FixtureRecords.test_unknown_account_and_duplicate_id_are_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.063s
+
+OK
