@@ -2,7 +2,7 @@
 
 日期：2026-10-02（Asia/Shanghai）
 
-最新状态（2026-10-03）：[PR #60](https://github.com/ZZZZihan/TeachingOpen/pull/60) 修复管理员切换班级后沿用旧课程选择、确认框或弹窗造成跨班级删除/添加，已推送 `8f58b323`，基于 #59，OPEN 可审阅。三个 SFC 由 GPT-6.1-sol/ultra 子 Agent 实施，另两 Agent 分别执行方法测试和真实HTTP/DB：同判据离线旧7/61→新61/61，HTTP/DB旧8/20→新20/20，分支497/497、组合517/517。根实际Vue/Antd预览发现并复验修正了复选框禁用缓存及隐藏字段告警。69 schema、68非审计表行及附件均恢复；临时服务全停。组合 `4d2e92fd87f4cbeac9625fb365582f22e70aef46` 构建成功，三代理48/48资源逐字相同，旧4893文件完整可回退；后端仍冻结#58、三个健康UP。完整认证三角色、人工视觉及受支持平台等门槛继续待验收。Goal active，无GitHub合并或生产写入。聚合见 [班级课程上下文候选](evidence/product-candidate/class-course-context-candidate.json)。下方为阶段历史。
+最新状态（2026-10-03）：[PR #61](https://github.com/ZZZZihan/TeachingOpen/pull/61) 修复切班后旧成员确认/选择/弹窗及迟到响应影响其他班级，并保留其他班级角色；已推送 `df4e7072`，基于 #60，OPEN 可审阅。指定 GPT-6.1-sol/ultra 实现与两组独立测试，离线旧13/64→新64/64，实际HTTP/DB成员旧12/22→新22/22、角色旧7/9→新9/9，分支561/561、组合581/581。根实际Vue/Antd合成API预览正常；最终69 schema、68非审计表行、附件恢复，自有临时进程/端口全停。组合 `145d9c88`（产品构建与测试于 `3a18de78`）构建成功、三代理78/78资源匹配，旧dist保留可回退。下一优先项为实证的后端 removeAll 学生越权；前端保护不视为已修后端授权。390px旧21px溢出、完整认证三角色、人工视觉和平台维护继续待处理。Goal active，无GitHub合并或生产写入。见 [本轮聚合](evidence/product-candidate/class-member-context-candidate.json)。下方为阶段历史。
 
 ## 目标
 
@@ -519,3 +519,16 @@ Java8 clean package退出0，Surefire跳过，分支工具42/42。精确JAR SHA-
 本地组合产品 `bf69b28f859d70ed5f39b4712c96244a94a20c66` 构建成功，12条既有告警；加入测试的 `230eb19b11baaccc1ef8470fc8afe6f3aac004c4` 完整517/517。最终 `4d2e92fd87f4cbeac9625fb365582f22e70aef46` 只再增加记录与测试工具。4893文件、211494174字节，manifest `8d8dd1a02a14f15aa2c744b0e5a16ac28da9e7929096e27faa068a6ae7e4575e`；三个代理初始/变化bundle各16项48/48。旧4893文件211470810字节完整副本逐字核对，可回退。18150刷新登录页正常、error/warn为空，验证码未操作。已有Z820副本5课程83单元297课程文件继续私有，本轮没有把合成写入检查称为生产验收。
 
 详细代码、失败修正、截图和复现入口在 #60 的 `docs/optimization/class-course-context-pr.md`；[本地组合聚合](evidence/product-candidate/class-course-context-candidate.json)。GitHub状态OPEN非draft，statusCheckRollup为空，未声称远端CI通过。Goal仍active；完整认证三角色、人工视觉与维护平台门槛尚未完成。
+
+
+## 2026-10-03：PR #61 班级成员会话隔离
+
+[PR #61](https://github.com/ZZZZihan/TeachingOpen/pull/61) 基于 #60，产品及测试 `57bf4930edad32d2b5b86d5844a6135b33ad31c5`，交付 `df4e707234c04d1c8932335e4f779e58be25835e`。旧 A 清空确认切 B 会实际清空 B，旧选择器会把 A 用户加入 B，部门角色保存会删除不可见 B 角色。四个成员管理 SFC 现在绑定原班级及会话；正常写入与共享普通入口保留，分页/刷新后重新勾选，已发服务器写不承诺撤销。
+
+冻结离线64/64、旧13/64；相邻176/176、分支561/561、组合581/581。实际HTTP/DB成员新22/22、旧12/22，角色新9/9、旧7/9。新版A取消和添加后B角色计数始终1；旧为0。首轮角色8/9由夹具重复补B关联造成，修夹具后同工具旧新各复跑，原始失败保留。69 schema、68非审计表完整行及全部附件恢复一致，自有13372/16445/18178/18179和根18180均关闭且PID退出。
+
+根实际Vue/Antd组件以内存API验证切班、成员增删、旧selector array、普通用户编辑与角色保存；冻结共享抽屉后重编复验，当前error/warn为空。UserModal没有在本轮真实HTTP专项执行账号写入，认证三角色全流程仍待完成。390px document411/body412的旧溢出保持，768/1440正常；单独UI待办。完整证据在#61的 `docs/optimization/class-member-context-pr.md`。
+
+本地组合 `3a18de7854b2b96b22f6f71a658cac9aeeb075f4` 构建/测试，最终 `145d9c88cc32a9dd3366575f26dfbc8d1c3d93ef` 仅再整合记录及测试工具；4893产物211568970字节，manifest `9d7589a49ebfceced30d3daf452f13094727bf160c04ff84295c09030c9c3005`。三代理78/78资源逐字匹配，上一4893文件211494174字节完整保留可回退。12条既有构建告警，冻结#58后端三个健康UP。18150登录入口刷新正常、验证码未操作；已有提问未重复，也未注入浏览器认证。
+
+下一独立后端优先项：合成学生合法CLI请求removeAll会清空合成A班含教师的两条关联；在拥有runtime实际复现并恢复，未探测生产。该事实为observations_not_fixed，不计入前端通过数。Z820私有副本继续提供5课程83单元297课程资源，真实正文/媒体不发布，破坏性回归仅用合成库。GitHub OPEN非draft、无已报告CI检查，未自动合并。Goal仍active。
