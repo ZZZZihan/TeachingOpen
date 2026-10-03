@@ -58,10 +58,15 @@ test('both HTML entry points load output helper before vendor bundles and share 
   assert.ok(html.indexOf('src="./output.js"')>=0);assert.ok(html.indexOf('src="./output.js"')<html.indexOf('src=./static/js/manifest.js'));assert.match(html,/href="\.\/output.css"/)
  }
 })
-test('the six prebuilt component substitutions are the entire vendor diff from the recorded base',()=>{
+test('the recorded URL substitutions reverse before the six output substitutions and preserve the historical vendor base',()=>{
+ const urlPatch=require('./python-preview-url/vendor-patch.json')
  const patch=require('./python-output-preview/vendor-patch.json')
  for(const file of patch.files){
   let source=fs.readFileSync(path.join(__dirname,'../..',file.path),'utf8')
+  const urlFile=urlPatch.files.find(value=>value.path===file.path)
+  assert.ok(urlFile,'the URL patch records each changed Python bundle')
+  for(const {before,after} of urlFile.replacements){assert.equal(source.split(after).length-1,1);source=source.replace(after,before)}
+  assert.equal(crypto.createHash('sha256').update(source).digest('hex'),urlFile.before_sha256)
   for(const {before,after} of file.replacements){assert.equal(source.split(after).length-1,1);source=source.replace(after,before)}
   assert.equal(crypto.createHash('sha256').update(source).digest('hex'),file.before_sha256)
  }

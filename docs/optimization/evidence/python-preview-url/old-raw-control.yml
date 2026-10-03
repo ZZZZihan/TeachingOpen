@@ -1,0 +1,19 @@
+- generic [ref=f1e1]:
+  - generic [ref=f1e3]:
+    - generic [ref=f1e4]:
+      - button "运 行" [active] [ref=f1e5] [cursor=pointer]
+      - button "清 空" [ref=f1e6] [cursor=pointer]
+    - generic "程序输出" [ref=f1e7]: Python persistence fixture 42
+    - generic [ref=f1e13]:
+      - textbox [ref=f1e14]
+      - generic [ref=f1e16]:
+        - generic [ref=f1e17]: "1"
+        - generic [ref=f1e18]: "2"
+        - generic [ref=f1e19]: "3"
+      - generic [ref=f1e22]:
+        - generic:
+          - generic: print("Python persistence fixture")
+          - generic: print(6 * 7)
+  - generic [ref=f1e24]:
+    - 'generic "icon: check-circle" [ref=f1e25]'
+    - text: 执行完毕
