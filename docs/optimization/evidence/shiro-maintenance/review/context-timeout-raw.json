@@ -1,0 +1,91 @@
+{
+  "scope": "exact JAR context probe; timeout and raw application logs withheld",
+  "checks": [
+    {
+      "case": "owned test-only context completes within 120 seconds",
+      "passed": false
+    }
+  ],
+  "observations": [
+    {
+      "case": "sanitized stages before timeout",
+      "value": [
+        "starting test context",
+        "test context started",
+        "check: one effective Shiro filter bean = true",
+        "check: filter uses the manual securityManager = true",
+        "check: manual securityManager originates from product ShiroConfig = true",
+        "check: manual realm remains the application ShiroRealm = true",
+        "check: rememberMe manager is disabled = true",
+        "check: session storage remains disabled = true",
+        "check: authorization advisor uses the manual manager = true",
+        "check: one enabled explicit Shiro registration = true",
+        "check: official Shiro registration keeps order 1 = true",
+        "check: Tomcat has one actual Shiro filter = true",
+        "check: actual mapping covers REQUEST FORWARD INCLUDE ERROR = true",
+        "check: actual Shiro mapping covers all paths = true",
+        "check: ServletContext confirms Shiro registration shiroFilter = true",
+        "check: factory and registration use the same filter instance = true",
+        "check: old and official names alias the same factory and product = true",
+        "check: nested dispatcher filtering remains enabled = true",
+        "check: media rule precedes generic extension and final JWT rules = true",
+        "check: every resolved chain starts with actual invalidRequest filter = true",
+        "check: resolved JWT rule /sys/common/static/** = true",
+        "check: resolved JWT rule /teaching/teachingWork/studentWorkInfo = true",
+        "check: resolved JWT rule /** = true",
+        "check: invalidRequest guards remain enabled = true",
+        "check: REQUEST finite synthetic traversal denied = true",
+        "check: FORWARD finite synthetic traversal denied = true",
+        "check: INCLUDE finite synthetic traversal denied = true",
+        "check: ERROR finite synthetic traversal denied = true",
+        "check: invalid path remains denied /sys/common/static/a;v.txt = true",
+        "check: invalid path remains denied /sys/common/static/a%3bv.txt = true",
+        "check: invalid path remains denied /sys/common/static/a%5cb.txt = true",
+        "check: invalid path remains denied /sys/common/static/%2e%2e/private.txt = true",
+        "check: invalid path remains denied /sys/common/static/a%2fb.txt = true",
+        "check: finite printable filename passes invalidRequest /sys/common/static/space name.txt = true",
+        "check: finite printable filename passes invalidRequest /sys/common/static/plus+name.txt = true",
+        "check: finite printable filename passes invalidRequest /sys/common/static/50%name.txt = true",
+        "check: official adapter targets actual business requestMappingHandlerMapping = true",
+        "check: REQUEST MVC and Shiro resolve the same finite path = true",
+        "check: FORWARD MVC and Shiro resolve the same finite path = true",
+        "check: INCLUDE MVC and Shiro resolve the same finite path = true",
+        "check: ERROR MVC and Shiro resolve the same finite path = true",
+        "check: servlet is bound to a random loopback test port = true",
+        "request: /maintenance-private",
+        "check: actual Tomcat REQUEST denies private servlet without JWT = true",
+        "request: /maintenance-dispatch.js?mode=forward",
+        "check: actual Tomcat FORWARD denies private servlet without JWT = true",
+        "request: /maintenance-dispatch.js?mode=include",
+        "check: actual Tomcat INCLUDE denies private servlet without JWT = true",
+        "request: /maintenance-dispatch.js?mode=error",
+        "check: actual Tomcat ERROR denies private servlet without JWT = true",
+        "request: /maintenance-dispatch.js",
+        "check: synthetic public js entry is reachable without JWT = true",
+        "request: /v2/api-docs",
+        "check: actual Swagger mapping retains configured anonymous access = true",
+        "request: /actuator/metrics",
+        "check: actual auxiliary Actuator route remains JWT protected = true",
+        "request: /v2/api-docs;synthetic",
+        "check: actual global invalidRequest protects auxiliary mapping /v2/api-docs;synthetic = true",
+        "request: /actuator/metrics;synthetic",
+        "check: actual global invalidRequest protects auxiliary mapping /actuator/metrics;synthetic = true",
+        "closing test context",
+        "test context closed"
+      ]
+    },
+    {
+      "case": "owned context process terminated",
+      "value": {
+        "pid": 38601,
+        "exit_status": -9,
+        "exited": true
+      }
+    }
+  ],
+  "observed_utc": "2026-10-03T10:57:30.444561+00:00",
+  "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "phase": "context",
+  "passed": 0,
+  "total": 1
+}

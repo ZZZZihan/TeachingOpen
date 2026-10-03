@@ -1,0 +1,132 @@
+{
+  "review_observed_utc": "2026-10-03T11:12:40.940056+00:00",
+  "review_kind": "independent static product/JAR review plus read-only inspection of other agents runtime evidence",
+  "root_regression": {
+    "suites": 10,
+    "passed": 752,
+    "total": 752,
+    "all_exit_zero": true,
+    "all_final_hash_match": true,
+    "cases": [
+      {
+        "suite": "auth-status",
+        "passed": 7,
+        "total": 7,
+        "exit_code": 0,
+        "scope": "real local HTTP, CAPTCHA, login and logout; no role/asset permission acceptance"
+      },
+      {
+        "suite": "role-cache",
+        "passed": 11,
+        "total": 11,
+        "exit_code": 0,
+        "scope": "real synthetic login/logout, database role change and Redis cache readback; no explicit eviction within the tested transition; no production role-editor acceptance"
+      },
+      {
+        "suite": "permission-menu",
+        "passed": 34,
+        "total": 34,
+        "exit_code": 0,
+        "scope": "actual HTTP, authentication, role/department SQL fixtures, bounded menu-table unavailability, private log scan; no browser login or administrative menu-editor acceptance"
+      },
+      {
+        "suite": "course-management",
+        "passed": 188,
+        "total": 188,
+        "exit_code": 0,
+        "scope": "real HTTP login, role gates, database and attachments; import role gate only, not workbook import; no full role UI acceptance"
+      },
+      {
+        "suite": "learning-units",
+        "passed": 80,
+        "total": 80,
+        "exit_code": 0,
+        "scope": "real HTTP login and unit list/detail responses, synthetic DB fixtures and cleanup; not browser editors or direct attachment-download authorization"
+      },
+      {
+        "suite": "community-work",
+        "passed": 235,
+        "total": 235,
+        "exit_code": 0,
+        "scope": "real synthetic HTTP/auth/DB/cache and disclosure checks; no browser editor, direct static-file security, concurrency or full public-profile privacy acceptance"
+      },
+      {
+        "suite": "local-download",
+        "passed": 88,
+        "total": 88,
+        "exit_code": 0,
+        "scope": "not separately stated in root aggregate"
+      },
+      {
+        "suite": "notification-websocket",
+        "passed": 44,
+        "total": 44,
+        "exit_code": 0,
+        "scope": "Actual local synthetic WebSocket and HTTP notification delivery; no external or real-user messages. Notification endpoint only, not Scratch cloud data or all announcement REST authorization."
+      },
+      {
+        "suite": "scratch-cloud",
+        "passed": 52,
+        "total": 52,
+        "exit_code": 0,
+        "scope": "Real Java/Redis/MySQL via local same-origin WebSocket, synthetic projects and CLI login only; not browser or shipped editor acceptance"
+      },
+      {
+        "suite": "token-logging",
+        "passed": 13,
+        "total": 13,
+        "exit_code": 0,
+        "scope": "real HTTP authentication, owned Redis cache JWT expiry/refresh, DEBUG and INFO log observation, logout and revocation; no log excerpts or credentials exported"
+      }
+    ]
+  },
+  "context_specialty_status": "complete final 49/49 exit0; original 39/40, second 43/49 and 120s timeout retained",
+  "reviewer_runtime_tests_run": false,
+  "specialty_results": [
+    {
+      "evidence": "context-final.json",
+      "passed": 49,
+      "total": 49,
+      "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "observed_utc": "2026-10-03T10:57:56.941811+00:00"
+    },
+    {
+      "evidence": "context-timeout-raw.json",
+      "passed": 0,
+      "total": 1,
+      "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "observed_utc": "2026-10-03T10:57:30.444561+00:00"
+    },
+    {
+      "evidence": "http-maintenance-final.json",
+      "passed": 15,
+      "total": 16,
+      "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "observed_utc": "2026-10-03T10:59:09.911156+00:00"
+    },
+    {
+      "evidence": "disabled-account-sql-final.json",
+      "passed": 3,
+      "total": 4,
+      "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "observed_utc": "2026-10-03T11:02:28.693862+00:00"
+    },
+    {
+      "evidence": "normal-account-freeze-new.json",
+      "passed": 5,
+      "total": 6,
+      "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "observed_utc": "2026-10-03T11:03:24.028240+00:00"
+    },
+    {
+      "evidence": "normal-account-freeze-old.json",
+      "passed": 5,
+      "total": 6,
+      "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+      "observed_utc": "2026-10-03T11:05:16.687423+00:00"
+    }
+  ],
+  "all_runtime_tests_green": false,
+  "remaining_defect": "normal administrator account freeze allows cached prior credential; reproduced 5/6 on old and new package; remains unfixed, separate next fix",
+  "normal_account_old_new_hashes_match_independently_reviewed_packages": true
+}

@@ -1,0 +1,41 @@
+{
+  "scope": "actual old/new packaged library matches and read-only bytecode comparison; no old/new HTTP execution",
+  "versions": [
+    {
+      "version": "1.7.0",
+      "library_sha256": "7747213db4cc1325fbc5975825d875274f37e8c750233ff13ddc566e3d8e7c56",
+      "matches_packaged_library": true,
+      "bytecode_evidence": "shiro-web-1.7.0--InvalidRequestFilter.javap.txt",
+      "blockNonAscii_constructor_default": true,
+      "validated_parts": [
+        "getRequestURI",
+        "getServletPath",
+        "getPathInfo"
+      ]
+    },
+    {
+      "version": "1.13.0",
+      "library_sha256": "8f2c2f7d4c141cd28a00edb30b3b62479fcdb2f70eeef710289b9c6138e4fc33",
+      "matches_packaged_library": true,
+      "bytecode_evidence": "shiro-web-1.13.0--InvalidRequestFilter.javap.txt",
+      "blockNonAscii_constructor_default": true,
+      "validated_parts": [
+        "getRequestURI",
+        "getServletPath",
+        "getPathInfo"
+      ]
+    }
+  ],
+  "configuration_override_search": "base 3fb70f and frozen candidate main source/resources contain no blockNonAscii, invalidRequest, setGlobalFilters, or setBlock override matches",
+  "finding": "both InvalidRequestFilter constructors default blockNonAscii=true and validate URI, servletPath, pathInfo; existing default non-ASCII rule, not old/new HTTP equivalence acceptance",
+  "old_factory": {
+    "version": "1.7.0",
+    "library_sha256": "b5b7a0a43e472f2a72ef31393b863f75f0b1d63fb415feb7923228655b264905",
+    "matches_packaged_library": true,
+    "default_global_filters": [
+      "invalidRequest"
+    ],
+    "passes_global_filters_to_chain_manager": true,
+    "bytecode_evidence": "shiro-spring-1.7.0--ShiroFilterFactoryBean.javap.txt"
+  }
+}

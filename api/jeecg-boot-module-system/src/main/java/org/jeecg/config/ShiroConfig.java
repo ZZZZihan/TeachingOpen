@@ -60,7 +60,8 @@ public class ShiroConfig {
 	 * 2、当设置多个过滤器时，全部验证通过，才视为通过
 	 * 3、部分过滤器可指定参数，如perms，roles
 	 */
-	@Bean("shiroFilter")
+    // The combined starter registers this factory by name; both names share one bean.
+	@Bean(name = {"shiroFilterFactoryBean", "shiroFilter"})
 	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, MediaCookie mediaCookie) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -190,6 +191,8 @@ public class ShiroConfig {
 	public DefaultWebSecurityManager securityManager(ShiroRealm myRealm) {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(myRealm);
+        // This JWT application does not use Shiro's remembered identity cookies.
+        securityManager.setRememberMeManager(null);
 
 		/*
 		 * 关闭shiro自带的session，详情见文档

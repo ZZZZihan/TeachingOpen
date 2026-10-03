@@ -1,0 +1,9 @@
+{
+  "class_count_before": 462,
+  "class_count_after": 462,
+  "added": [],
+  "removed": [],
+  "changed": [
+    "BOOT-INF/classes/org/jeecg/config/ShiroConfig.class"
+  ]
+}

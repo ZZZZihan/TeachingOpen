@@ -1,0 +1,13 @@
+[INFO] --- compiler:3.8.0:compile (default-compile) @ jeecg-boot-base-common ---
+[INFO] --- compiler:3.8.0:testCompile (default-testCompile) @ jeecg-boot-base-common ---
+[INFO] Tests are skipped.
+[INFO] --- compiler:3.8.0:compile (default-compile) @ teaching-open ---
+[INFO] --- compiler:3.8.0:testCompile (default-testCompile) @ teaching-open ---
+[INFO] Tests are skipped.
+[INFO] Reactor Summary for jeecg-boot-parent 2.8.0:
+[INFO] jeecg-boot-parent .................................. SUCCESS [  0.143 s]
+[INFO] jeecg-boot-base-common ............................. SUCCESS [  2.668 s]
+[INFO] teaching-open ...................................... SUCCESS [  5.109 s]
+[INFO] BUILD SUCCESS
+[INFO] Total time:  8.054 s
+[INFO] Finished at: 2026-10-03T18:34:52+08:00

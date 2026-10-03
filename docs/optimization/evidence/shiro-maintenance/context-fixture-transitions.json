@@ -1,0 +1,47 @@
+{
+  "scope": "test fixture development failures preserved; product JAR unchanged; full original sanitized JSON remains in owned private runtime/logs",
+  "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "observations": [
+    {
+      "case": "initial overbroad all-MVC-helper assertion",
+      "passed": 39,
+      "total": 40,
+      "failed_checks": [
+        "actual MVC mappings use ShiroUrlPathHelper"
+      ],
+      "interpretation": "official adapter targets the primary mapping; final report enumerates all mapper classes, helpers, and active custom Springfox registry instead of inferring routes from an empty superclass registry"
+    },
+    {
+      "case": "observer order and final-versus-initial error status assumptions",
+      "passed": 43,
+      "total": 49,
+      "failed_checks": [
+        "actual Tomcat REQUEST denies private servlet without JWT",
+        "actual Tomcat FORWARD denies private servlet without JWT",
+        "actual Tomcat INCLUDE denies private servlet without JWT",
+        "actual Tomcat ERROR denies private servlet without JWT",
+        "actual global invalidRequest protects auxiliary mapping /v2/api-docs;synthetic",
+        "actual global invalidRequest protects auxiliary mapping /actuator/metrics;synthetic"
+      ],
+      "interpretation": "all real private requests were denied with target count0; observer was after Shiro and could not witness dispatch; final test-only observer order0 sees dispatcher and initial400 before ERROR final401"
+    },
+    {
+      "case": "successful context close did not itself exit test JVM",
+      "passed": 0,
+      "total": 1,
+      "last_sanitized_stages": [
+        "check: actual global invalidRequest protects auxiliary mapping /v2/api-docs;synthetic = true",
+        "request: /actuator/metrics;synthetic",
+        "check: actual global invalidRequest protects auxiliary mapping /actuator/metrics;synthetic = true",
+        "closing test context",
+        "test context closed"
+      ],
+      "cleanup": {
+        "pid": 38601,
+        "exit_status": -9,
+        "exited": true
+      },
+      "interpretation": "49 checks had completed true and context.close finished; 120s watchdog terminated the owned process. Thread source was not identified. Final one-shot launcher exits explicitly only after close and report generation"
+    }
+  ]
+}

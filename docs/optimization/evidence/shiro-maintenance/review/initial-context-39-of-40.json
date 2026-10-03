@@ -1,0 +1,238 @@
+{
+  "scope": "exact JAR classes, real localtest application context and Tomcat registration; synthetic servlet requests; no diagnostic endpoint or login",
+  "checks": [
+    {
+      "case": "one effective Shiro filter bean",
+      "passed": true
+    },
+    {
+      "case": "filter uses the manual securityManager",
+      "passed": true
+    },
+    {
+      "case": "manual securityManager originates from product ShiroConfig",
+      "passed": true
+    },
+    {
+      "case": "manual realm remains the application ShiroRealm",
+      "passed": true
+    },
+    {
+      "case": "rememberMe manager is disabled",
+      "passed": true
+    },
+    {
+      "case": "session storage remains disabled",
+      "passed": true
+    },
+    {
+      "case": "authorization advisor uses the manual manager",
+      "passed": true
+    },
+    {
+      "case": "one enabled explicit Shiro registration",
+      "passed": true
+    },
+    {
+      "case": "official Shiro registration keeps order 1",
+      "passed": true
+    },
+    {
+      "case": "Tomcat has one actual Shiro filter",
+      "passed": true
+    },
+    {
+      "case": "actual mapping covers REQUEST FORWARD INCLUDE ERROR",
+      "passed": true
+    },
+    {
+      "case": "actual Shiro mapping covers all paths",
+      "passed": true
+    },
+    {
+      "case": "ServletContext confirms Shiro registration shiroFilter",
+      "passed": true
+    },
+    {
+      "case": "factory and registration use the same filter instance",
+      "passed": true
+    },
+    {
+      "case": "old and official names alias the same factory and product",
+      "passed": true
+    },
+    {
+      "case": "nested dispatcher filtering remains enabled",
+      "passed": true
+    },
+    {
+      "case": "media rule precedes generic extension and final JWT rules",
+      "passed": true
+    },
+    {
+      "case": "every resolved chain starts with actual invalidRequest filter",
+      "passed": true
+    },
+    {
+      "case": "resolved JWT rule /sys/common/static/**",
+      "passed": true
+    },
+    {
+      "case": "resolved JWT rule /teaching/teachingWork/studentWorkInfo",
+      "passed": true
+    },
+    {
+      "case": "resolved JWT rule /**",
+      "passed": true
+    },
+    {
+      "case": "invalidRequest guards remain enabled",
+      "passed": true
+    },
+    {
+      "case": "REQUEST finite synthetic traversal denied",
+      "passed": true
+    },
+    {
+      "case": "FORWARD finite synthetic traversal denied",
+      "passed": true
+    },
+    {
+      "case": "INCLUDE finite synthetic traversal denied",
+      "passed": true
+    },
+    {
+      "case": "ERROR finite synthetic traversal denied",
+      "passed": true
+    },
+    {
+      "case": "invalid path remains denied /sys/common/static/a;v.txt",
+      "passed": true
+    },
+    {
+      "case": "invalid path remains denied /sys/common/static/a%3bv.txt",
+      "passed": true
+    },
+    {
+      "case": "invalid path remains denied /sys/common/static/a%5cb.txt",
+      "passed": true
+    },
+    {
+      "case": "invalid path remains denied /sys/common/static/%2e%2e/private.txt",
+      "passed": true
+    },
+    {
+      "case": "invalid path remains denied /sys/common/static/a%2fb.txt",
+      "passed": true
+    },
+    {
+      "case": "finite printable filename passes invalidRequest /sys/common/static/space name.txt",
+      "passed": true
+    },
+    {
+      "case": "finite printable filename passes invalidRequest /sys/common/static/plus+name.txt",
+      "passed": true
+    },
+    {
+      "case": "finite printable filename passes invalidRequest /sys/common/static/50%name.txt",
+      "passed": true
+    },
+    {
+      "case": "actual MVC mappings use ShiroUrlPathHelper",
+      "passed": false
+    },
+    {
+      "case": "REQUEST MVC and Shiro resolve the same finite path",
+      "passed": true
+    },
+    {
+      "case": "FORWARD MVC and Shiro resolve the same finite path",
+      "passed": true
+    },
+    {
+      "case": "INCLUDE MVC and Shiro resolve the same finite path",
+      "passed": true
+    },
+    {
+      "case": "ERROR MVC and Shiro resolve the same finite path",
+      "passed": true
+    },
+    {
+      "case": "servlet is bound to a random loopback test port",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "case": "Shiro filter bean names",
+      "value": [
+        "shiroFilterFactoryBean"
+      ]
+    },
+    {
+      "case": "actual Shiro dispatcher mappings",
+      "value": [
+        "ERROR",
+        "FORWARD",
+        "INCLUDE",
+        "REQUEST"
+      ]
+    },
+    {
+      "case": "resolved filters /sys/common/static/**",
+      "value": [
+        "org.apache.shiro.web.filter.InvalidRequestFilter",
+        "org.jeecg.modules.shiro.authc.aop.MediaJwtFilter"
+      ]
+    },
+    {
+      "case": "resolved filters /teaching/teachingWork/studentWorkInfo",
+      "value": [
+        "org.apache.shiro.web.filter.InvalidRequestFilter",
+        "org.jeecg.modules.shiro.authc.aop.OptionalJwtFilter"
+      ]
+    },
+    {
+      "case": "resolved filters /**",
+      "value": [
+        "org.apache.shiro.web.filter.InvalidRequestFilter",
+        "org.jeecg.modules.shiro.authc.aop.JwtFilter"
+      ]
+    },
+    {
+      "case": "Unicode decoded filename existing restriction (not support acceptance)",
+      "value": 400
+    },
+    {
+      "case": "MVC mapping bean names",
+      "value": [
+        "swagger2ControllerMapping",
+        "requestMappingHandlerMapping",
+        "controllerEndpointHandlerMapping"
+      ]
+    },
+    {
+      "case": "packaged Shiro libraries",
+      "value": [
+        "shiro-cache-1.13.0.jar",
+        "shiro-config-core-1.13.0.jar",
+        "shiro-config-ogdl-1.13.0.jar",
+        "shiro-core-1.13.0.jar",
+        "shiro-crypto-cipher-1.13.0.jar",
+        "shiro-crypto-core-1.13.0.jar",
+        "shiro-crypto-hash-1.13.0.jar",
+        "shiro-event-1.13.0.jar",
+        "shiro-lang-1.13.0.jar",
+        "shiro-redis-3.1.0.jar",
+        "shiro-spring-1.13.0.jar",
+        "shiro-spring-boot-starter-1.13.0.jar",
+        "shiro-web-1.13.0.jar"
+      ]
+    }
+  ],
+  "observed_utc": "2026-10-03T10:40:15.410686+00:00",
+  "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "phase": "context",
+  "passed": 39,
+  "total": 40
+}
