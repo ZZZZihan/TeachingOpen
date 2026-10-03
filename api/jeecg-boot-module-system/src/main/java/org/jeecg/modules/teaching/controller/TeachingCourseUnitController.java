@@ -3,6 +3,8 @@ package org.jeecg.modules.teaching.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.authz.annotation.Logical;
 import javax.servlet.http.HttpServletRequest;
@@ -166,7 +168,12 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	@PutMapping(value = "/edit")
 	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> edit(@RequestBody TeachingCourseUnit teachingCourseUnit) {
-		teachingCourseUnitService.updateById(teachingCourseUnit);
+		if (teachingCourseUnit == null || StringUtils.isBlank(teachingCourseUnit.getId())) {
+			return Result.error(400, "请提供课程单元 ID");
+		}
+		if (!teachingCourseUnitService.updateById(teachingCourseUnit)) {
+			return Result.error(404, "课程单元已不存在，请刷新后重试");
+		}
 		return Result.ok("编辑成功!");
 	}
 
@@ -175,7 +182,18 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	 @PutMapping(value = "/editBatch")
 	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	 public Result<?> editMap(@RequestBody ArrayList<TeachingCourseUnit> unitList){
-		 teachingCourseUnitService.updateBatchById(unitList);
+		 if (unitList == null || unitList.isEmpty()) {
+			 return Result.error(400, "请选择需要更新的课程单元");
+		 }
+		 Set<String> ids = new HashSet<>();
+		 for (TeachingCourseUnit unit : unitList) {
+			 if (unit == null || StringUtils.isBlank(unit.getId()) || !ids.add(unit.getId())) {
+				 return Result.error(400, "课程单元 ID 不能为空或重复");
+			 }
+		 }
+		 if (!teachingCourseUnitService.updateExistingUnits(unitList)) {
+			 return Result.error(404, "部分课程单元已不存在，本次修改未保存，请刷新后重试");
+		 }
 		 return Result.ok("编辑成功!");
 	 }
 
