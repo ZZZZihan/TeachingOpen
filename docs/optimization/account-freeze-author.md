@@ -4,7 +4,7 @@
 
 产品只改四个 Java 文件：`SysUserController.frozenBatch` 调用新增的 `ISysUserService.updateUserStatus(String userIds, String status, String operatorId)`；`SysUserServiceImpl` 实现整批事务；`ShiroRealm.checkUserTokenIsEffect` 使用数据库当前状态判定是否可认证。
 
-端点在 try 外显式调用 `subject.checkPermission("user:status")`，对应 UserList 已有的单条、批量操作权限。权限来自现有 ShiroRealm 角色/部门授权查询，不增加 admin 自动全权或 admin-only 限制；不用新注解推断代理是否生效，也不改 Shiro 配置。缺权沿全局异常处理器返回 HTTP200、`success=false/code403`；无效 JWT 沿已有过滤器返回 HTTP401。通过权限门禁后的参数、目标、等级或更新失败返回 HTTP200、`success=false/code500`；只有 service 成功完成才返回 `success=true/code200`，异常响应不包含 SQL 细节。
+端点在 try 外显式调用 `subject.checkPermission("user:status")`，对应 UserList 已有的单条、批量操作权限。权限来自现有 ShiroRealm 角色/部门授权查询，不增加 admin 自动全权或 admin-only 限制；不用新注解推断代理是否生效，也不改 Shiro 配置。缺权沿全局异常处理器返回 HTTP200、`success=false/code510`；无效 JWT 沿已有过滤器返回 HTTP401。通过权限门禁后的参数、目标、等级或更新失败返回 HTTP200、`success=false/code500`；只有 service 成功完成才返回 `success=true/code200`，异常响应不包含 SQL 细节。
 
 service 只接受 trim 后的状态字符串 `1`、`2`，兼容 JSON 整数经现有 `getString` 转换。ids 仍是逗号字符串，trim、精确去重、忽略空段以兼容前端尾逗号，整体为空则拒绝；没有新增数组接口。目标行按 ID 排序并 `FOR UPDATE`，整批存在及权限预检完成后才写入。操作人 ID 只来自当前认证 principal；角色等级仍使用 `getUserRoleLevel` 的 MAX(role_level)，沿用“操作人等级小于任一目标则拒绝”的规则，包括原有同等级、自我及无角色时 -1 的语义。整批预检同时保护数据库中精确用户名 `admin`，两个状态均拒绝，沿用现有 UI 规则；不会按 admin 角色泛化这条保护。
 

@@ -1,0 +1,53 @@
+{
+  "suites": [
+    {
+      "suite": "auth-status",
+      "passed": 7,
+      "total": 7,
+      "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af"
+    },
+    {
+      "suite": "role-cache",
+      "passed": 11,
+      "total": 11,
+      "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af"
+    },
+    {
+      "suite": "permission-menu",
+      "passed": 34,
+      "total": 34,
+      "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af"
+    },
+    {
+      "suite": "local-download",
+      "passed": 88,
+      "total": 88,
+      "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af"
+    },
+    {
+      "suite": "notification-websocket",
+      "passed": 44,
+      "total": 44,
+      "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af"
+    },
+    {
+      "suite": "scratch-cloud",
+      "passed": 52,
+      "total": 52,
+      "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af"
+    },
+    {
+      "suite": "token-logging",
+      "passed": 13,
+      "total": 13,
+      "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af"
+    }
+  ],
+  "passed": 249,
+  "total": 249,
+  "initial_setup_failures_preserved": [
+    "Scratch suite refused connection before local frontend proxy was started",
+    "Logging suite stopped at DEBUG configuration guard before its checks"
+  ],
+  "product_changed_to_retry": false
+}

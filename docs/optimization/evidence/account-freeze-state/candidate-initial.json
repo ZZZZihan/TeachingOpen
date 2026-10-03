@@ -1,0 +1,229 @@
+{
+  "observed_utc": "2026-10-03T11:50:38.388115+00:00",
+  "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+  "scope": "Actual loopback HTTP and notification WebSocket; owned five-account permission/role fixture, deterministic stale-cache injection, and owned SQL trigger. No production, browser authentication, capacity or manual acceptance claim.",
+  "passed": 37,
+  "total": 38,
+  "cases": [
+    {
+      "case": "ordinary old JWT accepted before status transition",
+      "passed": true
+    },
+    {
+      "case": "real active identity cache warmed",
+      "passed": true
+    },
+    {
+      "case": "actual notification socket authenticates before freeze",
+      "passed": true
+    },
+    {
+      "case": "normal administrator freeze commits status 2",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "successful freeze clears the previously warmed user cache after commit",
+      "passed": true
+    },
+    {
+      "case": "same old JWT rejected after committed freeze",
+      "passed": true,
+      "http_status": 401
+    },
+    {
+      "case": "existing socket rechecks frozen state at heartbeat",
+      "passed": true
+    },
+    {
+      "case": "DB frozen plus injected old active cache rejects HTTP and socket",
+      "passed": true,
+      "http_status": 401
+    },
+    {
+      "case": "normal administrator unfreeze commits status 1",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "successful unfreeze clears the injected user cache after commit",
+      "passed": true
+    },
+    {
+      "case": "DB active plus injected stale frozen cache accepts the same old JWT and socket",
+      "passed": true,
+      "http_allowed": true
+    },
+    {
+      "case": "equal-level actor without status permission rejected with no mutation",
+      "passed": false,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "trim duplicate and trailing comma normalize to one valid target",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "same-state request is successful and idempotent",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "null body rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "missing status rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "null status rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "invalid status 0 rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "invalid status 3 rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "invalid status -1 rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "invalid status 1.0 rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "invalid status 01 rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "invalid status bad rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "invalid status True rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "missing ids rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "null ids rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "empty ids rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "empty comma ids rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "array ids outside existing contract rejected without changing users",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "valid plus missing target rejects entire batch",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "allowed plus higher-level target rejects entire batch",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "canonical administrator protected for target state 2",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "canonical administrator protected for target state 1",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "fault was injected after the first target update entered",
+      "passed": true,
+      "attempted_slots": [
+        1,
+        2
+      ]
+    },
+    {
+      "case": "mid-batch SQL failure reports business failure without SQL details",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "mid-batch SQL failure rolls back all target states",
+      "passed": true
+    },
+    {
+      "case": "all original database rows and schemas restored except ordinary audit logs",
+      "passed": true,
+      "changed_tables": []
+    },
+    {
+      "case": "owned trigger and ledger removed",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "kind": "path_scope",
+      "value": "Notification WebSocket and ordinary JWT use ShiroRealm. No application invocation of TokenUtils.verifyToken was found; this is not a TokenUtils direct-call test."
+    },
+    {
+      "kind": "stale_cache_scope",
+      "value": "An actual warmed active cache value and a constructed status-2 variant were injected through stdin in the owned Redis. This does not reproduce natural concurrent scheduling."
+    }
+  ]
+}
