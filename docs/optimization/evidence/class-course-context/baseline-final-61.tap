@@ -1,0 +1,1381 @@
+TAP version 13
+# Browserslist: caniuse-lite is outdated. Please run:
+#   npx update-browserslist-db@latest
+#   Why you should do it regularly: https://github.com/browserslist/update-db\#readme
+# Subtest: switching classes clears relation keys, selected rows, old list and pagination before B responds
+not ok 1 - switching classes clears relation keys, selected rows, old list and pagination before B responds
+  ---
+  duration_ms: 307.750167
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:119:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   'relation-a'
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0: 'relation-a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:122:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: bulk confirmation captured in A cannot dispatch after switch B
+not ok 2 - bulk confirmation captured in A cannot dispatch after switch B
+  ---
+  duration_ms: 82.065791
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:130:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:133:30)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: row confirmation rendered in A cannot dispatch after switch B
+not ok 3 - row confirmation rendered in A cannot dispatch after switch B
+  ---
+  duration_ms: 75.171833
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:135:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:138:30)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: bulk confirmation captured in A cannot dispatch after clear
+not ok 4 - bulk confirmation captured in A cannot dispatch after clear
+  ---
+  duration_ms: 73.340458
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:130:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:133:30)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: row confirmation rendered in A cannot dispatch after clear
+not ok 5 - row confirmation rendered in A cannot dispatch after clear
+  ---
+  duration_ms: 74.206083
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:135:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:138:30)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: bulk confirmation captured in A cannot dispatch after reopen A
+not ok 6 - bulk confirmation captured in A cannot dispatch after reopen A
+  ---
+  duration_ms: 73.878125
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:130:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:133:30)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: row confirmation rendered in A cannot dispatch after reopen A
+not ok 7 - row confirmation rendered in A cannot dispatch after reopen A
+  ---
+  duration_ms: 76.106667
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:135:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:138:30)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: changing the relation selection invalidates an open bulk confirmation (0)
+not ok 8 - changing the relation selection invalidates an open bulk confirmation (0)
+  ---
+  duration_ms: 72.38675
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:142:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:144:72)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: changing the relation selection invalidates an open bulk confirmation (1)
+not ok 9 - changing the relation selection invalidates an open bulk confirmation (1)
+  ---
+  duration_ms: 70.422583
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:142:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:144:72)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: B bulk deletion dispatches one frozen B ID list despite repeated clicks and confirmation callbacks
+not ok 10 - B bulk deletion dispatches one frozen B ID list despite repeated clicks and confirmation callbacks
+  ---
+  duration_ms: 76.051375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:147:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    2 !== 1
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:149:42)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: control: one normal B bulk confirmation deletes only B and refreshes B
+ok 11 - control: one normal B bulk confirmation deletes only B and refreshes B
+  ---
+  duration_ms: 70.562292
+  type: 'test'
+  ...
+# Subtest: an old cancelled confirmation cannot unlock or submit a newer B prompt
+not ok 12 - an old cancelled confirmation cannot unlock or submit a newer B prompt
+  ---
+  duration_ms: 69.711791
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:160:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    3 !== 2
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:164:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: normal B row deletion preserves the original relation ID and suppresses repeated dispatch
+not ok 13 - normal B row deletion preserves the original relation ID and suppresses repeated dispatch
+  ---
+  duration_ms: 64.849875
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:167:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    2 !== 1
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:169:40)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: control: one normal B row confirmation keeps the actual DELETE contract
+ok 14 - control: one normal B row confirmation keeps the actual DELETE contract
+  ---
+  duration_ms: 67.757833
+  type: 'test'
+  ...
+# Subtest: late A relation-list success cannot replace B list, count or loading state
+not ok 15 - late A relation-list success cannot replace B list, count or loading state
+  ---
+  duration_ms: 65.178625
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:177:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      [
+        {
+    +     courseId: 'course-a',
+    +     courseName: '课程 a',
+    +     deptId: 'class-a',
+    +     id: 'relation-a',
+    -     courseId: 'course-b',
+    -     courseName: '课程 b',
+    -     deptId: 'class-b',
+    -     id: 'relation-b',
+          openTime: '2026-10-03 09:00:00'
+        }
+      ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      id: 'relation-b'
+      deptId: 'class-b'
+      courseId: 'course-b'
+      courseName: '课程 b'
+      openTime: '2026-10-03 09:00:00'
+  actual:
+    0:
+      id: 'relation-a'
+      deptId: 'class-a'
+      courseId: 'course-a'
+      courseName: '课程 a'
+      openTime: '2026-10-03 09:00:00'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:180:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: newer list query within one class wins when responses arrive in reverse order
+not ok 16 - newer list query within one class wins when responses arrive in reverse order
+  ---
+  duration_ms: 67.7095
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:182:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + 'relation-b-old'
+    - 'relation-b-new'
+                  ^
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'relation-b-new'
+  actual: 'relation-b-old'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:185:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: malformed relation records containing null never enter the table or deletion path
+not ok 17 - malformed relation records containing null never enter the table or deletion path
+  ---
+  duration_ms: 62.765334
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:187:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   null
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:189:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: stale A list network does not publish a B error or unlock B's pending read
+not ok 18 - stale A list network does not publish a B error or unlock B's pending read
+  ---
+  duration_ms: 67.24725
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:194:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    false !== true
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:198:27)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: current B list network exposes recoverable failure and can retry without losing its scope
+not ok 19 - current B list network exposes recoverable failure and can retry without losing its scope
+  ---
+  duration_ms: 66.503417
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:201:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+
+      assert.ok(h.i.listError || h.env.notices.some(value => ['warning', 'error'].includes(value.type)))
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:204:61)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: stale A list business does not publish a B error or unlock B's pending read
+not ok 20 - stale A list business does not publish a B error or unlock B's pending read
+  ---
+  duration_ms: 65.068958
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:194:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    false !== true
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:198:27)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: current B list business exposes recoverable failure and can retry without losing its scope
+not ok 21 - current B list business exposes recoverable failure and can retry without losing its scope
+  ---
+  duration_ms: 62.291709
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:201:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+
+      assert.ok(h.i.listError || h.env.notices.some(value => ['warning', 'error'].includes(value.type)))
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:204:61)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late relation read after clear cannot repopulate an inactive panel
+not ok 22 - late relation read after clear cannot repopulate an inactive panel
+  ---
+  duration_ms: 61.834042
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:211:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   {
+    +     courseId: 'course-a',
+    +     courseName: '课程 a',
+    +     deptId: 'class-a',
+    +     id: 'relation-a',
+    +     openTime: '2026-10-03 09:00:00'
+    +   }
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      id: 'relation-a'
+      deptId: 'class-a'
+      courseId: 'course-a'
+      courseName: '课程 a'
+      openTime: '2026-10-03 09:00:00'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:215:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late relation read after destroy cannot repopulate an inactive panel
+not ok 23 - late relation read after destroy cannot repopulate an inactive panel
+  ---
+  duration_ms: 62.422833
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:211:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   {
+    +     courseId: 'course-a',
+    +     courseName: '课程 a',
+    +     deptId: 'class-a',
+    +     id: 'relation-a',
+    +     openTime: '2026-10-03 09:00:00'
+    +   }
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      id: 'relation-a'
+      deptId: 'class-a'
+      courseId: 'course-a'
+      courseName: '课程 a'
+      openTime: '2026-10-03 09:00:00'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:215:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: already dispatched A bulk response (true) cannot refresh, clear selection or notify in B
+not ok 24 - already dispatched A bulk response (true) cannot refresh, clear selection or notify in B
+  ---
+  duration_ms: 60.341917
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:219:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    3 !== 2
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:222:50)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: already dispatched A bulk response (false) cannot refresh, clear selection or notify in B
+not ok 25 - already dispatched A bulk response (false) cannot refresh, clear selection or notify in B
+  ---
+  duration_ms: 62.620334
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:219:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:222:95)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late A write completion cannot release B write lock or stack a second B write
+not ok 26 - late A write completion cannot release B write lock or stack a second B write
+  ---
+  duration_ms: 60.935875
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:226:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    3 !== 2
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:230:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: showing the course selector for B clears A selection, rows, draft query and pagination
+not ok 27 - showing the course selector for B clears A selection, rows, draft query and pagination
+  ---
+  duration_ms: 13.917958
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:233:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   'course-a'
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0: 'course-a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:237:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: course selector late A result cannot replace the visible B choices
+not ok 28 - course selector late A result cannot replace the visible B choices
+  ---
+  duration_ms: 12.871709
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:242:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      [
+        {
+    +     courseName: '课程 a',
+    +     id: 'course-a'
+    -     courseName: '课程 b',
+    -     id: 'course-b'
+        }
+      ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      id: 'course-b'
+      courseName: '课程 b'
+  actual:
+    0:
+      id: 'course-a'
+      courseName: '课程 a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:245:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: malformed course records containing null cannot become selectable course IDs
+not ok 29 - malformed course records containing null cannot become selectable course IDs
+  ---
+  duration_ms: 13.519125
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:247:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   null
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:249:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: selector stale A network cannot unlock B or expose an error in B
+not ok 30 - selector stale A network cannot unlock B or expose an error in B
+  ---
+  duration_ms: 13.064459
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:253:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    false !== true
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:257:27)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: selector current B network blocks emitting until a manual scoped retry succeeds
+not ok 31 - selector current B network blocks emitting until a manual scoped retry succeeds
+  ---
+  duration_ms: 12.471917
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:260:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+
+      assert.ok(h.i.loadError)
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:263:61)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: selector stale A business cannot unlock B or expose an error in B
+not ok 32 - selector stale A business cannot unlock B or expose an error in B
+  ---
+  duration_ms: 12.5535
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:253:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    false !== true
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:257:27)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: selector current B business blocks emitting until a manual scoped retry succeeds
+not ok 33 - selector current B business blocks emitting until a manual scoped retry succeeds
+  ---
+  duration_ms: 12.774709
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:260:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+
+      assert.ok(h.i.loadError)
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:263:61)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: closed course selector ignores a late read instead of restoring old choices
+not ok 34 - closed course selector ignores a late read instead of restoring old choices
+  ---
+  duration_ms: 12.814083
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:269:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   {
+    +     courseName: '课程 a',
+    +     id: 'course-a'
+    +   }
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      id: 'course-a'
+      courseName: '课程 a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:271:94)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: B selector emits an immutable original department and course-ID snapshot once
+not ok 35 - B selector emits an immutable original department and course-ID snapshot once
+  ---
+  duration_ms: 13.7705
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:273:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    2 !== 1
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:276:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: a delayed selector emit from A cannot add after switch B
+not ok 36 - a delayed selector emit from A cannot add after switch B
+  ---
+  duration_ms: 60.411583
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:281:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:287:39)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: a delayed selector emit from A cannot add after clear
+not ok 37 - a delayed selector emit from A cannot add after clear
+  ---
+  duration_ms: 65.774333
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:281:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:287:39)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: a delayed selector emit from A cannot add after reopen A
+not ok 38 - a delayed selector emit from A cannot add after reopen A
+  ---
+  duration_ms: 63.213417
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:281:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:287:39)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: actual B parent-selector chain adds only B chosen IDs and prevents repeated writes
+not ok 39 - actual B parent-selector chain adds only B chosen IDs and prevents repeated writes
+  ---
+  duration_ms: 65.761792
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:290:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    2 !== 1
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:294:42)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: control: one ordinary B course selection preserves the addOrUpdate endpoint and body
+ok 40 - control: one ordinary B course selection preserves the addOrUpdate endpoint and body
+  ---
+  duration_ms: 62.1205
+  type: 'test'
+  ...
+# Subtest: unscoped legacy selector arrays cannot silently write old courses to the current class
+not ok 41 - unscoped legacy selector arrays cannot silently write old courses to the current class
+  ---
+  duration_ms: 64.751333
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:303:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:304:85)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: already dispatched A add response (true) leaves B list, selection and notices alone
+not ok 42 - already dispatched A add response (true) leaves B list, selection and notices alone
+  ---
+  duration_ms: 64.147375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:307:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    4 !== 3
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 3
+  actual: 4
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:311:50)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: already dispatched A add response (false) leaves B list, selection and notices alone
+not ok 43 - already dispatched A add response (false) leaves B list, selection and notices alone
+  ---
+  duration_ms: 83.415416
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:307:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:311:95)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late A add completion cannot release the current B add lock
+not ok 44 - late A add completion cannot release the current B add lock
+  ---
+  duration_ms: 64.315375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:315:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    3 !== 2
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:321:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: normal B opening-time editor keeps relation identity and locks validation and duplicate writes
+not ok 45 - normal B opening-time editor keeps relation identity and locks validation and duplicate writes
+  ---
+  duration_ms: 63.175209
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:324:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    2 !== 1
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:327:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: control: one B opening-time update preserves the existing edit endpoint and refresh callback
+ok 46 - control: one B opening-time update preserves the existing edit endpoint and refresh callback
+  ---
+  duration_ms: 62.168625
+  type: 'test'
+  ...
+# Subtest: switching the parent closes both child dialogs and invalidates editor validation before dispatch
+not ok 47 - switching the parent closes both child dialogs and invalidates editor validation before dispatch
+  ---
+  duration_ms: 64.474667
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:338:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:340:31)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late editor nextTick cannot fill a newer record or a closed dialog
+not ok 48 - late editor nextTick cannot fill a newer record or a closed dialog
+  ---
+  duration_ms: 13.736542
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:343:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + '2026-10-03 09:00:00'
+    - undefined
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual: '2026-10-03 09:00:00'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:347:47)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late A form validation cannot dispatch a write after editor closes and opens B
+not ok 49 - late A form validation cannot dispatch a write after editor closes and opens B
+  ---
+  duration_ms: 12.970167
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:349:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:352:10)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late A opening-time completion cannot release the currently validating B dialog
+not ok 50 - late A opening-time completion cannot release the currently validating B dialog
+  ---
+  duration_ms: 14.162083
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:354:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    false !== true
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:357:55)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: opening-time validation error unlocks the same dialog without sending a request
+ok 51 - opening-time validation error unlocks the same dialog without sending a request
+  ---
+  duration_ms: 13.049625
+  type: 'test'
+  ...
+# Subtest: late A opening-time response (true) cannot close or notify in the reopened B editor
+not ok 52 - late A opening-time response (true) cannot close or notify in the reopened B editor
+  ---
+  duration_ms: 12.680917
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:367:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    false !== true
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:370:50)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late A opening-time response (false) cannot close or notify in the reopened B editor
+not ok 53 - late A opening-time response (false) cannot close or notify in the reopened B editor
+  ---
+  duration_ms: 12.917833
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:367:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    false !== true
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:370:50)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ordinary standalone edit(record) remains compatible and writes the same relation
+ok 54 - ordinary standalone edit(record) remains compatible and writes the same relation
+  ---
+  duration_ms: 13.161542
+  type: 'test'
+  ...
+# Subtest: ordinary standalone new-record edit(record) remains compatible with the existing POST endpoint
+ok 55 - ordinary standalone new-record edit(record) remains compatible with the existing POST endpoint
+  ---
+  duration_ms: 13.530916
+  type: 'test'
+  ...
+# Subtest: standalone: validation values cannot overwrite the original relation, class or course identity
+not ok 56 - standalone: validation values cannot overwrite the original relation, class or course identity
+  ---
+  duration_ms: 12.771291
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:387:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + 'relation-a'
+    - 'relation-b'
+                ^
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'relation-b'
+  actual: 'relation-a'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:394:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: parent context: validation values cannot overwrite the original relation, class or course identity
+not ok 57 - parent context: validation values cannot overwrite the original relation, class or course identity
+  ---
+  duration_ms: 61.095417
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:387:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + 'relation-a'
+    - 'relation-b'
+                ^
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'relation-b'
+  actual: 'relation-a'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:394:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: the actual editor and popup callback fill only registered openTime fields
+not ok 58 - the actual editor and popup callback fill only registered openTime fields
+  ---
+  duration_ms: 12.566417
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:398:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      {
+    +   courseId: 'course-b',
+    +   deptId: 'class-b',
+        openTime: '2026-10-03 09:00:00'
+      }
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    openTime: '2026-10-03 09:00:00'
+  actual:
+    deptId: 'class-b'
+    courseId: 'course-b'
+    openTime: '2026-10-03 09:00:00'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:400:10)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: opening-time business failure keeps values available for manual retry
+not ok 59 - opening-time business failure keeps values available for manual retry
+  ---
+  duration_ms: 13.193709
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:405:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    false !== true
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:407:100)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: destroyed opening-time editor ignores late validation and response
+not ok 60 - destroyed opening-time editor ignores late validation and response
+  ---
+  duration_ms: 13.2695
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:411:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:412:116)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: delayed parent refresh event from edited A cannot refresh current B
+not ok 61 - delayed parent refresh event from edited A cannot refresh current B
+  ---
+  duration_ms: 63.964584
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:417:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    3 !== 2
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-course-context/web/tests/class-course-context.test.cjs:421:99)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+1..61
+# tests 61
+# suites 0
+# pass 7
+# fail 54
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3387.468792

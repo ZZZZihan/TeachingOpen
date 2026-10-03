@@ -1,0 +1,31 @@
+{
+  "baselineRef": "253f3fb4c44b500b6e4824adbf89da51ac89d50c",
+  "testSha256": "66baa7f0262cc3b34e7c3f210ab09e3d02a5f1fda71e135ed6e664f52718498b",
+  "conversion": "Remove trailing spaces and tabs from each line; preserve raw logs.",
+  "files": [
+    {
+      "raw": "baseline-final-61.tap",
+      "rawSha256": "b0f748262db72c7dd43029504d33b583b073abd33cc698cd3c054eca2559abe1",
+      "published": "published/baseline-final-61.tap",
+      "publishedSha256": "5763146a3de0e0c63de9b8f31831f24d0d48f5e913bbb84b93f80aabb0799494"
+    },
+    {
+      "raw": "candidate-final-61.tap",
+      "rawSha256": "b464557f58c3825e99176451739756f5f463277f25b7cd36ab0be662624c7f01",
+      "published": "published/candidate-final-61.tap",
+      "publishedSha256": "b464557f58c3825e99176451739756f5f463277f25b7cd36ab0be662624c7f01"
+    },
+    {
+      "raw": "adjacent-final.tap",
+      "rawSha256": "63fb1f3c66ce32401399be75afe2972cef3ce08a354f4f960590052842442bce",
+      "published": "published/adjacent-final.tap",
+      "publishedSha256": "63fb1f3c66ce32401399be75afe2972cef3ce08a354f4f960590052842442bce"
+    },
+    {
+      "raw": "frontend-final-497.tap",
+      "rawSha256": "5842993c86e6a218caea2c73f6e69c568cd56d70428ef4b4cdea759774304030",
+      "published": "published/frontend-final-497.tap",
+      "publishedSha256": "5842993c86e6a218caea2c73f6e69c568cd56d70428ef4b4cdea759774304030"
+    }
+  ]
+}

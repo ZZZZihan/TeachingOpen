@@ -1,0 +1,45 @@
+{
+  "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+  "old_source_ref": "253f3fb4c44b500b6e4824adbf89da51ac89d50c",
+  "after_product_sha256": {
+    "web/src/views/system/modules/DeptCourseInfo.vue": "818140750a44fd642d58e62a481a38fec147af5dce3a713c6f2913cf227ef42a",
+    "web/src/views/teaching/modules/SelectCourseModal.vue": "367bdc581930e997f42a372a923ad543bb9389feeca97f0330da9db652e90f41",
+    "web/src/views/teaching/modules/TeachingCourseDeptModal.vue": "a2f0808da084747ee810a7f3d07c32c0d0847745fb7328cc9829577ad0a849b8"
+  },
+  "probe_sha256": {
+    "api/dev/verify-class-course-context.py": "1cc0070f768dddb7b0fba1bd909b2bdf61ec2995035fe933fd09f6b7d4c38d3a",
+    "web/tests/class-course-context-live.cjs": "6dfd16d952c8339b0b76db63610e9db4439e54786cd8215224cb9e28d3a265fc"
+  },
+  "evidence": [
+    {
+      "file": "method-http-initialization-failure.json",
+      "sha256": "1ff6439b0d3f61b5b6275df6b9ec88af3d068965e81b3a79d8266a9a6a3fc9ff"
+    },
+    {
+      "file": "method-http-before.json",
+      "sha256": "7d4a2e3867b246514352be5495019d1cfa69c2449448b42a178f31e62dfce39d"
+    },
+    {
+      "file": "method-http-after.json",
+      "sha256": "878eceace909d64f3fc2067fa43e5ace2eb61528934edd758a8b618d2603e64d"
+    },
+    {
+      "file": "runtime-cleanup.json",
+      "sha256": "0dbb53611db7b3a418d1d861694e3f27715c79b3c8090f970d3529a5a826d57e"
+    },
+    {
+      "file": "runtime-cleanup-final.json",
+      "sha256": "43b07ddc559bc9771f11831d08426519afec85eb02ba9972ddcd6e247d678ab2"
+    }
+  ],
+  "before": {
+    "passed": 8,
+    "total": 20,
+    "exit_code": 1
+  },
+  "after": {
+    "passed": 20,
+    "total": 20,
+    "exit_code": 0
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "runtime": "class-course-context-1003",
+  "owned_pids": {
+    "backend": 42061,
+    "mysql": 41488,
+    "redis": 41492
+  },
+  "listeners_after_stop": {
+    "mysql": false,
+    "redis": false,
+    "backend": false,
+    "frontend": false
+  },
+  "processes_alive_after_stop": {
+    "backend": false,
+    "mysql": false,
+    "redis": false
+  },
+  "passed": true,
+  "retained_runtime_directory": true,
+  "observation": "Initial check caught MySQL finishing shutdown after its listener closed; this final check also waits for owned PIDs to exit."
+}
