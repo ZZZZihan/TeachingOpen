@@ -2,7 +2,7 @@
 
 日期：2026-10-02（Asia/Shanghai）
 
-最新状态（2026-10-03）：生产来源课程副本仍在18142。PR #47交付Scratch云变量冷恢复，实际Java恢复14/14；PR #48交付三角色独立夹具，真实初始化/核验成功、API预检22/22，新入口18150。当前本地候选 `babf2a5`，工具组合112通过/1跳过；Java业务和web未变，沿用此前前端305/305和构建，未计为本轮重跑。两个PR均已推送附加，未远端合并。Goal active；真实浏览器登录、媒体/编辑器全链路和其他完成条件仍待完成。下方旧候选为阶段历史，以文末及最新聚合记录为准。
+最新状态（2026-10-03）：PR #49 已交付本机 Scratch 素材 Worker CSP 修复，实际浏览器旧版被拒绝、新版启动成功，同源及 Blob Worker 素材字节一致，普通脚本/连接限制保留。当前本地候选 `7102a32`，工具组合113通过/1跳过；18112/18142/18150前端代理已更新，刷新后实际Worker全部正常，后端18111/18141/18149健康。生产来源副本18142、三角色夹具18150保留。Java业务及web未变，沿用原构建，没有新前端/Java构建或认证浏览器验收。PR均未远端合并，Goal active。下方旧候选为阶段历史，以文末及最新聚合记录为准。
 
 ## 目标
 
@@ -388,3 +388,13 @@ root实际create/首次verify完成69表116行、5账号、10附件（原2+新8�
 最新组合 `babf2a55f4d996ef5284ca2c038f9ecfa9b53c8a`，API tree `f807915ca88d6b0dfdd496d9754ccc37b5732307`，web tree仍 `3a29ce07efe47f080860ecc72509d4ecf02f769e`。#48仅新增api/dev与文档，Java/依赖/web未变。组合工具重新执行113项：112通过、1可选生产副本MySQL项跳过。18111/18141/18149健康200/UP；真实课程18142保留，三角色18150已准备。[最终组合](evidence/product-candidate/role-flow-candidate.json) 和 [工具日志](evidence/product-candidate/role-flow-candidate-tests.log)。原源码未写入，#47核验的5,731项摘要保留为当时证据。
 
 管理员本轮代表性用户维护限定编辑原合成账号，新增用户未覆盖，五账号守卫保持。Python按实际保存即提交/关闭重开/再保存记录，不强加独立草稿按钮作为夹具失败。正常浏览器验证码操作仍等待前序工具要求的确认；真实学生学习/三编辑器、教师批改/回读及管理员维护没有因API22项通过而完成。剩余还包括Scratch Worker CSP、Python执行隔离、页面性能、依赖维护与用户视觉评阅。Goal active，无GitHub合并、生产部署或新生产操作。
+
+2026-10-03 Scratch Worker 阶段：PR #49 已创建附加、可审阅，提交 `a60d2b456bb312a1212d0905f521184639c011a5`，基于 #47。只在本地代理显式增加 `worker-src self blob`，普通script/connect来源保持。新断言在旧代理13项中3项预期失败；新代理13/13，分支全部98通过/1跳过。另一GPT-6.1-sol / Ultra Agent独立跑13/13且只读审查无阻断；开发与独立检查分别记录，工具不支持单独Fast参数。
+
+root实际匿名Chromium同页对照：旧Blob素材Worker有1错误/0消息，新版有fetch支持消息/0错误/无策略违规；默认项目仍能用旧回退，因此不把旧页就绪称为Worker正常。另用原样交付的素材Worker通过真实消息协议，分别以同源和Blob入口取得1,229-byte SVG，与文件SHA256完全一致。普通Blob脚本、跨来源脚本/连接和data Worker仍被CSP拒绝。应用Worker启动与受控素材请求单独记录，不声称复杂项目/性能/认证保存通过。详细报告和探针见 #49 `docs/optimization/local-worker-csp-pr.md`。
+
+最新本地组合 `7102a32e44621102998afed520fc06cdb06fb4ec`，API tree `201408ca4eef6ce37a217f699329cf7146f9d71a`，web tree仍 `3a29ce07efe47f080860ecc72509d4ecf02f769e`。重新执行114项工具：113通过、1可选MySQL跳过。只按确认过的PID/命令重启三个本机前端代理：18112/PID49543、18142/PID49545、18150/PID49547；Java后端未重启，18111/18141/18149健康200/UP。三个Scratch HTML与既有dist字节一致，均仅一个CSP头。首次导航最后到18150时仍沿用旧策略，等待Worker超时；记录保留，普通刷新后全部新策略/Worker通过，推断与缓存旧页面策略有关，没有改产品断言。临时18151代理和专用浏览器均已停止，长期预览保留。
+
+[本轮组合记录](evidence/product-candidate/worker-csp-candidate.json)、[实际工具日志](evidence/product-candidate/worker-csp-candidate-tests.log)、[组合浏览器探针](evidence/product-candidate/worker-csp-verify-candidate.cjs) 及首轮失败日志已保存。浏览器探针沿用PR49 compare探针初始化过的同一CLI会话；重新启动会话需先装载Worker观测。Java/web/依赖未改，无新构建；旧前端305/305只是先前证据。原源码未写入，5,731摘要一致仍为#47时的核验，不称本次重跑。没有GitHub合并或生产操作。
+
+并行Python只读核查给出两项后续：第一，教师/课程使用URLSearchParams编码作品URL，旧appPlayer.urlParam直接正则取原值，可能把编码地址作为相对路径；WorkDetail直接拼接又会截断嵌套&。精确组件方法离线复现，下一项先做真实浏览器复现，再按一个问题一个PR修复。第二，Skulpt默认无限execLimit/yieldLimit、同源jseval和document桥接，普通超时无法覆盖同步JavaScript忙循环；turtle又依赖DOM，不能简单搬到Worker或把普通iframe宣称为强隔离。该项仍待设计及真实浏览器验证，尚未实施，不建空PR。认证三角色全流程继续等待前序浏览器工具对验证码操作要求的确认；非认证开发正常推进。页面性能、依赖维护和用户视觉评阅仍待完成，Goal active。

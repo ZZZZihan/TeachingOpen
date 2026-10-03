@@ -1,0 +1,130 @@
+{
+  "recorded_utc": "2026-10-03T07:47:57.363482+00:00",
+  "candidate": "7102a32e44621102998afed520fc06cdb06fb4ec",
+  "api_tree": "201408ca4eef6ce37a217f699329cf7146f9d71a",
+  "web_tree": "3a29ce07efe47f080860ecc72509d4ecf02f769e",
+  "pr49_commit": "a60d2b456bb312a1212d0905f521184639c011a5",
+  "pr49_url": "https://github.com/ZZZZihan/TeachingOpen/pull/49",
+  "pr49_status": "OPEN, ready for review; not merged",
+  "candidate_tool_tests": {
+    "discovered": 114,
+    "passed": 113,
+    "skipped": 1,
+    "exit_code": 0
+  },
+  "branch_tool_tests": {
+    "discovered": 99,
+    "passed": 98,
+    "skipped": 1
+  },
+  "independent_proxy_tests": {
+    "passed": 13,
+    "total": 13,
+    "exit_code": 0
+  },
+  "frontend_switches": [
+    {
+      "runtime": "course-role-runtime",
+      "port": 18112,
+      "old_pid": 46477,
+      "new_pid": 49543,
+      "single_csp": true,
+      "worker_policy": true,
+      "scratch_html_matches_dist": true
+    },
+    {
+      "runtime": "prod-fixture-1003",
+      "port": 18142,
+      "old_pid": 1867,
+      "new_pid": 49545,
+      "single_csp": true,
+      "worker_policy": true,
+      "scratch_html_matches_dist": true
+    },
+    {
+      "runtime": "role-flow-1003",
+      "port": 18150,
+      "old_pid": 33973,
+      "new_pid": 49547,
+      "single_csp": true,
+      "worker_policy": true,
+      "scratch_html_matches_dist": true
+    }
+  ],
+  "candidate_browser_results": [
+    {
+      "port": 18112,
+      "csp": "default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self'",
+      "created": [
+        {
+          "kind": "blob",
+          "messages": 1,
+          "errors": 0,
+          "supportsFetch": true,
+          "fetchedBuffers": 0
+        }
+      ],
+      "violations": [],
+      "ready": true
+    },
+    {
+      "port": 18142,
+      "csp": "default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self'",
+      "created": [
+        {
+          "kind": "blob",
+          "messages": 1,
+          "errors": 0,
+          "supportsFetch": true,
+          "fetchedBuffers": 0
+        }
+      ],
+      "violations": [],
+      "ready": true
+    },
+    {
+      "port": 18150,
+      "csp": "default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self'",
+      "created": [
+        {
+          "kind": "blob",
+          "messages": 1,
+          "errors": 0,
+          "supportsFetch": true,
+          "fetchedBuffers": 0
+        }
+      ],
+      "violations": [],
+      "ready": true
+    }
+  ],
+  "initial_browser_attempt": {
+    "passed": false,
+    "last_page": 18150,
+    "failure": "Worker support wait timed out; old worker-src/blob violation persisted after navigation.",
+    "resolution": "Ordinary page.reload() requested current response; all three ports then returned the new CSP and started the actual app Worker.",
+    "inferred_cause": "Previously cached document policy; no further product code change made."
+  },
+  "healthy_backends": {
+    "18111": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18141": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18149": {
+      "http": 200,
+      "status": "UP"
+    }
+  },
+  "temporary_18151_stopped": true,
+  "new_java_build": false,
+  "new_frontend_build": false,
+  "frontend_tests_not_rerun": "Reuses unchanged PR46 web tree/build, previously 305/305.",
+  "browser_authentication_acceptance": false,
+  "original_source_protection": "No original source writes; 5731 matching hashes are historical PR47 evidence, not rerun here.",
+  "goal": "active",
+  "no_github_merge_or_production_deployment": true
+}
