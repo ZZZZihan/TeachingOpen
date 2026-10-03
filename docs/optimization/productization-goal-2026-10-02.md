@@ -2,7 +2,7 @@
 
 日期：2026-10-02（Asia/Shanghai）
 
-最新状态（2026-10-03）：Z820 生产来源副本保留在本机18141/18142；PR #45的匿名内容检查12/12与PR #46的课程摘要/三宽度结果仍有效。新增 PR #47 修复本机冷恢复丢失 Scratch 云变量，实际 Java 恢复检查14/14、工具套件97通过/1跳过；新候选 `e08cb55` 已本地集成 #45/#47，Java业务源码与web未变，沿用此前前端305/305和构建，不计作本轮重跑。Goal active；三角色专用夹具正在单独准备，认证浏览器、媒体整链路及其他条件仍待完成。下方旧候选为阶段记录，以文末及最新聚合证据为准。
+最新状态（2026-10-03）：生产来源课程副本仍在18142。PR #47交付Scratch云变量冷恢复，实际Java恢复14/14；PR #48交付三角色独立夹具，真实初始化/核验成功、API预检22/22，新入口18150。当前本地候选 `babf2a5`，工具组合112通过/1跳过；Java业务和web未变，沿用此前前端305/305和构建，未计为本轮重跑。两个PR均已推送附加，未远端合并。Goal active；真实浏览器登录、媒体/编辑器全链路和其他完成条件仍待完成。下方旧候选为阶段历史，以文末及最新聚合记录为准。
 
 ## 目标
 
@@ -379,3 +379,12 @@ root本地组合 `b878a2bc4e170413f4ee8068520323735aece2fe` 重新执行305/305�
 本地候选 `e08cb55767e4c70023f0c3677809839bd135af8b`，API tree `3d6aa6d1a400dc71b62839438b5154ae4d2502f4`（开发工具变化）、web tree仍 `3a29ce07efe47f080860ecc72509d4ecf02f769e`。Java业务源码、依赖及前端未变，复用#43JAR和#46构建，未重新宣称通过新前端/Java构建。18111/18141健康200/UP；所有本次恢复演练端口已停止，私有快照保留。原源码5,731文件摘要相同。最新 [组合记录](evidence/product-candidate/cloud-recovery-candidate.json) 及 [组合工具日志](evidence/product-candidate/cloud-recovery-candidate-tests.log)。工具仍只适用于本机合成环境的停机冷恢复，未启用Redis日常持久化，不是生产灾备。
 
 三角色准备发现原标准seed没有实际菜单与班级编号规则、两班category=2与管理页所需3不同，且教学资源不足。独立 `feature/role-flow-fixture` 正增加可选新环境初始化，不改原五账户标准夹具，不扩大教师权限，不硬编码前端路由。新 `.devspace/role-flow-1003` 已准备，后端未启动，工具尚未实测或交付PR。前序浏览器工具要求验证码操作时确认，本轮确认仍待答复；其他开发/非浏览器测试继续。Scratch Worker CSP、Python执行隔离、页面性能、依赖维护、认证三角色/编辑器与用户视觉评阅仍待完成，Goal active。
+
+
+2026-10-03 三角色夹具交付阶段：PR #48 已创建附加、可审阅，提交 `50f052e`，基于 #45。可选新 `role-flow-*` 环境保留五账号及默认seed，补齐11条真实菜单、两班category3、org_num_role、含work_status的必要字典，新增1课程3编辑器单元1文件任务8自制素材。独立静态审查发现状态字典缺失，冻结前修正，最终无本轮阻断。纯专项15/15、分支全部工具78通过/1跳过，作者测试和独立静态审查分别记录。
+
+root实际create/首次verify完成69表116行、5账号、10附件（原2+新8），初始清单 `bfa1d14a77458d4276a5b9519e1f0691d83bd7bc8c7fa894232a6e13261303a5`。启动#43精确JAR至18149/PID33557、既有candidate dist至18150/PID33973；真实API22/22覆盖五账号菜单/按钮权限、A/B课程范围、三单元类型、隐藏教案、跨班单元/视频拒绝、5素材字节和视频Range，以及教学/配置数据和附件不变。API测试使用既有合成FixtureApi，不绕过浏览器登录，也不当作播放/编辑器/批改验收。前端4项HTTP与dist字节一致；此前前端305项及构建没有重跑。详细 [夹具报告](https://github.com/ZZZZihan/TeachingOpen/blob/feature/role-flow-fixture/docs/optimization/role-flow-fixture-pr.md)。
+
+最新组合 `babf2a55f4d996ef5284ca2c038f9ecfa9b53c8a`，API tree `f807915ca88d6b0dfdd496d9754ccc37b5732307`，web tree仍 `3a29ce07efe47f080860ecc72509d4ecf02f769e`。#48仅新增api/dev与文档，Java/依赖/web未变。组合工具重新执行113项：112通过、1可选生产副本MySQL项跳过。18111/18141/18149健康200/UP；真实课程18142保留，三角色18150已准备。[最终组合](evidence/product-candidate/role-flow-candidate.json) 和 [工具日志](evidence/product-candidate/role-flow-candidate-tests.log)。原源码未写入，#47核验的5,731项摘要保留为当时证据。
+
+管理员本轮代表性用户维护限定编辑原合成账号，新增用户未覆盖，五账号守卫保持。Python按实际保存即提交/关闭重开/再保存记录，不强加独立草稿按钮作为夹具失败。正常浏览器验证码操作仍等待前序工具要求的确认；真实学生学习/三编辑器、教师批改/回读及管理员维护没有因API22项通过而完成。剩余还包括Scratch Worker CSP、Python执行隔离、页面性能、依赖维护与用户视觉评阅。Goal active，无GitHub合并、生产部署或新生产操作。
