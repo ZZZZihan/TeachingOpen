@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.jeecg.common.api.vo.Result;
@@ -76,10 +77,6 @@ public class SysUserController extends BaseController {
 	private ISysUserDepartService sysUserDepartService;
 	@Autowired
 	private ISysRoleService sysRoleService;
-    @Autowired
-    private ISysDepartRoleUserService departRoleUserService;
-    @Autowired
-    private ISysDepartRoleService departRoleService;
     @Autowired
     private ISysConfigService sysConfigService;
 	@Autowired
@@ -1054,95 +1051,42 @@ public class SysUserController extends BaseController {
     /**
      * 给指定部门添加对应的用户
      */
-    //@RequiresRoles({"admin"})
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     @RequestMapping(value = "/editSysDepartWithUser", method = RequestMethod.POST)
     public Result<String> editSysDepartWithUser(@RequestBody SysDepartUsersVO sysDepartUsersVO) {
         Result<String> result = new Result<String>();
-        try {
-            String sysDepId = sysDepartUsersVO.getDepId();
-            for(String sysUserId:sysDepartUsersVO.getUserIdList()) {
-                SysUserDepart sysUserDepart = new SysUserDepart(null,sysUserId,sysDepId);
-                QueryWrapper<SysUserDepart> queryWrapper = new QueryWrapper<SysUserDepart>();
-                queryWrapper.eq("dep_id", sysDepId).eq("user_id",sysUserId);
-                SysUserDepart one = sysUserDepartService.getOne(queryWrapper);
-                if(one==null){
-                    sysUserDepartService.save(sysUserDepart);
-                }
-            }
-            result.setMessage("添加成功!");
-            result.setSuccess(true);
-            return result;
-        }catch(Exception e) {
-            log.error(e.getMessage(), e);
-            result.setSuccess(false);
-            result.setMessage("出错了: " + e.getMessage());
-            return result;
-        }
+        sysUserDepartService.addUsersToDepart(sysDepartUsersVO.getDepId(), sysDepartUsersVO.getUserIdList());
+        result.setMessage("添加成功!");
+        result.setSuccess(true);
+        return result;
     }
 
     /**
      *   删除指定机构的用户关系
      */
-    //@RequiresRoles({"admin"})
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     @RequestMapping(value = "/deleteUserInDepart", method = RequestMethod.DELETE)
     public Result<SysUserDepart> deleteUserInDepart(@RequestParam(name="depId") String depId,
                                                     @RequestParam(name="userId",required=true) String userId
     ) {
         Result<SysUserDepart> result = new Result<SysUserDepart>();
-        if (lessThanUserRoleLevel(userId)){
-            result.error500("权限不足");
-            return result;
-        }
-        try {
-            QueryWrapper<SysUserDepart> queryWrapper = new QueryWrapper<SysUserDepart>();
-            queryWrapper.eq("dep_id", depId).eq("user_id",userId);
-            boolean b = sysUserDepartService.remove(queryWrapper);
-            if(b){
-                List<SysDepartRole> sysDepartRoleList = departRoleService.list(new QueryWrapper<SysDepartRole>().eq("depart_id",depId));
-                List<String> roleIds = sysDepartRoleList.stream().map(SysDepartRole::getId).collect(Collectors.toList());
-                if(roleIds != null && roleIds.size()>0){
-                    QueryWrapper<SysDepartRoleUser> query = new QueryWrapper<>();
-                    query.eq("user_id",userId).in("drole_id",roleIds);
-                    departRoleUserService.remove(query);
-                }
-                result.success("删除成功!");
-            }else{
-                result.error500("当前选中部门与用户无关联关系!");
-            }
-        }catch(Exception e) {
-            log.error(e.getMessage(), e);
-            result.error500("删除失败！");
-        }
+        sysUserDepartService.removeUsersFromDepart(depId, Collections.singletonList(userId));
+        result.success("删除成功!");
         return result;
     }
 
     /**
      * 批量删除指定机构的用户关系
      */
-    //@RequiresRoles({"admin"})
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     @RequestMapping(value = "/deleteUserInDepartBatch", method = RequestMethod.DELETE)
     public Result<SysUserDepart> deleteUserInDepartBatch(
             @RequestParam(name="depId") String depId,
             @RequestParam(name="userIds",required=true) String userIds) {
         Result<SysUserDepart> result = new Result<SysUserDepart>();
-        for (String id: userIds.split(",")){
-            if (lessThanUserRoleLevel(id)){
-                result.error500("权限不足");
-                return result;
-            }
-        }
-        try {
-            QueryWrapper<SysUserDepart> queryWrapper = new QueryWrapper<SysUserDepart>();
-            queryWrapper.eq("dep_id", depId).in("user_id",Arrays.asList(userIds.split(",")));
-            boolean b = sysUserDepartService.remove(queryWrapper);
-            if(b){
-                departRoleUserService.removeDeptRoleUser(Arrays.asList(userIds.split(",")),depId);
-            }
-            result.success("删除成功!");
-        }catch(Exception e) {
-            log.error(e.getMessage(), e);
-            result.error500("删除失败！");
-        }
+        // The existing department UI appends a comma to the final selected ID.
+        sysUserDepartService.removeUsersFromDepart(depId, Arrays.asList(userIds.split(",")));
+        result.success("删除成功!");
         return result;
     }
     
