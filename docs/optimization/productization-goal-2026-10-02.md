@@ -2,7 +2,7 @@
 
 日期：2026-10-02（Asia/Shanghai）
 
-最新状态（2026-10-03）：PR #51 首页按需加载、#52 Python Worker 执行隔离均已交付为可审阅 PR。当前本地候选 `2533f669909afdaa059a9ec91179cd4967e2a899`，组合前端 **367/367** 与新构建通过（12项既有warning）；保留#51的0 prefetch / 4 preload。三个前端18112/18142/18150各18个HTTP资源与新dist逐字节一致，两个Python入口分别在三个实际CSP代理上完成绘图、Stop、重跑、输入、clear，无pageerror；18142匿名课程/社区/登录表单导航通过。三个后端健康，Java/代理未重启，旧dist已保留。生产来源私有副本18142与三角色夹具18150持续可用。#52分支另有347项测试、三浏览器短流程、六组宽度事件和合成API保存重开证据；CPU终止有界实验单独记录，不承诺瞬时中断或强资源沙箱。完整认证角色与人工视觉评阅等仍待完成，Goal active；PR均未远端合并或生产部署。下方旧候选为阶段历史，以文末及最新聚合记录为准。
+最新状态（2026-10-03）：PR #53 Python 文件单次加载、失败重试与就绪保护已交付可审阅，提交 `8f5bf1e`，基于 #52。最新本地候选 `37a0cc553feb1ff065d1aeba40eb3c3263e551f2`，组合前端 **389/389** 与新构建通过（12项既有warning），保持0 prefetch / 4 preload。18112/18142/18150各22个HTTP资源与新dist一致；两个Python入口在三个实际CSP代理上均只读一次文件，运行、绘图与清空通过，pageerror为空。18142匿名课程/社区/登录表单导航通过，三个后端仍健康且未重启。#53分支369/369、新专项22/22、实际Chromium14功能/6布局与合成HTTP保存重开通过。Shiro实际1.7.0及升级/EOL边界已形成只读评估，尚未实施维护；认证三角色、人工视觉和生产验收等仍待完成，Goal active。下方旧候选为阶段历史，以文末及最新聚合记录为准。
 
 ## 目标
 
@@ -440,3 +440,16 @@ Worker审计随后定位到浏览器实现依据：Chromium官方 `worker_thread
 [组合汇总](evidence/product-candidate/python-execution-candidate.json)、[367项结果](evidence/product-candidate/python-execution-candidate-tests.log)、[实际执行入口](evidence/product-candidate/python-execution-candidate-browser.log)、[匿名导航](evidence/product-candidate/python-execution-candidate-navigation.log)、[构建摘要](evidence/product-candidate/python-execution-build-summary.log)与探针已记录。GitHub未合并、生产未修改；完整认证三角色/媒体/保存和人工视觉评阅、依赖维护仍有后续门槛，Goal active。
 
 收尾：本轮root临时18159/18160按PID/命令核对后停止，python-frame-root浏览器已关闭；独立Agent的18161/18164均无监听。长期18112/18142/18150及教师18133、管理员18137保留，其他任务18152未动。原始测试及失败证据保留。
+
+
+2026-10-03 Python 文件加载交付：[#53](https://github.com/ZZZZihan/TeachingOpen/pull/53) 可审阅、已附加，提交 `8f5bf1e272e57a3460c0414b506925c1395a18d2`，基于#52。旧版两页面均双入口/双GET，404后Run仍可用，player缺少错误/重试。新版每页只载自己的入口，单GET、15秒超时和明确错误/retry，Run与提交等待实际内容就绪。保留完整URL、workId优先、保存身份、同源媒体Cookie且源文件不带JWT。默认Ace直接同步应用并核三层状态；保留的CodeMirror组件去掉300ms延迟setter，空/同内容不再有迟到覆盖窗口。源码快照和live host保护、CRLF实际保存快照已处理。
+
+实现、新专项和独立窄审由用户指定GPT-6.1-sol/Ultra并行，Fast工具仍无独立参数。新专项22/22，含相关专项71/71，冻结后全suite369/369，build成功保留12旧warning；两个bundle各4替换可精确逆恢复#52，旧manifest不改，执行/运行时七文件逐字未变。root实际Chromium154两入口14功能、390/768/1440六组布局全部通过；UI保存重开同一seed-work仅一次upload/register/submit并重跑42，属于合成HTTP，非真实Java认证写入。首轮探针对player只读和按钮图标名称的错误假设已修正，没有将这些失败当产品缺陷；最后文案整理后20场景重新通过。默认Python模板当前实读无ss，前序疑点未复现，未改示例。详见[#53说明](https://github.com/ZZZZihan/TeachingOpen/blob/8f5bf1e272e57a3460c0414b506925c1395a18d2/docs/optimization/python-source-loading-pr.md)。
+
+新本地组合 `37a0cc553feb1ff065d1aeba40eb3c3263e551f2`，API tree保持 `201408ca4eef6ce37a217f699329cf7146f9d71a`，web tree `5cc4536c7647aed1458cb18bc20e92f0af88e924`。389/389及构建通过；新dist先在独立目录完成，再保留旧dist到 `.devspace/python-source-loading-previous-dist` 后切换。4893文件211466267字节，清单SHA `453a9f32aeb0f3d534146e790ae62ab49bae4c23405127c640cc6ce86e0d6065`，清单编码在JSON记录。三个原代理各22资源一致，两Python入口共6实际CSP场景单GET、默认示例输出/两canvas/clear通过；18142首页→课程→社区→登录表单通过，未填写验证码或登录。18111/18141/18149仍UP，原PID与#43JAR摘要保持，无Java或代理重启。
+
+[本轮组合汇总](evidence/product-candidate/python-source-loading-candidate.json)、[389项测试](evidence/product-candidate/python-source-loading-candidate-tests.log)、[实际Python浏览器](evidence/product-candidate/python-source-loading-candidate-browser.log)、[匿名导航](evidence/product-candidate/python-source-loading-candidate-navigation.log)、[构建摘要](evidence/product-candidate/python-source-loading-build-summary.log)已保存。原源码未编辑，本轮未重验历史5731文件摘要。Github未合并、生产未改。
+
+并行[Shiro只读评估](shiro-maintenance-assessment-2026-10-03.md)从当前JAR重新核对12模块均1.7.0，1.x/2.x已EOL；Java8下1.13只可作为过渡，仍须验证MVC/filter/dispatcher及不需要的rememberMe。Shiro3要求平台迁移，不能直接改版本，也没有将版本范围等同可利用性证明。本轮不改依赖、不建空PR；下一独立项按评估先做隔离兼容性验证。完整认证三角色/媒体/保存、人工视觉评阅和依赖维护未完成，Goal保持active。
+
+本轮收尾：按PID与命令核对后停止临时18159/PID9285、18160/PID11869，专用python-source-root浏览器已关闭；长期18112/18142/18150、教师18133与管理员18137保留，其他任务18152未动。原始失败/调试证据仍在私有目录。请求在Codex打开18142返回queued，不据此声称用户已看到。
