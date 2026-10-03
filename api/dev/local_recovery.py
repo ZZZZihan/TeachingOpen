@@ -18,9 +18,10 @@ import time
 from uuid import uuid4
 
 from local_runtime import assert_app_config, assert_database, assert_mysql_owner, load_ports, mysql_command, validate_ports
+from scratch_cloud_recovery import CLOUD_FILE, OwnedRedis, capture_cloud, cloud_summary, encode_cloud, load_cloud, restore_cloud
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 
 def private_write(path, data):
@@ -103,6 +104,14 @@ def database_inventory(runtime):
     return result
 
 
+def project_ids(runtime):
+    """Exact database IDs, independent of display names or publication state."""
+    try:
+        return {bytes.fromhex(value) for value in sql(runtime, 'SELECT HEX(id) FROM teachingopen_dev.teaching_work ORDER BY id').splitlines()}
+    except ValueError as error:
+        raise RuntimeError('Invalid work ID encoding in the local database') from error
+
+
 def assert_stopped(runtime):
     """Require a closed application listener and no live recorded application PID."""
     assert_app_config(runtime)
@@ -145,23 +154,30 @@ def create_snapshot(runtime, destination):
     runtime, destination = local_path(runtime), local_path(destination, new=True)
     assert_stopped(runtime)
     file_inventory(runtime / 'uploads')
-    destination.mkdir(mode=0o700)
-    with database_read_lock(runtime):
+    with OwnedRedis(runtime) as redis, database_read_lock(runtime):
         before = database_inventory(runtime)
+        projects = project_ids(runtime)
+        cloud = capture_cloud(redis, projects)
+        cloud_bytes = encode_cloud(cloud)
         files = file_inventory(runtime / 'uploads')
+        destination.mkdir(mode=0o700)
         dump = runtime / 'tools/mysql-8.4.6-macos15-arm64/bin/mysqldump'
         args = [str(dump), '--defaults-extra-file=' + str(runtime / 'config/mysql-admin-client.cnf'), '--single-transaction', '--skip-lock-tables', '--set-gtid-purged=OFF', '--no-tablespaces', '--hex-blob', '--default-character-set=utf8mb4', '--skip-comments', 'teachingopen_dev']
         private_write(destination / 'database.sql', command(runtime, args))
         shutil.copytree(runtime / 'uploads', destination / 'uploads')
+        private_write(destination / CLOUD_FILE, cloud_bytes)
         fixture_password = json.loads((runtime / 'config/credentials.json').read_text())['test_user_password']
         private_write(destination / 'fixture-login.json', json.dumps({'test_user_password': fixture_password}) + '\n')
-        if database_inventory(runtime) != before or file_inventory(runtime / 'uploads') != files or file_inventory(destination / 'uploads') != files:
+        if (database_inventory(runtime) != before or capture_cloud(redis, project_ids(runtime)) != cloud
+                or file_inventory(runtime / 'uploads') != files or file_inventory(destination / 'uploads') != files):
             raise RuntimeError('Source changed during snapshot; incomplete directory retained, no valid manifest')
         assert_stopped(runtime)
     payload = file_inventory(destination)
-    manifest = {'format': SCHEMA_VERSION, 'kind': 'teachingopen-local-synthetic', 'database': before, 'uploads': files, 'payload': payload, 'source_ports': load_ports(runtime), 'created_unix': int(time.time()), 'redis': 'excluded; fresh login required', 'complete': True}
+    manifest = {'format': SCHEMA_VERSION, 'kind': 'teachingopen-local-synthetic', 'database': before, 'uploads': files, 'payload': payload, 'source_ports': load_ports(runtime), 'created_unix': int(time.time()), 'redis': cloud_summary(cloud), 'complete': True}
     private_write(destination / 'manifest.json', json.dumps(manifest, indent=2) + '\n')
-    return {'tables': len(before), 'rows': sum(x['rows'] for x in before.values()), 'files': len(files), 'snapshot': str(destination), 'manifest_sha256': sha256(destination / 'manifest.json')}
+    return {'format': SCHEMA_VERSION, 'tables': len(before), 'rows': sum(x['rows'] for x in before.values()), 'files': len(files),
+            'cloud_keys': manifest['redis']['keys'], 'cloud_fields': manifest['redis']['fields'], 'redis_sessions_restored': False,
+            'snapshot': str(destination), 'manifest_sha256': sha256(destination / 'manifest.json')}
 
 
 def inspect_snapshot(snapshot):
@@ -170,15 +186,23 @@ def inspect_snapshot(snapshot):
     if 'manifest.json' not in inventory:
         raise ValueError('Snapshot is incomplete: manifest missing')
     manifest = json.loads((snapshot / 'manifest.json').read_text())
-    if manifest.get('format') != SCHEMA_VERSION or manifest.get('kind') != 'teachingopen-local-synthetic' or manifest.get('complete') is not True:
+    if (not isinstance(manifest, dict) or type(manifest.get('format')) is not int or manifest['format'] not in (1, SCHEMA_VERSION)
+            or manifest.get('kind') != 'teachingopen-local-synthetic' or manifest.get('complete') is not True):
         raise ValueError('Unsupported or incomplete snapshot manifest')
     inventory.pop('manifest.json')
     if inventory != manifest.get('payload'):
         raise ValueError('Snapshot bytes differ from its manifest')
-    if not {'database.sql', 'fixture-login.json'} <= set(inventory) or any(n not in {'database.sql', 'fixture-login.json'} and not n.startswith('uploads/') for n in inventory):
+    required = {'database.sql', 'fixture-login.json'} | ({CLOUD_FILE} if manifest['format'] == 2 else set())
+    if not required <= set(inventory) or any(n not in required and not n.startswith('uploads/') for n in inventory):
         raise ValueError('Unexpected snapshot payload layout')
     if file_inventory(snapshot / 'uploads') != manifest.get('uploads'):
         raise ValueError('Attachment manifest mismatch')
+    if manifest['format'] == 2:
+        expected = cloud_summary(load_cloud(snapshot))
+        actual = manifest.get('redis')
+        if (not isinstance(actual, dict) or set(actual) != set(expected)
+                or any(type(actual[key]) is not type(value) or actual[key] != value for key, value in expected.items())):
+            raise ValueError('Cloud summary differs from the bound snapshot payload')
     validate_ports(manifest.get('source_ports', {}))
     database = manifest.get('database')
     if not isinstance(database, dict) or not database:
@@ -210,23 +234,35 @@ def restore_snapshot(snapshot, runtime, tools, ports):
     assert_app_config(runtime)
     assert_database(runtime, empty=True)
     assert_mysql_owner(runtime)
-    credentials = json.loads((runtime / 'config/credentials.json').read_text())
-    app_client = runtime / 'config/recovery-app-client.cnf'
-    private_write(app_client, '[client]\nuser=teaching_dev\nhost=127.0.0.1\nprotocol=tcp\nport=' + str(ports['mysql']) + '\npassword=' + credentials['mysql_app_password'] + '\n')
-    client = [str(runtime / 'tools/mysql-8.4.6-macos15-arm64/bin/mysql'), '--defaults-extra-file=' + str(app_client), '--local-infile=0', '--binary-mode', '--default-character-set=utf8mb4']
-    # Use the newly created database-scoped account, not server root, for SQL import.
-    payload = b'DROP DATABASE teachingopen_dev; CREATE DATABASE teachingopen_dev CHARACTER SET utf8mb4; USE teachingopen_dev;\n' + (snapshot / 'database.sql').read_bytes()
-    command(runtime, client, input=payload)
-    shutil.rmtree(runtime / 'uploads')
-    shutil.copytree(snapshot / 'uploads', runtime / 'uploads')
-    # Preserve source fixture account passwords; rotate target infrastructure credentials.
-    credentials['test_user_password'] = json.loads((snapshot / 'fixture-login.json').read_text())['test_user_password']
-    (runtime / 'config/credentials.json').write_text(json.dumps(credentials, indent=2) + '\n')
-    assert_database(runtime)
-    actual = database_inventory(runtime)
-    files = file_inventory(runtime / 'uploads')
-    if inspect_snapshot(snapshot) != manifest or actual != manifest['database'] or files != manifest['uploads']:
-        raise RuntimeError('Restored data differs from snapshot; target retained for diagnosis, do not start app')
-    result = {'snapshot_manifest_sha256': sha256(snapshot / 'manifest.json'), 'database_equal': True, 'attachments_equal': True, 'tables': len(actual), 'rows': sum(x['rows'] for x in actual.values()), 'files': len(files), 'runtime': str(runtime), 'ports': ports, 'redis_sessions_restored': False, 'business_read_verified': False}
+    with OwnedRedis(runtime) as redis:
+        if redis.execute('DBSIZE') != 0: raise RuntimeError('Fresh target Redis DB 1 is not empty; do not overwrite it')
+        credentials = json.loads((runtime / 'config/credentials.json').read_text())
+        app_client = runtime / 'config/recovery-app-client.cnf'
+        private_write(app_client, '[client]\nuser=teaching_dev\nhost=127.0.0.1\nprotocol=tcp\nport=' + str(ports['mysql']) + '\npassword=' + credentials['mysql_app_password'] + '\n')
+        client = [str(runtime / 'tools/mysql-8.4.6-macos15-arm64/bin/mysql'), '--defaults-extra-file=' + str(app_client), '--local-infile=0', '--binary-mode', '--default-character-set=utf8mb4']
+        # Use the newly created database-scoped account, not server root, for SQL import.
+        payload = b'DROP DATABASE teachingopen_dev; CREATE DATABASE teachingopen_dev CHARACTER SET utf8mb4; USE teachingopen_dev;\n' + (snapshot / 'database.sql').read_bytes()
+        command(runtime, client, input=payload)
+        shutil.rmtree(runtime / 'uploads')
+        shutil.copytree(snapshot / 'uploads', runtime / 'uploads')
+        # Preserve source fixture account passwords; rotate target infrastructure credentials.
+        credentials['test_user_password'] = json.loads((snapshot / 'fixture-login.json').read_text())['test_user_password']
+        (runtime / 'config/credentials.json').write_text(json.dumps(credentials, indent=2) + '\n')
+        assert_database(runtime)
+        actual = database_inventory(runtime)
+        files = file_inventory(runtime / 'uploads')
+        has_cloud = manifest['format'] == 2
+        cloud = load_cloud(snapshot) if has_cloud else None
+        if has_cloud: restore_cloud(redis, cloud, project_ids(runtime))
+        if (inspect_snapshot(snapshot) != manifest or actual != manifest['database'] or files != manifest['uploads']
+                or (has_cloud and capture_cloud(redis, project_ids(runtime)) != cloud)
+                or (not has_cloud and redis.execute('DBSIZE') != 0)):
+            raise RuntimeError('Restored data differs from snapshot; target retained for diagnosis, do not start app')
+    result = {'snapshot_manifest_sha256': sha256(snapshot / 'manifest.json'), 'database_equal': True, 'attachments_equal': True,
+              'tables': len(actual), 'rows': sum(x['rows'] for x in actual.values()), 'files': len(files), 'runtime': str(runtime), 'ports': ports,
+              'cloud_data_present': has_cloud, 'cloud_equal': True if has_cloud else None,
+              'cloud_keys': manifest['redis']['keys'] if has_cloud else 0,
+              'cloud_fields': manifest['redis']['fields'] if has_cloud else 0, 'legacy_cloud_missing': not has_cloud,
+              'redis_sessions_restored': False, 'business_read_verified': False}
     private_write(runtime / 'restore-result.json', json.dumps(result, indent=2) + '\n')
     return result

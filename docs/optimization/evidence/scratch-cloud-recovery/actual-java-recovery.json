@@ -1,0 +1,78 @@
+{
+  "scope": "Read-only owned synthetic local restore; actual anonymous Java handshake and stale-session HTTP; no login, mutation or browser acceptance",
+  "cases": [
+    {
+      "case": "format 2 bound cloud payload",
+      "passed": true
+    },
+    {
+      "case": "restore completion records equal bytes and excludes sessions",
+      "passed": true
+    },
+    {
+      "case": "source cloud bytes still equal snapshot",
+      "passed": true
+    },
+    {
+      "case": "source contains excluded synthetic cache sentinel",
+      "passed": true
+    },
+    {
+      "case": "target raw cloud key field value bytes equal snapshot",
+      "passed": true
+    },
+    {
+      "case": "target initially contains only restored cloud hashes",
+      "passed": true
+    },
+    {
+      "case": "source login CAPTCHA and cache names were not restored",
+      "passed": true
+    },
+    {
+      "case": "running exact JAR belongs to target local profile",
+      "passed": true
+    },
+    {
+      "case": "restored business tables and attachment bytes match snapshot",
+      "passed": true
+    },
+    {
+      "case": "synthetic probe project is public and has expected three values",
+      "passed": true
+    },
+    {
+      "case": "anonymous Java handshake acknowledges complete restored values",
+      "passed": true
+    },
+    {
+      "case": "formerly valid source admin session is rejected HTTP 401",
+      "passed": true
+    },
+    {
+      "case": "read probes preserve raw cloud bytes",
+      "passed": true
+    },
+    {
+      "case": "read probes preserve business tables and attachment bytes",
+      "passed": true
+    }
+  ],
+  "passed": 14,
+  "total": 14,
+  "completed": true,
+  "phase": "complete",
+  "error_type": null,
+  "aggregates": {
+    "source_excluded_keys": 4,
+    "source_excluded_keys_sha256": "ada733fae0ae18b24744ed2b826b2311ed8b157a68b7e64991b2991c86a2a1a4",
+    "target_initial_keys": 1,
+    "cloud_keys": 1,
+    "cloud_fields": 3,
+    "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+    "business_tables": 12,
+    "handshake_set_messages": 3
+  },
+  "script_sha256": "a7fba53d864ddd6a34691edac066cd972c6c59572413ebbd498c09d584c34f97",
+  "snapshot_manifest_sha256": "29ec38e8b6334b67e1a0e39327a6af4b743d9f9eb4e358801e4a0eb675d1e123"
+}

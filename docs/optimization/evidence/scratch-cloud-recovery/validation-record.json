@@ -1,0 +1,24 @@
+{
+  "recorded_utc": "2026-10-03T07:07:11.578112+00:00",
+  "base_commit": "5f896ac572ec637bb3d4a92223d7c699e6b30182",
+  "scope": "Local owned synthetic recovery; no production operations or browser acceptance",
+  "source_sha256": {
+    "api/dev/local_recovery.py": "865bee663ca8e8d99626a96bc630a7d7a4e62bc763a5019cc1bc7361915f1942",
+    "api/dev/scratch_cloud_recovery.py": "b41486488d80d01a2430fc1530780f08585eced191fd3b1da435ab586be97e28",
+    "api/dev/backup-local.py": "421ce330e34794e77013e073420f69aed90d598be8b3127067d2cbe628e72317",
+    "api/dev/verify-cloud-recovered.py": "a7fba53d864ddd6a34691edac066cd972c6c59572413ebbd498c09d584c34f97",
+    "api/dev/test_local_recovery.py": "03f8ed9c660500b7d0add5722307f7dea5864b3c713b689fe654eb900ba8d821",
+    "api/dev/test_scratch_cloud_recovery.py": "0839f3f55e5bddaa0a88df5919bb3f0525347fe8c018fc98cee03b25384c7e1f",
+    "api/BUILDING.md": "e9fbf230e5fe146573e4a15a3524d4ab82905a8e3c756ee778bddda89e8f502e"
+  },
+  "python_suite": {
+    "command": "python3 -m unittest discover -s api/dev -p 'test_*.py'",
+    "exit_code": 0,
+    "discovered": 98,
+    "passed": 97,
+    "skipped": 1,
+    "skip": "Production fixture MySQL opt-in test; not enabled on these synthetic runtimes"
+  },
+  "new_snapshot_manifest_sha256": "29ec38e8b6334b67e1a0e39327a6af4b743d9f9eb4e358801e4a0eb675d1e123",
+  "old_snapshot_manifest_sha256": "f929de083757c1f1330ecd0db8e24482a51de41776d569410b5e1b438539dbf9"
+}

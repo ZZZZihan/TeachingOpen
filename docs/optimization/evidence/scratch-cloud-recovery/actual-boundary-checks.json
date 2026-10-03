@@ -1,0 +1,34 @@
+{
+  "actual_owned_source": true,
+  "cases": [
+    {
+      "case": "expiring-hash",
+      "rejected": true,
+      "complete_manifest_exists": false,
+      "destination_created": false
+    },
+    {
+      "case": "wrong-type",
+      "rejected": true,
+      "complete_manifest_exists": false,
+      "destination_created": false
+    },
+    {
+      "case": "orphan-project",
+      "rejected": true,
+      "complete_manifest_exists": false,
+      "destination_created": false
+    },
+    {
+      "case": "wrong-redis-database",
+      "rejected": true,
+      "complete_manifest_exists": false,
+      "destination_created": false
+    }
+  ],
+  "cloud_restored_to_original": true,
+  "database_unchanged": true,
+  "attachments_unchanged": true,
+  "configuration_restored_exactly": true,
+  "scope": "Temporary fault states only in newly created synthetic stopped-app runtime; no production access."
+}

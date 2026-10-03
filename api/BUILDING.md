@@ -73,7 +73,7 @@ python3 api/dev/run-backend.py stop --runtime "$TEACHING_RUNTIME" --java-home "$
 python3 api/dev/stop-local.py --runtime "$TEACHING_RUNTIME"
 ```
 
-后端停止操作核对 PID 对应的完整 JAR 路径和 profile，并等待进程退出；数据库和 Redis 停止前核对真实数据目录及端口。数据、凭据、附件和日志保留。Redis 不持久化，重启后会话和验证码失效。
+后端停止操作核对 PID 对应的完整 JAR 路径和 profile，并等待进程退出；数据库和 Redis 停止前核对真实数据目录及端口。数据、凭据、附件和日志保留。Redis 沿用临时测试配置（`appendonly no`、`save ""`），停止再启动会丢失会话、验证码及未显式备份的 Scratch 云变量；需要保留云值时先执行下面的冷备份。本工具提供显式快照恢复，不启用 Redis 持久化。
 
 再次启动保留环境，不重新导入或覆盖数据：
 
@@ -87,9 +87,9 @@ python3 api/dev/verify-environment.py --runtime "$TEACHING_RUNTIME" \
 
 本轮还保留了 [环境与重启结果](../docs/optimization/local-runtime-pr.md)。后续切换源码分支时，先用旧 worktree 的停止脚本停止其后端，再从新 worktree 构建并启动；不要覆盖正在运行的 JAR。若要使用已有数据之外的新 fixture，另建环境。
 
-## 数据库与附件备份、全新隔离恢复
+## 数据库、附件与 Scratch 云变量备份、全新隔离恢复
 
-`backup-local.py` 将本地合成环境的数据库和 `uploads/` 作为同一份快照保存。仅适用于上述 macOS arm64 工具和合成账号环境；不用于生产、在线备份、跨版本迁移或导入来历不明的 SQL。先停止该环境的后端和其他附件写入程序；快照期间工具保持本机 MySQL 全局读锁，完成后释放。失败时不会写入有效的完成清单，但可能保留私有的不完整目录。
+`backup-local.py` 将本地合成环境的数据库、`uploads/` 以及 Redis DB 1 的 `scratch:cloud:*` 持久 hash 保存到格式 2 快照。仅适用于上述 macOS arm64 工具和合成账号环境；不用于生产、在线备份、跨版本迁移或导入来历不明的 SQL。先停止该环境的后端，以及所有数据库、附件和云变量写入程序；快照期间工具保持本机 MySQL 全局读锁，完成后释放。云键由单条 Lua 原子读取，在捕获前后比较数据库、附件与云值；这依赖停机状态，不是 MySQL/Redis 跨库事务，也不能防止任意外部写入程序在两次检查之间修改后复原。失败时不会写入有效的完成清单，但可能保留私有的不完整目录。
 
 在包含此工具的源码仓库中执行；停止和启动后端必须使用实际运行该 JAR 的 worktree 中的 `run-backend.py`。以下假设它就是 `$TEACHING_REPO`：
 
@@ -113,7 +113,13 @@ python3 api/dev/verify-recovered-business.py --runtime "$TEACHING_RESTORED" \
   --output "$TEACHING_RESTORED/recovered-business-check.json"
 ```
 
-快照和恢复目录都必须是 `.devspace/` 的非符号链接直接子目录，且目的地必须不存在；恢复端口必须空闲、互不相同并与源环境不同。工具先核对快照清单和文件 SHA-256，再初始化新 MySQL/Redis，以仅有新数据库权限的账号导入。恢复时重新生成数据库和 Redis 口令，保留合成用户登录口令；Redis 会话不恢复，必须重新登录。恢复后的每张表结构、逐列编码的行摘要和附件文件摘要全部相等才写 `restore-result.json`。该文件的 `business_read_verified: false` 表示尚须单独运行接口检查，不能凭导入成功声称业务通过。
+快照和恢复目录都必须是 `.devspace/` 的非符号链接直接子目录，且目的地必须不存在；恢复端口必须空闲、互不相同并与源环境不同。工具先核对快照清单、云文档结构和文件 SHA-256，再初始化新 MySQL/Redis，以仅有新数据库权限的账号导入。读取或写入云键前核对 Redis 实际 `dir`、`bind` 和 `port` 归属，应用配置固定为本机 DB 1；目标 DB 1 必须为空。恢复时重新生成数据库和 Redis 口令，保留合成用户登录口令；只写 `scratch:cloud:*`，不复制登录令牌、验证码、权限缓存或其他 Redis 元数据，必须重新登录。恢复后的每张表结构、逐列编码的行摘要、附件和云值字节全部相等才写 `restore-result.json`。其中 `cloud_equal: true` 只表示新格式云值一致；`business_read_verified: false` 表示尚须单独运行接口检查，不能凭导入成功声称业务通过。
+
+格式 1 旧快照继续支持检查和全新恢复，但它完全没有 Redis 云数据；CLI 明确输出 `cloud_data_present: false`、`legacy_cloud_missing: true`，恢复结果的 `cloud_equal` 为 `null`。不会从其他环境补齐旧快照的云变量，也不会把空目标 Redis 宣称为旧云数据已恢复。
+
+新文件 `cloud-values.json` 保存排序后的键、字段和值的规范 base64，保留 Spring JSON serializer 已写入的原始字节，包括二进制、NUL、换行、Unicode 和空字段/值，不重新解释业务值。清单绑定该文件的 SHA-256、字节数、键数和字段数。现有云业务不设置 TTL，所以工具严格要求 `PTTL=-1`；带 TTL、错误 Redis 类型、无对应 `teaching_work.id` 的悬空键、无效格式和超限数据都明确拒绝，不静默过滤。已有作品行不按公开状态或删除标记过滤。
+
+上限为 10,000 个 hash，每个 64 个字段，键 1,024 字节、字段 4,096 字节、值 1 MiB，所有键/字段/值原始字节合计 16 MiB；实际编码后的云文档另限 32 MiB，超限整份拒绝。数据/格式问题抛出 `ValueError`；错误归属、非空目标、捕获变化或恢复不一致抛出 `RuntimeError`，连接和文件错误保留对应系统异常。恢复失败不写成功结果，新目标及其可能已导入的部分数据保留供诊断；不自动跨库回滚，不覆盖旧目标或其他环境。
 
 快照含数据库、用户密码散列及合成账号口令，必须保留在权限 700 的本机私有目录，不提交 Git、不复制到共享成果。SHA-256 清单检测意外损坏，不提供来源认证或加密。只恢复本任务自己创建、可信的快照。工具拒绝附件符号链接、特殊文件，以及包含视图、触发器、存储过程或事件的定制数据库，避免静默漏备份；空附件目录不参与文件摘要。恢复失败时保留新目录及其服务用于诊断，不覆盖、回滚或删除其他环境，也不自动启动应用。
 
