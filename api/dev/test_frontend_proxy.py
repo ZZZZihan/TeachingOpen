@@ -2,14 +2,17 @@
 import base64
 from contextlib import contextmanager
 import hashlib
+from http.client import parse_headers
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import importlib.util
+import io
 from pathlib import Path
 import socket
 import tempfile
 import threading
 import time
 import unittest
+from urllib.error import HTTPError
 from urllib.request import urlopen
 
 spec = importlib.util.spec_from_file_location('frontend_proxy', Path(__file__).with_name('serve-frontend.py'))
@@ -123,13 +126,31 @@ class FrontendProxyTest(unittest.TestCase):
             conn.sendall(request.encode() + early)
             yield conn, head(conn)
 
+    def assert_local_csp(self, headers):
+        policies = headers.get_all('Content-Security-Policy', [])
+        self.assertEqual(len(policies), 1)
+        directives = {}
+        for value in policies[0].split(';'):
+            name, *sources = value.split()
+            self.assertNotIn(name, directives)
+            directives[name] = set(sources)
+        # Read from a served response: workers get blob support, while ordinary
+        # scripts and connections retain the local-only isolation contract.
+        self.assertEqual(directives, {
+            'default-src': {"'self'", 'data:', 'blob:'},
+            'script-src': {"'self'", "'unsafe-inline'", "'unsafe-eval'"},
+            'worker-src': {"'self'", 'blob:'},
+            'style-src': {"'self'", "'unsafe-inline'"},
+            'connect-src': {"'self'"},
+        })
+
     def test_handshake_and_early_frames_preserved(self):
         self.backend.mode = 'early'
         data = b'\x89\x04ping\x82\x04\x00\xff\x80\x01\x88\x02\x03\xe8'
         with self.connect(early=data) as (conn, response):
             self.assertTrue(response.startswith(b'HTTP/1.1 101'))
             self.assertIn(b'Sec-WebSocket-Protocol: fixture', response)
-            self.assertIn(b"connect-src 'self'", response)
+            self.assert_local_csp(parse_headers(io.BytesIO(response.split(b'\r\n', 1)[1])))
             self.assertEqual(exact(conn, 4 + len(data)), b'\x81\x02ok' + data)
 
     def test_large_stream_and_concurrent_connection(self):
@@ -210,9 +231,32 @@ class FrontendProxyTest(unittest.TestCase):
         with urlopen(url + '/api/fixture') as response:
             self.assertEqual(response.read(), b'ordinary response')
             self.assertEqual(len(response.headers.get_all('Set-Cookie')), 2)
+            self.assert_local_csp(response.headers)
         for path in ('/index.html', '/nested/spa-route'):
             with urlopen(url + path) as response:
                 self.assertEqual(response.read(), b'fixture index')
+                self.assert_local_csp(response.headers)
+
+    def test_error_responses_keep_local_csp(self):
+        url = 'http://127.0.0.1:' + str(self.frontend.server_port)
+        with self.assertRaises(HTTPError) as missing:
+            urlopen(url + '/missing.js')
+        with missing.exception as response:
+            self.assertEqual(response.code, 404)
+            self.assert_local_csp(response.headers)
+        # A reserved, unlistened loopback port cannot be another local service.
+        old = self.handler.ports['backend']
+        with socket.socket() as unavailable:
+            unavailable.bind(('127.0.0.1', 0))
+            self.handler.ports['backend'] = unavailable.getsockname()[1]
+            try:
+                with self.assertRaises(HTTPError) as failed:
+                    urlopen(url + '/api/fixture')
+                with failed.exception as response:
+                    self.assertEqual(response.code, 502)
+                    self.assert_local_csp(response.headers)
+            finally:
+                self.handler.ports['backend'] = old
 
     def test_fragmented_http_body_is_not_truncated(self):
         body = b'fixture-body-' * 10000
