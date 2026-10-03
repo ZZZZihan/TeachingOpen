@@ -411,3 +411,19 @@ root实际组合dist通过自建HTTP夹具，三个调用方生成的链接均�
 并行执行隔离审计补齐了循环真正开始的证据：六组最长500ms的普通同源iframe/opaque sandbox iframe/Worker对照，在运行20ms且约9万次循环后向自建服务发标记。当前HeadlessChrome154中普通同源iframe把父50ms心跳和100ms移除拖到501ms；opaque iframe停止组父心跳51/100ms、移除100ms，完整对照运行期间持续响应；Worker101ms调用terminate且无完成消息。该实验证明当前浏览器的有限负载响应，不证明移除iframe即时终止CPU、跨浏览器支持或生产安全沙箱。引擎可通过小型webpack登记器复用原vendor/app的Skulpt与builtin模块而不执行Vue入口；Worker中turtle缺DOM，倾向先验证opaque frame runner。子frame CSP未阻止自身导航，父frame-src精确路径可挡另一路径，但自身允许路径query及其他通道还需处理。详细有界实验保持私有 `.devspace/artifacts/python-isolation-audit-20261003-49fbmcgc/v2/REPORT.md`，原不足结果保留，所有审计临时服务均停止；没有隔离产品代码，不能把审计当功能交付。
 
 后续独立项：Python执行隔离原型及运行/输入/turtle/停止/重跑验收、资源失败反馈与重复挂载；另发现默认Python样例末尾ss为源码疑点，需单独实际确认再修复。认证三角色全流程继续等待前序浏览器工具对验证码操作要求的确认，非认证开发正常推进。页面性能、依赖维护和用户视觉评阅仍待完成，Goal active。
+
+
+2026-10-03 首页按需加载阶段：PR #51 已创建附加、可审阅，提交 `630a639c8a9f73ff367d20404d6e656a90046662`，基于 #50。唯一产品改动是删除 Vue CLI 默认 prefetch 插件，保留 initial preload、14 处动态 import 与现有分块。新旧同基线构建均有497个逻辑JS/CSS资产，4条初始preload保留，HTML预取378→0；运行时异步JS映射230项。作者最初238统计混入8个public静态脚本，独立核对后已更正；部分文件名hash重算，入口归一化对应文件名后正文一致，其他资源内容一致。
+
+作者前端318/318与生产构建通过，另一GPT-6.1-sol / Ultra Agent只读核对配置/磁盘摘要/路由映射无本项阻断；二者分开记录，Fast无独立工具参数。root使用实际同基线dist、同一私有生产来源副本，各5轮1440×1000 Chromium匿名对照：同源资源请求395→17，transferSize合计23,581,181→15,396,141字节，减少34.71%。浏览器缓存每轮禁用清理、资源计时buffer2000、课程卡片和图片就绪后再等2500ms；无CPU/网络限速，服务端/OS缓存保留。早期默认250条buffer导致探索结果截断，已弃作结论依据。课程可用时间旧312–322ms、新225–437ms，不宣称普遍latency或公网容量改善。
+
+实际点击首页→全部课程→创作社区→登录表单，两版均通过，user分块200、无未处理pageerror。原有外部errlog脚本被本地CSP阻止，旧探索还有Ant焦点warning，未宣称控制台全无错误。首次选择器超时按新快照修正后通过，失败日志保留；没有登录、验证码交互或提交。真实正文/账号/截图未进Git，PR仅脱敏计数及复现探针。
+
+本地组合更新为 `c4d5f152f3cbe0e06412fc8c4980bd74ad584504`，API tree `201408ca4eef6ce37a217f699329cf7146f9d71a` 未变，web tree `2eb9e459f7ac03afc808ba54a8fbf0fe9d2df3d8`。重新运行338/338前端测试与build，12项既有CSS顺序/体积warning及过期Browserslist提示保留。4880构建文件先在新目录完成，再将旧dist保留 `.devspace/frontend-prefetch-previous-dist` 后切换。18112/18142/18150各9资源与新dist字节一致；18142实际组合匿名课程/社区/登录表单导航再次通过。18111/18141/18149健康200/UP，核验#43同JAR SHA256 `c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364`，服务未重启。临时18162/18163代理及prefetch-compare浏览器已关闭；共享入口保留，18152属于其他任务未动。原源码未编辑，5731文件摘要一致仍为旧证据，本轮未复核。
+
+[本轮组合记录](evidence/product-candidate/frontend-prefetch-candidate.json)、[338项测试日志](evidence/product-candidate/frontend-prefetch-candidate-tests.log)、[组合导航](evidence/product-candidate/frontend-prefetch-candidate-browser.log) 和 [构建摘要](evidence/product-candidate/frontend-prefetch-build-summary.log) 已保存。PR仍未GitHub合并，未进行生产部署。资源包本身仍较大，依赖维护、认证三角色/编辑器全流程、用户视觉评阅和Python执行终止仍待完成，Goal active。
+
+并行Python执行原型否证记录：opaque iframe原型的运行/输入/turtle/生命周期6项通过不代表CPU停止；实际Chromium有限500ms探针在Stop475ms移除frame后仍于940ms输出END，继续约465ms。WebKit/Firefox的iframe有限循环还会延迟父页面响应。原型与失败记录已留在私有 `.devspace/python-execution-frame-browser/failed-iframe-prototype` 和原型tests说明，未建PR或集成。现改为可信opaque绘图host + Worker执行，停止后ack再移除host，rapid rerun只保留最新排队请求。Worker turtle桥接与测试由指定模型子Agent并行实现，尚未完成验收。独立审计对原生Worker.terminate又发现Chrome154有限纯JS/Sk循环继续至END，而WebKit/Firefox该有界观察无END，正在以本机其他已缓存浏览器版本排查；API调用/ack/受控测试通过均不作为真实CPU终止证据。当前没有可交付隔离产品PR。
+
+
+Worker审计随后定位到浏览器实现依据：Chromium官方 `worker_thread.cc` 在精确140.0.7339.16与154.0.8037.93版本均设置2秒强制终止延迟，Terminate先排退出任务。因此500ms loop在调用后继续完成证实“非即时CPU归零”，不能作为Worker无法最终终止的判据，也不是仅Playwright调试异常（独立无CDP新profile同样观察）。官方来源： https://chromium.googlesource.com/chromium/src/+/154.0.8037.93/third_party/blink/renderer/core/workers/worker_thread.cc 。原反例全部保留，后续仅将隔离单Worker的有限忙循环延长到3500ms并观察4500ms，control/stop成对比较，绝不使用无限循环。此时最终跨浏览器结果仍在执行，尚未声称通过。产品增加结束后的短启动节流并保留最后一次重跑请求，时间窗口是抑制重跑叠加的措施，不是线程死亡测量。
