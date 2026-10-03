@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Back up/restore only isolated synthetic runtime data; never overwrite a target."""
+"""Cold backup of owned synthetic DB/uploads/persistent Scratch hashes; never overwrite a target.
+
+Only DB 1 scratch:cloud:* hashes are included. Expiring, orphaned, wrong-type or
+oversized hashes fail explicitly. Authentication/cache keys are never restored.
+Format 1 is readable, but has no cloud data. Not a production/online restore tool.
+"""
 import argparse
 import json
 from pathlib import Path
@@ -28,7 +33,11 @@ def main():
         result = restore_snapshot(args.snapshot, args.runtime, args.tools, {n: getattr(args, n + '_port') for n in DEFAULT_PORTS})
     else:
         manifest = inspect_snapshot(args.snapshot)
-        result = {'valid': True, 'tables': len(manifest['database']), 'files': len(manifest['uploads'])}
+        has_cloud = manifest['format'] == 2
+        result = {'valid': True, 'format': manifest['format'], 'tables': len(manifest['database']), 'files': len(manifest['uploads']),
+                  'cloud_data_present': has_cloud, 'cloud_keys': manifest['redis']['keys'] if has_cloud else 0,
+                  'cloud_fields': manifest['redis']['fields'] if has_cloud else 0, 'legacy_cloud_missing': not has_cloud,
+                  'redis_sessions_restored': False}
     print(json.dumps(result, indent=2))
 
 

@@ -1,0 +1,120 @@
+{
+  "observed_utc": "2026-10-03T06:16:00.513873+00:00",
+  "executed": true,
+  "scope": "Anonymous real loopback GET and read-only SQL on a private production-content copy; no login, Redis access, student files, writes, browser acceptance or production delivery.",
+  "cases": [
+    {
+      "case": "anonymous homepage matches existing SQL show_home contract",
+      "passed": true,
+      "http_status": 200,
+      "sql_total": 3,
+      "api_total": 3
+    },
+    {
+      "case": "returned homepage showHome and delFlag equal stored SQL flags including NULL",
+      "passed": true,
+      "records": 3
+    },
+    {
+      "case": "homepage page numbers and size preserve complete eligible set",
+      "passed": true
+    },
+    {
+      "case": "beyond-last homepage page returns empty records with same total",
+      "passed": true
+    },
+    {
+      "case": "homepage course-name filter matches SQL LIKE",
+      "passed": true,
+      "matches": 1
+    },
+    {
+      "case": "anonymous checks leave selected business rows unchanged",
+      "passed": true
+    }
+  ],
+  "metrics": {
+    "course_visibility_counts": {
+      "all_courses": 5,
+      "show_home": 3,
+      "home_zero_delete_flag": 0,
+      "home_nonzero_delete_flag": 0,
+      "home_null_delete_flag": 3
+    }
+  },
+  "http_requests_completed": 5,
+  "limitations": [
+    "Existing getHomeCourse filters show_home=1; del_flag equality is checked without adding a NULL/0 filter guarantee.",
+    "If no visible nonzero del_flag rows exist, deletion-state exclusion is not demonstrated.",
+    "Only copied course-cover assets are read; student files and external resources are not requested."
+  ],
+  "owned_process_verified": true,
+  "backend_port": 18141,
+  "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "manifest_sha256": "bb4380486c95f6ddd2aa8b362ffed6213e2614485a090e27f4c82ef825cdc100",
+  "failure_code": "typed_course_filter_unavailable",
+  "business_before": {
+    "teaching_course": {
+      "rows": 5,
+      "sha256": "48a20be4fb2b342e5c8ca43a29feea89147eb19b3472f7c3a465045731fe4b73"
+    },
+    "teaching_course_unit": {
+      "rows": 83,
+      "sha256": "2a6439c898e52dabe64979ad9cd16a77aa843bf1f788208e338d610c06a12991"
+    },
+    "teaching_course_dept": {
+      "rows": 4,
+      "sha256": "4c5eca1b213e692ea9c4b88fd81c3cac041e771623a9871ee8bd0ca0e6c6e97f"
+    },
+    "teaching_additional_work": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "teaching_student": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "teaching_work": {
+      "rows": 3,
+      "sha256": "63a53bdcc25016ff2441f57aa0ed69d1b3764f1c6f5f241262ac5fe5b49af066"
+    },
+    "teaching_work_correct": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "business_after": {
+    "teaching_course": {
+      "rows": 5,
+      "sha256": "48a20be4fb2b342e5c8ca43a29feea89147eb19b3472f7c3a465045731fe4b73"
+    },
+    "teaching_course_unit": {
+      "rows": 83,
+      "sha256": "2a6439c898e52dabe64979ad9cd16a77aa843bf1f788208e338d610c06a12991"
+    },
+    "teaching_course_dept": {
+      "rows": 4,
+      "sha256": "4c5eca1b213e692ea9c4b88fd81c3cac041e771623a9871ee8bd0ca0e6c6e97f"
+    },
+    "teaching_additional_work": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "teaching_student": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "teaching_work": {
+      "rows": 3,
+      "sha256": "63a53bdcc25016ff2441f57aa0ed69d1b3764f1c6f5f241262ac5fe5b49af066"
+    },
+    "teaching_work_correct": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "changed_business_tables": [],
+  "passed": 6,
+  "total": 6,
+  "successful": false
+}

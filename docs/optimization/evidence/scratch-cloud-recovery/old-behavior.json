@@ -1,0 +1,14 @@
+{
+  "old_tool_commit": "0b89d854b4145115d51521ebf3741d507d66e5bf",
+  "snapshot_format": 1,
+  "database_and_attachments_equal_before_start": true,
+  "actual_java_health": "UP",
+  "restored_public_work_handshake_accepted": true,
+  "cloud_values_before_backup": 3,
+  "cloud_values_after_old_restore": 0,
+  "cloud_loss_reproduced": true,
+  "tables_changed_by_start_or_read": [],
+  "attachments_equal_after_start": true,
+  "source_snapshot_sha256": "f929de083757c1f1330ecd0db8e24482a51de41776d569410b5e1b438539dbf9",
+  "probe_note": "Initial fixed 120ms drain returned before cold-start handshake reply; final bounded wait requires actual ack within 5s, unchanged value assertions."
+}

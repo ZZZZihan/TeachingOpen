@@ -1,0 +1,9 @@
+{
+  "source_healthy": true,
+  "source_authenticated_menu_http": 200,
+  "source_public_cloud_values_match": true,
+  "cloud_fields": 3,
+  "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "browser_login_performed": false,
+  "scope": "Synthetic standalone API authentication and actual anonymous cloud protocol; no browser token injection."
+}

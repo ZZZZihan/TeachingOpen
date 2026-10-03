@@ -1,0 +1,27 @@
+test_baseline_verify_failure_prevents_launch (test_production_fixture.BackendGuardTests.test_baseline_verify_failure_prevents_launch) ... ok
+test_live_prior_record_prevents_launch (test_production_fixture.BackendGuardTests.test_live_prior_record_prevents_launch) ... ok
+test_stop_after_business_mutation_uses_identity_without_database_verify (test_production_fixture.BackendGuardTests.test_stop_after_business_mutation_uses_identity_without_database_verify) ... ok
+test_stop_rejects_changed_pid_without_signaling (test_production_fixture.BackendGuardTests.test_stop_rejects_changed_pid_without_signaling) ... ok
+test_symlink_record_prevents_launch (test_production_fixture.BackendGuardTests.test_symlink_record_prevents_launch) ... ok
+test_wrong_jar_is_rejected_before_process_launch (test_production_fixture.BackendGuardTests.test_wrong_jar_is_rejected_before_process_launch) ... ok
+test_dump_directives_are_discarded (test_production_fixture.DumpParserTests.test_dump_directives_are_discarded) ... ok
+test_quotes_backslashes_unicode_multiline_and_binary (test_production_fixture.DumpParserTests.test_quotes_backslashes_unicode_multiline_and_binary) ... ok
+test_reject_cross_database_or_executable_statements (test_production_fixture.DumpParserTests.test_reject_cross_database_or_executable_statements) ... ok
+test_reject_expressions_including_parenthesized_literal (test_production_fixture.DumpParserTests.test_reject_expressions_including_parenthesized_literal) ... ok
+test_reject_external_table_files_or_foreign_key_targets (test_production_fixture.DumpParserTests.test_reject_external_table_files_or_foreign_key_targets) ... ok
+test_reject_unknown_table_column_type_and_order (test_production_fixture.DumpParserTests.test_reject_unknown_table_column_type_and_order) ... ok
+test_sql_like_payload_is_inert (test_production_fixture.DumpParserTests.test_sql_like_payload_is_inert) ... ok
+test_unterminated_or_incomplete_dump_is_rejected (test_production_fixture.DumpParserTests.test_unterminated_or_incomplete_dump_is_rejected) ... ok
+test_identifiers_roles_routes_and_relationships_preserved (test_production_fixture.IdentityTests.test_identifiers_roles_routes_and_relationships_preserved) ... ok
+test_source_dangling_links_are_not_fabricated (test_production_fixture.IdentityTests.test_source_dangling_links_are_not_fabricated) ... ok
+test_unknown_operator_maps_and_student_files_withheld (test_production_fixture.IdentityTests.test_unknown_operator_maps_and_student_files_withheld) ... ok
+test_generated_literals_roundtrip_and_schema_stays_unchanged (test_production_fixture.RealMysqlLiteralTests.test_generated_literals_roundtrip_and_schema_stays_unchanged) ... skipped 'explicit dedicated runtime required'
+test_escaped_json_links_and_unknown_asset_are_not_assumed_verified (test_production_fixture.ResourceTests.test_escaped_json_links_and_unknown_asset_are_not_assumed_verified) ... ok
+test_known_static_relocation_preserves_text_and_other_external_urls (test_production_fixture.ResourceTests.test_known_static_relocation_preserves_text_and_other_external_urls) ... ok
+test_paths_reject_traversal_absolute_and_encoded_forms (test_production_fixture.ResourceTests.test_paths_reject_traversal_absolute_and_encoded_forms) ... ok
+test_symlink_components_are_rejected (test_production_fixture.ResourceTests.test_symlink_components_are_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.016s
+
+OK (skipped=1)
