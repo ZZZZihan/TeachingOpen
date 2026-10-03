@@ -17,6 +17,10 @@ import org.springframework.web.util.HtmlUtils;
 import org.springframework.web.util.UriUtils;
 
 import java.net.URI;
+import java.nio.ByteBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -100,10 +104,12 @@ public class LocalDownloadAccessService {
     }
 
     // Table/column arguments are constants above, never caller input. LOCATE only selects
-    // candidates; authorization always requires an exact URL/key reference below.
+    // candidates; authorization always requires an exact URL/key reference below. A URL can
+    // encode any path character, using either hex case, so a single encoded key is not an
+    // exhaustive prefilter. Include values containing '%' and let exact decode the URI once.
     private List<Map<String,Object>> candidates(String table,String columns,String key) {
         String expression = "CONCAT_WS(',',"+columns+")";
-        return jdbc.queryForList("SELECT * FROM "+table+" WHERE LOCATE(?,"+expression+")>0 OR LOCATE(?,"+expression+")>0",key,UriUtils.encodePath(key,"UTF-8"));
+        return jdbc.queryForList("SELECT * FROM "+table+" WHERE LOCATE(?,"+expression+")>0 OR LOCATE(?,"+expression+")>0 OR LOCATE('%',"+expression+")>0",key,UriUtils.encodePath(key,"UTF-8"));
     }
     private boolean live(Map<String,Object> row) { return row.get("del_flag") == null || "0".equals(text(row,"del_flag")); }
     private boolean one(Map<String,Object> row,String field) { return "1".equals(text(row,field)) || Boolean.TRUE.equals(row.get(field)); }
@@ -140,7 +146,35 @@ public class LocalDownloadAccessService {
             // Absolute references must match the configured origin, not merely its path.
             if (!Objects.equals(reference.getScheme(),configured.getScheme())
                     || !Objects.equals(reference.getRawAuthority(),configured.getRawAuthority())) return false;
+            // URI.getPath replaces malformed UTF-8 with U+FFFD. Reject it instead of
+            // allowing invalid octets to identify a different, valid storage key.
+            if (!validUtf8Escapes(reference.getRawPath())) return false;
             return Objects.equals(reference.getPath(),configured.getPath()+"/"+key);
         } catch (java.net.URISyntaxException invalid) { return false; }
+    }
+
+    private boolean validUtf8Escapes(String rawPath) {
+        if (rawPath == null) return false;
+        int index = rawPath.indexOf('%');
+        if (index < 0) return true;
+        byte[] octets = new byte[(rawPath.length()-index)/3];
+        while (index >= 0) {
+            int count = 0;
+            // URI construction already validated every %HH escape. Validate each
+            // contiguous octet run without decoding again or treating '+' as a space.
+            do {
+                octets[count++] = (byte) ((Character.digit(rawPath.charAt(index+1),16) << 4)
+                        | Character.digit(rawPath.charAt(index+2),16));
+                index += 3;
+            } while (index < rawPath.length() && rawPath.charAt(index) == '%');
+            try {
+                StandardCharsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT)
+                        .onUnmappableCharacter(CodingErrorAction.REPORT).decode(ByteBuffer.wrap(octets,0,count));
+            } catch (CharacterCodingException invalid) {
+                return false;
+            }
+            index = rawPath.indexOf('%',index);
+        }
+        return true;
     }
 }
