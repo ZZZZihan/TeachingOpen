@@ -1,0 +1,149 @@
+[
+  {
+    "path": "web/public/python/static/js/app.js",
+    "anchor": "TeachingPython.mount",
+    "byteOffsetUtf8": 384604,
+    "line": 1,
+    "excerpt": "nction(){},created:function(){if(window.TeachingPython){var t=this;this.$nextTick(function(){window.TeachingPython.mount(t)})}else{var t=this,e=this.urlParam(\"url\");e?this.downloadFile(e):this.downloadFile(\"./static/defaultPython.py\"),window.document.addEventListener(\"loadPorject\",function(e){console.log(\"load project:\"),console.log(e.detail),t.projectName=e.detail.projectName,t.downloadFile(e.detail.url)}),window.document.addEventListener(\"setUserInfo\",function(e){console.log(\"set user info:\"),console.log(e.detail),t.username=e.detail.username,e.detail.avatar&&(t.avatar=e.detail.avatar)})}},methods:{runit:function(){return window.TeachingPythonExecution.run(this.getCode())},downloadFile:function(t){var e=this;a.a.get(t).then(function(t){e.setCode(t.data)})},openFile:function(){var t=this,e=document.getElementById(\"fileinput\");e.value=\"\";e.onchange=function(e){var n=new FileReader,i=e.target;n.onload=function(){t.setCode(this.result),t."
+  },
+  {
+    "path": "web/public/python/static/js/app.js",
+    "anchor": "setCode:function",
+    "byteOffsetUtf8": 385776,
+    "line": 1,
+    "excerpt": "s)(t)},submitCode:function(){window.submitCode&&window.submitCode(this.projectName,this.getCode())},setCode:function(t){this.code=t,this.$refs.codeEditor.setCodeContent(t)},getCode:function(){return this.code=this.$refs.codeEditor.getCodeContent(),this.code},clear:function(){window.TeachingPythonExecution.clear()},terminalOut:function(t){window.TeachingPythonOutput.append(document.getElementById(\"output\"),t)},builtinRead:function(t){if(void 0===u.builtinFiles||void 0===u.builtinFiles.files[t])throw\"File not found: '\"+t+\"'\";return u.builtinFiles.files[t]},urlParam:function(t){return window.PythonPersistence.query(window.location.search)[t]||0},toHome:function(){window.location.href=\"/account/center\"}}},p={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n(\"div\",[n(\"a-layout\",[n(\"a-layout-header\",{staticStyle:{padding:\"0\",height:\"50px\"}},[n(\"a-menu\",{staticStyle:{color:\"black\",height:\"100%\"},attrs:{mode:\"horizontal\"}"
+  },
+  {
+    "path": "web/public/python/static/js/app.js",
+    "anchor": "getCode:function",
+    "byteOffsetUtf8": 385849,
+    "line": 1,
+    "excerpt": "ojectName,this.getCode())},setCode:function(t){this.code=t,this.$refs.codeEditor.setCodeContent(t)},getCode:function(){return this.code=this.$refs.codeEditor.getCodeContent(),this.code},clear:function(){window.TeachingPythonExecution.clear()},terminalOut:function(t){window.TeachingPythonOutput.append(document.getElementById(\"output\"),t)},builtinRead:function(t){if(void 0===u.builtinFiles||void 0===u.builtinFiles.files[t])throw\"File not found: '\"+t+\"'\";return u.builtinFiles.files[t]},urlParam:function(t){return window.PythonPersistence.query(window.location.search)[t]||0},toHome:function(){window.location.href=\"/account/center\"}}},p={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n(\"div\",[n(\"a-layout\",[n(\"a-layout-header\",{staticStyle:{padding:\"0\",height:\"50px\"}},[n(\"a-menu\",{staticStyle:{color:\"black\",height:\"100%\"},attrs:{mode:\"horizontal\"}},[n(\"a-sub-menu\",[n(\"span\",{staticClass:\"submenu-title-wrapper\",attrs:{s"
+  },
+  {
+    "path": "web/public/python/static/js/app.js",
+    "anchor": "setCodeContent:function",
+    "byteOffsetUtf8": 396067,
+    "line": 1,
+    "excerpt": "{caption:\"test\",meta:\"解释：测试关键词\",value:\"testKeyWord\"}])},getCodeContent:function(){return this.code},setCodeContent:function(t){this.code=t}}},s={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n(\"div\",[n(\"editor\",{ref:\"aceEditor\",attrs:{options:t.options,lang:t.language,theme:\"monokai\",height:t.height},on:{init:t.editorInit},model:{value:t.code,callback:function(e){t.code=e},expression:\"code\"}})],1)},staticRenderFns:[]};var l=n(\"VU/8\")(o,s,!1,function(t){n(\"CPff\")},null,null);e.a=l.exports},q2Hc:function(t,e){},rONZ:function(t,e,n){\"use strict\";(function(t){var e=n(\"aFK5\"),i=n.n(e),r=n(\"mvHQ\"),o=n.n(r),s=n(\"BO1k\"),l=n.n(s),a=n(\"fZjL\"),u=n.n(a),c=n(\"KmDb\"),p=n.n(c),b=n(\"gRE1\"),f=n.n(b),k=n(\"d7EF\"),d=n.n(k),S=n(\"hiCB\"),h=n.n(S),m=n(\"//Fk\"),_=n.n(m),y=n(\"qUhW\"),g=n.n(y),v=n(\"RRo+\"),w=n.n(v),$=n(\"Gu7T\"),x=n.n($),E=n(\"kiBT\"),T=n.n(E),N=n(\"Zx67\"),A=n.n(N),C=n(\"OvRC\"),I=n.n(C),j=n(\"pFYg\"),L=n.n(j),M=n(\"a1FJ\"),B=n.n(M),D="
+  },
+  {
+    "path": "web/public/python/static/js/app.js",
+    "anchor": "setCodeContent:function",
+    "byteOffsetUtf8": 974356,
+    "line": 1,
+    "excerpt": "n(\"blur\",function(){t.code?t.hasCode=!0:t.hasCode=!1})},getCodeContent:function(){return this.code},setCodeContent:function(t){var e=this;setTimeout(function(){t?e.coder.setValue(t):e.coder.setValue(\"\")},300)},_getLanguage:function(t){return this.modes.find(function(e){var n=t.toLowerCase(),i=e.label.toLowerCase(),r=e.value.toLowerCase();return i===n||r===n})},_getCoder:function(){var t=this;return new r.a(function(e){!function n(){t.coder?e(t.coder):setTimeout(n,10)}()})},changeMode:function(t){this.coder.setOption(\"mode\",\"text/\"+t);var e=this._getLanguage(t).label.toLowerCase();this.$emit(\"language-change\",e)},nullTipClick:function(){this.coder.focus()}}},u={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n(\"div\",t._b({},\"div\",t.fullScreenParentProps,!1),[t.fullScreen?n(\"a-icon\",{staticClass:\"full-screen-icon\",attrs:{type:t.iconType},on:{click:function(){return t.fullCoder=!t.fullCoder}}}):t._e(),t._v(\" \"),n(\"di"
+  },
+  {
+    "path": "web/public/python/static/js/app.js",
+    "anchor": "el:\"#app\"",
+    "byteOffsetUtf8": 389474,
+    "line": 1,
+    "excerpt": "\"9vKL\")},null,null).exports,d=n(\"2vhu\");n(\"hZ/y\");i.a.config.productionTip=!1,i.a.use(d.a),new i.a({el:\"#app\",components:{App:k},template:\"<App/>\"})},PsxY:function(t,e){},UM8r:function(t,e){},XN5v:function(t,e){t.exports={name:\"ant-design-vue\",version:\"1.7.2\",title:\"Ant Design Vue\",description:\"An enterprise-class UI design language and Vue-based implementation\",keywords:[\"ant\",\"design\",\"antd\",\"vue\",\"vueComponent\",\"component\",\"components\",\"ui\",\"framework\",\"frontend\"],main:\"lib/index.js\",module:\"es/index.js\",typings:\"types/index.d.ts\",files:[\"dist\",\"lib\",\"es\",\"types\",\"scripts\"],scripts:{dev:\"webpack-dev-server\",start:\"cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js\",test:\"cross-env NODE_ENV=test jest --config .jest.js\",compile:\"node antd-tools/cli/run.js compile\",pub:\"node antd-tools/cli/run.js pub\",\"pub-with-ci\":\"node antd-tools/cli/run.js pub-with-ci\",prepublish:\"node antd-tools/cli/run.js guard\",\"pre-publi"
+  },
+  {
+    "path": "web/public/python/static/js/app.js",
+    "anchor": "[\"NHnr\"]",
+    "byteOffsetUtf8": 980649,
+    "line": 1,
+    "excerpt": " '\"+t+\"'.\");return e}r.keys=function(){return Object.keys(i)},r.resolve=o,t.exports=r,r.id=\"uslO\"}},[\"NHnr\"]);\n//# sourceMappingURL=app.js.map"
+  },
+  {
+    "path": "web/public/python/static/js/app.js",
+    "anchor": "persistReady",
+    "byteOffsetUtf8": 384427,
+    "line": 1,
+    "excerpt": "ata:function(){return{code:\"\",out:\"\",projectName:\"\",username:\"\",persistBusy:!!window.TeachingPython,persistReady:!window.TeachingPython,avatar:\"./static/avatar.png\"}},mounted:function(){},created:function(){if(window.TeachingPython){var t=this;this.$nextTick(function(){window.TeachingPython.mount(t)})}else{var t=this,e=this.urlParam(\"url\");e?this.downloadFile(e):this.downloadFile(\"./static/defaultPython.py\"),window.document.addEventListener(\"loadPorject\",function(e){console.log(\"load project:\"),console.log(e.detail),t.projectName=e.detail.projectName,t.downloadFile(e.detail.url)}),window.document.addEventListener(\"setUserInfo\",function(e){console.log(\"set user info:\"),console.log(e.detail),t.username=e.detail.username,e.detail.avatar&&(t.avatar=e.detail.avatar)})}},methods:{runit:function(){return window.TeachingPythonExecution.run(this.getCode())},downloadFile:function(t){var e=this;a.a.get(t).then(function(t){e.setCode(t.data)})},open"
+  },
+  {
+    "path": "web/public/python/static/js/app.js",
+    "anchor": "persistReady",
+    "byteOffsetUtf8": 386923,
+    "line": 1,
+    "excerpt": ",[n(\"a-menu-item\",{key:\"setting:1\"},[n(\"a\",{attrs:{type:\"primary\",\"aria-disabled\":t.persistBusy||!t.persistReady},on:{click:function(){if(t.persistReady&&!t.persistBusy)t.openFile()}}},[t._v(\"打开\")])]),t._v(\" \"),n(\"a-menu-item\",{key:\"setting:2\"},[n(\"a\",{attrs:{type:\"primary\"},on:{click:t.saveFile}},[t._v(\"保存\")])])],1)],1),t._v(\" \"),n(\"a-menu-item\",[n(\"a-input\",{staticStyle:{width:\"200px\"},attrs:{placeholder:\"请输入项目名称\",disabled:t.persistBusy||!t.persistReady,\"aria-label\":\"作品名称\",maxLength:64},model:{value:t.projectName,callback:function(e){t.projectName=e},expression:\"projectName\"}})],1),t._v(\" \"),n(\"a-menu-item\",[n(\"a-button\",{attrs:{type:\"primary\",disabled:t.persistBusy||!t.persistReady,loading:t.persistBusy},on:{click:t.submitCode}},[t._v(\"提交\")])],1),t._v(\" \"),n(\"a-menu-item\",[n(\"a-button\",{attrs:{type:\"primary\"},on:{click:t.runit}},[n(\"a-icon\",{attrs:{type:\"play-circle\"}}),t._v(\"运行\")],1)],1),t._v(\" \"),n(\"a-menu-item\",[n(\"a-button\",{attr"
+  },
+  {
+    "path": "web/public/python/static/js/app.js",
+    "anchor": "persistReady",
+    "byteOffsetUtf8": 386963,
+    "line": 1,
+    "excerpt": "a\",{attrs:{type:\"primary\",\"aria-disabled\":t.persistBusy||!t.persistReady},on:{click:function(){if(t.persistReady&&!t.persistBusy)t.openFile()}}},[t._v(\"打开\")])]),t._v(\" \"),n(\"a-menu-item\",{key:\"setting:2\"},[n(\"a\",{attrs:{type:\"primary\"},on:{click:t.saveFile}},[t._v(\"保存\")])])],1)],1),t._v(\" \"),n(\"a-menu-item\",[n(\"a-input\",{staticStyle:{width:\"200px\"},attrs:{placeholder:\"请输入项目名称\",disabled:t.persistBusy||!t.persistReady,\"aria-label\":\"作品名称\",maxLength:64},model:{value:t.projectName,callback:function(e){t.projectName=e},expression:\"projectName\"}})],1),t._v(\" \"),n(\"a-menu-item\",[n(\"a-button\",{attrs:{type:\"primary\",disabled:t.persistBusy||!t.persistReady,loading:t.persistBusy},on:{click:t.submitCode}},[t._v(\"提交\")])],1),t._v(\" \"),n(\"a-menu-item\",[n(\"a-button\",{attrs:{type:\"primary\"},on:{click:t.runit}},[n(\"a-icon\",{attrs:{type:\"play-circle\"}}),t._v(\"运行\")],1)],1),t._v(\" \"),n(\"a-menu-item\",[n(\"a-button\",{attrs:{type:\"primary\"},on:{click:t.clear}},["
+  },
+  {
+    "path": "web/public/python/static/js/appPlayer.js",
+    "anchor": "mounted:function(){var t=this.urlParam",
+    "byteOffsetUtf8": 384387,
+    "line": 1,
+    "excerpt": "eEditor:s.a},props:{editorType:{type:String,default:\"ace\"}},data:function(){return{code:\"\",out:\"\"}},mounted:function(){var t=this.urlParam(\"url\");t&&this.downloadFile(t)},created:function(){},methods:{runit:function(){return window.TeachingPythonExecution.run(this.code)},downloadFile:function(t){var e=this;a.a.get(t).then(function(t){e.setCode(t.data)})},openFile:function(){var t=this,e=document.getElementById(\"fileinput\");e.addEventListener(\"change\",function(e){var n=new FileReader,i=e.target;n.onload=function(){t.setCode(this.result),t.code=this.result},n.readAsText(i.files[0])}),e.click()},saveFile:function(){var t=new File([this.code],\"python项目.py\",{type:\"text/plain;charset=utf-8\"});Object(r.saveAs)(t)},submitCode:function(){window.submitCode&&window.submitCode(this.code)},setCode:function(t){this.code=t,this.$refs.codeEditor.setCodeContent(t)},clear:function(){window.TeachingPythonExecution.clear()},outf:function(t){window.Teaching"
+  },
+  {
+    "path": "web/public/python/static/js/appPlayer.js",
+    "anchor": "TeachingPythonExecution.run",
+    "byteOffsetUtf8": 384519,
+    "line": 1,
+    "excerpt": "lParam(\"url\");t&&this.downloadFile(t)},created:function(){},methods:{runit:function(){return window.TeachingPythonExecution.run(this.code)},downloadFile:function(t){var e=this;a.a.get(t).then(function(t){e.setCode(t.data)})},openFile:function(){var t=this,e=document.getElementById(\"fileinput\");e.addEventListener(\"change\",function(e){var n=new FileReader,i=e.target;n.onload=function(){t.setCode(this.result),t.code=this.result},n.readAsText(i.files[0])}),e.click()},saveFile:function(){var t=new File([this.code],\"python项目.py\",{type:\"text/plain;charset=utf-8\"});Object(r.saveAs)(t)},submitCode:function(){window.submitCode&&window.submitCode(this.code)},setCode:function(t){this.code=t,this.$refs.codeEditor.setCodeContent(t)},clear:function(){window.TeachingPythonExecution.clear()},outf:function(t){window.TeachingPythonOutput.append(document.getElementById(\"output\"),t)},builtinRead:function(t){if(void 0===u.builtinFiles||void 0===u.builtinFile"
+  },
+  {
+    "path": "web/public/python/static/js/appPlayer.js",
+    "anchor": "setCodeContent:function",
+    "byteOffsetUtf8": 393582,
+    "line": 1,
+    "excerpt": "{caption:\"test\",meta:\"解释：测试关键词\",value:\"testKeyWord\"}])},getCodeContent:function(){return this.code},setCodeContent:function(t){this.code=t}}},s={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n(\"div\",[n(\"editor\",{ref:\"aceEditor\",attrs:{options:t.options,lang:t.language,theme:\"monokai\",height:t.height},on:{init:t.editorInit},model:{value:t.code,callback:function(e){t.code=e},expression:\"code\"}})],1)},staticRenderFns:[]};var l=n(\"VU/8\")(o,s,!1,function(t){n(\"CPff\")},null,null);e.a=l.exports},q2Hc:function(t,e){},rONZ:function(t,e,n){\"use strict\";(function(t){var e=n(\"aFK5\"),i=n.n(e),r=n(\"mvHQ\"),o=n.n(r),s=n(\"BO1k\"),l=n.n(s),a=n(\"fZjL\"),u=n.n(a),c=n(\"KmDb\"),p=n.n(c),b=n(\"gRE1\"),f=n.n(b),k=n(\"d7EF\"),d=n.n(k),S=n(\"hiCB\"),h=n.n(S),m=n(\"//Fk\"),_=n.n(m),y=n(\"qUhW\"),g=n.n(y),v=n(\"RRo+\"),w=n.n(v),$=n(\"Gu7T\"),x=n.n($),E=n(\"kiBT\"),T=n.n(E),N=n(\"Zx67\"),A=n.n(N),C=n(\"OvRC\"),I=n.n(C),j=n(\"pFYg\"),L=n.n(j),M=n(\"a1FJ\"),B=n.n(M),D="
+  },
+  {
+    "path": "web/public/python/static/js/appPlayer.js",
+    "anchor": "setCodeContent:function",
+    "byteOffsetUtf8": 971871,
+    "line": 1,
+    "excerpt": "n(\"blur\",function(){t.code?t.hasCode=!0:t.hasCode=!1})},getCodeContent:function(){return this.code},setCodeContent:function(t){var e=this;setTimeout(function(){t?e.coder.setValue(t):e.coder.setValue(\"\")},300)},_getLanguage:function(t){return this.modes.find(function(e){var n=t.toLowerCase(),i=e.label.toLowerCase(),r=e.value.toLowerCase();return i===n||r===n})},_getCoder:function(){var t=this;return new r.a(function(e){!function n(){t.coder?e(t.coder):setTimeout(n,10)}()})},changeMode:function(t){this.coder.setOption(\"mode\",\"text/\"+t);var e=this._getLanguage(t).label.toLowerCase();this.$emit(\"language-change\",e)},nullTipClick:function(){this.coder.focus()}}},u={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n(\"div\",t._b({},\"div\",t.fullScreenParentProps,!1),[t.fullScreen?n(\"a-icon\",{staticClass:\"full-screen-icon\",attrs:{type:t.iconType},on:{click:function(){return t.fullCoder=!t.fullCoder}}}):t._e(),t._v(\" \"),n(\"di"
+  },
+  {
+    "path": "web/public/python/static/js/appPlayer.js",
+    "anchor": "el:\"#player\"",
+    "byteOffsetUtf8": 386974,
+    "line": 1,
+    "excerpt": "\"4saI\")},null,null).exports,d=n(\"2vhu\");n(\"hZ/y\");i.a.config.productionTip=!1,i.a.use(d.a),new i.a({el:\"#player\",components:{AppPlayer:k},template:\"<AppPlayer/>\"})},UM8r:function(t,e){},XN5v:function(t,e){t.exports={name:\"ant-design-vue\",version:\"1.7.2\",title:\"Ant Design Vue\",description:\"An enterprise-class UI design language and Vue-based implementation\",keywords:[\"ant\",\"design\",\"antd\",\"vue\",\"vueComponent\",\"component\",\"components\",\"ui\",\"framework\",\"frontend\"],main:\"lib/index.js\",module:\"es/index.js\",typings:\"types/index.d.ts\",files:[\"dist\",\"lib\",\"es\",\"types\",\"scripts\"],scripts:{dev:\"webpack-dev-server\",start:\"cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js\",test:\"cross-env NODE_ENV=test jest --config .jest.js\",compile:\"node antd-tools/cli/run.js compile\",pub:\"node antd-tools/cli/run.js pub\",\"pub-with-ci\":\"node antd-tools/cli/run.js pub-with-ci\",prepublish:\"node antd-tools/cli/run.js guard\",\"pre-publish\":\"n"
+  },
+  {
+    "path": "web/public/python/static/js/appPlayer.js",
+    "anchor": "[\"RQgh\"]",
+    "byteOffsetUtf8": 978143,
+    "line": 1,
+    "excerpt": " '\"+t+\"'.\");return e}r.keys=function(){return Object.keys(i)},r.resolve=o,t.exports=r,r.id=\"uslO\"}},[\"RQgh\"]);\n//# sourceMappingURL=appPlayer.js.map"
+  },
+  {
+    "path": "web/public/python/static/js/appPlayer.js",
+    "anchor": "readOnly:\"true\"",
+    "byteOffsetUtf8": 386178,
+    "line": 1,
+    "excerpt": "\"codemirror\"==t.editorType?n(\"JCodeEditor\",{ref:\"codeEditor\",attrs:{language:\"python\",fullScreen:!0,readOnly:\"true\",placeholder:\"请输入代码\"},model:{value:t.code,callback:function(e){t.code=e},expression:\"code\"}}):t._e(),t._v(\" \"),\"ace\"==t.editorType?n(\"AceEditor\",{ref:\"codeEditor\",attrs:{language:\"python\",readOnly:\"true\",height:500},model:{value:t.code,callback:function(e){t.code=e},expression:\"code\"}}):t._e()],1)],1)},staticRenderFns:[]};var b={name:\"AppPlayer\",data:function(){return{}},components:{PythonPlayer:n(\"VU/8\")(c,p,!1,function(t){n(\"XdwF\")},null,null).exports}},f={render:function(){var t=this.$createElement,e=this._self._c||t;return e(\"div\",{attrs:{id:\"player\"}},[e(\"PythonPlayer\",{attrs:{editorType:\"ace\"}})],1)},staticRenderFns:[]};var k=n(\"VU/8\")(b,f,!1,function(t){n(\"4saI\")},null,null).exports,d=n(\"2vhu\");n(\"hZ/y\");i.a.config.productionTip=!1,i.a.use(d.a),new i.a({el:\"#player\",components:{AppPlayer:k},template:\"<AppPlayer/>\"})}"
+  },
+  {
+    "path": "web/public/python/static/js/appPlayer.js",
+    "anchor": "readOnly:\"true\"",
+    "byteOffsetUtf8": 386391,
+    "line": 1,
+    "excerpt": "e\"}}):t._e(),t._v(\" \"),\"ace\"==t.editorType?n(\"AceEditor\",{ref:\"codeEditor\",attrs:{language:\"python\",readOnly:\"true\",height:500},model:{value:t.code,callback:function(e){t.code=e},expression:\"code\"}}):t._e()],1)],1)},staticRenderFns:[]};var b={name:\"AppPlayer\",data:function(){return{}},components:{PythonPlayer:n(\"VU/8\")(c,p,!1,function(t){n(\"XdwF\")},null,null).exports}},f={render:function(){var t=this.$createElement,e=this._self._c||t;return e(\"div\",{attrs:{id:\"player\"}},[e(\"PythonPlayer\",{attrs:{editorType:\"ace\"}})],1)},staticRenderFns:[]};var k=n(\"VU/8\")(b,f,!1,function(t){n(\"4saI\")},null,null).exports,d=n(\"2vhu\");n(\"hZ/y\");i.a.config.productionTip=!1,i.a.use(d.a),new i.a({el:\"#player\",components:{AppPlayer:k},template:\"<AppPlayer/>\"})},UM8r:function(t,e){},XN5v:function(t,e){t.exports={name:\"ant-design-vue\",version:\"1.7.2\",title:\"Ant Design Vue\",description:\"An enterprise-class UI design language and Vue-based implementation\",keywords"
+  },
+  {
+    "path": "web/public/python/static/js/vendor.js",
+    "anchor": "o4sT:function",
+    "byteOffsetUtf8": 2414772,
+    "line": 261,
+    "excerpt": " t;if(o(t))return r(t,e)+\"\";if(s(t))return c?c.call(t):\"\";var n=t+\"\";return\"0\"==n&&1/t==-a?\"-0\":n}},o4sT:function(e,t,n){var i=n(\"kX7f\");e.exports={render:function(e){return e(\"div\",{attrs:{style:\"height: \"+(this.height?this.px(this.height):\"100%\")+\"; width: \"+(this.width?this.px(this.width):\"100%\")}})},props:{value:String,lang:!0,theme:String,height:!0,width:!0,options:Object},data:function(){return{editor:null,contentBackup:\"\"}},methods:{px:function(e){return/^\\d*$/.test(e)?e+\"px\":e}},watch:{value:function(e){this.contentBackup!==e&&(this.editor.session.setValue(e,1),this.contentBackup=e)},theme:function(e){this.editor.setTheme(\"ace/theme/\"+e)},lang:function(e){this.editor.getSession().setMode(\"string\"==typeof e?\"ace/mode/\"+e:e)},options:function(e){this.editor.setOptions(e)},height:function(){this.$nextTick(function(){this.editor.resize()})},width:function(){this.$nextTick(function(){this.editor.resize()})}},beforeDestroy:function(){"
+  },
+  {
+    "path": "web/public/python/static/js/vendor.js",
+    "anchor": "getValue:function",
+    "byteOffsetUtf8": 1059561,
+    "line": 66,
+    "excerpt": "].height;this.insertInner(e-this.first,t,n)},remove:function(e,t){this.removeInner(e-this.first,t)},getValue:function(e){var t=Ge(this,this.first,this.first+this.size);return!1===e?t:t.join(e||this.lineSeparator())},setValue:Zi(function(e){var t=et(this.first,0),n=this.first+this.size-1;oo(this,{from:t,to:et(n,Ke(this,n).text.length),text:this.splitLines(e),origin:\"setValue\",full:!0},!0),this.cm&&Oi(this.cm,0,0),qr(this,wr(t),B)}),replaceRange:function(e,t,n,i){uo(this,e,t=at(this,t),n=n?at(this,n):t,i)},getRange:function(e,t,n){var i=Ue(this,at(this,e),at(this,t));return!1===n?i:i.join(n||this.lineSeparator())},getLine:function(e){var t=this.getLineHandle(e);return t&&t.text},getLineHandle:function(e){if(Qe(this,e))return Ke(this,e)},getLineNumber:function(e){return Je(e)},getLineHandleVisualStart:function(e){return\"number\"==typeof e&&(e=Ke(this,e)),Vt(e)},lineCount:function(){return this.size},firstLine:function(){return this.first},l"
+  },
+  {
+    "path": "web/public/python/static/js/vendor.js",
+    "anchor": "lineSeparator:function",
+    "byteOffsetUtf8": 1068285,
+    "line": 66,
+    "excerpt": ":function(){return this.cm},splitLines:function(e){return this.lineSep?e.split(this.lineSep):Fe(e)},lineSeparator:function(){return this.lineSep||\"\\n\"},setDirection:Zi(function(e){var t;(\"rtl\"!=e&&(e=\"ltr\"),e!=this.direction)&&(this.direction=e,this.iter(function(e){return e.order=null}),this.cm&&Ji(t=this.cm,function(){Fr(t),ci(t)}))})}),Lo.prototype.eachLine=Lo.prototype.iter;var To=0;function Ao(e){var t=this;if(Oo(t),!ve(t,e)&&!Cn(t.display,e)){_e(e),s&&(To=+new Date);var n=ai(t,e,!0),i=e.dataTransfer.files;if(n&&!t.isReadOnly())if(i&&i.length&&window.FileReader&&window.File)for(var r=i.length,o=Array(r),a=0,l=function(){++a==r&&Xi(t,function(){var e={from:n=at(t.doc,n),to:n,text:t.doc.splitLines(o.filter(function(e){return null!=e}).join(t.doc.lineSeparator())),origin:\"paste\"};oo(t.doc,e),Gr(t.doc,wr(at(t.doc,n),at(t.doc,Cr(e))))})()},c=function(e,n){if(t.options.allowDropFileTypes&&-1==R(t.options.allowDropFileTypes,e.type))l();el"
+  }
+]

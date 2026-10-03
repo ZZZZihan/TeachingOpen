@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 
 <head>
     <meta charset=utf-8>
@@ -8,6 +8,9 @@
     <link href=./static/css/appPlayer.css rel=stylesheet>
     <link href=./static/css/app.css rel=stylesheet>
   <script src="./persistence.js"></script>
+  <script src="./source-loading.js"></script>
+  <link href="./persistence.css" rel="stylesheet">
+  <link href="./source-loading.css" rel="stylesheet">
   <script src="./output.js"></script>
   <link href="./output.css" rel="stylesheet">
   <script src="./execution.js"></script>
@@ -15,11 +18,11 @@
 </head>
 
 <body>
+    <div class="persistence-bar source-loading-bar"><span class="persistence-label">PYTHON 预览</span><span id="persistence-status" role="status" aria-live="polite">正在打开程序文件…</span><button id="retry-load" type="button" hidden>重新加载</button></div>
     <div id=player></div>
     <script type=text/javascript src=./static/js/manifest.js></script>
     <script type=text/javascript src=./static/js/vendor.js></script>
     <script type=text/javascript src=./static/js/appPlayer.js></script>
-    <script type=text/javascript src=./static/js/app.js></script>
 </body>
 
 </html>

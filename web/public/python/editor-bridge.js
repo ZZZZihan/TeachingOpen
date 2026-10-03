@@ -1,7 +1,7 @@
 /* Small adapter for the inherited Vue/Ace editor; network and UI state stay here. */
 (function () {
   'use strict'
-  var host, session, savedSnapshot = '', initialized = false
+  var host, session, savedSnapshot = '', loadSnapshot = '', initialized = false
   var params = window.PythonPersistence.query(window.location.search)
   function token() { try { return window.getUserToken() || '' } catch (error) { return '' } }
   function message(error) {
@@ -55,36 +55,34 @@
     return registered.result
   }
   function readText(value) {
-    return new Promise(function (resolve, reject) {
-      var url
-      try { url = new URL(value, window.location.href); if (!['http:', 'https:'].includes(url.protocol)) throw new Error() } catch (error) { reject(new Error('作品地址不可用')); return }
-      // Private local resources use the existing same-origin media cookie. Never send JWTs to file hosts.
-      $.ajax({ url: url.href, dataType: 'text', timeout: 60000,
-        success: function (body, status, xhr) {
-          var type = xhr.getResponseHeader('Content-Type') || ''
-          if (/text\/html|application\/json/i.test(type) || typeof body !== 'string' || new Blob([body]).size > 10 * 1024 * 1024) { reject(new Error('作品文件格式不正确或过大')); return }
-          resolve(body)
-        }, error: function (error) { reject(new Error(message(error))) }
-      })
-    })
+    return window.PythonSourceLoading.read(value)
   }
-  function snapshot() { return host.projectName + '\n' + host.getCode() }
+  function snapshot() { return host.projectName + '\n' + window.PythonSourceLoading.contents(host) }
   function update(state) {
+    if (state.phase === 'loading') loadSnapshot = snapshot()
     host.$set(host, 'persistBusy', state.busy)
     host.$set(host, 'persistReady', state.ready)
-    if (host.$refs.codeEditor.editor) host.$refs.codeEditor.editor.setReadOnly(!state.ready || state.busy)
+    window.PythonSourceLoading.setReadOnly(host, !state.ready || state.busy)
     var status = document.getElementById('persistence-status')
     status.textContent = state.message; status.dataset.phase = state.phase
     document.getElementById('retry-load').hidden = state.phase !== 'load-error'
     if (state.phase === 'saved') savedSnapshot = snapshot()
   }
   function mount(editor) {
+    if (host) return session
     host = editor
     editor.$set(editor, 'persistBusy', true); editor.$set(editor, 'persistReady', false)
     session = window.PythonPersistence.create({ params: params,
       info: async function (id) { return (await request('/teaching/teachingWork/studentWorkInfo?workId=' + encodeURIComponent(id))).result },
       text: readText, upload: upload, submit: async function (body) { return (await request('/teaching/teachingWork/submit', body)).result },
-      apply: function (title, code) { host.projectName = title; host.setCode(code); savedSnapshot = title + '\n' + code; initialized = true },
+      apply: async function (title, code) {
+        var current = host
+        if (snapshot() !== loadSnapshot) throw new Error('加载期间代码已修改，已保留当前内容；请先备份，再重新打开')
+        await window.PythonSourceLoading.apply(current, code, function () { return host === current && !current._isDestroyed && snapshot() === loadSnapshot })
+        if (host !== current || current._isDestroyed) throw new Error('编辑器已经关闭，请重新打开作品')
+        host.projectName = title
+        savedSnapshot = snapshot(); initialized = true
+      },
       saved: function (id) {
         var url = new URL(window.location.href)
         url.searchParams.set('workId', id); url.searchParams.set('queryEncoding', 'uri')
@@ -100,6 +98,7 @@
     host.$watch('projectName', changed)
     host.$refs.codeEditor.$watch('code', changed)
     session.load()
+    return session
   }
   window.TeachingPython = { mount: mount }
   window.submitCode = function (title, code) { if (session) return session.save(title, code) }

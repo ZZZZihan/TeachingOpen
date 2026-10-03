@@ -1,0 +1,22 @@
+{
+  "pass": true,
+  "savedUrl": "http://127.0.0.1:18160/python/index.html?queryEncoding=uri&workId=seed-work",
+  "reopened": {
+    "code": "print \"SOURCE_SAVE_OK\"\nprint 6 * 7\n",
+    "title": "源码加载保存回归"
+  },
+  "reads": [
+    "http://127.0.0.1:18160/api/teaching/teachingWork/studentWorkInfo?workId=seed-work",
+    "http://127.0.0.1:18160/fixtures/seed.py?revision=1&label=a+b",
+    "http://127.0.0.1:18160/api/teaching/teachingWork/studentWorkInfo?workId=seed-work"
+  ],
+  "writeCount": {
+    "uploads": 1,
+    "registrations": 1,
+    "submissions": 1
+  },
+  "workId": "seed-work",
+  "workCountUnchanged": true,
+  "pageErrors": [],
+  "scope": "Actual UI + isolated synthetic HTTP fixture; not real Java authentication or persistence."
+}
