@@ -1,0 +1,19 @@
+### Result
+1. [GET] http://127.0.0.1:18170/courseList => [200] OK
+2. [GET] http://127.0.0.1:18170/js/polyfill.js => [200] OK
+3. [GET] http://127.0.0.1:18170/js/common.js => [200] OK
+4. [GET] http://127.0.0.1:18170/css/app.34569fa6.css => [200] OK
+5. [GET] http://127.0.0.1:18170/css/chunk-vendors.0626b6c1.css => [200] OK
+6. [GET] http://127.0.0.1:18170/js/app.8ceacb01.js => [200] OK
+7. [GET] http://127.0.0.1:18170/js/chunk-vendors.a2dd1501.js => [200] OK
+8. [GET] http://api.paas.plus/js/errlog.js => [FAILED] csp
+9. [GET] http://127.0.0.1:18170/api/sys/config/getCurrentConfig?_t=1791031341 => [200] OK
+10. [GET] http://127.0.0.1:18170/api/teaching/menu/getUserMenu?_t=1791031341 => [200] OK
+11. [GET] http://127.0.0.1:18170/logo.png => [200] OK
+12. [GET] http://127.0.0.1:18170/css/home.fcf4f702.css => [200] OK
+13. [GET] http://127.0.0.1:18170/js/home.db56c930.js => [200] OK
+14. [GET] http://127.0.0.1:18170/img/wordmark.271c59bd.png => [200] OK
+15. [GET] http://127.0.0.1:18170/api/teaching/teachingCourse/getHomeCourse?_t=1791031341&courseType=&courseCategory=&courseName=&orderBy=time&pageSize=24&pageNo=1 => [200] OK
+16. [GET] http://127.0.0.1:18170/api/sys/dict/getDictItems/course_category => [200] OK
+17. [GET] http://127.0.0.1:18170/api/sys/dict/getDictItems/course_type => [200] OK
+18. [GET] http://127.0.0.1:18170/api/sys/common/static/unicode-browser/%E8%AF%BE%E5%A0%82%E8%B5%84%E6%96%99/%E8%AF%BE%E7%A8%8B%E5%B0%81%E9%9D%A2.png => [200] OK

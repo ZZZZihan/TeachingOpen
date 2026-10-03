@@ -1,0 +1,794 @@
+{
+  "scope": "Real exact-JAR filter with synthetic servlet proxy; no container routing, database, cache, login, server or file-byte acceptance",
+  "outer_default_guards": true,
+  "native_denial_400": true,
+  "passed": 70,
+  "total": 70,
+  "cases": [
+    {
+      "case": "canonical_encoded_chinese_get",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "canonical_encoded_chinese_head",
+      "dispatcher": "REQUEST",
+      "method": "HEAD",
+      "candidate": true,
+      "expected": true,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "literal_unicode_fields_synthetic",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "mixed_unicode_space_plus_percent",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "unicode_literal_fullwidth_slash_is_filename",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "unicode_combining_name_no_normalization",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "split_servlet_mapping",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "empty_context_canonical",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "unicode_method_POST",
+      "dispatcher": "REQUEST",
+      "method": "POST",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "unicode_method_PUT",
+      "dispatcher": "REQUEST",
+      "method": "PUT",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "unicode_method_DELETE",
+      "dispatcher": "REQUEST",
+      "method": "DELETE",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "unicode_method_OPTIONS",
+      "dispatcher": "REQUEST",
+      "method": "OPTIONS",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "unicode_dispatch_FORWARD",
+      "dispatcher": "FORWARD",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "unicode_dispatch_INCLUDE",
+      "dispatcher": "INCLUDE",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "unicode_dispatch_ERROR",
+      "dispatcher": "ERROR",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "unicode_dispatch_ASYNC",
+      "dispatcher": "ASYNC",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "nonmedia_unicode",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "lookalike_media_prefix",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "wrong_raw_route",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "wrong_decoded_route",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "encoded_structural_prefix",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "context_prefix_boundary",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "missing_servlet_path",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "control_decoded_0",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "control_decoded_9",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "control_decoded_10",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "control_decoded_13",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "control_decoded_31",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "control_decoded_127",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "control_decoded_128",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "control_decoded_133",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "control_decoded_159",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "control_raw_uri",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "control_path_info",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_decoded_34",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_decoded_35",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_decoded_36",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_decoded_37",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_decoded_38",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_decoded_39",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_raw_%3B",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_raw_%3b",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_raw_%5C",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_raw_%5c",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_raw_%2E",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_raw_%2e",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_raw_%2F",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "structural_raw_%2f",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "double_encoded_dot_slash",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "duplicate_separator_preserves_upstream_behavior",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "ascii_equivalence_50",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_equivalence_51",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_equivalence_52",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_equivalence_53",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_equivalence_54",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_equivalence_55",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_equivalence_56",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_dispatch_equivalence_FORWARD",
+      "dispatcher": "FORWARD",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_dispatch_equivalence_INCLUDE",
+      "dispatcher": "INCLUDE",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_dispatch_equivalence_REQUEST",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_dispatch_equivalence_ASYNC",
+      "dispatcher": "ASYNC",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_dispatch_equivalence_ERROR",
+      "dispatcher": "ERROR",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_post_filter_equivalence_not_method_authorization",
+      "dispatcher": "REQUEST",
+      "method": "POST",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    },
+    {
+      "case": "ascii_invalid_equivalence_63",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "ascii_invalid_equivalence_64",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "ascii_invalid_equivalence_65",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "ascii_invalid_equivalence_66",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "ascii_invalid_equivalence_67",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "ascii_invalid_equivalence_68",
+      "dispatcher": "REQUEST",
+      "method": "GET",
+      "candidate": false,
+      "expected": false,
+      "original": false,
+      "original_expected": false,
+      "passed": true
+    },
+    {
+      "case": "include_attributes_preserve_original_getter_scope",
+      "dispatcher": "INCLUDE",
+      "method": "GET",
+      "candidate": true,
+      "expected": true,
+      "original": true,
+      "original_expected": true,
+      "passed": true
+    }
+  ],
+  "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "matrix_source_sha256": "a76b5b994c8ba739437418cb62fca2bf907b611e778eae1bb1a632a4453b399c",
+  "launcher_source_sha256": "c37f8b89299624d9b339b90b8a31c01c6f64180d2a9ef413a3fd9fceefbf234c",
+  "java_version": [
+    "openjdk version \"1.8.0_504\"",
+    "OpenJDK Runtime Environment (Zulu 8.96.0.205-CA-macos-aarch64) (build 1.8.0_504-b01)",
+    "OpenJDK 64-Bit Server VM (Zulu 8.96.0.205-CA-macos-aarch64) (build 25.504-b01, mixed mode)"
+  ],
+  "command": "python3 .devspace/artifacts/unicode-media-root/run-filter-matrix.py",
+  "compile_exit_code": 0,
+  "process_exit_code": 0,
+  "packaged_inputs": [
+    {
+      "entry": "BOOT-INF/classes/org/jeecg/modules/shiro/authc/aop/LocalMediaInvalidRequestFilter$UnicodePathChecks.class",
+      "sha256": "3ce6e45ed5d5ff47d5f64b2cc6770618d356334bbb9b6f35bd3374187088c574"
+    },
+    {
+      "entry": "BOOT-INF/classes/org/jeecg/modules/shiro/authc/aop/LocalMediaInvalidRequestFilter.class",
+      "sha256": "5eccacd18a06ed8e06bd03d992aa3a73757818ea1ccb0241bc2b87f77d194f52"
+    },
+    {
+      "entry": "BOOT-INF/classes/org/jeecg/modules/shiro/authc/aop/LocalMediaInvalidRequestFilter$1.class",
+      "sha256": "19a3ea2360de5217a45d46eb1f02b8f1e2cfb726d79e87f66722b517906c8d30"
+    },
+    {
+      "entry": "BOOT-INF/lib/tomcat-embed-core-9.0.122.jar",
+      "sha256": "d89e48fc2835102846988d3cdb9d833f61e1934e5e46440697b6f0cc24923455"
+    },
+    {
+      "entry": "BOOT-INF/lib/slf4j-api-1.7.25.jar",
+      "sha256": "18c4a0095d5c1da6b817592e767bb23d29dd2f560ad74df75ff3961dbde25b79"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-spring-boot-starter-1.13.0.jar",
+      "sha256": "8446c1f50c47c90c85e846feeeb3bab63eadc99dcd0182c5d4fa21c1103a3fb1"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-spring-1.13.0.jar",
+      "sha256": "3adc1d4ee3ca35c9b425d2012d8bc73fb25118916a730da61ab4d2380f04bb08"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-core-1.13.0.jar",
+      "sha256": "ddb03b68cdc08792ec2a18f0ae6edb298ce94073a87862cb44b5db3fa40643ff"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-lang-1.13.0.jar",
+      "sha256": "8c3eb1676191db97311218d5cccead1cee0f0ecdb3467f1ac9e0c4449378c97d"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-cache-1.13.0.jar",
+      "sha256": "e409e36056060224dc1b0ad42959cd51c61ac3dbbb0558be26c39e387f85c5a3"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-crypto-hash-1.13.0.jar",
+      "sha256": "c06c9f2e37fb8838842853e47035fab0c064c3b144948e60bdcf96e694f286a3"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-crypto-core-1.13.0.jar",
+      "sha256": "f9a103b92c4261258b9ae9cfcd83af43c2500309b0689ec149a45565cf44342d"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-crypto-cipher-1.13.0.jar",
+      "sha256": "aa30868a10055d5fe1e0d8dd8915f174532fabf6d00c810076da94a82deae75f"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-config-core-1.13.0.jar",
+      "sha256": "2f5cd02a5cf72a9d3e20417ad4b56ca692acfd1579f8c9bafe939e71e02888eb"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-config-ogdl-1.13.0.jar",
+      "sha256": "f067d8775ebde81e55f78603c0d5b3a0d1ce493726d4eff325b7a848c7bbf6e3"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-event-1.13.0.jar",
+      "sha256": "a4c6a9304ec16c948eec258fab577c13b446d1e82b6f49c41d40974b7fb191e9"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-web-1.13.0.jar",
+      "sha256": "8f2c2f7d4c141cd28a00edb30b3b62479fcdb2f70eeef710289b9c6138e4fc33"
+    },
+    {
+      "entry": "BOOT-INF/lib/shiro-redis-3.1.0.jar",
+      "sha256": "a6493e87ecb66e423b23a3b317da0f116bbffd8d4a5baf474d02899e5aa549cc"
+    }
+  ]
+}

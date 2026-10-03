@@ -1,0 +1,373 @@
+{
+  "scope": "exact JAR classes and real localtest context; Tomcat registration and actual loopback REQUEST/FORWARD/INCLUDE/ERROR test-only servlet dispatch; supplemental proxy request checks labelled synthetic; no login",
+  "checks": [
+    {
+      "case": "one effective Shiro filter bean",
+      "passed": true
+    },
+    {
+      "case": "filter uses the manual securityManager",
+      "passed": true
+    },
+    {
+      "case": "manual securityManager originates from product ShiroConfig",
+      "passed": true
+    },
+    {
+      "case": "manual realm remains the application ShiroRealm",
+      "passed": true
+    },
+    {
+      "case": "rememberMe manager is disabled",
+      "passed": true
+    },
+    {
+      "case": "session storage remains disabled",
+      "passed": true
+    },
+    {
+      "case": "authorization advisor uses the manual manager",
+      "passed": true
+    },
+    {
+      "case": "one enabled explicit Shiro registration",
+      "passed": true
+    },
+    {
+      "case": "official Shiro registration keeps order 1",
+      "passed": true
+    },
+    {
+      "case": "Tomcat has one actual Shiro filter",
+      "passed": true
+    },
+    {
+      "case": "actual mapping covers REQUEST FORWARD INCLUDE ERROR",
+      "passed": true
+    },
+    {
+      "case": "actual Shiro mapping covers all paths",
+      "passed": true
+    },
+    {
+      "case": "ServletContext confirms Shiro registration shiroFilter",
+      "passed": true
+    },
+    {
+      "case": "factory and registration use the same filter instance",
+      "passed": true
+    },
+    {
+      "case": "old and official names alias the same factory and product",
+      "passed": true
+    },
+    {
+      "case": "nested dispatcher filtering remains enabled",
+      "passed": true
+    },
+    {
+      "case": "media rule precedes generic extension and final JWT rules",
+      "passed": true
+    },
+    {
+      "case": "every resolved chain starts with actual invalidRequest filter",
+      "passed": true
+    },
+    {
+      "case": "resolved JWT rule /sys/common/static/**",
+      "passed": true
+    },
+    {
+      "case": "resolved JWT rule /teaching/teachingWork/studentWorkInfo",
+      "passed": true
+    },
+    {
+      "case": "resolved JWT rule /**",
+      "passed": true
+    },
+    {
+      "case": "invalidRequest guards remain enabled",
+      "passed": true
+    },
+    {
+      "case": "REQUEST finite synthetic traversal denied",
+      "passed": true
+    },
+    {
+      "case": "FORWARD finite synthetic traversal denied",
+      "passed": true
+    },
+    {
+      "case": "INCLUDE finite synthetic traversal denied",
+      "passed": true
+    },
+    {
+      "case": "ERROR finite synthetic traversal denied",
+      "passed": true
+    },
+    {
+      "case": "invalid path remains denied /sys/common/static/a;v.txt",
+      "passed": true
+    },
+    {
+      "case": "invalid path remains denied /sys/common/static/a%3bv.txt",
+      "passed": true
+    },
+    {
+      "case": "invalid path remains denied /sys/common/static/a%5cb.txt",
+      "passed": true
+    },
+    {
+      "case": "invalid path remains denied /sys/common/static/%2e%2e/private.txt",
+      "passed": true
+    },
+    {
+      "case": "invalid path remains denied /sys/common/static/a%2fb.txt",
+      "passed": true
+    },
+    {
+      "case": "finite printable filename passes invalidRequest /sys/common/static/space name.txt",
+      "passed": true
+    },
+    {
+      "case": "finite printable filename passes invalidRequest /sys/common/static/plus+name.txt",
+      "passed": true
+    },
+    {
+      "case": "finite printable filename passes invalidRequest /sys/common/static/50%name.txt",
+      "passed": true
+    },
+    {
+      "case": "official adapter targets actual business requestMappingHandlerMapping",
+      "passed": true
+    },
+    {
+      "case": "REQUEST MVC and Shiro resolve the same finite path",
+      "passed": true
+    },
+    {
+      "case": "FORWARD MVC and Shiro resolve the same finite path",
+      "passed": true
+    },
+    {
+      "case": "INCLUDE MVC and Shiro resolve the same finite path",
+      "passed": true
+    },
+    {
+      "case": "ERROR MVC and Shiro resolve the same finite path",
+      "passed": true
+    },
+    {
+      "case": "servlet is bound to a random loopback test port",
+      "passed": true
+    },
+    {
+      "case": "actual Tomcat REQUEST denies private servlet without JWT",
+      "passed": true
+    },
+    {
+      "case": "actual Tomcat FORWARD denies private servlet without JWT",
+      "passed": true
+    },
+    {
+      "case": "actual Tomcat INCLUDE denies private servlet without JWT",
+      "passed": true
+    },
+    {
+      "case": "actual Tomcat ERROR denies private servlet without JWT",
+      "passed": true
+    },
+    {
+      "case": "synthetic public js entry is reachable without JWT",
+      "passed": true
+    },
+    {
+      "case": "actual Swagger mapping retains configured anonymous access",
+      "passed": true
+    },
+    {
+      "case": "actual auxiliary Actuator route remains JWT protected",
+      "passed": true
+    },
+    {
+      "case": "actual global invalidRequest protects auxiliary mapping /v2/api-docs;synthetic",
+      "passed": true
+    },
+    {
+      "case": "actual global invalidRequest protects auxiliary mapping /actuator/metrics;synthetic",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "case": "Shiro filter bean names",
+      "value": [
+        "shiroFilterFactoryBean"
+      ]
+    },
+    {
+      "case": "actual Shiro dispatcher mappings",
+      "value": [
+        "ERROR",
+        "FORWARD",
+        "INCLUDE",
+        "REQUEST"
+      ]
+    },
+    {
+      "case": "resolved filters /sys/common/static/**",
+      "value": [
+        "org.jeecg.modules.shiro.authc.aop.LocalMediaInvalidRequestFilter",
+        "org.jeecg.modules.shiro.authc.aop.MediaJwtFilter"
+      ]
+    },
+    {
+      "case": "resolved filters /teaching/teachingWork/studentWorkInfo",
+      "value": [
+        "org.jeecg.modules.shiro.authc.aop.LocalMediaInvalidRequestFilter",
+        "org.jeecg.modules.shiro.authc.aop.OptionalJwtFilter"
+      ]
+    },
+    {
+      "case": "resolved filters /**",
+      "value": [
+        "org.jeecg.modules.shiro.authc.aop.LocalMediaInvalidRequestFilter",
+        "org.jeecg.modules.shiro.authc.aop.JwtFilter"
+      ]
+    },
+    {
+      "case": "Unicode decoded filename existing restriction (not support acceptance)",
+      "value": 200
+    },
+    {
+      "case": "mapping scope swagger2ControllerMapping",
+      "value": {
+        "mappingClass": "springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping",
+        "helperClass": "org.springframework.web.util.UrlPathHelper",
+        "superclassRegistryCount": 0,
+        "activeCustomRegistryCount": 1,
+        "activeCustomHandlers": [
+          {
+            "path": "/v2/api-docs",
+            "handlerType": "springfox.documentation.swagger2.web.Swagger2Controller"
+          }
+        ],
+        "handlers": []
+      }
+    },
+    {
+      "case": "mapping scope requestMappingHandlerMapping",
+      "value": {
+        "mappingClass": "org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping",
+        "helperClass": "org.apache.shiro.spring.web.ShiroUrlPathHelper",
+        "superclassRegistryCount": 602
+      }
+    },
+    {
+      "case": "mapping scope controllerEndpointHandlerMapping",
+      "value": {
+        "mappingClass": "org.springframework.boot.actuate.endpoint.web.servlet.ControllerEndpointHandlerMapping",
+        "helperClass": "org.springframework.web.util.UrlPathHelper",
+        "superclassRegistryCount": 0,
+        "handlers": []
+      }
+    },
+    {
+      "case": "actual MVC mapping helper classes",
+      "value": {
+        "swagger2ControllerMapping": "org.springframework.web.util.UrlPathHelper",
+        "requestMappingHandlerMapping": "org.apache.shiro.spring.web.ShiroUrlPathHelper",
+        "controllerEndpointHandlerMapping": "org.springframework.web.util.UrlPathHelper"
+      }
+    },
+    {
+      "case": "actual dispatch result direct",
+      "value": {
+        "status": 401,
+        "privateMarker": false,
+        "jwtDenied": true,
+        "actualDispatcherObserved": true,
+        "privateExecutionCount": 0
+      }
+    },
+    {
+      "case": "actual dispatch result forward",
+      "value": {
+        "status": 401,
+        "privateMarker": false,
+        "jwtDenied": true,
+        "actualDispatcherObserved": true,
+        "privateExecutionCount": 0
+      }
+    },
+    {
+      "case": "actual dispatch result include",
+      "value": {
+        "status": 200,
+        "privateMarker": false,
+        "jwtDenied": true,
+        "actualDispatcherObserved": true,
+        "privateExecutionCount": 0
+      }
+    },
+    {
+      "case": "actual dispatch result error",
+      "value": {
+        "status": 401,
+        "privateMarker": false,
+        "jwtDenied": true,
+        "actualDispatcherObserved": true,
+        "privateExecutionCount": 0
+      }
+    },
+    {
+      "case": "actual auxiliary invalid path /v2/api-docs;synthetic",
+      "value": {
+        "status": 401,
+        "privateMarker": false,
+        "jwtDenied": true,
+        "initialErrorStatus": 400
+      }
+    },
+    {
+      "case": "actual auxiliary invalid path /actuator/metrics;synthetic",
+      "value": {
+        "status": 401,
+        "privateMarker": false,
+        "jwtDenied": true,
+        "initialErrorStatus": 400
+      }
+    },
+    {
+      "case": "owned context process exited",
+      "value": {
+        "pid": 92345,
+        "exit_status": 0,
+        "exited": true
+      }
+    },
+    {
+      "case": "packaged Shiro libraries",
+      "value": [
+        "shiro-cache-1.13.0.jar",
+        "shiro-config-core-1.13.0.jar",
+        "shiro-config-ogdl-1.13.0.jar",
+        "shiro-core-1.13.0.jar",
+        "shiro-crypto-cipher-1.13.0.jar",
+        "shiro-crypto-core-1.13.0.jar",
+        "shiro-crypto-hash-1.13.0.jar",
+        "shiro-event-1.13.0.jar",
+        "shiro-lang-1.13.0.jar",
+        "shiro-redis-3.1.0.jar",
+        "shiro-spring-1.13.0.jar",
+        "shiro-spring-boot-starter-1.13.0.jar",
+        "shiro-web-1.13.0.jar"
+      ]
+    }
+  ],
+  "observed_utc": "2026-10-03T12:42:02.911116+00:00",
+  "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "phase": "context",
+  "passed": 49,
+  "total": 49
+}

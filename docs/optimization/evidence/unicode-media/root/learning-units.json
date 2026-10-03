@@ -1,0 +1,330 @@
+{
+  "observed_utc": "2026-10-03T12:41:01.029770+00:00",
+  "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "expected_legacy": false,
+  "scope": "real HTTP login and unit list/detail responses, synthetic DB fixtures and cleanup; not browser editors or direct attachment-download authorization",
+  "passed": 80,
+  "total": 80,
+  "cases": [
+    {
+      "case": "anonymous list denied",
+      "passed": true
+    },
+    {
+      "case": "student_b private list denied without unit data",
+      "passed": true
+    },
+    {
+      "case": "teacher_b private list denied without unit data",
+      "passed": true
+    },
+    {
+      "case": "anonymous detail denied",
+      "passed": true
+    },
+    {
+      "case": "student_b private detail denied without unit data",
+      "passed": true
+    },
+    {
+      "case": "teacher_b private detail denied without unit data",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 list has all probe units",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 list hidden visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 list visible visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 list video visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 list case visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 list ppt visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 list plan visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 list unset visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 detail hidden visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 detail visible visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 detail video visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 detail case visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 detail ppt visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 detail plan visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=1 detail unset visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 list has all probe units",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 list hidden visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 list visible visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 list video visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 list case visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 list ppt visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 list plan visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 list unset visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 detail hidden visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 detail visible visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 detail video visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 detail case visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 detail ppt visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 detail plan visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "teacher_a identity=2 detail unset visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 list has all probe units",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 list hidden visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 list visible visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 list video visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 list case visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 list ppt visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 list plan visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 list unset visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 detail hidden visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 detail visible visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 detail video visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 detail case visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 detail ppt visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 detail plan visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "admin identity=2 detail unset visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None list has all probe units",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None list hidden visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None list visible visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None list video visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None list case visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None list ppt visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None list plan visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None list unset visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None detail hidden visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None detail visible visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None detail video visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None detail case visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None detail ppt visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None detail plan visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a identity=None detail unset visibility and assignment template",
+      "passed": true
+    },
+    {
+      "case": "student_a editor work link preserved",
+      "passed": true
+    },
+    {
+      "case": "student_b editor work link preserved",
+      "passed": true
+    },
+    {
+      "case": "teacher_a editor work link preserved",
+      "passed": true
+    },
+    {
+      "case": "student_b shared list allowed with correct visibility",
+      "passed": true
+    },
+    {
+      "case": "student_b shared detail allowed with correct visibility",
+      "passed": true
+    },
+    {
+      "case": "teacher_b shared list allowed with correct visibility",
+      "passed": true
+    },
+    {
+      "case": "teacher_b shared detail allowed with correct visibility",
+      "passed": true
+    },
+    {
+      "case": "dev-only role can read unassigned list",
+      "passed": true
+    },
+    {
+      "case": "dev-only role can read unassigned detail",
+      "passed": true
+    },
+    {
+      "case": "missing unit returns existing not-found response",
+      "passed": true
+    },
+    {
+      "case": "read requests preserve stored resource paths",
+      "passed": true
+    },
+    {
+      "case": "all original business rows restored",
+      "passed": true
+    },
+    {
+      "case": "original identity and role restored; probe role removed",
+      "passed": true
+    },
+    {
+      "case": "all original attachment bytes unchanged",
+      "passed": true
+    }
+  ]
+}

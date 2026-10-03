@@ -1,0 +1,58 @@
+{
+  "created_utc": "2026-10-03T12:44:17.200235+00:00",
+  "scope": "Sanitized local synthetic evidence and repro scripts only; no credentials, production media or raw business rows",
+  "main_before_after_same_script_and_cases": true,
+  "baseline": {
+    "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+    "passed": 118,
+    "total": 186
+  },
+  "candidate": {
+    "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+    "passed": 182,
+    "total": 186
+  },
+  "followup": "18/18 actual CLI duplicate-separator permission/byte identity; legal percent2B-only reference remains401; existing proxyHEAD remains404; saved observations helper syntax-checked after runtime handoff, not rerun",
+  "files": {
+    "docs/optimization/evidence/unicode-media/baseline-final.json": {
+      "sha256": "d4b48cc9fa505cc0702c5ce3df00d62a2a1015062e0164d17832ee4cc6adff3a",
+      "bytes": 110677
+    },
+    "docs/optimization/evidence/unicode-media/baseline.json": {
+      "sha256": "99c171580af30d1c0228694949ff398f8dec639d8d236dd13870eed0a86c0147",
+      "bytes": 110429
+    },
+    "docs/optimization/evidence/unicode-media/candidate.json": {
+      "sha256": "5eb8d1ea6acb8cb5c128cd4f1fe0c6838e26bcdc99f591a6c3630069592ca1c1",
+      "bytes": 119016
+    },
+    "docs/optimization/evidence/unicode-media/core-baseline.json": {
+      "sha256": "01376f5107378cb8fede3bb2ffbde5f2e09ab77d3e529ccc07e19a100dc3a2bb",
+      "bytes": 32751
+    },
+    "docs/optimization/evidence/unicode-media/independent-candidate-observations.json": {
+      "sha256": "53ee1df9ac6e1d0308c70895dd061458b259a76e536e5e85d88081b6c4b97829",
+      "bytes": 42037
+    },
+    "docs/optimization/evidence/unicode-media/independent-observations-initial-error.json": {
+      "sha256": "2ece89d71077c97e8764ac0b5bd9e77be36854037b22ae1730804a1863908071",
+      "bytes": 467
+    },
+    "docs/optimization/evidence/unicode-media/independent-restoration-verification.json": {
+      "sha256": "a34f63aa5654011bac6b5736e6f897e076f3a35260d455f9702417fd587ce241",
+      "bytes": 275
+    },
+    "api/dev/verify-unicode-media.py": {
+      "sha256": "3bac3af26370e5313c256b6d16813889a38daebaf683a591d8159e4382657f25",
+      "bytes": 32425
+    },
+    "api/dev/verify-unicode-media-observations.py": {
+      "sha256": "a5477023520c0ff4ea7e2d1e3942a68450a06988913d34cd42d3c71a04a044bd",
+      "bytes": 11101
+    },
+    "docs/optimization/unicode-media-tests.md": {
+      "sha256": "c59dbbe603339566926670436aa163bee1fc68f732ce9ce81b2ecb6a8850df1f",
+      "bytes": 12285
+    }
+  }
+}
