@@ -1,0 +1,9 @@
+{
+  "file": "http://127.0.0.1:18155/fixtures/seed.py?revision=1&label=a+b",
+  "links": {
+    "teacher": "http://127.0.0.1:18155/python/player.html?queryEncoding=uri&lang=turtle&url=http%3A%2F%2F127.0.0.1%3A18155%2Ffixtures%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb",
+    "course": "http://127.0.0.1:18155/python/player.html?lang=turtle&url=http%3A%2F%2F127.0.0.1%3A18155%2Ffixtures%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb&queryEncoding=uri",
+    "community": "http://127.0.0.1:18155/python/player.html?queryEncoding=uri&lang=turtle&url=http%3A%2F%2F127.0.0.1%3A18155%2Ffixtures%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb"
+  },
+  "scope": "Synthetic loopback HTTP fixture; not a Java API or real-role acceptance."
+}

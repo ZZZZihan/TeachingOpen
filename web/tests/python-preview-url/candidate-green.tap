@@ -1,0 +1,208 @@
+TAP version 13
+# Subtest: both HTML entry points load the real query helper before both prebuilt Python bundles
+ok 1 - both HTML entry points load the real query helper before both prebuilt Python bundles
+  ---
+  duration_ms: 1.190584
+  type: 'test'
+  ...
+# Subtest: all three actual callers mark modern Python links for one standard outer decode
+ok 2 - all three actual callers mark modern Python links for one standard outer decode
+  ---
+  duration_ms: 2.01175
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: nested query and literal plus
+ok 3 - teacher actual caller reaches both actual Python component downloads: nested query and literal plus
+  ---
+  duration_ms: 7.595875
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: space and Chinese
+ok 4 - teacher actual caller reaches both actual Python component downloads: space and Chinese
+  ---
+  duration_ms: 3.63725
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: percent escapes belong to the file
+ok 5 - teacher actual caller reaches both actual Python component downloads: percent escapes belong to the file
+  ---
+  duration_ms: 3.021208
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: hash belongs to the file
+ok 6 - teacher actual caller reaches both actual Python component downloads: hash belongs to the file
+  ---
+  duration_ms: 2.842291
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: relative file with query and percent escape
+ok 7 - teacher actual caller reaches both actual Python component downloads: relative file with query and percent escape
+  ---
+  duration_ms: 2.703334
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: relative file without initial slash
+ok 8 - teacher actual caller reaches both actual Python component downloads: relative file without initial slash
+  ---
+  duration_ms: 2.601625
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: nested query and literal plus
+ok 9 - course actual caller reaches both actual Python component downloads: nested query and literal plus
+  ---
+  duration_ms: 2.87
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: space and Chinese
+ok 10 - course actual caller reaches both actual Python component downloads: space and Chinese
+  ---
+  duration_ms: 2.802542
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: percent escapes belong to the file
+ok 11 - course actual caller reaches both actual Python component downloads: percent escapes belong to the file
+  ---
+  duration_ms: 2.742834
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: hash belongs to the file
+ok 12 - course actual caller reaches both actual Python component downloads: hash belongs to the file
+  ---
+  duration_ms: 3.73375
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: relative file with query and percent escape
+ok 13 - course actual caller reaches both actual Python component downloads: relative file with query and percent escape
+  ---
+  duration_ms: 3.224667
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: relative file without initial slash
+ok 14 - course actual caller reaches both actual Python component downloads: relative file without initial slash
+  ---
+  duration_ms: 3.188
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: nested query and literal plus
+ok 15 - community actual caller reaches both actual Python component downloads: nested query and literal plus
+  ---
+  duration_ms: 2.969084
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: space and Chinese
+ok 16 - community actual caller reaches both actual Python component downloads: space and Chinese
+  ---
+  duration_ms: 2.99725
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: percent escapes belong to the file
+ok 17 - community actual caller reaches both actual Python component downloads: percent escapes belong to the file
+  ---
+  duration_ms: 2.8875
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: hash belongs to the file
+ok 18 - community actual caller reaches both actual Python component downloads: hash belongs to the file
+  ---
+  duration_ms: 2.739917
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: relative file with query and percent escape
+ok 19 - community actual caller reaches both actual Python component downloads: relative file with query and percent escape
+  ---
+  duration_ms: 2.709542
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: relative file without initial slash
+ok 20 - community actual caller reaches both actual Python component downloads: relative file without initial slash
+  ---
+  duration_ms: 2.9735
+  type: 'test'
+  ...
+# Subtest: appPlayer encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+ok 21 - appPlayer encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+  ---
+  duration_ms: 1.44075
+  type: 'test'
+  ...
+# Subtest: appPlayer first duplicate URL wins without reparsing embedded URL parameters
+ok 22 - appPlayer first duplicate URL wins without reparsing embedded URL parameters
+  ---
+  duration_ms: 1.309083
+  type: 'test'
+  ...
+# Subtest: appPlayer missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+ok 23 - appPlayer missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+  ---
+  duration_ms: 6.08575
+  type: 'test'
+  ...
+# Subtest: appPlayer ordinary raw relative links remain usable and malformed percent encoding does not throw
+ok 24 - appPlayer ordinary raw relative links remain usable and malformed percent encoding does not throw
+  ---
+  duration_ms: 6.471708
+  type: 'test'
+  ...
+# Subtest: appPlayer legacy raw addresses preserve their own percent escapes and literal plus
+ok 25 - appPlayer legacy raw addresses preserve their own percent escapes and literal plus
+  ---
+  duration_ms: 8.324375
+  type: 'test'
+  ...
+# Subtest: appPlayer legacy whole-value encoded recognized addresses decode once
+ok 26 - appPlayer legacy whole-value encoded recognized addresses decode once
+  ---
+  duration_ms: 4.320667
+  type: 'test'
+  ...
+# Subtest: app encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+ok 27 - app encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+  ---
+  duration_ms: 1.060417
+  type: 'test'
+  ...
+# Subtest: app first duplicate URL wins without reparsing embedded URL parameters
+ok 28 - app first duplicate URL wins without reparsing embedded URL parameters
+  ---
+  duration_ms: 1.269542
+  type: 'test'
+  ...
+# Subtest: app missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+ok 29 - app missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+  ---
+  duration_ms: 5.82075
+  type: 'test'
+  ...
+# Subtest: app ordinary raw relative links remain usable and malformed percent encoding does not throw
+ok 30 - app ordinary raw relative links remain usable and malformed percent encoding does not throw
+  ---
+  duration_ms: 5.329791
+  type: 'test'
+  ...
+# Subtest: app legacy raw addresses preserve their own percent escapes and literal plus
+ok 31 - app legacy raw addresses preserve their own percent escapes and literal plus
+  ---
+  duration_ms: 6.80775
+  type: 'test'
+  ...
+# Subtest: app legacy whole-value encoded recognized addresses decode once
+ok 32 - app legacy whole-value encoded recognized addresses decode once
+  ---
+  duration_ms: 4.540917
+  type: 'test'
+  ...
+# Subtest: the shared parser keeps editor workFile escapes while preserving the existing name and ID query behavior
+ok 33 - the shared parser keeps editor workFile escapes while preserving the existing name and ID query behavior
+  ---
+  duration_ms: 2.65475
+  type: 'test'
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 173.323458

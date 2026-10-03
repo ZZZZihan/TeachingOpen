@@ -10,8 +10,14 @@
     ;['workId', 'unitId', 'departId', 'additionalId', 'workName', 'scene', 'workFile', 'url', 'resetTemplate'].forEach(function (key) {
       var match = search.match(new RegExp('[?&]' + key + '=([^&]*)'))
       var value = standard ? params.get(key) : match && match[1]
-      if (!standard && value && (key !== 'url' && key !== 'workFile' || !/^(https?:\/\/|\/)/.test(value))) {
-        try { value = decodeURIComponent(value) } catch (error) { /* A literal percent is a valid name. */ }
+      var fileValue = key === 'url' || key === 'workFile'
+      // Legacy file URLs own their percent escapes and literal plus signs.
+      if (!standard && value && (!fileValue || !/^(https?:\/\/|\/|\.\.?\/)/.test(value))) {
+        try {
+          var decoded = decodeURIComponent(value)
+          // Only recognize whole encoded addresses; unknown relative values stay literal.
+          if (!fileValue || /^(https?:\/\/|\/|\.\.?\/)/.test(decoded)) value = decoded
+        } catch (error) { /* A literal percent is a valid name or file path. */ }
       }
       result[key] = !value || value === 'undefined' || value === 'null' ? '' : value
     })

@@ -220,7 +220,7 @@ export default {
           this.frameHref = '/scratchjr/editor.html?queryEncoding=uri&mode=look&workFile=' + encodeURIComponent(record.workFileKey_url)
           return
         case '4':
-          this.frameHref = '/python/player.html?lang=turtle&url=' + record.workFileKey_url
+          this.frameHref = '/python/player.html?' + new URLSearchParams({ queryEncoding: 'uri', lang: 'turtle', url: record.workFileKey_url }).toString()
           return
         case '10':
           this.frameHref = '/blockly/index.html?lang=zh-hans&workId=' + record.id
