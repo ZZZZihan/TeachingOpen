@@ -1,0 +1,217 @@
+{
+  "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "expected_legacy": false,
+  "cases": [
+    {
+      "case": "private read denied None",
+      "passed": true
+    },
+    {
+      "case": "private read denied student_b",
+      "passed": true
+    },
+    {
+      "case": "private read denied teacher_b",
+      "passed": true
+    },
+    {
+      "case": "invalid/unavailable project denied deleted",
+      "passed": true
+    },
+    {
+      "case": "invalid/unavailable project denied wrongtype",
+      "passed": true
+    },
+    {
+      "case": "invalid/unavailable project denied fixture_cloud_probe_missing",
+      "passed": true
+    },
+    {
+      "case": "invalid/unavailable project denied create",
+      "passed": true
+    },
+    {
+      "case": "invalid/unavailable project denied https://example.invalid/work.sb3",
+      "passed": true
+    },
+    {
+      "case": "private read allowed student_a",
+      "passed": true
+    },
+    {
+      "case": "private read allowed teacher_a",
+      "passed": true
+    },
+    {
+      "case": "private read allowed admin",
+      "passed": true
+    },
+    {
+      "case": "mutation before handshake denied without write",
+      "passed": true
+    },
+    {
+      "case": "anonymous published project is readable",
+      "passed": true
+    },
+    {
+      "case": "anonymous public mutation denied without write",
+      "passed": true
+    },
+    {
+      "case": "authorized player updates existing shared variable",
+      "passed": true
+    },
+    {
+      "case": "both owner tabs receive shared update",
+      "passed": true
+    },
+    {
+      "case": "anonymous reader keeps receiving but cannot write",
+      "passed": true
+    },
+    {
+      "case": "closing one owner tab preserves other subscription",
+      "passed": true
+    },
+    {
+      "case": "non-owner schema operation denied create",
+      "passed": true
+    },
+    {
+      "case": "non-owner schema operation denied delete",
+      "passed": true
+    },
+    {
+      "case": "non-owner schema operation denied rename",
+      "passed": true
+    },
+    {
+      "case": "non-owner schema operation denied set",
+      "passed": true
+    },
+    {
+      "case": "owner creates real Redis variable",
+      "passed": true
+    },
+    {
+      "case": "duplicate create preserves current shared value",
+      "passed": true
+    },
+    {
+      "case": "owner rename preserves value and removes old field",
+      "passed": true
+    },
+    {
+      "case": "rename collision preserves both variables",
+      "passed": true
+    },
+    {
+      "case": "owner deletes variable",
+      "passed": true
+    },
+    {
+      "case": "project switch requires new connection",
+      "passed": true
+    },
+    {
+      "case": "identity switch rejected without write",
+      "passed": true
+    },
+    {
+      "case": "invalid supplied token cannot downgrade to anonymous",
+      "passed": true
+    },
+    {
+      "case": "withdrawal stops anonymous and other-user receivers",
+      "passed": true
+    },
+    {
+      "case": "class reassignment stops former teacher receiver",
+      "passed": true
+    },
+    {
+      "case": "logout rejects subsequent writes",
+      "passed": true
+    },
+    {
+      "case": "logout also stops outbound delivery to old receiver",
+      "passed": true
+    },
+    {
+      "case": "Redis wrong-type failure closes without replacing data",
+      "passed": true
+    },
+    {
+      "case": "retry after Redis repair succeeds",
+      "passed": true
+    },
+    {
+      "case": "invalid payload denied malformed",
+      "passed": true
+    },
+    {
+      "case": "invalid payload denied object value",
+      "passed": true
+    },
+    {
+      "case": "invalid payload denied long name",
+      "passed": true
+    },
+    {
+      "case": "invalid payload denied long value",
+      "passed": true
+    },
+    {
+      "case": "work lookup database failure denies before Redis mutation",
+      "passed": true
+    },
+    {
+      "case": "new connection works after database recovery",
+      "passed": true
+    },
+    {
+      "case": "concurrent rename has exactly one winner and no lost value",
+      "passed": true
+    },
+    {
+      "case": "variable count is bounded without partial extra write",
+      "passed": true
+    },
+    {
+      "case": "existing variable update still works at capacity",
+      "passed": true
+    },
+    {
+      "case": "complete bounded snapshot returned on reconnect",
+      "passed": true
+    },
+    {
+      "case": "temporary project IDs do not create orphan storage",
+      "passed": true
+    },
+    {
+      "case": "raw cloud credential logging matches expected boundary",
+      "passed": true
+    },
+    {
+      "case": "raw cloud value logging matches expected boundary",
+      "passed": true
+    },
+    {
+      "case": "all non-audit database tables restored",
+      "passed": true
+    },
+    {
+      "case": "all attachment bytes unchanged",
+      "passed": true
+    },
+    {
+      "case": "all original cloud keys and values unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 52,
+  "total": 52,
+  "scope": "Real Java/Redis/MySQL via local same-origin WebSocket, synthetic projects and CLI login only; not browser or shipped editor acceptance"
+}

@@ -1,0 +1,309 @@
+test_api_head_does_not_invent_content_length (test_frontend_proxy.FrontendProxyTest.test_api_head_does_not_invent_content_length) ... HEAD api
+HEAD api
+
+  test_api_head_does_not_invent_content_length (test_frontend_proxy.FrontendProxyTest.test_api_head_does_not_invent_content_length) (status=200, length=None) ... FAIL
+HEAD api
+HEAD api
+  test_api_head_does_not_invent_content_length (test_frontend_proxy.FrontendProxyTest.test_api_head_does_not_invent_content_length) (status=204, length=None) ... FAIL
+HEAD api
+HEAD api
+  test_api_head_does_not_invent_content_length (test_frontend_proxy.FrontendProxyTest.test_api_head_does_not_invent_content_length) (status=304, length=None) ... FAIL
+HEAD api
+HEAD api
+  test_api_head_does_not_invent_content_length (test_frontend_proxy.FrontendProxyTest.test_api_head_does_not_invent_content_length) (status=304, length='1234') ... FAIL
+HEAD api
+HEAD api
+  test_api_head_does_not_invent_content_length (test_frontend_proxy.FrontendProxyTest.test_api_head_does_not_invent_content_length) (status=200, length='0') ... FAIL
+test_api_head_error_responses_keep_status_and_length_without_body (test_frontend_proxy.FrontendProxyTest.test_api_head_error_responses_keep_status_and_length_without_body) ... GET api
+HEAD api
+HEAD api
+
+  test_api_head_error_responses_keep_status_and_length_without_body (test_frontend_proxy.FrontendProxyTest.test_api_head_error_responses_keep_status_and_length_without_body) (status=401) ... FAIL
+GET api
+HEAD api
+HEAD api
+  test_api_head_error_responses_keep_status_and_length_without_body (test_frontend_proxy.FrontendProxyTest.test_api_head_error_responses_keep_status_and_length_without_body) (status=403) ... FAIL
+GET api
+HEAD api
+HEAD api
+  test_api_head_error_responses_keep_status_and_length_without_body (test_frontend_proxy.FrontendProxyTest.test_api_head_error_responses_keep_status_and_length_without_body) (status=404) ... FAIL
+test_api_head_local_errors_do_not_send_body (test_frontend_proxy.FrontendProxyTest.test_api_head_local_errors_do_not_send_body) ... HEAD api
+HEAD api
+FAIL
+test_api_head_preserves_representation_headers_without_body (test_frontend_proxy.FrontendProxyTest.test_api_head_preserves_representation_headers_without_body) ... GET api
+HEAD api
+HEAD api
+FAIL
+test_api_head_preserves_upstream_range_metadata (test_frontend_proxy.FrontendProxyTest.test_api_head_preserves_upstream_range_metadata) ... GET api
+HEAD api
+HEAD api
+
+  test_api_head_preserves_upstream_range_metadata (test_frontend_proxy.FrontendProxyTest.test_api_head_preserves_upstream_range_metadata) (status=206) ... FAIL
+GET api
+HEAD api
+HEAD api
+  test_api_head_preserves_upstream_range_metadata (test_frontend_proxy.FrontendProxyTest.test_api_head_preserves_upstream_range_metadata) (status=416) ... FAIL
+test_backend_disconnect_closes_client (test_frontend_proxy.FrontendProxyTest.test_backend_disconnect_closes_client) ... GET api
+ok
+test_client_disconnect_closes_upstream (test_frontend_proxy.FrontendProxyTest.test_client_disconnect_closes_upstream) ... GET api
+ok
+test_error_responses_keep_local_csp (test_frontend_proxy.FrontendProxyTest.test_error_responses_keep_local_csp) ... GET static
+GET static
+GET api
+GET api
+ok
+test_foreign_origin_is_rejected_before_backend (test_frontend_proxy.FrontendProxyTest.test_foreign_origin_is_rejected_before_backend) ... GET api
+GET api
+ok
+test_fragmented_http_body_is_not_truncated (test_frontend_proxy.FrontendProxyTest.test_fragmented_http_body_is_not_truncated) ... POST api
+ok
+test_handshake_and_early_frames_preserved (test_frontend_proxy.FrontendProxyTest.test_handshake_and_early_frames_preserved) ... GET api
+ok
+test_idle_connection_is_reaped (test_frontend_proxy.FrontendProxyTest.test_idle_connection_is_reaped) ... GET api
+ok
+test_invalid_upgrade_requests_do_not_reach_backend (test_frontend_proxy.FrontendProxyTest.test_invalid_upgrade_requests_do_not_reach_backend) ... GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+POST api
+POST api
+GET api
+GET api
+ok
+test_large_stream_and_concurrent_connection (test_frontend_proxy.FrontendProxyTest.test_large_stream_and_concurrent_connection) ... GET api
+GET api
+ok
+test_missing_backend_fails_and_recovers (test_frontend_proxy.FrontendProxyTest.test_missing_backend_fails_and_recovers) ... GET api
+GET api
+GET api
+ok
+test_nonbrowser_client_without_origin_is_supported (test_frontend_proxy.FrontendProxyTest.test_nonbrowser_client_without_origin_is_supported) ... GET api
+ok
+test_ordinary_http_and_static_routes_keep_contract (test_frontend_proxy.FrontendProxyTest.test_ordinary_http_and_static_routes_keep_contract) ... GET api
+GET static
+GET static
+ok
+test_static_and_spa_head_match_get_without_body (test_frontend_proxy.FrontendProxyTest.test_static_and_spa_head_match_get_without_body) ... GET static
+HEAD static
+GET static
+HEAD static
+GET static
+HEAD static
+GET static
+HEAD static
+HEAD static
+
+  test_static_and_spa_head_match_get_without_body (test_frontend_proxy.FrontendProxyTest.test_static_and_spa_head_match_get_without_body) (path='/nested/spa-route?fixture=1') ... FAIL
+GET static
+HEAD static
+GET static
+HEAD static
+test_static_head_conditional_and_missing_responses (test_frontend_proxy.FrontendProxyTest.test_static_head_conditional_and_missing_responses) ... GET static
+GET static
+HEAD static
+GET static
+GET static
+HEAD static
+HEAD static
+ok
+test_upstream_refusal_and_invalid_handshakes (test_frontend_proxy.FrontendProxyTest.test_upstream_refusal_and_invalid_handshakes) ... GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+ok
+
+======================================================================
+FAIL: test_api_head_does_not_invent_content_length (test_frontend_proxy.FrontendProxyTest.test_api_head_does_not_invent_content_length) (status=200, length=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 238, in test_api_head_does_not_invent_content_length
+    self.assertEqual(status, upstream_status)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 404 != 200
+
+======================================================================
+FAIL: test_api_head_does_not_invent_content_length (test_frontend_proxy.FrontendProxyTest.test_api_head_does_not_invent_content_length) (status=204, length=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 238, in test_api_head_does_not_invent_content_length
+    self.assertEqual(status, upstream_status)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 404 != 204
+
+======================================================================
+FAIL: test_api_head_does_not_invent_content_length (test_frontend_proxy.FrontendProxyTest.test_api_head_does_not_invent_content_length) (status=304, length=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 238, in test_api_head_does_not_invent_content_length
+    self.assertEqual(status, upstream_status)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 404 != 304
+
+======================================================================
+FAIL: test_api_head_does_not_invent_content_length (test_frontend_proxy.FrontendProxyTest.test_api_head_does_not_invent_content_length) (status=304, length='1234')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 238, in test_api_head_does_not_invent_content_length
+    self.assertEqual(status, upstream_status)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 404 != 304
+
+======================================================================
+FAIL: test_api_head_does_not_invent_content_length (test_frontend_proxy.FrontendProxyTest.test_api_head_does_not_invent_content_length) (status=200, length='0')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 238, in test_api_head_does_not_invent_content_length
+    self.assertEqual(status, upstream_status)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 404 != 200
+
+======================================================================
+FAIL: test_api_head_error_responses_keep_status_and_length_without_body (test_frontend_proxy.FrontendProxyTest.test_api_head_error_responses_keep_status_and_length_without_body) (status=401)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 255, in test_api_head_error_responses_keep_status_and_length_without_body
+    self.assertEqual((status, get_status), (upstream_status, upstream_status))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (404, 401) != (401, 401)
+
+First differing element 0:
+404
+401
+
+- (404, 401)
+?    ^
+
++ (401, 401)
+?    ^
+
+
+======================================================================
+FAIL: test_api_head_error_responses_keep_status_and_length_without_body (test_frontend_proxy.FrontendProxyTest.test_api_head_error_responses_keep_status_and_length_without_body) (status=403)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 255, in test_api_head_error_responses_keep_status_and_length_without_body
+    self.assertEqual((status, get_status), (upstream_status, upstream_status))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (404, 403) != (403, 403)
+
+First differing element 0:
+404
+403
+
+- (404, 403)
+?    ^
+
++ (403, 403)
+?    ^
+
+
+======================================================================
+FAIL: test_api_head_error_responses_keep_status_and_length_without_body (test_frontend_proxy.FrontendProxyTest.test_api_head_error_responses_keep_status_and_length_without_body) (status=404)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 259, in test_api_head_error_responses_keep_status_and_length_without_body
+    self.assertEqual(headers.get_all(name), get_headers.get_all(name), name)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['text/html;charset=utf-8'] != ['application/json']
+
+First differing element 0:
+'text/html;charset=utf-8'
+'application/json'
+
+- ['text/html;charset=utf-8']
++ ['application/json'] : Content-Type
+
+======================================================================
+FAIL: test_api_head_local_errors_do_not_send_body (test_frontend_proxy.FrontendProxyTest.test_api_head_local_errors_do_not_send_body)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 272, in test_api_head_local_errors_do_not_send_body
+    self.assertEqual(status, 502)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 404 != 502
+
+======================================================================
+FAIL: test_api_head_preserves_representation_headers_without_body (test_frontend_proxy.FrontendProxyTest.test_api_head_preserves_representation_headers_without_body)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 193, in test_api_head_preserves_representation_headers_without_body
+    self.assertEqual((status, get_status), (200, 200))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (404, 200) != (200, 200)
+
+First differing element 0:
+404
+200
+
+- (404, 200)
+?  ^ ^
+
++ (200, 200)
+?  ^ ^
+
+
+======================================================================
+FAIL: test_api_head_preserves_upstream_range_metadata (test_frontend_proxy.FrontendProxyTest.test_api_head_preserves_upstream_range_metadata) (status=206)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 220, in test_api_head_preserves_upstream_range_metadata
+    self.assertEqual((head_status, get_status), (status, status))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (404, 206) != (206, 206)
+
+First differing element 0:
+404
+206
+
+- (404, 206)
+?  ^ ^
+
++ (206, 206)
+?  ^ ^
+
+
+======================================================================
+FAIL: test_api_head_preserves_upstream_range_metadata (test_frontend_proxy.FrontendProxyTest.test_api_head_preserves_upstream_range_metadata) (status=416)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 220, in test_api_head_preserves_upstream_range_metadata
+    self.assertEqual((head_status, get_status), (status, status))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (404, 416) != (416, 416)
+
+First differing element 0:
+404
+416
+
+- (404, 416)
+?   ^^
+
++ (416, 416)
+?   ^^
+
+
+======================================================================
+FAIL: test_static_and_spa_head_match_get_without_body (test_frontend_proxy.FrontendProxyTest.test_static_and_spa_head_match_get_without_body) (path='/nested/spa-route?fixture=1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/proxy-head-root/baseline-final-test-copy/test_frontend_proxy.py", line 298, in test_static_and_spa_head_match_get_without_body
+    self.assertEqual(status, get_status)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 404 != 200
+
+----------------------------------------------------------------------
+Ran 20 tests in 9.060s
+
+FAILED (failures=13)

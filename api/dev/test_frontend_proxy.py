@@ -12,6 +12,7 @@ import tempfile
 import threading
 import time
 import unittest
+from unittest.mock import patch
 from urllib.error import HTTPError
 from urllib.request import urlopen
 
@@ -41,14 +42,24 @@ def head(conn):
 class Backend(BaseHTTPRequestHandler):
     rbufsize = 0
 
+    def ordinary_response(self):
+        status, headers, body = self.server.http_response
+        self.send_response(status)
+        for name, value in headers:
+            self.send_header(name, value)
+        self.end_headers()
+        if self.command != 'HEAD':
+            self.wfile.write(body)
+
+    def do_HEAD(self):
+        self.server.requests.append((self.path, dict(self.headers)))
+        self.server.head_requests.append((self.path, dict(self.headers)))
+        self.ordinary_response()
+
     def do_GET(self):
         self.server.requests.append((self.path, dict(self.headers)))
         if not self.headers.get('Upgrade'):
-            self.send_response(200)
-            self.send_header('Set-Cookie', 'fixture=one; HttpOnly')
-            self.send_header('Set-Cookie', 'fixture2=two; HttpOnly')
-            self.end_headers()
-            self.wfile.write(b'ordinary response')
+            self.ordinary_response()
             return
         mode = self.server.mode
         if mode == 'unresponsive':
@@ -105,6 +116,9 @@ class FrontendProxyTest(unittest.TestCase):
         self.backend = ThreadingHTTPServer(('127.0.0.1', 0), Backend)
         self.backend.mode = 'echo'
         self.backend.requests = []
+        self.backend.head_requests = []
+        self.backend.http_response = (200, [('Set-Cookie', 'fixture=one; HttpOnly'),
+                                           ('Set-Cookie', 'fixture2=two; HttpOnly')], b'ordinary response')
         self.backend.disconnected = threading.Event()
         handler = type('FixtureProxy', (proxy.LocalFrontend,), {'websocket_timeout': .2, 'websocket_idle_timeout': .3})
         self.handler = handler
@@ -143,6 +157,167 @@ class FrontendProxyTest(unittest.TestCase):
             'style-src': {"'self'", "'unsafe-inline'"},
             'connect-src': {"'self'"},
         })
+
+    def http_response(self, method, path, headers=None):
+        # HTTP clients discard HEAD bodies themselves. Read raw TCP through EOF
+        # so an accidental proxy body write cannot pass this check unnoticed.
+        fields = {'Host': '127.0.0.1:' + str(self.frontend.server_port), 'Connection': 'close'}
+        fields.update(headers or {})
+        request = method + ' ' + path + ' HTTP/1.1\r\n' + ''.join(k + ': ' + v + '\r\n' for k, v in fields.items()) + '\r\n'
+        with socket.create_connection(('127.0.0.1', self.frontend.server_port), timeout=2) as conn:
+            conn.sendall(request.encode('ascii'))
+            response = head(conn)
+            body = bytearray()
+            while True:
+                chunk = conn.recv(65536)
+                if not chunk:
+                    break
+                body.extend(chunk)
+        status_line, fields = response.split(b'\r\n', 1)
+        return int(status_line.split()[1]), parse_headers(io.BytesIO(fields)), bytes(body)
+
+    def test_api_head_preserves_representation_headers_without_body(self):
+        body = bytes(range(256)) * 17
+        self.backend.http_response = (200, [
+            ('Content-Type', 'image/png'), ('Content-Length', str(len(body))),
+            ('Accept-Ranges', 'bytes'), ('ETag', '"fixture-media"'),
+            ('Last-Modified', 'Thu, 01 Oct 2026 00:00:00 GMT'),
+            ('Content-Disposition', 'inline; filename="fixture.png"'),
+            ('Set-Cookie', 'fixture=one; HttpOnly'), ('Set-Cookie', 'fixture2=two; HttpOnly'),
+        ], body)
+        path = '/api/sys/common/static/%E4%B8%AD%E6%96%87.png?fixture=1'
+        get_status, get_headers, get_body = self.http_response('GET', path)
+        status, headers, head_body = self.http_response('HEAD', path, {
+            'X-Access-Token': 'fixture-token', 'Cookie': 'fixture=session', 'Accept-Encoding': 'gzip',
+        })
+        self.assertEqual((status, get_status), (200, 200))
+        self.assertEqual(get_body, body)
+        self.assertEqual(head_body, b'')
+        for name in ('Content-Type', 'Content-Length', 'Accept-Ranges', 'ETag', 'Last-Modified', 'Content-Disposition', 'Set-Cookie'):
+            self.assertEqual(headers.get_all(name), get_headers.get_all(name), name)
+        self.assertEqual(headers.get_all('Content-Length'), [str(len(body))])
+        self.assert_local_csp(headers)
+        self.assertEqual(len(self.backend.head_requests), 1)
+        upstream_path, upstream_headers = self.backend.head_requests[0]
+        self.assertEqual(upstream_path, path)
+        self.assertEqual(upstream_headers['X-Access-Token'], 'fixture-token')
+        self.assertEqual(upstream_headers['Cookie'], 'fixture=session')
+        self.assertEqual(upstream_headers['Accept-Encoding'], 'identity')
+
+    def test_api_head_preserves_upstream_range_metadata(self):
+        # The backend decides how to handle Range on HEAD; the proxy must keep
+        # its status and metadata instead of deriving a length from an empty body.
+        for status, body, content_range in ((206, b'part', 'bytes 2-5/20'),
+                                             (416, b'range unavailable', 'bytes */20')):
+            with self.subTest(status=status):
+                self.backend.http_response = (status, [
+                    ('Content-Type', 'application/octet-stream'), ('Content-Length', str(len(body))),
+                    ('Content-Range', content_range), ('Accept-Ranges', 'bytes'),
+                ], body)
+                request_headers = {'Range': 'bytes=2-5', 'If-Range': '"fixture-media"'}
+                get_status, get_headers, get_body = self.http_response('GET', '/api/media', request_headers)
+                head_status, headers, head_body = self.http_response('HEAD', '/api/media', request_headers)
+                self.assertEqual((head_status, get_status), (status, status))
+                self.assertEqual(get_body, body)
+                self.assertEqual(head_body, b'')
+                for name in ('Content-Type', 'Content-Length', 'Content-Range', 'Accept-Ranges'):
+                    self.assertEqual(headers.get_all(name), get_headers.get_all(name), name)
+                self.assertEqual(self.backend.head_requests[-1][1]['Range'], 'bytes=2-5')
+                self.assertEqual(self.backend.head_requests[-1][1]['If-Range'], '"fixture-media"')
+                self.assert_local_csp(headers)
+
+    def test_api_head_does_not_invent_content_length(self):
+        for upstream_status, declared_length in ((200, None), (204, None), (304, None),
+                                                   (304, '1234'), (200, '0')):
+            with self.subTest(status=upstream_status, length=declared_length):
+                upstream_headers = [('ETag', '"fixture-media"')]
+                if declared_length is not None:
+                    upstream_headers.append(('Content-Length', declared_length))
+                self.backend.http_response = (upstream_status, upstream_headers, b'')
+                status, headers, body = self.http_response('HEAD', '/api/media')
+                self.assertEqual(status, upstream_status)
+                self.assertEqual(headers.get_all('Content-Length', []),
+                                 [] if declared_length is None else [declared_length])
+                self.assertEqual(headers['ETag'], '"fixture-media"')
+                self.assertEqual(body, b'')
+                self.assert_local_csp(headers)
+
+    def test_api_head_error_responses_keep_status_and_length_without_body(self):
+        for upstream_status in (401, 403, 404):
+            with self.subTest(status=upstream_status):
+                payload = ('fixture error ' + str(upstream_status)).encode()
+                self.backend.http_response = (upstream_status, [
+                    ('Content-Type', 'application/json'), ('Content-Length', str(len(payload))),
+                    ('WWW-Authenticate', 'Bearer realm="fixture"'),
+                ], payload)
+                get_status, get_headers, get_body = self.http_response('GET', '/api/media')
+                status, headers, body = self.http_response('HEAD', '/api/media')
+                self.assertEqual((status, get_status), (upstream_status, upstream_status))
+                self.assertEqual(get_body, payload)
+                self.assertEqual(body, b'')
+                for name in ('Content-Type', 'Content-Length', 'WWW-Authenticate'):
+                    self.assertEqual(headers.get_all(name), get_headers.get_all(name), name)
+                self.assert_local_csp(headers)
+
+    def test_api_head_local_errors_do_not_send_body(self):
+        old = self.handler.ports['backend']
+        with socket.socket() as unavailable:
+            unavailable.bind(('127.0.0.1', 0))
+            self.handler.ports['backend'] = unavailable.getsockname()[1]
+            try:
+                # Some hosts wait for timeout on a bound, unlistened socket.
+                # Keep the real TCP failure path, but bound this fixture's wait.
+                with patch.object(proxy, 'urlopen', lambda request, timeout: urlopen(request, timeout=.2)):
+                    status, headers, body = self.http_response('HEAD', '/api/media')
+                self.assertEqual(status, 502)
+                self.assertEqual(body, b'')
+                self.assertGreater(int(headers['Content-Length']), 0)
+                self.assert_local_csp(headers)
+            finally:
+                self.handler.ports['backend'] = old
+        for fields in ({'Content-Length': '-1'}, {'Transfer-Encoding': 'chunked'},
+                       {'Upgrade': 'websocket', 'Connection': 'Upgrade'}):
+            with self.subTest(headers=fields):
+                status, headers, body = self.http_response('HEAD', '/api/media', fields)
+                self.assertEqual(status, 400)
+                self.assertEqual(body, b'')
+                self.assert_local_csp(headers)
+        self.assertFalse(self.backend.requests)
+
+    def test_static_and_spa_head_match_get_without_body(self):
+        Path(self.tmp.name, 'fixture.js').write_bytes(b'fixture javascript')
+        Path(self.tmp.name, '\u4e2d\u6587.txt').write_bytes('fixture \u4e2d\u6587'.encode())
+        directory = Path(self.tmp.name, 'nested')
+        directory.mkdir()
+        (directory / 'index.html').write_bytes(b'nested index')
+        for path in ('/index.html', '/fixture.js?version=1', '/%E4%B8%AD%E6%96%87.txt',
+                     '/nested/spa-route?fixture=1', '/nested', '/nested/'):
+            with self.subTest(path=path):
+                get_status, get_headers, get_body = self.http_response('GET', path)
+                status, headers, body = self.http_response('HEAD', path)
+                self.assertEqual(status, get_status)
+                self.assertEqual(body, b'')
+                for name in ('Content-Type', 'Content-Length', 'Last-Modified', 'Location'):
+                    self.assertEqual(headers.get_all(name), get_headers.get_all(name), name)
+                if get_status == 200:
+                    self.assertEqual(int(headers['Content-Length']), len(get_body))
+                self.assert_local_csp(headers)
+        self.assertFalse(self.backend.requests)
+
+    def test_static_head_conditional_and_missing_responses(self):
+        _, get_headers, _ = self.http_response('GET', '/index.html')
+        for path, fields, expected in (('/index.html', {'If-Modified-Since': get_headers['Last-Modified']}, 304),
+                                        ('/missing.js', {}, 404)):
+            with self.subTest(path=path):
+                get_status, get_headers, get_body = self.http_response('GET', path, fields)
+                status, headers, body = self.http_response('HEAD', path, fields)
+                self.assertEqual((status, get_status), (expected, expected))
+                self.assertEqual(body, b'')
+                for name in ('Content-Type', 'Content-Length'):
+                    self.assertEqual(headers.get_all(name), get_headers.get_all(name), name)
+                if expected == 404:
+                    self.assertEqual(int(headers['Content-Length']), len(get_body))
+                self.assert_local_csp(headers)
 
     def test_handshake_and_early_frames_preserved(self):
         self.backend.mode = 'early'

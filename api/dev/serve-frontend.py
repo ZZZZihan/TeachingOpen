@@ -61,14 +61,20 @@ class LocalFrontend(SimpleHTTPRequestHandler):
             self.send_error(502, "Local backend unavailable")
             return
         with response:
-            data = response.read()
+            headers_only = self.command == "HEAD"
+            data = b"" if headers_only else response.read()
             self.send_response(response.status)
             for key, value in response.headers.items():
-                if key.lower() not in ("transfer-encoding", "connection", "content-length", "content-encoding"):
+                if (key.lower() not in ("transfer-encoding", "connection", "content-encoding")
+                        and (headers_only or key.lower() != "content-length")):
                     self.send_header(key, value)
-            self.send_header("Content-Length", str(len(data)))
+            # HEAD's length describes the selected representation, not its empty
+            # wire body. Preserve the upstream value (or its omission) exactly.
+            if not headers_only:
+                self.send_header("Content-Length", str(len(data)))
             self.end_headers()
-            self.wfile.write(data)
+            if not headers_only:
+                self.wfile.write(data)
 
     @staticmethod
     def header_tokens(headers, name):
@@ -194,14 +200,24 @@ class LocalFrontend(SimpleHTTPRequestHandler):
                             pending[peer[conn]].extend(chunk)
                             last_activity = time.monotonic()
 
+    def send_head(self):
+        # SimpleHTTPRequestHandler uses this same path for GET and HEAD.
+        route = Path(urlsplit(self.path).path)
+        if not route.suffix and not Path(self.translate_path(self.path)).exists():
+            self.path = "/index.html"
+        return super().send_head()
+
     def do_GET(self):
         if self.path.startswith("/api/"):
             self.api()
         else:
-            route = Path(urlsplit(self.path).path)
-            if not route.suffix and not Path(self.translate_path(self.path)).exists():
-                self.path = "/index.html"
             super().do_GET()
+
+    def do_HEAD(self):
+        if self.path.startswith("/api/"):
+            self.api()
+        else:
+            super().do_HEAD()
 
     do_POST = api
     do_PUT = api
