@@ -13,6 +13,7 @@ import org.crazycake.shiro.RedisManager;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.shiro.authc.ShiroRealm;
 import org.jeecg.modules.shiro.authc.aop.JwtFilter;
+import org.jeecg.modules.shiro.authc.aop.LocalMediaInvalidRequestFilter;
 import org.jeecg.modules.shiro.authc.aop.MediaCookie;
 import org.jeecg.modules.shiro.authc.aop.MediaJwtFilter;
 import org.jeecg.modules.shiro.authc.aop.OptionalJwtFilter;
@@ -173,6 +174,8 @@ public class ShiroConfig {
 
 		// 添加自己的过滤器并且取名为jwt
 		Map<String, Filter> filterMap = new HashMap<String, Filter>(1);
+		// Retain Shiro's global path guard, with Unicode scoped to local media reads.
+		filterMap.put("invalidRequest", new LocalMediaInvalidRequestFilter());
 		filterMap.put("jwt", new JwtFilter(mediaCookie));
 		filterMap.put("optionalJwt", new OptionalJwtFilter(mediaCookie));
 		filterMap.put("mediaJwt", new MediaJwtFilter(mediaCookie));
