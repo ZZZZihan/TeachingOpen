@@ -269,7 +269,7 @@
     {
       "component": "Application WebSocket handlers",
       "evidence": "WebSocket.java uses userId path to subscribe; ScratchWebSocket logs whole incoming messages and uses token/project IDs in onMessage. ShiroConfig permits websocket paths.",
-      "assessment": "Initial source concern subsequently reproduced and backend remediations delivered in PR34/PR36, with local proxy PR35. See remediation entries; shipped Scratch integration, broader REST authorization and capacity remain pending."
+      "assessment": "Backend findings reproduced and remediated in PR34/PR36; local proxy PR35; shipped Scratch client PR37 tested with real backend and actual anonymous browser. Authenticated editor browser, broader REST authorization and capacity remain pending."
     }
   ],
   "tomcat_remediation": {
@@ -294,6 +294,13 @@
     "candidate_commit": "082813c47db020fdc02c6d30ba340457d00cef1a",
     "jar_sha256": "ba9a03697641afdb8ee1781ab20848e1865fdfa4ee4c1c1ac317156f7efcb72f",
     "scope": "Real legacy 14/14 reproduction, corrected backend 52/52 plus related 469/469 on isolated final JAR; 114/114 relevant checks repeated after local integration. Immutable project/identity, work visibility, outbound revalidation, bounded serialized send, atomic Redis mutations, no raw token/value logs.",
-    "remaining": "Shipped Scratch provider/editor integration (host port, unsaved/sample identity, token and reconnect lifecycle), multi-instance ordering, cross-store authorization/write race, slow-client/load tests and Redis data backup/restore remain pending."
+    "remaining": "Shipped provider work tracked separately in PR37; authenticated browser save/reopen and private player remain pending. Multi-instance ordering, cross-store authorization/write race, slow-client/load and Redis data backup/restore remain pending."
+  },
+  "scratch_client_remediation": {
+    "pull_request": "https://github.com/ZZZZihan/TeachingOpen/pull/37",
+    "product_commit": "1370f9c29d167d3aa6ddef91784a0b66851603be",
+    "draft": true,
+    "scope": "Same-origin port, saved work identity, current-session lifecycle, bounded confirmation/reconnect, explicit failure UI, actual anonymous engine and Node real-backend checks. Single vendor condition patch retaining cloud-variable UI.",
+    "remaining": "Authenticated browser owner first save/reopen, private player and account switch. Existing blob Worker CSP incompatibility observed in both old and new pages; no policy relaxation here."
   }
 }
