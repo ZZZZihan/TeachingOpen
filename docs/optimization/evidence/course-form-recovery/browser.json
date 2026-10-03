@@ -1,0 +1,142 @@
+{
+  "cases": [
+    {
+      "case": "课程 viewport and reachable save 1440",
+      "passed": true
+    },
+    {
+      "case": "课程 no internal horizontal overflow 1440",
+      "passed": true
+    },
+    {
+      "case": "课程 viewport and reachable save 768",
+      "passed": true
+    },
+    {
+      "case": "课程 no internal horizontal overflow 768",
+      "passed": true
+    },
+    {
+      "case": "课程 viewport and reachable save 390",
+      "passed": true
+    },
+    {
+      "case": "课程 no internal horizontal overflow 390",
+      "passed": true
+    },
+    {
+      "case": "单元 viewport and reachable save 1440",
+      "passed": true
+    },
+    {
+      "case": "单元 no internal horizontal overflow 1440",
+      "passed": true
+    },
+    {
+      "case": "单元 viewport and reachable save 768",
+      "passed": true
+    },
+    {
+      "case": "单元 no internal horizontal overflow 768",
+      "passed": true
+    },
+    {
+      "case": "单元 viewport and reachable save 390",
+      "passed": true
+    },
+    {
+      "case": "单元 no internal horizontal overflow 390",
+      "passed": true
+    },
+    {
+      "case": "课程 old business failure closes actual form",
+      "passed": true
+    },
+    {
+      "case": "课程 business failure retains input and focuses recoverable error",
+      "passed": true
+    },
+    {
+      "case": "课程 transport failure retains input and uncertain-outcome warning",
+      "passed": true
+    },
+    {
+      "case": "课程 busy dialog cannot close and form is inert",
+      "passed": true
+    },
+    {
+      "case": "课程 exactly one write and one success callback",
+      "passed": true
+    },
+    {
+      "case": "课程 preserved text reaches save payload",
+      "passed": true
+    },
+    {
+      "case": "课程 continue editing retains dirty input",
+      "passed": true
+    },
+    {
+      "case": "课程 explicit discard closes form",
+      "passed": true
+    },
+    {
+      "case": "课程 clean close requires no discard prompt",
+      "passed": true
+    },
+    {
+      "case": "单元 old business failure closes actual form",
+      "passed": true
+    },
+    {
+      "case": "单元 business failure retains input and focuses recoverable error",
+      "passed": true
+    },
+    {
+      "case": "单元 transport failure retains input and uncertain-outcome warning",
+      "passed": true
+    },
+    {
+      "case": "单元 busy dialog cannot close and form is inert",
+      "passed": true
+    },
+    {
+      "case": "单元 exactly one write and one success callback",
+      "passed": true
+    },
+    {
+      "case": "单元 preserved text reaches save payload",
+      "passed": true
+    },
+    {
+      "case": "单元 continue editing retains dirty input",
+      "passed": true
+    },
+    {
+      "case": "单元 explicit discard closes form",
+      "passed": true
+    },
+    {
+      "case": "单元 clean close requires no discard prompt",
+      "passed": true
+    }
+  ],
+  "shots": [
+    "output/playwright/course-form-before-course-1440.png",
+    "output/playwright/course-form-before-course-768.png",
+    "output/playwright/course-form-before-course-390.png",
+    "output/playwright/course-form-before-unit-1440.png",
+    "output/playwright/course-form-before-unit-768.png",
+    "output/playwright/course-form-before-unit-390.png",
+    "output/playwright/course-form-after-course-1440.png",
+    "output/playwright/course-form-after-course-768.png",
+    "output/playwright/course-form-after-course-390.png",
+    "output/playwright/course-form-after-unit-1440.png",
+    "output/playwright/course-form-after-unit-768.png",
+    "output/playwright/course-form-after-unit-390.png",
+    "output/playwright/course-form-after-course-error.png",
+    "output/playwright/course-form-after-unit-error.png"
+  ],
+  "passed": 30,
+  "total": 30
+}
