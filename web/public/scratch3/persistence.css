@@ -25,3 +25,6 @@ body { display: flex; flex-direction: column; color: #202c2a; background: #f5f7f
   .editor-actions { flex-wrap: wrap; }
   .editor-actions button { min-height: 40px; }
 }
+
+#cloud-status { margin: 2px 0 0; color: #53645e; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+#cloud-status[data-phase="error"], #cloud-status[data-phase="denied"], #cloud-status[data-phase="session"] { color: #a0392c; }

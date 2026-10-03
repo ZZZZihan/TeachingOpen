@@ -13,6 +13,7 @@
   <script src="../js/qiniu.min.js"></script>
   <script src="../js/common.js?v=28"></script>
   <script src="persistence.js"></script>
+  <script src="cloud-client.js"></script>
   <script src="editor-bridge.js"></script>
   <script>
     var userInfo = {}
@@ -30,8 +31,8 @@
       },
       cloudData:{
         enable: true,
-        id: "create", //云变量ID，提交作业后使用window.scratch.setCloudId换成作品ID
-        api: window.location.hostname +"/api/websocket/scratch/cloudData" //云变量API地址
+        managed: true, // Connections are owned by cloud-client.js; local cloud blocks remain available.
+        id: ""
       },
       projectInfo: {//作品信息
         projectName: "",
@@ -82,6 +83,7 @@
         newButton:{
           show: true,
           handleBefore(){
+            window.TeachingScratch.localCloud()
             return true
           }
         },
@@ -89,6 +91,7 @@
         loadFileButton:{
           show: true,
           handleBefore(){
+            window.TeachingScratch.localCloud()
             return true
           }
         },
@@ -187,8 +190,10 @@
     <div class="editor-heading">
       <h1>Scratch · 图形化创作</h1>
       <p id="persistence-status" role="status" aria-live="polite">正在启动编辑器…</p>
+      <p id="cloud-status" role="status" aria-live="polite">当前为本地变量。保存作品后才连接云端。</p>
     </div>
     <nav class="editor-actions" aria-label="作品操作">
+      <button id="retry-cloud" type="button" hidden>重连云变量</button>
       <button id="retry-load" type="button" hidden>重新打开</button>
       <button id="save-draft" type="button" disabled>保存草稿</button>
       <button id="submit-work" type="button" class="primary" disabled>提交作业</button>

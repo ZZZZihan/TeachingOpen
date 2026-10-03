@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 
 <head>
   <meta charset="UTF-8">
@@ -7,17 +7,17 @@
   <meta name="google" value="notranslate">
   <link rel="shortcut icon" href="static/favicon.ico">
   <title>Scratch 3.0 Player</title>
-  <style>html, body { margin: 0; } #scratch { width: 100%; }</style>
+  <style>html, body { margin: 0; } #scratch { width: 100%; } .cloud-status-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 10; padding: 5px 8px; background: rgba(255,255,255,.96); color: #53645e; font: 12px/1.5 sans-serif; } .cloud-status-bar button { margin-left: 8px; color: #225e48; background: #fff; border: 1px solid #cad6d0; border-radius: 4px; cursor: pointer; } [hidden] { display: none !important; }</style>
   <script src="../js/jquery.min.js"></script>
   <script src="../js/common.js?v=28"></script>
+  <script src="cloud-client.js"></script>
+  <script src="player-bridge.js"></script>
   <script>
-    var workId = urlParams('workId')
-    var workUrl = urlParams('workUrl')
     window.scratchConfig = {
       cloudData:{
         enable: true,
-        id: workId, //云变量ID
-        api: window.location.hostname + "/api/websocket/scratch/cloudData" //云变量API地址
+        managed: true,
+        id: ""
       },
       projectInfo: {//作品信息
         authorUsername: "",
@@ -58,29 +58,14 @@
           }
         }
       },
-      handleVmInitialized: (vm) => {
-        window.vm = vm
-      },
-      handleDefaultProjectLoaded: () => {
-        if(workUrl){
-          window.scratch.loadProject(workUrl, () => {
-            window.scratch.setCloudId(workUrl)
-            vm.runtime.start()
-          })
-        }else if(workId){
-          getWorkInfo(workId, function (info) {
-            window.scratch.loadProject(info.workFileKey_url, () => {
-              window.scratch.setCloudId(workId)
-              vm.runtime.start()
-            })
-          })
-        }
-      }
+      handleVmInitialized: window.TeachingScratchPlayer.initialize,
+      handleDefaultProjectLoaded: window.TeachingScratchPlayer.start
     }
   </script>
 </head>
 
 <body>
+  <aside id="cloud-status-bar" class="cloud-status-bar" aria-label="云变量状态"><span id="player-status" role="status" aria-live="polite">正在打开作品…</span><button id="retry-project" type="button" hidden>重新打开</button><span id="cloud-status" role="status" aria-live="polite">案例变量在本机运行。</span><button id="retry-cloud" type="button" hidden>重连云变量</button></aside>
   <div id="scratch">
   </div>
 </body>
