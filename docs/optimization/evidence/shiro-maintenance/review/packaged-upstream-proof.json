@@ -1,0 +1,127 @@
+{
+  "audited_artifact_matches": [
+    {
+      "evidence_file": "shiro-spring-boot-starter-1.13.0--ShiroWebFilterConfiguration.javap.txt",
+      "packaged_library": "BOOT-INF/lib/shiro-spring-boot-starter-1.13.0.jar",
+      "matches_audited_m2_artifact": true
+    },
+    {
+      "evidence_file": "shiro-spring-boot-starter-1.13.0--ShiroEnvironmentPostProcessor.javap.txt",
+      "packaged_library": "BOOT-INF/lib/shiro-spring-boot-starter-1.13.0.jar",
+      "matches_audited_m2_artifact": true
+    },
+    {
+      "evidence_file": "shiro-spring-1.13.0--ShiroFilterFactoryBean.javap.txt",
+      "packaged_library": "BOOT-INF/lib/shiro-spring-1.13.0.jar",
+      "matches_audited_m2_artifact": true
+    },
+    {
+      "evidence_file": "shiro-spring-1.13.0--ShiroRequestMappingConfig.javap.txt",
+      "packaged_library": "BOOT-INF/lib/shiro-spring-1.13.0.jar",
+      "matches_audited_m2_artifact": true
+    },
+    {
+      "evidence_file": "shiro-web-1.13.0--DefaultWebSecurityManager.javap.txt",
+      "packaged_library": "BOOT-INF/lib/shiro-web-1.13.0.jar",
+      "matches_audited_m2_artifact": true
+    },
+    {
+      "evidence_file": "spring-context-5.1.5.RELEASE--ConfigurationClassEnhancer$BeanMethodInterceptor.javap.txt",
+      "packaged_library": "BOOT-INF/lib/spring-context-5.1.5.RELEASE.jar",
+      "matches_audited_m2_artifact": true
+    },
+    {
+      "evidence_file": "spring-boot-2.1.3.RELEASE--ServletContextInitializerBeans.javap.txt",
+      "packaged_library": "BOOT-INF/lib/spring-boot-2.1.3.RELEASE.jar",
+      "matches_audited_m2_artifact": true
+    },
+    {
+      "evidence_file": "spring-boot-autoconfigure-2.1.3.RELEASE--OnBeanCondition.javap.txt",
+      "packaged_library": "BOOT-INF/lib/spring-boot-autoconfigure-2.1.3.RELEASE.jar",
+      "matches_audited_m2_artifact": true
+    },
+    {
+      "evidence_file": "shiro-spring-1.13.0--AbstractShiroWebConfiguration.javap.txt",
+      "packaged_library": "BOOT-INF/lib/shiro-spring-1.13.0.jar",
+      "matches_audited_m2_artifact": true
+    }
+  ],
+  "all_match": true,
+  "apache_shiro_class_majors": [
+    {
+      "library": "shiro-cache-1.13.0.jar",
+      "class_major_counts": {
+        "52": 8
+      }
+    },
+    {
+      "library": "shiro-config-core-1.13.0.jar",
+      "class_major_counts": {
+        "52": 6
+      }
+    },
+    {
+      "library": "shiro-config-ogdl-1.13.0.jar",
+      "class_major_counts": {
+        "52": 23
+      }
+    },
+    {
+      "library": "shiro-core-1.13.0.jar",
+      "class_major_counts": {
+        "52": 367
+      }
+    },
+    {
+      "library": "shiro-crypto-cipher-1.13.0.jar",
+      "class_major_counts": {
+        "52": 13
+      }
+    },
+    {
+      "library": "shiro-crypto-core-1.13.0.jar",
+      "class_major_counts": {
+        "52": 4
+      }
+    },
+    {
+      "library": "shiro-crypto-hash-1.13.0.jar",
+      "class_major_counts": {
+        "52": 25
+      }
+    },
+    {
+      "library": "shiro-event-1.13.0.jar",
+      "class_major_counts": {
+        "52": 13
+      }
+    },
+    {
+      "library": "shiro-lang-1.13.0.jar",
+      "class_major_counts": {
+        "52": 37
+      }
+    },
+    {
+      "library": "shiro-spring-1.13.0.jar",
+      "class_major_counts": {
+        "52": 29
+      }
+    },
+    {
+      "library": "shiro-spring-boot-starter-1.13.0.jar",
+      "class_major_counts": {
+        "52": 9
+      }
+    },
+    {
+      "library": "shiro-web-1.13.0.jar",
+      "class_major_counts": {
+        "52": 109
+      }
+    }
+  ],
+  "owasp_encoder_class_major_counts": {
+    "49": 21
+  }
+}

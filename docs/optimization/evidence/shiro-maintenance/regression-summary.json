@@ -1,0 +1,101 @@
+[
+  {
+    "suite": "auth-status",
+    "exit_code": 0,
+    "seconds": 0.78,
+    "log": "auth-status.log",
+    "passed": 7,
+    "total": 7,
+    "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+    "scope": "real local HTTP, CAPTCHA, login and logout; no role/asset permission acceptance"
+  },
+  {
+    "suite": "role-cache",
+    "exit_code": 0,
+    "seconds": 0.64,
+    "log": "role-cache.log",
+    "passed": 11,
+    "total": 11,
+    "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+    "scope": "real synthetic login/logout, database role change and Redis cache readback; no explicit eviction within the tested transition; no production role-editor acceptance"
+  },
+  {
+    "suite": "permission-menu",
+    "exit_code": 0,
+    "seconds": 1.5,
+    "log": "permission-menu.log",
+    "passed": 34,
+    "total": 34,
+    "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+    "scope": "actual HTTP, authentication, role/department SQL fixtures, bounded menu-table unavailability, private log scan; no browser login or administrative menu-editor acceptance"
+  },
+  {
+    "suite": "course-management",
+    "exit_code": 0,
+    "seconds": 3.0,
+    "log": "course-management.log",
+    "passed": 188,
+    "total": 188,
+    "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+    "scope": "real HTTP login, role gates, database and attachments; import role gate only, not workbook import; no full role UI acceptance"
+  },
+  {
+    "suite": "learning-units",
+    "exit_code": 0,
+    "seconds": 1.79,
+    "log": "learning-units.log",
+    "passed": 80,
+    "total": 80,
+    "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+    "scope": "real HTTP login and unit list/detail responses, synthetic DB fixtures and cleanup; not browser editors or direct attachment-download authorization"
+  },
+  {
+    "suite": "community-work",
+    "exit_code": 0,
+    "seconds": 22.62,
+    "log": "community-work.log",
+    "passed": 235,
+    "total": 235,
+    "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+    "scope": "real synthetic HTTP/auth/DB/cache and disclosure checks; no browser editor, direct static-file security, concurrency or full public-profile privacy acceptance"
+  },
+  {
+    "suite": "local-download",
+    "exit_code": 0,
+    "seconds": 2.27,
+    "log": "local-download.log",
+    "passed": 88,
+    "total": 88,
+    "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e"
+  },
+  {
+    "suite": "notification-websocket",
+    "exit_code": 0,
+    "seconds": 11.28,
+    "log": "notification-websocket.log",
+    "passed": 44,
+    "total": 44,
+    "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+    "scope": "Actual local synthetic WebSocket and HTTP notification delivery; no external or real-user messages. Notification endpoint only, not Scratch cloud data or all announcement REST authorization."
+  },
+  {
+    "suite": "scratch-cloud",
+    "exit_code": 0,
+    "seconds": 15.82,
+    "log": "scratch-cloud.log",
+    "passed": 52,
+    "total": 52,
+    "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+    "scope": "Real Java/Redis/MySQL via local same-origin WebSocket, synthetic projects and CLI login only; not browser or shipped editor acceptance"
+  },
+  {
+    "suite": "token-logging",
+    "exit_code": 0,
+    "seconds": 0.3,
+    "log": "token-logging.log",
+    "passed": 13,
+    "total": 13,
+    "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+    "scope": "real HTTP authentication, owned Redis cache JWT expiry/refresh, DEBUG and INFO log observation, logout and revocation; no log excerpts or credentials exported"
+  }
+]

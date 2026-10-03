@@ -1,0 +1,186 @@
+{
+  "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "expected_legacy": false,
+  "via_frontend": false,
+  "cases": [
+    {
+      "case": "administrator can send a targeted notification",
+      "passed": true
+    },
+    {
+      "case": "anonymous path identity delivery matches expected boundary",
+      "passed": true
+    },
+    {
+      "case": "cross-user authentication rejected",
+      "passed": true
+    },
+    {
+      "case": "other account cannot receive target private notification",
+      "passed": true
+    },
+    {
+      "case": "invalid token rejected",
+      "passed": true
+    },
+    {
+      "case": "owner authentication response",
+      "passed": true
+    },
+    {
+      "case": "second owner connection authenticates",
+      "passed": true
+    },
+    {
+      "case": "other owner authenticates separately",
+      "passed": true
+    },
+    {
+      "case": "first owner tab receives targeted notification",
+      "passed": true
+    },
+    {
+      "case": "second owner tab receives targeted notification",
+      "passed": true
+    },
+    {
+      "case": "targeted notification does not reach other owner",
+      "passed": true
+    },
+    {
+      "case": "closing one tab preserves other owner connection",
+      "passed": true
+    },
+    {
+      "case": "anonymous HTTP sender denied False",
+      "passed": true
+    },
+    {
+      "case": "anonymous HTTP send has no delivery False",
+      "passed": true
+    },
+    {
+      "case": "anonymous HTTP sender denied True",
+      "passed": true
+    },
+    {
+      "case": "anonymous HTTP send has no delivery True",
+      "passed": true
+    },
+    {
+      "case": "student_a direct test sending restricted to administrators",
+      "passed": true
+    },
+    {
+      "case": "student_a rejected direct send has no delivery",
+      "passed": true
+    },
+    {
+      "case": "student_a test broadcast restricted to administrators",
+      "passed": true
+    },
+    {
+      "case": "student_a rejected broadcast has no delivery",
+      "passed": true
+    },
+    {
+      "case": "student_b direct test sending restricted to administrators",
+      "passed": true
+    },
+    {
+      "case": "student_b rejected direct send has no delivery",
+      "passed": true
+    },
+    {
+      "case": "student_b test broadcast restricted to administrators",
+      "passed": true
+    },
+    {
+      "case": "student_b rejected broadcast has no delivery",
+      "passed": true
+    },
+    {
+      "case": "teacher_a direct test sending restricted to administrators",
+      "passed": true
+    },
+    {
+      "case": "teacher_a rejected direct send has no delivery",
+      "passed": true
+    },
+    {
+      "case": "teacher_a test broadcast restricted to administrators",
+      "passed": true
+    },
+    {
+      "case": "teacher_a rejected broadcast has no delivery",
+      "passed": true
+    },
+    {
+      "case": "administrator broadcast succeeds",
+      "passed": true
+    },
+    {
+      "case": "administrator broadcast reaches owner",
+      "passed": true
+    },
+    {
+      "case": "administrator broadcast reaches other authenticated owner",
+      "passed": true
+    },
+    {
+      "case": "authenticated heartbeat remains compatible",
+      "passed": true
+    },
+    {
+      "case": "logged-out token no longer receives notifications",
+      "passed": true
+    },
+    {
+      "case": "revoked receiver closes with policy code",
+      "passed": true
+    },
+    {
+      "case": "authenticated socket cannot switch identity",
+      "passed": true
+    },
+    {
+      "case": "malformed first frame closes safely",
+      "passed": true
+    },
+    {
+      "case": "heartbeat does not authenticate an anonymous socket",
+      "passed": true
+    },
+    {
+      "case": "altered credential cannot authenticate a known user ID",
+      "passed": true
+    },
+    {
+      "case": "new login can authenticate again",
+      "passed": true
+    },
+    {
+      "case": "new login receives its own notification",
+      "passed": true
+    },
+    {
+      "case": "notification content logging matches expected privacy boundary",
+      "passed": true
+    },
+    {
+      "case": "active credentials absent from ordinary notification logs",
+      "passed": true
+    },
+    {
+      "case": "all non-audit-log database tables unchanged",
+      "passed": true
+    },
+    {
+      "case": "all original attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 44,
+  "total": 44,
+  "scope": "Actual local synthetic WebSocket and HTTP notification delivery; no external or real-user messages. Notification endpoint only, not Scratch cloud data or all announcement REST authorization."
+}

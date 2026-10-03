@@ -53,6 +53,8 @@
     <properties>
         <jeecgboot.version>2.2.0</jeecgboot.version>
         <java.version>1.8</java.version>
+        <!-- Java 8 transition only: Shiro 1.x remains end-of-life. -->
+        <shiro.version>1.13.0</shiro.version>
         <!-- Keep the embedded Servlet 4 container on the maintained Java 8 line. -->
         <tomcat.version>9.0.122</tomcat.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -207,7 +209,7 @@
 		<dependency>
 		    <groupId>org.apache.shiro</groupId>
 		    <artifactId>shiro-spring-boot-starter</artifactId>
-		    <version>1.7.0</version>
+		    <version>${shiro.version}</version>
 		</dependency>
 		<!-- shiro-redis -->
         <dependency>

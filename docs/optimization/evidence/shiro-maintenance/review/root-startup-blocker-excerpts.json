@@ -1,0 +1,34 @@
+[
+  {
+    "source": ".devspace/shiro-1003/logs/backend-initial.log",
+    "selected_exception_lines": [
+      {
+        "line": 13,
+        "text": "org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext]: Constructor threw exception; nested exception is java.lang.NoClassDefFoundError: org/springframework/core/metrics/ApplicationStartup"
+      },
+      {
+        "line": 29,
+        "text": "Caused by: java.lang.NoClassDefFoundError: org/springframework/core/metrics/ApplicationStartup"
+      },
+      {
+        "line": 41,
+        "text": "Caused by: java.lang.ClassNotFoundException: org.springframework.core.metrics.ApplicationStartup"
+      }
+    ],
+    "producer": "root controlled local startup, read-only review of exception lines, not this reviewer process"
+  },
+  {
+    "source": ".devspace/shiro-1003/logs/backend-property-only.log",
+    "selected_exception_lines": [
+      {
+        "line": 46,
+        "text": "2026-10-03 18:33:19.371 [main] ERROR o.s.boot.web.embedded.tomcat.TomcatStarter:62 - Error starting Tomcat context. Exception: org.springframework.beans.factory.BeanCreationException. Message: Error creating bean with name 'filterShiroFilterRegistrationBean' defined in class path resource [org/apache/shiro/spring/config/web/autoconfigure/ShiroWebFilterConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.boot.web.servlet.FilterRegistrationBean]: Factory method 'filterShiroFilterRegistrationBean' threw exception; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'shiroFilterFactoryBean' available"
+      },
+      {
+        "line": 60,
+        "text": "Method filterShiroFilterRegistrationBean in org.apache.shiro.spring.config.web.autoconfigure.ShiroWebFilterConfiguration required a bean named 'shiroFilterFactoryBean' that could not be found."
+      }
+    ],
+    "producer": "root controlled local startup, read-only review of exception lines, not this reviewer process"
+  }
+]

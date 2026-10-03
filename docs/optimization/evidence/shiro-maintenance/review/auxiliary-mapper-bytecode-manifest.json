@@ -1,0 +1,14 @@
+[
+  {
+    "class": "springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping",
+    "evidence_file": "springfox-2.9.2--PropertySourcedRequestMappingHandlerMapping.javap.txt",
+    "artifact_sha256": "df925e7a2435de246afd68b83800e1f2a4b6d8031692298740e261a4a9b30b3d",
+    "matches_packaged_runtime": true
+  },
+  {
+    "class": "org.springframework.boot.actuate.endpoint.web.servlet.ControllerEndpointHandlerMapping",
+    "evidence_file": "spring-boot-actuator-2.1.3--ControllerEndpointHandlerMapping.javap.txt",
+    "artifact_sha256": "9760540bb7f96e1a5621037f6fdeb52f08112a992af941b04c6fb6c9afd9f99d",
+    "matches_packaged_runtime": true
+  }
+]

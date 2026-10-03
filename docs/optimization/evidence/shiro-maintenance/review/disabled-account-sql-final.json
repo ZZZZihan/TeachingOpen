@@ -1,0 +1,35 @@
+{
+  "scope": "actual candidate JAR HTTP; one owned fixture account disabled in SQL and restored; user cache untouched; no production",
+  "checks": [
+    {
+      "case": "credential is valid before temporary account disable",
+      "passed": true
+    },
+    {
+      "case": "disabled account rejects its previously valid credential",
+      "passed": false
+    },
+    {
+      "case": "disabled account state is restored",
+      "passed": true
+    },
+    {
+      "case": "same credential works after account state restoration",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "case": "previously valid credential while fixture account disabled; cache untouched",
+      "fixture_disabled_in_database": true,
+      "http_status": 200,
+      "api_code": 0,
+      "api_success": true
+    }
+  ],
+  "observed_utc": "2026-10-03T11:02:28.693862+00:00",
+  "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "phase": "disabled",
+  "passed": 3,
+  "total": 4
+}

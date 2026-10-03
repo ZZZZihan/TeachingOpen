@@ -1,0 +1,5 @@
+{
+  "test_launcher_or_servlet_in_packaged_jar": false,
+  "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "scope": "test launcher and dispatch endpoints compiled from src/test against exact JAR; not packaged in product"
+}
