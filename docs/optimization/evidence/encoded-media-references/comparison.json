@@ -1,0 +1,135 @@
+{
+  "identical_script_sha256": true,
+  "script_sha256": "f97fa6e661460da30a80c0e582cf150795823c8775207ae66c491189b46663d9",
+  "identical_case_names_statuses_and_expected_bytes": true,
+  "baseline": {
+    "report": "baseline-corrected.json",
+    "observed_utc": "2026-10-03T13:24:43.200943+00:00",
+    "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+    "passed": 83,
+    "total": 113
+  },
+  "candidate": {
+    "report": "candidate-final.json",
+    "observed_utc": "2026-10-03T13:21:28.468079+00:00",
+    "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+    "passed": 113,
+    "total": 113
+  },
+  "corrected_execution_order": [
+    "candidate-final",
+    "baseline-corrected"
+  ],
+  "improved_cases": [
+    "original legal percent2B HTML reference",
+    "public course configured same-origin percent2B uppercase",
+    "public course configured same-origin percent2b lowercase",
+    "public course optional unreserved first character encoded",
+    "public course mixed raw and encoded characters",
+    "public course HTML percent-encoded href",
+    "public course JSON percent-encoded string",
+    "encoded public cover HEAD",
+    "encoded public cover Range",
+    "encoded unit JSON permitted student_a",
+    "encoded unit HTML permitted student_a",
+    "encoded unit JSON permitted teacher_a",
+    "encoded unit HTML permitted teacher_a",
+    "encoded private unit cookie-only GET",
+    "encoded private unit cookie-only HEAD",
+    "encoded private unit cookie-only Range",
+    "hidden encoded unit video retained for teacher",
+    "hidden encoded plan retained for teacher",
+    "encoded additional starter permitted student_a",
+    "encoded additional starter permitted teacher_a",
+    "encoded additional document JSON class student",
+    "closed additional encoded starter retained for teacher",
+    "enabled sysconfig lowercase percent HTML anonymous",
+    "enabled sysconfig percent JSON anonymous",
+    "published news encoded JSON anonymous",
+    "published news encoded HTML anonymous",
+    "percent2B grants plus filename",
+    "percent2B grants plus comparison file",
+    "boundary valid encoded exact key",
+    "restored account token can read encoded private unit"
+  ],
+  "regressed_cases": [],
+  "restoration": {
+    "baseline-corrected": {
+      "all_table_schemas_equal_including_sys_log": true,
+      "all_non_log_complete_rows_equal": true,
+      "all_attachment_inventory_equal": true,
+      "error_type": null,
+      "cleanup_errors": []
+    },
+    "candidate-final": {
+      "all_table_schemas_equal_including_sys_log": true,
+      "all_non_log_complete_rows_equal": true,
+      "all_attachment_inventory_equal": true,
+      "error_type": null,
+      "cleanup_errors": []
+    }
+  },
+  "original_percent2B_observations": {
+    "baseline": [
+      {
+        "case": "original legal percent2B HTML reference",
+        "desired_status": 200,
+        "returned_expected_bytes": false,
+        "http_status": 401,
+        "body_bytes": 0,
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "headers": {
+          "cache-control": "no-store",
+          "content-length": "0"
+        }
+      },
+      {
+        "case": "original literal plus HTML comparison",
+        "desired_status": 200,
+        "returned_expected_bytes": true,
+        "http_status": 200,
+        "body_bytes": 73,
+        "body_sha256": "aad4475b137065b61497b32c9c0a4d050ef34a42ee0901d3ab1f623772145631",
+        "headers": {
+          "cache-control": "no-store",
+          "x-content-type-options": "nosniff",
+          "content-disposition": "inline; filename*=UTF-8''original%2Bcover.png",
+          "content-type": "image/png",
+          "content-length": "73"
+        }
+      }
+    ],
+    "candidate": [
+      {
+        "case": "original legal percent2B HTML reference",
+        "desired_status": 200,
+        "returned_expected_bytes": true,
+        "http_status": 200,
+        "body_bytes": 73,
+        "body_sha256": "aad4475b137065b61497b32c9c0a4d050ef34a42ee0901d3ab1f623772145631",
+        "headers": {
+          "cache-control": "no-store",
+          "x-content-type-options": "nosniff",
+          "content-disposition": "inline; filename*=UTF-8''original%2Bcover.png",
+          "content-type": "image/png",
+          "content-length": "73"
+        }
+      },
+      {
+        "case": "original literal plus HTML comparison",
+        "desired_status": 200,
+        "returned_expected_bytes": true,
+        "http_status": 200,
+        "body_bytes": 73,
+        "body_sha256": "aad4475b137065b61497b32c9c0a4d050ef34a42ee0901d3ab1f623772145631",
+        "headers": {
+          "cache-control": "no-store",
+          "x-content-type-options": "nosniff",
+          "content-disposition": "inline; filename*=UTF-8''original%2Bcover.png",
+          "content-type": "image/png",
+          "content-length": "73"
+        }
+      }
+    ]
+  }
+}

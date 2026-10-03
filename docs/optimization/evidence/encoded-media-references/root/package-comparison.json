@@ -1,0 +1,13 @@
+{
+  "baseline_jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "candidate_jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+  "added": [],
+  "deleted": [],
+  "changed": [
+    "BOOT-INF/classes/org/jeecg/modules/system/service/LocalDownloadAccessService.class",
+    "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar"
+  ],
+  "common_unpacked_equal": true,
+  "external_jars_equal": true,
+  "external_jar_count": 208
+}
