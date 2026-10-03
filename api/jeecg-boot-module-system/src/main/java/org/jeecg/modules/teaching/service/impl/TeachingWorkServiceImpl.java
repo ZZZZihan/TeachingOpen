@@ -77,19 +77,19 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	public void updateMain(TeachingWork teachingWork,List<TeachingWorkCorrect> teachingWorkCorrectList,List<TeachingWorkComment> teachingWorkCommentList) {
 		teachingWorkMapper.updateById(teachingWork);
 		
-		//1.先删除子表数据
-		teachingWorkCorrectMapper.deleteByMainId(teachingWork.getId());
-		teachingWorkCommentMapper.deleteByMainId(teachingWork.getId());
-		
-		//2.子表数据重新插入
-		if(teachingWorkCorrectList!=null && teachingWorkCorrectList.size()>0) {
+		// A partial edit must not clear a collection that the caller did not send.
+		// Null (including an omitted property) preserves it; [] explicitly clears it.
+		// Keep replacement inside this transaction so a failed insert restores all rows.
+		if(teachingWorkCorrectList!=null) {
+			teachingWorkCorrectMapper.deleteByMainId(teachingWork.getId());
 			for(TeachingWorkCorrect entity:teachingWorkCorrectList) {
 				//外键设置
 				entity.setWorkId(teachingWork.getId());
 				teachingWorkCorrectMapper.insert(entity);
 			}
 		}
-		if(teachingWorkCommentList!=null && teachingWorkCommentList.size()>0) {
+		if(teachingWorkCommentList!=null) {
+			teachingWorkCommentMapper.deleteByMainId(teachingWork.getId());
 			for(TeachingWorkComment entity:teachingWorkCommentList) {
 				//外键设置
 				entity.setWorkId(teachingWork.getId());

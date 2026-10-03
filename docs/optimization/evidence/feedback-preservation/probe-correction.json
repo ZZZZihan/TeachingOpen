@@ -1,0 +1,5 @@
+{
+  "accepted": false,
+  "reason": "Initial probe expected HTTP 401/403 for authenticated Shiro denial. Live readback proved HTTP 200, success false, code 510, result null, matching existing work-management verifier. Corrected exact assertion, no authorization product change.",
+  "fixture_cleanup": "finally ran on initial assertion failure; complete non-audit preservation checked in subsequent accepted run."
+}

@@ -1,0 +1,57 @@
+{
+  "product_commit": "f791c31a8788e3dc7b85c074955fa1bf48d778bb",
+  "base_commit": "9ae13f63dc3309f5aa8a8d4219f935a9cccc747c",
+  "base_pr": "https://github.com/ZZZZihan/TeachingOpen/pull/36",
+  "jar_sha256": "b87319a8e411d8f48c37de9e5589c486460c5c5f0306d8f5026281b5737a9b09",
+  "bundle_manifest_sha256": "04baa03cc5a7f5d812a5979381e5aca452f50be077faa83a5239d0138ee67da1",
+  "frontend_source_commit": "8ca9e35f5ea8341c28daf1ef423dc0990be12412",
+  "frontend_rebuilt": false,
+  "frontend_files_reused": 4887,
+  "tests": {
+    "legacy_reproduction": 7,
+    "feedback_preservation": 31,
+    "work_management": 134,
+    "community": 235,
+    "submission": 95,
+    "current_real_total": 495
+  },
+  "java_unit_tests": "skipped by parent POM",
+  "stopped_ports": {
+    "13336": true,
+    "16409": true,
+    "18131": true,
+    "18132": true
+  },
+  "data_preservation": {
+    "recovery-a": {
+      "tables": 69,
+      "changed_tables": [
+        "sys_log"
+      ],
+      "non_audit_equal": true,
+      "attachments_equal": true,
+      "audit_rows_before": 3977,
+      "audit_rows_after": 4086
+    },
+    "course-role-runtime": {
+      "tables": 69,
+      "changed_tables": [],
+      "non_audit_equal": true,
+      "attachments_equal": true,
+      "audit_rows_before": 3108,
+      "audit_rows_after": 3108
+    },
+    "original_source": {
+      "files": 5731,
+      "equal": true
+    }
+  },
+  "authenticated_browser": false,
+  "production_changed": false,
+  "remote_merged": false,
+  "scope": "Partial work updates only. Null/omitted collections preserve rows; explicit empty arrays clear; explicit arrays replace transactionally. No UI change or concurrent explicit-edit conflict resolution.",
+  "build_log": {
+    "raw_sha256": "9f5027b7fb16329ad5a6c5265b0fca345df1090445aa9aae9a6641e277fcc823",
+    "published_normalization": "Trailing whitespace removed; original retained privately."
+  }
+}
