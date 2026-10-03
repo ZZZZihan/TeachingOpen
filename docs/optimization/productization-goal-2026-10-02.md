@@ -2,7 +2,7 @@
 
 日期：2026-10-02（Asia/Shanghai）
 
-最新状态（2026-10-03）：PR #49 已交付本机 Scratch 素材 Worker CSP 修复，实际浏览器旧版被拒绝、新版启动成功，同源及 Blob Worker 素材字节一致，普通脚本/连接限制保留。当前本地候选 `7102a32`，工具组合113通过/1跳过；18112/18142/18150前端代理已更新，刷新后实际Worker全部正常，后端18111/18141/18149健康。生产来源副本18142、三角色夹具18150保留。Java业务及web未变，沿用原构建，没有新前端/Java构建或认证浏览器验收。PR均未远端合并，Goal active。下方旧候选为阶段历史，以文末及最新聚合记录为准。
+最新状态（2026-10-03）：PR #50 已交付 Python 预览 URL 编码与旧链接兼容修复。当前本地候选 `59d512d`，本轮组合前端338/338、生产构建成功（12项既有类型警告），独立集成定向46/46。实际组合播放器完成教师/课程/社区三个入口生成链接的加载、运行、清空、重跑；使用自建HTTP样例，不能替代认证角色浏览器验收。三个前端18112/18142/18150各9个HTTP资源与新dist逐字节一致，三个后端健康；旧dist保留，Java/服务未重启。生产来源副本18142与三角色夹具18150持续可用。Python执行隔离只有有界实验，产品未实现；其余验收条件仍待完成。PR均未远端合并，Goal active。下方旧候选为阶段历史，以文末及最新聚合记录为准。
 
 ## 目标
 
@@ -398,3 +398,16 @@ root实际匿名Chromium同页对照：旧Blob素材Worker有1错误/0消息，�
 [本轮组合记录](evidence/product-candidate/worker-csp-candidate.json)、[实际工具日志](evidence/product-candidate/worker-csp-candidate-tests.log)、[组合浏览器探针](evidence/product-candidate/worker-csp-verify-candidate.cjs) 及首轮失败日志已保存。浏览器探针沿用PR49 compare探针初始化过的同一CLI会话；重新启动会话需先装载Worker观测。Java/web/依赖未改，无新构建；旧前端305/305只是先前证据。原源码未写入，5,731摘要一致仍为#47时的核验，不称本次重跑。没有GitHub合并或生产操作。
 
 并行Python只读核查给出两项后续：第一，教师/课程使用URLSearchParams编码作品URL，旧appPlayer.urlParam直接正则取原值，可能把编码地址作为相对路径；WorkDetail直接拼接又会截断嵌套&。精确组件方法离线复现，下一项先做真实浏览器复现，再按一个问题一个PR修复。第二，Skulpt默认无限execLimit/yieldLimit、同源jseval和document桥接，普通超时无法覆盖同步JavaScript忙循环；turtle又依赖DOM，不能简单搬到Worker或把普通iframe宣称为强隔离。该项仍待设计及真实浏览器验证，尚未实施，不建空PR。认证三角色全流程继续等待前序浏览器工具对验证码操作要求的确认；非认证开发正常推进。页面性能、依赖维护和用户视觉评阅仍待完成，Goal active。
+
+
+2026-10-03 Python 预览文件阶段：PR #50 已创建并附加，可审阅，提交 `85f8a7d0a995047feb8ce486224d7bf991878e62`，基于 #46 `fix/course-summary-text`。教师和课程入口把完整文件URL编码后，旧播放器直接取原字符串，实际浏览器发出 `/python/http%3A...` 两次404，代码空白；社区旧拼接会截断嵌套&。现在新入口明确 queryEncoding=uri，旧HTTP/绝对/点相对路径保留内部百分号与加号，只对可识别的旧整串编码做一次解码。app/appPlayer共用现有persistence.query，没有升级运行时、变更Python2语义、保存API或认证。两个原入口重复挂载/双GET与缺文件错误UI仍保留待办，不能称完整编辑器可靠性完成。
+
+按用户要求由GPT-6.1-sol / Ultra子Agent分别实施、编写测试与只读复核，Fast无独立可设置工具参数。冻结专项同一33项在旧版4通过29失败，新版33/33；分支全前端318/318，独立复核60/60。构建成功；教师Vue lint0/0，WorkDetail原有34errors/165warnings变33/165，persistence旧16errors/82warnings变16/88（新增6条缩进warning），没有宣称旧全文件lint通过。精确bundle补丁与历史输出补丁可逆重建。作者报告、旧新浏览器与受控测试证据随PR保留。
+
+root组合 `59d512d0dfc9bb83eb52a0395602a2bae2baf738`，API tree `201408ca4eef6ce37a217f699329cf7146f9d71a` 不变，web tree `fbe18277b77a4d2ebfa8e2562ff8c64cdb663e34`。完整前端338/338、另一个Agent只读集成复核46/46，确认WorkDetail原评论失败恢复与第一父提交字节一致、previewCode及四Python文件与PR50一致。重新构建4880文件，12项CSS顺序/资源体积警告及过期Browserslist提示保留。先构建新目录，再将旧dist留在 `.devspace/python-preview-previous-dist`，切换三个代理共用的dist。各9个实际HTTP资源与新产物一致，18111/18141/18149健康200/UP；继续使用#43同JAR，前后端服务未重启。
+
+root实际组合dist通过自建HTTP夹具，三个调用方生成的链接均完整请求 `?revision=1&label=a+b` 并返回200，实际Skulpt输出42，清空后重跑相同，无pageerror。旧版未编码简单路径也能运行作为对照。浏览器证据范围是实际SFC方法生成链接→实际发布播放器→受控HTTP；不是完整教师/社区页面登录或真实Java作业读取验收。root检视最终截图。临时18154/18155服务及python-url浏览器已停止；没有修改生产或GitHub合并。最新 [组合记录](evidence/product-candidate/python-preview-url-candidate.json)、[前端日志](evidence/product-candidate/python-preview-url-frontend-tests.log)、[浏览器执行记录](evidence/product-candidate/python-preview-url-browser.log) 与 [构建摘要](evidence/product-candidate/python-preview-url-build-summary.log) 已保存。原源码未写入；5731文件相同仍是#47历史证据，未称本轮重新核验。
+
+并行执行隔离审计补齐了循环真正开始的证据：六组最长500ms的普通同源iframe/opaque sandbox iframe/Worker对照，在运行20ms且约9万次循环后向自建服务发标记。当前HeadlessChrome154中普通同源iframe把父50ms心跳和100ms移除拖到501ms；opaque iframe停止组父心跳51/100ms、移除100ms，完整对照运行期间持续响应；Worker101ms调用terminate且无完成消息。该实验证明当前浏览器的有限负载响应，不证明移除iframe即时终止CPU、跨浏览器支持或生产安全沙箱。引擎可通过小型webpack登记器复用原vendor/app的Skulpt与builtin模块而不执行Vue入口；Worker中turtle缺DOM，倾向先验证opaque frame runner。子frame CSP未阻止自身导航，父frame-src精确路径可挡另一路径，但自身允许路径query及其他通道还需处理。详细有界实验保持私有 `.devspace/artifacts/python-isolation-audit-20261003-49fbmcgc/v2/REPORT.md`，原不足结果保留，所有审计临时服务均停止；没有隔离产品代码，不能把审计当功能交付。
+
+后续独立项：Python执行隔离原型及运行/输入/turtle/停止/重跑验收、资源失败反馈与重复挂载；另发现默认Python样例末尾ss为源码疑点，需单独实际确认再修复。认证三角色全流程继续等待前序浏览器工具对验证码操作要求的确认，非认证开发正常推进。页面性能、依赖维护和用户视觉评阅仍待完成，Goal active。
