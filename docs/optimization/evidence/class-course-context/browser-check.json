@@ -1,0 +1,41 @@
+{
+  "scope": "Browser component verification; actual Vue/Antd/JDate, in-memory API, no authenticated platform session",
+  "product_commit": "b940c8c5b20694e76bf15c481dc72c2a6864d476",
+  "component_sources": {
+    "scope": "Actual Vue/Antd components with controlled API; no login, backend or database.",
+    "sha256": {
+      "src/views/system/modules/DeptCourseInfo.vue": "818140750a44fd642d58e62a481a38fec147af5dce3a713c6f2913cf227ef42a",
+      "src/views/teaching/modules/SelectCourseModal.vue": "367bdc581930e997f42a372a923ad543bb9389feeca97f0330da9db652e90f41",
+      "src/views/teaching/modules/TeachingCourseDeptModal.vue": "a2f0808da084747ee810a7f3d07c32c0d0847745fb7328cc9829577ad0a849b8",
+      "src/mixins/JeecgListMixin.js": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+      "src/components/jeecg/JDate.vue": "87d0dc7d409fba0cea596031bda5304c2ef1999590be0897b087338f23664ec0"
+    }
+  },
+  "observations": [
+    {
+      "case": "A row selection cleared after switch to B",
+      "evidence": "preview-switch-b.txt"
+    },
+    {
+      "case": "A row delete confirmation completed while B is active sends no DELETE",
+      "evidence": "preview-stale-confirm.txt"
+    },
+    {
+      "case": "B fresh selection add and real date edit update B only",
+      "evidence": "preview-add-edit.txt"
+    },
+    {
+      "case": "B batch delete removes only newly added relation",
+      "evidence": "preview-normal-delete.txt"
+    },
+    {
+      "case": "final form only time field; update and close succeeds; no current warnings/errors",
+      "evidence": "preview-final-edit.txt"
+    }
+  ],
+  "initial_failures": [
+    "preview-initial-disabled.txt",
+    "preview-before-form-fix-logs.json"
+  ],
+  "note": "First two SFC hashes unchanged after second browser pass. Final edit SFC rebuilt and retested after registered-field fix. Login page reload succeeds separately but full role flow remains pending."
+}

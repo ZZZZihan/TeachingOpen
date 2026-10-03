@@ -1,0 +1,150 @@
+{
+  "cases": [
+    {
+      "case": "A bulk confirmation after switch to B sends no delete request",
+      "passed": false,
+      "write_requests": 1
+    },
+    {
+      "case": "A relationship survives stale bulk confirmation",
+      "passed": false
+    },
+    {
+      "case": "A selection cannot produce a B batch delete request",
+      "passed": false,
+      "write_requests": 1
+    },
+    {
+      "case": "A relationship survives batch menu opened after switch",
+      "passed": false
+    },
+    {
+      "case": "A modal selection after switch to B sends no add request",
+      "passed": false,
+      "write_requests": 1
+    },
+    {
+      "case": "B has no course inherited from the stale A modal",
+      "passed": false
+    },
+    {
+      "case": "closed A modal reopened in B cannot reuse its old selection",
+      "passed": false,
+      "write_requests": 1
+    },
+    {
+      "case": "B has no course inherited from the closed modal session",
+      "passed": false
+    },
+    {
+      "case": "B real list contains its own relationship and no A relationships",
+      "passed": true
+    },
+    {
+      "case": "B fresh modal selection adds the selected course to B",
+      "passed": true
+    },
+    {
+      "case": "B openTime edit persists through the real shared modal and HTTP",
+      "passed": true
+    },
+    {
+      "case": "B current selection deletes only the newly added relationship",
+      "passed": true
+    },
+    {
+      "case": "bulkPending: DB A relationship preserved",
+      "passed": false
+    },
+    {
+      "case": "bulkAfterSwitch: DB A relationship preserved",
+      "passed": false
+    },
+    {
+      "case": "crossSwitch: DB has no stale A course attached to B",
+      "passed": false
+    },
+    {
+      "case": "crossReopen: DB has no stale A course attached to B",
+      "passed": false
+    },
+    {
+      "case": "normal B openTime verified directly in DB",
+      "passed": true
+    },
+    {
+      "case": "normal B newly added relationship deleted in DB",
+      "passed": true
+    },
+    {
+      "case": "method probe exited normally without launcher errors",
+      "passed": true
+    },
+    {
+      "case": "69 schemas 68 non-audit row sets and all attachments restored",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "kind": "transport",
+      "value": "Actual SFC/JeecgListMixin methods, real HTTP with legal synthetic CLI login; AntD form/confirm/nextTick facades only, no browser render or checkbox-cache acceptance."
+    },
+    {
+      "kind": "requests",
+      "total": 34,
+      "write_operations": [
+        {
+          "method": "DELETE",
+          "route": "/teaching/teachingCourseDept/deleteBatch"
+        },
+        {
+          "method": "DELETE",
+          "route": "/teaching/teachingCourseDept/deleteBatch"
+        },
+        {
+          "method": "POST",
+          "route": "/teaching/teachingCourseDept/addOrUpdate"
+        },
+        {
+          "method": "POST",
+          "route": "/teaching/teachingCourseDept/addOrUpdate"
+        },
+        {
+          "method": "POST",
+          "route": "/teaching/teachingCourseDept/addOrUpdate"
+        },
+        {
+          "method": "PUT",
+          "route": "/teaching/teachingCourseDept/edit"
+        },
+        {
+          "method": "DELETE",
+          "route": "/teaching/teachingCourseDept/deleteBatch"
+        }
+      ]
+    }
+  ],
+  "source_hashes": {
+    "web/src/utils/util.js": "345808587091ffd401f4c1cd7ebac55655db9439b02d9eae5aa6cb56176da6db",
+    "web/src/mixins/JeecgListMixin.js": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+    "web/src/views/teaching/modules/SelectCourseModal.vue": "88ba0e0c9971ef78e477a661874df13a7788e2a4734e1d98988c28ef32baf37e",
+    "web/src/views/teaching/modules/TeachingCourseDeptModal.vue": "640f0907d9fa76c331f47f8160768ea221c5a9afb9f9eae9735bbca2b2c5d5d7",
+    "web/src/views/system/modules/DeptCourseInfo.vue": "9c9b12567425f4f34ae820be9f5a1d25e4c6f959224aa2a1ec311a7e75c7bfef"
+  },
+  "source_ref": "253f3fb4c44b500b6e4824adbf89da51ac89d50c",
+  "exit_code": 1,
+  "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+  "probe_sha256": "6dfd16d952c8339b0b76db63610e9db4439e54786cd8215224cb9e28d3a265fc",
+  "scope": "Actual SFC/Mixin methods and real HTTP/DB in an owned runtime; browser rendering and browser authentication excluded",
+  "restoration": {
+    "table_count": 69,
+    "non_audit_table_count": 68,
+    "same_table_set": true,
+    "changed_schemas": [],
+    "changed_non_audit_tables": [],
+    "all_attachment_entries_equal": true
+  },
+  "total": 20,
+  "passed": 8
+}

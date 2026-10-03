@@ -1,0 +1,21 @@
+{
+  "runtime": "class-course-context-1003",
+  "owned_pids": {
+    "backend": 42061,
+    "mysql": 41488,
+    "redis": 41492
+  },
+  "listeners_after_stop": {
+    "mysql": false,
+    "redis": false,
+    "backend": false,
+    "frontend": false
+  },
+  "processes_alive_after_stop": {
+    "backend": false,
+    "mysql": true,
+    "redis": false
+  },
+  "passed": false,
+  "retained_runtime_directory": true
+}

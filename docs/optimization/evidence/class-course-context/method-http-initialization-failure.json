@@ -1,0 +1,8 @@
+{
+  "phase": "fixture-setup",
+  "product_run": false,
+  "result": "failed",
+  "error": "Owned synthetic SQL operation failed before login and component execution",
+  "fixture_issue": "One generated title had 33 characters; actual course_name is varchar(32). The fixture now uses shorter titles.",
+  "scope": "Setup diagnostic, not a product behavior failure. Inner finally removed partial temporary courses and restored department/user snapshots; no complete inventory comparison was emitted in this first failed launch."
+}

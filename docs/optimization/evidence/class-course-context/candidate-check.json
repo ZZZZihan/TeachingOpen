@@ -1,0 +1,395 @@
+{
+  "scope": "Local static bytes, lazy changed bundles and backend health; not authenticated browser flows",
+  "files": 4893,
+  "bytes": 211494174,
+  "manifest_sha256": "8d8dd1a02a14f15aa2c744b0e5a16ac28da9e7929096e27faa068a6ae7e4575e",
+  "changed_or_added": [
+    "css/chunk-2c5e648d.55dc3012.css",
+    "css/chunk-7b31e229.81db018d.css",
+    "css/chunk-d03eead4.6aa2395f.css",
+    "index.html",
+    "js/app.54ca7f99.js",
+    "js/app.54ca7f99.js.gz",
+    "js/chunk-29acf03b.3e0b6f86.js",
+    "js/chunk-2c5e648d.b99b7457.js",
+    "js/chunk-2c5e648d.b99b7457.js.gz",
+    "js/chunk-774f2a3a.d7afefb9.js",
+    "js/chunk-774f2a3a.d7afefb9.js.gz",
+    "js/chunk-7b31e229.fdc86a56.js",
+    "js/chunk-7b31e229.fdc86a56.js.gz",
+    "js/chunk-d03eead4.f0f8f9cb.js"
+  ],
+  "removed": [
+    "css/chunk-2dcb7cd7.08bbfeca.css",
+    "css/chunk-91def5e6.b4df06df.css",
+    "css/chunk-a3d7df0a.1bdf65ed.css",
+    "js/app.8ceacb01.js",
+    "js/app.8ceacb01.js.gz",
+    "js/chunk-29acf03b.e4bf1ba8.js",
+    "js/chunk-2dcb7cd7.b84f256a.js",
+    "js/chunk-2dcb7cd7.b84f256a.js.gz",
+    "js/chunk-774f2a3a.40a651df.js",
+    "js/chunk-774f2a3a.40a651df.js.gz",
+    "js/chunk-91def5e6.ba2022b4.js",
+    "js/chunk-91def5e6.ba2022b4.js.gz",
+    "js/chunk-a3d7df0a.fdfe8c30.js"
+  ],
+  "resources_per_proxy": 16,
+  "checks": [
+    {
+      "port": 18112,
+      "path": "css/app.34569fa6.css",
+      "status": 200,
+      "bytes": 47383,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-2c5e648d.55dc3012.css",
+      "status": 200,
+      "bytes": 173710,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-7b31e229.81db018d.css",
+      "status": 200,
+      "bytes": 705,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-d03eead4.6aa2395f.css",
+      "status": 200,
+      "bytes": 519,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-vendors.0626b6c1.css",
+      "status": 200,
+      "bytes": 561384,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "index.html",
+      "status": 200,
+      "bytes": 6084,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "js/app.54ca7f99.js",
+      "status": 200,
+      "bytes": 229840,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-29acf03b.3e0b6f86.js",
+      "status": 200,
+      "bytes": 6402,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-2c5e648d.b99b7457.js",
+      "status": 200,
+      "bytes": 1972796,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-774f2a3a.d7afefb9.js",
+      "status": 200,
+      "bytes": 18042,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-7b31e229.fdc86a56.js",
+      "status": 200,
+      "bytes": 20304,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-d03eead4.f0f8f9cb.js",
+      "status": 200,
+      "bytes": 5854,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-vendors.a2dd1501.js",
+      "status": 200,
+      "bytes": 8292628,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "js/common.js",
+      "status": 200,
+      "bytes": 8678,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "js/polyfill.js",
+      "status": 200,
+      "bytes": 230405,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "logo.png",
+      "status": 200,
+      "bytes": 9308,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "css/app.34569fa6.css",
+      "status": 200,
+      "bytes": 47383,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-2c5e648d.55dc3012.css",
+      "status": 200,
+      "bytes": 173710,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-7b31e229.81db018d.css",
+      "status": 200,
+      "bytes": 705,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-d03eead4.6aa2395f.css",
+      "status": 200,
+      "bytes": 519,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-vendors.0626b6c1.css",
+      "status": 200,
+      "bytes": 561384,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "index.html",
+      "status": 200,
+      "bytes": 6084,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "js/app.54ca7f99.js",
+      "status": 200,
+      "bytes": 229840,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-29acf03b.3e0b6f86.js",
+      "status": 200,
+      "bytes": 6402,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-2c5e648d.b99b7457.js",
+      "status": 200,
+      "bytes": 1972796,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-774f2a3a.d7afefb9.js",
+      "status": 200,
+      "bytes": 18042,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-7b31e229.fdc86a56.js",
+      "status": 200,
+      "bytes": 20304,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-d03eead4.f0f8f9cb.js",
+      "status": 200,
+      "bytes": 5854,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-vendors.a2dd1501.js",
+      "status": 200,
+      "bytes": 8292628,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "js/common.js",
+      "status": 200,
+      "bytes": 8678,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "js/polyfill.js",
+      "status": 200,
+      "bytes": 230405,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "logo.png",
+      "status": 200,
+      "bytes": 9308,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "css/app.34569fa6.css",
+      "status": 200,
+      "bytes": 47383,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-2c5e648d.55dc3012.css",
+      "status": 200,
+      "bytes": 173710,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-7b31e229.81db018d.css",
+      "status": 200,
+      "bytes": 705,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-d03eead4.6aa2395f.css",
+      "status": 200,
+      "bytes": 519,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-vendors.0626b6c1.css",
+      "status": 200,
+      "bytes": 561384,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "index.html",
+      "status": 200,
+      "bytes": 6084,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "js/app.54ca7f99.js",
+      "status": 200,
+      "bytes": 229840,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-29acf03b.3e0b6f86.js",
+      "status": 200,
+      "bytes": 6402,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-2c5e648d.b99b7457.js",
+      "status": 200,
+      "bytes": 1972796,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-774f2a3a.d7afefb9.js",
+      "status": 200,
+      "bytes": 18042,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-7b31e229.fdc86a56.js",
+      "status": 200,
+      "bytes": 20304,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-d03eead4.f0f8f9cb.js",
+      "status": 200,
+      "bytes": 5854,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-vendors.a2dd1501.js",
+      "status": 200,
+      "bytes": 8292628,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "js/common.js",
+      "status": 200,
+      "bytes": 8678,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "js/polyfill.js",
+      "status": 200,
+      "bytes": 230405,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "logo.png",
+      "status": 200,
+      "bytes": 9308,
+      "passed": true
+    }
+  ],
+  "passed": 48,
+  "total": 48,
+  "backend_health": [
+    {
+      "port": 18111,
+      "status": 200,
+      "health": "UP"
+    },
+    {
+      "port": 18141,
+      "status": 200,
+      "health": "UP"
+    },
+    {
+      "port": 18149,
+      "status": 200,
+      "health": "UP"
+    }
+  ]
+}
