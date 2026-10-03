@@ -40,16 +40,14 @@ test('replaced DOM content starts a fresh buffer and missing output is harmless'
   const n=element();output.append(n,'old');n.textContent='';output.append(n,'new');assert.equal(n.textContent,'new');output.clear(null);output.append(null,'ignored')
 })
 for(const [bundle,method] of [['app','terminalOut'],['appPlayer','outf']]){
- test(bundle+' actual component appends through the shared buffer and clears turtle canvas',()=>{
-  const source=fs.readFileSync(path.join(__dirname,'../public/python/static/js/'+bundle+'.js'),'utf8')
-  const start=source.indexOf('c={name:"PythonEditor"')+2
-  const body=source.slice(start,source.indexOf(',p={render:',start))
-  const nodes={output:element(),mycanvas:{innerHTML:'drawing'}}
-  const context={component:null,window:{TeachingPythonOutput:output},document:{getElementById:id=>nodes[id]},o:{a:{}},s:{a:{}},u:{}}
-  vm.createContext(context);vm.runInContext('component='+body,context)
-  context.component.methods[method]('<b>literal</b>');assert.equal(nodes.output.textContent,'<b>literal</b>');assert.equal(nodes.output.children.length,1)
-  context.component.methods.clear();assert.equal(nodes.output.textContent,'');assert.equal(nodes.mycanvas.innerHTML,'')
-  context.component.methods[method]('rerun');assert.equal(nodes.output.textContent,'rerun')
+ test(bundle+' actual component appends through the shared buffer and execution cleanup',()=>{
+  const {browserEnvironment,actualComponent}=require('./python-execution-frame/harness.cjs')
+  const h=browserEnvironment();h.load('web/public/python/output.js');h.load('web/public/python/execution.js')
+  const host=actualComponent(bundle,h).instance
+  const out=h.nodes.get('output'),canvas=h.nodes.get('mycanvas');host.runit()
+  host[method]('<b>literal</b>');assert.equal(out.textContent,'<b>literal</b>');assert.equal(out.children.length,1)
+  host.clear();assert.equal(out.textContent,'');assert.equal(canvas.textContent,'')
+  host[method]('rerun');assert.equal(out.textContent,'rerun')
  })
 }
 test('both HTML entry points load output helper before vendor bundles and share output styles',()=>{
@@ -58,11 +56,17 @@ test('both HTML entry points load output helper before vendor bundles and share 
   assert.ok(html.indexOf('src="./output.js"')>=0);assert.ok(html.indexOf('src="./output.js"')<html.indexOf('src=./static/js/manifest.js'));assert.match(html,/href="\.\/output.css"/)
  }
 })
-test('the recorded URL substitutions reverse before the six output substitutions and preserve the historical vendor base',()=>{
+test('execution and URL substitutions reverse before the six output substitutions and preserve every historical vendor base',()=>{
+ const framePatch=require('./python-execution-frame/vendor-patch.json')
  const urlPatch=require('./python-preview-url/vendor-patch.json')
  const patch=require('./python-output-preview/vendor-patch.json')
  for(const file of patch.files){
   let source=fs.readFileSync(path.join(__dirname,'../..',file.path),'utf8')
+  const frameFile=framePatch.files.find(value=>value.path===file.path)
+  assert.ok(frameFile,'the execution patch records each changed Python bundle')
+  assert.equal(crypto.createHash('sha256').update(source).digest('hex'),frameFile.after_sha256)
+  for(const {before,after} of frameFile.replacements){assert.equal(source.split(after).length-1,1);source=source.replace(after,before)}
+  assert.equal(crypto.createHash('sha256').update(source).digest('hex'),frameFile.before_sha256)
   const urlFile=urlPatch.files.find(value=>value.path===file.path)
   assert.ok(urlFile,'the URL patch records each changed Python bundle')
   for(const {before,after} of urlFile.replacements){assert.equal(source.split(after).length-1,1);source=source.replace(after,before)}

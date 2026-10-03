@@ -1,0 +1,90 @@
+[
+  {
+    "path": "player.html?queryEncoding=uri&lang=turtle&url=%2Ffixtures%2Fseed.py",
+    "result": {
+      "id": "python-frame-canary-1791019616954",
+      "networkURL": "http://127.0.0.1:18160/__python_frame_network_canary?id=python-frame-canary-1791019616954",
+      "realm": {
+        "document": {
+          "ok": true,
+          "value": "undefined"
+        },
+        "parentDOM": {
+          "ok": false,
+          "error": "ReferenceError"
+        },
+        "storage": {
+          "ok": false,
+          "error": "ReferenceError"
+        },
+        "nestedWorker": {
+          "ok": true,
+          "value": "undefined"
+        }
+      },
+      "canariesUnchanged": true,
+      "realmPassed": true,
+      "network": "passed: synthetic fetch rejected with browser CSP evidence",
+      "state": {
+        "runId": "ce02e6040ea643a74b926835e6cf5df9",
+        "pendingRunId": null,
+        "state": "completed",
+        "remainingMs": 29981
+      },
+      "output": "{\"document\":{\"ok\":true,\"value\":\"undefined\"},\"parentDOM\":{\"ok\":false,\"error\":\"ReferenceError\"},\"storage\":{\"ok\":false,\"error\":\"ReferenceError\"},\"nestedWorker\":{\"ok\":true,\"value\":\"undefined\"}}\nREALM_PROBE_FINISHED\n",
+      "networkConsole": [
+        "FRAME_REALM_NETWORK python-frame-canary-1791019616954 REJECTED TypeError"
+      ],
+      "cspEvidence": [
+        "FRAME_REALM_CSP python-frame-canary-1791019616954 connect-src http://127.0.0.1:18160/__python_frame_network_canary?id=python-frame-canary-1791019616954"
+      ],
+      "requestFailures": [],
+      "passed": true
+    },
+    "pageErrors": []
+  },
+  {
+    "path": "index.html?workId=seed-work",
+    "result": {
+      "id": "python-frame-canary-1791019620398",
+      "networkURL": "http://127.0.0.1:18160/__python_frame_network_canary?id=python-frame-canary-1791019620398",
+      "realm": {
+        "document": {
+          "ok": true,
+          "value": "undefined"
+        },
+        "parentDOM": {
+          "ok": false,
+          "error": "ReferenceError"
+        },
+        "storage": {
+          "ok": false,
+          "error": "ReferenceError"
+        },
+        "nestedWorker": {
+          "ok": true,
+          "value": "undefined"
+        }
+      },
+      "canariesUnchanged": true,
+      "realmPassed": true,
+      "network": "passed: synthetic fetch rejected with browser CSP evidence",
+      "state": {
+        "runId": "b2b55b5e7602c63f99ca9bc9cc63372e",
+        "pendingRunId": null,
+        "state": "completed",
+        "remainingMs": 29984
+      },
+      "output": "{\"document\":{\"ok\":true,\"value\":\"undefined\"},\"parentDOM\":{\"ok\":false,\"error\":\"ReferenceError\"},\"storage\":{\"ok\":false,\"error\":\"ReferenceError\"},\"nestedWorker\":{\"ok\":true,\"value\":\"undefined\"}}\nREALM_PROBE_FINISHED\n",
+      "networkConsole": [
+        "FRAME_REALM_NETWORK python-frame-canary-1791019620398 REJECTED TypeError"
+      ],
+      "cspEvidence": [
+        "FRAME_REALM_CSP python-frame-canary-1791019620398 connect-src http://127.0.0.1:18160/__python_frame_network_canary?id=python-frame-canary-1791019620398"
+      ],
+      "requestFailures": [],
+      "passed": true
+    },
+    "pageErrors": []
+  }
+]

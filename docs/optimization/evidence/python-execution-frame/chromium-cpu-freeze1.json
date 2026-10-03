@@ -1,0 +1,156 @@
+{
+  "rows": [
+    {
+      "id": "control-1791018381101",
+      "mode": "control",
+      "pass": true,
+      "enteredEpoch": 1791018381626,
+      "stopRequestedEpoch": null,
+      "events": [
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018381608 20 247134",
+          "receivedEpoch": 1791018381611
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018381838 250 3297254",
+          "receivedEpoch": 1791018381838
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018382088 500 6665011",
+          "receivedEpoch": 1791018382088
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018382338 750 10015904",
+          "receivedEpoch": 1791018382338
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018382588 1000 13351371",
+          "receivedEpoch": 1791018382588
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018382838 1250 16666660",
+          "receivedEpoch": 1791018382838
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018383088 1500 19954593",
+          "receivedEpoch": 1791018383088
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018383338 1750 23224160",
+          "receivedEpoch": 1791018383338
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018383588 2000 26517062",
+          "receivedEpoch": 1791018383588
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018383838 2250 29815399",
+          "receivedEpoch": 1791018383838
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018384088 2500 33101212",
+          "receivedEpoch": 1791018384088
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018384338 2750 36376359",
+          "receivedEpoch": 1791018384338
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018384588 3000 39657337",
+          "receivedEpoch": 1791018384588
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018384838 3250 42958089",
+          "receivedEpoch": 1791018384838
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 progress 1791018385088 3500 46280006",
+          "receivedEpoch": 1791018385088
+        },
+        {
+          "text": "PRODUCT_CPU control-1791018381101 done 1791018385088",
+          "receivedEpoch": 1791018385088
+        }
+      ],
+      "observation": {
+        "state": {
+          "runId": "b7372940d3634f911beba731ef2b1a18",
+          "pendingRunId": null,
+          "state": "completed",
+          "remainingMs": 26488
+        },
+        "output": "PRODUCT_CPU_COMPLETE\n",
+        "frames": 1,
+        "heartbeat_samples": 100,
+        "max_heartbeat_gap_ms": 52,
+        "heartbeat_first_epoch": 1791018381152,
+        "heartbeat_last_epoch": 1791018386102
+      },
+      "pageErrors": [],
+      "scope": "One finite 3500ms Worker per scenario; parent 50ms heartbeat; observe 4500ms after confirmed >=20ms busy-loop marker. Control required. Evidence of bounded eventual termination, not immediate CPU zero or all-resource measurement."
+    },
+    {
+      "id": "stop-1791018386204",
+      "mode": "stop",
+      "pass": true,
+      "enteredEpoch": 1791018386729,
+      "stopRequestedEpoch": 1791018386831,
+      "events": [
+        {
+          "text": "PRODUCT_CPU stop-1791018386204 progress 1791018386710 20 250397",
+          "receivedEpoch": 1791018386713
+        },
+        {
+          "text": "PRODUCT_CPU stop-1791018386204 progress 1791018386940 250 3271217",
+          "receivedEpoch": 1791018386940
+        },
+        {
+          "text": "PRODUCT_CPU stop-1791018386204 progress 1791018387190 500 6587257",
+          "receivedEpoch": 1791018387190
+        },
+        {
+          "text": "PRODUCT_CPU stop-1791018386204 progress 1791018387440 750 9953085",
+          "receivedEpoch": 1791018387440
+        },
+        {
+          "text": "PRODUCT_CPU stop-1791018386204 progress 1791018387690 1000 13335031",
+          "receivedEpoch": 1791018387690
+        },
+        {
+          "text": "PRODUCT_CPU stop-1791018386204 progress 1791018387940 1250 16692251",
+          "receivedEpoch": 1791018387940
+        },
+        {
+          "text": "PRODUCT_CPU stop-1791018386204 progress 1791018388190 1500 20001050",
+          "receivedEpoch": 1791018388190
+        },
+        {
+          "text": "PRODUCT_CPU stop-1791018386204 progress 1791018388440 1750 23330318",
+          "receivedEpoch": 1791018388440
+        },
+        {
+          "text": "PRODUCT_CPU stop-1791018386204 progress 1791018388690 2000 26659445",
+          "receivedEpoch": 1791018388690
+        }
+      ],
+      "observation": {
+        "state": {
+          "runId": null,
+          "pendingRunId": null,
+          "state": "stopped",
+          "remainingMs": 0
+        },
+        "output": "",
+        "frames": 0,
+        "heartbeat_samples": 100,
+        "max_heartbeat_gap_ms": 52,
+        "heartbeat_first_epoch": 1791018386254,
+        "heartbeat_last_epoch": 1791018391206
+      },
+      "pageErrors": [],
+      "scope": "One finite 3500ms Worker per scenario; parent 50ms heartbeat; observe 4500ms after confirmed >=20ms busy-loop marker. Control required. Evidence of bounded eventual termination, not immediate CPU zero or all-resource measurement."
+    }
+  ],
+  "product_snapshot": "freeze1: worker-frozen-manifest.json",
+  "scope": "Actual player in Chromium; callback budget and derived drawing limits were later revised. This paired CPU record is not final whole-product acceptance."
+}

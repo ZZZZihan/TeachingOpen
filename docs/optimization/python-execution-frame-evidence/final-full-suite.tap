@@ -1,0 +1,2095 @@
+TAP version 13
+# Browserslist: caniuse-lite is outdated. Please run:
+#   npx update-browserslist-db@latest
+#   Why you should do it regularly: https://github.com/browserslist/update-db\#readme
+# Subtest: course baseline: draft query enters a pagination request before query submission
+ok 1 - course baseline: draft query enters a pagination request before query submission
+  ---
+  duration_ms: 278.538917
+  type: 'test'
+  ...
+# Subtest: course baseline: late response overwrites newer query
+ok 2 - course baseline: late response overwrites newer query
+  ---
+  duration_ms: 49.995208
+  type: 'test'
+  ...
+# Subtest: course baseline: business rejection silently retains old rows
+ok 3 - course baseline: business rejection silently retains old rows
+  ---
+  duration_ms: 44.461708
+  type: 'test'
+  ...
+# Subtest: course baseline: repeated delete dispatches two actual DELETE requests
+ok 4 - course baseline: repeated delete dispatches two actual DELETE requests
+  ---
+  duration_ms: 42.03
+  type: 'test'
+  ...
+# Subtest: unit baseline: draft query enters a pagination request before query submission
+ok 5 - unit baseline: draft query enters a pagination request before query submission
+  ---
+  duration_ms: 44.516583
+  type: 'test'
+  ...
+# Subtest: unit baseline: late response overwrites newer query
+ok 6 - unit baseline: late response overwrites newer query
+  ---
+  duration_ms: 40.466
+  type: 'test'
+  ...
+# Subtest: unit baseline: business rejection silently retains old rows
+ok 7 - unit baseline: business rejection silently retains old rows
+  ---
+  duration_ms: 44.414542
+  type: 'test'
+  ...
+# Subtest: unit baseline: repeated delete dispatches two actual DELETE requests
+ok 8 - unit baseline: repeated delete dispatches two actual DELETE requests
+  ---
+  duration_ms: 44.879958
+  type: 'test'
+  ...
+# Subtest: unit baseline: initial route sends both unfiltered and filtered list requests
+ok 9 - unit baseline: initial route sends both unfiltered and filtered list requests
+  ---
+  duration_ms: 41.933459
+  type: 'test'
+  ...
+# Subtest: course: one initial request, preserving route filter and raw maintenance fields
+ok 10 - course: one initial request, preserving route filter and raw maintenance fields
+  ---
+  duration_ms: 20.9225
+  type: 'test'
+  ...
+# Subtest: course: query and reset return to page one, preserve page size and draft isolation
+ok 11 - course: query and reset return to page one, preserve page size and draft isolation
+  ---
+  duration_ms: 17.323791
+  type: 'test'
+  ...
+# Subtest: course: page size and sorting carry applied filters, reject invalid or busy changes
+ok 12 - course: page size and sorting carry applied filters, reject invalid or busy changes
+  ---
+  duration_ms: 19.508041
+  type: 'test'
+  ...
+# Subtest: course: failures and malformed responses clear stale rows and recover same query
+ok 13 - course: failures and malformed responses clear stale rows and recover same query
+  ---
+  duration_ms: 17.220375
+  type: 'test'
+  ...
+# Subtest: course: old success cannot replace newer rows or stop the active loading state
+ok 14 - course: old success cannot replace newer rows or stop the active loading state
+  ---
+  duration_ms: 19.583042
+  type: 'test'
+  ...
+# Subtest: course: an older network failure cannot put a current successful query in error
+ok 15 - course: an older network failure cannot put a current successful query in error
+  ---
+  duration_ms: 17.085208
+  type: 'test'
+  ...
+# Subtest: course: selection reflects current rows and is cleared for page changes
+ok 16 - course: selection reflects current rows and is cleared for page changes
+  ---
+  duration_ms: 19.491541
+  type: 'test'
+  ...
+# Subtest: course: repeated deletion dispatches once, list refresh keeps the delete lock
+ok 17 - course: repeated deletion dispatches once, list refresh keeps the delete lock
+  ---
+  duration_ms: 17.338833
+  type: 'test'
+  ...
+# Subtest: course: delete rejection retains rows, shows outcome warning and manual retry recovers
+ok 18 - course: delete rejection retains rows, shows outcome warning and manual retry recovers
+  ---
+  duration_ms: 18.541875
+  type: 'test'
+  ...
+# Subtest: course: deleting a last-page item falls back to the last valid page
+ok 19 - course: deleting a last-page item falls back to the last valid page
+  ---
+  duration_ms: 16.8665
+  type: 'test'
+  ...
+# Subtest: course: batch confirmation cannot stack, uses a snapshot, and can be cancelled
+ok 20 - course: batch confirmation cannot stack, uses a snapshot, and can be cancelled
+  ---
+  duration_ms: 15.51775
+  type: 'test'
+  ...
+# Subtest: course: late list and delete results after disposal cannot change data or notify success
+ok 21 - course: late list and delete results after disposal cannot change data or notify success
+  ---
+  duration_ms: 32.786584
+  type: 'test'
+  ...
+# Subtest: course: maintenance add and edit use inherited actual refs
+ok 22 - course: maintenance add and edit use inherited actual refs
+  ---
+  duration_ms: 18.16825
+  type: 'test'
+  ...
+# Subtest: course: export uses applied filters and selected IDs, one download at a time
+ok 23 - course: export uses applied filters and selected IDs, one download at a time
+  ---
+  duration_ms: 16.593375
+  type: 'test'
+  ...
+# Subtest: course: export rejects an HTTP-200 JSON denial instead of downloading it
+ok 24 - course: export rejects an HTTP-200 JSON denial instead of downloading it
+  ---
+  duration_ms: 15.610167
+  type: 'test'
+  ...
+# Subtest: unit: one initial request, preserving route filter and raw maintenance fields
+ok 25 - unit: one initial request, preserving route filter and raw maintenance fields
+  ---
+  duration_ms: 21.762334
+  type: 'test'
+  ...
+# Subtest: unit: query and reset return to page one, preserve page size and draft isolation
+ok 26 - unit: query and reset return to page one, preserve page size and draft isolation
+  ---
+  duration_ms: 14.270791
+  type: 'test'
+  ...
+# Subtest: unit: page size and sorting carry applied filters, reject invalid or busy changes
+ok 27 - unit: page size and sorting carry applied filters, reject invalid or busy changes
+  ---
+  duration_ms: 17.743
+  type: 'test'
+  ...
+# Subtest: unit: failures and malformed responses clear stale rows and recover same query
+ok 28 - unit: failures and malformed responses clear stale rows and recover same query
+  ---
+  duration_ms: 15.399334
+  type: 'test'
+  ...
+# Subtest: unit: old success cannot replace newer rows or stop the active loading state
+ok 29 - unit: old success cannot replace newer rows or stop the active loading state
+  ---
+  duration_ms: 18.333541
+  type: 'test'
+  ...
+# Subtest: unit: an older network failure cannot put a current successful query in error
+ok 30 - unit: an older network failure cannot put a current successful query in error
+  ---
+  duration_ms: 14.388583
+  type: 'test'
+  ...
+# Subtest: unit: selection reflects current rows and is cleared for page changes
+ok 31 - unit: selection reflects current rows and is cleared for page changes
+  ---
+  duration_ms: 17.131292
+  type: 'test'
+  ...
+# Subtest: unit: repeated deletion dispatches once, list refresh keeps the delete lock
+ok 32 - unit: repeated deletion dispatches once, list refresh keeps the delete lock
+  ---
+  duration_ms: 19.234333
+  type: 'test'
+  ...
+# Subtest: unit: delete rejection retains rows, shows outcome warning and manual retry recovers
+ok 33 - unit: delete rejection retains rows, shows outcome warning and manual retry recovers
+  ---
+  duration_ms: 19.867
+  type: 'test'
+  ...
+# Subtest: unit: deleting a last-page item falls back to the last valid page
+ok 34 - unit: deleting a last-page item falls back to the last valid page
+  ---
+  duration_ms: 16.235625
+  type: 'test'
+  ...
+# Subtest: unit: batch confirmation cannot stack, uses a snapshot, and can be cancelled
+ok 35 - unit: batch confirmation cannot stack, uses a snapshot, and can be cancelled
+  ---
+  duration_ms: 16.193125
+  type: 'test'
+  ...
+# Subtest: unit: late list and delete results after disposal cannot change data or notify success
+ok 36 - unit: late list and delete results after disposal cannot change data or notify success
+  ---
+  duration_ms: 34.818583
+  type: 'test'
+  ...
+# Subtest: unit: maintenance add and edit use inherited actual refs
+ok 37 - unit: maintenance add and edit use inherited actual refs
+  ---
+  duration_ms: 17.182625
+  type: 'test'
+  ...
+# Subtest: unit: export uses applied filters and selected IDs, one download at a time
+ok 38 - unit: export uses applied filters and selected IDs, one download at a time
+  ---
+  duration_ms: 14.474041
+  type: 'test'
+  ...
+# Subtest: unit: export rejects an HTTP-200 JSON denial instead of downloading it
+ok 39 - unit: export rejects an HTTP-200 JSON denial instead of downloading it
+  ---
+  duration_ms: 16.137458
+  type: 'test'
+  ...
+# Subtest: course: dictionaries and course-unit navigation keep their existing targets
+ok 40 - course: dictionaries and course-unit navigation keep their existing targets
+  ---
+  duration_ms: 17.757541
+  type: 'test'
+  ...
+# Subtest: unit: route changes submit one fresh course filter and discard late previous results
+ok 41 - unit: route changes submit one fresh course filter and discard late previous results
+  ---
+  duration_ms: 18.736583
+  type: 'test'
+  ...
+# Subtest: unit: route arrays cannot become a backend course filter
+ok 42 - unit: route arrays cannot become a backend course filter
+  ---
+  duration_ms: 32.114541
+  type: 'test'
+  ...
+# Subtest: unit: upload failure and business rejection retain data and expose safe recovery text
+ok 43 - unit: upload failure and business rejection retain data and expose safe recovery text
+  ---
+  duration_ms: 16.697041
+  type: 'test'
+  ...
+# Subtest: unit: import success refreshes applied scope, while code 201 keeps a safe detail report
+ok 44 - unit: import success refreshes applied scope, while code 201 keeps a safe detail report
+  ---
+  duration_ms: 19.768375
+  type: 'test'
+  ...
+# Subtest: course: quick page jump retains applied query and resets invalid page input
+ok 45 - course: quick page jump retains applied query and resets invalid page input
+  ---
+  duration_ms: 19.597
+  type: 'test'
+  ...
+# Subtest: course: unsafe resources do not become links, and a broken cover falls back
+ok 46 - course: unsafe resources do not become links, and a broken cover falls back
+  ---
+  duration_ms: 17.653708
+  type: 'test'
+  ...
+# Subtest: unit: quick page jump retains applied query and resets invalid page input
+ok 47 - unit: quick page jump retains applied query and resets invalid page input
+  ---
+  duration_ms: 20.606459
+  type: 'test'
+  ...
+# Subtest: unit: unsafe resources do not become links, and a broken cover falls back
+ok 48 - unit: unsafe resources do not become links, and a broken cover falls back
+  ---
+  duration_ms: 16.706208
+  type: 'test'
+  ...
+# Subtest: course: visible applied filter labels are snapshots and do not expose department IDs
+ok 49 - course: visible applied filter labels are snapshots and do not expose department IDs
+  ---
+  duration_ms: 19.402167
+  type: 'test'
+  ...
+# Subtest: unit: visible parent-course query summary uses a label snapshot
+ok 50 - unit: visible parent-course query summary uses a label snapshot
+  ---
+  duration_ms: 15.152042
+  type: 'test'
+  ...
+# Subtest: course: stale batch confirmation cannot delete after a new query or reset
+ok 51 - course: stale batch confirmation cannot delete after a new query or reset
+  ---
+  duration_ms: 32.551166
+  type: 'test'
+  ...
+# Subtest: unit: stale batch confirmation cannot delete after a new query or reset
+ok 52 - unit: stale batch confirmation cannot delete after a new query or reset
+  ---
+  duration_ms: 34.5215
+  type: 'test'
+  ...
+# Subtest: unit: stale batch confirmation cannot delete after the parent route changes
+ok 53 - unit: stale batch confirmation cannot delete after the parent route changes
+  ---
+  duration_ms: 16.57375
+  type: 'test'
+  ...
+# Subtest: course: changed selection invalidates confirmation and allows a fresh prompt
+ok 54 - course: changed selection invalidates confirmation and allows a fresh prompt
+  ---
+  duration_ms: 32.522542
+  type: 'test'
+  ...
+# Subtest: course: an old confirmation callback cannot unlock or submit a newer prompt
+ok 55 - course: an old confirmation callback cannot unlock or submit a newer prompt
+  ---
+  duration_ms: 16.1695
+  type: 'test'
+  ...
+# Subtest: unit: changed selection invalidates confirmation and allows a fresh prompt
+ok 56 - unit: changed selection invalidates confirmation and allows a fresh prompt
+  ---
+  duration_ms: 33.796125
+  type: 'test'
+  ...
+# Subtest: unit: an old confirmation callback cannot unlock or submit a newer prompt
+ok 57 - unit: an old confirmation callback cannot unlock or submit a newer prompt
+  ---
+  duration_ms: 15.282625
+  type: 'test'
+  ...
+# Subtest: 基线复现：旧弹窗取消后把上一份文件 ID 提交到新作业
+ok 58 - 基线复现：旧弹窗取消后把上一份文件 ID 提交到新作业
+  ---
+  duration_ms: 30.66675
+  type: 'test'
+  ...
+# Subtest: 取消再打开新任务不会继承文件、作品 ID 或额外字段
+ok 59 - 取消再打开新任务不会继承文件、作品 ID 或额外字段
+  ---
+  duration_ms: 4.886083
+  type: 'test'
+  ...
+# Subtest: 移除文件会取消上传；迟到上传与登记结果不能恢复选择
+ok 60 - 移除文件会取消上传；迟到上传与登记结果不能恢复选择
+  ---
+  duration_ms: 1.050834
+  type: 'test'
+  ...
+# Subtest: 新文件验证失败会清除旧文件，空文件和超限文件不能提交
+ok 61 - 新文件验证失败会清除旧文件，空文件和超限文件不能提交
+  ---
+  duration_ms: 1.235375
+  type: 'test'
+  ...
+# Subtest: 上传与登记期间禁止提交，上传失败可重试且只用新登记结果
+ok 62 - 上传与登记期间禁止提交，上传失败可重试且只用新登记结果
+  ---
+  duration_ms: 2.127583
+  type: 'test'
+  ...
+# Subtest: 提交只发送一次，提交期间不允许关闭或切换作业，成功刷新父列表
+ok 63 - 提交只发送一次，提交期间不允许关闭或切换作业，成功刷新父列表
+  ---
+  duration_ms: 1.429
+  type: 'test'
+  ...
+# Subtest: 业务失败与不完整成功响应不关闭；网络失败保留文件且说明结果未确认
+ok 64 - 业务失败与不完整成功响应不关闭；网络失败保留文件且说明结果未确认
+  ---
+  duration_ms: 1.385125
+  type: 'test'
+  ...
+# Subtest: 名称与后端 64 字符约束一致；销毁后迟到提交不弹成功或刷新新页面
+ok 65 - 名称与后端 64 字符约束一致；销毁后迟到提交不弹成功或刷新新页面
+  ---
+  duration_ms: 0.92925
+  type: 'test'
+  ...
+# Subtest: 本地上传完成不等于登记成功；登记返回匹配路径与 ID 才可提交
+ok 66 - 本地上传完成不等于登记成功；登记返回匹配路径与 ID 才可提交
+  ---
+  duration_ms: 2.528667
+  type: 'test'
+  ...
+# Subtest: 上传业务失败不登记，登记失败/缺失 ID/错误路径均拒绝就绪
+ok 67 - 上传业务失败不登记，登记失败/缺失 ID/错误路径均拒绝就绪
+  ---
+  duration_ms: 5.200208
+  type: 'test'
+  ...
+# Subtest: 七牛使用受限前缀的新 key，平台认证与 Cookie 不发给云上传
+ok 68 - 七牛使用受限前缀的新 key，平台认证与 Cookie 不发给云上传
+  ---
+  duration_ms: 2.14425
+  type: 'test'
+  ...
+# Subtest: 七牛凭证/区域/响应 key 不合规或上传取消后不登记文件
+ok 69 - 七牛凭证/区域/响应 key 不合规或上传取消后不登记文件
+  ---
+  duration_ms: 3.036333
+  type: 'test'
+  ...
+# Subtest: 提交成功事件有父列表监听；列表失败结束加载，可重试，迟到筛选不覆盖
+ok 70 - 提交成功事件有父列表监听；列表失败结束加载，可重试，迟到筛选不覆盖
+  ---
+  duration_ms: 2.684667
+  type: 'test'
+  ...
+# Subtest: 筛选选项并发读取，重复重试不会重复发送请求
+ok 71 - 筛选选项并发读取，重复重试不会重复发送请求
+  ---
+  duration_ms: 3.522583
+  type: 'test'
+  ...
+# Subtest: 一个字典失败不丢弃另一个，重试可以恢复失败项
+ok 72 - 一个字典失败不丢弃另一个，重试可以恢复失败项
+  ---
+  duration_ms: 1.41675
+  type: 'test'
+  ...
+# Subtest: 异常字典数据显示可重试错误，不作为有效选项呈现
+ok 73 - 异常字典数据显示可重试错误，不作为有效选项呈现
+  ---
+  duration_ms: 2.109584
+  type: 'test'
+  ...
+# Subtest: 页面销毁后迟到的字典成功或失败不修改界面状态
+ok 74 - 页面销毁后迟到的字典成功或失败不修改界面状态
+  ---
+  duration_ms: 1.033458
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal baseline: rejection closes old dialog; duplicate clicks send twice
+ok 75 - TeachingCourseModal baseline: rejection closes old dialog; duplicate clicks send twice
+  ---
+  duration_ms: 18.821834
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal locks validation, writes, closing and switching until success
+ok 76 - TeachingCourseModal locks validation, writes, closing and switching until success
+  ---
+  duration_ms: 2.394792
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal business failure retains fields and false switches; manual retry succeeds
+ok 77 - TeachingCourseModal business failure retains fields and false switches; manual retry succeeds
+  ---
+  duration_ms: 1.599209
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal network error preserves new input and warns of uncertain creation; no automatic retry
+ok 78 - TeachingCourseModal network error preserves new input and warns of uncertain creation; no automatic retry
+  ---
+  duration_ms: 2.193125
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal validation failure unlocks without request
+ok 79 - TeachingCourseModal validation failure unlocks without request
+  ---
+  duration_ms: 1.623292
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal malformed success cannot close or report success
+ok 80 - TeachingCourseModal malformed success cannot close or report success
+  ---
+  duration_ms: 5.72925
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal dirty cancel supports continuing, prevents stacked prompts, clean cancel closes
+ok 81 - TeachingCourseModal dirty cancel supports continuing, prevents stacked prompts, clean cancel closes
+  ---
+  duration_ms: 0.671208
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal switch-only change is dirty; stale confirmation cannot close another record
+ok 82 - TeachingCourseModal switch-only change is dirty; stale confirmation cannot close another record
+  ---
+  duration_ms: 1.022333
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal delayed nextTick cannot populate newer or closed dialog
+ok 83 - TeachingCourseModal delayed nextTick cannot populate newer or closed dialog
+  ---
+  duration_ms: 1.5815
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal destroyed dialog ignores validation and save response
+ok 84 - TeachingCourseModal destroyed dialog ignores validation and save response
+  ---
+  duration_ms: 3.982667
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal baseline: rejection closes old dialog; duplicate clicks send twice
+ok 85 - TeachingCourseUnitModal baseline: rejection closes old dialog; duplicate clicks send twice
+  ---
+  duration_ms: 18.37
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal locks validation, writes, closing and switching until success
+ok 86 - TeachingCourseUnitModal locks validation, writes, closing and switching until success
+  ---
+  duration_ms: 1.519333
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal business failure retains fields and false switches; manual retry succeeds
+ok 87 - TeachingCourseUnitModal business failure retains fields and false switches; manual retry succeeds
+  ---
+  duration_ms: 1.101583
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal network error preserves new input and warns of uncertain creation; no automatic retry
+ok 88 - TeachingCourseUnitModal network error preserves new input and warns of uncertain creation; no automatic retry
+  ---
+  duration_ms: 0.942875
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal validation failure unlocks without request
+ok 89 - TeachingCourseUnitModal validation failure unlocks without request
+  ---
+  duration_ms: 1.093292
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal malformed success cannot close or report success
+ok 90 - TeachingCourseUnitModal malformed success cannot close or report success
+  ---
+  duration_ms: 2.967917
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal dirty cancel supports continuing, prevents stacked prompts, clean cancel closes
+ok 91 - TeachingCourseUnitModal dirty cancel supports continuing, prevents stacked prompts, clean cancel closes
+  ---
+  duration_ms: 0.5635
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal switch-only change is dirty; stale confirmation cannot close another record
+ok 92 - TeachingCourseUnitModal switch-only change is dirty; stale confirmation cannot close another record
+  ---
+  duration_ms: 0.798417
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal delayed nextTick cannot populate newer or closed dialog
+ok 93 - TeachingCourseUnitModal delayed nextTick cannot populate newer or closed dialog
+  ---
+  duration_ms: 0.851917
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal destroyed dialog ignores validation and save response
+ok 94 - TeachingCourseUnitModal destroyed dialog ignores validation and save response
+  ---
+  duration_ms: 1.645208
+  type: 'test'
+  ...
+# Subtest: 初次查询携带筛选条件与桌面分页大小
+ok 95 - 初次查询携带筛选条件与桌面分页大小
+  ---
+  duration_ms: 5.970542
+  type: 'test'
+  ...
+# Subtest: 重复点击加载更多只发出一个请求
+ok 96 - 重复点击加载更多只发出一个请求
+  ---
+  duration_ms: 2.440541
+  type: 'test'
+  ...
+# Subtest: 失败响应后重试第一页，不跳过课程
+ok 97 - 失败响应后重试第一页，不跳过课程
+  ---
+  duration_ms: 2.931958
+  type: 'test'
+  ...
+# Subtest: 网络失败结束加载并保留已有课程，重试同一页
+ok 98 - 网络失败结束加载并保留已有课程，重试同一页
+  ---
+  duration_ms: 2.22625
+  type: 'test'
+  ...
+# Subtest: 旧筛选结果提前返回时不污染新结果或结束新请求的加载
+ok 99 - 旧筛选结果提前返回时不污染新结果或结束新请求的加载
+  ---
+  duration_ms: 1.894417
+  type: 'test'
+  ...
+# Subtest: 旧筛选结果最后返回时不覆盖新结果
+ok 100 - 旧筛选结果最后返回时不覆盖新结果
+  ---
+  duration_ms: 1.289125
+  type: 'test'
+  ...
+# Subtest: 旧请求失败不显示新查询的错误
+ok 101 - 旧请求失败不显示新查询的错误
+  ---
+  duration_ms: 3.083917
+  type: 'test'
+  ...
+# Subtest: 课程总数到达后停止分页，切换搜索恢复第一页
+ok 102 - 课程总数到达后停止分页，切换搜索恢复第一页
+  ---
+  duration_ms: 1.827916
+  type: 'test'
+  ...
+# Subtest: 服务端返回空页时停止继续加载
+ok 103 - 服务端返回空页时停止继续加载
+  ---
+  duration_ms: 2.036291
+  type: 'test'
+  ...
+# Subtest: 格式错误的响应显示可重试错误
+ok 104 - 格式错误的响应显示可重试错误
+  ---
+  duration_ms: 2.300625
+  type: 'test'
+  ...
+# Subtest: 移动设备每页请求 12 条课程
+ok 105 - 移动设备每页请求 12 条课程
+  ---
+  duration_ms: 1.035458
+  type: 'test'
+  ...
+# Subtest: 缺失总数的响应不会静默结束分页
+ok 106 - 缺失总数的响应不会静默结束分页
+  ---
+  duration_ms: 2.113083
+  type: 'test'
+  ...
+# Subtest: 离开页面后忽略尚未完成的请求
+ok 107 - 离开页面后忽略尚未完成的请求
+  ---
+  duration_ms: 1.406167
+  type: 'test'
+  ...
+# Subtest: 首页只请求一页公开课程，重复点击不并发重发
+ok 108 - 首页只请求一页公开课程，重复点击不并发重发
+  ---
+  duration_ms: 4.15875
+  type: 'test'
+  ...
+# Subtest: 首页课程网络失败后结束加载，重试成功可恢复
+ok 109 - 首页课程网络失败后结束加载，重试成功可恢复
+  ---
+  duration_ms: 1.622
+  type: 'test'
+  ...
+# Subtest: 损坏的首页课程响应转为错误状态，不把空记录或非法记录渲染为卡片
+ok 110 - 损坏的首页课程响应转为错误状态，不把空记录或非法记录渲染为卡片
+  ---
+  duration_ms: 3.757209
+  type: 'test'
+  ...
+# Subtest: 离开首页后迟到的请求不修改已销毁的组件状态
+ok 111 - 离开首页后迟到的请求不修改已销毁的组件状态
+  ---
+  duration_ms: 0.47425
+  type: 'test'
+  ...
+# Subtest: 摘要解码常用命名实体及十进制、十六进制 Unicode 实体
+ok 112 - 摘要解码常用命名实体及十进制、十六进制 Unicode 实体
+  ---
+  duration_ms: 0.950958
+  type: 'test'
+  ...
+# Subtest: 实体只解码一次，保留双重转义的文本语义
+ok 113 - 实体只解码一次，保留双重转义的文本语义
+  ---
+  duration_ms: 0.283042
+  type: 'test'
+  ...
+# Subtest: 未知或非法实体不丢失文本，也不会因非法码点报错
+ok 114 - 未知或非法实体不丢失文本，也不会因非法码点报错
+  ---
+  duration_ms: 0.0765
+  type: 'test'
+  ...
+# Subtest: 原始 HTML、注释及脚本样式仅转为摘要文本，不使用 DOM 解析
+ok 115 - 原始 HTML、注释及脚本样式仅转为摘要文本，不使用 DOM 解析
+  ---
+  duration_ms: 0.069583
+  type: 'test'
+  ...
+# Subtest: 实际 CourseCard 模板把解码后的标签作为文本，并保留原课程介绍事件和对象
+ok 116 - 实际 CourseCard 模板把解码后的标签作为文本，并保留原课程介绍事件和对象
+  ---
+  duration_ms: 16.783625
+  type: 'test'
+  ...
+# Subtest: 实际 Less 与项目 Autoprefixer 处理后仍保留三行截断所需的方向声明
+ok 117 - 实际 Less 与项目 Autoprefixer 处理后仍保留三行截断所需的方向声明
+  ---
+  duration_ms: 21.765417
+  type: 'test'
+  ...
+# Subtest: 暖缓存菜单在鉴权拒绝后撤销，导航同步更新且能显示新菜单
+ok 118 - 暖缓存菜单在鉴权拒绝后撤销，导航同步更新且能显示新菜单
+  ---
+  duration_ms: 3.097125
+  type: 'test'
+  ...
+# Subtest: 我的课程：忙状态防止重复请求，空、失败和重试成功不同
+ok 119 - 我的课程：忙状态防止重复请求，空、失败和重试成功不同
+  ---
+  duration_ms: 8.595667
+  type: 'test'
+  ...
+# Subtest: 我的课程：畸形响应不伪装空列表，销毁后响应不恢复数据
+ok 120 - 我的课程：畸形响应不伪装空列表，销毁后响应不恢复数据
+  ---
+  duration_ms: 5.403459
+  type: 'test'
+  ...
+# Subtest: 地图与目录入口保留路由，摘要只显示文本
+ok 121 - 地图与目录入口保留路由，摘要只显示文本
+  ---
+  duration_ms: 2.541209
+  type: 'test'
+  ...
+# Subtest: 目录：缺失或多值地址不请求后端
+ok 122 - 目录：缺失或多值地址不请求后端
+  ---
+  duration_ms: 3.232334
+  type: 'test'
+  ...
+# Subtest: 目录：分页契约和空单元、失败响应不同
+ok 123 - 目录：分页契约和空单元、失败响应不同
+  ---
+  duration_ms: 1.627708
+  type: 'test'
+  ...
+# Subtest: 目录：切课后旧错误不覆盖新页面或忙状态
+ok 124 - 目录：切课后旧错误不覆盖新页面或忙状态
+  ---
+  duration_ms: 2.710166
+  type: 'test'
+  ...
+# Subtest: 目录：下一页失败保留已有内容，重试同页，连击不重复请求
+ok 125 - 目录：下一页失败保留已有内容，重试同页，连击不重复请求
+  ---
+  duration_ms: 2.254833
+  type: 'test'
+  ...
+# Subtest: 目录：切课后的旧下一页不能追加单元
+ok 126 - 目录：切课后的旧下一页不能追加单元
+  ---
+  duration_ms: 22.936416
+  type: 'test'
+  ...
+# Subtest: 目录：分页无进展或结构损坏后重试，不无限追加空页
+ok 127 - 目录：分页无进展或结构损坏后重试，不无限追加空页
+  ---
+  duration_ms: 5.08075
+  type: 'test'
+  ...
+# Subtest: 目录：资源类型只取已返回字段，原对象交给学习弹窗
+ok 128 - 目录：资源类型只取已返回字段，原对象交给学习弹窗
+  ---
+  duration_ms: 2.612458
+  type: 'test'
+  ...
+# Subtest: 目录：销毁后第一批响应不恢复数据
+ok 129 - 目录：销毁后第一批响应不恢复数据
+  ---
+  duration_ms: 3.007584
+  type: 'test'
+  ...
+# Subtest: 阅读器：按实际内容选择初始视图，记录失败不会阻止阅读
+ok 130 - 阅读器：按实际内容选择初始视图，记录失败不会阻止阅读
+  ---
+  duration_ms: 6.031875
+  type: 'test'
+  ...
+# Subtest: 阅读器：旧单元日志失败不污染新单元，关闭后不恢复状态
+ok 131 - 阅读器：旧单元日志失败不污染新单元，关闭后不恢复状态
+  ---
+  duration_ms: 8.661833
+  type: 'test'
+  ...
+# Subtest: 阅读器：切换和关闭暂停视频、移除源并卸载 iframe，重试重建媒体
+ok 132 - 阅读器：切换和关闭暂停视频、移除源并卸载 iframe，重试重建媒体
+  ---
+  duration_ms: 1.063417
+  type: 'test'
+  ...
+# Subtest: 阅读器：迟到的视频事件不能污染新播放器
+ok 133 - 阅读器：迟到的视频事件不能污染新播放器
+  ---
+  duration_ms: 1.076834
+  type: 'test'
+  ...
+# Subtest: 阅读器：生命周期移除三个相同监听器，缓存停用关闭媒体
+ok 134 - 阅读器：生命周期移除三个相同监听器，缓存停用关闭媒体
+  ---
+  duration_ms: 0.623209
+  type: 'test'
+  ...
+# Subtest: 阅读器：空 iframe 与跨域 document 不能触发异常
+ok 135 - 阅读器：空 iframe 与跨域 document 不能触发异常
+  ---
+  duration_ms: 0.549083
+  type: 'test'
+  ...
+# Subtest: 阅读器：案例点击监听不重复，退出只操作自己的全屏
+ok 136 - 阅读器：案例点击监听不重复，退出只操作自己的全屏
+  ---
+  duration_ms: 0.46225
+  type: 'test'
+  ...
+# Subtest: 阅读器：ScratchJr 与 Python 保留完整任务和特殊字符文件参数
+ok 137 - 阅读器：ScratchJr 与 Python 保留完整任务和特殊字符文件参数
+  ---
+  duration_ms: 1.797333
+  type: 'test'
+  ...
+# Subtest: 阅读器：Scratch 案例的嵌套地址能由实际公共解析器解码
+ok 138 - 阅读器：Scratch 案例的嵌套地址能由实际公共解析器解码
+  ---
+  duration_ms: 1.148458
+  type: 'test'
+  ...
+# Subtest: 公共查询解析器：不带 opt-in 的历史链接保持百分号与大小写契约
+ok 139 - 公共查询解析器：不带 opt-in 的历史链接保持百分号与大小写契约
+  ---
+  duration_ms: 5.944583
+  type: 'test'
+  ...
+# Subtest: 阅读器：资料配置异常不破坏其他资料，拒绝可执行协议
+ok 140 - 阅读器：资料配置异常不破坏其他资料，拒绝可执行协议
+  ---
+  duration_ms: 1.4605
+  type: 'test'
+  ...
+# Subtest: local return paths preserve query/hash, unsafe and login-loop targets fall back
+ok 141 - local return paths preserve query/hash, unsafe and login-loop targets fall back
+  ---
+  duration_ms: 0.832959
+  type: 'test'
+  ...
+# Subtest: login validation moves focus to first missing field without network submission
+ok 142 - login validation moves focus to first missing field without network submission
+  ---
+  duration_ms: 5.002291
+  type: 'test'
+  ...
+# Subtest: pending login is single-flight, successful login clears password and restores full path
+ok 143 - pending login is single-flight, successful login clears password and restores full path
+  ---
+  duration_ms: 1.769375
+  type: 'test'
+  ...
+# Subtest: failed login remains on form, retains account, refreshes consumed captcha and announces inline error
+ok 144 - failed login remains on form, retains account, refreshes consumed captcha and announces inline error
+  ---
+  duration_ms: 1.298334
+  type: 'test'
+  ...
+# Subtest: captcha connection failure is retryable and stale response cannot replace a newer image
+ok 145 - captcha connection failure is retryable and stale response cannot replace a newer image
+  ---
+  duration_ms: 1.224166
+  type: 'test'
+  ...
+# Subtest: unmounted login ignores late captcha and successful navigation
+ok 146 - unmounted login ignores late captcha and successful navigation
+  ---
+  duration_ms: 1.079291
+  type: 'test'
+  ...
+# Subtest: network errors give actionable feedback without exposing server stack details
+ok 147 - network errors give actionable feedback without exposing server stack details
+  ---
+  duration_ms: 0.443417
+  type: 'test'
+  ...
+# Subtest: logout after refresh sends persisted token and synchronously clears roles, routes and button auth even offline
+ok 148 - logout after refresh sends persisted token and synchronously clears roles, routes and button auth even offline
+  ---
+  duration_ms: 2.710416
+  type: 'test'
+  ...
+# Subtest: empty menus are accepted; malformed permission data does not overwrite existing auth
+ok 149 - empty menus are accepted; malformed permission data does not overwrite existing auth
+  ---
+  duration_ms: 0.991834
+  type: 'test'
+  ...
+# Subtest: late permission response after logout cannot restore previous account authority
+ok 150 - late permission response after logout cannot restore previous account authority
+  ---
+  duration_ms: 0.751459
+  type: 'test'
+  ...
+# Subtest: cancelled login cannot resurrect a session and successful account switch drops stale privileges
+ok 151 - cancelled login cannot resurrect a session and successful account switch drops stale privileges
+  ---
+  duration_ms: 2.083875
+  type: 'test'
+  ...
+# Subtest: parallel expired requests produce one notice, keep page until choice, and retain return URL
+ok 152 - parallel expired requests produce one notice, keep page until choice, and retain return URL
+  ---
+  duration_ms: 1.296292
+  type: 'test'
+  ...
+# Subtest: late 401 from previous account cannot clear a new session
+ok 153 - late 401 from previous account cannot clear a new session
+  ---
+  duration_ms: 0.484583
+  type: 'test'
+  ...
+# Subtest: login errors stay local; 403 does not log out; menu 401 clears without duplicate modal
+ok 154 - login errors stay local; 403 does not log out; menu 401 clears without duplicate modal
+  ---
+  duration_ms: 0.442458
+  type: 'test'
+  ...
+# Subtest: auth requests do not attach stale token; logout retains explicit token
+ok 155 - auth requests do not attach stale token; logout retains explicit token
+  ---
+  duration_ms: 0.444959
+  type: 'test'
+  ...
+# Subtest: public routes remain usable while permission service is unavailable
+ok 156 - public routes remain usable while permission service is unavailable
+  ---
+  duration_ms: 2.046834
+  type: 'test'
+  ...
+# Subtest: protected cold entry keeps query/hash, loads once even with concurrent navigation and empty menu
+ok 157 - protected cold entry keeps query/hash, loads once even with concurrent navigation and empty menu
+  ---
+  duration_ms: 0.824625
+  type: 'test'
+  ...
+# Subtest: permission failure finishes navigation on recovery page, keeps session, retries fresh request
+ok 158 - permission failure finishes navigation on recovery page, keeps session, retries fresh request
+  ---
+  duration_ms: 0.507417
+  type: 'test'
+  ...
+# Subtest: auth failure redirects to login and changed-account response cannot register old routes
+ok 159 - auth failure redirects to login and changed-account response cannot register old routes
+  ---
+  duration_ms: 0.420375
+  type: 'test'
+  ...
+# Subtest: 桥接没有 CONFIG 缓存也可本地上传、登记、提交；每次 API 使用当前令牌
+ok 160 - 桥接没有 CONFIG 缓存也可本地上传、登记、提交；每次 API 使用当前令牌
+  ---
+  duration_ms: 27.337541
+  type: 'test'
+  ...
+# Subtest: 文件返回 HTML 登录页不会作为代码载入；401 有明确提示且解除忙状态
+ok 161 - 文件返回 HTML 登录页不会作为代码载入；401 有明确提示且解除忙状态
+  ---
+  duration_ms: 2.988458
+  type: 'test'
+  ...
+# Subtest: 文件登记路径不匹配、业务失败不能进入提交成功状态
+ok 162 - 文件登记路径不匹配、业务失败不能进入提交成功状态
+  ---
+  duration_ms: 1.421458
+  type: 'test'
+  ...
+# Subtest: 云上传使用服务器前缀和单次凭据，不向云传平台会话；验证返回键后登记
+ok 163 - 云上传使用服务器前缀和单次凭据，不向云传平台会话；验证返回键后登记
+  ---
+  duration_ms: 1.895542
+  type: 'test'
+  ...
+# Subtest: 未保存改动或正在保存时有离页提示，打开后未修改不触发
+ok 164 - 未保存改动或正在保存时有离页提示，打开后未修改不触发
+  ---
+  duration_ms: 1.172791
+  type: 'test'
+  ...
+# Subtest: 预编译编辑器只在下一轮渲染完成后挂接；本地导出和提交读取当前 Ace 内容
+ok 165 - 预编译编辑器只在下一轮渲染完成后挂接；本地导出和提交读取当前 Ace 内容
+  ---
+  duration_ms: 2.799458
+  type: 'test'
+  ...
+# Subtest: app actual runit delegates current code into opaque frame and actual clear destroys it
+ok 166 - app actual runit delegates current code into opaque frame and actual clear destroys it
+  ---
+  duration_ms: 30.161916
+  type: 'test'
+  ...
+# Subtest: appPlayer actual runit delegates current code into opaque frame and actual clear destroys it
+ok 167 - appPlayer actual runit delegates current code into opaque frame and actual clear destroys it
+  ---
+  duration_ms: 4.453542
+  type: 'test'
+  ...
+# Subtest: repeat Run keeps one computation host until old termination ack and starts only the latest queued code
+ok 168 - repeat Run keeps one computation host until old termination ack and starts only the latest queued code
+  ---
+  duration_ms: 3.804458
+  type: 'test'
+  ...
+# Subtest: actual coordinator and trusted host keep rapid reruns queued throughout Worker retirement cooldown
+ok 169 - actual coordinator and trusted host keep rapid reruns queued throughout Worker retirement cooldown
+  ---
+  duration_ms: 4.656791
+  type: 'test'
+  ...
+# Subtest: public window messages cannot forge output, input or done; private protocol rejects malformed and oversized fields
+ok 170 - public window messages cannot forge output, input or done; private protocol rejects malformed and oversized fields
+  ---
+  duration_ms: 2.07175
+  type: 'test'
+  ...
+# Subtest: parent gives completed turtle callbacks 30s, pauses for input and does not reset an active callback budget
+ok 171 - parent gives completed turtle callbacks 30s, pauses for input and does not reset an active callback budget
+  ---
+  duration_ms: 2.767667
+  type: 'test'
+  ...
+# Subtest: callbacks during main execution share its remaining budget and a 33rd pending callback ends the run
+ok 172 - callbacks during main execution share its remaining budget and a 33rd pending callback ends the run
+  ---
+  duration_ms: 1.886833
+  type: 'test'
+  ...
+# Subtest: main completion during callback input is retained and callback completion stops the resumed budget
+ok 173 - main completion during callback input is retained and callback completion stops the resumed budget
+  ---
+  duration_ms: 2.510959
+  type: 'test'
+  ...
+# Subtest: parent output cap preserves normal slow small messages and bounds display after saturation
+ok 174 - parent output cap preserves normal slow small messages and bounds display after saturation
+  ---
+  duration_ms: 2.86875
+  type: 'test'
+  ...
+# Subtest: input form pauses the remaining computation budget, sends only typed text and cancel destroys the runner
+ok 175 - input form pauses the remaining computation budget, sends only typed text and cancel destroys the runner
+  ---
+  duration_ms: 1.387
+  type: 'test'
+  ...
+# Subtest: load failure, compute timeout and immutable five-minute lifetime each clean up the actual frame
+ok 176 - load failure, compute timeout and immutable five-minute lifetime each clean up the actual frame
+  ---
+  duration_ms: 1.298625
+  type: 'test'
+  ...
+# Subtest: invalid code and unsupported isolation produce explicit errors with no legacy same-origin execution
+ok 177 - invalid code and unsupported isolation produce explicit errors with no legacy same-origin execution
+  ---
+  duration_ms: 3.636208
+  type: 'test'
+  ...
+# Subtest: Stop without trusted ack preserves the host, reports failure and retries; Clear cancels queued rerun
+ok 178 - Stop without trusted ack preserves the host, reports failure and retries; Clear cancels queued rerun
+  ---
+  duration_ms: 4.387458
+  type: 'test'
+  ...
+# Subtest: trusted renderer host validates bootstrap and transfers student code into one Worker only
+ok 179 - trusted renderer host validates bootstrap and transfers student code into one Worker only
+  ---
+  duration_ms: 1.861959
+  type: 'test'
+  ...
+# Subtest: trusted host calls Worker.terminate, closes results and waits 2500ms before its own stopped ack
+ok 180 - trusted host calls Worker.terminate, closes results and waits 2500ms before its own stopped ack
+  ---
+  duration_ms: 0.918417
+  type: 'test'
+  ...
+# Subtest: trusted host rejects malformed, duplicated, deeply nested RPC and a 33rd pending request
+ok 181 - trusted host rejects malformed, duplicated, deeply nested RPC and a 33rd pending request
+  ---
+  duration_ms: 5.057875
+  type: 'test'
+  ...
+# Subtest: trusted host limits completed RPC rate and recovers by explicit stop acknowledgment after errors
+ok 182 - trusted host limits completed RPC rate and recovers by explicit stop acknowledgment after errors
+  ---
+  duration_ms: 2.438083
+  type: 'test'
+  ...
+# Subtest: trusted turtle initialization exposes an event surface before lazy drawing; Worker graphics cannot forge it
+ok 183 - trusted turtle initialization exposes an event surface before lazy drawing; Worker graphics cannot forge it
+  ---
+  duration_ms: 0.8895
+  type: 'test'
+  ...
+# Subtest: runner loader registers the inherited bundles without mounting Vue and executes actual Python2 in its own realm
+ok 184 - runner loader registers the inherited bundles without mounting Vue and executes actual Python2 in its own realm
+  ---
+  duration_ms: 91.87225
+  type: 'test'
+  ...
+# Subtest: both public entry points load coordinator before the component bundles and expose no fallback runtime runner
+ok 185 - both public entry points load coordinator before the component bundles and expose no fallback runtime runner
+  ---
+  duration_ms: 0.167166
+  type: 'test'
+  ...
+# Subtest: HTML, entities and event attributes are literal output across chunks
+ok 186 - HTML, entities and event attributes are literal output across chunks
+  ---
+  duration_ms: 0.6775
+  type: 'test'
+  ...
+# Subtest: many print calls reuse one text node instead of reparsing or multiplying nodes
+ok 187 - many print calls reuse one text node instead of reparsing or multiplying nodes
+  ---
+  duration_ms: 2.437834
+  type: 'test'
+  ...
+# Subtest: exact display limit preserves all data; excess adds exactly one fixed notice
+ok 188 - exact display limit preserves all data; excess adds exactly one fixed notice
+  ---
+  duration_ms: 0.692125
+  type: 'test'
+  ...
+# Subtest: truncation preserves surrogate pairs inside a chunk and across a boundary
+ok 189 - truncation preserves surrogate pairs inside a chunk and across a boundary
+  ---
+  duration_ms: 0.199916
+  type: 'test'
+  ...
+# Subtest: clear removes the notice and allows full output again; nodes keep independent limits
+ok 190 - clear removes the notice and allows full output again; nodes keep independent limits
+  ---
+  duration_ms: 0.108834
+  type: 'test'
+  ...
+# Subtest: replaced DOM content starts a fresh buffer and missing output is harmless
+ok 191 - replaced DOM content starts a fresh buffer and missing output is harmless
+  ---
+  duration_ms: 0.071875
+  type: 'test'
+  ...
+# Subtest: app actual component appends through the shared buffer and execution cleanup
+ok 192 - app actual component appends through the shared buffer and execution cleanup
+  ---
+  duration_ms: 9.572083
+  type: 'test'
+  ...
+# Subtest: appPlayer actual component appends through the shared buffer and execution cleanup
+ok 193 - appPlayer actual component appends through the shared buffer and execution cleanup
+  ---
+  duration_ms: 5.144917
+  type: 'test'
+  ...
+# Subtest: both HTML entry points load output helper before vendor bundles and share output styles
+ok 194 - both HTML entry points load output helper before vendor bundles and share output styles
+  ---
+  duration_ms: 0.359708
+  type: 'test'
+  ...
+# Subtest: execution and URL substitutions reverse before the six output substitutions and preserve every historical vendor base
+ok 195 - execution and URL substitutions reverse before the six output substitutions and preserve every historical vendor base
+  ---
+  duration_ms: 30.808
+  type: 'test'
+  ...
+# Subtest: 基线复现：旧桥接保存成功后不记住 ID，第二次改名保存仍是新建请求
+ok 196 - 基线复现：旧桥接保存成功后不记住 ID，第二次改名保存仍是新建请求
+  ---
+  duration_ms: 22.67225
+  type: 'test'
+  ...
+# Subtest: 新链接完整往返名称、中文、百分号和查询地址；旧裸文件链接兼容
+ok 197 - 新链接完整往返名称、中文、百分号和查询地址；旧裸文件链接兼容
+  ---
+  duration_ms: 0.507042
+  type: 'test'
+  ...
+# Subtest: 已有作品只加载一个目标，并从记录恢复课程和班级归属
+ok 198 - 已有作品只加载一个目标，并从记录恢复课程和班级归属
+  ---
+  duration_ms: 0.734791
+  type: 'test'
+  ...
+# Subtest: 课程 url 与作业 workFile 均加载；重做读取模板但更新原作品 ID
+ok 199 - 课程 url 与作业 workFile 均加载；重做读取模板但更新原作品 ID
+  ---
+  duration_ms: 0.182958
+  type: 'test'
+  ...
+# Subtest: 慢速或失败读取禁止保存、不会回退默认示例，恢复后可以重试
+ok 200 - 慢速或失败读取禁止保存、不会回退默认示例，恢复后可以重试
+  ---
+  duration_ms: 0.14175
+  type: 'test'
+  ...
+# Subtest: 保存锁覆盖上传到提交，连续点击只使用固定的一次快照
+ok 201 - 保存锁覆盖上传到提交，连续点击只使用固定的一次快照
+  ---
+  duration_ms: 0.155125
+  type: 'test'
+  ...
+# Subtest: 成功后改名与修改代码仍使用返回 ID，默认场景为 create
+ok 202 - 成功后改名与修改代码仍使用返回 ID，默认场景为 create
+  ---
+  duration_ms: 0.119375
+  type: 'test'
+  ...
+# Subtest: 上传或登记失败均不提交；重试只使用成功文件
+ok 203 - 上传或登记失败均不提交；重试只使用成功文件
+  ---
+  duration_ms: 0.180667
+  type: 'test'
+  ...
+# Subtest: 提交失败保留 ID；未改动重试复用文件，改变快照重新上传
+ok 204 - 提交失败保留 ID；未改动重试复用文件，改变快照重新上传
+  ---
+  duration_ms: 0.169834
+  type: 'test'
+  ...
+# Subtest: 空代码和非法名称不上传；缺少结果 ID 不能宣称成功
+ok 205 - 空代码和非法名称不上传；缺少结果 ID 不能宣称成功
+  ---
+  duration_ms: 0.177083
+  type: 'test'
+  ...
+# Subtest: 未知或不完整作品不能降级为可保存的空编辑器
+ok 206 - 未知或不完整作品不能降级为可保存的空编辑器
+  ---
+  duration_ms: 0.13775
+  type: 'test'
+  ...
+# Subtest: both HTML entry points load the real query helper before both prebuilt Python bundles
+ok 207 - both HTML entry points load the real query helper before both prebuilt Python bundles
+  ---
+  duration_ms: 1.178917
+  type: 'test'
+  ...
+# Subtest: all three actual callers mark modern Python links for one standard outer decode
+ok 208 - all three actual callers mark modern Python links for one standard outer decode
+  ---
+  duration_ms: 2.219167
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: nested query and literal plus
+ok 209 - teacher actual caller reaches both actual Python component downloads: nested query and literal plus
+  ---
+  duration_ms: 13.282
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: space and Chinese
+ok 210 - teacher actual caller reaches both actual Python component downloads: space and Chinese
+  ---
+  duration_ms: 6.631708
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: percent escapes belong to the file
+ok 211 - teacher actual caller reaches both actual Python component downloads: percent escapes belong to the file
+  ---
+  duration_ms: 4.734542
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: hash belongs to the file
+ok 212 - teacher actual caller reaches both actual Python component downloads: hash belongs to the file
+  ---
+  duration_ms: 4.541667
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: relative file with query and percent escape
+ok 213 - teacher actual caller reaches both actual Python component downloads: relative file with query and percent escape
+  ---
+  duration_ms: 8.548125
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: relative file without initial slash
+ok 214 - teacher actual caller reaches both actual Python component downloads: relative file without initial slash
+  ---
+  duration_ms: 5.295333
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: nested query and literal plus
+ok 215 - course actual caller reaches both actual Python component downloads: nested query and literal plus
+  ---
+  duration_ms: 6.6135
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: space and Chinese
+ok 216 - course actual caller reaches both actual Python component downloads: space and Chinese
+  ---
+  duration_ms: 6.058958
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: percent escapes belong to the file
+ok 217 - course actual caller reaches both actual Python component downloads: percent escapes belong to the file
+  ---
+  duration_ms: 4.511834
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: hash belongs to the file
+ok 218 - course actual caller reaches both actual Python component downloads: hash belongs to the file
+  ---
+  duration_ms: 4.476792
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: relative file with query and percent escape
+ok 219 - course actual caller reaches both actual Python component downloads: relative file with query and percent escape
+  ---
+  duration_ms: 4.931792
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: relative file without initial slash
+ok 220 - course actual caller reaches both actual Python component downloads: relative file without initial slash
+  ---
+  duration_ms: 3.731625
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: nested query and literal plus
+ok 221 - community actual caller reaches both actual Python component downloads: nested query and literal plus
+  ---
+  duration_ms: 3.279709
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: space and Chinese
+ok 222 - community actual caller reaches both actual Python component downloads: space and Chinese
+  ---
+  duration_ms: 3.767208
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: percent escapes belong to the file
+ok 223 - community actual caller reaches both actual Python component downloads: percent escapes belong to the file
+  ---
+  duration_ms: 4.036375
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: hash belongs to the file
+ok 224 - community actual caller reaches both actual Python component downloads: hash belongs to the file
+  ---
+  duration_ms: 3.6625
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: relative file with query and percent escape
+ok 225 - community actual caller reaches both actual Python component downloads: relative file with query and percent escape
+  ---
+  duration_ms: 3.3855
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: relative file without initial slash
+ok 226 - community actual caller reaches both actual Python component downloads: relative file without initial slash
+  ---
+  duration_ms: 4.200834
+  type: 'test'
+  ...
+# Subtest: appPlayer encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+ok 227 - appPlayer encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+  ---
+  duration_ms: 1.453125
+  type: 'test'
+  ...
+# Subtest: appPlayer first duplicate URL wins without reparsing embedded URL parameters
+ok 228 - appPlayer first duplicate URL wins without reparsing embedded URL parameters
+  ---
+  duration_ms: 2.803167
+  type: 'test'
+  ...
+# Subtest: appPlayer missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+ok 229 - appPlayer missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+  ---
+  duration_ms: 7.435458
+  type: 'test'
+  ...
+# Subtest: appPlayer ordinary raw relative links remain usable and malformed percent encoding does not throw
+ok 230 - appPlayer ordinary raw relative links remain usable and malformed percent encoding does not throw
+  ---
+  duration_ms: 6.806166
+  type: 'test'
+  ...
+# Subtest: appPlayer legacy raw addresses preserve their own percent escapes and literal plus
+ok 231 - appPlayer legacy raw addresses preserve their own percent escapes and literal plus
+  ---
+  duration_ms: 8.581417
+  type: 'test'
+  ...
+# Subtest: appPlayer legacy whole-value encoded recognized addresses decode once
+ok 232 - appPlayer legacy whole-value encoded recognized addresses decode once
+  ---
+  duration_ms: 5.826292
+  type: 'test'
+  ...
+# Subtest: app encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+ok 233 - app encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+  ---
+  duration_ms: 1.596417
+  type: 'test'
+  ...
+# Subtest: app first duplicate URL wins without reparsing embedded URL parameters
+ok 234 - app first duplicate URL wins without reparsing embedded URL parameters
+  ---
+  duration_ms: 1.6615
+  type: 'test'
+  ...
+# Subtest: app missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+ok 235 - app missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+  ---
+  duration_ms: 6.586792
+  type: 'test'
+  ...
+# Subtest: app ordinary raw relative links remain usable and malformed percent encoding does not throw
+ok 236 - app ordinary raw relative links remain usable and malformed percent encoding does not throw
+  ---
+  duration_ms: 7.409084
+  type: 'test'
+  ...
+# Subtest: app legacy raw addresses preserve their own percent escapes and literal plus
+ok 237 - app legacy raw addresses preserve their own percent escapes and literal plus
+  ---
+  duration_ms: 8.623208
+  type: 'test'
+  ...
+# Subtest: app legacy whole-value encoded recognized addresses decode once
+ok 238 - app legacy whole-value encoded recognized addresses decode once
+  ---
+  duration_ms: 5.48125
+  type: 'test'
+  ...
+# Subtest: the shared parser keeps editor workFile escapes while preserving the existing name and ID query behavior
+ok 239 - the shared parser keeps editor workFile escapes while preserving the existing name and ID query behavior
+  ---
+  duration_ms: 2.405875
+  type: 'test'
+  ...
+# Subtest: actual renderer preserves original turtle schema, typed return values, references and undo
+ok 240 - actual renderer preserves original turtle schema, typed return values, references and undo
+  ---
+  duration_ms: 83.58825
+  type: 'test'
+  ...
+# Subtest: actual renderer emits typed timer callback events and disposes pending callbacks
+ok 241 - actual renderer emits typed timer callback events and disposes pending callbacks
+  ---
+  duration_ms: 21.136209
+  type: 'test'
+  ...
+# Subtest: actual renderer rejects unsupported or amplified calls and remains usable after each ValueError
+ok 242 - actual renderer rejects unsupported or amplified calls and remains usable after each ValueError
+  ---
+  duration_ms: 21.689958
+  type: 'test'
+  ...
+# Subtest: derived circle steps and moving text are bounded before original methods can allocate animation chains
+ok 243 - derived circle steps and moving text are bounded before original methods can allocate animation chains
+  ---
+  duration_ms: 17.881167
+  type: 'test'
+  ...
+# Subtest: actual Worker start handshake gates finite Python2 execution and batches bounded literal output
+ok 244 - actual Worker start handshake gates finite Python2 execution and batches bounded literal output
+  ---
+  duration_ms: 21.103333
+  type: 'test'
+  ...
+# Subtest: actual Worker input accepts only the current typed response and compensates Skulpt execution time after long wait
+ok 245 - actual Worker input accepts only the current typed response and compensates Skulpt execution time after long wait
+  ---
+  duration_ms: 39.18825
+  type: 'test'
+  ...
+# Subtest: actual Python turtle proxies preserve kwargs, tuples, object identity and caught renderer errors
+ok 246 - actual Python turtle proxies preserve kwargs, tuples, object identity and caught renderer errors
+  ---
+  duration_ms: 35.903208
+  type: 'test'
+  ...
+# Subtest: actual post-main turtle callback runs in Worker with a fresh budget, can wait for input and resume drawing
+ok 247 - actual post-main turtle callback runs in Worker with a fresh budget, can wait for input and resume drawing
+  ---
+  duration_ms: 34.499
+  type: 'test'
+  ...
+# Subtest: actual Worker serializes turtle events behind main input and bounds the pending event queue
+ok 248 - actual Worker serializes turtle events behind main input and bounds the pending event queue
+  ---
+  duration_ms: 41.870167
+  type: 'test'
+  ...
+# Subtest: 没有 CONFIG 缓存仍能从原生 VM 生成 SB3/PNG，登记成对 ID 并保存
+ok 249 - 没有 CONFIG 缓存仍能从原生 VM 生成 SB3/PNG，登记成对 ID 并保存
+  ---
+  duration_ms: 38.677667
+  type: 'test'
+  ...
+# Subtest: HTTP 错误、HTML 伪文件与无效项目都阻止编辑并保留重试入口
+ok 250 - HTTP 错误、HTML 伪文件与无效项目都阻止编辑并保留重试入口
+  ---
+  duration_ms: 4.642209
+  type: 'test'
+  ...
+# Subtest: 封面生成失败、登记不匹配或上传 401 不提交且保留编辑能力
+ok 251 - 封面生成失败、登记不匹配或上传 401 不提交且保留编辑能力
+  ---
+  duration_ms: 14.529125
+  type: 'test'
+  ...
+# Subtest: 模拟七牛使用同一组唯一前缀但不同扩展名，不传平台令牌
+ok 252 - 模拟七牛使用同一组唯一前缀但不同扩展名，不传平台令牌
+  ---
+  duration_ms: 4.387791
+  type: 'test'
+  ...
+# Subtest: 云上传报错解除忙状态，禁止提交未登记的一对文件
+ok 253 - 云上传报错解除忙状态，禁止提交未登记的一对文件
+  ---
+  duration_ms: 1.258958
+  type: 'test'
+  ...
+# Subtest: 实际 VM 的项目变化和标题输入触发未保存提示；成功保存后清除离页提示
+ok 254 - 实际 VM 的项目变化和标题输入触发未保存提示；成功保存后清除离页提示
+  ---
+  duration_ms: 1.669833
+  type: 'test'
+  ...
+# Subtest: 端点保留端口并跟随 HTTPS，拒绝其他协议
+ok 255 - 端点保留端口并跟随 HTTPS，拒绝其他协议
+  ---
+  duration_ms: 1.064291
+  type: 'test'
+  ...
+# Subtest: 基线实际页面丢端口、共用 create、案例 URL 当项目；补丁只增加 opt-in guard
+ok 256 - 基线实际页面丢端口、共用 create、案例 URL 当项目；补丁只增加 opt-in guard
+  ---
+  duration_ms: 118.7895
+  type: 'test'
+  ...
+# Subtest: 未保存、URL、非法作品无连接，变量值保留本地
+ok 257 - 未保存、URL、非法作品无连接，变量值保留本地
+  ---
+  duration_ms: 0.747292
+  type: 'test'
+  ...
+# Subtest: 无变量不建立连接，保存后新建云变量可启动连接
+ok 258 - 无变量不建立连接，保存后新建云变量可启动连接
+  ---
+  duration_ms: 0.492542
+  type: 'test'
+  ...
+# Subtest: 先握手再修改，正确带身份且 URL 不携带令牌
+ok 259 - 先握手再修改，正确带身份且 URL 不携带令牌
+  ---
+  duration_ms: 0.535958
+  type: 'test'
+  ...
+# Subtest: 快照在完成确认前应用，只创建作者缺少的变量，不覆盖已有值
+ok 260 - 快照在完成确认前应用，只创建作者缺少的变量，不覆盖已有值
+  ---
+  duration_ms: 0.18925
+  type: 'test'
+  ...
+# Subtest: 匿名只读可接收值，不能发送写入或播种
+ok 261 - 匿名只读可接收值，不能发送写入或播种
+  ---
+  duration_ms: 0.127125
+  type: 'test'
+  ...
+# Subtest: 修改串行确认，拒绝可见但继续接收更新
+ok 262 - 修改串行确认，拒绝可见但继续接收更新
+  ---
+  duration_ms: 0.150667
+  type: 'test'
+  ...
+# Subtest: 同作品重复 bind 不重复连接，切换关闭旧连接且丢弃旧回调
+ok 263 - 同作品重复 bind 不重复连接，切换关闭旧连接且丢弃旧回调
+  ---
+  duration_ms: 0.149334
+  type: 'test'
+  ...
+# Subtest: 会话变化关闭连接并停止重连，明确重试才使用新身份
+ok 264 - 会话变化关闭连接并停止重连，明确重试才使用新身份
+  ---
+  duration_ms: 2.232583
+  type: 'test'
+  ...
+# Subtest: 收发前也检查会话，不能在轮询间隙使用旧身份
+ok 265 - 收发前也检查会话，不能在轮询间隙使用旧身份
+  ---
+  duration_ms: 0.234875
+  type: 'test'
+  ...
+# Subtest: 策略拒绝和过大消息不自动重连
+ok 266 - 策略拒绝和过大消息不自动重连
+  ---
+  duration_ms: 0.180291
+  type: 'test'
+  ...
+# Subtest: 网络断开后有限退避，不补发未确认与排队写入
+ok 267 - 网络断开后有限退避，不补发未确认与排队写入
+  ---
+  duration_ms: 0.181916
+  type: 'test'
+  ...
+# Subtest: 连续连接失败最多五次自动重试，然后手动恢复
+ok 268 - 连续连接失败最多五次自动重试，然后手动恢复
+  ---
+  duration_ms: 0.113083
+  type: 'test'
+  ...
+# Subtest: 握手与未确认修改有超时，不永久假连通
+ok 269 - 握手与未确认修改有超时，不永久假连通
+  ---
+  duration_ms: 0.080833
+  type: 'test'
+  ...
+# Subtest: 非法响应、跨项目及错序确认停止同步，未知变量不注入 VM
+ok 270 - 非法响应、跨项目及错序确认停止同步，未知变量不注入 VM
+  ---
+  duration_ms: 0.194958
+  type: 'test'
+  ...
+# Subtest: 非法值不发送，队列上限触发明确停止而非无限积压
+ok 271 - 非法值不发送，队列上限触发明确停止而非无限积压
+  ---
+  duration_ms: 0.107208
+  type: 'test'
+  ...
+# Subtest: VM 清理停止全部计时，重新打开作品可重新绑定
+ok 272 - VM 清理停止全部计时，重新打开作品可重新绑定
+  ---
+  duration_ms: 0.083834
+  type: 'test'
+  ...
+# Subtest: bfcache 暂停关闭连接，恢复重读；期间换身份不自动连接
+ok 273 - bfcache 暂停关闭连接，恢复重读；期间换身份不自动连接
+  ---
+  duration_ms: 0.077167
+  type: 'test'
+  ...
+# Subtest: 标准及旧链接只解码一次，保留百分号与 URL 自身的转义
+ok 274 - 标准及旧链接只解码一次，保留百分号与 URL 自身的转义
+  ---
+  duration_ms: 1.616834
+  type: 'test'
+  ...
+# Subtest: 继续作业优先读取 ID，重做才使用模板，课程无文件时请求单元信息
+ok 275 - 继续作业优先读取 ID，重做才使用模板，课程无文件时请求单元信息
+  ---
+  duration_ms: 2.284541
+  type: 'test'
+  ...
+# Subtest: 读取失败不以默认项目覆盖，解除忙状态但禁止保存，重试可恢复
+ok 276 - 读取失败不以默认项目覆盖，解除忙状态但禁止保存，重试可恢复
+  ---
+  duration_ms: 0.356041
+  type: 'test'
+  ...
+# Subtest: 连续保存每次使用新的文件对，非云作品也保留 ID、状态及任务绑定
+ok 277 - 连续保存每次使用新的文件对，非云作品也保留 ID、状态及任务绑定
+  ---
+  duration_ms: 1.240667
+  type: 'test'
+  ...
+# Subtest: 慢上传期间再次点击不会捕获第二份快照；状态和标题固定
+ok 278 - 慢上传期间再次点击不会捕获第二份快照；状态和标题固定
+  ---
+  duration_ms: 4.89425
+  type: 'test'
+  ...
+# Subtest: 文件对等待全部结束，一方失败不会让另一方跨入下一次保存
+ok 279 - 文件对等待全部结束，一方失败不会让另一方跨入下一次保存
+  ---
+  duration_ms: 0.547084
+  type: 'test'
+  ...
+# Subtest: 捕获、上传和业务失败均保留编辑内容并能重试；失败不更新 ID
+ok 280 - 捕获、上传和业务失败均保留编辑内容并能重试；失败不更新 ID
+  ---
+  duration_ms: 0.311417
+  type: 'test'
+  ...
+# Subtest: 空封面、缺失登记 ID、错误作品类型和缺失保存 ID不能假报成功
+ok 281 - 空封面、缺失登记 ID、错误作品类型和缺失保存 ID不能假报成功
+  ---
+  duration_ms: 0.208375
+  type: 'test'
+  ...
+# Subtest: 初始状态禁止保存，非法状态和空白或超长名称不上传
+ok 282 - 初始状态禁止保存，非法状态和空白或超长名称不上传
+  ---
+  duration_ms: 0.114959
+  type: 'test'
+  ...
+# Subtest: 基线复现：旧页面第二次先上传封面，会携带上次项目 ID 提交
+ok 283 - 基线复现：旧页面第二次先上传封面，会携带上次项目 ID 提交
+  ---
+  duration_ms: 16.563708
+  type: 'test'
+  ...
+# Subtest: ScratchJr 使用独立类型与默认模板，不能打开 Scratch 项目后误覆盖
+ok 284 - ScratchJr 使用独立类型与默认模板，不能打开 Scratch 项目后误覆盖
+  ---
+  duration_ms: 0.21575
+  type: 'test'
+  ...
+# Subtest: 播放器详情使用当前身份，附件请求不携带 JWT；成功打开才连接真实作品
+ok 285 - 播放器详情使用当前身份，附件请求不携带 JWT；成功打开才连接真实作品
+  ---
+  duration_ms: 2.172375
+  type: 'test'
+  ...
+# Subtest: 案例 URL 仅本机云状态，不用地址或同时给出的 workId 绑定云端
+ok 286 - 案例 URL 仅本机云状态，不用地址或同时给出的 workId 绑定云端
+  ---
+  duration_ms: 2.429875
+  type: 'test'
+  ...
+# Subtest: 无作品和非法地址不连接、不执行项目
+ok 287 - 无作品和非法地址不连接、不执行项目
+  ---
+  duration_ms: 3.409417
+  type: 'test'
+  ...
+# Subtest: 403、业务失败和项目格式错误都有重试入口，不假报连接
+ok 288 - 403、业务失败和项目格式错误都有重试入口，不假报连接
+  ---
+  duration_ms: 1.418167
+  type: 'test'
+  ...
+# Subtest: 读取过程中身份变化不运行旧会话作品
+ok 289 - 读取过程中身份变化不运行旧会话作品
+  ---
+  duration_ms: 6.21825
+  type: 'test'
+  ...
+# Subtest: Scratch player: resize preserves stage and overlays, fullscreen releases overrides
+ok 290 - Scratch player: resize preserves stage and overlays, fullscreen releases overrides
+  ---
+  duration_ms: 1.345917
+  type: 'test'
+  ...
+# Subtest: cloud status gets reserved height and stage remains centered inside viewport
+ok 291 - cloud status gets reserved height and stage remains centered inside viewport
+  ---
+  duration_ms: 0.512625
+  type: 'test'
+  ...
+# Subtest: ScratchJr 取服务器作品并生成 SJR/PNG，保存 ID、类型、任务与新令牌
+ok 292 - ScratchJr 取服务器作品并生成 SJR/PNG，保存 ID、类型、任务与新令牌
+  ---
+  duration_ms: 42.443208
+  type: 'test'
+  ...
+# Subtest: 本机新作保留本机名；已有平台 ID 忽略陈旧 pmd5
+ok 293 - 本机新作保留本机名；已有平台 ID 忽略陈旧 pmd5
+  ---
+  duration_ms: 3.315584
+  type: 'test'
+  ...
+# Subtest: HTTP 失败与 HTML 文件不启动引擎、不允许提交
+ok 294 - HTTP 失败与 HTML 文件不启动引擎、不允许提交
+  ---
+  duration_ms: 1.748416
+  type: 'test'
+  ...
+# Subtest: 引擎错误销毁实例，旧回调不解除新实例的加载锁
+ok 295 - 引擎错误销毁实例，旧回调不解除新实例的加载锁
+  ---
+  duration_ms: 1.818958
+  type: 'test'
+  ...
+# Subtest: 封面无效、文件登记不匹配、401 均保留编辑且不业务提交
+ok 296 - 封面无效、文件登记不匹配、401 均保留编辑且不业务提交
+  ---
+  duration_ms: 4.385209
+  type: 'test'
+  ...
+# Subtest: 预览模式隐藏提交，原生云保存入口也不能写入
+ok 297 - 预览模式隐藏提交，原生云保存入口也不能写入
+  ---
+  duration_ms: 1.264916
+  type: 'test'
+  ...
+# Subtest: 标题与原生变化触发离页提醒；成功保存后清除
+ok 298 - 标题与原生变化触发离页提醒；成功保存后清除
+  ---
+  duration_ms: 1.383875
+  type: 'test'
+  ...
+# Subtest: 引擎仅含声明的六处局部修补，恢复后字节哈希等于上游基线
+ok 299 - 引擎仅含声明的六处局部修补，恢复后字节哈希等于上游基线
+  ---
+  duration_ms: 7.780958
+  type: 'test'
+  ...
+# Subtest: Web 界面初始化不再引用不存在的 fcn 或安排第二次启动
+ok 300 - Web 界面初始化不再引用不存在的 fcn 或安排第二次启动
+  ---
+  duration_ms: 0.777084
+  type: 'test'
+  ...
+# Subtest: 基线复现：ScratchJr 第二次封面回调混用上一轮项目编号
+ok 301 - 基线复现：ScratchJr 第二次封面回调混用上一轮项目编号
+  ---
+  duration_ms: 13.3715
+  type: 'test'
+  ...
+# Subtest: 首次配置请求失败显示恢复入口，恢复后只挂载一次
+ok 302 - 首次配置请求失败显示恢复入口，恢复后只挂载一次
+  ---
+  duration_ms: 8.026417
+  type: 'test'
+  ...
+# Subtest: 首次菜单请求失败可重试，失败结果不写入缓存
+ok 303 - 首次菜单请求失败可重试，失败结果不写入缓存
+  ---
+  duration_ms: 1.19575
+  type: 'test'
+  ...
+# Subtest: 业务失败和格式错误不会挂载或污染已有缓存
+ok 304 - 业务失败和格式错误不会挂载或污染已有缓存
+  ---
+  duration_ms: 2.952667
+  type: 'test'
+  ...
+# Subtest: 正常首次启动并发加载配置和菜单，空菜单也有效
+ok 305 - 正常首次启动并发加载配置和菜单，空菜单也有效
+  ---
+  duration_ms: 1.191584
+  type: 'test'
+  ...
+# Subtest: 有效缓存立即挂载，刷新失败被处理并保留缓存
+ok 306 - 有效缓存立即挂载，刷新失败被处理并保留缓存
+  ---
+  duration_ms: 0.999125
+  type: 'test'
+  ...
+# Subtest: 只有配置缓存时等待菜单，菜单失败仍显示恢复入口
+ok 307 - 只有配置缓存时等待菜单，菜单失败仍显示恢复入口
+  ---
+  duration_ms: 1.019459
+  type: 'test'
+  ...
+# Subtest: 重复触发启动不会发送重复的首次请求
+ok 308 - 重复触发启动不会发送重复的首次请求
+  ---
+  duration_ms: 0.980375
+  type: 'test'
+  ...
+# Subtest: 冷启动请求在15秒期限后显示错误，迟到响应不能写缓存
+ok 309 - 冷启动请求在15秒期限后显示错误，迟到响应不能写缓存
+  ---
+  duration_ms: 1.145458
+  type: 'test'
+  ...
+# Subtest: 超时后重试恢复，旧请求迟到不覆盖新缓存
+ok 310 - 超时后重试恢复，旧请求迟到不覆盖新缓存
+  ---
+  duration_ms: 1.722875
+  type: 'test'
+  ...
+# Subtest: 重试代次阻止旧的暖缓存刷新覆盖成功恢复的数据
+ok 311 - 重试代次阻止旧的暖缓存刷新覆盖成功恢复的数据
+  ---
+  duration_ms: 1.494792
+  type: 'test'
+  ...
+# Subtest: 暖缓存刷新收到401或403时清除旧菜单，不当作网络故障保留
+ok 312 - 暖缓存刷新收到401或403时清除旧菜单，不当作网络故障保留
+  ---
+  duration_ms: 1.671375
+  type: 'test'
+  ...
+# Subtest: 冷启动的业务未授权结果不能借旧菜单挂载
+ok 313 - 冷启动的业务未授权结果不能借旧菜单挂载
+  ---
+  duration_ms: 1.423833
+  type: 'test'
+  ...
+# Subtest: 暖缓存刷新超时保留有效数据，迟到响应不覆盖
+ok 314 - 暖缓存刷新超时保留有效数据，迟到响应不覆盖
+  ---
+  duration_ms: 1.00175
+  type: 'test'
+  ...
+# Subtest: 配置成功与缓存菜单403同批交错时拒绝返回启动成功
+ok 315 - 配置成功与缓存菜单403同批交错时拒绝返回启动成功
+  ---
+  duration_ms: 0.81275
+  type: 'test'
+  ...
+# Subtest: 403撤销的菜单不是有效空缓存，重复重试仍须等待授权响应
+ok 316 - 403撤销的菜单不是有效空缓存，重复重试仍须等待授权响应
+  ---
+  duration_ms: 1.466458
+  type: 'test'
+  ...
+# Subtest: 超时后同代迟到的HTTP401和业务403仍撤销暖菜单
+ok 317 - 超时后同代迟到的HTTP401和业务403仍撤销暖菜单
+  ---
+  duration_ms: 3.255834
+  type: 'test'
+  ...
+# Subtest: 旧代迟到的401不撤销重试后取得的新菜单
+ok 318 - 旧代迟到的401不撤销重试后取得的新菜单
+  ---
+  duration_ms: 1.410958
+  type: 'test'
+  ...
+# Subtest: 挂载前再次检查已经失效的启动结果
+ok 319 - 挂载前再次检查已经失效的启动结果
+  ---
+  duration_ms: 0.671417
+  type: 'test'
+  ...
+# Subtest: 零分与只有评语的反馈仍然可见，缺失分数不伪装成零分
+ok 320 - 零分与只有评语的反馈仍然可见，缺失分数不伪装成零分
+  ---
+  duration_ms: 2.056292
+  type: 'test'
+  ...
+# Subtest: 草稿、待批改、批改和公开状态遵循实际字典；未知状态不能修改
+ok 321 - 草稿、待批改、批改和公开状态遵循实际字典；未知状态不能修改
+  ---
+  duration_ms: 0.719417
+  type: 'test'
+  ...
+# Subtest: 切换提交筛选使用真实参数且回到首页，当前筛选和非法筛选不重复请求
+ok 322 - 切换提交筛选使用真实参数且回到首页，当前筛选和非法筛选不重复请求
+  ---
+  duration_ms: 3.652542
+  type: 'test'
+  ...
+# Subtest: 数组响应的本地分页不会遗漏末页，也不会越过边界
+ok 323 - 数组响应的本地分页不会遗漏末页，也不会越过边界
+  ---
+  duration_ms: 1.288375
+  type: 'test'
+  ...
+# Subtest: 无效列表与网络失败分别进入错误状态，空列表正常；销毁后的响应无效
+ok 324 - 无效列表与网络失败分别进入错误状态，空列表正常；销毁后的响应无效
+  ---
+  duration_ms: 2.194125
+  type: 'test'
+  ...
+# Subtest: 说明保留段落且不执行富文本，缺失图片回退不重复请求原图
+ok 325 - 说明保留段落且不执行富文本，缺失图片回退不重复请求原图
+  ---
+  duration_ms: 1.099625
+  type: 'test'
+  ...
+# Subtest: 资料拒绝可执行协议、配置失败能展示错误；新窗口隔离 opener
+ok 326 - 资料拒绝可执行协议、配置失败能展示错误；新窗口隔离 opener
+  ---
+  duration_ms: 0.664125
+  type: 'test'
+  ...
+# Subtest: 文件作业继续提交保留作品 ID 和名称，重做保留更新目标且不可修改已批改作品
+ok 327 - 文件作业继续提交保留作品 ID 和名称，重做保留更新目标且不可修改已批改作品
+  ---
+  duration_ms: 0.518375
+  type: 'test'
+  ...
+# Subtest: Python 继续与重做均保留 ID；名称和模板查询参数完整往返
+ok 328 - Python 继续与重做均保留 ID；名称和模板查询参数完整往返
+  ---
+  duration_ms: 0.63975
+  type: 'test'
+  ...
+# Subtest: Scratch 与 ScratchJr 入口携带已有 ID，继续与重做完整编码模板和名称
+ok 329 - Scratch 与 ScratchJr 入口携带已有 ID，继续与重做完整编码模板和名称
+  ---
+  duration_ms: 2.200541
+  type: 'test'
+  ...
+# Subtest: 旧表单实际复现：0 分且评语为空时被序列化为空列表
+ok 330 - 旧表单实际复现：0 分且评语为空时被序列化为空列表
+  ---
+  duration_ms: 13.770042
+  type: 'test'
+  ...
+# Subtest: 读取未完成或失败不能保存，重新读取可以恢复
+ok 331 - 读取未完成或失败不能保存，重新读取可以恢复
+  ---
+  duration_ms: 4.141875
+  type: 'test'
+  ...
+# Subtest: 零分实际提交，忽略列表受保护字段与已读取讨论，保存只发送一次
+ok 332 - 零分实际提交，忽略列表受保护字段与已读取讨论，保存只发送一次
+  ---
+  duration_ms: 1.532709
+  type: 'test'
+  ...
+# Subtest: 只有评语可以保存，改一个评分时保留额外反馈与第一条 ID
+ok 333 - 只有评语可以保存，改一个评分时保留额外反馈与第一条 ID
+  ---
+  duration_ms: 1.039333
+  type: 'test'
+  ...
+# Subtest: 仅改作品信息不重发评分；清空已有反馈时显式提交空列表
+ok 334 - 仅改作品信息不重发评分；清空已有反馈时显式提交空列表
+  ---
+  duration_ms: 0.961417
+  type: 'test'
+  ...
+# Subtest: 网络和业务失败保留输入，不显示成功、不关弹窗；再次保存可成功
+ok 335 - 网络和业务失败保留输入，不显示成功、不关弹窗；再次保存可成功
+  ---
+  duration_ms: 1.07375
+  type: 'test'
+  ...
+# Subtest: 切换作品、关闭或销毁后，迟到读取不能填入新弹窗
+ok 336 - 切换作品、关闭或销毁后，迟到读取不能填入新弹窗
+  ---
+  duration_ms: 1.191083
+  type: 'test'
+  ...
+# Subtest: 讨论失败可单独重试，保存不依赖旧讨论快照
+ok 337 - 讨论失败可单独重试，保存不依赖旧讨论快照
+  ---
+  duration_ms: 0.818209
+  type: 'test'
+  ...
+# Subtest: 无效评分、名称和状态不提交；未保存退出需要明确放弃
+ok 338 - 无效评分、名称和状态不提交；未保存退出需要明确放弃
+  ---
+  duration_ms: 0.990417
+  type: 'test'
+  ...
+# Subtest: 列表状态使用真实参数，未提交的搜索不随状态切换生效
+ok 339 - 列表状态使用真实参数，未提交的搜索不随状态切换生效
+  ---
+  duration_ms: 2.157041
+  type: 'test'
+  ...
+# Subtest: 旧列表响应不能覆盖新筛选，拒绝和畸形响应有恢复状态
+ok 340 - 旧列表响应不能覆盖新筛选，拒绝和畸形响应有恢复状态
+  ---
+  duration_ms: 0.81325
+  type: 'test'
+  ...
+# Subtest: 删除末页后回退有效页，翻页清空选择；销毁后不接受响应
+ok 341 - 删除末页后回退有效页，翻页清空选择；销毁后不接受响应
+  ---
+  duration_ms: 1.041542
+  type: 'test'
+  ...
+# Subtest: 标签草稿按作品重置，失败保留输入，重复点击不重复写入
+ok 342 - 标签草稿按作品重置，失败保留输入，重复点击不重复写入
+  ---
+  duration_ms: 0.795917
+  type: 'test'
+  ...
+# Subtest: 导出只使用已生效条件，姓名和标签筛选要求选中，JSON 错误不能伪装 Excel
+ok 343 - 导出只使用已生效条件，姓名和标签筛选要求选中，JSON 错误不能伪装 Excel
+  ---
+  duration_ms: 0.870833
+  type: 'test'
+  ...
+# Subtest: 预览编码完整查询参数，拒绝可执行 URL，关闭不假设 Scratch VM 存在
+ok 344 - 预览编码完整查询参数，拒绝可执行 URL，关闭不假设 Scratch VM 存在
+  ---
+  duration_ms: 0.737916
+  type: 'test'
+  ...
+# Subtest: 打开作品保留既有编辑器入口并隔离新窗口 opener；缺图不再重试原地址
+ok 345 - 打开作品保留既有编辑器入口并隔离新窗口 opener；缺图不再重试原地址
+  ---
+  duration_ms: 0.605625
+  type: 'test'
+  ...
+# Subtest: oversized feedback is retained locally instead of sending an invalid save
+ok 346 - oversized feedback is retained locally instead of sending an invalid save
+  ---
+  duration_ms: 1.431375
+  type: 'test'
+  ...
+# Subtest: fuzzy-name export requires selected results and omits the incompatible exact-name filter
+ok 347 - fuzzy-name export requires selected results and omits the incompatible exact-name filter
+  ---
+  duration_ms: 0.754625
+  type: 'test'
+  ...
+1..347
+# tests 347
+# suites 0
+# pass 347
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2384.02225

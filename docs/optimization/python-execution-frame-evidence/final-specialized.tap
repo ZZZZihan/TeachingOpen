@@ -1,0 +1,442 @@
+TAP version 13
+# Subtest: app actual runit delegates current code into opaque frame and actual clear destroys it
+ok 1 - app actual runit delegates current code into opaque frame and actual clear destroys it
+  ---
+  duration_ms: 8.138416
+  type: 'test'
+  ...
+# Subtest: appPlayer actual runit delegates current code into opaque frame and actual clear destroys it
+ok 2 - appPlayer actual runit delegates current code into opaque frame and actual clear destroys it
+  ---
+  duration_ms: 10.322125
+  type: 'test'
+  ...
+# Subtest: repeat Run keeps one computation host until old termination ack and starts only the latest queued code
+ok 3 - repeat Run keeps one computation host until old termination ack and starts only the latest queued code
+  ---
+  duration_ms: 6.412708
+  type: 'test'
+  ...
+# Subtest: actual coordinator and trusted host keep rapid reruns queued throughout Worker retirement cooldown
+ok 4 - actual coordinator and trusted host keep rapid reruns queued throughout Worker retirement cooldown
+  ---
+  duration_ms: 5.393084
+  type: 'test'
+  ...
+# Subtest: public window messages cannot forge output, input or done; private protocol rejects malformed and oversized fields
+ok 5 - public window messages cannot forge output, input or done; private protocol rejects malformed and oversized fields
+  ---
+  duration_ms: 2.592125
+  type: 'test'
+  ...
+# Subtest: parent gives completed turtle callbacks 30s, pauses for input and does not reset an active callback budget
+ok 6 - parent gives completed turtle callbacks 30s, pauses for input and does not reset an active callback budget
+  ---
+  duration_ms: 2.78325
+  type: 'test'
+  ...
+# Subtest: callbacks during main execution share its remaining budget and a 33rd pending callback ends the run
+ok 7 - callbacks during main execution share its remaining budget and a 33rd pending callback ends the run
+  ---
+  duration_ms: 3.063917
+  type: 'test'
+  ...
+# Subtest: main completion during callback input is retained and callback completion stops the resumed budget
+ok 8 - main completion during callback input is retained and callback completion stops the resumed budget
+  ---
+  duration_ms: 2.055958
+  type: 'test'
+  ...
+# Subtest: parent output cap preserves normal slow small messages and bounds display after saturation
+ok 9 - parent output cap preserves normal slow small messages and bounds display after saturation
+  ---
+  duration_ms: 4.085459
+  type: 'test'
+  ...
+# Subtest: input form pauses the remaining computation budget, sends only typed text and cancel destroys the runner
+ok 10 - input form pauses the remaining computation budget, sends only typed text and cancel destroys the runner
+  ---
+  duration_ms: 3.693584
+  type: 'test'
+  ...
+# Subtest: load failure, compute timeout and immutable five-minute lifetime each clean up the actual frame
+ok 11 - load failure, compute timeout and immutable five-minute lifetime each clean up the actual frame
+  ---
+  duration_ms: 1.656917
+  type: 'test'
+  ...
+# Subtest: invalid code and unsupported isolation produce explicit errors with no legacy same-origin execution
+ok 12 - invalid code and unsupported isolation produce explicit errors with no legacy same-origin execution
+  ---
+  duration_ms: 3.599959
+  type: 'test'
+  ...
+# Subtest: Stop without trusted ack preserves the host, reports failure and retries; Clear cancels queued rerun
+ok 13 - Stop without trusted ack preserves the host, reports failure and retries; Clear cancels queued rerun
+  ---
+  duration_ms: 9.414125
+  type: 'test'
+  ...
+# Subtest: trusted renderer host validates bootstrap and transfers student code into one Worker only
+ok 14 - trusted renderer host validates bootstrap and transfers student code into one Worker only
+  ---
+  duration_ms: 1.749792
+  type: 'test'
+  ...
+# Subtest: trusted host calls Worker.terminate, closes results and waits 2500ms before its own stopped ack
+ok 15 - trusted host calls Worker.terminate, closes results and waits 2500ms before its own stopped ack
+  ---
+  duration_ms: 2.199916
+  type: 'test'
+  ...
+# Subtest: trusted host rejects malformed, duplicated, deeply nested RPC and a 33rd pending request
+ok 16 - trusted host rejects malformed, duplicated, deeply nested RPC and a 33rd pending request
+  ---
+  duration_ms: 12.203958
+  type: 'test'
+  ...
+# Subtest: trusted host limits completed RPC rate and recovers by explicit stop acknowledgment after errors
+ok 17 - trusted host limits completed RPC rate and recovers by explicit stop acknowledgment after errors
+  ---
+  duration_ms: 4.199167
+  type: 'test'
+  ...
+# Subtest: trusted turtle initialization exposes an event surface before lazy drawing; Worker graphics cannot forge it
+ok 18 - trusted turtle initialization exposes an event surface before lazy drawing; Worker graphics cannot forge it
+  ---
+  duration_ms: 0.849583
+  type: 'test'
+  ...
+# Subtest: runner loader registers the inherited bundles without mounting Vue and executes actual Python2 in its own realm
+ok 19 - runner loader registers the inherited bundles without mounting Vue and executes actual Python2 in its own realm
+  ---
+  duration_ms: 94.11
+  type: 'test'
+  ...
+# Subtest: both public entry points load coordinator before the component bundles and expose no fallback runtime runner
+ok 20 - both public entry points load coordinator before the component bundles and expose no fallback runtime runner
+  ---
+  duration_ms: 0.198042
+  type: 'test'
+  ...
+# Subtest: HTML, entities and event attributes are literal output across chunks
+ok 21 - HTML, entities and event attributes are literal output across chunks
+  ---
+  duration_ms: 2.110959
+  type: 'test'
+  ...
+# Subtest: many print calls reuse one text node instead of reparsing or multiplying nodes
+ok 22 - many print calls reuse one text node instead of reparsing or multiplying nodes
+  ---
+  duration_ms: 2.166709
+  type: 'test'
+  ...
+# Subtest: exact display limit preserves all data; excess adds exactly one fixed notice
+ok 23 - exact display limit preserves all data; excess adds exactly one fixed notice
+  ---
+  duration_ms: 0.66375
+  type: 'test'
+  ...
+# Subtest: truncation preserves surrogate pairs inside a chunk and across a boundary
+ok 24 - truncation preserves surrogate pairs inside a chunk and across a boundary
+  ---
+  duration_ms: 0.197959
+  type: 'test'
+  ...
+# Subtest: clear removes the notice and allows full output again; nodes keep independent limits
+ok 25 - clear removes the notice and allows full output again; nodes keep independent limits
+  ---
+  duration_ms: 0.098458
+  type: 'test'
+  ...
+# Subtest: replaced DOM content starts a fresh buffer and missing output is harmless
+ok 26 - replaced DOM content starts a fresh buffer and missing output is harmless
+  ---
+  duration_ms: 0.069584
+  type: 'test'
+  ...
+# Subtest: app actual component appends through the shared buffer and execution cleanup
+ok 27 - app actual component appends through the shared buffer and execution cleanup
+  ---
+  duration_ms: 8.515875
+  type: 'test'
+  ...
+# Subtest: appPlayer actual component appends through the shared buffer and execution cleanup
+ok 28 - appPlayer actual component appends through the shared buffer and execution cleanup
+  ---
+  duration_ms: 4.588042
+  type: 'test'
+  ...
+# Subtest: both HTML entry points load output helper before vendor bundles and share output styles
+ok 29 - both HTML entry points load output helper before vendor bundles and share output styles
+  ---
+  duration_ms: 0.369708
+  type: 'test'
+  ...
+# Subtest: execution and URL substitutions reverse before the six output substitutions and preserve every historical vendor base
+ok 30 - execution and URL substitutions reverse before the six output substitutions and preserve every historical vendor base
+  ---
+  duration_ms: 39.765625
+  type: 'test'
+  ...
+# Subtest: both HTML entry points load the real query helper before both prebuilt Python bundles
+ok 31 - both HTML entry points load the real query helper before both prebuilt Python bundles
+  ---
+  duration_ms: 3.22925
+  type: 'test'
+  ...
+# Subtest: all three actual callers mark modern Python links for one standard outer decode
+ok 32 - all three actual callers mark modern Python links for one standard outer decode
+  ---
+  duration_ms: 5.609958
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: nested query and literal plus
+ok 33 - teacher actual caller reaches both actual Python component downloads: nested query and literal plus
+  ---
+  duration_ms: 25.717209
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: space and Chinese
+ok 34 - teacher actual caller reaches both actual Python component downloads: space and Chinese
+  ---
+  duration_ms: 7.158834
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: percent escapes belong to the file
+ok 35 - teacher actual caller reaches both actual Python component downloads: percent escapes belong to the file
+  ---
+  duration_ms: 6.932625
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: hash belongs to the file
+ok 36 - teacher actual caller reaches both actual Python component downloads: hash belongs to the file
+  ---
+  duration_ms: 10.372
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: relative file with query and percent escape
+ok 37 - teacher actual caller reaches both actual Python component downloads: relative file with query and percent escape
+  ---
+  duration_ms: 5.161791
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: relative file without initial slash
+ok 38 - teacher actual caller reaches both actual Python component downloads: relative file without initial slash
+  ---
+  duration_ms: 4.964625
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: nested query and literal plus
+ok 39 - course actual caller reaches both actual Python component downloads: nested query and literal plus
+  ---
+  duration_ms: 6.083584
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: space and Chinese
+ok 40 - course actual caller reaches both actual Python component downloads: space and Chinese
+  ---
+  duration_ms: 4.06275
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: percent escapes belong to the file
+ok 41 - course actual caller reaches both actual Python component downloads: percent escapes belong to the file
+  ---
+  duration_ms: 4.789875
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: hash belongs to the file
+ok 42 - course actual caller reaches both actual Python component downloads: hash belongs to the file
+  ---
+  duration_ms: 4.941875
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: relative file with query and percent escape
+ok 43 - course actual caller reaches both actual Python component downloads: relative file with query and percent escape
+  ---
+  duration_ms: 4.648208
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: relative file without initial slash
+ok 44 - course actual caller reaches both actual Python component downloads: relative file without initial slash
+  ---
+  duration_ms: 4.128917
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: nested query and literal plus
+ok 45 - community actual caller reaches both actual Python component downloads: nested query and literal plus
+  ---
+  duration_ms: 3.696791
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: space and Chinese
+ok 46 - community actual caller reaches both actual Python component downloads: space and Chinese
+  ---
+  duration_ms: 3.753167
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: percent escapes belong to the file
+ok 47 - community actual caller reaches both actual Python component downloads: percent escapes belong to the file
+  ---
+  duration_ms: 3.508458
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: hash belongs to the file
+ok 48 - community actual caller reaches both actual Python component downloads: hash belongs to the file
+  ---
+  duration_ms: 4.908292
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: relative file with query and percent escape
+ok 49 - community actual caller reaches both actual Python component downloads: relative file with query and percent escape
+  ---
+  duration_ms: 4.83375
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: relative file without initial slash
+ok 50 - community actual caller reaches both actual Python component downloads: relative file without initial slash
+  ---
+  duration_ms: 3.548333
+  type: 'test'
+  ...
+# Subtest: appPlayer encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+ok 51 - appPlayer encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+  ---
+  duration_ms: 1.9595
+  type: 'test'
+  ...
+# Subtest: appPlayer first duplicate URL wins without reparsing embedded URL parameters
+ok 52 - appPlayer first duplicate URL wins without reparsing embedded URL parameters
+  ---
+  duration_ms: 2.684
+  type: 'test'
+  ...
+# Subtest: appPlayer missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+ok 53 - appPlayer missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+  ---
+  duration_ms: 7.235708
+  type: 'test'
+  ...
+# Subtest: appPlayer ordinary raw relative links remain usable and malformed percent encoding does not throw
+ok 54 - appPlayer ordinary raw relative links remain usable and malformed percent encoding does not throw
+  ---
+  duration_ms: 7.303334
+  type: 'test'
+  ...
+# Subtest: appPlayer legacy raw addresses preserve their own percent escapes and literal plus
+ok 55 - appPlayer legacy raw addresses preserve their own percent escapes and literal plus
+  ---
+  duration_ms: 8.336667
+  type: 'test'
+  ...
+# Subtest: appPlayer legacy whole-value encoded recognized addresses decode once
+ok 56 - appPlayer legacy whole-value encoded recognized addresses decode once
+  ---
+  duration_ms: 5.370708
+  type: 'test'
+  ...
+# Subtest: app encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+ok 57 - app encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+  ---
+  duration_ms: 1.850375
+  type: 'test'
+  ...
+# Subtest: app first duplicate URL wins without reparsing embedded URL parameters
+ok 58 - app first duplicate URL wins without reparsing embedded URL parameters
+  ---
+  duration_ms: 1.367875
+  type: 'test'
+  ...
+# Subtest: app missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+ok 59 - app missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+  ---
+  duration_ms: 7.664833
+  type: 'test'
+  ...
+# Subtest: app ordinary raw relative links remain usable and malformed percent encoding does not throw
+ok 60 - app ordinary raw relative links remain usable and malformed percent encoding does not throw
+  ---
+  duration_ms: 7.081417
+  type: 'test'
+  ...
+# Subtest: app legacy raw addresses preserve their own percent escapes and literal plus
+ok 61 - app legacy raw addresses preserve their own percent escapes and literal plus
+  ---
+  duration_ms: 8.7155
+  type: 'test'
+  ...
+# Subtest: app legacy whole-value encoded recognized addresses decode once
+ok 62 - app legacy whole-value encoded recognized addresses decode once
+  ---
+  duration_ms: 5.652875
+  type: 'test'
+  ...
+# Subtest: the shared parser keeps editor workFile escapes while preserving the existing name and ID query behavior
+ok 63 - the shared parser keeps editor workFile escapes while preserving the existing name and ID query behavior
+  ---
+  duration_ms: 2.596875
+  type: 'test'
+  ...
+# Subtest: actual renderer preserves original turtle schema, typed return values, references and undo
+ok 64 - actual renderer preserves original turtle schema, typed return values, references and undo
+  ---
+  duration_ms: 99.505875
+  type: 'test'
+  ...
+# Subtest: actual renderer emits typed timer callback events and disposes pending callbacks
+ok 65 - actual renderer emits typed timer callback events and disposes pending callbacks
+  ---
+  duration_ms: 22.247542
+  type: 'test'
+  ...
+# Subtest: actual renderer rejects unsupported or amplified calls and remains usable after each ValueError
+ok 66 - actual renderer rejects unsupported or amplified calls and remains usable after each ValueError
+  ---
+  duration_ms: 21.268
+  type: 'test'
+  ...
+# Subtest: derived circle steps and moving text are bounded before original methods can allocate animation chains
+ok 67 - derived circle steps and moving text are bounded before original methods can allocate animation chains
+  ---
+  duration_ms: 17.518542
+  type: 'test'
+  ...
+# Subtest: actual Worker start handshake gates finite Python2 execution and batches bounded literal output
+ok 68 - actual Worker start handshake gates finite Python2 execution and batches bounded literal output
+  ---
+  duration_ms: 23.471833
+  type: 'test'
+  ...
+# Subtest: actual Worker input accepts only the current typed response and compensates Skulpt execution time after long wait
+ok 69 - actual Worker input accepts only the current typed response and compensates Skulpt execution time after long wait
+  ---
+  duration_ms: 39.990708
+  type: 'test'
+  ...
+# Subtest: actual Python turtle proxies preserve kwargs, tuples, object identity and caught renderer errors
+ok 70 - actual Python turtle proxies preserve kwargs, tuples, object identity and caught renderer errors
+  ---
+  duration_ms: 35.553625
+  type: 'test'
+  ...
+# Subtest: actual post-main turtle callback runs in Worker with a fresh budget, can wait for input and resume drawing
+ok 71 - actual post-main turtle callback runs in Worker with a fresh budget, can wait for input and resume drawing
+  ---
+  duration_ms: 34.978083
+  type: 'test'
+  ...
+# Subtest: actual Worker serializes turtle events behind main input and bounds the pending event queue
+ok 72 - actual Worker serializes turtle events behind main input and bounds the pending event queue
+  ---
+  duration_ms: 41.300334
+  type: 'test'
+  ...
+1..72
+# tests 72
+# suites 0
+# pass 72
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 430.813583

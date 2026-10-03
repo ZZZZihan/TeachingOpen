@@ -1,0 +1,30 @@
+{
+  "stopped": {
+    "oldConnected": false,
+    "state": {
+      "runId": null,
+      "pendingRunId": null,
+      "state": "stopped",
+      "remainingMs": 0
+    }
+  },
+  "rerun": {
+    "output": "AFTER_DRAW_STOP\n",
+    "state": {
+      "runId": "b3f3f73ab17fa39aa7e71fa4bfb0e9e5",
+      "pendingRunId": null,
+      "state": "completed",
+      "remainingMs": 29985
+    }
+  },
+  "cleared": {
+    "state": {
+      "runId": null,
+      "pendingRunId": null,
+      "state": "idle",
+      "remainingMs": 0
+    },
+    "frameCount": 0,
+    "output": ""
+  }
+}

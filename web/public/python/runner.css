@@ -1,0 +1,3 @@
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #fff; }
+#mycanvas { width: 100%; height: 100%; outline: none; overflow: hidden; }
+#mycanvas canvas { max-width: 100%; }
