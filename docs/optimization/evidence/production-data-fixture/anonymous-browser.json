@@ -1,0 +1,58 @@
+{
+  "source": "root actual browser via Playwright CLI; anonymous only",
+  "candidate_commit": "91cdbe4404356da3727d1bd1d572c4bc3cdbd806",
+  "backend_jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "ports": {
+    "backend": 18141,
+    "frontend": 18142
+  },
+  "homepage": {
+    "public_course_cards": 3,
+    "viewports": [
+      {
+        "width": 1440,
+        "document_width": 1432,
+        "images": 5,
+        "broken_images": 0,
+        "raw_quote_entities_present": true
+      },
+      {
+        "width": 768,
+        "document_width": 760,
+        "images": 5,
+        "broken_images": 0,
+        "raw_quote_entities_present": true
+      },
+      {
+        "width": 390,
+        "document_width": 382,
+        "images": 5,
+        "broken_images": 0,
+        "raw_quote_entities_present": true
+      }
+    ]
+  },
+  "course_catalog": {
+    "public_course_cards": 3,
+    "actual_description_modal_opened": true,
+    "modal_viewport": 390,
+    "close_and_learn_buttons_visible": true
+  },
+  "expected_console_rejections": [
+    {
+      "type": "CSP",
+      "resource": "legacy external telemetry script",
+      "blocked": true
+    }
+  ],
+  "issues_not_fixed_in_this_pr": [
+    "Course summary displays encoded quote entities.",
+    "Production CSS lost WebKit box orientation, so long summaries exceed intended three lines; independent fix in progress."
+  ],
+  "scope": "Actual production-derived private course data through local Java/MySQL plus built frontend. Not authenticated role flows, video/document playback, Excel import, or user acceptance.",
+  "private_artifacts": {
+    "screenshots": 4,
+    "copied_to_git": false
+  },
+  "root_visual_review": true
+}

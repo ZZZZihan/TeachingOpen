@@ -1,0 +1,39 @@
+{
+  "script": "api/dev/verify-production-content.py",
+  "script_sha256": "8478bd0093a4a0ca8d984a9a30e1e24eea0e77b9221247f3ce48afc69ccd9446",
+  "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "final_report": "production-content-readonly-http-covers.json",
+  "final_cli_exit_code": 0,
+  "final_passed": 12,
+  "final_total": 12,
+  "anonymous_http_covers_verified": 3,
+  "changed_business_tables": [],
+  "historical_runs": [
+    {
+      "report": "production-content-readonly.json",
+      "cli_exit_code": 1,
+      "passed": 1,
+      "total": 5,
+      "phase": "Strict del_flag=0 test assumption was incorrect for NULL production-source values; retained as failure."
+    },
+    {
+      "report": "production-content-readonly-final.json",
+      "cli_exit_code": 1,
+      "passed": 6,
+      "total": 6,
+      "phase": "Partial run stopped before type/category due to a test reference-value assumption; no complete success claim."
+    },
+    {
+      "report": "production-content-readonly-complete.json",
+      "cli_exit_code": 0,
+      "passed": 12,
+      "total": 12,
+      "phase": "Prior cover check compared disk and manifest only; superseded by final HTTP byte check, not added to final count."
+    }
+  ],
+  "limitations": [
+    "Existing getHomeCourse selects show_home=1; returned del_flag is compared as stored.",
+    "Three visible source rows have NULL del_flag; no nonzero visible sample demonstrates deletion filtering.",
+    "No login, Redis token/CAPTCHA access, writes, student files, browser acceptance or production deployment."
+  ]
+}
