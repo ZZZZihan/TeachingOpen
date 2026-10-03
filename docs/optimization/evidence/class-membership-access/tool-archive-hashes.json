@@ -1,0 +1,12 @@
+[
+  {
+    "archive": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/downloads/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64.tar.gz",
+    "sha256": "58bb3c08f2aa63d9743cf31899fa4b8c6c9effefce9479e7288c26621c3bb21b",
+    "matches_toolchain_manifest": true
+  },
+  {
+    "archive": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/downloads/apache-maven-3.9.16-bin.tar.gz",
+    "sha256": "80ffca22aed9e8b9713a232f3394fd81d7f20322df75efdb2b047dbd3e3a23bb",
+    "matches_toolchain_manifest": true
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "suites": [
+    {
+      "suite": "auth-status",
+      "passed": 7,
+      "total": 7,
+      "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+      "exit_code": 0
+    },
+    {
+      "suite": "role-cache",
+      "passed": 11,
+      "total": 11,
+      "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+      "exit_code": 0
+    },
+    {
+      "suite": "course-management",
+      "passed": 188,
+      "total": 188,
+      "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+      "exit_code": 0
+    },
+    {
+      "suite": "learning-units",
+      "passed": 80,
+      "total": 80,
+      "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+      "exit_code": 0
+    }
+  ],
+  "passed": 286,
+  "total": 286,
+  "record_writer_failure_retained": true,
+  "initial_runner_exit_code": 1,
+  "continued_runner_exit_code": 0
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "runtime": "course-role-runtime",
+    "previous_pid": 20583,
+    "old_jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+    "new_jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+    "healthy": true,
+    "new_pid": 1402,
+    "rollback_needed": false
+  },
+  {
+    "runtime": "role-flow-1003",
+    "previous_pid": 20637,
+    "old_jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+    "new_jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+    "healthy": true,
+    "new_pid": 1604,
+    "rollback_needed": false
+  },
+  {
+    "runtime": "prod-fixture-1003",
+    "previous_pid": 20934,
+    "old_jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+    "new_jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+    "healthy": true,
+    "new_pid": 1963,
+    "rollback_needed": false
+  }
+]

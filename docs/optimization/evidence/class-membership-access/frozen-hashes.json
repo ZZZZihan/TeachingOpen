@@ -1,0 +1,15 @@
+{
+  "source_files": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/controller/SysDepartController.java": "852f9f488c3c7dc4bd1185da40fa3fc003407972612258f284d0f67d5c45117d",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/controller/SysUserController.java": "03765d8321bf4cf9f9194ea1eede4f8aff1b87fdbd8af380d683ba423a1cb955",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/ISysUserDepartService.java": "c7edd821906b243d64bf72f30fdce38add1241c0ff49738e7c11c5ba6a1c91d1",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/impl/SysUserDepartServiceImpl.java": "b7d0d67c129d1a6b4b704a6476b153fdcd032fae50075c66df2e57253166b518"
+  },
+  "source_manifest_before_sha256": "4e4e3bc7cb6a6e5a6f264e640904369677302c09994bbfe0f4763aaf624fee2c",
+  "source_manifest_after_sha256": "4e4e3bc7cb6a6e5a6f264e640904369677302c09994bbfe0f4763aaf624fee2c",
+  "product_diff_sha256": "8c6d054d30c6113e666997ecc9a5d4c9b771717dadc2b61c5bcc6f0541454d75",
+  "build_log_sha256": "14b78f4c84dd4c44c0fe0ee32c67e8fd092a9c3adccedb1fdda977be981ba961",
+  "source_jar": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-membership-access/api/jeecg-boot-module-system/target/teaching-open-2.8.0.jar",
+  "frozen_jar": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/class-membership-access/author-build-20261003T155810Z/teaching-open-class-membership-access.jar",
+  "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0"
+}

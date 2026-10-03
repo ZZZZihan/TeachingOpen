@@ -1,0 +1,22 @@
+{
+  "old_jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+  "new_jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+  "source_files_verified": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/controller/SysDepartController.java": "852f9f488c3c7dc4bd1185da40fa3fc003407972612258f284d0f67d5c45117d",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/controller/SysUserController.java": "03765d8321bf4cf9f9194ea1eede4f8aff1b87fdbd8af380d683ba423a1cb955",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/ISysUserDepartService.java": "c7edd821906b243d64bf72f30fdce38add1241c0ff49738e7c11c5ba6a1c91d1",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/impl/SysUserDepartServiceImpl.java": "b7d0d67c129d1a6b4b704a6476b153fdcd032fae50075c66df2e57253166b518"
+  },
+  "external_dependencies_identical": 208,
+  "common_module_entries_identical": 111,
+  "changed_application_entries": [
+    "BOOT-INF/classes/org/jeecg/modules/system/controller/SysDepartController.class",
+    "BOOT-INF/classes/org/jeecg/modules/system/controller/SysUserController.class",
+    "BOOT-INF/classes/org/jeecg/modules/system/controller/SysDepartController$2.class",
+    "BOOT-INF/classes/org/jeecg/modules/system/controller/SysDepartController$1.class",
+    "BOOT-INF/classes/org/jeecg/modules/system/service/ISysUserDepartService.class",
+    "BOOT-INF/classes/org/jeecg/modules/system/service/impl/SysUserDepartServiceImpl.class"
+  ],
+  "added_entries": [],
+  "removed_entries": []
+}
