@@ -1,9 +1,10 @@
 <template>
   <header class="public-header">
+    <CampusMasthead />
     <div class="header-inner">
       <router-link class="brand" to="/index" :aria-label="brandName + '首页'">
         <img v-if="logoUrl && !logoFailed" class="brand-logo" :src="logoUrl" alt="" @error="logoFailed = true" />
-        <span v-else class="brand-mark" aria-hidden="true">T<span>•</span></span>
+        <span v-else class="brand-mark" aria-hidden="true">天工</span>
         <span class="brand-name">{{ brandName }}</span>
       </router-link>
       <button
@@ -37,19 +38,20 @@
 </template>
 <script>
 import Vue from 'vue'
+import CampusMasthead from '@/components/brand/CampusMasthead'
 import { mapActions } from 'vuex'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import TMenu from '@/components/menu/tmenu'
 import { getFileAccessHttpUrl } from '@/api/manage'
 export default {
-    components: { TMenu },
+    components: { TMenu, CampusMasthead },
     data () {
         return { menuOpen: false, compact: false, logoFailed: false, viewportQuery: null }
     },
     computed: {
         menus () { return this.$store.state.user.menuList || [] },
         sysConfig () { return this.$store.getters.sysConfig || {} },
-        brandName () { return (this.sysConfig.brandName || '').trim() || 'TeachingOpen' },
+        brandName () { return (this.sysConfig.brandName || '').trim() || '人工智能教学平台' },
         logoUrl () {
             const { logo, qiniuDomain } = this.sysConfig
             if (!logo) return ''
@@ -89,11 +91,10 @@ export default {
 </script>
 <style scoped lang="less">
 .public-header { background: #fff; border-bottom: 1px solid #e1e4e8; color: #20252b; }
-.header-inner { max-width: 1280px; min-height: 80px; padding: 16px 40px; margin: auto; display: flex; align-items: center; gap: 64px; line-height: 1.5; }
+.header-inner { max-width: 1280px; min-height: 70px; padding: 14px 40px; margin: auto; display: flex; align-items: center; gap: 48px; line-height: 1.5; }
 .brand { display: flex; align-items: center; gap: 12px; min-width: 0; color: #20252b; flex-shrink: 0; }
-.brand-name { font-size: 21px; font-weight: 600; letter-spacing: -.8px; max-width: 260px; overflow-wrap: anywhere; }
-.brand-mark { display: inline-flex; align-items: baseline; color: #c84a55; font-family: Georgia, serif; font-size: 36px; font-weight: 700; line-height: 1; letter-spacing: -5px; padding-right: 5px; flex-shrink: 0; }
-.brand-mark span { color: #c84a55; font-size: 25px; }
+.brand-name { font-size: 18px; font-weight: 600; letter-spacing: .5px; max-width: 260px; overflow-wrap: anywhere; }
+.brand-mark { display: inline-flex; align-items: center; color: #74256a; font-size: 12px; font-weight: 600; letter-spacing: 2px; padding-right: 13px; border-right: 1px solid #dbd1da; flex-shrink: 0; }
 .brand-logo { max-width: 100px; max-height: 40px; object-fit: contain; }
 .header-nav { flex: 1; min-width: 0; }
 .default-menu { display: flex; gap: 32px; }
@@ -104,12 +105,12 @@ export default {
 .account-actions { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
 .account-link { color: #45515e; display: flex; align-items: center; gap: 6px; }
 .account-link span { max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.login-link { display: inline-flex; align-items: center; gap: 18px; padding: 10px 18px; border: 1px solid #c84a55; border-radius: 3px; color: #c84a55; font-size: 13px; white-space: nowrap; }
-.login-link:hover { background: #f7f8fa; color: #a93540; border-color: #c84a55; }
+.login-link { display: inline-flex; align-items: center; gap: 18px; padding: 10px 18px; border: 1px solid #74256a; border-radius: 3px; color: #74256a; font-size: 13px; white-space: nowrap; }
+.login-link:hover { background: #f7f8fa; color: #592052; border-color: #74256a; }
 .logout-button, .menu-toggle { border: 1px solid #e1e4e8; background: transparent; border-radius: 3px; padding: 8px 10px; color: #596775; cursor: pointer; }
 .menu-toggle { display: none; }
-a:focus-visible, button:focus-visible { outline: 2px solid #c84a55; outline-offset: 4px; }
+a:focus-visible, button:focus-visible { outline: 2px solid #74256a; outline-offset: 4px; }
 @media (max-width: 1100px) { .header-inner { gap: 30px; } .brand-name { max-width: 210px; } .default-menu { gap: 24px; } }
-@media (max-width: 900px) { .header-inner { gap: 12px; flex-wrap: wrap; padding: 18px 28px; min-height: 80px; } .brand { flex: 1; } .brand-name { font-size: 19px; max-width: 100%; } .menu-toggle { display: block; order: 3; width: 38px; height: 38px; } .account-actions { order: 2; } .header-nav { display: none; order: 4; flex-basis: 100%; } .header-nav.is-open { display: block; padding-top: 12px; border-top: 1px solid #e1e4e8; } .default-menu { flex-direction: column; gap: 2px; } .default-menu a { padding: 12px 0; } }
-@media (max-width: 480px) { .header-inner { padding: 16px 22px; gap: 10px; } .brand { gap: 8px; } .brand-mark { font-size: 28px; } .brand-mark span { font-size: 20px; } .brand-logo { max-width: 32px; max-height: 32px; } .brand-name { font-size: 17px; } .login-link { padding: 8px 10px; font-size: 12px; } .login-link .anticon { display: none; } .account-actions { gap: 6px; } .account-link span { max-width: 55px; } }
+@media (max-width: 900px) { .header-inner { gap: 12px; flex-wrap: wrap; padding: 18px 28px; min-height: 70px; } .brand { flex: 1; } .brand-name { font-size: 19px; max-width: 100%; } .menu-toggle { display: block; order: 3; width: 38px; height: 38px; } .account-actions { order: 2; } .header-nav { display: none; order: 4; flex-basis: 100%; } .header-nav.is-open { display: block; padding-top: 12px; border-top: 1px solid #e1e4e8; } .default-menu { flex-direction: column; gap: 2px; } .default-menu a { padding: 12px 0; } }
+@media (max-width: 480px) { .header-inner { padding: 16px 22px; gap: 10px; } .brand { gap: 8px; } .brand-mark { display: none; } .brand-logo { max-width: 32px; max-height: 32px; } .brand-name { font-size: 17px; } .login-link { padding: 8px 10px; font-size: 12px; } .login-link .anticon { display: none; } .account-actions { gap: 6px; } .account-link span { max-width: 55px; } }
 </style>

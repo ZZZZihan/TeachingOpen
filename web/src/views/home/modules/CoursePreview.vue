@@ -50,12 +50,12 @@ export default {
 .preview-heading { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
 .preview-heading h2 { font-size: 25px; font-weight: 600; color: #202c37; margin: 0 0 10px; }
 .preview-heading p { color: #687684; font-size: 13px; margin: 0; line-height: 1.8; }
-.preview-heading > a { display: inline-flex; align-items: center; gap: 16px; color: #a93944; font-size: 13px; white-space: nowrap; }
+.preview-heading > a { display: inline-flex; align-items: center; gap: 16px; color: #74256a; font-size: 13px; white-space: nowrap; }
 .preview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
 .preview-grid article { min-width: 0; }
 .preview-state { padding: 36px 24px; background: #fff; border: 1px solid #e1e5e9; color: #687684; text-align: center; line-height: 1.8; }
-.preview-state button { border: 1px solid #c84a55; background: #fff; border-radius: 4px; padding: 8px 16px; color: #a93944; cursor: pointer; }
-a:focus-visible, button:focus-visible { outline: 2px solid #c84a55; outline-offset: 4px; }
+.preview-state button { border: 1px solid #74256a; background: #fff; border-radius: 4px; padding: 8px 16px; color: #74256a; cursor: pointer; }
+a:focus-visible, button:focus-visible { outline: 2px solid #74256a; outline-offset: 4px; }
 .course-description { overflow-wrap: anywhere; line-height: 1.8; }
 .course-description /deep/ img { max-width: 100%; height: auto; }
 @media (max-width: 1000px) { .preview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }

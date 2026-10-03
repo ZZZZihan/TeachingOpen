@@ -9,7 +9,7 @@ test('暖缓存菜单在鉴权拒绝后撤销，导航同步更新且能显示�
   const source = readFileSync(resolve(__dirname, '../src/views/home/modules/Header.vue'), 'utf8')
   const script = source.match(/<script>([\s\S]*?)<\/script>/)[1]
     .replace(/^import .*$/gm, '').replace('export default', 'this.component =')
-  const context = { window: { removeEventListener: () => {} }, TMenu: {}, mapActions: () => ({}), mapGetters: () => ({ avatar: () => null }),
+  const context = { window: { removeEventListener: () => {} }, TMenu: {}, CampusMasthead: {}, mapActions: () => ({}), mapGetters: () => ({ avatar: () => null }),
     getFileAccessHttpUrl: value => value }
   vm.runInNewContext(script, context)
   const state = Vue.observable({ user: { menuList: [{ title: '旧菜单' }] } })

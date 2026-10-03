@@ -1,0 +1,266 @@
+{
+  "product_commit": "87974555da37ba3cfe2188710f6749cf63b00ae3",
+  "base": "193b8bfb349e7b2aa40d51f145b54b07e48ca236",
+  "before_frontend_commit": "8ca9e35f5ea8341c28daf1ef423dc0990be12412",
+  "before_origin": "http://127.0.0.1:18112",
+  "after_origin": "http://127.0.0.1:18133",
+  "tests": {
+    "passed": 184,
+    "total": 184
+  },
+  "lint": {
+    "files": 11,
+    "errors": 0,
+    "warnings": 0
+  },
+  "build": {
+    "success": true,
+    "warnings": 6
+  },
+  "browser": [
+    {
+      "scope": "Actual built frontend; anonymous synthetic backend; no login or CAPTCHA input",
+      "checks": [
+        {
+          "name": "home 1440",
+          "passed": true,
+          "detail": {
+            "path": "/index",
+            "width": 1440,
+            "scroll": 1432
+          }
+        },
+        {
+          "name": "home 768",
+          "passed": true,
+          "detail": {
+            "path": "/index",
+            "width": 768,
+            "scroll": 760
+          }
+        },
+        {
+          "name": "home 390",
+          "passed": true,
+          "detail": {
+            "path": "/index",
+            "width": 390,
+            "scroll": 382
+          }
+        },
+        {
+          "name": "bundled school images decoded",
+          "passed": true,
+          "detail": [
+            {
+              "src": "/img/wordmark.271c59bd.png",
+              "naturalWidth": 265,
+              "complete": true
+            },
+            {
+              "src": "/img/campus.7acad0db.jpg",
+              "naturalWidth": 499,
+              "complete": true
+            }
+          ]
+        },
+        {
+          "name": "official links open safely",
+          "passed": true,
+          "detail": [
+            {
+              "href": "https://www.tiangong.edu.cn/",
+              "target": "_blank",
+              "rel": "noopener noreferrer"
+            },
+            {
+              "href": "https://news.tiangong.edu.cn/2022/0617/c7646a77757/page.htm",
+              "target": "_blank",
+              "rel": "noopener noreferrer"
+            },
+            {
+              "href": "https://www.tiangong.edu.cn/",
+              "target": "_blank",
+              "rel": "noopener noreferrer"
+            },
+            {
+              "href": "https://lib.tiangong.edu.cn/",
+              "target": "_blank",
+              "rel": "noopener noreferrer"
+            }
+          ]
+        },
+        {
+          "name": "mobile menu expands",
+          "passed": true
+        },
+        {
+          "name": "navigation collapses on route",
+          "passed": true
+        },
+        {
+          "name": "courses 1440",
+          "passed": true,
+          "detail": {
+            "path": "/courseList",
+            "width": 1440,
+            "scroll": 1432
+          }
+        },
+        {
+          "name": "courses 768",
+          "passed": true,
+          "detail": {
+            "path": "/courseList",
+            "width": 768,
+            "scroll": 760
+          }
+        },
+        {
+          "name": "courses 390",
+          "passed": true,
+          "detail": {
+            "path": "/courseList",
+            "width": 390,
+            "scroll": 382
+          }
+        },
+        {
+          "name": "course dialog uses university primary",
+          "passed": true,
+          "detail": "rgb(116, 37, 106)"
+        },
+        {
+          "name": "course entry preserves login destination",
+          "passed": true,
+          "detail": "http://127.0.0.1:18133/user/login?redirect=%2Fteaching%2FmineCourse%2FcourseUnitCard%3Fid%3Dfixture_course_a"
+        },
+        {
+          "name": "login 1440",
+          "passed": true,
+          "detail": {
+            "path": "/user/login",
+            "width": 1440,
+            "scroll": 1432
+          }
+        },
+        {
+          "name": "login 768",
+          "passed": true,
+          "detail": {
+            "path": "/user/login",
+            "width": 768,
+            "scroll": 760
+          }
+        },
+        {
+          "name": "login 390",
+          "passed": true,
+          "detail": {
+            "path": "/user/login",
+            "width": 390,
+            "scroll": 382
+          }
+        },
+        {
+          "name": "login fields empty and captcha image loads",
+          "passed": true,
+          "detail": {
+            "inputs": [
+              {
+                "name": "username",
+                "value": ""
+              },
+              {
+                "name": "password",
+                "value": ""
+              },
+              {
+                "name": "captcha",
+                "value": ""
+              }
+            ],
+            "captcha": 105
+          }
+        }
+      ]
+    },
+    {
+      "scope": "Browser-only response interception and asset failure; backend configuration untouched; fresh anonymous context closed",
+      "checks": [
+        {
+          "name": "campus photo failure retains teaching content",
+          "passed": true
+        },
+        {
+          "name": "wordmark failure retains full school name",
+          "passed": true
+        },
+        {
+          "name": "custom home replaces default hero",
+          "passed": true
+        },
+        {
+          "name": "custom platform name and logo retained",
+          "passed": true
+        },
+        {
+          "name": "custom footer and institutional resources coexist",
+          "passed": true
+        },
+        {
+          "name": "configured banner remains preferred",
+          "passed": true
+        },
+        {
+          "name": "configured banner mobile fits",
+          "passed": true,
+          "detail": {
+            "width": 390,
+            "scroll": 382
+          }
+        }
+      ]
+    }
+  ],
+  "browser_passed": 23,
+  "screenshot_files": {
+    "after-course-detail-390.png": "d19a6635568df6d666addcc4f51f3174dfdcc1a2c741672ae4065cf966f055e3",
+    "after-courses-1440.png": "c9d3f38aeb9e5cb13985b96d24f3350de7c26f58f7b5e3d72a2aed935f78d684",
+    "after-courses-390.png": "1b6a39f215c27f5c2e3319403b6682d554eb398dc000e9a08d87047bbc6a8c00",
+    "after-courses-768.png": "dd7683e0aa8418f0197c85cbf63ad7644741cf6ed7258f96a300c0153e7f2be1",
+    "after-custom-banner-390.png": "1bb6c3d67589c905ea6f1c90a044b9ca4ff0c5655b4b1636a2bcc55a8f3f5073",
+    "after-custom-config-390.png": "1f0dda97fd3f257292f8b64b23015a231d86e61a28de4299b85202778e9f0066",
+    "after-home-1440.png": "125a50de80b45e2a887fec714d8a89e5914e0aca602486d43dbd26a2f79e7598",
+    "after-home-390.png": "1d1721b86f2cb15186a56605341b2f9e841960a0f6839a5d1042434a0eefccb7",
+    "after-home-768.png": "ad3c7d3af4ad9d69775eba2a9b56fa953deff875e41455621569ab7e437ed2d1",
+    "after-image-failure-390.png": "2c4442a6e3b74904f98d1cf1ef1e2234e5a733fbde522e997904652eb759409b",
+    "after-login-1440.png": "e80e3c6f1c8ee8f05c6056dd92161d6057a48aa81144db7fbd6fcd7f24f24709",
+    "after-login-390.png": "5d234f65b7fab9f086d894a31727a1c2e46f82b3ee64deeb42cc1eaf2a204353",
+    "after-login-768.png": "5aaf7b9b4922599ead7d2843294792e1e5abaf15bd9e36929a8d83b9a82fbbb1",
+    "before-home-1440.png": "99f9624bfab8aa0277b8c5d6a790c2e8785ed0b9637a363f738b29cccc34e3de",
+    "before-home-390.png": "42406670d90736b31f53882a709a0661c5c219e3fe3207d39987fb791927fd3d",
+    "before-home-768.png": "287f5a5bd43d0eaacee102c48347df485e0c3c893583c59a7b80d734ffca342b",
+    "before-login-1440.png": "98f43f22c5c7ed887d5e1a40d0f57fbb4569b72e3b84bd3c945e8dd1242f2a88",
+    "before-login-390.png": "16ed2336e77cae8167d8688f41b58ed81e649a1892f582b43d328637a2df9282",
+    "before-login-768.png": "c9822620ab880ca7f0ea946f4891b739485ddc994f48c792c40187a5be21fc1f"
+  },
+  "asset_files": {
+    "campus.jpg": {
+      "bytes": 133778,
+      "sha256": "bb4dc06dfa1346eb4f432efe739e82e42a3c7498feef87523b7ecdeff68d2ef4"
+    },
+    "wordmark.png": {
+      "bytes": 8673,
+      "sha256": "1e36742940a1c9d3af0765ba92c089d1314f5b9f9519393ec4ac3210b0209218"
+    }
+  },
+  "limits": [
+    "Anonymous built app against actual isolated synthetic backend; no authenticated UI verification.",
+    "Seven fallback/configuration checks use browser-only interception; backend configuration unchanged.",
+    "Existing errlog.js blocked by local CSP; Ant Design dialog aria-hidden/focus warning observed. Two prefetch connection resets during navigation, both assets subsequently HTTP 200. No zero-console-error claim.",
+    "Global Ant Design primary color changed; existing authenticated management screens not visually accepted.",
+    "Six build warnings: three legacy CSS order, asset size, entrypoint size, webpack performance recommendation; old browserslist database warning.",
+    "Human visual acceptance, merge and production rollout not completed."
+  ]
+}
