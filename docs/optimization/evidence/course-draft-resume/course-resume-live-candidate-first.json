@@ -1,0 +1,177 @@
+{
+  "passed": 31,
+  "total": 31,
+  "cases": [
+    {
+      "case": "Scratch: real course entry has unit and no explicit work ID",
+      "passed": true
+    },
+    {
+      "case": "Scratch: first entry loads the teacher template",
+      "passed": true
+    },
+    {
+      "case": "Scratch: actual upload and first save succeed",
+      "passed": true
+    },
+    {
+      "case": "Scratch: server exposes the saved work in the same unit",
+      "passed": true
+    },
+    {
+      "case": "Scratch: close and reenter the original course URL restores student bytes",
+      "passed": true
+    },
+    {
+      "case": "Scratch: restored title and work ID match",
+      "passed": true
+    },
+    {
+      "case": "Scratch: reentry resolves existing student details",
+      "passed": true
+    },
+    {
+      "case": "Scratch: next save succeeds with original ID and unit",
+      "passed": true
+    },
+    {
+      "case": "Scratch: database readback and attachment preserve student content",
+      "passed": true
+    },
+    {
+      "case": "ScratchJr: real course entry has unit and no explicit work ID",
+      "passed": true
+    },
+    {
+      "case": "ScratchJr: first entry loads the teacher template",
+      "passed": true
+    },
+    {
+      "case": "ScratchJr: actual upload and first save succeed",
+      "passed": true
+    },
+    {
+      "case": "ScratchJr: server exposes the saved work in the same unit",
+      "passed": true
+    },
+    {
+      "case": "ScratchJr: close and reenter the original course URL restores student bytes",
+      "passed": true
+    },
+    {
+      "case": "ScratchJr: restored title and work ID match",
+      "passed": true
+    },
+    {
+      "case": "ScratchJr: reentry resolves existing student details",
+      "passed": true
+    },
+    {
+      "case": "ScratchJr: next save succeeds with original ID and unit",
+      "passed": true
+    },
+    {
+      "case": "ScratchJr: database readback and attachment preserve student content",
+      "passed": true
+    },
+    {
+      "case": "Python: real course entry has unit and no explicit work ID",
+      "passed": true
+    },
+    {
+      "case": "Python: first entry loads the teacher template",
+      "passed": true
+    },
+    {
+      "case": "Python: actual upload and first save succeed",
+      "passed": true
+    },
+    {
+      "case": "Python: server exposes the saved work in the same unit",
+      "passed": true
+    },
+    {
+      "case": "Python: close and reenter the original course URL restores student bytes",
+      "passed": true
+    },
+    {
+      "case": "Python: restored title and work ID match",
+      "passed": true
+    },
+    {
+      "case": "Python: reentry resolves existing student details",
+      "passed": true
+    },
+    {
+      "case": "Python: next save succeeds with original ID and unit",
+      "passed": true
+    },
+    {
+      "case": "Python: database readback and attachment preserve student content",
+      "passed": true
+    },
+    {
+      "case": "Scratch: exactly one student work row remains after reopen and save",
+      "passed": true
+    },
+    {
+      "case": "ScratchJr: exactly one student work row remains after reopen and save",
+      "passed": true
+    },
+    {
+      "case": "Python: exactly one student work row remains after reopen and save",
+      "passed": true
+    },
+    {
+      "case": "complete database schemas non-audit rows attachments and submission cache restored",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "kind": "Scratch",
+      "unitId": "fixture_cr_34b8616914_sb3",
+      "workId": "2106382961493532674",
+      "reentryInfoCalls": 1,
+      "reentryUnitCalls": 1,
+      "templateSha256": "94b92bf01ca353f9853a56a027fe3351b6e64883b7e301a6f0e46f0fd05990d2",
+      "expectedStudentSha256": "cdb6d9fc490e81512d31e46ae781862a6ce8f0bf12ab8c475c88d6a0f26ff964",
+      "reopenedSha256": "cdb6d9fc490e81512d31e46ae781862a6ce8f0bf12ab8c475c88d6a0f26ff964",
+      "finalSha256": "cdb6d9fc490e81512d31e46ae781862a6ce8f0bf12ab8c475c88d6a0f26ff964"
+    },
+    {
+      "kind": "ScratchJr",
+      "unitId": "fixture_cr_34b8616914_sjr",
+      "workId": "2106382962399502338",
+      "reentryInfoCalls": 1,
+      "reentryUnitCalls": 1,
+      "templateSha256": "3db97173b9436df3ce8deacacbf3dd46ac60467044ea1650b14f7d250bf88147",
+      "expectedStudentSha256": "d49cf780b883851a18bb7a0e28ea4e9dc76507747e2decc316e90052de2fa068",
+      "reopenedSha256": "d49cf780b883851a18bb7a0e28ea4e9dc76507747e2decc316e90052de2fa068",
+      "finalSha256": "d49cf780b883851a18bb7a0e28ea4e9dc76507747e2decc316e90052de2fa068"
+    },
+    {
+      "kind": "Python",
+      "unitId": "fixture_cr_34b8616914_py",
+      "workId": "2106382963129311234",
+      "reentryInfoCalls": 1,
+      "reentryUnitCalls": 1,
+      "templateSha256": "506e62912182574ef0225c6721dac5031fa584679221131b9877013fcfc2b03e",
+      "expectedStudentSha256": "e596c773d2a3de5f353333582b900c8df8d99defa266e143ba841e8db6066bf2",
+      "reopenedSha256": "e596c773d2a3de5f353333582b900c8df8d99defa266e143ba841e8db6066bf2",
+      "finalSha256": "e596c773d2a3de5f353333582b900c8df8d99defa266e143ba841e8db6066bf2"
+    }
+  ],
+  "exit_code": 0,
+  "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+  "source_head": "8f5bf1e272e57a3460c0414b506925c1395a18d2",
+  "scope": "actual persistence modules and course URLs with real HTTP/DB; editor rendering and browser login excluded",
+  "restoration": {
+    "table_count": 69,
+    "same_table_set": true,
+    "changed_schemas": [],
+    "changed_non_audit_tables": [],
+    "all_attachment_entries_equal": true,
+    "cache_restored": true
+  }
+}

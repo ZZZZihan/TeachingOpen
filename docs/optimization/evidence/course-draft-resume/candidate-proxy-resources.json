@@ -1,0 +1,222 @@
+{
+  "checks": [
+    {
+      "port": 18112,
+      "path": "index.html",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "02051519d10077c034cd574051e4a83c42291d44cac023905599d883609631d8"
+    },
+    {
+      "port": 18112,
+      "path": "scratch3/persistence.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "a335e902d727401c5044cd99f2faea28c7f9c3e0210da537d07bcfdf00066b40"
+    },
+    {
+      "port": 18112,
+      "path": "python/persistence.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "7305e2bd9ee18ddf8fa419a1ea436a7f14c23d6d0aa50b1e3d7d7829209499be"
+    },
+    {
+      "port": 18112,
+      "path": "python/editor-bridge.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "7eec9c27025cde073c9f7a7ce717cbed14758c6ae5c5108339b01935aa3032d7"
+    },
+    {
+      "port": 18112,
+      "path": "js/polyfill.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "75ee1eaf39c8a336d4e1a716608129e81b1fbc391dced1bd2fad2aef1d20cb56"
+    },
+    {
+      "port": 18112,
+      "path": "js/common.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "332fbf27c8626a23db454737fac678a1e13013bcde9c58ebaf2835212c302a6d"
+    },
+    {
+      "port": 18112,
+      "path": "css/app.34569fa6.css",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "5f6787e1be451dbc58111fc26ef9cfa051770a8d79aee83a84fa886768afa664"
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-vendors.0626b6c1.css",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "92daf3dc8099f23dac491df9eeb1541e09f9485de66399726fb4c3ac16b28b8a"
+    },
+    {
+      "port": 18112,
+      "path": "js/app.8ceacb01.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "0cc42b26de1763726a4b2bb253150919f41f630c091dc26679c6127efd3f4d32"
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-vendors.a2dd1501.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "28a640ed157e30ff5d4527e31505e771bf9fa5d3bf4e1dff04173c89d7b2578b"
+    },
+    {
+      "port": 18142,
+      "path": "index.html",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "02051519d10077c034cd574051e4a83c42291d44cac023905599d883609631d8"
+    },
+    {
+      "port": 18142,
+      "path": "scratch3/persistence.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "a335e902d727401c5044cd99f2faea28c7f9c3e0210da537d07bcfdf00066b40"
+    },
+    {
+      "port": 18142,
+      "path": "python/persistence.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "7305e2bd9ee18ddf8fa419a1ea436a7f14c23d6d0aa50b1e3d7d7829209499be"
+    },
+    {
+      "port": 18142,
+      "path": "python/editor-bridge.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "7eec9c27025cde073c9f7a7ce717cbed14758c6ae5c5108339b01935aa3032d7"
+    },
+    {
+      "port": 18142,
+      "path": "js/polyfill.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "75ee1eaf39c8a336d4e1a716608129e81b1fbc391dced1bd2fad2aef1d20cb56"
+    },
+    {
+      "port": 18142,
+      "path": "js/common.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "332fbf27c8626a23db454737fac678a1e13013bcde9c58ebaf2835212c302a6d"
+    },
+    {
+      "port": 18142,
+      "path": "css/app.34569fa6.css",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "5f6787e1be451dbc58111fc26ef9cfa051770a8d79aee83a84fa886768afa664"
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-vendors.0626b6c1.css",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "92daf3dc8099f23dac491df9eeb1541e09f9485de66399726fb4c3ac16b28b8a"
+    },
+    {
+      "port": 18142,
+      "path": "js/app.8ceacb01.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "0cc42b26de1763726a4b2bb253150919f41f630c091dc26679c6127efd3f4d32"
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-vendors.a2dd1501.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "28a640ed157e30ff5d4527e31505e771bf9fa5d3bf4e1dff04173c89d7b2578b"
+    },
+    {
+      "port": 18150,
+      "path": "index.html",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "02051519d10077c034cd574051e4a83c42291d44cac023905599d883609631d8"
+    },
+    {
+      "port": 18150,
+      "path": "scratch3/persistence.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "a335e902d727401c5044cd99f2faea28c7f9c3e0210da537d07bcfdf00066b40"
+    },
+    {
+      "port": 18150,
+      "path": "python/persistence.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "7305e2bd9ee18ddf8fa419a1ea436a7f14c23d6d0aa50b1e3d7d7829209499be"
+    },
+    {
+      "port": 18150,
+      "path": "python/editor-bridge.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "7eec9c27025cde073c9f7a7ce717cbed14758c6ae5c5108339b01935aa3032d7"
+    },
+    {
+      "port": 18150,
+      "path": "js/polyfill.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "75ee1eaf39c8a336d4e1a716608129e81b1fbc391dced1bd2fad2aef1d20cb56"
+    },
+    {
+      "port": 18150,
+      "path": "js/common.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "332fbf27c8626a23db454737fac678a1e13013bcde9c58ebaf2835212c302a6d"
+    },
+    {
+      "port": 18150,
+      "path": "css/app.34569fa6.css",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "5f6787e1be451dbc58111fc26ef9cfa051770a8d79aee83a84fa886768afa664"
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-vendors.0626b6c1.css",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "92daf3dc8099f23dac491df9eeb1541e09f9485de66399726fb4c3ac16b28b8a"
+    },
+    {
+      "port": 18150,
+      "path": "js/app.8ceacb01.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "0cc42b26de1763726a4b2bb253150919f41f630c091dc26679c6127efd3f4d32"
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-vendors.a2dd1501.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "28a640ed157e30ff5d4527e31505e771bf9fa5d3bf4e1dff04173c89d7b2578b"
+    }
+  ],
+  "passed": 30,
+  "total": 30,
+  "changed_dist_paths": [
+    "python/editor-bridge.js",
+    "python/persistence.js",
+    "scratch3/persistence.js"
+  ],
+  "removed_dist_paths": []
+}

@@ -8,6 +8,7 @@ function harness(params = {}) {
   const h = { events: [], uploads: [], writes: [], applied: [], saved: [], reads: [] }
   h.options = { params, notify: s => h.events.push(s), apply: (...a) => h.applied.push(a), saved: id => h.saved.push(id),
     info: async id => ({ id, workType:'4', workName:'已保存 & 100%', workFileKey_url:'/saved.py?a=1&b=2', courseId:'unit-saved', departId:'saved-class' }),
+    unit: async id => ({ id, courseWorkType:4, unitName:'课程练习', courseWork_url:'/template.py', mineWorkId:'existing' }),
     text: async url => { h.reads.push(url); return 'print(42)' }, upload: async (title,code) => { h.uploads.push({title,code}); return {id:'file-'+h.uploads.length} },
     submit: async body => { h.writes.push(body); return {id:body.id||'saved-work'} } }
   h.session=create(h.options);return h
