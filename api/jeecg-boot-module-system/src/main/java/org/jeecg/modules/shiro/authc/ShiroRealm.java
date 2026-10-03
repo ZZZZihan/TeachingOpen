@@ -116,14 +116,19 @@ public class ShiroRealm extends AuthorizingRealm {
 
 		// 查询用户信息
 		log.debug("checkUserTokenIsEffect: checking authentication token");
+        // Account state must not be taken from a cached LoginUser: a concurrent
+        // cache miss can put an older value back after a committed freeze.
+        SysUser currentUser = sysUserService.getUserByName(username);
+        if (currentUser == null) {
+            throw new AuthenticationException("用户不存在!");
+        }
+        if (!CommonConstant.USER_UNFREEZE.equals(currentUser.getStatus())) {
+            throw new AuthenticationException("账号已被锁定,请联系管理员!");
+        }
         LoginUser loginUser = sysBaseAPI.getUserByName(username);
 		if (loginUser == null) {
 			throw new AuthenticationException("用户不存在!");
 		}
-        // 判断用户状态
-        if (loginUser.getStatus() != 1) {
-            throw new AuthenticationException("账号已被锁定,请联系管理员!");
-        }
 		// 校验token是否超时失效 & 或者账号密码是否错误
 		if (!jwtTokenRefresh(token, username, loginUser.getPassword())) {
 			throw new AuthenticationException("Token失效，请重新登录!");
