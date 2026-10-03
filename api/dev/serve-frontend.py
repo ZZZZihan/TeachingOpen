@@ -26,7 +26,8 @@ class LocalFrontend(SimpleHTTPRequestHandler):
 
     def end_headers(self):
         # Block legacy telemetry and other remote integrations during local tests.
-        self.send_header("Content-Security-Policy", "default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self'")
+        # Scratch uses blob workers; give them an explicit source without widening scripts.
+        self.send_header("Content-Security-Policy", "default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self'")
         super().end_headers()
 
     def api(self):
