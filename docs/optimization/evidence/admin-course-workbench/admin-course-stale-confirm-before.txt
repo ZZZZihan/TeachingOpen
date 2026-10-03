@@ -18,9 +18,9 @@ Browserslist: caniuse-lite is outdated. Please run:
 test at tests/admin-course-workbench.test.cjs:221:3
 ✖ course: stale batch confirmation cannot delete after a new query or reset (237.075084ms)
   AssertionError [ERR_ASSERTION]: searchQuery must invalidate a previous delete confirmation
-  
+
   1 !== 0
-  
+
       at TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/admin-course-workbench/web/tests/admin-course-workbench.test.cjs:227:14)
       at async Test.run (node:internal/test_runner/test:1404:7)
       at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
@@ -35,9 +35,9 @@ test at tests/admin-course-workbench.test.cjs:221:3
 test at tests/admin-course-workbench.test.cjs:221:3
 ✖ unit: stale batch confirmation cannot delete after a new query or reset (24.5365ms)
   AssertionError [ERR_ASSERTION]: searchQuery must invalidate a previous delete confirmation
-  
+
   1 !== 0
-  
+
       at TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/admin-course-workbench/web/tests/admin-course-workbench.test.cjs:227:14)
       at async Test.run (node:internal/test_runner/test:1404:7)
       at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
@@ -52,9 +52,9 @@ test at tests/admin-course-workbench.test.cjs:221:3
 test at tests/admin-course-workbench.test.cjs:232:1
 ✖ unit: stale batch confirmation cannot delete after the parent route changes (21.350333ms)
   AssertionError [ERR_ASSERTION]: route courseId change must invalidate previous confirmation
-  
+
   1 !== 0
-  
+
       at TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/admin-course-workbench/web/tests/admin-course-workbench.test.cjs:237:10)
       at async Test.run (node:internal/test_runner/test:1404:7)
       at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
