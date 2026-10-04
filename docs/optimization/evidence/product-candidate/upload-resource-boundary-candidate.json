@@ -1,0 +1,232 @@
+{
+  "date": "2026-10-05",
+  "candidate": {
+    "integration_head": "9c7456c646f0a4a533fd9d49d167f76f4c56f4c9",
+    "product_commit": "9945646b7ad996455795f9f7b6ec2d31fcae36a0",
+    "backend_input_count": 1031,
+    "backend_matches_frozen_build": true,
+    "frozen_jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869",
+    "dist_files": 4893,
+    "dist_bytes": 211629143,
+    "dist_identical_to_pr63": true,
+    "prior_manifest_sha256": "0b38b4690bac046186f3f4127eb8dc666aada7e2a413216a1a1a917f4bf2d120",
+    "frontend_rebuilt": false,
+    "verification_note": "Initial filename-set check used quoted git output; replaced with NUL-delimited ls-files. Actual source hashes matched in both checks."
+  },
+  "root_review": {
+    "date": "2026-10-05",
+    "review_kind": "root code and independent-agent report review; no second HTTP run",
+    "product_files_changed": [
+      "api/jeecg-boot-module-system/src/main/java/org/jeecg/config/WebMvcConfiguration.java"
+    ],
+    "same_probe_sha256": true,
+    "same_450_http_assertions": true,
+    "old": [
+      247,
+      451
+    ],
+    "new": [
+      452,
+      452
+    ],
+    "canonical_regression": {
+      "passed": 88,
+      "total": 88,
+      "probe_sha256": "a3ec1444d1ad88d658ea6c697182a6f89bec668de2220225d6cc5b4e0332f11d"
+    },
+    "old_restoration": {
+      "table_count": 69,
+      "non_audit_table_count": 68,
+      "same_table_set": true,
+      "changed_schemas": [],
+      "changed_non_audit_tables": [],
+      "attachments_equal": true,
+      "webapp_files_equal": true,
+      "synthetic_user_columns_restored": true
+    },
+    "new_restoration": {
+      "table_count": 69,
+      "non_audit_table_count": 68,
+      "same_table_set": true,
+      "changed_schemas": [],
+      "changed_non_audit_tables": [],
+      "attachments_equal": true,
+      "webapp_files_equal": true,
+      "synthetic_user_columns_restored": true
+    },
+    "raw_report_sha256": {
+      "old-boundary-final-report.json": "8235003733cce2e05d8fbab9da1fde2f3676a52e8b5a0cc7cd61997fbcdafe1b",
+      "fixed-boundary-final-report.json": "9f048b9bebff21a20534e8108132e34beffcf0cefd37c6ece3e056bf8f70308d"
+    },
+    "notes": [
+      "Root independently recomputed both counts and compared ordered names/expectations",
+      "No Shiro, controller, frontend, dependency or schema changes",
+      "Explicit custom public locations must remain separated from private uploads",
+      "No production exploitation or full browser acceptance claimed"
+    ]
+  },
+  "combination": {
+    "candidate_python_tools": {
+      "ran": 172,
+      "passed": 171,
+      "skipped": 1,
+      "exit_code": 0,
+      "skip_reason": "TEACHING_SNAPSHOT_TEST_RUNTIME not set; optional dedicated MySQL test"
+    },
+    "frontend_rebuilt": false
+  },
+  "backends": [
+    {
+      "runtime": "course-role-runtime",
+      "previous_pid": 1402,
+      "new_pid": 57075,
+      "backend_port": 18111,
+      "jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869",
+      "healthy": true,
+      "process_record_matches": true
+    },
+    {
+      "runtime": "role-flow-1003",
+      "previous_pid": 1604,
+      "new_pid": 57127,
+      "backend_port": 18149,
+      "jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869",
+      "healthy": true,
+      "process_record_matches": true
+    },
+    {
+      "runtime": "prod-fixture-1003",
+      "previous_pid": 1963,
+      "new_pid": 57880,
+      "backend_port": 18141,
+      "jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869",
+      "healthy": true,
+      "process_record_matches": true
+    }
+  ],
+  "switch_writer_failure": {
+    "initial_exit": 1,
+    "reason": "Existing private report rejected second cumulative write via O_EXCL",
+    "two_switched_processes_verified_after_failure": true,
+    "remaining_switch_exit": 0,
+    "record_retained": true,
+    "rollback_needed": false
+  },
+  "private_copy_readonly": [
+    12,
+    12
+  ],
+  "production_modified": false,
+  "remote_merge": false,
+  "runtime_cleanup": {
+    "observed_utc": "2026-10-04T17:41:23.477883+00:00",
+    "scope": "Stop only the owned resource-route-1005 synthetic backend/MySQL/Redis; retain all runtime data and evidence.",
+    "runtime": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/resource-route-1005",
+    "ports": {
+      "mysql": 13374,
+      "redis": 16447,
+      "backend": 18184,
+      "frontend": 18185
+    },
+    "jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869",
+    "pids_before": {
+      "backend": 54027,
+      "mysql": 49055,
+      "redis": 49059
+    },
+    "guard_before": {
+      "runtime": "resource-route-1005",
+      "ports": {
+        "mysql": 13374,
+        "redis": 16447,
+        "backend": 18184,
+        "frontend": 18185
+      },
+      "jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869",
+      "configuration_sha256": "20cb06877f7d9a67150871c716b55ff91be9d1cfe130ddb8d4c479180a79c5cf",
+      "ports_sha256": "2ce6c5ef16cf792c8560356323cebbb3f4ac06e8247facfd3cf49638497aed70",
+      "backend_pid": 54027,
+      "loopback_listener_ownership_checked": true,
+      "fixture_identity_set_checked": true
+    },
+    "before_shutdown": {
+      "table_count": 69,
+      "non_audit_table_count": 68,
+      "schemas_match_final_test_snapshot": true,
+      "non_audit_rows_match_final_test_snapshot": true,
+      "users_match_final_test_snapshot": true,
+      "attachments_match_final_test_snapshot": true,
+      "webapp_files_match_final_test_snapshot": true
+    },
+    "completed": true,
+    "verified_utc": "2026-10-04T17:42:45.254503+00:00",
+    "pids_all_exited": true,
+    "pids_after": {
+      "backend": "absent",
+      "mysql": "absent",
+      "redis": "absent"
+    },
+    "port_checks": {
+      "mysql": {
+        "port": 13374,
+        "listeners": [],
+        "lsof_exit_code": 1,
+        "connect_ex": 61,
+        "connection_refused": true
+      },
+      "redis": {
+        "port": 16447,
+        "listeners": [],
+        "lsof_exit_code": 1,
+        "connect_ex": 61,
+        "connection_refused": true
+      },
+      "backend": {
+        "port": 18184,
+        "listeners": [],
+        "lsof_exit_code": 1,
+        "connect_ex": 61,
+        "connection_refused": true
+      },
+      "frontend": {
+        "port": 18185,
+        "listeners": [],
+        "lsof_exit_code": 1,
+        "connect_ex": 61,
+        "connection_refused": true
+      }
+    },
+    "preserved": {
+      "runtime_directory": true,
+      "database_directory": true,
+      "database_storage_file": true,
+      "redis_directory": true,
+      "config_directory": true,
+      "logs_directory": true,
+      "attachments_equal": true,
+      "webapp_files_equal": true,
+      "evidence_directory": true,
+      "frozen_jar_sha256_equal": true
+    },
+    "repo_files_modified": false,
+    "other_services_touched": false,
+    "retained_diagnostic": "runtime-cleanup-initial-check.json retains the first post-shutdown check: an additional plain bind returned EADDRINUSE after all service PIDs exited. Final verification uses actual listener inventory and refused TCP connections, with no extra stop/start operation."
+  },
+  "pr": "https://github.com/ZZZZihan/TeachingOpen/pull/65",
+  "state": "OPEN",
+  "isDraft": false,
+  "ci_checks": [],
+  "branch_head": "956a4c167794d4648f559fc8932fecf4111f2101",
+  "base_pr": 62,
+  "integration_head": "49bea7da3552c554a8412f777eeec48d9a5ac9f2",
+  "final_integration_changes_after_tests": "documentation only",
+  "goal_status": "active",
+  "remaining": [
+    "authenticated three-role browser acceptance",
+    "editor save/reopen/submit end-to-end",
+    "human visual review",
+    "target deployment validation",
+    "Servlet session and HTTPS proxy cookie condition review",
+    "supported platform migration assessment"
+  ]
+}

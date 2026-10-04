@@ -40,3 +40,7 @@
 实现、51项独立专项和完整分组结果见[PR交付说明](https://github.com/ZZZZihan/TeachingOpen/blob/3483f3a3729ad84b359db43dfe93e03fa4e32c0e/docs/optimization/production-read-benchmark-pr.md)。组合工具171通过/1可选MySQL跳过；随后独立逐样本复算报告与包/脚本/清单绑定一致，没有发起第二轮HTTP或SQL。最终本地候选 `2d71bdf4f7cc6c3f0914b14834b612a9161c18f4` 与实际测量版本之间只新增证据文档；[本地集成记录](evidence/product-candidate/production-read-benchmark-candidate.json)。原Java/前端及当前运行包保持，本轮不重建、不重启服务。
 
 [依赖审查](evidence/dependency-release-20261005/review.md)、[机器清单](evidence/dependency-release-20261005/inventory-summary.json)和[官方来源](evidence/dependency-release-20261005/official-sources.json)补充当前维护证据。未实施的条件验证/迁移保留待办，不建空PR。真实副本仍不覆盖三种练习类型，完整认证三角色与人工验收继续待完成。
+
+## 后续：上传路径修复后的只读兼容
+
+[PR #65](https://github.com/ZZZZihan/TeachingOpen/pull/65) 后，新冻结包 `9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869` 已接入本机私有副本后端18141。重新执行既有匿名读取检查12/12，7张业务表前后摘要相同，3张公开课程封面HTTP字节匹配；原始私有报告SHA256 `f29375866206fb664251635f7f0c29a6c773600837322ceead789bc9f7e82e28`。该次读取没有登录、写业务、访问学生附件或Z820生产。正式路径兼容检查不是新一轮性能测量，#64数值仍绑定旧#62包。详细[集成证据](evidence/product-candidate/upload-resource-boundary-candidate.json)记录本地候选、三服务切换与工具检查范围。
