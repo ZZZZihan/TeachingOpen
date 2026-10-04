@@ -2,7 +2,9 @@
 
 日期：2026-10-02（Asia/Shanghai）
 
-最新交付（2026-10-05）：[PR #71](https://github.com/ZZZZihan/TeachingOpen/pull/71) 补齐学生表格与个人中心卡片教师反馈，基于#70，OPEN/非Draft且已附加。作者13/13、分支597/597、独立20/20、组合617/617；CUA三宽度及长文本键盘通过。旧父组件仍有存量lint77错误/227警告，新文件lint为0，构建12条既有warning。最新JAR67568eea与dist4894份的精确组合在全新Linux/arm64容器实际45/45通过；三代理24/24初始资源一致，旧dist可回退，后端未重启。最终本地候选49d8c32a，临时容器/预览已停、数据保留，18142真实副本仍可用。普通认证三角色、编辑器全链、人工视觉和目标部署尚未完成，Goal active。[本轮记录](student-feedback-followup-2026-10-05.md)与[组合证据](evidence/product-candidate/student-feedback-readable-candidate.json)。
+最新交付（2026-10-05）：[PR #72](https://github.com/ZZZZihan/TeachingOpen/pull/72) 修复学生作品两入口的加载/失败/空态、重试参数保留和迟到请求覆盖，基于#71，OPEN/非Draft已附加。作者28/28、分支625/625、独立35/35、候选645/645；CUA三宽度及实际分页/键盘恢复通过，最终console0。新文件lint0，旧父75错误/213警告及构建12warning保留。候选06ab2040，新dist4895文件，三代理24/24一致，后端未重启。最新冻结容器包离线verify通过，本轮不重跑45项；旧45仅历史证据。18142真实副本可用，临时服务已停，Goal active。[本轮记录](student-work-loading-followup-2026-10-05.md)与[聚合证据](evidence/product-candidate/student-work-loading-candidate.json)。
+
+此前交付（2026-10-05）：[PR #71](https://github.com/ZZZZihan/TeachingOpen/pull/71) 补齐学生表格与个人中心卡片教师反馈，基于#70，OPEN/非Draft且已附加。作者13/13、分支597/597、独立20/20、组合617/617；CUA三宽度及长文本键盘通过。旧父组件仍有存量lint77错误/227警告，新文件lint为0，构建12条既有warning。最新JAR67568eea与dist4894份的精确组合在全新Linux/arm64容器实际45/45通过；三代理24/24初始资源一致，旧dist可回退，后端未重启。最终本地候选49d8c32a，临时容器/预览已停、数据保留，18142真实副本仍可用。普通认证三角色、编辑器全链、人工视觉和目标部署尚未完成，Goal active。[本轮记录](student-feedback-followup-2026-10-05.md)与[组合证据](evidence/product-candidate/student-feedback-readable-candidate.json)。
 
 此前交付（2026-10-05）：[PR #69](https://github.com/ZZZZihan/TeachingOpen/pull/69) 与 [PR #70](https://github.com/ZZZZihan/TeachingOpen/pull/70) 账号恢复API及天工主题恢复界面，详细检查与限制见[记录](account-recovery-followup-2026-10-05.md)。
 
