@@ -2,7 +2,7 @@
 
 2026-10-05，Asia/Shanghai。旧 `benchmark-local-http.py` 会写作品和草稿，不能用于保留真实课程内容的只读副本。本次增加独立工具，仅从明确归属的本机副本读取匿名课程列表与一个公开课程封面，保存逐次请求的语义校验、时延、包与数据绑定及结束状态。没有修改 Java、前端页面、依赖或数据库结构。
 
-基于 [PR #45](https://github.com/ZZZZihan/TeachingOpen/pull/45) 的 `5f896ac572ec637bb3d4a92223d7c699e6b30182`，实现提交 `e559e9b`。实现和独立测试分别由用户指定的 GPT-6.1-sol / ultra 子 Agent 完成，主 Agent 审查并整合到本地候选 `77a4fbfb95d3ad8fa76d969793b5a441fec23699`，然后执行真实副本测量。平台工具无单独 Fast 参数，未声称已开启。
+交付 [PR #64](https://github.com/ZZZZihan/TeachingOpen/pull/64)，基于 [PR #45](https://github.com/ZZZZihan/TeachingOpen/pull/45) 的 `5f896ac572ec637bb3d4a92223d7c699e6b30182`，实现提交 `e559e9b`。实现和独立测试分别由用户指定的 GPT-6.1-sol / ultra 子 Agent 完成，主 Agent 审查并整合到本地候选 `77a4fbfb95d3ad8fa76d969793b5a441fec23699`，然后执行真实副本测量。平台工具无单独 Fast 参数，未声称已开启。
 
 ## 实际行为与保护范围
 
@@ -48,3 +48,5 @@ env -u TEACHING_SNAPSHOT_TEST_RUNTIME python3 api/dev/benchmark-production-read.
 全素材集合本次只比较文件元数据，未重新哈希 5.94 GB 全部内容；仅选定封面重算完整哈希。7 张表不是全 69 表，操作日志、Redis、其他表和中途改后复原不在不变结论内。工具未登录、写业务、读取学生文件、播放视频、运行编辑器或重启服务。冻结快照不是 Z820 当前状态，也不是数据库与文件的跨资源原子快照。当前结果不能替代认证三角色、媒体/编辑器浏览器、人工视觉、广域网、长期压力或生产容量验收。
 
 本次只本地整合，不远端合并或生产部署。可通过撤去本工具及相应文档恢复原工具集合，现有应用包和运行服务没有切换。
+
+执行后由负责独立测试的 Agent 进行[实测报告独立复核](evidence/production-read-benchmark/runtime-independent-review.md)：独立重算全部 42 个单元及 14 个聚合的样本统计，并核对 8 个工具源码、当前 JAR 和 3 个清单/回执摘要，未发现不一致。这次只读报告审查未重新请求 HTTP、查询 SQL 或遍历资源，不冒称第二次实测。
