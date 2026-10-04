@@ -100,7 +100,7 @@ def run(args):
               http_status=legacy[0], business_code=legacy[1].get('code') if isinstance(legacy[1], dict) else None)
         no_change('missing OTP cannot update credentials', payload)
         seed()
-        no_change('wrong code leaves credentials unchanged', {**payload, 'smscode': 'x' * 6})
+        no_change('wrong six-digit code leaves credentials unchanged', {**payload, 'smscode': str((int(code) + 1) % 1000000).zfill(6)})
         no_change('mismatched account leaves all user rows unchanged', {**payload, 'username': 'fixture_student_b'})
         no_change('mismatched phone leaves all user rows unchanged', {**payload, 'phone': '19900000002'})
         no_change('unsupported password characters rejected before consuming OTP', {**payload, 'password': 'Aa9!中文测试'})
