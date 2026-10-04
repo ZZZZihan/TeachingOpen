@@ -36,3 +36,7 @@ python3 tests/account-recovery-preview/server.py --directory /absolute/private/p
 ## 集成注意
 
 必须与新的后端契约一起集成。旧 GET 改密已拒绝，前端不能回退 GET；后端码使用独立恢复 namespace，前端不会自行更改有效期或重用旧认证流程。分支 Node suite 只覆盖分支基线，根 Agent 应对最终 candidate 重新执行必需的组合测试和构建，浏览器与人工验收另行记录。
+
+## 合成预览深链接修正
+
+根 Agent 在 `18303/user/alteration` 的实际 CUA 核对发现预览首屏空白，控制台报 `Unexpected token <`；原 `index.html` 使用相对 `preview.js`，深链接将其解析成 `/user/preview.js`，服务回退 HTML。已将构建器 script src 改为绝对 `/preview.js` 并重建同一预览输出。此修正只涉及预览静态入口与本记录，七个产品源码及其文件哈希保持冻结。无需重跑产品 suite；浏览器核对由根 Agent 继续。
