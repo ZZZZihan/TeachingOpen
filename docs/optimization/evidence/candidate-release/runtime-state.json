@@ -1,0 +1,67 @@
+{
+  "project": "teaching-candidate-f8532d650034",
+  "manifest_sha256": "248981ca502091d46a45d739cbdda6d0dbe67484fb2717933267aa5931379b1f",
+  "compose_sha256": "16f49c8c729a396de72b3b4e67e4e42dd752974cc965df91349a3a95cccca6be",
+  "mysql": {
+    "version": "8.4.6",
+    "lower_case_table_names": 2,
+    "tables": 69,
+    "synthetic_users": 5
+  },
+  "containers": {
+    "web": {
+      "id": "1a430c07d08b31626a45c22a6f39b4ca60df8a2ae0c0fd2d3b604f240162a67b",
+      "image_id": "sha256:a805dc02b9a7ee985b411db35996123b9bb3df80e79a9ab5b194751d3087defe",
+      "running": true,
+      "health": null,
+      "actual_ports": {
+        "80/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18190"
+          }
+        ]
+      },
+      "networks": [
+        "teaching-candidate-f8532d650034_candidate",
+        "teaching-candidate-f8532d650034_ingress"
+      ]
+    },
+    "api": {
+      "id": "300f90423f2252c6823d3ce3741604e4c6c16203ddf5b47b4a1589a40ca6c5a3",
+      "image_id": "sha256:86c48f6b73fd9bd19ed3ee174691a6a8435d6edf7b213caf6e0d247cb4e3e7d4",
+      "running": true,
+      "health": null,
+      "actual_ports": {},
+      "networks": [
+        "teaching-candidate-f8532d650034_candidate"
+      ]
+    },
+    "db": {
+      "id": "ec81b9434333433fd64c5840e7de31b983e01a5d94048c6c0a21b54711fec076",
+      "image_id": "sha256:6dcafc5ba1372cb4ae19439f7dcaeb03a7293b1b3521747774b2ab2129aa9ec4",
+      "running": true,
+      "health": "healthy",
+      "actual_ports": {
+        "3306/tcp": null,
+        "33060/tcp": null
+      },
+      "networks": [
+        "teaching-candidate-f8532d650034_candidate"
+      ]
+    },
+    "redis": {
+      "id": "694acb8ae23d4ded6cd8e3803ef0f27760cce3013048cc4a45aa448d480c5b7a",
+      "image_id": "sha256:bd6e9b4d3e1f5acafb81c94478265979375f91e17cbd5b6a6481af4449460351",
+      "running": true,
+      "health": null,
+      "actual_ports": {
+        "6379/tcp": null
+      },
+      "networks": [
+        "teaching-candidate-f8532d650034_candidate"
+      ]
+    }
+  },
+  "post_runtime_immutable_verify_exit": 0
+}

@@ -1,0 +1,464 @@
+{
+  "attempts": [
+    {
+      "compose_project": "teaching-candidate-3efd444fe02f",
+      "dist_files": 4893,
+      "fixture_counts": {
+        "accounts": 5,
+        "classes": 2,
+        "courses": 3,
+        "tables": 69
+      },
+      "immutable_files": 4904,
+      "manifest_sha256": "85aea1c40a8c068380be78210266acffdc49778ef570fcf34fbd0343e38f0275",
+      "platform": "linux/arm64",
+      "port": 18190,
+      "runtime_data_checked": false,
+      "services_started": false,
+      "source_commit": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+      "status": "created_immutable",
+      "attempt": "01",
+      "generator_sha256": "d55f86371d3e5a7ad6a05f0cb378856a24cf1ee0f4cd370b51a2f0dea41ddf1d",
+      "outcome": "Created only; never started. Superseded by strict integer-format fix."
+    },
+    {
+      "compose_project": "teaching-candidate-3d6441c4abc9",
+      "dist_files": 4893,
+      "fixture_counts": {
+        "accounts": 5,
+        "classes": 2,
+        "courses": 3,
+        "tables": 69
+      },
+      "immutable_files": 4904,
+      "manifest_sha256": "84491ef6c8f368b7f72ed48a6ae4f361bc578acd01e30e4906a9e1b5eb509573",
+      "platform": "linux/arm64",
+      "port": 18190,
+      "runtime_data_checked": false,
+      "services_started": false,
+      "source_commit": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+      "status": "created_immutable",
+      "attempt": "02",
+      "generator_sha256": "6e5d1388c1973ed8d296962c2d5313134107334ef5b1f54ac061beb736a7cdaf",
+      "readiness": {
+        "ready": false,
+        "observations": [
+          {
+            "elapsed_seconds": 0.0,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 2.02,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 4.03,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 6.04,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 8.04,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 10.04,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 12.04,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 14.05,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 16.06,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 18.07,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 20.07,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 22.08,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 24.09,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 26.09,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 28.1,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 30.11,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 32.12,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 34.13,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 36.13,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 38.14,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 40.15,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 42.16,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 44.16,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 46.17,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 48.17,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 50.17,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 52.18,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 54.19,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 56.2,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 58.21,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 60.21,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 62.21,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 64.22,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 66.23,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 68.23,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 70.24,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 72.25,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 74.26,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 76.27,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 78.28,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 80.29,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 82.3,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 84.31,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 86.32,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 88.33,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 90.33,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 92.34,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 94.34,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 96.35,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 98.36,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 100.37,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 102.37,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 104.38,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 106.39,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 108.39,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 110.4,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 112.41,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 114.42,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 116.43,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 118.43,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 120.44,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 122.45,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 124.46,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 126.47,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 128.48,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 130.49,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 132.5,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 134.51,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 136.52,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 138.52,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 140.53,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 142.54,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 144.55,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 146.56,
+            "error": "URLError"
+          },
+          {
+            "elapsed_seconds": 148.56,
+            "error": "URLError"
+          }
+        ]
+      },
+      "outcome": "MySQL initialized; mysqladmin failed unknown variable local-infile=0; API/web not started."
+    },
+    {
+      "compose_project": "teaching-candidate-2e3824b9d92c",
+      "dist_files": 4893,
+      "fixture_counts": {
+        "accounts": 5,
+        "classes": 2,
+        "courses": 3,
+        "tables": 69
+      },
+      "immutable_files": 4904,
+      "manifest_sha256": "a324641614b3c49dcea6c93f7bfddb585bec8bfd295da20c8e485f49c8f3968e",
+      "platform": "linux/arm64",
+      "port": 18190,
+      "runtime_data_checked": false,
+      "services_started": false,
+      "source_commit": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+      "status": "created_immutable",
+      "attempt": "03",
+      "generator_sha256": "58616f5446901168fad20855f034feee20f8261a74d69226e88ba900080417f0",
+      "readiness": {
+        "ready": false,
+        "attempts": 75,
+        "elapsed_seconds": 150.56,
+        "last_error_class": "URLError"
+      },
+      "outcome": "Four services running and DB healthy, but actual web port mapping absent on internal-only network."
+    },
+    {
+      "compose_project": "teaching-candidate-4d420fe5d60e",
+      "dist_files": 4893,
+      "fixture_counts": {
+        "accounts": 5,
+        "classes": 2,
+        "courses": 3,
+        "tables": 69
+      },
+      "immutable_files": 4904,
+      "manifest_sha256": "034422c690985b2ab7bf863548f85d05b62a02e3c893734ea5f749c87b2ff053",
+      "platform": "linux/arm64",
+      "port": 18190,
+      "runtime_data_checked": false,
+      "services_started": false,
+      "source_commit": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+      "status": "created_immutable",
+      "attempt": "04",
+      "generator_sha256": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67",
+      "readiness": {
+        "ready": true,
+        "attempts": 2,
+        "elapsed_seconds": 2.38,
+        "last_error_class": "HTTPError"
+      },
+      "outcome": "45/45 actual runtime passed with earlier probe; output-parent permission issue found in later review.",
+      "runtime_report_sha256": "073b4746b68d399df9b1b5efdb7dc0b43eac9d7528780b907ef7a38c08a821cf",
+      "execution": {
+        "exit_code": 0,
+        "elapsed_seconds": 4.194,
+        "hashes_before": {
+          "probe_candidate_runtime.py": "b1b0e3704fc536b1bdc2d3d98d35a0722bff7f00b2c14a6d67223b17fcf4d4d2",
+          "candidate_release.py": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67"
+        },
+        "hashes_after": {
+          "probe_candidate_runtime.py": "b1b0e3704fc536b1bdc2d3d98d35a0722bff7f00b2c14a6d67223b17fcf4d4d2",
+          "candidate_release.py": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67"
+        },
+        "unchanged_during_run": true,
+        "report_sha256": "073b4746b68d399df9b1b5efdb7dc0b43eac9d7528780b907ef7a38c08a821cf"
+      }
+    },
+    {
+      "compose_project": "teaching-candidate-f8532d650034",
+      "dist_files": 4893,
+      "fixture_counts": {
+        "accounts": 5,
+        "classes": 2,
+        "courses": 3,
+        "tables": 69
+      },
+      "immutable_files": 4904,
+      "manifest_sha256": "248981ca502091d46a45d739cbdda6d0dbe67484fb2717933267aa5931379b1f",
+      "platform": "linux/arm64",
+      "port": 18190,
+      "runtime_data_checked": false,
+      "services_started": false,
+      "source_commit": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+      "status": "created_immutable",
+      "attempt": "05",
+      "generator_sha256": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67",
+      "readiness": {
+        "ready": true,
+        "attempts": 1,
+        "elapsed_seconds": 0.41,
+        "last_error_class": null
+      },
+      "outcome": "45/45 actual runtime passed on final probe; post-runtime immutable verify passed.",
+      "runtime_report_sha256": "7d796d7099fb7af58520245ce61f19cfbc18bc3af35f84c504e290a48f2056a3",
+      "execution": {
+        "exit_code": 0,
+        "elapsed_seconds": 4.011,
+        "hashes_before": {
+          "probe_candidate_runtime.py": "68a7c76899de0490b1b0a2530dae8267841867d88ecf92dc5a2432f1de3f16dd",
+          "candidate_release.py": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67"
+        },
+        "hashes_after": {
+          "probe_candidate_runtime.py": "68a7c76899de0490b1b0a2530dae8267841867d88ecf92dc5a2432f1de3f16dd",
+          "candidate_release.py": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67"
+        },
+        "unchanged_during_run": true,
+        "report_sha256": "7d796d7099fb7af58520245ce61f19cfbc18bc3af35f84c504e290a48f2056a3"
+      }
+    }
+  ],
+  "failure_artifacts": "Full bundle data and logs retained locally and excluded from Git.",
+  "no_production_connection": true
+}

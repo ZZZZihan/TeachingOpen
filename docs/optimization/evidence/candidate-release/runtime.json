@@ -1,0 +1,368 @@
+{
+  "format": 1,
+  "observed_utc": "2026-10-04T19:07:43.440152+00:00",
+  "scope": "Fresh owned Linux containers; actual loopback HTTP, API fixture login, bounded SQL reads and WebSocket authentication. No browser, manual acceptance, production, deployment or capacity claim.",
+  "fixture_login": "CAPTCHA from owned Redis for synthetic API fixtures only",
+  "data_retention": "Normal API DELETE checks probe course/unit. Synthetic Python draft/upload and any rows remaining after failures are retained only in owned private bundle data for evidence. Root stops containers afterward.",
+  "cases": [
+    {
+      "case": "frozen_bundle_verified",
+      "passed": true,
+      "status": "pass",
+      "phase": "bundle_verification"
+    },
+    {
+      "case": "four_owned_running_containers",
+      "passed": true,
+      "status": "pass",
+      "phase": "container_boundary"
+    },
+    {
+      "case": "owned_dual_network_isolation",
+      "passed": true,
+      "status": "pass",
+      "phase": "container_boundary"
+    },
+    {
+      "case": "only_web_loopback_18190_published",
+      "passed": true,
+      "status": "pass",
+      "phase": "container_boundary"
+    },
+    {
+      "case": "exact_bundle_bind_mounts_with_readonly_jar_dist",
+      "passed": true,
+      "status": "pass",
+      "phase": "container_boundary"
+    },
+    {
+      "case": "pinned_linux_images_match_containers",
+      "passed": true,
+      "status": "pass",
+      "phase": "container_boundary"
+    },
+    {
+      "case": "actual_health_up",
+      "passed": true,
+      "status": "pass",
+      "phase": "static_and_anonymous_api",
+      "http_status": 200,
+      "body_sha256": "647a83cca85203d6d4eb07eea84ef6eb91d5c6482eaff2ac8bb65a342b9f2946"
+    },
+    {
+      "case": "index_matches_frozen_body",
+      "passed": true,
+      "status": "pass",
+      "phase": "static_and_anonymous_api",
+      "http_status": 200,
+      "body_sha256": "3f3219d51da94ce4f3c03c00e3ec8bc58b1be3a02cc9449a626ea68c52496cfd"
+    },
+    {
+      "case": "referenced_asset_matches_frozen_body",
+      "passed": true,
+      "status": "pass",
+      "phase": "static_and_anonymous_api",
+      "http_status": 200,
+      "body_sha256": "332fbf27c8626a23db454737fac678a1e13013bcde9c58ebaf2835212c302a6d"
+    },
+    {
+      "case": "anonymous_home_courses",
+      "passed": true,
+      "status": "pass",
+      "phase": "static_and_anonymous_api",
+      "http_status": 200,
+      "body_sha256": "e9932f241941ea0d2383ec7d902cc3dc406f6a6e858614bc09255eb97b25bebd"
+    },
+    {
+      "case": "invalid_api_token_401",
+      "passed": true,
+      "status": "pass",
+      "phase": "static_and_anonymous_api",
+      "http_status": 401,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750"
+    },
+    {
+      "case": "fixture_login_and_role_menu_admin",
+      "passed": true,
+      "status": "pass",
+      "phase": "fixture_login_admin",
+      "http_status": 200,
+      "body_sha256": "0b0e52fc650a7bf0d1815ef9f00d78871d4ae3084b07303c2ddb8bc1e1a43d79"
+    },
+    {
+      "case": "fixture_login_and_role_menu_teacher_a",
+      "passed": true,
+      "status": "pass",
+      "phase": "fixture_login_teacher_a",
+      "http_status": 200,
+      "body_sha256": "66f1fca7cabca88c631a1b9d52c69477b5f76a9c5711cd3f1badb6c87ed48635"
+    },
+    {
+      "case": "fixture_login_and_role_menu_teacher_b",
+      "passed": true,
+      "status": "pass",
+      "phase": "fixture_login_teacher_b",
+      "http_status": 200,
+      "body_sha256": "fdcad0b3c897468e5378e592a03a1aa3660b83914e12f9dbb36add618b4e8185"
+    },
+    {
+      "case": "fixture_login_and_role_menu_student_a",
+      "passed": true,
+      "status": "pass",
+      "phase": "fixture_login_student_a",
+      "http_status": 200,
+      "body_sha256": "b57062e4094bb99eac590b2b7127836f3c9d0bc7ac4bd5028a6e8801c0b58620"
+    },
+    {
+      "case": "fixture_login_and_role_menu_student_b",
+      "passed": true,
+      "status": "pass",
+      "phase": "fixture_login_student_b",
+      "http_status": 200,
+      "body_sha256": "94550fca33a20881f595895928812b312ebc6ef25ebc2641f92e89b4fac858c3"
+    },
+    {
+      "case": "student_same_class_course_read",
+      "passed": true,
+      "status": "pass",
+      "phase": "class_course_authorization",
+      "http_status": 200,
+      "body_sha256": "c38207efa60b93ab48647536c03d2086ae0ee85986519d08e415c0ff3d5ea622"
+    },
+    {
+      "case": "student_foreign_class_course_denied",
+      "passed": true,
+      "status": "pass",
+      "phase": "class_course_authorization",
+      "http_status": 200,
+      "body_sha256": "543ee47d67e5617326038918bfbad53e04b9e7b3002c03251f415a170cb8664e"
+    },
+    {
+      "case": "admin_post_course_persisted",
+      "passed": true,
+      "status": "pass",
+      "phase": "course_and_unit_business_methods",
+      "http_status": 200,
+      "body_sha256": "06ca63d06e9d677b561d06a924be8651770318ab51d0e3ab5b3c5024ec94d216"
+    },
+    {
+      "case": "admin_post_unit_persisted",
+      "passed": true,
+      "status": "pass",
+      "phase": "course_and_unit_business_methods",
+      "http_status": 200,
+      "body_sha256": "9c3edbf9c799584aa6884b6cc40786708dafa43c27396ce58123718052299995"
+    },
+    {
+      "case": "admin_put_course_success",
+      "passed": true,
+      "status": "pass",
+      "phase": "course_and_unit_business_methods",
+      "http_status": 200,
+      "body_sha256": "3f26bddf8dee57006d18d6f4894ce79837bcdbea1ca3e40f70594bd7a3d2dca2"
+    },
+    {
+      "case": "admin_put_unit_success",
+      "passed": true,
+      "status": "pass",
+      "phase": "course_and_unit_business_methods",
+      "http_status": 200,
+      "body_sha256": "fa698d24929b239b169f4765b2bebb34785948cf88f4be99806f46a59f13010b"
+    },
+    {
+      "case": "edited_course_api_and_db_reread",
+      "passed": true,
+      "status": "pass",
+      "phase": "course_and_unit_business_methods",
+      "http_status": 200,
+      "body_sha256": "98c592480a210889de516c7e6bd50ee87e1d3d26f3661c7a13337ac97e1cce96"
+    },
+    {
+      "case": "edited_unit_api_and_db_reread",
+      "passed": true,
+      "status": "pass",
+      "phase": "course_and_unit_business_methods",
+      "http_status": 200,
+      "body_sha256": "6478bf00be385fda5e36138e2cf77dea889e4580c4857aafeb5b63c430cc881e"
+    },
+    {
+      "case": "student_put_denied_and_both_values_unchanged",
+      "passed": true,
+      "status": "pass",
+      "phase": "course_and_unit_business_methods",
+      "http_status": 200,
+      "body_sha256": "41b920c77c16f95d001872975ade453702fd046d832506a2727839a51e3bdf01"
+    },
+    {
+      "case": "admin_delete_unit_persisted",
+      "passed": true,
+      "status": "pass",
+      "phase": "course_and_unit_business_methods",
+      "http_status": 200,
+      "body_sha256": "c23e75e7449d7ed3d4712cd6bc728b3d22a33f208523e22edc73a8a786a7ebbc"
+    },
+    {
+      "case": "admin_delete_course_persisted",
+      "passed": true,
+      "status": "pass",
+      "phase": "course_and_unit_business_methods",
+      "http_status": 200,
+      "body_sha256": "a1c68e7e0f75e5a343d4ea3c0abb873b3a294435b77b40ae3aea575d7ebc6042"
+    },
+    {
+      "case": "anonymous_public_cover_get_bytes_nosniff",
+      "passed": true,
+      "status": "pass",
+      "phase": "public_and_private_media",
+      "http_status": 200,
+      "body_sha256": "0bc0610637895302de347bce0d7a1f5d76fee6721e64cd2e6ca071acf04b3080"
+    },
+    {
+      "case": "anonymous_public_cover_head_size_nosniff",
+      "passed": true,
+      "status": "pass",
+      "phase": "public_and_private_media",
+      "http_status": 200,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "anonymous_public_cover_range_original_bytes",
+      "passed": true,
+      "status": "pass",
+      "phase": "public_and_private_media",
+      "http_status": 206,
+      "body_sha256": "e4af2a66713924bb65a4116b458e852ca9b137f3f2f939416e582fb04b639f1c"
+    },
+    {
+      "case": "student_private_video_get_bytes_nosniff",
+      "passed": true,
+      "status": "pass",
+      "phase": "public_and_private_media",
+      "http_status": 200,
+      "body_sha256": "a13e04078b6d1a7aa52bec79aea4a8beeec7d5911d88c02931df84180b363dd0"
+    },
+    {
+      "case": "student_private_video_head_size_nosniff",
+      "passed": true,
+      "status": "pass",
+      "phase": "public_and_private_media",
+      "http_status": 200,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "student_private_video_range_original_bytes",
+      "passed": true,
+      "status": "pass",
+      "phase": "public_and_private_media",
+      "http_status": 206,
+      "body_sha256": "657beefccf1e2c243f9430d5456429cca5c1aa3c9ac83f0b4c3f672812af1009"
+    },
+    {
+      "case": "foreign_private_video_denied",
+      "passed": true,
+      "status": "pass",
+      "phase": "public_and_private_media",
+      "http_status": 403,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "student_real_multipart_python_upload",
+      "passed": true,
+      "status": "pass",
+      "phase": "python_upload_personal_draft",
+      "http_status": 200,
+      "body_sha256": "8ceff383abb2e88ea11083ae38552d923e6befa5864cfa17024b290cb3392724"
+    },
+    {
+      "case": "student_file_registration_and_db_owner",
+      "passed": true,
+      "status": "pass",
+      "phase": "python_upload_personal_draft",
+      "http_status": 200,
+      "body_sha256": "e0d17f17085930dcdb77193ac3b9ec5d9777c0114008fa91907b8618eafadc69"
+    },
+    {
+      "case": "student_personal_python_draft_submit",
+      "passed": true,
+      "status": "pass",
+      "phase": "python_upload_personal_draft",
+      "http_status": 200,
+      "body_sha256": "63089c2b98a394ec90202292e47fe5d1ceab66326ea4e040521795a7d132231b"
+    },
+    {
+      "case": "python_draft_db_identity_status_persisted",
+      "passed": true,
+      "status": "pass",
+      "phase": "python_upload_personal_draft"
+    },
+    {
+      "case": "student_python_draft_reopens",
+      "passed": true,
+      "status": "pass",
+      "phase": "python_upload_personal_draft",
+      "http_status": 200,
+      "body_sha256": "212eb397bd2437857168a07c10c6fbccddf947e7d7926b578cf70d391ad5e869"
+    },
+    {
+      "case": "python_attachment_download_full_hash",
+      "passed": true,
+      "status": "pass",
+      "phase": "python_upload_personal_draft",
+      "http_status": 200,
+      "body_sha256": "effeff6260153eee49bfe7a6062ab83aa3c9251b09d5f2c926663896bfe8fc15"
+    },
+    {
+      "case": "foreign_python_draft_and_download_denied",
+      "passed": true,
+      "status": "pass",
+      "phase": "python_upload_personal_draft",
+      "http_status": 403,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "media_cookie_httponly_path_samesite_and_media_read",
+      "passed": true,
+      "status": "pass",
+      "phase": "media_cookie_revocation_and_websocket",
+      "http_status": 200,
+      "body_sha256": "a13e04078b6d1a7aa52bec79aea4a8beeec7d5911d88c02931df84180b363dd0"
+    },
+    {
+      "case": "media_cookie_cannot_authorize_api",
+      "passed": true,
+      "status": "pass",
+      "phase": "media_cookie_revocation_and_websocket",
+      "http_status": 401,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750"
+    },
+    {
+      "case": "logout_revokes_token_and_media_cookie",
+      "passed": true,
+      "status": "pass",
+      "phase": "media_cookie_revocation_and_websocket",
+      "http_status": 401,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750"
+    },
+    {
+      "case": "actual_websocket_upgrade_and_authentication_reply",
+      "passed": true,
+      "status": "pass",
+      "phase": "media_cookie_revocation_and_websocket"
+    }
+  ],
+  "exceptions": [],
+  "fingerprints": {
+    "manifest_sha256": "248981ca502091d46a45d739cbdda6d0dbe67484fb2717933267aa5931379b1f",
+    "generator_sha256": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67",
+    "source_commit": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+    "artifact_inputs": {
+      "dist_manifest_sha256": "0b38b4690bac046186f3f4127eb8dc666aada7e2a413216a1a1a917f4bf2d120",
+      "jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869"
+    }
+  },
+  "passed": 45,
+  "total": 45,
+  "failed": 0,
+  "not_run": 0,
+  "all_passed": true
+}

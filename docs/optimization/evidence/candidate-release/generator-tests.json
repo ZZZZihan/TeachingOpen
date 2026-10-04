@@ -1,0 +1,28 @@
+{
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "deploy",
+    "-p",
+    "test_candidate_release.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "source_hashes_before": {
+    "deploy/candidate_release.py": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67",
+    "deploy/test_candidate_release.py": "a63b350d09ab699de2f01785d68f186eaa7df7aad4627283dfdc59cd133d7fb7"
+  },
+  "source_hashes_after": {
+    "deploy/candidate_release.py": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67",
+    "deploy/test_candidate_release.py": "a63b350d09ab699de2f01785d68f186eaa7df7aad4627283dfdc59cd133d7fb7"
+  },
+  "unchanged_during_run": true,
+  "elapsed_seconds": 7.758,
+  "source_checkout_commit": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+  "test_scope": "offline synthetic filesystem and real Java 8 fixture password helper only; no application JAR/services executed",
+  "tests": 66,
+  "unittest_seconds": 7.67
+}
