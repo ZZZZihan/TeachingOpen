@@ -1,0 +1,44 @@
+{
+  "format": 1,
+  "date_local": "2026-10-05",
+  "pull_request": "https://github.com/ZZZZihan/TeachingOpen/pull/64",
+  "pull_request_head": "3483f3a3729ad84b359db43dfe93e03fa4e32c0e",
+  "pull_request_base": "feature/production-data-fixture",
+  "measurement_candidate": "77a4fbfb95d3ad8fa76d969793b5a441fec23699",
+  "final_local_candidate": "2d71bdf4f7cc6c3f0914b14834b612a9161c18f4",
+  "changes_after_measurement": [
+    "docs/optimization/evidence/production-read-benchmark/aggregate.json",
+    "docs/optimization/evidence/production-read-benchmark/candidate-tests.log",
+    "docs/optimization/evidence/production-read-benchmark/runtime-independent-review.md",
+    "docs/optimization/evidence/production-read-benchmark/runtime-run.log",
+    "docs/optimization/production-read-benchmark-pr.md"
+  ],
+  "application_changes_since_64cce174": false,
+  "application_rebuilt_or_restarted": false,
+  "aggregate_sha256": "b5773b5f70f39ea11eeb4c3706b218ae1ae6998af2453a8f016ad5b569da7394",
+  "private_report_sha256": "50f97cf685d468b85b9f3290b400e88b8d7fa597a1534cdef76ec056963c9067",
+  "benchmark": {
+    "measured_passed": 1008,
+    "measured_total": 1008,
+    "warmup_passed": 126,
+    "warmup_total": 126,
+    "preflight_passed": 2,
+    "preflight_total": 2,
+    "business_tables_equal": 7,
+    "asset_files_metadata_equal": 297,
+    "full_asset_bytes_rehashed": false
+  },
+  "candidate_dev_tests": {
+    "passed": 171,
+    "skipped": 1,
+    "total": 172,
+    "exit_code": 0,
+    "skip_reason": "Optional dedicated MySQL runtime was not requested"
+  },
+  "independent_report_review": "No internal statistical, binding, preservation digest or privacy inconsistency; not a second live run",
+  "dependency_inventory_candidate": "64cce174aac6cf3699985b4bc88a30cc70c2f67f",
+  "dependency_inventory_remains_applicable": "Application sources, package lock, dependency POMs and frozen JAR unchanged; Python tools/docs only",
+  "production_actions": false,
+  "remote_merge": false,
+  "goal_complete": false
+}

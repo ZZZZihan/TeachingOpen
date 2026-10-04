@@ -29,3 +29,14 @@
 并行的[性能、恢复与维护证据审阅](evidence/production-copy-coverage-20261005/candidate-gap-review.md)确认：已有有限 HTTP 读写性能、首页按需加载对照、数据库/附件/云变量恢复及候选回退演练，仍可在原声明范围内成立。本轮没有重复这些测试。后续有价值的增量是绑定当前精确包和上述真实数据的有限只读性能样本，以及更新当前依赖维护与发布风险清单；完整认证三角色、编辑器流程、人工视觉和目标环境验收仍分别待完成。
 
 本轮只更新现有管理 PR #1 的证据和计划，不为尚未实施的发现建立空 PR。后续每个实际修复或功能继续独立 PR。Goal 保持 active，未合并、发布或部署。
+
+
+## 后续：当前包的真实副本读取基线
+
+同日交付 [PR #64](https://github.com/ZZZZihan/TeachingOpen/pull/64)，最终分支 `3483f3a3729ad84b359db43dfe93e03fa4e32c0e`，在候选77a4fbfb运行。工具只对自有本机副本执行匿名首页全集、分页、名称筛选及一个公开课程封面的GET/HEAD/Range，没有业务写入或生产请求。1008次计时、126次预热、2次分页预检全部成功；本次7张业务表前后摘要、297个素材元数据和所选封面的完整哈希相同。它与上文的9表覆盖审计是两次不同范围的检查，不相加成全库验收。
+
+共享Mac14,14/24CPU/64GiB，无TLS的loopback，每场景/并发72个计时样本，3轮，workers1/4。课程全集中位数分别4.594/6.363ms，p95分别15.831/43.695ms；1,671,015字节封面GET中位数3.454/8.295ms。结果包含完整响应读取，无旧新产品性能对照，不宣称性能提升、生产容量或浏览器加载速度。全量5.94GB文件没有重新哈希；当次私有完整报告600权限，SHA25650f97cf685d468b85b9f3290b400e88b8d7fa597a1534cdef76ec056963c9067。
+
+实现、51项独立专项和完整分组结果见[PR交付说明](https://github.com/ZZZZihan/TeachingOpen/blob/3483f3a3729ad84b359db43dfe93e03fa4e32c0e/docs/optimization/production-read-benchmark-pr.md)。组合工具171通过/1可选MySQL跳过；随后独立逐样本复算报告与包/脚本/清单绑定一致，没有发起第二轮HTTP或SQL。最终本地候选 `2d71bdf4f7cc6c3f0914b14834b612a9161c18f4` 与实际测量版本之间只新增证据文档；[本地集成记录](evidence/product-candidate/production-read-benchmark-candidate.json)。原Java/前端及当前运行包保持，本轮不重建、不重启服务。
+
+[依赖审查](evidence/dependency-release-20261005/review.md)、[机器清单](evidence/dependency-release-20261005/inventory-summary.json)和[官方来源](evidence/dependency-release-20261005/official-sources.json)补充当前维护证据。未实施的条件验证/迁移保留待办，不建空PR。真实副本仍不覆盖三种练习类型，完整认证三角色与人工验收继续待完成。
