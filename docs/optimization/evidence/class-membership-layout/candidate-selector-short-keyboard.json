@@ -1,0 +1,41 @@
+{
+  "buttons": [
+    {
+      "bottom": 82,
+      "left": 318,
+      "right": 374,
+      "text": "",
+      "top": 26
+    },
+    {
+      "bottom": 610,
+      "left": 234.484375,
+      "right": 298.2734375,
+      "text": "关 闭",
+      "top": 578
+    },
+    {
+      "bottom": 610,
+      "left": 306.2734375,
+      "right": 358,
+      "text": "OK",
+      "top": 578
+    }
+  ],
+  "height": 650,
+  "table": [
+    {
+      "class": "ant-table-header",
+      "client": 308,
+      "left": 120,
+      "scroll": 920
+    },
+    {
+      "class": "ant-table-body",
+      "client": 324,
+      "left": 120,
+      "scroll": 920
+    }
+  ],
+  "width": 390
+}
