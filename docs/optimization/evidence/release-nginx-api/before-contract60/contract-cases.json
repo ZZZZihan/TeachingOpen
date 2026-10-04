@@ -1,0 +1,482 @@
+[
+  [
+    "GET",
+    "/api/probe?cursor=%2F&text=a%20b",
+    204,
+    "/api/probe?cursor=%2F&text=a%20b",
+    "API method and URI preserved",
+    null
+  ],
+  [
+    "HEAD",
+    "/api/probe?cursor=%2F&text=a%20b",
+    204,
+    "/api/probe?cursor=%2F&text=a%20b",
+    "API method and URI preserved",
+    null
+  ],
+  [
+    "POST",
+    "/api/probe?cursor=%2F&text=a%20b",
+    204,
+    "/api/probe?cursor=%2F&text=a%20b",
+    "API method and URI preserved",
+    null
+  ],
+  [
+    "PUT",
+    "/api/probe?cursor=%2F&text=a%20b",
+    204,
+    "/api/probe?cursor=%2F&text=a%20b",
+    "API method and URI preserved",
+    null
+  ],
+  [
+    "DELETE",
+    "/api/probe?cursor=%2F&text=a%20b",
+    204,
+    "/api/probe?cursor=%2F&text=a%20b",
+    "API method and URI preserved",
+    null
+  ],
+  [
+    "OPTIONS",
+    "/api/probe?cursor=%2F&text=a%20b",
+    204,
+    "/api/probe?cursor=%2F&text=a%20b",
+    "API method and URI preserved",
+    null
+  ],
+  [
+    "GET",
+    "/api/",
+    204,
+    "/api/",
+    "API path, Unicode encoding, query preserved",
+    null
+  ],
+  [
+    "GET",
+    "/api/probe%20encoded?x=%252F&y=a+b",
+    204,
+    "/api/probe%20encoded?x=%252F&y=a+b",
+    "API path, Unicode encoding, query preserved",
+    null
+  ],
+  [
+    "GET",
+    "/api/probe%2Fencoded?x=a%2Fb",
+    204,
+    "/api/probe%2Fencoded?x=a%2Fb",
+    "API path, Unicode encoding, query preserved",
+    null
+  ],
+  [
+    "GET",
+    "/api/probe.map",
+    204,
+    "/api/probe.map",
+    "API path, Unicode encoding, query preserved",
+    null
+  ],
+  [
+    "GET",
+    "/api/probe.sql",
+    204,
+    "/api/probe.sql",
+    "API path, Unicode encoding, query preserved",
+    null
+  ],
+  [
+    "GET",
+    "/api/logfiles/probe",
+    204,
+    "/api/logfiles/probe",
+    "API path, Unicode encoding, query preserved",
+    null
+  ],
+  [
+    "GET",
+    "/api/samples/probe",
+    204,
+    "/api/samples/probe",
+    "API path, Unicode encoding, query preserved",
+    null
+  ],
+  [
+    "GET",
+    "/api/%E8%AF%BE%E7%A8%8B",
+    204,
+    "/api/%E8%AF%BE%E7%A8%8B",
+    "API path, Unicode encoding, query preserved",
+    null
+  ],
+  [
+    "GET",
+    "/api//probe",
+    204,
+    "/api//probe",
+    "API path, Unicode encoding, query preserved",
+    null
+  ],
+  [
+    "GET",
+    "/api/probe?dup=a&dup=b&empty=&text=a%20b+z&hash=%23",
+    204,
+    "/api/probe?dup=a&dup=b&empty=&text=a%20b+z&hash=%23",
+    "API path, Unicode encoding, query preserved",
+    null
+  ],
+  [
+    "GET",
+    "/api",
+    308,
+    null,
+    "Bare API redirect retains query and method",
+    "/api/"
+  ],
+  [
+    "GET",
+    "/api?cursor=%2F&text=a%20b",
+    308,
+    null,
+    "Bare API redirect retains query and method",
+    "/api/?cursor=%2F&text=a%20b"
+  ],
+  [
+    "POST",
+    "/api",
+    308,
+    null,
+    "Bare API redirect retains query and method",
+    "/api/"
+  ],
+  [
+    "POST",
+    "/api?cursor=%2F&text=a%20b",
+    308,
+    null,
+    "Bare API redirect retains query and method",
+    "/api/?cursor=%2F&text=a%20b"
+  ],
+  [
+    "PUT",
+    "/api",
+    308,
+    null,
+    "Bare API redirect retains query and method",
+    "/api/"
+  ],
+  [
+    "PUT",
+    "/api?cursor=%2F&text=a%20b",
+    308,
+    null,
+    "Bare API redirect retains query and method",
+    "/api/?cursor=%2F&text=a%20b"
+  ],
+  [
+    "DELETE",
+    "/api",
+    308,
+    null,
+    "Bare API redirect retains query and method",
+    "/api/"
+  ],
+  [
+    "DELETE",
+    "/api?cursor=%2F&text=a%20b",
+    308,
+    null,
+    "Bare API redirect retains query and method",
+    "/api/?cursor=%2F&text=a%20b"
+  ],
+  [
+    "GET",
+    "/apiculture",
+    200,
+    null,
+    "Non-API prefix stays in frontend location",
+    null
+  ],
+  [
+    "HEAD",
+    "/apiculture",
+    200,
+    null,
+    "Non-API prefix stays in frontend location",
+    null
+  ],
+  [
+    "POST",
+    "/apiculture",
+    405,
+    null,
+    "Non-API prefix stays in frontend location",
+    null
+  ],
+  [
+    "PUT",
+    "/apiculture",
+    405,
+    null,
+    "Non-API prefix stays in frontend location",
+    null
+  ],
+  [
+    "DELETE",
+    "/apiculture",
+    405,
+    null,
+    "Non-API prefix stays in frontend location",
+    null
+  ],
+  [
+    "GET",
+    "/apiXYZ/probe?cursor=%2F",
+    200,
+    null,
+    "Non-API prefix stays in frontend location",
+    null
+  ],
+  [
+    "HEAD",
+    "/apiXYZ/probe?cursor=%2F",
+    200,
+    null,
+    "Non-API prefix stays in frontend location",
+    null
+  ],
+  [
+    "POST",
+    "/apiXYZ/probe?cursor=%2F",
+    405,
+    null,
+    "Non-API prefix stays in frontend location",
+    null
+  ],
+  [
+    "PUT",
+    "/apiXYZ/probe?cursor=%2F",
+    405,
+    null,
+    "Non-API prefix stays in frontend location",
+    null
+  ],
+  [
+    "DELETE",
+    "/apiXYZ/probe?cursor=%2F",
+    405,
+    null,
+    "Non-API prefix stays in frontend location",
+    null
+  ],
+  [
+    "GET",
+    "/index.html",
+    200,
+    null,
+    "Static file and SPA fallback",
+    null
+  ],
+  [
+    "GET",
+    "/probe.js",
+    200,
+    null,
+    "Static file and SPA fallback",
+    null
+  ],
+  [
+    "GET",
+    "/course/unit/1",
+    200,
+    null,
+    "Static file and SPA fallback",
+    null
+  ],
+  [
+    "HEAD",
+    "/index.html",
+    200,
+    null,
+    "Static file and SPA fallback",
+    null
+  ],
+  [
+    "HEAD",
+    "/probe.js",
+    200,
+    null,
+    "Static file and SPA fallback",
+    null
+  ],
+  [
+    "HEAD",
+    "/course/unit/1",
+    200,
+    null,
+    "Static file and SPA fallback",
+    null
+  ],
+  [
+    "GET",
+    "/probe.js.map",
+    404,
+    null,
+    "Static sensitive content denied",
+    null
+  ],
+  [
+    "GET",
+    "/probe.sql",
+    404,
+    null,
+    "Static sensitive content denied",
+    null
+  ],
+  [
+    "GET",
+    "/logfiles/probe",
+    404,
+    null,
+    "Static sensitive content denied",
+    null
+  ],
+  [
+    "GET",
+    "/samples/probe",
+    404,
+    null,
+    "Static sensitive content denied",
+    null
+  ],
+  [
+    "GET",
+    "/../outside-probe.txt",
+    400,
+    null,
+    "Out-of-root traversal rejected",
+    null
+  ],
+  [
+    "GET",
+    "/%2e%2e/outside-probe.txt",
+    400,
+    null,
+    "Out-of-root traversal rejected",
+    null
+  ],
+  [
+    "TRACE",
+    "/api/probe",
+    405,
+    null,
+    "Previously denied unsupported method remains denied",
+    null
+  ],
+  [
+    "TRACK",
+    "/api/probe",
+    405,
+    null,
+    "Previously denied unsupported method remains denied",
+    null
+  ],
+  [
+    "MOVE",
+    "/api/probe",
+    405,
+    null,
+    "Previously denied unsupported method remains denied",
+    null
+  ],
+  [
+    "COPY",
+    "/api/probe",
+    405,
+    null,
+    "Previously denied unsupported method remains denied",
+    null
+  ],
+  [
+    "PROPFIND",
+    "/api/probe",
+    405,
+    null,
+    "Previously denied unsupported method remains denied",
+    null
+  ],
+  [
+    "SEARCH",
+    "/api/probe",
+    405,
+    null,
+    "Previously denied unsupported method remains denied",
+    null
+  ],
+  [
+    "MKCOL",
+    "/api/probe",
+    405,
+    null,
+    "Previously denied unsupported method remains denied",
+    null
+  ],
+  [
+    "LOCK",
+    "/api/probe",
+    405,
+    null,
+    "Previously denied unsupported method remains denied",
+    null
+  ],
+  [
+    "UNLOCK",
+    "/api/probe",
+    405,
+    null,
+    "Previously denied unsupported method remains denied",
+    null
+  ],
+  [
+    "PROPPATCH",
+    "/api/probe",
+    405,
+    null,
+    "Previously denied unsupported method remains denied",
+    null
+  ],
+  [
+    "POST",
+    "/probe.js",
+    405,
+    null,
+    "Static file disallows write method",
+    null
+  ],
+  [
+    "PUT",
+    "/probe.js",
+    405,
+    null,
+    "Static file disallows write method",
+    null
+  ],
+  [
+    "DELETE",
+    "/probe.js",
+    405,
+    null,
+    "Static file disallows write method",
+    null
+  ],
+  [
+    "OPTIONS",
+    "/probe.js",
+    405,
+    null,
+    "Static file disallows write method",
+    null
+  ]
+]

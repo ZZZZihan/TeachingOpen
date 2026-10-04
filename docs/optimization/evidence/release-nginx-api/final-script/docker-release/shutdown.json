@@ -1,0 +1,10 @@
+{
+  "container_id": "5f9050a89f8fb4febae8bcbc4e330ec82b9b8a0f5eda9b48b8e4c8217da5d36b",
+  "owner_label_checked": true,
+  "stopped": true,
+  "removed": true,
+  "host_ports_free_after_shutdown": [
+    18186,
+    18187
+  ]
+}

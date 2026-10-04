@@ -1,0 +1,28 @@
+--- .devspace/worktrees/product-candidate/资料/nginx.example.conf
++++ /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/nginx-release-20261005/before-contract60/native-example/server.conf
+@@ -1,6 +1,6 @@
+ server
+ {
+-    listen 80 default_server;
++    listen 8080 default_server;
+     server_name localhost;  #改成你的域名
+ 
+     # --- 安全响应头 ---
+@@ -40,7 +40,7 @@
+ 
+     location / {
+       index index.html index.htm;
+-      root /www/wwwroot/localhost;  #网站前端位置
++      root /probe/fixture/public;  #网站前端位置
+ 
+       if (!-e $request_filename) {
+           rewrite ^(.*)$ /index.html?s=$1 last;
+@@ -58,7 +58,7 @@
+     location ^~ /api
+     {
+         expires 0;
+-        proxy_pass              http://127.0.0.1:8080/api/;
++        proxy_pass              http://127.0.0.1:8081/api/;
+         proxy_set_header        Host 127.0.0.1;
+         proxy_set_header        X-Real-IP $remote_addr;
+         proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;

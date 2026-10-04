@@ -1,0 +1,1463 @@
+{
+  "receipt": {
+    "container_id": "73c81a37bdb1e096058f8935340de33bf4d4eb0c80402b89c3b6d2f230413008",
+    "container_name": "teachingopen-nginx-contract-915ae71adb7b",
+    "owner_label": "9552cc63342d443f8c83586036699abe",
+    "source": ".devspace/worktrees/product-candidate/web/nginx/default.conf",
+    "source_sha256": "d1b42c0f1d5cea0d4b7a08272364d0308c86dbdcbf85e990240e6456b9730370",
+    "ports": {
+      "nginx": "127.0.0.1:18186",
+      "echo": "127.0.0.1:18187"
+    },
+    "config_file": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/nginx-release-20261005/before-contract60/docker-release/server.conf",
+    "environment_diff": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/nginx-release-20261005/before-contract60/docker-release/server.environment.diff",
+    "daemon_port_bindings": {
+      "8080/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": "18186"
+        }
+      ],
+      "8081/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": "18187"
+        }
+      ]
+    },
+    "nginx_version": "nginx version: nginx/1.30.5"
+  },
+  "total": 60,
+  "passed": 31,
+  "failed": 29,
+  "rows": [
+    {
+      "method": "GET",
+      "request_path": "/api/probe?cursor=%2F&text=a%20b",
+      "purpose": "API method and URI preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/probe?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api//probe?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "HEAD",
+      "request_path": "/api/probe?cursor=%2F&text=a%20b",
+      "purpose": "API method and URI preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "HEAD",
+        "upstream_path": "/api/probe?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "HEAD",
+        "upstream_path": "/api//probe?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "POST",
+      "request_path": "/api/probe?cursor=%2F&text=a%20b",
+      "purpose": "API method and URI preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "POST",
+        "upstream_path": "/api/probe?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "POST",
+        "upstream_path": "/api//probe?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "PUT",
+      "request_path": "/api/probe?cursor=%2F&text=a%20b",
+      "purpose": "API method and URI preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "PUT",
+        "upstream_path": "/api/probe?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "DELETE",
+      "request_path": "/api/probe?cursor=%2F&text=a%20b",
+      "purpose": "API method and URI preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "DELETE",
+        "upstream_path": "/api/probe?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "OPTIONS",
+      "request_path": "/api/probe?cursor=%2F&text=a%20b",
+      "purpose": "API method and URI preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "OPTIONS",
+        "upstream_path": "/api/probe?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "OPTIONS",
+        "upstream_path": "/api//probe?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "GET",
+      "request_path": "/api/",
+      "purpose": "API path, Unicode encoding, query preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api//",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "GET",
+      "request_path": "/api/probe%20encoded?x=%252F&y=a+b",
+      "purpose": "API path, Unicode encoding, query preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/probe%20encoded?x=%252F&y=a+b",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api//probe%20encoded?x=%252F&y=a+b",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "GET",
+      "request_path": "/api/probe%2Fencoded?x=a%2Fb",
+      "purpose": "API path, Unicode encoding, query preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/probe%2Fencoded?x=a%2Fb",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api//probe/encoded?x=a%2Fb",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "GET",
+      "request_path": "/api/probe.map",
+      "purpose": "API path, Unicode encoding, query preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/probe.map",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api//probe.map",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "GET",
+      "request_path": "/api/probe.sql",
+      "purpose": "API path, Unicode encoding, query preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/probe.sql",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api//probe.sql",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "GET",
+      "request_path": "/api/logfiles/probe",
+      "purpose": "API path, Unicode encoding, query preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/logfiles/probe",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api//logfiles/probe",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "GET",
+      "request_path": "/api/samples/probe",
+      "purpose": "API path, Unicode encoding, query preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/samples/probe",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api//samples/probe",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "GET",
+      "request_path": "/api/%E8%AF%BE%E7%A8%8B",
+      "purpose": "API path, Unicode encoding, query preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/%E8%AF%BE%E7%A8%8B",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api//%E8%AF%BE%E7%A8%8B",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "GET",
+      "request_path": "/api//probe",
+      "purpose": "API path, Unicode encoding, query preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api//probe",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api//probe",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "request_path": "/api/probe?dup=a&dup=b&empty=&text=a%20b+z&hash=%23",
+      "purpose": "API path, Unicode encoding, query preserved",
+      "expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/probe?dup=a&dup=b&empty=&text=a%20b+z&hash=%23",
+        "upstream_canary_matches": true
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api//probe?dup=a&dup=b&empty=&text=a%20b+z&hash=%23",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "GET",
+      "request_path": "/api",
+      "purpose": "Bare API redirect retains query and method",
+      "expected": {
+        "status": 308,
+        "location": "/api/",
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/",
+        "upstream_canary_matches": true
+      },
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "GET",
+      "request_path": "/api?cursor=%2F&text=a%20b",
+      "purpose": "Bare API redirect retains query and method",
+      "expected": {
+        "status": 308,
+        "location": "/api/?cursor=%2F&text=a%20b",
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "POST",
+      "request_path": "/api",
+      "purpose": "Bare API redirect retains query and method",
+      "expected": {
+        "status": 308,
+        "location": "/api/",
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "POST",
+        "upstream_path": "/api/",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "POST",
+        "upstream_path": "/api/",
+        "upstream_canary_matches": true
+      },
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "POST",
+      "request_path": "/api?cursor=%2F&text=a%20b",
+      "purpose": "Bare API redirect retains query and method",
+      "expected": {
+        "status": 308,
+        "location": "/api/?cursor=%2F&text=a%20b",
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "POST",
+        "upstream_path": "/api/?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "POST",
+        "upstream_path": "/api/?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "PUT",
+      "request_path": "/api",
+      "purpose": "Bare API redirect retains query and method",
+      "expected": {
+        "status": 308,
+        "location": "/api/",
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "PUT",
+        "upstream_path": "/api/",
+        "upstream_canary_matches": true
+      },
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "PUT",
+      "request_path": "/api?cursor=%2F&text=a%20b",
+      "purpose": "Bare API redirect retains query and method",
+      "expected": {
+        "status": 308,
+        "location": "/api/?cursor=%2F&text=a%20b",
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "PUT",
+        "upstream_path": "/api/?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "DELETE",
+      "request_path": "/api",
+      "purpose": "Bare API redirect retains query and method",
+      "expected": {
+        "status": 308,
+        "location": "/api/",
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "DELETE",
+        "upstream_path": "/api/",
+        "upstream_canary_matches": true
+      },
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "DELETE",
+      "request_path": "/api?cursor=%2F&text=a%20b",
+      "purpose": "Bare API redirect retains query and method",
+      "expected": {
+        "status": 308,
+        "location": "/api/?cursor=%2F&text=a%20b",
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "DELETE",
+        "upstream_path": "/api/?cursor=%2F&text=a%20b",
+        "upstream_canary_matches": true
+      },
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "GET",
+      "request_path": "/apiculture",
+      "purpose": "Non-API prefix stays in frontend location",
+      "expected": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/culture",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "HEAD",
+      "request_path": "/apiculture",
+      "purpose": "Non-API prefix stays in frontend location",
+      "expected": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "HEAD",
+        "upstream_path": "/api/culture",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "POST",
+      "request_path": "/apiculture",
+      "purpose": "Non-API prefix stays in frontend location",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "POST",
+        "upstream_path": "/api/culture",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "PUT",
+      "request_path": "/apiculture",
+      "purpose": "Non-API prefix stays in frontend location",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "DELETE",
+      "request_path": "/apiculture",
+      "purpose": "Non-API prefix stays in frontend location",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "request_path": "/apiXYZ/probe?cursor=%2F",
+      "purpose": "Non-API prefix stays in frontend location",
+      "expected": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "GET",
+        "upstream_path": "/api/XYZ/probe?cursor=%2F",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "HEAD",
+      "request_path": "/apiXYZ/probe?cursor=%2F",
+      "purpose": "Non-API prefix stays in frontend location",
+      "expected": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "HEAD",
+        "upstream_path": "/api/XYZ/probe?cursor=%2F",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "POST",
+      "request_path": "/apiXYZ/probe?cursor=%2F",
+      "purpose": "Non-API prefix stays in frontend location",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 204,
+        "location": null,
+        "upstream_method": "POST",
+        "upstream_path": "/api/XYZ/probe?cursor=%2F",
+        "upstream_canary_matches": true
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": false
+    },
+    {
+      "method": "PUT",
+      "request_path": "/apiXYZ/probe?cursor=%2F",
+      "purpose": "Non-API prefix stays in frontend location",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "DELETE",
+      "request_path": "/apiXYZ/probe?cursor=%2F",
+      "purpose": "Non-API prefix stays in frontend location",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "request_path": "/index.html",
+      "purpose": "Static file and SPA fallback",
+      "expected": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "request_path": "/probe.js",
+      "purpose": "Static file and SPA fallback",
+      "expected": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "request_path": "/course/unit/1",
+      "purpose": "Static file and SPA fallback",
+      "expected": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "HEAD",
+      "request_path": "/index.html",
+      "purpose": "Static file and SPA fallback",
+      "expected": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "HEAD",
+      "request_path": "/probe.js",
+      "purpose": "Static file and SPA fallback",
+      "expected": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "HEAD",
+      "request_path": "/course/unit/1",
+      "purpose": "Static file and SPA fallback",
+      "expected": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 200,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "request_path": "/probe.js.map",
+      "purpose": "Static sensitive content denied",
+      "expected": {
+        "status": 404,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 404,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "request_path": "/probe.sql",
+      "purpose": "Static sensitive content denied",
+      "expected": {
+        "status": 404,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 404,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "request_path": "/logfiles/probe",
+      "purpose": "Static sensitive content denied",
+      "expected": {
+        "status": 404,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 404,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "request_path": "/samples/probe",
+      "purpose": "Static sensitive content denied",
+      "expected": {
+        "status": 404,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 404,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "request_path": "/../outside-probe.txt",
+      "purpose": "Out-of-root traversal rejected",
+      "expected": {
+        "status": 400,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 400,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "request_path": "/%2e%2e/outside-probe.txt",
+      "purpose": "Out-of-root traversal rejected",
+      "expected": {
+        "status": 400,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 400,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "TRACE",
+      "request_path": "/api/probe",
+      "purpose": "Previously denied unsupported method remains denied",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "TRACK",
+      "request_path": "/api/probe",
+      "purpose": "Previously denied unsupported method remains denied",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "MOVE",
+      "request_path": "/api/probe",
+      "purpose": "Previously denied unsupported method remains denied",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "COPY",
+      "request_path": "/api/probe",
+      "purpose": "Previously denied unsupported method remains denied",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "PROPFIND",
+      "request_path": "/api/probe",
+      "purpose": "Previously denied unsupported method remains denied",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "SEARCH",
+      "request_path": "/api/probe",
+      "purpose": "Previously denied unsupported method remains denied",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "MKCOL",
+      "request_path": "/api/probe",
+      "purpose": "Previously denied unsupported method remains denied",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "LOCK",
+      "request_path": "/api/probe",
+      "purpose": "Previously denied unsupported method remains denied",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "UNLOCK",
+      "request_path": "/api/probe",
+      "purpose": "Previously denied unsupported method remains denied",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "PROPPATCH",
+      "request_path": "/api/probe",
+      "purpose": "Previously denied unsupported method remains denied",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "POST",
+      "request_path": "/probe.js",
+      "purpose": "Static file disallows write method",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "PUT",
+      "request_path": "/probe.js",
+      "purpose": "Static file disallows write method",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "DELETE",
+      "request_path": "/probe.js",
+      "purpose": "Static file disallows write method",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    },
+    {
+      "method": "OPTIONS",
+      "request_path": "/probe.js",
+      "purpose": "Static file disallows write method",
+      "expected": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "actual": {
+        "status": 405,
+        "location": null,
+        "upstream_method": null,
+        "upstream_path": null,
+        "upstream_canary_matches": false
+      },
+      "raw_location": null,
+      "redirect_follow_expected": null,
+      "redirect_follow_actual": null,
+      "pass": true
+    }
+  ]
+}

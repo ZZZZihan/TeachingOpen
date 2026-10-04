@@ -1,0 +1,12 @@
+{
+  "image_tag": "nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94",
+  "image_id": "sha256:a805dc02b9a7ee985b411db35996123b9bb3df80e79a9ab5b194751d3087defe",
+  "repo_digests": [
+    "nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94"
+  ],
+  "architecture": "arm64",
+  "os": "linux",
+  "server": "29.4.0",
+  "context": "orbstack",
+  "captured_utc": "2026-10-04T18:11:03.243039+00:00"
+}
