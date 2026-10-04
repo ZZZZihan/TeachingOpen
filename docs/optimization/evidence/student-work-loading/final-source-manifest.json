@@ -1,0 +1,138 @@
+{
+  "base": "f0980ce2d8c8a06e635bf09aca3a8b7d16edbcb7",
+  "reviewed_commit": "e3522dbc57e10330cbe697ac310e5106231f7aea",
+  "freeze_manifest_sha256": "c33ce3380564a252d606c1e2c4cfc37d0e68eb47de7e9c4d2e5b26e83246ba59",
+  "frozen_src_count": 424,
+  "frozen_src_matches": true,
+  "changed_or_missing": [],
+  "extra_src": [],
+  "offline_tests": {
+    "passed": 35,
+    "total": 35,
+    "report": "loading-offline.json",
+    "prior_report": "loading-offline-frozen-v1.json",
+    "runtime": {
+      "node": "v26.7.0",
+      "vue": "2.7.16",
+      "templateCompiler": "2.7.16"
+    }
+  },
+  "tested_source_checks": [
+    {
+      "path": "web/src/utils/util.js",
+      "test_sha256": "345808587091ffd401f4c1cd7ebac55655db9439b02d9eae5aa6cb56176da6db",
+      "frozen_sha256": "345808587091ffd401f4c1cd7ebac55655db9439b02d9eae5aa6cb56176da6db",
+      "matches": true,
+      "committed_sha256": "345808587091ffd401f4c1cd7ebac55655db9439b02d9eae5aa6cb56176da6db",
+      "equals_committed_blob": true
+    },
+    {
+      "path": "web/src/mixins/JeecgListMixin.js",
+      "test_sha256": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+      "frozen_sha256": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+      "matches": true,
+      "committed_sha256": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+      "equals_committed_blob": true
+    },
+    {
+      "path": "web/src/utils/studentWorkFeedback.js",
+      "test_sha256": "85cce96b39e491db4044db1cc2a5b15744fbf807a31412649280e0a239cf8f12",
+      "frozen_sha256": "85cce96b39e491db4044db1cc2a5b15744fbf807a31412649280e0a239cf8f12",
+      "matches": true,
+      "committed_sha256": "85cce96b39e491db4044db1cc2a5b15744fbf807a31412649280e0a239cf8f12",
+      "equals_committed_blob": true
+    },
+    {
+      "path": "web/src/components/teaching/StudentWorkFeedback.vue",
+      "test_sha256": "d833bb9ad51985c4445024f795baaa71e6542c3cb4f687a4ab800dbb9b8ecc5e",
+      "frozen_sha256": "d833bb9ad51985c4445024f795baaa71e6542c3cb4f687a4ab800dbb9b8ecc5e",
+      "matches": true,
+      "committed_sha256": "d833bb9ad51985c4445024f795baaa71e6542c3cb4f687a4ab800dbb9b8ecc5e",
+      "equals_committed_blob": true
+    },
+    {
+      "path": "web/src/components/teaching/StudentWorkListState.vue",
+      "test_sha256": "e247415bd1ae15f2cdff7fd4b50b8ff911bd996e7158bb13d5ac160563af1ba4",
+      "frozen_sha256": "e247415bd1ae15f2cdff7fd4b50b8ff911bd996e7158bb13d5ac160563af1ba4",
+      "matches": true,
+      "committed_sha256": "e247415bd1ae15f2cdff7fd4b50b8ff911bd996e7158bb13d5ac160563af1ba4",
+      "equals_committed_blob": true
+    },
+    {
+      "path": "web/src/utils/studentWorkList.js",
+      "test_sha256": "85fa1b51395cba4389c7a954f21db1f1ca467e623bed9d79b4c74a26d889bbe4",
+      "frozen_sha256": "85fa1b51395cba4389c7a954f21db1f1ca467e623bed9d79b4c74a26d889bbe4",
+      "matches": true,
+      "committed_sha256": "85fa1b51395cba4389c7a954f21db1f1ca467e623bed9d79b4c74a26d889bbe4",
+      "equals_committed_blob": true
+    },
+    {
+      "path": "web/src/views/account/center/MineWorkList.vue",
+      "test_sha256": "9a96a37861171406bc8e732a30ac354fbc3e2bfb58ad7cc1b51033c16ffe2409",
+      "frozen_sha256": "9a96a37861171406bc8e732a30ac354fbc3e2bfb58ad7cc1b51033c16ffe2409",
+      "matches": true,
+      "committed_sha256": "9a96a37861171406bc8e732a30ac354fbc3e2bfb58ad7cc1b51033c16ffe2409",
+      "equals_committed_blob": true
+    },
+    {
+      "path": "web/src/views/account/center/page/MineWorks.vue",
+      "test_sha256": "4e37de887be41a8a7ed2d25bd0c24c951d9f8591456a37eac76e21bac88ae176",
+      "frozen_sha256": "4e37de887be41a8a7ed2d25bd0c24c951d9f8591456a37eac76e21bac88ae176",
+      "matches": true,
+      "committed_sha256": "4e37de887be41a8a7ed2d25bd0c24c951d9f8591456a37eac76e21bac88ae176",
+      "equals_committed_blob": true
+    },
+    {
+      "path": "web/src/views/account/center/page/index.js",
+      "test_sha256": "10bc81f202a8c2010b1839943edfd14823874875f4db9b3295d36f402cba6545",
+      "frozen_sha256": "10bc81f202a8c2010b1839943edfd14823874875f4db9b3295d36f402cba6545",
+      "matches": true,
+      "committed_sha256": "10bc81f202a8c2010b1839943edfd14823874875f4db9b3295d36f402cba6545",
+      "equals_committed_blob": true
+    },
+    {
+      "path": "web/src/views/account/center/Index.vue",
+      "test_sha256": "97f1ecd5cf18326fd3a4e8ec2f00c48613b458f0573b73e7213d73e050eb4b1c",
+      "frozen_sha256": "97f1ecd5cf18326fd3a4e8ec2f00c48613b458f0573b73e7213d73e050eb4b1c",
+      "matches": true,
+      "committed_sha256": "97f1ecd5cf18326fd3a4e8ec2f00c48613b458f0573b73e7213d73e050eb4b1c",
+      "equals_committed_blob": true
+    }
+  ],
+  "all_tested_sources_equal_commit": true,
+  "candidate_integration": {
+    "observed_head": "872109fde9020ab5ad8e42a9cc445f06224589dd",
+    "checks": [
+      {
+        "path": "web/src/components/teaching/StudentWorkListState.vue",
+        "test_source_sha256": "e247415bd1ae15f2cdff7fd4b50b8ff911bd996e7158bb13d5ac160563af1ba4",
+        "candidate_committed_sha256": "e247415bd1ae15f2cdff7fd4b50b8ff911bd996e7158bb13d5ac160563af1ba4",
+        "candidate_worktree_sha256": "e247415bd1ae15f2cdff7fd4b50b8ff911bd996e7158bb13d5ac160563af1ba4",
+        "all_equal": true
+      },
+      {
+        "path": "web/src/utils/studentWorkList.js",
+        "test_source_sha256": "85fa1b51395cba4389c7a954f21db1f1ca467e623bed9d79b4c74a26d889bbe4",
+        "candidate_committed_sha256": "85fa1b51395cba4389c7a954f21db1f1ca467e623bed9d79b4c74a26d889bbe4",
+        "candidate_worktree_sha256": "85fa1b51395cba4389c7a954f21db1f1ca467e623bed9d79b4c74a26d889bbe4",
+        "all_equal": true
+      },
+      {
+        "path": "web/src/views/account/center/MineWorkList.vue",
+        "test_source_sha256": "9a96a37861171406bc8e732a30ac354fbc3e2bfb58ad7cc1b51033c16ffe2409",
+        "candidate_committed_sha256": "9a96a37861171406bc8e732a30ac354fbc3e2bfb58ad7cc1b51033c16ffe2409",
+        "candidate_worktree_sha256": "9a96a37861171406bc8e732a30ac354fbc3e2bfb58ad7cc1b51033c16ffe2409",
+        "all_equal": true
+      },
+      {
+        "path": "web/src/views/account/center/page/MineWorks.vue",
+        "test_source_sha256": "4e37de887be41a8a7ed2d25bd0c24c951d9f8591456a37eac76e21bac88ae176",
+        "candidate_committed_sha256": "4e37de887be41a8a7ed2d25bd0c24c951d9f8591456a37eac76e21bac88ae176",
+        "candidate_worktree_sha256": "4e37de887be41a8a7ed2d25bd0c24c951d9f8591456a37eac76e21bac88ae176",
+        "all_equal": true
+      }
+    ],
+    "all_equal": true,
+    "scope": "Read-only product source byte comparison; candidate tests/build owned by root"
+  }
+}

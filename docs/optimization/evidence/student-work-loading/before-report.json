@@ -1,0 +1,39 @@
+{
+  "scope": "Actual f0980ce2 parent SFCs in synthetic readonly HTTP preview; no authenticated shell or global request interceptor",
+  "table": {
+    "scenario": "HTTP500",
+    "width": 390,
+    "documentWidth": 390,
+    "spinningAfterFailedResponse": true,
+    "retryButtons": 0,
+    "emptyText": "No Data"
+  },
+  "center": {
+    "scenario": "HTTP500",
+    "width": 390,
+    "documentWidth": 390,
+    "appListText": "",
+    "cards": 0,
+    "retryButtons": 0
+  },
+  "console": [
+    {
+      "level": "error",
+      "message": "Error: Request failed with status code 500\n    at createError (http://127.0.0.1:18308/preview.js:79116:15)\n    at settle (http://127.0.0.1:18308/preview.js:79279:12)\n    at XMLHttpRequest.handleLoad (http://127.0.0.1:18308/preview.js:78649:7)",
+      "timestamp": "2026-10-04T20:46:22.819Z",
+      "url": "http://127.0.0.1:18308/preview.js"
+    },
+    {
+      "level": "error",
+      "message": "Error: Request failed with status code 500\n    at createError (http://127.0.0.1:18308/preview.js:79116:15)\n    at settle (http://127.0.0.1:18308/preview.js:79279:12)\n    at XMLHttpRequest.handleLoad (http://127.0.0.1:18308/preview.js:78649:7)",
+      "timestamp": "2026-10-04T20:46:48.461Z",
+      "url": "http://127.0.0.1:18308/preview.js"
+    }
+  ],
+  "centerBusiness": {
+    "code": 510,
+    "cardArea": "",
+    "retryButtons": 0,
+    "toast": "Raw server detail shown as literal text, not executed HTML"
+  }
+}
