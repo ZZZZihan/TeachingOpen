@@ -13,6 +13,7 @@
           <h3><j-ellipsis :value="item.workName" :length="35" /></h3>
         </a>
       </a-card-meta>
+      <StudentWorkFeedback class="card-feedback" :work="item" />
       <template class="ant-card-actions" slot="actions">
         <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(item.id)">
           <a><a-icon type="delete" /></a>
@@ -32,14 +33,16 @@
 </template>
 
 <script>
-import { deleteAction, getAction, downFile,getFileAccessHttpUrl } from '@/api/manage'
+import { deleteAction, getAction, getFileAccessHttpUrl } from '@/api/manage'
 import QrCode from '@/components/tools/QrCode'
 import JEllipsis from '@/components/jeecg/JEllipsis'
+import StudentWorkFeedback from '@/components/teaching/StudentWorkFeedback'
 export default {
   name: 'MineWorksCard',
   components: {
     qrcode: QrCode,
-    JEllipsis
+    JEllipsis,
+        StudentWorkFeedback
   },
   data() {
     return {
@@ -110,14 +113,20 @@ export default {
 
 <style lang="less" scoped>
 .app-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  min-width: 0;
+  @media (max-width: 600px) { grid-template-columns: minmax(0, 1fr); }
+  .card-feedback { margin-top: 14px; padding-top: 14px; border-top: 1px solid #e1e4e8; }
   /deep/.ant-card-extra{
     margin-left:0!important;
     height: 55px;
   }
   /deep/.ant-card{
-    width: 300px;
-    display: inline-block;
-    margin: 20px;
+    width: auto;
+    min-width: 0;
+    margin: 0;
   }
   /deep/.ant-card-body{
     padding: 5px;
