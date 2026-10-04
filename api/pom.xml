@@ -53,6 +53,8 @@
     <properties>
         <jeecgboot.version>2.2.0</jeecgboot.version>
         <java.version>1.8</java.version>
+        <!-- Keep legacy default; allow targeted tests with -DskipTests=false. -->
+        <skipTests>true</skipTests>
         <!-- Java 8 transition only: Shiro 1.x remains end-of-life. -->
         <shiro.version>1.13.0</shiro.version>
         <!-- Keep the embedded Servlet 4 container on the maintained Java 8 line. -->
@@ -433,7 +435,7 @@
 		        <groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-surefire-plugin</artifactId>
 		        <configuration>
-		          <skipTests>true</skipTests>
+		          <skipTests>${skipTests}</skipTests>
 		        </configuration>
 	        </plugin>
 	         <!-- 避免font文件的二进制文件格式压缩破坏 -->

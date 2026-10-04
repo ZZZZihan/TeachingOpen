@@ -129,8 +129,12 @@ public class ShiroRealm extends AuthorizingRealm {
 		if (loginUser == null) {
 			throw new AuthenticationException("用户不存在!");
 		}
-		// 校验token是否超时失效 & 或者账号密码是否错误
-		if (!jwtTokenRefresh(token, username, loginUser.getPassword())) {
+		// Check the original token against the live DB credential before any
+		// refresh. Cache eviction alone cannot revoke the previous password's
+		// sessions: jwtTokenRefresh can otherwise re-sign an old cached token.
+		// Expiry is intentionally left to the existing Redis refresh mechanism.
+		if (!JwtUtil.verifySignature(token, username, currentUser.getPassword())
+				|| !jwtTokenRefresh(token, username, currentUser.getPassword())) {
 			throw new AuthenticationException("Token失效，请重新登录!");
 		}
 

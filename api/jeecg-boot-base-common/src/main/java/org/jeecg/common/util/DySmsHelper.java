@@ -54,6 +54,11 @@ public class DySmsHelper {
     
     
     public static boolean sendSms(String phone,JSONObject templateParamJson,DySmsEnum dySmsEnum) throws ClientException {
+        return sendSms(phone, templateParamJson, dySmsEnum, true);
+    }
+
+    /** Recovery callers suppress provider diagnostics that may contain sensitive metadata. */
+    public static boolean sendSms(String phone, JSONObject templateParamJson, DySmsEnum dySmsEnum, boolean logProviderResponse) throws ClientException {
     	//可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
@@ -87,8 +92,10 @@ public class DySmsHelper {
 
         //hint 此处可能会抛出异常，注意catch
         SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
-        logger.info("短信接口返回的数据----------------");
-        logger.info("{Code:" + sendSmsResponse.getCode()+",Message:" + sendSmsResponse.getMessage()+",RequestId:"+ sendSmsResponse.getRequestId()+",BizId:"+sendSmsResponse.getBizId()+"}");
+        if (logProviderResponse) {
+            logger.info("短信接口返回的数据----------------");
+            logger.info("{Code:" + sendSmsResponse.getCode()+",Message:" + sendSmsResponse.getMessage()+",RequestId:"+ sendSmsResponse.getRequestId()+",BizId:"+sendSmsResponse.getBizId()+"}");
+        }
         if ("OK".equals(sendSmsResponse.getCode())) {
             result = true;
         }
