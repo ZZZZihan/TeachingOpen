@@ -1,6 +1,6 @@
 2026-10-05 独立限定审阅结论：在明确可信源码、全新私有合成包和本机 Linux/arm64 容器的范围内，未发现尚未处理的 P1/P2 缺陷。此前发现的 P2“探针改变既有报告父目录权限”已修复，独立文件系统回归 8/8 通过；最终 fresh05 实际运行报告与修复后的同一份探针摘要绑定，45/45 通过。这里的独立性指另一个 Agent 对源码、拒绝路径及证据文件的核对；实际 Docker、HTTP、数据库与 WebSocket 执行由根 Agent 完成。
 
-审阅对象为 `candidate-release-bundle` 工作树中的 `deploy/candidate_release.py`、`deploy/probe_candidate_runtime.py`、独立测试及公开说明。审阅者没有启动 Docker、访问 HTTP/数据库/浏览器、读取 bundle 内凭据、生产配置或真实生产资料，没有改动实现。唯一主动执行是下面的临时文件测试；唯一交付写入是本审阅记录。
+审阅对象为 `candidate-release-bundle` 工作树中的 `deploy/candidate_release.py`、`deploy/probe_candidate_runtime.py`、独立测试及公开说明。审阅者没有启动 Docker、访问 HTTP/数据库/浏览器、读取 bundle 内凭据、生产配置或真实生产资料，没有改动实现。唯一主动执行是下面的临时文件测试；交付写入仅为本审阅记录与独立测试回执。
 
 冻结摘要逐字复算如下，独立测试运行前后均未变化：
 
@@ -35,4 +35,6 @@
 
 公开说明已校正 MySQL 文件系统边界：根 Agent 的 post-run SQL 记录为 MySQL 8.4.6、`lower_case_table_names=2`、69 表、五个合成用户；运行状态记录也一致。审阅者只读核对该记录，未独立执行 SQL。Linux/arm64 镜像运行在 Mac 宿主 bind 目录，不证明大小写敏感 Linux 文件系统下参数 0 的兼容性，也不证明实际 Z820、生产部署、TLS、容量、普通浏览器登录、用户人工验收或源代码到产物的构建重现。
 
-自有容器停止与网络删除由根 Agent另行记录；本审阅不以运行时 running 快照证明清理完成，也没有扩大为重启恢复或生产交付门槛。最终产品 Goal、PR 提交/推送/合并及部署状态由根 Agent单独报告。
+最后只读核对了根 Agent 的 `cleanup-final.json`，复算 SHA256 为 `3a9957074cfbe09c412436bdec5998f5b5fd99eedd4d0bf39ccd804ab05a9db9`。记录显示五个自有项目均无剩余容器/网络、私有 data 保留、18190 已关闭；三个既有后端仍 UP、18142 预览 HTTP 200，候选 tracked clean、JAR 摘要与 4893 个 dist 文件全部保持冻结值。这里核对的是根 Agent 的最终清理证据，未主动访问这些服务；运行时 running 快照仍是历史快照，不代表清理后的状态。本审阅没有扩大为重启恢复或生产交付门槛。最终产品 Goal、PR 提交/推送/合并及部署状态由根 Agent 单独报告。
+
+上述 8 项独立测试另存为 `probe-output-tests.json`，与本记录属于同一次有限审阅。

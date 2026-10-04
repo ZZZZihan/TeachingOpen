@@ -1,0 +1,51 @@
+{
+  "recorded_utc": "2026-10-04T19:11:53Z",
+  "reviewer": "independent release-contract design/review agent",
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "deploy",
+    "-p",
+    "test_probe_candidate_runtime.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "tests": 8,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "unittest_seconds": 0.005,
+  "result": "OK",
+  "test_scope": "Independent filesystem-only regression using test-owned temporary paths. Probe subprocess runner and socket connection operations are disabled by test patches; no Docker, HTTP, database, browser or application services executed.",
+  "source_hashes_before": {
+    "deploy/candidate_release.py": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67",
+    "deploy/probe_candidate_runtime.py": "68a7c76899de0490b1b0a2530dae8267841867d88ecf92dc5a2432f1de3f16dd",
+    "deploy/test_probe_candidate_runtime.py": "622ebaf06dcaa1fdc051486cd726d258d5f3b5e88bbc4fe09df3d95fd3934785"
+  },
+  "source_hashes_after": {
+    "deploy/candidate_release.py": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67",
+    "deploy/probe_candidate_runtime.py": "68a7c76899de0490b1b0a2530dae8267841867d88ecf92dc5a2432f1de3f16dd",
+    "deploy/test_probe_candidate_runtime.py": "622ebaf06dcaa1fdc051486cd726d258d5f3b5e88bbc4fe09df3d95fd3934785"
+  },
+  "unchanged_during_run": true,
+  "finding": {
+    "priority": "P2",
+    "problem": "Earlier probe changed an existing report parent directory permission with chmod.",
+    "status": "resolved",
+    "fix": "Validate a new output and ordinary private writable/traversable parent before Probe construction; preserve existing permissions, reject public or symlink parent and existing output, and create missing parent as 0700.",
+    "coverage": [
+      "existing public parent rejected without chmod",
+      "existing private parent accepted without chmod",
+      "private permissions preserved exactly",
+      "missing parent created as 0700",
+      "symlink parent rejected without target chmod",
+      "dangling output symlink rejected",
+      "existing report bytes and permissions preserved",
+      "CLI rejects public parent before Probe construction"
+    ]
+  }
+}
