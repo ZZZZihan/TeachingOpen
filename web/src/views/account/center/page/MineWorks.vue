@@ -1,5 +1,6 @@
 <template>
-  <div class="app-list">
+  <div class="app-list" :aria-busy="loading">
+    <StudentWorkListState class="list-state" :loading="loading" :error="listError" :empty="listReady && !dataSource.length" @retry="getWorkList" />
     <a-card hoverable  v-for="item in dataSource" :key="item.id">
       <div slot="cover" class="meta-cardInfo">
         <a-tag color="blue">{{item.workType_dictText}}</a-tag>
@@ -37,12 +38,15 @@ import { deleteAction, getAction, getFileAccessHttpUrl } from '@/api/manage'
 import QrCode from '@/components/tools/QrCode'
 import JEllipsis from '@/components/jeecg/JEllipsis'
 import StudentWorkFeedback from '@/components/teaching/StudentWorkFeedback'
+import StudentWorkListState from '@/components/teaching/StudentWorkListState'
+import { studentWorkPage, studentWorkListError } from '@/utils/studentWorkList'
 export default {
   name: 'MineWorksCard',
   components: {
     qrcode: QrCode,
     JEllipsis,
-        StudentWorkFeedback
+        StudentWorkFeedback,
+        StudentWorkListState
   },
   data() {
     return {
@@ -52,6 +56,10 @@ export default {
         },
         pageSize: 12,
       },
+            requestId: 0,
+            isDisposed: false,
+            listError: '',
+            listReady: false,
       dataSource: [],
       loading: false,
       url: {
@@ -64,22 +72,23 @@ export default {
   mounted() {
     this.getWorkList()
   },
+    beforeDestroy () { this.isDisposed = true; this.requestId++ },
   methods: {
     getFileAccessHttpUrl,
-    getWorkList: function() {
-      var that = this;
-      that.loading = true
-      getAction(that.url.list, null).then(res => {
-        if (res.success) {
-          that.dataSource = res.result.records
-          // that.ipagination.total = res.result.total
-        }
-        if (res.code === 510) {
-          that.$message.warning(res.message)
-        }
-        that.loading = false
-      })
-    },
+        async getWorkList () {
+            if (this.isDisposed) return
+            const sequence = ++this.requestId
+            this.loading = true; this.listError = ''; this.listReady = false; this.dataSource = []
+            try {
+                const response = await getAction(this.url.list, null)
+                if (sequence !== this.requestId || this.isDisposed) return
+                this.dataSource = studentWorkPage(response).records; this.listReady = true
+            } catch (error) {
+                if (sequence === this.requestId && !this.isDisposed) this.listError = studentWorkListError(error)
+            } finally {
+                if (sequence === this.requestId && !this.isDisposed) this.loading = false
+            }
+        },
     handleDelete: function(id){
       var that = this;
       deleteAction(that.url.delete, {id: id}).then((res) => {
@@ -113,6 +122,7 @@ export default {
 
 <style lang="less" scoped>
 .app-list {
+  .list-state { grid-column-start: 1; grid-column-end: -1; }
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;

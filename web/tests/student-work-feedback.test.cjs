@@ -172,13 +172,15 @@ test('separate rows keep independent detail and closing callbacks', () => {
     first.instance.$destroy()
     second.instance.$destroy()
 })
-const listImports = { getAction: () => Promise.resolve({ success: true, result: [] }), deleteAction () {}, QrCode: stub, JeecgListMixin: { data () { return { queryParam: {}, selectedRowKeys: [], dataSource: [], ipagination: {}, loading: false, isorter: {}, filters: {} } }, methods: { onSelectChange () {}, handleTableChange () {}, searchQuery () {}, searchReset () {}, onClearSelected () {} } }, TeachingWorkPreviewModal: stub, JDictSelectTag: stub, StudentWorkFeedback: Shared }
+const listImports = { getAction: () => Promise.resolve({ success: true, result: [] }), deleteAction () {}, QrCode: stub, JeecgListMixin: { data () { return { queryParam: {}, selectedRowKeys: [], dataSource: [], ipagination: {}, loading: false, isorter: {}, filters: {} } }, methods: { onSelectChange () {}, handleTableChange () {}, searchQuery () {}, searchReset () {}, onClearSelected () {} } }, TeachingWorkPreviewModal: stub, JDictSelectTag: stub, StudentWorkFeedback: Shared, StudentWorkListState: stub }
 const List = component('views/account/center/MineWorkList.vue', listImports)
-const Cards = component('views/account/center/page/MineWorks.vue', { deleteAction () {}, getAction: listImports.getAction, getFileAccessHttpUrl: value => value, QrCode: stub, JEllipsis: stub, StudentWorkFeedback: Shared })
+const Cards = component('views/account/center/page/MineWorks.vue', { deleteAction () {}, getAction: listImports.getAction, getFileAccessHttpUrl: value => value, QrCode: stub, JEllipsis: stub, StudentWorkFeedback: Shared, StudentWorkListState: stub })
 
 test('both actual parent templates pass their API row into the shared component', () => {
     const row = { id: 'fixture', score: 0, teacherComment: '评语', workType: '0' }
     const list = new Vue(List)
+    list.dataSource = [row]
+    list.listReady = true
     const table = nodes(list._render()).find(node => node.tag === 'a-table')
     const slot = table.data.scopedSlots.scoreInfo(0, row)
     assert.equal(slot.componentOptions.Ctor.options.name, 'StudentWorkFeedback')
