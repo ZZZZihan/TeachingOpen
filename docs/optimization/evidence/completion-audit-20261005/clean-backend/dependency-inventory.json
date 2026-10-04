@@ -1,0 +1,2714 @@
+{
+  "libraries": [
+    {
+      "path": "BOOT-INF/lib/FastInfoset-1.2.15.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 311876,
+      "sha256": "785861db11ca1bd0d1956682b974ad73eb19cd3e01a4b3fa82d62eca97210aec",
+      "maven_properties": [
+        {
+          "groupId": "com.sun.xml.fastinfoset",
+          "artifactId": "FastInfoset",
+          "version": "1.2.15"
+        }
+      ],
+      "frozen_sha256": "785861db11ca1bd0d1956682b974ad73eb19cd3e01a4b3fa82d62eca97210aec",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/HdrHistogram-2.1.9.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 114165,
+      "sha256": "95d40913be28dfd439cefea9170c40898ea84f11f25e6ff8de50339b8a7b5e3e",
+      "maven_properties": [
+        {
+          "version": "2.1.9",
+          "groupId": "org.hdrhistogram",
+          "artifactId": "HdrHistogram"
+        }
+      ],
+      "frozen_sha256": "95d40913be28dfd439cefea9170c40898ea84f11f25e6ff8de50339b8a7b5e3e",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/HikariCP-3.2.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 143577,
+      "sha256": "b008de68bbd85811f4b6e8f0860d0966c6acb4f2e75fabd46ec2094569cbefeb",
+      "maven_properties": [
+        {
+          "version": "3.2.0",
+          "groupId": "com.zaxxer",
+          "artifactId": "HikariCP"
+        }
+      ],
+      "frozen_sha256": "b008de68bbd85811f4b6e8f0860d0966c6acb4f2e75fabd46ec2094569cbefeb",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/JustAuth-1.13.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 153598,
+      "sha256": "9a84c5b5db036329ea473f962c7f9766b216dadeca8a7aff5b083a1b06224304",
+      "maven_properties": [
+        {
+          "version": "1.13.2",
+          "groupId": "me.zhyd.oauth",
+          "artifactId": "JustAuth"
+        }
+      ],
+      "frozen_sha256": "9a84c5b5db036329ea473f962c7f9766b216dadeca8a7aff5b083a1b06224304",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/LatencyUtils-2.0.3.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 29779,
+      "sha256": "a32a9ffa06b2f4e01c5360f8f9df7bc5d9454a5d373cd8f361347fa5a57165ec",
+      "maven_properties": [
+        {
+          "version": "2.0.3",
+          "groupId": "org.latencyutils",
+          "artifactId": "LatencyUtils"
+        }
+      ],
+      "frozen_sha256": "a32a9ffa06b2f4e01c5360f8f9df7bc5d9454a5d373cd8f361347fa5a57165ec",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/Saxon-HE-9.8.0-4.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 4995768,
+      "sha256": "bf84117caaf95c2f86623fb8e159b786ac2b8b3ff0571c7dec932009624fa875",
+      "maven_properties": [],
+      "frozen_sha256": "bf84117caaf95c2f86623fb8e159b786ac2b8b3ff0571c7dec932009624fa875",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/activation-1.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 62983,
+      "sha256": "2881c79c9d6ef01c58e62beea13e9d1ac8b8baa16f2fc198ad6e6776defdcdd3",
+      "maven_properties": [],
+      "frozen_sha256": "2881c79c9d6ef01c58e62beea13e9d1ac8b8baa16f2fc198ad6e6776defdcdd3",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/aliyun-java-sdk-core-3.4.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 116337,
+      "sha256": "924fea80fddc4b03f83ff9a69d719241905ac8f22ab9f016c2fe47eb6c164544",
+      "maven_properties": [
+        {
+          "version": "3.4.0",
+          "groupId": "com.aliyun",
+          "artifactId": "aliyun-java-sdk-core"
+        }
+      ],
+      "frozen_sha256": "924fea80fddc4b03f83ff9a69d719241905ac8f22ab9f016c2fe47eb6c164544",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/aliyun-java-sdk-dysmsapi-1.0.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 18142,
+      "sha256": "77333535390d8a9d81bdc5225b08755d3fdd788d1b0dc869af94a1336bd9512d",
+      "maven_properties": [
+        {
+          "version": "1.0.0",
+          "groupId": "com.aliyun",
+          "artifactId": "aliyun-java-sdk-dysmsapi"
+        }
+      ],
+      "frozen_sha256": "77333535390d8a9d81bdc5225b08755d3fdd788d1b0dc869af94a1336bd9512d",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/aliyun-java-sdk-ecs-4.2.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 788137,
+      "sha256": "4ee006cdbd60f4af70026595dc8aa982f4805fa5ab3efe257d8479011901eb56",
+      "maven_properties": [
+        {
+          "version": "4.2.0",
+          "groupId": "com.aliyun",
+          "artifactId": "aliyun-java-sdk-ecs"
+        }
+      ],
+      "frozen_sha256": "4ee006cdbd60f4af70026595dc8aa982f4805fa5ab3efe257d8479011901eb56",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/aliyun-java-sdk-ram-3.0.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 215492,
+      "sha256": "191d6f49389ad0b5d36106461c72743d6e09817604f3bd008bc9df1e4870f3c1",
+      "maven_properties": [
+        {
+          "version": "3.0.0",
+          "groupId": "com.aliyun",
+          "artifactId": "aliyun-java-sdk-ram"
+        }
+      ],
+      "frozen_sha256": "191d6f49389ad0b5d36106461c72743d6e09817604f3bd008bc9df1e4870f3c1",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/aliyun-java-sdk-sts-3.0.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 13277,
+      "sha256": "f846c9c4f30f852662333615d86b18b04934b8a0f083b5a52024cf4836560727",
+      "maven_properties": [
+        {
+          "version": "3.0.0",
+          "groupId": "com.aliyun",
+          "artifactId": "aliyun-java-sdk-sts"
+        }
+      ],
+      "frozen_sha256": "f846c9c4f30f852662333615d86b18b04934b8a0f083b5a52024cf4836560727",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/aliyun-sdk-oss-3.6.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 614816,
+      "sha256": "1710b59e2b4aa63d0021556eed42f3980539fc3959c8bdfc063a1f500869908a",
+      "maven_properties": [
+        {
+          "version": "3.6.0",
+          "groupId": "com.aliyun.oss",
+          "artifactId": "aliyun-sdk-oss"
+        }
+      ],
+      "frozen_sha256": "1710b59e2b4aa63d0021556eed42f3980539fc3959c8bdfc063a1f500869908a",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/annotations-3.0.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 38806,
+      "sha256": "6b47ff0a6de0ce17cbedc3abb0828ca5bce3009d53ea47b3723ff023c4742f79",
+      "maven_properties": [
+        {
+          "version": "3.0.1",
+          "groupId": "com.google.code.findbugs",
+          "artifactId": "annotations"
+        },
+        {
+          "version": "3.0.1",
+          "groupId": "com.google.code.findbugs",
+          "artifactId": "jsr305"
+        }
+      ],
+      "frozen_sha256": "6b47ff0a6de0ce17cbedc3abb0828ca5bce3009d53ea47b3723ff023c4742f79",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/antlr-2.7.7.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 445288,
+      "sha256": "88fbda4b912596b9f56e8e12e580cc954bacfb51776ecfddd3e18fc1cf56dc4c",
+      "maven_properties": [],
+      "frozen_sha256": "88fbda4b912596b9f56e8e12e580cc954bacfb51776ecfddd3e18fc1cf56dc4c",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/antlr4-runtime-4.7.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 334662,
+      "sha256": "2a61943f803bbd1d0e02dffd19b92a418f83340c994346809e3b51e2231aa6c0",
+      "maven_properties": [
+        {
+          "version": "4.7",
+          "groupId": "org.antlr",
+          "artifactId": "antlr4-runtime"
+        }
+      ],
+      "frozen_sha256": "2a61943f803bbd1d0e02dffd19b92a418f83340c994346809e3b51e2231aa6c0",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/aspectjweaver-1.9.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 2058984,
+      "sha256": "b98ad94989052b195150edf1f85db2ee10f33e140d416f19f03c9746da16b691",
+      "maven_properties": [],
+      "frozen_sha256": "b98ad94989052b195150edf1f85db2ee10f33e140d416f19f03c9746da16b691",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/autopoi-1.1.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 167874,
+      "sha256": "4a02de3ae054437e81e02b5093dfb080142f9e96e195ac164815a7b1e91ac1b2",
+      "maven_properties": [
+        {
+          "version": "1.1.1",
+          "groupId": "org.jeecgframework",
+          "artifactId": "autopoi"
+        }
+      ],
+      "frozen_sha256": "4a02de3ae054437e81e02b5093dfb080142f9e96e195ac164815a7b1e91ac1b2",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/autopoi-web-1.1.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 12570,
+      "sha256": "ae689c9b8c9f361513ca07c03afc722e65666bc98db52278c725b63d4be75e24",
+      "maven_properties": [
+        {
+          "version": "1.1.1",
+          "groupId": "org.jeecgframework",
+          "artifactId": "autopoi-web"
+        }
+      ],
+      "frozen_sha256": "ae689c9b8c9f361513ca07c03afc722e65666bc98db52278c725b63d4be75e24",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/byte-buddy-1.9.10.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 3272730,
+      "sha256": "2936debc4d7b6c534848d361412e2d0f8bd06f7f27a6f4e728a20e97648d2bf3",
+      "maven_properties": [
+        {
+          "version": "1.9.10",
+          "groupId": "net.bytebuddy",
+          "artifactId": "byte-buddy-dep"
+        },
+        {
+          "version": "1.9.10",
+          "groupId": "net.bytebuddy",
+          "artifactId": "byte-buddy"
+        }
+      ],
+      "frozen_sha256": "2936debc4d7b6c534848d361412e2d0f8bd06f7f27a6f4e728a20e97648d2bf3",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/checker-qual-3.5.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 214381,
+      "sha256": "729990b3f18a95606fc2573836b6958bcdb44cb52bfbd1b7aa9c339cff35a5a4",
+      "maven_properties": [],
+      "frozen_sha256": "729990b3f18a95606fc2573836b6958bcdb44cb52bfbd1b7aa9c339cff35a5a4",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/checkstyle-8.3.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1235741,
+      "sha256": "c7fb83c3c7908d2a2e9afd8b72461f274f3a035dc567ebb7e36e6d3eded22078",
+      "maven_properties": [
+        {
+          "version": "8.3",
+          "groupId": "com.puppycrawl.tools",
+          "artifactId": "checkstyle"
+        }
+      ],
+      "frozen_sha256": "c7fb83c3c7908d2a2e9afd8b72461f274f3a035dc567ebb7e36e6d3eded22078",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/classmate-1.4.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 66540,
+      "sha256": "2829acc59abf4aa6b72579697a0391c0fc69df7772ae59c58e0237f909cd6803",
+      "maven_properties": [
+        {
+          "version": "1.4.0",
+          "groupId": "com.fasterxml",
+          "artifactId": "classmate"
+        }
+      ],
+      "frozen_sha256": "2829acc59abf4aa6b72579697a0391c0fc69df7772ae59c58e0237f909cd6803",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/codegenerate-1.2.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 52085,
+      "sha256": "01218a9eb9355c8343487e5a04dccf06eeda578efa64dde215dd4fe0e380bd0e",
+      "maven_properties": [],
+      "frozen_sha256": "01218a9eb9355c8343487e5a04dccf06eeda578efa64dde215dd4fe0e380bd0e",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/commons-beanutils-1.9.3.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 246174,
+      "sha256": "c058e39c7c64203d3a448f3adb588cb03d6378ed808485618f26e137f29dae73",
+      "maven_properties": [
+        {
+          "version": "1.9.3",
+          "groupId": "commons-beanutils",
+          "artifactId": "commons-beanutils"
+        }
+      ],
+      "frozen_sha256": "c058e39c7c64203d3a448f3adb588cb03d6378ed808485618f26e137f29dae73",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/commons-cli-1.4.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 53820,
+      "sha256": "fd3c7c9545a9cdb2051d1f9155c4f76b1e4ac5a57304404a6eedb578ffba7328",
+      "maven_properties": [
+        {
+          "version": "1.4",
+          "groupId": "commons-cli",
+          "artifactId": "commons-cli"
+        }
+      ],
+      "frozen_sha256": "fd3c7c9545a9cdb2051d1f9155c4f76b1e4ac5a57304404a6eedb578ffba7328",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/commons-codec-1.11.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 335042,
+      "sha256": "e599d5318e97aa48f42136a2927e6dfa4e8881dff0e6c8e3109ddbbff51d7b7d",
+      "maven_properties": [
+        {
+          "version": "1.11",
+          "groupId": "commons-codec",
+          "artifactId": "commons-codec"
+        }
+      ],
+      "frozen_sha256": "e599d5318e97aa48f42136a2927e6dfa4e8881dff0e6c8e3109ddbbff51d7b7d",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/commons-collections-3.2.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 588337,
+      "sha256": "eeeae917917144a68a741d4c0dff66aa5c5c5fd85593ff217bced3fc8ca783b8",
+      "maven_properties": [
+        {
+          "version": "3.2.2",
+          "groupId": "commons-collections",
+          "artifactId": "commons-collections"
+        }
+      ],
+      "frozen_sha256": "eeeae917917144a68a741d4c0dff66aa5c5c5fd85593ff217bced3fc8ca783b8",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/commons-io-2.6.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 214788,
+      "sha256": "f877d304660ac2a142f3865badfc971dec7ed73c747c7f8d5d2f5139ca736513",
+      "maven_properties": [
+        {
+          "version": "2.6",
+          "groupId": "commons-io",
+          "artifactId": "commons-io"
+        }
+      ],
+      "frozen_sha256": "f877d304660ac2a142f3865badfc971dec7ed73c747c7f8d5d2f5139ca736513",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/commons-lang-2.6.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 284220,
+      "sha256": "50f11b09f877c294d56f24463f47d28f929cf5044f648661c0f0cfbae9a2f49c",
+      "maven_properties": [
+        {
+          "version": "2.6",
+          "groupId": "commons-lang",
+          "artifactId": "commons-lang"
+        }
+      ],
+      "frozen_sha256": "50f11b09f877c294d56f24463f47d28f929cf5044f648661c0f0cfbae9a2f49c",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/commons-lang3-3.8.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 501879,
+      "sha256": "dac807f65b07698ff39b1b07bfef3d87ae3fd46d91bbf8a2bc02b2a831616f68",
+      "maven_properties": [
+        {
+          "version": "3.8.1",
+          "groupId": "org.apache.commons",
+          "artifactId": "commons-lang3"
+        }
+      ],
+      "frozen_sha256": "dac807f65b07698ff39b1b07bfef3d87ae3fd46d91bbf8a2bc02b2a831616f68",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/commons-logging-1.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 61829,
+      "sha256": "daddea1ea0be0f56978ab3006b8ac92834afeefbd9b7e4e6316fca57df0fa636",
+      "maven_properties": [
+        {
+          "version": "1.2",
+          "groupId": "commons-logging",
+          "artifactId": "commons-logging"
+        }
+      ],
+      "frozen_sha256": "daddea1ea0be0f56978ab3006b8ac92834afeefbd9b7e4e6316fca57df0fa636",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/commons-pool2-2.6.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 130324,
+      "sha256": "e2d6f4084f8a180de66c7700343fe8ad3a0aa84f2cb0561edb417fe1fd41aa15",
+      "maven_properties": [
+        {
+          "version": "2.6.1",
+          "groupId": "org.apache.commons",
+          "artifactId": "commons-pool2"
+        }
+      ],
+      "frozen_sha256": "e2d6f4084f8a180de66c7700343fe8ad3a0aa84f2cb0561edb417fe1fd41aa15",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/dom4j-1.6.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 313898,
+      "sha256": "593552ffea3c5823c6602478b5002a7c525fd904a3c44f1abe4065c22edfac73",
+      "maven_properties": [],
+      "frozen_sha256": "593552ffea3c5823c6602478b5002a7c525fd904a3c44f1abe4065c22edfac73",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/dom4j-2.1.3.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 323630,
+      "sha256": "549f3007c6290f6a901e57d1d331b4ed0e6bf7384f78bf10316ffceeca834de6",
+      "maven_properties": [],
+      "frozen_sha256": "549f3007c6290f6a901e57d1d331b4ed0e6bf7384f78bf10316ffceeca834de6",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/druid-1.1.17.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 2779723,
+      "sha256": "645d69a515bee3876b613ce9ba50369eedbf49d25301d227d12d8a61dbec9dab",
+      "maven_properties": [
+        {
+          "version": "1.1.17",
+          "groupId": "com.alibaba",
+          "artifactId": "druid"
+        }
+      ],
+      "frozen_sha256": "645d69a515bee3876b613ce9ba50369eedbf49d25301d227d12d8a61dbec9dab",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/druid-spring-boot-starter-1.1.17.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 19975,
+      "sha256": "fdb41bd76ddd928a0e610d34bf7f5f5c4eb0c7833ea127a18b1978855de79e34",
+      "maven_properties": [
+        {
+          "version": "1.1.17",
+          "groupId": "com.alibaba",
+          "artifactId": "druid-spring-boot-starter"
+        }
+      ],
+      "frozen_sha256": "fdb41bd76ddd928a0e610d34bf7f5f5c4eb0c7833ea127a18b1978855de79e34",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/dynamic-datasource-spring-boot-starter-2.5.4.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 85826,
+      "sha256": "1d7b40a816ee07c1123b34fa4c6d7099abbf1b0fe5a8fe341251735b3cca793d",
+      "maven_properties": [
+        {
+          "version": "2.5.4",
+          "groupId": "com.baomidou",
+          "artifactId": "dynamic-datasource-spring-boot-starter"
+        }
+      ],
+      "frozen_sha256": "1d7b40a816ee07c1123b34fa4c6d7099abbf1b0fe5a8fe341251735b3cca793d",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/emoji-java-4.0.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 58996,
+      "sha256": "189e5a5f9f20945487e244bce31c52c949ebef18941449b166f212650a685591",
+      "maven_properties": [
+        {
+          "version": "4.0.0",
+          "groupId": "com.vdurmont",
+          "artifactId": "emoji-java"
+        }
+      ],
+      "frozen_sha256": "189e5a5f9f20945487e244bce31c52c949ebef18941449b166f212650a685591",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/encoder-1.2.3.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 37931,
+      "sha256": "b09e2cd5c36a7127e091df9be628278b1166b40bc08b9de8196ccddb0cccd67f",
+      "maven_properties": [
+        {
+          "version": "1.2.3",
+          "groupId": "org.owasp.encoder",
+          "artifactId": "encoder"
+        }
+      ],
+      "frozen_sha256": "b09e2cd5c36a7127e091df9be628278b1166b40bc08b9de8196ccddb0cccd67f",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/error_prone_annotations-2.3.4.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 13879,
+      "sha256": "baf7d6ea97ce606c53e11b6854ba5f2ce7ef5c24dddf0afa18d1260bd25b002c",
+      "maven_properties": [
+        {
+          "version": "2.3.4",
+          "groupId": "com.google.errorprone",
+          "artifactId": "error_prone_annotations"
+        }
+      ],
+      "frozen_sha256": "baf7d6ea97ce606c53e11b6854ba5f2ce7ef5c24dddf0afa18d1260bd25b002c",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/failureaccess-1.0.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 4617,
+      "sha256": "a171ee4c734dd2da837e4b16be9df4661afab72a41adaf31eb84dfdaf936ca26",
+      "maven_properties": [
+        {
+          "version": "1.0.1",
+          "groupId": "com.google.guava",
+          "artifactId": "failureaccess"
+        }
+      ],
+      "frozen_sha256": "a171ee4c734dd2da837e4b16be9df4661afab72a41adaf31eb84dfdaf936ca26",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/fastjson-1.2.83.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 671701,
+      "sha256": "641a4d65ab32fbfdccd9c718e3f83ebc4caabdb5e4fe5b3d51527c5fe692631d",
+      "maven_properties": [
+        {
+          "version": "1.2.83",
+          "groupId": "com.alibaba",
+          "artifactId": "fastjson"
+        }
+      ],
+      "frozen_sha256": "641a4d65ab32fbfdccd9c718e3f83ebc4caabdb5e4fe5b3d51527c5fe692631d",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/freemarker-2.3.28.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1524587,
+      "sha256": "de92d103d3a86c2287307218ff50dc1c941de283f7b9e1fb23e93fc7220838bf",
+      "maven_properties": [],
+      "frozen_sha256": "de92d103d3a86c2287307218ff50dc1c941de283f7b9e1fb23e93fc7220838bf",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/google-http-client-1.20.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 286717,
+      "sha256": "345958d00cbfa69c3e93b356872abdd3ad03e9e4204b7229ccef258dd3921d4a",
+      "maven_properties": [],
+      "frozen_sha256": "345958d00cbfa69c3e93b356872abdd3ad03e9e4204b7229ccef258dd3921d4a",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/google-http-client-xml-1.20.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 28056,
+      "sha256": "3749fb028a7b7b15e3806686e02a18b4da0f04d51693bd8743aa849e5b9b6474",
+      "maven_properties": [],
+      "frozen_sha256": "3749fb028a7b7b15e3806686e02a18b4da0f04d51693bd8743aa849e5b9b6474",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/gson-2.8.5.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 241622,
+      "sha256": "233a0149fc365c9f6edbd683cfe266b19bdc773be98eabdaf6b3c924b48e7d81",
+      "maven_properties": [
+        {
+          "version": "2.8.5",
+          "groupId": "com.google.code.gson",
+          "artifactId": "gson"
+        }
+      ],
+      "frozen_sha256": "233a0149fc365c9f6edbd683cfe266b19bdc773be98eabdaf6b3c924b48e7d81",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/guava-30.0-jre.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 2858426,
+      "sha256": "56b292df9ec29d102820c1fd7dd581cd749d5c416c7b3aeac008dbda3b984cc2",
+      "maven_properties": [
+        {
+          "groupId": "com.google.guava",
+          "artifactId": "guava",
+          "version": "30.0-jre"
+        }
+      ],
+      "frozen_sha256": "56b292df9ec29d102820c1fd7dd581cd749d5c416c7b3aeac008dbda3b984cc2",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/hibernate-commons-annotations-5.0.4.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 76233,
+      "sha256": "b509d514d33265c0e8d872a3bf93df9da1c4d8760bdeec274b73c3310976c4f8",
+      "maven_properties": [],
+      "frozen_sha256": "b509d514d33265c0e8d872a3bf93df9da1c4d8760bdeec274b73c3310976c4f8",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/hibernate-core-5.3.20.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 7021061,
+      "sha256": "0217f232a5ce233e9ceb1dd3763407c601c99db10590211a5cfa9a251b2f4d62",
+      "maven_properties": [],
+      "frozen_sha256": "0217f232a5ce233e9ceb1dd3763407c601c99db10590211a5cfa9a251b2f4d62",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/hibernate-re-2.1.5.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 301300,
+      "sha256": "4f88c02303e1da385365ad7b0b93e7c201cf1f40180772f335b77896e19300a4",
+      "maven_properties": [],
+      "frozen_sha256": "4f88c02303e1da385365ad7b0b93e7c201cf1f40180772f335b77896e19300a4",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/hibernate-validator-6.0.14.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1155701,
+      "sha256": "8b366c9ad8969a1f25bd81af88a9e8630e70fdf1b6229298c30b58950527802c",
+      "maven_properties": [
+        {
+          "version": "6.0.14.Final",
+          "groupId": "org.hibernate.validator",
+          "artifactId": "hibernate-validator"
+        }
+      ],
+      "frozen_sha256": "8b366c9ad8969a1f25bd81af88a9e8630e70fdf1b6229298c30b58950527802c",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/httpclient-4.5.7.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 767916,
+      "sha256": "807e9c73f27a4b19dd04b1b67126532fc74b0a37bd8d13fbad073ad74d078330",
+      "maven_properties": [
+        {
+          "groupId": "org.apache.httpcomponents",
+          "artifactId": "httpclient",
+          "version": "4.5.7"
+        }
+      ],
+      "frozen_sha256": "807e9c73f27a4b19dd04b1b67126532fc74b0a37bd8d13fbad073ad74d078330",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/httpcore-4.4.11.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 326874,
+      "sha256": "d799522d579aac06b170603f8f080f6e3248dadc01f9652cdd7ea7bc318c21ce",
+      "maven_properties": [
+        {
+          "version": "4.4.11",
+          "groupId": "org.apache.httpcomponents",
+          "artifactId": "httpcore"
+        }
+      ],
+      "frozen_sha256": "d799522d579aac06b170603f8f080f6e3248dadc01f9652cdd7ea7bc318c21ce",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/httpmime-4.5.7.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 41779,
+      "sha256": "fc19576301e39f7f8854ca7f718c0b6b794fc52a650b62bf316c0ff99efce7bd",
+      "maven_properties": [
+        {
+          "groupId": "org.apache.httpcomponents",
+          "artifactId": "httpmime",
+          "version": "4.5.7"
+        }
+      ],
+      "frozen_sha256": "fc19576301e39f7f8854ca7f718c0b6b794fc52a650b62bf316c0ff99efce7bd",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/hutool-all-4.5.11.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1457288,
+      "sha256": "fa1ad5316b517ea7c91887eaaf711b770e4b1040a898c567a7dd552d768753e5",
+      "maven_properties": [
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-all"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-aop"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-bloomFilter"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-cache"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-captcha"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-core"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-cron"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-crypto"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-db"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-dfa"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-extra"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-http"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-json"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-log"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-poi"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-script"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-setting"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-socket"
+        },
+        {
+          "version": "4.5.11",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-system"
+        }
+      ],
+      "frozen_sha256": "fa1ad5316b517ea7c91887eaaf711b770e4b1040a898c567a7dd552d768753e5",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/hutool-core-5.0.7.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 712275,
+      "sha256": "853b460f0bd3a5f117caa6fc52b740088a948c0888b46c5697feaf92dd04a998",
+      "maven_properties": [
+        {
+          "version": "5.0.7",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-core"
+        }
+      ],
+      "frozen_sha256": "853b460f0bd3a5f117caa6fc52b740088a948c0888b46c5697feaf92dd04a998",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/hutool-http-5.0.7.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 75701,
+      "sha256": "1e881275c51501c6e2987114accc6861d46bc4a1279ded2d8ea8074b967515f1",
+      "maven_properties": [
+        {
+          "version": "5.0.7",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-http"
+        }
+      ],
+      "frozen_sha256": "1e881275c51501c6e2987114accc6861d46bc4a1279ded2d8ea8074b967515f1",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/hutool-json-5.0.7.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 46206,
+      "sha256": "90a5491bb7e1ee5e6508d228e38407127efa601106198cf5e35a4f825b10d150",
+      "maven_properties": [
+        {
+          "version": "5.0.7",
+          "groupId": "cn.hutool",
+          "artifactId": "hutool-json"
+        }
+      ],
+      "frozen_sha256": "90a5491bb7e1ee5e6508d228e38407127efa601106198cf5e35a4f825b10d150",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/istack-commons-runtime-3.0.7.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 25523,
+      "sha256": "6443e10ba2e259fb821d9b6becf10db5316285fc30c53cec9d7b19a3877e7fdf",
+      "maven_properties": [
+        {
+          "groupId": "com.sun.istack",
+          "artifactId": "istack-commons-runtime",
+          "version": "3.0.7"
+        }
+      ],
+      "frozen_sha256": "6443e10ba2e259fb821d9b6becf10db5316285fc30c53cec9d7b19a3877e7fdf",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/j2objc-annotations-1.3.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 8781,
+      "sha256": "21af30c92267bd6122c0e0b4d20cccb6641a37eaf956c6540ec471d584e64a7b",
+      "maven_properties": [
+        {
+          "version": "1.3",
+          "groupId": "com.google.j2objc",
+          "artifactId": "j2objc-annotations"
+        }
+      ],
+      "frozen_sha256": "21af30c92267bd6122c0e0b4d20cccb6641a37eaf956c6540ec471d584e64a7b",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jackson-annotations-2.9.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 66519,
+      "sha256": "45d32ac61ef8a744b464c54c2b3414be571016dd46bfc2bec226761cf7ae457a",
+      "maven_properties": [
+        {
+          "version": "2.9.0",
+          "groupId": "com.fasterxml.jackson.core",
+          "artifactId": "jackson-annotations"
+        }
+      ],
+      "frozen_sha256": "45d32ac61ef8a744b464c54c2b3414be571016dd46bfc2bec226761cf7ae457a",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jackson-core-2.9.8.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 325619,
+      "sha256": "d934dab0bd48994eeea2c1b493cb547158a338a80b58c4fbc8e85fb0905e105f",
+      "maven_properties": [
+        {
+          "version": "2.9.8",
+          "groupId": "com.fasterxml.jackson.core",
+          "artifactId": "jackson-core"
+        }
+      ],
+      "frozen_sha256": "d934dab0bd48994eeea2c1b493cb547158a338a80b58c4fbc8e85fb0905e105f",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jackson-databind-2.9.8.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1347236,
+      "sha256": "2351c3eba73a545db9079f5d6d768347ad72666537362c8220fe3e950a55a864",
+      "maven_properties": [
+        {
+          "version": "2.9.8",
+          "groupId": "com.fasterxml.jackson.core",
+          "artifactId": "jackson-databind"
+        }
+      ],
+      "frozen_sha256": "2351c3eba73a545db9079f5d6d768347ad72666537362c8220fe3e950a55a864",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jackson-datatype-jdk8-2.9.8.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 33391,
+      "sha256": "6d0e43d927c63b25d94130dc95d9b26c031e4516a2b1dfb984dea99bfd49b003",
+      "maven_properties": [
+        {
+          "version": "2.9.8",
+          "groupId": "com.fasterxml.jackson.datatype",
+          "artifactId": "jackson-datatype-jdk8"
+        }
+      ],
+      "frozen_sha256": "6d0e43d927c63b25d94130dc95d9b26c031e4516a2b1dfb984dea99bfd49b003",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jackson-datatype-jsr310-2.9.8.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 100674,
+      "sha256": "ab71c4f31c3dd583ba22e15837e9142360f056ad1677f1c2cf2c832d826c8dab",
+      "maven_properties": [
+        {
+          "version": "2.9.8",
+          "groupId": "com.fasterxml.jackson.datatype",
+          "artifactId": "jackson-datatype-jsr310"
+        }
+      ],
+      "frozen_sha256": "ab71c4f31c3dd583ba22e15837e9142360f056ad1677f1c2cf2c832d826c8dab",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jackson-module-parameter-names-2.9.8.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 8642,
+      "sha256": "a7e100dddfdd82c4fb60d0b98a753bd59ce743183b18d4a017d6584f2592df37",
+      "maven_properties": [
+        {
+          "version": "2.9.8",
+          "groupId": "com.fasterxml.jackson.module",
+          "artifactId": "jackson-module-parameter-names"
+        }
+      ],
+      "frozen_sha256": "a7e100dddfdd82c4fb60d0b98a753bd59ce743183b18d4a017d6584f2592df37",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jandex-2.0.5.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 187548,
+      "sha256": "9112a9c33175b8c64b999ecf47b649fdf1cd6fa8262d0677895e976ed2891f0b",
+      "maven_properties": [
+        {
+          "version": "2.0.5.Final",
+          "groupId": "org.jboss",
+          "artifactId": "jandex"
+        }
+      ],
+      "frozen_sha256": "9112a9c33175b8c64b999ecf47b649fdf1cd6fa8262d0677895e976ed2891f0b",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/java-jwt-3.7.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 52227,
+      "sha256": "0db5e81d55bb227fa210e6802bf5793dbb87e48eb12cdc3bcefd820f1bf47a5b",
+      "maven_properties": [],
+      "frozen_sha256": "0db5e81d55bb227fa210e6802bf5793dbb87e48eb12cdc3bcefd820f1bf47a5b",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/javassist-3.23.2-GA.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 770482,
+      "sha256": "01017bb7b9f8945592d0af82cf76c6ceee2a258de39522dd601be681b7154476",
+      "maven_properties": [
+        {
+          "groupId": "org.javassist",
+          "artifactId": "javassist",
+          "version": "3.23.2-GA"
+        }
+      ],
+      "frozen_sha256": "01017bb7b9f8945592d0af82cf76c6ceee2a258de39522dd601be681b7154476",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/javax.activation-api-1.2.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 56674,
+      "sha256": "43fdef0b5b6ceb31b0424b208b930c74ab58fac2ceeb7b3f6fd3aeb8b5ca4393",
+      "maven_properties": [
+        {
+          "version": "1.2.0",
+          "groupId": "javax.activation",
+          "artifactId": "javax.activation-api"
+        }
+      ],
+      "frozen_sha256": "43fdef0b5b6ceb31b0424b208b930c74ab58fac2ceeb7b3f6fd3aeb8b5ca4393",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/javax.annotation-api-1.3.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 26586,
+      "sha256": "e04ba5195bcd555dc95650f7cc614d151e4bcd52d29a10b8aa2197f3ab89ab9b",
+      "maven_properties": [
+        {
+          "version": "1.3.2",
+          "groupId": "javax.annotation",
+          "artifactId": "javax.annotation-api"
+        }
+      ],
+      "frozen_sha256": "e04ba5195bcd555dc95650f7cc614d151e4bcd52d29a10b8aa2197f3ab89ab9b",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/javax.mail-1.6.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 659031,
+      "sha256": "45b515e7104944c09e45b9c7bb1ce5dff640486374852dd2b2e80cc3752dfa11",
+      "maven_properties": [
+        {
+          "version": "1.6.2",
+          "groupId": "com.sun.mail",
+          "artifactId": "javax.mail"
+        }
+      ],
+      "frozen_sha256": "45b515e7104944c09e45b9c7bb1ce5dff640486374852dd2b2e80cc3752dfa11",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/javax.persistence-api-2.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 164556,
+      "sha256": "5578b71b37999a5eaed3fea0d14aa61c60c6ec6328256f2b63472f336318baf4",
+      "maven_properties": [
+        {
+          "version": "2.2",
+          "groupId": "javax.persistence",
+          "artifactId": "javax.persistence-api"
+        }
+      ],
+      "frozen_sha256": "5578b71b37999a5eaed3fea0d14aa61c60c6ec6328256f2b63472f336318baf4",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jaxb-api-2.3.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 128076,
+      "sha256": "88b955a0df57880a26a74708bc34f74dcaf8ebf4e78843a28b50eae945732b06",
+      "maven_properties": [
+        {
+          "groupId": "javax.xml.bind",
+          "artifactId": "jaxb-api",
+          "version": "2.3.1"
+        }
+      ],
+      "frozen_sha256": "88b955a0df57880a26a74708bc34f74dcaf8ebf4e78843a28b50eae945732b06",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jaxb-impl-2.1.12.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 867801,
+      "sha256": "a1549040d7d181501ef9db457b6914347de389b964b307b38f98713d9a24c90e",
+      "maven_properties": [],
+      "frozen_sha256": "a1549040d7d181501ef9db457b6914347de389b964b307b38f98713d9a24c90e",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jaxb-runtime-2.3.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1093432,
+      "sha256": "45fecfa5c8217ce1f3652ab95179790ec8cc0dec0384bca51cbeb94a293d9f2f",
+      "maven_properties": [
+        {
+          "groupId": "org.glassfish.jaxb",
+          "artifactId": "jaxb-runtime",
+          "version": "2.3.1"
+        }
+      ],
+      "frozen_sha256": "45fecfa5c8217ce1f3652ab95179790ec8cc0dec0384bca51cbeb94a293d9f2f",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jboss-logging-3.3.2.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 66469,
+      "sha256": "cb914bfe888da7d9162e965ac8b0d6f28f2f32eca944a00fbbf6dd3cf1aacc13",
+      "maven_properties": [
+        {
+          "version": "3.3.2.Final",
+          "groupId": "org.jboss.logging",
+          "artifactId": "jboss-logging"
+        }
+      ],
+      "frozen_sha256": "cb914bfe888da7d9162e965ac8b0d6f28f2f32eca944a00fbbf6dd3cf1aacc13",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jboss-transaction-api_1.2_spec-1.1.1.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 26290,
+      "sha256": "a310a50b9bdc44aaf36362dc9bb212235a147ffa8ef72dc9544a39c329eabbc3",
+      "maven_properties": [
+        {
+          "version": "1.1.1.Final",
+          "groupId": "org.jboss.spec.javax.transaction",
+          "artifactId": "jboss-transaction-api_1.2_spec"
+        }
+      ],
+      "frozen_sha256": "a310a50b9bdc44aaf36362dc9bb212235a147ffa8ef72dc9544a39c329eabbc3",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jcip-annotations-1.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 2254,
+      "sha256": "be5805392060c71474bf6c9a67a099471274d30b83eef84bfc4e0889a4f1dcc0",
+      "maven_properties": [],
+      "frozen_sha256": "be5805392060c71474bf6c9a67a099471274d30b83eef84bfc4e0889a4f1dcc0",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jdom-1.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 153115,
+      "sha256": "3c167654499436ee9c19674b519d04e7364085533f6facada1bf90b16ad34897",
+      "maven_properties": [],
+      "frozen_sha256": "3c167654499436ee9c19674b519d04e7364085533f6facada1bf90b16ad34897",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jedis-2.9.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 563629,
+      "sha256": "25479444f1f061e5083c8789ad44911c09093e38194734b772afe2be124623e7",
+      "maven_properties": [
+        {
+          "version": "2.9.1",
+          "groupId": "redis.clients",
+          "artifactId": "jedis"
+        }
+      ],
+      "frozen_sha256": "25479444f1f061e5083c8789ad44911c09093e38194734b772afe2be124623e7",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar",
+      "internal_reactor_artifact": true,
+      "bytes": 240414,
+      "sha256": "533d344b11c969af9f963cf8880d55baad5d2d0ff37ed0da4d8815fed14fab80",
+      "maven_properties": [
+        {
+          "version": "2.8.0",
+          "groupId": "org.jeecgframework.boot",
+          "artifactId": "jeecg-boot-base-common"
+        }
+      ],
+      "frozen_sha256": "324cca14df6202cec0950a9abea63ea3a3c4f8e7c07a9d7f256fb0ff03954c67",
+      "bytes_equal_to_frozen": false
+    },
+    {
+      "path": "BOOT-INF/lib/jettison-1.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 67758,
+      "sha256": "377940288b0643c48780137f6f68578937e1ea5ca2b73830a820c50a7b7ed801",
+      "maven_properties": [
+        {
+          "version": "1.1",
+          "groupId": "org.codehaus.jettison",
+          "artifactId": "jettison"
+        }
+      ],
+      "frozen_sha256": "377940288b0643c48780137f6f68578937e1ea5ca2b73830a820c50a7b7ed801",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/joda-time-2.10.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 640724,
+      "sha256": "d269671656767e05a58dd634cbafc36ed70d417220b058d11c0d88dfd281616d",
+      "maven_properties": [
+        {
+          "version": "2.10.1",
+          "groupId": "joda-time",
+          "artifactId": "joda-time"
+        }
+      ],
+      "frozen_sha256": "d269671656767e05a58dd634cbafc36ed70d417220b058d11c0d88dfd281616d",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/json-20170516.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 57264,
+      "sha256": "813f37e4820f1854e8a4eb4f80df94bf1b1f2ec6c3b72692f23ab9a556256af6",
+      "maven_properties": [
+        {
+          "version": "20170516",
+          "groupId": "org.json",
+          "artifactId": "json"
+        }
+      ],
+      "frozen_sha256": "813f37e4820f1854e8a4eb4f80df94bf1b1f2ec6c3b72692f23ab9a556256af6",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jsqlparser-1.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 410148,
+      "sha256": "e68c8d41143cd82f65b143494ab55162dab572d813e97fd6e411b9d5a920f013",
+      "maven_properties": [
+        {
+          "version": "1.2",
+          "groupId": "com.github.jsqlparser",
+          "artifactId": "jsqlparser"
+        }
+      ],
+      "frozen_sha256": "e68c8d41143cd82f65b143494ab55162dab572d813e97fd6e411b9d5a920f013",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jsr305-3.0.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 19936,
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+      "maven_properties": [
+        {
+          "version": "3.0.2",
+          "groupId": "com.google.code.findbugs",
+          "artifactId": "jsr305"
+        }
+      ],
+      "frozen_sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/jul-to-slf4j-1.7.25.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 4596,
+      "sha256": "416c5a0c145ad19526e108d44b6bf77b75412d47982cce6ce8d43abdbdbb0fac",
+      "maven_properties": [
+        {
+          "version": "1.7.25",
+          "groupId": "org.slf4j",
+          "artifactId": "jul-to-slf4j"
+        }
+      ],
+      "frozen_sha256": "416c5a0c145ad19526e108d44b6bf77b75412d47982cce6ce8d43abdbdbb0fac",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/justauth-spring-boot-starter-1.3.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 22614,
+      "sha256": "18764ba9df933d86db3fa92eb8fd224a03d89d9ffecdc013ed8442ae2c7df473",
+      "maven_properties": [
+        {
+          "version": "1.3.2",
+          "groupId": "com.xkcoding.justauth",
+          "artifactId": "justauth-spring-boot-starter"
+        }
+      ],
+      "frozen_sha256": "18764ba9df933d86db3fa92eb8fd224a03d89d9ffecdc013ed8442ae2c7df473",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/lettuce-core-5.1.4.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1350683,
+      "sha256": "dfec71f48f004df5fea349325a6fe92cefb392e64476aaf226cb5dd81ac1ec4a",
+      "maven_properties": [
+        {
+          "version": "5.1.4.RELEASE",
+          "groupId": "io.lettuce",
+          "artifactId": "lettuce-core"
+        }
+      ],
+      "frozen_sha256": "dfec71f48f004df5fea349325a6fe92cefb392e64476aaf226cb5dd81ac1ec4a",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 2199,
+      "sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99",
+      "maven_properties": [
+        {
+          "version": "9999.0-empty-to-avoid-conflict-with-guava",
+          "groupId": "com.google.guava",
+          "artifactId": "listenablefuture"
+        }
+      ],
+      "frozen_sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/log4j-api-2.17.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 301776,
+      "sha256": "ab9cadc80e234580e3f3c8c18644314fccd4b3cd3f7085d4e934866cb561b95d",
+      "maven_properties": [
+        {
+          "version": "2.17.0",
+          "groupId": "org.apache.logging.log4j",
+          "artifactId": "log4j-api"
+        }
+      ],
+      "frozen_sha256": "ab9cadc80e234580e3f3c8c18644314fccd4b3cd3f7085d4e934866cb561b95d",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/log4j-to-slf4j-2.17.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 17818,
+      "sha256": "df8a9a9d06368a87abd04051597310cc7a501762ab0cd7492ba106df92862c78",
+      "maven_properties": [
+        {
+          "version": "2.17.0",
+          "groupId": "org.apache.logging.log4j",
+          "artifactId": "log4j-to-slf4j"
+        }
+      ],
+      "frozen_sha256": "df8a9a9d06368a87abd04051597310cc7a501762ab0cd7492ba106df92862c78",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/logback-classic-1.2.9.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 233855,
+      "sha256": "ad745cc243805800d1ebbf5b7deba03b37c95885e6bce71335a73f7d6d0f14ee",
+      "maven_properties": [
+        {
+          "version": "1.2.9",
+          "groupId": "ch.qos.logback",
+          "artifactId": "logback-classic"
+        }
+      ],
+      "frozen_sha256": "ad745cc243805800d1ebbf5b7deba03b37c95885e6bce71335a73f7d6d0f14ee",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/logback-core-1.2.9.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 454201,
+      "sha256": "4a9ef7ed809b1fbc6992bf87d404087c247e7a9766e25bb84377b58ed5c9eb58",
+      "maven_properties": [
+        {
+          "version": "1.2.9",
+          "groupId": "ch.qos.logback",
+          "artifactId": "logback-core"
+        }
+      ],
+      "frozen_sha256": "4a9ef7ed809b1fbc6992bf87d404087c247e7a9766e25bb84377b58ed5c9eb58",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/lombok-1.18.6.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1718523,
+      "sha256": "6373d9ade79efdc028cd48d40a9af9ac6a090dbcfaec55b438ec49556a4e92fb",
+      "maven_properties": [],
+      "frozen_sha256": "6373d9ade79efdc028cd48d40a9af9ac6a090dbcfaec55b438ec49556a4e92fb",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/mapstruct-1.2.0.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 20720,
+      "sha256": "a3d2414cb7adbd5ae9b29bff5197a42d6e48bdf68d9798d437f48e798abd2309",
+      "maven_properties": [
+        {
+          "version": "1.2.0.Final",
+          "groupId": "org.mapstruct",
+          "artifactId": "mapstruct"
+        }
+      ],
+      "frozen_sha256": "a3d2414cb7adbd5ae9b29bff5197a42d6e48bdf68d9798d437f48e798abd2309",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/mchange-commons-java-0.2.11.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 606472,
+      "sha256": "b38f9c39fbd2dfdffb40e0fc5b68caab6ccc494e47fce214e5c4ab9e39689abb",
+      "maven_properties": [],
+      "frozen_sha256": "b38f9c39fbd2dfdffb40e0fc5b68caab6ccc494e47fce214e5c4ab9e39689abb",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/micrometer-core-1.1.3.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 422554,
+      "sha256": "ec0eb20aa2a7f14b0d9d67474a03eaa7f6d30d0dd9ca3f433241092e8f4f34d3",
+      "maven_properties": [
+        {
+          "version": "3.0.3",
+          "groupId": "org.pcollections",
+          "artifactId": "pcollections"
+        }
+      ],
+      "frozen_sha256": "ec0eb20aa2a7f14b0d9d67474a03eaa7f6d30d0dd9ca3f433241092e8f4f34d3",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/minio-4.0.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 122362,
+      "sha256": "505b08565c48b84b3137e73a6b21498f8fbe9ce5ab92daed1dd9c471d5ce861c",
+      "maven_properties": [],
+      "frozen_sha256": "505b08565c48b84b3137e73a6b21498f8fbe9ce5ab92daed1dd9c471d5ce861c",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/mybatis-3.5.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1692845,
+      "sha256": "0b878c468d28b3d2c3a2125314899f85e76f165f7cb58256993b93b973c9847d",
+      "maven_properties": [
+        {
+          "version": "3.2.10",
+          "groupId": "ognl",
+          "artifactId": "ognl"
+        },
+        {
+          "groupId": "org.javassist",
+          "artifactId": "javassist",
+          "version": "3.24.1-GA"
+        },
+        {
+          "groupId": "org.mybatis",
+          "artifactId": "mybatis",
+          "version": "3.5.1"
+        }
+      ],
+      "frozen_sha256": "0b878c468d28b3d2c3a2125314899f85e76f165f7cb58256993b93b973c9847d",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/mybatis-plus-3.1.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 398,
+      "sha256": "b299263fa5818c0da796263bad18fec7a57037e9582c3c78ecac2053fbcd0f80",
+      "maven_properties": [],
+      "frozen_sha256": "b299263fa5818c0da796263bad18fec7a57037e9582c3c78ecac2053fbcd0f80",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/mybatis-plus-annotation-3.1.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 10201,
+      "sha256": "1be607417bf2a6b2f7fe7f712b7b9d097a9589276193632b5d8e0e787c573a73",
+      "maven_properties": [],
+      "frozen_sha256": "1be607417bf2a6b2f7fe7f712b7b9d097a9589276193632b5d8e0e787c573a73",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/mybatis-plus-boot-starter-3.1.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 18194,
+      "sha256": "b09b2f7038aa9a14dc5acc592da722fe4fad8bd811eb22b9256b155186a61f2d",
+      "maven_properties": [],
+      "frozen_sha256": "b09b2f7038aa9a14dc5acc592da722fe4fad8bd811eb22b9256b155186a61f2d",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/mybatis-plus-core-3.1.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 244047,
+      "sha256": "33b6bd57c18657e98f0b05384d652ecf5cc5e46b3ff620148d943e0c06acff9a",
+      "maven_properties": [],
+      "frozen_sha256": "33b6bd57c18657e98f0b05384d652ecf5cc5e46b3ff620148d943e0c06acff9a",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/mybatis-plus-extension-3.1.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 150879,
+      "sha256": "af19bfc74738987af498adee09e57e3a5a68fc19a3c265636d24072fe4856471",
+      "maven_properties": [],
+      "frozen_sha256": "af19bfc74738987af498adee09e57e3a5a68fc19a3c265636d24072fe4856471",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/mybatis-spring-2.0.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 66346,
+      "sha256": "af99d8ae1c1375efa62308771dc3b302004a9965b05dbe2dd09698ba29e747fa",
+      "maven_properties": [
+        {
+          "groupId": "org.mybatis",
+          "artifactId": "mybatis-spring",
+          "version": "2.0.1"
+        }
+      ],
+      "frozen_sha256": "af99d8ae1c1375efa62308771dc3b302004a9965b05dbe2dd09698ba29e747fa",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/mysql-connector-java-8.0.28.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 2476480,
+      "sha256": "a00ccdf537ff50e50067b989108c2235197ffb65e197149bbb669db843cd1c3e",
+      "maven_properties": [],
+      "frozen_sha256": "a00ccdf537ff50e50067b989108c2235197ffb65e197149bbb669db843cd1c3e",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/netty-buffer-4.1.33.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 278556,
+      "sha256": "dc458713d93fda555fa08a329fe26c7459569df660fe661405028f29cc478ed5",
+      "maven_properties": [
+        {
+          "version": "4.1.33.Final",
+          "groupId": "io.netty",
+          "artifactId": "netty-buffer"
+        }
+      ],
+      "frozen_sha256": "dc458713d93fda555fa08a329fe26c7459569df660fe661405028f29cc478ed5",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/netty-codec-4.1.33.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 316689,
+      "sha256": "1bb36742dc14844c9f1f9165d7be42b5b3a3209e9a57c5e466c138fcd86a0fa5",
+      "maven_properties": [
+        {
+          "version": "4.1.33.Final",
+          "groupId": "io.netty",
+          "artifactId": "netty-codec"
+        }
+      ],
+      "frozen_sha256": "1bb36742dc14844c9f1f9165d7be42b5b3a3209e9a57c5e466c138fcd86a0fa5",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/netty-common-4.1.33.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 587588,
+      "sha256": "bbb2a29f809b71f91aa162da921602524a8cfce6df7ab2e00fb12d777f6b20e3",
+      "maven_properties": [
+        {
+          "version": "4.1.33.Final",
+          "groupId": "io.netty",
+          "artifactId": "netty-common"
+        },
+        {
+          "groupId": "org.jctools",
+          "artifactId": "jctools-core",
+          "version": "2.1.1"
+        }
+      ],
+      "frozen_sha256": "bbb2a29f809b71f91aa162da921602524a8cfce6df7ab2e00fb12d777f6b20e3",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/netty-handler-4.1.33.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 420905,
+      "sha256": "ace0855da3564b2d8654831a47f8c7505cb4d0a7f612baf65c49b026b58d39ed",
+      "maven_properties": [
+        {
+          "version": "4.1.33.Final",
+          "groupId": "io.netty",
+          "artifactId": "netty-handler"
+        }
+      ],
+      "frozen_sha256": "ace0855da3564b2d8654831a47f8c7505cb4d0a7f612baf65c49b026b58d39ed",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/netty-resolver-4.1.33.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 32799,
+      "sha256": "93a4936597d80c6162228462b0d410df6b2edb0921ea74044fc838765495f4b3",
+      "maven_properties": [
+        {
+          "version": "4.1.33.Final",
+          "groupId": "io.netty",
+          "artifactId": "netty-resolver"
+        }
+      ],
+      "frozen_sha256": "93a4936597d80c6162228462b0d410df6b2edb0921ea74044fc838765495f4b3",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/netty-transport-4.1.33.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 463615,
+      "sha256": "27d666d2d60e8de446f5fea98363f9b17eaeb4a52599f09b6e4091e62ce3aaed",
+      "maven_properties": [
+        {
+          "version": "4.1.33.Final",
+          "groupId": "io.netty",
+          "artifactId": "netty-transport"
+        }
+      ],
+      "frozen_sha256": "27d666d2d60e8de446f5fea98363f9b17eaeb4a52599f09b6e4091e62ce3aaed",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/ojdbc6-11.2.0.4.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 2739670,
+      "sha256": "e70213917b5f0d7448072836da07c709930b89dd4b0cc14a1eef814836747900",
+      "maven_properties": [],
+      "frozen_sha256": "e70213917b5f0d7448072836da07c709930b89dd4b0cc14a1eef814836747900",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/okhttp-3.7.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 394987,
+      "sha256": "f55abda036da75e1af45bd43b9dfa79b2a3d90905be9cb38687c6621597a8165",
+      "maven_properties": [
+        {
+          "version": "3.7.0",
+          "groupId": "com.squareup.okhttp3",
+          "artifactId": "okhttp"
+        }
+      ],
+      "frozen_sha256": "f55abda036da75e1af45bd43b9dfa79b2a3d90905be9cb38687c6621597a8165",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/okio-1.12.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 81088,
+      "sha256": "bfe7dfe483c37137966a1690f0c7d0b448ba217902c1fed202aaffdbba3291ae",
+      "maven_properties": [
+        {
+          "version": "1.12.0",
+          "groupId": "com.squareup.okio",
+          "artifactId": "okio"
+        }
+      ],
+      "frozen_sha256": "bfe7dfe483c37137966a1690f0c7d0b448ba217902c1fed202aaffdbba3291ae",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/ons-11.2.0.4.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 71830,
+      "sha256": "260b39643f99af4426b1ff45f6951791ae8c6840b29cc8c20cc67f8cc0dd0d8c",
+      "maven_properties": [],
+      "frozen_sha256": "260b39643f99af4426b1ff45f6951791ae8c6840b29cc8c20cc67f8cc0dd0d8c",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/oraclepki-11.2.0.4.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 219382,
+      "sha256": "d55e8ee86ea25c3b225e154097834f2642021ceeebbca508a0eb52e7b2a09dd2",
+      "maven_properties": [],
+      "frozen_sha256": "d55e8ee86ea25c3b225e154097834f2642021ceeebbca508a0eb52e7b2a09dd2",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/osdt_cert-11.2.0.4.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 170248,
+      "sha256": "9f625d40eac1c2c8e71a8f33048fe3898668f8e75c35a640fe1cf390fbe2f7bf",
+      "maven_properties": [],
+      "frozen_sha256": "9f625d40eac1c2c8e71a8f33048fe3898668f8e75c35a640fe1cf390fbe2f7bf",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/osdt_core-11.2.0.4.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 262385,
+      "sha256": "c44fee7bea0b55d200dc6ce74def34b1d6f004b6a3c532bea4293db64c0ba823",
+      "maven_properties": [],
+      "frozen_sha256": "c44fee7bea0b55d200dc6ce74def34b1d6f004b6a3c532bea4293db64c0ba823",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/poi-3.9.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1869113,
+      "sha256": "1b0003f3864b3ffb9cca50d3e859d25ffa0e604c80b1e6821447931c740f1db7",
+      "maven_properties": [],
+      "frozen_sha256": "1b0003f3864b3ffb9cca50d3e859d25ffa0e604c80b1e6821447931c740f1db7",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/poi-ooxml-3.9.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 936648,
+      "sha256": "70afcf888aee418c52ef3056de9a035eb4163312944370030025bd0be976bd83",
+      "maven_properties": [],
+      "frozen_sha256": "70afcf888aee418c52ef3056de9a035eb4163312944370030025bd0be976bd83",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/poi-ooxml-schemas-3.9.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 4802621,
+      "sha256": "468ff406183250e81fd495a596f58aaf5db097107678ee8674679431a111cf66",
+      "maven_properties": [],
+      "frozen_sha256": "468ff406183250e81fd495a596f58aaf5db097107678ee8674679431a111cf66",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/poi-scratchpad-3.9.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1226511,
+      "sha256": "36bbc76a8081b02a800349439dcd0259764c51796cf7ea80d8e4e05540f34ac4",
+      "maven_properties": [],
+      "frozen_sha256": "36bbc76a8081b02a800349439dcd0259764c51796cf7ea80d8e4e05540f34ac4",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/postgresql-42.2.27.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1006852,
+      "sha256": "f6e1ea4363352a12798db697b824737edc2e38062085387f64fc595559850486",
+      "maven_properties": [],
+      "frozen_sha256": "f6e1ea4363352a12798db697b824737edc2e38062085387f64fc595559850486",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/qiniu-java-sdk-7.2.23.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 175856,
+      "sha256": "c68bf0cb351c5af608cb7af1a9c44252d96d4093ae0ba52d62157782d68e4d79",
+      "maven_properties": [],
+      "frozen_sha256": "c68bf0cb351c5af608cb7af1a9c44252d96d4093ae0ba52d62157782d68e4d79",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/quartz-2.3.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 690992,
+      "sha256": "b73efc1eee7f44b59ba1f020ecb11848c0a988b712220f41df0698974c3a3531",
+      "maven_properties": [
+        {
+          "version": "2.3.0",
+          "groupId": "org.quartz-scheduler",
+          "artifactId": "quartz"
+        }
+      ],
+      "frozen_sha256": "b73efc1eee7f44b59ba1f020ecb11848c0a988b712220f41df0698974c3a3531",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/reactive-streams-1.0.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 2097,
+      "sha256": "cc09ab0b140e0d0496c2165d4b32ce24f4d6446c0a26c5dc77b06bdf99ee8fae",
+      "maven_properties": [],
+      "frozen_sha256": "cc09ab0b140e0d0496c2165d4b32ce24f4d6446c0a26c5dc77b06bdf99ee8fae",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/reactor-core-3.2.6.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1467522,
+      "sha256": "8962081aa9e0fbe1685cc2746471b232f93f58e269cc89b54efebcb99c65af1a",
+      "maven_properties": [],
+      "frozen_sha256": "8962081aa9e0fbe1685cc2746471b232f93f58e269cc89b54efebcb99c65af1a",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/requests-4.18.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 105505,
+      "sha256": "04c2665c7d704e71539817b68ddc6544158366a39c35f0e2d611c46b7ad4de22",
+      "maven_properties": [
+        {
+          "version": "4.18.1",
+          "groupId": "net.dongliu",
+          "artifactId": "requests"
+        }
+      ],
+      "frozen_sha256": "04c2665c7d704e71539817b68ddc6544158366a39c35f0e2d611c46b7ad4de22",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-cache-1.13.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 13968,
+      "sha256": "e409e36056060224dc1b0ad42959cd51c61ac3dbbb0558be26c39e387f85c5a3",
+      "maven_properties": [
+        {
+          "version": "1.13.0",
+          "groupId": "org.apache.shiro",
+          "artifactId": "shiro-cache"
+        }
+      ],
+      "frozen_sha256": "e409e36056060224dc1b0ad42959cd51c61ac3dbbb0558be26c39e387f85c5a3",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-config-core-1.13.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 18400,
+      "sha256": "2f5cd02a5cf72a9d3e20417ad4b56ca692acfd1579f8c9bafe939e71e02888eb",
+      "maven_properties": [
+        {
+          "version": "1.13.0",
+          "groupId": "org.apache.shiro",
+          "artifactId": "shiro-config-core"
+        }
+      ],
+      "frozen_sha256": "2f5cd02a5cf72a9d3e20417ad4b56ca692acfd1579f8c9bafe939e71e02888eb",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-config-ogdl-1.13.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 44021,
+      "sha256": "f067d8775ebde81e55f78603c0d5b3a0d1ce493726d4eff325b7a848c7bbf6e3",
+      "maven_properties": [
+        {
+          "version": "1.13.0",
+          "groupId": "org.apache.shiro",
+          "artifactId": "shiro-config-ogdl"
+        }
+      ],
+      "frozen_sha256": "f067d8775ebde81e55f78603c0d5b3a0d1ce493726d4eff325b7a848c7bbf6e3",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-core-1.13.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 425201,
+      "sha256": "ddb03b68cdc08792ec2a18f0ae6edb298ce94073a87862cb44b5db3fa40643ff",
+      "maven_properties": [
+        {
+          "version": "1.13.0",
+          "groupId": "org.apache.shiro",
+          "artifactId": "shiro-core"
+        }
+      ],
+      "frozen_sha256": "ddb03b68cdc08792ec2a18f0ae6edb298ce94073a87862cb44b5db3fa40643ff",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-crypto-cipher-1.13.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 24978,
+      "sha256": "aa30868a10055d5fe1e0d8dd8915f174532fabf6d00c810076da94a82deae75f",
+      "maven_properties": [
+        {
+          "version": "1.13.0",
+          "groupId": "org.apache.shiro",
+          "artifactId": "shiro-crypto-cipher"
+        }
+      ],
+      "frozen_sha256": "aa30868a10055d5fe1e0d8dd8915f174532fabf6d00c810076da94a82deae75f",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-crypto-core-1.13.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 10936,
+      "sha256": "f9a103b92c4261258b9ae9cfcd83af43c2500309b0689ec149a45565cf44342d",
+      "maven_properties": [
+        {
+          "version": "1.13.0",
+          "groupId": "org.apache.shiro",
+          "artifactId": "shiro-crypto-core"
+        }
+      ],
+      "frozen_sha256": "f9a103b92c4261258b9ae9cfcd83af43c2500309b0689ec149a45565cf44342d",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-crypto-hash-1.13.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 34743,
+      "sha256": "c06c9f2e37fb8838842853e47035fab0c064c3b144948e60bdcf96e694f286a3",
+      "maven_properties": [
+        {
+          "version": "1.13.0",
+          "groupId": "org.apache.shiro",
+          "artifactId": "shiro-crypto-hash"
+        }
+      ],
+      "frozen_sha256": "c06c9f2e37fb8838842853e47035fab0c064c3b144948e60bdcf96e694f286a3",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-event-1.13.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 19307,
+      "sha256": "a4c6a9304ec16c948eec258fab577c13b446d1e82b6f49c41d40974b7fb191e9",
+      "maven_properties": [
+        {
+          "version": "1.13.0",
+          "groupId": "org.apache.shiro",
+          "artifactId": "shiro-event"
+        }
+      ],
+      "frozen_sha256": "a4c6a9304ec16c948eec258fab577c13b446d1e82b6f49c41d40974b7fb191e9",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-lang-1.13.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 52188,
+      "sha256": "8c3eb1676191db97311218d5cccead1cee0f0ecdb3467f1ac9e0c4449378c97d",
+      "maven_properties": [
+        {
+          "version": "1.13.0",
+          "groupId": "org.apache.shiro",
+          "artifactId": "shiro-lang"
+        }
+      ],
+      "frozen_sha256": "8c3eb1676191db97311218d5cccead1cee0f0ecdb3467f1ac9e0c4449378c97d",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-redis-3.1.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 28944,
+      "sha256": "a6493e87ecb66e423b23a3b317da0f116bbffd8d4a5baf474d02899e5aa549cc",
+      "maven_properties": [
+        {
+          "version": "3.1.0",
+          "groupId": "org.crazycake",
+          "artifactId": "shiro-redis"
+        }
+      ],
+      "frozen_sha256": "a6493e87ecb66e423b23a3b317da0f116bbffd8d4a5baf474d02899e5aa549cc",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-spring-1.13.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 44379,
+      "sha256": "3adc1d4ee3ca35c9b425d2012d8bc73fb25118916a730da61ab4d2380f04bb08",
+      "maven_properties": [
+        {
+          "version": "1.13.0",
+          "groupId": "org.apache.shiro",
+          "artifactId": "shiro-spring"
+        }
+      ],
+      "frozen_sha256": "3adc1d4ee3ca35c9b425d2012d8bc73fb25118916a730da61ab4d2380f04bb08",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-spring-boot-starter-1.13.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 20972,
+      "sha256": "8446c1f50c47c90c85e846feeeb3bab63eadc99dcd0182c5d4fa21c1103a3fb1",
+      "maven_properties": [
+        {
+          "artifactId": "shiro-spring-boot-starter",
+          "groupId": "org.apache.shiro",
+          "version": "1.13.0"
+        }
+      ],
+      "frozen_sha256": "8446c1f50c47c90c85e846feeeb3bab63eadc99dcd0182c5d4fa21c1103a3fb1",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/shiro-web-1.13.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 167596,
+      "sha256": "8f2c2f7d4c141cd28a00edb30b3b62479fcdb2f70eeef710289b9c6138e4fc33",
+      "maven_properties": [
+        {
+          "version": "1.13.0",
+          "groupId": "org.apache.shiro",
+          "artifactId": "shiro-web"
+        }
+      ],
+      "frozen_sha256": "8f2c2f7d4c141cd28a00edb30b3b62479fcdb2f70eeef710289b9c6138e4fc33",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/simplefan-11.2.0.4.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 20365,
+      "sha256": "5cc7e746d2e8b96db0a6392c53a891a0b2175299ad50db8cd7a2a20a63fb714a",
+      "maven_properties": [],
+      "frozen_sha256": "5cc7e746d2e8b96db0a6392c53a891a0b2175299ad50db8cd7a2a20a63fb714a",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/slf4j-api-1.7.25.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 41203,
+      "sha256": "18c4a0095d5c1da6b817592e767bb23d29dd2f560ad74df75ff3961dbde25b79",
+      "maven_properties": [
+        {
+          "version": "1.7.25",
+          "groupId": "org.slf4j",
+          "artifactId": "slf4j-api"
+        }
+      ],
+      "frozen_sha256": "18c4a0095d5c1da6b817592e767bb23d29dd2f560ad74df75ff3961dbde25b79",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/snakeyaml-1.23.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 301298,
+      "sha256": "13009fb5ede3cf2be5a8d0f1602155aeaa0ce5ef5f9366892bd258d8d3d4d2b1",
+      "maven_properties": [
+        {
+          "version": "1.23",
+          "groupId": "org.yaml",
+          "artifactId": "snakeyaml"
+        }
+      ],
+      "frozen_sha256": "13009fb5ede3cf2be5a8d0f1602155aeaa0ce5ef5f9366892bd258d8d3d4d2b1",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-aop-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 368947,
+      "sha256": "3a65f53ff7b61f68a29ee672a3f683f046602e766f5a10eabab7c0dc2a827757",
+      "maven_properties": [],
+      "frozen_sha256": "3a65f53ff7b61f68a29ee672a3f683f046602e766f5a10eabab7c0dc2a827757",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-beans-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 672558,
+      "sha256": "7f759c26bfc4697346de39993df48b2dac49f502d5d4e5d69f19054edc4376f5",
+      "maven_properties": [],
+      "frozen_sha256": "7f759c26bfc4697346de39993df48b2dac49f502d5d4e5d69f19054edc4376f5",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 948706,
+      "sha256": "b94730a5420b92201b48b044b2368fc75ace3d9095cf243350d3b396f1b125a8",
+      "maven_properties": [],
+      "frozen_sha256": "b94730a5420b92201b48b044b2368fc75ace3d9095cf243350d3b396f1b125a8",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-actuator-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 508463,
+      "sha256": "9760540bb7f96e1a5621037f6fdeb52f08112a992af941b04c6fb6c9afd9f99d",
+      "maven_properties": [],
+      "frozen_sha256": "9760540bb7f96e1a5621037f6fdeb52f08112a992af941b04c6fb6c9afd9f99d",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-actuator-autoconfigure-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 437220,
+      "sha256": "0cdff0338b8d32643df78cf5e65c6db2cc6babebf79ee0604a977f4ef168cc45",
+      "maven_properties": [],
+      "frozen_sha256": "0cdff0338b8d32643df78cf5e65c6db2cc6babebf79ee0604a977f4ef168cc45",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-autoconfigure-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1257845,
+      "sha256": "81873e18da7657b6f4082c8fd93705b8d462438a2706e92e4a76cedb9f3bd23c",
+      "maven_properties": [],
+      "frozen_sha256": "81873e18da7657b6f4082c8fd93705b8d462438a2706e92e4a76cedb9f3bd23c",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 398,
+      "sha256": "0c290c97f69535c9bcd5246a2391c744d109fa9d346faa014dea8dcddf763b13",
+      "maven_properties": [],
+      "frozen_sha256": "0c290c97f69535c9bcd5246a2391c744d109fa9d346faa014dea8dcddf763b13",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-actuator-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 408,
+      "sha256": "fbe2a7688dd86522e2b19ce622bd7145fb80a26d285881c348519abbb9fd23a7",
+      "maven_properties": [],
+      "frozen_sha256": "fbe2a7688dd86522e2b19ce622bd7145fb80a26d285881c348519abbb9fd23a7",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-aop-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 405,
+      "sha256": "2e1caae13df19b9e63cc713c8b5008b32d7c30b749a58c9799432e5b029fbaee",
+      "maven_properties": [],
+      "frozen_sha256": "2e1caae13df19b9e63cc713c8b5008b32d7c30b749a58c9799432e5b029fbaee",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-data-redis-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 415,
+      "sha256": "bc4e1cd468b47cff08a7c1b84967915fd7e4db06e99fc4263ddb3dce3ea31fdc",
+      "maven_properties": [],
+      "frozen_sha256": "bc4e1cd468b47cff08a7c1b84967915fd7e4db06e99fc4263ddb3dce3ea31fdc",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-freemarker-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 411,
+      "sha256": "939fc85beb5059d48c92354fea32d4ee0fe2707efd877b4cb89e2ca8631caa55",
+      "maven_properties": [],
+      "frozen_sha256": "939fc85beb5059d48c92354fea32d4ee0fe2707efd877b4cb89e2ca8631caa55",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-jdbc-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 406,
+      "sha256": "caed65a403f6a0b33eb39f7290aee7b9907f8ee2cd857d290cbe9b2958b0c378",
+      "maven_properties": [],
+      "frozen_sha256": "caed65a403f6a0b33eb39f7290aee7b9907f8ee2cd857d290cbe9b2958b0c378",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-json-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 405,
+      "sha256": "bbf52e2361343d34844fc9482be513728e5627dba2345c7ca29c0cef27e1fd0e",
+      "maven_properties": [],
+      "frozen_sha256": "bbf52e2361343d34844fc9482be513728e5627dba2345c7ca29c0cef27e1fd0e",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-logging-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 407,
+      "sha256": "d9e7beac64cfc82f2bd0ccbda0afea43755c6e1a84291be5b2921b79c644fbba",
+      "maven_properties": [],
+      "frozen_sha256": "d9e7beac64cfc82f2bd0ccbda0afea43755c6e1a84291be5b2921b79c644fbba",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-mail-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 404,
+      "sha256": "8fea32233d7a09e4afb7137a30c605d6093b569462621bf9e9ebc8df05c75255",
+      "maven_properties": [],
+      "frozen_sha256": "8fea32233d7a09e4afb7137a30c605d6093b569462621bf9e9ebc8df05c75255",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-quartz-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 408,
+      "sha256": "7cec567b146a4662f2709ad59f5154bde0ad5b6ff9566aca62b6b797aef2fa33",
+      "maven_properties": [],
+      "frozen_sha256": "7cec567b146a4662f2709ad59f5154bde0ad5b6ff9566aca62b6b797aef2fa33",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-tomcat-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 406,
+      "sha256": "55c328649576740f6ea88b60447dfead20fa1eb1f96cbe91c140784621d45ac4",
+      "maven_properties": [],
+      "frozen_sha256": "55c328649576740f6ea88b60447dfead20fa1eb1f96cbe91c140784621d45ac4",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-web-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 406,
+      "sha256": "511470fe37189f0e223586328a7a94aed91db26e5adca3d92c11ba483f41be53",
+      "maven_properties": [],
+      "frozen_sha256": "511470fe37189f0e223586328a7a94aed91db26e5adca3d92c11ba483f41be53",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-boot-starter-websocket-2.1.3.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 411,
+      "sha256": "c06d19ca33152f21f60d56ebf467508ef1bdbbb95d9a3f3d473d8cfde9bd1be1",
+      "maven_properties": [],
+      "frozen_sha256": "c06d19ca33152f21f60d56ebf467508ef1bdbbb95d9a3f3d473d8cfde9bd1be1",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-context-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1099682,
+      "sha256": "6140252422a01d85dbd75fd2d6e8d4a7856f7c6ba6be4c5b59ff5f4b800d498b",
+      "maven_properties": [],
+      "frozen_sha256": "6140252422a01d85dbd75fd2d6e8d4a7856f7c6ba6be4c5b59ff5f4b800d498b",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-context-support-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 181438,
+      "sha256": "1d439236a735b0c135814368a32ae7b0a1f6f09253c98f48d0b755106b801e5b",
+      "maven_properties": [],
+      "frozen_sha256": "1d439236a735b0c135814368a32ae7b0a1f6f09253c98f48d0b755106b801e5b",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-core-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1293377,
+      "sha256": "f771b605019eb9d2cf8f60c25c050233e39487ff54d74c93d687ea8de8b7285a",
+      "maven_properties": [],
+      "frozen_sha256": "f771b605019eb9d2cf8f60c25c050233e39487ff54d74c93d687ea8de8b7285a",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-data-commons-2.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1165457,
+      "sha256": "0cdf4cbc411842dc97355f758957ec02b1619d07364c36d132e770dd8aa11b9a",
+      "maven_properties": [
+        {
+          "version": "2.1.5.RELEASE",
+          "groupId": "org.springframework.data",
+          "artifactId": "spring-data-commons"
+        }
+      ],
+      "frozen_sha256": "0cdf4cbc411842dc97355f758957ec02b1619d07364c36d132e770dd8aa11b9a",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-data-keyvalue-2.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 105317,
+      "sha256": "600c7d06009eee08477ea20ae57f120bdb94dfcb0f86844378288e65ac612730",
+      "maven_properties": [
+        {
+          "version": "2.1.5.RELEASE",
+          "groupId": "org.springframework.data",
+          "artifactId": "spring-data-keyvalue"
+        }
+      ],
+      "frozen_sha256": "600c7d06009eee08477ea20ae57f120bdb94dfcb0f86844378288e65ac612730",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-data-redis-2.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1438721,
+      "sha256": "0444eaa91fd9b1b3179fcda0dabea0adb33abf28f5565c8be575736e04dafe25",
+      "maven_properties": [
+        {
+          "version": "2.1.5.RELEASE",
+          "groupId": "org.springframework.data",
+          "artifactId": "spring-data-redis"
+        }
+      ],
+      "frozen_sha256": "0444eaa91fd9b1b3179fcda0dabea0adb33abf28f5565c8be575736e04dafe25",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-expression-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 280409,
+      "sha256": "c3c25bf89de3e277926abb0f32655ff5e365e1d1eed8c8602e05b07126bba1cf",
+      "maven_properties": [],
+      "frozen_sha256": "c3c25bf89de3e277926abb0f32655ff5e365e1d1eed8c8602e05b07126bba1cf",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-jcl-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 23725,
+      "sha256": "194423c7c485e40706d74c01a36b1f0aad436f0b55958f06ac95bcbac65bf4e6",
+      "maven_properties": [],
+      "frozen_sha256": "194423c7c485e40706d74c01a36b1f0aad436f0b55958f06ac95bcbac65bf4e6",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-jdbc-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 404234,
+      "sha256": "6b30c02543ff33d165203d851feb03a48ee83b0331f8accea3928a98f9628e25",
+      "maven_properties": [],
+      "frozen_sha256": "6b30c02543ff33d165203d851feb03a48ee83b0331f8accea3928a98f9628e25",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-messaging-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 383412,
+      "sha256": "c0f601bbaee53485c8405e40c51ec5464759428c04c49bced5c69f94c255daab",
+      "maven_properties": [],
+      "frozen_sha256": "c0f601bbaee53485c8405e40c51ec5464759428c04c49bced5c69f94c255daab",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-oxm-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 72027,
+      "sha256": "21c61fe1a0c9fc76d1872188ec80ff1363c08f78f97366d516a3687082d60864",
+      "maven_properties": [],
+      "frozen_sha256": "21c61fe1a0c9fc76d1872188ec80ff1363c08f78f97366d516a3687082d60864",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-plugin-core-1.2.0.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 19896,
+      "sha256": "de8d411556cccbb9a68a4b40f847e473593336412de86fb3f6f7f61f3923c09e",
+      "maven_properties": [
+        {
+          "version": "1.2.0.RELEASE",
+          "groupId": "org.springframework.plugin",
+          "artifactId": "spring-plugin-core"
+        }
+      ],
+      "frozen_sha256": "de8d411556cccbb9a68a4b40f847e473593336412de86fb3f6f7f61f3923c09e",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-plugin-metadata-1.2.0.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 5145,
+      "sha256": "aa58a6e6d038553b6bfae03bd18cd985e4bfb37cb2fb6406551b87f57283b00a",
+      "maven_properties": [
+        {
+          "version": "1.2.0.RELEASE",
+          "groupId": "org.springframework.plugin",
+          "artifactId": "spring-plugin-metadata"
+        }
+      ],
+      "frozen_sha256": "aa58a6e6d038553b6bfae03bd18cd985e4bfb37cb2fb6406551b87f57283b00a",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-tx-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 256262,
+      "sha256": "666f72b73c7e6b34e5bb92a0d77a14cdeef491c00fcb07a1e89eb62b08500135",
+      "maven_properties": [],
+      "frozen_sha256": "666f72b73c7e6b34e5bb92a0d77a14cdeef491c00fcb07a1e89eb62b08500135",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-web-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1381453,
+      "sha256": "0a7a9111a6aae028dc7ceefa3cfee76c01e70f8e61cd2289a0271b16975f76f7",
+      "maven_properties": [],
+      "frozen_sha256": "0a7a9111a6aae028dc7ceefa3cfee76c01e70f8e61cd2289a0271b16975f76f7",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-webmvc-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 800464,
+      "sha256": "7953dc786a5ee32a267cdf8e9be08b94f7cb52bf88dd9752e29ba17943884eb7",
+      "maven_properties": [],
+      "frozen_sha256": "7953dc786a5ee32a267cdf8e9be08b94f7cb52bf88dd9752e29ba17943884eb7",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/spring-websocket-5.1.5.RELEASE.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 416779,
+      "sha256": "3fecc54ff17b98cf82cb6454c8efb3d2a1b50604ab7704431be2d5744dc332ed",
+      "maven_properties": [],
+      "frozen_sha256": "3fecc54ff17b98cf82cb6454c8efb3d2a1b50604ab7704431be2d5744dc332ed",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/springfox-bean-validators-2.9.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 23451,
+      "sha256": "e53e47a1c9f8250945f4408d048a039b05b5672fecd337579368b692a84f7133",
+      "maven_properties": [],
+      "frozen_sha256": "e53e47a1c9f8250945f4408d048a039b05b5672fecd337579368b692a84f7133",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/springfox-core-2.9.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 116534,
+      "sha256": "70ed452095f0cf4d916d4f5120e79f9ea7ba609f4fdfb1f6e863227c20dd0a0b",
+      "maven_properties": [],
+      "frozen_sha256": "70ed452095f0cf4d916d4f5120e79f9ea7ba609f4fdfb1f6e863227c20dd0a0b",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/springfox-schema-2.9.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 83895,
+      "sha256": "f289487967890dbb3698aaa9eaaac656c9bb9e30ee8cd399980ae8d8f888783f",
+      "maven_properties": [],
+      "frozen_sha256": "f289487967890dbb3698aaa9eaaac656c9bb9e30ee8cd399980ae8d8f888783f",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/springfox-spi-2.9.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 53503,
+      "sha256": "8e0d6a9ef7b75060f2fd1797759880d259b292c159043bd624d68f1b57734d79",
+      "maven_properties": [],
+      "frozen_sha256": "8e0d6a9ef7b75060f2fd1797759880d259b292c159043bd624d68f1b57734d79",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/springfox-spring-web-2.9.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 195249,
+      "sha256": "df925e7a2435de246afd68b83800e1f2a4b6d8031692298740e261a4a9b30b3d",
+      "maven_properties": [],
+      "frozen_sha256": "df925e7a2435de246afd68b83800e1f2a4b6d8031692298740e261a4a9b30b3d",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/springfox-swagger-common-2.9.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 106641,
+      "sha256": "1d8534e2d38f989a84900166264cde966e9368ce0af74ce5ddda48ab6cd744fb",
+      "maven_properties": [],
+      "frozen_sha256": "1d8534e2d38f989a84900166264cde966e9368ce0af74ce5ddda48ab6cd744fb",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/springfox-swagger-ui-2.9.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 2905995,
+      "sha256": "44ee72b046428a694c44095c60f8156bcc505faff2d5b142b0f8175a6570b307",
+      "maven_properties": [],
+      "frozen_sha256": "44ee72b046428a694c44095c60f8156bcc505faff2d5b142b0f8175a6570b307",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/springfox-swagger2-2.9.2.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 67625,
+      "sha256": "5341bf351c3e14e5a8436f81eeb2dc8f9f07ef83c8cd046b4e0edea33d0f8c52",
+      "maven_properties": [],
+      "frozen_sha256": "5341bf351c3e14e5a8436f81eeb2dc8f9f07ef83c8cd046b4e0edea33d0f8c52",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/sqljdbc4-4.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 466359,
+      "sha256": "af3c54d8857ebbfdc34a9c5a51a7ee91e7dfa583205c81b6e0ee6208efe96e04",
+      "maven_properties": [],
+      "frozen_sha256": "af3c54d8857ebbfdc34a9c5a51a7ee91e7dfa583205c81b6e0ee6208efe96e04",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/stax-api-1.0.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 26514,
+      "sha256": "d1968436fc216c901fb9b82c7e878b50fd1d30091676da95b2edd3a9c0ccf92e",
+      "maven_properties": [],
+      "frozen_sha256": "d1968436fc216c901fb9b82c7e878b50fd1d30091676da95b2edd3a9c0ccf92e",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/stax-ex-1.8.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 36073,
+      "sha256": "95b05d9590af4154c6513b9c5dc1fb2e55b539972ba0a9ef28e9a0c01d83ad77",
+      "maven_properties": [
+        {
+          "groupId": "org.jvnet.staxex",
+          "artifactId": "stax-ex",
+          "version": "1.8"
+        }
+      ],
+      "frozen_sha256": "95b05d9590af4154c6513b9c5dc1fb2e55b539972ba0a9ef28e9a0c01d83ad77",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/swagger-annotations-1.5.22.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 21747,
+      "sha256": "e3f7af74982bce1c4ac1c73a4d6d1efc2fabc9811b2f50679069a65a873e753c",
+      "maven_properties": [
+        {
+          "version": "1.5.22",
+          "groupId": "io.swagger",
+          "artifactId": "swagger-annotations"
+        }
+      ],
+      "frozen_sha256": "e3f7af74982bce1c4ac1c73a4d6d1efc2fabc9811b2f50679069a65a873e753c",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/swagger-bootstrap-ui-1.9.3.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 819277,
+      "sha256": "6016441a337663925c2ba16e652c1f0b0bc67e0f93fe737949bb3efc6fd21cc8",
+      "maven_properties": [
+        {
+          "version": "1.9.3",
+          "groupId": "com.github.xiaoymin",
+          "artifactId": "swagger-bootstrap-ui"
+        }
+      ],
+      "frozen_sha256": "6016441a337663925c2ba16e652c1f0b0bc67e0f93fe737949bb3efc6fd21cc8",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/swagger-models-1.5.22.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 154968,
+      "sha256": "de824a1d5c9081d4c151e7c96c715e804670fadd5bb04606b7a1eda9918b8df7",
+      "maven_properties": [
+        {
+          "version": "1.5.22",
+          "groupId": "io.swagger",
+          "artifactId": "swagger-models"
+        }
+      ],
+      "frozen_sha256": "de824a1d5c9081d4c151e7c96c715e804670fadd5bb04606b7a1eda9918b8df7",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/tomcat-embed-core-9.0.122.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 3747150,
+      "sha256": "d89e48fc2835102846988d3cdb9d833f61e1934e5e46440697b6f0cc24923455",
+      "maven_properties": [],
+      "frozen_sha256": "d89e48fc2835102846988d3cdb9d833f61e1934e5e46440697b6f0cc24923455",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/tomcat-embed-el-9.0.122.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 263640,
+      "sha256": "cd9fd2b078ec8129134669a9a6bd71c87d87b5e3d4f39dbc328e85342b90bfc6",
+      "maven_properties": [],
+      "frozen_sha256": "cd9fd2b078ec8129134669a9a6bd71c87d87b5e3d4f39dbc328e85342b90bfc6",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/tomcat-embed-websocket-9.0.122.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 292159,
+      "sha256": "e15e6fae2eb07536d545e2d38a8ff71522d91c136be71a55d70f7397a780ad98",
+      "maven_properties": [],
+      "frozen_sha256": "e15e6fae2eb07536d545e2d38a8ff71522d91c136be71a55d70f7397a780ad98",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/txw2-2.3.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 70288,
+      "sha256": "34975dde1c6920f1a39791142235689bc3cd357e24d05edd8ff93b885bd68d60",
+      "maven_properties": [
+        {
+          "groupId": "org.glassfish.jaxb",
+          "artifactId": "txw2",
+          "version": "2.3.1"
+        }
+      ],
+      "frozen_sha256": "34975dde1c6920f1a39791142235689bc3cd357e24d05edd8ff93b885bd68d60",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/ucp-11.2.0.4.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 506301,
+      "sha256": "32be78083c6cfbffb67690309b7c55a018aeeca07ad71d1518446973e31bb3a6",
+      "maven_properties": [],
+      "frozen_sha256": "32be78083c6cfbffb67690309b7c55a018aeeca07ad71d1518446973e31bb3a6",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/validation-api-2.0.1.Final.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 93107,
+      "sha256": "9873b46df1833c9ee8f5bc1ff6853375115dadd8897bcb5a0dffb5848835ee6c",
+      "maven_properties": [
+        {
+          "version": "2.0.1.Final",
+          "groupId": "javax.validation",
+          "artifactId": "validation-api"
+        }
+      ],
+      "frozen_sha256": "9873b46df1833c9ee8f5bc1ff6853375115dadd8897bcb5a0dffb5848835ee6c",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/weixin-popular-2.8.30.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 609014,
+      "sha256": "5b21c74c1115c9d54187f67431037027b0d412aab85022d117861ce6616bac14",
+      "maven_properties": [
+        {
+          "version": "2.8.30",
+          "groupId": "com.github.liyiorg",
+          "artifactId": "weixin-popular"
+        }
+      ],
+      "frozen_sha256": "5b21c74c1115c9d54187f67431037027b0d412aab85022d117861ce6616bac14",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/xercesImpl-2.9.1.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 1229125,
+      "sha256": "6ae540a7c85c814ac64bea48016b3a6f45c95d4765f547fcc0053dc36c94ed5c",
+      "maven_properties": [],
+      "frozen_sha256": "6ae540a7c85c814ac64bea48016b3a6f45c95d4765f547fcc0053dc36c94ed5c",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/xml-apis-1.4.01.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 220536,
+      "sha256": "a840968176645684bb01aed376e067ab39614885f9eee44abe35a5f20ebe7fad",
+      "maven_properties": [],
+      "frozen_sha256": "a840968176645684bb01aed376e067ab39614885f9eee44abe35a5f20ebe7fad",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/xmlbeans-2.3.0.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 2666695,
+      "sha256": "c63808344ea50d9741b266362996557bac8587cdc4f3faf13bbec95296d353e3",
+      "maven_properties": [],
+      "frozen_sha256": "c63808344ea50d9741b266362996557bac8587cdc4f3faf13bbec95296d353e3",
+      "bytes_equal_to_frozen": true
+    },
+    {
+      "path": "BOOT-INF/lib/xpp3-1.1.4c.jar",
+      "internal_reactor_artifact": false,
+      "bytes": 120069,
+      "sha256": "0341395a481bb887803957145a6a37879853dd625e9244c2ea2509d9bb7531b9",
+      "maven_properties": [],
+      "frozen_sha256": "0341395a481bb887803957145a6a37879853dd625e9244c2ea2509d9bb7531b9",
+      "bytes_equal_to_frozen": true
+    }
+  ]
+}

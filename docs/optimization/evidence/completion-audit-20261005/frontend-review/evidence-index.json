@@ -1,0 +1,275 @@
+[
+  {
+    "id": "E01",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/productization-goal-2026-10-02.md",
+    "sha256": "434769032d6372ebccfbfca5406023a134899df9859dae77fdbe0208aca74f42",
+    "classification": "current completion contract",
+    "scope": "gates 2/3/5/6/7 at lines72/73/75/76/77"
+  },
+  {
+    "id": "E02",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/student-work-loading-candidate.json",
+    "sha256": "9d80af701b5960e46451479e787eed7544c4244d3a3d582cca55a1e287a33b13",
+    "classification": "current candidate aggregation",
+    "scope": "current06ab2040;645node;static24;latestcontainerNOT_RUN"
+  },
+  {
+    "id": "E03",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/role-flow-fixture-pr.md",
+    "sha256": "1b15c6dd6f8e349ffe4b4616653eacc3e9cabde20ee4d8313e57f41eb83af207",
+    "classification": "historical fixture/actual API preparation",
+    "scope": "existing five accounts, real menu/routes, three engine units; full ordinary browser checklist"
+  },
+  {
+    "id": "E04",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/role-flow-fixture/api-preflight.json",
+    "sha256": "dfa052f32de164b8997db685e5bda1eaa080cae4596843a2dec9a00af60b2221",
+    "classification": "historical actual Java API with synthetic accounts",
+    "scope": "22/22;no browser login/editor/playback"
+  },
+  {
+    "id": "E05",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/role-flow-candidate.json",
+    "sha256": "9addaeb663b9ac3227031bd3f8bc6a6320401870f68b48f869344dd40ea9c828",
+    "classification": "historical candidate binding",
+    "scope": "babf2a55;browser_role_acceptance=false"
+  },
+  {
+    "id": "E06",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/production-media-compatibility/root-result.json",
+    "sha256": "0f2be8c63ef4360447bcba6330d8a0d2ae49f6f8a464ce0e05e88af61c66fb32",
+    "classification": "historical actual assets and real component",
+    "scope": "211media;86inventory;5video/2PDF/1MD;memorylearning API and local URL adapter"
+  },
+  {
+    "id": "E07",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/production-media-compatibility/browser-video-results.json",
+    "sha256": "7947e29603830e979fe00cd1a8cd4cece7f5abcb94b7add0adf7d51869ba647f",
+    "classification": "historical browser media observations",
+    "scope": "5 representative videos;not authenticated platform"
+  },
+  {
+    "id": "E08",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-feedback/browser-report.json",
+    "sha256": "7dd187a7be1135ddda18167c97b29c971cffada8f37ceb0c66e990be7fa85108",
+    "classification": "recent actual Vue/AntD synthetic container browser",
+    "scope": "390/768/1440;literalHTML,keyboard;no persisted teacher-to-student browser flow"
+  },
+  {
+    "id": "E09",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/final-report.json",
+    "sha256": "41f15fc72d313b3828379d36b99f1c63b6bf8fb1db6c2ef442337f3a2049adf2",
+    "classification": "current source actual Vue/AntD synthetic browser",
+    "scope": "faults,retry,snapshot,pagination;no authenticated shell/global interceptors"
+  },
+  {
+    "id": "E10",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/final-assertions.json",
+    "sha256": "c031b11a0cd1906848514c003d8f6d19a931ca07a9680f2a9b2014fee4c1cc3a",
+    "classification": "current source browser assertion aggregation",
+    "scope": "7 true assertions"
+  },
+  {
+    "id": "E11",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/loading-offline.json",
+    "sha256": "290bd7ff5b61b679987ebdd5c0c20cbc945a6deabe7efb3558890b5153c688b0",
+    "classification": "current source independent actual Vue/SFC offline",
+    "scope": "35/35;deferred transport;noDOM/HTTP/DB"
+  },
+  {
+    "id": "E12",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/teacher-workbench/checks.json",
+    "sha256": "90b8806f1a4819fb1f45b290eb2929261b244fc4e1496f4deb56cf36caace9b0",
+    "classification": "historical real Vue/AntD synthetic browser",
+    "scope": "202tests;25interactionchecks;editoriframe substitute"
+  },
+  {
+    "id": "E13",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/teacher-workbench/actual-backend.json",
+    "sha256": "e44b19d4c77240bcf5b8310317bdade1820b6062e7e91f0cee7009e9560d41e7",
+    "classification": "historical actual Java API/MySQL",
+    "scope": "31/31;syntheticCLIauth;not authenticated browser"
+  },
+  {
+    "id": "E14",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/admin-course-workbench/admin-course-test-summary.json",
+    "sha256": "14d8b8d8ca13c43e491205b867356eb3a3d4bb3a64cc83738d7c8d0e58befc29",
+    "classification": "historical real Vue/AntD synthetic browser/methods",
+    "scope": "57methods;62browser beforelastguard+4finalaffected;not authenticated maintenance"
+  },
+  {
+    "id": "E15",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/admin-course-workbench/admin-course-actual-api.json",
+    "sha256": "1d9f4119146e21f1d15a7b7299112c381f10baf3d699c09f47f8563d6e76540c",
+    "classification": "historical actual Java/MySQL",
+    "scope": "37/37;course/unitmaintenance contract"
+  },
+  {
+    "id": "E16",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/class-membership-layout/browser-summary.json",
+    "sha256": "2f13b72d313dba8336f7353ddb6ab011cd8aeab699cbe774655cc95d34933af1",
+    "classification": "recent actual parent/theme synthetic browser",
+    "scope": "DepartList realparent/common/theme;memoryAPI;not platformE2E"
+  },
+  {
+    "id": "E17",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/login-experience/browser.json",
+    "sha256": "b843abc91878e2807cde9f0cc3c2c02435f055b14519bc3565d159920da3e0db",
+    "classification": "historical anonymous complete application browser",
+    "scope": "10observations;captcha completion pending;authflows not verified"
+  },
+  {
+    "id": "E18",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/tiangong-branding/checks.json",
+    "sha256": "8a9dd4062644398d045c16dfb20270306c9d89220fc177ceb3f75d6c036d4ab1",
+    "classification": "historical anonymous actual dist/browser",
+    "scope": "16real+7interception;user visual pending"
+  },
+  {
+    "id": "E19",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/account-recovery/candidate-report.json",
+    "sha256": "2b34c99bd52c94eaf0fc43ceb0ce122084e97005a424b378d680b39d75dbb06c",
+    "classification": "recent anonymous complete application browser",
+    "scope": "f92cc7dd;step1only;CAPTCHA image loaded;no credentials"
+  },
+  {
+    "id": "E20",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/account-recovery/preview-report.json",
+    "sha256": "f788ec819642462926184d89e3ad0e0b0e473c5e1de8ddec3f15eaf8462cf8c3",
+    "classification": "recent actual SFC/UserLayout synthetic browser",
+    "scope": "noCAPTCHAsolved/noSMS/no newpassword/fixturecompletion"
+  },
+  {
+    "id": "E21",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-assignment-feedback/browser-observations.json",
+    "sha256": "0e83c0a873e781e4abddec421d724fd5c3a7a00f7e4125b7d0760901c7914f46",
+    "classification": "historical actual SFC/modal synthetic HTTP browser",
+    "scope": "task upload/submit/feedback/zero/retry;no platformauth"
+  },
+  {
+    "id": "E22",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/assignment-file-submit/after-submit-error-http.json",
+    "sha256": "092a167778eb9ea4b6471ed9bb0b2d59ca02c93edf9a299ed5fa1da98448475b",
+    "classification": "historical synthetic HTTP recorded calls",
+    "scope": "upload/register/submiterrors;not actualplatform"
+  },
+  {
+    "id": "E23",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/scratch-editor-persistence/browser-observations.json",
+    "sha256": "75502ef30c4db359eceeea3fd7341251de3cc2a4d069b54b95d3526ff9b1842e",
+    "classification": "historical real engine + synthetic HTTP browser",
+    "scope": "15 observations;real generated SB3/PNG"
+  },
+  {
+    "id": "E24",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/scratch-editor-persistence/real-backend.json",
+    "sha256": "a615cb2c2da9ca311497e7e43f1107bbf2c6e52bffae9d62855819bf709c6bf1",
+    "classification": "historical actual Java API CLI",
+    "scope": "24/24;engine browser and API separate"
+  },
+  {
+    "id": "E25",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/scratchjr-editor-persistence/browser-observations.json",
+    "sha256": "6d14e9b2e63c778407fa081d4d9e7071eaa1a7dcb673c83549882dbdb4078b07",
+    "classification": "historical real engine + synthetic HTTP browser",
+    "scope": "18observations;real edited SJR/PNG"
+  },
+  {
+    "id": "E26",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/scratchjr-editor-persistence/real-backend.json",
+    "sha256": "2a9382607413a8d7b2183facfa72d38919881114650c866bc0d16602b2829367",
+    "classification": "historical actual Java API CLI",
+    "scope": "24/24;browserlogin excluded"
+  },
+  {
+    "id": "E27",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/python-editor-persistence/browser-observations.json",
+    "sha256": "0629f74384f2dfdcbf14ddf2d451f7415e222b2e6d547e9ead35a13fb4149a35",
+    "classification": "historical real Vue/Ace/Skulpt + synthetic HTTP browser",
+    "scope": "14observations;save/reopen;localdownload not passed"
+  },
+  {
+    "id": "E28",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/python-editor-persistence/real-backend.json",
+    "sha256": "44933fbbbb511aa4034c6905bf6a0c3003e07b97d59e5b8a6ad5f9508c4329a8",
+    "classification": "historical actual Java API CLI",
+    "scope": "18/18;browserlogin excluded"
+  },
+  {
+    "id": "E29",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/course-draft-resume/course-resume-live-candidate-final.json",
+    "sha256": "cd0627222696f34319eb55d5f0f5c3e9f391f073036c2e9a448a8a5d3be33a7f",
+    "classification": "historical actual persistence modules + real HTTP/DB",
+    "scope": "31/31;editorrender/browserlogin excluded"
+  },
+  {
+    "id": "E30",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/course-draft-resume/source-and-probe-manifest.json",
+    "sha256": "5a4cc48fd23c3f614be1ebb34d82391acc2f96a3dc985ca34c2f58e4e617c145",
+    "classification": "historical source manifest checked against current bytes",
+    "scope": "3currentproductfiles+2probes"
+  },
+  {
+    "id": "E31",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/python-execution-candidate.json",
+    "sha256": "55f9a5aa7a17cb0bcc16427c7dd13e673587c0e18bb3df1fe1e2430b85fed49c",
+    "classification": "historical anonymous combined actualdist real engine browser",
+    "scope": "6/6 twoentries threeproxies;noauthentication/save"
+  },
+  {
+    "id": "E32",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/student-feedback-readable-candidate.json",
+    "sha256": "e9a1268daaa2cbdd7934e23572afc6b3b2f6c47ec84b6e30543dfa928cf21d80",
+    "classification": "previous exact candidate real container aggregation",
+    "scope": "45/45 only69002a14/dist4894;notcurrentdist4895"
+  },
+  {
+    "id": "E33",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/final-source-manifest.json",
+    "sha256": "8659ade7440b14bc37369bb1f4170b14dbee0e34906334d357daa71eaa1cb911",
+    "classification": "current source independent freeze binding",
+    "scope": "424 frozen src;35tests;verifiedsourcecommit"
+  },
+  {
+    "id": "E34",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/scratch-cloud-client/verification.json",
+    "sha256": "a89f9c74e106b866ea269363403ee28d2f66a740f01e1c59b23e4731a85460fd",
+    "classification": "historical real Scratch VM anonymous browser + actual backend",
+    "scope": "public cloud snapshots;no authenticated author browser"
+  },
+  {
+    "id": "E35",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/scratch-cloud-client/real-client.json",
+    "sha256": "c0bf26bcfd8e2630d14c301db6ec07d867669205244f0b331354ce427cb914e5",
+    "classification": "historical actual Java/Redis/MySQL + Node WebSocket provider",
+    "scope": "15/15;VM-interface harness not browserlogin"
+  },
+  {
+    "id": "E36",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/python-source-loading-candidate.json",
+    "sha256": "c22037ec8afc14c3828c92c97b7ea8994739cd95a168814d9adb715da2a93c06",
+    "classification": "historical anonymous combined actualdist engine",
+    "scope": "6/6 twoentries threeproxies;noauth/save"
+  },
+  {
+    "id": "E37",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/python-source-loading/browser-final.json",
+    "sha256": "4b60b311048954c0da8b51f249d47f22700eb7522c7feecd0b05505e49fc82c5",
+    "classification": "historical real Python UI + synthetic HTTP",
+    "scope": "20scenarios;sourcefailure/retry/threewidths"
+  },
+  {
+    "id": "E38",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/python-source-loading/save-reopen.json",
+    "sha256": "a4078b889fae8351e74434e2bb146004b4be4a3dc966d8d832b20e3df4d26713",
+    "classification": "historical real Python UI + synthetic HTTP",
+    "scope": "sameID save/reopen;noJava/auth"
+  },
+  {
+    "id": "E39",
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/python-execution-frame/chromium-save-reopen.json",
+    "sha256": "126b819c1ec8c1204b8b6ce74ce1ec5fdb0628df1b9710fda92db4bb759b1bd9",
+    "classification": "historical real Python UI + synthetic HTTP",
+    "scope": "actual submit/register/upload eachonce;seed-work sameID;noJava/auth"
+  }
+]

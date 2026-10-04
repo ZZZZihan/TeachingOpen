@@ -1,0 +1,14 @@
+{
+  "started_preparation_utc": "2026-10-04T21:25:35.242323+00:00",
+  "candidate_status_porcelain": "?? .playwright-cli/\n?? output/\n",
+  "source": "06ab2040780f33296e93c97d29d00e80cbcc2f65",
+  "cache_before_file_count": 0,
+  "cache_before_entry_count": 0,
+  "cache_path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/clean-backend/cache",
+  "project_settings_sha256": "e89e5d81032455d4dfe256e1fd905be42208697e072978a05886af89b9ed9021",
+  "packaged_global_settings_sha256": "2f552325aedd9a9c9268df520be22cfe3aa86260b76a0f830d2796d2f0e22bd4",
+  "packaged_global_settings_active_elements": [
+    "mirrors"
+  ],
+  "isolated_global_settings_sha256": "05204bd36a3ad4bcb454ab04f61684accf2de5f73606a4bba23f862b5a6dbecb"
+}
