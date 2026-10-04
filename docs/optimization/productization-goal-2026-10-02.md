@@ -2,7 +2,7 @@
 
 日期：2026-10-02（Asia/Shanghai）
 
-最新交付（2026-10-05）：[PR #71](https://github.com/ZZZZihan/TeachingOpen/pull/71) 补齐学生表格与个人中心卡片教师反馈，基于#70，OPEN/非Draft且已附加。作者13/13、分支597/597、独立20/20、组合617/617；CUA三宽度及长文本键盘通过。旧父组件仍有存量lint77错误/227警告，新文件lint为0，构建12条既有warning。最新JAR67568eea与dist4894份的精确组合在全新Linux/arm64容器实际45/45通过；三代理24/24初始资源一致，旧dist可回退，后端未重启。最终本地候选49d8c32a，临时容器/预览已停、数据保留，18142真实副本仍可用。普通认证三角色、编辑器全链、人工视觉和目标部署尚未完成，Goal active。[本轮记录](student-feedback-followup-2026-10-05.md)与[组合证据](evidence/product-candidate/student-feedback-candidate.json)。
+最新交付（2026-10-05）：[PR #71](https://github.com/ZZZZihan/TeachingOpen/pull/71) 补齐学生表格与个人中心卡片教师反馈，基于#70，OPEN/非Draft且已附加。作者13/13、分支597/597、独立20/20、组合617/617；CUA三宽度及长文本键盘通过。旧父组件仍有存量lint77错误/227警告，新文件lint为0，构建12条既有warning。最新JAR67568eea与dist4894份的精确组合在全新Linux/arm64容器实际45/45通过；三代理24/24初始资源一致，旧dist可回退，后端未重启。最终本地候选49d8c32a，临时容器/预览已停、数据保留，18142真实副本仍可用。普通认证三角色、编辑器全链、人工视觉和目标部署尚未完成，Goal active。[本轮记录](student-feedback-followup-2026-10-05.md)与[组合证据](evidence/product-candidate/student-feedback-readable-candidate.json)。
 
 此前交付（2026-10-05）：[PR #69](https://github.com/ZZZZihan/TeachingOpen/pull/69) 与 [PR #70](https://github.com/ZZZZihan/TeachingOpen/pull/70) 账号恢复API及天工主题恢复界面，详细检查与限制见[记录](account-recovery-followup-2026-10-05.md)。
 
@@ -572,4 +572,4 @@ PR63仅两产品SFC、原有测试helper一行和可复现预览/交付记录；
 
 ## 2026-10-05：PR #71 学生反馈可读性
 
-最新交付（2026-10-05）：[PR #71](https://github.com/ZZZZihan/TeachingOpen/pull/71) 补齐学生表格与个人中心卡片教师反馈，基于#70，OPEN/非Draft且已附加。作者13/13、分支597/597、独立20/20、组合617/617；CUA三宽度及长文本键盘通过。旧父组件仍有存量lint77错误/227警告，新文件lint为0，构建12条既有warning。最新JAR67568eea与dist4894份的精确组合在全新Linux/arm64容器实际45/45通过；三代理24/24初始资源一致，旧dist可回退，后端未重启。最终本地候选49d8c32a，临时容器/预览已停、数据保留，18142真实副本仍可用。普通认证三角色、编辑器全链、人工视觉和目标部署尚未完成，Goal active。[本轮记录](student-feedback-followup-2026-10-05.md)与[组合证据](evidence/product-candidate/student-feedback-candidate.json)。
+最新交付（2026-10-05）：[PR #71](https://github.com/ZZZZihan/TeachingOpen/pull/71) 补齐学生表格与个人中心卡片教师反馈，基于#70，OPEN/非Draft且已附加。作者13/13、分支597/597、独立20/20、组合617/617；CUA三宽度及长文本键盘通过。旧父组件仍有存量lint77错误/227警告，新文件lint为0，构建12条既有warning。最新JAR67568eea与dist4894份的精确组合在全新Linux/arm64容器实际45/45通过；三代理24/24初始资源一致，旧dist可回退，后端未重启。最终本地候选49d8c32a，临时容器/预览已停、数据保留，18142真实副本仍可用。普通认证三角色、编辑器全链、人工视觉和目标部署尚未完成，Goal active。[本轮记录](student-feedback-followup-2026-10-05.md)与[组合证据](evidence/product-candidate/student-feedback-readable-candidate.json)。

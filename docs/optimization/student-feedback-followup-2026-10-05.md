@@ -12,4 +12,6 @@
 
 失败记录如实保留：初次Less原生min函数提前求值、草稿关闭重开竞态、预览漏全局过滤器、首次bundle输出位于输入目录被拒绝、静态解析只处理带引号URL而漏资源。分别修复并复核；初次Less日志已被覆盖，仅保留事实说明，不冒充日志仍在。
 
-[聚合证据](evidence/product-candidate/student-feedback-candidate.json)绑定提交、产物及私有原始报告摘要。Goal active；普通认证三角色、三编辑器完整链路、用户审美认可和目标部署继续待完成。
+[聚合证据](evidence/product-candidate/student-feedback-readable-candidate.json)绑定提交、产物及私有原始报告摘要。Goal active；普通认证三角色、三编辑器完整链路、用户审美认可和目标部署继续待完成。
+
+记录修正：首次保存本轮聚合证据时遇到与早期#25记录同名的路径；随后追加提交恢复旧文件原始字节，本轮改用student-feedback-readable-candidate.json，保留早期证据及其原链接，不改写已推送历史。
