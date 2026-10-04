@@ -1,0 +1,213 @@
+{
+  "main": [
+    {
+      "body": 390,
+      "document": 390,
+      "form": [
+        {
+          "client": 292,
+          "scroll": 292
+        }
+      ],
+      "table": [
+        {
+          "client": 326,
+          "scroll": 921
+        }
+      ],
+      "width": 390
+    },
+    {
+      "body": 768,
+      "document": 768,
+      "form": [
+        {
+          "client": 670,
+          "scroll": 670
+        }
+      ],
+      "table": [
+        {
+          "client": 704,
+          "scroll": 921
+        }
+      ],
+      "width": 768
+    },
+    {
+      "body": 1440,
+      "document": 1440,
+      "form": [
+        {
+          "client": 1002,
+          "scroll": 1002
+        }
+      ],
+      "table": [
+        {
+          "client": 1036,
+          "scroll": 1036
+        }
+      ],
+      "width": 1440
+    }
+  ],
+  "modal": [
+    {
+      "document": 390,
+      "rects": [
+        {
+          "bottom": 816.390625,
+          "class": "ant-modal",
+          "left": 16,
+          "right": 374,
+          "text": "添加已有用户\n\n查找已有用户，选择后加入当前班级。\n\n用户账号\n角色\n请选择角色查询\n查询\n重置\n已选择 0 位用户\n\n表格可横向滚动，聚焦后用 ← → 查看。\n\n\t\n#\n\t\n用户账号\n\t\n用户名称\n\t\n电话\n\t\n角色\n\t\n部门\n\t1\tsample_a\t合成学生 A\t\t学生\t\n\n\t2\tsample_b\t合成学生 B\t\t学生\t\n\n\t3\tsample_new\t合成学生 NEW\t\t学生\t\n1-3 共3条\n1\n10 / page\n关 闭\nOK",
+          "top": 83.609375
+        },
+        {
+          "bottom": 139.609375,
+          "class": "ant-modal-close",
+          "left": 318,
+          "right": 374,
+          "text": "",
+          "top": 83.609375
+        },
+        {
+          "bottom": 735.390625,
+          "class": "ant-pagination mini ant-table-pagination",
+          "left": 32,
+          "right": 358,
+          "text": "1-3 共3条\n1\n10 / page",
+          "top": 699.390625
+        },
+        {
+          "bottom": 802.390625,
+          "class": "ant-btn",
+          "left": 234.484375,
+          "right": 298.2734375,
+          "text": "关 闭",
+          "top": 770.390625
+        },
+        {
+          "bottom": 802.390625,
+          "class": "ant-btn ant-btn-primary",
+          "left": 306.2734375,
+          "right": 358,
+          "text": "OK",
+          "top": 770.390625
+        }
+      ],
+      "table": [
+        {
+          "client": 324,
+          "scroll": 920
+        }
+      ],
+      "width": 390
+    },
+    {
+      "document": 768,
+      "rects": [
+        {
+          "bottom": 737.9921875,
+          "class": "ant-modal",
+          "left": 16,
+          "right": 752,
+          "text": "添加已有用户\n\n查找已有用户，选择后加入当前班级。\n\n用户账号\n角色\n请选择角色查询\n查询\n重置\n已选择 0 位用户\n\n表格可横向滚动，聚焦后用 ← → 查看。\n\n\t\n#\n\t\n用户账号\n\t\n用户名称\n\t\n电话\n\t\n角色\n\t\n部门\n\t1\tsample_a\t合成学生 A\t\t学生\t\n\n\t2\tsample_b\t合成学生 B\t\t学生\t\n\n\t3\tsample_new\t合成学生 NEW\t\t学生\t\n1-3 共3条\n1\n10 / page\n关 闭\nOK",
+          "top": 162
+        },
+        {
+          "bottom": 218,
+          "class": "ant-modal-close",
+          "left": 696,
+          "right": 752,
+          "text": "",
+          "top": 162
+        },
+        {
+          "bottom": 656.9921875,
+          "class": "ant-pagination mini ant-table-pagination",
+          "left": 40,
+          "right": 728,
+          "text": "1-3 共3条\n1\n10 / page",
+          "top": 620.9921875
+        },
+        {
+          "bottom": 723.9921875,
+          "class": "ant-btn",
+          "left": 604.484375,
+          "right": 668.2734375,
+          "text": "关 闭",
+          "top": 691.9921875
+        },
+        {
+          "bottom": 723.9921875,
+          "class": "ant-btn ant-btn-primary",
+          "left": 676.2734375,
+          "right": 728,
+          "text": "OK",
+          "top": 691.9921875
+        }
+      ],
+      "table": [
+        {
+          "client": 686,
+          "scroll": 920
+        }
+      ],
+      "width": 768
+    },
+    {
+      "document": 1440,
+      "rects": [
+        {
+          "bottom": 737.9921875,
+          "class": "ant-modal",
+          "left": 220,
+          "right": 1220,
+          "text": "添加已有用户\n\n查找已有用户，选择后加入当前班级。\n\n用户账号\n角色\n请选择角色查询\n查询\n重置\n已选择 0 位用户\n\n表格可横向滚动，聚焦后用 ← → 查看。\n\n\t\n#\n\t\n用户账号\n\t\n用户名称\n\t\n电话\n\t\n角色\n\t\n部门\n\t1\tsample_a\t合成学生 A\t\t学生\t\n\n\t2\tsample_b\t合成学生 B\t\t学生\t\n\n\t3\tsample_new\t合成学生 NEW\t\t学生\t\n1-3 共3条\n1\n10 / page\n关 闭\nOK",
+          "top": 162
+        },
+        {
+          "bottom": 218,
+          "class": "ant-modal-close",
+          "left": 1164,
+          "right": 1220,
+          "text": "",
+          "top": 162
+        },
+        {
+          "bottom": 656.9921875,
+          "class": "ant-pagination mini ant-table-pagination",
+          "left": 244,
+          "right": 1196,
+          "text": "1-3 共3条\n1\n10 / page",
+          "top": 620.9921875
+        },
+        {
+          "bottom": 723.9921875,
+          "class": "ant-btn",
+          "left": 1072.484375,
+          "right": 1136.2734375,
+          "text": "关 闭",
+          "top": 691.9921875
+        },
+        {
+          "bottom": 723.9921875,
+          "class": "ant-btn ant-btn-primary",
+          "left": 1144.2734375,
+          "right": 1196,
+          "text": "OK",
+          "top": 691.9921875
+        }
+      ],
+      "table": [
+        {
+          "client": 950,
+          "scroll": 950
+        }
+      ],
+      "width": 1440
+    }
+  ]
+}

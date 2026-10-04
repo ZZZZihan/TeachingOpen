@@ -1,0 +1,24 @@
+{
+  "normalSearch": "\tsample_b\t合成学生 B\t合成班级\t男\t\t\n编辑\n更多",
+  "recoveredText": "\tsample_a\t合成学生 A\t合成班级\t男\t\t\n编辑\n更多\n\n\n\tsample_b\t合成学生 B\t合成班级\t男\t\t\n编辑\n更多",
+  "stressGeometry": {
+    "doc": 390,
+    "pagination": [
+      {
+        "client": 326,
+        "left": 32,
+        "right": 358,
+        "scroll": 326,
+        "text": "1-10 共26条\n1\n2\n3\n10 / page\nGo to"
+      }
+    ],
+    "table": [
+      {
+        "client": 326,
+        "scroll": 921
+      }
+    ],
+    "width": 390
+  },
+  "nextPageText": "11-20 共26条\n1\n2\n3\n10 / page\nGo to"
+}

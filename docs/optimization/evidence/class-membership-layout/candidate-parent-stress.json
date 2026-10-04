@@ -1,0 +1,36 @@
+{
+  "actions": [
+    {
+      "left": 197.5,
+      "right": 241.5,
+      "text": "编辑"
+    },
+    {
+      "left": 245.5,
+      "right": 309.5,
+      "text": "更多"
+    }
+  ],
+  "body": [
+    {
+      "client": 278,
+      "left": 643,
+      "scroll": 921
+    }
+  ],
+  "document": 390,
+  "page": [
+    {
+      "client": 278,
+      "scroll": 278,
+      "text": "1-10 共25条\n1\n2\n3\n10 / page\nGo to"
+    }
+  ],
+  "region": [
+    {
+      "client": 278,
+      "scroll": 278
+    }
+  ],
+  "width": 390
+}
