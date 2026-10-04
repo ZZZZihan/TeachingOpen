@@ -172,3 +172,25 @@ python3 api/dev/verify-course-management.py --runtime "$TEACHING_RUNTIME" \
 脚本校验实际 JAR、数据库和缓存归属后，执行真实登录、管理请求及数据/附件核对；只写本次探针数据，结束后恢复业务表和测试角色。角色切换会清理该合成账号在隔离 Redis 中的权限缓存，不用于生产。导入只检查权限及空文件请求校验，完整角色页面尚未验收。行为、源码摘要及已知缓存问题见 [课程管理 PR 记录](../docs/optimization/course-management-pr.md)。
 
 权限缓存数据库不一致问题在当前后续候选中已修复。可运行 `python3 api/dev/verify-role-cache.py --runtime "$TEACHING_RUNTIME" --output "$TEACHING_RUNTIME/role-cache-check.json"` 检查实际缓存位置、退出清理及角色变化后的重新登录；被测转换期间不直接清理缓存。范围与结果见 [权限缓存 PR 记录](../docs/optimization/role-cache-pr.md)。
+
+## 私有生产内容副本的有限只读 HTTP 基线
+
+仅在已授权、已由 `production-fixture.py` 导入的本机私有副本上运行 `benchmark-production-read.py`。脚本复用 `verify-production-content.py` 的快照、配置、精确 JAR、进程和独占 loopback 监听守卫；它不会准备环境或启动服务。运行前应已完成副本的内容验证，保留现有 JAR 和运行目录，确认这次有限请求负载适合当前本机工作。原 `benchmark-local-http.py` 会写入业务数据，不能替代这里的工具。
+
+在含本工具的源码 worktree 根目录执行。以下运行目录属于本机副本；JAR 必须是 `backend-process.json` 绑定的实际包，省略 `--jar` 也只接受这个包。输出必须是运行目录内尚不存在的直接子文件；输出权限为 `600`，不能覆盖旧结果。
+
+```sh
+TEACHING_READ_RUNTIME="$TEACHING_WORKSPACE/.devspace/prod-fixture-1003"
+python3 api/dev/benchmark-production-read.py \
+  --runtime "$TEACHING_READ_RUNTIME" \
+  --output "$TEACHING_READ_RUNTIME/production-read-benchmark-new.json"
+# 如需显式核对精确包，再添加：--jar "/absolute/path/to/the-owned-running.jar"
+```
+
+工具固定为 7 个场景：匿名首页全集、第一页、第二页、从公开课程选择的非空名称过滤，以及同一公开课程图片封面的 GET、HEAD 和前最多 4096 字节 Range。首页集合、字段和分页元数据与本次只读 SQL 比较；过滤沿用实际 SQL LIKE 语义。接口没有 ORDER BY，因此分页只检查合法子集、正确条数和去重；额外预检最多 50 页，观察当次各页的联合覆盖，不建立排序保证。课程总数须为 1–100；封面须是素材清单中的普通本地图片，实际大小与清单相等且最多 16 MiB。不会访问远程链接、受保护课程或单元详情、视频、学生文件、登录或 Redis。
+
+每个场景进行 3 轮，在 1 和 4 个 worker 下各完成 3 次预热及 24 次计时样本；完整成功运行是 **1008 次计时、126 次预热**，分页预检请求另列（3 门公开课程时为 2 次）。轮次按固定旋转顺序安排场景，每条样本使用新的 HTTP/1.1 loopback 连接，无 cookie、认证头、代理环境变量或重定向跟随。`perf_counter` 从发送请求开始计到有限响应正文读取完成，包含连接与响应头/正文完成，业务校验在计时结束后进行。报告保留每条耗时、状态、正文长度及成功/失败；同时列出包含所有样本和只含语义成功样本的中位数、最近秩 p95、最小值和最大值，并按场景/worker/轮次及跨轮次汇总。
+
+默认 socket 超时是 5 秒的无活动等待限制；300 秒测量预算在批次之间检查，等待已发出的请求完成，**不是绝对 300 秒终止保证**。发生传输或业务校验失败时，当前最多 4 个 worker 的批次完成后不再安排请求，失败样本保留，返回非零。结束或部分执行失败后仍尝试运行归属守卫、所选 7 张业务表前后摘要、全部复制素材的元数据集合，以及所选封面前后实际 SHA-256 核对；无法取得结束证据也使结果失败。素材全集仅 stat，不重读约 6 GB 正文；前后检查不证明操作日志或所有数据库表不变。
+
+报告包含实际包、快照/源清单、工具及所用 helper 摘要、OS/型号/CPU/内存、本次数据库和素材计数，使用固定场景名称和脱敏错误码，不包含课程名称、ID、素材路径、查询正文、响应正文、口令或异常原文。保留权限 `600` 的完整 JSON 作为本机证据，分享时只整理必要汇总。返回 0 仅表示声明的本机有限读取样本与结束核对全部成功；它不证明公网延迟、浏览器播放、持续负载、生产容量或人工验收。工具实现、自检与独立验证状态见 [作者记录](../docs/optimization/production-read-benchmark-author.md)。
