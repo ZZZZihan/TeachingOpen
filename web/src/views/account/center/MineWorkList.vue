@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false">
+  <a-card :bordered="false" class="mine-work-list">
     <!-- 查询区域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline">
@@ -59,8 +59,14 @@
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
+      <p class="table-scroll-hint">窄屏可左右滚动作品列表，查看教师反馈和作品操作。</p>
       <a-table
         ref="table"
+        class="work-table-region"
+        role="region"
+        aria-label="我的作品列表，可左右滚动"
+        tabindex="0"
+        @keydown.native="scrollTable"
         size="middle"
         bordered
         rowKey="id"
@@ -68,6 +74,7 @@
         :dataSource="dataSource"
         :pagination="ipagination"
         :loading="loading"
+        :scroll="{ x: 1420 }"
         :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
         @change="handleTableChange"
       >
@@ -96,26 +103,24 @@
           <a href="#">{{text || '暂无'}}</a>
         </a-popover>
 
-        <a-tooltip slot="scoreInfo" slot-scope="text, row" :title="row.teacherComment">
-          <a-rate v-model="row.score" disabled />
-        </a-tooltip>
+        <StudentWorkFeedback slot="scoreInfo" slot-scope="text, row" :work="row" />
         
 
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleView(record)">查看</a>
+          <button class="work-action" type="button" @click="handleView(record)">查看</button>
           <a-divider type="vertical"/>
-          <a @click="handlePreview(record)">预览</a>
+          <button class="work-action" type="button" @click="handlePreview(record)">预览</button>
           <a-divider type="vertical" v-if="record.workType==1||record.workType==2"/>
           <a-popover trigger="click" v-if="record.workType==1||record.workType==2">
             <template slot="content">
               <qrcode :value="url.shareUrl + record.id" :size="250"></qrcode>
             </template>
-            <a>二维码</a>
+            <button class="work-action" type="button">二维码</button>
           </a-popover>
           <a-divider type="vertical" />
           <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-            <a>删除</a>
+            <button class="work-action" type="button">删除</button>
           </a-popconfirm>
         </span>
       </a-table>
@@ -131,11 +136,12 @@
 
 <script>
 // import TeachingWorkModal from './modules/TeachingWorkModal'
-import { postAction, getAction, deleteAction } from '@/api/manage'
+import { getAction, deleteAction } from '@/api/manage'
 import QrCode from '@/components/tools/QrCode'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import TeachingWorkPreviewModal from '@/views/teaching/modules/TeachingWorkPreviewModal'
 import JDictSelectTag from '@/components/dict/JDictSelectTag.vue'
+import StudentWorkFeedback from '@/components/teaching/StudentWorkFeedback'
 
 export default {
   name: 'MineWorkList',
@@ -143,7 +149,8 @@ export default {
   components: {
     qrcode: QrCode,
     TeachingWorkPreviewModal,
-    JDictSelectTag
+    JDictSelectTag,
+        StudentWorkFeedback
   },
   data() {
     return {
@@ -164,7 +171,8 @@ export default {
         {
           title: '作品名',
           align: 'center',
-          dataIndex: 'workName'
+          dataIndex: 'workName',
+                    width: 180
         },
         {
           title: '封面',
@@ -199,6 +207,7 @@ export default {
           title: '得分/评语',
           align: 'center',
           dataIndex: 'score',
+                    width: 260,
           scopedSlots: { customRender: 'scoreInfo' }
         },
         {
@@ -215,6 +224,7 @@ export default {
         {
           title: '操作',
           dataIndex: 'action',
+                    width: 180,
           align: 'center',
           scopedSlots: { customRender: 'action' }
         }
@@ -234,6 +244,11 @@ export default {
     this.getWorkTags()
   },
   methods: {
+        scrollTable (event) {
+            if (event.target !== event.currentTarget || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return
+            const body = this.$refs.table && this.$refs.table.$el.querySelector('.ant-table-body')
+            if (body) { event.preventDefault(); body.scrollLeft += event.key === 'ArrowRight' ? 160 : -160 }
+        },
     getWorkTags(){
       getAction("/teaching/teachingWork/getWorkTags").then(res=>{
         this.workTag = res.result
@@ -288,4 +303,14 @@ export default {
 </script>
 <style scoped>
 @import '~@assets/less/common.less';
+.mine-work-list { min-width: 0; max-width: 100%; }
+.work-table-region { min-width: 0; max-width: 100%; }
+.work-table-region:focus-visible { outline: 2px solid #74256a; outline-offset: 3px; }
+.mine-work-list /deep/ .ant-table-body { overflow-x: auto !important; }
+.mine-work-list /deep/ td { overflow-wrap: anywhere; word-break: break-word; }
+.work-action { border: 0; background: none; color: #74256a; font: inherit; padding: 2px 0; cursor: pointer; }
+.work-action:focus-visible { outline: 2px solid #74256a; outline-offset: 3px; }
+.table-scroll-hint { display: none; color: #737b82; font-size: 12px; line-height: 1.7; margin: 0 0 12px; }
+@media (max-width: 900px) { .table-scroll-hint { display: block; } }
+@media (max-width: 600px) { .mine-work-list /deep/ > .ant-card-body { padding: 16px; } .mine-work-list /deep/ .ant-form-item { display: flex; } .mine-work-list /deep/ .ant-form-item-control-wrapper { flex: 1; min-width: 0; } .mine-work-list /deep/ .ant-form-item-label { flex-shrink: 0; } .mine-work-list /deep/ .ant-select { width: 100%; } }
 </style>
