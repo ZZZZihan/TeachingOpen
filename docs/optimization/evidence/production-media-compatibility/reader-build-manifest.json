@@ -1,0 +1,29 @@
+{
+  "format": 1,
+  "scope": "Unchanged actual UnitViewModal/JModal; synthetic learning API; no platform authentication or formal preview provider",
+  "source_commit": "49bea7da3552c554a8412f777eeec48d9a5ac9f2",
+  "source_inputs": {
+    "web/src/views/account/course/modules/UnitViewModal.vue": "cf15fdb263b624b58acce54dbdf17d34c6adee439c9972c2f8f722265a457cf5",
+    "web/src/components/jeecg/JModal/index.vue": "bd3f1e7b9ff583afbb264797d3d292403ec7983be38cd46209715815ce8b2688",
+    "web/src/utils/props-util.js": "c2aee0c67f500eeaedbb05f3a00bf17c01cd0151e40edef3dbec139be1f328fc",
+    "web/package-lock.json": "100033635ce1d01f5ee7b8cd1385bc958edde7ad5686d441d205b49ea7e78e74"
+  },
+  "tools": {
+    "build.cjs": "cf434b668388d706c362cab39c10fb431b6c886eec378f695f620709a94fdc72",
+    "entry.js": "2b9a174f43c89a49ba15c45eafdd2283de1fe59b6fff79cec989d0512b0f081a",
+    "fixtures.js": "217d88a5b74fa760198dfe30a54f1d2622e7a15fa099fdbeb70be322c41cbef8",
+    "server.py": "0f3fdeb19ca82c017b9dc0bb331cad801f3188e38e1e07f8f6ab3f1968491863"
+  },
+  "outputs": {
+    "index.html": {
+      "bytes": 259,
+      "sha256": "660ca992d7cef6c070926479f7d2204f0ec5fb5b90cd8b8ef78d4e59d9670a5e"
+    },
+    "preview.js": {
+      "bytes": 6559522,
+      "sha256": "feea6a0f288e72c808b23966c7407222e1eaf1c31eaf53c23a1679b7d2cb3761"
+    }
+  },
+  "warnings": 0,
+  "compilation_success": true
+}

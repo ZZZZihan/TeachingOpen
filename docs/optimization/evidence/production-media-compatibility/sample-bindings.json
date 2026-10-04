@@ -1,0 +1,73 @@
+{
+  "source": "fixed SELECT in server READ ONLY transaction; anonymous course labels only",
+  "unit_rows": 83,
+  "courses_with_units": 3,
+  "database_courses": 5,
+  "video_courses_covered": 3,
+  "bindings": [
+    {
+      "sample": "sample01",
+      "asset_id": "042b04cefb6e60f58e41a90c064754a94a7ed2c41172d00c6e3b041f897cfff2",
+      "kind": "mp4",
+      "associated_course_ids": [
+        "course02"
+      ]
+    },
+    {
+      "sample": "sample02",
+      "asset_id": "1bdb1ab58f5ac1f5c7c1655647e812634d9d3667b32374592434f751f0c57a43",
+      "kind": "mp4",
+      "associated_course_ids": [
+        "course01"
+      ]
+    },
+    {
+      "sample": "sample03",
+      "asset_id": "1d2e358cbcf0bb08bcacedea1145d9f7e0dc5225c24c25ac0faca1d8874640db",
+      "kind": "mp4",
+      "associated_course_ids": [
+        "course03"
+      ]
+    },
+    {
+      "sample": "sample04",
+      "asset_id": "43981ab5d6c9b91a68a17d78f72f7543917251cd21a3a268b496ad4c0f25237c",
+      "kind": "mp4",
+      "associated_course_ids": [
+        "course01"
+      ]
+    },
+    {
+      "sample": "sample05",
+      "asset_id": "e8cd22260406b0aaba15743da09bdd2484145f2d803bbe05424a509abb2ec3aa",
+      "kind": "mp4",
+      "associated_course_ids": [
+        "course01"
+      ]
+    },
+    {
+      "sample": "sample06",
+      "asset_id": "5d7cf8b6f8f82eec3a0a0b7d90eb15833b3b8ef7aba5067fd65f6a9fd90e3893",
+      "kind": "pdf",
+      "associated_course_ids": [
+        "course01"
+      ]
+    },
+    {
+      "sample": "sample07",
+      "asset_id": "79347a5ac6b57123b10b47d42d2e370b57e7b8e3e2c137de7e2b27c74ed3439a",
+      "kind": "pdf",
+      "associated_course_ids": [
+        "course01"
+      ]
+    },
+    {
+      "sample": "sample08",
+      "asset_id": "f91ae56071fdb0ad9b8f98781916ce988206a34ad19bd4d6144e16b876a8c213",
+      "kind": "md",
+      "associated_course_ids": [
+        "course01"
+      ]
+    }
+  ]
+}
