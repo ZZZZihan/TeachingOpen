@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-05",
+  "goal": "active",
+  "prs": [
+    {
+      "number": 69,
+      "head": "03954459774c885c099e786ecce26848e0b02926",
+      "base": "fix/upload-resource-boundary",
+      "state": "OPEN",
+      "isDraft": false,
+      "statusCheckRollup": []
+    },
+    {
+      "number": 70,
+      "head": "c2c3eacbe54a1a44314c83f17e4d27027686553a",
+      "base": "fix/class-membership-layout",
+      "state": "OPEN",
+      "isDraft": false,
+      "statusCheckRollup": []
+    }
+  ],
+  "measured_candidate": "f92cc7dd5f960786aa3a698918d4db8d8d4a4fa6",
+  "final_candidate": "3a7c18d751affe4782bb39275135de7b52539db2",
+  "final_api_web_diff_empty": true,
+  "jar_sha256": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016",
+  "dist": {
+    "candidate": "f92cc7dd5f960786aa3a698918d4db8d8d4a4fa6",
+    "files": 4893,
+    "bytes": 211808928,
+    "manifest_sha256": "a423e27e280dcbc18627c93e4707bf12e816a6324234717143587849d0bf624d",
+    "backup": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/account-recovery-20261005/previous-dist",
+    "old_manifest_match": true,
+    "new_dist_verified": true
+  },
+  "checks": {
+    "author_junit": 30,
+    "independent_rerun_author_junit": 30,
+    "independent_ui_offline": 17,
+    "author_ui_focused": 23,
+    "author_ui_branch": 584,
+    "candidate_node": 604,
+    "root_synthetic_http": 22,
+    "root_auth_status": 7,
+    "root_role_cache": 11,
+    "private_copy_readonly": 12,
+    "local_static_bytes": 21,
+    "build_exit": 0,
+    "build_warnings": 12,
+    "independent_api_full_matrix": "interrupted_not_completed"
+  },
+  "private_evidence_hashes": {
+    "root-functional/functional-02.json": "b5885cda128126f076ba9650f71fca7d6e7a2526c64b9756d4e30b4f74fa6ef9",
+    "root-functional/auth-status.json": "a0a7781a404e522ccf29f848dc56114de6da3eaa60b4856905ab7a78a5c5cf11",
+    "root-functional/role-cache.json": "4311346c074636c8af6ce8cec4dfa053b1b14da6cf20c2983e469c4fd4f7f6e9",
+    "review/review.md": "9931d1a0208d223298b60776096bb8aa47cb2859c5888fc20dc037af415976f3",
+    "review/integration-review.md": "2465c9de797446aa063661cf181830da6efe325185b90fe4c0fc2f62eda19f40",
+    "candidate-tests.log": "2d2c54c0078be3057f984faf928fc1c9cd9fa9300a5e600a77ecd2b3981bdf18",
+    "candidate-build.log": "efaca017f25dfef7140a5ba6c59d72e2b3d62b65538f37822b1e310b239c5059",
+    "browser/candidate-report.json": "2b34c99bd52c94eaf0fc43ceb0ce122084e97005a424b378d680b39d75dbb06c",
+    "browser/preview-report.json": "f788ec819642462926184d89e3ad0e0b0e473c5e1de8ddec3f15eaf8462cf8c3",
+    "local-backend-switch-resumed.json": "ee72208d46beb20592cbb0d0d8d1ed11cea48cf1a15c06a75d27ea693c6f5bfb",
+    "production-business-switch.json": "162da24306eb946281a677ee184aa7941f06ca5b795b5fd8110a3e9b78303ef7",
+    "static-smoke.json": "5fa78d1f3a8efb7c41daa338a3645c38eb0d4d4d111c017d142bce670ae60a6a",
+    "root-functional/cleanup.json": "cc1cf53d8e33f85de90ff6b8f8f44e36a373a76f871ade70c1419d43e4076a7f",
+    "browser/cleanup.json": "ffd7ef01767c5e220efee99811311eda39d62220f03487bc03152589889b6bcc"
+  },
+  "runtime_switch": [
+    {
+      "runtime": "course-role-runtime",
+      "previous_pid": 9470,
+      "old_jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869",
+      "new_jar_sha256": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016",
+      "already_switched_before_resume": true,
+      "healthy": true,
+      "new_pid": 9470,
+      "rollback_needed": false
+    },
+    {
+      "runtime": "role-flow-1003",
+      "previous_pid": 9533,
+      "old_jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869",
+      "new_jar_sha256": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016",
+      "already_switched_before_resume": true,
+      "healthy": true,
+      "new_pid": 9533,
+      "rollback_needed": false
+    },
+    {
+      "runtime": "prod-fixture-1003",
+      "previous_pid": 57880,
+      "old_jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869",
+      "new_jar_sha256": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016",
+      "already_switched_before_resume": false,
+      "healthy": true,
+      "new_pid": 11257,
+      "rollback_needed": false
+    }
+  ],
+  "retained_untracked": [
+    ".playwright-cli/",
+    "output/"
+  ],
+  "authority": {
+    "production_writes": false,
+    "remote_merge": false,
+    "deployment": false,
+    "real_sms": false,
+    "real_browser_password_reset": false
+  },
+  "prior_container45": "not rerun on new JAR/dist",
+  "remaining": [
+    "real SMS delivery",
+    "independent real concurrency/DB-failure matrix",
+    "ordinary authenticated three-role editor/submit/feedback browser chain",
+    "human visual review",
+    "supported platform/target deployment"
+  ],
+  "new_observations_not_fixed": [
+    "MineWorkList feedback hover-only keyboard accessibility"
+  ]
+}
