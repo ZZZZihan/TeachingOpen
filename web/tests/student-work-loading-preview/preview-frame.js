@@ -1,0 +1,1 @@
+export default { data: () => ({ visible: false, title: '' }), methods: { previewCode (row) { this.title = row.workName; this.visible = true } }, template: '<a-modal :visible="visible" :title="title" :footer="null" @cancel="visible=false"><p>无关的代码/文件预览 iframe 在此合成验证中替代。</p></a-modal>' }

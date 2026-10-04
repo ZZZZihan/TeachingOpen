@@ -1,0 +1,1 @@
+export default { props: ['value', 'dictCode', 'placeholder'], template: '<a-select :value="value" :placeholder="placeholder" @change="$emit(\'input\', $event)"><a-select-option value="0">文件作品</a-select-option><a-select-option value="4">Python</a-select-option></a-select>' }

@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false" class="mine-work-list">
+  <a-card :bordered="false" class="mine-work-list" :aria-busy="listLoading">
     <!-- 查询区域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline">
@@ -53,14 +53,22 @@
 
     <!-- table区域-begin -->
     <div>
-      <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
+      <div v-if="!listLoading && !listError && dataSource.length" class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
         <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择
         <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
-      <p class="table-scroll-hint">窄屏可左右滚动作品列表，查看教师反馈和作品操作。</p>
+      <StudentWorkListState
+        :loading="listLoading"
+        :error="listError"
+        :empty="listReady && !dataSource.length"
+        :emptyPage="ipagination.total > 0"
+        keepQuery
+        @retry="retryList" />
+      <p v-if="!listLoading && !listError && dataSource.length" class="table-scroll-hint">窄屏可左右滚动作品列表，查看教师反馈和作品操作。</p>
       <a-table
+        v-show="listReady && !listLoading && !listError && (dataSource.length || ipagination.total > 0)"
         ref="table"
         class="work-table-region"
         role="region"
@@ -73,7 +81,7 @@
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
-        :loading="loading"
+        :loading="listLoading"
         :scroll="{ x: 1420 }"
         :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
         @change="handleTableChange"
@@ -142,6 +150,8 @@ import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import TeachingWorkPreviewModal from '@/views/teaching/modules/TeachingWorkPreviewModal'
 import JDictSelectTag from '@/components/dict/JDictSelectTag.vue'
 import StudentWorkFeedback from '@/components/teaching/StudentWorkFeedback'
+import StudentWorkListState from '@/components/teaching/StudentWorkListState'
+import { copyStudentWorkParams, studentWorkPage, studentWorkListError } from '@/utils/studentWorkList'
 
 export default {
   name: 'MineWorkList',
@@ -150,10 +160,17 @@ export default {
     qrcode: QrCode,
     TeachingWorkPreviewModal,
     JDictSelectTag,
-        StudentWorkFeedback
+        StudentWorkFeedback,
+        StudentWorkListState
   },
   data() {
     return {
+            requestId: 0,
+            isDisposed: false,
+            listError: '',
+            listReady: false,
+            listLoading: false,
+            lastListParams: null,
       description: '我的作品管理页面',
       sendWorkId: null,
       // 表头
@@ -243,7 +260,29 @@ export default {
   created(){
     this.getWorkTags()
   },
+    beforeDestroy () { this.isDisposed = true; this.requestId++ },
   methods: {
+        async loadData (first, retry = false) {
+            if (this.isDisposed) return
+            if (first === 1) this.ipagination.current = 1
+            const sequence = ++this.requestId
+            this.loading = true; this.listLoading = true; this.listError = ''; this.listReady = false; this.dataSource = []; this.ipagination.total = 0
+            this.onClearSelected()
+            try {
+                const params = copyStudentWorkParams(retry && this.lastListParams ? this.lastListParams : this.getQueryParams())
+                this.lastListParams = copyStudentWorkParams(params)
+                if (retry) { this.ipagination.current = params.pageNo; this.ipagination.pageSize = params.pageSize }
+                const response = await getAction(this.url.list, params)
+                if (sequence !== this.requestId || this.isDisposed) return
+                const page = studentWorkPage(response)
+                this.dataSource = page.records; this.ipagination.total = page.total; this.listReady = true
+            } catch (error) {
+                if (sequence === this.requestId && !this.isDisposed) this.listError = studentWorkListError(error)
+            } finally {
+                if (sequence === this.requestId && !this.isDisposed) { this.loading = false; this.listLoading = false }
+            }
+        },
+        retryList () { if (!this.listLoading) return this.loadData(undefined, Boolean(this.lastListParams)) },
         scrollTable (event) {
             if (event.target !== event.currentTarget || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return
             const body = this.$refs.table && this.$refs.table.$el.querySelector('.ant-table-body')
