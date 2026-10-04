@@ -1,73 +1,79 @@
 <template>
-  <a-card :bordered="false">
-    <!-- 查询区域 -->
-    <div class="table-page-search-wrapper">
-      <!-- 搜索区域 -->
-      <a-form layout="inline">
-        <a-row :gutter="10">
-          <a-col :md="8" :sm="8">
-            <a-form-item label="账号" style="margin-left:8px">
-              <a-input placeholder="请输入账号" v-model="queryParam.username"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :md="8" :sm="8">
-            <a-form-item label="姓名" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
-              <a-input placeholder="请输入姓名" v-model="queryParam.realname"></a-input>
-            </a-form-item>
-          </a-col>
-          <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-            <a-col :md="6" :sm="24">
-             <a-button type="primary" @click="searchQuery" icon="search" style="margin-left: 18px">查询</a-button>
-              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
-            </a-col>
-          </span>
-        </a-row>
+  <a-card class="member-workspace" :bordered="false" :bodyStyle="{ padding: 0 }">
+    <div class="member-workspace-heading">
+      <div>
+        <h3>班级成员</h3>
+        <p>查看成员并维护班级关联。</p>
+      </div>
+      <span class="member-workspace-context">{{ currentDept.departName || '请先选择班级' }}</span>
+    </div>
+
+    <div class="member-search-panel">
+      <a-form layout="vertical" class="member-search-form">
+        <a-form-item label="账号" :htmlFor="'member-username-' + _uid">
+          <a-input :id="'member-username-' + _uid" placeholder="请输入账号" v-model="queryParam.username"></a-input>
+        </a-form-item>
+        <a-form-item label="姓名" :htmlFor="'member-realname-' + _uid">
+          <a-input :id="'member-realname-' + _uid" placeholder="请输入姓名" v-model="queryParam.realname"></a-input>
+        </a-form-item>
+        <div class="member-search-actions">
+          <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+          <a-button @click="searchReset" icon="reload">重置</a-button>
+        </div>
       </a-form>
     </div>
-    <!-- 操作按钮区域 -->
-    <div class="table-operator" :md="24" :sm="24" style="margin-top: -15px">
-      <!--<a-button @click="handleEdit" type="primary" icon="edit" style="margin-top: 16px">用户编辑</a-button>-->
-      <a-button @click="handleAddUserDepart" :disabled="operationsDisabled" type="primary" icon="plus">添加已有用户</a-button>
-      <a-button @click="handleAdd" :disabled="operationsDisabled" type="primary" icon="plus" style="margin-top: 16px">新建用户</a-button>
-      <a-upload
-        name="file"
-        :showUploadList="false"
-        :multiple="false"
-        :headers="tokenHeader"
-        :action="url.importStudentUrl"
-        :disabled="operationsDisabled"
-        :beforeUpload="beforeImportUpload"
-        :customRequest="handleImportRequest"
-        @change="handleImportExcel"
-      >
-        <a-button :disabled="operationsDisabled" type="primary" icon="import">导入学生</a-button>
-      </a-upload>
-      <a-button @click="handleRemoveAll" :disabled="operationsDisabled" type="default" icon="delete" style="margin-top: 16px">清空班级</a-button>
-      <a-dropdown v-if="selectedRowKeys.length > 0">
-        <a-menu slot="overlay">
-          <a-menu-item key="1" @click="batchDel">
-            <a-icon type="delete"/>
-            取消关联
-          </a-menu-item>
-        </a-menu>
-        <a-button :disabled="operationsDisabled" style="margin-left: 8px"> 批量操作
-          <a-icon type="down"/>
-        </a-button>
-      </a-dropdown>
+
+    <div class="member-toolbar" role="group" aria-label="班级成员操作">
+      <div class="member-toolbar-group">
+        <a-button @click="handleAddUserDepart" :disabled="operationsDisabled" type="primary" icon="plus">添加已有用户</a-button>
+        <a-button @click="handleAdd" :disabled="operationsDisabled" icon="user-add">新建用户</a-button>
+        <a-upload
+          name="file"
+          :showUploadList="false"
+          :multiple="false"
+          :headers="tokenHeader"
+          :action="url.importStudentUrl"
+          :disabled="operationsDisabled"
+          :beforeUpload="beforeImportUpload"
+          :customRequest="handleImportRequest"
+          @change="handleImportExcel"
+        >
+          <a-button :disabled="operationsDisabled" icon="import">导入学生</a-button>
+        </a-upload>
+      </div>
+      <div class="member-toolbar-group">
+        <a-dropdown v-if="selectedRowKeys.length > 0" :trigger="['click']">
+          <a-menu slot="overlay">
+            <a-menu-item key="1" @click="batchDel">
+              <a-icon type="delete"/>
+              取消关联
+            </a-menu-item>
+          </a-menu>
+          <a-button :disabled="operationsDisabled">批量操作 <a-icon type="down"/></a-button>
+        </a-dropdown>
+        <a-button class="member-danger-action" @click="handleRemoveAll" :disabled="operationsDisabled" icon="delete">清空班级</a-button>
+      </div>
     </div>
 
-    <!-- table区域-begin -->
-    <div>
-      <a-alert v-if="listError || actionError" type="error" show-icon style="margin-bottom: 16px">
-        <span slot="message">{{ listError || actionError }} <a @click="loadData()">刷新重试</a></span>
-      </a-alert>
-      <p v-if="importReport">{{ importReport.message }} <a v-if="importReport.url" :href="importReport.url" target="_blank" rel="noopener noreferrer">下载导入明细</a></p>
-      <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{
-        selectedRowKeys.length }}</a>项
-        <a style="margin-left: 24px" @click="onClearSelected">清空</a>
+    <a-alert v-if="listError || actionError" class="member-feedback" type="error" show-icon>
+      <span slot="message">{{ listError || actionError }} <a href="#" @click.prevent="loadData()">刷新重试</a></span>
+    </a-alert>
+    <p v-if="importReport" class="member-import-report">{{ importReport.message }} <a v-if="importReport.url" :href="importReport.url" target="_blank" rel="noopener noreferrer">下载导入明细</a></p>
+    <div class="member-table-summary">
+      <div class="member-selection-status" role="status" aria-live="polite">
+        <span>已选择 <strong>{{ selectedRowKeys.length }}</strong> 位成员</span>
+        <a-button type="link" size="small" @click="onClearSelected" :disabled="selectedRowKeys.length === 0">清空选择</a-button>
       </div>
+      <p class="member-scroll-hint">表格可横向滚动，聚焦后用 ← → 查看。</p>
+    </div>
 
+    <div
+      class="member-table-region"
+      role="region"
+      tabindex="0"
+      aria-label="班级成员表格，左右方向键横向滚动"
+      @keydown.left.self.prevent="$event.currentTarget.querySelector('.ant-table-body').scrollLeft -= 120"
+      @keydown.right.self.prevent="$event.currentTarget.querySelector('.ant-table-body').scrollLeft += 120">
       <a-table
         ref="table"
         size="middle"
@@ -76,43 +82,30 @@
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
+        :scroll="{ x: 920 }"
         :loading="loading || mutationLoading || importLoading"
-        :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
+        :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange, columnWidth: 64}"
         @change="handleTableChange">
-
-
-
-        <span slot="action" slot-scope="text, record">
-          <a :disabled="operationsDisabled" @click="handleEdit(record)">编辑</a>
-
-          <a-divider type="vertical"/>
-
-          <a-dropdown>
-            <a class="ant-dropdown-link">
-              更多 <a-icon type="down"/>
-            </a>
+        <span slot="action" slot-scope="text, record" class="member-row-actions">
+          <a-button type="link" size="small" :disabled="operationsDisabled" @click="handleEdit(record)">编辑</a-button>
+          <a-dropdown :trigger="['click']">
+            <a-button type="link" size="small" :disabled="operationsDisabled">更多 <a-icon type="down"/></a-button>
             <a-menu slot="overlay">
-                <a-menu-item>
-                <a href="javascript:;" @click="handleDeptRole(record)">分配部门角色</a>
-              </a-menu-item>
-
               <a-menu-item>
-                <a href="javascript:;" @click="handleDetail(record)">用户详情</a>
+                <a href="#" @click.prevent="handleDeptRole(record)">分配部门角色</a>
               </a-menu-item>
-
               <a-menu-item>
-                <a :disabled="operationsDisabled" @click="confirmDelete(record)">取消关联</a>
+                <a href="#" @click.prevent="handleDetail(record)">用户详情</a>
+              </a-menu-item>
+              <a-menu-item>
+                <a :disabled="operationsDisabled" href="#" @click.prevent="confirmDelete(record)">取消关联</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
         </span>
-
-
       </a-table>
     </div>
-    <!-- table区域-end -->
 
-    <!-- 表单区域 -->
     <user-modal ref="modalForm" @ok="modalFormOk"></user-modal>
     <Select-User-Modal ref="selectUserModal" @selectFinished="selectOK"></Select-User-Modal>
     <dept-role-user-modal ref="deptRoleUser"></dept-role-user-modal>
@@ -155,26 +148,31 @@
         columns: [{
             title: '用户账号',
             align: "center",
+            width: 150,
             dataIndex: 'username'
           },
           {
             title: '用户名称',
             align: "center",
+            width: 140,
             dataIndex: 'realname'
           },
           {
             title: '部门',
             align: "center",
+            width: 180,
             dataIndex: 'orgCode'
           },
           {
             title: '性别',
             align: "center",
+            width: 76,
             dataIndex: 'sex_dictText'
           },
           {
             title: '电话',
             align: "center",
+            width: 150,
             dataIndex: 'phone'
           },
           {
@@ -182,7 +180,7 @@
             dataIndex: 'action',
             scopedSlots: {customRender: 'action'},
             align: "center",
-            width: 150
+            width: 160
           }],
         url: {
           list: "/sys/user/departUserList",
@@ -421,18 +419,197 @@
   }
 </script>
 <style scoped>
-  /** Button按钮间距 */
-  .ant-btn {
-    margin-left: 3px
-  }
-
-  .ant-card {
-    margin-left: -30px;
-    margin-right: -30px;
-  }
-
-  .table-page-search-wrapper {
-    margin-top: -16px;
-    margin-bottom: 16px;
-  }
+.member-workspace {
+  width: 100%;
+  min-width: 0;
+  color: #29222b;
+}
+.member-workspace-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-bottom: 20px;
+}
+.member-workspace-heading h3 {
+  margin: 0 0 6px;
+  color: #29222b;
+  font-size: 20px;
+  font-weight: 600;
+}
+.member-workspace-heading p {
+  margin: 0;
+  color: #6e6570;
+  line-height: 1.6;
+}
+.member-workspace-context {
+  max-width: 100%;
+  padding: 5px 10px;
+  border: 1px solid #e4dce3;
+  border-radius: 4px;
+  color: #74256a;
+  background: #fcfafc;
+  overflow-wrap: anywhere;
+}
+.member-search-panel {
+  padding: 16px;
+  border: 1px solid #e9e2e8;
+  border-radius: 6px;
+  background: #fcfafc;
+}
+.member-search-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  align-items: end;
+  gap: 12px 16px;
+  min-width: 0;
+}
+.member-search-form /deep/ .ant-form-item {
+  min-width: 0;
+  margin: 0;
+}
+.member-search-form /deep/ .ant-form-item-label {
+  padding-bottom: 6px;
+  line-height: 1.4;
+}
+.member-search-form /deep/ .ant-form-item-label label {
+  color: #534757;
+  font-size: 13px;
+}
+.member-search-form /deep/ .ant-input {
+  height: 36px;
+}
+.member-search-actions,
+.member-toolbar,
+.member-toolbar-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.member-search-actions .ant-btn {
+  flex: 1 1 auto;
+}
+.member-toolbar {
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid #eee8ed;
+}
+.member-workspace /deep/ .ant-btn {
+  margin: 0;
+}
+.member-search-actions .ant-btn,
+.member-toolbar .ant-btn {
+  height: 36px;
+}
+.member-workspace /deep/ .ant-btn-primary:not([disabled]) {
+  background: #74256a;
+  border-color: #74256a;
+}
+.member-workspace /deep/ .ant-btn-primary:not([disabled]):hover {
+  background: #592052;
+  border-color: #592052;
+}
+.member-workspace /deep/ .ant-btn-link:not([disabled]),
+.member-workspace a {
+  color: #74256a;
+}
+.member-danger-action:not([disabled]) {
+  color: #a63b41;
+  border-color: #e2c6c8;
+}
+.member-danger-action:not([disabled]):hover {
+  color: #8c272d;
+  border-color: #a63b41;
+}
+.member-feedback,
+.member-import-report {
+  margin-top: 16px;
+  overflow-wrap: anywhere;
+}
+.member-table-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 16px 0 12px;
+}
+.member-selection-status {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #534757;
+}
+.member-selection-status strong {
+  color: #74256a;
+}
+.member-scroll-hint {
+  margin: 0;
+  color: #6e6570;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.member-table-region {
+  width: 100%;
+  min-width: 0;
+  border-radius: 4px;
+}
+.member-table-region:focus-visible {
+  outline: 2px solid #74256a;
+  outline-offset: 3px;
+}
+.member-table-region /deep/ .ant-table-wrapper,
+.member-table-region /deep/ .ant-spin-nested-loading,
+.member-table-region /deep/ .ant-spin-container,
+.member-table-region /deep/ .ant-table,
+.member-table-region /deep/ .ant-table-content,
+.member-table-region /deep/ .ant-table-scroll {
+  min-width: 0;
+  max-width: 100%;
+}
+.member-table-region /deep/ .ant-table-thead > tr > th {
+  color: #534757;
+  background: #f8f5f8;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.member-table-region /deep/ .ant-table-tbody > tr > td {
+  overflow-wrap: anywhere;
+}
+.member-row-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.member-table-region /deep/ .ant-table-pagination.ant-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+  margin: 16px 0 0;
+}
+.member-table-region /deep/ .ant-pagination > li {
+  margin: 0;
+}
+.member-table-region /deep/ .ant-pagination-options {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+.member-table-region /deep/ .ant-pagination-options-size-changer.ant-select {
+  margin: 0;
+}
 </style>
