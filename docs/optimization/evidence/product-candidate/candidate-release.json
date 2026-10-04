@@ -1,0 +1,158 @@
+{
+  "pr": {
+    "number": 68,
+    "url": "https://github.com/ZZZZihan/TeachingOpen/pull/68",
+    "state": "OPEN",
+    "isDraft": false,
+    "base": "fix/release-nginx-api",
+    "head": "1e93ef2c932dccfae19916ae046e421aa2aae83c",
+    "github_checks_reported": []
+  },
+  "integration": {
+    "candidate_before": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+    "candidate_after": "0cc8e06d9b9049ef803abe91ca65f735931e2fcd",
+    "pr_head": "1e93ef2c932dccfae19916ae046e421aa2aae83c",
+    "changed_files": [
+      "deploy/CANDIDATE.md",
+      "deploy/candidate_release.py",
+      "deploy/probe_candidate_runtime.py",
+      "deploy/test_candidate_release.py",
+      "deploy/test_probe_candidate_runtime.py",
+      "docs/optimization/candidate-release-author.md",
+      "docs/optimization/candidate-release-pr.md",
+      "docs/optimization/candidate-release-review.md",
+      "docs/optimization/candidate-release-tests.md",
+      "docs/optimization/evidence/candidate-release/attempts.json",
+      "docs/optimization/evidence/candidate-release/cleanup.json",
+      "docs/optimization/evidence/candidate-release/generator-tests.json",
+      "docs/optimization/evidence/candidate-release/generator-tests.txt",
+      "docs/optimization/evidence/candidate-release/images.json",
+      "docs/optimization/evidence/candidate-release/mysql-version.txt",
+      "docs/optimization/evidence/candidate-release/nginx-version.txt",
+      "docs/optimization/evidence/candidate-release/preflight.json",
+      "docs/optimization/evidence/candidate-release/probe-output-tests.json",
+      "docs/optimization/evidence/candidate-release/redis-version.txt",
+      "docs/optimization/evidence/candidate-release/runtime-execution.json",
+      "docs/optimization/evidence/candidate-release/runtime-state.json",
+      "docs/optimization/evidence/candidate-release/runtime.json",
+      "docs/optimization/evidence/candidate-release/temurin-java-version.txt"
+    ],
+    "api_web_source_diff_empty": true,
+    "new_tools_identical_to_verified_pr": true,
+    "hashes": {
+      "deploy/candidate_release.py": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67",
+      "deploy/probe_candidate_runtime.py": "68a7c76899de0490b1b0a2530dae8267841867d88ecf92dc5a2432f1de3f16dd",
+      "deploy/test_candidate_release.py": "a63b350d09ab699de2f01785d68f186eaa7df7aad4627283dfdc59cd133d7fb7",
+      "deploy/test_probe_candidate_runtime.py": "622ebaf06dcaa1fdc051486cd726d258d5f3b5e88bbc4fe09df3d95fd3934785"
+    },
+    "integrated_tool_verifies_final_bundle": {
+      "bundle": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/release-candidate-20261005/bundle-05",
+      "compose_project": "teaching-candidate-f8532d650034",
+      "dist_files": 4893,
+      "immutable_files": 4904,
+      "manifest_sha256": "248981ca502091d46a45d739cbdda6d0dbe67484fb2717933267aa5931379b1f",
+      "platform": "linux/arm64",
+      "port": 18190,
+      "runtime_data_checked": false,
+      "services_started": false,
+      "source_commit": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+      "status": "verified_immutable"
+    },
+    "tracked_clean": true,
+    "known_untracked_retained": [
+      "?? .playwright-cli/",
+      "?? output/"
+    ]
+  },
+  "verification": {
+    "generator_independent_tests": 66,
+    "probe_output_independent_tests": 8,
+    "actual_runtime": {
+      "passed": 45,
+      "total": 45,
+      "failed": 0,
+      "not_run": 0,
+      "all_passed": true,
+      "exceptions": [],
+      "fingerprints": {
+        "manifest_sha256": "248981ca502091d46a45d739cbdda6d0dbe67484fb2717933267aa5931379b1f",
+        "generator_sha256": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67",
+        "source_commit": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+        "artifact_inputs": {
+          "dist_manifest_sha256": "0b38b4690bac046186f3f4127eb8dc666aada7e2a413216a1a1a917f4bf2d120",
+          "jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869"
+        }
+      }
+    },
+    "runtime_report_sha256": "7d796d7099fb7af58520245ce61f19cfbc18bc3af35f84c504e290a48f2056a3"
+  },
+  "cleanup": {
+    "observed_utc": "2026-10-04T19:09:38.077954+00:00",
+    "attempts": {
+      "01": {
+        "project": "teaching-candidate-3efd444fe02f",
+        "remaining_containers": [],
+        "remaining_networks": [],
+        "data_retained": true
+      },
+      "02": {
+        "project": "teaching-candidate-3d6441c4abc9",
+        "remaining_containers": [],
+        "remaining_networks": [],
+        "data_retained": true
+      },
+      "03": {
+        "project": "teaching-candidate-2e3824b9d92c",
+        "remaining_containers": [],
+        "remaining_networks": [],
+        "data_retained": true
+      },
+      "04": {
+        "project": "teaching-candidate-4d420fe5d60e",
+        "remaining_containers": [],
+        "remaining_networks": [],
+        "data_retained": true
+      },
+      "05": {
+        "project": "teaching-candidate-f8532d650034",
+        "remaining_containers": [],
+        "remaining_networks": [],
+        "data_retained": true
+      }
+    },
+    "existing_services": {
+      "18111": {
+        "http": 200,
+        "status": "UP"
+      },
+      "18141": {
+        "http": 200,
+        "status": "UP"
+      },
+      "18149": {
+        "http": 200,
+        "status": "UP"
+      }
+    },
+    "port_18190_closed": true,
+    "production_copy_preview": {
+      "url": "http://127.0.0.1:18142/index",
+      "http": 200
+    },
+    "candidate_commit": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+    "candidate_tracked_clean": true,
+    "dist": {
+      "files": 4893,
+      "bytes": 211629143,
+      "all_hashes_match_frozen_manifest": true
+    },
+    "jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869"
+  },
+  "goal_status": "active",
+  "production_connection_this_round": false,
+  "limitations": [
+    "Mac-hosted Linux/arm64 with bind-mounted MySQL lower_case_table_names=2",
+    "No Z820/TLS/capacity/manual acceptance",
+    "Synthetic fixture API authentication and personal Python draft only; no full browser/editor workflow"
+  ]
+}
