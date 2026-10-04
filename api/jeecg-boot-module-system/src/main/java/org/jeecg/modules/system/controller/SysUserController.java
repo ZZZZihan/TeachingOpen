@@ -81,6 +81,8 @@ public class SysUserController extends BaseController {
     private ISysConfigService sysConfigService;
 	@Autowired
 	private RedisUtil redisUtil;
+	@Autowired
+	private PasswordResetService passwordResetService;
 
     @Value("${jeecg.path.upload}")
     private String upLoadPath;
@@ -1254,69 +1256,17 @@ public class SysUserController extends BaseController {
 		return phone;
 	}
 	
-	/**
-	 * 用户手机号验证
-	 */
+	/** Only verifies a recovery code; never extends its TTL or returns it. */
 	@PostMapping("/phoneVerification")
 	public Result<String> phoneVerification(@RequestBody JSONObject jsonObject) {
-		Result<String> result = new Result<String>();
-		String phone = jsonObject.getString("phone");
-		String smscode = jsonObject.getString("smscode");
-		Object code = redisUtil.get(phone);
-		if (!smscode.equals(code)) {
-			result.setMessage("手机验证码错误");
-			result.setSuccess(false);
-			return result;
-		}
-		redisUtil.set(phone, smscode);
-		result.setResult(smscode);
-		result.setSuccess(true);
-		return result;
+		return passwordResetService.verify(jsonObject);
 	}
-	
-	/**
-	 * 用户更改密码
-	 */
-	@GetMapping("/passwordChange")
-	public Result<SysUser> passwordChange(@RequestParam(name="username")String username,
-										  @RequestParam(name="password")String password,
-			                              @RequestParam(name="smscode")String smscode,
-			                              @RequestParam(name="phone") String phone) {
-        Result<SysUser> result = new Result<SysUser>();
-        if(oConvertUtils.isEmpty(username) || oConvertUtils.isEmpty(password) || oConvertUtils.isEmpty(smscode)  || oConvertUtils.isEmpty(phone) ) {
-            result.setMessage("重置密码失败！");
-            result.setSuccess(false);
-            return result;
-        }
 
-        SysUser sysUser=new SysUser();
-        Object object= redisUtil.get(phone);
-        if(null==object) {
-        	result.setMessage("短信验证码失效！");
-            result.setSuccess(false);
-            return result;
-        }
-        if(!smscode.equals(object)) {
-        	result.setMessage("短信验证码不匹配！");
-            result.setSuccess(false);
-            return result;
-        }
-        sysUser = this.sysUserService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername,username).eq(SysUser::getPhone,phone));
-        if (sysUser == null) {
-            result.setMessage("未找到用户！");
-            result.setSuccess(false);
-            return result;
-        } else {
-            String salt = oConvertUtils.randomGen(8);
-            sysUser.setSalt(salt);
-            String passwordEncode = PasswordUtil.encrypt(sysUser.getUsername(), password, salt);
-            sysUser.setPassword(passwordEncode);
-            this.sysUserService.updateById(sysUser);
-            result.setSuccess(true);
-            result.setMessage("密码重置完成！");
-            return result;
-        }
-    }
+	/** Passwords and codes must be supplied in a JSON body, never a GET query. */
+	@PostMapping("/passwordChange")
+	public Result<String> passwordChange(@RequestBody JSONObject jsonObject) {
+		return passwordResetService.reset(jsonObject);
+	}
 	
 
 	/**
