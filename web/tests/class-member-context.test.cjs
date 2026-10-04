@@ -113,7 +113,7 @@ function select(h, rows) { h.i.onSelectChange(rows.map(row => row.id), rows) }
 function displayed(h, record) { return h.i.dataSource.find(row => row.id === record.id) || record }
 function rowPrompt(h, record) {
   record = displayed(h, record)
-  if (/@click="confirmDelete\(record\)"/.test(h.source)) { h.i.confirmDelete(record); return h.env.confirms.at(-1) }
+  if (/@click(?:\.prevent)?="confirmDelete\(record\)"/.test(h.source)) { h.i.confirmDelete(record); return h.env.confirms.at(-1) }
   assert.match(h.source, /@confirm="\(\) => handleDelete\(record.id\)"/, 'execute the actual rendered row cancellation binding')
   return { onOk: () => h.i.handleDelete(record.id) }
 }
