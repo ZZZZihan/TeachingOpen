@@ -1,0 +1,62 @@
+{
+  "observed_utc": "2026-10-04T19:09:38.077954+00:00",
+  "attempts": {
+    "01": {
+      "project": "teaching-candidate-3efd444fe02f",
+      "remaining_containers": [],
+      "remaining_networks": [],
+      "data_retained": true
+    },
+    "02": {
+      "project": "teaching-candidate-3d6441c4abc9",
+      "remaining_containers": [],
+      "remaining_networks": [],
+      "data_retained": true
+    },
+    "03": {
+      "project": "teaching-candidate-2e3824b9d92c",
+      "remaining_containers": [],
+      "remaining_networks": [],
+      "data_retained": true
+    },
+    "04": {
+      "project": "teaching-candidate-4d420fe5d60e",
+      "remaining_containers": [],
+      "remaining_networks": [],
+      "data_retained": true
+    },
+    "05": {
+      "project": "teaching-candidate-f8532d650034",
+      "remaining_containers": [],
+      "remaining_networks": [],
+      "data_retained": true
+    }
+  },
+  "existing_services": {
+    "18111": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18141": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18149": {
+      "http": 200,
+      "status": "UP"
+    }
+  },
+  "port_18190_closed": true,
+  "production_copy_preview": {
+    "url": "http://127.0.0.1:18142/index",
+    "http": 200
+  },
+  "candidate_commit": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+  "candidate_tracked_clean": true,
+  "dist": {
+    "files": 4893,
+    "bytes": 211629143,
+    "all_hashes_match_frozen_manifest": true
+  },
+  "jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869"
+}
