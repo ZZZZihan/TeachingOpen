@@ -1,0 +1,41 @@
+{
+  "backend_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869",
+  "manifest_sha256": "bb4380486c95f6ddd2aa8b362ffed6213e2614485a090e27f4c82ef825cdc100",
+  "asset_manifest_sha256": "ce5dc2b2f86faec5017b73eaf4944e4689d8f7ecdeb219a6851d7e3cc7a677ab",
+  "business": {
+    "teaching_course": {
+      "rows": 5,
+      "sha256": "48a20be4fb2b342e5c8ca43a29feea89147eb19b3472f7c3a465045731fe4b73"
+    },
+    "teaching_course_unit": {
+      "rows": 83,
+      "sha256": "2a6439c898e52dabe64979ad9cd16a77aa843bf1f788208e338d610c06a12991"
+    },
+    "teaching_course_dept": {
+      "rows": 4,
+      "sha256": "4c5eca1b213e692ea9c4b88fd81c3cac041e771623a9871ee8bd0ca0e6c6e97f"
+    },
+    "teaching_additional_work": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "teaching_student": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "teaching_work": {
+      "rows": 3,
+      "sha256": "63a53bdcc25016ff2441f57aa0ed69d1b3764f1c6f5f241262ac5fe5b49af066"
+    },
+    "teaching_work_correct": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "assets": {
+    "files": 297,
+    "bytes": 5941586119,
+    "metadata_sha256": "2a98b2e1bb6a8e7ec57bfd3e9db53bcc24d4177f9bcc7ac5a537bf3c1d89f7d2",
+    "full_collection_content_rehashed": false
+  }
+}
