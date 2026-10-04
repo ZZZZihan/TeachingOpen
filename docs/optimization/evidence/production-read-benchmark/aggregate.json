@@ -1,0 +1,570 @@
+{
+  "observed_utc": "2026-10-04T17:09:18.243752+00:00",
+  "scope": "Anonymous owned-loopback private-copy reads; no production capacity or browser acceptance claim.",
+  "plan": {
+    "rounds": 3,
+    "workers": [
+      1,
+      4
+    ],
+    "measured_samples_per_cell": 24,
+    "warmup_samples_per_cell": 3,
+    "planned_measured_requests": 1008,
+    "planned_warmup_requests": 126,
+    "request_timeout_seconds": 5,
+    "measurement_budget_seconds": 300,
+    "json_byte_ceiling": 8388608,
+    "cover_byte_ceiling": 16777216,
+    "range_bytes": 4096
+  },
+  "method": {
+    "connection": "Fresh loopback HTTP/1.1 connection per request; full bounded body completion.",
+    "timer": "perf_counter; excludes semantic validation, SQL, local hashing and report writing.",
+    "p95": "Nearest rank over the individual sample durations.",
+    "failure_policy": "Retain each failure; stop scheduling after the current bounded worker batch.",
+    "timeout_contract": "Socket inactivity timeout; measurement budget checked between batches, not an absolute wall-clock termination deadline.",
+    "page_contract": "SQL eligible subsets with correct counts; preflight observes complete nonoverlapping pages, without ordering guarantee."
+  },
+  "machine": {
+    "os": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.7",
+    "model": "Mac14,14",
+    "cpus": 24,
+    "ram_bytes": 68719476736
+  },
+  "data_counts": {
+    "database_tables": 69,
+    "courses": 5,
+    "units": 83,
+    "manifest_courses": 5,
+    "manifest_units": 83,
+    "public_home_courses": 3,
+    "name_filter_matches": 1,
+    "course_assets": 297,
+    "course_asset_bytes": 5941586119
+  },
+  "measured_summary": {
+    "attempted": 1008,
+    "successful": 1008,
+    "failed": 0,
+    "all_latency_ms": {
+      "count": 1008,
+      "min": 1.2390409829095006,
+      "max": 44.022540998412296,
+      "median": 3.665749987703748,
+      "p95": 11.425500008044764
+    },
+    "successful_latency_ms": {
+      "count": 1008,
+      "min": 1.2390409829095006,
+      "max": 44.022540998412296,
+      "median": 3.665749987703748,
+      "p95": 11.425500008044764
+    },
+    "failure_counts": {}
+  },
+  "warmup_summary": {
+    "attempted": 126,
+    "successful": 126,
+    "failed": 0,
+    "all_latency_ms": {
+      "count": 126,
+      "min": 1.4154999807942659,
+      "max": 16.32233301643282,
+      "median": 3.9813955081626773,
+      "p95": 11.603457998717204
+    },
+    "successful_latency_ms": {
+      "count": 126,
+      "min": 1.4154999807942659,
+      "max": 16.32233301643282,
+      "median": 3.9813955081626773,
+      "p95": 11.603457998717204
+    },
+    "failure_counts": {}
+  },
+  "aggregates": [
+    {
+      "scenario": "home_full",
+      "workers": 1,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 3.5290000087115914,
+          "max": 18.147541995858774,
+          "median": 4.5936045062262565,
+          "p95": 15.831083001103252
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 3.5290000087115914,
+          "max": 18.147541995858774,
+          "median": 4.5936045062262565,
+          "p95": 15.831083001103252
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "home_full",
+      "workers": 4,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 5.2910830127075315,
+          "max": 44.022540998412296,
+          "median": 6.362791507854126,
+          "p95": 43.69495899300091
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 5.2910830127075315,
+          "max": 44.022540998412296,
+          "median": 6.362791507854126,
+          "p95": 43.69495899300091
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "home_first_page",
+      "workers": 1,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 2.801624999847263,
+          "max": 13.63487500930205,
+          "median": 3.534291492542252,
+          "p95": 11.425500008044764
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 2.801624999847263,
+          "max": 13.63487500930205,
+          "median": 3.534291492542252,
+          "p95": 11.425500008044764
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "home_first_page",
+      "workers": 4,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 3.915167006198317,
+          "max": 12.512125016655773,
+          "median": 4.711312503786758,
+          "p95": 11.087165999924764
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 3.915167006198317,
+          "max": 12.512125016655773,
+          "median": 4.711312503786758,
+          "p95": 11.087165999924764
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "home_second_page",
+      "workers": 1,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 1.9003750057891011,
+          "max": 26.741417008452117,
+          "median": 3.1272290070774034,
+          "p95": 7.646834012120962
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 1.9003750057891011,
+          "max": 26.741417008452117,
+          "median": 3.1272290070774034,
+          "p95": 7.646834012120962
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "home_second_page",
+      "workers": 4,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 2.775542001472786,
+          "max": 7.471291988622397,
+          "median": 3.4357705153524876,
+          "p95": 6.647833011811599
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 2.775542001472786,
+          "max": 7.471291988622397,
+          "median": 3.4357705153524876,
+          "p95": 6.647833011811599
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "home_name_filter",
+      "workers": 1,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 1.9087090040557086,
+          "max": 13.910333014791831,
+          "median": 3.0176250002114102,
+          "p95": 6.434458016883582
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 1.9087090040557086,
+          "max": 13.910333014791831,
+          "median": 3.0176250002114102,
+          "p95": 6.434458016883582
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "home_name_filter",
+      "workers": 4,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 2.774332999251783,
+          "max": 12.225749989738688,
+          "median": 3.464207999058999,
+          "p95": 9.671582985902205
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 2.774332999251783,
+          "max": 12.225749989738688,
+          "median": 3.464207999058999,
+          "p95": 9.671582985902205
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "cover_get",
+      "workers": 1,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 2.6141669950447977,
+          "max": 11.325250001391396,
+          "median": 3.453958503087051,
+          "p95": 9.999500005505979
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 2.6141669950447977,
+          "max": 11.325250001391396,
+          "median": 3.453958503087051,
+          "p95": 9.999500005505979
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "cover_get",
+      "workers": 4,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 6.6893339972011745,
+          "max": 15.594999975292012,
+          "median": 8.295417006593198,
+          "p95": 15.540374995907769
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 6.6893339972011745,
+          "max": 15.594999975292012,
+          "median": 8.295417006593198,
+          "p95": 15.540374995907769
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "cover_head",
+      "workers": 1,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 1.2438340054359287,
+          "max": 10.525499994400889,
+          "median": 1.859687501564622,
+          "p95": 8.386375004192814
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 1.2438340054359287,
+          "max": 10.525499994400889,
+          "median": 1.859687501564622,
+          "p95": 8.386375004192814
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "cover_head",
+      "workers": 4,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 1.4892499893903732,
+          "max": 6.357457983540371,
+          "median": 2.2483130014734343,
+          "p95": 3.9074160158634186
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 1.4892499893903732,
+          "max": 6.357457983540371,
+          "median": 2.2483130014734343,
+          "p95": 3.9074160158634186
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "cover_range",
+      "workers": 1,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 1.2390409829095006,
+          "max": 10.445124993566424,
+          "median": 1.9528335105860606,
+          "p95": 7.18612500349991
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 1.2390409829095006,
+          "max": 10.445124993566424,
+          "median": 1.9528335105860606,
+          "p95": 7.18612500349991
+        },
+        "failure_counts": {}
+      }
+    },
+    {
+      "scenario": "cover_range",
+      "workers": 4,
+      "summary": {
+        "attempted": 72,
+        "successful": 72,
+        "failed": 0,
+        "all_latency_ms": {
+          "count": 72,
+          "min": 1.6921669885050505,
+          "max": 8.28745900071226,
+          "median": 2.2353125095833093,
+          "p95": 7.913042005384341
+        },
+        "successful_latency_ms": {
+          "count": 72,
+          "min": 1.6921669885050505,
+          "max": 8.28745900071226,
+          "median": 2.2353125095833093,
+          "p95": 7.913042005384341
+        },
+        "failure_counts": {}
+      }
+    }
+  ],
+  "checks": [
+    {
+      "case": "preflight_pages_observe_sql_partition",
+      "passed": true
+    },
+    {
+      "case": "all_planned_measurements_completed",
+      "passed": true
+    },
+    {
+      "case": "owned_backend_and_bindings_unchanged",
+      "passed": true
+    },
+    {
+      "case": "selected_business_rows_unchanged",
+      "passed": true
+    },
+    {
+      "case": "asset_metadata_unchanged",
+      "passed": true
+    },
+    {
+      "case": "selected_cover_bytes_unchanged",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Shared local developer hardware; no WAN, TLS, browser rendering, playback, soak, saturation or production capacity conclusion.",
+    "Only anonymous homepage and one eligible course-cover asset are sampled.",
+    "Selected business-table digests and asset metadata are checked; operational logs and unrelated tables are outside the unchanged-data claim.",
+    "Full asset collection content is not rehashed; the selected cover is hashed before and after."
+  ],
+  "binding_before": {
+    "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+    "snapshot_manifest_sha256": "bb4380486c95f6ddd2aa8b362ffed6213e2614485a090e27f4c82ef825cdc100",
+    "source_sha256": "54b7bc48c80dfafd405bf0907502fb46c3de90ee50bc25540e7fe0f547a6435c",
+    "source_manifest_sha256": "ed521f84edbeb46f146711fbd35dc48c8d516dc1595d00ed9d987572e650debc",
+    "assets_manifest_sha256": "ce5dc2b2f86faec5017b73eaf4944e4689d8f7ecdeb219a6851d7e3cc7a677ab",
+    "backend_receipt_sha256": "15c67a8049390b1ec25749de7c123b49c8758b4aeaebf6e9cd43f6cbfbda459d",
+    "scripts": {
+      "benchmark_cli": "663a9a0e37ca55026710496fa7cec7216da80813fbcb40da0f9a08656422f5fa",
+      "benchmark_module": "2706d2dfdc561b303336261b91ef288f6c5327cde00e3bdeca2bc63b0c7a6a10",
+      "production_content_verifier": "8478bd0093a4a0ca8d984a9a30e1e24eea0e77b9221247f3ce48afc69ccd9446",
+      "schema_policy": "641617eaff6f6df5d2cdb9e0d4227f29260b8eb650984453f0d0a8ea9c4fc796",
+      "production_fixture_helper": "c82af6eeb1869b3ce264a13559287bbded6a12aa599fb93700a63cc8ff66611c",
+      "local_runtime_helper": "3da053aec48dad58c77b8c4a7ad1aa11562f1f586edea4cf3ce6c92d7583bee8",
+      "local_recovery_helper": "865bee663ca8e8d99626a96bc630a7d7a4e62bc763a5019cc1bc7361915f1942",
+      "snapshot_backend_helper": "604926b7437430bf71440148913c61c5667e269fd4fc47076c8d6be07396bce2"
+    }
+  },
+  "binding_after": {
+    "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+    "snapshot_manifest_sha256": "bb4380486c95f6ddd2aa8b362ffed6213e2614485a090e27f4c82ef825cdc100",
+    "source_sha256": "54b7bc48c80dfafd405bf0907502fb46c3de90ee50bc25540e7fe0f547a6435c",
+    "source_manifest_sha256": "ed521f84edbeb46f146711fbd35dc48c8d516dc1595d00ed9d987572e650debc",
+    "assets_manifest_sha256": "ce5dc2b2f86faec5017b73eaf4944e4689d8f7ecdeb219a6851d7e3cc7a677ab",
+    "backend_receipt_sha256": "15c67a8049390b1ec25749de7c123b49c8758b4aeaebf6e9cd43f6cbfbda459d",
+    "scripts": {
+      "benchmark_cli": "663a9a0e37ca55026710496fa7cec7216da80813fbcb40da0f9a08656422f5fa",
+      "benchmark_module": "2706d2dfdc561b303336261b91ef288f6c5327cde00e3bdeca2bc63b0c7a6a10",
+      "production_content_verifier": "8478bd0093a4a0ca8d984a9a30e1e24eea0e77b9221247f3ce48afc69ccd9446",
+      "schema_policy": "641617eaff6f6df5d2cdb9e0d4227f29260b8eb650984453f0d0a8ea9c4fc796",
+      "production_fixture_helper": "c82af6eeb1869b3ce264a13559287bbded6a12aa599fb93700a63cc8ff66611c",
+      "local_runtime_helper": "3da053aec48dad58c77b8c4a7ad1aa11562f1f586edea4cf3ce6c92d7583bee8",
+      "local_recovery_helper": "865bee663ca8e8d99626a96bc630a7d7a4e62bc763a5019cc1bc7361915f1942",
+      "snapshot_backend_helper": "604926b7437430bf71440148913c61c5667e269fd4fc47076c8d6be07396bce2"
+    }
+  },
+  "asset_metadata_before": {
+    "files": 297,
+    "bytes": 5941586119,
+    "metadata_sha256": "2a98b2e1bb6a8e7ec57bfd3e9db53bcc24d4177f9bcc7ac5a537bf3c1d89f7d2",
+    "full_collection_content_rehashed": false
+  },
+  "asset_metadata_after": {
+    "files": 297,
+    "bytes": 5941586119,
+    "metadata_sha256": "2a98b2e1bb6a8e7ec57bfd3e9db53bcc24d4177f9bcc7ac5a537bf3c1d89f7d2",
+    "full_collection_content_rehashed": false
+  },
+  "selected_cover_before": {
+    "bytes": 1671015,
+    "sha256": "e4d024bb14a306347decd2c1567d795b3058f96accf40dd1f1ceea5f1b5a468b"
+  },
+  "selected_cover_after": {
+    "bytes": 1671015,
+    "sha256": "e4d024bb14a306347decd2c1567d795b3058f96accf40dd1f1ceea5f1b5a468b"
+  },
+  "format": 1,
+  "successful": true,
+  "measured_candidate_commit": "77a4fbfb95d3ad8fa76d969793b5a441fec23699",
+  "implementation_commit": "e559e9b",
+  "private_report_sha256": "50f97cf685d468b85b9f3290b400e88b8d7fa597a1534cdef76ec056963c9067",
+  "private_report_mode": "0600",
+  "private_raw_report_committed": false,
+  "preflight_requests": 2,
+  "preflight_successful": 2,
+  "selected_business_tables": {
+    "teaching_course": {
+      "rows": 5,
+      "before_after_equal": true
+    },
+    "teaching_course_unit": {
+      "rows": 83,
+      "before_after_equal": true
+    },
+    "teaching_course_dept": {
+      "rows": 4,
+      "before_after_equal": true
+    },
+    "teaching_additional_work": {
+      "rows": 0,
+      "before_after_equal": true
+    },
+    "teaching_student": {
+      "rows": 0,
+      "before_after_equal": true
+    },
+    "teaching_work": {
+      "rows": 3,
+      "before_after_equal": true
+    },
+    "teaching_work_correct": {
+      "rows": 0,
+      "before_after_equal": true
+    }
+  },
+  "checks_execution": {
+    "feature_specialized": {
+      "total": 51,
+      "passed": 51,
+      "skipped": 0
+    },
+    "feature_all_dev": {
+      "total": 115,
+      "passed": 114,
+      "skipped": 1
+    },
+    "candidate_all_dev": {
+      "total": 172,
+      "passed": 171,
+      "skipped": 1
+    },
+    "optional_skip": "MySQL literal test requires explicit dedicated runtime; environment unset",
+    "runtime_exit_code": 0
+  }
+}
