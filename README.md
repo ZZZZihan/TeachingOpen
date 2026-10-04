@@ -237,10 +237,14 @@ server
       gzip_disable "MSIE [1-6]\.";
     }
     
-    location ^~ /api
+    location = /api {
+        return 308 /api/$is_args$args;
+    }
+
+    location ^~ /api/
     {
         expires 0;
-        proxy_pass              http://127.0.0.1:8080/api/;
+        proxy_pass              http://127.0.0.1:8080;
         proxy_set_header        Host 127.0.0.1;
         proxy_set_header        X-Real-IP $remote_addr;
         proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
