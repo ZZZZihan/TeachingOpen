@@ -1,0 +1,107 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- generic: 天津工业大学 · 开放学习
+- generic: 社团与课后项目 · 设计方向原型
+- banner:
+  - link "开放创作，回到探索项目首页":
+    - /url: "#/"
+    - text: 开放创作
+    - generic: OPEN STUDIO
+  - navigation "主要导航":
+    - link "探索项目":
+      - /url: "#/"
+    - link "我的创作台":
+      - /url: "#/studio"
+      - text: 我的创作台
+      - generic: ↗
+- main:
+  - link "探索项目":
+    - /url: "#/"
+  - generic: /
+  - generic: 几何画室
+  - heading "让几何动起来" [level=1]
+  - paragraph: 改一个参数，观察一次变化。把规律画成自己的作品。
+  - generic: 艺术 × 数学 · 原创演示
+  - region "几何画室交互演示":
+    - strong: 你的实验画布
+    - generic: 实时演示 · 无需安装
+    - img "当前几何画布，可使用旁边的参数实时改变图案":
+      - generic: EXPERIMENT / 01
+      - generic: 4 边形 × 12 次旋转
+      - generic: 29°
+    - generic: 4 边形 · 重复 12 次 · 每次旋转 29°
+    - generic: 一次只改一项，看看有什么不同。
+    - heading "试着改一点" [level=2]
+    - paragraph: 拖动滑块，图案会立刻跟着变化。
+    - generic: 多边形边数
+    - status: 4边
+    - slider "多边形边数": "4"
+    - paragraph: 从三角形，到八边形。
+    - generic: 重复次数
+    - status: 12次
+    - slider "重复次数": "12"
+    - paragraph: 更多线条，也会带来更多重叠。
+    - generic: 旋转角度
+    - status: 29°
+    - slider "旋转角度": "29"
+    - paragraph: 每画一次，转过这么多角度。
+    - generic: 线条颜色
+    - group "线条颜色":
+      - button "松绿" [pressed]: ✓
+      - button "湖蓝"
+      - button "陶红"
+    - button "已保存到本机 ✓" [active]
+    - button "恢复初始图案"
+    - paragraph: 保存在当前浏览器 · 10/5 16:00。没有发送给老师。
+  - region "学习任务与创作记录":
+    - tablist "项目学习内容":
+      - tab "学习步骤" [selected]
+      - tab "基础任务"
+      - tab "进阶挑战"
+      - tab "看看建议"
+    - tabpanel "学习步骤":
+      - generic "选择学习步骤":
+        - button "01 · 已完成 先试一试" [pressed]:
+          - generic: 01 · 已完成
+          - text: 先试一试
+        - button "02 发现规律":
+          - generic: "02"
+          - text: 发现规律
+        - button "03 做我的作品":
+          - generic: "03"
+          - text: 做我的作品
+        - button "04 说说想法":
+          - generic: "04"
+          - text: 说说想法
+      - heading "先试一试" [level=2]
+      - paragraph: 拖动「旋转角度」，观察图案哪里变了。先随意试几次，再选一个你喜欢的角度。没有标准答案，先让好奇心带路。
+      - button "已完成这一步 · 再看下一步":
+        - text: 已完成这一步 · 再看下一步
+        - generic: →
+    - complementary "留下你的发现":
+      - heading "留下你的发现" [level=2]
+      - paragraph: 作品不只是图案，还可以是你发现的一点小规律。
+      - generic: 作品名字
+      - textbox "作品名字":
+        - /placeholder: 给它起个名字
+        - text: 我的海河波纹
+      - generic: 我的发现
+      - textbox "我的发现":
+        - /placeholder: 我把角度从……改成……，发现……
+        - text: 把角度从28度改成29度，线条交错的位置也跟着变化。
+      - paragraph:
+        - text: 名字和笔记会和图案一起保存到本机。
+        - text: 保存后到
+        - link "创作台":
+          - /url: "#/studio"
+        - text: 看看自己的作品。
+- contentinfo:
+  - strong: 开放创作
+  - text: 天津工业大学 · 开放学习设计方向
+  - paragraph:
+    - text: 本页为交互原型。项目、作品与建议均为演示内容。
+    - text: 练习仅可保存在当前浏览器；没有接入账号、老师或正式课程。
+  - link "再找一个灵感":
+    - /url: "#/"
+    - text: 再找一个灵感 ↗
+- generic: 图案、名字和练习记录已保存到当前浏览器。可以去创作台继续。

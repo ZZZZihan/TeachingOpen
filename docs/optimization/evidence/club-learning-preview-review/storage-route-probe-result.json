@@ -1,0 +1,107 @@
+{
+  "scope": "Unmodified app.js executed by Node VM with a minimal DOM adapter. Application-state/storage branches only; no real browser, network, login, database, or product API.",
+  "sourceSha256": "186ed48a216ac94184c0cb7988ed03007fc90eb42d3a584ce23fd20352053de1",
+  "scenarios": [
+    {
+      "name": "save_reload_continue_actual_edits",
+      "passed": true,
+      "details": {
+        "savedFields": [
+          "params",
+          "title",
+          "note",
+          "completed",
+          "tasks"
+        ],
+        "writes": 1
+      }
+    },
+    {
+      "name": "write_failure_keeps_session_without_claiming_save",
+      "passed": true,
+      "details": {
+        "successfulWrites": 0,
+        "retainedUntilReload": true,
+        "newMountRestoredDefault": true
+      }
+    },
+    {
+      "name": "read_denial_can_render_and_edit",
+      "passed": true,
+      "details": {
+        "renderedDefault": true,
+        "editedInSession": true
+      }
+    },
+    {
+      "name": "corrupt_json_recovery_does_not_delete_before_save",
+      "passed": true,
+      "details": {
+        "untouchedBeforeExplicitSave": true,
+        "recoveredWithOneExplicitSave": true
+      }
+    },
+    {
+      "name": "null_parameters_recovery_does_not_delete_before_save",
+      "passed": true,
+      "details": {
+        "untouchedBeforeExplicitSave": true,
+        "recoveredWithOneExplicitSave": true
+      }
+    },
+    {
+      "name": "wrong_version_recovery_does_not_delete_before_save",
+      "passed": true,
+      "details": {
+        "untouchedBeforeExplicitSave": true,
+        "recoveredWithOneExplicitSave": true
+      }
+    },
+    {
+      "name": "restored_fields_are_bounded_deduplicated_and_escaped",
+      "passed": true,
+      "details": {
+        "bounds": {
+          "sides": 8,
+          "repeats": 4,
+          "rotation": 90
+        },
+        "completed": [
+          0,
+          3
+        ],
+        "tasks": [
+          2
+        ],
+        "textEscaped": true
+      }
+    },
+    {
+      "name": "dirty_saved_work_resumes_session_and_reload_restores_saved_snapshot",
+      "passed": true,
+      "details": {
+        "sessionDraftVisible": true,
+        "reloadUsesLastSavedSnapshot": true
+      }
+    },
+    {
+      "name": "generated_routes_and_project_idea_destinations",
+      "passed": true,
+      "details": {
+        "knownRoutesRendered": [
+          "#/",
+          "#/studio",
+          "#/learn/geometry",
+          "#/learn/geometry/notes",
+          "#/learn/geometry/feedback",
+          "#/learn/geometry/challenge"
+        ],
+        "unknownHashFallback": "home",
+        "projectIdeaBranches": [
+          "sound",
+          "bridge"
+        ]
+      }
+    }
+  ]
+}

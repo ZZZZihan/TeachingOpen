@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6f5ef">
+    <title>开放创作 · 社团学习设计演示</title>
+    <meta name="description" content="面向初高中社团与课后项目学习的可点击设计演示。探索项目，在几何画室里动手创作。">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <div class="institution-bar">
+      <div class="shell institution-inner">
+        <span>天津工业大学 · 开放学习</span>
+        <span>社团与课后项目 · 设计方向原型</span>
+      </div>
+    </div>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="wordmark" href="#/" aria-label="开放创作，回到探索项目首页">
+          <svg width="29" height="29" viewBox="0 0 29 29" aria-hidden="true"><path d="M3 23V7l12 7L26 6v17l-11-7z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg>
+          <span>开放创作<span class="wordmark-en">OPEN STUDIO</span></span>
+        </a>
+        <nav aria-label="主要导航">
+          <a href="#/" data-route="home">探索项目</a>
+          <a href="#/studio" data-route="studio">我的创作台<span class="nav-arrow" aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1"></main>
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <div><strong>开放创作</strong><span>天津工业大学 · 开放学习设计方向</span></div>
+        <p>本页为交互原型。项目、作品与建议均为演示内容。<br>练习仅可保存在当前浏览器；没有接入账号、老师或正式课程。</p>
+        <a href="#/">再找一个灵感 <span aria-hidden="true">↗</span></a>
+      </div>
+    </footer>
+    <div id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    <dialog id="project-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-head"><span class="eyebrow">项目想法 · 设计演示</span><button type="button" class="icon-button" data-action="close-dialog" aria-label="关闭项目想法">×</button></div>
+      <div id="dialog-content"></div>
+      <p class="dialog-note">这个项目目前只有设计想法。完整的可操作演示是「几何画室」。</p>
+      <a class="button button-primary" href="#/learn/geometry" data-action="close-dialog">去几何画室试试 <span aria-hidden="true">↗</span></a>
+    </dialog>
+  </body>
+</html>
