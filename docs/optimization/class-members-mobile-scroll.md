@@ -14,4 +14,16 @@
 - 显式 `eslint --no-ignore src/views/system/modules/DeptUserInfo.vue` 退出 1：54 个错误、289 个警告；与 #63 逐条相同。本 CSS 修复没有新增 lint 诊断。
 - `git diff --check` 退出 0；未安装依赖，未修改后端、数据库或运行服务。
 
-PR 保持 Draft，等待根 Agent 在真实完整后台壳复验手机滚动、操作列和桌面显示。本分支生产构建不包含组合候选的其他 PR，不作为候选运行产物。
+根 Agent 已在完整后台壳中完成真实浏览器复验，绑定组合候选 `1b23551257b3f922f7fc4b125dfd9a85e5090a0c`、最终构建和前端进程 PID `49600`：
+
+| 视口 | body clientWidth / scrollWidth | 右键到末端的 scrollLeft | 外层 clientWidth / scrollWidth |
+| --- | --- | --- | --- |
+| 390px | 310 / 921 | 610.4545 | 310 / 310 |
+| 768px | 377 / 921 | 543.6364 | 377 / 377 |
+| 1440px | 769 / 921 | 151.3636 | 769 / 769 |
+
+390px 视口连续按右键8次后，编辑按钮进入可见区域，根 Agent 实际打开学生编辑对话框，再取消并确认放弃，没有提交字段写入。三个视口的外层均不再承载第二段横向溢出。原始 DOM 测量和截图位于本地 `.devspace/artifacts/authenticated-role-flow-20261005/root-browser/admin-members-keyboard-{end-after,768-after,1440-after}.{json,png}`，编辑可达证据为 `admin-members-edit-accessible-after.png`。
+
+根 Agent 最终组合候选全量测试 688/688，生产构建退出0／12条既有告警，证据位于同一 artifact 根目录的 `member-scroll-final-build/`。独立窄审阅的编译／级联／源码／几何探针12/12，无阻断问题，报告为 `member-scroll-review/review.md`；独立离线审查和根的真实浏览器验收分别记录，不混为同一种证据。
+
+上述门槛已完成，PR 转为 Ready。此记录更新不修改产品或测试，不重建。本分支自身 dist 仍不包含组合候选其他 PR，不作为候选运行产物；没有远端合并或生产发布。
