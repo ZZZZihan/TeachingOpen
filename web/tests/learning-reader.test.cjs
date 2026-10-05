@@ -9,7 +9,7 @@ function mount () {
   const script = source.match(/<script>([\s\S]*?)<\/script>/)[1].replace(/^import .*$/gm, '').replace('export default', 'component =')
   const requests = []; const listeners = new Map(); const removed = []; let previews = 0
   const doc = { addEventListener: (name, fn) => listeners.set(name, fn), removeEventListener: (name, fn) => { assert.equal(listeners.get(name), fn); removed.push(name); listeners.delete(name) } }
-  const ctx = { component: null, document: doc, URL, URLSearchParams, window: { location: { origin: 'http://localhost:18112' } }, getFileAccessHttpUrl: path => path || undefined, getFilePrevew: path => { previews++; if (path === 'broken-config') throw new Error('broken preview'); return path }, getAction: (url, params) => new Promise((resolve, reject) => requests.push({ url, params, resolve, reject })) }
+  const ctx = { component: null, document: doc, URL, URLSearchParams, window: { location: { origin: 'http://localhost:18112' } }, getFileAccessHttpUrl: path => path || undefined, getFilePrevew: path => { previews++; if (new URL(path, 'http://localhost:18112').pathname === '/broken-config') throw new Error('broken preview'); return path }, getAction: (url, params) => new Promise((resolve, reject) => requests.push({ url, params, resolve, reject })) }
   vm.createContext(ctx); vm.runInContext(script, ctx)
   const component = ctx.component; const instance = Object.assign(component.data(), { $refs: {} })
   for (const [name, fn] of Object.entries(component.methods)) instance[name] = fn.bind(instance)
