@@ -572,6 +572,10 @@
   min-width: 0;
   max-width: 100%;
 }
+.member-table-region /deep/ .ant-table-wrapper .ant-table .ant-table-body {
+  min-width: 0;
+  max-width: 100%;
+}
 .member-table-region /deep/ .ant-table-thead > tr > th {
   color: #534757;
   background: #f8f5f8;
