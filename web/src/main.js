@@ -47,6 +47,7 @@ import '@/assets/less/JAreaLinkage.less'
 import VueAreaLinkage from 'vue-area-linkage'
 import { getSysConfig, getMenu } from '@/api/manage'
 import { loadStartupData, showStartupError } from '@/utils/startup'
+import { platformBrandName } from '@/utils/platformBranding'
 // 颜色选择器
 import vcolorpicker from 'vcolorpicker'
 
@@ -114,7 +115,7 @@ const start = async () => {
         router,
         store,
         created () {
-            window.document.title = (sysConfig.brandName || '').trim() || '天津工业大学 · 人工智能教学平台'
+            window.document.title = platformBrandName(sysConfig)
             if (sysConfig.customJS) {
                 let script = document.createElement('script')
                 script.type = 'text/javascript'
