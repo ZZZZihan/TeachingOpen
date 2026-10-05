@@ -101,8 +101,7 @@ export default {
                 String(this.unit[field] || '').split(',').map(value => value.trim()).filter(Boolean).forEach((value, index) => {
                     let url = ''
                     try {
-                        const path = value.split(/[?#]/)[0]
-                        url = /\.sb3$/i.test(path) ? this.withQuery('/scratch3/index.html', { scene: 'create', workFile: value }) : this.safeUrl(getFilePrevew(value))
+                        url = this.resourceUrl(value)
                     } catch (error) { /* A broken preview configuration must not prevent reading the lesson. */ }
                     items.push({ key: field + '-' + index, kind, name: kind + ' ' + (index + 1), url })
                 })
@@ -124,6 +123,16 @@ export default {
     },
     methods: {
         getFileAccessHttpUrl,
+        resourceUrl (value) {
+            if (/^aess?:/.test(value)) return this.safeUrl(getFilePrevew(value))
+            const isUrl = value.startsWith('/') || /^[a-z][a-z\d+.-]*:/i.test(value)
+            // mineUnit already resolves material keys; make root-relative URLs absolute before previewing.
+            const file = this.safeUrl(isUrl ? value : this.getFileAccessHttpUrl(value))
+            if (!file) return ''
+            return /\.sb3$/i.test(value.split(/[?#]/)[0])
+                ? this.withQuery('/scratch3/index.html', { scene: 'create', workFile: file })
+                : this.safeUrl(getFilePrevew(file))
+        },
         safeUrl (value) {
             if (typeof value !== 'string' || !value.trim()) return ''
             try {
