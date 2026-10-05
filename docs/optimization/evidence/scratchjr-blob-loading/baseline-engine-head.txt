@@ -1,0 +1,6 @@
+HEAD http://127.0.0.1:18150/scratchjr/engine.html; no identity
+HTTP/1.0 200 OK
+Date: Mon, 05 Oct 2026 05:39:46 GMT
+Content-type: text/html
+Content-Length: 528
+Content-Security-Policy: default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self'
