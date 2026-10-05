@@ -1,0 +1,135 @@
+test_project_blob_permission_is_limited_to_scratchjr_engine (test_frontend_proxy.FrontendProxyTest.test_project_blob_permission_is_limited_to_scratchjr_engine) ... GET static
+HEAD static
+GET static
+HEAD static
+GET static
+HEAD static
+GET static
+GET static
+HEAD static
+HEAD static
+GET api
+HEAD api
+ok
+test_scratchjr_engine_can_read_its_project_blob (test_frontend_proxy.FrontendProxyTest.test_scratchjr_engine_can_read_its_project_blob) ... GET static
+
+  test_scratchjr_engine_can_read_its_project_blob (test_frontend_proxy.FrontendProxyTest.test_scratchjr_engine_can_read_its_project_blob) (path='/scratchjr/engine.html', method='GET') ... FAIL
+HEAD static
+  test_scratchjr_engine_can_read_its_project_blob (test_frontend_proxy.FrontendProxyTest.test_scratchjr_engine_can_read_its_project_blob) (path='/scratchjr/engine.html', method='HEAD') ... FAIL
+GET static
+  test_scratchjr_engine_can_read_its_project_blob (test_frontend_proxy.FrontendProxyTest.test_scratchjr_engine_can_read_its_project_blob) (path='/scratchjr/engine.html?mode=edit&workFile=blob:fixture', method='GET') ... FAIL
+HEAD static
+  test_scratchjr_engine_can_read_its_project_blob (test_frontend_proxy.FrontendProxyTest.test_scratchjr_engine_can_read_its_project_blob) (path='/scratchjr/engine.html?mode=edit&workFile=blob:fixture', method='HEAD') ... FAIL
+
+======================================================================
+FAIL: test_scratchjr_engine_can_read_its_project_blob (test_frontend_proxy.FrontendProxyTest.test_scratchjr_engine_can_read_its_project_blob) (path='/scratchjr/engine.html', method='GET')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/scratchjr-blob-loading/api/dev/test_frontend_proxy.py", line 316, in test_scratchjr_engine_can_read_its_project_blob
+    self.assert_local_csp(headers, {"'self'", 'blob:'})
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/scratchjr-blob-loading/api/dev/test_frontend_proxy.py", line 153, in assert_local_csp
+    self.assertEqual(directives, {
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+        'default-src': {"'self'", 'data:', 'blob:'},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        'connect-src': {"'self'"} if connect_sources is None else connect_sources,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    })
+    ^^
+AssertionError: {'def[154 chars]self'", "'unsafe-inline'"}, 'connect-src': {"'self'"}} != {'def[154 chars]self'", "'unsafe-inline'"}, 'connect-src': {"'self'", 'blob:'}}
+- {'connect-src': {"'self'"},
++ {'connect-src': {"'self'", 'blob:'},
+?                          +++++++++
+
+   'default-src': {"'self'", 'blob:', 'data:'},
+   'script-src': {"'self'", "'unsafe-eval'", "'unsafe-inline'"},
+   'style-src': {"'self'", "'unsafe-inline'"},
+   'worker-src': {"'self'", 'blob:'}}
+
+======================================================================
+FAIL: test_scratchjr_engine_can_read_its_project_blob (test_frontend_proxy.FrontendProxyTest.test_scratchjr_engine_can_read_its_project_blob) (path='/scratchjr/engine.html', method='HEAD')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/scratchjr-blob-loading/api/dev/test_frontend_proxy.py", line 316, in test_scratchjr_engine_can_read_its_project_blob
+    self.assert_local_csp(headers, {"'self'", 'blob:'})
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/scratchjr-blob-loading/api/dev/test_frontend_proxy.py", line 153, in assert_local_csp
+    self.assertEqual(directives, {
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+        'default-src': {"'self'", 'data:', 'blob:'},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        'connect-src': {"'self'"} if connect_sources is None else connect_sources,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    })
+    ^^
+AssertionError: {'def[154 chars]self'", "'unsafe-inline'"}, 'connect-src': {"'self'"}} != {'def[154 chars]self'", "'unsafe-inline'"}, 'connect-src': {"'self'", 'blob:'}}
+- {'connect-src': {"'self'"},
++ {'connect-src': {"'self'", 'blob:'},
+?                          +++++++++
+
+   'default-src': {"'self'", 'blob:', 'data:'},
+   'script-src': {"'self'", "'unsafe-eval'", "'unsafe-inline'"},
+   'style-src': {"'self'", "'unsafe-inline'"},
+   'worker-src': {"'self'", 'blob:'}}
+
+======================================================================
+FAIL: test_scratchjr_engine_can_read_its_project_blob (test_frontend_proxy.FrontendProxyTest.test_scratchjr_engine_can_read_its_project_blob) (path='/scratchjr/engine.html?mode=edit&workFile=blob:fixture', method='GET')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/scratchjr-blob-loading/api/dev/test_frontend_proxy.py", line 316, in test_scratchjr_engine_can_read_its_project_blob
+    self.assert_local_csp(headers, {"'self'", 'blob:'})
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/scratchjr-blob-loading/api/dev/test_frontend_proxy.py", line 153, in assert_local_csp
+    self.assertEqual(directives, {
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+        'default-src': {"'self'", 'data:', 'blob:'},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        'connect-src': {"'self'"} if connect_sources is None else connect_sources,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    })
+    ^^
+AssertionError: {'def[154 chars]self'", "'unsafe-inline'"}, 'connect-src': {"'self'"}} != {'def[154 chars]self'", "'unsafe-inline'"}, 'connect-src': {"'self'", 'blob:'}}
+- {'connect-src': {"'self'"},
++ {'connect-src': {"'self'", 'blob:'},
+?                          +++++++++
+
+   'default-src': {"'self'", 'blob:', 'data:'},
+   'script-src': {"'self'", "'unsafe-eval'", "'unsafe-inline'"},
+   'style-src': {"'self'", "'unsafe-inline'"},
+   'worker-src': {"'self'", 'blob:'}}
+
+======================================================================
+FAIL: test_scratchjr_engine_can_read_its_project_blob (test_frontend_proxy.FrontendProxyTest.test_scratchjr_engine_can_read_its_project_blob) (path='/scratchjr/engine.html?mode=edit&workFile=blob:fixture', method='HEAD')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/scratchjr-blob-loading/api/dev/test_frontend_proxy.py", line 316, in test_scratchjr_engine_can_read_its_project_blob
+    self.assert_local_csp(headers, {"'self'", 'blob:'})
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/scratchjr-blob-loading/api/dev/test_frontend_proxy.py", line 153, in assert_local_csp
+    self.assertEqual(directives, {
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+        'default-src': {"'self'", 'data:', 'blob:'},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        'connect-src': {"'self'"} if connect_sources is None else connect_sources,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    })
+    ^^
+AssertionError: {'def[154 chars]self'", "'unsafe-inline'"}, 'connect-src': {"'self'"}} != {'def[154 chars]self'", "'unsafe-inline'"}, 'connect-src': {"'self'", 'blob:'}}
+- {'connect-src': {"'self'"},
++ {'connect-src': {"'self'", 'blob:'},
+?                          +++++++++
+
+   'default-src': {"'self'", 'blob:', 'data:'},
+   'script-src': {"'self'", "'unsafe-eval'", "'unsafe-inline'"},
+   'style-src': {"'self'", "'unsafe-inline'"},
+   'worker-src': {"'self'", 'blob:'}}
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.071s
+
+FAILED (failures=4)

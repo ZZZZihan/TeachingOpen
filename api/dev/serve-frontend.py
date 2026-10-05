@@ -27,7 +27,9 @@ class LocalFrontend(SimpleHTTPRequestHandler):
     def end_headers(self):
         # Block legacy telemetry and other remote integrations during local tests.
         # Scratch uses blob workers; give them an explicit source without widening scripts.
-        self.send_header("Content-Security-Policy", "default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self'")
+        # ScratchJr's engine reads a parent-created project Blob through XHR.
+        connect_sources = "'self' blob:" if urlsplit(self.path).path == "/scratchjr/engine.html" else "'self'"
+        self.send_header("Content-Security-Policy", "default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; connect-src " + connect_sources)
         super().end_headers()
 
     def api(self):

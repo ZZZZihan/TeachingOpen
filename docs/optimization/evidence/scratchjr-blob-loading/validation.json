@@ -1,0 +1,41 @@
+{
+  "base_commit": "dc4c398a8559efa5eef46280305242156cc7ae61",
+  "candidate_diagnosed": "06ab2040780f33296e93c97d29d00e80cbcc2f65",
+  "branch": "fix/scratchjr-blob-loading-delivery",
+  "scope": "Author HTTP/TCP and Python checks; no browser or runtime switch. Root owns authenticated DOM regression.",
+  "baseline_scratchjr_policy": "connect-src 'self'",
+  "fixed_engine_policy": "connect-src 'self' blob:",
+  "other_routes_policy": "connect-src 'self'",
+  "tests": {
+    "baseline_new_targeted": {
+      "tests": 2,
+      "failing_subtests": 4,
+      "passing_tests": 1,
+      "exit_code": 1
+    },
+    "proxy": {
+      "tests": 22,
+      "passed": 22,
+      "seconds": 9.284,
+      "exit_code": 0
+    },
+    "python_base_suite": {
+      "tests": 108,
+      "passed": 107,
+      "skipped": 1,
+      "seconds": 9.645,
+      "exit_code": 0,
+      "skip_reason": "Existing dedicated snapshot runtime test requires TEACHING_SNAPSHOT_TEST_RUNTIME; not configured for this task."
+    },
+    "py_compile": {
+      "exit_code": 0
+    },
+    "diff_check": {
+      "exit_code": 0
+    }
+  },
+  "files": {
+    "api/dev/serve-frontend.py": "7c5e7af868c180e74d58ac218e4c9f23bf7b2aab411df47363de767800773966",
+    "api/dev/test_frontend_proxy.py": "2023f802dab524ea66ce74e6e31cf605192c901ca718c73d9cbd70d0962eda1b"
+  }
+}

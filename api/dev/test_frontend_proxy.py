@@ -140,7 +140,7 @@ class FrontendProxyTest(unittest.TestCase):
             conn.sendall(request.encode() + early)
             yield conn, head(conn)
 
-    def assert_local_csp(self, headers):
+    def assert_local_csp(self, headers, connect_sources=None):
         policies = headers.get_all('Content-Security-Policy', [])
         self.assertEqual(len(policies), 1)
         directives = {}
@@ -155,7 +155,7 @@ class FrontendProxyTest(unittest.TestCase):
             'script-src': {"'self'", "'unsafe-inline'", "'unsafe-eval'"},
             'worker-src': {"'self'", 'blob:'},
             'style-src': {"'self'", "'unsafe-inline'"},
-            'connect-src': {"'self'"},
+            'connect-src': {"'self'"} if connect_sources is None else connect_sources,
         })
 
     def http_response(self, method, path, headers=None):
@@ -303,6 +303,32 @@ class FrontendProxyTest(unittest.TestCase):
                     self.assertEqual(int(headers['Content-Length']), len(get_body))
                 self.assert_local_csp(headers)
         self.assertFalse(self.backend.requests)
+
+    def test_scratchjr_engine_can_read_its_project_blob(self):
+        directory = Path(self.tmp.name, 'scratchjr')
+        directory.mkdir()
+        (directory / 'engine.html').write_bytes(b'fixture ScratchJr engine')
+        for path in ('/scratchjr/engine.html', '/scratchjr/engine.html?mode=edit&workFile=blob:fixture'):
+            for method in ('GET', 'HEAD'):
+                with self.subTest(path=path, method=method):
+                    status, headers, body = self.http_response(method, path)
+                    self.assertEqual(status, 200)
+                    self.assert_local_csp(headers, {"'self'", 'blob:'})
+                    self.assertEqual(body, b'' if method == 'HEAD' else b'fixture ScratchJr engine')
+        self.assertFalse(self.backend.requests)
+
+    def test_project_blob_permission_is_limited_to_scratchjr_engine(self):
+        directory = Path(self.tmp.name, 'scratchjr')
+        directory.mkdir()
+        for name in ('editor.html', 'other.html'):
+            (directory / name).write_bytes(b'fixture ordinary page')
+        for path in ('/scratchjr/editor.html', '/scratchjr/other.html',
+                     '/index.html?next=/scratchjr/engine.html', '/scratchjr/engine.html.extra',
+                     '/api/fixture?next=/scratchjr/engine.html'):
+            for method in ('GET', 'HEAD'):
+                with self.subTest(path=path, method=method):
+                    _, headers, _ = self.http_response(method, path)
+                    self.assert_local_csp(headers)
 
     def test_static_head_conditional_and_missing_responses(self):
         _, get_headers, _ = self.http_response('GET', '/index.html')
