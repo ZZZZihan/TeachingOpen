@@ -43,6 +43,8 @@ function startupHarness (cached = {}) {
     const helper = readFileSync(resolve(__dirname, '../src/utils/startup.js'), 'utf8').replace(/export /g, '')
     vm.runInContext(helper, context)
   } catch (error) { if (error.code !== 'ENOENT') throw error }
+    const branding = readFileSync(resolve(__dirname, '../src/utils/platformBranding.js'), 'utf8').replace(/export /g, '')
+    vm.runInContext(branding, context)
   const source = readFileSync(resolve(__dirname, '../src/main.js'), 'utf8')
   const block = source.slice(source.indexOf('let cacheTime'))
     .replace(/start\(\)\s*$/, 'this.start = start')
@@ -290,4 +292,21 @@ test('挂载前再次检查已经失效的启动结果', async () => {
   await h.context.start()
   assert.equal(h.mounts, 0)
   assert.ok(h.elements.get('app').children.some(e => e.tag === 'button'))
+})
+
+test('真实启动对空白或非字符串品牌使用平台名称，保留有效自定义品牌', async () => {
+    for (const [brandName, expected] of [
+        [undefined, '天津工业大学 · 人工智能教学平台'],
+        [' \n\t ', '天津工业大学 · 人工智能教学平台'],
+        [42, '天津工业大学 · 人工智能教学平台'],
+        [{ name: '不应隐式转换' }, '天津工业大学 · 人工智能教学平台'],
+        ['  自定义课堂  ', '自定义课堂']
+    ]) {
+        const h = startupHarness()
+        const pending = h.context.start()
+        await answer(h, success({ ...config, brandName }), success(menu))
+        await pending
+        assert.equal(h.mounts, 1)
+        assert.equal(h.context.window.document.title, expected)
+    }
 })
