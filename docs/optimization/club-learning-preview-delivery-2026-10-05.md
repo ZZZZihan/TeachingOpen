@@ -2,6 +2,8 @@
 
 日期：2026-10-05。关联目标：[初高中社团学习体验](club-learning-goal-2026-10-05.md)。状态：三页原型已完成本地检查；用户视觉评阅、正式产品接入和真实学生试用尚未完成，Goal 保持 active。
 
+交付 PR：[#77 初高中社团三页创作体验原型](https://github.com/ZZZZihan/TeachingOpen/pull/77)，已普通推送并附加当前任务。实现与证据提交为 `8da8632`；此后的 PR 链接记录仅修改本文档，运行文件摘要不变。PR 创建后保持开放待评阅，未远端合并或部署。
+
 ## 本次改动
 
 - 新增独立目录 `design/club-learning-preview/`，只有 HTML、CSS、JavaScript 三个运行文件，没有安装依赖。
