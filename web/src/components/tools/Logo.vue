@@ -11,7 +11,7 @@
 <script>
 import { mixin } from '@/utils/mixin.js'
 import { getFileAccessHttpUrl } from '@/api/manage'
-import { brandingValue, platformBrandName } from '@/utils/platformBranding'
+import { brandingFileUrl, platformBrandName } from '@/utils/platformBranding'
 export default {
     name: 'Logo',
     mixins: [mixin],
@@ -33,8 +33,7 @@ export default {
         },
         logo () {
             const config = this.$store.state.user.sysConfig || {}
-            const path = brandingValue(config.logo)
-            return path ? getFileAccessHttpUrl(path) : ''
+            return brandingFileUrl(config, config.logo, getFileAccessHttpUrl)
         }
     },
     watch: {

@@ -96,7 +96,7 @@
   import { mapActions, mapGetters,mapState } from 'vuex'
   import { mixinDevice } from '@/utils/mixin.js'
   import { getFileAccessHttpUrl } from "@/api/manage"
-import { brandingValue } from '@/utils/platformBranding'
+import { brandingFileUrl, brandingValue } from '@/utils/platformBranding'
 
   export default {
     name: "UserMenu",
@@ -161,19 +161,16 @@ import { brandingValue } from '@/utils/platformBranding'
       ...mapGetters(["nickname", "avatar","userInfo"]),
       getFileAccessHttpUrl,
         getAvatar () {
-            const personalAvatar = brandingValue(this.avatar())
-            if (personalAvatar) {
-                const personalUrl = this.getFileAccessHttpUrl(personalAvatar)
-                if (personalUrl) return personalUrl
-            }
             const config = this.$store.state.user.sysConfig || {}
+            const personalUrl = brandingFileUrl(config, this.avatar(), this.getFileAccessHttpUrl)
+            if (personalUrl) return personalUrl
             const configuredAvatar = brandingValue(config.avatar)
             if (!configuredAvatar) return ''
             if (/^https?:\/\//i.test(configuredAvatar)) return configuredAvatar
             const domain = brandingValue(config.qiniuDomain)
             return domain
                 ? `${domain.replace(/\/+$/, '')}/${configuredAvatar.replace(/^\/+/, '')}`
-                : (this.getFileAccessHttpUrl(configuredAvatar) || '')
+                : brandingFileUrl(config, configuredAvatar, this.getFileAccessHttpUrl)
         },
       handleHome(){
         window.location.href = location.protocol + "//" + window.location.host

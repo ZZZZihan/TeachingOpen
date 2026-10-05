@@ -12,8 +12,8 @@ Vue.use(Vuex)
 const source = file => readFileSync(resolve(__dirname, '../src', file), 'utf8')
 const helpers = {}
 vm.runInNewContext(source('utils/platformBranding.js').replace(/export /g, '') +
-  '\nthis.helpers = { brandingValue, platformBrandName, platformPageTitle }', helpers)
-const { brandingValue, platformBrandName, platformPageTitle } = helpers.helpers
+  '\nthis.helpers = { brandingValue, brandingFileUrl, platformBrandName, platformPageTitle }', helpers)
+const { brandingValue, brandingFileUrl, platformBrandName, platformPageTitle } = helpers.helpers
 const platform = '天津工业大学 · 人工智能教学平台'
 const invalid = [undefined, null, '', ' \n\t ', false, true, 0, 42, NaN, {}, [], ['品牌']]
 const stub = { render (h) { return h('div', this.$slots.default) } }
@@ -329,4 +329,97 @@ test('真实 TabLayout 首页在配置刷新后仍只显示平台名称', async 
     await Vue.nextTick()
     assert.equal(h.document.title, '更新平台')
     h.instance.$destroy()
+})
+
+test('品牌文件守卫在缺失媒体域时不调用相对路径解析器，并处理解析器异常或无效输出', () => {
+    let calls = 0
+    const resolveFileUrl = () => { calls++; throw new Error('配置缓存缺失') }
+    for (const config of [null, undefined, {}, { uploadType: 'qiniu' }, { staticDomain: ' \n ' }]) {
+        assert.equal(brandingFileUrl(config, 'relative.png', resolveFileUrl), '')
+    }
+    assert.equal(calls, 0)
+    assert.equal(brandingFileUrl(null, 'https://assets.example.invalid/logo.png', resolveFileUrl), 'https://assets.example.invalid/logo.png')
+    assert.equal(calls, 0)
+    assert.equal(brandingFileUrl({ staticDomain: '/files' }, 'relative.png', resolver(makeStore(null))), '')
+    assert.equal(brandingFileUrl({ staticDomain: '/files' }, 'relative.png', () => 'undefined/relative.png'), '')
+    assert.equal(brandingFileUrl({ staticDomain: '/files' }, 'relative.png', () => null), '')
+})
+
+test('真实 UserMenu 相对个人头像遇到 null 或部分配置仍可渲染中性图标', () => {
+    for (const config of [null, undefined, {}, { uploadType: 'local' }, { uploadType: 'qiniu' }]) {
+        const h = harness('components/tools/UserMenu.vue', config, {}, 'personal.png')
+        assert.equal(h.instance.getAvatar(), '')
+        const avatar = renderedAvatar(h.instance._render())
+        assert.equal(avatar.componentOptions.propsData.src, '')
+        const actualAvatar = new Vue({ ...Avatar, propsData: avatar.componentOptions.propsData })
+        assert.equal(image(actualAvatar._render()), undefined)
+        assert.ok(nodes(actualAvatar._render()).some(node => node.componentOptions && node.componentOptions.propsData.type === 'user'))
+        actualAvatar.$destroy()
+        h.instance.$destroy()
+    }
+})
+
+test('真实 Logo 相对图片缺少对应文件域时直接显示文字而不产生 undefined 地址', () => {
+    for (const config of [
+        { logo: 'logo.png' },
+        { logo: 'logo.png', staticDomain: null },
+        { logo: 'logo.png', staticDomain: ' \n ' },
+        { logo: 'logo.png', staticDomain: {} },
+        { logo: 'logo.png', uploadType: 'qiniu', staticDomain: '/wrong-provider' }
+    ]) {
+        const h = harness('components/tools/Logo.vue', config)
+        assert.equal(h.instance.logo, '')
+        assert.equal(image(h.instance._render()), undefined)
+        assert.match(text(h.instance._render()), /天工/)
+        h.instance.$destroy()
+    }
+})
+
+test('真实 UserMenu 相对平台头像缺少文件域时不生成错误请求地址', () => {
+    for (const config of [
+        { avatar: 'default.png' },
+        { avatar: 'default.png', staticDomain: null },
+        { avatar: 'default.png', staticDomain: {} },
+        { avatar: 'default.png', uploadType: 'qiniu', staticDomain: '/wrong-provider' },
+        { avatar: 'default.png', qiniuDomain: ' \n ' }
+    ]) {
+        const h = harness('components/tools/UserMenu.vue', config)
+        assert.equal(h.instance.getAvatar(), '')
+        assert.equal(renderedAvatar(h.instance._render()).componentOptions.propsData.src, '')
+        h.instance.$destroy()
+    }
+})
+
+test('真实相对图片守卫仍保留无需媒体域的完整 HTTP 自定义图片', () => {
+    for (const address of ['https://assets.example.invalid/custom.png', 'https://[::1]/custom.png']) {
+        const logo = harness('components/tools/Logo.vue', { logo: address })
+        assert.equal(image(logo.instance._render()).data.attrs.src, address)
+        const personal = harness('components/tools/UserMenu.vue', null, {}, address)
+        assert.equal(renderedAvatar(personal.instance._render()).componentOptions.propsData.src, address)
+        const configured = harness('components/tools/UserMenu.vue', { avatar: address })
+        assert.equal(renderedAvatar(configured.instance._render()).componentOptions.propsData.src, address)
+        for (const h of [logo, personal, configured]) h.instance.$destroy()
+    }
+})
+
+test('真实 Logo 和 UserMenu 在媒体配置补全后恢复原来的相对自定义图片', async () => {
+    const logo = harness('components/tools/Logo.vue', { logo: 'logo.png' })
+    const avatar = harness('components/tools/UserMenu.vue', null, {}, 'personal.png')
+    assert.equal(image(logo.instance._render()), undefined)
+    assert.equal(avatar.instance.getAvatar(), '')
+    logo.replaceConfig({ logo: 'logo.png', staticDomain: '/files', uploadType: 'local' })
+    avatar.replaceConfig({ avatar: 'default.png', staticDomain: '/files', uploadType: 'local' })
+    await Vue.nextTick()
+    assert.equal(image(logo.instance._render()).data.attrs.src, '/files/logo.png')
+    assert.equal(renderedAvatar(avatar.instance._render()).componentOptions.propsData.src, '/files/personal.png')
+    avatar.store.state.personalAvatar = ''
+    await Vue.nextTick()
+    assert.equal(avatar.instance.getAvatar(), '/files/default.png')
+    logo.replaceConfig({ logo: 'logo.png', uploadType: 'qiniu', qiniuDomain: 'https://cdn.example.invalid' })
+    avatar.replaceConfig({ avatar: 'default.png', uploadType: 'qiniu', qiniuDomain: 'https://cdn.example.invalid' })
+    await Vue.nextTick()
+    assert.equal(image(logo.instance._render()).data.attrs.src, 'https://cdn.example.invalid/logo.png')
+    assert.equal(avatar.instance.getAvatar(), 'https://cdn.example.invalid/default.png')
+    logo.instance.$destroy()
+    avatar.instance.$destroy()
 })
