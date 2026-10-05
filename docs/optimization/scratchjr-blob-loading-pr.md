@@ -23,4 +23,19 @@ python3 -m unittest discover -s api/dev -p 'test_*.py'
 python3 -m py_compile api/dev/serve-frontend.py api/dev/test_frontend_proxy.py
 ```
 
-上述是作者受控 HTTP/TCP 和 Python 检查，没有在本任务操作浏览器、读取身份凭据、切换现有 runtime 或重新构建前端/JAR。真实认证课程从加载到实际编辑、保存、重开的 DOM 回归由主 Agent 执行；本文不将响应头通过称为该流程完成。独立审查、人工验收、合并及生产部署分别保留为后续状态。
+上述是作者受控 HTTP/TCP 和 Python 检查，没有在本任务操作浏览器、读取身份凭据、切换现有 runtime 或重新构建前端/JAR。
+
+## 主 Agent 的真实认证浏览器回归
+
+主 Agent 在隔离本地环境使用普通登录和真实 API 完成了 ScratchJr 课程链；账户、班级和起始材料均为自制验收夹具。只修复 CSP 后，学生从课程正常打开编辑器并添加“猫猫”，编写绿旗后前进 5 步的程序、保存草稿。关闭编辑器后从正常入口重开，仍是同一作品编号，角色及 5 步程序保留；将参数改成 8 后提交，页面提示更新同一作品。
+
+最终候选 `0d06bc53` 的教师预览成功加载该角色和前进 8 步的程序，教师保存 5 分及反馈。学生随后正常重新登录，回读到 **5/5** 和完整反馈。只读观察者另外核对实际保存的 `project/data.json`：草稿含 `onflag → forward(5)`，提交含 `onflag → forward(8)`，作品状态按 **0 → 1 → 2** 变化，始终为同一作品编号，作品计数 1、反馈记录 1；评分后引用的 SJR 仍是这份 8 步提交。这里报告的是实际浏览器操作和指定记录的持久化结果，未将其扩展成所有数据库、复杂项目或生产环境验收。
+
+本轮私有证据位于本机 `/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/authenticated-role-flow-20261005/`，未复制原始业务行、评论全文、账户记录或截图到本 PR：
+
+- `root-browser/scratchjr-draft-success.{png,txt}`、`scratchjr-reopened-five-steps.{png,txt}`、`scratchjr-submit-eight-steps.{png,txt}`：实际草稿、关闭重开及更新提交。
+- `root-browser/teacher-scratchjr-preview-ran.{png,txt}`、`teacher-scratchjr-grade-reopen-390.{png,txt}`：教师预览与评分回读。预览证据的文件名虽带 `ran`，截图只证明载入角色和 8 步程序，**不证明教师点击绿旗或动画执行，未记为运行通过**。
+- `root-browser/student-scratchjr-feedback-fulltext.{png,txt}`：学生正常重新登录后的分数和完整反馈回读。
+- `data-observer/scratchjr-draft-01-sjr-summary.json`、`scratchjr-submit-02-sjr-summary.json`、`scratchjr-score-five-summary.json`：只读的项目脚本、状态、同编号计数及评分关联核对。
+
+此说明补齐真实认证链的证据，产品源码、测试及其原有检查结果保持不变。人工验收、PR 合并及生产部署仍是分别判断的后续状态。
