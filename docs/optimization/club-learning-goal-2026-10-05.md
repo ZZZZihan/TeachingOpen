@@ -38,11 +38,13 @@
 | --- | --- | --- |
 | 公开首页 | `getHomeCourse` 的课程 id、名称、描述、封面、类型、分类；公开作品列表 | 仅展示允许公开的数据；“项目”尚无独立模型。 |
 | 学生创作台 | `mine` 的作品名称、类型、状态、文件、更新时间、课程名、评分和评语；`mineCourse` | 草稿、待批改、已批改、公开、精选等状态按实际合同显示；评分可空且为 0–5，评语可空。已批改不等于项目已完成。 |
-| 项目学习页 | `mineUnit` / `getUnitWorkInfo` 的单元介绍、资料、视频、案例、练习类型与文件、`mineWorkId` | 资料受显示开关约束，继续创作沿用现有编辑器与保存权限；作品 `courseId` 实际绑定单元 id，不能直接当父课程 id。 |
+| 项目学习页 | `mineUnit` / `getUnitWorkInfo` 的单元介绍、资料、视频、案例、练习类型与文件、`mineWorkId` | 视频、案例、教案、资料四类受显示开关约束；不要据此推断所有附件字段均被过滤。继续创作沿用现有编辑器与保存权限；作品 `courseId` 实际绑定单元 id，不能直接当父课程 id。 |
 
 相关源码：`web/src/views/home/Home.vue`、`web/src/views/account/course/{CourseListCard.vue,CourseUnitListCard.vue,modules/UnitViewModal.vue}`、`web/src/views/account/center/page/MineWorks.vue`、`web/src/utils/studentWorkFeedback.js`、`web/public/python/editor-bridge.js`，以及后端 `modules/teaching` 的实体、控制器和映射。
 
 未发现可靠的个人项目完成率、学习时长、难度、先修关系和推荐下一步字段。浏览或开课次数不转化为个人学习进度。后续若需要，先明确教学和数据定义，再独立实施。
+
+正式接入前的补充核对见[三页接入合同](club-learning-integration-audit-2026-10-05.md)，尤其注意创建时间与编辑时间、不同工具保存动作、旧评语与本次批改、课程可见性与访问权限之间的差别。
 
 ## 分阶段完成条件
 
