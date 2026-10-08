@@ -53,6 +53,7 @@
     <properties>
         <jeecgboot.version>2.2.0</jeecgboot.version>
         <java.version>1.8</java.version>
+        <skipTests>true</skipTests>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mybatis-plus.version>3.1.2</mybatis-plus.version>
@@ -429,7 +430,7 @@
 		        <groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-surefire-plugin</artifactId>
 		        <configuration>
-		          <skipTests>true</skipTests>
+		          <skipTests>${skipTests}</skipTests>
 		        </configuration>
 	        </plugin>
 	         <!-- 避免font文件的二进制文件格式压缩破坏 -->
