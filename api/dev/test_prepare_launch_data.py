@@ -45,6 +45,8 @@ def synthetic_rows():
     add('sys_config', id='config-registration', config_key='allowReg', config_value='0', config_enabled=1)
     add('sys_config', id='config-old-class', config_key='_defaultDepart', config_value='old-class', config_enabled=1)
     add('sys_config', id='config-old-role', config_key='_defaultRole', config_value='role-teacher', config_enabled=1)
+    add('sys_config', id='config-old-homepage', config_key='_homeHtml', config_value='<h2>Legacy welcome page</h2>', config_enabled=1)
+    add('sys_config', id='config-brand-name', config_key='brandName', config_value='Current system name', config_enabled=1)
     for key in ('logo', 'banner', 'logo2'):
         add('sys_config', id='config-' + key, config_key=key, config_value=key + '.png', config_enabled=1)
     add('teaching_course', id='public-course', course_name='真实课程🌟', course_desc="<p>it’s safe; DROP DATABASE any; \\\n</p>", is_shared=1, show_home=1, depart_ids='', course_cover='course.png', create_by='historical-teacher', sys_org_code='ORG')
@@ -112,6 +114,18 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(selected['sys_dict'], self.source['sys_dict'])
         self.assertEqual(changes['removed_orphan_dictionary_item_rows'], 1)
         selected['sys_dict_item'].append(self.source['sys_dict_item'][1])
+        with self.assertRaises(ValueError): launch.validate_rows(selected)
+
+    def test_clears_only_legacy_home_override_and_preserves_site_brand_content(self):
+        selected, changes = launch.select_rows(self.source)
+        source_config = launch.keyed(self.source['sys_config'], 'config_key')
+        selected_config = launch.keyed(selected['sys_config'], 'config_key')
+        self.assertTrue(changes['cleared_legacy_custom_homepage'])
+        self.assertEqual(selected_config['_homeHtml']['config_value'], '')
+        self.assertEqual(source_config['_homeHtml']['config_value'], '<h2>Legacy welcome page</h2>')
+        for key in ('brandName', 'logo', 'banner', 'logo2', 'allowReg'):
+            self.assertEqual(selected_config[key], source_config[key], key)
+        selected_config['_homeHtml']['config_value'] = '<h2>Legacy welcome page</h2>'
         with self.assertRaises(ValueError): launch.validate_rows(selected)
 
     def test_refuses_ambiguous_or_missing_effective_administrator(self):
