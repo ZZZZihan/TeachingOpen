@@ -1,0 +1,190 @@
+{
+  "checked_at": "2026-10-09T23:08:39.165188+08:00",
+  "scope": "Current cloud production read-only inspection; cloud and Mac registration writes only in restored isolated databases; server backups and timers installed under this task authorization. No production application restart or data import.",
+  "unit_tests": {
+    "passed": 18
+  },
+  "cloud_registration": {
+    "status": "passed",
+    "database": "teachingopen_check_backup_20261009",
+    "checks": [
+      "isolated application healthy",
+      "synthetic phones unused",
+      "student registration",
+      "student no credentials returned",
+      "student exact required fields persisted",
+      "student password protected at rest",
+      "student profile persisted",
+      "student only student role granted",
+      "student duplicate rejected",
+      "captcha generated",
+      "captcha belongs to isolated cache",
+      "new account password login",
+      "student admin endpoint refused",
+      "teacher registration",
+      "teacher no credentials returned",
+      "teacher exact required fields persisted",
+      "teacher password protected at rest",
+      "teacher profile persisted",
+      "teacher only student role granted",
+      "teacher duplicate rejected",
+      "captcha generated",
+      "captcha belongs to isolated cache",
+      "new account password login",
+      "teacher admin endpoint refused",
+      "six concurrent attempts create one user",
+      "other concurrent attempts report duplicate",
+      "concurrent profile and role each saved once",
+      "profile write failure reports retryable error",
+      "failed registration rolls back user",
+      "recovery after failure succeeds",
+      "final user count includes exactly four test accounts",
+      "public directory contains only masked safe fields"
+    ],
+    "passed": 32,
+    "test_accounts": 4,
+    "production_test_writes": false
+  },
+  "local_registration_after_cloud_backup_restore": {
+    "status": "passed",
+    "database": "teachingopen_check_cloud_20261009",
+    "checks": [
+      "isolated application healthy",
+      "synthetic phones unused",
+      "student registration",
+      "student no credentials returned",
+      "student exact required fields persisted",
+      "student password protected at rest",
+      "student profile persisted",
+      "student only student role granted",
+      "student duplicate rejected",
+      "captcha generated",
+      "captcha belongs to isolated cache",
+      "new account password login",
+      "student admin endpoint refused",
+      "teacher registration",
+      "teacher no credentials returned",
+      "teacher exact required fields persisted",
+      "teacher password protected at rest",
+      "teacher profile persisted",
+      "teacher only student role granted",
+      "teacher duplicate rejected",
+      "captcha generated",
+      "captcha belongs to isolated cache",
+      "new account password login",
+      "teacher admin endpoint refused",
+      "six concurrent attempts create one user",
+      "other concurrent attempts report duplicate",
+      "concurrent profile and role each saved once",
+      "profile write failure reports retryable error",
+      "failed registration rolls back user",
+      "recovery after failure succeeds",
+      "final user count includes exactly four test accounts",
+      "public directory contains only masked safe fields"
+    ],
+    "passed": 32,
+    "test_accounts": 4,
+    "production_test_writes": false
+  },
+  "local_schema_sha256": "229df93adeb4057e40e61c9bf31f11a289efbe9a684898a7fc1e417a4737b398",
+  "production": {
+    "checked_at": "2026-10-09T23:08:39.165188+08:00",
+    "units": {
+      "teachingopen-api.service": {
+        "is-active": "active",
+        "is-enabled": "enabled"
+      },
+      "teachingopen-mysql.service": {
+        "is-active": "active",
+        "is-enabled": "enabled"
+      },
+      "teachingopen-backup.timer": {
+        "is-active": "active",
+        "is-enabled": "enabled"
+      },
+      "teachingopen-backup-verify.timer": {
+        "is-active": "active",
+        "is-enabled": "enabled"
+      }
+    },
+    "source_services": [
+      "MainPID=24803",
+      "ExecMainStartTimestamp=Fri 2026-10-09 21:54:47 CST",
+      "Id=teachingopen-api.service",
+      "",
+      "MainPID=23701",
+      "ExecMainStartTimestamp=Fri 2026-10-09 21:36:58 CST",
+      "Id=teachingopen-mysql.service"
+    ],
+    "production_counts": {
+      "users": 2,
+      "registration_profiles": 1,
+      "courses": 3,
+      "units": 83
+    },
+    "registration_open": true,
+    "orphan_profiles": 0,
+    "missing_role_links": 0,
+    "parity": {
+      "jar_sha256": "bc7934c5d258674c125a76f5a2c6a59d03b6cd24af0489f6bd37206ea5ce56bc",
+      "expected_jar_sha256": "bc7934c5d258674c125a76f5a2c6a59d03b6cd24af0489f6bd37206ea5ce56bc",
+      "frontend_files": 4902,
+      "frontend_mismatches": [],
+      "frontend_extra_files": [],
+      "schema_sha256": "229df93adeb4057e40e61c9bf31f11a289efbe9a684898a7fc1e417a4737b398"
+    },
+    "complete_backups": 2,
+    "latest_snapshot": "20261009T150253Z-38d13b80",
+    "latest_database_sha256": "05e9fe4cbf877cd0a6f112aae3a61fea091e7f9b2b562a465090648a21da59d1",
+    "latest_database_bytes": 120255,
+    "backup_upload_files": 297,
+    "backup_upload_bytes": 5941586119,
+    "deduplicated_files": 297,
+    "latest_restore_check": {
+      "counts": {
+        "sys_user": 2,
+        "sys_user_role": 3,
+        "teaching_registration_profile": 1,
+        "teaching_course": 3,
+        "teaching_course_unit": 83,
+        "sys_file": 0
+      },
+      "checks": [
+        "profiles_have_users",
+        "profiles_have_roles",
+        "valid_identity",
+        "profile_required_fields",
+        "name_school_utf8mb4"
+      ],
+      "checked_at": "2026-10-09T15:05:24.775442+00:00",
+      "status": "passed",
+      "database_sha256": "05e9fe4cbf877cd0a6f112aae3a61fea091e7f9b2b562a465090648a21da59d1",
+      "restricted_restore_user": true
+    },
+    "disk_available_bytes": 30334926848,
+    "traffic_protection_remains_disabled": true,
+    "production_test_accounts_created": 0,
+    "production_application_restarted": false,
+    "verification_app_stopped": true
+  },
+  "heartbeat": {
+    "id": "teachingopen-2",
+    "name": "TeachingOpen 注册与备份巡检",
+    "status": "ACTIVE",
+    "interval_hours": 6
+  },
+  "limitations": [
+    "Database/file snapshots are online and not one cross-store atomic transaction.",
+    "Scheduled off-host copies cover MySQL; uploads and private config snapshots are currently on the server.",
+    "Redis data is excluded.",
+    "No whole-server reboot, production overwrite restore, future timer cycle, or human acceptance claimed."
+  ],
+  "offhost_latest": {
+    "status": "passed",
+    "snapshot": "20261009T150253Z-38d13b80",
+    "sha256": "05e9fe4cbf877cd0a6f112aae3a61fea091e7f9b2b562a465090648a21da59d1",
+    "bytes": 120255,
+    "copied_at": "2026-10-09T15:09:32.985941+00:00",
+    "database_only": true
+  }
+}

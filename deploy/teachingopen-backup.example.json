@@ -1,0 +1,19 @@
+{
+  "database": "teachingopen",
+  "mysql": "/usr/bin/mysql",
+  "mysqldump": "/usr/bin/mysqldump",
+  "mysql_options": "/srv/teachingopen/private/mysql-root.cnf",
+  "mysql_socket": "/run/teachingopen-mysql/mysql.sock",
+  "uploads": "/srv/teachingopen/runtime/uploads",
+  "application": "/srv/teachingopen/runtime/app.jar",
+  "destination": "/srv/teachingopen/backups",
+  "rsync": "/usr/bin/rsync",
+  "minimum_free_bytes": 4294967296,
+  "configuration_files": {
+    "application.properties": "/srv/teachingopen/runtime/config/application.properties",
+    "mysql-client.cnf": "/srv/teachingopen/private/mysql-root.cnf",
+    "teachingopen-api.service": "/etc/systemd/system/teachingopen-api.service",
+    "teachingopen-mysql.service": "/etc/systemd/system/teachingopen-mysql.service",
+    "nginx.conf": "/etc/nginx/sites-enabled/teachingopen.conf"
+  }
+}
