@@ -78,7 +78,9 @@ jeecg.elasticsearch.check-enabled=false
 jeecg.elasticsearch.cluster-nodes=127.0.0.1:9
 jeecg.qiniu.accessKey=disabled
 jeecg.qiniu.secretKey=disabled
-jeecg.qiniu.staticDomain=http://127.0.0.1:9
+# Legacy header/login components use this name for local logo URLs.
+# uploadType=local keeps Qiniu uploads disabled.
+jeecg.qiniu.staticDomain=/api/sys/common/static
 jeecg.qiniu.bucketName=disabled
 jeecg.qiniu.area=z0
 jeecg.oss.endpoint=http://127.0.0.1:9

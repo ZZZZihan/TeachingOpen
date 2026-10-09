@@ -80,6 +80,8 @@ JAR、dist、SQL 和课程资源本身可跨 Linux amd64/arm64 迁移；JRE、My
 
 把模板复制到目标侧 `0700` 私有配置目录，文件设为 `0600`。按目标填写所有 `@PLACEHOLDER@`：数据库完整 JDBC URL/应用用户名/密码、Redis 主机/端口/独占 database/密码、API 绑定地址/端口、对外 origin、运行 uploads/webapp/临时文件目录。MySQL 应用账号应限定所需数据库；数据库与 Redis 不公开暴露。模板单独声明所有应用必需配置，并禁用外部邮件、短信、第三方登录、云存储和搜索功能。
 
+旧页头和登录组件仍用 `qiniu.staticDomain` 这个配置名拼接本地品牌素材地址，因此模板把它设为 `/api/sys/common/static`，与本地素材路径一致。这只是兼容旧组件的本地 URL 别名；`uploadType=local`，不会开启七牛上传，也不提供云存储凭据。
+
 使用 Spring 的 `spring.config.location` 明确替换 JAR 内嵌配置，只启用 `launch`。不要使用内嵌 `dev`、`prod` 或测试 profile，也不要使用 `spring.config.additional-location` 叠加旧配置。目标配置包含凭据，启动命令只引用配置路径：
 
 ```sh
