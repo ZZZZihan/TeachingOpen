@@ -20,8 +20,10 @@ spec.loader.exec_module(paths)
 FORMAT = 1
 JAR = 'api/jeecg-boot-module-system/target/teaching-open-2.8.0.jar'
 MIGRATIONS = ['api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql']
+MIGRATION_NAMES = ['01-phone-profile-registration.sql', '02-enable-phone-registration.sql']
 SUPPORT = ['deploy/launch_bundle.py', 'deploy/candidate_release.py', 'deploy/LAUNCH_BUNDLE.md',
-           'deploy/application-launch.properties.template', 'api/dev/prepare_launch_data.py']
+           'deploy/application-launch.properties.template', 'api/dev/prepare_launch_data.py',
+           'deploy/registration_upgrade.py']
 
 
 def git(source, *args):
@@ -221,6 +223,17 @@ def data_verify(source, package):
     return paths.read_json(package / 'manifest.json')
 
 
+def upgrade_manifest(source):
+    # Execute only the source explicitly selected as a trusted clean candidate.
+    specification = importlib.util.spec_from_file_location('_launch_upgrade', source / 'deploy/registration_upgrade.py')
+    module = importlib.util.module_from_spec(specification)
+    specification.loader.exec_module(module)
+    value = module.migration_manifest(source)
+    if [tuple(row) for row in module.MIGRATIONS] != list(zip(MIGRATIONS, MIGRATION_NAMES)):
+        raise ValueError('Upgrade runner migration contract differs')
+    return value
+
+
 def create(args):
     source = paths.checked_path(args.source, 'directory')
     commit = paths.git_commit(source)
@@ -237,8 +250,10 @@ def create(args):
     copy_tree(output, 'web/dist', build_dir / 'web/dist')
     copy_file(output, 'web/nginx.conf', source / 'web/nginx/default.conf')
     copy_tree(output, 'initial-data', data_dir)
-    for name in MIGRATIONS:
-        copy_file(output, 'migrations/' + Path(name).name, source / name)
+    for name, frozen_name in zip(MIGRATIONS, MIGRATION_NAMES):
+        copy_file(output, 'migrations/' + frozen_name, source / name)
+    copy_file(output, 'migrations/registration_upgrade.py', source / 'deploy/registration_upgrade.py')
+    write_file(output, 'migrations/migration-manifest.json', paths.json_bytes(upgrade_manifest(source)))
     copy_file(output, 'migrations/Dockerfile.db.reference', source / 'api/Dockerfile.db')
     copy_file(output, 'config/application-launch.properties.template', source / 'deploy/application-launch.properties.template')
     copy_file(output, 'RUNBOOK.md', source / 'deploy/LAUNCH_BUNDLE.md')
@@ -258,8 +273,9 @@ def create(args):
         'initial_data_manifest_sha256': paths.sha256(data_dir / 'manifest.json'),
         'initial_data_source_commit': data['source_commit'],
         'initial_data_counts': data['counts']['retained'], 'course_assets': data['assets'],
-        'migration_order_new_database': ['initial-data/mysql/seed.sql'] + ['migrations/' + Path(name).name for name in MIGRATIONS],
-        'migration_order_existing_database': ['migrations/' + Path(name).name for name in MIGRATIONS],
+        'registration_upgrade_manifest_sha256': paths.sha256(output / 'migrations/migration-manifest.json'),
+        'migration_order_new_database': ['initial-data/mysql/seed.sql'] + ['migrations/' + name for name in MIGRATION_NAMES],
+        'migration_order_existing_database': ['migrations/' + name for name in MIGRATION_NAMES],
         'source_files': {name: receipt(source / name) for name in required},
         'files': immutable, 'services_started': False,
         'runtime_data_checked': False, 'cloud_deployed': False, 'human_accepted': False,
@@ -317,11 +333,11 @@ def verify_bundle(bundle, expected_manifest=None, source=None):
         raise ValueError('Initial data summary differs')
     if data['source_commit'] != value['initial_data_source_commit']:
         raise ValueError('Initial data source provenance differs')
-    expected_new_order = ['initial-data/mysql/seed.sql'] + ['migrations/' + Path(name).name for name in MIGRATIONS]
+    expected_new_order = ['initial-data/mysql/seed.sql'] + ['migrations/' + name for name in MIGRATION_NAMES]
     if value['migration_order_new_database'] != expected_new_order or value['migration_order_existing_database'] != expected_new_order[1:]:
         raise ValueError('Migration order differs')
     frozen_sources = {name: 'tools/' + name for name in SUPPORT}
-    frozen_sources.update({name: 'migrations/' + Path(name).name for name in MIGRATIONS})
+    frozen_sources.update({name: 'migrations/' + frozen_name for name, frozen_name in zip(MIGRATIONS, MIGRATION_NAMES)})
     frozen_sources.update({'api/Dockerfile.db': 'migrations/Dockerfile.db.reference',
                           'web/nginx/default.conf': 'web/nginx.conf'})
     if set(value['source_files']) != set(frozen_sources):
@@ -331,6 +347,19 @@ def verify_bundle(bundle, expected_manifest=None, source=None):
             raise ValueError('Copied release source provenance differs')
     if receipt(bundle / 'RUNBOOK.md') != value['source_files']['deploy/LAUNCH_BUNDLE.md'] or receipt(bundle / 'config/application-launch.properties.template') != value['source_files']['deploy/application-launch.properties.template']:
         raise ValueError('Runbook or configuration template differs')
+    if receipt(bundle / 'migrations/registration_upgrade.py') != value['source_files']['deploy/registration_upgrade.py']:
+        raise ValueError('Upgrade runner source differs')
+    if paths.sha256(bundle / 'migrations/migration-manifest.json') != value['registration_upgrade_manifest_sha256']:
+        raise ValueError('Upgrade manifest fingerprint differs')
+    upgrade = paths.read_json(bundle / 'migrations/migration-manifest.json')
+    expected_upgrade = {'format': 1, 'kind': 'teachingopen-registration-upgrade',
+                        'automatic_apply': False, 'ddl_transactional': False,
+                        'initialization_order': ['schema', 'data', *MIGRATION_NAMES],
+                        'existing_database_order': MIGRATION_NAMES,
+                        'steps': [{'source': name, 'file': frozen_name, **value['source_files'][name]}
+                                  for name, frozen_name in zip(MIGRATIONS, MIGRATION_NAMES)]}
+    if upgrade != expected_upgrade:
+        raise ValueError('Upgrade manifest source or order differs')
     if source is not None:
         source = paths.checked_path(source, 'directory')
         if paths.git_commit(source) != value['source_commit']:
@@ -347,6 +376,7 @@ def verify_bundle(bundle, expected_manifest=None, source=None):
             'jar_sha256': value['jar']['sha256'], 'dist_files': value['dist_files'],
             'initial_data_counts': value['initial_data_counts'],
             'asset_file_count': value['course_assets']['count'],
+            'registration_upgrade_manifest_sha256': value['registration_upgrade_manifest_sha256'],
             'immutable_files': len(actual), 'permissions': 'directories 0700; files 0600',
             'source_checked': source is not None, 'services_started': False,
             'runtime_data_checked': False, 'cloud_deployed': False, 'human_accepted': False}

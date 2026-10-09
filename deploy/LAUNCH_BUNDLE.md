@@ -41,6 +41,8 @@ initial-data/uploads/**                297 个课程文件与 3 个系统品牌�
 initial-data/manifest.json             数据来源、净化计数与资源聚合指纹
 initial-data/assets-manifest.json      私有资源路径与逐文件指纹
 migrations/*.sql                      按最终源码冻结的注册升级 SQL
+migrations/migration-manifest.json    独立升级清单；外层 manifest 钉住其 SHA256
+migrations/registration_upgrade.py    明确的核验、预检、备份与应用入口
 migrations/Dockerfile.db.reference     既有数据库镜像初始化次序参考
 config/application-launch.properties.template
 evidence/build.json                   构建工具版本、命令、源码与产物清单
@@ -60,6 +62,15 @@ RUNBOOK.md                            本说明
 新数据库仅在目标数据库确认为 0 个表的全新数据库且已获初始化授权后，按 manifest 的 `migration_order_new_database` 顺序执行：CREATE schema 与初始数据 SQL，再执行手机资料注册表升级，最后显式开启手机号资料注册。初始 SQL 不含 DROP，只创建表；已有表会使初始化失败。导入前必须核对数据包并查询实际表数；非 0 表的环境拒绝使用 seed。不要使用 `mysql --force` 或忽略导入错误，以免部分创建、部分插入。导入失败应保留错误与隔离库，定位原因后另用一个新空库重试，不向业务环境继续灌入。
 
 已有数据库只能在单独授权、备份与回滚材料完成后，执行 manifest 的 `migration_order_existing_database`，禁止导入 `seed.sql`。手机资料注册表升级脚本保留已有注册开关值；随后的 enable 脚本表示操作者显式开启注册，会把有效且唯一的开关值改为开启。注册升级的幂等性、开启步骤和管理员菜单权限由升级 SQL 的专项验证负责。Docker 官方初始化目录仅在数据库数据目录为空时执行，重启已有数据容器不会补跑升级 SQL。
+
+包内升级目录按 `01-phone-profile-registration.sql`、`02-enable-phone-registration.sql` 排序。读取外层 manifest 的 `registration_upgrade_manifest_sha256` 作为 `$UPGRADE_MANIFEST_SHA256`，先执行离线核验：
+
+```sh
+python3 "$BUNDLE_DIR/migrations/registration_upgrade.py" verify \
+  --directory "$BUNDLE_DIR/migrations" --manifest-sha256 "$UPGRADE_MANIFEST_SHA256"
+```
+
+目标已有数据库的 `preflight` 和 `apply` 需要明确 MySQL 二进制、私有 `--defaults-extra-file` 与数据库名。预检会创建并移除保留的校验存储过程，属于目标库操作；正式应用前需单独授权并停止所有应用/管理员写入。`apply` 还要求明确 mysqldump、全新的私有备份路径、`--maintenance-confirmed` 与 `--restore-check-confirmed`，先通过预检并生成新的完整备份及收据，再执行升级。恢复检查必须来自操作者实际验证，不能靠勾选替代。DDL 不可事务回滚，任何错误都保留备份并停止，不能自动删除表或继续忽略错误。
 
 初始 uploads 应复制到新的运行上传目录。保留原文件名和目录大小写，先核对资源 manifest，再允许应用写入。运行 uploads、webapp、日志、MySQL 与 Redis 各用独立可写目录，不在冻结包内写入。正式包不包含测试账号、Redis 挑战值或测试服务配置。
 

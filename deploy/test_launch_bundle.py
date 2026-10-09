@@ -21,8 +21,9 @@ class PrivateBundleIntegrityTest(unittest.TestCase):
         self.write('web/dist/index.html', '<!doctype html>offline unit fixture')
         for name in release.SUPPORT:
             self.write('tools/' + name, 'placeholder ' + name)
-        for name in release.MIGRATIONS:
-            self.write('migrations/' + Path(name).name, '-- offline test migration\n')
+        for name in release.MIGRATION_NAMES:
+            self.write('migrations/' + name, '-- offline test migration\n')
+        self.write('migrations/registration_upgrade.py', 'placeholder deploy/registration_upgrade.py')
         self.write('migrations/Dockerfile.db.reference', '# offline test reference')
         self.write('web/nginx.conf', '# offline test proxy')
         self.write('RUNBOOK.md', 'placeholder deploy/LAUNCH_BUNDLE.md')
@@ -45,10 +46,16 @@ class PrivateBundleIntegrityTest(unittest.TestCase):
                           for name in ['backend-build.log', 'frontend-build.log']}}
         self.write('evidence/build.json', release.paths.json_bytes(built))
         copies = {name: 'tools/' + name for name in release.SUPPORT}
-        copies.update({name: 'migrations/' + Path(name).name for name in release.MIGRATIONS})
+        copies.update({name: 'migrations/' + frozen_name for name, frozen_name in zip(release.MIGRATIONS, release.MIGRATION_NAMES)})
         copies.update({'api/Dockerfile.db': 'migrations/Dockerfile.db.reference',
                        'web/nginx/default.conf': 'web/nginx.conf'})
-        order = ['initial-data/mysql/seed.sql'] + ['migrations/' + Path(name).name for name in release.MIGRATIONS]
+        upgrade = {'format': 1, 'kind': 'teachingopen-registration-upgrade', 'automatic_apply': False,
+                   'ddl_transactional': False, 'initialization_order': ['schema', 'data', *release.MIGRATION_NAMES],
+                   'existing_database_order': release.MIGRATION_NAMES,
+                   'steps': [{'source': name, 'file': frozen_name, **release.receipt(self.bundle / 'migrations' / frozen_name)}
+                             for name, frozen_name in zip(release.MIGRATIONS, release.MIGRATION_NAMES)]}
+        self.write('migrations/migration-manifest.json', release.paths.json_bytes(upgrade))
+        order = ['initial-data/mysql/seed.sql'] + ['migrations/' + name for name in release.MIGRATION_NAMES]
         self.manifest = {'format': 1, 'kind': 'teachingopen-private-launch-bundle', 'complete': True,
                          'source_commit': 'a' * 40, 'build_source_commit': 'b' * 40,
                          'initial_data_source_commit': 'c' * 40,
@@ -58,6 +65,7 @@ class PrivateBundleIntegrityTest(unittest.TestCase):
                          'build_receipt_sha256': release.paths.sha256(self.bundle / 'evidence/build.json'),
                          'initial_data_manifest_sha256': release.paths.sha256(self.bundle / 'initial-data/manifest.json'),
                          'initial_data_counts': data['counts']['retained'], 'course_assets': data['assets'],
+                         'registration_upgrade_manifest_sha256': release.paths.sha256(self.bundle / 'migrations/migration-manifest.json'),
                          'migration_order_new_database': order, 'migration_order_existing_database': order[1:],
                          'source_files': {name: release.receipt(self.bundle / copied) for name, copied in copies.items()},
                          'files': release.paths.file_inventory(self.bundle),
@@ -89,7 +97,7 @@ class PrivateBundleIntegrityTest(unittest.TestCase):
             release.verify_bundle(self.bundle)
 
     def test_upgrade_sql_byte_change_is_rejected(self):
-        (self.bundle / 'migrations/enable-phone-registration.sql').write_text('-- changed')
+        (self.bundle / 'migrations/02-enable-phone-registration.sql').write_text('-- changed')
         with self.assertRaisesRegex(ValueError, 'inventory differs'):
             release.verify_bundle(self.bundle)
 
