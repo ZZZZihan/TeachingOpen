@@ -1,7 +1,7 @@
 <template>
   <section class="registered-users" aria-labelledby="registered-users-title">
     <div class="directory-heading">
-      <div><h2 id="registered-users-title">已注册用户 <span v-if="total !== null && !error">{{ total }} 人</span></h2><p>统计通过注册入口加入、目前正常使用的教师和学生账号。姓名已脱敏；历史上没有注册档案的账号暂不计入。</p></div>
+      <div><h2 id="registered-users-title">已注册用户 <span v-if="total !== null && !error">{{ total }} 人</span></h2></div>
       <button type="button" class="refresh-button" :disabled="loading" @click="loadPage(1)">{{ loading ? '更新中…' : '刷新名单' }}</button>
     </div>
     <div class="directory-body" :class="{ 'with-entry': Boolean($slots['registration-entry']) }">
@@ -53,7 +53,6 @@ export default {
 .directory-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 20px; }
 h2 { margin: 0 0 10px; font-size: 22px; font-weight: 500; color: #29222b; }
 h2 span { margin-left: 14px; color: #74256a; font-size: 18px; }
-.directory-heading p { margin: 0; font-size: 12px; color: #79717a; line-height: 1.8; }
 button { background: transparent; border: 1px solid #d5c8d2; border-radius: 2px; color: #74256a; padding: 7px 12px; cursor: pointer; white-space: nowrap; }
 button:disabled { opacity: .45; cursor: default; }
 button:focus-visible { outline: 2px solid #74256a; outline-offset: 3px; }
