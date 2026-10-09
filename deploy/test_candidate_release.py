@@ -31,6 +31,8 @@ SOURCE_INPUTS = (
     'api/dev/production_fixture.py', 'api/dev/scratch_cloud_recovery.py',
     'api/dev/FixturePassword.java', 'api/dev/application-localtest.properties.template',
     PASSWORD_UTIL, 'web/nginx/default.conf',
+    'api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql',
+    'deploy/registration_upgrade.py',
 )
 CANARY = 'DO_NOT_PACKAGE_ORIGINAL_SOURCE_INSERT_9c207eb5'
 
@@ -99,7 +101,7 @@ class CandidateReleaseTests(unittest.TestCase):
         extractor = load_module(cls.trusted_source / 'api/dev/extract-schema.py', 'independent_schema_extractor')
         schema = extractor.extract_schema((cls.trusted_source / 'api/db/teachingopen2.8.sql').read_text())
         sql = cls.base_source / 'api/db/teachingopen2.8.sql'
-        sql.parent.mkdir(parents=True)
+        sql.parent.mkdir(parents=True, exist_ok=True)
         sql.write_text(schema + "\nINSERT INTO `sys_user` (`id`) VALUES ('" + CANARY + "');\n")
         (cls.base_source / 'README.fixture').write_text('Only synthetic test inputs.\n')
         git(cls.base_source, 'init', '-q')
@@ -478,7 +480,48 @@ class CandidateReleaseTests(unittest.TestCase):
         manifest = json.loads((self.base_bundle / 'manifest.json').read_text())
         self.assertEqual(manifest['fixtures']['initial_upload_files'], len(observed))
         self.assertEqual(manifest['fixture_counts'],
-                         {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 69})
+                         {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 70})
+
+    def test_registration_migrations_follow_data_and_match_explicit_upgrade_inputs(self):
+        manifest = json.loads((self.base_bundle / 'manifest.json').read_text())
+        self.assertEqual(manifest['database_upgrade']['initialization_order'],
+            ['init/01-schema.sql', 'init/02-fixtures.sql', 'init/03-phone-profile-registration.sql',
+             'init/04-enable-phone-registration.sql'])
+        self.assertIs(manifest['database_upgrade']['automatic_apply'], False)
+        self.assertIs(manifest['database_upgrade']['ddl_transactional'], False)
+        _, rows = self.parse_fixture_rows(self.base_bundle)
+        switches = [row for row in rows['sys_config'] if row['config_key'] == 'allowReg']
+        self.assertEqual(len(switches), 1)
+        self.assertEqual(switches[0]['config_value'], '0')
+        for initial, explicit in (
+                ('init/03-phone-profile-registration.sql', 'upgrade/01-phone-profile-registration.sql'),
+                ('init/04-enable-phone-registration.sql', 'upgrade/02-enable-phone-registration.sql')):
+            self.assertEqual((self.base_bundle / initial).read_bytes(), (self.base_bundle / explicit).read_bytes())
+
+    def test_verify_rejects_registration_sql_tamper_even_with_resealed_file_inventory(self):
+        bundle = self.bundle_copy()
+        self.replace_bundle_file(bundle, 'init/04-enable-phone-registration.sql', '-- removed registration activation\n')
+        self.reseal_inventory(bundle)
+        self.rejected_verify(bundle)
+
+    def test_verify_rejects_upgrade_order_or_backup_boundary_tamper(self):
+        for key, value in (('initialization_order', ['init/04-enable-phone-registration.sql']),
+                           ('existing_database_requires_explicit_backup_and_apply', False),
+                           ('ddl_transactional', True)):
+            with self.subTest(key=key):
+                bundle = self.bundle_copy()
+                self.edit_manifest(bundle, lambda manifest: manifest['database_upgrade'].update({key: value}))
+                self.rejected_verify(bundle)
+                shutil.rmtree(bundle)
+
+    def test_verify_rejects_changed_migration_manifest(self):
+        bundle = self.bundle_copy()
+        path = bundle / 'upgrade/migration-manifest.json'
+        manifest = json.loads(path.read_text())
+        manifest['existing_database_order'].reverse()
+        write_json(path, manifest)
+        self.reseal_inventory(bundle)
+        self.rejected_verify(bundle)
 
     def test_private_and_container_readable_permissions(self):
         bundle = self.base_bundle
@@ -488,7 +531,8 @@ class CandidateReleaseTests(unittest.TestCase):
         self.assertEqual(stat.S_IMODE((bundle / 'config/application-localtest.properties').stat().st_mode), 0o600)
         self.assertEqual(stat.S_IMODE((bundle / 'web/dist').stat().st_mode), 0o755)
         self.assertEqual(stat.S_IMODE((bundle / 'web/dist/js/app.js').stat().st_mode), 0o644)
-        for name in ('init/01-schema.sql', 'init/02-fixtures.sql', 'config/mysql-root-password',
+        for name in ('init/01-schema.sql', 'init/02-fixtures.sql', 'init/03-phone-profile-registration.sql',
+                     'init/04-enable-phone-registration.sql', 'config/mysql-root-password',
                      'config/mysql-app-password', 'config/redis.conf'):
             self.assertEqual(stat.S_IMODE((bundle / name).stat().st_mode), 0o444)
 
