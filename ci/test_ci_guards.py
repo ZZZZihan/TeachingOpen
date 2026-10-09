@@ -9,6 +9,12 @@ import registration_mysql as registration
 
 
 class CiGuardsTest(unittest.TestCase):
+    def test_configuration_comments_are_not_placeholders_but_missing_values_fail(self):
+        template = '# Fill @PLACEHOLDER@ in a private copy\nserver.port=@API_PORT@\n'
+        self.assertEqual(registration.render_properties(template, {'API_PORT':'18259'}),
+                         'server.port=18259\n')
+        with self.assertRaises(KeyError): registration.render_properties(template, {})
+
     def test_local_or_self_hosted_execution_is_rejected_before_connection(self):
         for environment in ({}, {'GITHUB_ACTIONS': 'true', 'RUNNER_ENVIRONMENT': 'self-hosted'}):
             with patch.dict(os.environ, environment, clear=True), patch.object(registration.subprocess, 'run') as call:

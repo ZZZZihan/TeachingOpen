@@ -36,6 +36,12 @@ def load(name, path):
     return module
 
 
+def render_properties(template, values):
+    # Template comments describe @PLACEHOLDER@ syntax but are not configuration.
+    active = '\n'.join(line for line in template.splitlines() if not line.lstrip().startswith('#'))
+    return re.sub(r'@([A-Z_]+)@', lambda m: values[m.group(1)], active) + '\n'
+
+
 def run(command, **kwargs):
     result = subprocess.run(command, capture_output=True, timeout=90, **kwargs)
     if result.returncode:
@@ -96,7 +102,7 @@ def main():
             'WEBAPP_DIRECTORY': str(runtime / 'webapp'),
         }
         template = (ROOT / 'deploy/application-launch.properties.template').read_text()
-        properties = re.sub(r'@([A-Z_]+)@', lambda m: values[m.group(1)], template)
+        properties = render_properties(template, values)
         config = runtime / 'application.properties'
         config.write_text(properties)
         config.chmod(0o600)

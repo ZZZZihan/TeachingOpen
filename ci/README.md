@@ -4,7 +4,7 @@
 
 ## 合并检查
 
-- **Frontend tests and build**：沿用 `web/.nvmrc` 与锁文件，禁用依赖安装脚本，运行前端测试和生产构建。
+- **Frontend tests and build**：沿用 `web/.nvmrc` 与锁文件，禁用依赖安装脚本，运行前端测试和生产构建。获取完整 Git 历史，以运行已有的旧版本回归对照测试。
 - **Backup and migration tools**：执行备份、升级清单、发布包、空表提取以及 CI 守卫的合成测试，不实际运行备份或拉取服务器数据。
 - **Backend and MySQL registration**：Java 8 干净构建并显式开启四组核心 Java 单元测试。额外核对 Surefire 报告，缺少或跳过任何核心测试都会失败。原 `SampleTest` 依赖固定旧业务样例，`SecurityToolsTest` 仅打印加解密结果，因此不列入核心检查。
 - **CI required**：汇总前三项，只有全部成功才通过；失败、取消或跳过均不能通过。作为分支必需状态检查使用，避免单项路径过滤导致检查缺失。
