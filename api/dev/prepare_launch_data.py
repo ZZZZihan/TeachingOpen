@@ -133,6 +133,9 @@ def select_rows(source):
     if effective_permissions != admin_permission_set(rows, admin['id']):
         raise ValueError('Administrator effective permission set changed')
 
+    dictionary_ids = set(keyed(rows['sys_dict']))
+    rows['sys_dict_item'] = [row for row in rows['sys_dict_item'] if row['dict_id'] in dictionary_ids]
+
     configs = keyed(rows['sys_config'], 'config_key')
     if set(configs) - CONFIG_KEYS:
         raise ValueError('Unreviewed site config needs a separate environment/credential policy')
@@ -190,6 +193,7 @@ def select_rows(source):
         'cleared_legacy_registration_role': default_role_cleared,
         'removed_orphan_role_permission_rows': removed_permission_links,
         'removed_orphan_permission_data_rule_rows': len(source['sys_permission_data_rule']) - len(rule_ids),
+        'removed_orphan_dictionary_item_rows': len(source['sys_dict_item']) - len(rows['sys_dict_item']),
         'audit_actor_fields_mapped_to_administrator': actor_changes,
         'obsolete_org_metadata_fields_cleared': org_changes,
         'permission_definitions_with_missing_parent': sum(bool(row['parent_id']) and row['parent_id'] not in permissions for row in rows['sys_permission']),
@@ -236,6 +240,9 @@ def validate_rows(rows):
     if any(row['role_id'] not in roles or row['permission_id'] not in perms
            or any(value not in rules for value in identifiers(row['data_rule_ids'])) for row in rows['sys_role_permission']):
         raise ValueError('Orphan permission association survived')
+    dictionary_ids = set(keyed(rows['sys_dict']))
+    if any(row['dict_id'] not in dictionary_ids for row in rows['sys_dict_item']):
+        raise ValueError('Orphan dictionary item survived')
     config = keyed(rows['sys_config'], 'config_key')
     if set(config) - CONFIG_KEYS or 'allowReg' not in config or not is_flag(config['allowReg']['config_enabled'], 1):
         raise ValueError('Registration or site config differs from the reviewed scope')

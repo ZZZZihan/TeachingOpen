@@ -27,6 +27,8 @@
 
 原始 `sys_role_permission` 413 条中清除 182 条无效关联：162 条引用不存在权限对象，另 20 条引用不存在角色定义。保留 231 条有效定义关联，管理员实际有效权限对象集合仍为 138 个。`sys_permission_data_rule` 清除 21 条引用不存在权限的记录，保留 5 条。
 
+字典项另有 11 条引用不存在的字典定义，定向剔除后保留 51 个字典、152 个有效字典项；没有改变任何有效字典定义或选项。当前候选包为 `launch-data-20261009-v2`，第一版只作为本机历史产物保留，当前准备器会因生成器 hash 不同而拒绝验证第一版。
+
 来源有 2 条权限定义的父节点已不存在。准备器保留这两条权限及关联的原状，不凭数据清理重建菜单层级；聚合 manifest 记录数量。课程和单元的原始 `del_flag` 均为空，准备器保留这一事实，未擅自改成其他值。
 
 该来源的所有课程 `depart_ids` 已为空，三门首页课均 `is_shared=1`；`TeachingCourseMapper.mineCourse` 和 `TeachingCourseDeptServiceImpl.checkCoursePermission` 都以共享状态允许访问。删除旧课程班级关系后不需要改公开范围。准备器若遇到旧组织限制或非共享首页课会拒绝，避免通过清空限制扩大访问。
@@ -40,7 +42,7 @@
 输出布局：
 
 ```text
-launch-data-20261009/
+launch-data-20261009-v2/
   manifest.json             # 仅聚合计数、变更数量、来源/工具/schema/文件 hash
   assets-manifest.json      # 私有：选中路径、大小、hash 和两组白名单
   mysql/seed.sql            # 私有：69 表 CREATE + 净化后的完整行 INSERT
@@ -58,14 +60,15 @@ launch-data-20261009/
 ```sh
 python3 api/dev/prepare_launch_data.py prepare \
   --source /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/production-source-20261003 \
-  --source-commit 359562e373c5dea3e0df72ac39c7892ab0f58af9
+  --source-commit 359562e373c5dea3e0df72ac39c7892ab0f58af9 \
+  --output /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/launch-data-20261009-v2
 ```
 
 默认输出至来源同级 `artifacts/launch-data-20261009`；任何已存在目录都会拒绝覆盖。复现时使用 `--output` 指定另一个全新私有目录。失败可能留下不完整目录，但不会生成成功 manifest，也不自动删除目录或覆盖重新尝试。只要来源、候选提交及工具代码相同，输出 SQL、私有清单和聚合 manifest 可重复生成；没有随机口令、生成时间或目标路径混入内容。
 
 ```sh
 python3 api/dev/prepare_launch_data.py verify \
-  --package /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/launch-data-20261009
+  --package /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/launch-data-20261009-v2
 ```
 
 验证接口再次核验 69 表 schema、唯一正常管理员和两个角色、空历史表、系统关联完整性、初始人数 0、隐私权限、文件清单、准确资源白名单及每份完整 SHA-256。CLI 成功只返回聚合 JSON；失败不打印原始异常、账号字段、密码/盐或来源行。
@@ -81,10 +84,10 @@ SQL 升级、部署配置和正式发布包组合属于各自工具范围，本�
 
 ## 检查与验收边界
 
-合成样例覆盖 15 项检查：唯一正常管理员识别、原始凭据与有效权限保留、历史数据清空、根组织/班级边界、孤儿定义关联清理、公开与隐藏课程边界、未知角色/数据规则/配置拒绝、中文及转义标量回读、来源 hash 绑定、课程/品牌白名单、符号链接/编码穿越、拒绝覆盖、包内附加文件/内容篡改及文件权限拒绝、相同输入重复生成字节一致性。所有测试数据为合成，不含原始账号、口令或个人资料。
+合成样例覆盖 16 项检查：唯一正常管理员识别、原始凭据与有效权限保留、历史数据清空、根组织/班级边界、孤儿角色权限及字典项关联清理、公开与隐藏课程边界、未知角色/数据规则/配置拒绝、中文及转义标量回读、来源 hash 绑定、课程/品牌白名单、符号链接/编码穿越、拒绝覆盖、包内附加文件/内容篡改及文件权限拒绝、相同输入重复生成字节一致性。所有测试数据为合成，不含原始账号、口令或个人资料。
 
 共享解析器原有 22 项检查执行 21 项通过，1 项需显式专用 MySQL runtime 的字面量测试未在此子任务运行。真实包生成与逐资源 hash 检查属于文件准备验证；空库导入及当前注册/首页/课程的运行验证由主 Agent 独立实施，再单独记录证据。
 
-本次实际包共 300 个附件、5,941,796,132 字节；课程素材 297 个，品牌素材 3 个/210,013 字节。聚合 manifest SHA-256 为 `77107fdd75147f9aeed65574879f2fe72f1250f24cc2a87ed265b3351b1496ab`。原始 SQL 与来源清单在准备前后 hash 不变；准备器成功返回 `database_imported=false`、`production_modified=false`。
+本次实际包共 300 个附件、5,941,796,132 字节；课程素材 297 个，品牌素材 3 个/210,013 字节。当前 v2 聚合 manifest SHA-256 为 `5a8c5b0e5972d09e98bb6fc4b8c4a84262980843716ae714e5c96600066d69dc`。原始 SQL 与来源清单在准备前后 hash 不变；准备器成功返回 `database_imported=false`、`production_modified=false`。
 
 没有生产连接、导入、清理、重启、上线、备份恢复或人工验收证据。视频/PDF 内容逐份打开、两处外部引用可用性、目标服务器素材路径和性能也不在文件校验结论中。

@@ -39,6 +39,9 @@ def synthetic_rows():
     add('sys_permission_data_rule', id='valid-rule', permission_id='permission-admin', rule_value='#{sys_user_code}')
     rows['sys_role_permission'][0]['data_rule_ids'] = 'valid-rule'
     add('sys_permission_data_rule', id='orphan-rule', permission_id='deleted-permission')
+    add('sys_dict', id='required-dictionary', dict_code='system-definition', dict_name='System definition')
+    add('sys_dict_item', id='valid-item', dict_id='required-dictionary', item_text='Valid system option', item_value='1')
+    add('sys_dict_item', id='orphan-item', dict_id='deleted-dictionary', item_text='Obsolete option', item_value='2')
     add('sys_config', id='config-registration', config_key='allowReg', config_value='0', config_enabled=1)
     add('sys_config', id='config-old-class', config_key='_defaultDepart', config_value='old-class', config_enabled=1)
     add('sys_config', id='config-old-role', config_key='_defaultRole', config_value='role-teacher', config_enabled=1)
@@ -102,6 +105,14 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(selected['teaching_course'][0]['sys_org_code'], 'ORG')
         self.assertEqual(selected['teaching_course'][0]['create_by'], selected['sys_user'][0]['username'])
         self.assertEqual(selected['teaching_course_unit'][0]['create_by'], selected['sys_user'][0]['username'])
+
+    def test_removes_only_dictionary_items_with_missing_definitions(self):
+        selected, changes = launch.select_rows(self.source)
+        self.assertEqual([row['id'] for row in selected['sys_dict_item']], ['valid-item'])
+        self.assertEqual(selected['sys_dict'], self.source['sys_dict'])
+        self.assertEqual(changes['removed_orphan_dictionary_item_rows'], 1)
+        selected['sys_dict_item'].append(self.source['sys_dict_item'][1])
+        with self.assertRaises(ValueError): launch.validate_rows(selected)
 
     def test_refuses_ambiguous_or_missing_effective_administrator(self):
         for status in (1, 2):
