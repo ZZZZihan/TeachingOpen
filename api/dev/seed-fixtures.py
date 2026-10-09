@@ -25,9 +25,10 @@ def seed(runtime, java_home):
     classes.mkdir(exist_ok=True)
     classpath = api / "jeecg-boot-base-common/target/classes"
     subprocess.run([str(java_home / "bin/javac"), "-cp", str(classpath), "-d", str(classes), str(api / "dev/FixturePassword.java")], check=True)
-    statements = ["START TRANSACTION;"]
+    statements = [(api / "db/phone-profile-registration.sql").read_text(), "START TRANSACTION;"]
     def insert(table, **fields):
         statements.append("INSERT INTO `" + table + "` (" + ",".join("`" + k + "`" for k in fields) + ") VALUES (" + ",".join(quote(v) for v in fields.values()) + ");")
+    insert("sys_config", id="fixture_allow_registration", config_key="allowReg", config_value="1", config_enabled=1, comment="仅本地合成验收开放注册")
     for role in ("admin", "teacher", "student"):
         insert("sys_role", id="fixture_role_" + role, role_code=role, role_name="测试" + role)
     insert("sys_depart", id="fixture_school", parent_id="", depart_name="合成测试学校", org_code="A99", org_category="1", org_type="1", status="1", del_flag="0")
