@@ -83,6 +83,8 @@ public class SysUserController extends BaseController {
 	private RedisUtil redisUtil;
 	@Autowired
 	private PasswordResetService passwordResetService;
+    @Autowired
+    private AccountRegistrationService accountRegistrationService;
 
     @Value("${jeecg.path.upload}")
     private String upLoadPath;
@@ -1125,87 +1127,9 @@ public class SysUserController extends BaseController {
 	 * @return
 	 */
 	@PostMapping("/register")
-	public Result<JSONObject> userRegister(@RequestBody JSONObject jsonObject, SysUser user) {
-		Result<JSONObject> result = new Result<JSONObject>();
-		String phone = jsonObject.getString("phone");
-		String smscode = jsonObject.getString("smscode");
-		Object code = redisUtil.get(phone);
-		String username = jsonObject.getString("username");
-		String realname = jsonObject.getString("realname");
-		//未设置用户名，则用手机号作为用户名
-		if(oConvertUtils.isEmpty(username)){
-            username = phone;
-        }
-        //未设置密码，则随机生成一个密码
-		String password = jsonObject.getString("password");
-		if(oConvertUtils.isEmpty(password)){
-            password = RandomUtil.randomString(8);
-        }
-		String email = jsonObject.getString("email");
-		SysUser sysUser1 = sysUserService.getUserByName(username);
-		if (sysUser1 != null) {
-			result.setMessage("用户名已注册");
-			result.setSuccess(false);
-			return result;
-		}
-		SysUser sysUser2 = sysUserService.getUserByPhone(phone);
-		if (sysUser2 != null) {
-			result.setMessage("该手机号已注册");
-			result.setSuccess(false);
-			return result;
-		}
-
-		if(oConvertUtils.isNotEmpty(email)){
-            SysUser sysUser3 = sysUserService.getUserByEmail(email);
-            if (sysUser3 != null) {
-                result.setMessage("邮箱已被注册");
-                result.setSuccess(false);
-                return result;
-            }
-        }
-        if(oConvertUtils.isNotEmpty(phone) && oConvertUtils.isNotEmpty(smscode)){
-            if (!smscode.equals(code)) {
-                result.setMessage("手机验证码错误");
-                result.setSuccess(false);
-                return result;
-            }
-        }
-
-        String allowReg = sysConfigService.getConfigItem("allowReg");
-        if (!"1".equals(allowReg)){
-            result.setSuccess(false);
-            result.setMessage("未开放注册");
-            return result;
-        }
-        String defaultRole = sysConfigService.getConfigItem("_defaultRole");
-        String defaultDepart = sysConfigService.getConfigItem("_defaultDepart");
-
-		try {
-			user.setCreateTime(new Date());// 设置创建时间
-			String salt = oConvertUtils.randomGen(8);
-			String passwordEncode = PasswordUtil.encrypt(username, password, salt);
-			user.setSalt(salt);
-			user.setUsername(username);
-			user.setRealname(realname);
-			user.setPassword(passwordEncode);
-			user.setEmail(email);
-			user.setPhone(phone);
-			user.setStatus(CommonConstant.USER_UNFREEZE);
-			user.setDelFlag(CommonConstant.DEL_FLAG_0);
-			user.setActivitiSync(CommonConstant.ACT_SYNC_0);
-			sysUserService.save(user);
-            if (defaultRole != null){
-                sysUserService.addUserWithRole(user,defaultRole);
-            }
-            if (defaultDepart != null){
-                sysUserService.addUserWithDepart(user, defaultDepart);
-            }
-            result.success("注册成功");
-		} catch (Exception e) {
-			result.error500("注册失败");
-		}
-		return result;
-	}
+    public Result<JSONObject> userRegister(@RequestBody JSONObject request) {
+        return accountRegistrationService.register(request);
+    }
 
 	/**
 	 * 根据用户名或手机号查询用户信息

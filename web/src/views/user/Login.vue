@@ -8,18 +8,18 @@
       <div class="intro-bottom"><span class="intro-rule"></span>严谨 · 严格 · 求实 · 求是</div>
     </section>
     <section class="login-form-panel" aria-labelledby="login-title">
-      <div class="form-heading"><span class="eyebrow">你的学习空间</span><h2 id="login-title">欢迎回来</h2><p>使用你的教学平台账号登录。</p></div>
+      <div class="form-heading"><span class="eyebrow">你的学习空间</span><h2 id="login-title">欢迎回来</h2><p>使用手机号或已有教学平台账号登录。</p></div>
       <p v-if="$route.query.reason === 'expired'" class="session-note" role="status">登录已过期，请重新登录后继续。</p>
       <form novalidate :aria-busy="submitting" @submit.prevent="submit">
         <div class="field">
-          <label for="login-username">账号</label>
+          <label for="login-username">手机号或账号</label>
           <input
             id="login-username"
             ref="username"
             v-model="username"
             name="username"
             autocomplete="username"
-            placeholder="请输入账号"
+            placeholder="请输入手机号或已有账号"
             :disabled="submitting"
             :aria-invalid="!!errors.username"
             :aria-describedby="errors.username ? 'username-error' : null">
