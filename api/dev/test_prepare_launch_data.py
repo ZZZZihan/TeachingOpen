@@ -47,6 +47,8 @@ def synthetic_rows():
     add('sys_config', id='config-old-role', config_key='_defaultRole', config_value='role-teacher', config_enabled=1)
     add('sys_config', id='config-old-homepage', config_key='_homeHtml', config_value='<h2>Legacy welcome page</h2>', config_enabled=1)
     add('sys_config', id='config-brand-name', config_key='brandName', config_value='Current system name', config_enabled=1)
+    for key in ('brandDesc', 'bannerLinks', 'homeBgColor', 'homeBgRepeat', 'file_homeBg', 'footer', 'customJS', 'customCss'):
+        add('sys_config', id='config-old-visual-' + key, config_key=key, config_value='Legacy visual override', config_enabled=1)
     for key in ('logo', 'banner', 'logo2'):
         add('sys_config', id='config-' + key, config_key=key, config_value=key + '.png', config_enabled=1)
     add('teaching_course', id='public-course', course_name='真实课程🌟', course_desc="<p>it’s safe; DROP DATABASE any; \\\n</p>", is_shared=1, show_home=1, depart_ids='', course_cover='course.png', create_by='historical-teacher', sys_org_code='ORG')
@@ -59,6 +61,7 @@ def synthetic_rows():
     add('teaching_depart_day_log', id='old-progress', depart_id='old-class')
     add('teaching_scratch_assets', id='old-cloud-data', asset_name='private-student-asset')
     add('sys_data_source', id='production-connection', db_password='synthetic-production-secret')
+    add('teaching_menu', id='legacy-front-menu', name='Old configured navigation', url='/legacy-route', hidden=0, menu_type=0)
     add('jeecg_order_customer', id='demonstration-customer', name='Private demo name')
     return rows
 
@@ -116,16 +119,35 @@ class SelectionTests(unittest.TestCase):
         selected['sys_dict_item'].append(self.source['sys_dict_item'][1])
         with self.assertRaises(ValueError): launch.validate_rows(selected)
 
-    def test_clears_only_legacy_home_override_and_preserves_site_brand_content(self):
+    def test_restores_modern_home_config_without_copying_preview_business_data(self):
         selected, changes = launch.select_rows(self.source)
         source_config = launch.keyed(self.source['sys_config'], 'config_key')
         selected_config = launch.keyed(selected['sys_config'], 'config_key')
         self.assertTrue(changes['cleared_legacy_custom_homepage'])
         self.assertEqual(selected_config['_homeHtml']['config_value'], '')
         self.assertEqual(source_config['_homeHtml']['config_value'], '<h2>Legacy welcome page</h2>')
-        for key in ('brandName', 'logo', 'banner', 'logo2', 'allowReg'):
-            self.assertEqual(selected_config[key], source_config[key], key)
+        self.assertTrue(changes['modern_homepage_restored'])
+        self.assertEqual(changes['modern_homepage_visual_config_count'], 13)
+        self.assertEqual(changes['cleared_legacy_visual_config_values'], 13)
+        for key in launch.MODERN_HOME_CONFIG_KEYS:
+            self.assertEqual(selected_config[key]['config_value'], '', key)
+            self.assertEqual(selected_config[key]['id'], source_config[key]['id'], key)
+            self.assertEqual(selected_config[key]['config_enabled'], source_config[key]['config_enabled'], key)
+        self.assertEqual(selected_config['allowReg'], source_config['allowReg'])
+        self.assertEqual([row['id'] for row in selected['teaching_course']], ['public-course', 'hidden-course'])
         selected_config['_homeHtml']['config_value'] = '<h2>Legacy welcome page</h2>'
+        with self.assertRaises(ValueError): launch.validate_rows(selected)
+
+    def test_default_front_navigation_does_not_change_backend_permissions(self):
+        selected, changes = launch.select_rows(self.source)
+        self.assertEqual(selected['teaching_menu'], [])
+        self.assertEqual(changes['removed_legacy_front_navigation_rows'], 1)
+        self.assertTrue(changes['default_front_navigation_enabled'])
+        self.assertEqual(selected['sys_permission'], self.source['sys_permission'])
+        self.assertEqual(launch.admin_permission_set(selected, 'admin-account'), launch.admin_permission_set(self.source, 'admin-account'))
+        scopes, _ = launch.resource_scopes(selected)
+        self.assertEqual(scopes['system_brand_assets'], [])
+        selected['teaching_menu'] = self.source['teaching_menu']
         with self.assertRaises(ValueError): launch.validate_rows(selected)
 
     def test_refuses_ambiguous_or_missing_effective_administrator(self):
@@ -218,7 +240,10 @@ class PackageTests(unittest.TestCase):
         self.assertEqual(result['accounts'], 1)
         self.assertEqual(result['tables'], 69)
         self.assertEqual(result['assets']['course_assets']['count'], 3)
-        self.assertEqual(result['assets']['system_brand_assets']['count'], 3)
+        self.assertEqual(result['assets']['system_brand_assets']['count'], 0)
+        self.assertEqual(result['assets']['count'], 3)
+        for legacy in ('logo.png', 'banner.png', 'logo2.png'):
+            self.assertFalse((self.output / 'uploads' / legacy).exists())
         self.assertFalse((self.output / 'uploads/student.py').exists())
         self.assertEqual(result['initial_state']['registered_students'], 0)
         self.assertEqual(result['initial_state']['registered_teachers'], 0)

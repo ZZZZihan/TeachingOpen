@@ -23,13 +23,16 @@ HERE = Path(__file__).resolve().parent
 POLICY_TABLES = frozenset('''sys_check_rule sys_config sys_dict sys_dict_item
 sys_fill_rule sys_permission sys_permission_data_rule sys_role sys_role_permission
 sys_user sys_user_depart sys_user_role sys_depart teaching_course
-teaching_course_unit teaching_menu'''.split())
+teaching_course_unit'''.split())
 # These are site settings, not environment credentials or data-source connections.
 CONFIG_KEYS = frozenset('''_address brandName footer _phone _defaultRole logo
 allowReg _linkman _defaultDepart brandDesc banner bannerLinks _indexHtml customJS
 _workShareHtml logo2 homeBgColor homeBgRepeat file_homeBg _homeHtml customCss
 avatar allowComment'''.split())
 BRAND_KEYS = frozenset({'logo', 'banner', 'logo2'})
+MODERN_HOME_CONFIG_KEYS = frozenset('''brandName brandDesc logo logo2 banner
+bannerLinks homeBgColor homeBgRepeat file_homeBg _homeHtml footer customJS
+customCss'''.split())
 HASH = re.compile('[0-9a-f]{64}')
 COMMIT = re.compile('[0-9a-f]{40}')
 
@@ -144,10 +147,13 @@ def select_rows(source):
     default_depart_cleared = bool(configs.get('_defaultDepart', {}).get('config_value'))
     default_role_cleared = bool(configs.get('_defaultRole', {}).get('config_value'))
     custom_homepage_cleared = bool(configs.get('_homeHtml', {}).get('config_value'))
-    # The approved default homepage contains the real course preview. A legacy
-    # custom welcome fragment suppresses it on /index in HomeLayout.showIntro.
-    if '_homeHtml' in configs:
-        configs['_homeHtml']['config_value'] = ''
+    visual_values_cleared = sum(bool(configs.get(key, {}).get('config_value')) for key in MODERN_HOME_CONFIG_KEYS)
+    # Match the user-selected modern preview: component defaults supply the
+    # platform name, concise navigation, pale background and campus photograph.
+    # This is site configuration selection, never a copy of preview data.
+    for key in MODERN_HOME_CONFIG_KEYS:
+        if key in configs:
+            configs[key]['config_value'] = ''
     if '_defaultDepart' in configs:
         configs['_defaultDepart']['config_value'] = ''
     # No implicit registration assignment to historical roles or classrooms.
@@ -197,6 +203,11 @@ def select_rows(source):
         'cleared_legacy_registration_department': default_depart_cleared,
         'cleared_legacy_registration_role': default_role_cleared,
         'cleared_legacy_custom_homepage': custom_homepage_cleared,
+        'modern_homepage_restored': True,
+        'modern_homepage_visual_config_count': sum(key in configs for key in MODERN_HOME_CONFIG_KEYS),
+        'cleared_legacy_visual_config_values': visual_values_cleared,
+        'removed_legacy_front_navigation_rows': len(source['teaching_menu']),
+        'default_front_navigation_enabled': True,
         'removed_orphan_role_permission_rows': removed_permission_links,
         'removed_orphan_permission_data_rule_rows': len(source['sys_permission_data_rule']) - len(rule_ids),
         'removed_orphan_dictionary_item_rows': len(source['sys_dict_item']) - len(rows['sys_dict_item']),
@@ -254,8 +265,8 @@ def validate_rows(rows):
         raise ValueError('Registration or site config differs from the reviewed scope')
     if any(config.get(key, {}).get('config_value') for key in ('_defaultDepart', '_defaultRole', 'avatar', 'file_homeBg')):
         raise ValueError('Unreviewed historical assignment or extra site asset survived')
-    if config.get('_homeHtml', {}).get('config_value'):
-        raise ValueError('Legacy custom homepage would suppress the approved course homepage')
+    if any(config.get(key, {}).get('config_value') for key in MODERN_HOME_CONFIG_KEYS):
+        raise ValueError('Legacy visual override would change the user-selected modern homepage')
     courses = keyed(rows['teaching_course'])
     if any(row['course_id'] not in courses for row in rows['teaching_course_unit']):
         raise ValueError('Orphan real course unit survived')
