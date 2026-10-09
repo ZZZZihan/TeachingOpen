@@ -143,6 +143,11 @@ def select_rows(source):
         raise ValueError('Registration requires one enabled allowReg config row')
     default_depart_cleared = bool(configs.get('_defaultDepart', {}).get('config_value'))
     default_role_cleared = bool(configs.get('_defaultRole', {}).get('config_value'))
+    custom_homepage_cleared = bool(configs.get('_homeHtml', {}).get('config_value'))
+    # The approved default homepage contains the real course preview. A legacy
+    # custom welcome fragment suppresses it on /index in HomeLayout.showIntro.
+    if '_homeHtml' in configs:
+        configs['_homeHtml']['config_value'] = ''
     if '_defaultDepart' in configs:
         configs['_defaultDepart']['config_value'] = ''
     # No implicit registration assignment to historical roles or classrooms.
@@ -191,6 +196,7 @@ def select_rows(source):
         'removed_admin_managed_department_references': len(managed) - len(kept_managed),
         'cleared_legacy_registration_department': default_depart_cleared,
         'cleared_legacy_registration_role': default_role_cleared,
+        'cleared_legacy_custom_homepage': custom_homepage_cleared,
         'removed_orphan_role_permission_rows': removed_permission_links,
         'removed_orphan_permission_data_rule_rows': len(source['sys_permission_data_rule']) - len(rule_ids),
         'removed_orphan_dictionary_item_rows': len(source['sys_dict_item']) - len(rows['sys_dict_item']),
@@ -248,6 +254,8 @@ def validate_rows(rows):
         raise ValueError('Registration or site config differs from the reviewed scope')
     if any(config.get(key, {}).get('config_value') for key in ('_defaultDepart', '_defaultRole', 'avatar', 'file_homeBg')):
         raise ValueError('Unreviewed historical assignment or extra site asset survived')
+    if config.get('_homeHtml', {}).get('config_value'):
+        raise ValueError('Legacy custom homepage would suppress the approved course homepage')
     courses = keyed(rows['teaching_course'])
     if any(row['course_id'] not in courses for row in rows['teaching_course_unit']):
         raise ValueError('Orphan real course unit survived')
