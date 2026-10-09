@@ -1,0 +1,99 @@
+# 正式初始数据包准备规则与复核
+
+准备器 `api/dev/prepare_launch_data.py` 从已取得的私有原始归档生成**新空库使用的私有初始包**。它不连接数据库，不执行原始 SQL，不覆盖原始归档、已有包或运行环境。这里的“正式初始”指数据保留规则；生成包不等于生产迁移、部署或人工验收。
+
+## 数据范围
+
+原始来源是 2026-10-03 归档 `teachingopen.sql`、`source-manifest.json`、`assets-manifest.json` 和 `uploads`。准备前后重新核验 SQL 与来源清单的字节数/完整 SHA-256。来源时点不代表当前生产库内容。
+
+复用 `production_fixture.py` 的受限解析器与现有 69 表 schema policy：只接受已审阅表定义及标量 INSERT，拒绝跨库语句、表达式、未审阅 schema、可执行 SQL 和危险注释。新脚本由解析后的值重新生成，不执行来源 SQL。输出有完整 69 表定义，历史表保留空 schema。
+
+保留范围为：
+
+- 唯一 `admin` 角色关联且 `status=1`、`del_flag=0` 的正常管理员；按角色关联识别，不猜用户名。
+- 原始管理员的账号 ID、用户名、姓名、密码密文、盐、状态、删除标记和组织编码；不重置口令，不生成明文口令。其 `admin`、`dev` 两条角色关联与有效权限集合保持相同。
+- 管理员当前组织及现有非班级祖先。此来源只需 1 个 `org_type=1` 根组织；不迁移 `org_type=2` 旧班级。管理员负责部门里已删除的引用清空，不补造旧部门。
+- 4 个系统角色定义，包括注册需要的 `student` 及 `teacher` 定义。角色定义不代表保留任何旧师生账号，也不赋予新注册教师管理权限。
+- 系统字典、字典项、必要业务站点配置、校验规则/编码规则、全局权限定义、有效角色权限与数据规则。前台导航采用用户选定的现代首页默认菜单。
+- 5 门真实课程和 83 个单元，保留正文、资源、类型及公开/共享标志。三门首页课程原本均共享；两门空课程维持非首页且非共享。
+
+旧教师/学生/异常管理员/演示/测试账号、旧班级与成员关系、课程班级关系、作品、提交、批改、评论、进度、会话、数据日志、微信账号、学生文件记录、云端素材、通知、Quartz 运行记录及示例业务数据均不迁移。旧数据源连接 `sys_data_source` 清空，原有数据库连接/口令不能成为新部署配置。
+
+站点配置采用已有 23 个配置键的明确白名单；未知键会拒绝准备，要求核对用途，不能直接将新增环境地址或凭据带入。`allowReg` 保留来源值，由单独升级步骤显式开启。旧 `_defaultDepart` / 非空 `_defaultRole` 清空，注册逻辑继续由当前注册服务固定授予学生角色。非空站点头像需另外审阅，不能自动归入课程资源；旧背景覆盖按下述现代首页规则清空。
+
+## 定向清理与已有边界
+
+来源中的 44 个 `create_by` / `update_by` 历史作者字段映射为保留管理员的用户名；正文和作品作者内容不做字符串替换。此动作只处理审计元信息，不能理解为把真实课程作者改成管理员。
+
+原始 `sys_role_permission` 413 条中清除 182 条无效关联：162 条引用不存在权限对象，另 20 条引用不存在角色定义。保留 231 条有效定义关联，管理员实际有效权限对象集合仍为 138 个。`sys_permission_data_rule` 清除 21 条引用不存在权限的记录，保留 5 条。
+
+字典项另有 11 条引用不存在的字典定义，定向剔除后保留 51 个字典、152 个有效字典项；没有改变任何有效字典定义或选项。当前候选包为 `launch-data-20261009-v4`，先前版本只作为本机历史产物保留，当前准备器会因生成器 hash 不同而拒绝验证旧版本。
+
+用户选定此前的浅白现代首页、右侧天津工业大学校园长廊照片和简洁导航，只补充真实课程与封面。已只读核对归属明确的 `reg1009` 预览：站点仅有 1 条业务配置，13 个首页视觉覆盖项都没有非空值，前台菜单为 0；代码默认分支因此显示用户选定界面。没有复制该预览的账号、课程或其他数据。
+
+v4 将 `brandName`、`brandDesc`、`logo`、`logo2`、`banner`、`bannerLinks`、`homeBgColor`、`homeBgRepeat`、`file_homeBg`、`_homeHtml`、`footer`、`customJS`、`customCss` 的配置值明确置空；来源其中 9 项非空。`Header` 使用默认“人工智能教学平台”和“天工”标记，`HomeLayout` 使用浅白背景及内置校园长廊照片，`Footer` 使用现代默认内容。删除 11 条旧前台 `teaching_menu` 配置，使导航回到“首页 / 探索课程 / 创作社区”；这与后台 `sys_permission` 完全独立，不改变管理员权限。
+
+聚合 manifest 的 `changes.modern_homepage_restored=true`、`modern_homepage_visual_config_count=13`、`cleared_legacy_visual_config_values=9`、`removed_legacy_front_navigation_rows=11` 与 `default_front_navigation_enabled=true` 记录该配置选择。课程的公开/共享标志及其他业务配置保持。
+
+来源有 2 条权限定义的父节点已不存在。准备器保留这两条权限及关联的原状，不凭数据清理重建菜单层级；聚合 manifest 记录数量。课程和单元的原始 `del_flag` 均为空，准备器保留这一事实，未擅自改成其他值。
+
+该来源的所有课程 `depart_ids` 已为空，三门首页课均 `is_shared=1`；`TeachingCourseMapper.mineCourse` 和 `TeachingCourseDeptServiceImpl.checkCoursePermission` 都以共享状态允许访问。删除旧课程班级关系后不需要改公开范围。准备器若遇到旧组织限制或非共享首页课会拒绝，避免通过清空限制扩大访问。
+
+## 资源与私有文件
+
+只复制课程引用白名单。旧站 `logo`、`banner`、`logo2` 不再被新首页引用，因此不纳入 v4；现代校园照片属于前端自身素材。`course_assets` 统计 297 个文件，`system_brand_assets` 为 0。对每份选中资源核验原始清单大小、SHA-256，复制后再次核验；每层路径拒绝符号链接、绝对路径、编码穿越、反斜杠及特殊文件。
+
+已知课程白名单有 297 个文件、5,941,586,119 字节；含 83 个视频、83 张单元封面、83 份教案、45 份 PDF 和 3 张课程封面。其余来源附件不因存在于 `uploads` 就进入新包。课程的两个外部引用保留，未在此任务联网核验。
+
+输出布局：
+
+```text
+launch-data-20261009-v4/
+  manifest.json             # 仅聚合计数、变更数量、来源/工具/schema/文件 hash
+  assets-manifest.json      # 私有：选中路径、大小、hash 和两组白名单
+  mysql/seed.sql            # 私有：69 表 CREATE + 净化后的完整行 INSERT
+  uploads/                  # 私有：真实课程素材副本
+```
+
+所有包目录均 `0700`，文件均 `0600`。SQL 中含管理员原始登录密文与盐，私有资产清单含路径；两者不得进入 Git、PR 内容或普通日志。聚合 manifest 不含账号、姓名、手机号、角色/权限 ID、资源文件名或任何单独凭据值。包与原始归档都在被忽略的 `.devspace` 中。
+
+`seed.sql` 只创建表，不含 `DROP TABLE`，不能用来重置现有库。脚本在会话内固定 `SQL_MODE='NO_AUTO_VALUE_ON_ZERO'`，保证反斜杠字面量语义，即使调用方原本使用 `NO_BACKSLASH_ESCAPES` 也能正确导入；末尾恢复原 SQL mode。所有标量数据在写入后再次通过受限解析器回读，并与准备后的行逐字段比较。
+
+## 重复生成与验证
+
+从使用本工具的工作树运行：
+
+```sh
+python3 api/dev/prepare_launch_data.py prepare \
+  --source /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/production-source-20261003 \
+  --source-commit 359562e373c5dea3e0df72ac39c7892ab0f58af9 \
+  --output /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/launch-data-20261009-v4
+```
+
+默认输出至来源同级 `artifacts/launch-data-20261009`；任何已存在目录都会拒绝覆盖。复现时使用 `--output` 指定另一个全新私有目录。失败可能留下不完整目录，但不会生成成功 manifest，也不自动删除目录或覆盖重新尝试。只要来源、候选提交及工具代码相同，输出 SQL、私有清单和聚合 manifest 可重复生成；没有随机口令、生成时间或目标路径混入内容。
+
+```sh
+python3 api/dev/prepare_launch_data.py verify \
+  --package /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/launch-data-20261009-v4
+```
+
+验证接口再次核验 69 表 schema、唯一正常管理员和两个角色、空历史表、系统关联完整性、初始人数 0、隐私权限、文件清单、准确资源白名单及每份完整 SHA-256。CLI 成功只返回聚合 JSON；失败不打印原始异常、账号字段、密码/盐或来源行。
+
+新注册档案由升级 SQL 建立，本包不预置任何档案。**新空库**按以下顺序准备：
+
+1. 确认目标数据库为空、与生产和现有预览库隔离；以受保护的客户端配置导入 `mysql/seed.sql`，启用 `--binary-mode --local-infile=0`。
+2. 执行 `api/db/phone-profile-registration.sql`，核验必要唯一索引并建立空注册档案表、升级姓名/学校字符集。
+3. 执行 `api/db/enable-phone-registration.sql`，开启唯一有效 `allowReg`。
+4. 独立核对原始管理员登录字段、两个角色与有效权限，首页师生人数应为 0；随后验证真实课程进入和附件访问。
+
+SQL 升级、部署配置和正式发布包组合属于各自工具范围，本准备器不提供连接库或启动应用的命令。
+
+## 检查与验收边界
+
+合成样例覆盖 18 项检查：唯一正常管理员识别、原始凭据与有效权限保留、历史数据清空、根组织/班级边界、孤儿角色权限及字典项关联清理、公开与隐藏课程边界、现代默认首页配置恢复而业务配置保持、前台导航恢复而后台权限保持、未知角色/数据规则/配置拒绝、中文及转义标量回读、来源 hash 绑定、课程白名单及旧品牌资源不复制、符号链接/编码穿越、拒绝覆盖、包内附加文件/内容篡改及文件权限拒绝、相同输入重复生成字节一致性。所有测试数据为合成，不含原始账号、口令或个人资料。
+
+共享解析器原有 22 项检查执行 21 项通过，1 项需显式专用 MySQL runtime 的字面量测试未在此子任务运行。真实包生成与逐资源 hash 检查属于文件准备验证；空库导入及当前注册/首页/课程的运行验证由主 Agent 独立实施，再单独记录证据。
+
+本次实际包共 297 个附件、5,941,586,119 字节，均为真实课程素材。当前 v4 聚合 manifest SHA-256 为 `e9ad23b7abd7fd08cf5b3052b9ac52ef2f08d2bed7dc3ef597903d543935681a`。原始 SQL 与来源清单在准备前后 hash 不变；准备器成功返回 `database_imported=false`、`production_modified=false`。安全回读比较 v3/v4：除站点配置和前台菜单以外，其余 67 张表完全相同，包含原始管理员、后台权限、5 门课程及 83 个单元。
+
+没有生产连接、导入、清理、重启、上线、备份恢复或人工验收证据。视频/PDF 内容逐份打开、两处外部引用可用性、目标服务器素材路径和性能也不在文件校验结论中。
