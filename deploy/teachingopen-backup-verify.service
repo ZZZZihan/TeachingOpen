@@ -1,0 +1,17 @@
+[Unit]
+Description=TeachingOpen daily full backup integrity and isolated restore check
+After=teachingopen-mysql.service teachingopen-backup.service
+
+[Service]
+Type=oneshot
+User=root
+UMask=0077
+ExecStart=/usr/bin/python3 /usr/local/sbin/teachingopen-backup.py verify --config /etc/teachingopen-backup.json
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+TimeoutStartSec=2h
+PrivateTmp=true
+NoNewPrivileges=true
+ProtectHome=true
+ProtectSystem=full

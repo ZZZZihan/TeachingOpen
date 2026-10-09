@@ -1,0 +1,11 @@
+[Unit]
+Description=TeachingOpen daily full backup verification (Beijing time)
+
+[Timer]
+OnCalendar=*-*-* 03:35:00 Asia/Shanghai
+Persistent=true
+AccuracySec=1min
+Unit=teachingopen-backup-verify.service
+
+[Install]
+WantedBy=timers.target
