@@ -1,13 +1,16 @@
 <template>
   <div class="boxBackground">
     <div class="boxContent" v-html="sysConfig._homeHtml"></div>
-    <PublicUserDirectory />
+    <PublicUserDirectory>
+      <RegistrationEntry slot="registration-entry" />
+    </PublicUserDirectory>
   </div>
 </template>
 <script>
 import PublicUserDirectory from './modules/PublicUserDirectory'
+import RegistrationEntry from './modules/RegistrationEntry'
 export default {
-    components: { PublicUserDirectory },
+    components: { PublicUserDirectory, RegistrationEntry },
     computed: {
         sysConfig () { return this.$store.getters.sysConfig || {} }
     }
