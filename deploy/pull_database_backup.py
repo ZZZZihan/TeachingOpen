@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read backup health and retain a checksum-verified private off-host database copy.
+"""Read backup health; download a private database copy only with --download.
 
 No credentials in arguments/output; uses the already configured Workbench profile.
 The server's systemd timer runs independently of this optional local copy job.
@@ -47,11 +47,11 @@ def main():
     p.add_argument('--instance', required=True)
     p.add_argument('--profile', required=True)
     p.add_argument('--region', required=True)
-    p.add_argument('--destination', required=True, type=Path)
+    p.add_argument('--download', action='store_true', help='Explicitly download the latest database backup')
+    p.add_argument('--destination', type=Path, help='Private local directory; required with --download')
     a = p.parse_args()
-    root = a.destination.resolve()
-    root.mkdir(mode=0o700, parents=True, exist_ok=True)
-    if root.stat().st_mode & 0o077: raise ValueError('Local backup directory must be private')
+    if a.download and a.destination is None:
+        p.error('--destination is required with --download')
     command = [a.workbench, '--profile', a.profile, '--region', a.region]
     remote = """import json,subprocess
 from pathlib import Path
@@ -72,6 +72,14 @@ print(json.dumps(out))
     if datetime.now(timezone.utc) - datetime.fromisoformat(state['last-verify.json']['checked_at']) > timedelta(hours=28): raise RuntimeError('Restore verification is stale (>28h)')
     if any(x != 'enabled' for x in state['units'].values()): raise RuntimeError('Backup timer disabled')
     if any(x != 'active' for x in state['active'].values()): raise RuntimeError('Backup timer or application is not active')
+    if not a.download:
+        print(json.dumps({'status':'passed', 'mode':'status_only', 'snapshot':name,
+                          'sha256':latest['database_sha256'], 'downloaded':False,
+                          'checked_at':datetime.now(timezone.utc).isoformat()}, ensure_ascii=False))
+        return
+    root = a.destination.resolve()
+    root.mkdir(mode=0o700, parents=True, exist_ok=True)
+    if root.stat().st_mode & 0o077: raise ValueError('Local backup directory must be private')
     target = root / (name + '.sql.gz')
     if target.exists():
         if target.is_symlink() or sha256(target) != latest['database_sha256']: raise RuntimeError('Existing local copy checksum mismatch')

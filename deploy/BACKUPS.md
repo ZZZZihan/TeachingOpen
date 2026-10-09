@@ -36,21 +36,32 @@ systemctl start teachingopen-backup-verify.service
 
 隔离恢复使用随机的 `teachingopen_restore_*` 数据库和只拥有该库权限的临时账号；即使 SQL 中意外出现其他数据库引用，也不能写入正式库。结束时仅删除本次成功创建的随机隔离库和账号。不会自动恢复或覆盖正式库。
 
-## 异机数据库副本和巡检
+## 已有异机副本与手动工具
 
-本机使用已有 Workbench 配置，不复制访问凭据：
+用户于 2026-10-09 明确要求不运行本地定时任务或备份脚本。本聊天的“TeachingOpen 注册与备份巡检”（`teachingopen-2`）已删除；本机不再定时巡检、下载或自动执行本节工具。云端服务器的两个定时器继续独立工作。已有私有本地副本保留。以下命令仅供后续用户明确要求检查或恢复时参考，不属于当前运行计划。
+
+本机使用已有 Workbench 配置，不复制访问凭据。默认只读取少量状态、时间和服务器已记录的校验信息，不下载数据库或附件，也不创建本地备份文件：
 
 ```sh
 python3 deploy/pull_database_backup.py \
   --workbench /Users/xuzihan/.local/bin/workbench \
   --instance i-2ze2jqs9tbjygwhvnepr \
-  --profile teachingopen --region cn-beijing \
+  --profile teachingopen --region cn-beijing
+```
+
+后续用户明确要求下载用于恢复或验收时，需加上 `--download` 和本地目录：
+
+```sh
+python3 deploy/pull_database_backup.py \
+  --workbench /Users/xuzihan/.local/bin/workbench \
+  --instance i-2ze2jqs9tbjygwhvnepr \
+  --profile teachingopen --region cn-beijing --download \
   --destination /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backups/cloud-database
 ```
 
-该命令检查服务、两个定时器和备份新鲜度，将最新完整 `database.sql.gz` 下载到本机私有目录，验证 SHA256 后才改为最终文件名。它不修改线上数据库。已有相同副本会复核指纹，不重复下载。备份超过 8 小时、每日核验超过 28 小时、定时器停用、最近运行失败或应用服务停止都会报错。首次异机副本已在本机 MySQL 实际恢复，并用对应应用完成注册/登录检查。
+两种模式均检查服务、两个定时器和备份新鲜度。只有带 `--download` 时，才将最新完整 `database.sql.gz` 下载到本机私有目录，验证 SHA256 后改为最终文件名；已有相同副本会复核指纹，不重复下载。命令不修改线上数据库。备份超过 8 小时、每日核验超过 28 小时、定时器停用、最近运行失败或应用服务停止都会报错。默认状态检查读取服务器上次校验结果，不声称本次重新校验了归档内容。首次异机副本已在本机 MySQL 实际恢复，并用对应应用完成注册/登录检查。
 
-本聊天的“TeachingOpen 注册与备份巡检”每 6 小时调用该命令。没有异常或有意义的变化时保持安静，只报告失败、漂移或需要用户处理的事项。该异机复制依赖本机在线和 Workbench 网络可用；服务器定时备份独立执行。没有启用邮件、流量轮询或流量暂停规则。
+本机没有持续巡检或故障通知；不能将服务器定时备份等同于有人持续监控。服务器定时器和本地文件写入互不依赖。本任务没有启用邮件、流量轮询或流量暂停规则。
 
 注册只读检查可复用 `scheduled_backup.health(config, 'teachingopen')`，其检查用户、资料和角色关联，身份值、姓名/学校/手机号/口令字段及 utf8mb4。还应读取 `sys_config` 的 `allowReg`、检查 `sys_user` 的手机号及用户名唯一索引和 `sys_role.role_code='student'`。只返回计数/布尔值，不输出姓名、手机号、密码、令牌或 SQL 数据。
 
@@ -65,7 +76,7 @@ python3 deploy/pull_database_backup.py \
 ## 恢复能力的限制
 
 - MySQL 所有表必须是 InnoDB；导出采用 `--single-transaction --quick --skip-lock-tables`。备份窗口避免并发 DDL。数据库与文件系统的在线备份不是同一个原子事务；文件在备份期间变化仍可能需要检查。参见 [MySQL 官方 mysqldump 文档](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)。
-- 服务器快照有全部上传文件和私有运行配置；定期异机复制目前覆盖数据库。不要把数据库异机副本称为所有新附件的异机灾备。
+- 服务器快照有全部上传文件和私有运行配置；异机数据库副本按需下载，不持续同步，已有本地副本只反映其下载时点。不要将它称为最新完整异机灾备。
 - Redis 会话、验证码、缓存和 Scratch 云变量不在这套 MySQL/上传文件备份中，不自动恢复旧登录会话。本任务不将它表述为整个 Redis 的灾备。
 - 定时器启用和手动成功运行已核查；刚创建时不能声称已观察到未来多个定时周期。没有执行整机重启或覆盖正式库的恢复演练。
 
@@ -76,4 +87,4 @@ python3 -m unittest discover -s deploy -p 'test_*backup*.py' -v
 python3 -m py_compile deploy/scheduled_backup.py deploy/pull_database_backup.py deploy/verify_registration.py
 ```
 
-18 项工具测试覆盖保留策略、路径与权限、损坏备份、恢复账号权限、失败后清理、非 InnoDB、导出失败、带配置文件的完整快照发布/发现/核验，以及 Workbench 空响应、错误响应的一次只读重试。首次线上运行曾暴露配置文件循环覆盖归档名的问题，已修复并新增端到端回归测试；首份数据保留并更正目录名，第二份由最终脚本正常生成并恢复成功。发布的验证结论使用修复后的实际结果。
+23 项工具测试覆盖保留策略、路径与权限、损坏备份、恢复账号权限、失败后清理、非 InnoDB、导出失败、带配置文件的完整快照发布/发现/核验，以及 Workbench 空响应、错误响应的一次只读重试。也覆盖默认仅查状态、不产生本地备份文件、状态检查仍拒绝过期备份，以及显式下载时的校验和副本复用。首次线上运行曾暴露配置文件循环覆盖归档名的问题，已修复并新增端到端回归测试；首份数据保留并更正目录名，第二份由最终脚本正常生成并恢复成功。发布的验证结论使用修复后的实际结果。

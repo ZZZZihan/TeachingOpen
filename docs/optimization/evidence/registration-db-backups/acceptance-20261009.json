@@ -4,6 +4,15 @@
   "unit_tests": {
     "passed": 18
   },
+  "followup_review": {
+    "checked_at": "2026-10-09T23:46:02+08:00",
+    "reviewer": "implementing_agent_self_review",
+    "unit_tests_passed": 23,
+    "python_compile": "passed",
+    "diff_check": "passed",
+    "local_backup_or_download_script_executed": false,
+    "notes": "The five added command tests use mocked server status and temporary synthetic bytes; no remote backup transfer. Local automation deleted as requested. Server backup implementation unchanged."
+  },
   "cloud_registration": {
     "status": "passed",
     "database": "teachingopen_check_backup_20261009",
@@ -170,12 +179,14 @@
   "heartbeat": {
     "id": "teachingopen-2",
     "name": "TeachingOpen 注册与备份巡检",
-    "status": "ACTIVE",
-    "interval_hours": 6
+    "status": "DELETED",
+    "updated_at": "2026-10-09T23:46:02+08:00",
+    "reason": "User requested no local scheduled jobs or backup scripts; server timers remain configured independently. Existing local copies retained.",
+    "local_backup_scripts_scheduled": false
   },
   "limitations": [
     "Database/file snapshots are online and not one cross-store atomic transaction.",
-    "Scheduled off-host copies cover MySQL; uploads and private config snapshots are currently on the server.",
+    "No scheduled off-host copies or local polling. Existing MySQL copies reflect their download time; uploads and private config snapshots are currently on the server.",
     "Redis data is excluded.",
     "No whole-server reboot, production overwrite restore, future timer cycle, or human acceptance claimed."
   ],
