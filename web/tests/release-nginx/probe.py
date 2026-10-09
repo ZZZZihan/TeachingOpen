@@ -22,6 +22,21 @@ DOCKER = shutil.which('docker') or '/usr/local/bin/docker'
 IMAGE = 'nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94'
 PORTS = (18186, 18187)
 TOKEN = 'nginx-contract-canary-' + uuid.uuid4().hex[:12]
+PYTHON_RUNTIME_ASSETS = [
+    'runner.css', 'runner-loader.js', 'static/js/vendor.js', 'static/js/app.js',
+    'turtle-renderer.js', 'runner.js', 'worker-turtle.js', 'worker.js',
+]
+SECURITY_HEADERS = {
+    'X-Frame-Options': 'SAMEORIGIN',
+    'X-Content-Type-Options': 'nosniff',
+    'X-XSS-Protection': '1; mode=block',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Content-Security-Policy': "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: ws: wss:;",
+    'X-Download-Options': 'noopen',
+    'X-Permitted-Cross-Domain-Policies': 'none',
+    'Permission-Policy': 'camera=(), geolocation=(), microphone=()',
+    'Cross-Origin-Opener-Policy': 'same-origin',
+}
 
 
 def command(*args, check=True):
@@ -46,12 +61,16 @@ def free_ports(wait_seconds=0):
                 time.sleep(0.1)
 
 
-def request(port, method, path):
+def request(port, method, path, security_headers=False):
     connection = http.client.HTTPConnection('127.0.0.1', port, timeout=4)
     try:
         connection.request(method, path, headers={'X-Probe-Canary': TOKEN})
         response = connection.getresponse()
         response.read()  # Discard all response bodies; only canary metadata is retained.
+        if security_headers:
+            names = [*SECURITY_HEADERS, 'Cross-Origin-Resource-Policy']
+            return {'status': response.status,
+                    'headers': {name: response.getheader(name) for name in names}}
         raw_location = response.getheader('Location')
         redirect = urlsplit(raw_location) if raw_location else None
         location_path = (redirect.path + ('?' + redirect.query if redirect.query else '')) if redirect else None
@@ -126,6 +145,20 @@ def cases():
     for method in ['POST', 'PUT', 'DELETE', 'OPTIONS']:
         add(method, '/probe.js', 405, None, 'Static file disallows write method')
     return good
+
+
+def resource_policy_cases():
+    for asset in PYTHON_RUNTIME_ASSETS:
+        for method in ['GET', 'HEAD']:
+            for suffix in ['', '?v=runtime-check']:
+                yield method, '/python/' + asset + suffix, 200, 'cross-origin'
+    for path in ['/index.html', '/python/index.html', '/python/player.html',
+                 '/python/execution.js', '/python/private.py', '/python/runner.js.bak',
+                 '/python/runner.js/extra', '/scratch3/runner.js']:
+        yield 'GET', path, 200, 'same-site'
+    yield 'GET', '/python/runner.js.map', 404, 'same-site'
+    yield 'GET', '/api/python/runner.js', 204, 'same-site'
+    yield 'GET', '/api/sys/common/static/python/private.py', 204, 'same-site'
 
 
 def run_config(label, source, prefix):
@@ -213,6 +246,13 @@ http {
                    'redirect_follow_actual': follow_observed,
                    'pass': expected == observed and follow_expected == follow_observed}
             rows.append(row)
+        for method, path, status, policy in resource_policy_cases():
+            observed = request(18186, method, path, security_headers=True)
+            expected = {'status': status,
+                        'headers': {**SECURITY_HEADERS, 'Cross-Origin-Resource-Policy': policy}}
+            rows.append({'method': method, 'request_path': path,
+                         'purpose': 'Opaque Python runtime exception preserves all other security headers',
+                         'expected': expected, 'actual': observed, 'pass': observed == expected})
         report = {'receipt': receipt, 'total': len(rows),
                   'passed': sum(row['pass'] for row in rows),
                   'failed': sum(not row['pass'] for row in rows), 'rows': rows}
@@ -256,6 +296,12 @@ def main():
     fixture.mkdir(parents=True, exist_ok=True)
     (fixture / 'index.html').write_text('<!doctype html><title>TeachingOpen synthetic SPA</title>SPA canary\n')
     (fixture / 'probe.js').write_text('/* synthetic static canary */\n')
+    for path in [*['python/' + asset for asset in PYTHON_RUNTIME_ASSETS],
+                 'python/index.html', 'python/player.html', 'python/execution.js',
+                 'python/private.py', 'python/runner.js.bak', 'scratch3/runner.js']:
+        resource = fixture / path
+        resource.parent.mkdir(exist_ok=True, parents=True)
+        resource.write_text('/* synthetic resource policy canary */\n')
     for path in ['probe.js.map', 'probe.sql', 'logfiles/probe', 'samples/probe']:
         denied = fixture / path
         denied.parent.mkdir(exist_ok=True, parents=True)
