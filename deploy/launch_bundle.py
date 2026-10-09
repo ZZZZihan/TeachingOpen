@@ -66,10 +66,14 @@ def new_private_output(output, inputs):
 
 
 def copy_file(root, name, origin):
-    write_file(root, name, paths.checked_path(origin).read_bytes())
+    origin = paths.checked_path(origin)
+    path = private_output_file(root, name)
+    with origin.open('rb') as source, path.open('xb') as target:
+        path.chmod(0o600)
+        shutil.copyfileobj(source, target, length=1024 * 1024)
 
 
-def write_file(root, name, value):
+def private_output_file(root, name):
     # mkdir(parents=True, mode=0700) applies mode only to the final directory.
     # Create each ancestor explicitly so nested tools/resources remain private.
     relative = Path(paths.relative_path(name))
@@ -80,12 +84,22 @@ def write_file(root, name, value):
             parent.mkdir(mode=0o700)
         if stat.S_IMODE(paths.checked_path(parent, 'directory').stat().st_mode) != 0o700:
             raise ValueError('Existing private directory must be 0700')
+    return root / relative
+
+
+def write_file(root, name, value):
+    private_output_file(root, name)
     paths.write_file(root, name, value)
 
 
 def copy_tree(root, prefix, origin):
-    for name in paths.file_inventory(origin):
-        copy_file(root, prefix + '/' + name, origin / name)
+    origin = paths.checked_path(origin, 'directory')
+    for parent, dirs, files in os.walk(origin, followlinks=False):
+        for name in dirs:
+            paths.checked_path(Path(parent) / name, 'directory')
+        for name in files:
+            path = Path(parent) / name
+            copy_file(root, prefix + '/' + path.relative_to(origin).as_posix(), path)
 
 
 def compiled_inputs(source):
