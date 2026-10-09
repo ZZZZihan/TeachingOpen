@@ -13,7 +13,7 @@ import subprocess
 import sys
 import tempfile
 
-FORMAT = 1
+FORMAT = 2
 NGINX_SHA256 = '93b019f547c36b708d46ac175368aee69a234495e6456b3e48e75d681e799a40'
 TEMPLATE_SHA256 = '8854226931f4aea3fd076f90ff0c0e73b932fff2ef885a0fb4d19f6034b8ce64'
 PLATFORM = 'linux/arm64'
@@ -33,7 +33,22 @@ HELPERS = [
     'api/jeecg-boot-base-common/src/main/java/org/jeecg/common/util/PasswordUtil.java',
     'api/dev/role-flow-assets/lesson.mp4', 'api/dev/role-flow-assets/starter.sb3',
     'api/dev/role-flow-assets/starter.sjr', 'web/nginx/default.conf',
+    'api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql',
+    'deploy/registration_upgrade.py',
 ]
+
+
+def registration_tool(source=None):
+    path = (source / 'deploy/registration_upgrade.py') if source is not None else Path(__file__).with_name('registration_upgrade.py')
+    spec = importlib.util.spec_from_file_location('_candidate_registration_upgrade', path)
+    module = importlib.util.module_from_spec(spec)
+    old = sys.dont_write_bytecode
+    try:
+        sys.dont_write_bytecode = True
+        spec.loader.exec_module(module)
+    finally:
+        sys.dont_write_bytecode = old
+    return module
 
 
 def sha256(path):
@@ -290,7 +305,7 @@ def verify_bundle(bundle):
         raise ValueError('Manifest must have mode 0600')
     manifest = read_json(manifest_path)
     fields = {'format', 'kind', 'source_commit', 'generator_sha256', 'helper_sha256', 'artifact_inputs',
-        'files', 'mutable_directories', 'fixture_counts', 'fixtures', 'images', 'platform', 'port', 'compose_project'}
+        'files', 'mutable_directories', 'fixture_counts', 'fixtures', 'images', 'platform', 'port', 'compose_project', 'database_upgrade'}
     if not isinstance(manifest, dict) or set(manifest) != fields:
         raise ValueError('Missing or unknown manifest field')
     if type(manifest.get('format')) is not int or manifest['format'] != FORMAT or manifest.get('kind') != 'teachingopen-linux-synthetic-candidate':
@@ -306,7 +321,7 @@ def verify_bundle(bundle):
         raise ValueError('Invalid artifact input receipt')
     for digest in manifest['artifact_inputs'].values():
         check_digest(digest)
-    if manifest['fixture_counts'] != {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 69}:
+    if manifest['fixture_counts'] != {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 70}:
         raise ValueError('Unexpected synthetic fixture counts')
     fixtures = manifest['fixtures']
     if not isinstance(fixtures, dict) or set(fixtures) != {'database', 'public_media_key', 'private_media_key',
@@ -330,7 +345,10 @@ def verify_bundle(bundle):
     required = {'app/app.jar', 'web/nginx.conf', 'config/credentials.json',
         'config/application-localtest.properties', 'config/mysql-root-password',
         'config/mysql-app-password', 'config/mysql-client.cnf', 'config/redis.conf',
-        'init/01-schema.sql', 'init/02-fixtures.sql', 'compose.json'}
+        'init/01-schema.sql', 'init/02-fixtures.sql', 'init/03-phone-profile-registration.sql',
+        'init/04-enable-phone-registration.sql', 'upgrade/01-phone-profile-registration.sql',
+        'upgrade/02-enable-phone-registration.sql', 'upgrade/migration-manifest.json',
+        'upgrade/registration_upgrade.py', 'compose.json'}
     if not required <= set(expected) or not any(n.startswith('web/dist/') for n in expected):
         raise ValueError('Missing required bundle input')
     if any(name not in required and not name.startswith('web/dist/') for name in expected):
@@ -339,6 +357,23 @@ def verify_bundle(bundle):
         raise ValueError('Manifest cannot reinterpret runtime or self-hash boundaries')
     if immutable_inventory(bundle) != expected:
         raise ValueError('Immutable file missing, extra, or changed')
+    upgrade = registration_tool()
+    upgrade_manifest = upgrade.verify_migrations(bundle / 'upgrade')
+    expected_upgrade = {'manifest_sha256': expected['upgrade/migration-manifest.json']['sha256'],
+        'initialization_order': ['init/01-schema.sql', 'init/02-fixtures.sql',
+            'init/03-phone-profile-registration.sql', 'init/04-enable-phone-registration.sql'],
+        'existing_database_requires_explicit_backup_and_apply': True, 'automatic_apply': False, 'ddl_transactional': False}
+    if manifest['database_upgrade'] != expected_upgrade:
+        raise ValueError('Database upgrade manifest/order changed')
+    for index, (source_name, name) in enumerate(upgrade.MIGRATIONS, 3):
+        init_name = 'init/' + str(index).zfill(2) + '-' + name[3:]
+        receipt = expected['upgrade/' + name]
+        if (receipt != expected[init_name] or receipt['sha256'] != manifest['helper_sha256'][source_name]
+                or receipt != {'bytes': upgrade_manifest['steps'][index - 3]['bytes'],
+                    'sha256': upgrade_manifest['steps'][index - 3]['sha256']}):
+            raise ValueError('Initialization/explicit migration SQL must match the frozen helper receipt')
+    if expected['upgrade/registration_upgrade.py']['sha256'] != manifest['helper_sha256']['deploy/registration_upgrade.py']:
+        raise ValueError('Upgrade runner differs from frozen helper receipt')
     for name in expected:
         if stat.S_IMODE((bundle / name).stat().st_mode) != expected_mode(name):
             raise ValueError('Unexpected file permissions: ' + name)
@@ -411,6 +446,10 @@ def create_bundle(source, jar, jar_sha256, dist_manifest, dist_manifest_sha256, 
     finally:
         sys.dont_write_bytecode = old_bytecode
     assets, base = fixture.generated_assets(), fixture.base_records()
+    # Synthetic-only opt-in switch. Formal data is produced by the distinct
+    # launch entry point and is never read/replaced by this fixture generator.
+    base['sys_config'] = [{'id': 'fixture_allow_registration', 'config_key': 'allowReg',
+        'config_value': '0', 'config_enabled': 1}]
     credentials = {name: secrets.token_hex(20) for name in
         ('mysql_root_password', 'mysql_app_password', 'redis_password', 'test_user_password')}
     hashed = password_hashes(source, java_home, credentials, fixture.ACCOUNT_ROLES)
@@ -418,8 +457,8 @@ def create_bundle(source, jar, jar_sha256, dist_manifest, dist_manifest_sha256, 
         row.update(hashed[row['username']])
     records = fixture.expected_after(model, base, fixture.ui_records(assets))
     counts = {'accounts': len(records['sys_user']), 'classes': sum(r['id'].startswith('fixture_class_') for r in records['sys_depart']),
-        'courses': len(records['teaching_course']), 'tables': len(model)}
-    if counts != {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 69}:
+        'courses': len(records['teaching_course']), 'tables': len(model) + 1}
+    if counts != {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 70}:
         raise ValueError('Unexpected synthetic fixture contract')
     sql = ['SET NAMES utf8mb4;', "SET SESSION sql_mode='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';", 'START TRANSACTION;']
     for table, rows in records.items():
@@ -436,6 +475,13 @@ def create_bundle(source, jar, jar_sha256, dist_manifest, dist_manifest_sha256, 
         write_file(output, 'web/nginx.conf', (source / 'web/nginx/default.conf').read_bytes(), 0o644)
         write_file(output, 'init/01-schema.sql', schema, 0o444)
         write_file(output, 'init/02-fixtures.sql', sql, 0o444)
+        upgrade = registration_tool(source)
+        for index, (source_name, name) in enumerate(upgrade.MIGRATIONS, 3):
+            contents = (source / source_name).read_bytes()
+            write_file(output, 'init/' + str(index).zfill(2) + '-' + name[3:], contents, 0o444)
+            write_file(output, 'upgrade/' + name, contents)
+        write_file(output, 'upgrade/migration-manifest.json', json_bytes(upgrade.migration_manifest(source)))
+        write_file(output, 'upgrade/registration_upgrade.py', (source / 'deploy/registration_upgrade.py').read_bytes())
         write_file(output, 'config/credentials.json', json_bytes(credentials))
         write_file(output, 'config/mysql-root-password', credentials['mysql_root_password'] + '\n', 0o444)
         write_file(output, 'config/mysql-app-password', credentials['mysql_app_password'] + '\n', 0o444)
@@ -475,6 +521,10 @@ def create_bundle(source, jar, jar_sha256, dist_manifest, dist_manifest_sha256, 
                 'private_media_sha256': hashlib.sha256(assets['lesson.mp4']).hexdigest(),
                 'public_media_bytes': len(assets['cover.png']), 'private_media_bytes': len(assets['lesson.mp4'])},
             'images': IMAGES, 'platform': PLATFORM, 'port': port, 'compose_project': project}
+        manifest['database_upgrade'] = {'manifest_sha256': files['upgrade/migration-manifest.json']['sha256'],
+            'initialization_order': ['init/01-schema.sql', 'init/02-fixtures.sql',
+                'init/03-phone-profile-registration.sql', 'init/04-enable-phone-registration.sql'],
+            'existing_database_requires_explicit_backup_and_apply': True, 'automatic_apply': False, 'ddl_transactional': False}
         write_file(output, 'manifest.json', json_bytes(manifest))
         result = verify_bundle(output)
         result['status'] = 'created_immutable'
