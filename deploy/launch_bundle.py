@@ -346,7 +346,7 @@ def verify_bundle(bundle, expected_manifest=None, source=None):
             'source_commit': value['source_commit'], 'build_source_commit': value['build_source_commit'],
             'jar_sha256': value['jar']['sha256'], 'dist_files': value['dist_files'],
             'initial_data_counts': value['initial_data_counts'],
-            'course_asset_count': value['course_assets']['count'],
+            'asset_file_count': value['course_assets']['count'],
             'immutable_files': len(actual), 'permissions': 'directories 0700; files 0600',
             'source_checked': source is not None, 'services_started': False,
             'runtime_data_checked': False, 'cloud_deployed': False, 'human_accepted': False}
