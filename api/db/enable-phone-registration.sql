@@ -4,9 +4,10 @@
 -- The reserved temporary procedure is removed on success. A failed call can leave it behind;
 -- rerunning this exact migration replaces only that migration procedure, never user data.
 SET NAMES utf8mb4;
-DROP PROCEDURE IF EXISTS teachingopen_registration_schema_v1;
+-- This final step targets sys_config; menu and dictionary rows are not registration switches.
+DROP PROCEDURE IF EXISTS teachingopen_registration_enable_v1;
 DELIMITER $$
-CREATE PROCEDURE teachingopen_registration_schema_v1()
+CREATE PROCEDURE teachingopen_registration_enable_v1()
 BEGIN
   DECLARE v_lock INT DEFAULT 0;
   DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -75,7 +76,6 @@ BEGIN
       HAVING COUNT(*) = 1 AND MAX(column_name) = 'id' AND MAX(non_unique) = 0 AND MAX(sub_part) IS NULL) THEN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Config primary key id is required for a single-row update';
   END IF;
-  IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = 'teaching_registration_profile') THEN
   IF (SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = DATABASE()
       AND table_name = 'teaching_registration_profile' AND engine = 'InnoDB') <> 1 OR
       (SELECT COUNT(*) FROM information_schema.columns WHERE table_schema = DATABASE()
@@ -105,27 +105,24 @@ BEGIN
   IF EXISTS (SELECT 1 FROM teaching_registration_profile WHERE BINARY identity NOT IN (BINARY 'student', BINARY 'teacher')) THEN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Unexpected registration identity values; existing profiles are preserved';
   END IF;
+  IF (SELECT COUNT(*) FROM information_schema.columns WHERE table_schema = DATABASE() AND table_name = 'sys_user'
+      AND column_name IN ('realname', 'school') AND character_set_name = 'utf8mb4') <> 2 THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Apply the profile and utf8mb4 migration before enabling registration';
   END IF;
   IF COALESCE(@teachingopen_registration_preflight_only, 0) = 0 THEN
-    CREATE TABLE IF NOT EXISTS teaching_registration_profile (
-      user_id varchar(32) NOT NULL,
-      identity varchar(16) NOT NULL COMMENT 'Self-declared student or teacher; does not grant permissions',
-      create_time datetime NOT NULL,
-      PRIMARY KEY (user_id),
-      CONSTRAINT chk_registration_identity CHECK (BINARY identity IN (BINARY 'student', BINARY 'teacher'))
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-    -- Metadata was checked above; change these character sets and restore
-    -- canonical comments for the reviewed restricted exporter output.
-    IF (SELECT COUNT(*) FROM information_schema.columns WHERE table_schema = DATABASE() AND table_name = 'sys_user'
-        AND column_name IN ('realname', 'school') AND character_set_name = 'utf8mb4'
-        AND column_comment = CASE column_name WHEN 'realname' THEN '真实姓名' WHEN 'school' THEN '学校' END) <> 2 THEN
-    ALTER TABLE sys_user
-      MODIFY COLUMN realname varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '真实姓名',
-      MODIFY COLUMN school varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '学校';
+    START TRANSACTION;
+    -- Select the already validated one row by primary key; never update all matching keys.
+    SELECT id INTO @teachingopen_allowreg_id FROM sys_config WHERE BINARY config_key = BINARY 'allowReg' FOR UPDATE;
+    UPDATE sys_config SET config_value = '1', config_enabled = 1 WHERE id = @teachingopen_allowreg_id;
+    IF (SELECT COUNT(*) FROM sys_config WHERE config_key = 'allowReg') <> 1 OR
+        (SELECT COUNT(*) FROM sys_config WHERE id = @teachingopen_allowreg_id
+         AND BINARY config_key = BINARY 'allowReg' AND BINARY config_value = BINARY '1' AND config_enabled = 1) <> 1 THEN
+      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Registration switch changed during migration';
     END IF;
+    COMMIT;
   END IF;
   DO RELEASE_LOCK(CONCAT('teachingopen.reg.', LEFT(SHA2(DATABASE(), 256), 40)));
 END$$
 DELIMITER ;
-CALL teachingopen_registration_schema_v1();
-DROP PROCEDURE teachingopen_registration_schema_v1;
+CALL teachingopen_registration_enable_v1();
+DROP PROCEDURE teachingopen_registration_enable_v1;
