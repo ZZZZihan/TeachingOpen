@@ -164,11 +164,15 @@ export default {
                     try { const response = await deleteAction(root + 'delWorkTag', { tag, force: true }); if (!response.success) throw new Error('标签删除失败'); await this.getWorkTags() } catch (error) { this.tagError = '快捷标签未能删除，请重试。' } finally { this.actionBusy = '' }
                 } })
         },
-        handleSend (row) { if (this.actionBusy) return; this.sendWorkId = row.id; this.$refs.selectUserModal.visible = true },
+        handleSend (row) { if (this.actionBusy) return; this.sendWorkId = row.id; this.$refs.selectUserModal.title = '选择接收作品新草稿的账号'; this.$refs.selectUserModal.visible = true },
         async selectStudentOK (ids) {
             if (this.actionBusy || !this.sendWorkId || !Array.isArray(ids) || !ids.length) return
             this.actionBusy = 'send'; this.actionError = ''
-            try { const response = await postAction(root + 'sendWork', { sendWorkId: this.sendWorkId, userIdList: ids }); if (!response.success) throw new Error('发送失败'); this.$message.success('作品已克隆至所选账号') } catch (error) { this.actionError = '未能确认克隆成功，请先核对目标账号中的作品，避免重复发送。' } finally { this.actionBusy = '' }
+            try {
+                const response = await postAction(root + 'sendWork', { sendWorkId: this.sendWorkId, userIdList: ids })
+                if (!response.success) { this.actionError = response.message || '克隆失败，本批次未创建作品。'; return }
+                this.$message.success(response.message || '已为所选账号新建作品草稿')
+            } catch (error) { this.actionError = '未能确认克隆成功，请先核对目标账号中的作品，避免重复发送。' } finally { this.actionBusy = '' }
         },
         deleteWorks (ids) {
             if (this.actionBusy || !ids.length) return
