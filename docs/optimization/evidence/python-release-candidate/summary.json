@@ -1,0 +1,174 @@
+{
+  "captured_date": "2026-10-10 Asia/Shanghai",
+  "target_branch": "codex/registration-acceptance",
+  "base_commit": "33995e5b41237d552cf21b66eb408623ac830eab",
+  "ported_from": {
+    "pr": 87,
+    "commit": "c678c6ac0855bf45a02687f13f2c86c5002aac98",
+    "files_match_exactly": 12
+  },
+  "branch_selection": {
+    "recorded_deployment_source": "fdd10aaaf0c7d006551c466f333703acbaaf8a3e",
+    "recorded_deployment_is_ancestor": true,
+    "merged_release_prs": [
+      84,
+      85,
+      86,
+      88,
+      89
+    ],
+    "independent_open_prs": [
+      90,
+      91
+    ],
+    "basis": "Fresh GitHub refs and PR topology; local historical deployment manifest, not a live production inspection"
+  },
+  "local_frontend_tests": {
+    "passed": 700,
+    "failed": 0
+  },
+  "lint": {
+    "existing_changed_scope": "pass",
+    "execution_js_and_runner_js": "0 errors, 0 warnings"
+  },
+  "build": {
+    "base_commit": "33995e5b41237d552cf21b66eb408623ac830eab",
+    "source_fix_commit": "c678c6ac0855bf45a02687f13f2c86c5002aac98",
+    "compiled_input_sha256": {
+      "api": "5195e27efb07bcf5c1b618a351c4dd12fc0f9125a583a42c4869500a38c20a93",
+      "web": "1683b6b76f6f15b15ac6e028be5708760292971d621dd01a957b7f2577f8edf2"
+    },
+    "dist_inventory_sha256": "85b5378cc06a887da9e55dcb9faf316071582e55bb3ca7ba9d66007c925491e3",
+    "dist_file_count": 4900,
+    "build_log_sha256": "4e3a67c64f4cf5c8e504ef4632f562f63e70a30f87bf5cd8b78ca2a4fe5242f9",
+    "runtime": {
+      "node": "v26.11.0",
+      "npm": "11.20.0"
+    },
+    "complete_frontend_build": true,
+    "backend_rebuilt": false,
+    "full_release_bundle_created": false
+  },
+  "build_warnings": {
+    "css_order": 9,
+    "size_categories": 2
+  },
+  "launch_bundle_integrity_tests": {
+    "passed": 9,
+    "failed": 0,
+    "scope": "synthetic offline tests; no actual release bundle generated"
+  },
+  "nginx": {
+    "version": "1.30.5",
+    "image": "nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94",
+    "release": {
+      "passed": 103,
+      "failed": 0
+    },
+    "example": {
+      "passed": 103,
+      "failed": 0
+    }
+  },
+  "resource_integrity": {
+    "python_public_files_equal_dist": 24,
+    "actual_http_files_equal_dist": 48
+  },
+  "browser": {
+    "engine": "Headless Chromium 154",
+    "served": "new production web/dist",
+    "groups": {
+      "release": [
+        {
+          "entry": "index",
+          "passed": 6,
+          "failed": 0,
+          "blocked_runner": {
+            "status": "运行环境加载失败，请重新运行。",
+            "state": "error",
+            "frames": 0,
+            "code": "print \"RECOVERED_WITHOUT_RELOAD\"\n",
+            "stopDisabled": true,
+            "workerStarts": 0
+          },
+          "retry_output": "RECOVERED_WITHOUT_RELOAD\n",
+          "turtle_canvas_count": 2
+        },
+        {
+          "entry": "player",
+          "passed": 6,
+          "failed": 0,
+          "blocked_runner": {
+            "status": "运行环境加载失败，请重新运行。",
+            "state": "error",
+            "frames": 0,
+            "code": "print \"RECOVERED_WITHOUT_RELOAD\"\n",
+            "stopDisabled": true,
+            "workerStarts": 0
+          },
+          "retry_output": "RECOVERED_WITHOUT_RELOAD\n",
+          "turtle_canvas_count": 2
+        }
+      ],
+      "example": [
+        {
+          "entry": "index",
+          "passed": 6,
+          "failed": 0,
+          "blocked_runner": {
+            "status": "运行环境加载失败，请重新运行。",
+            "state": "error",
+            "frames": 0,
+            "code": "print \"RECOVERED_WITHOUT_RELOAD\"\n",
+            "stopDisabled": true,
+            "workerStarts": 0
+          },
+          "retry_output": "RECOVERED_WITHOUT_RELOAD\n",
+          "turtle_canvas_count": 2
+        },
+        {
+          "entry": "player",
+          "passed": 6,
+          "failed": 0,
+          "blocked_runner": {
+            "status": "运行环境加载失败，请重新运行。",
+            "state": "error",
+            "frames": 0,
+            "code": "print \"RECOVERED_WITHOUT_RELOAD\"\n",
+            "stopDisabled": true,
+            "workerStarts": 0
+          },
+          "retry_output": "RECOVERED_WITHOUT_RELOAD\n",
+          "turtle_canvas_count": 2
+        }
+      ]
+    }
+  },
+  "workspace_preservation": {
+    "original": {
+      "branch": "feature/frontend-course-stability",
+      "head": "2e0c1831a234c138c4c6873b56f5060e3a80aec8",
+      "changed_files_preserved": 46,
+      "contents_unchanged": true
+    },
+    "release": {
+      "branch": "codex/registration-acceptance",
+      "head": "359562e373c5dea3e0df72ac39c7892ab0f58af9",
+      "changed_files_preserved": 33,
+      "contents_unchanged": true
+    }
+  },
+  "cleanup": {
+    "browser_sessions_closed": 2,
+    "browser_containers_removed": 2,
+    "contract_containers_removed": 2
+  },
+  "verification_limits": [
+    "Current agent implementation and self-review; no independent review or human acceptance",
+    "Local browser tests use synthetic programs and backend",
+    "No new backend build or full formal release bundle in local validation",
+    "No production access, merge, deployment, data migration or changes to runtime configuration",
+    "No all-library, multi-browser or OS-level instantaneous CPU-termination claim"
+  ],
+  "ci_record": "Actual pull request head results are reported in the PR; local results above are not CI results."
+}
