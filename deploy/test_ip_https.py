@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Offline rendering and real-file failure/recovery checks; no target services."""
 import fcntl
-from contextlib import contextmanager
+from contextlib import contextmanager, redirect_stdout
+import io
 import json
 import os
 from pathlib import Path
@@ -15,6 +16,7 @@ import unittest
 from unittest.mock import patch
 
 import ip_https as tls
+import test_ip_https_runtime as runtime_test
 
 
 class RenderingTests(unittest.TestCase):
@@ -756,6 +758,199 @@ if sys.argv[1:] == ['-s', 'reload'] and ('RELOAD_FAIL' in data or failure.exists
             self.activate()
         self.assertEqual(owned.read_text(), 'keep')
         self.assertFalse(self.events.exists())
+
+
+class RuntimeDiagnosticsTests(unittest.TestCase):
+    """Exercise failure reports offline; no Docker or HTTP services are started."""
+
+    def fixture(self):
+        return runtime_test.Runtime(Path('/synthetic-fixture'), 'synthetic-image', {'checks': []})
+
+    def test_non_200_echo_keeps_status_body_and_request_without_retry(self):
+        fixture = self.fixture()
+        body = b'<html>502 Bad Gateway</html>'
+        with patch.object(fixture, 'request', return_value=(502, {'content-type': 'text/html'}, body)) as request:
+            with self.assertRaisesRegex(AssertionError, 'returns HTTP 200'):
+                fixture.api('bootstrap HTTP')
+        self.assertEqual(request.call_count, 1)
+        details = fixture.report['checks'][-1]['details']
+        self.assertEqual(details['status'], 502)
+        self.assertEqual(details['method'], 'GET')
+        self.assertEqual(details['path'], '/api/runtime-echo/item%20one?method=GET&literal=a%2Fb')
+        self.assertEqual(details['content_type'], 'text/html')
+        self.assertEqual(details['body_preview'], body.decode())
+
+    def test_malformed_echo_is_an_assertion_with_bounded_original_body(self):
+        for body in (b'', b'<html>error</html>', b'=value', b'key=one\nkey=two', b'key=\xff'):
+            with self.subTest(body=body):
+                fixture = self.fixture()
+                with self.assertRaises(AssertionError):
+                    fixture.echo_response('fixture', 'POST', '/api/fixture', 200, {}, body)
+                details = fixture.report['checks'][-1]['details']
+                self.assertEqual(details['status'], 200)
+                self.assertIn('format_error', details)
+                self.assertEqual(details['body_preview'], body.decode('utf-8', errors='replace'))
+        body = b'x' * (runtime_test.RESPONSE_PREVIEW_BYTES + 100)
+        fixture = self.fixture()
+        with self.assertRaises(AssertionError):
+            fixture.echo_response('fixture', 'POST', '/api/fixture', 502, {}, body)
+        details = fixture.report['checks'][-1]['details']
+        self.assertEqual(len(details['body_preview']), runtime_test.RESPONSE_PREVIEW_BYTES)
+        self.assertEqual(details['body_bytes'], len(body))
+        self.assertTrue(details['body_truncated'])
+
+    def test_valid_echo_preserves_empty_values_and_embedded_equals(self):
+        fixture = self.fixture()
+        values, details = fixture.echo_response('fixture', 'GET', '/api/fixture', 200,
+            {'content-type': 'text/plain'}, b'method=GET\nuri=/api/fixture?item=a=b\nbody=')
+        self.assertEqual(values, {'method': 'GET', 'uri': '/api/fixture?item=a=b', 'body': ''})
+        self.assertEqual(details['status'], 200)
+        self.assertTrue(fixture.report['checks'][-1]['passed'])
+
+    def test_every_echo_entry_point_supplies_original_response_context(self):
+        entries = (
+            (lambda fixture: fixture.api('bootstrap HTTP'), 'bootstrap HTTP', 'GET',
+             '/api/runtime-echo/item%20one?method=GET&literal=a%2Fb'),
+            (lambda fixture: fixture.forwarded_header_boundary(), 'HTTPS forwarding boundary', 'GET',
+             '/api/forwarded-boundary'),
+            (lambda fixture: fixture.native_business('native HTTP'), 'native HTTP', 'POST',
+             '/api/native-loopback?probe=1'))
+        for invoke, stage, method, path in entries:
+            with self.subTest(stage=stage):
+                fixture = self.fixture()
+                with patch.object(fixture, 'request', return_value=(502, {}, b'original response')), \
+                        patch.object(fixture, 'record'), \
+                        patch.object(fixture, 'echo_response', side_effect=AssertionError('echo reached')) as echo:
+                    with self.assertRaisesRegex(AssertionError, 'echo reached'):
+                        invoke(fixture)
+                echo.assert_called_once_with(stage, method, path, 502, {}, b'original response')
+
+    def test_stability_check_runs_all_four_methods_in_ten_rounds_without_sleep(self):
+        fixture = self.fixture()
+
+        def echo(method, path, *, tls=False, body=None):
+            response = f'method={method}\nuri={path}\nbody={body or ""}\nscheme=http\nforwarded_proto=http'.encode()
+            return 200, {'cross-origin-resource-policy': 'same-site'}, response
+
+        with patch.object(fixture, 'request', side_effect=echo) as request, \
+                patch.object(runtime_test.time, 'sleep', side_effect=AssertionError('no stability sleeps')):
+            fixture.api_stability('bootstrap HTTP')
+        self.assertEqual(request.call_count, 40)
+        self.assertEqual([call.args[0] for call in request.call_args_list], ['GET', 'POST', 'PUT', 'DELETE'] * 10)
+        self.assertEqual(fixture.report['api_stability']['rounds_completed'], 10)
+        self.assertEqual(fixture.report['api_stability']['request_retries'], 0)
+        self.assertTrue(all(row['passed'] for row in fixture.report['checks']))
+
+    def test_stability_failure_stops_without_retry_and_preserves_round_and_method(self):
+        fixture = self.fixture()
+        with patch.object(fixture, 'request', return_value=(502, {}, b'upstream unavailable')) as request:
+            with self.assertRaisesRegex(AssertionError, 'consecutive round 1/10'):
+                fixture.api_stability('bootstrap HTTP')
+        self.assertEqual(request.call_count, 1)
+        self.assertEqual(fixture.report['api_stability']['rounds_completed'], 0)
+        details = fixture.report['checks'][-1]['details']
+        self.assertEqual(details['stage'], 'bootstrap HTTP consecutive round 1/10')
+        self.assertEqual(details['method'], 'GET')
+        self.assertEqual(details['status'], 502)
+        self.assertEqual(details['body_preview'], 'upstream unavailable')
+
+    def test_fixture_starts_persistent_upstream_with_loopback_binding(self):
+        fixture = self.fixture()
+        inspection = [{'NetworkSettings': {'Ports': {
+            '80/tcp': [{'HostIp': '127.0.0.1', 'HostPort': '18001'}],
+            '443/tcp': [{'HostIp': '127.0.0.1', 'HostPort': '18002'}]}}}]
+        results = [subprocess.CompletedProcess([], 0, fixture.name, ''),
+                   subprocess.CompletedProcess([], 0, json.dumps(inspection), '')]
+        with patch.object(runtime_test, 'command', side_effect=results) as command, \
+                patch.object(fixture, 'wait_until'), patch.object(fixture, 'worker_permissions'), \
+                patch.object(fixture, 'nginx', return_value=subprocess.CompletedProcess([], 0)):
+            fixture.start()
+        arguments = command.call_args_list[0].args[0]
+        script = arguments[-1]
+        self.assertIn('nc -lk -s 127.0.0.1 -p 18080 -e /fixture/upstream.sh & ', script)
+        self.assertNotIn('while true', script)
+        self.assertEqual([arguments[index + 1] for index, value in enumerate(arguments) if value == '--publish'],
+                         ['127.0.0.1::80', '127.0.0.1::443'])
+        self.assertTrue(fixture.started)
+        self.assertEqual((fixture.http_port, fixture.https_port), (18001, 18002))
+
+    def failure_report(self, verify, *, logs_error=None, cleanup_error=None):
+        events = []
+
+        def prepare(fixture):
+            fixture.record('synthetic setup', True)
+            (fixture.directory / 'fixture-nginx-diagnostics.log').write_text('synthetic nginx diagnostic')
+
+        def start(fixture):
+            fixture.started = True
+
+        def logs(args, *, check=True):
+            self.assertEqual(args[:5], ['docker', 'logs', '--timestamps', '--tail', '100'])
+            self.assertTrue(args[-1].startswith('teachingopen-ip-https-test-'))
+            self.assertFalse(check)
+            events.append('logs before cleanup')
+            if logs_error:
+                raise logs_error
+            return subprocess.CompletedProcess(args, 0, 'x' * 20000, 'upstream connection refused')
+
+        def cleanup(fixture):
+            events.append('cleanup')
+            if cleanup_error:
+                raise cleanup_error
+            fixture.started = False
+            fixture.record('owned runtime container removed', True)
+
+        with tempfile.TemporaryDirectory() as raw:
+            output = Path(raw) / 'result.json'
+            with patch.object(runtime_test.Runtime, 'prepare', prepare), \
+                    patch.object(runtime_test.Runtime, 'start', start), \
+                    patch.object(runtime_test.Runtime, 'verify', verify), \
+                    patch.object(runtime_test.Runtime, 'cleanup', cleanup), \
+                    patch.object(runtime_test, 'command', side_effect=logs), \
+                    patch.object(sys, 'argv', ['runtime-test', '--output', str(output)]), redirect_stdout(io.StringIO()):
+                result = runtime_test.main()
+            self.assertEqual(result, 1)
+            report = json.loads(output.read_text())
+        self.assertFalse(report['passed'])
+        self.assertEqual(set(report['scenarios']), {'template'})
+        self.assertEqual(events, ['logs before cleanup', 'cleanup'])
+        return report
+
+    def test_http_failure_saves_json_and_bounded_logs_before_cleanup(self):
+        def verify(fixture):
+            fixture.echo_response('bootstrap HTTP', 'GET', '/api/fixture', 502,
+                                  {'content-type': 'text/html'}, b'<html>502 Bad Gateway</html>')
+        report = self.failure_report(verify)
+        self.assertEqual(report['error_type'], 'AssertionError')
+        scenario = report['scenarios']['template']
+        self.assertFalse(scenario['passed'])
+        self.assertEqual(scenario['nginx_diagnostics'], 'synthetic nginx diagnostic')
+        self.assertTrue(scenario['docker_logs']['truncated'])
+        self.assertEqual(len(scenario['docker_logs']['text']), runtime_test.DOCKER_LOG_CHARACTERS)
+        self.assertTrue(scenario['docker_logs']['text'].endswith('upstream connection refused'))
+        failed = [row for row in report['checks'] if not row['passed']]
+        self.assertEqual(len(failed), 1)
+        self.assertEqual(failed[0]['details']['status'], 502)
+        self.assertEqual(report['checks_passed'], 2)
+
+    def test_unexpected_exception_still_saves_failure_json(self):
+        def verify(fixture):
+            raise ValueError('unexpected response parser failure')
+        report = self.failure_report(verify)
+        self.assertEqual(report['error_type'], 'ValueError')
+        self.assertEqual(report['error'], 'unexpected response parser failure')
+        self.assertEqual(report['scenarios']['template']['error_type'], 'ValueError')
+
+    def test_log_or_cleanup_failure_cannot_replace_original_error(self):
+        def verify(fixture):
+            raise ValueError('original failure')
+        report = self.failure_report(verify, logs_error=OSError('cannot read logs'))
+        self.assertEqual(report['error'], 'original failure')
+        self.assertEqual(report['scenarios']['template']['docker_logs_error'], 'OSError: cannot read logs')
+        report = self.failure_report(verify, cleanup_error=RuntimeError('cleanup failure'))
+        self.assertEqual(report['error'], 'original failure')
+        self.assertEqual(report['scenarios']['template']['cleanup_error'], 'RuntimeError: cleanup failure')
+        self.assertIn('docker_logs', report['scenarios']['template'])
 
 
 if __name__ == '__main__':
