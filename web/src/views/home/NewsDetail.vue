@@ -1,7 +1,7 @@
 <template>
   <div class="cms">
     <div class="cms-header">
-      <h1>{{ cmsInfo.cmsTitle }}</h1>
+      <h1>{{ cmsInfo.newsTitle }}</h1>
       <div class="cms-info">
         <span class="gap">本文发布于：{{ cmsInfo.createTime }}</span>
       </div>
