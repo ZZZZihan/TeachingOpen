@@ -100,11 +100,14 @@
                 halt()
                 // Chromium permits a brief graceful shutdown interval. Space rapid runs; this timer is not proof of CPU death.
                 // The acknowledgment is generated here after terminate(), never forwarded from user code.
-                if (!workerEverStarted || stopAcknowledged) send('stopped')
-                else if (!stopAckTimer) stopAckTimer = root.setTimeout(function () {
-                    stopAcknowledged = true
+                if (!workerEverStarted || stopAcknowledged) {
                     send('stopped')
-                }, RETIRE_COOLDOWN_MS)
+                } else if (!stopAckTimer) {
+                    stopAckTimer = root.setTimeout(function () {
+                        stopAcknowledged = true
+                        send('stopped')
+                    }, RETIRE_COOLDOWN_MS)
+                }
             } else if (!stopped && workerPort && reply.type === 'start' && workerReady) {
                 workerPort.postMessage({ channel: CHANNEL, type: 'start', runId: runId })
             } else if (!stopped && workerPort && reply.type === 'input-result' && typeof reply.requestId === 'string' && reply.requestId.length <= 32 && typeof reply.value === 'string' && reply.value.length <= 4096) {
@@ -188,4 +191,7 @@
         }, 0)
     }
     root.addEventListener('message', bootstrap)
+    // This announces only that the trusted bootstrap listener exists. Execution
+    // results and stop acknowledgments still use the parent's private MessagePort.
+    root.parent.postMessage({ channel: CHANNEL, type: 'host-ready' }, '*')
 }(window))
