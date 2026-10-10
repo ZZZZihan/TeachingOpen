@@ -40,6 +40,7 @@ import JEllipsis from '@/components/jeecg/JEllipsis'
 import StudentWorkFeedback from '@/components/teaching/StudentWorkFeedback'
 import StudentWorkListState from '@/components/teaching/StudentWorkListState'
 import { studentWorkPage, studentWorkListError } from '@/utils/studentWorkList'
+import { loadPagedRecords } from '@/utils/loadPagedRecords'
 export default {
   name: 'MineWorksCard',
   components: {
@@ -80,9 +81,15 @@ export default {
             const sequence = ++this.requestId
             this.loading = true; this.listError = ''; this.listReady = false; this.dataSource = []
             try {
-                const response = await getAction(this.url.list, null)
+                const records = await loadPagedRecords(async params => {
+                    if (sequence !== this.requestId || this.isDisposed) throw new Error('作品列表请求已结束')
+                    const response = await getAction(this.url.list, params)
+                    if (sequence !== this.requestId || this.isDisposed) throw new Error('作品列表请求已结束')
+                    studentWorkPage(response)
+                    return response
+                })
                 if (sequence !== this.requestId || this.isDisposed) return
-                this.dataSource = studentWorkPage(response).records; this.listReady = true
+                this.dataSource = records; this.listReady = true
             } catch (error) {
                 if (sequence === this.requestId && !this.isDisposed) this.listError = studentWorkListError(error)
             } finally {

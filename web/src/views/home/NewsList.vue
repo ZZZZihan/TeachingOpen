@@ -32,13 +32,16 @@ export default {
   components: {},
   data() {
     return {
-      info: {},
+      info: { total: 0 },
+      listRequest: 0,
       cmsDataSource: [],
       pagination: {
         onChange: (page) => {
-          console.log(page)
+          this.getCmsList(this.$route.query.type, page)
         },
         pageSize: 10,
+        current: 1,
+        total: 0,
       },
       queryParam: {
         cmsType: '',
@@ -58,17 +61,26 @@ export default {
     },
   },
   methods: {
-    getCmsList(type) {
+    getCmsList(type, pageNo = 1) {
+      const request = ++this.listRequest
       this.cmsDataSource = []
-      getAction('/teaching/teachingNews/newsList', {
+      return getAction('/teaching/teachingNews/newsList', {
         cmsStatus: 1,
         cmsType: type,
-        pageSize: 999,
+        pageNo,
+        pageSize: this.pagination.pageSize,
       }).then((res) => {
+        if (request !== this.listRequest) return
         if (res.success) {
           this.info = res.result
           this.cmsDataSource = res.result.records
+          this.pagination.current = pageNo
+          this.pagination.total = Number(res.result.total) || 0
+        } else {
+          this.$message.warning(res.message || '资讯加载失败')
         }
+      }).catch(() => {
+        if (request === this.listRequest) this.$message.warning('资讯加载失败，请重试')
       })
     },
     toDetail(item) {

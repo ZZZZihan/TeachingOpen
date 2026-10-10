@@ -441,8 +441,30 @@ public class SysUserController extends BaseController {
         }
 
         QueryGenerator.installMplus(queryWrapper, sysUser, request.getParameterMap());
-        Page<SysUser> page = new Page<SysUser>(1, 999);
+        // Exports use bounded SQL pages as well, without silently exporting
+        // only the first page after the global pagination limit is applied.
+        queryWrapper.orderByAsc("sys_user.id");
+        Page<SysUser> page = new Page<SysUser>(1, 100);
         IPage<SysUser> pageList = sysUserService.getUserList(page, queryWrapper);
+        List<SysUser> exportedUsers = new ArrayList<>(pageList.getRecords());
+        final long total = pageList.getTotal();
+        if (total < 0 || exportedUsers.size() != Math.min(100L, total)) {
+            throw new org.jeecg.common.exception.JeecgBootException("导出期间用户列表已变化，请重试");
+        }
+        Set<String> exportedIds = exportedUsers.stream().map(SysUser::getId).collect(Collectors.toSet());
+        for (long current = 2; exportedUsers.size() < total; current++) {
+            IPage<SysUser> next = sysUserService.getUserList(new Page<SysUser>(current, 100), queryWrapper);
+            if (next.getTotal() != total || next.getRecords().size() != Math.min(100L, total - exportedUsers.size())) {
+                throw new org.jeecg.common.exception.JeecgBootException("导出期间用户列表已变化，请重试");
+            }
+            for (SysUser record : next.getRecords()) {
+                if (!exportedIds.add(record.getId())) {
+                    throw new org.jeecg.common.exception.JeecgBootException("导出期间用户列表已变化，请重试");
+                }
+            }
+            exportedUsers.addAll(next.getRecords());
+        }
+        pageList.setRecords(exportedUsers);
 
         //批量查询用户的所属部门
         //step.1 先拿到全部的 useids

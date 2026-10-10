@@ -134,14 +134,14 @@ public class TeachingWorkController extends BaseController {
 	 @GetMapping(value = "/mine")
 	 public Result<?> mine(StudentWorkModel teachingWork,
 												 @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
-												 @RequestParam(name = "pageSize", defaultValue = "999") Integer pageSize,
+												 @RequestParam(name = "pageSize", defaultValue = "100") Integer pageSize,
 												 HttpServletRequest req) {
 		 String tag = teachingWork.getWorkTag();
 		 teachingWork.setWorkTag(null);
 		 teachingWork.setUserId(getCurrentUser().getId());
 		 Result<IPage<StudentWorkModel>> result = new Result<IPage<StudentWorkModel>>();
 		 QueryWrapper<StudentWorkModel> queryWrapper = QueryGenerator.initQueryWrapper(teachingWork, req.getParameterMap());
-		 queryWrapper.orderByDesc("teaching_work.create_time");
+		 queryWrapper.orderByDesc("teaching_work.create_time", "teaching_work.id");
 //		 Page<TeachingWork> page = new Page<TeachingWork>(pageNo, pageSize);
 		 if (StringUtils.isNotBlank(tag)){
 			 String keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), tag);
