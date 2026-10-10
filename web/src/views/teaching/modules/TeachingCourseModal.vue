@@ -52,7 +52,7 @@
           </a-form-item>
           <a-form-item label="课程介绍" :labelCol="labelCol" :wrapperCol="wrapperCol">
             <!-- <a-textarea v-decorator="['courseDesc', validatorRules.courseDesc]" rows="4" placeholder="请输入课程介绍"/> -->
-            <j-editor v-decorator="['courseDesc', { trigger: 'input' }]" />
+            <j-editor :active="visible" :session="saveVersion" v-decorator="['courseDesc', { trigger: 'input' }]" />
           </a-form-item>
           <a-form-item label="课程封面" :labelCol="labelCol" :wrapperCol="wrapperCol">
             <j-upload v-decorator="['courseCover', validatorRules.courseCover]" :number="1" :trigger-change="true" :session="uploadSession" :active="visible" :disabled="confirmLoading" @upload-state="onUploadState('courseCover', $event)"></j-upload>

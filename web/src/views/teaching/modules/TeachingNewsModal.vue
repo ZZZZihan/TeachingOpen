@@ -17,7 +17,7 @@
           <a-input v-decorator="['newsTitle', validatorRules.newsTitle]" placeholder="请输入标题"></a-input>
         </a-form-item>
         <a-form-item label="内容" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-editor v-decorator="['newsContent',{trigger:'input'}]"/>
+          <j-editor :active="visible" :session="editorSession" v-decorator="['newsContent',{trigger:'input'}]"/>
         </a-form-item>
       </a-form>
     </a-spin>
@@ -45,6 +45,7 @@
         title:"操作",
         width:1200,
         visible: false,
+        editorSession: 0,
         model: {},
         labelCol: {
           xs: { span: 24 },
@@ -85,6 +86,7 @@
         this.edit({});
       },
       edit (record) {
+        this.editorSession++
         this.form.resetFields();
         this.model = Object.assign({}, record);
         this.visible = true;

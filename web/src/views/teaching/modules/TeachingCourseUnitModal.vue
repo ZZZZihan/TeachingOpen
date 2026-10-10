@@ -76,7 +76,7 @@
             <j-upload v-decorator="['courseWork', validatorRules.courseWork]" :number="1" :trigger-change="true" :session="uploadSession" :active="visible" :disabled="confirmLoading" @upload-state="onUploadState('courseWork', $event)"></j-upload>
           </a-form-item>
           <a-form-item label="课程内容" :labelCol="labelCol" :wrapperCol="wrapperCol" >
-            <j-editor v-decorator="['mediaContent', { trigger: 'input' }]" />
+            <j-editor :active="visible" :session="saveVersion" v-decorator="['mediaContent', { trigger: 'input' }]" />
           </a-form-item>
           <a-form-item label="地图坐标" :labelCol="labelCol" :wrapperCol="wrapperCol">
             <p>坐标由地图编辑器保存；新建单元或更换所属课程后，请先保存单元。</p>

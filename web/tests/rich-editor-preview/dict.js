@@ -1,0 +1,1 @@
+export default { props: ['value'], render(h) { return h('select', { attrs: { 'aria-label': '新闻状态' }, domProps: { value: this.value }, on: { change: event => this.$emit('change', Number(event.target.value)) } }, [h('option', { attrs: { value: 0 } }, '草稿'), h('option', { attrs: { value: 1 } }, '发布')]) } }

@@ -122,7 +122,7 @@
               :wrapperCol="wrapperColX1"
               label="内容"
               class="j-field-content">
-              <j-editor v-decorator="[ 'msgContent', {} ]" triggerChange></j-editor>
+              <j-editor :active="visible" :session="editorSession" v-decorator="[ 'msgContent', {} ]" triggerChange></j-editor>
             </a-form-item>
           </a-col>
         </a-row>
@@ -148,6 +148,7 @@
       return {
         title:"操作",
         visible: false,
+        editorSession: 0,
         disableSubmit:false,
         model: {},
         labelCol: {
@@ -196,6 +197,7 @@
         this.edit({});
       },
       edit (record) {
+        this.editorSession++
         this.form.resetFields();
         this.model = {}
         this.disable = false;

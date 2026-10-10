@@ -9,18 +9,22 @@
 
     <a-divider></a-divider>
 
-    <div class="article-content" v-html="cmsInfo.newsContent"></div>
+    <div class="article-content" v-html="safeContent"></div>
   </div>
 </template>
 
 <script>
 import { getAction } from "@/api/manage";
+import { sanitizeRichText } from '@/utils/richText'
 
 export default {
   data() {
     return {
       cmsInfo: {},
     };
+  },
+  computed: {
+    safeContent() { return sanitizeRichText(this.cmsInfo.newsContent) }
   },
   watch: {
     $route(to, from) {
