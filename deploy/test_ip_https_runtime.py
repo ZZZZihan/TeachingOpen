@@ -30,6 +30,8 @@ ROOT = Path(__file__).resolve().parents[1]
 IDENTITY = "8.8.8.8"
 WRONG_IDENTITY = "8.8.4.4"
 DEFAULT_IMAGE = "nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94"
+RESPONSE_PREVIEW_BYTES = 4096
+DOCKER_LOG_CHARACTERS = 16384
 SECURITY_HEADERS = {
     "x-frame-options": "SAMEORIGIN",
     "x-content-type-options": "nosniff",
@@ -182,6 +184,51 @@ class Runtime:
         self.report["checks"].append(row)
         if not condition:
             raise AssertionError(f"runtime check failed: {name}: {details}")
+
+    def echo_response(self, stage, method, path, status, headers, body):
+        """Reject non-echo responses with the original HTTP failure evidence."""
+        details = {"stage": stage, "method": method, "path": path, "status": status,
+                   "content_type": headers.get("content-type"), "body_bytes": len(body),
+                   "body_preview": body[:RESPONSE_PREVIEW_BYTES].decode("utf-8", errors="replace"),
+                   "body_truncated": len(body) > RESPONSE_PREVIEW_BYTES}
+        name = f"{stage} API {method} returns HTTP 200 and key/value echo"
+        if status != 200:
+            self.record(name, False, details)
+        try:
+            lines = body.decode("utf-8").splitlines()
+        except UnicodeDecodeError:
+            details["format_error"] = "echo body is not UTF-8"
+            self.record(name, False, details)
+        values = {}
+        if not lines:
+            details["format_error"] = "echo body is empty"
+            self.record(name, False, details)
+        for number, line in enumerate(lines, 1):
+            key, separator, value = line.partition("=")
+            if not separator or not key or key in values:
+                details["format_error"] = f"invalid or duplicate echo key on line {number}"
+                self.record(name, False, details)
+            values[key] = value
+        self.record(name, True, details)
+        return values, details
+
+    def capture_diagnostics(self):
+        # These files and this named container belong only to the synthetic test.
+        # Diagnostic failures must not replace the original verification failure.
+        try:
+            diagnostics = self.directory / "fixture-nginx-diagnostics.log"
+            if diagnostics.exists():
+                self.report["nginx_diagnostics"] = diagnostics.read_text()[-4096:]
+        except Exception as exc:
+            self.report["nginx_diagnostics_error"] = f"{type(exc).__name__}: {exc}"
+        if self.started:
+            try:
+                result = command(["docker", "logs", "--timestamps", "--tail", "100", self.name], check=False)
+                logs = result.stdout + result.stderr
+                self.report["docker_logs"] = {"exit_code": result.returncode,
+                    "text": logs[-DOCKER_LOG_CHARACTERS:], "truncated": len(logs) > DOCKER_LOG_CHARACTERS}
+            except Exception as exc:
+                self.report["docker_logs_error"] = f"{type(exc).__name__}: {exc}"
 
     def prepare(self):
         image = command(["docker", "image", "inspect", self.image])
@@ -606,12 +653,12 @@ sys.exit(result.returncode)
                     and headers.get("content-range") == "bytes 100-199/4096"
                     and body == bytes(range(100, 200)) and secure(headers))
         status, headers, body = request("POST", "/api/native-loopback?probe=1", body="native-unchanged-body")
-        values = dict(line.split("=", 1) for line in body.decode().splitlines())
+        values, details = self.echo_response(stage, "POST", "/api/native-loopback?probe=1", status, headers, body)
         self.record(f"{stage} API writes preserve method, URI, body and original scheme", status == 200
                     and values.get("method") == "POST" and values.get("uri") == "/api/native-loopback?probe=1"
                     and values.get("body") == "native-unchanged-body"
                     and values.get("scheme") == ("https" if tls else "http")
-                    and (original or values.get("forwarded_proto") == ("https" if tls else "http")), values)
+                    and (original or values.get("forwarded_proto") == ("https" if tls else "http")), details)
         self.record(f"{stage} API retains every reviewed security header", secure(headers), headers)
         if internal:
             listeners = command(["docker", "exec", self.name, "netstat", "-lnt"]).stdout
@@ -637,10 +684,10 @@ sys.exit(result.returncode)
             path = f"/api/runtime-echo/item%20one?method={method}&literal=a%2Fb"
             body = "synthetic-write-sentinel" if method != "GET" else None
             status, headers, response = self.request(method, path, tls=tls, body=body)
-            values = dict(line.split("=", 1) for line in response.decode().splitlines())
+            values, details = self.echo_response(stage, method, path, status, headers, response)
             self.record(f"{stage} API {method} preserves URI, method and body",
                         status == 200 and values.get("method") == method and values.get("uri") == path
-                        and values.get("body") == (body or ""), values)
+                        and values.get("body") == (body or ""), details)
             self.record(f"{stage} API {method} forwards original scheme",
                         values.get("scheme") == ("https" if tls else "http")
                         and values.get("forwarded_proto") == ("https" if tls else "http"), values.get("scheme"))
@@ -671,13 +718,14 @@ sys.exit(result.returncode)
 
     def forwarded_header_boundary(self):
         spoofed_ip = "203.0.113.66"
-        status, _, response = self.request("GET", "/api/forwarded-boundary", tls=True, headers={
+        status, headers, response = self.request("GET", "/api/forwarded-boundary", tls=True, headers={
             "Host": f"{IDENTITY}:{self.https_port}",
             "X-Forwarded-For": f"{spoofed_ip}, 127.0.0.1",
             "X-Forwarded-Proto": "http", "X-Forwarded-Host": "attacker.invalid",
             "X-Forwarded-Port": "81", "X-Real-IP": spoofed_ip, "X-Scheme": "http"})
-        values = dict(line.split("=", 1) for line in response.decode().splitlines())
-        self.record("HTTPS forwarding-boundary probe reaches synthetic API", status == 200)
+        values, details = self.echo_response("HTTPS forwarding boundary", "GET", "/api/forwarded-boundary",
+                                            status, headers, response)
+        self.record("HTTPS forwarding-boundary probe reaches synthetic API", status == 200, details)
         self.record("HTTPS overwrites forged X-Forwarded-For with the connected client address",
                     bool(values.get("forwarded_for"))
                     and values["forwarded_for"] == values.get("real_ip")
@@ -824,22 +872,27 @@ def main():
             scenario = {"checks": [], "passed": False}
             with tempfile.TemporaryDirectory(prefix="teachingopen-ip-https-runtime-") as temporary:
                 runtime = Runtime(Path(temporary).resolve(), args.image, scenario, source_mode)
+                verification_error = None
                 try:
                     runtime.prepare()
                     runtime.start()
                     runtime.verify()
                     scenario["passed"] = True
-                except BaseException:
-                    diagnostics = runtime.directory / "fixture-nginx-diagnostics.log"
-                    if diagnostics.exists():
-                        scenario["nginx_diagnostics"] = diagnostics.read_text()[-4096:]
+                except BaseException as exc:
+                    verification_error = exc
+                    scenario["error_type"] = type(exc).__name__
+                    scenario["error"] = str(exc)
+                    runtime.capture_diagnostics()
                     raise
                 finally:
                     try:
                         runtime.cleanup()
-                    except BaseException:
+                    except BaseException as exc:
                         scenario["passed"] = False
-                        raise
+                        scenario["cleanup_error"] = f"{type(exc).__name__}: {exc}"
+                        if verification_error is None:
+                            runtime.capture_diagnostics()
+                            raise
                     finally:
                         checks = scenario.pop("checks")
                         scenario["checks_passed"] = sum(check["passed"] for check in checks)
@@ -851,8 +904,9 @@ def main():
                                 report[field] = scenario[field]
         report["passed"] = all(scenario["passed"] for scenario in report["scenarios"].values())
         result = 0
-    except (AssertionError, RuntimeError, OSError, subprocess.TimeoutExpired, http.client.HTTPException) as exc:
+    except (Exception, KeyboardInterrupt) as exc:
         report["error"] = str(exc)
+        report["error_type"] = type(exc).__name__
         report["passed"] = False
     report["checks_passed"] = sum(check["passed"] for check in report["checks"])
     report["checks_total"] = len(report["checks"])
