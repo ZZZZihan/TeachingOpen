@@ -51,6 +51,50 @@ def replace_once(text, old, new):
     return text.replace(old, new, 1)
 
 
+def reviewed_site_profile(template, ip, web_root, api_upstream):
+    """The one supported native-site shape, not a general Nginx parser.
+
+    Review a different shape before extending these explicit anchors. A caller's
+    digest proves which bytes were reviewed; this profile also prevents unknown
+    listeners, nested servers, includes or TLS/proxy policies from being copied.
+    """
+    source = '''map $uri $teaching_html_cache_policy {
+    default "";
+    ~*\\.html$ "no-cache";
+}
+
+''' + template
+    source = replace_once(source, '    listen 80 default_server;',
+                          '    listen 80 default_server;\n    listen 127.0.0.1:8088;')
+    source = replace_once(source, '    server_name localhost;', '    server_name ' + ip + ';')
+    source = replace_once(source, 'root /usr/share/nginx/html;', 'root ' + web_root + ';')
+    source = replace_once(source, 'proxy_pass              http://api:8080;',
+                          'proxy_pass              ' + api_upstream + ';')
+    source = replace_once(source,
+        '    add_header Cross-Origin-Resource-Policy $teaching_python_resource_policy always;',
+        '    add_header Cross-Origin-Resource-Policy $teaching_python_resource_policy always;\n'
+        '    add_header Cache-Control $teaching_html_cache_policy always;')
+    return replace_once(source, '    location / {', '''    # A missing script/style is not a client-side page route.
+    location ~* \\.(js|css)(\\.gz)?$ {
+        root ''' + web_root + ''';
+        try_files $uri =404;
+        gzip on;
+        gzip_min_length 1k;
+        gzip_comp_level 9;
+        gzip_types application/javascript text/css;
+        gzip_vary on;
+        gzip_disable "MSIE [1-6]\\.";
+    }
+
+    location / {''')
+
+
+def checked_sha256(value):
+    if not re.fullmatch(r'[0-9a-f]{64}', value):
+        raise ValueError('Use an explicit lowercase SHA-256 digest')
+    return value
+
+
 def atomic_write(path, data, mode=0o600, owner=None):
     fd, temporary = tempfile.mkstemp(prefix='.' + path.name + '.', dir=path.parent)
     try:
@@ -86,7 +130,8 @@ def acme_location(acme_root):
 '''
 
 
-def render(ip, web_root, api_upstream, acme_root, certificate, private_key, output):
+def render(ip, web_root, api_upstream, acme_root, certificate, private_key, output,
+           source_config=None, source_sha256=None):
     address = ipaddress.ip_address(ip)
     if address.version != 4 or not address.is_global or address.is_multicast:
         raise ValueError('A globally routable public IPv4 address is required')
@@ -108,14 +153,27 @@ def render(ip, web_root, api_upstream, acme_root, certificate, private_key, outp
     for public in (Path(web_root), Path(acme_root)):
         if output == public or public in output.parents:
             raise ValueError('Output must stay outside public web roots')
-    source = ordinary(TEMPLATE).read_text()
+    if (source_config is None) != (source_sha256 is None):
+        raise ValueError('Provide both source configuration and its reviewed SHA-256')
+    template = ordinary(TEMPLATE).read_bytes()
+    source_path = ordinary(source_config) if source_config is not None else ordinary(TEMPLATE)
+    source_bytes = source_path.read_bytes()
+    source = source_bytes.decode('utf-8')
+    native = source_config is not None
+    if native:
+        if digest(source_bytes) != checked_sha256(source_sha256):
+            raise ValueError('Reviewed source configuration checksum mismatch')
+        if source != reviewed_site_profile(template.decode('utf-8'), ip, web_root, api_upstream):
+            raise ValueError('Reviewed source does not match the supported single-server site profile; '
+                             'review its paths, listeners and unique rendering anchors')
     if source.count('\nserver\n{\n') != 1:
         raise ValueError('Expected exactly one reviewed application server block')
     prefix, server = source.split('\nserver\n', 1)
     server = 'server\n' + server
-    server = replace_once(server, '    server_name localhost;', '    server_name ' + ip + ';')
-    server = replace_once(server, 'root /usr/share/nginx/html;', 'root "' + web_root + '";')
-    server = replace_once(server, 'proxy_pass              http://api:8080;', 'proxy_pass              ' + api_upstream + ';')
+    if not native:
+        server = replace_once(server, '    server_name localhost;', '    server_name ' + ip + ';')
+        server = replace_once(server, 'root /usr/share/nginx/html;', 'root "' + web_root + '";')
+        server = replace_once(server, 'proxy_pass              http://api:8080;', 'proxy_pass              ' + api_upstream + ';')
     server = replace_once(server, 'proxy_set_header        Host $host;', '''proxy_set_header        Host $host;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-Forwarded-Port $server_port;
@@ -127,7 +185,9 @@ def render(ip, web_root, api_upstream, acme_root, certificate, private_key, outp
     # Avoid permanent browser state while this configuration remains a trial.
     if 'Strict-Transport-Security' in source or 'ssl_certificate' in source:
         raise ValueError('Source template unexpectedly contains TLS policy')
-    tls = replace_once(server, '    listen 80 default_server;', '''    listen 443 ssl;
+    # The trial's HTTP block owns 8088; duplicating it into TLS would conflict.
+    tls_source = replace_once(server, '    listen 127.0.0.1:8088;\n', '') if native else server
+    tls = replace_once(tls_source, '    listen 80 default_server;', '''    listen 443 ssl;
     ssl_certificate "''' + certificate + '''";
     ssl_certificate_key "''' + private_key + '''";
     ssl_protocols TLSv1.2 TLSv1.3;
@@ -146,10 +206,12 @@ def render(ip, web_root, api_upstream, acme_root, certificate, private_key, outp
     }
 }
 '''
+    # Final external HTTP policy must not remove the local business/health entry.
+    local_http = '\n' + replace_once(server, '    listen 80 default_server;\n', '') if native else ''
     generated = {
         'bootstrap.conf': prefix + '\n' + server,
         'trial.conf': prefix + '\n' + server + '\n' + tls,
-        'https.conf': prefix + '\n' + tls + '\n' + redirect,
+        'https.conf': prefix + '\n' + tls + local_http + '\n' + redirect,
     }
     output.mkdir(mode=0o700)
     files = {}
@@ -157,7 +219,9 @@ def render(ip, web_root, api_upstream, acme_root, certificate, private_key, outp
         data = ('# Generated by TeachingOpen ip_https.py; install only after target review.\n' + content).encode()
         atomic_write(output / name, data)
         files[name] = {'sha256': digest(data), 'bytes': len(data)}
-    manifest = {'kind': KIND, 'public_ipv4': ip, 'template_sha256': digest(source.encode()),
+    manifest = {'kind': KIND, 'public_ipv4': ip, 'template_sha256': digest(template),
+        'source_mode': 'reviewed_site' if native else 'repository_template',
+        'source_path': str(source_path), 'source_sha256': digest(source_bytes),
         'files': files, 'deployed': False, 'certificate_issued': False,
         'production_verified': False}
     save_receipt(output, manifest)
@@ -228,16 +292,20 @@ def switch(target, next_data, restore_data, mode, owner, nginx, backup, receipt,
             'active_sha256': digest(next_data), 'live_business_verified': False}
 
 
-def activate(target, candidate, backup, nginx):
+def activate(target, candidate, backup, nginx, expected_target_sha256=None):
     target, candidate = ordinary(target), ordinary(candidate)
     nginx = executable(nginx)
     backup = ordinary(backup, directory=True, missing=True)
     if backup.exists() or target == candidate:
         raise ValueError('Use a fresh backup directory and a distinct candidate file')
     distinct(backup, target, candidate, nginx)
+    if expected_target_sha256 is not None:
+        checked_sha256(expected_target_sha256)
     with target_lock(target):
         target, candidate = ordinary(target), ordinary(candidate)
         old, new = target.read_bytes(), candidate.read_bytes()
+        if expected_target_sha256 is not None and digest(old) != expected_target_sha256:
+            raise ValueError('Target changed since review; expected target checksum mismatch')
         info = target.stat()
         nginx_command(nginx, '-t')
         backup.mkdir(mode=0o700)
@@ -293,12 +361,15 @@ def main():
     rendering = commands.add_parser('render')
     for name in ('ip', 'web-root', 'api-upstream', 'acme-root', 'certificate', 'private-key', 'output'):
         rendering.add_argument('--' + name, required=True)
+    rendering.add_argument('--source-config', help='Reviewed native-site config; paired with --source-sha256')
+    rendering.add_argument('--source-sha256', help='Exact reviewed source bytes; both source options are required together')
     for action in ('activate', 'rollback'):
         command = commands.add_parser(action)
         for name in ('target', 'backup', 'nginx'):
             command.add_argument('--' + name, required=True)
         if action == 'activate':
             command.add_argument('--candidate', required=True)
+            command.add_argument('--expected-target-sha256', help='Refuse activation if target changed since review')
     args = vars(parser.parse_args())
     action = args.pop('action')
     try:

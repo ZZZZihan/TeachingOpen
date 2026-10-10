@@ -15,7 +15,7 @@
 
 ## 上线前取得实际参数
 
-核实云端正在运行的配置，而不是直接套用旧报告：Nginx 版本/活动站点文件、前端真实目录、API 的 loopback 端口、配置额外规则、公网 IP 是否稳定、云安全组及主机防火墙的 80/443、现有应用启动方式。`render` 沿用仓库 `web/nginx/default.conf` 的业务规则，不能自动保留云端额外定制；必须审阅生成文件与当前活动站点差异。
+核实云端正在运行的配置，而不是直接套用旧报告：Nginx 版本/活动站点文件、前端真实目录、API 的 loopback 端口、配置额外规则、公网 IP 是否稳定、云安全组及主机防火墙的 80/443、现有应用启动方式。默认 `render` 沿用仓库 `web/nginx/default.conf`；已有原生站点应传入已审阅的 `--source-config` 和 `--source-sha256`。当前受支持形态保留现场的 HTML `no-cache`、缺失 JS/CSS 的 404、现有前端目录及 `127.0.0.1:8088` 本机业务入口。它严格匹配已审阅的单站点形态，额外 include、listener 或未知业务规则会拒绝生成，需要先审阅并扩展支持；不是通用 Nginx 解析器。
 
 工具要求 `--target` 为已存在的普通文件；若 `sites-enabled` 是符号链接，请核实并使用其实际 `sites-available` 目标路径。不要替换整个 `/etc/nginx/nginx.conf`，不要把三个候选同时 include，避免重复监听和 map 冲突。确认其他站点无冲突后再试行。
 
@@ -39,7 +39,10 @@ WORK=/var/lib/teachingopen-https-trial
 ```sh
 sudo install -d -m 0700 "$WORK" /var/lib/teachingopen-acme
 sudo install -d -m 0755 /var/www/teachingopen-acme/.well-known/acme-challenge
+sudo install -m 0600 "$SITE" "$WORK/reviewed-site.conf"
+SOURCE_SHA=$(sudo sha256sum "$WORK/reviewed-site.conf" | cut -d ' ' -f 1)
 sudo python3 "$SOURCE/deploy/ip_https.py" render \
+  --source-config "$WORK/reviewed-site.conf" --source-sha256 "$SOURCE_SHA" \
   --ip "$PUBLIC_IP" --web-root "$WEB_ROOT" \
   --api-upstream "http://127.0.0.1:$API_PORT" \
   --acme-root /var/www/teachingopen-acme \
@@ -51,11 +54,16 @@ sudo diff -u "$SITE" "$WORK/rendered/bootstrap.conf"
 
 渲染目录须全新。`diff` 的非零退出只表示有差异，需要审阅路径、安全头、上传、媒体、WebSocket与自定义业务规则。当前生成器是一个明确拓扑的候选，不是任意 Nginx 配置迁移器。
 
-把 `ip-https-proxy.properties.example` 中的配置合并进**现有完整私有应用配置**，先备份这份配置；不要用片段替换整个配置，也不要输出其中凭据。它只信任 loopback 代理，Nginx 会覆盖转发头。按实际服务方式受控重启后端，再分别核对 HTTP 正常、HTTPS 登录时 `teaching_media` Cookie 带 `Secure`。这一步使 TLS 在 Nginx 终止后 Java 仍能识别安全连接，适用于现有 Nginx 1.18，无需为 `proxy_cookie_flags` 升级 Nginx。
+源配置摘要绑定审阅过的原始字节；下面每次 `activate` 还传入预期的活动配置摘要。工具在加锁后、执行 Nginx 命令和创建备份前拒绝摘要不匹配。若其他发布改变了活动配置，重新核对、生成与验证候选，不要临时读取新摘要来绕过这个保护。仅使用同一工具的操作共享该锁；仍需避免与其他发布同时切换配置。
+
+把 `ip-https-proxy.properties.example` 中的配置合并进**现有完整私有应用配置**，先备份这份配置；不要用片段替换整个配置，也不要输出其中凭据。它只信任 loopback 代理，Nginx 会覆盖转发头。按实际服务方式受控重启后端，先核对 HTTP 正常及后端仅监听 loopback；HTTPS 登录 Cookie 检查放在后续 trial 证书与监听就绪后。这一步使 TLS 在 Nginx 终止后 Java 仍能识别安全连接，适用于现有 Nginx 1.18，无需为 `proxy_cookie_flags` 升级 Nginx。
+
+若完整后端候选提前准备，应用前比较活动配置与准备时备份的 SHA-256；不一致时基于新的完整配置重新合并 7 个属性，不能用旧候选覆盖后来修改的数据库连接或业务参数。
 
 ```sh
 sudo python3 "$SOURCE/deploy/ip_https.py" activate \
   --target "$SITE" --candidate "$WORK/rendered/bootstrap.conf" \
+  --expected-target-sha256 "$SOURCE_SHA" \
   --backup "$WORK/before-bootstrap" --nginx /usr/sbin/nginx
 ```
 
@@ -63,7 +71,7 @@ sudo python3 "$SOURCE/deploy/ip_https.py" activate \
 
 ## 2. 申请证书并试行 HTTPS
 
-准备受维护的 Certbot **5.4 或更新版本**，本方案使用独立路径 `/opt/teachingopen-certbot/bin/certbot`；不复用不明版本的系统旧包。先运行 `--version` 核对。安装方式与版本另行按目标环境核实，工具不会自动安装软件。
+准备受维护的 Certbot **5.4 或更新版本**，本方案使用独立路径 `/opt/teachingopen-certbot/bin/certbot`；不复用不明版本的系统旧包。先运行 `--version` 核对。2026-10-10 的目标主机准备已在独立 Python 3.10 虚拟环境安装 Certbot/acme 5.8.0，19 个 wheel 与官方 PyPI SHA-256 一致，`pip check` 通过。安装准备不等于签发；仓库工具不会自动安装软件。
 
 先使用测试 CA 验证流程，状态目录与正式目录分开。`ACME_EMAIL` 由操作者填写，日志留在服务器私有目录：
 
@@ -89,11 +97,12 @@ sudo /opt/teachingopen-certbot/bin/certbot certonly \
   --logs-dir /var/lib/teachingopen-acme/logs
 sudo python3 "$SOURCE/deploy/ip_https.py" activate \
   --target "$SITE" --candidate "$WORK/rendered/trial.conf" \
+  --expected-target-sha256 "$(sudo python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["files"]["bootstrap.conf"]["sha256"])' "$WORK/rendered/manifest.json")" \
   --backup "$WORK/before-trial" --nginx /usr/sbin/nginx
 python3 "$SOURCE/deploy/check_ip_certificate.py" --ip "$PUBLIC_IP"
 ```
 
-使用真实浏览器直接打开 HTTPS，不忽略证书错误。至少检查注册/登录、管理员与师生入口、视频起播/拖动、附件、三编辑器加载/保存、通知/云变量 WSS、退出。保持生产数据写入范围与已有授权一致，必要时在独立验证副本执行写入。核对返回 Cookie，而不仅是首页状态码。
+使用真实浏览器直接打开 HTTPS，不忽略证书错误。至少检查注册/登录、管理员与师生入口、视频起播/拖动、附件、三编辑器加载/保存、通知/云变量 WSS、退出。保持生产数据写入范围与已有授权一致，必要时在独立验证副本执行写入。核对 HTTPS 登录及退出时 `teaching_media` Cookie 的 `Secure`、`HttpOnly`、`SameSite=Strict`，而不仅是首页状态码。
 
 现有主 API、编辑器与 socket 已有同源逻辑，历史课程内容仍可能含绝对 `http://` 链接。审计实际数据并在浏览器验证；HTTP 重定向不能替代 mixed-content 检查，不在本 PR 批量改写数据库。前端 origin 从 HTTP 变成 HTTPS 后，本地登录存储/草稿是不同 origin，应先保存未提交内容并重新登录。
 
@@ -138,6 +147,7 @@ systemctl list-timers 'teachingopen-ip-cert-*'
 ```sh
 sudo python3 "$SOURCE/deploy/ip_https.py" activate \
   --target "$SITE" --candidate "$WORK/rendered/https.conf" \
+  --expected-target-sha256 "$(sudo python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["files"]["trial.conf"]["sha256"])' "$WORK/rendered/manifest.json")" \
   --backup "$WORK/before-https" --nginx /usr/sbin/nginx
 ```
 

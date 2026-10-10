@@ -97,6 +97,180 @@ class RenderingTests(unittest.TestCase):
         self.assertFalse((self.root / 'out').exists())
 
 
+class ReviewedSiteRenderingTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name).resolve()
+        self.source = self.root / 'reviewed-site.conf'
+        self.args = dict(ip='8.8.8.8', web_root='/var/www/teachingopen-current',
+            api_upstream='http://127.0.0.1:8080', acme_root='/var/lib/teachingopen-acme',
+            certificate='/etc/letsencrypt/live/teachingopen-ip/fullchain.pem',
+            private_key='/etc/letsencrypt/live/teachingopen-ip/privkey.pem',
+            output=str(self.root / 'rendered'), source_config=str(self.source))
+        self.cache_map = '''map $uri $teaching_html_cache_policy {
+    default "";
+    ~*\\.html$ "no-cache";
+}
+
+'''
+        self.static = '''    # A missing script/style is not a client-side page route.
+    location ~* \\.(js|css)(\\.gz)?$ {
+        root /var/www/teachingopen-current;
+        try_files $uri =404;
+        gzip on;
+        gzip_min_length 1k;
+        gzip_comp_level 9;
+        gzip_types application/javascript text/css;
+        gzip_vary on;
+        gzip_disable "MSIE [1-6]\\.";
+    }
+
+'''
+        # A synthetic copy of the supported deployment shape. No production
+        # config/path or certificate is read by these tests.
+        fixture = self.cache_map + tls.TEMPLATE.read_text()
+        fixture = fixture.replace('    listen 80 default_server;',
+                                  '    listen 80 default_server;\n    listen 127.0.0.1:8088;')
+        fixture = fixture.replace('server_name localhost;', 'server_name 8.8.8.8;')
+        fixture = fixture.replace('root /usr/share/nginx/html;', 'root /var/www/teachingopen-current;')
+        fixture = fixture.replace('http://api:8080;', 'http://127.0.0.1:8080;')
+        fixture = fixture.replace(
+            '    add_header Cross-Origin-Resource-Policy $teaching_python_resource_policy always;',
+            '    add_header Cross-Origin-Resource-Policy $teaching_python_resource_policy always;\n'
+            '    add_header Cache-Control $teaching_html_cache_policy always;')
+        fixture = fixture.replace('    location / {', self.static + '    location / {')
+        self.source.write_text(fixture)
+        self.args['source_sha256'] = tls.digest(self.source.read_bytes())
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def render(self, **overrides):
+        return tls.render(**dict(self.args, **overrides))
+
+    def output(self, name):
+        return (Path(self.args['output']) / name).read_text()
+
+    def test_source_provenance_and_all_untouched_business_bytes_are_preserved(self):
+        before = self.source.read_bytes()
+        with patch.object(tls.subprocess, 'run', side_effect=AssertionError('Rendering must stay offline')):
+            result = self.render()
+        self.assertEqual(self.source.read_bytes(), before)
+        self.assertEqual(result['source_mode'], 'reviewed_site')
+        self.assertEqual(result['source_path'], str(self.source))
+        self.assertEqual(result['source_sha256'], tls.digest(before))
+        bootstrap = self.output('bootstrap.conf').split('\n', 1)[1]
+        # Reverse only the design's four deliberate changes. Equality proves
+        # the complete reviewed business config survived, not selected snippets.
+        bootstrap = bootstrap.replace('''        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_set_header X-Forwarded-Host $host;
+''', '')
+        bootstrap = bootstrap.replace('        absolute_redirect off;\n', '')
+        bootstrap = bootstrap.replace('proxy_set_header X-Forwarded-For $remote_addr;',
+                                      'proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;')
+        bootstrap = bootstrap.replace('''    location ^~ /.well-known/acme-challenge/ {
+        root "/var/lib/teachingopen-acme";
+        default_type text/plain;
+        try_files $uri =404;
+    }
+
+''', '')
+        self.assertEqual(bootstrap.encode(), before)
+
+    def test_native_listeners_are_owned_once_and_final_local_http_keeps_business(self):
+        self.render()
+        bootstrap, trial, final = [self.output(name + '.conf') for name in ('bootstrap', 'trial', 'https')]
+        for config in (bootstrap, trial, final):
+            self.assertEqual(config.count('listen 127.0.0.1:8088;'), 1)
+            self.assertEqual(config.count('listen 80 default_server;'), 1)
+        self.assertNotIn('listen 443 ssl;', bootstrap)
+        self.assertEqual(trial.count('listen 443 ssl;'), 1)
+        self.assertEqual(final.count('listen 443 ssl;'), 1)
+        tls_trial = 'server\n' + trial.split('\nserver\n')[2]
+        self.assertNotIn('8088', tls_trial)
+        local = 'server\n' + final.split('\nserver\n')[2].split('\nserver {')[0]
+        self.assertNotIn('listen 80', local)
+        self.assertNotIn('ssl_', local)
+        self.assertIn('proxy_pass              http://127.0.0.1:8080;', local)
+        self.assertIn(self.static, local)
+        self.assertIn('add_header Cache-Control $teaching_html_cache_policy always;', local)
+        self.assertNotIn('return 426', local)
+        redirect = final.split('\nserver {')[1]
+        self.assertIn('location = /api { return 426; }', redirect)
+        self.assertIn('location ^~ /api/ { return 426; }', redirect)
+        self.assertIn('return 307 https://8.8.8.8$request_uri;', redirect)
+
+    def test_current_roots_static_404_and_html_cache_survive_all_stages(self):
+        self.render()
+        for mode, businesses in (('bootstrap', 1), ('trial', 2), ('https', 2)):
+            with self.subTest(mode=mode):
+                config = self.output(mode + '.conf')
+                self.assertEqual(config.count(self.static), businesses)
+                self.assertEqual(config.count('root /var/www/teachingopen-current;'), businesses * 2)
+                self.assertEqual(config.count(self.cache_map), 1)
+                self.assertEqual(config.count('add_header Cache-Control $teaching_html_cache_policy always;'), businesses)
+                self.assertNotIn('/usr/share/nginx/html', config)
+                self.assertNotIn('Strict-Transport-Security', config)
+                self.assertNotIn('$proxy_add_x_forwarded_for', config)
+
+    def test_source_digest_mismatch_refuses_render_before_output(self):
+        original = self.source.read_bytes()
+        self.source.write_bytes(original + b'# later operator edit\n')
+        with self.assertRaisesRegex(ValueError, 'checksum mismatch'):
+            self.render()
+        self.assertEqual(self.source.read_bytes(), original + b'# later operator edit\n')
+        self.assertFalse(Path(self.args['output']).exists())
+
+    def test_source_options_must_be_paired_and_sha256_must_be_explicit(self):
+        for overrides in ({'source_config': None}, {'source_sha256': None},
+                          {'source_sha256': ''}, {'source_sha256': 'a' * 63},
+                          {'source_sha256': 'A' * 64}):
+            with self.subTest(overrides=overrides), self.assertRaises(ValueError):
+                self.render(**overrides)
+        self.assertFalse(Path(self.args['output']).exists())
+
+    def test_wrong_expected_source_identity_root_or_upstream_are_not_silently_replaced(self):
+        for overrides in ({'web_root': '/var/www/teachingopen-old'},
+                          {'api_upstream': 'http://127.0.0.1:18080'}, {'ip': '8.8.4.4'}):
+            with self.subTest(overrides=overrides), self.assertRaisesRegex(ValueError, 'site profile'):
+                self.render(**overrides)
+        self.assertFalse(Path(self.args['output']).exists())
+
+    def test_reviewed_but_unsupported_or_nonunique_config_is_rejected(self):
+        source = self.source.read_text()
+        unsupported = (
+            source + '\nserver { listen 8089; }\n',
+            source.replace('    listen 127.0.0.1:8088;\n', ''),
+            source.replace('    listen 127.0.0.1:8088;', '    listen 0.0.0.0:8088;'),
+            source.replace('    listen 127.0.0.1:8088;', '    listen 127.0.0.1:8088;\n    listen 8089;'),
+            source.replace('server_name 8.8.8.8;', 'server_name 8.8.8.8;\n    server_name other;'),
+            source.replace('root /var/www/teachingopen-current;', 'root /var/www/teachingopen-old;', 1),
+            source.replace('        try_files $uri =404;\n', '', 1),
+            source.replace('    add_header Cache-Control $teaching_html_cache_policy always;\n', ''),
+            source.replace('    location = /api {', '    location = /api {\n        include /etc/nginx/custom.conf;'),
+            source.replace('        proxy_set_header        Host $host;',
+                           '        proxy_set_header        Host $host;\n        proxy_set_header        Host $host;'),
+            source.replace('        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;', ''),
+            source.replace('    listen 80 default_server;', '    listen 443 ssl;'),
+        )
+        for index, config in enumerate(unsupported):
+            self.source.write_text(config)
+            with self.subTest(index=index), self.assertRaisesRegex(ValueError, 'site profile'):
+                self.render(source_sha256=tls.digest(self.source.read_bytes()))
+            self.assertEqual(self.source.read_text(), config)
+            self.assertFalse(Path(self.args['output']).exists())
+
+    def test_source_symlink_and_missing_path_are_refused(self):
+        alias = self.root / 'alias.conf'
+        alias.symlink_to(self.source)
+        with self.assertRaises(ValueError):
+            self.render(source_config=str(alias))
+        with self.assertRaises(OSError):
+            self.render(source_config=str(self.root / 'missing.conf'))
+        self.assertFalse(Path(self.args['output']).exists())
+
+
 class SwitchTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -176,6 +350,34 @@ if sys.argv[1:] == ['-s', 'reload'] and ('RELOAD_FAIL' in data or failure.exists
         self.assertEqual(self.target.read_text(), 'INVALID old configuration')
         self.assertFalse(self.backup.exists())
         self.assertEqual(len(self.logged()), 1)
+
+    def test_expected_target_digest_allows_exact_reviewed_source(self):
+        expected = tls.digest(self.target.read_bytes())
+        result = tls.activate(self.target, self.candidate, self.backup, self.nginx,
+                              expected_target_sha256=expected)
+        self.assertEqual(result['status'], 'active')
+        self.assertEqual(self.target.read_bytes(), self.candidate.read_bytes())
+        self.assertEqual(self.receipt()['previous_sha256'], expected)
+
+    def test_expected_target_digest_refuses_drift_before_nginx_or_backup(self):
+        expected = tls.digest(self.target.read_bytes())
+        self.target.write_bytes(b'later release config\n')
+        with self.assertRaisesRegex(ValueError, 'Target changed since review'):
+            tls.activate(self.target, self.candidate, self.backup, self.nginx,
+                         expected_target_sha256=expected)
+        self.assertEqual(self.target.read_bytes(), b'later release config\n')
+        self.assertEqual(stat.S_IMODE(self.target.stat().st_mode), 0o640)
+        self.assertFalse(self.backup.exists())
+        self.assertFalse(self.events.exists())
+
+    def test_expected_target_digest_rejects_malformed_checksum(self):
+        original = self.target.read_bytes()
+        with self.assertRaisesRegex(ValueError, 'SHA-256'):
+            tls.activate(self.target, self.candidate, self.backup, self.nginx,
+                         expected_target_sha256='')
+        self.assertEqual(self.target.read_bytes(), original)
+        self.assertFalse(self.backup.exists())
+        self.assertFalse(self.events.exists())
 
     def test_invalid_candidate_restores_old_config_and_never_reloads_bad_bytes(self):
         self.candidate.write_text('INVALID candidate')
