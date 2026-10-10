@@ -3,13 +3,15 @@
 import copy
 import datetime as dt
 import json
+import io
 from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from traffic_control import AlibabaCloud, Config, Ledger, process_lock, run_once
+from traffic_control import AlibabaCloud, Config, Ledger, adopt_current, main, process_lock, run_once
 
 
 UTC = dt.timezone.utc
@@ -342,6 +344,264 @@ class TrafficControlTest(unittest.TestCase):
         self.assertEqual([call[0] for call in self.cloud.calls], [5, 5])
         self.assertEqual(self.cloud.calls[-1][1], first_token)
         self.assertTrue(first_token)
+
+    def test_unresolved_previous_month_write_survives_no_write_rollover(self):
+        self.seed_october(150 * GB)
+        self.cloud.write_mode = "delayed"
+        self.check_once()
+        pending = copy.deepcopy(self.ledger.state()["pending"])
+        self.prepare_november()
+        report = self.check_once(NOVEMBER_NOW)
+        self.assertTrue(report["coverage_complete"])
+        self.assertEqual(report["status"], "pending")
+        self.assertEqual(report["action"], "awaiting-prior-write")
+        self.assertEqual(self.ledger.state()["pending"], pending)
+        self.assertEqual(self.ledger.state()["control_month"], "2026-10")
+        self.assertEqual([call[0] for call in self.cloud.calls], [5])
+        # The delayed old request then takes effect. It remains recognizable and
+        # the complete new month restores automatically instead of conflicting.
+        self.cloud.bandwidth = 5
+        self.cloud.write_mode = "immediate"
+        self.reopen()
+        report = self.check_once(NOVEMBER_NOW)
+        self.assertEqual(report["status"], "ok")
+        self.assertEqual([call[0] for call in self.cloud.calls], [5, 100])
+        self.assertIsNone(self.ledger.state()["pending"])
+        self.assertEqual(self.ledger.state()["control_month"], "2026-11")
+
+    def test_unresolved_write_is_not_replaced_when_next_tier_is_reached(self):
+        self.seed_october(150 * GB)
+        self.cloud.write_mode = "delayed"
+        self.check_once()
+        pending = copy.deepcopy(self.ledger.state()["pending"])
+        self.seed_october(200 * GB)
+        report = self.check_once()
+        self.assertEqual(report["target_mbps"], 1)
+        self.assertEqual(report["status"], "pending")
+        self.assertEqual(self.ledger.state()["pending"], pending)
+        self.assertEqual([call[0] for call in self.cloud.calls], [5])
+        self.cloud.bandwidth = 5
+        self.cloud.write_mode = "immediate"
+        self.reopen()
+        self.check_once()
+        self.assertEqual([call[0] for call in self.cloud.calls], [5, 1])
+
+    def test_nonempty_ledger_without_state_is_rejected_on_reopen_and_run(self):
+        self.seed_october(200 * GB)
+        self.check_once(dry_run=True)
+        with self.ledger.db:
+            self.ledger.db.execute("DELETE FROM state")
+        with self.assertRaisesRegex(RuntimeError, "samples but no resource/control state"):
+            self.check_once()
+        with self.assertRaisesRegex(RuntimeError, "samples but no resource/control state"):
+            Ledger(self.database)
+        with self.assertRaisesRegex(RuntimeError, "samples but no resource/control state"):
+            Ledger(self.database, initialize=True)
+        self.assertEqual(self.cloud.calls, [])
+        self.assertIsNone(self.ledger.state())
+
+    def prepare_stopped_new_month(self):
+        self.seed_october(200 * GB)
+        self.check_once()
+        self.prepare_november()
+        first_missing = timestamp_ms(NOVEMBER_START + dt.timedelta(minutes=1))
+        self.cloud.hidden_points.add(first_missing)
+        self.assertFalse(self.check_once(NOVEMBER_NOW)["coverage_complete"])
+        return Config.from_dict(dict(self.settings, enabled=False))
+
+    def review_stopped_minute(self, paused, evidence="ECS stop/start event test-evidence-001"):
+        self.ledger.record_stopped_interval(
+            paused, NOVEMBER_START.isoformat(),
+            (NOVEMBER_START + dt.timedelta(minutes=1)).isoformat(),
+            evidence, NOVEMBER_NOW, dry_run=True)
+
+    def test_audited_stopped_gap_can_restore_without_fabricating_cloud_samples(self):
+        paused = self.prepare_stopped_new_month()
+        self.review_stopped_minute(paused)
+        self.reopen()
+        report = self.check_once(NOVEMBER_NOW, config=paused, dry_run=True)
+        self.assertTrue(report["coverage_complete"])
+        self.assertEqual(report["reconciled_zero_minutes"], 1)
+        self.assertEqual(report["missing_minutes"], 0)
+        self.assertEqual(report["stopped_interval_reviews"][0]["evidence"],
+                         "ECS stop/start event test-evidence-001")
+        self.assertNotIn(timestamp_ms(NOVEMBER_START + dt.timedelta(minutes=1)),
+                         self.ledger.samples(timestamp_ms(NOVEMBER_START), timestamp_ms(NOVEMBER_NOW)))
+        self.assertEqual([call[0] for call in self.cloud.calls], [1])
+        self.check_once(NOVEMBER_NOW)
+        self.assertEqual([call[0] for call in self.cloud.calls], [1, 100])
+
+    def test_stopped_review_needs_paused_dry_run_and_evidence(self):
+        paused = self.prepare_stopped_new_month()
+        for config, dry_run, evidence in (
+                (self.config, True, "event-reference"),
+                (paused, False, "event-reference"),
+                (paused, True, "   ")):
+            with self.subTest(enabled=config.enabled, dry_run=dry_run, evidence=evidence):
+                with self.assertRaises(RuntimeError):
+                    self.ledger.record_stopped_interval(
+                        config, NOVEMBER_START.isoformat(),
+                        (NOVEMBER_START + dt.timedelta(minutes=1)).isoformat(),
+                        evidence, NOVEMBER_NOW, dry_run=dry_run)
+        self.assertEqual(self.ledger.stopped_intervals(paused, timestamp_ms(NOVEMBER_START),
+                                                      timestamp_ms(NOVEMBER_NOW)), [])
+
+    def test_stopped_review_rejects_partial_future_and_precreation_minutes(self):
+        paused = self.prepare_stopped_new_month()
+        for beginning, ending in (
+                (NOVEMBER_START + dt.timedelta(seconds=1), NOVEMBER_START + dt.timedelta(minutes=2)),
+                (NOVEMBER_START, NOVEMBER_START + dt.timedelta(minutes=1, microseconds=1)),
+                (NOVEMBER_START, NOVEMBER_NOW),
+                (CREATED - dt.timedelta(minutes=1), CREATED),
+                (NOVEMBER_START, NOVEMBER_START)):
+            with self.subTest(beginning=beginning, ending=ending):
+                with self.assertRaises(RuntimeError):
+                    self.ledger.record_stopped_interval(paused, beginning.isoformat(), ending.isoformat(),
+                                                        "event-reference", NOVEMBER_NOW, dry_run=True)
+
+    def test_stopped_review_rejects_overlap_and_observed_nonzero_traffic(self):
+        paused = self.prepare_stopped_new_month()
+        self.review_stopped_minute(paused)
+        with self.assertRaisesRegex(RuntimeError, "overlaps"):
+            self.review_stopped_minute(paused)
+        with self.assertRaisesRegex(RuntimeError, "observed nonzero"):
+            self.ledger.record_stopped_interval(paused, CREATED.isoformat(),
+                                                (CREATED + dt.timedelta(minutes=1)).isoformat(),
+                                                "event-reference", NOVEMBER_NOW, dry_run=True)
+
+    def test_stopped_review_does_not_fill_unreviewed_missing_minutes(self):
+        paused = self.prepare_stopped_new_month()
+        other = timestamp_ms(NOVEMBER_START + dt.timedelta(minutes=2))
+        self.cloud.hidden_points.add(other)
+        with self.ledger.db:
+            self.ledger.db.execute("DELETE FROM samples WHERE ts=?", (other,))
+        self.review_stopped_minute(paused)
+        report = self.check_once(NOVEMBER_NOW)
+        self.assertFalse(report["coverage_complete"])
+        self.assertEqual(report["reconciled_zero_minutes"], 1)
+        self.assertEqual(report["missing_minutes"], 1)
+        self.assertEqual(self.cloud.bandwidth, 1)
+
+    def test_late_nonzero_data_in_stopped_review_blocks_restore(self):
+        paused = self.prepare_stopped_new_month()
+        self.review_stopped_minute(paused)
+        minute = timestamp_ms(NOVEMBER_START + dt.timedelta(minutes=1))
+        self.cloud.hidden_points.clear()
+        self.cloud.points[minute]["Average"] = 1
+        # Move to this early review block to simulate a late correction.
+        state = self.ledger.state()
+        state["review_cursor"] = timestamp_ms(NOVEMBER_START)
+        self.ledger.save(state)
+        with self.assertRaisesRegex(RuntimeError, "conflicts with reviewed stopped interval"):
+            self.check_once(NOVEMBER_NOW)
+        self.assertEqual(self.cloud.bandwidth, 1)
+        self.assertEqual([call[0] for call in self.cloud.calls], [1])
+        self.reopen()
+        self.assertEqual(len(self.ledger.stopped_intervals(paused, timestamp_ms(NOVEMBER_START),
+                                                         timestamp_ms(NOVEMBER_NOW))), 1)
+
+    def test_existing_valid_ledger_adds_audit_table_without_resetting_history(self):
+        self.seed_october(200 * GB)
+        self.check_once()
+        state = self.ledger.state()
+        points = self.ledger.samples(timestamp_ms(CREATED), timestamp_ms(OCTOBER_NOW))
+        with self.ledger.db:
+            self.ledger.db.execute("DROP TABLE stopped_intervals")
+        self.reopen()
+        self.assertEqual(self.ledger.state(), state)
+        self.assertEqual(self.ledger.samples(timestamp_ms(CREATED), timestamp_ms(OCTOBER_NOW)), points)
+        self.assertEqual(self.ledger.stopped_intervals(self.config, timestamp_ms(CREATED),
+                                                      timestamp_ms(OCTOBER_NOW)), [])
+
+    def test_audit_only_ledger_without_state_is_rejected(self):
+        paused = self.prepare_stopped_new_month()
+        self.review_stopped_minute(paused)
+        with self.ledger.db:
+            self.ledger.db.execute("DELETE FROM samples")
+            self.ledger.db.execute("DELETE FROM state")
+        with self.assertRaisesRegex(RuntimeError, "stopped reviews but no resource/control state"):
+            Ledger(self.database)
+        with self.assertRaisesRegex(RuntimeError, "stopped reviews but no resource/control state"):
+            self.check_once()
+
+    def test_unresolved_adoption_requires_evidence_and_retains_audit(self):
+        self.seed_october(150 * GB)
+        self.cloud.write_mode = "delayed"
+        self.check_once()
+        pending = copy.deepcopy(self.ledger.state()["pending"])
+        paused = Config.from_dict(dict(self.settings, enabled=False))
+        with self.assertRaisesRegex(RuntimeError, "authoritative outcome evidence"):
+            adopt_current(paused, self.ledger, self.cloud, OCTOBER_NOW, dry_run=True)
+        self.assertEqual(self.ledger.state()["pending"], pending)
+        adopt_current(paused, self.ledger, self.cloud, OCTOBER_NOW, dry_run=True,
+                      evidence="Cloud request synthetic-001 definitively rejected; see incident record")
+        state = self.ledger.state()
+        self.assertIsNone(state["pending"])
+        self.assertEqual(state["bandwidth_adoptions"][0]["previous_pending"], pending)
+        self.assertIn("definitively rejected", state["bandwidth_adoptions"][0]["evidence"])
+        self.assertEqual([call[0] for call in self.cloud.calls], [5])
+
+    def test_adoption_requires_paused_dry_run(self):
+        self.seed_october(0)
+        self.check_once()
+        paused = Config.from_dict(dict(self.settings, enabled=False))
+        for config, dry_run in ((self.config, True), (paused, False)):
+            with self.assertRaisesRegex(RuntimeError, "adoption requires"):
+                adopt_current(config, self.ledger, self.cloud, OCTOBER_NOW, dry_run=dry_run)
+        self.assertNotIn("bandwidth_adoptions", self.ledger.state())
+
+    def call_cli(self, extra_args, settings, now=NOVEMBER_NOW):
+        config_file = Path(self.directory.name) / "command-config.json"
+        config_file.write_text(json.dumps(dict(settings, state_path=str(self.database))))
+
+        class FixedDatetime(dt.datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return now if tz is None else now.astimezone(tz)
+
+        output = io.StringIO()
+        with mock.patch.object(sys, "argv", ["traffic_control.py", "--config", str(config_file), *extra_args]), \
+                mock.patch("traffic_control.AlibabaCloud", return_value=self.cloud) as constructor, \
+                mock.patch("traffic_control.datetime", FixedDatetime), \
+                mock.patch("sys.stdout", output), mock.patch("sys.stderr", output):
+            code = main()
+        return code, json.loads(output.getvalue()), constructor
+
+    def test_stopped_review_cli_success_is_local_only_and_reports_evidence(self):
+        self.prepare_stopped_new_month()
+        code, report, constructor = self.call_cli(
+            ["--dry-run", "--record-stopped-interval", NOVEMBER_START.isoformat(),
+             (NOVEMBER_START + dt.timedelta(minutes=1)).isoformat(), "--evidence", "ECS event test-001"],
+            dict(self.settings, enabled=False))
+        self.assertEqual(code, 0)
+        self.assertTrue(constructor.called)
+        self.assertEqual(report["action"], "dry-run")
+        self.assertEqual(report["reconciled_zero_minutes"], 1)
+        self.assertEqual([call[0] for call in self.cloud.calls], [1])
+
+    def test_stopped_review_cli_invalid_options_fail_before_cloud_access(self):
+        base = ["--record-stopped-interval", NOVEMBER_START.isoformat(),
+                (NOVEMBER_START + dt.timedelta(minutes=1)).isoformat(), "--evidence", "ECS event test-001"]
+        for extra, settings in ((["--dry-run", *base], self.settings),
+                                (base, dict(self.settings, enabled=False)),
+                                (["--dry-run", "--initialize", *base], dict(self.settings, enabled=False))):
+            with self.subTest(extra=extra, enabled=settings["enabled"]):
+                code, report, constructor = self.call_cli(extra, settings)
+                self.assertEqual(code, 1)
+                self.assertEqual(report["status"], "error")
+                constructor.assert_not_called()
+
+    def test_verify_write_cannot_clear_unresolved_previous_month_request(self):
+        self.seed_october(150 * GB)
+        self.cloud.write_mode = "delayed"
+        self.check_once()
+        pending = copy.deepcopy(self.ledger.state()["pending"])
+        self.prepare_november()
+        code, report, _ = self.call_cli(["--verify-write"], self.settings)
+        self.assertEqual(code, 1)
+        self.assertEqual(report["status"], "error")
+        self.assertEqual(self.ledger.state()["pending"], pending)
+        self.assertEqual([call[0] for call in self.cloud.calls], [5])
 
     def test_response_lost_after_effect_does_not_repeat_or_mark_manual(self):
         self.seed_october(150 * GB)

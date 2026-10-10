@@ -8,7 +8,7 @@
 
 该程序只适用于 VPC ECS 固定公网 IP、`PayByTraffic` 计费方式。每次运行都核对实例、地域、公网 IP、计费方式和实际出带宽；绑定了 EIP、身份变化、出带宽为 0 或实际带宽与账本不一致时，需要人工核对。公网带宽 API 仅设置出带宽峰值，不传转换计费方式的参数，参见阿里云 [ModifyInstanceNetworkSpec](https://help.aliyun.com/zh/ecs/developer-reference/api-ecs-2014-05-26-modifyinstancenetworkspec)。
 
-同一管理月份内只降不升。提高阈值或调整正常带宽不会自动撤销当月已经生效的限速。跨月恢复要求分钟覆盖完整、实际带宽仍与程序最后确认值一致；出现缺口时阻止升速，但已采集流量达到阶梯仍可降速。外部带宽修改会阻止自动写入并报告冲突。服务器停机期间控制程序也停机，恢复运行后再补齐和判断。
+同一管理月份内只降不升。提高阈值或调整正常带宽不会自动撤销当月已经生效的限速。跨月恢复要求分钟覆盖完整、实际带宽仍与程序最后确认值一致；出现缺口时阻止升速，但已采集流量达到阶梯仍可降速。外部带宽修改会阻止自动写入并报告冲突。服务器停机期间控制程序也停机；恢复后查询已有监控，真实停止实例期间可能没有分钟数据，永久缺口按下方“停机缺口核对”处理，不能视为自动补齐。
 
 流量来源为 CloudMonitor 的 `acs_ecs_dashboard / VPC_PublicIP_InternetOutRate`，查询周期为 60 秒，维度为实例 ID 和固定公网 IP。将每分钟 `Average`（bit/s）乘以 `60 / 8` 转为字节，分钟样本按时间戳写入 SQLite，重复查询覆盖同一分钟并重新累计。它是限速判断使用的监控估算；阿里云最终计费流量仍以账单为准。指标说明见 [ECS 基础监控](https://help.aliyun.com/zh/cms/cloudmonitor-1-0/user-guide/overview-of-basic-and-operating-system-monitoring)，账单差异说明见 [计费常见问题](https://help.aliyun.com/zh/user-center/support/billing-faqs)。
 
@@ -20,7 +20,7 @@
 | `deploy/teachingopen-traffic-control.example.json` | `/etc/teachingopen-traffic-control.json` | 目标实例、规则和开关 |
 | `deploy/teachingopen-traffic-control.service` | `/etc/systemd/system/teachingopen-traffic-control.service` | 单次采集与控制 |
 | `deploy/teachingopen-traffic-control.timer` | `/etc/systemd/system/teachingopen-traffic-control.timer` | 每分钟触发 |
-| 程序生成 | `/var/lib/teachingopen-traffic-control/state.sqlite3` | 持久分钟样本、确认带宽和待回读意图 |
+| 程序生成 | `/var/lib/teachingopen-traffic-control/state.sqlite3` | 持久分钟样本、确认带宽、待回读意图与停机核对记录 |
 | 程序生成 | `/var/lib/teachingopen-traffic-control/state.sqlite3.lock` | 防止手动运行与 timer 并发 |
 
 服务器需要 Linux、systemd、Python 3.10 或以上、可用的 `Asia/Shanghai` 时区数据，以及访问实例元数据、ECS 和 CloudMonitor API 的网络。无需安装 Python 第三方包。service 以 root 运行，配置文件与状态目录仅 root 可读写；`StateDirectory` 是 `ProtectSystem=strict` 下允许程序写入的位置。
@@ -129,15 +129,32 @@ sudo journalctl -u teachingopen-traffic-control.service -n 50 --no-pager
 - **暂停控制：** 将 `enabled` 改为 `false`。后续执行停止写云带宽，继续采集并保存账本，当前已生效带宽保持。输出 `action=paused`。已开始的执行会在带宽 API 调用前复核配置；已发往云端的请求仍可能完成。
 - **停止定时采集：** `sudo systemctl disable --now teachingopen-traffic-control.timer`。已启动的 service 可能继续完成，检查其状态后再做需要独占的维护。重新启用前确认时间、账本和配置。
 - **调整规则：** `tiers` 是按阈值递增、带宽递减的数组，示例为 `[[150,5],[200,1]]`。配置必须保持 JSON 有效；编辑后先执行 `--dry-run` 查看目标。同月只降不升的约束仍然有效。
-- **外部带宽变化或正常带宽修改：** 先设置 `enabled=false`，核对谁进行了修改、实际带宽和目标规则。确认要把同一实例的当前带宽接管为新的已确认值后，执行下面的 `--adopt-current --dry-run`。它保留分钟样本，登记配置中的新 `baseline_mbps`，清除旧冲突与待回读意图；需要已有且身份一致的账本。核对输出后再决定启用。它不适用于换实例、换 IP 或丢失账本。
-- **账本缺失或损坏：** 保持暂停，恢复经核验的账本或明确重新初始化并补齐完整历史。普通运行拒绝静默生成空账本。不要删除数据库来清除限速或冲突。
+- **外部带宽变化或正常带宽修改：** 先设置 `enabled=false`，核对谁进行了修改、实际带宽和目标规则。确认要把同一实例的当前带宽接管为新的已确认值后，执行下面的 `--adopt-current --dry-run`，程序要求暂停和 dry-run。它保留分钟样本，登记配置中的新 `baseline_mbps`，清除已核对的冲突与待回读意图，并在 `bandwidth_adoptions` 保存原确认值、原意图、时间和依据；需要已有且身份一致的账本。若仍有未决请求，且当前值还不等于其目标，必须先核实该请求已明确失败或终结、不会晚到生效，再用 `--evidence '<云端请求结果或运维记录引用>'` 登记依据。当前值仍等于旧确认值不能证明旧请求失败。核对输出后再决定启用。它不适用于换实例、换 IP 或丢失账本。
+- **账本缺失或损坏：** 保持暂停，恢复经核验的账本或明确重新初始化并补齐完整历史。普通运行拒绝静默生成空账本；已有分钟样本或停机核对记录但缺少资源/控制状态时，包括 `--initialize` 在内均拒绝沿用这些数据，需要从有效备份恢复或另行核对。不要删除数据库来清除限速或冲突。
 - **跨月恢复：** 无需定时手动改回 100 Mbps；程序在新月分钟数据完整且不存在冲突后恢复配置的正常带宽，或按新月已到达阶梯设置更低目标。月初等待数据、断网或停机可能延后恢复，应检查 `through_utc` 和覆盖情况。
 
 ```sh
 sudo /usr/bin/python3 /usr/local/lib/teachingopen-traffic-control/traffic_control.py --config /etc/teachingopen-traffic-control.json --adopt-current --dry-run
 ```
 
-`pending` 表示已持久记录写入意图，可能正在等待云端回读。下次执行会先核对实际值再继续，遇到不同于已确认值和待应用值的带宽则报告冲突。不要用接管命令掩盖尚未查明的外部修改。
+`pending` 表示已持久记录写入意图，可能正在等待云端回读。下次执行会先核对实际值再继续，遇到不同于已确认值和待应用值的带宽则报告冲突。跨月或目标档位变化时，未决旧意图保留并输出 `status=pending`、`action=awaiting-prior-write`，不会因为新目标等于当前值而清除，也不会用新的请求覆盖旧意图。旧目标回读确认后，重新依据当前月数据判断；一直没有确定结果时应核对云端请求结果，按上述显式接管流程登记依据。不要用接管命令掩盖尚未查明的外部修改。
+
+### 停机缺口核对
+
+监控空响应、连接失败、程序停机、操作系统重启或某分钟没有点，都不足以证明该分钟流量为 0。程序不会据此自动生成零样本。只有已经通过 ECS 停止/启动事件、实例状态变更记录等权威来源核实“整个分钟内实例处于停止状态且没有公网出流量”的区间，才可由操作者登记；证据应保存在对应环境运维记录中，并包含资源身份、停止/启动时间和核查结论。程序记录引用，无法替代操作者对引用内容真实性和零使用结论的核验。
+
+先设置 `enabled=false` 并暂停 timer，在现有有效账本上执行下方命令。`START` 和 `END` 使用带时区 ISO 8601 时间且必须对齐整分钟，表示停止区间 `[START, END)`；只覆盖起点之后、终点之前结束的完整分钟。若实际停止或启动发生在分钟中间，应将开始向后取整、结束向前取整，边缘不完整分钟继续保留缺口，不能把它们归零。区间必须在实例创建之后、当前采集截止点之前。
+
+```sh
+sudo /usr/bin/python3 /usr/local/lib/teachingopen-traffic-control/traffic_control.py \
+  --config /etc/teachingopen-traffic-control.json --dry-run \
+  --record-stopped-interval '<START_WITH_TIMEZONE>' '<END_WITH_TIMEZONE>' \
+  --evidence '<ECS 停止/启动事件或核验记录引用>'
+```
+
+此命令要求 `enabled=false`、`--dry-run`、非空依据和已有资源一致的账本，不能与初始化、接管或验收写入混用。重叠记录、已有非零样本、未来或不完整分钟均拒绝。它将区间、资源身份、依据和登记时间写入独立 `stopped_intervals` 表，原始云监控样本保留；后续若查询到区间内非零流量，程序报错并停止本轮带宽写入，需要重新核对，不能静默忽略矛盾。
+
+输出增加 `reconciled_zero_minutes`（本轮由核对记录补足、尚无云样本的分钟数）和 `stopped_interval_reviews`（相关区间及依据）。核对总量、剩余 `missing_minutes`、覆盖情况和目标后再恢复配置和 timer。未核实的缺口仍阻止升速；如果边缘分钟或其他永久缺口无法补齐，应继续保持当前限制并核查，不能使用停机记录掩盖未知使用量。账本升级仅增加此审计表，保留已有分钟样本和控制状态。
 
 检查服务、日志与下一次触发：
 

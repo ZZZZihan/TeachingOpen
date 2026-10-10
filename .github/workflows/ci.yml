@@ -61,6 +61,7 @@ jobs:
           python3 -m unittest discover -s deploy -p 'test_*backup*.py' -v
           PYTHONPATH=deploy python3 -m unittest test_registration_upgrade.MigrationManifestTests -v
           python3 -m unittest discover -s deploy -p 'test_launch_bundle.py' -v
+          python3 -m unittest discover -s deploy -p 'test_traffic_control.py' -v
           python3 -m unittest discover -s api/dev -p 'test_extract_schema.py' -v
           python3 -m unittest discover -s ci -p 'test_*.py' -v
 

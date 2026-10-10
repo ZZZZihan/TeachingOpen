@@ -102,7 +102,19 @@ class Ledger:
         if self.db.execute('PRAGMA quick_check').fetchone()[0] != 'ok':
             raise ControlError('ledger integrity check failed')
         # Missing tables/corruption raises, never repaired or replaced automatically.
-        self.db.execute('SELECT count(*) FROM samples').fetchone()
+        sample_count = self.db.execute('SELECT count(*) FROM samples').fetchone()[0]
+        if self.state() is None and sample_count:
+            self.db.close()
+            raise ControlError('ledger has samples but no resource/control state; explicit reconciliation required')
+        # Additive migration for existing, valid ledgers. Never replace cloud samples
+        # with invented zeros: separately record operator-reviewed stopped intervals.
+        with self.db:
+            self.db.execute('CREATE TABLE IF NOT EXISTS stopped_intervals ('
+                            'id INTEGER PRIMARY KEY, start INTEGER NOT NULL, end INTEGER NOT NULL, '
+                            'identity TEXT NOT NULL, evidence TEXT NOT NULL, recorded_at TEXT NOT NULL)')
+        if self.state() is None and self.db.execute('SELECT count(*) FROM stopped_intervals').fetchone()[0]:
+            self.db.close()
+            raise ControlError('ledger has stopped reviews but no resource/control state; explicit reconciliation required')
 
     def state(self):
         row = self.db.execute('SELECT value FROM state WHERE id=1').fetchone()
@@ -116,8 +128,55 @@ class Ledger:
         return {ts: Decimal(value) for ts, value in self.db.execute(
             'SELECT ts,bytes FROM samples WHERE ts>? AND ts<=?', (start, end))}
 
+    def stopped_intervals(self, c, start, end):
+        records = []
+        for begin, finish, identity, evidence, recorded in self.db.execute(
+                'SELECT start,end,identity,evidence,recorded_at FROM stopped_intervals '
+                'WHERE start<? AND end>? ORDER BY start', (end, start)):
+            if json.loads(identity) != c.identity():
+                raise ControlError('stopped-interval resource identity mismatch')
+            records.append({'start_ms': begin, 'end_ms': finish,
+                            'evidence': evidence, 'recorded_at': recorded})
+        return records
+
+    def reconciled_minutes(self, c, start, end):
+        records = self.stopped_intervals(c, start, end)
+        minutes = set()
+        for record in records:
+            minutes.update(range(max(start, record['start_ms']) + MINUTE,
+                                 min(end, record['end_ms']) + 1, MINUTE))
+        known = self.samples(start, end)
+        if any(known.get(ts, Decimal(0)) != 0 for ts in minutes):
+            raise ControlError('nonzero monitor traffic conflicts with reviewed stopped interval')
+        return minutes, records
+
+    def record_stopped_interval(self, c, beginning, ending, evidence, now, dry_run=False):
+        if c.enabled or not dry_run:
+            raise ControlError('stopped-interval review requires enabled=false and --dry-run')
+        state = self.state()
+        if not state or state['identity'] != c.identity() or state['baseline_mbps'] != c.baseline_mbps:
+            raise ControlError('cannot reconcile missing or different-resource/control ledger')
+        begin_time, end_time = parse_time(beginning), parse_time(ending)
+        begin, finish = int(begin_time.timestamp() * 1000), int(end_time.timestamp() * 1000)
+        if (begin_time.microsecond or end_time.microsecond or begin % MINUTE or finish % MINUTE
+                or begin >= finish or begin_time < parse_time(c.created_at)
+                or finish > int((now.timestamp() - c.settle_seconds) // 60) * MINUTE):
+            raise ControlError('stopped interval must contain only past settled whole minutes after creation')
+        evidence = evidence.strip() if isinstance(evidence, str) else ''
+        if not evidence:
+            raise ControlError('stopped interval requires an authoritative evidence reference')
+        if self.stopped_intervals(c, begin, finish):
+            raise ControlError('stopped interval overlaps an existing review; preserve its audit record')
+        if any(value != 0 for value in self.samples(begin, finish).values()):
+            raise ControlError('cannot mark observed nonzero traffic as a stopped interval')
+        with self.db:
+            self.db.execute('INSERT INTO stopped_intervals (start,end,identity,evidence,recorded_at) '
+                            'VALUES (?,?,?,?,?)',
+                            (begin, finish, json.dumps(c.identity()), evidence, now.isoformat()))
+
     def ingest(self, points, c, start, end):
         values = []
+        stopped, _ = self.reconciled_minutes(c, start, end)
         for p in points:
             ts = p.get('timestamp')
             if type(ts) is not int or ts % MINUTE or not start < ts <= end:
@@ -127,6 +186,8 @@ class Ledger:
             rate = Decimal(str(p['Average']))
             if not rate.is_finite() or rate < 0:
                 raise ControlError('invalid metric Average')
+            if ts in stopped and rate != 0:
+                raise ControlError('nonzero monitor traffic conflicts with reviewed stopped interval')
             values.append((ts, str(rate * Decimal('7.5'))))
         with self.db:
             self.db.executemany('INSERT OR REPLACE INTO samples VALUES (?,?)', values)
@@ -176,11 +237,35 @@ def month_window(c, now):
     return local.strftime('%Y-%m'), start, end
 
 
+def adopt_current(c, ledger, cloud, now, dry_run=False, evidence=None):
+    if c.enabled or not dry_run:
+        raise ControlError('bandwidth adoption requires enabled=false and --dry-run')
+    state = ledger.state()
+    if not state or state['identity'] != c.identity():
+        raise ControlError('cannot adopt missing or different-resource ledger')
+    actual = validate_instance(c, cloud.describe())
+    pending = state.get('pending')
+    evidence = evidence.strip() if isinstance(evidence, str) else ''
+    if pending and actual != pending['target'] and not evidence:
+        raise ControlError('unresolved write requires authoritative outcome evidence before adoption')
+    adoption_evidence = evidence or ('current bandwidth readback matches pending target' if pending else '')
+    state.setdefault('bandwidth_adoptions', []).append(
+        {'recorded_at': now.isoformat(), 'actual_mbps': actual,
+         'previous_confirmed_mbps': state['confirmed_mbps'], 'previous_pending': pending,
+         'evidence': adoption_evidence})
+    state.update(confirmed_mbps=actual, pending=None, conflict=None, baseline_mbps=c.baseline_mbps)
+    ledger.save(state)
+
+
 def run_once(c, ledger, cloud, now, dry_run=False):
     month, start, end = month_window(c, now)
     actual = validate_instance(c, cloud.describe())
     state = ledger.state()
     if state is None:
+        if ledger.db.execute('SELECT count(*) FROM samples').fetchone()[0]:
+            raise ControlError('ledger has samples but no resource/control state; explicit reconciliation required')
+        if ledger.db.execute('SELECT count(*) FROM stopped_intervals').fetchone()[0]:
+            raise ControlError('ledger has stopped reviews but no resource/control state; explicit reconciliation required')
         state = {'identity': c.identity(), 'control_month': month, 'confirmed_mbps': actual,
                  'baseline_mbps': c.baseline_mbps, 'pending': None, 'conflict': None,
                  'review_cursor': start}
@@ -207,7 +292,8 @@ def run_once(c, ledger, cloud, now, dry_run=False):
         ledger.ingest(cloud.metrics(tail, end), c, tail, end)
         expected = set(range(start + MINUTE, end + 1, MINUTE))
         known = ledger.samples(start, end)
-        missing = sorted(expected - known.keys())
+        reconciled, reconciliations = ledger.reconciled_minutes(c, start, end)
+        missing = sorted(expected - known.keys() - reconciled)
         # Try each missing daily block once; an empty response is not proof of zero use.
         queried = set()
         for ts in missing:
@@ -226,11 +312,13 @@ def run_once(c, ledger, cloud, now, dry_run=False):
             ledger.ingest(cloud.metrics(cursor, review_end), c, cursor, review_end)
         state['review_cursor'] = start if review_end >= end else review_end
         known = ledger.samples(start, end)
-        missing = sorted(expected - known.keys())
+        reconciled, reconciliations = ledger.reconciled_minutes(c, start, end)
+        missing = sorted(expected - known.keys() - reconciled)
         total = sum(known.values(), Decimal(0))
         complete = not missing
     else:
         total, missing, complete = Decimal(0), [], False
+        reconciled, reconciliations, known = set(), [], {}
 
     cap = c.cap(total)
     new_month = month > state['control_month']
@@ -240,12 +328,19 @@ def run_once(c, ledger, cloud, now, dry_run=False):
     status = 'ok' if complete else 'incomplete'
     report = {'month': month, 'observed_gb': float(total / Decimal(1000000000)),
               'coverage_complete': complete, 'missing_minutes': len(missing),
+              'reconciled_zero_minutes': len(reconciled - known.keys()),
+              'stopped_interval_reviews': reconciliations,
               'first_missing_ms': missing[0] if missing else None,
               'through_utc': datetime.fromtimestamp(max(start, end) / 1000, timezone.utc).isoformat(),
               'current_mbps': actual, 'target_mbps': target, 'action': 'none', 'status': status,
               'enabled': c.enabled, 'checked_at': now.isoformat()}
     if state.get('conflict'):
         report.update(status='conflict', action='blocked', detail=state['conflict'])
+    elif state.get('pending') and (state['pending']['target'] != target or state['pending']['month'] != month):
+        # An earlier request may still take effect. Do not discard it or issue a
+        # different request until its target is observed or explicitly reconciled.
+        report.update(status='pending', action='awaiting-prior-write',
+                      detail='previous bandwidth write outcome unresolved; retain intent before changing target/month')
     elif dry_run or not c.enabled:
         report['action'] = 'dry-run' if dry_run else 'paused'
     elif target != actual:
@@ -374,21 +469,32 @@ def main():
     parser.add_argument('--dry-run', action='store_true', help='collect data without bandwidth writes')
     parser.add_argument('--adopt-current', action='store_true', help='acknowledge external bandwidth change; preserve samples')
     parser.add_argument('--verify-write', action='store_true', help='write the CURRENT speed and read back; does not test lower tiers')
+    parser.add_argument('--record-stopped-interval', nargs=2, metavar=('START', 'END'),
+                        help='record operator-verified zero-use whole minutes; requires paused dry-run and evidence')
+    parser.add_argument('--evidence', help='authoritative stopped-interval or pending-write outcome reference; no credentials')
     args = parser.parse_args()
     os.umask(0o077)
     try:
         c = Config.from_dict(json.loads(Path(args.config).read_text()))
+        if args.record_stopped_interval:
+            if c.enabled or not args.dry_run or args.adopt_current or args.verify_write or args.initialize:
+                raise ControlError('stopped-interval review requires a paused existing ledger and --dry-run only')
+            if not args.evidence:
+                raise ControlError('stopped-interval review requires --evidence')
+        elif args.evidence and not args.adopt_current:
+            raise ControlError('--evidence requires --record-stopped-interval or --adopt-current')
+        if args.adopt_current and (c.enabled or not args.dry_run or args.verify_write or args.initialize):
+            raise ControlError('bandwidth adoption requires a paused existing ledger and --dry-run only')
         with process_lock(c.state_path):
             ledger = Ledger(c.state_path, args.initialize)
             cloud = AlibabaCloud(c)
             cloud.config_path = args.config
+            if args.record_stopped_interval:
+                validate_instance(c, cloud.describe())
+                ledger.record_stopped_interval(c, *args.record_stopped_interval,
+                                              args.evidence, datetime.now(timezone.utc), args.dry_run)
             if args.adopt_current:
-                state = ledger.state()
-                if not state or state['identity'] != c.identity():
-                    raise ControlError('cannot adopt missing or different-resource ledger')
-                actual = validate_instance(c, cloud.describe())
-                state.update(confirmed_mbps=actual, pending=None, conflict=None, baseline_mbps=c.baseline_mbps)
-                ledger.save(state)
+                adopt_current(c, ledger, cloud, datetime.now(timezone.utc), args.dry_run, args.evidence)
             if args.verify_write:
                 if not c.enabled or args.dry_run:
                     raise ControlError('write verification requires enabled=true and no dry-run')
