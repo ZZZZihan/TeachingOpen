@@ -5,9 +5,19 @@ import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.ibatis.builder.MapperBuilderAssistant;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.Cache;
+import org.apache.shiro.cache.CacheException;
+import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.cache.MapCache;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ThreadContext;
 import org.jeecg.common.system.vo.LoginUser;
+import org.jeecg.config.ShiroConfig;
+import org.jeecg.modules.shiro.authc.ShiroRealm;
 import org.jeecg.modules.system.entity.*;
 import org.jeecg.modules.system.mapper.*;
 import org.jeecg.modules.system.model.UserProfileRequest;
@@ -16,6 +26,8 @@ import org.junit.*;
 import org.mockito.ArgumentCaptor;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.test.util.ReflectionTestUtils;
+import org.crazycake.shiro.RedisCacheManager;
 import java.util.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -131,5 +143,56 @@ public class AccountAuthorizationTest {
             catch(com.fasterxml.jackson.databind.JsonMappingException expected) { }
         }
         assertEquals("name",new ObjectMapper().readValue("{\"realname\":\"name\"}",UserProfileRequest.class).getRealname());
+    }
+
+    @Test public void realmIgnoresSurvivingDeveloperCacheAfterDatabaseRevocation() {
+        ShiroRealm realm = new ShiroRealm();
+        ISysUserService liveUsers = mock(ISysUserService.class);
+        ReflectionTestUtils.setField(realm, "sysUserService", liveUsers);
+        LoginUser principal = new LoginUser(); principal.setId("former-dev"); principal.setUsername("former_dev");
+        PrincipalCollection principals = new SimplePrincipalCollection(principal, realm.getName());
+        SimpleAuthorizationInfo old = new SimpleAuthorizationInfo(new HashSet<>(Arrays.asList("admin", "dev")));
+        old.addStringPermission("*");
+        Map<Object, AuthorizationInfo> stored = new HashMap<>(); stored.put(principals, old);
+        Cache<Object, AuthorizationInfo> stale = spy(new MapCache<>(realm.getAuthorizationCacheName(), stored));
+        CacheManager manager = mock(CacheManager.class);
+        doReturn(stale).when(manager).getCache(anyString());
+        doThrow(new CacheException("synthetic eviction failure")).when(stale).remove(principals);
+        try { stale.remove(principals); fail("injected eviction failure must occur"); }
+        catch (CacheException expected) { }
+        assertSame(old, stored.get(principals));
+        clearInvocations(stale, manager);
+        realm.setCacheManager(manager);
+        realm.init();
+        assertFalse(realm.isAuthorizationCachingEnabled());
+        when(liveUsers.getUserRolesSet("former_dev")).thenReturn(new HashSet<>(Arrays.asList("admin", "dev")));
+        when(liveUsers.getUserPermissionsSet("former_dev")).thenReturn(Collections.singleton("sys:role:add"));
+        assertTrue(realm.hasRole(principals, "dev")); assertTrue(realm.hasRole(principals, "admin"));
+        assertTrue(realm.isPermitted(principals, "sys:role:add"));
+        when(liveUsers.getUserRolesSet("former_dev")).thenReturn(Collections.singleton("student"));
+        when(liveUsers.getUserPermissionsSet("former_dev")).thenReturn(Collections.emptySet());
+        assertFalse(realm.hasRole(principals, "dev")); assertFalse(realm.hasRole(principals, "admin"));
+        assertFalse(realm.isPermitted(principals, "sys:role:add"));
+        assertSame(old, stored.get(principals));
+        verify(manager, never()).getCache(anyString());
+        verify(stale, never()).get(any()); verify(stale, never()).put(any(), any());
+        verify(liveUsers, times(6)).getUserRolesSet("former_dev");
+        verify(liveUsers, times(6)).getUserPermissionsSet("former_dev");
+    }
+
+    @Test public void shiroConfigurationCannotReattachAnOldAuthorizationCache() {
+        ShiroRealm realm = new ShiroRealm();
+        boolean authenticationCaching = realm.isAuthenticationCachingEnabled();
+        realm.setAuthorizationCachingEnabled(true);
+        realm.setAuthorizationCache(mock(Cache.class));
+        RedisCacheManager manager = mock(RedisCacheManager.class);
+        ShiroConfig configuration = new ShiroConfig() {
+            @Override public RedisCacheManager redisCacheManager() { return manager; }
+        };
+        configuration.securityManager(realm);
+        assertFalse(realm.isAuthorizationCachingEnabled()); assertNull(realm.getAuthorizationCache());
+        assertEquals(authenticationCaching, realm.isAuthenticationCachingEnabled());
+        assertSame(manager, realm.getCacheManager());
+        verify(manager, never()).getCache(anyString());
     }
 }

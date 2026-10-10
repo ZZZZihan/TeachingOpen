@@ -36,6 +36,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ShiroRealm extends AuthorizingRealm {
 
+    public ShiroRealm() {
+        // Revocation must take effect even when an old Redis value survives eviction.
+        // Authentication caching and the JWT refresh contract remain unchanged.
+        setAuthorizationCachingEnabled(false);
+    }
+
 	@Autowired
 	@Lazy
 	private ISysUserService sysUserService;
@@ -55,7 +61,7 @@ public class ShiroRealm extends AuthorizingRealm {
 	}
 
 	/**
-     * 权限信息认证(包括角色以及权限)是用户访问controller的时候才进行验证(redis存储的此处权限信息)
+     * 每次权限检查直接读取当前数据库角色和权限，不使用授权缓存。
 	 * 触发检测用户权限时才会调用此方法，例如checkRole,checkPermission
      *
      * @param principals 身份信息
