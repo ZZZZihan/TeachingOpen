@@ -12,6 +12,7 @@
 </template>
 
 <script>
+  import './install'
   import { ChartEventMixins } from './mixins/ChartMixins'
 
   export default {

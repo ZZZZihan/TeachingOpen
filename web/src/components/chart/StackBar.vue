@@ -12,6 +12,7 @@
 </template>
 
 <script>
+  import './install'
   const DataSet = require('@antv/data-set');
 
   export default {

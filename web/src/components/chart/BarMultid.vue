@@ -11,6 +11,7 @@
 </template>
 
 <script>
+  import './install'
   import { DataSet } from '@antv/data-set'
   import { ChartEventMixins } from './mixins/ChartMixins'
 
