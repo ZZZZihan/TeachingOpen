@@ -1,0 +1,125 @@
+{
+  "audited_utc": "2026-10-04T21:25:16.907080+00:00",
+  "candidate": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate",
+  "head": "06ab2040780f33296e93c97d29d00e80cbcc2f65",
+  "status_before": [
+    "?? .playwright-cli/",
+    "?? output/"
+  ],
+  "scope": "read-only filesystem/source/evidence audit; no browser, HTTP, DB, service, CAPTCHA, auth injection or test execution",
+  "source_checks": [
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/loading-offline.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/src/utils/util.js",
+      "expected": "345808587091ffd401f4c1cd7ebac55655db9439b02d9eae5aa6cb56176da6db",
+      "current": "345808587091ffd401f4c1cd7ebac55655db9439b02d9eae5aa6cb56176da6db",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/loading-offline.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/src/mixins/JeecgListMixin.js",
+      "expected": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+      "current": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/loading-offline.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/src/utils/studentWorkFeedback.js",
+      "expected": "85cce96b39e491db4044db1cc2a5b15744fbf807a31412649280e0a239cf8f12",
+      "current": "85cce96b39e491db4044db1cc2a5b15744fbf807a31412649280e0a239cf8f12",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/loading-offline.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/src/components/teaching/StudentWorkFeedback.vue",
+      "expected": "d833bb9ad51985c4445024f795baaa71e6542c3cb4f687a4ab800dbb9b8ecc5e",
+      "current": "d833bb9ad51985c4445024f795baaa71e6542c3cb4f687a4ab800dbb9b8ecc5e",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/loading-offline.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/src/components/teaching/StudentWorkListState.vue",
+      "expected": "e247415bd1ae15f2cdff7fd4b50b8ff911bd996e7158bb13d5ac160563af1ba4",
+      "current": "e247415bd1ae15f2cdff7fd4b50b8ff911bd996e7158bb13d5ac160563af1ba4",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/loading-offline.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/src/utils/studentWorkList.js",
+      "expected": "85fa1b51395cba4389c7a954f21db1f1ca467e623bed9d79b4c74a26d889bbe4",
+      "current": "85fa1b51395cba4389c7a954f21db1f1ca467e623bed9d79b4c74a26d889bbe4",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/loading-offline.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/src/views/account/center/MineWorkList.vue",
+      "expected": "9a96a37861171406bc8e732a30ac354fbc3e2bfb58ad7cc1b51033c16ffe2409",
+      "current": "9a96a37861171406bc8e732a30ac354fbc3e2bfb58ad7cc1b51033c16ffe2409",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/loading-offline.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/src/views/account/center/page/MineWorks.vue",
+      "expected": "4e37de887be41a8a7ed2d25bd0c24c951d9f8591456a37eac76e21bac88ae176",
+      "current": "4e37de887be41a8a7ed2d25bd0c24c951d9f8591456a37eac76e21bac88ae176",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/loading-offline.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/src/views/account/center/page/index.js",
+      "expected": "10bc81f202a8c2010b1839943edfd14823874875f4db9b3295d36f402cba6545",
+      "current": "10bc81f202a8c2010b1839943edfd14823874875f4db9b3295d36f402cba6545",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/student-work-loading/loading-offline.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/src/views/account/center/Index.vue",
+      "expected": "97f1ecd5cf18326fd3a4e8ec2f00c48613b458f0573b73e7213d73e050eb4b1c",
+      "current": "97f1ecd5cf18326fd3a4e8ec2f00c48613b458f0573b73e7213d73e050eb4b1c",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/course-draft-resume/source-and-probe-manifest.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/public/scratch3/persistence.js",
+      "expected": "a335e902d727401c5044cd99f2faea28c7f9c3e0210da537d07bcfdf00066b40",
+      "current": "a335e902d727401c5044cd99f2faea28c7f9c3e0210da537d07bcfdf00066b40",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/course-draft-resume/source-and-probe-manifest.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/public/python/persistence.js",
+      "expected": "7305e2bd9ee18ddf8fa419a1ea436a7f14c23d6d0aa50b1e3d7d7829209499be",
+      "current": "7305e2bd9ee18ddf8fa419a1ea436a7f14c23d6d0aa50b1e3d7d7829209499be",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/course-draft-resume/source-and-probe-manifest.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/public/python/editor-bridge.js",
+      "expected": "7eec9c27025cde073c9f7a7ce717cbed14758c6ae5c5108339b01935aa3032d7",
+      "current": "7eec9c27025cde073c9f7a7ce717cbed14758c6ae5c5108339b01935aa3032d7",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/course-draft-resume/source-and-probe-manifest.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/tests/course-draft-resume-live.cjs",
+      "expected": "a27ed3f7fd9ef1dc035dae031607afc871b34075468403ab1834e3203e3ea2d6",
+      "current": "a27ed3f7fd9ef1dc035dae031607afc871b34075468403ab1834e3203e3ea2d6",
+      "matches": true
+    },
+    {
+      "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/course-draft-resume/source-and-probe-manifest.json",
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/api/dev/verify-course-draft-resume.py",
+      "expected": "acf49d48bc5f7a031c2c30dfcf99aafa6f0e7399f82a82ca256a86a101a69343",
+      "current": "acf49d48bc5f7a031c2c30dfcf99aafa6f0e7399f82a82ca256a86a101a69343",
+      "matches": true
+    }
+  ],
+  "all_source_checks_match": true,
+  "historical_tests_not_rerun": true,
+  "head_after": "06ab2040780f33296e93c97d29d00e80cbcc2f65",
+  "status_after": [
+    "?? .playwright-cli/",
+    "?? output/"
+  ],
+  "candidate_head_status_unchanged": true
+}

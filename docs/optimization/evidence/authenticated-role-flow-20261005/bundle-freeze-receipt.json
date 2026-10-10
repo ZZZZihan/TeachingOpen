@@ -1,0 +1,154 @@
+{
+  "commands": {
+    "create": [
+      "python3",
+      "-B",
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/candidate-release-bundle/deploy/candidate_release.py",
+      "create",
+      "--source",
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/release-final-1b235512",
+      "--jar",
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/account-recovery-20261005/api-author/teaching-open-account-recovery.jar",
+      "--jar-sha256",
+      "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016",
+      "--dist-manifest",
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/release-candidate-20261005/inputs-final-1b235512/dist-manifest.json",
+      "--dist-manifest-sha256",
+      "582ccefd1c23fe717afa9e2a4d12e124f6dbb3ad906e8198720ea5a2238295e4",
+      "--java-home",
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home",
+      "--output",
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/release-candidate-20261005/bundle-final-1b235512",
+      "--port",
+      "18190"
+    ],
+    "freeze": [
+      "python3",
+      "-B",
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/release-candidate-20261005/freeze-final-1b235512.py"
+    ],
+    "verify": [
+      "python3",
+      "-B",
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/candidate-release-bundle/deploy/candidate_release.py",
+      "verify",
+      "--bundle",
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/release-candidate-20261005/bundle-final-1b235512"
+    ],
+    "worktree": [
+      "git",
+      "-C",
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate",
+      "worktree",
+      "add",
+      "--detach",
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/release-final-1b235512",
+      "1b23551257b3f922f7fc4b125dfd9a85e5090a0c"
+    ]
+  },
+  "compose_project": "teaching-candidate-0ceb5d912fb8",
+  "create": {
+    "bundle": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/release-candidate-20261005/bundle-final-1b235512",
+    "compose_project": "teaching-candidate-0ceb5d912fb8",
+    "dist_files": 4895,
+    "fixture_counts": {
+      "accounts": 5,
+      "classes": 2,
+      "courses": 3,
+      "tables": 69
+    },
+    "immutable_files": 4906,
+    "manifest_sha256": "beb05d1aa50ea0ac0e052c95ef60cbe5c04a6bb85d17b1c5e0584c0dc08046aa",
+    "platform": "linux/arm64",
+    "port": 18190,
+    "runtime_data_checked": false,
+    "services_started": false,
+    "source_commit": "1b23551257b3f922f7fc4b125dfd9a85e5090a0c",
+    "status": "created_immutable"
+  },
+  "dist_bytes": 211929947,
+  "dist_files": 4895,
+  "fixture_counts": {
+    "accounts": 5,
+    "classes": 2,
+    "courses": 3,
+    "tables": 69
+  },
+  "helper_sha256": {
+    "api/db/teachingopen2.8.sql": "3a4d6ca698018da0710b2d8ed8bb03a623e9b74ec2640d11b89f377cd17f3d09",
+    "api/dev/FixturePassword.java": "4f434352bf554ddaf8eadafed7c251fe404e3bc787562ad7400b432740ddc759",
+    "api/dev/application-localtest.properties.template": "8854226931f4aea3fd076f90ff0c0e73b932fff2ef885a0fb4d19f6034b8ce64",
+    "api/dev/extract-schema.py": "afd0b01fb96b4447acb858bc55eaa6bbbd3f5dfe63da36fddba125612f99a120",
+    "api/dev/local_recovery.py": "865bee663ca8e8d99626a96bc630a7d7a4e62bc763a5019cc1bc7361915f1942",
+    "api/dev/local_runtime.py": "3da053aec48dad58c77b8c4a7ad1aa11562f1f586edea4cf3ce6c92d7583bee8",
+    "api/dev/production_fixture.py": "c82af6eeb1869b3ce264a13559287bbded6a12aa599fb93700a63cc8ff66611c",
+    "api/dev/role-flow-assets/lesson.mp4": "a13e04078b6d1a7aa52bec79aea4a8beeec7d5911d88c02931df84180b363dd0",
+    "api/dev/role-flow-assets/starter.sb3": "94b92bf01ca353f9853a56a027fe3351b6e64883b7e301a6f0e46f0fd05990d2",
+    "api/dev/role-flow-assets/starter.sjr": "3db97173b9436df3ce8deacacbf3dd46ac60467044ea1650b14f7d250bf88147",
+    "api/dev/role_flow_fixture.py": "2cb63d80d12c90ac505ed0d62c7168ac2fe26ea3f8af98ad68e3993cc12cf303",
+    "api/dev/scratch_cloud_recovery.py": "b41486488d80d01a2430fc1530780f08585eced191fd3b1da435ab586be97e28",
+    "api/jeecg-boot-base-common/src/main/java/org/jeecg/common/util/PasswordUtil.java": "62c44aeb7d628bc4c57c73f8b1708f50dbe2006cec157795039822cc98dc7bfc",
+    "web/nginx/default.conf": "93b019f547c36b708d46ac175368aee69a234495e6456b3e48e75d681e799a40"
+  },
+  "historical_45_assertions_apply_to_this_bundle": false,
+  "http_sql_run": false,
+  "images": {
+    "api": "eclipse-temurin@sha256:d05fc020fcaae47f67ac951f7d6f3430278b78216c121a1162fdad14826bab95",
+    "db": "mysql@sha256:6752fee1ed70df146fe22d5d1656deee79463f780a24cb7e67c807f2f07d7dc5",
+    "redis": "redis@sha256:6aa2a40135cd61fe5f3359b5d8644151a25de7f7ddd806dfd6d48f8ad9d748c5",
+    "web": "nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94"
+  },
+  "immutable_files": 4906,
+  "offline_verify": {
+    "bundle": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/release-candidate-20261005/bundle-final-1b235512",
+    "compose_project": "teaching-candidate-0ceb5d912fb8",
+    "dist_files": 4895,
+    "immutable_files": 4906,
+    "manifest_sha256": "beb05d1aa50ea0ac0e052c95ef60cbe5c04a6bb85d17b1c5e0584c0dc08046aa",
+    "platform": "linux/arm64",
+    "port": 18190,
+    "runtime_data_checked": false,
+    "services_started": false,
+    "source_commit": "1b23551257b3f922f7fc4b125dfd9a85e5090a0c",
+    "status": "verified_immutable"
+  },
+  "original_product_candidate_dist_unchanged": true,
+  "original_source_head_observed": "4f30e51b7121b7f102cfe1c71bba3183cd21b7e2",
+  "paths": {
+    "bundle": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/release-candidate-20261005/bundle-final-1b235512",
+    "flat_manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/release-candidate-20261005/inputs-final-1b235512/dist-manifest.json",
+    "frozen_source": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/release-final-1b235512",
+    "jar": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/account-recovery-20261005/api-author/teaching-open-account-recovery.jar",
+    "java_home": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home",
+    "list_manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/authenticated-role-flow-20261005/member-scroll-final-build/dist-manifest.json",
+    "original_source": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate",
+    "probe": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/candidate-release-bundle/deploy/probe_candidate_runtime.py",
+    "snapshot": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/authenticated-role-flow-20261005/member-scroll-final-build/dist",
+    "tool": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/candidate-release-bundle/deploy/candidate_release.py"
+  },
+  "platform": "linux/arm64",
+  "port": 18190,
+  "runtime_data_checked": false,
+  "runtime_probe_run": false,
+  "scope": "Exact final local artifact freeze and offline immutable verification only",
+  "services_started": false,
+  "sha256": {
+    "bundle_manifest": "beb05d1aa50ea0ac0e052c95ef60cbe5c04a6bb85d17b1c5e0584c0dc08046aa",
+    "dist_index": "e8c92c0092dcfa76fff366d8d0d533d47d051d418c2bcfbb37434bd65559fe66",
+    "flat_manifest": "582ccefd1c23fe717afa9e2a4d12e124f6dbb3ad906e8198720ea5a2238295e4",
+    "freeze_script": "6f136298120d0e33a7615e843e3ce24d3b16a6446648f87d7c5045f3e892ee5b",
+    "jar": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016",
+    "list_manifest": "49e62b14fe9a61169a40ff67ca0348799fcd455d5eb6f1bb372aa86c20d72bc5",
+    "native_proxy": "7c5e7af868c180e74d58ac218e4c9f23bf7b2aab411df47363de767800773966",
+    "nginx": "93b019f547c36b708d46ac175368aee69a234495e6456b3e48e75d681e799a40",
+    "probe": "68a7c76899de0490b1b0a2530dae8267841867d88ecf92dc5a2432f1de3f16dd",
+    "tool": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67"
+  },
+  "source_commit": "1b23551257b3f922f7fc4b125dfd9a85e5090a0c",
+  "status": "PASS_LOCAL_FREEZE_CREATE_OFFLINE_VERIFY",
+  "subsequent_original_source_changed_paths": [
+    "docs/optimization/class-members-mobile-scroll.md"
+  ],
+  "web_tree": "4913373ff6b28dd3af0e7e7a43079475735c5d34",
+  "worktree_preserved": true
+}

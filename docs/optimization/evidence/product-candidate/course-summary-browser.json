@@ -1,0 +1,131 @@
+{
+  "success": true,
+  "viewports": [
+    {
+      "width": 1440,
+      "rows": [
+        {
+          "height": 74.0859375,
+          "lineHeight": 24.7,
+          "clamp": "3",
+          "orientation": "vertical",
+          "rawEntities": false,
+          "curlyQuotes": false,
+          "retainedCharacters": 182
+        },
+        {
+          "height": 74.0859375,
+          "lineHeight": 24.7,
+          "clamp": "3",
+          "orientation": "vertical",
+          "rawEntities": false,
+          "curlyQuotes": false,
+          "retainedCharacters": 226
+        },
+        {
+          "height": 74.0859375,
+          "lineHeight": 24.7,
+          "clamp": "3",
+          "orientation": "vertical",
+          "rawEntities": false,
+          "curlyQuotes": true,
+          "retainedCharacters": 317
+        }
+      ],
+      "geometry": {
+        "documentWidth": 1432,
+        "viewport": 1440,
+        "brokenImages": 0
+      }
+    },
+    {
+      "width": 768,
+      "rows": [
+        {
+          "height": 74.0859375,
+          "lineHeight": 24.7,
+          "clamp": "3",
+          "orientation": "vertical",
+          "rawEntities": false,
+          "curlyQuotes": false,
+          "retainedCharacters": 182
+        },
+        {
+          "height": 74.0859375,
+          "lineHeight": 24.7,
+          "clamp": "3",
+          "orientation": "vertical",
+          "rawEntities": false,
+          "curlyQuotes": false,
+          "retainedCharacters": 226
+        },
+        {
+          "height": 74.0859375,
+          "lineHeight": 24.7,
+          "clamp": "3",
+          "orientation": "vertical",
+          "rawEntities": false,
+          "curlyQuotes": true,
+          "retainedCharacters": 317
+        }
+      ],
+      "geometry": {
+        "documentWidth": 760,
+        "viewport": 768,
+        "brokenImages": 0
+      }
+    },
+    {
+      "width": 390,
+      "rows": [
+        {
+          "height": 74.0859375,
+          "lineHeight": 24.7,
+          "clamp": "3",
+          "orientation": "vertical",
+          "rawEntities": false,
+          "curlyQuotes": false,
+          "retainedCharacters": 182
+        },
+        {
+          "height": 74.0859375,
+          "lineHeight": 24.7,
+          "clamp": "3",
+          "orientation": "vertical",
+          "rawEntities": false,
+          "curlyQuotes": false,
+          "retainedCharacters": 226
+        },
+        {
+          "height": 74.0859375,
+          "lineHeight": 24.7,
+          "clamp": "3",
+          "orientation": "vertical",
+          "rawEntities": false,
+          "curlyQuotes": true,
+          "retainedCharacters": 317
+        }
+      ],
+      "geometry": {
+        "documentWidth": 382,
+        "viewport": 390,
+        "brokenImages": 0
+      }
+    }
+  ],
+  "fullIntroduction": {
+    "visible": true,
+    "characters": 334,
+    "longerThanSummary": true,
+    "decodedQuotes": true,
+    "learnButtonVisible": true,
+    "normalizedParagraphsEqualOriginalSummaryText": true,
+    "paragraphCount": 3,
+    "dialogWidthAt390": 390
+  },
+  "errors": [],
+  "scope": "Private production-derived content on actual built candidate and local Java/MySQL, anonymous only. No login or writes.",
+  "visual_review": "Root inspected desktop and phone summary screenshots, then a settled full-page modal screenshot and a viewport-only modal screenshot. Initial immediate modal screenshot was captured before its entrance settled and is not visual confirmation.",
+  "console_notes": "One legacy external analytics script was refused by existing CSP; no pageerror event in this run. Zero pageerror does not mean zero console errors.",
+  "content_policy": "Screenshots and DOM with production-derived content remain private and are not committed."
+}

@@ -1,0 +1,136 @@
+{
+  "cases": [
+    {
+      "case": "edit accepted: workStatus,teachingWorkCorrectList",
+      "passed": true
+    },
+    {
+      "case": "zero-score feedback persisted",
+      "passed": true
+    },
+    {
+      "case": "grade preserves omitted comments including IDs and metadata",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: workName",
+      "passed": true
+    },
+    {
+      "case": "metadata-only edit preserves both child collections",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: teachingWorkCorrectList,teachingWorkCommentList",
+      "passed": true
+    },
+    {
+      "case": "explicit null means unchanged for both collections",
+      "passed": true
+    },
+    {
+      "case": "student discussion accepted through actual endpoint",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: workStatus,teachingWorkCorrectList",
+      "passed": true
+    },
+    {
+      "case": "grading does not erase discussion posted since initial read",
+      "passed": true
+    },
+    {
+      "case": "owner reads committed feedback",
+      "passed": true
+    },
+    {
+      "case": "edit denied for student_a",
+      "passed": true
+    },
+    {
+      "case": "denied mutation preserves parent and children for student_a",
+      "passed": true
+    },
+    {
+      "case": "edit denied for teacher_b",
+      "passed": true
+    },
+    {
+      "case": "denied mutation preserves parent and children for teacher_b",
+      "passed": true
+    },
+    {
+      "case": "edit denied for None",
+      "passed": true
+    },
+    {
+      "case": "denied mutation preserves parent and children for None",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: teachingWorkCommentList",
+      "passed": true
+    },
+    {
+      "case": "explicit comments replace only comments",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: teachingWorkCommentList",
+      "passed": true
+    },
+    {
+      "case": "explicit empty comments clears only comments",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: teachingWorkCorrectList",
+      "passed": true
+    },
+    {
+      "case": "explicit empty feedback clears only feedback",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: teachingWorkCorrectList,teachingWorkCommentList",
+      "passed": true
+    },
+    {
+      "case": "explicit two-collection update persists both",
+      "passed": true
+    },
+    {
+      "case": "second insert fails: teachingWorkCorrectList",
+      "passed": true
+    },
+    {
+      "case": "failed replace restores all parent and child columns: teachingWorkCorrectList",
+      "passed": true
+    },
+    {
+      "case": "second insert fails: teachingWorkCommentList",
+      "passed": true
+    },
+    {
+      "case": "failed replace restores all parent and child columns: teachingWorkCommentList",
+      "passed": true
+    },
+    {
+      "case": "all 68 non-audit database tables restored",
+      "passed": true
+    },
+    {
+      "case": "all attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 31,
+  "total": 31,
+  "expected_legacy": false,
+  "jar_sha256": "b87319a8e411d8f48c37de9e5589c486460c5c5f0306d8f5026281b5737a9b09",
+  "changed_tables": [
+    "sys_log"
+  ],
+  "scope": "Actual synthetic HTTP, MySQL transaction failures and readback. No authenticated browser or concurrent-write stress test."
+}

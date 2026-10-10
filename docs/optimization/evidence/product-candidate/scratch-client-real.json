@@ -1,0 +1,71 @@
+{
+  "cases": [
+    {
+      "case": "shipped client reads real Redis snapshot on owner and anonymous sockets",
+      "passed": true
+    },
+    {
+      "case": "owner update reaches both tabs and anonymous reader",
+      "passed": true
+    },
+    {
+      "case": "anonymous update rejected locally",
+      "passed": true
+    },
+    {
+      "case": "closing one tab preserves others",
+      "passed": true
+    },
+    {
+      "case": "private work denial stops reconnect storm",
+      "passed": true
+    },
+    {
+      "case": "saved editor seeds missing definition in real Redis",
+      "passed": true
+    },
+    {
+      "case": "switch project reads new authorized snapshot",
+      "passed": true
+    },
+    {
+      "case": "old project cannot update switched client",
+      "passed": true
+    },
+    {
+      "case": "authorized public participant updates existing value",
+      "passed": true
+    },
+    {
+      "case": "local logout closes and clears pending connection",
+      "passed": true
+    },
+    {
+      "case": "synthetic owner session revoked through real API",
+      "passed": true
+    },
+    {
+      "case": "server logout policy closes client without automatic reconnect",
+      "passed": true
+    },
+    {
+      "case": "real Redis seed and final public/private values match expected writes",
+      "passed": true
+    },
+    {
+      "case": "all non-audit database tables restored",
+      "passed": true
+    },
+    {
+      "case": "all attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 15,
+  "total": 15,
+  "scope": "Shipped provider with Node native WebSocket, actual Java/Redis/MySQL; VM interface harness, not authenticated browser.",
+  "changed_database_tables": [
+    "sys_log"
+  ],
+  "jar_sha256": "ba9a03697641afdb8ee1781ab20848e1865fdfa4ee4c1c1ac317156f7efcb72f"
+}

@@ -1,0 +1,75 @@
+{
+  "generated_utc": "2026-10-02T23:56:32.147608+00:00",
+  "source_commit": "082813c47db020fdc02c6d30ba340457d00cef1a",
+  "previous_commit": "8881cbe524526d39bf835cd8b433d385579f2ca1",
+  "pr": "https://github.com/ZZZZihan/TeachingOpen/pull/36",
+  "pr_head": "9ae13f63dc3309f5aa8a8d4219f935a9cccc747c",
+  "product_commit": "c2a4cb7f11752e77a09f1bd4f18f11d679d82864",
+  "api_tree": "f877f1dc2e2cd28f68d34e455c5f458a004f3297",
+  "web_tree": "dc434125f306aab68e0d12e79a500364d5d33f8f",
+  "original_source_files": 5731,
+  "original_source_unchanged": true,
+  "dist_files": 4884,
+  "dist_bytes_equal_frozen": true,
+  "web_tree_unchanged": true,
+  "api_tree_equals_pr": true,
+  "frontend_pid": 15798,
+  "backend_pid": 32858,
+  "jar_sha256": "ba9a03697641afdb8ee1781ab20848e1865fdfa4ee4c1c1ac317156f7efcb72f",
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "http_assets": {
+    "/index.html": "a5b1fba9890e1682bdcf8b866d7edbbf3aadaf712a408244cb99c9b87c6c148b",
+    "/js/app.f75d88dd.js": "ec1de4c26557b893d39b69bed2219be670f6eea09dec9c941cfe25bcc0cc59fc"
+  },
+  "real_checks": {
+    "scratch-cloud": {
+      "passed": 52,
+      "total": 52
+    },
+    "notification-websocket": {
+      "passed": 44,
+      "total": 44
+    },
+    "notification-client": {
+      "passed": 5,
+      "total": 5
+    },
+    "frontend-http": {
+      "passed": 13,
+      "total": 13
+    }
+  },
+  "real_total": 114,
+  "data_preservation": {
+    "tables_checked": 69,
+    "changed_tables": [
+      "sys_log"
+    ],
+    "all_non_audit_tables_equal": true,
+    "attachments_equal": true,
+    "sys_log_rows_before": 3043,
+    "sys_log_rows_after": 3074
+  },
+  "frontend_build_repeated": false,
+  "frontend_tests_repeated": false,
+  "frontend_actual_build_commit": "7a0fe014d5de5c68335461321d8c1c1aa0553257",
+  "isolated_suite_total": 521,
+  "isolated_suite_repeated_in_full_on_integration": false,
+  "isolated_python_checks": 42,
+  "browser_e2e": false,
+  "scratch_shipped_client_verified": false,
+  "production_changed": false,
+  "remote_merged": false,
+  "goal_status": "active",
+  "scope": "Actual backend cloud protocol, notification helper and HTTP via integration proxy. Scratch editor/provider integration, Redis backups and human UI acceptance remain pending.",
+  "evidence_sha256": {
+    "scratch-cloud-api.json": "93069398c131384991b9e678b5e05f339fb93dd62fd3e6fb0c02975cb74ebf12",
+    "scratch-cloud-frontend-http.json": "26c64471da05c118f501adf010a518d4374f53dacfdd9272252866dcb2c43b5b",
+    "scratch-cloud-notification-client.json": "92ca3ac96e5845a0b4bc0fa830e8f13911851b7a610620671fdabbf19541f152",
+    "scratch-cloud-notification-websocket.json": "b3c3217f36baa16d9f5011d2e96d515f5f3f3a66a747ee146707456354f7792d"
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "observed_utc": "2026-10-03T11:18:27.618281+00:00",
+  "candidate_commit": "3ef17b8035c7ca11360fca584dd1e51f186f0547",
+  "api_tree": "fb1c63809789c9d132a6c5e3d85d7db70a363b63",
+  "web_tree": "5cc4536c7647aed1458cb18bc20e92f0af88e924",
+  "pr": 54,
+  "pr_commit": "c1ab0f80e1179ee4f81c3e1865741bf6a6fc159b",
+  "backend_jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "packaged_source_and_poms_equal_pr": true,
+  "backend_switch": [
+    {
+      "runtime": "course-role-runtime",
+      "previous_pid": 82413,
+      "old_jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+      "new_jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "healthy": true,
+      "new_pid": 44139,
+      "rollback_needed": false
+    },
+    {
+      "runtime": "role-flow-1003",
+      "previous_pid": 33557,
+      "old_jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+      "new_jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "healthy": true,
+      "new_pid": 44219,
+      "rollback_needed": false
+    },
+    {
+      "runtime": "prod-fixture-1003",
+      "previous_pid": 1792,
+      "old_jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+      "new_jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "healthy": true,
+      "new_pid": 44512,
+      "rollback_needed": false
+    }
+  ],
+  "backend_health": [
+    {
+      "runtime": "course-role-runtime",
+      "port": 18111,
+      "pid": 44139,
+      "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "http_status": 200,
+      "health": "UP"
+    },
+    {
+      "runtime": "role-flow-1003",
+      "port": 18149,
+      "pid": 44219,
+      "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "http_status": 200,
+      "health": "UP"
+    },
+    {
+      "runtime": "prod-fixture-1003",
+      "port": 18141,
+      "pid": 44512,
+      "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "http_status": 200,
+      "health": "UP"
+    }
+  ],
+  "frontend_dist": {
+    "files": 4893,
+    "bytes": 211466267,
+    "manifest_sha256": "453a9f32aeb0f3d534146e790ae62ab49bae4c23405127c640cc6ce86e0d6065",
+    "equals_previous_manifest": true
+  },
+  "frontend_http": [
+    {
+      "port": 18112,
+      "matched_resources": 7,
+      "paths": [
+        "index.html",
+        "css/app.34569fa6.css",
+        "css/chunk-vendors.0626b6c1.css",
+        "js/app.8ceacb01.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/common.js",
+        "js/polyfill.js"
+      ],
+      "bytes_equal": true
+    },
+    {
+      "port": 18142,
+      "matched_resources": 7,
+      "paths": [
+        "index.html",
+        "css/app.34569fa6.css",
+        "css/chunk-vendors.0626b6c1.css",
+        "js/app.8ceacb01.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/common.js",
+        "js/polyfill.js"
+      ],
+      "bytes_equal": true
+    },
+    {
+      "port": 18150,
+      "matched_resources": 7,
+      "paths": [
+        "index.html",
+        "css/app.34569fa6.css",
+        "css/chunk-vendors.0626b6c1.css",
+        "js/app.8ceacb01.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/common.js",
+        "js/polyfill.js"
+      ],
+      "bytes_equal": true
+    }
+  ],
+  "candidate_dev_tests": {
+    "run": 114,
+    "passed": 113,
+    "skipped": 1,
+    "optional_skip": "MySQL production-fixture optional test",
+    "exit_code": 0
+  },
+  "candidate_auth": {
+    "observed_utc": "2026-10-03T11:11:23.884877+00:00",
+    "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+    "expected_legacy_500": false,
+    "cases": [
+      {
+        "case": "missing login credential",
+        "http_status": 401,
+        "passed": true
+      },
+      {
+        "case": "empty login credential",
+        "http_status": 401,
+        "passed": true
+      },
+      {
+        "case": "malformed login credential",
+        "http_status": 401,
+        "passed": true
+      },
+      {
+        "case": "anonymous public courses",
+        "http_status": 200,
+        "passed": true
+      },
+      {
+        "case": "preflight remains available",
+        "http_status": 200,
+        "passed": true
+      },
+      {
+        "case": "valid student credential",
+        "http_status": 200,
+        "passed": true
+      },
+      {
+        "case": "revoked login credential",
+        "http_status": 401,
+        "passed": true
+      }
+    ],
+    "passed": 7,
+    "total": 7,
+    "scope": "real local HTTP, CAPTCHA, login and logout; no role/asset permission acceptance"
+  },
+  "production_content": {
+    "observed_utc": "2026-10-03T11:11:22.751766+00:00",
+    "passed": 12,
+    "total": 12,
+    "successful": true,
+    "owned_process_verified": true,
+    "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+    "changed_business_tables": []
+  },
+  "production_content_private_report_sha256": "151e5123cfa2d65083022303dd22f88ab0e039f7b1bdb9c1904d0dd3c3e818fa",
+  "anonymous_browser": {
+    "port": 18142,
+    "home_loaded": true,
+    "course_list_count": 3,
+    "course_list_loaded": true,
+    "community_editor_choices": [
+      "ScratchJr",
+      "Scratch",
+      "Python"
+    ],
+    "community_loaded": true,
+    "login_account_and_password_fields_visible": true,
+    "credentials_or_captcha_entered": false,
+    "console_error_count": 1,
+    "console_error_context": "existing external telemetry script refused by local CSP; not a zero-console claim",
+    "evidence": "private browser-home-snapshot.log and browser-*-click.log",
+    "scope": "Observed real browser anonymous navigation only; no authentication or role acceptance"
+  },
+  "cleanup": {
+    "temporary_ports_stopped": {
+      "13366": true,
+      "16439": true,
+      "18165": true,
+      "18166": true
+    },
+    "debug_config_restored_exactly": true,
+    "original_config_sha256": "1832ff9e81ef6c958d94a1af428578fd15836b97eabe223558a2853094935360",
+    "browser_session": "shiro-candidate",
+    "browser_closed": true,
+    "data_and_evidence_retained": true,
+    "long_lived_previews_preserved": [
+      18112,
+      18142,
+      18150,
+      18133,
+      18137
+    ],
+    "other_task_18152_untouched": true
+  },
+  "limitations": [
+    "Known cached identity remains active after normal administrator freeze; old and new JAR reproduce; next separate PR",
+    "Shiro1.13 remains EOL interim on Java8",
+    "Unicode filename support not accepted",
+    "No authenticated three-role browser, human visual acceptance, production deployment or GitHub merge"
+  ],
+  "front_end_tests_not_repeated": "Prior 389/389 and build belong to PR53 candidate; byte-identical frontend reused without new frontend build",
+  "production_service_untouched": true
+}

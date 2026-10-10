@@ -1,0 +1,7 @@
+Build exit code: 0
+Compiled with 12 warnings
+Existing CSS order/asset-size warnings and outdated Browserslist database.
+New destination built first; prior dist preserved before switch.
+ DONE  Build complete. The ../../../frontend-prefetch-next-dist directory is ready to be deployed.
+ INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html
+      

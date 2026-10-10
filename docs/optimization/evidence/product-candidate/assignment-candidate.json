@@ -1,0 +1,45 @@
+{
+  "observed_utc": "2026-10-02T20:22:37.307093+00:00",
+  "local_candidate_commit": "eb2801b3fc77cfb5c3f81e5bb72c3535cebe7301",
+  "local_branch": "integration/product-candidate",
+  "previous_integration": "78f8b350f150422dbdbdd59488523a9e33295cd5",
+  "added_pr23": "95f5bfe179a7eefe86ca7a2fd41423bc7ba87191",
+  "api_tree": "5e7b90630dbebb4cda00d625f4c357d25a33a52a",
+  "web_tree": "b3a1ea2a9961f49bdd4244a1312b1085c8c45312",
+  "backend": {
+    "api_tree_matches_pr20": true,
+    "reuses_previously_verified_pr20_jar_sha256": "c76dfb9032b92eb6f4bf86ef152e16fadc7504436b81fe1e4d49990f6883738f",
+    "new_backend_build_or_suite_rerun": false
+  },
+  "frontend": {
+    "tests_passed": 104,
+    "tests_total": 104,
+    "lint_files": 3,
+    "lint_errors": 0,
+    "lint_warnings": 0,
+    "lint_scope": "TeachingWorkSubmitModal.vue, assignmentFileUpload.js, MyAdditionalWorkList.vue",
+    "build_exit": 0,
+    "existing_build_warnings": 6,
+    "built_files": 4871,
+    "dist_path_hashes_aggregate_sha256": "084dc97f89a82ffeaff25a6e8c27721f3bdb2a14f1acde4d325d170a3413115c",
+    "dist_hash_serialization": "UTF-8 json.dumps(path_to_sha256, sort_keys=True, separators=(comma,colon))"
+  },
+  "merge_resolution": "TeachingWorkSubmitModal conflict with PR14 workStatus addition resolved by final PR23 modal, which also submits workStatus 1. Three product files match PR23 exactly. GitHub PRs not merged.",
+  "browser_observations": [
+    {
+      "case": "Actual combined login page reload",
+      "result": "Account/password/captcha labels render and real backend captcha decodes; target query preserved. No account or CAPTCHA entered.",
+      "viewport_width": 1280,
+      "document_width": 1272,
+      "screenshot": "login-with-assignment.jpg"
+    }
+  ],
+  "component_evidence": "PR23 component/browser fixture evidence remains bound to c532e52; not an authenticated combined submission acceptance.",
+  "original_source_files": 5634,
+  "original_source_changes": 0,
+  "limits": [
+    "No real authenticated assignment workflow or database write in this stage.",
+    "Reused unchanged backend; no new backend suite claim.",
+    "Previous evidence kept. Full role/editor/recovery/performance/dependency acceptance incomplete."
+  ]
+}

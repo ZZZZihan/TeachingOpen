@@ -1,0 +1,53 @@
+{
+  "recorded_utc": "2026-10-03T07:12:43.362379+00:00",
+  "candidate": "e08cb55767e4c70023f0c3677809839bd135af8b",
+  "api_tree": "3d6aa6d1a400dc71b62839438b5154ae4d2502f4",
+  "web_tree": "3a29ce07efe47f080860ecc72509d4ecf02f769e",
+  "merged_prs": [
+    45,
+    47
+  ],
+  "pr47_commit": "b7a7d788734315c8cdb183e4f79b2853198b4018",
+  "changes_from_previous_candidate": "api/dev and BUILDING plus documentation; Java business source, dependencies and web unchanged",
+  "candidate_python_tests": {
+    "discovered": 98,
+    "passed": 97,
+    "skipped": 1,
+    "exit_code": 0
+  },
+  "frontend_validation_reused": {
+    "candidate": "b878a2bc4e170413f4ee8068520323735aece2fe",
+    "tests_passed": 305,
+    "web_tree_unchanged": true,
+    "not_rebuilt_or_retested_this_change": true
+  },
+  "backend_jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "preserved_backend_health": {
+    "18111": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18141": {
+      "http": 200,
+      "status": "UP"
+    }
+  },
+  "stopped_drill_ports": [
+    13347,
+    16420,
+    18143,
+    13348,
+    16421,
+    18145,
+    13349,
+    16422,
+    18147
+  ],
+  "original_source": {
+    "protected_files": 5731,
+    "matching_files": 5731,
+    "changed_or_missing": 0
+  },
+  "no_github_merge_or_production_deployment": true,
+  "goal": "active"
+}

@@ -1,0 +1,8 @@
+{
+  "frontend_port": 18112,
+  "path": "/api/websocket/fixture_student_a",
+  "status_line": "HTTP/1.0 400 Bad Request",
+  "websocket_upgraded": false,
+  "source_evidence": "serve-frontend.py drops Connection and buffers HTTP bodies; no WebSocket tunnel",
+  "scope": "Existing local proxy limitation, no credential/application frame sent; direct-backend client check does not prove same-origin browser transport."
+}

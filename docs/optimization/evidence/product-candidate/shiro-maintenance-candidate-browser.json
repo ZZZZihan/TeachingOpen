@@ -1,0 +1,18 @@
+{
+  "port": 18142,
+  "home_loaded": true,
+  "course_list_count": 3,
+  "course_list_loaded": true,
+  "community_editor_choices": [
+    "ScratchJr",
+    "Scratch",
+    "Python"
+  ],
+  "community_loaded": true,
+  "login_account_and_password_fields_visible": true,
+  "credentials_or_captcha_entered": false,
+  "console_error_count": 1,
+  "console_error_context": "existing external telemetry script refused by local CSP; not a zero-console claim",
+  "evidence": "private browser-home-snapshot.log and browser-*-click.log",
+  "scope": "Observed real browser anonymous navigation only; no authentication or role acceptance"
+}

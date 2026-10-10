@@ -1,0 +1,38 @@
+{
+  "command": [
+    "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/apache-maven-3.9.16/bin/mvn",
+    "-B",
+    "-s",
+    "dev/maven-settings.xml",
+    "-gs",
+    "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/clean-backend/empty-global-settings.xml",
+    "-Dmaven.repo.local=/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/clean-backend/cache",
+    "clean",
+    "package"
+  ],
+  "command_shell": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/apache-maven-3.9.16/bin/mvn -B -s dev/maven-settings.xml -gs /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/clean-backend/empty-global-settings.xml -Dmaven.repo.local=/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/clean-backend/cache clean package",
+  "cwd": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/clean-backend/api",
+  "environment_overrides": {
+    "JAVA_HOME": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home",
+    "MAVEN_SKIP_RC": "true"
+  },
+  "removed_environment_variables": [
+    "MAVEN_OPTS",
+    "MAVEN_ARGS",
+    "JAVA_TOOL_OPTIONS",
+    "JDK_JAVA_OPTIONS",
+    "_JAVA_OPTIONS",
+    "MAVEN_PROJECTBASEDIR"
+  ],
+  "started_utc": "2026-10-04T21:26:24.088880+00:00",
+  "cache_file_count_at_start": 0,
+  "cache_entry_count_at_start": 0,
+  "status": "complete",
+  "pid": 47043,
+  "finished_utc": "2026-10-04T21:29:02.192428+00:00",
+  "duration_seconds": 158.103,
+  "exit_code": 0,
+  "cache_file_count_after": 2614,
+  "cache_entry_count_after": 3887,
+  "build_log_sha256": "0433fe9b69bc3374020f16f31bf2c891d95dd82d025fa2cc4516c8cb00d4acec"
+}

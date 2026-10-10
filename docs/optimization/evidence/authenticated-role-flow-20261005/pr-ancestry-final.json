@@ -1,0 +1,458 @@
+{
+  "at": "2026-10-05T06:41:34.926306+00:00",
+  "candidate": "4f30e51b7121b7f102cfe1c71bba3183cd21b7e2",
+  "implementation_prs": 75,
+  "included": 75,
+  "rows": [
+    {
+      "number": 76,
+      "head": "47549b7d9d8518c955ef124a9457779d179ad682",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 75,
+      "head": "fd6d2dcec0b808dac12ec9b1bb9a557cc5f03556",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 74,
+      "head": "cb7bfda2d2c4b6c46f853816b638ba0dbcd4c115",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 73,
+      "head": "6ec6bfb31e3cb6a529f15dd7c158d544df6932dc",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 72,
+      "head": "fcaaf6d82dfaa8b3a0120c4104a6b07d8e8ad1f3",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 71,
+      "head": "f0980ce2d8c8a06e635bf09aca3a8b7d16edbcb7",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 70,
+      "head": "c2c3eacbe54a1a44314c83f17e4d27027686553a",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 69,
+      "head": "03954459774c885c099e786ecce26848e0b02926",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 68,
+      "head": "1e93ef2c932dccfae19916ae046e421aa2aae83c",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 67,
+      "head": "a9cc45678d4a61f960a863e968af38609cea4d4b",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 66,
+      "head": "8b444cd35330f26283aa9ff8b85c9b291d836c48",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 65,
+      "head": "956a4c167794d4648f559fc8932fecf4111f2101",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 64,
+      "head": "3483f3a3729ad84b359db43dfe93e03fa4e32c0e",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 63,
+      "head": "a1dd2c3bef24fdd69a5aa5563550b1707df1bb4f",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 62,
+      "head": "328a021224521674654c8c6f03c01be7fbb7ae2f",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 61,
+      "head": "df4e707234c04d1c8932335e4f779e58be25835e",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 60,
+      "head": "8f58b32362899047da0136e41278368fd26c88f0",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 59,
+      "head": "253f3fb4c44b500b6e4824adbf89da51ac89d50c",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 58,
+      "head": "c923ea03a0c5a75cb8f36dee1e90f6587702c0d6",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 57,
+      "head": "dc4c398a8559efa5eef46280305242156cc7ae61",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 56,
+      "head": "152aaef2231c1282df39055350db93aafe89a818",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 55,
+      "head": "6235e7e2586a4ce914257faa11c7552bf628c04c",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 54,
+      "head": "c1ab0f80e1179ee4f81c3e1865741bf6a6fc159b",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 53,
+      "head": "8f5bf1e272e57a3460c0414b506925c1395a18d2",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 52,
+      "head": "f906f8e782795ddd670725e85ffa4ea1756b665c",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 51,
+      "head": "630a639c8a9f73ff367d20404d6e656a90046662",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 50,
+      "head": "85f8a7d0a995047feb8ce486224d7bf991878e62",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 49,
+      "head": "a60d2b456bb312a1212d0905f521184639c011a5",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 48,
+      "head": "50f052e87d5a9c06965a31de3ed538136aeaff9f",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 47,
+      "head": "b7a7d788734315c8cdb183e4f79b2853198b4018",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 46,
+      "head": "6ee37a8b974373536748dbef9128814287f2dede",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 45,
+      "head": "5f896ac572ec637bb3d4a92223d7c699e6b30182",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 44,
+      "head": "11e8958080c6eeff397474031a2621036fd2b382",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 43,
+      "head": "3fb70f1919289d777ccffe936f3a7a8b889a749b",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 42,
+      "head": "fbf8097f0616cb865ce6ee109ca806b42f4767ef",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 41,
+      "head": "2a530a517d9eaaea5b4aa53a2f494edf521e4996",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 40,
+      "head": "6484a0133ba6bdd2afb6b9ba75d96806dcd6d7ea",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 39,
+      "head": "f6f1938e73ebaa67b12c35ec0ffb169d4f459765",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 38,
+      "head": "33200898b4f42e13f0d352054183c299ee91cddf",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 37,
+      "head": "193b8bfb349e7b2aa40d51f145b54b07e48ca236",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 36,
+      "head": "9ae13f63dc3309f5aa8a8d4219f935a9cccc747c",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 35,
+      "head": "c41b8ba615bee4d17dec290035fc25da9cb77540",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 34,
+      "head": "20f52ca13df1d8649cace5927651b5b194f8a0c8",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 33,
+      "head": "afab74393edbc711b349a99fd1e90506e4755eb0",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 32,
+      "head": "cd31827920bfda2b06b482f216798d3e57d10e1f",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 31,
+      "head": "40bdd77e2f7dd9c20b385d63c6efeb672296a512",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 30,
+      "head": "fd1cd542ad71148580249b230ac4c1e2b7d66792",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 29,
+      "head": "292dd7ea3830a22e719d80b12efcab26c81b4ed5",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 28,
+      "head": "75586a844bcce3c715f02fd057964ea4eb9b28f3",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 27,
+      "head": "45dd581e03054a2609a1aba80464cb44e0f8594b",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 26,
+      "head": "e772f0212885f01878ba9acc828686c4a30cf1d4",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 25,
+      "head": "7ab1dd5dacc957f308acca44fe34b16dd09fd512",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 24,
+      "head": "c38c9c1352bfc671d317b072d638955cf4207267",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 23,
+      "head": "95f5bfe179a7eefe86ca7a2fd41423bc7ba87191",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 22,
+      "head": "1bd5fecc9f634612cca7180d7211148ecb8ea1dd",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 21,
+      "head": "8d3a3fe78ec1015cf4c04e5fa16fdc46aa0034e5",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 20,
+      "head": "bad0e272969d0b0543381ba61276d68f03393950",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 19,
+      "head": "54b34492427adb118de4b9f58c92dfd997b2f5c2",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 18,
+      "head": "1bc4468934b353aafda5609d71533bb65fb2d326",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 17,
+      "head": "a999d45b8f38c2cf2d3c125fc1cd04ba3e285ef6",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 16,
+      "head": "4c1d70123e45a3b6e9feccf30f57e0ce483c5e1d",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 15,
+      "head": "57c120e48c128944f5d6989a95cff6dab0752ca9",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 14,
+      "head": "1b5bfe930983ae8b35ef4967b0bf29546a963234",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 13,
+      "head": "4f2235b31c5d5fb45552b8e69363435934115ad9",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 12,
+      "head": "8250c7b8fc1d2c7ddc80add806b6f8053cfc9355",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 11,
+      "head": "7a35ffd618331e4fdff36c1cbb97cffc5aa94adf",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 10,
+      "head": "d2cd67110201d3641d2bbe0848dc1c79bfa7ec0a",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 9,
+      "head": "0a21e33f8faee573ec7695d93a638c7b87ece1a6",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 8,
+      "head": "4027a8975aec4776485d81432549b244769cce3d",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 7,
+      "head": "4dfcec81b0742de480c7631264f89b932893e23f",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 6,
+      "head": "17f4a7cbdd23c8fad81dc1ac4c82a0a26e3e5f6f",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 5,
+      "head": "57d2a0819db8eb870f22592e2854299368b8e729",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 4,
+      "head": "8c1827d5af6e26b2eaae7ee4fe3e70317f952bdb",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 3,
+      "head": "0748a32f709adc2f1691a72bd80aa7f37bb222e7",
+      "included": true,
+      "exit_code": 0
+    },
+    {
+      "number": 2,
+      "head": "6d798ac76094794ee8cbe8500f0418fabf15eb5c",
+      "included": true,
+      "exit_code": 0
+    }
+  ]
+}

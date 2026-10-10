@@ -1,0 +1,204 @@
+{
+  "candidate_commit": "6f917f72310c0843104e160f1ec65a4fab8f6468",
+  "api_tree": "888edec98d06ee43ad2c2a7b429a927bd88d6fda",
+  "web_tree": "5cc4536c7647aed1458cb18bc20e92f0af88e924",
+  "prs": [
+    {
+      "number": 56,
+      "commit": "152aaef2231c1282df39055350db93aafe89a818",
+      "state": "OPEN",
+      "draft": false,
+      "base": "fix/account-freeze-state"
+    },
+    {
+      "number": 57,
+      "commit": "dc4c398a8559efa5eef46280305242156cc7ae61",
+      "state": "OPEN",
+      "draft": false,
+      "base": "fix/local-worker-csp"
+    }
+  ],
+  "java_jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "rollback_jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+  "production_source_and_pom_files_match": 1027,
+  "proxy_sha256": "d765e08c8bcbb09b315e21e82d432d8f1938e037a93edee30d9fb7b23db33af2",
+  "frontend": {
+    "files": 4893,
+    "bytes": 211466267,
+    "manifest_sha256": "453a9f32aeb0f3d534146e790ae62ab49bae4c23405127c640cc6ce86e0d6065",
+    "unchanged_from_pr53": true,
+    "web_tree": "5cc4536c7647aed1458cb18bc20e92f0af88e924",
+    "build_source_commit": "37a0cc553feb1ff065d1aeba40eb3c3263e551f2",
+    "new_build_performed": false
+  },
+  "unicode": {
+    "old_frozen_suite_passed": 118,
+    "new_backend_old_proxy_passed": 182,
+    "new_backend_new_proxy_passed": 183,
+    "frozen_suite_total": 186,
+    "frozen_suite_exit_code": 1,
+    "remaining_failures": "Three unchanged assertions require repeated-separator rejection; framework canonicalizes to same key; separate18/18 confirms permission and bytes. Preserved, not counted as green.",
+    "canonical_supplement": {
+      "passed": 18,
+      "total": 18,
+      "compiled_delivery_cli_actually_executed_with_new_proxy": true
+    },
+    "related_regression": {
+      "passed": 393,
+      "total": 393
+    },
+    "context": {
+      "passed": 49,
+      "total": 49
+    },
+    "filter_matrix": {
+      "passed": 70,
+      "total": 70,
+      "scope": "synthetic servlet fields, exact filter classes"
+    },
+    "browser": {
+      "anonymous_real_course_image": true,
+      "http_status": 200,
+      "natural_width": 320,
+      "natural_height": 180,
+      "synthetic_data_restored": true
+    }
+  },
+  "proxy_tests": {
+    "passed": 20,
+    "total": 20,
+    "real_notification": {
+      "passed": 44,
+      "total": 44
+    },
+    "real_scratch_cloud": {
+      "passed": 52,
+      "total": 52
+    }
+  },
+  "combined_dev_tests": {
+    "passed": 120,
+    "skipped": 1,
+    "total": 121,
+    "exit_code": 0,
+    "log_sha256": "d454df43c0e166abd309220b3eb160fe78ad7028de3528ba52d2272c9ff20348"
+  },
+  "backend_switches": [
+    {
+      "runtime": "course-role-runtime",
+      "previous_pid": 71897,
+      "old_jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+      "new_jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+      "healthy": true,
+      "new_pid": 95276,
+      "rollback_needed": false
+    },
+    {
+      "runtime": "role-flow-1003",
+      "previous_pid": 71980,
+      "old_jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+      "new_jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+      "healthy": true,
+      "new_pid": 95350,
+      "rollback_needed": false
+    },
+    {
+      "runtime": "prod-fixture-1003",
+      "previous_pid": 72317,
+      "old_jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+      "new_jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+      "healthy": true,
+      "new_pid": 95670,
+      "rollback_needed": false
+    }
+  ],
+  "proxy_switches": [
+    {
+      "runtime": "course-role-runtime",
+      "port": 18112,
+      "previous_pid": 49543,
+      "new_pid": 1030,
+      "get_index_matches_dist": true,
+      "head_index_status": 200,
+      "head_body_bytes": 0,
+      "rollback_needed": false
+    },
+    {
+      "runtime": "prod-fixture-1003",
+      "port": 18142,
+      "previous_pid": 49545,
+      "new_pid": 1035,
+      "get_index_matches_dist": true,
+      "head_index_status": 200,
+      "head_body_bytes": 0,
+      "rollback_needed": false
+    },
+    {
+      "runtime": "role-flow-1003",
+      "port": 18150,
+      "previous_pid": 49547,
+      "new_pid": 1036,
+      "get_index_matches_dist": true,
+      "head_index_status": 200,
+      "head_body_bytes": 0,
+      "rollback_needed": false
+    }
+  ],
+  "fresh_production_copy_read_check": {
+    "passed": 12,
+    "total": 12,
+    "changed_business_tables": [],
+    "private_source_sha256": "90dab436885bd5e8991f9846b9964a4fc995bbed47d264b67fce9e2f46b1a9ab",
+    "source_files": 297,
+    "non_ascii_source_paths": 0,
+    "real_student_attachments_used": false
+  },
+  "candidate_auth": {
+    "passed": 7,
+    "total": 7
+  },
+  "proxy_http": {
+    "initial_resources": [
+      {
+        "port": 18112,
+        "matched_initial_resources": 7
+      },
+      {
+        "port": 18142,
+        "matched_initial_resources": 7
+      },
+      {
+        "port": 18150,
+        "matched_initial_resources": 7
+      }
+    ],
+    "private_production_copy": {
+      "proxy_port": 18142,
+      "home_records": 3,
+      "cover_get_bytes_verified": 3,
+      "cover_head_200_lengths_verified": 3,
+      "business_tables_unchanged": true,
+      "business_tables_compared": 7,
+      "no_private_contents_exported": true
+    }
+  },
+  "temporary_cleanup": {
+    "only_owned_temporary_runtime_stopped": true,
+    "ports_closed": {
+      "13368": true,
+      "16441": true,
+      "18169": true,
+      "18170": true
+    },
+    "data_and_evidence_preserved": true,
+    "long_lived_previews_untouched": true
+  },
+  "remaining": [
+    "Legal %2B-only stored URL references still fail candidate permission lookup; separate compatibility issue.",
+    "Full authenticated student/teacher/admin browser flow and human visual acceptance remain pending.",
+    "Shiro1.13 remains EOL; supported-platform migration and production capacity not accepted."
+  ],
+  "github_merged": false,
+  "production_modified": false,
+  "goal_status": "active"
+}

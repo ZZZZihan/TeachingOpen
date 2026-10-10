@@ -1,0 +1,77 @@
+{
+  "observed_utc": "2026-10-02T20:37:59.090370+00:00",
+  "local_candidate_commit": "d56f9584bb91c55e9b39cdee9600127e2b2d8a4f",
+  "local_branch": "integration/product-candidate",
+  "previous_integration": "eb2801b3fc77cfb5c3f81e5bb72c3535cebe7301",
+  "added_pr24": "c38c9c1352bfc671d317b072d638955cf4207267",
+  "api_tree": "b231c08b808be2a9c05190eb8739d1cf2418950c",
+  "web_tree": "b3a1ea2a9961f49bdd4244a1312b1085c8c45312",
+  "backend": {
+    "api_tree_matches_pr24": true,
+    "running_jar_sha256": "85f7746a3ae4b143f1a4ca4e5c043e11c81bf7d69f32c72b7dbaa190f6a0e85c",
+    "product_commit": "3eada950e4681cb86d787ee07d7233c1e3589058",
+    "assignment_list_checks": [
+      48,
+      48
+    ],
+    "related_checks": {
+      "work_submission": [
+        95,
+        95
+      ],
+      "work_management": [
+        134,
+        134
+      ],
+      "local_download": [
+        88,
+        88
+      ]
+    },
+    "scope": "Same exact JAR tested before local integration; API tree matches. No new full-suite claim."
+  },
+  "frontend": {
+    "web_tree_matches_previous": true,
+    "reused_build_source_commit": "eb2801b3fc77cfb5c3f81e5bb72c3535cebe7301",
+    "build_rerun": false,
+    "tests_rerun": false,
+    "built_files": 4871,
+    "dist_path_hashes_aggregate_sha256": "084dc97f89a82ffeaff25a6e8c27721f3bdb2a14f1acde4d325d170a3413115c"
+  },
+  "http_observations": [
+    {
+      "case": "18112 login shell exact current dist index",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "case": "18112 current app bundle bytes",
+      "asset": "/js/app.5bccdb36.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "case": "http://127.0.0.1:18111/api anonymous assignment list denied",
+      "status": 401,
+      "passed": true
+    },
+    {
+      "case": "http://127.0.0.1:18112/api anonymous assignment list denied",
+      "status": 401,
+      "passed": true
+    }
+  ],
+  "backend_health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "original_source_files": 5634,
+  "original_source_changes": 0,
+  "limits": [
+    "HTTP shell and asset checks are not browser rendering or authenticated workflow acceptance.",
+    "Frontend dist is unchanged; previous 104 checks and build remain historical evidence, not a new run.",
+    "General fixture class category remains 2 after verifier cleanup; full role browser preparation must explicitly provision category 3.",
+    "GitHub PRs remain unmerged. No production changes. Full role, editor, recovery, performance and dependency acceptance incomplete."
+  ]
+}

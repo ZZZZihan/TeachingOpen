@@ -1,0 +1,95 @@
+{
+  "candidate": "06ab2040780f33296e93c97d29d00e80cbcc2f65",
+  "read_only_audit": true,
+  "new_product_changes": false,
+  "new_runtime_tests": false,
+  "findings": [
+    {
+      "gate": 2,
+      "status": "PARTIAL_FULL_AUTHENTICATED_CHAIN_MISSING",
+      "current_evidence": [
+        "E03",
+        "E04",
+        "E06",
+        "E08",
+        "E09",
+        "E21"
+      ],
+      "missing": "ordinary student course/video/real engine/current API save/reopen/submit/teacher feedback/browser readback single-ID chain",
+      "next_safe_action": "Use existing role-flow fixture once CAPTCHA authorization is resolved; no new harness"
+    },
+    {
+      "gate": 3,
+      "status": "PARTIAL_AUTHENTICATED_ROLE_FLOW_MISSING",
+      "current_evidence": [
+        "E03",
+        "E04",
+        "E12",
+        "E13",
+        "E14",
+        "E15",
+        "E16"
+      ],
+      "missing": "teacher browser preview/grade actual student submissions; admin representative user/class/course save/reopen",
+      "next_safe_action": "Use existing five-account real menu fixture; preserve role boundary; no permission expansion"
+    },
+    {
+      "gate": 5,
+      "status": "PARTIAL_REAL_AUTH_SHELL_FAILURE_RECOVERY_MISSING",
+      "current_evidence": [
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "E17",
+        "E22",
+        "E37"
+      ],
+      "missing": "global60s/401/auth shell/upload/submit/grade failure recovery and normal cleanup through ordinary page",
+      "next_safe_action": "Inject controlled own-request failures during authorized role-flow acceptance; preserve input and exact IDs"
+    },
+    {
+      "gate": 6,
+      "status": "PARTIAL_AUTHENTICATED_LAYOUT_ENGINEERING_MISSING",
+      "current_evidence": [
+        "E08",
+        "E09",
+        "E14",
+        "E16",
+        "E18",
+        "E19",
+        "E20"
+      ],
+      "missing": "real authenticated BasicLayout/RouteView key pages/statuses/threewidths; user visual opinion separately pending",
+      "next_safe_action": "Capture real route layouts and key controls at390/768/1440 during authorized chain; no forced aesthetic/deployment gate"
+    },
+    {
+      "gate": 7,
+      "status": "PARTIAL_NATIVE_ENGINE_PLUS_AUTHENTICATED_PERSISTENCE_COMBINATION_MISSING",
+      "current_evidence": [
+        "E23",
+        "E24",
+        "E25",
+        "E26",
+        "E27",
+        "E28",
+        "E29",
+        "E30",
+        "E31",
+        "E34",
+        "E35",
+        "E36",
+        "E38",
+        "E39"
+      ],
+      "missing": "ordinary auth native edit/current API save/from actual list same-ID reopen/submit/teacher preview",
+      "next_safe_action": "Use existing three editor units and save actual changed bytes; Python save/submission only; no browser auth bypass"
+    }
+  ],
+  "engineering_work_now": "Evidence/source/protocol audit complete; no evidenced prerequisite frontend patch or new harness needed",
+  "independent_pending": [
+    "User visual opinion separately pending, not upgraded to compulsory aesthetic pass",
+    "Target deployment/TLS/real trial state separately pending, not upgraded to production-deployment requirement"
+  ],
+  "authentication_constraint": "Earlier CAPTCHA operation confirmation pending; no token/challenge bypass"
+}

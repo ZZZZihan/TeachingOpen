@@ -1,0 +1,704 @@
+{
+  "captured_at": "2026-10-04T21:22:15.647348+00:00",
+  "candidate": {
+    "commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65",
+    "api_tree": "150a3a0b738c3e635c5bf1eb7be467c4d0ee2266",
+    "web_tree": "e63b7764a0e8b4b647cfb75f516f40cac37c1255",
+    "status": "?? .playwright-cli/\n?? output/",
+    "jar_sha256": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016"
+  },
+  "plan_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6",
+  "health": [
+    {
+      "port": 18111,
+      "http_status": 200,
+      "status": "UP"
+    },
+    {
+      "port": 18149,
+      "http_status": 200,
+      "status": "UP"
+    },
+    {
+      "port": 18141,
+      "http_status": 200,
+      "status": "UP"
+    }
+  ],
+  "open_pr_count": 72,
+  "draft_pr_numbers": [
+    44,
+    41,
+    37,
+    29,
+    28,
+    27,
+    26,
+    25,
+    23,
+    22,
+    21,
+    19
+  ],
+  "pull_requests": [
+    {
+      "baseRefName": "fix/student-feedback-readable",
+      "headRefName": "fix/student-work-loading",
+      "headRefOid": "fcaaf6d82dfaa8b3a0120c4104a6b07d8e8ad1f3",
+      "isDraft": false,
+      "number": 72,
+      "title": "fix: 学生作品列表失败恢复与过期请求隔离",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/72"
+    },
+    {
+      "baseRefName": "fix/account-recovery-ui",
+      "headRefName": "fix/student-feedback-readable",
+      "headRefOid": "f0980ce2d8c8a06e635bf09aca3a8b7d16edbcb7",
+      "isDraft": false,
+      "number": 71,
+      "title": "fix: 让学生在两个作品入口直接阅读教师反馈",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/71"
+    },
+    {
+      "baseRefName": "fix/class-membership-layout",
+      "headRefName": "fix/account-recovery-ui",
+      "headRefOid": "c2c3eacbe54a1a44314c83f17e4d27027686553a",
+      "isDraft": false,
+      "number": 70,
+      "title": "fix: 找回密码完整手机号流程与天工账号服务界面",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/70"
+    },
+    {
+      "baseRefName": "fix/upload-resource-boundary",
+      "headRefName": "fix/account-recovery-api",
+      "headRefOid": "03954459774c885c099e786ecce26848e0b02926",
+      "isDraft": false,
+      "number": 69,
+      "title": "fix: 账号恢复验证码限时单次使用并撤销旧密码会话",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/69"
+    },
+    {
+      "baseRefName": "fix/release-nginx-api",
+      "headRefName": "feature/candidate-release-bundle",
+      "headRefOid": "1e93ef2c932dccfae19916ae046e421aa2aae83c",
+      "isDraft": false,
+      "number": 68,
+      "title": "feat: 冻结候选包与真实 Linux 容器验证",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/68"
+    },
+    {
+      "baseRefName": "feature/production-read-benchmark",
+      "headRefName": "feature/production-media-compatibility",
+      "headRefOid": "a9cc45678d4a61f960a863e968af38609cea4d4b",
+      "isDraft": false,
+      "number": 67,
+      "title": "feat(dev): 增加真实课程媒体审计与阅读器兼容性证据",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/67"
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "fix/release-nginx-api",
+      "headRefOid": "8b444cd35330f26283aa9ff8b85c9b291d836c48",
+      "isDraft": false,
+      "number": 66,
+      "title": "fix(deploy): 修复发布 Nginx 的 API 方法和路径转发",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/66"
+    },
+    {
+      "baseRefName": "fix/class-membership-access",
+      "headRefName": "fix/upload-resource-boundary",
+      "headRefOid": "956a4c167794d4648f559fc8932fecf4111f2101",
+      "isDraft": false,
+      "number": 65,
+      "title": "fix: 阻止上传文件绕过正式下载授权",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/65"
+    },
+    {
+      "baseRefName": "feature/production-data-fixture",
+      "headRefName": "feature/production-read-benchmark",
+      "headRefOid": "3483f3a3729ad84b359db43dfe93e03fa4e32c0e",
+      "isDraft": false,
+      "number": 64,
+      "title": "feat: 为私有真实课程副本建立只读性能基线",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/64"
+    },
+    {
+      "baseRefName": "fix/class-member-context",
+      "headRefName": "fix/class-membership-layout",
+      "headRefOid": "a1dd2c3bef24fdd69a5aa5563550b1707df1bb4f",
+      "isDraft": false,
+      "number": 63,
+      "title": "fix: 改善班级成员窄屏布局与选人弹窗可达性",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/63"
+    },
+    {
+      "baseRefName": "fix/encoded-media-references",
+      "headRefName": "fix/class-membership-access",
+      "headRefOid": "328a021224521674654c8c6f03c01be7fbb7ae2f",
+      "isDraft": false,
+      "number": 62,
+      "title": "fix: 班级成员写入授权与事务回滚",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/62"
+    },
+    {
+      "baseRefName": "fix/class-course-context",
+      "headRefName": "fix/class-member-context",
+      "headRefOid": "df4e707234c04d1c8932335e4f779e58be25835e",
+      "isDraft": false,
+      "number": 61,
+      "title": "fix: 防止切班后成员操作及角色保存影响其他班级",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/61"
+    },
+    {
+      "baseRefName": "fix/course-draft-resume",
+      "headRefName": "fix/class-course-context",
+      "headRefOid": "8f58b32362899047da0136e41278368fd26c88f0",
+      "isDraft": false,
+      "number": 60,
+      "title": "fix: prevent stale class course selections from changing another class",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/60"
+    },
+    {
+      "baseRefName": "fix/python-source-loading",
+      "headRefName": "fix/course-draft-resume",
+      "headRefOid": "253f3fb4c44b500b6e4824adbf89da51ac89d50c",
+      "isDraft": false,
+      "number": 59,
+      "title": "fix: 从课程入口恢复学生已保存作品，避免模板覆盖",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/59"
+    },
+    {
+      "baseRefName": "fix/unicode-media-paths",
+      "headRefName": "fix/encoded-media-references",
+      "headRefOid": "c923ea03a0c5a75cb8f36dee1e90f6587702c0d6",
+      "isDraft": false,
+      "number": 58,
+      "title": "fix: resolve valid percent-encoded media references",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/58"
+    },
+    {
+      "baseRefName": "fix/local-worker-csp",
+      "headRefName": "fix/local-proxy-head",
+      "headRefOid": "dc4c398a8559efa5eef46280305242156cc7ae61",
+      "isDraft": false,
+      "number": 57,
+      "title": "修复本地预览代理 HEAD 转发与资源长度",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/57"
+    },
+    {
+      "baseRefName": "fix/account-freeze-state",
+      "headRefName": "fix/unicode-media-paths",
+      "headRefOid": "152aaef2231c1282df39055350db93aafe89a818",
+      "isDraft": false,
+      "number": 56,
+      "title": "修复中文本地媒体路径读取并保留路径与资源权限检查",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/56"
+    },
+    {
+      "baseRefName": "fix/shiro-maintenance",
+      "headRefName": "fix/account-freeze-state",
+      "headRefOid": "6235e7e2586a4ce914257faa11c7552bf628c04c",
+      "isDraft": false,
+      "number": 55,
+      "title": "修复账号冻结权限、状态生效与批量回滚",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/55"
+    },
+    {
+      "baseRefName": "fix/course-update-outcome",
+      "headRefName": "fix/shiro-maintenance",
+      "headRefOid": "c1ab0f80e1179ee4f81c3e1865741bf6a6fc159b",
+      "isDraft": false,
+      "number": 54,
+      "title": "维护 Shiro 兼容 Java 8 并关闭未使用的 rememberMe",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/54"
+    },
+    {
+      "baseRefName": "feature/python-execution-frame",
+      "headRefName": "fix/python-source-loading",
+      "headRefOid": "8f5bf1e272e57a3460c0414b506925c1395a18d2",
+      "isDraft": false,
+      "number": 53,
+      "title": "fix: Python 文件单次加载、失败重试与就绪保护",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/53"
+    },
+    {
+      "baseRefName": "fix/python-preview-url",
+      "headRefName": "feature/python-execution-frame",
+      "headRefOid": "f906f8e782795ddd670725e85ffa4ea1756b665c",
+      "isDraft": false,
+      "number": 52,
+      "title": "feat: isolate Python execution with Stop and recoverable input",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/52"
+    },
+    {
+      "baseRefName": "fix/python-preview-url",
+      "headRefName": "fix/frontend-route-prefetch",
+      "headRefOid": "630a639c8a9f73ff367d20404d6e656a90046662",
+      "isDraft": false,
+      "number": 51,
+      "title": "perf: 按访问页面加载资源，减少首页过度预取",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/51"
+    },
+    {
+      "baseRefName": "fix/course-summary-text",
+      "headRefName": "fix/python-preview-url",
+      "headRefOid": "85f8a7d0a995047feb8ce486224d7bf991878e62",
+      "isDraft": false,
+      "number": 50,
+      "title": "fix: 修复 Python 预览文件 URL 编码与旧链接兼容性",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/50"
+    },
+    {
+      "baseRefName": "feature/scratch-cloud-recovery",
+      "headRefName": "fix/local-worker-csp",
+      "headRefOid": "a60d2b456bb312a1212d0905f521184639c011a5",
+      "isDraft": false,
+      "number": 49,
+      "title": "fix: restore local Scratch asset Worker startup",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/49"
+    },
+    {
+      "baseRefName": "feature/production-data-fixture",
+      "headRefName": "feature/role-flow-fixture",
+      "headRefOid": "50f052e87d5a9c06965a31de3ed538136aeaff9f",
+      "isDraft": false,
+      "number": 48,
+      "title": "test: 三角色真实页面流程的独立数据与教学素材夹具",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/48"
+    },
+    {
+      "baseRefName": "feature/production-data-fixture",
+      "headRefName": "feature/scratch-cloud-recovery",
+      "headRefOid": "b7a7d788734315c8cdb183e4f79b2853198b4018",
+      "isDraft": false,
+      "number": 47,
+      "title": "fix: 本机冷备份恢复 Scratch 云变量并排除旧会话",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/47"
+    },
+    {
+      "baseRefName": "feature/admin-course-workbench",
+      "headRefName": "fix/course-summary-text",
+      "headRefOid": "6ee37a8b974373536748dbef9128814287f2dede",
+      "isDraft": false,
+      "number": 46,
+      "title": "fix: 真实课程摘要正确解码并稳定限制为三行",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/46"
+    },
+    {
+      "baseRefName": "fix/course-update-outcome",
+      "headRefName": "feature/production-data-fixture",
+      "headRefOid": "5f896ac572ec637bb3d4a92223d7c699e6b30182",
+      "isDraft": false,
+      "number": 45,
+      "title": "生产来源课程数据的私有测试副本与核验工具",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/45"
+    },
+    {
+      "baseRefName": "fix/course-form-recovery",
+      "headRefName": "feature/admin-course-workbench",
+      "headRefOid": "11e8958080c6eeff397474031a2621036fd2b382",
+      "isDraft": true,
+      "number": 44,
+      "title": "管理员课程工作台：工大风格列表与可恢复维护操作",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/44"
+    },
+    {
+      "baseRefName": "fix/teacher-work-search",
+      "headRefName": "fix/course-update-outcome",
+      "headRefOid": "3fb70f1919289d777ccffe936f3a7a8b889a749b",
+      "isDraft": false,
+      "number": 43,
+      "title": "fix: 课程目标缺失明确报错并原子保存课程地图",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/43"
+    },
+    {
+      "baseRefName": "feature/teacher-workbench",
+      "headRefName": "fix/course-form-recovery",
+      "headRefOid": "fbf8097f0616cb865ce6ee109ca806b42f4767ef",
+      "isDraft": false,
+      "number": 42,
+      "title": "fix: 课程与单元表单失败保留输入并防止重复保存",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/42"
+    },
+    {
+      "baseRefName": "feature/tiangong-branding",
+      "headRefName": "feature/teacher-workbench",
+      "headRefOid": "2a530a517d9eaaea5b4aa53a2f494edf521e4996",
+      "isDraft": true,
+      "number": 41,
+      "title": "feat: 天工紫教师作业工作台与可恢复批改",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/41"
+    },
+    {
+      "baseRefName": "fix/feedback-comment-preservation",
+      "headRefName": "fix/teacher-work-search",
+      "headRefOid": "6484a0133ba6bdd2afb6b9ba75d96806dcd6d7ea",
+      "isDraft": false,
+      "number": 40,
+      "title": "fix: 修复教师作品名称与学生姓名模糊筛选",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/40"
+    },
+    {
+      "baseRefName": "fix/scratch-cloud-client",
+      "headRefName": "feature/tiangong-branding",
+      "headRefOid": "f6f1938e73ebaa67b12c35ec0ffb169d4f459765",
+      "isDraft": false,
+      "number": 39,
+      "title": "feat: 融入天津工业大学校园视觉与天工紫主题",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/39"
+    },
+    {
+      "baseRefName": "fix/scratch-cloud-access",
+      "headRefName": "fix/feedback-comment-preservation",
+      "headRefOid": "33200898b4f42e13f0d352054183c299ee91cddf",
+      "isDraft": false,
+      "number": 38,
+      "title": "fix: 批改与局部编辑保留未提交的评分和讨论",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/38"
+    },
+    {
+      "baseRefName": "fix/python-output-boundary",
+      "headRefName": "fix/scratch-cloud-client",
+      "headRefOid": "193b8bfb349e7b2aa40d51f145b54b07e48ca236",
+      "isDraft": true,
+      "number": 37,
+      "title": "修复 Scratch 云变量连接、作品绑定与恢复状态",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/37"
+    },
+    {
+      "baseRefName": "fix/local-websocket-proxy",
+      "headRefName": "fix/scratch-cloud-access",
+      "headRefOid": "9ae13f63dc3309f5aa8a8d4219f935a9cccc747c",
+      "isDraft": false,
+      "number": 36,
+      "title": "fix: 保护 Scratch 云变量身份、作品权限与原子修改",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/36"
+    },
+    {
+      "baseRefName": "fix/notification-websocket-access",
+      "headRefName": "fix/local-websocket-proxy",
+      "headRefOid": "c41b8ba615bee4d17dec290035fc25da9cb77540",
+      "isDraft": false,
+      "number": 35,
+      "title": "fix: 补通本地同源 WebSocket 并保护断开与 HTTP 兼容",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/35"
+    },
+    {
+      "baseRefName": "fix/tomcat-maintenance",
+      "headRefName": "fix/notification-websocket-access",
+      "headRefOid": "20f52ca13df1d8649cace5927651b5b194f8a0c8",
+      "isDraft": false,
+      "number": 34,
+      "title": "fix: 通知连接绑定认证身份并保护多标签与退出会话",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/34"
+    },
+    {
+      "baseRefName": "fix/work-view-metadata",
+      "headRefName": "fix/tomcat-maintenance",
+      "headRefOid": "afab74393edbc711b349a99fd1e90506e4755eb0",
+      "isDraft": false,
+      "number": 33,
+      "title": "fix: 更新内嵌 Tomcat 并验证上传与核心请求兼容性",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/33"
+    },
+    {
+      "baseRefName": "feature/local-candidate-switch",
+      "headRefName": "fix/work-view-metadata",
+      "headRefOid": "cd31827920bfda2b06b482f216798d3e57d10e1f",
+      "isDraft": false,
+      "number": 32,
+      "title": "fix: 浏览作品保留修改记录并可靠累计并发浏览次数",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/32"
+    },
+    {
+      "baseRefName": "feature/local-backup-restore",
+      "headRefName": "feature/local-candidate-switch",
+      "headRefOid": "40bdd77e2f7dd9c20b385d63c6efeb672296a512",
+      "isDraft": false,
+      "number": 31,
+      "title": "feat: 冻结本地候选包并支持切换失败恢复与版本回退",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/31"
+    },
+    {
+      "baseRefName": "fix/assignment-list-contract",
+      "headRefName": "feature/local-backup-restore",
+      "headRefOid": "fd1cd542ad71148580249b230ac4c1e2b7d66792",
+      "isDraft": false,
+      "number": 30,
+      "title": "feat: 验证数据库与附件备份恢复到全新隔离环境",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/30"
+    },
+    {
+      "baseRefName": "fix/scratchjr-editor-persistence",
+      "headRefName": "fix/python-output-boundary",
+      "headRefOid": "292dd7ea3830a22e719d80b12efcab26c81b4ed5",
+      "isDraft": true,
+      "number": 29,
+      "title": "fix(python): 纯文本输出、显示上限与重跑恢复",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/29"
+    },
+    {
+      "baseRefName": "fix/scratch-editor-persistence",
+      "headRefName": "fix/scratchjr-editor-persistence",
+      "headRefOid": "75586a844bcce3c715f02fd057964ea4eb9b28f3",
+      "isDraft": true,
+      "number": 28,
+      "title": "fix(scratchjr): reliably save and reopen editor projects",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/28"
+    },
+    {
+      "baseRefName": "fix/python-editor-persistence",
+      "headRefName": "fix/scratch-editor-persistence",
+      "headRefOid": "45dd581e03054a2609a1aba80464cb44e0f8594b",
+      "isDraft": true,
+      "number": 27,
+      "title": "fix: 修复 Scratch 成对保存、失败恢复与同作品重开",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/27"
+    },
+    {
+      "baseRefName": "feature/student-assignment-feedback",
+      "headRefName": "fix/python-editor-persistence",
+      "headRefOid": "e772f0212885f01878ba9acc828686c4a30cf1d4",
+      "isDraft": true,
+      "number": 26,
+      "title": "fix: 修复 Python 编辑器保存、失败恢复与重开",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/26"
+    },
+    {
+      "baseRefName": "fix/assignment-file-submit",
+      "headRefName": "feature/student-assignment-feedback",
+      "headRefOid": "7ab1dd5dacc957f308acca44fe34b16dd09fd512",
+      "isDraft": true,
+      "number": 25,
+      "title": "feat: 学生任务与反馈页面",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/25"
+    },
+    {
+      "baseRefName": "fix/permission-menu-identity",
+      "headRefName": "fix/assignment-list-contract",
+      "headRefOid": "c38c9c1352bfc671d317b072d638955cf4207267",
+      "isDraft": false,
+      "number": 24,
+      "title": "fix: 班级作业列表范围、状态与附件地址",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/24"
+    },
+    {
+      "baseRefName": "feature/learning-reader",
+      "headRefName": "fix/assignment-file-submit",
+      "headRefOid": "95f5bfe179a7eefe86ca7a2fd41423bc7ba87191",
+      "isDraft": true,
+      "number": 23,
+      "title": "fix: 文件作业提交隔离与失败恢复，统一提交表单",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/23"
+    },
+    {
+      "baseRefName": "feature/learning-entry",
+      "headRefName": "feature/learning-reader",
+      "headRefOid": "1bd5fecc9f634612cca7180d7211148ecb8ea1dd",
+      "isDraft": true,
+      "number": 22,
+      "title": "feat: 统一课程阅读器与媒体恢复体验",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/22"
+    },
+    {
+      "baseRefName": "feature/login-experience",
+      "headRefName": "feature/learning-entry",
+      "headRefOid": "8d3a3fe78ec1015cf4c04e5fa16fdc46aa0034e5",
+      "isDraft": true,
+      "number": 21,
+      "title": "feat: 重做课程学习入口与可恢复的单元目录",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/21"
+    },
+    {
+      "baseRefName": "fix/local-file-download-access",
+      "headRefName": "fix/permission-menu-identity",
+      "headRefOid": "bad0e272969d0b0543381ba61276d68f03393950",
+      "isDraft": false,
+      "number": 20,
+      "title": "fix: 菜单加载绑定认证身份并支持空权限配置",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/20"
+    },
+    {
+      "baseRefName": "feature/course-discovery",
+      "headRefName": "feature/login-experience",
+      "headRefOid": "54b34492427adb118de4b9f58c92dfd997b2f5c2",
+      "isDraft": true,
+      "number": 19,
+      "title": "feat: 登录界面与可恢复的会话体验",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/19"
+    },
+    {
+      "baseRefName": "fix/file-record-ownership",
+      "headRefName": "fix/local-file-download-access",
+      "headRefOid": "1bc4468934b353aafda5609d71533bb65fb2d326",
+      "isDraft": false,
+      "number": 18,
+      "title": "fix: 本地下载按资源授权并保留浏览器媒体播放",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/18"
+    },
+    {
+      "baseRefName": "fix/local-upload-boundary",
+      "headRefName": "fix/file-record-ownership",
+      "headRefOid": "a999d45b8f38c2cf2d3c125fc1cd04ba3e285ef6",
+      "isDraft": false,
+      "number": 17,
+      "title": "fix: 绑定文件上传归属并保护引用与管理权限",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/17"
+    },
+    {
+      "baseRefName": "fix/community-work-access",
+      "headRefName": "fix/local-upload-boundary",
+      "headRefOid": "4c1d70123e45a3b6e9feccf30f57e0ce483c5e1d",
+      "isDraft": false,
+      "number": 16,
+      "title": "fix: 限制本地上传目录并清理失败文件",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/16"
+    },
+    {
+      "baseRefName": "fix/student-work-submission",
+      "headRefName": "fix/community-work-access",
+      "headRefOid": "57c120e48c128944f5d6989a95cff6dab0752ca9",
+      "isDraft": false,
+      "number": 15,
+      "title": "fix: 限制社区作品可见性并保留授权用户访问",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/15"
+    },
+    {
+      "baseRefName": "fix/shared-work-attachments",
+      "headRefName": "fix/student-work-submission",
+      "headRefOid": "1b5bfe930983ae8b35ef4967b0bf29546a963234",
+      "isDraft": false,
+      "number": 14,
+      "title": "fix: 保护学生作业提交的身份、任务和事务",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/14"
+    },
+    {
+      "baseRefName": "fix/work-management-access",
+      "headRefName": "fix/shared-work-attachments",
+      "headRefOid": "4f2235b31c5d5fb45552b8e69363435934115ad9",
+      "isDraft": false,
+      "number": 13,
+      "title": "fix: 删除作品时保留共享附件并保护事务回滚",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/13"
+    },
+    {
+      "baseRefName": "fix/auth-token-logging",
+      "headRefName": "fix/work-management-access",
+      "headRefOid": "8250c7b8fc1d2c7ddc80add806b6f8053cfc9355",
+      "isDraft": false,
+      "number": 12,
+      "title": "fix: 限制作业管理与反馈读取的班级范围",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/12"
+    },
+    {
+      "baseRefName": "fix/learning-unit-access",
+      "headRefName": "fix/auth-token-logging",
+      "headRefOid": "7a35ffd618331e4fdff36c1cbb97cffc5aa94adf",
+      "isDraft": false,
+      "number": 11,
+      "title": "fix: 认证与会话刷新日志不再输出令牌",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/11"
+    },
+    {
+      "baseRefName": "fix/shiro-cache-database",
+      "headRefName": "fix/learning-unit-access",
+      "headRefOid": "d2cd67110201d3641d2bbe0848dc1c79bfa7ec0a",
+      "isDraft": false,
+      "number": 10,
+      "title": "fix: 统一学习单元授权与资料显示规则",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/10"
+    },
+    {
+      "baseRefName": "fix/course-management-roles",
+      "headRefName": "fix/shiro-cache-database",
+      "headRefOid": "0a21e33f8faee573ec7695d93a638c7b87ece1a6",
+      "isDraft": false,
+      "number": 9,
+      "title": "fix: 权限缓存遵循 Redis 数据库配置",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/9"
+    },
+    {
+      "baseRefName": "fix/authentication-http-status",
+      "headRefName": "fix/course-management-roles",
+      "headRefOid": "4027a8975aec4776485d81432549b244769cce3d",
+      "isDraft": false,
+      "number": 8,
+      "title": "fix: 限制课程管理权限并保留学习读取",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/8"
+    },
+    {
+      "baseRefName": "feature/public-layout",
+      "headRefName": "feature/course-discovery",
+      "headRefOid": "4dfcec81b0742de480c7631264f89b932893e23f",
+      "isDraft": false,
+      "number": 7,
+      "title": "feat: 完善课程发现与筛选体验",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/7"
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "feature/public-layout",
+      "headRefOid": "17f4a7cbdd23c8fad81dc1ac4c82a0a26e3e5f6f",
+      "isDraft": false,
+      "number": 6,
+      "title": "feat: 完善公共入口并展示真实课程内容",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/6"
+    },
+    {
+      "baseRefName": "feature/isolated-local-runtime",
+      "headRefName": "fix/authentication-http-status",
+      "headRefOid": "57d2a0819db8eb870f22592e2854299368b8e729",
+      "isDraft": false,
+      "number": 5,
+      "title": "fix: 未登录和失效凭证返回明确的 401 响应",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/5"
+    },
+    {
+      "baseRefName": "fix/disabled-third-login",
+      "headRefName": "feature/isolated-local-runtime",
+      "headRefOid": "8c1827d5af6e26b2eaae7ee4fe3e70317f952bdb",
+      "isDraft": false,
+      "number": 4,
+      "title": "feat: 提供可并行运行和恢复的隔离开发环境",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/4"
+    },
+    {
+      "baseRefName": "fix/backend-oracle-build",
+      "headRefName": "fix/disabled-third-login",
+      "headRefOid": "0748a32f709adc2f1691a72bd80aa7f37bb222e7",
+      "isDraft": false,
+      "number": 3,
+      "title": "fix: 关闭第三方登录时应用仍可正常启动",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/3"
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "fix/backend-oracle-build",
+      "headRefOid": "6d798ac76094794ee8cbe8500f0418fabf15eb5c",
+      "isDraft": false,
+      "number": 2,
+      "title": "fix: 修正 Oracle 驱动坐标恢复后端构建",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/2"
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "feature/productization-goal",
+      "headRefOid": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6",
+      "isDraft": false,
+      "number": 1,
+      "title": "docs: 明确产品化目标与逐项 PR 交付规则",
+      "url": "https://github.com/ZZZZihan/TeachingOpen/pull/1"
+    }
+  ],
+  "scope": "Read-only source/PR/hash/local-health audit; no login, challenge, SQL, browser, service mutation or production request.",
+  "attempts": [
+    {
+      "result": "failed_before_health_or_output",
+      "cause": "Repository owner misspelled as ZZZZZihan; read-only gh lookup failed."
+    },
+    {
+      "result": "success",
+      "repo": "ZZZZihan/TeachingOpen"
+    }
+  ]
+}

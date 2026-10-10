@@ -1,0 +1,148 @@
+{
+  "date": "2026-10-05",
+  "goal": "active",
+  "pr": {
+    "baseRefName": "fix/student-feedback-readable",
+    "headRefOid": "fcaaf6d82dfaa8b3a0120c4104a6b07d8e8ad1f3",
+    "isDraft": false,
+    "number": 72,
+    "state": "OPEN",
+    "statusCheckRollup": [],
+    "url": "https://github.com/ZZZZihan/TeachingOpen/pull/72"
+  },
+  "product_commit": "e3522dbc57e10330cbe697ac310e5106231f7aea",
+  "measured_candidate": "872109fde9020ab5ad8e42a9cc445f06224589dd",
+  "final_candidate": "06ab2040780f33296e93c97d29d00e80cbcc2f65",
+  "final_api_web_diff_empty": true,
+  "jar_sha256": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016",
+  "dist": {
+    "candidate": "872109fde9020ab5ad8e42a9cc445f06224589dd",
+    "files": 4895,
+    "bytes": 211925716,
+    "manifest_sha256": "9f9a89fb12fc2a3c674988059c86665bcc0a80617bd53b8445f996708b5929da",
+    "backup": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/student-work-loading-20261005/previous-dist",
+    "old_manifest_match": true,
+    "new_dist_verified": true,
+    "backend_restarted": false
+  },
+  "checks": {
+    "baseline_expected_defects": 8,
+    "author_focused": 28,
+    "author_branch": 625,
+    "independent_offline": 35,
+    "candidate_node": 645,
+    "new_files_lint_errors": 0,
+    "new_files_lint_warnings": 0,
+    "legacy_parent_lint_errors": 75,
+    "legacy_parent_lint_warnings": 213,
+    "build_exit": 0,
+    "build_warnings": 12,
+    "local_initial_resources": 24,
+    "browser_assertions": {
+      "layout_widths_exact": true,
+      "retry_min44": true,
+      "card_state_fills_container": true,
+      "final_origin_console_empty": true,
+      "page_recovery10": true,
+      "snapshot_retry2": true,
+      "no_loading_after_failures": true
+    }
+  },
+  "bundle": {
+    "bundle": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/student-work-loading-candidate-1005",
+    "compose_project": "teaching-candidate-95df9210affa",
+    "dist_files": 4895,
+    "fixture_counts": {
+      "accounts": 5,
+      "classes": 2,
+      "courses": 3,
+      "tables": 69
+    },
+    "immutable_files": 4906,
+    "manifest_sha256": "e20f87524a1cc31872b1c2a6fb8e5c0bb854e478e28bdd608a0b225830c8de59",
+    "platform": "linux/arm64",
+    "port": 18190,
+    "runtime_data_checked": false,
+    "services_started": false,
+    "source_commit": "872109fde9020ab5ad8e42a9cc445f06224589dd",
+    "status": "created_immutable"
+  },
+  "bundle_verify": {
+    "bundle": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/student-work-loading-candidate-1005",
+    "compose_project": "teaching-candidate-95df9210affa",
+    "dist_files": 4895,
+    "immutable_files": 4906,
+    "manifest_sha256": "e20f87524a1cc31872b1c2a6fb8e5c0bb854e478e28bdd608a0b225830c8de59",
+    "platform": "linux/arm64",
+    "port": 18190,
+    "runtime_data_checked": false,
+    "services_started": false,
+    "source_commit": "872109fde9020ab5ad8e42a9cc445f06224589dd",
+    "status": "verified_immutable"
+  },
+  "container_runtime_this_turn": "NOT_RUN: frontend loading-only change; previous exact45 is history, not current result",
+  "cleanup": {
+    "stopped_previews": [
+      {
+        "port": 18308,
+        "pid": 31343
+      },
+      {
+        "port": 18309,
+        "pid": 34638
+      },
+      {
+        "port": 18310,
+        "pid": 36367
+      }
+    ],
+    "health": {
+      "18111": "UP",
+      "18141": "UP",
+      "18149": "UP"
+    },
+    "backend_identity_unchanged": {
+      "course-role-runtime": true,
+      "role-flow-1003": true,
+      "prod-fixture-1003": true
+    },
+    "production_connected": false,
+    "container_services_started": false,
+    "closed": {
+      "18308": true,
+      "18309": true,
+      "18310": true,
+      "18190": true
+    }
+  },
+  "remaining": [
+    "Ordinary authenticated student-teacher-admin browser chain",
+    "Editor open/save/reopen/submit browser evidence",
+    "User visual acceptance",
+    "Target deployment/case-sensitive Linux validation",
+    "Card large-list pagination and separate tag-query failure behavior"
+  ],
+  "failures_retained": [
+    "Initial health probe used wrong context path and got404; actual/api/actuator/healthUP",
+    "Initial process-identity probe assumed nonexistentkey; corrected using liveps",
+    "Initial first10 inference corrected to actual backend999",
+    "Previewgitarchive cwd pathspec failure fixed; before files retained",
+    "Initial focused fixture failures retained; corrected tests and final28passed",
+    "After2 Less1/-1 arithmetic caused implicitgrid; start/end fix verified",
+    "After2 tablev-if destroyed AntDrefs onpagination; v-show fix verified"
+  ],
+  "production": "No Z820 connection or production change; existing private copy18142 publichomepage3courses checked after dist switch; backend processes unchanged",
+  "private_evidence_hashes": {
+    "candidate-tests.log": "f47c0e5e41cb367fdbcfe0ceab9a21b9d12c67fcd5be27346c37cb9c0c5f868c",
+    "candidate-build.log": "89061cf039a51872bbb3eff44c363af04b86c5ea109eda3a5161fb4ea2bc732b",
+    "browser/final-report.json": "41f15fc72d313b3828379d36b99f1c63b6bf8fb1db6c2ef442337f3a2049adf2",
+    "browser/final-assertions.json": "c031b11a0cd1906848514c003d8f6d19a931ca07a9680f2a9b2014fee4c1cc3a",
+    "review/review.md": "1b62b016ac232726eb54315e6e32f92c6107c9eaf9eda53f8d78ab2b2c004f40",
+    "review/loading-offline.json": "290bd7ff5b61b679987ebdd5c0c20cbc945a6deabe7efb3558890b5153c688b0",
+    "review/final-source-manifest.json": "8659ade7440b14bc37369bb1f4170b14dbee0e34906334d357daa71eaa1cb911",
+    "bundle-create.json": "15808f8b5f1145019842d6fe433daa08e5de197b9fc388e8b80e08f31382a7e4",
+    "bundle-verify.json": "a8c675b9d40fa416977f165886e9b1ba79a96829ece421744ec18b2867209e20",
+    "static-smoke.json": "319734c4ec9fcd14b53d4046d663c24f52feabb4ed188d2a93de91ef07b55bfd",
+    "cleanup.json": "49533d29227e5fae6d1cd7028ab373aa0b796cb8368c48ba8c6eececa289827e"
+  }
+}

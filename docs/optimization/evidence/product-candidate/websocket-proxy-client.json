@@ -1,0 +1,29 @@
+{
+  "cases": [
+    {
+      "case": "shipped JavaScript client authenticates and receives on both real sockets",
+      "passed": true
+    },
+    {
+      "case": "disposing one JavaScript client preserves the other subscription",
+      "passed": true
+    },
+    {
+      "case": "cleared frontend login prevents notification callbacks",
+      "passed": true
+    },
+    {
+      "case": "all non-audit-log tables unchanged",
+      "passed": true
+    },
+    {
+      "case": "all attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 5,
+  "total": 5,
+  "transport": "Node native WebSocket with shipped browser helper and real Java API, not a browser login/UI test",
+  "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396",
+  "via_frontend": true
+}
