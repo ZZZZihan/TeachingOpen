@@ -1,6 +1,7 @@
 package org.jeecg.modules.teaching.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.jeecg.modules.teaching.entity.TeachingDepartDayLog;
 
 /**
@@ -10,5 +11,10 @@ import org.jeecg.modules.teaching.entity.TeachingDepartDayLog;
  * @Version: V1.0
  */
 public interface TeachingDepartDayLogMapper extends BaseMapper<TeachingDepartDayLog> {
+
+    String selectDayIdForUpdate(@Param("departId") String departId, @Param("day") String day);
+
+    int incrementDayCounter(@Param("id") String id, @Param("departId") String departId,
+                                         @Param("day") String day, @Param("counter") String counter);
 
 }

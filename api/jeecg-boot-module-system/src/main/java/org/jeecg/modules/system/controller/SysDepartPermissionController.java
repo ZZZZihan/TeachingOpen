@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.authz.annotation.Logical;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.constant.CommonConstant;
@@ -43,6 +45,7 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags="部门权限表")
 @RestController
 @RequestMapping("/sys/sysDepartPermission")
+@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 public class SysDepartPermissionController extends JeecgController<SysDepartPermission, ISysDepartPermissionService> {
 	@Autowired
 	private ISysDepartPermissionService sysDepartPermissionService;
@@ -275,8 +278,11 @@ public class SysDepartPermissionController extends JeecgController<SysDepartPerm
 			 LambdaQueryWrapper<SysPermission> query = new LambdaQueryWrapper<SysPermission>();
 			 query.eq(SysPermission::getDelFlag, CommonConstant.DEL_FLAG_0);
 			 query.orderByAsc(SysPermission::getSortNo);
-			 query.inSql(SysPermission::getId,"select permission_id  from sys_depart_permission where depart_id='"+departId+"'");
-			 List<SysPermission> list = sysPermissionService.list(query);
+			 List<String> permissionIds = sysDepartPermissionService.list(new LambdaQueryWrapper<SysDepartPermission>()
+                     .eq(SysDepartPermission::getDepartId, departId)).stream()
+                     .map(SysDepartPermission::getPermissionId).collect(Collectors.toList());
+             List<SysPermission> list = permissionIds.isEmpty() ? Collections.emptyList()
+                     : sysPermissionService.list(query.in(SysPermission::getId, permissionIds));
 			 for(SysPermission sysPer : list) {
 				 ids.add(sysPer.getId());
 			 }

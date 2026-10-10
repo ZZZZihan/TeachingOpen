@@ -1,5 +1,7 @@
 package org.jeecg.modules.system.controller;
 
+import org.apache.shiro.authz.annotation.Logical;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -247,6 +249,7 @@ public class SysPermissionController {
 	 */
 	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<SysPermission> add(@RequestBody SysPermission permission) {
 		Result<SysPermission> result = new Result<SysPermission>();
 		try {
@@ -267,6 +270,7 @@ public class SysPermissionController {
 	 */
 	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/edit", method = { RequestMethod.PUT, RequestMethod.POST })
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<SysPermission> edit(@RequestBody SysPermission permission) {
 		Result<SysPermission> result = new Result<>();
 		try {
@@ -287,6 +291,7 @@ public class SysPermissionController {
 	 */
 	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<SysPermission> delete(@RequestParam(name = "id", required = true) String id) {
 		Result<SysPermission> result = new Result<>();
 		try {
@@ -306,6 +311,7 @@ public class SysPermissionController {
 	 */
 	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/deleteBatch", method = RequestMethod.DELETE)
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<SysPermission> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
 		Result<SysPermission> result = new Result<>();
 		try {
@@ -403,6 +409,7 @@ public class SysPermissionController {
 	 */
 	@RequestMapping(value = "/saveRolePermission", method = RequestMethod.POST)
 	//@RequiresRoles({"admin"})
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<String> saveRolePermission(@RequestBody JSONObject json) {
 		long start = System.currentTimeMillis();
 		Result<String> result = new Result<>();
@@ -683,6 +690,7 @@ public class SysPermissionController {
 	 * @return
 	 */
 	@RequestMapping(value = "/addPermissionRule", method = RequestMethod.POST)
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<SysPermissionDataRule> addPermissionRule(@RequestBody SysPermissionDataRule sysPermissionDataRule) {
 		Result<SysPermissionDataRule> result = new Result<SysPermissionDataRule>();
 		try {
@@ -697,6 +705,7 @@ public class SysPermissionController {
 	}
 
 	@RequestMapping(value = "/editPermissionRule", method = { RequestMethod.PUT, RequestMethod.POST })
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<SysPermissionDataRule> editPermissionRule(@RequestBody SysPermissionDataRule sysPermissionDataRule) {
 		Result<SysPermissionDataRule> result = new Result<SysPermissionDataRule>();
 		try {
@@ -716,6 +725,7 @@ public class SysPermissionController {
 	 * @return
 	 */
 	@RequestMapping(value = "/deletePermissionRule", method = RequestMethod.DELETE)
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<SysPermissionDataRule> deletePermissionRule(@RequestParam(name = "id", required = true) String id) {
 		Result<SysPermissionDataRule> result = new Result<SysPermissionDataRule>();
 		try {
@@ -773,6 +783,7 @@ public class SysPermissionController {
 	 */
 	@RequestMapping(value = "/saveDepartPermission", method = RequestMethod.POST)
 	//@RequiresRoles({"admin"})
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<String> saveDepartPermission(@RequestBody JSONObject json) {
 		long start = System.currentTimeMillis();
 		Result<String> result = new Result<>();

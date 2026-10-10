@@ -30,13 +30,13 @@
 
     <!-- 操作按钮区域 -->
     <div class="table-operator"  style="margin-top: 5px">
-      <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
+      <a-button v-if="canDefineRoles" @click="handleAdd" type="primary" icon="plus">新增</a-button>
       <a-button type="primary" icon="download" @click="handleExportXls('角色信息')">导出</a-button>
-      <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
+      <a-upload v-if="canDefineRoles" name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
 
-      <a-dropdown v-if="selectedRowKeys.length > 0">
+      <a-dropdown v-if="canDefineRoles && selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
         </a-menu>
@@ -45,6 +45,8 @@
         </a-button>
       </a-dropdown>
     </div>
+
+    <a-alert v-if="!canDefineRoles" message="角色编码和权限等级由开发者维护；管理员可为现有角色配置菜单和分配成员。" type="info" style="margin-bottom: 16px" />
 
     <!-- table区域-begin -->
     <div>
@@ -66,11 +68,11 @@
         @change="handleTableChange">
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
-          <a-divider type="vertical" />
+          <template v-if="canDefineRoles"><a @click="handleEdit(record)">编辑</a>
+          <a-divider type="vertical" /></template>
         <a @click="handlePerssion(record.id)">授权</a>
         <a-divider type="vertical" />
-          <a-dropdown>
+          <a-dropdown v-if="canDefineRoles">
             <a class="ant-dropdown-link">
               更多 <a-icon type="down" />
             </a>
@@ -96,6 +98,8 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+  import { USER_ROLE } from '@/store/mutation-types'
   import RoleModal from './modules/RoleModal'
   import UserRoleModal from './modules/UserRoleModal'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
@@ -171,6 +175,7 @@
       }
     },
     computed: {
+      canDefineRoles () { return (Vue.ls.get(USER_ROLE) || []).includes('dev') },
       importExcelUrl: function(){
         return `${window._CONFIG['domianURL']}/${this.url.importExcelUrl}`;
       }
