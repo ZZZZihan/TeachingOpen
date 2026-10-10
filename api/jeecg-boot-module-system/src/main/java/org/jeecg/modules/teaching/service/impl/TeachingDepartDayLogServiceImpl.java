@@ -1,8 +1,8 @@
 package org.jeecg.modules.teaching.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.jeecg.common.util.DateUtils;
 import org.jeecg.common.exception.JeecgBootException;
 import org.jeecg.modules.system.entity.SysDepart;
 import org.jeecg.modules.system.service.ISysDepartService;
@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.Clock;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Objects;
 
 /**
@@ -25,6 +27,9 @@ import java.util.Objects;
  */
 @Service
 public class TeachingDepartDayLogServiceImpl extends ServiceImpl<TeachingDepartDayLogMapper, TeachingDepartDayLog> implements ITeachingDepartDayLogService {
+    private static final ZoneId BUSINESS_ZONE = ZoneId.of("Asia/Shanghai");
+    private Clock clock = Clock.systemUTC();
+
     @Autowired
     private ISysDepartService sysDepartService;
 
@@ -46,12 +51,13 @@ public class TeachingDepartDayLogServiceImpl extends ServiceImpl<TeachingDepartD
         if (department == null || !Objects.equals(departId, department.getId())) {
             throw new JeecgBootException("未找到目标班级");
         }
-        Date now = new Date();
-        String day = DateUtils.yyyyMMdd.get().format(now);
+        // Use one business date for both the current read and the DATE insert.
+        // Passing java.util.Date here lets JDBC and the JVM disagree at midnight.
+        String day = LocalDate.now(clock.withZone(BUSINESS_ZONE)).toString();
         String id = baseMapper.selectDayIdForUpdate(departId, day);
         if (id == null) {
-            log.setDepartId(departId).setDepartName(department.getDepartName()).setCreateTime(now);
-            if (baseMapper.insert(log) != 1) throw new JeecgBootException("班级教学统计保存失败");
+            log.setId(IdWorker.getIdStr()).setDepartId(departId).setDepartName(department.getDepartName());
+            if (baseMapper.insertDayLog(log, day) != 1) throw new JeecgBootException("班级教学统计保存失败");
         } else if (baseMapper.incrementDayCounter(id, departId, day, type.name()) != 1) {
             throw new JeecgBootException("班级教学统计更新失败");
         }
