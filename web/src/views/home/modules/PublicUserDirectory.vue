@@ -58,14 +58,14 @@ export default {
 }
 </script>
 <style scoped lang="less">
-.registered-users { margin-top: 38px; border: 1px solid #d5e5f5; border-radius: 8px; overflow: hidden; color: #29222b; background: #fff; }
-.directory-overview { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 30px 36px; background: #eef6ff; }
+.registered-users { margin-top: 38px; border: 1px solid #e4d9c2; border-radius: 8px; overflow: hidden; color: #29222b; background: #fff; }
+.directory-overview { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 30px 36px; background: #fff3d9; }
 .directory-summary { flex: 1; min-width: 0; }
 h2 { margin: 0 0 10px; font-size: 17px; line-height: 1.5; font-weight: 500; color: #534757; }
-.directory-total { display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px; color: #146fc2; }
+.directory-total { display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px; color: #257c78; }
 .directory-total strong { min-width: 0; max-width: 100%; overflow-wrap: anywhere; font-size: 64px; line-height: 1.15; font-weight: 600; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
 .directory-total span { font-size: 18px; color: #77637a; }
-.directory-total-status { margin: 18px 0; color: #79717a; font-size: 16px; }
+.directory-total-status { margin: 18px 0; color: #5d6d7f; font-size: 16px; }
 .directory-entry { flex: 0 1 360px; min-width: 0; }
 .directory-list { min-width: 0; padding: 24px 36px 28px; }
 .directory-list-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 16px; }

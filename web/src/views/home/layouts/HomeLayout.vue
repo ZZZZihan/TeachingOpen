@@ -63,14 +63,14 @@ export default {
 }
 </script>
 <style scoped lang="less">
-.public-layout { min-height: 100vh; display: flex; flex-direction: column; background: #fcfbfa; background-size: 100% auto; color: #253446; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
+.public-layout { min-height: 100vh; display: flex; flex-direction: column; background: #fbfaf6; background-size: 100% auto; color: #253446; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; }
 .public-content { width: 100%; max-width: 1280px; margin: 0 auto; padding: 44px 40px 64px; flex: 1; }
 .skip-link { position: absolute; top: -100px; left: 20px; padding: 12px 20px; background: #fff; border: 2px solid #146fc2; z-index: 1000; }
 .skip-link:focus { top: 8px; }
 .welcome-panel { display: grid; grid-template-columns: 1.08fr 1fr; gap: 64px; align-items: center; padding: 12px 0 38px; }
-.eyebrow { color: #146fc2; font-size: 10px; letter-spacing: 1.8px; margin: 0 0 26px; }
+.eyebrow { color: #257c78; font-size: 10px; letter-spacing: 1.8px; margin: 0 0 26px; }
 .welcome-copy h1 { font-size: clamp(34px, 3.2vw, 46px); font-weight: 500; line-height: 1.45; letter-spacing: -1px; color: #253446; margin: 0 0 22px; }
-.welcome-copy h1 span { color: #146fc2; }
+.welcome-copy h1 span { color: #146fc2; background: linear-gradient(transparent 72%, #f4da8b 72%, #f4da8b 92%, transparent 92%); }
 .welcome-description { font-size: 14px; line-height: 1.9; color: #5d6d7f; margin: 0 0 30px; }
 .welcome-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 26px; }
 .primary-action { display: inline-flex; align-items: center; gap: 28px; padding: 13px 22px; border: 1px solid #146fc2; border-radius: 2px; background: #146fc2; color: #fff; font-weight: 500; }
@@ -80,15 +80,15 @@ export default {
 a:focus-visible { outline: 2px solid #146fc2; outline-offset: 5px; }
 .campus-view { min-width: 0; margin: 0; }
 .campus-view img { display: block; width: 100%; height: auto; aspect-ratio: 499 / 333; object-fit: cover; }
-.campus-view figcaption { display: flex; justify-content: space-between; gap: 15px; color: #647487; font-size: 11px; margin-top: 14px; }
-.campus-view figcaption a { color: #647487; }
+.campus-view figcaption { display: flex; justify-content: space-between; gap: 15px; color: #5d6d7f; font-size: 11px; margin-top: 14px; }
+.campus-view figcaption a { color: #5d6d7f; }
 .campus-image-fallback { aspect-ratio: 499 / 333; background: #eef6ff; color: #146fc2; display: flex; flex-direction: column; justify-content: center; padding: 36px; }
 .campus-image-fallback span { font-size: 11px; letter-spacing: 2px; }
 .campus-image-fallback p { color: #146fc2; font-family: 'Songti SC', SimSun, serif; font-size: 32px; line-height: 1.7; margin: 20px 0 0; }
-.teaching-principle { padding: 22px 0; margin-bottom: 42px; border-top: 1px solid #dce7f2; border-bottom: 1px solid #dce7f2; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-.teaching-principle p { margin: 0; font-family: 'Songti SC', SimSun, serif; color: #146fc2; letter-spacing: 4px; font-size: 18px; }
-.teaching-principle p span { margin-left: 24px; }
-.teaching-principle > span { color: #67798b; font-size: 12px; }
+.teaching-principle { padding: 22px 0; margin-bottom: 42px; border-top: 1px solid #cde3dd; border-bottom: 1px solid #e6d9c2; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.teaching-principle p { margin: 0; font-family: 'Songti SC', SimSun, serif; color: #257c78; letter-spacing: 4px; font-size: 18px; }
+.teaching-principle p span { margin-left: 24px; color: #b45a25; }
+.teaching-principle > span { color: #5d6d7f; font-size: 12px; }
 .welcome-banner { min-width: 0; }
 @media (max-width: 1000px) { .welcome-panel { gap: 32px; grid-template-columns: 1fr 1fr; } .welcome-copy h1 { font-size: 34px; } .eyebrow { letter-spacing: 1px; } }
 @media (max-width: 900px) { .public-content { padding: 32px 28px 48px; } .welcome-panel.has-banner { grid-template-columns: 1fr; } .teaching-principle > span { max-width: 190px; line-height: 1.8; } }

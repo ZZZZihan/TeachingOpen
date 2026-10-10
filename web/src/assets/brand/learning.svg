@@ -1,28 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="499" height="333" viewBox="0 0 499 333">
   <title>课程学习与编程创作</title>
-  <rect width="499" height="333" fill="#eef6ff"/>
-  <circle cx="428" cy="68" r="99" fill="#e1effd"/>
-  <circle cx="59" cy="294" r="88" fill="#e1effd"/>
+  <rect width="499" height="333" fill="#f7f5ef"/>
+  <circle cx="428" cy="68" r="99" fill="#fff0df"/>
+  <circle cx="59" cy="294" r="88" fill="#e8f4ec"/>
   <g font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">
-    <text x="32" y="42" fill="#123e67" font-size="17" font-weight="600">让想法成为作品</text>
-    <rect x="56" y="69" width="387" height="207" rx="12" fill="#fff" stroke="#c9ddf0" stroke-width="2"/>
+    <text x="32" y="42" fill="#253446" font-size="17" font-weight="600">让想法成为作品</text>
+    <rect x="56" y="69" width="387" height="207" rx="12" fill="#fff" stroke="#253446" stroke-width="2"/>
     <path d="M68 69h363a12 12 0 0 1 12 12v24H56V81a12 12 0 0 1 12-12" fill="#146fc2"/>
-    <g fill="#fff"><circle cx="73" cy="87" r="3"/><circle cx="84" cy="87" r="3"/><circle cx="95" cy="87" r="3"/></g>
+    <g fill="#efc75e"><circle cx="73" cy="87" r="3"/><circle cx="84" cy="87" r="3"/><circle cx="95" cy="87" r="3"/></g>
     <text x="113" y="92" fill="#fff" font-size="12">编程实践</text>
-    <rect x="75" y="122" width="197" height="136" rx="6" fill="#f4f8fd"/>
+    <rect x="75" y="122" width="197" height="136" rx="6" fill="#e8f4ec"/>
     <text x="90" y="146" fill="#146fc2" font-size="12">Python</text>
-    <g fill="none" stroke="#146fc2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="none" stroke="#c2672d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
       <path d="m105 169-12 12 12 12m22-24 12 12-12 12m-8-28-8 32"/>
-      <path d="M156 174h87m-87 15h56M92 220h141m-141 15h105" stroke="#9cbdda"/>
+      <path d="M156 174h87m-87 15h56M92 220h141m-141 15h105" stroke="#257c78"/>
     </g>
-    <text x="294" y="146" fill="#123e67" font-size="12">运行结果</text>
-    <g fill="none" stroke="#146fc2" stroke-width="2">
-      <path d="M302 224l22-52 58-4 32 47-40 35z" fill="#e1effd"/>
+    <text x="294" y="146" fill="#253446" font-size="12">运行结果</text>
+    <g fill="none" stroke="#257c78" stroke-width="2">
+      <path d="M302 224l22-52 58-4 32 47-40 35z" fill="#fff0df"/>
       <path d="m324 172 50 78m8-82-80 56m112-9-90-43"/>
     </g>
-    <g fill="#146fc2"><circle cx="302" cy="224" r="4"/><circle cx="324" cy="172" r="4"/><circle cx="382" cy="168" r="4"/><circle cx="414" cy="215" r="4"/><circle cx="374" cy="250" r="4"/></g>
-    <path d="M37 279h425l-15 15H52z" fill="#c9ddf0"/>
-    <path d="M207 279h85l-5 6h-75z" fill="#a9c8e5"/>
-    <text x="249.5" y="319" fill="#456783" font-size="12" text-anchor="middle">学习知识 · 动手实践 · 分享作品</text>
+    <g fill="#c2672d"><circle cx="302" cy="224" r="4"/><circle cx="324" cy="172" r="4"/><circle cx="382" cy="168" r="4"/><circle cx="414" cy="215" r="4"/><circle cx="374" cy="250" r="4"/></g>
+    <path d="M37 279h425l-15 15H52z" fill="#253446"/>
+    <path d="M207 279h85l-5 6h-75z" fill="#efc75e"/>
+    <text x="249.5" y="319" fill="#253446" font-size="12" text-anchor="middle">学习知识 · 动手实践 · 分享作品</text>
   </g>
 </svg>

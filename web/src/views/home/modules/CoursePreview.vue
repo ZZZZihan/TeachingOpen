@@ -49,11 +49,14 @@ export default {
 <style scoped lang="less">
 .preview-heading { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
 .preview-heading h2 { font-size: 25px; font-weight: 600; color: #202c37; margin: 0 0 10px; }
-.preview-heading p { color: #687684; font-size: 13px; margin: 0; line-height: 1.8; }
+.preview-heading p { color: #5d6d7f; font-size: 13px; margin: 0; line-height: 1.8; }
 .preview-heading > a { display: inline-flex; align-items: center; gap: 16px; color: #146fc2; font-size: 13px; white-space: nowrap; }
 .preview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
 .preview-grid article { min-width: 0; }
-.preview-state { padding: 36px 24px; background: #fff; border: 1px solid #e1e5e9; color: #687684; text-align: center; line-height: 1.8; }
+.preview-grid article:nth-child(3n + 1) { --course-accent: #146fc2; --course-surface: #edf5ff; --course-border: #cbdff2; }
+.preview-grid article:nth-child(3n + 2) { --course-accent: #a45125; --course-surface: #fff0df; --course-border: #ebd6bf; }
+.preview-grid article:nth-child(3n) { --course-accent: #206f6b; --course-surface: #e8f4ec; --course-border: #c8dfd4; }
+.preview-state { padding: 36px 24px; background: #fff; border: 1px solid #e1e5e9; color: #5d6d7f; text-align: center; line-height: 1.8; }
 .preview-state button { border: 1px solid #146fc2; background: #fff; border-radius: 4px; padding: 8px 16px; color: #146fc2; cursor: pointer; }
 a:focus-visible, button:focus-visible { outline: 2px solid #146fc2; outline-offset: 4px; }
 .course-description { overflow-wrap: anywhere; line-height: 1.8; }

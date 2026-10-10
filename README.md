@@ -12,9 +12,9 @@
 
 TeachingOpen 将课程学习、在线编程、作业提交与教师反馈连接在一起。学生可以从课程进入 Python、Scratch 或 ScratchJr 创作，教师按班级查看作品、评分并给出建议，管理员统一维护课程、账号与班级。
 
-项目基于 TeachingOpen 持续开发，采用科技蓝主题与中性学习视觉，服务于人工智能科普与编程教学场景。
+项目基于 TeachingOpen 持续开发，采用科技蓝主色、橙绿黄辅助配色与学习主题插画，服务于人工智能科普与编程教学场景。
 
-![TeachingOpen 首页：科技蓝主题、课程入口与示例课程](docs/images/course-home-blue.png)
+![TeachingOpen 首页：蓝色主调的多彩主题、课程入口与示例课程](docs/images/course-home-blue.png)
 
 <p align="center"><sub>本地示例环境实拍 · 2026-10-10 · 课程为合成演示数据</sub></p>
 

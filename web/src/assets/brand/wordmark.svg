@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="265" height="66" viewBox="0 0 265 66">
   <title>TeachingOpen 人工智能与编程</title>
   <g fill="#fff" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">
-    <text x="0" y="32" font-size="34" font-weight="700">TeachingOpen</text>
+    <text x="0" y="32" font-size="34" font-weight="700">Teaching<tspan fill="#efc75e">Open</tspan></text>
     <text x="2" y="57" font-size="14" letter-spacing="3">人工智能与编程</text>
   </g>
 </svg>

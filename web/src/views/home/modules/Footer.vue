@@ -27,7 +27,7 @@ export default {
 .campus-footer nav { display: flex; gap: 28px; }
 .campus-footer a { color: #146fc2; }
 .campus-footer a:focus-visible { outline: 2px solid #146fc2; outline-offset: 4px; }
-.public-footer { background: #f4f8fd; padding: 0 40px; border-top: 1px solid #e1e4e8; color: #66717d; font-size: 12px; line-height: 1.7; }
+.public-footer { background: #eef4ee; padding: 0 40px; border-top: 1px solid #d4e3d9; color: #5d6d7f; font-size: 12px; line-height: 1.7; }
 .footer-inner { max-width: 1200px; margin: auto; padding: 22px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .footer-inner strong { color: #454f5b; font-weight: 500; margin-right: 26px; }
 .footer-inner nav { display: flex; gap: 28px; white-space: nowrap; }
