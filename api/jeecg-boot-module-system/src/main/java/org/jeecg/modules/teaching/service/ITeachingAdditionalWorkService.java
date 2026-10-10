@@ -17,4 +17,8 @@ public interface ITeachingAdditionalWorkService extends IService<TeachingAdditio
     Result<List<MineAdditionalWorkModel>> mineAdditionalWork(String userId);
 
     Result<?> addNewAdditionalWork(TeachingAdditionalWork teachingAdditionalWork);
+
+    Result<?> editAdditionalWork(TeachingAdditionalWork teachingAdditionalWork);
+
+    Result<?> deleteAdditionalWorks(List<String> ids);
 }

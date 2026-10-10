@@ -145,6 +145,10 @@ def main():
                 except subprocess.TimeoutExpired:
                     process.kill()
                     process.wait(timeout=5)
+        # Reuse only the disposable service containers. The review stage creates
+        # another fresh database and a separately scoped application account.
+        from review_mysql import run_reviews
+        run_reviews(runtime, jar, mysql, root_options, redis, redis_password)
 
 
 if __name__ == '__main__':

@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.jeecg.modules.teaching.mapper.TeachingDepartDayLogMapper">
-
+    <!-- Current reads are required even when a caller already established an older RR snapshot. -->
+    <select id="selectDayIdForUpdate" resultType="java.lang.String">
+        SELECT id FROM teaching_depart_day_log
+        WHERE depart_id = #{departId} AND create_time = #{day}
+        ORDER BY id LIMIT 1 FOR UPDATE
+    </select>
+    <update id="incrementDayCounter">
+        UPDATE teaching_depart_day_log SET
+        <!-- Static SQL columns: the caller passes a validated server enum name, never a request field. -->
+        <choose>
+            <when test="counter == 'UNIT_OPEN_COUNT'">unit_open_count = COALESCE(unit_open_count, 0) + 1</when>
+            <when test="counter == 'COURSE_WORK_ASSIGN_COUNT'">course_work_assign_count = COALESCE(course_work_assign_count, 0) + 1</when>
+            <when test="counter == 'ADDITIONAL_WORK_ASSIGN_COUNT'">additional_work_assign_count = COALESCE(additional_work_assign_count, 0) + 1</when>
+            <when test="counter == 'COURSE_WORK_SUBMIT_COUNT'">course_work_submit_count = COALESCE(course_work_submit_count, 0) + 1</when>
+            <when test="counter == 'ADDITIONAL_WORK_SUBMIT_COUNT'">additional_work_submit_count = COALESCE(additional_work_submit_count, 0) + 1</when>
+            <when test="counter == 'COURSE_WORK_CORRECT_COUNT'">course_work_correct_count = COALESCE(course_work_correct_count, 0) + 1</when>
+            <when test="counter == 'ADDITIONAL_WORK_CORRECT_COUNT'">additional_work_correct_count = COALESCE(additional_work_correct_count, 0) + 1</when>
+            <otherwise>id = id</otherwise>
+        </choose>
+        WHERE id = #{id} AND depart_id = #{departId} AND create_time = #{day}
+        AND #{counter,jdbcType=VARCHAR} IN (
+            'UNIT_OPEN_COUNT', 'COURSE_WORK_ASSIGN_COUNT', 'ADDITIONAL_WORK_ASSIGN_COUNT', 'COURSE_WORK_SUBMIT_COUNT', 'ADDITIONAL_WORK_SUBMIT_COUNT', 'COURSE_WORK_CORRECT_COUNT', 'ADDITIONAL_WORK_CORRECT_COUNT'
+        )
+    </update>
 </mapper>
