@@ -158,8 +158,7 @@
           callback("角色编码不可输入汉字!");
         }else{
           var params = {
-            tableName: "sys_role",
-            fieldName: "role_code",
+            purpose: 'role_code',
             fieldVal: value,
             dataId: this.model.id,
           };
@@ -169,7 +168,7 @@
             }else{
               callback(res.message);
             }
-          });
+          }).catch(() => callback(new Error('验证未完成，请重试。')))
         }
       }
 

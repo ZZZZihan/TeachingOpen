@@ -361,8 +361,7 @@
         if(value && value.length>0){
           //校验授权标识是否存在
           var params = {
-            tableName: 'sys_permission',
-            fieldName: 'perms',
+            purpose: 'permission_perms',
             fieldVal: value,
             dataId: this.model.id
           };
@@ -370,9 +369,9 @@
             if (res.success) {
               callback()
             } else {
-              callback("授权标识已存在!")
+              callback(res.code === 500 ? '授权标识已存在!' : res.message || '验证未完成，请重试。')
             }
-          })
+          }).catch(() => callback(new Error('验证未完成，请重试。')))
         }else{
           callback()
         }

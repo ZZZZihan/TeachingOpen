@@ -194,8 +194,7 @@
       },
       validateTemplateCode(rule, value, callback){
         var params = {
-          tableName: "sys_sms_template",
-          fieldName: "template_code",
+          purpose: 'message_template_code',
           fieldVal: value,
           dataId: this.model.id
         }
@@ -205,7 +204,7 @@
           }else{
             callback(res.message);
           }
-        })
+        }).catch(() => callback(new Error('验证未完成，请重试。')))
 
       },
       handleCancel() {

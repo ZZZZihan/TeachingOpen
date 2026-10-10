@@ -112,7 +112,7 @@
                   if (!pattern.test(value)) {
                     callback('编码必须以字母开头，可包含数字、下划线、横杠')
                   } else {
-                    validateDuplicateValue('sys_data_source', 'code', value, this.model.id, callback)
+                    validateDuplicateValue('data_source_code', value, this.model.id, callback)
                   }
                 }
               }

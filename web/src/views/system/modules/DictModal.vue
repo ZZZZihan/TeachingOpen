@@ -74,8 +74,7 @@
       validateDictCode(rule, value, callback) {
         // 重复校验
         var params = {
-          tableName: 'sys_dict',
-          fieldName: 'dict_code',
+          purpose: 'dict_code',
           fieldVal: value,
           dataId: this.model.id
         }
@@ -85,7 +84,7 @@
           } else {
             callback(res.message)
           }
-        })
+        }).catch(() => callback(new Error('验证未完成，请重试。')))
       },
       handleChange(value) {
         this.model.status = value

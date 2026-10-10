@@ -55,6 +55,7 @@ import JUpload from '@/components/jeecg/JUpload'
 import moment from 'moment'
 import pick from 'lodash.pick'
 import { getAction,putAction } from '@/api/manage'
+import { duplicateCheck } from '@/api/api'
 
 export default {
   components: {
@@ -162,18 +163,17 @@ export default {
       } else {
         if (new RegExp(/^1[3|4|5|7|8][0-9]\d{8}$/).test(value)) {
           var params = {
-            tableName: 'sys_user',
-            fieldName: 'phone',
+            purpose: 'profile_phone',
             fieldVal: value,
-            dataId: this.userId
+            dataId: this.userInfo.id
           }
           duplicateCheck(params).then(res => {
             if (res.success) {
               callback()
             } else {
-              callback('手机号已存在!')
+              callback(res.code === 500 ? '手机号已存在!' : res.message || '验证未完成，请重试。')
             }
-          })
+          }).catch(() => callback(new Error('验证未完成，请重试。')))
         } else {
           callback('请输入正确格式的手机号码!')
         }
@@ -189,19 +189,18 @@ export default {
           ).test(value)
         ) {
           var params = {
-            tableName: 'sys_user',
-            fieldName: 'email',
+            purpose: 'profile_email',
             fieldVal: value,
-            dataId: this.userId
+            dataId: this.userInfo.id
           }
           duplicateCheck(params).then(res => {
             console.log(res)
             if (res.success) {
               callback()
             } else {
-              callback('邮箱已存在!')
+              callback(res.code === 500 ? '邮箱已存在!' : res.message || '验证未完成，请重试。')
             }
-          })
+          }).catch(() => callback(new Error('验证未完成，请重试。')))
         } else {
           callback('请输入正确格式的邮箱!')
         }

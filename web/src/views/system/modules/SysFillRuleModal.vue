@@ -65,7 +65,7 @@
           ruleCode: {
             rules: [
               { required: true, message: '规则Code不能为空' },
-              { validator: (rule, value, callback) => validateDuplicateValue('sys_fill_rule', 'rule_code', value, this.model.id, callback) }
+              { validator: (rule, value, callback) => validateDuplicateValue('fill_rule_code', value, this.model.id, callback) }
             ]
           },
           ruleClass: { rules: [{ required: true, message: '规则实现类不能为空' }] },

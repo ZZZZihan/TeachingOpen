@@ -87,8 +87,7 @@
                   }
                   validatorCodeTimer = setTimeout(() => {
                     duplicateCheck({
-                      tableName: 'sys_position',
-                      fieldName: 'code',
+                      purpose: 'position_code',
                       fieldVal: value,
                       dataId: this.model.id
                     }).then((res) => {
@@ -97,7 +96,7 @@
                       } else {
                         callback(res.message)
                       }
-                    }).catch(console.error)
+                    }).catch(() => callback(new Error('验证未完成，请重试。')))
                   }, 300)
                 }
               }
