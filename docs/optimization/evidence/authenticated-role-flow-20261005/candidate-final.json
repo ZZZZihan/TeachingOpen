@@ -1,0 +1,162 @@
+{
+  "recorded_at": "2026-10-05T06:44:32.808559+00:00",
+  "local_candidate": "4f30e51b7121b7f102cfe1c71bba3183cd21b7e2",
+  "frontend_build_source": "1b23551257b3f922f7fc4b125dfd9a85e5090a0c",
+  "web_tree": "4913373ff6b28dd3af0e7e7a43079475735c5d34",
+  "change_after_build": "PR76 validation documentation only",
+  "frontend": {
+    "dist_files": 4895,
+    "dist_bytes": 211929947,
+    "dist_manifest_sha256": "49e62b14fe9a61169a40ff67ca0348799fcd455d5eb6f1bb372aa86c20d72bc5",
+    "runner_sha256": "7c5e7af868c180e74d58ac218e4c9f23bf7b2aab411df47363de767800773966",
+    "frontend_port": 18150,
+    "pid": 49600,
+    "tests": {
+      "web": {
+        "pass": 688,
+        "fail": 0,
+        "skip": 0
+      },
+      "build_exit": 0,
+      "warnings": 12,
+      "proxy_unchanged_previous": {
+        "pass": 22
+      }
+    }
+  },
+  "backend_jar_sha256": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016",
+  "ordinary_login_roles": [
+    "student_a",
+    "student_b",
+    "teacher_a",
+    "teacher_b",
+    "administrator"
+  ],
+  "completed_representative_chains": [
+    "Python",
+    "Scratch",
+    "ScratchJr",
+    "file assignment"
+  ],
+  "final_scores": {
+    "Python": 0,
+    "Scratch": 4,
+    "ScratchJr": 5,
+    "file assignment": 0
+  },
+  "extra_upload_retry": "separate submitted/ungraded work retained; not a fifth full chain",
+  "administrator": "four selected fields saved, reopened and restored; original class memo NULL/empty not independently proven",
+  "responsive_css_widths": [
+    390,
+    768,
+    1440
+  ],
+  "last_member_scroll_fix": {
+    "actual_operations_column_visible_all_widths": true,
+    "actual_student_edit_opened_390": true,
+    "edit_cancelled_without_saving": true,
+    "author_before": {
+      "passed": 4,
+      "total": 7
+    },
+    "author_after": {
+      "passed": 7,
+      "total": 7
+    },
+    "related_member_checks": {
+      "passed": 71,
+      "total": 71
+    },
+    "independent_compile_cascade_probes": {
+      "passed": 12,
+      "total": 12
+    }
+  },
+  "evidence": {
+    "observer_index_sha256": "5d703cbbfdf5130ce47112c64fc9749859a11aa28a3292dbade888d4b6f27a75",
+    "independent_role_report_sha256": "e4dd9dc34e21274231a45e877f47a9b6bbcf56272af67699777f3016126284b2",
+    "independent_member_source_review_sha256": "b4d8889ffdd74e7f892661c67337c0b3bf245c754663546a0f452146db229874",
+    "root_browser_cleanup_sha256": "4037ebbaadba425cf42fee55fb02c2f51d9f020532d4c3a5e2798b3a1e635540",
+    "screenshot_manifest_sha256": "cc313f7a2e2669f32382a9ff2243de030cdaec5eadf1ab4f6d465df03f00170e"
+  },
+  "final_backend_health": [
+    {
+      "port": 18111,
+      "http_status": 200,
+      "status": "UP"
+    },
+    {
+      "port": 18149,
+      "http_status": 200,
+      "status": "UP"
+    },
+    {
+      "port": 18141,
+      "http_status": 200,
+      "status": "UP"
+    }
+  ],
+  "pull_requests": {
+    "count": 76,
+    "state": "OPEN",
+    "implementation_heads_in_candidate": 75,
+    "ready_new": [
+      73,
+      74,
+      75,
+      76
+    ],
+    "historical_drafts": [
+      19,
+      21,
+      22,
+      23,
+      25,
+      26,
+      27,
+      28,
+      29,
+      37,
+      41,
+      44
+    ],
+    "remote_merged": false
+  },
+  "data_scope": {
+    "z820_snapshot_date": "2026-10-03",
+    "real_copy": "private sanitized read-only courses; no real student attachments copied",
+    "write_tests": "isolated synthetic role-flow-1003 only",
+    "production_mutated": false
+  },
+  "cleanup": {
+    "network_blocked_urls": [],
+    "viewport_override": "reset",
+    "admin_session": "normal logout confirmed",
+    "synthetic_examples": "retained for user review",
+    "old_error_tab": "manual selection denied by browser policy; no bypass"
+  },
+  "remaining_acceptance": [
+    "user visual approval",
+    "real teachers and students trial",
+    "production customization alignment",
+    "Z820/target Linux deployment, TLS, trusted forwarding and capacity acceptance"
+  ],
+  "legacy_debt": [
+    "12 existing build warnings",
+    "baseline lint debt remains",
+    "Java tests skipped by parent POM",
+    "Spring/Boot/Shiro/Vue maintenance migration needs separate planning"
+  ],
+  "new_bundle_verification": {
+    "status": "PASS_LOCAL_FREEZE_CREATE_OFFLINE_VERIFY",
+    "manifest_sha256": "beb05d1aa50ea0ac0e052c95ef60cbe5c04a6bb85d17b1c5e0584c0dc08046aa",
+    "flat_dist_manifest_sha256": "582ccefd1c23fe717afa9e2a4d12e124f6dbb3ad906e8198720ea5a2238295e4",
+    "receipt_sha256": "824e15b7c30b88a01b1afec84104114e7685fe4633cc653b5f600e8e2dbcefe7",
+    "immutable_files": 4906,
+    "runtime_probe_run": false,
+    "services_started": false,
+    "historical_45_checks_apply": false,
+    "frozen_source": "1b23551257b3f922f7fc4b125dfd9a85e5090a0c",
+    "source_snapshot_and_bundle_dist_equal": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "comparison": "Same six Vue files, eslint --no-ignore; compare file, rule, severity, message counts independent of moved line numbers",
+  "totals": {
+    "baseline": {
+      "errors": 910,
+      "warnings": 1572
+    },
+    "candidate": {
+      "errors": 909,
+      "warnings": 1568
+    }
+  },
+  "added": []
+}

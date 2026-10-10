@@ -1,0 +1,124 @@
+{
+  "passed": 29,
+  "total": 29,
+  "cases": [
+    {
+      "case": "closed registration rejects account creation",
+      "passed": true
+    },
+    {
+      "case": "GET registration cannot create an account",
+      "passed": true
+    },
+    {
+      "case": "invalid username input is rejected list",
+      "passed": true
+    },
+    {
+      "case": "invalid username input is rejected str",
+      "passed": true
+    },
+    {
+      "case": "invalid realname input is rejected str",
+      "passed": true
+    },
+    {
+      "case": "invalid realname input is rejected str",
+      "passed": true
+    },
+    {
+      "case": "invalid password input is rejected str",
+      "passed": true
+    },
+    {
+      "case": "invalid password input is rejected list",
+      "passed": true
+    },
+    {
+      "case": "privileged default role is rejected",
+      "passed": true
+    },
+    {
+      "case": "missing default class is rejected",
+      "passed": true
+    },
+    {
+      "case": "anonymous registration succeeds without phone or SMS code",
+      "passed": true
+    },
+    {
+      "case": "registration response contains username only",
+      "passed": true
+    },
+    {
+      "case": "server controls identity/status and stores encrypted password",
+      "passed": true
+    },
+    {
+      "case": "server default student role and class applied exactly once",
+      "passed": true
+    },
+    {
+      "case": "client phone and SMS fields are ignored; stored phone is NULL",
+      "passed": true
+    },
+    {
+      "case": "same username is rejected without altering existing account",
+      "passed": true
+    },
+    {
+      "case": "registered account signs in with actual CAPTCHA and new password",
+      "passed": true
+    },
+    {
+      "case": "new student can read its assigned courses",
+      "passed": true
+    },
+    {
+      "case": "concurrent same-username registrations create one account",
+      "passed": true
+    },
+    {
+      "case": "concurrent same-username loser rolls back relationships",
+      "passed": true
+    },
+    {
+      "case": "different accounts can both have NULL phone with existing unique index",
+      "passed": true
+    },
+    {
+      "case": "empty configured defaults permit account without relationships",
+      "passed": true
+    },
+    {
+      "case": "sys_user_role fault rolls back account and all relationships",
+      "passed": true
+    },
+    {
+      "case": "sys_user_role failure returns fixed non-sensitive retry state",
+      "passed": true
+    },
+    {
+      "case": "sys_user_role rollback leaves account retryable",
+      "passed": true
+    },
+    {
+      "case": "sys_user_depart fault rolls back account and all relationships",
+      "passed": true
+    },
+    {
+      "case": "sys_user_depart failure returns fixed non-sensitive retry state",
+      "passed": true
+    },
+    {
+      "case": "sys_user_depart rollback leaves account retryable",
+      "passed": true
+    },
+    {
+      "case": "all four fixture tables fully restored",
+      "passed": true
+    }
+  ],
+  "jar_sha256": "2c915235285e11312514b1d577172a0bad3b80073f1d5afc831595f6ff25e429",
+  "scope": "Real loopback HTTP, synthetic MySQL/Redis. No phone/SMS registration or production access."
+}

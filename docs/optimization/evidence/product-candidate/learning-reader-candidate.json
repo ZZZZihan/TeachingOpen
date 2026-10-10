@@ -1,0 +1,57 @@
+{
+  "observed_utc": "2026-10-02T20:01:16.428609+00:00",
+  "local_candidate_commit": "78f8b350f150422dbdbdd59488523a9e33295cd5",
+  "local_branch": "integration/product-candidate",
+  "previous_integration": "1cd2c5790b90c40b7293f12e7c3cf3ed23b9bd0d",
+  "intermediate_learning_entry_commit": "1d6133b0a62b0ee4712cdfdedf98d29fb2ecda05",
+  "intermediate_frontend_tests_passed": 79,
+  "merged_sources": {
+    "pr19": "54b34492427adb118de4b9f58c92dfd997b2f5c2",
+    "pr20": "bad0e272969d0b0543381ba61276d68f03393950",
+    "pr21": "8d3a3fe78ec1015cf4c04e5fa16fdc46aa0034e5",
+    "pr22": "1bd5fecc9f634612cca7180d7211148ecb8ea1dd"
+  },
+  "api_tree": "5e7b90630dbebb4cda00d625f4c357d25a33a52a",
+  "web_tree": "e124198327b89612900ccf8fd3537772e7a350af",
+  "backend": {
+    "api_tree_matches_pr20": true,
+    "reuses_previously_verified_pr20_jar_sha256": "c76dfb9032b92eb6f4bf86ef152e16fadc7504436b81fe1e4d49990f6883738f",
+    "new_backend_build_or_suite_rerun": false
+  },
+  "frontend": {
+    "tests_passed": 91,
+    "tests_total": 91,
+    "lint_files": 4,
+    "lint_errors": 0,
+    "lint_warnings": 0,
+    "lint_scope": "CourseListCard.vue, CourseUnitListCard.vue, learningPresentation.js, UnitViewModal.vue",
+    "build_exit": 0,
+    "existing_build_warnings": 6,
+    "built_files": 4871,
+    "dist_path_hashes_aggregate_sha256": "1bb07389d4fae870d6061cdcd89de300f569952b141ca332363a14dc19926b8e"
+  },
+  "merge_result": "No conflicts adding PR21 then PR22. Common query-parser opt-in preserved together with PR20/backend-lineage common helper changes. GitHub PRs not merged.",
+  "browser_observations": [
+    {
+      "case": "Actual rebuilt combined login page reload",
+      "result": "Account/password/captcha labels render; real backend captcha image decoded; redirect query remains present. No credentials or CAPTCHA entered.",
+      "viewport_width": 390,
+      "document_scroll_width": 382,
+      "screenshot": "login-with-reader-390.jpg"
+    }
+  ],
+  "component_evidence": "PR22 evidence remains bound to 4180281 component source and local synthetic API preview; not counted as authenticated combined acceptance.",
+  "original_source_files": 5634,
+  "original_source_changes": 0,
+  "backend_health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "limits": [
+    "Local-only integration; no remote PR merge or production deployment.",
+    "No authenticated login, student/teacher/admin/editor or protected-media acceptance in this integration stage.",
+    "Historical 1cd2c evidence retained; old PR checks are not counted as reruns.",
+    "Full recovery, performance, dependency and product acceptance remain incomplete."
+  ]
+}

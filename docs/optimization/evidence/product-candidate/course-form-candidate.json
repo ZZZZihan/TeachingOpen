@@ -1,0 +1,231 @@
+{
+  "candidate_commit": "88aad02bf706fd4820a05e6f505eea9d3204f378",
+  "pr": 42,
+  "product_commit": "14430e1",
+  "delivery_commit": "fbf8097f0616cb865ce6ee109ca806b42f4767ef",
+  "frontend_checks": 242,
+  "build": "successful; existing warnings retained",
+  "dist_files": 4880,
+  "frontend_pid": 46477,
+  "api_unchanged": true,
+  "jar_sha256": "d89ef0667d90854195792b30d2af4b469738bb86c65498bd7c68ce350aeb3ac8",
+  "browser": {
+    "scope": "Actual built frontend; anonymous synthetic backend; no login or CAPTCHA input",
+    "checks": [
+      {
+        "name": "home 1440",
+        "passed": true,
+        "detail": {
+          "path": "/index",
+          "width": 1440,
+          "scroll": 1432
+        }
+      },
+      {
+        "name": "home 768",
+        "passed": true,
+        "detail": {
+          "path": "/index",
+          "width": 768,
+          "scroll": 760
+        }
+      },
+      {
+        "name": "home 390",
+        "passed": true,
+        "detail": {
+          "path": "/index",
+          "width": 390,
+          "scroll": 382
+        }
+      },
+      {
+        "name": "bundled school images decoded",
+        "passed": true,
+        "detail": [
+          {
+            "src": "/img/wordmark.271c59bd.png",
+            "naturalWidth": 265,
+            "complete": true
+          },
+          {
+            "src": "/img/campus.7acad0db.jpg",
+            "naturalWidth": 499,
+            "complete": true
+          }
+        ]
+      },
+      {
+        "name": "official links open safely",
+        "passed": true,
+        "detail": [
+          {
+            "href": "https://www.tiangong.edu.cn/",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          },
+          {
+            "href": "https://news.tiangong.edu.cn/2022/0617/c7646a77757/page.htm",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          },
+          {
+            "href": "https://www.tiangong.edu.cn/",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          },
+          {
+            "href": "https://lib.tiangong.edu.cn/",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          }
+        ]
+      },
+      {
+        "name": "mobile menu expands",
+        "passed": true
+      },
+      {
+        "name": "navigation collapses on route",
+        "passed": true
+      },
+      {
+        "name": "courses 1440",
+        "passed": true,
+        "detail": {
+          "path": "/courseList",
+          "width": 1440,
+          "scroll": 1432
+        }
+      },
+      {
+        "name": "courses 768",
+        "passed": true,
+        "detail": {
+          "path": "/courseList",
+          "width": 768,
+          "scroll": 760
+        }
+      },
+      {
+        "name": "courses 390",
+        "passed": true,
+        "detail": {
+          "path": "/courseList",
+          "width": 390,
+          "scroll": 382
+        }
+      },
+      {
+        "name": "course dialog uses university primary",
+        "passed": true,
+        "detail": "rgb(116, 37, 106)"
+      },
+      {
+        "name": "course entry preserves login destination",
+        "passed": true,
+        "detail": "http://127.0.0.1:18112/user/login?redirect=%2Fteaching%2FmineCourse%2FcourseUnitCard%3Fid%3Dfixture_course_a"
+      },
+      {
+        "name": "login 1440",
+        "passed": true,
+        "detail": {
+          "path": "/user/login",
+          "width": 1440,
+          "scroll": 1432
+        }
+      },
+      {
+        "name": "login 768",
+        "passed": true,
+        "detail": {
+          "path": "/user/login",
+          "width": 768,
+          "scroll": 760
+        }
+      },
+      {
+        "name": "login 390",
+        "passed": true,
+        "detail": {
+          "path": "/user/login",
+          "width": 390,
+          "scroll": 382
+        }
+      },
+      {
+        "name": "login fields empty and captcha image loads",
+        "passed": true,
+        "detail": {
+          "inputs": [
+            {
+              "name": "username",
+              "value": ""
+            },
+            {
+              "name": "password",
+              "value": ""
+            },
+            {
+              "name": "captcha",
+              "value": ""
+            }
+          ],
+          "captcha": 105
+        }
+      }
+    ]
+  },
+  "http": {
+    "checks": [
+      {
+        "asset": "index.html",
+        "matches_manifest": true,
+        "bytes": 27110
+      },
+      {
+        "asset": "js/polyfill.js",
+        "matches_manifest": true,
+        "bytes": 230405
+      },
+      {
+        "asset": "js/common.js",
+        "matches_manifest": true,
+        "bytes": 8678
+      },
+      {
+        "asset": "js/chunk-vendors.a2dd1501.js",
+        "matches_manifest": true,
+        "bytes": 8292628
+      },
+      {
+        "asset": "js/app.8bf7bf7b.js",
+        "matches_manifest": true,
+        "bytes": 229205
+      },
+      {
+        "asset": "js/chunk-4df55040.f0510e7f.js",
+        "matches_manifest": true,
+        "bytes": 25833
+      },
+      {
+        "asset": "js/chunk-c4521220.4444b807.js",
+        "matches_manifest": true,
+        "bytes": 1915769
+      }
+    ],
+    "source_commit": "88aad02bf706fd4820a05e6f505eea9d3204f378",
+    "api_tree": "ace637205ef6da378a65ef0b640fec0face87420",
+    "web_tree": "f4a46b3a71e238ee98c86fbf038247b63e5e6b06"
+  },
+  "preserved": {
+    "non_audit_tables": 68,
+    "uploads": true,
+    "original_source": 5731
+  },
+  "temporary_previews": {
+    "18135": "stopped",
+    "18136": "stopped"
+  },
+  "scope": "New exact combined frontend build and fresh anonymous browser checks; same backend API tree and JAR, separately checked 24 resource contract cases before frontend switch. Authenticated admin browser still pending."
+}

@@ -1,0 +1,34 @@
+### Result
+[{"port":18142,"courseOk":true,"communityOk":true,"loginFormVisible":true,"loginNavigationMs":106,"userChunkResponsesBeforeClick":0,"userChunkResponsesAfterClick":1,"chunkStatuses":[200],"pageErrors":[],"scope":"Anonymous navigation and form display only; no login, CAPTCHA interaction, code/credential injection or form submission."}]
+### Ran Playwright code
+```js
+await (async (rootPage) => {
+ const page=await rootPage.context().newPage();
+ const results=[];
+ for(const port of [18142]){
+  const errors=[],chunks=[];
+  const onErr=e=>errors.push(String(e));const onResponse=r=>{if(new URL(r.url()).origin==='http://127.0.0.1:'+port && /\/js\/user\..*\.js$/.test(new URL(r.url()).pathname))chunks.push({status:r.status(),at:Date.now()});};
+  page.on('pageerror',onErr);page.on('response',onResponse);
+  await page.goto('http://127.0.0.1:'+port+'/index');
+  await page.waitForFunction(()=>document.querySelectorAll('.course-card-button').length===3);
+  await page.waitForTimeout(1500);
+  const before=chunks.length;
+  await page.locator('.preview-heading a[href="/courseList"]').click();
+  await page.waitForFunction(()=>location.pathname==='/courseList' && document.querySelector('.course-results')?.getAttribute('aria-busy')==='false' && document.querySelectorAll('.course-card-button').length===3);
+  const courseOk=true;
+  await page.getByRole('navigation',{name:'页脚导航'}).getByRole('link',{name:'创作社区',exact:true}).click();
+  await page.waitForFunction(()=>location.pathname==='/home' && document.querySelectorAll('.editor-card').length===3);
+  const communityOk=true;
+  const clickedAt=Date.now();
+  await page.locator('header a[href="/user/login"]').click();
+  await page.getByLabel('账号',{exact:true}).waitFor({state:'visible'});
+  const loginOk=await page.getByLabel('密码',{exact:true}).isVisible();
+  const loginMs=Date.now()-clickedAt;
+  page.off('pageerror',onErr);page.off('response',onResponse);
+  results.push({port,courseOk,communityOk,loginFormVisible:loginOk,loginNavigationMs:loginMs,userChunkResponsesBeforeClick:before,userChunkResponsesAfterClick:chunks.length-before,chunkStatuses:chunks.map(c=>c.status),pageErrors:errors,scope:'Anonymous navigation and form display only; no login, CAPTCHA interaction, code/credential injection or form submission.'});
+  if(!loginOk||errors.length)throw Error('navigation failed');
+ }
+ await page.close(); return results;
+}
+)(page);
+```

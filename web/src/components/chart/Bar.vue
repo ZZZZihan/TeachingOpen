@@ -10,6 +10,7 @@
 </template>
 
 <script>
+  import './install'
   import { triggerWindowResizeEvent } from '@/utils/util'
 
   export default {

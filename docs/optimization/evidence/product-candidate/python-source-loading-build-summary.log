@@ -1,0 +1,6 @@
+Command: npm run build -- --dest <isolated staging directory>
+Exit code: 0
+Browserslist: caniuse-lite is outdated. Please run:
+ WARNING  Compiled with 12 warnings6:10:53 PM
+ DONE  Build complete. The ../../../python-source-loading-built-dist directory is ready to be deployed.
+Build first, then preserve old dist and switch local candidate. No Java or proxy restart.

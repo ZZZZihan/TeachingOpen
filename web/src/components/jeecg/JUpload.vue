@@ -1,5 +1,5 @@
 <template>
-  <div :id="containerId" style="position: relative">
+  <div :id="containerId" class="j-upload" style="position: relative">
 
     <!--  ---------------------------- begin 图片左右换位置 ------------------------------------- -->
     <div class="movety-container" :style="{top:top+'px',left:left+'px',display:moveDisplay}" style="padding:0 8px;position: absolute;z-index: 91;height: 32px;width: 104px;text-align: center;">
@@ -621,6 +621,7 @@
 </script>
 
 <style lang="less">
+.j-upload {
 .uploadty-disabled{
   .ant-upload-list-item {
     .anticon-close{
@@ -640,4 +641,5 @@
     line-height: 28px;
   }
   //---------------------------- end 图片左右换位置 -------------------------------------
+}
 </style>

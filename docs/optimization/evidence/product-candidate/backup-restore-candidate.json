@@ -1,0 +1,50 @@
+{
+  "generated_utc": "2026-10-02T22:18:45.850871+00:00",
+  "source_commit": "b30f597524347de7de7f1ce2f22d5f9dc4ecc9dc",
+  "previous_commit": "b7b536c2cf261dddac1c6d7e34f059f78109ebcf",
+  "integrated_pr": "https://github.com/ZZZZihan/TeachingOpen/pull/30",
+  "pr_head": "fd1cd542ad71148580249b230ac4c1e2b7d66792",
+  "api_tree": "2a17d58f759cd4e443b580249891299e25bcbc8b",
+  "web_tree": "bb2496d96d994e3a7e3fd3dd34169420a761ae39",
+  "application_code_resources_unchanged": true,
+  "recovery_code_equals_pr_tested_files": true,
+  "python_tests": {
+    "passed": 15,
+    "total": 15
+  },
+  "pr_actual_recovery_checks": {
+    "passed": 39,
+    "total": 39,
+    "rerun_on_integration": false,
+    "reason": "All five recovery source files exactly match verified PR code; isolated restore retained and stopped"
+  },
+  "frontend_dist_file_count": 4884,
+  "frontend_dist_matches_previous": true,
+  "frontend_build_and_tests_rerun": false,
+  "http_assets": {
+    "/index.html": {
+      "status": 200,
+      "sha256": "2389c437574e6bfe99236b4ecee12d41bc034ba10f6a8f87d615011eceff9b34"
+    },
+    "/js/app.65b2b49b.js": {
+      "status": 200,
+      "sha256": "e7cf2b53b482c05c12ccd49cdfa57fbfc6bba7a831a415ae8c57e74ea5cef59c"
+    }
+  },
+  "anonymous_protected_api_status": 401,
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "backend_pid": 57077,
+  "jar_sha256": "85f7746a3ae4b143f1a4ca4e5c043e11c81bf7d69f32c72b7dbaa190f6a0e85c",
+  "jar_rebuilt": false,
+  "browser_e2e": false,
+  "remote_merged": false,
+  "production_changed": false,
+  "evidence_sha256": {
+    "backup-restore-python-tests.txt": "3a88c3dd424bd7938e77d8e5d39fbda44bca1b250c58cb0f4042e2f499f3513f",
+    "backup-restore-snapshot-inspect.json": "0b16dac87a6e2b7e93646ce0d80b2b9f54a550aceace1370d4a2810f9084da0c"
+  }
+}

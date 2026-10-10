@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-04T16:58:39.625525+00:00",
+  "query_date_local": "2026-10-05",
+  "scope": "Compact inventory of frozen local candidate; not production attestation or vulnerability count",
+  "candidate": {
+    "head": "64cce174aac6cf3699985b4bc88a30cc70c2f67f",
+    "api_tree": "92a0c8032ee4a94cebf95ee48b60dbfc7abb0068",
+    "web_tree": "d35f4bf0d3cf203429cdd23b14c232116b34d734"
+  },
+  "jar": {
+    "sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+    "library_count": 209,
+    "external_library_count": 208,
+    "internal_library_count": 1
+  },
+  "build_jdk": {
+    "vendor": "Azul Zulu",
+    "version": "8u504-b01",
+    "zulu_build": "8.96.0.205-CA",
+    "os_arch": "macOS aarch64",
+    "production_runtime": "not checked"
+  },
+  "backend_versions": {
+    "spring_boot": "2.1.3.RELEASE",
+    "spring_framework": "5.1.5.RELEASE (14 modules)",
+    "apache_shiro": "1.13.0 (12 modules)",
+    "shiro_redis": "3.1.0",
+    "tomcat_embed_core": "9.0.122",
+    "tomcat_embed_el": "9.0.122",
+    "tomcat_embed_websocket": "9.0.122"
+  },
+  "frontend_lock": {
+    "lockfile_version": 2,
+    "sha256": "100033635ce1d01f5ee7b8cd1385bc958edde7ad5686d441d205b49ea7e78e74",
+    "packages": [
+      {
+        "name": "vue",
+        "declaration": "^2.7.16",
+        "declaration_scope": "dependencies",
+        "installed_version": "2.7.16",
+        "locked_instances": [
+          {
+            "path": "node_modules/vue",
+            "version": "2.7.16"
+          }
+        ]
+      },
+      {
+        "name": "vue-template-compiler",
+        "declaration": "^2.7.16",
+        "declaration_scope": "devDependencies",
+        "installed_version": "2.7.16",
+        "locked_instances": [
+          {
+            "path": "node_modules/vue-template-compiler",
+            "version": "2.7.16"
+          }
+        ]
+      },
+      {
+        "name": "ant-design-vue",
+        "declaration": "^1.6.3",
+        "declaration_scope": "dependencies",
+        "installed_version": "1.7.8",
+        "locked_instances": [
+          {
+            "path": "node_modules/ant-design-vue",
+            "version": "1.7.8"
+          }
+        ]
+      },
+      {
+        "name": "@vue/cli-service",
+        "declaration": "^3.3.0",
+        "declaration_scope": "devDependencies",
+        "installed_version": "3.12.1",
+        "locked_instances": [
+          {
+            "path": "node_modules/@vue/cli-service",
+            "version": "3.12.1"
+          }
+        ]
+      },
+      {
+        "name": "webpack",
+        "declaration": null,
+        "declaration_scope": null,
+        "installed_version": "4.47.0",
+        "locked_instances": [
+          {
+            "path": "node_modules/vue-photo-preview/node_modules/webpack",
+            "version": "3.12.0"
+          },
+          {
+            "path": "node_modules/webpack",
+            "version": "4.47.0"
+          }
+        ]
+      }
+    ]
+  },
+  "maintenance_assessment": {
+    "java8": "Azul roadmap retains maintenance; entitlement and production patch not attested",
+    "spring_boot21": "community maintenance ended 2020-11-01",
+    "spring_framework51": "no longer active since end of 2020",
+    "shiro1": "EOL; 1.13 fixes selected historical advisories, conditional 2026 applicability needs verification",
+    "tomcat9": "official currently supported; latest listed 9.0.122 at query",
+    "vue2": "community EOL 2023-12-31; 2.7.16 final",
+    "ant_design_vue1": "official raw table says supported, but undated template policy gives no patch SLA",
+    "vue_cli3": "project maintenance mode; no current CLI3-specific support guarantee obtained",
+    "webpack4": "legacy build chain; official policy does not supply supported-version matrix/EOL date"
+  },
+  "evidence": {
+    "detailed_inventory": "inventory.json",
+    "detailed_inventory_sha256": "9302d59766ec0dcc6205e09ed5a437c58080383ad8cfbbfdd40cf663e25d80ca",
+    "official_sources": "official-sources.json",
+    "review": "review.md"
+  },
+  "actions_performed": [
+    "Read frozen artifact and metadata",
+    "Read package-lock and existing installed package metadata",
+    "Visit focused primary web sources",
+    "Write and validate report JSON"
+  ],
+  "actions_not_performed": [
+    "Dependency install/download",
+    "Product modifications",
+    "Build or product tests",
+    "Service/database/browser operations",
+    "Vulnerability payloads",
+    "Production access"
+  ]
+}

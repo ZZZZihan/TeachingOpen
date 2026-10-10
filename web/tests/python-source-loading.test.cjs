@@ -56,6 +56,7 @@ for (const name of ['index', 'player']) {
       const id = host.instance.runit(), frame = h.nodes.get('mycanvas').querySelector('iframe')
       assert.ok(id); assert.equal(frame.getAttribute('sandbox'), 'allow-scripts')
       frame.dispatch('load')
+      h.message(frame.contentWindow, { channel: 'teaching-python-v1', type: 'host-ready' })
       assert.equal(h.posted[0].data.code, 'print 42\n', 'real coordinator receives the loaded bytes')
       assert.equal(h.requests.length, 1)
     })

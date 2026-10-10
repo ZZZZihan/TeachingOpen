@@ -1,0 +1,62 @@
+[
+  {
+    "path": "admin-course-768-final.png",
+    "bytes": 41596,
+    "sha256": "3315f514ba5297c73765ea7104321c9fb8af0324379798cacb92e2cd55a73f08"
+  },
+  {
+    "path": "admin-course-edit-390-final.png",
+    "bytes": 30019,
+    "sha256": "493686c7de7453916455541ddecf5aeaa40af0d4493b91a4fcbb0c20309f5715"
+  },
+  {
+    "path": "admin-members-edit-accessible-after.png",
+    "bytes": 19262,
+    "sha256": "605b37b7b74e9af5769df8664217c18477f03d59aa0dc334b82ab39054ccdd7e"
+  },
+  {
+    "path": "admin-members-keyboard-1440-after.png",
+    "bytes": 59137,
+    "sha256": "6ce41cb8e2cc6be720dbc90ee4291802e961ac6774ddc462967e9a080bc4b112"
+  },
+  {
+    "path": "admin-members-keyboard-768-after.png",
+    "bytes": 44148,
+    "sha256": "dfd761b87428585c3dc89c3d6bfe0779a14630a834ff5d031955816116dbaf25"
+  },
+  {
+    "path": "admin-members-keyboard-end-after.png",
+    "bytes": 26290,
+    "sha256": "806d540da4e8bcb85b509a27ee2fb3a77de481a8f38d76a541c3bf1dea5c44a1"
+  },
+  {
+    "path": "admin-members-keyboard-end-before.png",
+    "bytes": 28451,
+    "sha256": "35c36ec14c6b1c90fcdecbb58c729ae429e705ac483345d8850daafc805fd2dd"
+  },
+  {
+    "path": "candidate-home-final.png",
+    "bytes": 55805,
+    "sha256": "54aa81548abc6cd56900693f0d5c6184c871197a4bb87c0d511a1470d8c6ed23"
+  },
+  {
+    "path": "python-session-ended-retains-code.png",
+    "bytes": 25392,
+    "sha256": "05735255de03148f2fc1988ad570c862d88a3066c29afef1fffdd17cc8a6f3b0"
+  },
+  {
+    "path": "student-scratchjr-feedback-fulltext.png",
+    "bytes": 53582,
+    "sha256": "5f1b33c34e04162a3ffe1f8f1b048626c9df8bce7ce5e9cf4643e44d35bd82ea"
+  },
+  {
+    "path": "student-upload-failure-final.png",
+    "bytes": 49007,
+    "sha256": "74cf6b8d846a03a5c118ca6265ce750c686209988b495a1195b3a5ca4c3d3a85"
+  },
+  {
+    "path": "teacher-scratchjr-grade-reopen-390.png",
+    "bytes": 32126,
+    "sha256": "528def329eaa12defa2ab6f71e4a4bb35b33bbe86be6bf8f0754d224d03247d6"
+  }
+]

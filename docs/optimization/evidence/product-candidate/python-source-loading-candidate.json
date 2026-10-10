@@ -1,0 +1,278 @@
+{
+  "recorded_utc": "2026-10-03T10:12:02.023965+00:00",
+  "candidate": "37a0cc553feb1ff065d1aeba40eb3c3263e551f2",
+  "api_tree": "201408ca4eef6ce37a217f699329cf7146f9d71a",
+  "web_tree": "5cc4536c7647aed1458cb18bc20e92f0af88e924",
+  "pr53_commit": "8f5bf1e272e57a3460c0414b506925c1395a18d2",
+  "pr53_url": "https://github.com/ZZZZihan/TeachingOpen/pull/53",
+  "frontend_tests": {
+    "passed": 389,
+    "total": 389,
+    "exit_code": 0
+  },
+  "build": {
+    "exit_code": 0,
+    "warnings": 12,
+    "prefetch_hints": 0,
+    "preload_hints": 4
+  },
+  "dist_file_count": 4893,
+  "dist_bytes": 211466267,
+  "dist_manifest_sha256": "453a9f32aeb0f3d534146e790ae62ab49bae4c23405127c640cc6ce86e0d6065",
+  "dist_manifest_encoding": "UTF-8 JSON, sorted path array of path/size/sha256 entries, ensure_ascii=False, compact separators, no trailing newline",
+  "previous_dist": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/python-source-loading-previous-dist",
+  "product_source_hashes_match": 17,
+  "frontend_http": [
+    {
+      "port": 18112,
+      "pid": 49543,
+      "matched_resources": [
+        "index.html",
+        "python/index.html",
+        "python/player.html",
+        "python/source-loading.js",
+        "python/editor-bridge.js",
+        "python/persistence.js",
+        "python/persistence.css",
+        "python/execution.js",
+        "python/execution.css",
+        "python/runner-loader.js",
+        "python/runner.js",
+        "python/runner.css",
+        "python/worker.js",
+        "python/worker-turtle.js",
+        "python/turtle-renderer.js",
+        "python/static/js/app.js",
+        "python/static/js/appPlayer.js",
+        "python/source-loading.css",
+        "js/polyfill.js",
+        "js/common.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/app.8ceacb01.js"
+      ]
+    },
+    {
+      "port": 18142,
+      "pid": 49545,
+      "matched_resources": [
+        "index.html",
+        "python/index.html",
+        "python/player.html",
+        "python/source-loading.js",
+        "python/editor-bridge.js",
+        "python/persistence.js",
+        "python/persistence.css",
+        "python/execution.js",
+        "python/execution.css",
+        "python/runner-loader.js",
+        "python/runner.js",
+        "python/runner.css",
+        "python/worker.js",
+        "python/worker-turtle.js",
+        "python/turtle-renderer.js",
+        "python/static/js/app.js",
+        "python/static/js/appPlayer.js",
+        "python/source-loading.css",
+        "js/polyfill.js",
+        "js/common.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/app.8ceacb01.js"
+      ]
+    },
+    {
+      "port": 18150,
+      "pid": 49547,
+      "matched_resources": [
+        "index.html",
+        "python/index.html",
+        "python/player.html",
+        "python/source-loading.js",
+        "python/editor-bridge.js",
+        "python/persistence.js",
+        "python/persistence.css",
+        "python/execution.js",
+        "python/execution.css",
+        "python/runner-loader.js",
+        "python/runner.js",
+        "python/runner.css",
+        "python/worker.js",
+        "python/worker-turtle.js",
+        "python/turtle-renderer.js",
+        "python/static/js/app.js",
+        "python/static/js/appPlayer.js",
+        "python/source-loading.css",
+        "js/polyfill.js",
+        "js/common.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/app.8ceacb01.js"
+      ]
+    }
+  ],
+  "backend_health": [
+    {
+      "port": 18111,
+      "pid": 82413,
+      "status": "UP"
+    },
+    {
+      "port": 18141,
+      "pid": 1792,
+      "status": "UP"
+    },
+    {
+      "port": 18149,
+      "pid": 33557,
+      "status": "UP"
+    }
+  ],
+  "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "python_actual_proxy_browser": [
+    {
+      "port": 18112,
+      "entry": "index",
+      "pass": true,
+      "sourceRequests": 1,
+      "ready": {
+        "phase": "ready",
+        "code": "import turtle\n\nt = turtle.Turtle()\nt.forward(100)\n\nprint (\"Teaching Python Editor\")",
+        "runDisabled": false
+      },
+      "drawing": {
+        "state": "completed",
+        "output": "Teaching Python Editor\n"
+      },
+      "frameCount": 1,
+      "canvasCount": 2,
+      "pageErrors": []
+    },
+    {
+      "port": 18112,
+      "entry": "player",
+      "pass": true,
+      "sourceRequests": 1,
+      "ready": {
+        "phase": "ready",
+        "code": "import turtle\n\nt = turtle.Turtle()\nt.forward(100)\n\nprint (\"Teaching Python Editor\")",
+        "runDisabled": false
+      },
+      "drawing": {
+        "state": "completed",
+        "output": "Teaching Python Editor\n"
+      },
+      "frameCount": 1,
+      "canvasCount": 2,
+      "pageErrors": []
+    },
+    {
+      "port": 18142,
+      "entry": "index",
+      "pass": true,
+      "sourceRequests": 1,
+      "ready": {
+        "phase": "ready",
+        "code": "import turtle\n\nt = turtle.Turtle()\nt.forward(100)\n\nprint (\"Teaching Python Editor\")",
+        "runDisabled": false
+      },
+      "drawing": {
+        "state": "completed",
+        "output": "Teaching Python Editor\n"
+      },
+      "frameCount": 1,
+      "canvasCount": 2,
+      "pageErrors": []
+    },
+    {
+      "port": 18142,
+      "entry": "player",
+      "pass": true,
+      "sourceRequests": 1,
+      "ready": {
+        "phase": "ready",
+        "code": "import turtle\n\nt = turtle.Turtle()\nt.forward(100)\n\nprint (\"Teaching Python Editor\")",
+        "runDisabled": false
+      },
+      "drawing": {
+        "state": "completed",
+        "output": "Teaching Python Editor\n"
+      },
+      "frameCount": 1,
+      "canvasCount": 2,
+      "pageErrors": []
+    },
+    {
+      "port": 18150,
+      "entry": "index",
+      "pass": true,
+      "sourceRequests": 1,
+      "ready": {
+        "phase": "ready",
+        "code": "import turtle\n\nt = turtle.Turtle()\nt.forward(100)\n\nprint (\"Teaching Python Editor\")",
+        "runDisabled": false
+      },
+      "drawing": {
+        "state": "completed",
+        "output": "Teaching Python Editor\n"
+      },
+      "frameCount": 1,
+      "canvasCount": 2,
+      "pageErrors": []
+    },
+    {
+      "port": 18150,
+      "entry": "player",
+      "pass": true,
+      "sourceRequests": 1,
+      "ready": {
+        "phase": "ready",
+        "code": "import turtle\n\nt = turtle.Turtle()\nt.forward(100)\n\nprint (\"Teaching Python Editor\")",
+        "runDisabled": false
+      },
+      "drawing": {
+        "state": "completed",
+        "output": "Teaching Python Editor\n"
+      },
+      "frameCount": 1,
+      "canvasCount": 2,
+      "pageErrors": []
+    }
+  ],
+  "anonymous_navigation": [
+    {
+      "port": 18142,
+      "courseOk": true,
+      "communityOk": true,
+      "loginFormVisible": true,
+      "loginNavigationMs": 48,
+      "userChunkResponsesBeforeClick": 0,
+      "userChunkResponsesAfterClick": 1,
+      "chunkStatuses": [
+        200
+      ],
+      "pageErrors": [],
+      "scope": "Anonymous navigation and form display only; no login, CAPTCHA interaction, code/credential injection or form submission."
+    }
+  ],
+  "scope": "Local combination only. Anonymous real-course-copy navigation; built-in self-authored Python source on all three actual CSP proxies. No authenticated role flow, CAPTCHA interaction, Java save, production change or GitHub merge.",
+  "branch_validation": {
+    "tests": 369,
+    "source_specialized": 22,
+    "related_specialized": 71,
+    "browser_functional": 14,
+    "browser_layouts": 6,
+    "synthetic_http_save_reopen": true
+  },
+  "temporary_fixture_cleanup": [
+    {
+      "pid": 9285,
+      "port": 18159,
+      "stopped": true
+    },
+    {
+      "pid": 11869,
+      "port": 18160,
+      "stopped": true
+    }
+  ],
+  "owned_browser_closed": "python-source-root",
+  "preview_open_request": "queued"
+}

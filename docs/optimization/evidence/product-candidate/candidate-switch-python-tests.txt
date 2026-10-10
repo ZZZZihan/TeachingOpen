@@ -1,0 +1,35 @@
+test_duplicate_and_unterminated_are_rejected (test_extract_schema.ExtractSchemaTest.test_duplicate_and_unterminated_are_rejected) ... ok
+test_quoted_semicolon_and_escaped_quotes (test_extract_schema.ExtractSchemaTest.test_quoted_semicolon_and_escaped_quotes) ... ok
+test_upstream_contains_only_69_empty_table_definitions (test_extract_schema.ExtractSchemaTest.test_upstream_contains_only_69_empty_table_definitions) ... ok
+test_auto_increment_is_not_schema_migration (test_local_candidate.LocalCandidateTest.test_auto_increment_is_not_schema_migration) ... ok
+test_backend_stop_refuses_same_jar_in_another_runtime (test_local_candidate.LocalCandidateTest.test_backend_stop_refuses_same_jar_in_another_runtime) ... ok
+test_corrupt_target_leaves_active_running (test_local_candidate.LocalCandidateTest.test_corrupt_target_leaves_active_running) ... ok
+test_failed_initial_start_stays_stopped (test_local_candidate.LocalCandidateTest.test_failed_initial_start_stays_stopped) ... ok
+test_failed_recovery_retains_both_references (test_local_candidate.LocalCandidateTest.test_failed_recovery_retains_both_references) ... ok
+test_failed_start_restores_previous (test_local_candidate.LocalCandidateTest.test_failed_start_restores_previous) ... ok
+test_foreign_listener_not_stopped (test_local_candidate.LocalCandidateTest.test_foreign_listener_not_stopped) ... ok
+test_intact_bundle_and_changed_bytes (test_local_candidate.LocalCandidateTest.test_intact_bundle_and_changed_bytes) ... ok
+test_interruption_requires_explicit_recover (test_local_candidate.LocalCandidateTest.test_interruption_requires_explicit_recover) ... ok
+test_manifest_replacement_rejected (test_local_candidate.LocalCandidateTest.test_manifest_replacement_rejected) ... ok
+test_manual_rollback_uses_recorded_previous (test_local_candidate.LocalCandidateTest.test_manual_rollback_uses_recorded_previous) ... ok
+test_parallel_operation_rejected (test_local_candidate.LocalCandidateTest.test_parallel_operation_rejected) ... ok
+test_reused_pid_not_stopped (test_local_candidate.LocalCandidateTest.test_reused_pid_not_stopped) ... ok
+test_schema_difference_refuses_before_stop (test_local_candidate.LocalCandidateTest.test_schema_difference_refuses_before_stop) ... ok
+test_successful_switch_remembers_previous (test_local_candidate.LocalCandidateTest.test_successful_switch_remembers_previous) ... ok
+test_busy_source_does_not_create_snapshot (test_local_recovery.LocalRecoveryTest.test_busy_source_does_not_create_snapshot) ... ok
+test_corrupt_payload_rejected_before_target_creation (test_local_recovery.LocalRecoveryTest.test_corrupt_payload_rejected_before_target_creation) ... ok
+test_empty_value_row_remains_distinct_from_zero_rows (test_local_recovery.LocalRecoveryTest.test_empty_value_row_remains_distinct_from_zero_rows) ... ok
+test_existing_target_preserved (test_local_recovery.LocalRecoveryTest.test_existing_target_preserved) ... ok
+test_extra_payload_rejected (test_local_recovery.LocalRecoveryTest.test_extra_payload_rejected) ... ok
+test_invalid_database_manifest_refused (test_local_recovery.LocalRecoveryTest.test_invalid_database_manifest_refused) ... ok
+test_missing_manifest_is_incomplete (test_local_recovery.LocalRecoveryTest.test_missing_manifest_is_incomplete) ... ok
+test_nested_and_linked_paths_rejected (test_local_recovery.LocalRecoveryTest.test_nested_and_linked_paths_rejected) ... ok
+test_shared_directory_rejected (test_local_recovery.LocalRecoveryTest.test_shared_directory_rejected) ... ok
+test_source_ports_cannot_be_reused (test_local_recovery.LocalRecoveryTest.test_source_ports_cannot_be_reused) ... ok
+test_symlink_and_fifo_rejected (test_local_recovery.LocalRecoveryTest.test_symlink_and_fifo_rejected) ... ok
+test_valid_snapshot_and_private_payload (test_local_recovery.LocalRecoveryTest.test_valid_snapshot_and_private_payload) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.096s
+
+OK

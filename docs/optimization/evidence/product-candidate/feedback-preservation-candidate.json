@@ -1,0 +1,67 @@
+{
+  "generated_utc": "2026-10-03T00:31:11.761943+00:00",
+  "source_commit": "9d571da155ed2644d604de87af5fbcdefabad39e",
+  "previous_commit": "8ca9e35f5ea8341c28daf1ef423dc0990be12412",
+  "pr": "https://github.com/ZZZZihan/TeachingOpen/pull/38",
+  "pr_head": "33200898b4f42e13f0d352054183c299ee91cddf",
+  "product_commit": "f791c31a8788e3dc7b85c074955fa1bf48d778bb",
+  "api_tree": "0845e3f50113a357dbce0f13d96c7c0ae9eebff9",
+  "web_tree": "e1e7874798f80304f603cf1154482834d7985a0d",
+  "backend_restarted": true,
+  "backend_pid": 58396,
+  "frontend_pid": 46477,
+  "frontend_process_unchanged": true,
+  "jar_sha256": "b87319a8e411d8f48c37de9e5589c486460c5c5f0306d8f5026281b5737a9b09",
+  "frontend_build_repeated": false,
+  "frontend_checks_repeated": false,
+  "frontend_tree_and_dist_unchanged": true,
+  "dist_files": 4887,
+  "http_assets": {
+    "/index.html": "a5b1fba9890e1682bdcf8b866d7edbbf3aadaf712a408244cb99c9b87c6c148b",
+    "/scratch3/index.html": "31a3a7a0ff7c2cb9fe1c22067bd3b19ad26e293c26412ec985021908222c8111",
+    "/scratch3/player.html": "414e5988be63cbd507db2bb663373a7fe1ea31ee0ad880467f71c34665818ecd",
+    "/scratch3/cloud-client.js": "326db0d51748b5ba03499ce8b2da23a61aa82f6676e3280e8628fa2a22ed2e72",
+    "/scratch3/player-bridge.js": "ed90eba4ee089f2f73361964ecf36a6a641140ec2833822c3dd3406ec4ace3c4",
+    "/scratch3/player-layout.js": "778f3dc96356fe82b45216e8b0f047ee1dd7637403e35a13fb0bb3abe59f671c",
+    "/scratch3/editor-bridge.js": "4ea6d29110ba39b9ac1bb482852a850fc3ca78f3d84dd9e371294fe6bd91ec43",
+    "/scratch3/lib.min.js": "83a7bb1e001957303c4f609879d094886d1f4c51235161f3c9d9e2e2d28abf40"
+  },
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "real_checks": {
+    "feedback": {
+      "passed": 31,
+      "total": 31
+    },
+    "http": {
+      "passed": 13,
+      "total": 13
+    }
+  },
+  "real_checks_total": 44,
+  "isolated_495_checks_repeated_here": false,
+  "authenticated_browser": false,
+  "data_preservation": {
+    "tables_checked": 69,
+    "changed_tables": [
+      "sys_log"
+    ],
+    "non_audit_equal": true,
+    "attachments_equal": true,
+    "audit_rows_before": 3108,
+    "audit_rows_after": 3130
+  },
+  "original_source_files": 5731,
+  "original_source_unchanged": true,
+  "remote_merged": false,
+  "production_changed": false,
+  "goal_status": "active",
+  "previous_backend_preserved": ".devspace/worktrees/scratch-cloud-access/api/jeecg-boot-module-system/target/teaching-open-2.8.0.jar",
+  "evidence_sha256": {
+    "feedback-preservation-real.json": "24e61be05dbe786072359bf9817e4ef55f8162dde9e53c599e5a2c828415dd5e",
+    "feedback-preservation-http.json": "7d24effbe9db3f049d142327d20dd12a01aa2ceac5fba32a8c2e8586acae0a6b"
+  }
+}

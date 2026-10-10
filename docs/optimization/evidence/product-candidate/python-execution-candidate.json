@@ -1,0 +1,257 @@
+{
+  "recorded_utc": "2026-10-03T09:33:08.958957+00:00",
+  "candidate": "2533f669909afdaa059a9ec91179cd4967e2a899",
+  "api_tree": "201408ca4eef6ce37a217f699329cf7146f9d71a",
+  "web_tree": "d0563ef84f04063a2888d3df25175eed25d4b95f",
+  "pr52_commit": "f906f8e782795ddd670725e85ffa4ea1756b665c",
+  "pr52_url": "https://github.com/ZZZZihan/TeachingOpen/pull/52",
+  "frontend_tests": {
+    "passed": 367,
+    "total": 367,
+    "exit_code": 0
+  },
+  "build": {
+    "exit_code": 0,
+    "warnings": 12,
+    "prefetch_hints": 0,
+    "preload_hints": 4
+  },
+  "dist_file_count": 4891,
+  "dist_bytes": 211457943,
+  "dist_manifest_sha256": "46324f35000237ad28f06e391770fdb03221ae9114188ff2a80334e47671d52e",
+  "previous_dist": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/python-execution-previous-dist",
+  "product_source_hashes_match": true,
+  "frontend_http": [
+    {
+      "port": 18112,
+      "pid": 49543,
+      "matched_resources": [
+        "index.html",
+        "python/index.html",
+        "python/player.html",
+        "python/execution.js",
+        "python/execution.css",
+        "python/runner-loader.js",
+        "python/runner.js",
+        "python/runner.css",
+        "python/worker.js",
+        "python/worker-turtle.js",
+        "python/turtle-renderer.js",
+        "python/static/js/app.js",
+        "python/static/js/appPlayer.js",
+        "python/persistence.js",
+        "js/polyfill.js",
+        "js/common.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/app.8ceacb01.js"
+      ]
+    },
+    {
+      "port": 18142,
+      "pid": 49545,
+      "matched_resources": [
+        "index.html",
+        "python/index.html",
+        "python/player.html",
+        "python/execution.js",
+        "python/execution.css",
+        "python/runner-loader.js",
+        "python/runner.js",
+        "python/runner.css",
+        "python/worker.js",
+        "python/worker-turtle.js",
+        "python/turtle-renderer.js",
+        "python/static/js/app.js",
+        "python/static/js/appPlayer.js",
+        "python/persistence.js",
+        "js/polyfill.js",
+        "js/common.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/app.8ceacb01.js"
+      ]
+    },
+    {
+      "port": 18150,
+      "pid": 49547,
+      "matched_resources": [
+        "index.html",
+        "python/index.html",
+        "python/player.html",
+        "python/execution.js",
+        "python/execution.css",
+        "python/runner-loader.js",
+        "python/runner.js",
+        "python/runner.css",
+        "python/worker.js",
+        "python/worker-turtle.js",
+        "python/turtle-renderer.js",
+        "python/static/js/app.js",
+        "python/static/js/appPlayer.js",
+        "python/persistence.js",
+        "js/polyfill.js",
+        "js/common.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/app.8ceacb01.js"
+      ]
+    }
+  ],
+  "healthy_backends": {
+    "18111": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18141": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18149": {
+      "http": 200,
+      "status": "UP"
+    }
+  },
+  "java_artifact_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "new_java_build": false,
+  "service_restarted": false,
+  "github_merged": false,
+  "production_changed": false,
+  "real_role_browser_acceptance": false,
+  "goal": "active",
+  "source_workspace_modified": false,
+  "source_manifest_revalidated_this_turn": false,
+  "combined_browser": {
+    "all": [
+      {
+        "port": 18112,
+        "entry": "player",
+        "pass": true,
+        "canvasCount": 2,
+        "drawOutput": "CANDIDATE_42 42\n",
+        "inputOutput": "CANDIDATE_INPUT ok\n",
+        "finalState": {
+          "runId": null,
+          "pendingRunId": null,
+          "state": "idle",
+          "remainingMs": 0
+        },
+        "pageErrors": []
+      },
+      {
+        "port": 18112,
+        "entry": "index",
+        "pass": true,
+        "canvasCount": 2,
+        "drawOutput": "CANDIDATE_42 42\n",
+        "inputOutput": "CANDIDATE_INPUT ok\n",
+        "finalState": {
+          "runId": null,
+          "pendingRunId": null,
+          "state": "idle",
+          "remainingMs": 0
+        },
+        "pageErrors": []
+      },
+      {
+        "port": 18142,
+        "entry": "player",
+        "pass": true,
+        "canvasCount": 2,
+        "drawOutput": "CANDIDATE_42 42\n",
+        "inputOutput": "CANDIDATE_INPUT ok\n",
+        "finalState": {
+          "runId": null,
+          "pendingRunId": null,
+          "state": "idle",
+          "remainingMs": 0
+        },
+        "pageErrors": []
+      },
+      {
+        "port": 18142,
+        "entry": "index",
+        "pass": true,
+        "canvasCount": 2,
+        "drawOutput": "CANDIDATE_42 42\n",
+        "inputOutput": "CANDIDATE_INPUT ok\n",
+        "finalState": {
+          "runId": null,
+          "pendingRunId": null,
+          "state": "idle",
+          "remainingMs": 0
+        },
+        "pageErrors": []
+      },
+      {
+        "port": 18150,
+        "entry": "player",
+        "pass": true,
+        "canvasCount": 2,
+        "drawOutput": "CANDIDATE_42 42\n",
+        "inputOutput": "CANDIDATE_INPUT ok\n",
+        "finalState": {
+          "runId": null,
+          "pendingRunId": null,
+          "state": "idle",
+          "remainingMs": 0
+        },
+        "pageErrors": []
+      },
+      {
+        "port": 18150,
+        "entry": "index",
+        "pass": true,
+        "canvasCount": 2,
+        "drawOutput": "CANDIDATE_42 42\n",
+        "inputOutput": "CANDIDATE_INPUT ok\n",
+        "finalState": {
+          "runId": null,
+          "pendingRunId": null,
+          "state": "idle",
+          "remainingMs": 0
+        },
+        "pageErrors": []
+      }
+    ],
+    "scope": "Actual combined built dist with existing loopback CSP headers; self-authored code, anonymous, no save or authentication."
+  },
+  "anonymous_home_navigation": [
+    {
+      "port": 18142,
+      "courseOk": true,
+      "communityOk": true,
+      "loginFormVisible": true,
+      "loginNavigationMs": 106,
+      "userChunkResponsesBeforeClick": 0,
+      "userChunkResponsesAfterClick": 1,
+      "chunkStatuses": [
+        200
+      ],
+      "pageErrors": [],
+      "scope": "Anonymous navigation and form display only; no login, CAPTCHA interaction, code/credential injection or form submission."
+    }
+  ],
+  "scope_notes": [
+    "Combined dist under actual existing loopback CSP, anonymous self-authored code; no authentication or save to production-derived database.",
+    "Branch synthetic editor UI save/reopen is separate from actual Java backend save acceptance.",
+    "Same #43 Java artifact; inherited build warnings and blocked external tracking script remain.",
+    "Source worktree not changed; historical 5731-file source hash verification was not rerun."
+  ],
+  "temporary_servers": [
+    {
+      "pid": 73432,
+      "port": 18159,
+      "verified_command_before_stop": true,
+      "listening_after_stop": false
+    },
+    {
+      "pid": 73433,
+      "port": 18160,
+      "verified_command_before_stop": true,
+      "listening_after_stop": false
+    }
+  ],
+  "temporary_browser_session_closed": true,
+  "independent_audit_ports_closed": {
+    "18161": true,
+    "18164": true
+  }
+}

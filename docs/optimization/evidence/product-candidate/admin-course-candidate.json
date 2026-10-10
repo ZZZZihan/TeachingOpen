@@ -1,0 +1,40 @@
+{
+  "candidate_commit": "91cdbe4404356da3727d1bd1d572c4bc3cdbd806",
+  "api_tree": "37aa15d47970b22d94aa910dd152a4858c10bae7",
+  "web_tree": "de904dd24566dbf9e83640eb35e9c7c2776106a6",
+  "frontend_test_passed": 299,
+  "frontend_test_total": 299,
+  "build_exit": 0,
+  "built_files": 4880,
+  "http": [
+    {
+      "asset": "index.html",
+      "matches": true
+    },
+    {
+      "asset": "js/polyfill.js",
+      "matches": true
+    },
+    {
+      "asset": "js/common.js",
+      "matches": true
+    },
+    {
+      "asset": "js/chunk-vendors.a2dd1501.js",
+      "matches": true
+    },
+    {
+      "asset": "js/app.77f80ef3.js",
+      "matches": true
+    }
+  ],
+  "backend_unchanged": true,
+  "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "original_source_files": 5731,
+  "original_source_unchanged": true,
+  "old_dist_preserved": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/admin-course-previous-dist",
+  "scope": "Fresh full frontend test/build on locally combined candidate; actual API 37 checks on same unchanged backend from branch report. No authenticated whole-application browser acceptance.",
+  "failed_attempts": [
+    "Initial static HTTP asset probe treated external telemetry script as local path and got 404; corrected selection to same-origin scripts. No external request was made."
+  ]
+}

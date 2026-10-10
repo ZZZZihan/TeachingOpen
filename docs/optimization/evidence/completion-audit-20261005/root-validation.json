@@ -1,0 +1,19 @@
+{
+  "scope": "Documentation and evidence review, no product test rerun",
+  "copies_match_private_sources": true,
+  "copied_files": 23,
+  "all_json_parse": true,
+  "summary_relative_links_exist": true,
+  "git_diff_check_except_verbatim_maven_log_exit_code": 0,
+  "full_git_diff_check_exit_code": 2,
+  "verbatim_maven_log_trailing_whitespace_count": 21,
+  "raw_log_policy": "Preserve original Maven INFO trailing spaces and original SHA256, do not rewrite evidence",
+  "earlier_recording_errors": [
+    "Read-only PR owner typo corrected",
+    "Plan insertion first assertion expected punctuation not present; no file modified before retry",
+    "First diff command ran from non-Git workspace root; rerun in correct plan worktree"
+  ],
+  "candidate_product_changes": false,
+  "services_restarted": false,
+  "production_access": false
+}

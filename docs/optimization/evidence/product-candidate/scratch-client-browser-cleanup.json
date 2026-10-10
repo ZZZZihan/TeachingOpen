@@ -1,0 +1,7 @@
+{
+  "non_audit_database_equal": true,
+  "attachments_equal": true,
+  "audit_before": 3108,
+  "audit_after": 3108,
+  "cloud_fixture_removed": true
+}

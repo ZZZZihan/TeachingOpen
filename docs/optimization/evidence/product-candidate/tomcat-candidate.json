@@ -1,0 +1,55 @@
+{
+  "generated_utc": "2026-10-02T23:07:59.000680+00:00",
+  "source_commit": "6ffbaf364f2a7f87b41bfd3cbd0650839f6057e1",
+  "previous_commit": "ab0c7c3419d74346eb9b80c39a2e4b69293cf2d9",
+  "integrated_pr": "https://github.com/ZZZZihan/TeachingOpen/pull/33",
+  "pr_head": "afab74393edbc711b349a99fd1e90506e4755eb0",
+  "api_tree": "b5bf17facc0025cd7841a852f409ecd817c7da4c",
+  "web_tree": "bb2496d96d994e3a7e3fd3dd34169420a761ae39",
+  "api_tree_equals_tested_pr": true,
+  "frontend_tree_unchanged": true,
+  "candidate_http_checks": {
+    "container_transport": 9,
+    "work_views": 56,
+    "passed": 65,
+    "total": 65
+  },
+  "isolated_pr_checks": {
+    "passed": 1157,
+    "total": 1157,
+    "scope": "PR runtime, includes three direct packaged-Java fault checks; not rerun in full on integration"
+  },
+  "backend_pid": 96172,
+  "jar_sha256": "be388932d612c21e078a0fb29ab21fb99f4e1f01b4ccdc12da70b5f4b1c44c68",
+  "jar_provenance": "Clean build of product 26edc47; exact API tree reused on integration",
+  "tomcat_version_in_startup_log": "9.0.122",
+  "frontend_dist_files_unchanged": 4884,
+  "http_assets": {
+    "/index.html": "2389c437574e6bfe99236b4ecee12d41bc034ba10f6a8f87d615011eceff9b34",
+    "/js/app.65b2b49b.js": "e7cf2b53b482c05c12ccd49cdfa57fbfc6bba7a831a415ae8c57e74ea5cef59c"
+  },
+  "protected_anonymous_status": 401,
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "business_data_preservation": {
+    "tables_checked": 69,
+    "changed_tables": [
+      "sys_log"
+    ],
+    "all_68_business_tables_equal": true,
+    "attachments_equal": true,
+    "sys_log_rows_before": 2996,
+    "sys_log_rows_after": 3008
+  },
+  "frontend_build_and_tests_rerun": false,
+  "browser_e2e": false,
+  "remote_merged": false,
+  "production_changed": false,
+  "evidence_sha256": {
+    "tomcat-container-http.json": "6a2089e407454563f5aeed05058eaf48465880d1a128e8794d0c44e2334e687f",
+    "tomcat-work-views.json": "3dc8184b1097e7892008eb8e8e4161130b82c92ed99602a7e9679395ae79ea05"
+  }
+}

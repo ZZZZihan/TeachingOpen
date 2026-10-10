@@ -100,6 +100,8 @@
         root.clearTimeout(run.sessionTimer)
         root.clearTimeout(run.stopTimer)
         if (run.port) { run.port.onmessage = null; run.port.close() }
+        if (run.transferPort) { run.transferPort.close(); run.transferPort = null }
+        run.code = null
         if (run.frame) { run.frame.onload = null; run.frame.remove() }
         runs.delete(run)
         if (active === run) {
@@ -247,6 +249,23 @@
         policyInstalled = true
     }
     function escapeAttribute (text) { return text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;') }
+    function connectRunner (run) {
+        if (active !== run || run.stopping || run.handshakeSent || !run.frameLoaded || !run.hostReady) return
+        // A frame load event also fires when its scripts are blocked. Wait for the
+        // trusted runner listener before allowing it to create a computation Worker.
+        run.handshakeSent = true
+        run.frame.onload = null
+        run.frame.contentWindow.postMessage({ channel: CHANNEL, type: 'run', runId: run.runId, code: run.code }, '*', [run.transferPort])
+        run.transferPort = null
+        run.code = null
+    }
+    root.addEventListener('message', function (event) {
+        var run = active
+        var data = event.data
+        if (!run || event.source !== run.frame.contentWindow || !data || data.channel !== CHANNEL || data.type !== 'host-ready') return
+        run.hostReady = true
+        connectRunner(run)
+    })
     function frameDocument () {
         var scripts = ['runner-loader.js', 'static/js/vendor.js', 'static/js/app.js', 'turtle-renderer.js', 'runner.js'].map(function (path) { return new URL(path, scriptBase).href })
         var workerScripts = ['worker-turtle.js', 'worker.js'].map(function (path) { return new URL(path, scriptBase).href })
@@ -273,17 +292,13 @@
         frame.setAttribute('sandbox', 'allow-scripts')
         frame.setAttribute('referrerpolicy', 'no-referrer')
         var channel = new root.MessageChannel()
-        var current = active = { runId: runId, state: 'loading', frame: frame, port: channel.port1, remainingMs: COMPUTE_MS, computeStarted: 0, ready: false, mainDone: false, callbacks: new Set(), graphics: false, pendingInput: null, outputUnits: 0 }
+        var current = active = { runId: runId, state: 'loading', frame: frame, port: channel.port1, transferPort: channel.port2, code: code, remainingMs: COMPUTE_MS, computeStarted: 0, ready: false, mainDone: false, callbacks: new Set(), graphics: false, pendingInput: null, outputUnits: 0 }
         runs.add(current)
         channel.port1.onmessage = function (event) { receive(current, event) }
         channel.port1.start()
         frame.onload = function () {
-            if (active !== current) return
-            frame.onload = null
-            // The transfer is tied to this exact current WindowProxy. No execution object from the parent is sent.
-            frame.contentWindow.postMessage({ channel: CHANNEL, type: 'run', runId: runId, code: code }, '*', [channel.port2])
-            current.handshakeSent = true
-            code = null
+            current.frameLoaded = true
+            connectRunner(current)
         }
         current.loadTimer = root.setTimeout(function () { expire(current, 'error', '运行环境加载失败，请重新运行。') }, LOAD_MS)
         current.sessionTimer = root.setTimeout(function () { expire(current, 'expired', '本次运行已结束，重新运行可继续。') }, SESSION_MS)

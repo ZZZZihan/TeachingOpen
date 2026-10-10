@@ -66,7 +66,6 @@
 
 <script>
   import JeecgOrderCustomerModal from './form/JeecgOrderCustomerModal'
-  import JeecgOrderDMainList from './JeecgOrderDMainList'
   import {JeecgListMixin} from '@/mixins/JeecgListMixin'
   import {getAction} from '@/api/manage'
 
@@ -74,7 +73,6 @@
     name: "JeecgOrderCustomerList",
     mixins: [JeecgListMixin],
     components: {
-      JeecgOrderDMainList,
       JeecgOrderCustomerModal
     },
     data() {

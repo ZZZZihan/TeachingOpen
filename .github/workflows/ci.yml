@@ -41,6 +41,9 @@ jobs:
         env:
           NODE_OPTIONS: --openssl-legacy-provider --max-old-space-size=4096
         run: npm run build
+      - name: Initial JS and CSS budget
+        working-directory: web
+        run: npm run check:initial-assets
 
   tools:
     name: Backup and migration tools

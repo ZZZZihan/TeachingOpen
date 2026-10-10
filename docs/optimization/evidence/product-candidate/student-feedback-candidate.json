@@ -1,0 +1,51 @@
+{
+  "observed_utc": "2026-10-02T20:49:55.110017+00:00",
+  "local_candidate_commit": "3996efae93648e437ffce7ddaf35a4700b67a26e",
+  "local_branch": "integration/product-candidate",
+  "previous_integration": "d56f9584bb91c55e9b39cdee9600127e2b2d8a4f",
+  "added_pr25": "7ab1dd5dacc957f308acca44fe34b16dd09fd512",
+  "api_tree": "b231c08b808be2a9c05190eb8739d1cf2418950c",
+  "web_tree": "0ddcc76b57adb489bdb3a50b5641066a6b95601e",
+  "frontend": {
+    "tests_passed": 112,
+    "tests_total": 112,
+    "lint_files": 1,
+    "lint_errors": 0,
+    "lint_warnings": 0,
+    "build_exit": 0,
+    "existing_build_warnings": 6,
+    "built_files": 4871,
+    "dist_path_hashes_aggregate_sha256": "a143f6e0a9ef5eef7a44396af1ed91a385a7909765f60689283af0db713ecd47"
+  },
+  "backend": {
+    "api_tree_matches_pr24": true,
+    "reused_jar_sha256": "85f7746a3ae4b143f1a4ca4e5c043e11c81bf7d69f32c72b7dbaa190f6a0e85c",
+    "build_or_suites_rerun": false
+  },
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "http_checks": [
+    "18112 login shell byte equality",
+    "18112 anonymous assignment list HTTP401"
+  ],
+  "original_source_files": 5634,
+  "original_source_changes": 0,
+  "limits": [
+    "No authenticated browser task/feedback acceptance; PR25 component HTTP evidence remains bound to e9ec65e.",
+    "No backend rerun; PR24 results remain historical for the unchanged exact JAR.",
+    "Full role and editor flow, performance, backup/recovery and dependencies remain incomplete.",
+    "Local merge only; no GitHub merge or production change."
+  ],
+  "browser_observations": [
+    {
+      "case": "Combined login reload",
+      "viewport_width": 1280,
+      "document_width": 1272,
+      "result": "Account/password/captcha labels and real backend captcha image render; no credentials or CAPTCHA entered.",
+      "screenshot": "login-with-feedback.jpg"
+    }
+  ]
+}

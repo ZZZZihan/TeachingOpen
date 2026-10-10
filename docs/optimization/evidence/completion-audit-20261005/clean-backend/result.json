@@ -1,0 +1,3457 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-04T21:29:19.436001+00:00",
+  "scope": "Precise committed api source, macOS arm64 JDK8, isolated cold Maven cache compilation and packaging only",
+  "source_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65",
+  "api_tree": "150a3a0b738c3e635c5bf1eb7be467c4d0ee2266",
+  "source_archive_sha256": "cf5101576d6cf5286b5ef02f8602910dfb2d1d03243de756c02bea080d78e478",
+  "source_manifest_sha256": "c20d4531b23f2dcbb0d821fa92acbb8d8a1030aa76856eec5ec39e776881ad38",
+  "source_file_count": 1141,
+  "source_file_hash_mismatches_after_build": [],
+  "cache_was_empty": true,
+  "project_settings_sha256": "e89e5d81032455d4dfe256e1fd905be42208697e072978a05886af89b9ed9021",
+  "isolated_global_settings_sha256": "05204bd36a3ad4bcb454ab04f61684accf2de5f73606a4bba23f862b5a6dbecb",
+  "java_maven_versions": {
+    "java": {
+      "command": [
+        "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java",
+        "-version"
+      ],
+      "exit_code": 0,
+      "output": "openjdk version \"1.8.0_504\"\nOpenJDK Runtime Environment (Zulu 8.96.0.205-CA-macos-aarch64) (build 1.8.0_504-b01)\nOpenJDK 64-Bit Server VM (Zulu 8.96.0.205-CA-macos-aarch64) (build 25.504-b01, mixed mode)\n"
+    },
+    "maven": {
+      "command": [
+        "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/apache-maven-3.9.16/bin/mvn",
+        "-version"
+      ],
+      "exit_code": 0,
+      "output": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)\nMaven home: /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/apache-maven-3.9.16\nJava version: 1.8.0_504, vendor: Azul Systems, Inc., runtime: /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/jre\nDefault locale: zh_CN, platform encoding: UTF-8\nOS name: \"mac os x\", version: \"27.2\", arch: \"aarch64\", family: \"mac\"\n"
+    }
+  },
+  "build": {
+    "command": [
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/apache-maven-3.9.16/bin/mvn",
+      "-B",
+      "-s",
+      "dev/maven-settings.xml",
+      "-gs",
+      "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/clean-backend/empty-global-settings.xml",
+      "-Dmaven.repo.local=/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/clean-backend/cache",
+      "clean",
+      "package"
+    ],
+    "command_shell": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/apache-maven-3.9.16/bin/mvn -B -s dev/maven-settings.xml -gs /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/clean-backend/empty-global-settings.xml -Dmaven.repo.local=/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/clean-backend/cache clean package",
+    "cwd": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/clean-backend/api",
+    "environment_overrides": {
+      "JAVA_HOME": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/backend-runtime/tools/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home",
+      "MAVEN_SKIP_RC": "true"
+    },
+    "removed_environment_variables": [
+      "MAVEN_OPTS",
+      "MAVEN_ARGS",
+      "JAVA_TOOL_OPTIONS",
+      "JDK_JAVA_OPTIONS",
+      "_JAVA_OPTIONS",
+      "MAVEN_PROJECTBASEDIR"
+    ],
+    "started_utc": "2026-10-04T21:26:24.088880+00:00",
+    "cache_file_count_at_start": 0,
+    "cache_entry_count_at_start": 0,
+    "status": "complete",
+    "pid": 47043,
+    "finished_utc": "2026-10-04T21:29:02.192428+00:00",
+    "duration_seconds": 158.103,
+    "exit_code": 0,
+    "cache_file_count_after": 2614,
+    "cache_entry_count_after": 3887,
+    "build_log_sha256": "0433fe9b69bc3374020f16f31bf2c891d95dd82d025fa2cc4516c8cb00d4acec"
+  },
+  "test_status": {
+    "java_tests_executed": false,
+    "parent_pom_skipTests": true,
+    "surefire_skipped_log_lines": [
+      "[INFO] Tests are skipped.",
+      "[INFO] Tests are skipped."
+    ],
+    "test_result_claim": "Java tests explicitly skipped by the default parent POM; BUILD SUCCESS is compilation and packaging evidence only"
+  },
+  "network": {
+    "downloaded_log_event_count": 983,
+    "download_repository_ids": [
+      "central-https",
+      "jeecg"
+    ]
+  },
+  "reportable_build_success": true,
+  "jar": {
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/clean-backend/api/jeecg-boot-module-system/target/teaching-open-2.8.0.jar",
+    "bytes": 112462842,
+    "sha256": "3f2347f87f270c126b24101998dfb47b4746c101488b483935e770cfc19c81e1",
+    "frozen_path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/account-recovery-20261005/api-author/teaching-open-account-recovery.jar",
+    "frozen_bytes": 112462842,
+    "frozen_sha256": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016",
+    "whole_archive_bytes_equal": false,
+    "embedded_library_count": 209,
+    "external_library_count": 208,
+    "internal_library_count": 1
+  },
+  "comparison": {
+    "boot_inf_lib": {
+      "new_file_count": 209,
+      "frozen_file_count": 209,
+      "path_set_equal": true,
+      "only_new_paths": [],
+      "only_frozen_paths": [],
+      "equal_file_count": 208,
+      "different_files": [
+        {
+          "path": "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar",
+          "new_bytes": 240414,
+          "frozen_bytes": 240414,
+          "new_sha256": "533d344b11c969af9f963cf8880d55baad5d2d0ff37ed0da4d8815fed14fab80",
+          "frozen_sha256": "324cca14df6202cec0950a9abea63ea3a3c4f8e7c07a9d7f256fb0ff03954c67"
+        }
+      ],
+      "all_file_bytes_equal": false
+    },
+    "boot_inf_classes": {
+      "new_file_count": 945,
+      "frozen_file_count": 945,
+      "path_set_equal": true,
+      "only_new_paths": [],
+      "only_frozen_paths": [],
+      "equal_file_count": 945,
+      "different_files": [],
+      "all_file_bytes_equal": true
+    },
+    "boot_inf_class_file_count": 362,
+    "boot_inf_resource_file_count": 583,
+    "external_library_bytes_equal_count": 208,
+    "internal_library_bytes_equal_count": 0,
+    "internal_library_differences": [
+      {
+        "path": "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar",
+        "nested_file_comparison": {
+          "new_file_count": 111,
+          "frozen_file_count": 111,
+          "path_set_equal": true,
+          "only_new_paths": [],
+          "only_frozen_paths": [],
+          "equal_file_count": 111,
+          "different_files": [],
+          "all_file_bytes_equal": true
+        },
+        "zip_metadata_differences": [
+          {
+            "path": "META-INF/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              42
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "META-INF/MANIFEST.MF",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              42
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "META-INF/maven/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              42
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "META-INF/maven/org.jeecgframework.boot/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              42
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "META-INF/maven/org.jeecgframework.boot/jeecg-boot-base-common/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              42
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "META-INF/maven/org.jeecgframework.boot/jeecg-boot-base-common/pom.properties",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              40
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "META-INF/maven/org.jeecgframework.boot/jeecg-boot-base-common/pom.xml",
+            "different_metadata_fields": [
+              "date_time",
+              "external_attr"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              11,
+              12
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              25,
+              8
+            ]
+          },
+          {
+            "path": "org/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/api/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/api/vo/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/api/vo/DictResult.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/api/vo/Result.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/aspect/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/aspect/annotation/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/aspect/annotation/AutoLog.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/aspect/annotation/Dict.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/aspect/annotation/OnlineAuth.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/aspect/annotation/PermissionData.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/constant/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/constant/CacheConstant.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/constant/CommonConstant.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/constant/CommonSendStatus.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/constant/DataBaseConstant.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/constant/FillRuleConstant.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/constant/ProvinceCityArea$Area.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/constant/ProvinceCityArea.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/constant/WebsocketConst.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/es/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/es/JeecgElasticsearchTemplate.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/es/QueryStringBuilder.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/exception/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/exception/JeecgBootException.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/exception/JeecgBootExceptionHandler$1.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/exception/JeecgBootExceptionHandler.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/handler/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/handler/IFillRuleHandler.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/api/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/api/ISysBaseAPI.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/base/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/base/controller/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/base/controller/JeecgController.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/base/entity/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/base/entity/JeecgEntity.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/base/service/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/base/service/JeecgService.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/base/service/impl/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/base/service/impl/JeecgServiceImpl.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/controller/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/controller/CommonController.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/query/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/query/MatchTypeEnum.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/query/QueryCondition.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/query/QueryGenerator$1.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/query/QueryGenerator.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/query/QueryRuleEnum.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/util/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/util/JeecgDataAutorUtils.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/util/JwtUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/vo/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/vo/ComboModel.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/vo/DictModel.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/vo/DictQuery.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/vo/DynamicDataSourceModel.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/vo/LoginUser.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/vo/SysCategoryModel.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/vo/SysDepartModel.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/vo/SysPermissionDataRuleModel.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/system/vo/SysUserCacheInfo.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/BrowserType.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/BrowserUtils.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/CommonUtils.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/DateUtils$1.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/DateUtils$2.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/DateUtils$3.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/DateUtils$4.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/DateUtils$5.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/DateUtils$6.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/DateUtils$7.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/DateUtils.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/DySmsEnum.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/DySmsHelper.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/FillRuleUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/HTMLUtils.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/IPUtils.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/ImportExcelUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/LocalFileDownload.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/LocalFileUpload.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/MD5Util.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/MinioUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/MyClassLoader.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/PasswordUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/PmsUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/RedisUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/ReflectHelper.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/RestDesformUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/RestUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/SpringContextUtils.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/SqlInjectionUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/SysAnnmentTypeEnum.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/TokenUtils.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/UUIDGenerator.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/YouBianCodeUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/dynamic/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/dynamic/db/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/dynamic/db/DataSourceCachePool.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/dynamic/db/DbValidationQueryEnum.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/dynamic/db/DynamicDBUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/dynamic/db/FreemarkerParseFactory.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/dynamic/db/SqlUtils.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/encryption/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/encryption/AesEncryptUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/encryption/EncryptedString.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/BaseColumn.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/CommonProperty.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/JsonSchemaDescrip.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/JsonschemaUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/validate/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/validate/DictProperty.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/validate/HiddenProperty.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/validate/LinkDownProperty.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/validate/NumberProperty.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/validate/PopupProperty.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/validate/StringProperty.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/validate/SwitchProperty.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/jsonschema/validate/TreeSelectProperty.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/oConvertUtils.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/oss/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/oss/OssBootUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/security/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/security/SecurityTools.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/security/entity/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/security/entity/MyKeyPair.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/security/entity/SecurityReq.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/security/entity/SecurityResp.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/security/entity/SecuritySignReq.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/security/entity/SecuritySignResp.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/superSearch/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/superSearch/ObjectParseUtil$1.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/superSearch/ObjectParseUtil.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/superSearch/QueryRuleEnum.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "org/jeecg/common/util/superSearch/QueryRuleVo.class",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              32
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              30
+            ]
+          },
+          {
+            "path": "static/",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              20
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          },
+          {
+            "path": "static/pca.json",
+            "different_metadata_fields": [
+              "date_time"
+            ],
+            "new_zip_datetime": [
+              2026,
+              10,
+              5,
+              5,
+              28,
+              20
+            ],
+            "frozen_zip_datetime": [
+              2026,
+              10,
+              5,
+              3,
+              39,
+              28
+            ]
+          }
+        ],
+        "reason": "Nested file path sets and all payload bytes equal; ZIP metadata differs."
+      }
+    ],
+    "whole_jar_file_entries": {
+      "new_file_count": 1207,
+      "frozen_file_count": 1207,
+      "path_set_equal": true,
+      "only_new_paths": [],
+      "only_frozen_paths": [],
+      "equal_file_count": 1206,
+      "different_files": [
+        {
+          "path": "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar",
+          "new_bytes": 240414,
+          "frozen_bytes": 240414,
+          "new_sha256": "533d344b11c969af9f963cf8880d55baad5d2d0ff37ed0da4d8815fed14fab80",
+          "frozen_sha256": "324cca14df6202cec0950a9abea63ea3a3c4f8e7c07a9d7f256fb0ff03954c67"
+        }
+      ],
+      "all_file_bytes_equal": false
+    },
+    "whole_jar_zip_metadata_summary": {
+      "whole_jar_metadata_difference_count": 1216,
+      "whole_jar_metadata_difference_fields": {
+        "date_time": 1216,
+        "CRC": 1
+      },
+      "private_build_copy_mode_difference_count": 1141,
+      "private_mode_reason": "Extraction preparation explicitly set private copy source files to 0600 (directory 0700); committed source archive original modes are retained in source-api.tar. Content hashes are unchanged."
+    },
+    "internal_zip_metadata_fields": {
+      "date_time": 148,
+      "external_attr": 1
+    },
+    "internal_pom_permission_metadata_difference": [
+      {
+        "which": "new",
+        "path": "META-INF/maven/org.jeecgframework.boot/jeecg-boot-base-common/pom.xml",
+        "external_attr": 2172649472,
+        "unix_mode_octal": "0o100600"
+      },
+      {
+        "which": "frozen",
+        "path": "META-INF/maven/org.jeecgframework.boot/jeecg-boot-base-common/pom.xml",
+        "external_attr": 2175008768,
+        "unix_mode_octal": "0o100644"
+      }
+    ]
+  },
+  "verdict": "PASS_COMPILE_PACKAGE_AND_DEPENDENCY_REPRODUCTION",
+  "source_toolchain_manifest_sha256": "8d56df2bf300565398d38a64906e07b0badba6894f794cbc67fc73197aa43a40",
+  "original_candidate_status_at_start": "?? .playwright-cli/\n?? output/\n",
+  "build_source_permissions_note": "Extraction preparation explicitly set private copy source files to 0600 (directory 0700); committed source archive original modes are retained in source-api.tar. Content hashes are unchanged."
+}

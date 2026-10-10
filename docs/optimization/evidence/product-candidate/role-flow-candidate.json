@@ -1,0 +1,46 @@
+{
+  "recorded_utc": "2026-10-03T07:23:51.045742+00:00",
+  "candidate": "babf2a55f4d996ef5284ca2c038f9ecfa9b53c8a",
+  "api_tree": "f807915ca88d6b0dfdd496d9754ccc37b5732307",
+  "web_tree": "3a29ce07efe47f080860ecc72509d4ecf02f769e",
+  "pr48_commit": "50f052e87d5a9c06965a31de3ed538136aeaff9f",
+  "candidate_python_tests": {
+    "discovered": 113,
+    "passed": 112,
+    "skipped": 1,
+    "exit_code": 0
+  },
+  "actual_fixture_api_tests": {
+    "passed": 22,
+    "total": 22,
+    "jar_unchanged": true
+  },
+  "branch_fixture_tests": {
+    "discovered": 79,
+    "passed": 78,
+    "skipped": 1
+  },
+  "frontend_unchanged_reuses_prior_305_tests_and_build": true,
+  "frontend_current_round_http_checks": 4,
+  "new_java_build": false,
+  "healthy_backends": {
+    "18111": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18141": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18149": {
+      "http": 200,
+      "status": "UP"
+    }
+  },
+  "preview": "http://127.0.0.1:18150/index",
+  "real_course_preview": "http://127.0.0.1:18142/index",
+  "browser_role_acceptance": false,
+  "original_source_protection": "5731 matching files recorded during PR47; no subsequent original source writes performed",
+  "no_github_merge_or_production_deployment": true,
+  "goal": "active"
+}
