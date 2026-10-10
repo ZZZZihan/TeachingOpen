@@ -462,10 +462,7 @@
           this.$message.warning('请选择一条记录！')
           return
         } else {
-          var ids = ''
-          for (var a = 0; a < this.selectedRowKeys2.length; a++) {
-            ids += this.selectedRowKeys2[a] + ','
-          }
+          const ids = this.selectedRowKeys2.join(',')
           var that = this
           console.log(this.currentDeptId)
           this.$confirm({
