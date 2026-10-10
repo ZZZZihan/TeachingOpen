@@ -193,6 +193,11 @@ public class ShiroConfig {
 
 	@Bean("securityManager")
 	public DefaultWebSecurityManager securityManager(ShiroRealm myRealm) {
+
+        // Shiro may reuse an explicitly supplied cache even after its flag is disabled.
+        // Drop only the authorization cache reference before attaching Redis's cache manager.
+        myRealm.setAuthorizationCachingEnabled(false);
+        myRealm.setAuthorizationCache(null);
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(myRealm);
         // This JWT application does not use Shiro's remembered identity cookies.

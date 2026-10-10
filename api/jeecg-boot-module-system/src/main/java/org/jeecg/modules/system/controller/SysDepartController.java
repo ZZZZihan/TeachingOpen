@@ -141,7 +141,7 @@ public class SysDepartController extends BaseController {
 	 * @param sysDepart
 	 * @return
 	 */
-	//@RequiresRoles({"admin"})
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@CacheEvict(value= {CacheConstant.SYS_DEPARTS_CACHE,CacheConstant.SYS_DEPART_IDS_CACHE}, allEntries=true)
 	public Result<SysDepart> add(@RequestBody SysDepart sysDepart, HttpServletRequest request) {
@@ -167,7 +167,7 @@ public class SysDepartController extends BaseController {
 	 * @param sysDepart
 	 * @return
 	 */
-	//@RequiresRoles({"admin"})
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	@CacheEvict(value= {CacheConstant.SYS_DEPARTS_CACHE,CacheConstant.SYS_DEPART_IDS_CACHE}, allEntries=true)
 	public Result<SysDepart> edit(@RequestBody SysDepart sysDepart, HttpServletRequest request) {
@@ -205,7 +205,7 @@ public class SysDepartController extends BaseController {
     * @param id
     * @return
     */
-	//@RequiresRoles({"admin"})
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	@CacheEvict(value= {CacheConstant.SYS_DEPARTS_CACHE,CacheConstant.SYS_DEPART_IDS_CACHE}, allEntries=true)
    public Result<SysDepart> delete(@RequestParam(name="id",required=true) String id) {
@@ -233,7 +233,7 @@ public class SysDepartController extends BaseController {
 	 * @param ids
 	 * @return
 	 */
-	//@RequiresRoles({"admin"})
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	@RequestMapping(value = "/deleteBatch", method = RequestMethod.DELETE)
 	@CacheEvict(value= {CacheConstant.SYS_DEPARTS_CACHE,CacheConstant.SYS_DEPART_IDS_CACHE}, allEntries=true)
 	public Result<SysDepart> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
@@ -337,7 +337,7 @@ public class SysDepartController extends BaseController {
      * @param response
      * @return
      */
-    //@RequiresRoles({"admin"})
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
 	@CacheEvict(value= {CacheConstant.SYS_DEPARTS_CACHE,CacheConstant.SYS_DEPART_IDS_CACHE}, allEntries=true)
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
