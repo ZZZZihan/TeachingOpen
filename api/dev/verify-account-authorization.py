@@ -1,16 +1,70 @@
 #!/usr/bin/env python3
 """Exercise administrative and profile boundaries on an owned synthetic runtime."""
 import argparse
+import base64
 import hashlib
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+import shutil
 import subprocess
+from tempfile import TemporaryDirectory
 from urllib.parse import urlencode
 from uuid import uuid4
+from zipfile import ZipFile
 
 from local_http import FixtureApi
 from local_runtime import mysql_command
+
+
+def legacy_authorization_payload(runtime, jar):
+    """Create the legacy Redis value using the candidate's real Shiro serializer."""
+    with TemporaryDirectory(prefix='teaching-legacy-auth-') as temporary:
+        directory = Path(temporary)
+        libraries = []
+        with ZipFile(jar) as archive:
+            for artifact in ('shiro-core', 'shiro-redis', 'slf4j-api'):
+                matches = [name for name in archive.namelist()
+                           if name.startswith('BOOT-INF/lib/' + artifact + '-') and name.endswith('.jar')]
+                if len(matches) != 1:
+                    raise RuntimeError('Candidate must contain one legacy Shiro dependency')
+                library = directory / (artifact + '.jar')
+                library.write_bytes(archive.read(matches[0]))
+                libraries.append(str(library))
+        javac_candidates = sorted((runtime / 'tools').glob('*jdk*/Contents/Home/bin/javac'))
+        javac = str(javac_candidates[0]) if javac_candidates else shutil.which('javac')
+        if not javac:
+            raise RuntimeError('Java compiler required for canonical legacy authorization cache')
+        java = str(Path(javac).parent / 'java')
+        source = directory / 'LegacyAuthorization.java'
+        source.write_text('''import java.util.*;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.crazycake.shiro.serializer.ObjectSerializer;
+public class LegacyAuthorization {
+    public static void main(String[] args) throws Exception {
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(new HashSet<>(Arrays.asList("student", "admin", "dev")));
+        info.addStringPermission("user:status");
+        ObjectSerializer serializer = new ObjectSerializer();
+        byte[] value = serializer.serialize(info);
+        SimpleAuthorizationInfo restored = (SimpleAuthorizationInfo) serializer.deserialize(value);
+        if (!restored.getRoles().contains("dev") || !restored.getStringPermissions().contains("user:status"))
+            throw new IllegalStateException("Legacy authorization round trip failed");
+        System.out.print(Base64.getEncoder().encodeToString(value));
+    }
+}
+''')
+        classpath = ':'.join(libraries)
+        compiled = subprocess.run([javac, '-cp', classpath, str(source)], capture_output=True, timeout=30)
+        if compiled.returncode:
+            raise RuntimeError('Canonical legacy authorization helper compilation failed')
+        serialized = subprocess.run([java, '-cp', str(directory) + ':' + classpath, 'LegacyAuthorization'],
+                                    capture_output=True, timeout=20)
+        if serialized.returncode:
+            raise RuntimeError('Canonical legacy authorization serialization failed')
+        value = base64.b64decode(serialized.stdout, validate=True)
+        if not value.startswith(b'\xac\xed\x00\x05'):
+            raise RuntimeError('Legacy authorization must use Java object serialization')
+        return value
 
 
 def verify(args):
@@ -34,7 +88,7 @@ def verify(args):
 
         tables = ('sys_user', 'sys_user_role', 'sys_user_depart', 'sys_depart_role_user',
                   'sys_permission', 'sys_role_permission', 'sys_depart_role', 'sys_depart_role_permission',
-                  'sys_role', 'sys_depart_permission')
+                  'sys_role', 'sys_depart_permission', 'sys_depart', 'sys_permission_data_rule')
 
         def snapshot():
             return {table: hashlib.sha256(sql('SELECT * FROM ' + table + ' ORDER BY id').encode()).hexdigest()
@@ -53,6 +107,15 @@ def verify(args):
             status, result, _ = request(method, route, actor, body)
             check(name, status == 200 and result is not None and result.get('success') is True)
 
+        def authorization_denied(name, method, route, actor, body=None, stale_key=None, stale_hash=None):
+            before = snapshot()
+            status, result, _ = request(method, route, actor, body)
+            check(name, status == 403 or result is not None and result.get('success') is False and result.get('code') == 510)
+            check(name + ' changes no account, department, or permission records', snapshot() == before)
+            if stale_key:
+                observed = api.cache('EVAL', "return redis.sha1hex(redis.call('GET',KEYS[1]) or '')", '1', stale_key)
+                check(name + ' leaves the old authorization cache intact', observed == stale_hash)
+
         def clear(actor):
             for key in ('sys:cache:user::fixture_' + actor, 'shiro:cache:org.jeecg.modules.shiro.authc.ShiroRealm.authorizationCache:fixture_' + actor):
                 api.cache('DEL', key)
@@ -66,6 +129,8 @@ def verify(args):
             saved[table] = (columns, rows)
         prefix = 'account_auth_' + uuid4().hex[:10]
         probe_a, probe_b = prefix + '_a', prefix + '_b'
+        permission_id, permission_link = prefix + '_p', prefix + '_rp'
+        old_admin_grant, old_dev_grant = prefix + '_oa', prefix + '_od'
         trigger = prefix + '_reject'
         original = snapshot()
         sql("UPDATE sys_role SET role_level=CASE role_code WHEN 'admin' THEN 9 WHEN 'teacher' THEN 5 ELSE 1 END WHERE id LIKE 'fixture_role_%'")
@@ -85,6 +150,14 @@ def verify(args):
                     denied(actor + ' cannot import accounts ' + route, 'POST', route, actor, {})
                 for route in ('/sys/permission/add', '/sys/permission/saveRolePermission', '/sys/sysDepartRole/add'):
                     denied(actor + ' permission graph blocked ' + route, 'POST', route, actor, {})
+                for method, route, body in (
+                    ('POST', '/sys/sysDepart/add', {'id': prefix + '_d', 'departName': '合成班级'}),
+                    ('PUT', '/sys/sysDepart/edit', {'id': 'fixture_class_a', 'departName': 'forged'}),
+                    ('DELETE', '/sys/sysDepart/delete?id=fixture_class_a', None),
+                    ('DELETE', '/sys/sysDepart/deleteBatch?ids=fixture_class_a', None),
+                    ('POST', '/sys/sysDepart/importExcel', {}),
+                    ('GET', '/sys/sysDepart/removeAll?id=fixture_class_a', None)):
+                    authorization_denied(actor + ' department management blocked ' + route, method, route, actor, body)
                 for method, route, body in (
                     ('POST', '/sys/sysDepartPermission/add', {}),
                     ('PUT', '/sys/sysDepartPermission/edit', {}),
@@ -142,13 +215,96 @@ def verify(args):
                   sql('SELECT dep_id FROM sys_user_depart WHERE user_id=' + literal(new_id)) == 'fixture_class_b')
             allowed('administrator logically deletes newly created account', 'DELETE', '/sys/user/delete?id=' + new_id, 'admin')
             allowed('administrator purges newly deleted account', 'DELETE', '/sys/user/deleteRecycleBin?userIds=' + new_id, 'admin')
-            # Populate the real Shiro authorization cache before adding/removing a grant.
+            # The same token observes live role changes before and after each grant.
             denied('student has no recycle access before grant', 'GET', '/sys/user/recycleBin', 'student_a')
             allowed('administrator grants an allowed role', 'POST', '/sys/user/addSysUserRole', 'admin', role_body)
             allowed('same token observes newly granted role', 'GET', '/sys/user/recycleBin', 'student_a')
             allowed('administrator revokes role', 'DELETE', '/sys/user/deleteUserRole?' + urlencode(
                 {'roleId': 'fixture_role_admin', 'userId': 'fixture_student_a'}), 'admin')
             denied('same token loses revoked role', 'GET', '/sys/user/recycleBin', 'student_a')
+            # Preserve an authentic old Redis value across DB revocation. This models the
+            # result of a failed eviction without changing Redis availability or configuration.
+            sql('INSERT INTO sys_permission(id,name,perms,menu_type,del_flag,status) VALUES ('
+                + literal(permission_id) + ",'probe','user:status',2,0,'1')")
+            sql('INSERT INTO sys_role_permission(id,role_id,permission_id) VALUES ('
+                + literal(permission_link) + ',' + literal(prefix) + ',' + literal(permission_id) + ')')
+            for assignment, role in ((old_admin_grant, 'fixture_role_admin'), (old_dev_grant, prefix)):
+                sql('INSERT INTO sys_user_role(id,user_id,role_id) VALUES (' + literal(assignment)
+                    + ",'fixture_student_a'," + literal(role) + ')')
+            allowed('live developer can edit its synthetic role', 'PUT', '/sys/role/edit', 'student_a',
+                    {'id': prefix, 'roleName': '合成开发角色'})
+            allowed('live administrator has recycle access', 'GET', '/sys/user/recycleBin', 'student_a')
+            allowed('live permission authorizes status API', 'PUT', '/sys/user/frozenBatch', 'student_a',
+                    {'ids': 'fixture_student_b', 'status': '1'})
+            jar = (args.jar or Path(__file__).resolve().parents[1] / 'jeecg-boot-module-system/target/teaching-open-2.8.0.jar').resolve()
+            stale_value = legacy_authorization_payload(api.runtime, jar)
+            stale_hash = hashlib.sha1(stale_value).hexdigest()
+            stale_key = 'shiro:cache:org.jeecg.modules.shiro.authc.ShiroRealm.authorizationCache:fixture_student_a'
+            replay = "local value=ARGV[1]:gsub('..',function(h) return string.char(tonumber(h,16)) end); redis.call('SET',KEYS[1],value,'EX',200000); return redis.sha1hex(value)"
+            check('canonical legacy administrator/developer cache is retained in owned Redis',
+                  api.cache('EVAL', replay, '1', stale_key, stale_value.hex()) == stale_hash)
+            sql('DELETE FROM sys_user_role WHERE id IN (' + literal(old_admin_grant) + ',' + literal(old_dev_grant) + ')')
+            check('database revocation removes both old management roles',
+                  sql("SELECT COUNT(*) FROM sys_user_role WHERE user_id='fixture_student_a' AND role_id IN ('fixture_role_admin',"
+                      + literal(prefix) + ')') == '0')
+            missing = prefix + '_missing'
+            for method, route, body in (
+                ('PUT', '/sys/role/edit', {'id': prefix, 'roleName': 'forged stale cache'}),
+                ('POST', '/sys/role/add', {'id': prefix + '_r', 'roleCode': prefix + '_new', 'roleName': 'forged', 'roleLevel': 1}),
+                ('DELETE', '/sys/role/delete?id=' + prefix, None),
+                ('DELETE', '/sys/role/deleteBatch?ids=' + prefix, None),
+                ('POST', '/sys/role/importExcel', {}),
+                ('POST', '/sys/role/datarule', {'roleId': prefix, 'permissionId': permission_id, 'dataRuleIds': ''}),
+                ('POST', '/sys/permission/add', {'id': prefix + '_p2', 'name': 'forged', 'menuType': 2, 'perms': '*'}),
+                ('PUT', '/sys/permission/edit', {'id': permission_id, 'name': 'forged'}),
+                ('POST', '/sys/permission/edit', {'id': permission_id, 'name': 'forged'}),
+                ('DELETE', '/sys/permission/delete?id=' + permission_id, None),
+                ('DELETE', '/sys/permission/deleteBatch?ids=' + permission_id, None),
+                ('POST', '/sys/permission/saveRolePermission', {'roleId': prefix, 'permissionIds': '', 'lastpermissionIds': permission_id}),
+                ('POST', '/sys/permission/saveDepartPermission', {'departId': 'fixture_class_a', 'permissionIds': permission_id, 'lastpermissionIds': ''}),
+                ('POST', '/sys/permission/addPermissionRule', {'id': prefix + '_rule', 'permissionId': permission_id, 'ruleName': 'forged'}),
+                ('PUT', '/sys/permission/editPermissionRule', {'id': prefix + '_rule', 'ruleName': 'forged'}),
+                ('POST', '/sys/permission/editPermissionRule', {'id': prefix + '_rule', 'ruleName': 'forged'}),
+                ('DELETE', '/sys/permission/deletePermissionRule?id=' + prefix + '_rule', None),
+                ('POST', '/sys/sysDepartRole/add', {'id': prefix + '_dr', 'departId': 'fixture_class_a', 'roleName': 'forged'}),
+                ('PUT', '/sys/sysDepartRole/edit', {'id': prefix + '_dr', 'roleName': 'forged'}),
+                ('DELETE', '/sys/sysDepartRole/delete?id=' + prefix + '_dr', None),
+                ('DELETE', '/sys/sysDepartRole/deleteBatch?ids=' + prefix + '_dr', None),
+                ('POST', '/sys/sysDepartRole/deptRoleUserAdd', {'depId': 'fixture_class_a', 'userId': 'fixture_student_a', 'newRoleId': prefix + '_dr'}),
+                ('POST', '/sys/sysDepartRole/datarule', {'roleId': prefix + '_dr', 'permissionId': permission_id, 'dataRuleIds': ''}),
+                ('POST', '/sys/sysDepartRole/importExcel', {}),
+                ('POST', '/sys/sysDepartPermission/add', {'id': prefix + '_dp', 'departId': 'fixture_class_a', 'permissionId': permission_id}),
+                ('PUT', '/sys/sysDepartPermission/edit', {'id': prefix + '_dp', 'permissionId': permission_id}),
+                ('DELETE', '/sys/sysDepartPermission/delete?id=' + prefix + '_dp', None),
+                ('DELETE', '/sys/sysDepartPermission/deleteBatch?ids=' + prefix + '_dp', None),
+                ('POST', '/sys/sysDepartPermission/importExcel', {}),
+                ('POST', '/sys/sysDepartPermission/datarule', {'departId': 'fixture_class_a', 'permissionId': permission_id, 'dataRuleIds': ''}),
+                ('POST', '/sys/sysDepartPermission/saveDeptRolePermission', {'roleId': prefix + '_dr', 'permissionIds': permission_id, 'lastpermissionIds': ''}),
+                ('POST', '/sys/sysDepart/add', {'id': prefix + '_d', 'departName': 'forged'}),
+                ('PUT', '/sys/sysDepart/edit', {'id': 'fixture_class_a', 'departName': 'forged'}),
+                ('DELETE', '/sys/sysDepart/delete?id=' + missing, None),
+                ('DELETE', '/sys/sysDepart/deleteBatch?ids=' + missing, None),
+                ('POST', '/sys/sysDepart/importExcel', {}),
+                ('GET', '/sys/sysDepart/removeAll?id=' + missing, None),
+                ('POST', '/sys/user/add', {'username': prefix + '_denied', 'password': 'SecurePassword9!', 'realname': 'forged'}),
+                ('PUT', '/sys/user/edit', {'id': 'fixture_student_a', 'realname': 'forged'}),
+                ('DELETE', '/sys/user/delete?id=' + missing, None),
+                ('DELETE', '/sys/user/deleteBatch?ids=' + missing, None),
+                ('PUT', '/sys/user/changePassword', {'id': 'fixture_student_b', 'password': 'SecurePassword9!'}),
+                ('POST', '/sys/user/importExcel', {}),
+                ('POST', '/sys/user/importStudent', {}),
+                ('POST', '/sys/user/addSysUserRole', role_body),
+                ('DELETE', '/sys/user/deleteUserRole?roleId=fixture_role_student&userId=fixture_student_a', None),
+                ('DELETE', '/sys/user/deleteUserRoleBatch?roleId=fixture_role_student&userIds=fixture_student_a', None),
+                ('POST', '/sys/user/editSysDepartWithUser', {'depId': 'fixture_class_a', 'userIdList': ['fixture_student_a']}),
+                ('DELETE', '/sys/user/deleteUserInDepart?depId=fixture_class_a&userId=fixture_student_a', None),
+                ('DELETE', '/sys/user/deleteUserInDepartBatch?depId=fixture_class_a&userIds=fixture_student_a', None),
+                ('GET', '/sys/user/recycleBin', None),
+                ('PUT', '/sys/user/putRecycleBin', {'userIds': missing}),
+                ('DELETE', '/sys/user/deleteRecycleBin?userIds=' + missing, None),
+                ('PUT', '/sys/user/frozenBatch', {'ids': 'fixture_student_b', 'status': '2'})):
+                authorization_denied('revoked roles ignore retained old cache ' + method + ' ' + route,
+                                     method, route, 'student_a', body, stale_key, stale_hash)
             for probe in (probe_a, probe_b):
                 sql('INSERT INTO sys_user(id,username,realname,status,del_flag) VALUES (' + literal(probe) + ','
                     + literal(probe) + ",'probe',1,1)")
@@ -194,6 +350,9 @@ def verify(args):
             for table in ('sys_user_role', 'sys_user_depart', 'sys_depart_role_user'):
                 sql('DELETE FROM ' + table + ' WHERE user_id IN (' + literal(probe_a) + ',' + literal(probe_b) + ')')
             sql("DELETE FROM sys_user_role WHERE user_id='fixture_student_a' AND role_id IN ('fixture_role_admin','fixture_role_teacher')")
+            sql('DELETE FROM sys_user_role WHERE id IN (' + literal(old_admin_grant) + ',' + literal(old_dev_grant) + ')')
+            sql('DELETE FROM sys_role_permission WHERE id=' + literal(permission_link))
+            sql('DELETE FROM sys_permission WHERE id=' + literal(permission_id))
             sql('DELETE FROM sys_user WHERE id IN (' + literal(probe_a) + ',' + literal(probe_b) + ')')
             sql('DELETE FROM sys_role WHERE id=' + literal(prefix))
             for table, (columns, rows) in saved.items():
