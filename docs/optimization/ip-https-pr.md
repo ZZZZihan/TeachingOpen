@@ -15,13 +15,13 @@
 ## 本地已经执行的验证
 
 - HTTPS 工具单元测试 **23 项通过**：正常切换/回退、错误配置、reload 失败、恢复失败、证书依赖损坏、摘要漂移、符号链接、并发锁和真实 SIGKILL 后恢复。
-- 固定官方镜像 `nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94` 的真实 Nginx/TLS 测试 **85 项通过**。汇总由 `deploy/test_ip_https_runtime.py` 输出并在 GitHub CI 保存；所有客户端 TCP 目的地址为本机动态端口，`8.8.8.8` 只用于配置及证书身份。临时测试 CA 和私钥不上传。覆盖可信 TLS/IP SAN、证书失败分支、API 读写、真实 WebSocket 握手及消息回显、Range 206、CORP、ACME 精确响应和缺失 404、阶段切换和逐级回退。
+- 固定官方镜像 `nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94` 的真实 Nginx/TLS 测试 **91 项通过**。汇总由 `deploy/test_ip_https_runtime.py` 输出并在 GitHub CI 保存；所有客户端 TCP 目的地址为本机动态端口，`8.8.8.8` 只用于配置及证书身份。临时测试 CA 和私钥不上传。覆盖可信 TLS/IP SAN、证书失败分支、API 读写、真实 WebSocket 握手及消息回显、Range 206、CORP、ACME 精确响应和缺失 404、阶段切换和逐级回退。
 - 实际 Spring Boot 2.1.3 配置绑定 → Tomcat 9.0.122 RemoteIpValve → 原始 MediaCookie 源码 **14 项通过**，另核对全部 7 个属性受实际依赖支持。包括可信 HTTPS 设置/清除 Secure Cookie、HTTP 及不可信来源无法伪造安全协议。未启动应用上下文或数据库。
 - 前端相关 8 组测试 **101 项通过**：通知 socket、Scratch 云变量、Python URL、课程材料链接、阅读器及三个编辑器桥接。
 - 既有备份、迁移清单、发布包、空表提取及 CI 守卫 **45 项通过**。`git diff --check` 通过。
 - 另一子 Agent 对实现、测试、配置与操作说明进行了独立代码审查，没有发现阻止 PR 的 P1/P2 问题。独立审查不是用户人工验收。
 
-集成测试开发中修正过两项测试夹具问题：生成目录必须全新；Nginx reload 后旧 worker 可暂时共存。测试现等待旧 worker 退出再验收新阶段。保留这一边界，避免仅凭一次成功响应就宣布切换完成。
+集成测试开发中修正过生成目录必须全新、reload 后旧 worker 可暂时共存两项测试夹具问题；测试现等待旧 worker 退出再验收新阶段。首轮 GitHub CI 的工具任务在运行时就绪检查失败，独立审查在 Linux 容器复现为临时目录 0700 阻止非 root worker 读取。后续将顶层改为 0711、公开内容改为可读，同时保留证书目录 0700 和私钥 0600；新增原生 Linux 文件系统及实际 worker UID 的访问检查，完整重跑 91 项通过。前后端首轮 CI 已通过，最终以修复提交的完整 CI 为准。
 
 复现入口：
 

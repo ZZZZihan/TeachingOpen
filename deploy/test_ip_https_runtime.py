@@ -16,6 +16,7 @@ import shlex
 import shutil
 import socket
 import ssl
+import stat
 import subprocess
 import sys
 import tempfile
@@ -159,6 +160,27 @@ class Runtime:
                  "-CA", str(certs / "ca.pem"), "-CAkey", str(certs / "ca.key"),
                  "-CAcreateserial", "-days", "2", "-sha256", "-extfile", str(certs / "server.ext"),
                  "-out", str(certs / "server.pem")])
+        # A TemporaryDirectory starts at 0700. Native Linux bind mounts retain
+        # that mode, so non-root Nginx workers need traversal through /fixture.
+        # Keep only the public static trees readable; CA/server keys stay private.
+        self.directory.chmod(0o711)
+        public_paths = []
+        for public in (self.directory / "web", self.directory / "acme"):
+            for path in (public, *public.rglob("*")):
+                path.chmod(0o755 if path.is_dir() else 0o644)
+                public_paths.append(path)
+        certs.chmod(0o700)
+        for key in (certs / "ca.key", certs / "server.key"):
+            key.chmod(0o600)
+        self.record("fixture root permits worker traversal without directory listing",
+                    stat.S_IMODE(self.directory.stat().st_mode) == 0o711)
+        self.record("public web and ACME paths have explicit worker-readable permissions", all(
+            stat.S_IMODE(path.stat().st_mode) == (0o755 if path.is_dir() else 0o644)
+            for path in public_paths))
+        self.record("certificate directory and both private keys keep private permissions",
+                    stat.S_IMODE(certs.stat().st_mode) == 0o700 and all(
+                        stat.S_IMODE(key.stat().st_mode) == 0o600
+                        for key in (certs / "ca.key", certs / "server.key")))
         self.context = ssl.create_default_context(cafile=str(certs / "ca.pem"))
         render_args = [sys.executable, str(ROOT / "deploy/ip_https.py"), "render",
                        "--ip", IDENTITY, "--web-root", "/fixture/web",
@@ -204,6 +226,26 @@ class Runtime:
             for binding in bindings or []))
         self.wait_until(lambda: self.request("GET", "/")[0] == 200)
         self.record("bootstrap nginx configuration validates", self.nginx("-t").returncode == 0)
+        self.worker_permissions()
+
+    def worker_permissions(self):
+        # Copy the actual fixture to the container's native Linux filesystem.
+        # This checks POSIX access independently of macOS bind-mount translation.
+        worker = next(iter(self.workers()))
+        process = command(["docker", "exec", self.name, "cat", f"/proc/{worker}/status"]).stdout
+        worker_uid = next(line.split()[2] for line in process.splitlines() if line.startswith("Uid:"))
+        self.record("Nginx serves content with a non-root worker", worker_uid != "0")
+        native = "/tmp/ip-https-native-permissions"
+        command(["docker", "exec", self.name, "cp", "-a", "/fixture", native])
+        command(["docker", "exec", "--user", worker_uid, self.name, "/bin/sh", "-c",
+                 'test "$(cat "$1/web/index.html")" = "<html>synthetic-ip-https-spa</html>" && '
+                 'test "$(cat "$1/acme/.well-known/acme-challenge/runtime-token")" = synthetic-acme-response',
+                 "permission-probe", native])
+        self.record("non-root worker reads web and ACME files on native Linux permissions", True)
+        command(["docker", "exec", "--user", worker_uid, self.name, "/bin/sh", "-c",
+                 '! test -r "$1/certs/ca.key" && ! test -r "$1/certs/server.key"',
+                 "permission-probe", native])
+        self.record("non-root worker cannot read either private key on native Linux permissions", True)
 
     def nginx(self, action):
         return command(["docker", "exec", self.name, "nginx", "-c", "/fixture/nginx.conf", action])
