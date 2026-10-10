@@ -36,7 +36,7 @@ class CiGuardsTest(unittest.TestCase):
             for name in java.EXPECTED:
                 (reports / ('TEST-' + name + '.xml')).write_text(
                     '<testsuite name="' + name + '" tests="1" failures="0" errors="0" skipped="0"/>')
-            self.assertEqual(java.check(reports)['tests'], 4)
+            self.assertEqual(java.check(reports)['tests'], len(java.EXPECTED))
             name = sorted(java.EXPECTED)[0]
             (reports / ('TEST-' + name + '.xml')).write_text(
                 '<testsuite name="' + name + '" tests="1" skipped="1"/>')

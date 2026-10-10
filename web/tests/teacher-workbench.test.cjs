@@ -30,6 +30,18 @@ async function ready (h, feedback = [], record = row) {
 }
 const modal = () => mount('modules/TeachingWorkModal.vue')
 const list = () => mount('TeachingWorkList.vue')
+test('克隆冲突保留后端原因，只有成功才提示新建草稿，重复点击不重复发送', async () => {
+  const h = list(); h.i.handleSend(row)
+  assert.match(h.i.$refs.selectUserModal.title, /新草稿/)
+  const failed = h.i.selectStudentOK(['student-a']); h.i.selectStudentOK(['student-a'])
+  assert.equal(h.calls.length, 1)
+  h.calls[0].resolve({ success: false, message: '接收用户已有该任务的作品，请继续编辑原作品；本批次未创建作品' })
+  await failed; assert.match(h.i.actionError, /已有该任务/); assert.equal(h.notices.length, 0); assert.equal(h.i.actionBusy, '')
+  const saved = h.i.selectStudentOK(['student-b'])
+  assert.equal(h.calls[1].data.sendWorkId, row.id)
+  h.calls[1].resolve({ success: true, message: '已为1个用户新建作品草稿' })
+  await saved; assert.deepEqual(h.notices, ['已为1个用户新建作品草稿']); assert.equal(h.i.actionError, '')
+})
 test('旧表单实际复现：0 分且评语为空时被序列化为空列表', () => {
   const h = mount('modules/TeachingWorkCorrectForm.vue', true)
   assert.equal(h.i.getFormData().length, 0)

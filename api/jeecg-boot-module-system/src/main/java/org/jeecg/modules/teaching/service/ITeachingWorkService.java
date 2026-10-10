@@ -49,6 +49,9 @@ public interface ITeachingWorkService extends IService<TeachingWork> {
 	/** Count one authorized detail read without changing content metadata. */
 	boolean incrementViewCount(String workId);
 
+	/** Count one like only while the work remains public, without editing content. */
+	boolean incrementStarCount(String workId);
+
 	Page<StudentWorkModel> listWorkModel(Page<StudentWorkModel> page, QueryWrapper<StudentWorkModel> queryWrapper, List<String> deptIds);
 
     int sendWork(StudentWorkSendVO studentWorkSendVO);
