@@ -3,7 +3,12 @@ import { httpAction } from '@/api/manage'
 // Shared by the course and unit dialogs. Server writes are never retried automatically.
 export default {
     data () {
-        return { saveError: '', saveVersion: 0, initialModel: '', discardPromptOpen: false }
+        return { saveError: '', saveVersion: 0, uploadSession: 0, uploadStates: {}, initialModel: '', discardPromptOpen: false }
+    },
+    computed: {
+        uploadsReady () {
+            return Object.keys(this.uploadStates).every(field => this.uploadStates[field] === 'ready')
+        }
     },
     watch: {
         saveError (message) {
@@ -19,11 +24,18 @@ export default {
     },
     beforeDestroy () {
         this.saveVersion += 1
+        this.uploadSession += 1
     },
     methods: {
+        onUploadState (field, status) {
+            if (!this.visible || !status || status.session !== this.uploadSession) return
+            this.$set(this.uploadStates, field, status.state)
+        },
         beginEdit (record) {
             if (this.confirmLoading) return false
             this.saveVersion += 1
+            this.uploadSession += 1
+            this.uploadStates = {}
             this.saveError = ''
             this.form.resetFields()
             this.model = Object.assign({}, record)
@@ -34,12 +46,15 @@ export default {
         close () {
             if (this.confirmLoading) return
             this.saveVersion += 1
+            this.uploadSession += 1
+            this.uploadStates = {}
+            if (this.$refs.mapEditor && this.$refs.mapEditor.close) this.$refs.mapEditor.close()
             this.visible = false
             this.$emit('close')
         },
         handleCancel () {
             if (this.confirmLoading || !this.visible || this.discardPromptOpen) return
-            if (!this.form.isFieldsTouched() && JSON.stringify(this.model) === this.initialModel) {
+            if (this.uploadsReady && !this.form.isFieldsTouched() && JSON.stringify(this.model) === this.initialModel) {
                 this.close()
                 return
             }
@@ -59,6 +74,10 @@ export default {
         },
         handleOk () {
             if (!this.visible || this.confirmLoading || this.discardPromptOpen) return
+            if (!this.uploadsReady) {
+                this.saveError = '附件尚未准备好，请等待上传和登记完成，或重试、移除失败文件后保存。'
+                return
+            }
             const version = ++this.saveVersion
             this.confirmLoading = true
             this.saveError = ''
@@ -67,6 +86,11 @@ export default {
                 if (version !== this.saveVersion || !this.visible) return
                 if (err) {
                     this.confirmLoading = false
+                    return
+                }
+                if (!this.uploadsReady) {
+                    this.confirmLoading = false
+                    this.saveError = '附件尚未准备好，请完成上传后保存。'
                     return
                 }
                 const payload = Object.assign({}, this.model, values)
