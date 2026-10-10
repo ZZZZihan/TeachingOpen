@@ -40,7 +40,10 @@ jobs:
         working-directory: web
         env:
           NODE_OPTIONS: --openssl-legacy-provider --max-old-space-size=4096
+          TEACHING_DEPENDENCY_REPORT: '1'
         run: npm run build
+      - name: Browser runtime dependency release gate
+        run: python3 ci/check_richtext_dependencies.py
       - name: Initial JS and CSS budget
         working-directory: web
         run: npm run check:initial-assets
@@ -107,7 +110,7 @@ jobs:
         run: >-
           mvn -B -ntp -s dev/maven-settings.xml
           -DskipTests=false
-          -Dtest=AccountRegistrationServiceTest,AccountRecoveryServiceTest,AccountRecoverySessionTest,PublicUserDirectoryTest
+          -Dtest=RichTextSanitizerTest,AccountRegistrationServiceTest,AccountRecoveryServiceTest,AccountRecoverySessionTest,PublicUserDirectoryTest,CourseMapPositionServiceTest,PublicDictionaryBoundaryTest,DisabledTransitBoundaryTest,AccountAuthorizationTest,AdditionalWorkAuthorizationTest,AdditionalWorkStatisticsTest,PaginationBoundaryTest,WorkStarControllerTest,WorkCloneServiceTest
           -Dsurefire.failIfNoSpecifiedTests=false
           clean package
       - name: Require executed core tests

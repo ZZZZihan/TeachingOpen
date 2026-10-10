@@ -149,7 +149,7 @@ def select_rows(source):
     custom_homepage_cleared = bool(configs.get('_homeHtml', {}).get('config_value'))
     visual_values_cleared = sum(bool(configs.get(key, {}).get('config_value')) for key in MODERN_HOME_CONFIG_KEYS)
     # Match the user-selected modern preview: component defaults supply the
-    # platform name, concise navigation, pale background and campus photograph.
+    # platform name, concise navigation, pale background and learning illustration.
     # This is site configuration selection, never a copy of preview data.
     for key in MODERN_HOME_CONFIG_KEYS:
         if key in configs:

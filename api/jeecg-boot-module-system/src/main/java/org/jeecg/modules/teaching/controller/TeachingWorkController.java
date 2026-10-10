@@ -134,14 +134,14 @@ public class TeachingWorkController extends BaseController {
 	 @GetMapping(value = "/mine")
 	 public Result<?> mine(StudentWorkModel teachingWork,
 												 @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
-												 @RequestParam(name = "pageSize", defaultValue = "999") Integer pageSize,
+												 @RequestParam(name = "pageSize", defaultValue = "100") Integer pageSize,
 												 HttpServletRequest req) {
 		 String tag = teachingWork.getWorkTag();
 		 teachingWork.setWorkTag(null);
 		 teachingWork.setUserId(getCurrentUser().getId());
 		 Result<IPage<StudentWorkModel>> result = new Result<IPage<StudentWorkModel>>();
 		 QueryWrapper<StudentWorkModel> queryWrapper = QueryGenerator.initQueryWrapper(teachingWork, req.getParameterMap());
-		 queryWrapper.orderByDesc("teaching_work.create_time");
+		 queryWrapper.orderByDesc("teaching_work.create_time", "teaching_work.id");
 //		 Page<TeachingWork> page = new Page<TeachingWork>(pageNo, pageSize);
 		 if (StringUtils.isNotBlank(tag)){
 			 String keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), tag);
@@ -234,25 +234,16 @@ public class TeachingWorkController extends BaseController {
 	@RequiresRoles(value = {"admin", "dev", "teacher"}, logical = Logical.OR)
 	 public Result<TeachingWork> sendWork(@RequestBody StudentWorkSendVO studentWorkSendVO){
 		 Result<TeachingWork> result = new Result<>();
-		 if (studentWorkSendVO.getUserIdList() == null || studentWorkSendVO.getUserIdList().isEmpty()) {
-			 result.error500("请选择接收用户");
-			 return result;
+		 try {
+			 int count = teachingWorkService.sendWork(studentWorkSendVO);
+			 result.setSuccess(true);
+			 result.setMessage(String.format("已为%d个用户新建作品草稿", count));
+		 } catch (AuthorizationException | JeecgBootException error) {
+			 throw error;
+		 } catch (RuntimeException error) {
+			 log.error("作品克隆失败", error);
+			 result.error500("作品克隆失败，本批次未创建任何作品，请稍后重试");
 		 }
-		 TeachingWork source = teachingWorkService.getById(studentWorkSendVO.getSendWorkId());
-		 teachingAccessService.requireReadWork(source);
-		 // Validate every recipient and any same-name overwrite before the first write.
-		 for (String userId : studentWorkSendVO.getUserIdList()) {
-			 TeachingWork recipient = new TeachingWork();
-			 recipient.setUserId(userId);
-			 recipient.setDepartId(source.getDepartId());
-			 teachingAccessService.requireManageWork(recipient);
-		 }
-		 List<TeachingWork> overwritten = teachingWorkService.list(new QueryWrapper<TeachingWork>()
-				 .eq("work_name", source.getWorkName()).in("user_id", studentWorkSendVO.getUserIdList()));
-		 for (TeachingWork existing : overwritten) teachingAccessService.requireManageWork(existing);
-		 int count = teachingWorkService.sendWork(studentWorkSendVO);
-		 result.setSuccess(true);
-		 result.setMessage(String.format("发送成功，共%d个用户", count));
 		 return result;
 	 }
 
@@ -333,17 +324,19 @@ public class TeachingWorkController extends BaseController {
 		 Result<TeachingWork> result = new Result<TeachingWork>();
 		 TeachingWork teachingWork = teachingWorkService.getById(workId);
 		 teachingAccessService.requireCommunityWork(teachingWork);
+		 if (teachingWork != null && !"3".equals(teachingWork.getWorkStatus()) && !"4".equals(teachingWork.getWorkStatus())) {
+			 result.error500("作品不可公开点赞");
+			 return result;
+		 }
 		 if (teachingWork == null) {
 			 result.error500("未找到对作业");
 		 } else {
 			 String ip = IPUtils.getIpAddr(request);
 			 if (redisUtil.get("starWork:" + workId + ip) == null) {
-				 if (Objects.nonNull(teachingWork.getStarNum())) {
-					 teachingWork.setStarNum(teachingWork.getStarNum() + 1);
-				 } else {
-					 teachingWork.setStarNum(1);
+				 if (!teachingWorkService.incrementStarCount(workId)) {
+					 result.error500("作品已撤回或不可公开点赞，请刷新后重试");
+					 return result;
 				 }
-				 teachingWorkService.updateById(teachingWork);
 				 redisUtil.set("starWork:" + workId + ip, "1", 3600*24);
 				 result.setMessage("点赞成功");
 				 result.setSuccess(true);

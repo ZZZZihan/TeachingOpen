@@ -17,6 +17,6 @@ export default {
 <style scoped>
 .registration-result { max-width: 480px; margin: 80px auto; padding: 24px; text-align: center; }
 .registration-result p { margin: 24px 0; line-height: 1.8; color: #69747c; }
-.registration-result a { color: #74256a; }
+.registration-result a { color: #146fc2; }
 .home-link { display: block; margin-top: 20px; }
 </style>

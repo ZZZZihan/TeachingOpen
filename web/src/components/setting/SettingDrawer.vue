@@ -44,12 +44,12 @@
           <h3 class="setting-drawer-index-title">主题色</h3>
 
           <div style="height: 20px">
-            <a-tooltip class="setting-drawer-theme-color-colorBlock" v-for="(item, index) in colorList" :key="index">
+            <a-tooltip class="setting-drawer-theme-color-colorBlock" v-for="(item, index) in themeColors" :key="index">
               <template slot="title">
                 {{ item.key }}
               </template>
               <a-tag :color="item.color" @click="changeColor(item.color)">
-                <a-icon type="check" v-if="item.color === primaryColor"></a-icon>
+                <a-icon type="check" v-if="sameThemeColor(item.color, primaryColor)"></a-icon>
               </a-tag>
             </a-tooltip>
 
@@ -169,6 +169,7 @@
   import { updateTheme, updateColorWeak, colorList } from '@/components/tools/setting'
   import { mixin, mixinDevice } from '@/utils/mixin.js'
   import { triggerWindowResizeEvent } from '@/utils/util'
+import { sameThemeColor, themeColorOptions } from '@/utils/themePreference'
 
   export default {
     components: {
@@ -183,8 +184,10 @@
         dataFixSiderbar: false
     }
     },
-    watch: {
-
+    computed: {
+        themeColors () {
+            return themeColorOptions(this.colorList, this.primaryColor)
+        }
     },
     mounted () {
       const vm = this
@@ -203,6 +206,7 @@
       }
     },
     methods: {
+        sameThemeColor,
       showDrawer() {
         this.visible = true
       },
@@ -233,10 +237,8 @@
         this.$store.dispatch('ToggleContentWidth', type)
       },
       changeColor (color) {
-        if (this.primaryColor !== color) {
-          this.$store.dispatch('ToggleColor', color)
-          updateTheme(color)
-        }
+        this.$store.dispatch('ToggleColor', color)
+        updateTheme(color)
       },
       handleFixedHeader (fixed) {
         this.$store.dispatch('ToggleFixedHeader', fixed)
@@ -280,7 +282,7 @@
           padding-top: 15px;
           padding-left: 24px;
           height: 100%;
-          color: #1890ff;
+          color: #146fc2;
           font-size: 14px;
           font-weight: 700;
         }
@@ -308,7 +310,7 @@
   .setting-drawer-index-handle {
     position: absolute;
     top: 240px;
-    background: #1890ff;
+    background: #146fc2;
     width: 48px;
     height: 48px;
     right: 300px;

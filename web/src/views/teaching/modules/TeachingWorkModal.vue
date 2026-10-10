@@ -141,28 +141,28 @@ export default {
 </style>
 <style scoped>
 .grading-state { padding: 48px 16px; text-align: center; color: #746b75; }
-.grading-context { border-bottom: 1px solid #e6e0e5; padding-bottom: 22px; margin-bottom: 26px; }
+.grading-context { border-bottom: 1px solid #d5e5f5; padding-bottom: 22px; margin-bottom: 26px; }
 .grading-context h2 { color: #28252c; font-size: 25px; line-height: 1.45; margin: 6px 0 10px; overflow-wrap: anywhere; }
 .grading-context p { color: #746b75; font-size: 13px; }
-.grading-eyebrow { color: #74256a !important; letter-spacing: .03em; }
+.grading-eyebrow { color: #146fc2 !important; letter-spacing: .03em; }
 .grading-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 32px; }
-.grading-settings { border-left: 1px solid #e6e0e5; padding-left: 28px; min-width: 0; }
+.grading-settings { border-left: 1px solid #d5e5f5; padding-left: 28px; min-width: 0; }
 .grading-settings label { display: block; font-weight: 600; color: #3d3740; margin-bottom: 8px; }
-.grading-settings input, .grading-settings select { width: 100%; min-height: 40px; background: white; border: 1px solid #d3c9d2; border-radius: 4px; padding: 8px 10px; margin-bottom: 18px; color: #3d3740; }
+.grading-settings input, .grading-settings select { width: 100%; min-height: 40px; background: white; border: 1px solid #bccfe2; border-radius: 4px; padding: 8px 10px; margin-bottom: 18px; color: #3d3740; }
 .grading-note { font-size: 12px; line-height: 1.8; color: #746b75; }
-.grading-discussion { margin-top: 22px; border-top: 1px solid #e6e0e5; padding-top: 18px; font-size: 13px; color: #675f69; }
+.grading-discussion { margin-top: 22px; border-top: 1px solid #d5e5f5; padding-top: 18px; font-size: 13px; color: #675f69; }
 .grading-discussion summary { cursor: pointer; font-weight: 600; color: #3d3740; }
-.grading-discussion article { border-bottom: 1px solid #e6e0e5; padding: 16px 0; }
+.grading-discussion article { border-bottom: 1px solid #d5e5f5; padding: 16px 0; }
 .grading-discussion p { white-space: pre-wrap; overflow-wrap: anywhere; margin: 10px 0; }
 .grading-discussion small { color: #817582; }
-.grading-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px solid #e6e0e5; margin-top: 28px; padding-top: 20px; }
+.grading-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px solid #d5e5f5; margin-top: 28px; padding-top: 20px; }
 .grading-footer p { color: #746b75; font-size: 12px; margin: 0; }
 .grading-footer > div { display: flex; gap: 10px; flex-shrink: 0; }
-.grade-button { background: #74256a; color: white; border: 1px solid #74256a; border-radius: 4px; padding: 9px 18px; cursor: pointer; }
-.grade-button.secondary { color: #3d3740; border-color: #d3c9d2; background: white; }
+.grade-button { background: #146fc2; color: white; border: 1px solid #146fc2; border-radius: 4px; padding: 9px 18px; cursor: pointer; }
+.grade-button.secondary { color: #3d3740; border-color: #bccfe2; background: white; }
 .grade-button:disabled { opacity: .6; cursor: wait; }
-.grade-link { color: #74256a; border: 0; background: transparent; padding: 0; cursor: pointer; font-weight: 600; }
+.grade-link { color: #146fc2; border: 0; background: transparent; padding: 0; cursor: pointer; font-weight: 600; }
 .grading-error { color: #a43c31; background: #fff3ef; padding: 12px; margin-top: 18px; }
-.grading-content :focus-visible { outline: 2px solid #74256a; outline-offset: 3px; }
-@media (max-width: 640px) { .grading-grid { grid-template-columns: 1fr; gap: 24px; } .grading-settings { border-left: 0; border-top: 1px solid #e6e0e5; padding: 24px 0 0; } .grading-footer { flex-direction: column; align-items: stretch; } .grading-footer > div { justify-content: flex-end; } .grading-context h2 { font-size: 22px; } }
+.grading-content :focus-visible { outline: 2px solid #146fc2; outline-offset: 3px; }
+@media (max-width: 640px) { .grading-grid { grid-template-columns: 1fr; gap: 24px; } .grading-settings { border-left: 0; border-top: 1px solid #d5e5f5; padding: 24px 0 0; } .grading-footer { flex-direction: column; align-items: stretch; } .grading-footer > div { justify-content: flex-end; } .grading-context h2 { font-size: 22px; } }
 </style>

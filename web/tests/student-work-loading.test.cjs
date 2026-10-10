@@ -9,6 +9,7 @@ const babel = require('@babel/core')
 const source = file => fs.readFileSync(path.resolve(__dirname, '../src', file), 'utf8')
 const run = (text, context = {}) => { vm.runInNewContext(text, context); return context }
 const helpers = run(source('utils/studentWorkList.js').replace(/export /g, ''))
+const paged = run(source('utils/loadPagedRecords.js').replace(/export /g, ''))
 const filterObj = run(source('utils/util.js').match(/export function filterObj\(obj\) \{[\s\S]*?^}/m)[0].replace('export ', '')).filterObj
 const stub = { render (h) { return h('div', this.$slots.default) } }
 Vue.ls = { get: () => undefined }
@@ -21,7 +22,7 @@ const plain = value => JSON.parse(JSON.stringify(value))
 
 function component (file, imports = {}) {
     const parsed = compiler.parseComponent(source(file))
-    const context = run(parsed.script.content.replace(/^[ \t]*import .*$/gm, '').replace('export default', 'this.component ='), { ...helpers, ...imports, window: { _CONFIG: { webURL: 'http://synthetic.invalid' } } })
+    const context = run(parsed.script.content.replace(/^[ \t]*import .*$/gm, '').replace('export default', 'this.component ='), { ...helpers, ...paged, ...imports, window: { _CONFIG: { webURL: 'http://synthetic.invalid' } } })
     const compiled = compiler.compileToFunctions(parsed.template.content)
     return { ...context.component, render: compiled.render, staticRenderFns: compiled.staticRenderFns }
 }
@@ -103,7 +104,7 @@ for (const entry of ['table', 'card']) {
         const current = status(h.instance)
         assert.ok(byTestId(current.render(), 'work-list-loading'))
         assert.equal(byTestId(current.render(), 'work-list-empty'), undefined)
-        pending.resolve(ok([row('fresh')], 25)); await request
+        pending.resolve(ok([row('fresh')], entry === 'table' ? 25 : 1)); await request
         assert.equal(h.busy(), false)
         assert.equal(h.instance.listReady, true)
         assert.equal(h.instance.dataSource[0].id, 'fresh')
@@ -273,9 +274,95 @@ test('actual table creation and card mounted hook wire their existing request co
     card.instance.$options.mounted[0].call(card.instance)
     await flush()
     assert.equal(card.calls.length, 1)
-    assert.equal(card.calls[0].params, null, 'card keeps backend default pageSize contract')
+    assert.deepEqual(card.calls[0].params, { pageNo: 1, pageSize: 100 })
     const Index = component('views/account/center/Index.vue', { PageLayout: stub, RouteView: stub, MineWorksPage: card.options, mapGetters: () => ({}), getFileAccessHttpUrl: value => value })
     const index = new Vue(Index)
     assert.ok(nodes(index._render()).some(node => node.componentOptions && node.componentOptions.Ctor.options.name === 'MineWorksCard'))
     table.instance.$destroy(); card.instance.$destroy(); index.$destroy()
+})
+
+test('actual cards load all 101 works before rendering any cards', async () => {
+    const second = deferred()
+    const records = Array.from({ length: 101 }, (_, index) => row(`work-${index}`))
+    const h = harness('card', params => params.pageNo === 1 ? Promise.resolve(ok(records.slice(0, 100), 101)) : second.promise)
+    const pending = h.load()
+    await flush()
+    assert.deepEqual(h.calls.map(call => call.params), [{ pageNo: 1, pageSize: 100 }, { pageNo: 2, pageSize: 100 }])
+    assert.equal(h.busy(), true)
+    assert.equal(h.instance.dataSource.length, 0)
+    assert.equal(nodes(h.instance._render()).filter(node => node.tag === 'a-card').length, 0)
+    second.resolve(ok(records.slice(100), 101)); await pending
+    assert.deepEqual(plain(h.instance.dataSource).map(item => item.id), records.map(item => item.id))
+    const cards = nodes(h.instance._render()).filter(node => node.tag === 'a-card')
+    assert.equal(cards.length, 101)
+    assert.equal(cards[100].key, 'work-100')
+    assert.equal(h.instance.listReady, true)
+    assert.equal(h.busy(), false)
+    h.instance.$destroy()
+})
+
+test('actual card late empty page rejects partial results and native retry starts again from page one', async () => {
+    let repaired = false
+    const records = Array.from({ length: 101 }, (_, index) => row(`work-${index}`))
+    const h = harness('card', params => Promise.resolve(ok(params.pageNo === 1 ? records.slice(0, 100) : repaired ? records.slice(100) : [], 101)))
+    await h.load()
+    assert.equal(h.instance.dataSource.length, 0)
+    assert.equal(h.instance.listReady, false)
+    assert.equal(h.busy(), false)
+    const current = status(h.instance)
+    assert.ok(byTestId(current.render(), 'work-list-error'))
+    assert.match(content(current.render()), /不完整/)
+    repaired = true
+    await current.clickRetry()
+    assert.deepEqual(h.calls.map(call => call.params.pageNo), [1, 2, 1, 2])
+    assert.equal(h.instance.dataSource.length, 101)
+    assert.equal(h.instance.listError, '')
+    current.state.$destroy(); h.instance.$destroy()
+})
+
+test('actual card second-page transport or business failure never displays the first 100 works', async () => {
+    const first = Array.from({ length: 100 }, (_, index) => row(`work-${index}`))
+    for (const outcome of [() => Promise.reject(failure({ isAxiosError: true })), () => Promise.resolve({ success: false, message: 'private' })]) {
+        const h = harness('card', params => params.pageNo === 1 ? Promise.resolve(ok(first, 101)) : outcome())
+        await h.load()
+        assert.equal(h.instance.dataSource.length, 0)
+        assert.equal(h.instance.listReady, false)
+        assert.equal(h.busy(), false)
+        assert.ok(h.instance.listError)
+        assert.doesNotMatch(h.instance.listError, /private/)
+        assert.equal(h.calls.length, 2)
+        h.instance.$destroy()
+    }
+})
+
+for (const oldFails of [false, true]) {
+    test(`actual card old second-page ${oldFails ? 'failure' : 'success'} cannot end or overwrite a newer complete-list request`, async () => {
+        const requests = []
+        const h = harness('card', () => { const pending = deferred(); requests.push(pending); return pending.promise })
+        const old = h.load()
+        requests[0].resolve(ok(Array.from({ length: 100 }, (_, index) => row(`old-${index}`)), 201))
+        await flush()
+        const current = h.load()
+        oldFails ? requests[1].reject({ isAxiosError: true }) : requests[1].resolve(ok(Array.from({ length: 100 }, (_, index) => row(`old-${index + 100}`)), 201))
+        await old
+        assert.equal(h.calls.length, 3, 'stale pagination does not fetch its third page')
+        assert.equal(h.busy(), true)
+        assert.equal(h.instance.dataSource.length, 0)
+        assert.equal(h.instance.listError, '')
+        requests[2].resolve(ok([row('new')])); await current
+        assert.deepEqual(plain(h.instance.dataSource).map(item => item.id), ['new'])
+        assert.equal(h.busy(), false)
+        h.instance.$destroy()
+    })
+}
+
+test('actual card destroyed before first page completes does not request more pages', async () => {
+    const pending = deferred()
+    const h = harness('card', () => pending.promise)
+    const request = h.load()
+    h.instance.$destroy()
+    pending.resolve(ok(Array.from({ length: 100 }, (_, index) => row(`late-${index}`)), 101))
+    await request
+    assert.equal(h.calls.length, 1)
+    assert.equal(h.instance.dataSource.length, 0)
 })

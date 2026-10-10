@@ -1,4 +1,4 @@
-const DEFAULT_BRAND_NAME = '天津工业大学 · 人工智能教学平台'
+const DEFAULT_BRAND_NAME = 'TeachingOpen · 人工智能教学平台'
 
 export function brandingValue (value) {
     return typeof value === 'string' ? value.trim() : ''

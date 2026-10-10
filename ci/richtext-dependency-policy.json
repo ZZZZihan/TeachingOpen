@@ -1,0 +1,28 @@
+{
+  "runtime_roots": [
+    "@tiptap/core",
+    "@tiptap/starter-kit",
+    "@tiptap/extension-image",
+    "@tiptap/extension-table",
+    "@tiptap/extension-text-align",
+    "@tiptap/extension-text-style",
+    "@tiptap/pm",
+    "dompurify"
+  ],
+  "exceptions": [
+    {
+      "package": "swiper",
+      "advisory": "https://github.com/advisories/GHSA-p3hc-fv2j-rp68",
+      "owner": "ZZZZihan",
+      "reason": "仅 Banner.vue 使用 Swiper，swiperOption 的字段及嵌套参数均为源码常量；服务端 banner 仅进入 img/src 和链接，不合并进 Swiper options。参数边界改变时必须移除此例外并升级。",
+      "expires": "2026-10-24"
+    },
+    {
+      "package": "lodash.pick",
+      "advisory": "https://github.com/advisories/GHSA-p6mc-m468-83gw",
+      "owner": "ZZZZihan",
+      "reason": "web/src 中 pick 的字段路径均为源码字面量，UserModal 展开的 fields 也为源码常量数组；没有让请求数据提供 __proto__/constructor 路径。新增动态字段路径时必须移除此例外并替换该包。",
+      "expires": "2026-10-24"
+    }
+  ]
+}

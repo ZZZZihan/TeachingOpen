@@ -35,7 +35,7 @@
             </a-col>
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
               <a-form-item label="选择用户">
-                <j-dict-select-tag v-model="queryParam.id" placeholder="请选择用户" dictCode="demo,name,id"/>
+                <j-dict-select-tag v-model="queryParam.id" placeholder="请选择用户" dictCode="demo_options"/>
               </a-form-item>
             </a-col>
           </template>

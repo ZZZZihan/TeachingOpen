@@ -130,6 +130,7 @@ import moment from "moment";
 import Pie from "@/components/chart/Pie";
 import LineChartMultid from "@/components/chart/LineChartMultid";
 import { getAction } from "@/api/manage";
+import config from '@/defaultSettings'
 export default {
   name: "TeacherReport",
   components: {
@@ -200,7 +201,7 @@ export default {
     getCurrentStyle(current, today) {
       const style = {};
       if (current.date() === 1) {
-        style.border = "1px solid #1890ff";
+        style.border = '1px solid var(--app-primary-color, ' + config.primaryColor + ')'
         style.borderRadius = "50%";
       }
       return style;

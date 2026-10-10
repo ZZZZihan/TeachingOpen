@@ -8,8 +8,9 @@ function mount(name,old=false){
  vm.createContext(ctx)
  if(!old)vm.runInContext(fs.readFileSync(path.join(root,'src/mixins/CourseFormRecovery.js'),'utf8').replace(/^import .*$/gm,'').replace('export default','CourseFormRecovery ='),ctx)
  vm.runInContext(source.match(/<script>([\s\S]*?)<\/script>/)[1].replace(/^\s*import .*$/gm,'').replace('export default','component ='),ctx)
- const c=ctx.component,m=ctx.CourseFormRecovery,i={...m?.data(),...c.data.call({$form:{createForm:()=>form}}),$nextTick:cb=>ticks.push(cb),$emit:(...x)=>events.push(x),$message:{success:x=>notices.push(x),warning:x=>notices.push(x)},$confirm:x=>confirms.push(x)}
+ const c=ctx.component,m=ctx.CourseFormRecovery,i={...m?.data(),...c.data.call({$form:{createForm:()=>form}}),$refs:{},$set:(o,k,v)=>o[k]=v,$nextTick:cb=>ticks.push(cb),$emit:(...x)=>events.push(x),$message:{success:x=>notices.push(x),warning:x=>notices.push(x)},$confirm:x=>confirms.push(x)}
  for(const [k,v]of Object.entries({...m?.methods,...c.methods}))i[k]=v.bind(i)
+ for(const [key,getter] of Object.entries(m?.computed||{}))Object.defineProperty(i,key,{get:()=>getter.call(i)})
  const ready=(record={id:'existing',courseName:'旧课程',unitName:'旧单元',courseId:'course',showCourseVideo:false,isShared:false})=>{i.edit(record);while(ticks.length)ticks.shift()()}
  return {i,m,calls,events,notices,confirms,ticks,callbacks,values,form,ready,validate:(error=null)=>callbacks.shift()(error,{...values})}
 }

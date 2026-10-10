@@ -37,8 +37,12 @@ function startupHarness (cached = {}) {
     console, config: {}, SYS_CONFIG: 'SYS_CONFIG', MENU: 'MENU' }
   for (const name of ['SIDEBAR_TYPE', 'DEFAULT_THEME', 'DEFAULT_LAYOUT_MODE', 'DEFAULT_FIXED_HEADER',
     'DEFAULT_FIXED_SIDEMENU', 'DEFAULT_CONTENT_WIDTH_TYPE', 'DEFAULT_FIXED_HEADER_HIDDEN',
-    'DEFAULT_COLOR_WEAK', 'DEFAULT_COLOR', 'ACCESS_TOKEN', 'DEFAULT_MULTI_PAGE']) context[name] = name
+    'DEFAULT_COLOR_WEAK', 'DEFAULT_COLOR', 'DEFAULT_COLOR_USER_CHOICE', 'DEFAULT_COLOR_LEGACY',
+    'ACCESS_TOKEN', 'DEFAULT_MULTI_PAGE']) context[name] = name
   vm.createContext(context)
+  const theme = readFileSync(resolve(__dirname, '../src/utils/themePreference.js'), 'utf8')
+    .replace(/^import [^\n]+$/gm, '').replace(/export /g, '')
+  vm.runInContext(theme, context)
   try {
     const helper = readFileSync(resolve(__dirname, '../src/utils/startup.js'), 'utf8').replace(/export /g, '')
     vm.runInContext(helper, context)
@@ -296,10 +300,10 @@ test('挂载前再次检查已经失效的启动结果', async () => {
 
 test('真实启动对空白或非字符串品牌使用平台名称，保留有效自定义品牌', async () => {
     for (const [brandName, expected] of [
-        [undefined, '天津工业大学 · 人工智能教学平台'],
-        [' \n\t ', '天津工业大学 · 人工智能教学平台'],
-        [42, '天津工业大学 · 人工智能教学平台'],
-        [{ name: '不应隐式转换' }, '天津工业大学 · 人工智能教学平台'],
+        [undefined, 'TeachingOpen · 人工智能教学平台'],
+        [' \n\t ', 'TeachingOpen · 人工智能教学平台'],
+        [42, 'TeachingOpen · 人工智能教学平台'],
+        [{ name: '不应隐式转换' }, 'TeachingOpen · 人工智能教学平台'],
         ['  自定义课堂  ', '自定义课堂']
     ]) {
         const h = startupHarness()
