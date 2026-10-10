@@ -7,8 +7,9 @@ After=network-online.target nginx.service
 Type=oneshot
 UMask=0077
 # Dedicated state avoids renewing certificates owned by other applications.
-# The timer already randomizes starts; Certbot's extra 8-minute sleep can exceed this service timeout.
-ExecStart=/opt/teachingopen-certbot/bin/certbot renew --no-random-sleep-on-renew --non-interactive --cert-name teachingopen-ip --config-dir /var/lib/teachingopen-acme/config --work-dir /var/lib/teachingopen-acme/work --logs-dir /var/lib/teachingopen-acme/logs --deploy-hook "/usr/sbin/nginx -t && /bin/systemctl reload nginx"
+# Replace @PUBLIC_IP@ before installation, as for the certificate check service.
+# The wrapper disables Certbot's extra random sleep and verifies the served leaf.
+ExecStart=/usr/bin/python3 /opt/teachingopen-https/renew_ip_certificate.py --ip @PUBLIC_IP@
 TimeoutStartSec=300
 PrivateTmp=true
 ProtectHome=true

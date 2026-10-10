@@ -110,12 +110,16 @@ python3 "$SOURCE/deploy/check_ip_certificate.py" --ip "$PUBLIC_IP"
 
 ## 3. 自动续期与实际服务证书检查
 
-Let’s Encrypt IP 证书有效期为 160 小时。`teachingopen-ip-cert-renew.timer` 每天两次启动 Certbot，由 Certbot 判断是否到续期时间；只有成功续期后才执行 `nginx -t` 和 reload。专用 config/work/logs 路径及 `--cert-name` 防止触碰其他服务证书。定时器已有最多 30 分钟的随机调度，因此服务和下方演练命令使用 `--no-random-sleep-on-renew`，避免 Certbot 5.8 默认额外等待最多 8 分钟而触发 300 秒服务超时；已在目标安装版本核对参数解析。
+Let’s Encrypt IP 证书有效期为 160 小时。`teachingopen-ip-cert-renew.timer` 每天两次启动专用续期程序，由 Certbot 判断是否到续期时间。专用 config/work/logs 路径及 `--cert-name` 防止触碰其他服务证书。定时器已有最多 30 分钟的随机调度，因此程序和下方演练命令使用 `--no-random-sleep-on-renew`，避免 Certbot 5.8 默认额外等待最多 8 分钟而触发 300 秒服务超时；已在目标安装版本核对参数解析。
+
+Certbot 的 deploy-hook 失败不保证续期命令返回非零。`renew_ip_certificate.py` 因此还会比较专用 `live/teachingopen-ip/cert.pem` 与 Nginx 实际提供的叶证书，校验证书链、IP 身份及至少 48 小时有效期。磁盘证书与服务证书不一致时，执行一次 `nginx -t` 和 reload，再有界核验；后续续期无需换证时也会做这个检查和恢复，不为修复加载故障反复申请证书。Certbot 失败、加载失败或最后核验失败均使服务失败。Certbot 子进程上限 240 秒，整个程序预算 295 秒，systemd 最终上限为 300 秒；详细 ACME 日志留在专用私有目录。
 
 ```sh
 sudo install -d -m 0755 /opt/teachingopen-https
 sudo install -m 0644 "$SOURCE/deploy/check_ip_certificate.py" /opt/teachingopen-https/
-sudo install -m 0644 "$SOURCE/deploy/teachingopen-ip-cert-renew.service" /etc/systemd/system/
+sudo install -m 0644 "$SOURCE/deploy/renew_ip_certificate.py" /opt/teachingopen-https/
+sed "s/@PUBLIC_IP@/$PUBLIC_IP/g" "$SOURCE/deploy/teachingopen-ip-cert-renew.service" \
+  | sudo tee /etc/systemd/system/teachingopen-ip-cert-renew.service >/dev/null
 sudo install -m 0644 "$SOURCE/deploy/teachingopen-ip-cert-renew.timer" /etc/systemd/system/
 sudo install -m 0644 "$SOURCE/deploy/teachingopen-ip-cert-check.timer" /etc/systemd/system/
 sed "s/@PUBLIC_IP@/$PUBLIC_IP/g" "$SOURCE/deploy/teachingopen-ip-cert-check.service.template" \
@@ -138,9 +142,9 @@ sudo systemctl enable --now teachingopen-ip-cert-renew.timer teachingopen-ip-cer
 systemctl list-timers 'teachingopen-ip-cert-*'
 ```
 
-每小时的检查连接本机 443，使用公网 IP 验证 TLS 身份，检查**正在提供**的证书链、IP SAN 和至少 48 小时剩余时间。它不依赖云端 NAT 回流；不证明外部安全组可达。外部网络还应执行不带 `--connect-host` 的相同检查。
+每小时的检查连接本机 443，使用公网 IP 验证 TLS 身份，检查**正在提供**的证书链、IP SAN、至少 48 小时剩余时间，以及它与磁盘叶证书的 SHA-256 一致性。检查单元以 root 运行，以便穿过原有私有 ACME 目录读取公开叶证书；不读取私钥，也不放宽证书目录权限，保留只读文件系统等 systemd 限制。它不依赖云端 NAT 回流；不证明外部安全组可达。外部网络还应执行不带 `--connect-host` 的相同检查。
 
-检查失败会产生非零状态并保留 systemd/journal 记录；**本 PR 没有配置短信、邮件或其他主动通知**。正式长期使用前，接入已有告警渠道，或明确由维护者查看失败状态。不能把日志存在描述为已通知用户，也不能忽略 Certbot 退出为零但未触发 reload 的情形；实际服务证书检查会发现仍在提供旧证书。
+检查失败会产生非零状态并保留 systemd/journal 记录；**本 PR 没有配置短信、邮件或其他主动通知**。正式长期使用前，接入已有告警渠道，或明确由维护者查看失败状态。不能把日志存在描述为已通知用户。磁盘与服务证书指纹的比较会发现仍在提供旧证书的情况，即使旧证书剩余有效期尚超过 48 小时。
 
 ## 4. 切换入口与回退
 

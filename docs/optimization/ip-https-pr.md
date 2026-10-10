@@ -1,6 +1,6 @@
 # 公网 IP HTTPS 试行 PR：方案与验证记录
 
-日期：2026-10-10。基线：`github/main` 的 `6da25b9`，独立分支 `feature/ip-https`。目标是让现有公网 IPv4 入口具备可选择启用、可分阶段验证、可回退的 HTTPS 流程。交付包括源码、测试、操作说明、PR，以及获准的目标主机准备、隔离验证和公网试行。今日已完成 staging 与正式 IP 证书签发，并在保留 HTTP 的状态下实际启用过公网 HTTPS；两次续期演练均失败，未启用自动续期或证书检查定时器。按用户“有问题回退”的要求，现已恢复原 HTTP 配置并完成目标主机及外网核验。真实登录、媒体 Cookie、业务路径和续期可靠性仍未通过实际验收。
+日期：2026-10-10。基线：`github/main` 的 `6da25b9`，独立分支 `feature/ip-https`。目标是让现有公网 IPv4 入口具备可选择启用、可分阶段验证、可回退的 HTTPS 流程。交付包括源码、测试、操作说明、PR，以及获准的目标主机准备、隔离验证和公网试行。首次试行因两次续期网络超时而完整回退；获准继续后，本次完整续期演练及实际 deploy-hook 已成功，已恢复 HTTP/HTTPS 并行入口，启用两个 timer，并用受控学生账号完成公网 HTTPS API 与浏览器登录、刷新、退出验证。未来按计划真正重新签发、受保护媒体鉴权和完整业务路径仍需后续观察或验收。
 
 ## 改动与取舍
 
@@ -14,9 +14,12 @@
 
 证书使用 Let’s Encrypt 免费 IP 证书方案；主要持续成本是自动续期、实际证书检查、发现失败和维护。提供隔离的 Certbot 状态目录、每天两次续期及每小时实际服务证书检查的 systemd 示例。检查失败只进入 systemd/journal，没有配置主动消息通知。具体启用和回退步骤见 [操作说明](../../deploy/IP_HTTPS.md)。
 
+续期 wrapper 除了检查 Certbot 退出码，还核对实际 TLS 叶证书与磁盘 `cert.pem` 的指纹。Certbot 成功但 deploy-hook 未正确加载证书时，先检查 Nginx 配置，再 reload 并复查；下一次无需签发的运行也能修复残留的旧证书加载。命令和总耗时均有上限，超时终止子进程组，避免超过 systemd 的 300 秒限制。每小时只读检查也核对指纹，不把仍有效的旧证书误报为新证书已加载。
+
 ## 本地已经执行的验证
 
 - HTTPS 工具单元测试 **34 项通过**：保留原 23 项正常切换/回退、错误配置、reload 失败、恢复失败、证书依赖损坏、摘要漂移、符号链接、并发锁和真实 SIGKILL 后恢复；新增源摘要/形态约束、本机入口与缓存规则保留，以及激活摘要漂移拒绝。
+- 证书检查与续期 wrapper 新增 **21 项通过**：覆盖实际服务与磁盘指纹一致/不一致、Certbot 失败与超时、hook 漏加载后的恢复、Nginx 检查/reload 失败及复查耗时限制；独立进程组实验确认超时终止父子进程。本次整合后重跑 34 项工具测试及 409 项本地集成检查全部通过。下列代理、前端及既有工具测试保留此前本 PR 验证记录，当前提交的完整检查以 CI 为准。
 - 固定官方镜像 `nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94` 的真实 Nginx/TLS 测试 **409 项通过**：仓库模板 91 项、已审阅原生形态 318 项。汇总由 `deploy/test_ip_https_runtime.py` 输出并在 GitHub CI 保存；所有客户端 TCP 目的地址为本机动态端口，`8.8.8.8` 只用于配置及证书身份。临时测试 CA 和私钥不上传。覆盖可信 TLS/IP SAN、证书失败分支、API 读写、真实 WebSocket 握手及消息回显、Range 206、CORP、ACME 精确响应和缺失 404、阶段切换和逐级回退。
 - 实际 Spring Boot 2.1.3 配置绑定 → Tomcat 9.0.122 RemoteIpValve → 原始 MediaCookie 源码 **14 项通过**，另核对全部 7 个属性受实际依赖支持。包括可信 HTTPS 设置/清除 Secure Cookie、HTTP 及不可信来源无法伪造安全协议。未启动应用上下文或数据库。
 - 前端相关 8 组测试 **101 项通过**：通知 socket、Scratch 云变量、Python URL、课程材料链接、阅读器及三个编辑器桥接。
@@ -31,6 +34,8 @@
 
 ```sh
 python3 -m unittest discover -s deploy -p 'test_ip_https.py' -v
+python3 -m unittest discover -s deploy -p 'test_check_ip_certificate.py' -v
+python3 -m unittest discover -s deploy -p 'test_renew_ip_certificate.py' -v
 docker pull nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
 python3 deploy/test_ip_https_runtime.py --output ci-results/ip-https-runtime.json
 python3 deploy/test_ip_https_proxy.py --java-home "$JAVA_HOME" --m2 "$MAVEN_CACHE"
@@ -45,12 +50,12 @@ python3 deploy/test_ip_https_proxy.py --java-home "$JAVA_HOME" --m2 "$MAVEN_CACH
 - 专用 Python 3.10 环境 `/opt/teachingopen-certbot` 已安装 Certbot/acme 5.8.0、pip 26.2。19 个 wheel 使用官方 PyPI 元数据验证 SHA-256，依赖检查及 IP/webroot 参数检查通过；已核实包都安装在该虚拟环境。准备阶段只读取 staging/正式 ACME directory，当时未注册账户或申请证书。
 - 目标 Nginx **45 项隔离检查通过**：三阶段配置语法、当前首页内容、HTML `no-cache`、缺失 JS/CSS 的 404、ACME 精确内容、可信测试证书/IP/剩余有效期、临近过期失败检测、最终 HTTP 页面 307 与 API 426、目标 systemd 单元校验。运行时使用独立 Nginx 进程与随机 loopback 端口；测试证书仅由本轮客户端显式信任，未安装系统 CA。进程退出后测试端口关闭。
 - 隔离验证前后活动站点及首页摘要、Nginx/Java 主进程 PID 均相同。该阶段没有 reload 现有 Nginx、重启后端、开放云安全组 443、启用 timer 或修改应用数据。首次隔离 ACME 探测因测试目录受 umask 限制不可读而失败；修正公开测试目录权限后完整 45 项通过，证书目录继续私有。
-- 在服务器私有目录准备了完整后端配置备份和加入 7 个可信代理属性的候选；准备阶段没有替换活动文件，凭据未复制到本地或 Git。随后试行时应用了候选，回退时已恢复完整原配置；HTTPS 真实登录 Cookie 始终未完成实际检查。
+- 在服务器私有目录准备了完整后端配置备份和加入 7 个可信代理属性的候选；准备阶段没有替换活动文件，凭据未复制到本地或 Git。首次试行时应用了候选，首次回退时恢复完整原配置；当时未完成 HTTPS 真实登录 Cookie 检查，后续恢复试行的结果另记。
 - 准备时发布清单 **4909 个文件**全部匹配；为旧标签页保留的 **566 个文件、27,324,333 字节**与新清单不重合，已另存清单和恢复包，未删除。旧标签页可能延迟加载旧分块；清理会让这些标签页需要刷新，不是 HTTPS 启用前提。静态缺失 404 与 HTML 缓存规则仍应保留。
 
 这些历史结果只证明准备和目标版本隔离行为。当时线上只提供 HTTP，云安全组尚未开放 443；之后获准的真实切换及最终回退单独记录如下。
 
-## 2026-10-10 公网试行与已完成的回退
+## 2026-10-10 首次公网试行与已完成的回退
 
 - 在核对活动配置摘要后，应用了 HTTP + ACME 配置、完整后端可信代理候选，并仅为本轮试行新增云安全组 443 规则。staging 与正式 CA 的 IP 证书签发均成功；随后启用 HTTP/HTTPS 并行试行。签发成功证明本次申请完成，不证明续期可用。
 - 外网检查实际服务的公信证书链与 IP 身份通过，连接使用 TLSv1.3；HTTP、HTTPS 首页均为 200 且内容摘要一致，两边图片验证码均可加载，匿名本人信息接口均返回 401。真实浏览器直接访问 HTTPS 登录页正常。这些结果覆盖公开入口和匿名认证边界，没有验证登录后的业务行为。
@@ -62,11 +67,23 @@ python3 deploy/test_ip_https_proxy.py --java-home "$JAVA_HOME" --m2 "$MAVEN_CACH
 
 本轮证据保存在外层工作区 `.devspace/artifacts/ip-https-trial-20261010/`：签发为 `staging-issuance.json`、`formal-issuance.json`；公开访问为 `public-access-verified.json`；注册拒绝为 `registration-result.json`；两次续期失败为 `renewal-failure-diagnosis.json`、`renewal-retry-failure-diagnosis.json`；随机等待修复及 parser 验证为 `renewal-delay-fix-staged.json`；回退以 `trial-rollback.json`、后续 `security-group-rollback-result.json` 和最终 `rollback-public-verified.json` 共同确认。第一份回退回执中的安全组清理待办已由后两份证据补齐。凭据、手机号、邮件地址、私钥及原始私有配置不进入本文件或 Git。
 
-## 恢复 HTTPS 试行前仍需完成
+## 2026-10-10 恢复并保留 HTTP/HTTPS 并行试行
 
-- 查明并验证两条续期网络路径，重新在正式专用状态目录执行续期演练，确认 deploy-hook 实际执行且服务仍加载有效正式证书。仅在该门槛通过后启用续期与证书检查 timer，并落实失败发现责任；`systemd-analyze verify`、首次签发成功和 ACME directory 可达均不能替代续期成功。
-- 取得有效受控测试账号的安全凭据，或另一个由用户确认可注册的受控号码，通过正常图片验证码登录，只验证本人信息、实际角色、HTTPS 媒体 Cookie 属性、正常退出和旧令牌失效；不得为验证重置现有用户密码或绕过验证码。
+- 用户授权继续处理续期并使用其提供的另一个受控账号。沿用先前按正常注册流程创建的普通学生测试账号，本次没有重置既有用户密码或再次注册；凭据仅从本机权限受限的私有文件读取，未写入 Git、浏览器命令参数或普通日志。
+- 先重新核对当前配置、正式证书、两条网络路径与可回退备份。在 HTTP + ACME 阶段执行正式专用状态目录的 `renew --dry-run --run-deploy-hooks --no-random-sleep-on-renew`：20.89 秒完成，退出码 0，部署 hook 的 Nginx 配置检查/reload 成功且 worker 更代；正式证书、续期配置和站点文件未改变。该窗口记录 5 次 challenge 200，仅作为辅助证据，不能精确归因每个 CA 验证点。本次成功证明当前两条路径可完成演练，上次超时的具体网络根因仍未确定。
+- 演练通过后应用可信代理候选及并行试行配置，只新增本次所需的云安全组 443 规则。HTTP 和 HTTPS 首页均为 200，内容与原首页摘要一致；HTTP 不跳转，没有 HSTS。复用仍有效的正式公信 IP 证书，未强制重新签发。公网可信 TLS、IP 身份及磁盘/实际服务叶证书一致性通过；证书到期为 `2026-10-16T21:09:15Z`（北京时间 10 月 17 日 05:09:15）。
+- 新的续期 wrapper、只读证书 checker 及两个 service 已部署，安装摘要与本次审查源码完全一致。实际 `renew.service` 与 `check.service` 均为 `Result=success`、`ExecMainStatus=0`，耗时 15.33 秒和 0.08 秒；实际 service 这次无需重新签发，不应表述为正式证书已自动更新。每天两次续期、每小时检查的 timer 已 enabled/active。
+- 公网 HTTPS API 使用正常图片验证码登录成功；本人信息与受控账号一致，角色严格为 student。媒体 Cookie 的 Secure、HttpOnly、SameSite=Strict、host-only 与限定路径通过；退出清除 Cookie，旧令牌随后返回 401。真实浏览器独立完成登录、刷新后保持登录、点击退出；浏览器实际存储的 Cookie 属性正确，退出后 Cookie 和登录令牌清除，页面恢复匿名状态。未关闭证书验证、绕过验证码或经公网 HTTP 提交密码。
+- 浏览器存在外部 errlog 脚本被既有 CSP 拦截的提示，HTTP 页面复查有同样行为，未为此放宽安全策略。登录流程通过不代表所有媒体与编辑器业务已经验收。
+- 本轮独立回退脚本保留原配置、当前配置摘要校验、逆序恢复与中断后继续恢复能力；若需要回退，仅撤销本次新增的 443 安全组规则。第一次完整线上回退与本地失败恢复测试已有证据；这次验证通过，当前保持并行试行，没有再次回退。
+
+本次脱敏证据保存在外层工作区 `.devspace/artifacts/ip-https-retry-20261010/`：`renewal-dry-run-result.json`、`renewal-hardening-installed.json`、`renewal-services-verified.json`、`timers-enabled.json`、`public-access-verified.json`、`real-login-verification.json`、`browser-login-verification.json`、`runtime-integration.json`。私有账号文件、证书私钥及完整服务器配置不进入 Git。先前试行目录的回退结论是历史状态，不代表本次最终状态。
+
+## 后续观察与业务验收边界
+
+- 尚未观察未来 timer 到期后真正签发并加载新正式证书。当前证据是完整 staging 续期演练、实际生产 service 检查及 timer 启用。失败会进入 systemd/journal，未接入主动消息告警；需要维护者定期查看并处理失败，不能宣称已实现自动通知或已证明长期稳定性。
+- Cookie 属性及浏览器存储/清除已通过；尚未用受保护媒体验证浏览器自动携带 Cookie 后的授权访问与退出后失效。公开图片 200 不能替代此项。
 - 在已授权的账号和数据范围内验证管理员与师生路径、视频起播和定位、附件、三个编辑器加载及保存、通知与云变量 WSS；历史内容中的绝对 HTTP 资源仍需实际数据审计。公开登录页正常不替代这些业务验证。
-- 再次试行前重新核对活动配置摘要、稳定公网 IP 和可达性。HTTP→HTTPS 会改变浏览器 origin，应先保存未提交内容并重新登录；真实业务与续期验证完成后，按后续授权决定是否更新注册二维码、入口或切换最终阶段。
+- 后续配置切换前重新核对活动配置摘要、稳定公网 IP 和可达性。HTTP→HTTPS 会改变浏览器 origin，应先保存未提交内容并重新登录；完整业务与持续续期验证完成后，按后续授权决定是否更新注册二维码、入口或切换最终阶段。
 
-本 PR 继续交付分阶段启用、验证和回退所需的工具、测试、配置示例与操作说明。已有本地、CI、目标隔离检查和今日公网试行分别保留证据范围；当前生产入口已回到原 HTTP，真实登录、业务、自动续期及用户人工验收仍未完成。
+本 PR 交付分阶段启用、验证和回退所需的工具、测试、配置示例与操作说明。当前生产为获准的 HTTP/HTTPS 并行试行，真实 HTTPS 登录已验证；本地、CI、目标隔离检查、公网运行、未来自动续期观察和用户人工验收分别记录，不互相替代。
