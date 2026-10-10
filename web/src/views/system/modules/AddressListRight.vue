@@ -44,6 +44,7 @@
 
 <script>
   import { getAction } from '@/api/manage'
+  import { loadPagedRecords } from '@/utils/loadPagedRecords'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 
   export default {
@@ -184,15 +185,11 @@
 
       // 查询职务信息
       queryPositionInfo() {
-        getAction(this.url.listByPosition, { pageSize: 99999 }).then(res => {
-          if (res.success) {
-            let positionInfo = {}
-            res.result.records.forEach(record => {
-              positionInfo[record['code']] = record['name']
-            })
-            this.positionInfo = positionInfo
-          }
-        })
+        return loadPagedRecords(params => getAction(this.url.listByPosition, params)).then(records => {
+          const positionInfo = {}
+          records.forEach(record => { positionInfo[record.code] = record.name })
+          this.positionInfo = positionInfo
+        }).catch(() => this.$message.warning('职务列表加载失败，请重试'))
       }
 
     }
