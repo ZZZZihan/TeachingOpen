@@ -5,9 +5,11 @@
 ## 合并检查
 
 - **Frontend tests and build**：沿用 `web/.nvmrc` 与锁文件，禁用依赖安装脚本，运行前端测试和生产构建。获取完整 Git 历史，以运行已有的旧版本回归对照测试。
-- **Backup and migration tools**：执行备份、升级清单、发布包、空表提取以及 CI 守卫的合成测试，不实际运行备份或拉取服务器数据。
+- **Backup and migration tools**：执行备份、升级清单、发布包、空表提取以及 CI 守卫的合成测试，不实际运行备份或拉取服务器数据。另运行公网 IP HTTPS 工具单元测试与固定镜像的隔离 Nginx/TLS 验证：临时测试 CA、回环端口、合成 API/WebSocket/媒体、实际配置切换与回退，不请求公网证书、不连接生产。只保存不含私钥的汇总 JSON。
 - **Backend and MySQL registration**：Java 8 干净构建并显式开启四组核心 Java 单元测试。额外核对 Surefire 报告，缺少或跳过任何核心测试都会失败。原 `SampleTest` 依赖固定旧业务样例，`SecurityToolsTest` 仅打印加解密结果，因此不列入核心检查。
 - **CI required**：汇总前三项，只有全部成功才通过；失败、取消或跳过均不能通过。作为分支必需状态检查使用，避免单项路径过滤导致检查缺失。
+
+后端构建后还用当前依赖执行 `deploy/test_ip_https_proxy.py`：实际 Spring Boot 配置绑定、Tomcat RemoteIpValve 与原 MediaCookie 源码，核对仅信任 127.0.0.1 的协议转发及 Secure Cookie。该测试无需数据库或监听 socket，不能代替线上登录验收。
 
 每个 PR 的新提交取消同一 PR 的旧运行。没有定时触发。Node/npm 版本遵循现有项目；Actions 使用完整提交 SHA 固定，任务只有仓库读取权限，不使用生产凭据。
 

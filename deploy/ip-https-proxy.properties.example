@@ -1,0 +1,30 @@
+# MERGE these keys into the EXISTING private, complete application properties.
+# This is a fragment, not a replacement spring.config.location or a full profile.
+# Back up that private file first; do not copy database credentials into Git.
+# Spring Boot 2.1.3 / embedded Tomcat 9: the newer remoteip.* keys do not apply.
+# Only for native Nginx and Java on the SAME host, with IPv4 loopback upstream.
+server.address=127.0.0.1
+server.use-forward-headers=true
+server.tomcat.internal-proxies=^127[.]0[.]0[.]1$
+server.tomcat.remote-ip-header=X-Forwarded-For
+server.tomcat.protocol-header=X-Forwarded-Proto
+server.tomcat.protocol-header-https-value=https
+server.tomcat.port-header=X-Forwarded-Port
+
+# REQUIRED Nginx contract on EVERY location that proxies to the API:
+# proxy_pass http://127.0.0.1:<existing-api-port>;
+# proxy_set_header Host $host;
+# proxy_set_header X-Forwarded-Host $host;
+# proxy_set_header X-Forwarded-Proto $scheme;
+# proxy_set_header X-Forwarded-Port $server_port;
+# proxy_set_header X-Forwarded-For $remote_addr;
+# Overwrite these headers; do not copy client-supplied forwarded values.
+# Boot 2.1.3 has no server.tomcat.host-header binding: Host supplies serverName.
+# No Docker bridge, LAN proxy, other 127/8 address or IPv6 proxy is trusted here.
+# Loopback is a local-host trust boundary; local processes can reach the API.
+# Use the existing backend service manager to restart the Java process after
+# merging these keys. An Nginx reload alone does not apply Spring properties.
+# Verify HTTPS login Set-Cookie has Secure, HttpOnly and SameSite=Strict before
+# enabling the redirect. Verify the backend listens only on 127.0.0.1.
+# Roll back by restoring the backed-up COMPLETE private properties file and
+# restarting that same backend service; restore/reload the prior Nginx config.

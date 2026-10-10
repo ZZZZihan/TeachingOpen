@@ -1,0 +1,16 @@
+[Unit]
+Description=Renew only the TeachingOpen public IP certificate
+Wants=network-online.target
+After=network-online.target nginx.service
+
+[Service]
+Type=oneshot
+UMask=0077
+# Dedicated state avoids renewing certificates owned by other applications.
+# Replace @PUBLIC_IP@ before installation, as for the certificate check service.
+# The wrapper disables Certbot's extra random sleep and verifies the served leaf.
+ExecStart=/usr/bin/python3 /opt/teachingopen-https/renew_ip_certificate.py --ip @PUBLIC_IP@
+TimeoutStartSec=320
+PrivateTmp=true
+ProtectHome=true
+NoNewPrivileges=true
