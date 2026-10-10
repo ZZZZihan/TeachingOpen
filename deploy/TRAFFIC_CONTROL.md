@@ -154,7 +154,7 @@ sudo systemctl list-timers teachingopen-traffic-control.timer --all
 
 本方案不修改、启用或复用旧的 250 GB guard；相关历史脚本与旧记录保留。部署前检查目标上是否已有其他自动修改同一 ECS 带宽的任务，出现重叠时先明确管理归属，避免相互覆盖。此方案依靠目标 ECS 自身的 timer，不依赖本机电脑周期查询。
 
-部署完成后，在本节追加实际证据，至少记录：
+部署完成后，在对应环境的交接记录中追加实际证据，至少记录：
 
 - 部署时间、服务器与目标资源核对结果；已绑定角色名称与实际权限核验结果。普通记录不包含 AccessKey、SecurityToken 或元数据凭证响应。
 - 已安装程序及配置的 SHA-256、Python 版本、systemd unit 校验结果；配置记录需确认不包含任何长期密钥。
