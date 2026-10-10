@@ -7,9 +7,11 @@ Type=oneshot
 # Replace @PUBLIC_IP@ before installation. Loopback avoids cloud NAT hairpin.
 # The dedicated ACME directories are private; root reads only the public leaf.
 User=root
+UMask=0077
 ExecStart=/usr/bin/python3 /opt/teachingopen-https/check_ip_certificate.py --ip @PUBLIC_IP@ --connect-host 127.0.0.1 --min-hours 48 --expected-certificate /var/lib/teachingopen-acme/config/live/teachingopen-ip/cert.pem
 PrivateTmp=true
 ProtectHome=true
 ProtectSystem=strict
+ReadWritePaths=/run/lock
 NoNewPrivileges=true
-TimeoutStartSec=15
+TimeoutStartSec=330

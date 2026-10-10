@@ -15,6 +15,7 @@ class RenewalTests(unittest.TestCase):
     def setUp(self):
         self.now = 100.0
         self.stack = contextlib.ExitStack()
+        self.lock = self.stack.enter_context(patch.object(renewal, 'certificate_lock', return_value=contextlib.nullcontext()))
         self.stack.enter_context(patch.object(renewal.time, 'monotonic', side_effect=lambda: self.now))
         self.stack.enter_context(patch.object(renewal.time, 'sleep', side_effect=self.advance))
         self.fingerprint = self.stack.enter_context(
@@ -71,6 +72,15 @@ class RenewalTests(unittest.TestCase):
         self.assertEqual(arguments[arguments.index('--cert-name') + 1], 'teachingopen-ip')
         self.assertEqual(arguments[arguments.index('--config-dir') + 1], '/var/lib/teachingopen-acme/config')
         self.processes[0].wait.assert_called_once_with(timeout=240)
+
+    def test_cli_does_not_start_certbot_while_reader_holds_lock(self):
+        self.lock.side_effect = renewal.CertificateBusy('busy')
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            self.assertEqual(renewal.main(['--ip', '8.8.8.8']), 1)
+        self.assertEqual(json.loads(output.getvalue())['stage'], 'certificate_lock')
+        self.popen.assert_not_called()
+        self.lock.assert_called_once_with(shared=False, wait_seconds=15)
 
     def test_success_exit_with_failed_hook_recovers_loaded_leaf(self):
         self.check.side_effect = [renewal.CertificateMismatch('stale'), self.checked]

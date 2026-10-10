@@ -128,14 +128,45 @@ class MonitorTests(unittest.TestCase):
         observed[0]['monotonic'] += 54001
         self.assertEqual(codes(evaluate(observed)[0]), {'check_not_recent', 'renew_not_recent'})
 
-    def test_activating_ignores_old_result_for_300_seconds(self):
+    def test_activating_ignores_old_result_within_unit_budget(self):
         observed = observation()
         observed[0]['units']['renew_service'].update(
             ActiveState='activating', Result='exit-code', ExecMainStatus=1,
             ExecMainStartTimestampMonotonic=(MONOTONIC-20)*1000000)
         self.assertEqual(evaluate(observed)[0]['status'], 'healthy')
-        observed[0]['monotonic'] += 301
+        observed[0]['monotonic'] += 321
         self.assertIn('renew_service_overdue', codes(evaluate(observed)[0]))
+
+    def test_renewal_lock_defers_observation_without_false_recovery(self):
+        observed = observation()
+        _, baseline = evaluate(observed)
+        observed[0]['units']['renew_service'].update(ActiveState='activating',
+            ExecMainStartTimestampMonotonic=(MONOTONIC-20)*1000000)
+        observed[0]['certificate'] = {'status': 'deferred', 'error': 'renewal_in_progress'}
+        result, state = evaluate(observed, baseline)
+        self.assertEqual(result['status'], 'checking')
+        self.assertFalse(result['attention_required'])
+        self.assertEqual(state['last_good'], baseline['last_good'])
+        baseline['issues']['loopback_tls_failed'] = {'severity': 'error', 'domain': 'remote'}
+        result, state = evaluate(observed, baseline)
+        self.assertIn('loopback_tls_failed', codes(result))
+        self.assertFalse(result['attention_required'])
+
+    def test_deferred_certificate_requires_bounded_running_renewal(self):
+        observed = observation()
+        observed[0]['certificate'] = {'status': 'deferred', 'error': 'renewal_in_progress'}
+        self.assertIn('loopback_tls_failed', codes(evaluate(observed)[0]))
+        observed[0]['units']['renew_service']['ActiveState'] = 'activating'
+        self.assertIn('loopback_tls_failed', codes(evaluate(observed)[0]))
+
+    def test_deferred_renewal_does_not_hide_public_failure_or_expiry(self):
+        observed = observation(23)
+        _, baseline = evaluate(observed)
+        observed[0]['units']['renew_service'].update(ActiveState='activating',
+            ExecMainStartTimestampMonotonic=(MONOTONIC-20)*1000000)
+        observed[0]['certificate'] = {'status': 'deferred', 'error': 'renewal_in_progress'}
+        observed[1]['status'] = 'failed'
+        self.assertTrue({'certificate_expiry', 'public_tls_failed'} <= codes(evaluate(observed, baseline)[0]))
 
     def test_future_monotonic_clock_is_not_accepted(self):
         observed = observation()
@@ -249,6 +280,13 @@ class MonitorTests(unittest.TestCase):
             return types.SimpleNamespace(request=lambda *a, **k: None, getresponse=lambda: response,
                                          sock=types.SimpleNamespace(settimeout=lambda _: None), close=lambda: None)
         for first, second, expected in ((connection(), connection(), 'passed'),
+                                        (connection(307, 'https://8.8.8.8/'), connection(), 'passed'),
+                                        (connection(307, 'https://8.8.8.8/'), connection(500), 'failed'),
+                                        (connection(307, 'https://8.8.8.8/'), connection(body=b''), 'failed'),
+                                        (connection(307, 'https://other.example/'), connection(), 'failed'),
+                                        (connection(307, 'http://8.8.8.8/'), connection(), 'failed'),
+                                        (connection(307, 'https://8.8.8.8:8443/'), connection(), 'failed'),
+                                        (connection(307, 'https://8.8.8.8/'), connection(307, 'https://other.example/'), 'failed'),
                                         (connection(301), connection(), 'failed'),
                                         (connection(location='/'), connection(), 'failed'),
                                         (connection(), connection(body=b'other'), 'failed'),
@@ -286,6 +324,7 @@ class MonitorTests(unittest.TestCase):
             def create_module(self, spec): return None
             def exec_module(self, module):
                 module.check_certificate = lambda *a, **k: certificate(remote=True)
+                module.certificate_lock = lambda **kwargs: contextlib.nullcontext()
         def run(arguments, **kwargs):
             if arguments[0] == 'systemctl':
                 fields = {'LoadState': 'loaded', 'ActiveState': 'active', 'SubState': 'waiting',

@@ -19,6 +19,8 @@
 
 工具要求 `--target` 为已存在的普通文件；若 `sites-enabled` 是符号链接，请核实并使用其实际 `sites-available` 目标路径。不要替换整个 `/etc/nginx/nginx.conf`，不要把三个候选同时 include，避免重复监听和 map 冲突。确认其他站点无冲突后再试行。
 
+直接用 IP 连接时，TLS 握手可能不携带 SNI，证书会在 HTTP Host 头到达前选定。试行和最终候选因此明确使用 `listen 443 ssl default_server`，保证此监听地址上无 SNI 的连接获得本站证书，即使另一个普通 443 站点先被加载。若现有同地址的 443 站点已声明 `default_server`，候选的 `nginx -t` 会拒绝重复默认站点，工具恢复原配置；先单独审阅其他站点的影响与监听规划，不临时删除别人的默认设置来绕过冲突。
+
 证书及 ACME 状态不进入仓库、webroot、PR 附件和普通日志。ACME webroot 只放临时挑战文件。下列命令是获准在目标上试行后的操作说明，本 PR 不自动执行它们。
 
 ## 1. 准备 HTTP 验证路径与后端可信代理
@@ -54,12 +56,21 @@ sudo diff -u "$SITE" "$WORK/rendered/bootstrap.conf"
 
 渲染目录须全新。`diff` 的非零退出只表示有差异，需要审阅路径、安全头、上传、媒体、WebSocket与自定义业务规则。当前生成器是一个明确拓扑的候选，不是任意 Nginx 配置迁移器。
 
-源配置摘要绑定审阅过的原始字节；下面每次 `activate` 还传入预期的活动配置摘要。工具在加锁后、执行 Nginx 命令和创建备份前拒绝摘要不匹配。若其他发布改变了活动配置，重新核对、生成与验证候选，不要临时读取新摘要来绕过这个保护。仅使用同一工具的操作共享该锁；仍需避免与其他发布同时切换配置。
+审阅本次三个候选及其 manifest 后，将预期摘要保存在本次操作记录和下列变量中，后续切换沿用这组值：
+
+```sh
+BOOTSTRAP_SHA=$(sudo python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["files"]["bootstrap.conf"]["sha256"])' "$WORK/rendered/manifest.json")
+TRIAL_SHA=$(sudo python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["files"]["trial.conf"]["sha256"])' "$WORK/rendered/manifest.json")
+HTTPS_SHA=$(sudo python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["files"]["https.conf"]["sha256"])' "$WORK/rendered/manifest.json")
+```
+
+源配置摘要绑定审阅过的原始字节；每次 `activate` 还传入预期的活动配置摘要和必需的 `--expected-candidate-sha256`。Python API 同样要求显式提供 `expected_candidate_sha256`。工具先读取候选并核对摘要，再创建锁、备份或执行 Nginx；切换使用这份已核对字节，之后替换候选路径不会改变本次载入内容。活动配置摘要在加锁后核对，且在 Nginx 命令与备份之前拒绝不匹配。若其他发布改变了活动配置，或候选／manifest 被改动，重新审阅、生成与验证；不要临时现读新的文件摘要绕过保护。仅使用同一工具的操作共享该锁；仍需避免与其他发布同时切换配置。
 
 ```sh
 sudo python3 "$SOURCE/deploy/ip_https.py" activate \
   --target "$SITE" --candidate "$WORK/rendered/bootstrap.conf" \
   --expected-target-sha256 "$SOURCE_SHA" \
+  --expected-candidate-sha256 "$BOOTSTRAP_SHA" \
   --backup "$WORK/before-bootstrap" --nginx /usr/sbin/nginx
 ```
 
@@ -99,7 +110,7 @@ sudo /opt/teachingopen-certbot/bin/certbot certonly \
   --logs-dir /var/lib/teachingopen-acme/logs
 sudo python3 "$SOURCE/deploy/ip_https.py" activate \
   --target "$SITE" --candidate "$WORK/rendered/trial.conf" \
-  --expected-target-sha256 "$(sudo python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["files"]["bootstrap.conf"]["sha256"])' "$WORK/rendered/manifest.json")" \
+  --expected-target-sha256 "$BOOTSTRAP_SHA" --expected-candidate-sha256 "$TRIAL_SHA" \
   --backup "$WORK/before-trial" --nginx /usr/sbin/nginx
 python3 "$SOURCE/deploy/check_ip_certificate.py" --ip "$PUBLIC_IP"
 ```
@@ -110,11 +121,15 @@ python3 "$SOURCE/deploy/check_ip_certificate.py" --ip "$PUBLIC_IP"
 
 ## 3. 自动续期与实际服务证书检查
 
-Let’s Encrypt IP 证书有效期为 160 小时。`teachingopen-ip-cert-renew.timer` 每天两次启动专用续期程序，由 Certbot 判断是否到续期时间。专用 config/work/logs 路径及 `--cert-name` 防止触碰其他服务证书。定时器已有最多 30 分钟的随机调度，因此程序和下方演练命令使用 `--no-random-sleep-on-renew`，避免 Certbot 5.8 默认额外等待最多 8 分钟而触发 300 秒服务超时；已在目标安装版本核对参数解析。
+Let’s Encrypt IP 证书有效期为 160 小时。`teachingopen-ip-cert-renew.timer` 每天两次启动专用续期程序，由 Certbot 判断是否到续期时间。专用 config/work/logs 路径及 `--cert-name` 防止触碰其他服务证书。定时器已有最多 30 分钟的随机调度，因此程序和下方演练命令使用 `--no-random-sleep-on-renew`，避免 Certbot 5.8 默认额外等待最多 8 分钟而超出执行预算；已在目标安装版本核对参数解析。
 
-Certbot 的 deploy-hook 失败不保证续期命令返回非零。`renew_ip_certificate.py` 因此还会比较专用 `live/teachingopen-ip/cert.pem` 与 Nginx 实际提供的叶证书，校验证书链、IP 身份及至少 48 小时有效期。磁盘证书与服务证书不一致时，执行一次 `nginx -t` 和 reload，再有界核验；后续续期无需换证时也会做这个检查和恢复，不为修复加载故障反复申请证书。Certbot 最终失败且没有已更新的可核验证书、加载失败或最后核验失败，均使服务失败。Certbot 尝试窗口上限 240 秒，整个程序预算 295 秒，systemd 最终上限为 300 秒；详细 ACME 日志留在专用私有目录。
+Certbot 的 deploy-hook 失败不保证续期命令返回非零。`renew_ip_certificate.py` 因此还会比较专用 `live/teachingopen-ip/cert.pem` 与 Nginx 实际提供的叶证书，校验证书链、IP 身份及至少 48 小时有效期。磁盘证书与服务证书不一致时，执行一次 `nginx -t` 和 reload，再有界核验；后续续期无需换证时也会做这个检查和恢复，不为修复加载故障反复申请证书。Certbot 最终失败且没有已更新的可核验证书、加载失败或最后核验失败，均使服务失败。Certbot 尝试窗口上限 240 秒，wrapper 本体预算 295 秒，独占锁最多等待 15 秒，续期 systemd 单元最终上限为 320 秒；详细 ACME 日志留在专用私有目录。
 
 Certbot 失败或超时后，在共享的 240 秒尝试窗口内最多执行三次，重试分别等待 5 秒和 10 秒，等待也计入窗口；时间不足时提前停止，为后续证书核验与加载恢复保留预算。找不到命令、公网 IP 或本地证书输入错误和 Nginx 错误不通过重新申请证书处理。对 Certbot 非零退出码无法仅凭返回值精确区分网络与其他失败，因此这里是有限重试，而不是已识别全部网络根因的自动修复。失败后若磁盘叶证书已经变化，则停止申请尝试，转入实际证书核验和必要的加载恢复；JSON 会保留命令失败及尝试次数，不能把状态恢复成功描述为所有命令都成功。未使用强制续期参数，短时失败不会停止正在使用有效证书的站点。
+
+续期 wrapper 和带磁盘叶证书比对的 checker 共用 `/run/lock/teachingopen-ip-certificate.lock`。续期取得独占写锁，覆盖 Certbot、deploy-hook 和最后的服务证书核验；checker 取得共享读锁，避免在换证和 reload 之间误报磁盘／服务不一致。checker 最多等待 310 秒，随后 TLS 连接和握手合计最多约 10 秒，检查单元上限为 330 秒。`ProtectSystem=strict` 保持证书与应用路径只读，单独允许 `/run/lock` 写入这份锁文件；不读取私钥、不放宽 ACME 目录。
+
+下列 checker、续期 wrapper 及两个 service 文件须同批更新。wrapper 依赖 checker 导出的 `certificate_lock` 等接口，只替换 wrapper 会因旧 checker 缺少接口而无法启动。先完成同批安装与单元核查，再加载 systemd 配置和启用定时器。
 
 ```sh
 sudo install -d -m 0755 /opt/teachingopen-https
@@ -144,13 +159,15 @@ sudo systemctl enable --now teachingopen-ip-cert-renew.timer teachingopen-ip-cer
 systemctl list-timers 'teachingopen-ip-cert-*'
 ```
 
-每小时的检查连接本机 443，使用公网 IP 验证 TLS 身份，检查**正在提供**的证书链、IP SAN、至少 48 小时剩余时间，以及它与磁盘叶证书的 SHA-256 一致性。检查单元以 root 运行，以便穿过原有私有 ACME 目录读取公开叶证书；不读取私钥，也不放宽证书目录权限，保留只读文件系统等 systemd 限制。它不依赖云端 NAT 回流；不证明外部安全组可达。外部网络还应执行不带 `--connect-host` 的相同检查。
+每小时的检查连接本机 443，使用公网 IP 验证 TLS 身份，检查**正在提供**的证书链、IP SAN、至少 48 小时剩余时间，以及它与磁盘叶证书的 SHA-256 一致性。检查单元以 root 运行，以便穿过原有私有 ACME 目录读取公开叶证书，并以共享锁协调续期；除锁目录外保留文件系统只读等 systemd 限制。它不依赖云端 NAT 回流；不证明外部安全组可达。外部网络还应执行不带 `--connect-host` 的相同检查。
 
 检查失败会产生非零状态并保留 systemd/journal 记录。磁盘与服务证书指纹的比较会发现仍在提供旧证书的情况，即使旧证书剩余有效期尚超过 48 小时。服务器本身没有短信或邮件发送功能；当前试行选择通过本机 Codex 对话的每小时检查接收告警，具体依赖与边界见下文。
 
 ### 本机只读告警检查
 
 `monitor_ip_https.py` 通过已配置的 Workbench profile 查询四个 systemd 单元、实际 TLS 证书和经过筛选的续期结果，并从本机检查公网 HTTP/HTTPS 入口。它不申请证书、不控制服务、不登录业务，也不读取或输出账号密码、证书私钥或原始服务器配置。检查结果与本机上次状态比较，健康基线或无变化时不要求通知；新故障、严重度升高、恢复及首次确认新正式证书已加载会产生需关注的变化。
+
+远端证书探针也遵守同一共享锁。续期仍持有锁时，本次证书核验有界暂缓；无其他故障时返回 `checking`，保留上次告警和证据，下一次再核查，不把暂缓当恢复或成功换证。公网入口允许 HTTP 首页的 307 指向精确的 `https://固定IP/`，并继续核验该 HTTPS 首页为 200；不跟随其他 Location，HTTPS 入口也必须直接返回 200。并行试行期间 HTTP 首页直接 200 仍是允许状态。
 
 ```sh
 python3 "$SOURCE/deploy/monitor_ip_https.py" \
@@ -172,7 +189,7 @@ python3 "$SOURCE/deploy/monitor_ip_https.py" \
 ```sh
 sudo python3 "$SOURCE/deploy/ip_https.py" activate \
   --target "$SITE" --candidate "$WORK/rendered/https.conf" \
-  --expected-target-sha256 "$(sudo python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["files"]["trial.conf"]["sha256"])' "$WORK/rendered/manifest.json")" \
+  --expected-target-sha256 "$TRIAL_SHA" --expected-candidate-sha256 "$HTTPS_SHA" \
   --backup "$WORK/before-https" --nginx /usr/sbin/nginx
 ```
 
@@ -189,7 +206,9 @@ sudo python3 "$SOURCE/deploy/ip_https.py" rollback \
 
 若撤销整个并行试行，先用 `before-trial` 回到 bootstrap（撤下 TLS，但仍覆盖转发头），停止本次两个 timer，再恢复完整后端配置并重启，确认 HTTP 正常后用 `before-bootstrap` 恢复原 Nginx。不要在后端仍信任转发头时先恢复会透传这些头的原站点。云安全组只撤销本轮实际新增的精确 443 规则，保留原有规则和其他人的后续变更。
 
-进程被 SIGKILL、主机断电等情况无法执行自动恢复；已提前落盘的备份和中间状态供下次显式 `rollback` 使用。工具允许恢复中断时已知的原配置/候选配置，仍拒绝未知改动。若报告 `recovery_required`，需按备份处理并核查 Nginx；不要反复启用新候选。成功返回仅证明配置检查和 reload 命令通过；旧 worker 可能短暂共存，之后还须用新连接确认实际响应、证书及业务。
+激活或回退的完成回执若在 Nginx reload 已接受后写入失败，也会尝试恢复本次操作前的配置字节、校验并再次 reload。激活恢复成功报告 `activation_failed_recovered`；回退恢复成功通常报告 `active`，表示已回到操作前的候选。若本次是在恢复中断操作、目标原已是备份字节，则回退恢复后报告 `rolled_back`。这些情况仍返回操作失败，须读明恢复结果。恢复回执再写入失败时，错误仍明确报告已恢复、当前磁盘 SHA-256 和“回执可能过期”，不会用普通磁盘错误掩盖已经发生的 reload。此时以错误中的实际恢复结果为准，先解决存储问题、比较目标与备份，再决定后续操作，不把旧回执当作最终状态。
+
+进程被 SIGKILL、主机断电等情况无法执行自动恢复；已提前落盘的备份和中间状态供下次显式 `rollback` 使用。工具允许恢复中断时已知的原配置/候选配置，仍拒绝未知改动。若恢复本身失败，工具报告 `recovery_required`，同时说明 Nginx 当前实际提供的配置未知；即使这一状态的回执也写入失败，关键恢复错误仍会保留。需按备份处理并核查 Nginx，不反复启用新候选。成功返回或“已恢复”只证明相应配置检查和 reload 命令已通过，不能证明新 worker 已接管全部请求；旧 worker 可能短暂共存，之后还须用新连接确认实际响应、证书及业务。
 
 回到纯 HTTP 是明确的运维决定，真实用户的传输保护将暂时撤销。回退不恢复数据库、账号、课程或期间新增的数据；应用数据持续保留。HTTPS 签发资料和私钥也保留以便诊断。若停留在仍覆盖转发头的 bootstrap，后端可信代理片段可以保留；若恢复未覆盖这些头的原站点，必须先恢复后端配置并受控重启。完全撤下 HTTPS 时停止本 PR 的两个 timer，保留日志和证书。
 

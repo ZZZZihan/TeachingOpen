@@ -219,6 +219,16 @@ class Runtime:
                  "-CA", str(certs / "ca.pem"), "-CAkey", str(certs / "ca.key"),
                  "-CAcreateserial", "-days", "2", "-sha256", "-extfile", str(certs / "server.ext"),
                  "-out", str(certs / "server.pem")])
+        # Another site's CA-trusted leaf has a different IP SAN. Its ordinary
+        # vhost is included first to expose IP clients that send no TLS SNI.
+        (certs / "other-site.ext").write_text(f"subjectAltName=IP:{WRONG_IDENTITY}\n"
+                                               "basicConstraints=critical,CA:FALSE\n"
+                                               "keyUsage=critical,digitalSignature,keyEncipherment\n"
+                                               "extendedKeyUsage=serverAuth\n")
+        command(["openssl", "x509", "-req", "-in", str(certs / "server.csr"),
+                 "-CA", str(certs / "ca.pem"), "-CAkey", str(certs / "ca.key"),
+                 "-CAserial", str(certs / "ca.srl"), "-days", "2", "-sha256",
+                 "-extfile", str(certs / "other-site.ext"), "-out", str(certs / "other-site.pem")])
         # A TemporaryDirectory starts at 0700. Native Linux bind mounts retain
         # that mode, so non-root Nginx workers need traversal through /fixture.
         # Keep only the public static trees readable; CA/server keys stay private.
@@ -270,10 +280,11 @@ class Runtime:
                 self.record(f"{mode} retains exactly one loopback-only native listener",
                             config.count("    listen 127.0.0.1:8088;") == 1
                             and "    listen 8088;" not in config)
+        (self.directory / "other-vhost.conf").write_text("")
         (self.directory / "nginx.conf").write_text("worker_processes 1;\npid /tmp/nginx.pid;\n"
                                                    "error_log /dev/stderr notice;\nevents { worker_connections 128; }\n"
                                                    "http { include /etc/nginx/mime.types; access_log off; "
-                                                   "include /fixture/active.conf; }\n")
+                                                   "include /fixture/other-vhost.conf; include /fixture/active.conf; }\n")
         if self.source_mode == "reviewed-native":
             shutil.copyfile(self.directory / "native-source.conf", self.directory / "active.conf")
         else:
@@ -453,12 +464,21 @@ sys.exit(result.returncode)
                 if process.poll() is None:
                     process.kill()
 
-    def control(self, action, backup, candidate=None, check=True, expected_target_sha256=None):
+    def control(self, action, backup, candidate=None, check=True, expected_target_sha256=None,
+                expected_candidate_sha256=None):
         arguments = [sys.executable, str(ROOT / "deploy/ip_https.py"), action,
                      "--target", str(self.directory / "active.conf"),
                      "--backup", str(self.directory / backup), "--nginx", str(self.shim)]
         if candidate:
             arguments.extend(["--candidate", str(self.directory / candidate)])
+            if expected_candidate_sha256 is None:
+                # Rendered candidates bind the original preparation manifest,
+                # rather than recalculating a review hash from later bytes.
+                if Path(candidate).parent == Path("rendered"):
+                    expected_candidate_sha256 = self.report["config_sha256"][Path(candidate).stem]
+                else:
+                    expected_candidate_sha256 = hashlib.sha256((self.directory / candidate).read_bytes()).hexdigest()
+            arguments.extend(["--expected-candidate-sha256", expected_candidate_sha256])
             if self.source_mode == "reviewed-native":
                 reviewed_hash = expected_target_sha256 or hashlib.sha256((self.directory / "active.conf").read_bytes()).hexdigest()
                 arguments.extend(["--expected-target-sha256", reviewed_hash])
@@ -499,6 +519,42 @@ sys.exit(result.returncode)
             result = command(arguments + extra, check=False)
             details = json.loads(result.stdout)
             self.record(f"served certificate probe rejects {name}", result.returncode == 1 and details.get("status") == "failed")
+
+    def other_tls_vhost(self, *, default=False, remove=False):
+        path = self.directory / "other-vhost.conf"
+        flag = " default_server" if default else ""
+        content = "" if remove else f'''server {{
+    listen 443 ssl{flag};
+    server_name other-fixture.invalid;
+    ssl_certificate /fixture/certs/other-site.pem;
+    ssl_certificate_key /fixture/certs/server.key;
+    return 200 "other-site";
+}}
+'''
+        path.write_text(content)
+        expected = hashlib.sha256(path.read_bytes()).hexdigest()
+        self.wait_until(lambda: command(["docker", "exec", self.name, "sha256sum",
+                                        "/fixture/other-vhost.conf"]).stdout.split()[0] == expected)
+        previous_workers = self.workers()
+        self.nginx("-t")
+        command([str(self.shim), "-s", "reload"])
+        self.wait_until(lambda: bool(self.workers()) and not previous_workers.intersection(self.workers()))
+
+    def no_sni_certificate(self, stage):
+        context = ssl.create_default_context(cafile=str(self.directory / "certs/ca.pem"))
+        # The chain remains verified. IP SAN and the exact fixture leaf are
+        # checked explicitly because no server_hostname means no built-in
+        # hostname check and, crucially, no SNI extension in this handshake.
+        context.check_hostname = False
+        with socket.create_connection(("127.0.0.1", self.https_port), timeout=5) as plain:
+            with context.wrap_socket(plain, server_hostname=None) as secure:
+                certificate = secure.getpeercert()
+                actual = hashlib.sha256(secure.getpeercert(binary_form=True)).hexdigest()
+        expected = hashlib.sha256(ssl.PEM_cert_to_DER_cert(
+            (self.directory / "certs/server.pem").read_text())).hexdigest()
+        self.record(f"{stage} no-SNI handshake verifies CA, exact TeachingOpen leaf and IP SAN despite earlier vhost",
+                    actual == expected and ("IP Address", IDENTITY) in certificate.get("subjectAltName", ()),
+                    {"sha256": actual, "san": certificate.get("subjectAltName")})
 
     def acme(self, stage, tls=False, internal=False):
         status, _, body = self.request("GET", "/.well-known/acme-challenge/runtime-token", tls=tls, internal=internal)
@@ -642,6 +698,14 @@ sys.exit(result.returncode)
         self.api("bootstrap HTTP")
         original = (self.directory / "active.conf").read_bytes()
         previous_workers = self.workers()
+        modified = self.directory / "modified-trial.conf"
+        modified.write_bytes((self.directory / "rendered/trial.conf").read_bytes() + b"\n# unreviewed valid change\n")
+        rejected = self.control("activate", "backup-candidate-drift", "modified-trial.conf", check=False,
+                                expected_candidate_sha256=self.report["config_sha256"]["trial"])
+        self.record("modified but syntactically valid candidate rejects activation before files or workers change",
+                    rejected.returncode != 0 and (self.directory / "active.conf").read_bytes() == original
+                    and not (self.directory / "backup-candidate-drift").exists()
+                    and self.workers() == previous_workers)
         if self.source_mode == "reviewed-native":
             rejected = self.control("activate", "backup-stale-review", "rendered/trial.conf", check=False,
                                     expected_target_sha256="0" * 64)
@@ -658,7 +722,19 @@ sys.exit(result.returncode)
         self.record("failed activation leaves original HTTP service available", True)
         if self.source_mode == "reviewed-native":
             self.native_business("failed activation loopback HTTP", internal=True)
+        self.other_tls_vhost(default=True)
+        previous_workers = self.workers()
+        failed = self.control("activate", "backup-default-conflict", "rendered/trial.conf", check=False)
+        receipt = json.loads((self.directory / "backup-default-conflict/receipt.json").read_text())
+        self.record("an existing explicit 443 default rejects activation and records exact-byte recovery",
+                    failed.returncode != 0 and (self.directory / "active.conf").read_bytes() == original
+                    and receipt.get("status") == "activation_failed_recovered")
+        self.wait_until(lambda: bool(self.workers()) and not previous_workers.intersection(self.workers()))
+        self.record("existing 443 default conflict leaves original HTTP business available",
+                    self.request("GET", "/")[0] == 200)
+        self.other_tls_vhost(default=False)
         self.switch("trial")
+        self.no_sni_certificate("trial")
         self.native_stage("trial")
         self.acme("trial HTTP")
         self.record("trial keeps HTTP available", self.request("GET", "/")[0] == 200)
@@ -686,6 +762,8 @@ sys.exit(result.returncode)
             self.record(f"HTTPS CORP policy {path}", status == 200 and headers.get("cross-origin-resource-policy") == policy)
         self.websocket()
         self.switch("https")
+        self.no_sni_certificate("https-only")
+        self.other_tls_vhost(remove=True)
         self.native_stage("https")
         self.acme("HTTPS-only mode HTTP")
         status, headers, _ = self.request("GET", "/courses/fixture?lesson=1", headers={"Host": "untrusted.invalid"})

@@ -1,20 +1,55 @@
 #!/usr/bin/env python3
 """Verify the certificate actually served for an IP; never renew or change services."""
 import argparse
+from contextlib import contextmanager
 import datetime
+import fcntl
 import hashlib
 import ipaddress
 import json
 import math
+import os
 from pathlib import Path
 import socket
 import ssl
+import stat
 import sys
 import time
 
 
 class CertificateMismatch(ValueError):
     """The live TLS leaf does not match the expected certificate on disk."""
+
+
+class CertificateBusy(TimeoutError):
+    """Another certificate operation holds the shared host lock."""
+
+
+CERTIFICATE_LOCK = '/run/lock/teachingopen-ip-certificate.lock'
+
+
+@contextmanager
+def certificate_lock(shared, wait_seconds, path=None):
+    """Serialize readers with the whole renewal, including its deploy hook."""
+    fd = os.open(path or CERTIFICATE_LOCK, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
+    try:
+        info = os.fstat(fd)
+        if (not stat.S_ISREG(info.st_mode) or stat.S_IMODE(info.st_mode) != 0o600
+                or info.st_uid != os.geteuid()):
+            raise ValueError('Unsafe certificate lock')
+        deadline = time.monotonic() + wait_seconds
+        while True:
+            try:
+                fcntl.flock(fd, (fcntl.LOCK_SH if shared else fcntl.LOCK_EX) | fcntl.LOCK_NB)
+                break
+            except BlockingIOError:
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    raise CertificateBusy('Certificate operation still in progress') from None
+                time.sleep(min(0.1, remaining))
+        yield
+    finally:
+        os.close(fd)
 
 
 def certificate_sha256(path):
@@ -82,8 +117,13 @@ def main(argv=None):
                         help='Compare the served leaf with this public PEM leaf certificate')
     args = parser.parse_args(argv)
     try:
-        result = check_certificate(args.ip, args.port, args.min_hours, args.connect_host,
-                                   args.ca_file, args.expected_certificate)
+        if args.expected_certificate is not None:
+            with certificate_lock(shared=True, wait_seconds=310):
+                result = check_certificate(args.ip, args.port, args.min_hours, args.connect_host,
+                                           args.ca_file, args.expected_certificate)
+        else:
+            result = check_certificate(args.ip, args.port, args.min_hours, args.connect_host,
+                                       args.ca_file, args.expected_certificate)
     except (ValueError, OSError) as error:
         print(json.dumps({'status': 'failed', 'error': str(error)}, ensure_ascii=False))
         return 1

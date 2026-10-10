@@ -10,7 +10,7 @@ import subprocess
 import sys
 import time
 
-from check_ip_certificate import CertificateMismatch, certificate_sha256, check_certificate
+from check_ip_certificate import CertificateBusy, CertificateMismatch, certificate_lock, certificate_sha256, check_certificate
 
 
 CERTIFICATE = '/var/lib/teachingopen-acme/config/live/teachingopen-ip/cert.pem'
@@ -201,7 +201,12 @@ def main(argv=None):
     parser.add_argument('--ip', required=True)
     args = parser.parse_args(argv)
     try:
-        result = renew_certificate(args.ip)
+        with certificate_lock(shared=False, wait_seconds=15):
+            result = renew_certificate(args.ip)
+    except CertificateBusy:
+        print(json.dumps({'status': 'failed', 'stage': 'certificate_lock',
+                          'error': 'certificate_operation_in_progress', 'attempts': 0}))
+        return 1
     except RenewalFailure as error:
         print(json.dumps(error.report()))
         return 1

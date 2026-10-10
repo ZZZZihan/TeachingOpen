@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Offline rendering and real-file failure/recovery checks; no target services."""
 import fcntl
+from contextlib import contextmanager
 import json
 import os
 from pathlib import Path
@@ -184,9 +185,9 @@ class ReviewedSiteRenderingTests(unittest.TestCase):
         for config in (bootstrap, trial, final):
             self.assertEqual(config.count('listen 127.0.0.1:8088;'), 1)
             self.assertEqual(config.count('listen 80 default_server;'), 1)
-        self.assertNotIn('listen 443 ssl;', bootstrap)
-        self.assertEqual(trial.count('listen 443 ssl;'), 1)
-        self.assertEqual(final.count('listen 443 ssl;'), 1)
+        self.assertNotIn('listen 443 ssl', bootstrap)
+        self.assertEqual(trial.count('listen 443 ssl default_server;'), 1)
+        self.assertEqual(final.count('listen 443 ssl default_server;'), 1)
         tls_trial = 'server\n' + trial.split('\nserver\n')[2]
         self.assertNotIn('8088', tls_trial)
         local = 'server\n' + final.split('\nserver\n')[2].split('\nserver {')[0]
@@ -313,7 +314,8 @@ if sys.argv[1:] == ['-s', 'reload'] and ('RELOAD_FAIL' in data or failure.exists
         self.temp.cleanup()
 
     def activate(self):
-        return tls.activate(self.target, self.candidate, self.backup, self.nginx)
+        return tls.activate(self.target, self.candidate, self.backup, self.nginx,
+                            expected_candidate_sha256=tls.digest(self.candidate.read_bytes()))
 
     def rollback(self):
         return tls.rollback(self.target, self.backup, self.nginx)
@@ -354,7 +356,8 @@ if sys.argv[1:] == ['-s', 'reload'] and ('RELOAD_FAIL' in data or failure.exists
     def test_expected_target_digest_allows_exact_reviewed_source(self):
         expected = tls.digest(self.target.read_bytes())
         result = tls.activate(self.target, self.candidate, self.backup, self.nginx,
-                              expected_target_sha256=expected)
+                              expected_target_sha256=expected,
+                              expected_candidate_sha256=tls.digest(self.candidate.read_bytes()))
         self.assertEqual(result['status'], 'active')
         self.assertEqual(self.target.read_bytes(), self.candidate.read_bytes())
         self.assertEqual(self.receipt()['previous_sha256'], expected)
@@ -364,7 +367,8 @@ if sys.argv[1:] == ['-s', 'reload'] and ('RELOAD_FAIL' in data or failure.exists
         self.target.write_bytes(b'later release config\n')
         with self.assertRaisesRegex(ValueError, 'Target changed since review'):
             tls.activate(self.target, self.candidate, self.backup, self.nginx,
-                         expected_target_sha256=expected)
+                         expected_target_sha256=expected,
+                         expected_candidate_sha256=tls.digest(self.candidate.read_bytes()))
         self.assertEqual(self.target.read_bytes(), b'later release config\n')
         self.assertEqual(stat.S_IMODE(self.target.stat().st_mode), 0o640)
         self.assertFalse(self.backup.exists())
@@ -374,10 +378,140 @@ if sys.argv[1:] == ['-s', 'reload'] and ('RELOAD_FAIL' in data or failure.exists
         original = self.target.read_bytes()
         with self.assertRaisesRegex(ValueError, 'SHA-256'):
             tls.activate(self.target, self.candidate, self.backup, self.nginx,
-                         expected_target_sha256='')
+                         expected_target_sha256='',
+                         expected_candidate_sha256=tls.digest(self.candidate.read_bytes()))
         self.assertEqual(self.target.read_bytes(), original)
         self.assertFalse(self.backup.exists())
         self.assertFalse(self.events.exists())
+
+    def test_candidate_digest_is_required_by_python_api_and_cli(self):
+        with self.assertRaises(TypeError):
+            tls.activate(self.target, self.candidate, self.backup, self.nginx)
+        result = subprocess.run([sys.executable, str(Path(tls.__file__).resolve()), 'activate',
+            '--target', str(self.target), '--candidate', str(self.candidate),
+            '--backup', str(self.backup), '--nginx', str(self.nginx)],
+            capture_output=True, text=True, timeout=5)
+        self.assertEqual(result.returncode, 2)
+        self.assertIn('--expected-candidate-sha256', result.stderr)
+        self.assertEqual(self.target.read_bytes(), b'old configuration\n')
+        self.assertFalse(self.backup.exists())
+        self.assertFalse(self.events.exists())
+
+    def test_candidate_digest_rejects_malformed_review_before_any_state_write(self):
+        for expected in (None, '', 'a' * 63, 'A' * 64):
+            with self.subTest(expected=expected), self.assertRaisesRegex(ValueError, 'SHA-256'):
+                tls.activate(self.target, self.candidate, self.backup, self.nginx,
+                             expected_candidate_sha256=expected)
+        self.assertEqual(self.target.read_bytes(), b'old configuration\n')
+        self.assertFalse(self.backup.exists())
+        self.assertFalse(self.events.exists())
+        self.assertFalse(self.target.with_name('.' + self.target.name + '.teachingopen-https.lock').exists())
+
+    def test_modified_candidate_is_refused_before_any_state_write_or_nginx(self):
+        expected = tls.digest(self.candidate.read_bytes())
+        self.candidate.write_bytes(b'valid but unreviewed candidate\n')
+        with self.assertRaisesRegex(ValueError, 'Candidate changed since review'):
+            tls.activate(self.target, self.candidate, self.backup, self.nginx,
+                         expected_candidate_sha256=expected)
+        result = subprocess.run([sys.executable, str(Path(tls.__file__).resolve()), 'activate',
+            '--target', str(self.target), '--candidate', str(self.candidate),
+            '--expected-candidate-sha256', expected,
+            '--backup', str(self.backup), '--nginx', str(self.nginx)],
+            capture_output=True, text=True, timeout=5)
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('Candidate changed since review', result.stderr)
+        self.assertEqual(self.target.read_bytes(), b'old configuration\n')
+        self.assertFalse(self.backup.exists())
+        self.assertFalse(self.events.exists())
+        self.assertFalse(self.target.with_name('.' + self.target.name + '.teachingopen-https.lock').exists())
+
+    def test_candidate_changes_after_read_cannot_change_activated_reviewed_bytes(self):
+        reviewed = self.candidate.read_bytes()
+        original_lock = tls.target_lock
+
+        @contextmanager
+        def candidate_changes_before_lock(target):
+            self.candidate.write_bytes(b'unreviewed replacement after candidate read\n')
+            with original_lock(target):
+                yield
+
+        with patch.object(tls, 'target_lock', candidate_changes_before_lock):
+            result = tls.activate(self.target, self.candidate, self.backup, self.nginx,
+                                  expected_candidate_sha256=tls.digest(reviewed))
+        self.assertEqual(self.target.read_bytes(), reviewed)
+        self.assertEqual(result['active_sha256'], tls.digest(reviewed))
+        self.assertEqual(self.receipt()['candidate_sha256'], tls.digest(reviewed))
+        self.assertNotEqual(self.target.read_bytes(), self.candidate.read_bytes())
+
+    def test_completion_receipt_failure_restores_and_reloads_before_reporting_error(self):
+        save_receipt = tls.save_receipt
+
+        def fail_completion(backup, receipt):
+            if receipt['status'] == 'active':
+                raise OSError('simulated disk full')
+            return save_receipt(backup, receipt)
+
+        with patch.object(tls, 'save_receipt', fail_completion), self.assertRaisesRegex(
+                RuntimeError, 'completion receipt persistence after accepted Nginx reload') as raised:
+            self.activate()
+        self.assertIn('status=activation_failed_recovered', str(raised.exception))
+        self.assertIn('previous configuration bytes restored and reloaded', str(raised.exception))
+        self.assertEqual(self.target.read_bytes(), b'old configuration\n')
+        self.assertEqual(self.receipt()['status'], 'activation_failed_recovered')
+        self.assertEqual([event['data'] for event in self.logged() if event['args'] == ['-s', 'reload']],
+                         ['new configuration\n', 'old configuration\n'])
+
+    def test_completion_and_recovery_receipt_failure_preserve_recovered_live_status(self):
+        save_receipt = tls.save_receipt
+
+        def fail_final_receipts(backup, receipt):
+            if receipt['status'] != 'switching':
+                raise OSError('simulated persistent disk full')
+            return save_receipt(backup, receipt)
+
+        with patch.object(tls, 'save_receipt', fail_final_receipts), self.assertRaises(RuntimeError) as raised:
+            self.activate()
+        message = str(raised.exception)
+        self.assertIn('status=activation_failed_recovered', message)
+        self.assertIn('recovery receipt persistence failed; durable receipt may be stale', message)
+        self.assertIn('previous configuration bytes restored and reloaded', message)
+        self.assertIn('target_disk_sha256=' + tls.digest(b'old configuration\n'), message)
+        self.assertIn('live responses remain unverified', message)
+        self.assertEqual(self.target.read_bytes(), b'old configuration\n')
+        self.assertEqual(self.receipt()['status'], 'switching')
+
+    def test_failed_reload_and_recovery_receipt_failure_still_report_recovery(self):
+        self.candidate.write_text('RELOAD_FAIL candidate')
+        save_receipt = tls.save_receipt
+
+        def fail_recovery_receipt(backup, receipt):
+            if receipt['status'] == 'activation_failed_recovered':
+                raise OSError('simulated disk full')
+            return save_receipt(backup, receipt)
+
+        with patch.object(tls, 'save_receipt', fail_recovery_receipt), self.assertRaises(RuntimeError) as raised:
+            self.activate()
+        self.assertIn('status=activation_failed_recovered', str(raised.exception))
+        self.assertIn('recovery receipt persistence failed', str(raised.exception))
+        self.assertEqual(self.target.read_bytes(), b'old configuration\n')
+        self.assertEqual(self.logged()[-1], {'args': ['-s', 'reload'], 'data': 'old configuration\n'})
+
+    def test_failed_recovery_and_receipt_failure_report_unknown_live_state(self):
+        self.always_fail_reload.touch()
+        save_receipt = tls.save_receipt
+
+        def fail_recovery_receipt(backup, receipt):
+            if receipt['status'] == 'recovery_required':
+                raise OSError('simulated disk full')
+            return save_receipt(backup, receipt)
+
+        with patch.object(tls, 'save_receipt', fail_recovery_receipt), self.assertRaises(RuntimeError) as raised:
+            self.activate()
+        self.assertIn('status=recovery_required', str(raised.exception))
+        self.assertIn('live Nginx configuration is unknown', str(raised.exception))
+        self.assertIn('recovery receipt persistence failed', str(raised.exception))
+        self.assertEqual(self.receipt()['status'], 'switching')
+        self.assertEqual((self.backup / 'previous.conf').read_bytes(), b'old configuration\n')
 
     def test_invalid_candidate_restores_old_config_and_never_reloads_bad_bytes(self):
         self.candidate.write_text('INVALID candidate')
@@ -448,6 +582,7 @@ if sys.argv[1:] == ['-s', 'reload'] and ('RELOAD_FAIL' in data or failure.exists
         self.candidate.write_text('BLOCK_ACTIVATE')
         process = subprocess.Popen([sys.executable, str(Path(tls.__file__).resolve()), 'activate',
             '--target', str(self.target), '--candidate', str(self.candidate),
+            '--expected-candidate-sha256', tls.digest(self.candidate.read_bytes()),
             '--backup', str(self.backup), '--nginx', str(self.nginx)],
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
         try:
@@ -490,17 +625,106 @@ if sys.argv[1:] == ['-s', 'reload'] and ('RELOAD_FAIL' in data or failure.exists
         self.assertEqual(self.target.read_bytes(), self.candidate.read_bytes())
         self.assertEqual(self.receipt()['status'], 'active')
 
+    def test_rollback_completion_receipt_failure_recovers_candidate_and_reports_active(self):
+        self.activate()
+        save_receipt = tls.save_receipt
+
+        def fail_completion(backup, receipt):
+            if receipt['status'] == 'rolled_back':
+                raise OSError('simulated disk full')
+            return save_receipt(backup, receipt)
+
+        with patch.object(tls, 'save_receipt', fail_completion), self.assertRaises(RuntimeError) as raised:
+            self.rollback()
+        self.assertIn('completion receipt persistence after accepted Nginx reload', str(raised.exception))
+        self.assertIn('status=active', str(raised.exception))
+        self.assertEqual(self.target.read_bytes(), self.candidate.read_bytes())
+        self.assertEqual(self.receipt()['status'], 'active')
+        self.assertEqual([event['data'] for event in self.logged() if event['args'] == ['-s', 'reload']],
+                         ['new configuration\n', 'old configuration\n', 'new configuration\n'])
+
+    def test_rollback_completion_and_recovery_receipt_failure_preserve_active_status(self):
+        self.activate()
+        save_receipt = tls.save_receipt
+
+        def fail_final_receipts(backup, receipt):
+            if receipt['status'] != 'rolling_back':
+                raise OSError('simulated persistent disk full')
+            return save_receipt(backup, receipt)
+
+        with patch.object(tls, 'save_receipt', fail_final_receipts), self.assertRaises(RuntimeError) as raised:
+            self.rollback()
+        self.assertIn('status=active', str(raised.exception))
+        self.assertIn('recovery receipt persistence failed', str(raised.exception))
+        self.assertIn('previous configuration bytes restored and reloaded', str(raised.exception))
+        self.assertEqual(self.target.read_bytes(), self.candidate.read_bytes())
+        self.assertEqual(self.receipt()['status'], 'rolling_back')
+        # The earlier durable intermediate receipt still supports explicit recovery.
+        self.assertEqual(self.rollback()['status'], 'rolled_back')
+
+    def test_interrupted_rollback_receipt_failure_with_original_bytes_preserves_correct_status(self):
+        self.activate()
+        self.target.write_bytes(b'old configuration\n')
+        tls.save_receipt(self.backup, dict(self.receipt(), status='rolling_back'))
+        save_receipt = tls.save_receipt
+        failed = False
+
+        def fail_first_completion(backup, receipt):
+            nonlocal failed
+            if receipt['status'] == 'rolled_back' and not failed:
+                failed = True
+                raise OSError('simulated disk full')
+            return save_receipt(backup, receipt)
+
+        with patch.object(tls, 'save_receipt', fail_first_completion), self.assertRaises(RuntimeError) as raised:
+            self.rollback()
+        self.assertIn('status=rolled_back', str(raised.exception))
+        self.assertEqual(self.target.read_bytes(), b'old configuration\n')
+        self.assertEqual(self.receipt()['status'], 'rolled_back')
+        self.assertEqual(self.rollback()['status'], 'rolled_back')
+
+    def test_rollback_recovery_and_receipt_failure_report_unknown_live_state(self):
+        self.activate()
+        self.always_fail_reload.touch()
+        save_receipt = tls.save_receipt
+
+        def fail_recovery_receipt(backup, receipt):
+            if receipt['status'] == 'recovery_required':
+                raise OSError('simulated disk full')
+            return save_receipt(backup, receipt)
+
+        with patch.object(tls, 'save_receipt', fail_recovery_receipt), self.assertRaises(RuntimeError) as raised:
+            self.rollback()
+        self.assertIn('status=recovery_required', str(raised.exception))
+        self.assertIn('live Nginx configuration is unknown', str(raised.exception))
+        self.assertIn('recovery receipt persistence failed', str(raised.exception))
+        self.assertEqual(self.target.read_bytes(), self.candidate.read_bytes())
+        self.assertEqual(self.receipt()['status'], 'rolling_back')
+
+    def test_rollback_intermediate_receipt_failure_does_not_switch_configuration(self):
+        self.activate()
+        events_before = self.logged()
+        with patch.object(tls, 'save_receipt', side_effect=OSError('simulated disk full')):
+            with self.assertRaises(OSError):
+                self.rollback()
+        self.assertEqual(self.target.read_bytes(), self.candidate.read_bytes())
+        self.assertEqual(self.logged(), events_before)
+        self.assertEqual(self.receipt()['status'], 'active')
+
     def test_symlink_target_candidate_and_backup_parent_refused(self):
         alias = self.root / 'alias.conf'
         alias.symlink_to(self.target)
         with self.assertRaises(ValueError):
-            tls.activate(alias, self.candidate, self.backup, self.nginx)
+            tls.activate(alias, self.candidate, self.backup, self.nginx,
+                         expected_candidate_sha256=tls.digest(self.candidate.read_bytes()))
         with self.assertRaises(ValueError):
-            tls.activate(self.target, alias, self.backup, self.nginx)
+            tls.activate(self.target, alias, self.backup, self.nginx,
+                         expected_candidate_sha256=tls.digest(self.candidate.read_bytes()))
         directory_alias = self.root / 'alias-dir'
         directory_alias.symlink_to(self.root, target_is_directory=True)
         with self.assertRaises(ValueError):
-            tls.activate(self.target, self.candidate, directory_alias / 'backup', self.nginx)
+            tls.activate(self.target, self.candidate, directory_alias / 'backup', self.nginx,
+                         expected_candidate_sha256=tls.digest(self.candidate.read_bytes()))
         self.assertFalse(self.events.exists())
 
     def test_existing_backup_not_reused(self):

@@ -5,6 +5,8 @@ import io
 from pathlib import Path
 import ssl
 import tempfile
+import subprocess
+import sys
 import unittest
 from unittest.mock import MagicMock, patch
 
@@ -28,6 +30,7 @@ class CertificateBindingTests(unittest.TestCase):
         self.stack.enter_context(patch.object(checker.ssl, 'create_default_context', return_value=self.context))
         self.connection = self.stack.enter_context(patch.object(checker.socket, 'create_connection'))
         self.stack.enter_context(patch.object(checker.time, 'time', return_value=1791590400))
+        self.stack.enter_context(patch.object(checker, 'CERTIFICATE_LOCK', str(Path(self.temp.name) / 'lock')))
 
     def tearDown(self):
         self.stack.close()
@@ -84,6 +87,60 @@ class CertificateBindingTests(unittest.TestCase):
                                  '--expected-certificate', str(self.leaf)])
         self.assertEqual(code, 1)
         self.assertIn('"status": "failed"', output.getvalue())
+
+
+class CertificateLockTests(unittest.TestCase):
+    def test_readers_can_overlap_but_writer_and_reader_cannot(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = str(Path(directory) / 'certificate.lock')
+            with checker.certificate_lock(True, 0, path):
+                with checker.certificate_lock(True, 0, path):
+                    pass
+                with self.assertRaises(checker.CertificateBusy):
+                    with checker.certificate_lock(False, 0, path):
+                        self.fail('writer entered during read')
+            with checker.certificate_lock(False, 0, path):
+                for shared in (True, False):
+                    with self.assertRaises(checker.CertificateBusy):
+                        with checker.certificate_lock(shared, 0.01, path):
+                            self.fail('entered during renewal')
+            with checker.certificate_lock(True, 0, path):
+                pass
+
+    def test_process_reader_waits_for_writer_then_reads_updated_leaf(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path, value = Path(directory) / 'lock', Path(directory) / 'leaf'
+            value.write_text('old')
+            script = '''import sys
+from pathlib import Path
+from check_ip_certificate import certificate_lock
+print('ready', flush=True)
+with certificate_lock(True, 2, sys.argv[1]):
+    print(Path(sys.argv[2]).read_text(), flush=True)
+'''
+            with checker.certificate_lock(False, 0, str(path)):
+                process = subprocess.Popen([sys.executable, '-c', script, str(path), str(value)],
+                    cwd=Path(checker.__file__).parent, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                try:
+                    self.assertEqual(process.stdout.readline().strip(), 'ready')
+                    self.assertIsNone(process.poll())
+                    value.write_text('new')
+                except BaseException:
+                    process.kill(); process.communicate(); raise
+            stdout, stderr = process.communicate(timeout=5)
+            self.assertEqual(process.returncode, 0, stderr)
+            self.assertEqual(stdout.strip(), 'new')
+
+    def test_symlink_lock_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / 'target'
+            target.write_text('preserve')
+            path = Path(directory) / 'lock'
+            path.symlink_to(target)
+            with self.assertRaises(OSError):
+                with checker.certificate_lock(True, 0, str(path)):
+                    self.fail('symlink accepted')
+            self.assertEqual(target.read_text(), 'preserve')
 
 
 if __name__ == '__main__':

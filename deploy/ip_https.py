@@ -90,7 +90,7 @@ def reviewed_site_profile(template, ip, web_root, api_upstream):
 
 
 def checked_sha256(value):
-    if not re.fullmatch(r'[0-9a-f]{64}', value):
+    if not isinstance(value, str) or not re.fullmatch(r'[0-9a-f]{64}', value):
         raise ValueError('Use an explicit lowercase SHA-256 digest')
     return value
 
@@ -187,7 +187,7 @@ def render(ip, web_root, api_upstream, acme_root, certificate, private_key, outp
         raise ValueError('Source template unexpectedly contains TLS policy')
     # The trial's HTTP block owns 8088; duplicating it into TLS would conflict.
     tls_source = replace_once(server, '    listen 127.0.0.1:8088;\n', '') if native else server
-    tls = replace_once(tls_source, '    listen 80 default_server;', '''    listen 443 ssl;
+    tls = replace_once(tls_source, '    listen 80 default_server;', '''    listen 443 ssl default_server;
     ssl_certificate "''' + certificate + '''";
     ssl_certificate_key "''' + private_key + '''";
     ssl_protocols TLSv1.2 TLSv1.3;
@@ -270,40 +270,72 @@ def distinct(backup, *paths):
 
 
 def switch(target, next_data, restore_data, mode, owner, nginx, backup, receipt, success, recovered):
+    phase = 'configuration replacement'
     try:
         atomic_write(target, next_data, mode, owner)
+        phase = 'configuration validation'
         nginx_command(nginx, '-t')
+        phase = 'Nginx reload'
         nginx_command(nginx, '-s', 'reload')
+        # Completion is durable only after its receipt is saved. A failure here
+        # occurs after a reload was accepted, so recover just like a reload
+        # failure rather than reporting an ordinary, apparently harmless error.
+        phase = 'completion receipt persistence after accepted Nginx reload'
+        receipt['status'] = success
+        save_receipt(backup, receipt)
     except (Exception, KeyboardInterrupt) as error:
+        recovery_error = None
         try:
             atomic_write(target, restore_data, mode, owner)
             nginx_command(nginx, '-t')
             nginx_command(nginx, '-s', 'reload')
-        except (Exception, KeyboardInterrupt):
-            receipt['status'] = 'recovery_required'
+        except (Exception, KeyboardInterrupt) as failure:
+            recovery_error = failure
+        receipt['status'] = 'recovery_required' if recovery_error is not None else recovered
+        # A second disk error must not hide the outcome of the restore/reload.
+        # Even atomic_write can replace receipt.json before its directory fsync
+        # fails, so describe a failed receipt as potentially stale either way.
+        try:
             save_receipt(backup, receipt)
-            raise RuntimeError('Switch and recovery failed; inspect target and private backup') from None
-        receipt['status'] = recovered
-        save_receipt(backup, receipt)
-        raise RuntimeError('Switch failed (' + str(error) + '); previous configuration bytes restored and reloaded') from None
-    receipt['status'] = success
-    save_receipt(backup, receipt)
+            receipt_state = 'recovery receipt saved'
+        except (Exception, KeyboardInterrupt):
+            receipt_state = 'recovery receipt persistence failed; durable receipt may be stale'
+        try:
+            disk_state = 'target_disk_sha256=' + digest(ordinary(target).read_bytes())
+        except (Exception, KeyboardInterrupt):
+            disk_state = 'target disk configuration could not be read'
+        outcome = 'status=' + receipt['status'] + '; ' + receipt_state + '; ' + disk_state
+        location = '; target=' + str(target) + '; private backup=' + str(backup)
+        if recovery_error is not None:
+            raise RuntimeError('Switch and recovery failed; switch phase=' + phase +
+                               '; ' + outcome + '; live Nginx configuration is unknown; '
+                               'inspect target and private backup before explicit rollback' + location) from None
+        raise RuntimeError('Switch failed during ' + phase + ' (' + str(error) + '); '
+                           'previous configuration bytes restored and reloaded; ' + outcome +
+                           '; recovery reload accepted, live responses remain unverified' + location) from None
     return {'status': success, 'target': str(target), 'backup': str(backup),
             'active_sha256': digest(next_data), 'live_business_verified': False}
 
 
-def activate(target, candidate, backup, nginx, expected_target_sha256=None):
+def activate(target, candidate, backup, nginx, expected_target_sha256=None, *, expected_candidate_sha256):
     target, candidate = ordinary(target), ordinary(candidate)
     nginx = executable(nginx)
     backup = ordinary(backup, directory=True, missing=True)
     if backup.exists() or target == candidate:
         raise ValueError('Use a fresh backup directory and a distinct candidate file')
     distinct(backup, target, candidate, nginx)
+    checked_sha256(expected_candidate_sha256)
     if expected_target_sha256 is not None:
         checked_sha256(expected_target_sha256)
+    # Read and bind the exact reviewed bytes before creating even the lock file.
+    # Keep this snapshot: changing the candidate path later cannot change the
+    # bytes passed to switch(), including while waiting for the target lock.
+    new = candidate.read_bytes()
+    if digest(new) != expected_candidate_sha256:
+        raise ValueError('Candidate changed since review; expected candidate checksum mismatch')
     with target_lock(target):
-        target, candidate = ordinary(target), ordinary(candidate)
-        old, new = target.read_bytes(), candidate.read_bytes()
+        target = ordinary(target)
+        old = target.read_bytes()
         if expected_target_sha256 is not None and digest(old) != expected_target_sha256:
             raise ValueError('Target changed since review; expected target checksum mismatch')
         info = target.stat()
@@ -351,8 +383,12 @@ def rollback(target, backup, nginx):
         save_receipt(backup, receipt)
         # A missing current certificate can make `nginx -t` fail. Check the
         # restored configuration, rather than requiring the broken one to pass.
+        # Interrupted operations can already have the original bytes installed.
+        # If this rollback later fails, restoring those bytes must not leave an
+        # 'active' receipt that only permits the different candidate checksum.
+        recovered = 'rolled_back' if digest(active) == digest(old) else 'active'
         return switch(target, old, active, receipt['mode'], (receipt['uid'], receipt['gid']),
-                      nginx, backup, receipt, 'rolled_back', 'active')
+                      nginx, backup, receipt, 'rolled_back', recovered)
 
 
 def main():
@@ -369,6 +405,8 @@ def main():
             command.add_argument('--' + name, required=True)
         if action == 'activate':
             command.add_argument('--candidate', required=True)
+            command.add_argument('--expected-candidate-sha256', required=True,
+                                 help='Exact reviewed candidate bytes; refuse activation if they differ')
             command.add_argument('--expected-target-sha256', help='Refuse activation if target changed since review')
     args = vars(parser.parse_args())
     action = args.pop('action')

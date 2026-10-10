@@ -72,11 +72,26 @@ try:
     spec = importlib.util.spec_from_file_location('checker','/opt/teachingopen-https/check_ip_certificate.py')
     checker = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(checker)
-    checked = checker.check_certificate(IP,minimum_hours=0.000001,connect_host='127.0.0.1',
-                                        expected_certificate=CERTIFICATE,timeout=5)
+    with checker.certificate_lock(shared=True, wait_seconds=0):
+        checked = checker.check_certificate(IP,minimum_hours=0.000001,connect_host='127.0.0.1',
+                                            expected_certificate=CERTIFICATE,timeout=5)
     out['certificate'] = dict(status='passed', **cert(checked))
 except Exception as e:
-    out['certificate'] = {'status':'failed','error':error(e)}
+    if type(e).__name__ == 'CertificateBusy':
+        out['certificate'] = {'status':'deferred','error':'renewal_in_progress'}
+        # Renewal may have started after the earlier unit snapshot.
+        try:
+            current = dict(line.split('=',1) for line in command(
+                ['systemctl','show','teachingopen-ip-cert-renew.service',
+                 '--property=ActiveState,ExecMainStartTimestampMonotonic']).splitlines() if '=' in line)
+            if (current.get('ActiveState') == 'activating' and
+                    current.get('ExecMainStartTimestampMonotonic','').isdigit()):
+                out['units']['renew_service'].update(ActiveState='activating',
+                    ExecMainStartTimestampMonotonic=int(current['ExecMainStartTimestampMonotonic']))
+        except Exception:
+            pass  # Missing bounded-running evidence remains a failure below.
+    else:
+        out['certificate'] = {'status':'failed','error':error(e)}
 try:
     lines = command(['journalctl','--no-pager','-u','teachingopen-ip-cert-renew.service',
                      '-n','20','-o','json','--output-fields=MESSAGE,__REALTIME_TIMESTAMP,_SYSTEMD_INVOCATION_ID'])
@@ -177,6 +192,7 @@ def wall_budget(seconds):
 
 def entry_probe(ip):
     fingerprints = []
+    redirected = False
     for secured in (False, True):
         deadline = time.monotonic()+10
         connection = (http.client.HTTPSConnection(ip, timeout=5, context=ssl.create_default_context())
@@ -187,6 +203,12 @@ def entry_probe(ip):
                 network = connection.sock  # Retain the socket even for Connection: close.
                 network.settimeout(max(0.001, deadline-time.monotonic()))
                 response = connection.getresponse()
+                if (not secured and response.status == 307
+                        and response.getheader('Location') == 'https://' + ip + '/'):
+                    # Probe only our fixed HTTPS endpoint below, never follow an
+                    # arbitrary Location header or compare the redirect body.
+                    redirected = True
+                    continue
                 if response.status != 200 or response.getheader('Location') is not None:
                     return {'status': 'failed', 'error': 'entry_status_or_redirect'}
                 digest, size = hashlib.sha256(), 0
@@ -205,8 +227,9 @@ def entry_probe(ip):
             return {'status': 'failed', 'error': 'entry_unavailable'}
         finally:
             connection.close()
-    return {'status': 'passed' if fingerprints[0] == fingerprints[1] else 'failed',
-            'error': None if fingerprints[0] == fingerprints[1] else 'entry_content_mismatch'}
+    matched = redirected or fingerprints[0] == fingerprints[1]
+    return {'status': 'passed' if matched else 'failed',
+            'error': None if matched else 'entry_content_mismatch'}
 
 
 def valid_certificate(value, remote=False):
@@ -241,12 +264,13 @@ def scheduled_evidence(remote, good, pending):
 
 def evaluate(remote, public, entries, previous, now):
     issues, unknown = {}, set()
+    units = remote.get('units', {})
+    if not isinstance(units, dict): units = {}
     def issue(code, severity, domain): issues[code] = {'severity': severity, 'domain': domain}
     if remote.get('status') != 'passed':
         issue('monitor_unavailable', 'error', 'remote'); unknown.add('remote')
     else:
-        mono, units = remote.get('monotonic'), remote.get('units', {})
-        if not isinstance(units, dict): units = {}
+        mono = remote.get('monotonic')
         for kind, maximum in (('check', 5400), ('renew', 54000)):
             timer, service = units.get(kind+'_timer', {}), units.get(kind+'_service', {})
             try:
@@ -262,7 +286,8 @@ def evaluate(remote, public, entries, previous, now):
                     issue(kind+'_timer_disabled', 'error', 'remote')
                 if service['ActiveState'] not in ('inactive', 'active', 'activating', 'failed'):
                     raise ValueError('invalid_service_state')
-                running = service['ActiveState'] == 'activating' and times[2] > 0 and mono-times[2]/1e6 <= 300
+                service_limit = 320 if kind == 'renew' else 330
+                running = service['ActiveState'] == 'activating' and times[2] > 0 and mono-times[2]/1e6 <= service_limit
                 if not running and (service['Result'] != 'success' or service['ExecMainStatus'] != 0):
                     issue(kind+'_service_failed', 'error', 'remote')
                 if service['ActiveState'] == 'activating' and not running:
@@ -275,7 +300,21 @@ def evaluate(remote, public, entries, previous, now):
                 issue(kind+'_unit_unavailable', 'error', 'remote'); unknown.add('remote')
     remote_cert = remote.get('certificate', {})
     if not isinstance(remote_cert, dict): remote_cert = {}
+    renewal = units.get('renew_service', {})
+    if not isinstance(renewal, dict): renewal = {}
+    started = renewal.get('ExecMainStartTimestampMonotonic', 0)
+    deferred = (remote_cert.get('status') == 'deferred'
+                and remote_cert.get('error') == 'renewal_in_progress'
+                and renewal.get('ActiveState') == 'activating'
+                and type(started) is int and started > 0
+                and type(remote.get('monotonic')) in (int, float)
+                and 0 <= remote['monotonic'] - started / 1e6 <= 320)
+    if deferred:
+        # In-progress evidence cannot establish recovery or a new certificate.
+        unknown.update(('remote', 'public'))
     for value, domain, code in ((remote_cert, 'remote', 'loopback_tls'), (public, 'public', 'public_tls')):
+        if deferred and domain == 'remote':
+            continue
         if not valid_certificate(value, domain == 'remote'):
             expired = value.get('error') == 'tls_expired'
             issue(code+('_expired' if expired else '_failed'), 'critical' if expired else 'error', domain)
@@ -323,7 +362,7 @@ def evaluate(remote, public, entries, previous, now):
         scheduled_first, pending = True, None
     status = ('unavailable' if 'monitor_unavailable' in issues else
               'critical' if any(i['severity'] == 'critical' for i in issues.values()) else
-              'warning' if issues else 'healthy')
+              'warning' if issues else 'checking' if deferred else 'healthy')
     renewal = remote.get('renewal', {})
     result = {'status': status, 'issues': [{'code': code, **value} for code, value in sorted(issues.items())],
               'attention_required': bool(changes or event or scheduled_event), 'changes': changes,
@@ -407,7 +446,7 @@ def main(argv=None):
         write_state(path, state)
         result['observed_at'] = state['observed_at']
         print(json.dumps(result, sort_keys=True))
-        return 0 if result['status'] == 'healthy' else 1
+        return 0 if result['status'] in ('healthy', 'checking') else 1
     except (OSError, ValueError, TypeError, KeyError, AttributeError):
         print(json.dumps({'status': 'unavailable', 'issues': [{'code': 'monitor_state_or_input_invalid',
                           'severity': 'error', 'domain': 'monitor'}], 'attention_required': True,
