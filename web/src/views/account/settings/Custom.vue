@@ -4,6 +4,7 @@
   import AList from "ant-design-vue/es/list"
   import AListItem from "ant-design-vue/es/list/Item"
   import { mixin } from '@/utils/mixin.js'
+import { themeColorLabel } from '@/utils/themePreference'
 
   const Meta = AListItem.Meta
 
@@ -30,8 +31,7 @@
     },
     methods: {
       colorFilter(color) {
-        const c = colorList.filter(o => o.color === color)[0]
-        return c && c.key
+        return themeColorLabel(colorList, color)
       },
 
       onChange (checked) {

@@ -85,7 +85,7 @@
         display: inline-block;
         width: 100%;
         &:hover {
-          color: #1890ff;
+          color: var(--app-primary-color, @primary-color);
         }
       }
     }

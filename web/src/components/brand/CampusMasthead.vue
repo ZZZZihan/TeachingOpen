@@ -31,7 +31,7 @@ export default {
 .university-name small { display: block; font-family: Georgia, serif; font-size: 11px; letter-spacing: 1px; }
 .university-motto { text-align: right; }
 .university-motto p { color: #fff; font-family: 'Songti SC', SimSun, serif; font-size: 18px; letter-spacing: 5px; margin: 0 0 8px; }
-.university-motto span { color: #e3f0ff; font-size: 10px; letter-spacing: 3px; }
+.university-motto span { color: #fff; font-size: 10px; letter-spacing: 3px; }
 @media (max-width: 900px) { .campus-masthead-inner { padding: 15px 28px; } }
 @media (max-width: 600px) { .campus-masthead-inner { padding: 15px 20px; gap: 12px; } .university-link img { width: 178px; } .university-motto p { font-size: 12px; letter-spacing: 1px; max-width: 90px; line-height: 1.8; margin: 0; } .university-motto span { display: none; } .university-name { font-size: 22px; } }
 </style>
