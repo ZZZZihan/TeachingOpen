@@ -14,7 +14,7 @@ const helpers = {}
 vm.runInNewContext(source('utils/platformBranding.js').replace(/export /g, '') +
   '\nthis.helpers = { brandingValue, brandingFileUrl, platformBrandName, platformPageTitle }', helpers)
 const { brandingValue, brandingFileUrl, platformBrandName, platformPageTitle } = helpers.helpers
-const platform = '天津工业大学 · 人工智能教学平台'
+const platform = 'TeachingOpen · 人工智能教学平台'
 const invalid = [undefined, null, '', ' \n\t ', false, true, 0, 42, NaN, {}, [], ['品牌']]
 const stub = { render (h) { return h('div', this.$slots.default) } }
 const mixins = { ...Vuex }
@@ -151,13 +151,13 @@ test('真实 GlobalHeader 对品牌修改和整份配置替换立即响应', asy
     h.instance.$destroy()
 })
 
-test('真实 Logo 无有效图片时显示天工文字 mark，展开和收起均不请求旧 logo', () => {
+test('真实 Logo 无有效图片时显示AI文字 mark，展开和收起均不请求旧 logo', () => {
     for (const config of [undefined, null, {}, { logo: ' \n ' }, { logo: {} }]) {
         for (const showTitle of [true, false]) {
             const h = harness('components/tools/Logo.vue', config, { showTitle })
             const tree = h.instance._render()
             assert.equal(image(tree), undefined)
-            assert.match(text(tree), /天工/)
+            assert.match(text(tree), /AI/)
             if (showTitle) assert.ok(text(tree).includes(platform))
             h.instance.$destroy()
         }
@@ -191,7 +191,7 @@ test('真实 Logo 图片失败后回退文字，新配置恢复图片而旧失�
     first.data.on.error()
     await Vue.nextTick()
     assert.equal(image(h.instance._render()), undefined)
-    assert.match(text(h.instance._render()), /天工/)
+    assert.match(text(h.instance._render()), /AI/)
     h.replaceConfig({ brandName: '恢复平台', logo: 'good.png', uploadType: 'local', staticDomain: '/files' })
     await Vue.nextTick()
     assert.equal(image(h.instance._render()).data.attrs.src, '/files/good.png')
@@ -370,7 +370,7 @@ test('真实 Logo 相对图片缺少对应文件域时直接显示文字而不�
         const h = harness('components/tools/Logo.vue', config)
         assert.equal(h.instance.logo, '')
         assert.equal(image(h.instance._render()), undefined)
-        assert.match(text(h.instance._render()), /天工/)
+        assert.match(text(h.instance._render()), /AI/)
         h.instance.$destroy()
     }
 })

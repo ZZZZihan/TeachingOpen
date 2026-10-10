@@ -1,6 +1,6 @@
 <div align="center">
 
-# 天工 · TeachingOpen
+# TeachingOpen
 
 **面向课堂的人工智能与编程教学平台**
 
@@ -10,11 +10,11 @@
 
 </div>
 
-天工将课程学习、在线编程、作业提交与教师反馈连接在一起。学生可以从课程进入 Python、Scratch 或 ScratchJr 创作，教师按班级查看作品、评分并给出建议，管理员统一维护课程、账号与班级。
+TeachingOpen 将课程学习、在线编程、作业提交与教师反馈连接在一起。学生可以从课程进入 Python、Scratch 或 ScratchJr 创作，教师按班级查看作品、评分并给出建议，管理员统一维护课程、账号与班级。
 
-项目基于 TeachingOpen 持续开发，采用天工紫与天津工业大学校园视觉，服务于人工智能科普与编程教学场景。
+项目基于 TeachingOpen 持续开发，采用科技蓝主题与中性学习视觉，服务于人工智能科普与编程教学场景。
 
-![天工首页：校园视觉、课程入口与示例课程](docs/images/course-home-desktop.jpg)
+![TeachingOpen 首页：科技蓝主题、课程入口与示例课程](docs/images/course-home-blue.png)
 
 <p align="center"><sub>本地示例环境实拍 · 2026-10-10 · 课程为合成演示数据</sub></p>
 
@@ -68,7 +68,7 @@
 
 ## 本地体验
 
-在线试用：[天工教学平台](http://101.201.225.116/index)。当前使用 IP 与 HTTP，注册需填写手机号、姓名、学校和身份。
+在线试用：[TeachingOpen 教学平台](http://101.201.225.116/index)。当前使用 IP 与 HTTP，注册需填写手机号、姓名、学校和身份。
 
 本机体验可按[本地开发与运行指南](docs/local-development.md)启动独立示例环境，分别使用学生、教师和管理员账号进入平台。
 
@@ -119,4 +119,4 @@ docs/      开发指南、界面截图与工程记录
 
 ## 来源与许可
 
-本项目基于 [TeachingOpen](https://gitee.com/chengyu2333/teaching-open) 开源代码持续开发，保留上游来源与版权信息。仓库许可证为 [Apache License 2.0](LICENSE)，第三方组件遵循各自随附许可。校园标识与照片的来源见[校园视觉记录](https://github.com/ZZZZihan/TeachingOpen/blob/main/docs/optimization/tiangong-branding-pr.md)，相关素材权利归原权利人。
+本项目基于 [TeachingOpen](https://gitee.com/chengyu2333/teaching-open) 开源代码持续开发，保留上游来源与版权信息。仓库许可证为 [Apache License 2.0](LICENSE)，第三方组件遵循各自随附许可。历史版本使用的校园标识与照片已从当前界面移除，原始来源仍保留在[历史校园视觉记录](https://github.com/ZZZZihan/TeachingOpen/blob/main/docs/optimization/tiangong-branding-pr.md)，相关素材权利归原权利人。

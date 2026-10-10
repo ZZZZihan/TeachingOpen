@@ -1,6 +1,6 @@
 <template>
   <main class="teacher-workbench">
-    <header class="workbench-heading"><div><p class="workbench-eyebrow">天津工业大学 · 教学管理</p><h1>作业与反馈</h1><p>查看学生的思考与创作，让每一次提交都有回应。</p></div><button class="work-button secondary" :disabled="loading" @click="loadData()"><a-icon type="reload" /> 刷新列表</button></header>
+    <header class="workbench-heading"><div><p class="workbench-eyebrow">TeachingOpen · 教学管理</p><h1>作业与反馈</h1><p>查看学生的思考与创作，让每一次提交都有回应。</p></div><button class="work-button secondary" :disabled="loading" @click="loadData()"><a-icon type="reload" /> 刷新列表</button></header>
     <nav class="work-status-tabs" aria-label="作业状态筛选"><button v-for="status in statuses" :key="status.value" :class="{ active: applied.workStatus === status.value }" :aria-current="applied.workStatus === status.value ? 'page' : null" @click="chooseStatus(status.value)">{{ status.label }}</button></nav>
     <form class="work-filters" @submit.prevent="searchQuery">
       <div class="primary-filters">
@@ -209,35 +209,35 @@ export default {
 .workbench-heading { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
 .workbench-heading h1 { font-size: 32px; line-height: 1.3; letter-spacing: -.03em; font-weight: 600; color: #28252c; margin: 6px 0 12px; }
 .workbench-heading p { color: #746b75; margin: 0; line-height: 1.8; }
-.workbench-heading .workbench-eyebrow { color: #74256a; font-size: 12px; letter-spacing: .08em; }
-.work-status-tabs { display: flex; flex-wrap: wrap; gap: 6px 28px; border-bottom: 1px solid #e6e0e5; margin-bottom: 24px; }
+.workbench-heading .workbench-eyebrow { color: #146fc2; font-size: 12px; letter-spacing: .08em; }
+.work-status-tabs { display: flex; flex-wrap: wrap; gap: 6px 28px; border-bottom: 1px solid #d5e5f5; margin-bottom: 24px; }
 .work-status-tabs button { border: 0; border-bottom: 3px solid transparent; padding: 12px 0; background: none; color: #746b75; font-size: 14px; cursor: pointer; }
-.work-status-tabs button.active { color: #74256a; font-weight: 600; border-bottom-color: #74256a; }
+.work-status-tabs button.active { color: #146fc2; font-weight: 600; border-bottom-color: #146fc2; }
 .primary-filters { display: grid; grid-template-columns: 1.2fr 1fr 1fr auto; gap: 20px; align-items: end; }
 .work-filters label { display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: #675f69; }
-.work-filters input, .work-filters select { width: 100%; min-width: 0; height: 40px; border: 1px solid #d3c9d2; border-radius: 4px; padding: 8px 10px; background: #fff; color: #3d3740; font-size: 14px; }
+.work-filters input, .work-filters select { width: 100%; min-width: 0; height: 40px; border: 1px solid #bccfe2; border-radius: 4px; padding: 8px 10px; background: #fff; color: #3d3740; font-size: 14px; }
 .filter-actions { display: flex; align-items: center; gap: 16px; min-height: 40px; }
 .more-filters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; padding-top: 22px; }
-.work-button { display: inline-flex; justify-content: center; align-items: center; gap: 8px; border: 1px solid #74256a; background: #74256a; color: #fff; border-radius: 4px; padding: 9px 16px; font-size: 13px; line-height: 20px; cursor: pointer; white-space: nowrap; }
-.work-button.secondary { background: #fff; border-color: #d3c9d2; color: #524753; }
+.work-button { display: inline-flex; justify-content: center; align-items: center; gap: 8px; border: 1px solid #146fc2; background: #146fc2; color: #fff; border-radius: 4px; padding: 9px 16px; font-size: 13px; line-height: 20px; cursor: pointer; white-space: nowrap; }
+.work-button.secondary { background: #fff; border-color: #bccfe2; color: #524753; }
 .work-link { border: 0; background: none; padding: 4px 0; color: #675f69; font-size: 13px; cursor: pointer; }
-.work-link:hover { color: #572052; text-decoration: underline; }
+.work-link:hover { color: #095b9e; text-decoration: underline; }
 .work-link.danger { color: #ab4535; }
 button:disabled { opacity: .5; cursor: default; }
-.teacher-workbench :focus-visible { outline: 2px solid #74256a; outline-offset: 3px; }
-.work-results { margin-top: 28px; border-top: 1px solid #e6e0e5; }
+.teacher-workbench :focus-visible { outline: 2px solid #146fc2; outline-offset: 3px; }
+.work-results { margin-top: 28px; border-top: 1px solid #d5e5f5; }
 .results-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; }
 .results-toolbar > div { display: flex; gap: 14px; align-items: baseline; }
 .results-toolbar h2 { margin: 0; color: #28252c; font-size: 17px; font-weight: 600; }
 .results-toolbar span, .sort-control { font-size: 12px; color: #776d78; }
 .sort-control select { color: #524753; border: 0; background: transparent; padding: 5px; }
-.selection-toolbar { display: flex; gap: 18px; align-items: center; padding: 12px 16px; background: #faf7f9; font-size: 12px; color: #675f69; }
+.selection-toolbar { display: flex; gap: 18px; align-items: center; padding: 12px 16px; background: #f4f8fd; font-size: 12px; color: #675f69; }
 .selection-toolbar > div { display: flex; gap: 18px; margin-left: auto; }
 .selection-toolbar label { display: flex; gap: 8px; align-items: center; }
-input[type='checkbox'] { accent-color: #74256a; width: 15px; height: 15px; }
-.work-row { display: grid; grid-template-columns: 18px 88px minmax(0, 1fr) 130px; gap: 20px; padding: 25px 16px; border-bottom: 1px solid #e8e2e7; align-items: start; }
+input[type='checkbox'] { accent-color: #146fc2; width: 15px; height: 15px; }
+.work-row { display: grid; grid-template-columns: 18px 88px minmax(0, 1fr) 130px; gap: 20px; padding: 25px 16px; border-bottom: 1px solid #d5e5f5; align-items: start; }
 .row-select { padding-top: 27px; }
-.work-cover { width: 88px; height: 72px; border-radius: 3px; overflow: hidden; display: grid; place-items: center; background: #f4edf3; color: #93668d; font-size: 28px; }
+.work-cover { width: 88px; height: 72px; border-radius: 3px; overflow: hidden; display: grid; place-items: center; background: #eef6ff; color: #648ab2; font-size: 28px; }
 .work-cover img { width: 100%; height: 100%; object-fit: cover; }
 .work-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 12px; color: #776d78; font-size: 11px; }
 .work-badge { background: #f0f3f0; color: #6b7b72; padding: 2px 7px; border-radius: 3px; }
@@ -256,7 +256,7 @@ input[type='checkbox'] { accent-color: #74256a; width: 15px; height: 15px; }
 .work-pagination { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 24px; font-size: 12px; color: #776d78; }
 .work-pagination > div { display: flex; gap: 10px; align-items: center; }
 .work-pagination p { margin: 0; }
-.work-pagination select { border: 1px solid #d3c9d2; background: white; padding: 5px; border-radius: 3px; }
+.work-pagination select { border: 1px solid #bccfe2; background: white; padding: 5px; border-radius: 3px; }
 .work-state { text-align: center; color: #817582; padding: 70px 16px; }
 .work-state > .anticon { font-size: 30px; }
 .work-state h3 { color: #28252c; font-size: 18px; margin: 18px 0 12px; }
@@ -265,7 +265,7 @@ input[type='checkbox'] { accent-color: #74256a; width: 15px; height: 15px; }
 .work-muted { color: #817582; font-size: 12px; margin-top: 12px; }
 .tag-label { display: block; margin-bottom: 12px; color: #524753; }
 .tag-choices { display: flex; flex-wrap: wrap; gap: 8px; }
-.tag-choices span { border: 1px solid #d3c9d2; border-radius: 3px; display: flex; }
+.tag-choices span { border: 1px solid #bccfe2; border-radius: 3px; display: flex; }
 .tag-choices button { background: none; border: 0; padding: 4px 8px; color: #675f69; cursor: pointer; }
 @media (max-width: 1050px) { .primary-filters { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; } .filter-actions { grid-column: 1 / -1; } .more-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); } .teacher-workbench { padding: 24px; } .work-row { grid-template-columns: 18px 64px minmax(0, 1fr) 120px; gap: 14px; padding-inline: 0; } .work-cover { width: 64px; height: 60px; } }
 @media (max-width: 600px) { .teacher-workbench { padding: 22px 16px 32px; } .workbench-heading { align-items: flex-start; gap: 12px; } .workbench-heading h1 { font-size: 27px; } .workbench-heading > button { font-size: 0; padding: 9px; } .workbench-heading > button .anticon { font-size: 15px; } .workbench-heading p { font-size: 12px; } .work-status-tabs { gap: 2px 22px; } .primary-filters { grid-template-columns: 1fr 1fr; gap: 14px; } .primary-filters > label:first-child { grid-column: 1 / -1; } .more-filters { grid-template-columns: 1fr; } .work-row { grid-template-columns: 18px minmax(0, 1fr); gap: 12px; padding: 22px 0; } .work-cover { display: none; } .work-summary h3 { font-size: 17px; } .row-select { padding-top: 5px; } .work-row-actions { grid-column: 2; flex-direction: row; justify-content: flex-start; gap: 18px; padding-top: 2px; } .work-row-actions .work-button { padding: 7px 12px; } .selection-toolbar { gap: 10px; flex-wrap: wrap; padding: 10px; } .selection-toolbar > div { gap: 14px; } .results-toolbar { gap: 10px; } .results-toolbar > div { gap: 8px; } .work-pagination { flex-direction: column; align-items: flex-start; } .work-pagination > div { flex-wrap: wrap; } }

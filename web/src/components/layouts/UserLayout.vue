@@ -3,7 +3,7 @@
     <CampusMasthead />
     <header class="user-header"><router-link to="/index" class="brand"><img v-if="logoUrl && !logoFailed" :src="logoUrl" alt="" @error="logoFailed = true"><span>{{ brandName }}</span></router-link><router-link to="/courseList" class="header-link">探索课程 <span aria-hidden="true">↗</span></router-link></header>
     <main :class="['user-content', { 'compact-form': !widePage }]"><route-view /></main>
-    <footer class="user-footer"><div v-if="config.footer" v-html="config.footer"></div><span v-else>天津工业大学 · {{ brandName }}</span></footer>
+    <footer class="user-footer"><div v-if="config.footer" v-html="config.footer"></div><span v-else>TeachingOpen · {{ brandName }}</span></footer>
   </div>
 </template>
 
@@ -33,10 +33,10 @@ export default {
 .brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 600; color: #20252b; min-width: 0; overflow-wrap: anywhere; line-height: 1.3; }
 .brand img { width: 36px; height: 36px; object-fit: contain; }
 .brand-symbol { font-size: 31px; font-weight: 700; letter-spacing: -4px; padding-right: 4px; flex-shrink: 0; }
-.brand-symbol span { color: #74256a; }
+.brand-symbol span { color: #146fc2; }
 .header-link { flex-shrink: 0; color: #59646e; font-size: 13px; }
 .header-link span { margin-left: 12px; }
-a:focus-visible { outline: 2px solid #74256a; outline-offset: 4px; }
+a:focus-visible { outline: 2px solid #146fc2; outline-offset: 4px; }
 .user-content { padding: 48px 32px 32px; flex: 1; }
 .compact-form { width: 100%; max-width: 500px; margin: 48px auto 0; padding: 32px; background: #fff; flex: 0 0 auto; }
 .compact-form /deep/ .main { width: 100%; min-width: 0; margin: 0; }

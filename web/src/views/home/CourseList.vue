@@ -170,7 +170,7 @@ export default {
 <style lang="less" scoped>
 .course-discovery { padding-top: 4px; }
 .page-heading { margin-bottom: 36px; padding-bottom: 30px; border-bottom: 1px solid #dfe4e9; }
-.eyebrow { margin: 0 0 12px; color: #74256a; font-size: 10px; font-weight: 600; letter-spacing: 2px; }
+.eyebrow { margin: 0 0 12px; color: #146fc2; font-size: 10px; font-weight: 600; letter-spacing: 2px; }
 .page-heading h1 { font-size: 36px; line-height: 1.4; font-weight: 600; color: #202c37; margin: 0 0 14px; }
 .page-description { color: #687684; margin: 0; line-height: 1.8; font-size: 14px; }
 .course-body { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; align-items: start; }
@@ -183,8 +183,8 @@ export default {
 .message-state { text-align: center; padding: 48px 24px; background: #fff; border: 1px solid #dce1e6; border-radius: 5px; color: #687684; }
 .message-state > .anticon { font-size: 26px; margin-bottom: 18px; color: #82909b; }
 .message-state h3 { font-size: 18px; color: #344553; margin-bottom: 12px; }
-.message-state button { color: #74256a; background: #fff; border: 1px solid #74256a; border-radius: 4px; padding: 9px 18px; cursor: pointer; }
-.message-state button:focus-visible { outline: 2px solid #74256a; outline-offset: 4px; }
+.message-state button { color: #146fc2; background: #fff; border: 1px solid #146fc2; border-radius: 4px; padding: 9px 18px; cursor: pointer; }
+.message-state button:focus-visible { outline: 2px solid #146fc2; outline-offset: 4px; }
 .error-state { margin-top: 24px; border-color: #d8b6a1; }
 .error-state > .anticon { color: #a36a40; }
 .load-more { display: block; margin: 32px auto 0; border-radius: 4px; }

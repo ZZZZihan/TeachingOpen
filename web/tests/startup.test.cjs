@@ -296,10 +296,10 @@ test('挂载前再次检查已经失效的启动结果', async () => {
 
 test('真实启动对空白或非字符串品牌使用平台名称，保留有效自定义品牌', async () => {
     for (const [brandName, expected] of [
-        [undefined, '天津工业大学 · 人工智能教学平台'],
-        [' \n\t ', '天津工业大学 · 人工智能教学平台'],
-        [42, '天津工业大学 · 人工智能教学平台'],
-        [{ name: '不应隐式转换' }, '天津工业大学 · 人工智能教学平台'],
+        [undefined, 'TeachingOpen · 人工智能教学平台'],
+        [' \n\t ', 'TeachingOpen · 人工智能教学平台'],
+        [42, 'TeachingOpen · 人工智能教学平台'],
+        [{ name: '不应隐式转换' }, 'TeachingOpen · 人工智能教学平台'],
         ['  自定义课堂  ', '自定义课堂']
     ]) {
         const h = startupHarness()
