@@ -152,7 +152,7 @@
           ruleCode: {
             rules: [
               { required: true, message: '请输入规则Code!' },
-              { validator: (rule, value, callback) => validateDuplicateValue('sys_check_rule', 'rule_code', value, this.model.id, callback) }
+              { validator: (rule, value, callback) => validateDuplicateValue('check_rule_code', value, this.model.id, callback) }
             ]
           },
         },

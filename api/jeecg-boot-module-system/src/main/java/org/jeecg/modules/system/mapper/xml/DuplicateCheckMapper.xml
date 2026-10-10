@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.DuplicateCheckMapper">
+    <!-- Every branch uses literal identifiers and bound values, never SQL interpolation. -->
+    <select id="count" resultType="Long">
+        <choose>
+            <when test="purpose == 'user_username'">SELECT COUNT(*) FROM sys_user WHERE username = #{fieldVal}</when>
+            <when test="purpose == 'user_phone' or purpose == 'profile_phone'">SELECT COUNT(*) FROM sys_user WHERE phone = #{fieldVal}</when>
+            <when test="purpose == 'user_email' or purpose == 'profile_email'">SELECT COUNT(*) FROM sys_user WHERE email = #{fieldVal}</when>
+            <when test="purpose == 'user_work_no'">SELECT COUNT(*) FROM sys_user WHERE work_no = #{fieldVal}</when>
+            <when test="purpose == 'role_code'">SELECT COUNT(*) FROM sys_role WHERE role_code = #{fieldVal}</when>
+            <when test="purpose == 'dict_code'">SELECT COUNT(*) FROM sys_dict WHERE dict_code = #{fieldVal}</when>
+            <when test="purpose == 'permission_perms'">SELECT COUNT(*) FROM sys_permission WHERE perms = #{fieldVal}</when>
+            <when test="purpose == 'position_code'">SELECT COUNT(*) FROM sys_position WHERE code = #{fieldVal}</when>
+            <when test="purpose == 'depart_role_code'">SELECT COUNT(*) FROM sys_depart_role WHERE role_code = #{fieldVal}</when>
+            <when test="purpose == 'message_template_code'">SELECT COUNT(*) FROM sys_sms_template WHERE template_code = #{fieldVal}</when>
+            <when test="purpose == 'fill_rule_code'">SELECT COUNT(*) FROM sys_fill_rule WHERE rule_code = #{fieldVal}</when>
+            <when test="purpose == 'check_rule_code'">SELECT COUNT(*) FROM sys_check_rule WHERE rule_code = #{fieldVal}</when>
+            <when test="purpose == 'data_source_code'">SELECT COUNT(*) FROM sys_data_source WHERE code = #{fieldVal}</when>
+            <otherwise>SELECT COUNT(*) FROM sys_user WHERE 1 = 0</otherwise>
+        </choose>
+        <if test="dataId != null">AND id &lt;&gt; #{dataId}</if>
+    </select>
+    <select id="targetId" resultType="String">
+        <choose>
+            <when test="purpose == 'role_code'">SELECT id FROM sys_role</when>
+            <when test="purpose == 'dict_code'">SELECT id FROM sys_dict</when>
+            <when test="purpose == 'permission_perms'">SELECT id FROM sys_permission</when>
+            <when test="purpose == 'position_code'">SELECT id FROM sys_position</when>
+            <when test="purpose == 'depart_role_code'">SELECT id FROM sys_depart_role</when>
+            <when test="purpose == 'message_template_code'">SELECT id FROM sys_sms_template</when>
+            <when test="purpose == 'fill_rule_code'">SELECT id FROM sys_fill_rule</when>
+            <when test="purpose == 'check_rule_code'">SELECT id FROM sys_check_rule</when>
+            <when test="purpose == 'data_source_code'">SELECT id FROM sys_data_source</when>
+            <otherwise>SELECT id FROM sys_user</otherwise>
+        </choose>
+        WHERE id = #{dataId}
+        <if test="purpose == 'dict_code' or purpose == 'permission_perms'">AND del_flag = 0</if>
+    </select>
+</mapper>

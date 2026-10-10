@@ -528,10 +528,11 @@
       },
       validateDuplicate(params, message, callback) {
         const version = this.sessionVersion
+        if (!params.fieldVal) { callback(); return Promise.resolve() }
         return duplicateCheck(params).then(res => {
           if (!this.isCurrentSession(version)) return
           if (res && res.success === true) callback()
-          else callback(message)
+          else callback(res && res.code !== 500 ? res.message || '验证未完成，请重试。' : message)
         }).catch(() => { if (this.isCurrentSession(version)) callback('验证未完成，请重试。') })
       },
       validatePhone(rule, value, callback){
@@ -543,8 +544,7 @@
             //update-end--Author:kangxiaolin  Date:20190826 for：[05] 手机号不支持199号码段--------------------
 
             var params = {
-              tableName: 'sys_user',
-              fieldName: 'phone',
+              purpose: 'user_phone',
               fieldVal: value,
               dataId: this.userId
             };
@@ -560,8 +560,7 @@
         }else{
           if(new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value)){
             var params = {
-              tableName: 'sys_user',
-              fieldName: 'email',
+              purpose: 'user_email',
               fieldVal: value,
               dataId: this.userId
             };
@@ -573,8 +572,7 @@
       },
       validateUsername(rule, value, callback){
         var params = {
-          tableName: 'sys_user',
-          fieldName: 'username',
+          purpose: 'user_username',
           fieldVal: value,
           dataId: this.userId
         };
@@ -582,8 +580,7 @@
       },
       validateWorkNo(rule, value, callback){
         var params = {
-          tableName: 'sys_user',
-          fieldName: 'work_no',
+          purpose: 'user_work_no',
           fieldVal: value,
           dataId: this.userId
         };

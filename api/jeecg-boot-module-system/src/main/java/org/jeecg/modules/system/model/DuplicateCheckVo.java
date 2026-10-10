@@ -17,17 +17,9 @@ import lombok.Data;
 public class DuplicateCheckVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * 表名
-	 */
-	@ApiModelProperty(value="表名",name="tableName",example="sys_log")
-	private String tableName;
-	
-	/**
-	 * 字段名
-	 */
-	@ApiModelProperty(value="字段名",name="fieldName",example="id")
-	private String fieldName;
+	/** Server-owned form purpose; SQL identifiers are never accepted. */
+	@ApiModelProperty(value="校验用途",name="purpose",example="user_username")
+	private String purpose;
 	
 	/**
 	 * 字段值

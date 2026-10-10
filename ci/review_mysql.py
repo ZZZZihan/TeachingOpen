@@ -25,6 +25,7 @@ DATABASE = 'teachingopen_dev'
 REDIS_DATABASE = 4
 PROBES = (
     'verify-public-boundaries.py',
+    'verify-duplicate-check.py',
     'verify-news-content.py',
     'verify-account-authorization.py',
     'verify-additional-work-authorization.py',

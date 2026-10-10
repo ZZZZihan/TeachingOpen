@@ -11,7 +11,6 @@ import org.apache.ibatis.annotations.Update;
 import org.jeecg.common.system.vo.DictModel;
 import org.jeecg.common.system.vo.DictQuery;
 import org.jeecg.modules.system.entity.SysDict;
-import org.jeecg.modules.system.model.DuplicateCheckVo;
 import org.jeecg.modules.system.model.TreeSelectModel;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -25,13 +24,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2018-12-28
  */
 public interface SysDictMapper extends BaseMapper<SysDict> {
-	
-	/**
-	  *  重复检查SQL
-	 * @return
-	 */
-	public Long duplicateCheckCountSql(DuplicateCheckVo duplicateCheckVo);
-	public Long duplicateCheckCountSqlNoDataId(DuplicateCheckVo duplicateCheckVo);
 	
 	public List<DictModel> queryDictItemsByCode(@Param("code") String code);
 

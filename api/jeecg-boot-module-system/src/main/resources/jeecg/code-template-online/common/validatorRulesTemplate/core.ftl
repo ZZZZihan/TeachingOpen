@@ -10,7 +10,21 @@
     </#if>
     <#-- 唯一校验 -->
     <#if fieldValidType == 'only'>
-              { validator: (rule, value, callback) => validateDuplicateValue('${tableName}', '${po.fieldDbName}', value, this.model.id, callback)},
+      <#-- A generated form may only select a configured server-owned purpose. -->
+      <#assign duplicatePurposes = {
+        'sys_user.username': 'user_username', 'sys_user.phone': 'user_phone',
+        'sys_user.email': 'user_email', 'sys_user.work_no': 'user_work_no',
+        'sys_role.role_code': 'role_code', 'sys_dict.dict_code': 'dict_code',
+        'sys_permission.perms': 'permission_perms', 'sys_position.code': 'position_code',
+        'sys_depart_role.role_code': 'depart_role_code', 'sys_sms_template.template_code': 'message_template_code',
+        'sys_fill_rule.rule_code': 'fill_rule_code', 'sys_check_rule.rule_code': 'check_rule_code',
+        'sys_data_source.code': 'data_source_code'
+      }>
+      <#assign duplicatePurpose = duplicatePurposes[tableName + '.' + po.fieldDbName]!''>
+      <#if duplicatePurpose == ''>
+        <#stop '未配置此字段的唯一校验用途。请先在服务端配置固定查询、操作权限和编辑对象授权，再更新生成模板。'>
+      </#if>
+              { validator: (rule, value, callback) => validateDuplicateValue('${duplicatePurpose}', value, this.model.id, callback)},
     <#-- 6到16位数字 -->
     <#elseif fieldValidType == 'n6-16'>
               { pattern: /\d{6,18}/, message: '请输入6到16位数字!'},

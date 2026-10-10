@@ -43,16 +43,6 @@
 		</foreach>
 	</select>
 
-	<!-- 重复校验 sql语句 -->
-	<select id="duplicateCheckCountSql" resultType="Long" parameterType="org.jeecg.modules.system.model.DuplicateCheckVo">
-		SELECT COUNT(*) FROM ${tableName} WHERE ${fieldName} = #{fieldVal} and id &lt;&gt; #{dataId}
-	</select>
-	
-	<!-- 重复校验 sql语句 -->
-	<select id="duplicateCheckCountSqlNoDataId" resultType="Long" parameterType="org.jeecg.modules.system.model.DuplicateCheckVo">
-		SELECT COUNT(*) FROM ${tableName} WHERE ${fieldName} = #{fieldVal}
-	</select>
-		
 	<!-- 查询部门信息 作为字典数据 -->
 	<select id="queryAllDepartBackDictModel" resultType="org.jeecg.common.system.vo.DictModel">
 		select id as "value",depart_name as "text" from sys_depart where del_flag = '0'
