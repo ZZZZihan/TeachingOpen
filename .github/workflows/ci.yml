@@ -61,8 +61,21 @@ jobs:
           python3 -m unittest discover -s deploy -p 'test_*backup*.py' -v
           PYTHONPATH=deploy python3 -m unittest test_registration_upgrade.MigrationManifestTests -v
           python3 -m unittest discover -s deploy -p 'test_launch_bundle.py' -v
+          python3 -m unittest discover -s deploy -p 'test_ip_https.py' -v
           python3 -m unittest discover -s api/dev -p 'test_extract_schema.py' -v
           python3 -m unittest discover -s ci -p 'test_*.py' -v
+      - name: Isolated IP HTTPS and rollback (synthetic CA, loopback only)
+        run: |
+          docker pull nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+          python3 deploy/test_ip_https_runtime.py --output ci-results/ip-https-runtime.json
+      - name: Store synthetic HTTPS verification results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ip-https-ci-results
+          path: ci-results/ip-https-runtime.json
+          if-no-files-found: ignore
+          retention-days: 7
 
   backend:
     name: Backend and MySQL registration
@@ -111,6 +124,8 @@ jobs:
           clean package
       - name: Require executed core tests
         run: python3 ci/check_java_results.py
+      - name: Verify trusted proxy configuration and media cookie flags
+        run: python3 deploy/test_ip_https_proxy.py --java-home "$JAVA_HOME" --m2 "$HOME/.m2/repository"
       - name: Fresh MySQL migrations and registration HTTP/SQL checks
         env:
           CI_MYSQL_ROOT_PASSWORD: ci-ephemeral-mysql

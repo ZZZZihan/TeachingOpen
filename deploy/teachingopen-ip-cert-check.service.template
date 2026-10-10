@@ -1,0 +1,14 @@
+[Unit]
+Description=Verify the live TeachingOpen TLS certificate and expiry
+After=network-online.target nginx.service
+
+[Service]
+Type=oneshot
+# Replace @PUBLIC_IP@ before installation. Loopback avoids cloud NAT hairpin.
+ExecStart=/usr/bin/python3 /opt/teachingopen-https/check_ip_certificate.py --ip @PUBLIC_IP@ --connect-host 127.0.0.1 --min-hours 48
+DynamicUser=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+NoNewPrivileges=true
+TimeoutStartSec=15
