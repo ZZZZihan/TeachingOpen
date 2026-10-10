@@ -1,0 +1,233 @@
+{
+  "base_commit": "0142a849d7b509e9c614d7219a5dc5ca51a63af7",
+  "patch_sha256": "95d3484feb9df66a2397c03d862beaf4d1f4e87ca0c7e28b00486855efdc9912",
+  "backend_jar_sha256": "d2b2b7497fb622efc30be3ae6c73e6fa46847190eb7c4268949eb1f9502264e0",
+  "browser": {
+    "channel": "chrome",
+    "version": "154.0.8037.98"
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "checks": [
+    {
+      "case": "actual maintained Axios browser transport loaded",
+      "passed": true
+    },
+    {
+      "case": "initial existing HTML and height",
+      "passed": true
+    },
+    {
+      "case": "v-model input reaches parent",
+      "passed": true
+    },
+    {
+      "case": "native keyboard text input reaches parent",
+      "passed": true
+    },
+    {
+      "case": "native clipboard rich HTML paste keeps safe formatting",
+      "passed": true
+    },
+    {
+      "case": "native clipboard paste has no executable markup",
+      "passed": true
+    },
+    {
+      "case": "bold formatting",
+      "passed": true
+    },
+    {
+      "case": "italic formatting",
+      "passed": true
+    },
+    {
+      "case": "alignment formatting",
+      "passed": true
+    },
+    {
+      "case": "text color formatting",
+      "passed": true
+    },
+    {
+      "case": "background color formatting",
+      "passed": true
+    },
+    {
+      "case": "list formatting",
+      "passed": true
+    },
+    {
+      "case": "undo redo restore list",
+      "passed": true
+    },
+    {
+      "case": "insert table",
+      "passed": true
+    },
+    {
+      "case": "add table row",
+      "passed": true
+    },
+    {
+      "case": "add table column",
+      "passed": true
+    },
+    {
+      "case": "safe link inserted",
+      "passed": true
+    },
+    {
+      "case": "unlink works",
+      "passed": true
+    },
+    {
+      "case": "code sample language and text retained",
+      "passed": true
+    },
+    {
+      "case": "source edits remove executable HTML",
+      "passed": true
+    },
+    {
+      "case": "source edit keeps allowed style",
+      "passed": true
+    },
+    {
+      "case": "preview renders safe text and no script",
+      "passed": true
+    },
+    {
+      "case": "fullscreen uses full viewport",
+      "passed": true
+    },
+    {
+      "case": "Escape exits fullscreen",
+      "passed": true
+    },
+    {
+      "case": "reload retains content and one editor",
+      "passed": true
+    },
+    {
+      "case": "tab reload remains editable",
+      "passed": true
+    },
+    {
+      "case": "disabled editor and toolbar",
+      "passed": true
+    },
+    {
+      "case": "triggerChange decorator form receives change only",
+      "passed": true
+    },
+    {
+      "case": "real local image upload returns media path",
+      "passed": true
+    },
+    {
+      "case": "uploaded image inserted",
+      "passed": true
+    },
+    {
+      "case": "upload failure releases controls and preserves text",
+      "passed": true
+    },
+    {
+      "case": "same upload can retry successfully",
+      "passed": true
+    },
+    {
+      "case": "database raster image mode retained",
+      "passed": true
+    },
+    {
+      "case": "database video limitation gives recoverable error",
+      "passed": true
+    },
+    {
+      "case": "real local video upload inserted with controls",
+      "passed": true
+    },
+    {
+      "case": "late upload after close and reload cannot alter a new dialog",
+      "passed": true
+    },
+    {
+      "case": "external value change invalidates prior upload and dialog",
+      "passed": true
+    },
+    {
+      "case": "external record value resets undo history",
+      "passed": true
+    },
+    {
+      "case": "switching records with identical HTML invalidates media session",
+      "passed": true
+    },
+    {
+      "case": "identical-body new session cannot undo into another record",
+      "passed": true
+    },
+    {
+      "case": "closing parent modal restores fullscreen editor and hides it",
+      "passed": true
+    },
+    {
+      "case": "Qiniu token and upload result use configured domain (simulated cloud)",
+      "passed": true
+    },
+    {
+      "case": "actual TeachingNewsModal decorator saves to MySQL",
+      "passed": true
+    },
+    {
+      "case": "reopened modal uses empty new value",
+      "passed": true
+    },
+    {
+      "case": "editor fullscreen inside actual news modal",
+      "passed": true
+    },
+    {
+      "case": "modal editor restored after fullscreen",
+      "passed": true
+    },
+    {
+      "case": "saved actual MySQL record reopens in news editor",
+      "passed": true
+    },
+    {
+      "case": "reopened actual record edit persists through MySQL",
+      "passed": true
+    },
+    {
+      "case": "actual anonymous newsDetail request renders saved MySQL body",
+      "passed": true
+    },
+    {
+      "case": "actual public NewsDetail renders saved news title",
+      "passed": true
+    },
+    {
+      "case": "actual NewsDetail sanitizes historical or compromised API HTML",
+      "passed": true
+    },
+    {
+      "case": "no uncaught browser errors",
+      "passed": true
+    }
+  ],
+  "passed": 52,
+  "total": 52,
+  "production_connected": false,
+  "scope": "Chrome runs actual JEditor/NewsModal/NewsDetail in a minimal preview shell connected to synthetic local Spring/MySQL/Redis. api/manage is replaced by a real Axios wrapper and dictionary controls are stubbed. Qiniu responses, network failures/delays, deferred uploadMedia race responses, and historical attack HTML injected through component state are simulated. Video uses synthetic uploaded bytes and verifies node insertion, not playback. No production access.",
+  "frontend_node_tests": {
+    "passed": 763,
+    "failed": 0
+  },
+  "production_build": "passed",
+  "initial_assets": "passed"
+}
