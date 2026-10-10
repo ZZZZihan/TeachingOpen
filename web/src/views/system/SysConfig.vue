@@ -154,7 +154,7 @@
                 <j-dict-select-tag
                   :disabled="model.allowReg != '1'"
                   :triggerChange="true"
-                  dictCode="sys_role,role_name,id"
+                  dictCode="registration_roles"
                   v-decorator="['_defaultRole']"
                   placeholder="请选择角色"
                 />

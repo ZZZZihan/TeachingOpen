@@ -5,7 +5,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED = {'PaginationBoundaryTest', 'AccountRegistrationServiceTest', 'AccountRecoveryServiceTest',
+EXPECTED = {'PaginationBoundaryTest', 'AccountRegistrationServiceTest', 'AccountRecoveryServiceTest', 'CourseMapPositionServiceTest', 'PublicDictionaryBoundaryTest', 'DisabledTransitBoundaryTest', 'AccountAuthorizationTest', 'AdditionalWorkAuthorizationTest', 'AdditionalWorkStatisticsTest',
             'AccountRecoverySessionTest', 'PublicUserDirectoryTest'}
 
 

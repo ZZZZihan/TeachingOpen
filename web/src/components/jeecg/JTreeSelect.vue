@@ -18,8 +18,8 @@
 <script>
 
   /*
-  * 异步树加载组件 通过传入表名 显示字段 存储字段 加载一个树控件
-  * <j-tree-select dict="aa_tree_test,aad,id" pid-field="pid" ></j-tree-select>
+  * 异步树按服务器登记的用途加载；旧三元组仅兼容服务器允许的固定配置。
+  * <j-tree-select dict="category_tree" pid-value="0" ></j-tree-select>
   * */
   import { getAction } from '@/api/manage'
 
@@ -134,6 +134,20 @@
         this.text = arr[1]
         this.code = arr[2]
       },
+      treeRequest(pid) {
+        if (this.dict.indexOf(',') === -1) {
+          return {dictCode: this.dict, pid}
+        }
+        return {
+          pid,
+          tableName: this.tableName,
+          text: this.text,
+          code: this.code,
+          pidField: this.pidField,
+          hasChildField: this.hasChildField,
+          condition: this.condition
+        }
+      },
       asyncLoadTreeData (treeNode) {
         return new Promise((resolve) => {
           if (treeNode.$vnode.children) {
@@ -141,15 +155,7 @@
             return
           }
           let pid = treeNode.$vnode.key
-          let param = {
-            pid:pid,
-            tableName:this.tableName,
-            text:this.text,
-            code:this.code,
-            pidField:this.pidField,
-            hasChildField:this.hasChildField,
-            condition:this.condition
-          }
+          let param = this.treeRequest(pid)
           getAction(this.url,param).then(res=>{
             if(res.success){
               for(let i of res.result){
@@ -184,15 +190,7 @@
         }
       },
       loadRoot(){
-        let param = {
-          pid:this.pidValue,
-          tableName:this.tableName,
-          text:this.text,
-          code:this.code,
-          pidField:this.pidField,
-          hasChildField:this.hasChildField,
-          condition:this.condition
-        }
+        let param = this.treeRequest(this.pidValue)
         getAction(this.url,param).then(res=>{
           if(res.success && res.result){
             for(let i of res.result){

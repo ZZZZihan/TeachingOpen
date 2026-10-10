@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.constant.CacheConstant;
@@ -21,7 +22,6 @@ import org.jeecg.common.system.vo.DictQuery;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.ImportExcelUtil;
 import org.jeecg.common.util.RedisUtil;
-import org.jeecg.common.util.SqlInjectionUtil;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.shiro.vo.DefContants;
 import org.jeecg.modules.system.entity.SysDict;
@@ -30,6 +30,7 @@ import org.jeecg.modules.system.model.SysDictTree;
 import org.jeecg.modules.system.model.TreeSelectModel;
 import org.jeecg.modules.system.service.ISysDictItemService;
 import org.jeecg.modules.system.service.ISysDictService;
+import org.jeecg.modules.system.service.NamedTableDictionaryService;
 import org.jeecg.modules.system.vo.SysDictPage;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
 import org.jeecgframework.poi.excel.def.NormalExcelConstants;
@@ -69,6 +70,8 @@ public class SysDictController {
 
 	@Autowired
 	private ISysDictService sysDictService;
+	@Autowired
+	private NamedTableDictionaryService namedTableDictionaries;
 	@Autowired
 	private ISysDictItemService sysDictItemService;
 	@Autowired
@@ -130,52 +133,25 @@ public class SysDictController {
 	/**
 	 * 获取字典数据
 	 * @param dictCode 字典code
-	 * @param dictCode 表名,文本字段,code字段  | 举例：sys_user,realname,id
+	 * @param dictCode 标量字典名称或服务器登记的固定用途；旧三元组仅精确兼容
 	 * @return
 	 */
 	@RequestMapping(value = "/getDictItems/{dictCode}", method = RequestMethod.GET)
 	public Result<List<DictModel>> getDictItems(@PathVariable String dictCode, @RequestParam(value = "sign",required = false) String sign,HttpServletRequest request) {
-		log.info(" dictCode : "+ dictCode);
-		Result<List<DictModel>> result = new Result<List<DictModel>>();
-		List<DictModel> ls = null;
-		try {
-			if(dictCode.indexOf(",")!=-1) {
-				//关联表字典（举例：sys_user,realname,id）
-				String[] params = dictCode.split(",");
-				
-				if(params.length<3) {
-					result.error500("字典Code格式不正确！");
-					return result;
-				}
-				//SQL注入校验（只限制非法串改数据库）
-				final String[] sqlInjCheck = {params[0],params[1],params[2]};
-				SqlInjectionUtil.filterContent(sqlInjCheck);
-				
-				if(params.length==4) {
-					//SQL注入校验（查询条件SQL 特殊check，此方法仅供此处使用）
-					SqlInjectionUtil.specialFilterContent(params[3]);
-					ls = sysDictService.queryTableDictItemsByCodeAndFilter(params[0],params[1],params[2],params[3]);
-				}else if (params.length==3) {
-					ls = sysDictService.queryTableDictItemsByCode(params[0],params[1],params[2]);
-				}else{
-					result.error500("字典Code格式不正确！");
-					return result;
-				}
-			}else {
-				//字典表
-				 ls = sysDictService.queryDictItemsByCode(dictCode);
-			}
-
-			 result.setSuccess(true);
-			 result.setResult(ls);
-			 log.info(result.toString());
-		} catch (Exception e) {
-			log.error(e.getMessage(),e);
-			result.error500("操作失败");
-			return result;
-		}
-
-		return result;
+        try {
+            List<DictModel> items;
+            if (namedTableDictionaries.isTablePurpose(dictCode)) {
+                items = namedTableDictionaries.items(dictCode);
+            } else {
+                namedTableDictionaries.validateScalarCode(dictCode);
+                items = sysDictService.queryDictItemsByCode(dictCode);
+            }
+            Result<List<DictModel>> result = new Result<>();
+            result.setResult(items);
+            return result;
+        } catch (Exception e) {
+            return dictionaryFailure(e);
+        }
 	}
 
 	/**
@@ -219,30 +195,13 @@ public class SysDictController {
 	 */
 	@RequestMapping(value = "/loadDict/{dictCode}", method = RequestMethod.GET)
 	public Result<List<DictModel>> loadDict(@PathVariable String dictCode,@RequestParam(name="keyword") String keyword, @RequestParam(value = "sign",required = false) String sign,HttpServletRequest request) {
-		log.info(" 加载字典表数据,加载关键字: "+ keyword);
-		Result<List<DictModel>> result = new Result<List<DictModel>>();
-		List<DictModel> ls = null;
-		try {
-			if(dictCode.indexOf(",")!=-1) {
-				String[] params = dictCode.split(",");
-				if(params.length!=3) {
-					result.error500("字典Code格式不正确！");
-					return result;
-				}
-				ls = sysDictService.queryTableDictItems(params[0],params[1],params[2],keyword);
-				result.setSuccess(true);
-				result.setResult(ls);
-				log.info(result.toString());
-			}else {
-				result.error500("字典Code格式不正确！");
-			}
-		} catch (Exception e) {
-			log.error(e.getMessage(),e);
-			result.error500("操作失败");
-			return result;
-		}
-
-		return result;
+        try {
+            Result<List<DictModel>> result = new Result<>();
+            result.setResult(namedTableDictionaries.search(dictCode, keyword));
+            return result;
+        } catch (Exception e) {
+            return dictionaryFailure(e);
+        }
 	}
 
 	/**
@@ -250,55 +209,42 @@ public class SysDictController {
 	 */
 	@RequestMapping(value = "/loadDictItem/{dictCode}", method = RequestMethod.GET)
 	public Result<List<String>> loadDictItem(@PathVariable String dictCode,@RequestParam(name="key") String key, @RequestParam(value = "sign",required = false) String sign,HttpServletRequest request) {
-		Result<List<String>> result = new Result<>();
-		try {
-			if(dictCode.indexOf(",")!=-1) {
-				String[] params = dictCode.split(",");
-				if(params.length!=3) {
-					result.error500("字典Code格式不正确！");
-					return result;
-				}
-				List<String> texts = sysDictService.queryTableDictByKeys(params[0], params[1], params[2], key.split(","));
-
-				result.setSuccess(true);
-				result.setResult(texts);
-				log.info(result.toString());
-			}else {
-				result.error500("字典Code格式不正确！");
-			}
-		} catch (Exception e) {
-			log.error(e.getMessage(),e);
-			result.error500("操作失败");
-			return result;
-		}
-
-		return result;
+        try {
+            Result<List<String>> result = new Result<>();
+            result.setResult(namedTableDictionaries.labels(dictCode, key));
+            return result;
+        } catch (Exception e) {
+            return dictionaryFailure(e);
+        }
 	}
 
 	/**
-	 * 根据表名——显示字段-存储字段 pid 加载树形数据
+	 * 按固定分类/菜单用途加载树形数据，不接受自定义表、字段或过滤条件
 	 */
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/loadTreeData", method = RequestMethod.GET)
-	public Result<List<TreeSelectModel>> loadTreeData(@RequestParam(name="pid") String pid,@RequestParam(name="pidField") String pidField,
-												  @RequestParam(name="tableName") String tbname,
-												  @RequestParam(name="text") String text,
-												  @RequestParam(name="code") String code,
-												  @RequestParam(name="hasChildField") String hasChildField,
-												  @RequestParam(name="condition") String condition,
-												  @RequestParam(value = "sign",required = false) String sign,HttpServletRequest request) {
-		Result<List<TreeSelectModel>> result = new Result<List<TreeSelectModel>>();
-		Map<String, String> query = null;
-		if(oConvertUtils.isNotEmpty(condition)) {
-			query = JSON.parseObject(condition, Map.class);
-		}
-		// SQL注入漏洞 sign签名校验(表名,label字段,val字段,条件)
-		String dictCode = tbname+","+text+","+code+","+condition;
-		List<TreeSelectModel> ls = sysDictService.queryTreeList(query,tbname, text, code, pidField, pid,hasChildField);
-		result.setSuccess(true);
-		result.setResult(ls);
-		return result;
-	}
+    @RequestMapping(value = "/loadTreeData", method = RequestMethod.GET)
+    public Result<List<TreeSelectModel>> loadTreeData(@RequestParam(name="pid", defaultValue="") String pid,
+            @RequestParam(name="dictCode", required=false) String dictCode,
+            @RequestParam(name="pidField", required=false) String pidField,
+            @RequestParam(name="tableName", required=false) String tableName,
+            @RequestParam(name="text", required=false) String text,
+            @RequestParam(name="code", required=false) String code,
+            @RequestParam(name="hasChildField", required=false) String hasChildField,
+            @RequestParam(name="condition", required=false) String condition,
+            @RequestParam(value="sign", required=false) String sign, HttpServletRequest request) {
+        try {
+            String purpose = dictCode;
+            if (purpose == null) {
+                purpose = tableName + "," + text + "," + code;
+            } else if (tableName != null || text != null || code != null) {
+                throw new IllegalArgumentException("字典用途参数不能与表字段混用");
+            }
+            Result<List<TreeSelectModel>> result = new Result<>();
+            result.setResult(namedTableDictionaries.tree(purpose, pid, pidField, hasChildField, condition));
+            return result;
+        } catch (Exception e) {
+            return dictionaryFailure(e);
+        }
+    }
 
 	/**
 	 * 【APP接口】根据字典配置查询表字典数据
@@ -312,14 +258,25 @@ public class SysDictController {
 												  @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
 												  @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
 												  @RequestParam(value = "sign",required = false) String sign,HttpServletRequest request){
-		Result<List<DictModel>> res = new Result<List<DictModel>>();
-		// SQL注入漏洞 sign签名校验
-		String dictCode = query.getTable()+","+query.getText()+","+query.getCode();
-		List<DictModel> ls = this.sysDictService.queryDictTablePageList(query,pageSize,pageNo);
-		res.setResult(ls);
-		res.setSuccess(true);
-		return res;
+        return dictionaryFailure(new IllegalArgumentException("通用表查询已停用，请使用已配置的字典用途"));
 	}
+
+    private <T> Result<T> dictionaryFailure(Exception exception) {
+        Result<T> result = new Result<>();
+        result.setSuccess(false);
+        if (exception instanceof UnauthorizedException) {
+            result.setCode(403);
+            result.setMessage("无字典访问权限");
+        } else if (exception instanceof IllegalArgumentException) {
+            result.setCode(400);
+            result.setMessage(exception.getMessage());
+        } else {
+            result.setCode(500);
+            result.setMessage("字典读取失败，请稍后重试");
+            log.error("字典读取失败", exception);
+        }
+        return result;
+    }
 
 	/**
 	 * @功能：新增

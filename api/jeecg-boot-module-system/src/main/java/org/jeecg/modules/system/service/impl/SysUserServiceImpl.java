@@ -41,6 +41,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
+    @Autowired private org.jeecg.modules.system.service.AccountAdministrationService accountAdministration;
 	
 	@Autowired
 	private SysUserMapper userMapper;
@@ -83,12 +84,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     @CacheEvict(value = {CacheConstant.SYS_USERS_CACHE}, allEntries = true)
     public Result<?> changePassword(SysUser sysUser) {
-        String salt = oConvertUtils.randomGen(8);
-        sysUser.setSalt(salt);
-        String password = sysUser.getPassword();
-        String passwordEncode = PasswordUtil.encrypt(sysUser.getUsername(), password, salt);
-        sysUser.setPassword(passwordEncode);
-        this.userMapper.updateById(sysUser);
+        accountAdministration.resetPassword(sysUser.getId(), sysUser.getPassword());
         return Result.ok("密码修改成功!");
     }
 
@@ -447,22 +443,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
 	@Override
 	public boolean revertLogicDeleted(List<String> userIds, SysUser updateEntity) {
-		String ids = String.format("'%s'", String.join("','", userIds));
-		return userMapper.revertLogicDeleted(ids, updateEntity) > 0;
-	}
+        accountAdministration.recycle(userIds, true);
+        return true;
+    }
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public boolean removeLogicDeleted(List<String> userIds) {
-		String ids = String.format("'%s'", String.join("','", userIds));
-		// 1. 删除用户
-		int line = userMapper.deleteLogicDeleted(ids);
-		// 2. 删除用户部门关系
-		line += sysUserDepartMapper.delete(new LambdaQueryWrapper<SysUserDepart>().in(SysUserDepart::getUserId, userIds));
-		//3. 删除用户角色关系
-		line += sysUserRoleMapper.delete(new LambdaQueryWrapper<SysUserRole>().in(SysUserRole::getUserId, userIds));
-		return line != 0;
-	}
+        accountAdministration.recycle(userIds, false);
+        return true;
+    }
 
 	@Override
 	public Page<SysUser> getUserList(Page<SysUser> page, QueryWrapper<SysUser> queryWrapper) {

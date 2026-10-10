@@ -3,12 +3,18 @@
     :visible="visible"
     :width="1200"
     title="地图编辑器"
+    :okClose="false"
+    :confirmLoading="saving"
+    :okButtonProps="{ props: { disabled: loading || saving || !!loadError || unitList.length === 0 } }"
+    :maskClosable="false"
     :fullscreen="true"
     :switchFullscreen="true"
     @ok="handleOk"
     @cancel="handleCancel"
   >
-    <div class="map-config">
+    <a-alert v-if="loadError || saveError" type="error" :message="loadError || saveError" show-icon />
+    <a-spin :spinning="loading" tip="正在加载课程单元…">
+    <div class="map-config" :inert="saving ? '' : null">
       <a-row>
         <a-col :span="8">
           <a-select v-model="currentUnitId" style="width: 200px">
@@ -19,8 +25,8 @@
         </a-col>
         <a-col :span="8">
           <div class="position">
-            <a-input prefix="X:" v-model="currentUnit.mapX" placeholder="x坐标" />
-            <a-input prefix="Y:" v-model="currentUnit.mapY" placeholder="y坐标" />
+            <a-input prefix="X:" v-model="currentUnit.mapX" :disabled="saving || !currentUnitId" @change="saved = false" placeholder="x坐标" />
+            <a-input prefix="Y:" v-model="currentUnit.mapY" :disabled="saving || !currentUnitId" @change="saved = false" placeholder="y坐标" />
           </div>
         </a-col>
         <a-col :span="8"> <a-tag color="red">双击图标开始拖动/结束拖动</a-tag> </a-col>
@@ -28,7 +34,7 @@
     </div>
     <div
       class="map-wrapper"
-      id="map-wrapper"
+      ref="mapWrapper"
       :style="{ background: 'url(' + mapUrl + ') no-repeat', backgroundSize: 'auto', height: '1000px' }"
     >
       <div
@@ -44,6 +50,7 @@
         <a-tag>{{ unit.unitName }}</a-tag>
       </div>
     </div>
+    </a-spin>
   </j-modal>
 </template>
 
@@ -51,103 +58,185 @@
 import { getAction, putAction } from '@/api/manage'
 export default {
   name: 'TeachingMapEditor',
-  props: {},
   data() {
     return {
-      visible: false,
-      courseInfo: {},
-      mapUrl: '',
-      mapIconUrl: '',
-      unitList: [],
-      currentUnitId: '',
-      currentUnit: {},
-      flags: false,
-      saved: true
+      visible: false, courseInfo: {}, mapUrl: '', mapIconUrl: '', unitList: [],
+      currentUnitId: '', currentUnit: {}, flags: false, saved: true,
+      requestVersion: 0, loading: false, saving: false, loadError: '', saveError: ''
     }
   },
   watch: {
-    currentUnitId(newValue) {
-      this.currentUnit = this.unitList.filter((x) => {
-        return x.id == newValue
-      })[0]
-    },
+    currentUnitId(value) {
+      if (this.flags && this.currentUnit.id !== value) this.stopDrag()
+      this.currentUnit = this.unitList.find(unit => unit.id === value) || {}
+    }
   },
-  created() {},
+  beforeDestroy() {
+    this.requestVersion += 1
+    this.stopDrag()
+  },
   methods: {
+    isCurrent(version) { return this.visible && version === this.requestVersion },
+    beginOpen(courseId) {
+      this.requestVersion += 1
+      this.stopDrag()
+      this.courseInfo = { id: courseId }
+      this.mapUrl = ''
+      this.mapIconUrl = ''
+      this.unitList = []
+      this.currentUnitId = ''
+      this.currentUnit = {}
+      this.saved = true
+      this.loading = true
+      this.saving = false
+      this.loadError = ''
+      this.saveError = ''
+      this.visible = true
+      return this.requestVersion
+    },
     open(courseInfo) {
-      this.visible = true
-      this.courseInfo = courseInfo
-      this.mapUrl = this.courseInfo.courseMap_url
-      this.mapIconUrl = this.courseInfo.courseMapIcon_url
-      this.getUnitInfo(this.courseInfo.id,null)
+      const version = this.beginOpen(courseInfo && courseInfo.id)
+      if (!courseInfo || !courseInfo.id) {
+        this.loading = false
+        this.loadError = '请先保存课程，再编辑课程地图。'
+        return
+      }
+      this.applyCourse(courseInfo)
+      return this.loadUnits(courseInfo.id, null, version)
     },
-    openById(courseId, unitId){
-      this.visible = true
-      getAction('/teaching/teachingCourse/queryById', {id:courseId}).then(res=>{
-        this.courseInfo = res.result
-        this.mapUrl = this.courseInfo.courseMap_url
-        this.mapIconUrl = this.courseInfo.courseMapIcon_url
-      })
-      this.getUnitInfo(courseId,unitId)
+    async openById(courseId, unitId) {
+      const version = this.beginOpen(courseId)
+      if (!courseId) {
+        this.loading = false
+        this.loadError = '请选择所属课程后再编辑地图。'
+        return
+      }
+      try {
+        const result = await getAction('/teaching/teachingCourse/queryById', { id: courseId })
+        if (!this.isCurrent(version)) return
+        if (!result || result.success !== true || !result.result || result.result.id !== courseId) throw new Error('Course unavailable')
+        this.applyCourse(result.result)
+        await this.loadUnits(courseId, unitId, version)
+      } catch (error) {
+        if (this.isCurrent(version)) {
+          this.loading = false
+          this.loadError = '课程地图加载未成功，请关闭后重新打开。'
+        }
+      }
     },
-    handleOk() {
-      putAction('/teaching/teachingCourseUnit/editBatch', this.unitList).then((res) => {
-        this.$message.success(res.message)
+    applyCourse(course) {
+      this.courseInfo = { ...course }
+      this.mapUrl = course.courseMap_url || ''
+      this.mapIconUrl = course.courseMapIcon_url || ''
+    },
+    async loadUnits(courseId, selectUnitId, version) {
+      const units = []
+      try {
+        let total = 0
+        let pageNo = 1
+        do {
+          const res = await getAction('/teaching/teachingCourseUnit/list', { courseId, pageNo, pageSize: 100 })
+          if (!this.isCurrent(version)) return
+          if (!res || res.success !== true || !res.result || !Array.isArray(res.result.records)) throw new Error('Unit list unavailable')
+          const records = res.result.records
+          total = Number(res.result.total)
+          if (!Number.isSafeInteger(total) || total < 0 || records.length > 100 ||
+              new Set(records.map(unit => unit.id)).size !== records.length ||
+              records.some(unit => unit.courseId !== courseId || !unit.id || units.some(existing => existing.id === unit.id))) throw new Error('Invalid unit page')
+          if (records.length === 0 && units.length < total) throw new Error('Incomplete unit page')
+          units.push(...records)
+          pageNo += 1
+        } while (units.length < total)
+        if (!this.isCurrent(version)) return
+        this.unitList = units
+        this.currentUnitId = units.some(unit => unit.id === selectUnitId) ? selectUnitId : (units[0] ? units[0].id : '')
+        this.currentUnit = units.find(unit => unit.id === this.currentUnitId) || {}
+      } catch (error) {
+        if (this.isCurrent(version)) this.loadError = '课程单元加载未成功，请关闭后重新打开。'
+      } finally {
+        if (this.isCurrent(version)) this.loading = false
+      }
+    },
+    async handleOk() {
+      if (!this.visible || this.loading || this.saving || this.loadError || !this.unitList.length) return
+      this.stopDrag()
+      const units = this.unitList.map(({ id, mapX, mapY }) => ({ id, mapX: Number(mapX), mapY: Number(mapY) }))
+      if (this.unitList.some(unit => unit.mapX === null || unit.mapY === null || unit.mapX === '' || unit.mapY === '') ||
+          units.some(unit => !Number.isInteger(unit.mapX) || !Number.isInteger(unit.mapY) ||
+            Math.abs(unit.mapX) > 2147483647 || Math.abs(unit.mapY) > 2147483647)) {
+        this.saveError = '请为每个课程单元填写有效的整数坐标。'
+        return
+      }
+      const version = this.requestVersion
+      this.saving = true
+      this.saveError = ''
+      try {
+        const res = await putAction('/teaching/teachingCourseUnit/editBatch', { courseId: this.courseInfo.id, units })
+        if (!this.isCurrent(version)) return
+        if (!res || res.success !== true) {
+          this.saveError = '地图保存未成功，坐标修改已保留。请检查课程权限后重试。'
+          return
+        }
         this.saved = true
-      })
+        this.$emit('saved', { courseId: this.courseInfo.id, units })
+        this.$message.success('地图保存成功')
+      } catch (error) {
+        if (this.isCurrent(version)) this.saveError = '未能确认地图保存结果，坐标修改已保留。请先核对后再决定是否重试。'
+      } finally {
+        if (this.isCurrent(version)) this.saving = false
+      }
+    },
+    close() {
+      this.requestVersion += 1
+      this.stopDrag()
+      this.visible = false
+      this.loading = false
+      this.saving = false
+      this.unitList = []
+      this.currentUnitId = ''
+      this.currentUnit = {}
     },
     handleCancel() {
-      var that = this
-      if(this.saved){
-        this.visible = false
-      }else{
-        
-        this.$confirm({
-          title: '提示',
-          content: '地图已修改，确定要关闭吗 ?',
-          onOk() {
-            that.visible = false
-          },
-          onCancel() {
-          },
-        });
-      }
-    },
-    getUnitInfo(courseId, selectUnitId) {
-      getAction('/teaching/teachingCourseUnit/list', { courseId: courseId, pageSize:999 }).then((res) => {
-        if (res.success && res.result.total > 0) {
-          this.unitList = res.result.records
-          this.currentUnitId = selectUnitId==null?this.unitList[0].id:selectUnitId
-          console.log("----"+this.currentUnitId);
-        } else {
-          this.$message.error('没有课程单元')
-        }
+      this.stopDrag()
+      if (this.saving) return
+      if (this.saved) return this.close()
+      const version = this.requestVersion
+      this.$confirm({
+        title: '放弃未保存的地图修改？',
+        content: '关闭后，本次坐标修改将丢失。',
+        onOk: () => { if (this.isCurrent(version)) this.close() }
       })
     },
-
     selectUnit(unitId) {
-      this.currentUnitId = unitId
-    },
-    drag(unitId) {
-      this.currentUnitId = unitId
-      this.flags = !this.flags
-      if (this.flags) {
-        window.addEventListener('mousemove', this.mouseMove)
-      } else {
-        window.removeEventListener('mousemove', this.mouseMove)
-        this.unitList.forEach((u) => {
-          if (u.id == unitId) {
-            u = this.currentUnit
-          }
-        })
+      if (!this.saving) {
+        if (this.currentUnitId !== unitId) this.stopDrag()
+        this.currentUnitId = unitId
       }
     },
-    mouseMove(e) {
-      this.saved = false
-      this.currentUnit.mapY = e.clientY - document.getElementById('map-wrapper').offsetTop - 25
-      this.currentUnit.mapX = e.clientX - document.getElementById('map-wrapper').offsetLeft - 25
+    stopDrag() {
+      window.removeEventListener('mousemove', this.mouseMove)
+      this.flags = false
     },
-  },
+    drag(unitId) {
+      if (!this.visible || this.loading || this.saving) return
+      const wasDragging = this.flags && this.currentUnitId === unitId
+      this.stopDrag()
+      this.currentUnitId = unitId
+      this.currentUnit = this.unitList.find(unit => unit.id === unitId) || {}
+      if (!wasDragging && this.currentUnitId) {
+        this.flags = true
+        window.addEventListener('mousemove', this.mouseMove)
+      }
+    },
+    mouseMove(event) {
+      const wrapper = this.$refs.mapWrapper
+      if (!this.visible || !this.flags || this.saving || !this.currentUnitId || !wrapper) return
+      const bounds = wrapper.getBoundingClientRect()
+      this.saved = false
+      this.currentUnit.mapY = Math.round(event.clientY - bounds.top - 25)
+      this.currentUnit.mapX = Math.round(event.clientX - bounds.left - 25)
+    }
+  }
 }
 </script>
 

@@ -8,6 +8,7 @@
     :maskClosable="false"
     :keyboard="!confirmLoading"
     :closable="!confirmLoading"
+    :okButtonProps="{ props: { disabled: confirmLoading || !uploadsReady } }"
     :cancelButtonProps="{ props: { disabled: confirmLoading } }"
     okText="保存"
     @ok="handleOk"
@@ -54,10 +55,10 @@
             <j-editor v-decorator="['courseDesc', { trigger: 'input' }]" />
           </a-form-item>
           <a-form-item label="课程封面" :labelCol="labelCol" :wrapperCol="wrapperCol">
-            <j-upload v-decorator="['courseCover', validatorRules.courseCover]" :number="1" :trigger-change="true"></j-upload>
+            <j-upload v-decorator="['courseCover', validatorRules.courseCover]" :number="1" :trigger-change="true" :session="uploadSession" :active="visible" :disabled="confirmLoading" @upload-state="onUploadState('courseCover', $event)"></j-upload>
           </a-form-item>
           <!-- <a-form-item label="课程图标" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-upload v-decorator="[ 'courseIcon', validatorRules.courseIcon]"  :number="1" :trigger-change="true"></j-upload>
+          <j-upload v-decorator="[ 'courseIcon', validatorRules.courseIcon]"  :number="1" :trigger-change="true" :session="uploadSession" :active="visible" :disabled="confirmLoading" @upload-state="onUploadState('courseIcon', $event)"></j-upload>
         </a-form-item> -->
           <a-form-item label="展示形式" :labelCol="labelCol" :wrapperCol="wrapperCol">
             <a-select placeholder="请选择展示形式" v-decorator="['showType', validatorRules.showType, {initialValue:'1'}]" @change="onShowTypeSelected">
@@ -91,7 +92,7 @@
                   text="上传地图"
                   :number="1"
                   :trigger-change="true"
-                ></j-upload>
+                 :session="uploadSession" :active="visible" :disabled="confirmLoading" @upload-state="onUploadState('courseMap', $event)"></j-upload>
                 <a-button type="primary" @click="showMapEdit">地图编辑器</a-button>
               </a-col>
             <!-- <a-col :span="12">
@@ -103,7 +104,7 @@
                 text="上传图标"
                 :number="1"
                 :trigger-change="true"
-              ></j-upload>
+               :session="uploadSession" :active="visible" :disabled="confirmLoading" @upload-state="onUploadState('courseMapIcon', $event)"></j-upload>
             </a-col> -->
             </a-row>
           </a-form-item>

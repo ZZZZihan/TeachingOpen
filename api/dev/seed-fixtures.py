@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Seed synthetic accounts/classes in the task-owned, empty local test database."""
+"""Build synthetic fixtures, or seed them into an owned empty local database."""
 import argparse
 import json
 from pathlib import Path
@@ -12,20 +12,13 @@ def quote(value):
     return "'" + str(value).replace("\\", "\\\\").replace("'", "''") + "'"
 
 
-def seed(runtime, java_home):
-    api = Path(__file__).resolve().parents[1]
-    mysql = runtime / "tools/mysql-8.4.6-macos15-arm64/bin/mysql"
-    command = [str(mysql), "--defaults-extra-file=" + str(runtime / "config/mysql-admin-client.cnf"), "--batch", "--skip-column-names"]
-    def query(sql):
-        return subprocess.check_output(command + ["-e", sql], text=True).strip()
-    # Refuse a different server or existing account data before any inserts.
-    assert_database(runtime, empty=True)
-    credentials = json.loads((runtime / "config/credentials.json").read_text())
+def build_fixture_seed(api, runtime, java_home, credentials):
+    """Build synthetic seed SQL without opening a database connection."""
     classes = runtime / "fixture-classes"
-    classes.mkdir(exist_ok=True)
+    classes.mkdir(mode=0o700, exist_ok=True)
     classpath = api / "jeecg-boot-base-common/target/classes"
     subprocess.run([str(java_home / "bin/javac"), "-cp", str(classpath), "-d", str(classes), str(api / "dev/FixturePassword.java")], check=True)
-    statements = [(api / "db/phone-profile-registration.sql").read_text(), "START TRANSACTION;"]
+    statements = ["START TRANSACTION;"]
     def insert(table, **fields):
         statements.append("INSERT INTO `" + table + "` (" + ",".join("`" + k + "`" for k in fields) + ") VALUES (" + ",".join(quote(v) for v in fields.values()) + ");")
     insert("sys_config", id="fixture_allow_registration", config_key="allowReg", config_value="1", config_enabled=1, comment="仅本地合成验收开放注册")
@@ -54,11 +47,27 @@ def seed(runtime, java_home):
         insert("teaching_additional_work", id="fixture_additional_" + suffix, work_name="合成附加作业" + suffix, work_dept="fixture_class_" + suffix, status=1, code_type=0)
         insert("teaching_work", id="fixture_work_" + suffix, user_id="fixture_student_" + suffix, depart_id="fixture_class_" + suffix, course_id="fixture_unit_" + suffix, work_name="合成作业" + suffix, work_type="1", work_file="fixture_file_" + suffix, create_by="fixture_student_" + suffix, create_time="2026-10-02 20:00:00", work_scene="course")
     statements.append("COMMIT;")
+    # Migration preflight requires the canonical student role and allowReg row.
+    # Commit all synthetic fixtures before MySQL's implicitly committed DDL.
+    statements.append((api / "db/phone-profile-registration.sql").read_text())
+    return "\n".join(statements) + "\n", accounts
+
+
+def seed(runtime, java_home):
+    api = Path(__file__).resolve().parents[1]
+    mysql = runtime / "tools/mysql-8.4.6-macos15-arm64/bin/mysql"
+    command = [str(mysql), "--defaults-extra-file=" + str(runtime / "config/mysql-admin-client.cnf"), "--batch", "--skip-column-names"]
+    # Refuse a different server or existing account data before any inserts.
+    assert_database(runtime, empty=True)
+    credentials = json.loads((runtime / "config/credentials.json").read_text())
+    statements, accounts = build_fixture_seed(api, runtime, java_home, credentials)
     sql = runtime / "config/fixture-seed.sql"
-    sql.write_text("\n".join(statements) + "\n"); sql.chmod(0o600)
+    sql.write_text(statements); sql.chmod(0o600)
     with sql.open() as f:
         subprocess.run(command + ["teachingopen_dev"], stdin=f, check=True)
-    (runtime / "fixture-accounts.json").write_text(json.dumps(accounts, ensure_ascii=False, indent=2) + "\n")
+    manifest = runtime / "fixture-accounts.json"
+    manifest.write_text(json.dumps(accounts, ensure_ascii=False, indent=2) + "\n")
+    manifest.chmod(0o600)
     print("Seeded 5 synthetic accounts, 2 classes, 2 courses and 2 works; no upstream INSERT data imported")
 
 

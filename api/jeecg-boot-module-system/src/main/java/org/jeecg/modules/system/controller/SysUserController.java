@@ -29,6 +29,7 @@ import org.jeecg.common.util.*;
 import org.jeecg.modules.common.controller.BaseController;
 import org.jeecg.modules.system.entity.*;
 import org.jeecg.modules.system.model.DepartIdModel;
+import org.jeecg.modules.system.model.UserProfileRequest;
 import org.jeecg.modules.system.model.SysUserModel;
 import org.jeecg.modules.system.model.SysUserSysDepartModel;
 import org.jeecg.modules.system.service.*;
@@ -65,6 +66,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/sys/user")
 public class SysUserController extends BaseController {
+    @Autowired private AccountAdministrationService accountAdministration;
+    @Autowired private UserProfileService userProfiles;
 	@Autowired
 	private ISysBaseAPI sysBaseAPI;
 	@Autowired
@@ -168,128 +171,44 @@ public class SysUserController extends BaseController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
     //@RequiresPermissions("user:add")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<SysUser> add(@RequestBody JSONObject jsonObject) {
-		Result<SysUser> result = new Result<SysUser>();
-		String selectedRoles = jsonObject.getString("selectedroles");
-        if (StringUtils.isNotBlank(selectedRoles)){
-            int currentRoleLevel = getUserRoleLevel();
-            for (String roleId: selectedRoles.split(",")){
-                SysRole role = sysRoleService.getById(roleId);
-                if (role.getRoleLevel() > currentRoleLevel){
-                    result.error500("权限不足，无法分配所选角色");
-                    return result;
-                }
-            }
-        }else{
-            //默认学生角色
-            SysRole role = sysRoleService.getRoleByCode("student");
-            if (role!=null){
-                selectedRoles = role.getId();
-            }
-        }
-
-		String selectedDeparts = jsonObject.getString("selecteddeparts");
-		try {
-			SysUser user = JSON.parseObject(jsonObject.toJSONString(), SysUser.class);
-			user.setCreateTime(new Date());//设置创建时间
-			String salt = oConvertUtils.randomGen(8);
-			user.setSalt(salt);
-			String passwordEncode = PasswordUtil.encrypt(user.getUsername(), user.getPassword(), salt);
-			user.setPassword(passwordEncode);
-			user.setStatus(1);
-			user.setDelFlag(CommonConstant.DEL_FLAG_0);
-			sysUserService.save(user);
-			sysUserService.addUserWithRole(user, selectedRoles);
-            sysUserService.addUserWithDepart(user, selectedDeparts);
-			result.success("添加成功！");
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			result.error500("操作失败");
-		}
-		return result;
-	}
+        accountAdministration.saveAccount(JSON.parseObject(jsonObject.toJSONString(), SysUser.class),
+                jsonObject.getString("selectedroles"), jsonObject.getString("selecteddeparts"), true);
+        return new Result<SysUser>().success("保存成功!");
+    }
 
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
     //@RequiresRoles({"admin"})
     //@RequiresPermissions("user:edit")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<SysUser> edit(@RequestBody JSONObject jsonObject) {
-		Result<SysUser> result = new Result<SysUser>();
-		try {
-			SysUser sysUser = sysUserService.getById(jsonObject.getString("id"));
-			sysBaseAPI.addLog("编辑用户，id： " +jsonObject.getString("id") ,CommonConstant.LOG_TYPE_2, 2);
-			if(sysUser==null) {
-				result.error500("未找到对应实体");
-			}else {
-                if (lessThanUserRoleLevel(sysUser.getId())){
-                    result.error500("权限不足");
-                    return result;
-                }
-
-				SysUser user = JSON.parseObject(jsonObject.toJSONString(), SysUser.class);
-				user.setUpdateTime(new Date());
-				//String passwordEncode = PasswordUtil.encrypt(user.getUsername(), user.getPassword(), sysUser.getSalt());
-				user.setPassword(sysUser.getPassword());
-				String roles = jsonObject.getString("selectedroles");
-                String departs = jsonObject.getString("selecteddeparts");
-
-                if (StringUtils.isNotBlank(roles)){
-                    int currentRoleLevel = getUserRoleLevel();
-                    for (String roleId: roles.split(",")){
-                        SysRole role = sysRoleService.getById(roleId);
-                        if (role.getRoleLevel() > currentRoleLevel){
-                            result.error500("权限不足，无法分配所选角色");
-                            return result;
-                        }
-                    }
-                }else{
-                    //默认学生角色
-                    SysRole role = sysRoleService.getRoleByCode("student");
-                    if (role!=null){
-                        roles = role.getId();
-                    }
-                }
-
-				sysUserService.editUserWithRole(user, roles);
-                sysUserService.editUserWithDepart(user, departs);
-                sysUserService.updateNullPhoneEmail();
-				result.success("修改成功!");
-			}
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			result.error500("操作失败");
-		}
-		return result;
-	}
+        accountAdministration.saveAccount(JSON.parseObject(jsonObject.toJSONString(), SysUser.class),
+                jsonObject.getString("selectedroles"), jsonObject.getString("selecteddeparts"), false);
+        return new Result<SysUser>().success("保存成功!");
+    }
 
 	/**
 	 * 删除用户
 	 */
 	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
-		sysBaseAPI.addLog("删除用户，id： " +id ,CommonConstant.LOG_TYPE_2, 3);
-        if (lessThanUserRoleLevel(id)){
-            return Result.error("权限不足");
-        }
-		this.sysUserService.deleteUser(id);
-		return Result.ok("删除用户成功");
-	}
+        accountAdministration.deleteAccounts(Collections.singletonList(id));
+        return Result.ok("删除用户成功");
+    }
 
 	/**
 	 * 批量删除用户
 	 */
 	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/deleteBatch", method = RequestMethod.DELETE)
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
-		sysBaseAPI.addLog("批量删除用户， ids： " +ids ,CommonConstant.LOG_TYPE_2, 3);
-		for (String id: ids.split(",")){
-            if (lessThanUserRoleLevel(id)){
-                return Result.error("权限不足");
-            }
-        }
-        this.sysUserService.deleteBatchUsers(ids);
-		return Result.ok("批量删除用户成功");
-	}
+        accountAdministration.deleteAccounts(AccountAdministrationService.ids(ids));
+        return Result.ok("批量删除用户成功");
+    }
 
 	/**
 	  * 冻结&解冻用户
@@ -389,16 +308,10 @@ public class SysUserController extends BaseController {
      */
     //@RequiresRoles({"admin"})
     @RequestMapping(value = "/changePassword", method = RequestMethod.PUT)
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result<?> changePassword(@RequestBody SysUser sysUser) {
-        SysUser u = this.sysUserService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getId, sysUser.getId()));
-        if (u == null) {
-            return Result.error("用户不存在！");
-        }
-        if (lessThanUserRoleLevel(u.getId())){
-            return Result.error("权限不足");
-        }
-        sysUser.setId(u.getId());
-        return sysUserService.changePassword(sysUser);
+        accountAdministration.resetPassword(sysUser.getId(), sysUser.getPassword());
+        return Result.ok("密码修改成功!");
     }
 
     /**
@@ -592,235 +505,50 @@ public class SysUserController extends BaseController {
      */
     //@RequiresPermissions("user:import")
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-        // 错误信息
-        List<String> errorMessage = new ArrayList<>();
-        int successLines = 0, errorLines = 0;
-
-        SysRole studentRole = sysRoleService.getRoleByCode("student");
-
-        for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
-            MultipartFile file = entity.getValue();// 获取上传文件对象
-            ImportParams params = new ImportParams();
-            params.setTitleRows(2);
-            params.setHeadRows(1);
-            params.setNeedSave(true);
-            try {
-                List<SysUserModel> listSysUsers = ExcelImportUtil.importExcel(file.getInputStream(), SysUserModel.class, params);
-                for (int i = 0; i < listSysUsers.size(); i++) {
-                    int lineNumber = i + 1;
-                    SysUserModel sysUserExcel = listSysUsers.get(i);
-                    if (StringUtils.isBlank(sysUserExcel.getPassword())) {
-                        sysUserExcel.setPassword("123456");// 密码默认为 “123456”
-                    }
-                    sysUserExcel.setDelFlag(0);
-                    sysUserExcel.setUserIdentity(sysUserExcel.getUserIdentity() != null && sysUserExcel.getUserIdentity() == 2 ? 2:1);
-                    sysUserExcel.setStatus(1);
-                    // 密码加密加盐
-                    String salt = oConvertUtils.randomGen(8);
-                    sysUserExcel.setSalt(salt);
-                    String passwordEncode = PasswordUtil.encrypt(sysUserExcel.getUsername(), sysUserExcel.getPassword(), salt);
-                    sysUserExcel.setPassword(passwordEncode);
-                    try {
-                        sysUserService.save(sysUserExcel);
-                        successLines++;
-                    } catch (Exception e) {
-                        errorLines++;
-                        String message = e.getMessage();
-                        // 通过索引名判断出错信息
-                        if (message.contains(CommonConstant.SQL_INDEX_UNIQ_SYS_USER_USERNAME)) {
-                            errorMessage.add("第 " + lineNumber + " 行：用户名已经存在，忽略导入。");
-                        } else if (message.contains(CommonConstant.SQL_INDEX_UNIQ_SYS_USER_WORK_NO)) {
-                            errorMessage.add("第 " + lineNumber + " 行：工号已经存在，忽略导入。");
-                        } else if (message.contains(CommonConstant.SQL_INDEX_UNIQ_SYS_USER_PHONE)) {
-                            errorMessage.add("第 " + lineNumber + " 行：手机号已经存在，忽略导入。");
-                        } else if (message.contains(CommonConstant.SQL_INDEX_UNIQ_SYS_USER_EMAIL)) {
-                            errorMessage.add("第 " + lineNumber + " 行：电子邮件已经存在，忽略导入。");
-                        } else {
-                            errorMessage.add("第 " + lineNumber + " 行：未知错误，忽略导入:" + e.getMessage());
-                        }
-                    }
-                    // 批量将负责部门和用户信息建立关联关系
-                    String departIds = sysUserExcel.getOrgCodeTxt();
-                    if (StringUtils.isNotBlank(departIds)) {
-                        String userId = sysUserExcel.getId();
-                        String[] departIdArray = departIds.split(",");
-                        List<SysUserDepart> userDepartList = new ArrayList<>(departIdArray.length);
-                        for (String departId : departIdArray) {
-                            SysDepart depart = sysDepartService.getOne(new QueryWrapper<SysDepart>().lambda()
-                                    .eq(SysDepart::getId, departId)
-                                    .or().eq(SysDepart::getOrgCode, departId)
-                                    .or().eq(SysDepart::getDepartName, departId)
-                                    .last("limit 1")
-                            );
-                            if (depart != null){
-                                userDepartList.add(new SysUserDepart(userId, depart.getId()));
-                            }else{
-                                errorLines++;
-                                errorMessage.add("第 " + lineNumber + " 行：部门不存在。");
-                            }
-                        }
-                        sysUserDepartService.saveBatch(userDepartList);
-                    }
-
-                    // 批量将角色和用户信息建立关联关系
-                    String roleIds = sysUserExcel.getRoleTxt();
-                    if (StringUtils.isNotBlank(roleIds)) {
-                        String userId = sysUserExcel.getId();
-                        String[] roleIdArray = roleIds.split(",");
-                        List<SysUserRole> userRoleList = new ArrayList<>(roleIdArray.length);
-                        for (String roleId : roleIdArray) {
-                            SysRole role = sysRoleService.getOne(new QueryWrapper<SysRole>().lambda()
-                                    .eq(SysRole::getId, roleId)
-                                    .or().eq(SysRole::getRoleCode, roleId)
-                                    .or().eq(SysRole::getRoleName, roleId)
-                                    .last("limit 1")
-                            );
-                            if (role != null){
-                                userRoleList.add(new SysUserRole(userId, role.getId()));
-                            }else{
-                                errorLines++;
-                                errorMessage.add("第 " + lineNumber + " 行：角色不存在。");
-                            }
-                        }
-                        sysUserRoleService.saveBatch(userRoleList);
-                    }else if(studentRole != null){ //默认student角色
-                        sysUserRoleService.save(new SysUserRole(sysUserExcel.getId(), studentRole.getId()));
-                    }
-
-                }
-            } catch (Exception e) {
-                errorMessage.add("发生异常：" + e.getMessage());
-                log.error(e.getMessage(), e);
-            } finally {
-                try {
-                    file.getInputStream().close();
-                } catch (IOException e) {
-                	log.error(e.getMessage(), e);
-                }
-            }
-        }
-        if (errorLines == 0) {
-            return Result.ok("共" + successLines + "行数据全部导入成功！");
-        } else {
-            JSONObject result = new JSONObject(5);
-            int totalCount = successLines + errorLines;
-            result.put("totalCount", totalCount);
-            result.put("errorCount", errorLines);
-            result.put("successCount", successLines);
-            result.put("msg", "总上传行数：" + totalCount + "，已导入行数：" + successLines + "，错误行数：" + errorLines);
-            String fileUrl = PmsUtil.saveErrorTxtByList(errorMessage, "userImportExcelErrorLog");
-            int lastIndex = fileUrl.lastIndexOf(File.separator);
-            String fileName = fileUrl.substring(lastIndex + 1);
-            result.put("fileUrl", "/sys/common/static/" + fileUrl);
-            result.put("fileName", fileName);
-            Result res = Result.ok(result);
-
-            res.setCode(201);
-            res.setMessage("文件导入成功，但有错误。");
-
-            return res;
-        }
+        return importAccounts(request, null, false);
     }
 
     @RequestMapping(value = "/importStudent", method = RequestMethod.POST)
-    public Result<?> importStudent(@RequestParam(required = false)String departIds, //默认班级ID
-                                   HttpServletRequest request, HttpServletResponse response)throws IOException {
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-        // 错误信息
-        List<String> errorMessage = new ArrayList<>();
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
+    public Result<?> importStudent(@RequestParam(required = false) String departIds,
+                                   HttpServletRequest request, HttpServletResponse response) {
+        return importAccounts(request, departIds, true);
+    }
 
-        SysRole studentRole = sysRoleService.getRoleByCode("student");
-        if (studentRole == null){ return Result.error("student角色不存在"); }
-
-        int successLines = 0, errorLines = 0;
-        for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
-            MultipartFile file = entity.getValue();// 获取上传文件对象
+    private Result<?> importAccounts(HttpServletRequest request, String departIds, boolean studentOnly) {
+        accountAdministration.requireAdministrator();
+        MultipartHttpServletRequest multipart = (MultipartHttpServletRequest) request;
+        List<String> errors = new ArrayList<>();
+        int success = 0, failed = 0;
+        for (MultipartFile file : multipart.getFileMap().values()) {
             ImportParams params = new ImportParams();
-            params.setTitleRows(2);
-            params.setHeadRows(1);
-            params.setNeedSave(true);
-            try {
-                List<SysUser> listSysUsers = ExcelImportUtil.importExcel(file.getInputStream(), SysUser.class, params);
-                for (int i = 0; i < listSysUsers.size(); i++) {
-                    int lineNumber = i + 1;
-                    SysUser sysUserExcel = listSysUsers.get(i);
-                    if(sysUserExcel == null || StringUtils.isEmpty(sysUserExcel.getUsername())){
-                        errorMessage.add("第 " + lineNumber + " 行：账号为空，忽略导入。");
-                        errorLines++;
-                        continue;
+            params.setTitleRows(2); params.setHeadRows(1); params.setNeedSave(false);
+            try (java.io.InputStream input = file.getInputStream()) {
+                List<SysUserModel> rows = ExcelImportUtil.importExcel(input, SysUserModel.class, params);
+                for (int i = 0; i < rows.size(); i++) {
+                    SysUserModel row = rows.get(i);
+                    try {
+                        accountAdministration.importAccount(row, row.getRoleTxt(),
+                                StringUtils.isBlank(departIds) ? row.getOrgCodeTxt() : departIds, studentOnly);
+                        success++;
+                    } catch (RuntimeException failure) {
+                        failed++;
+                        errors.add("第 " + (i + 1) + " 行：导入失败，请检查账号、强密码、角色和部门；该行未保存。");
                     }
-                    sysUserExcel.setUserIdentity(1);
-                    sysUserExcel.setDelFlag(0);
-                    sysUserExcel.setStatus(1);
-                    //判断是否有密码字段，没有则使用用户名生成密码
-                    String password;
-                    if(StringUtils.isNotBlank(sysUserExcel.getPassword())){
-                        password = sysUserExcel.getPassword();
-                    }else{
-                        password = "123456";
-                    }
-                    // 密码加密加盐
-                    String salt = oConvertUtils.randomGen(8);
-                    sysUserExcel.setSalt(salt);
-                    String passwordEncode = PasswordUtil.encrypt(sysUserExcel.getUsername(), password, salt);
-                    sysUserExcel.setPassword(passwordEncode);
-
-                    SysUser oldUser = sysUserService.getUserByName(sysUserExcel.getUsername());
-                    if (oldUser != null){
-                        sysUserExcel.setId(oldUser.getId());
-                        successLines++;
-                    }else{
-                        try {
-                            sysUserService.save(sysUserExcel);
-                            successLines++;
-                        } catch (Exception e) {
-                            errorLines++;
-                            String message = e.getMessage();
-                            // 通过索引名判断出错信息
-                            if (message.contains(CommonConstant.SQL_INDEX_UNIQ_SYS_USER_USERNAME)) {
-                                errorMessage.add("第 " + lineNumber + " 行：用户名已经存在，忽略导入。");
-                            } else if (message.contains(CommonConstant.SQL_INDEX_UNIQ_SYS_USER_PHONE)) {
-                                errorMessage.add("第 " + lineNumber + " 行：手机号已经存在，忽略导入。");
-                            } else {
-                                errorMessage.add("第 " + lineNumber + " 行：" + e.getMessage());
-                                log.error(e.getMessage(), e);
-                            }
-                        }
-                    }
-
-                    // 批量将负责部门和用户信息建立关联关系
-                    if (StringUtils.isBlank(departIds)){
-                        departIds = sysUserExcel.getOrgCodeTxt();
-                    }
-                    if (StringUtils.isNotBlank(departIds)) {
-                        String userId = sysUserExcel.getId();
-                        String[] departIdArray = departIds.split(",");
-                        List<SysUserDepart> userDepartList = new ArrayList<>(departIdArray.length);
-                        for (String d : departIdArray) {
-                            userDepartList.add(new SysUserDepart(userId, d));
-                        }
-                        sysUserDepartService.saveBatch(userDepartList);
-                    }
-                    // 批量将角色和用户信息建立关联关系
-                    sysUserRoleService.save(new SysUserRole(sysUserExcel.getId(), studentRole.getId()));
-
                 }
-            } catch (Exception e) {
-                errorMessage.add("发生异常：" + e.getMessage());
-                log.error(e.getMessage(), e);
-            } finally {
-                try {
-                    file.getInputStream().close();
-                } catch (IOException e) {
-                    log.error(e.getMessage(), e);
-                }
+            } catch (Exception failure) {
+                failed++;
+                errors.add("文件读取失败，请检查导入模板。");
             }
         }
-        return ImportExcelUtil.imporReturnRes(errorLines,successLines,errorMessage);
+        JSONObject result = new JSONObject();
+        result.put("successCount", success); result.put("errorCount", failed); result.put("errors", errors);
+        Result<JSONObject> response = new Result<>();
+        response.setResult(result); response.setSuccess(failed == 0);
+        response.setMessage("已导入" + success + "行，失败" + failed + "行");
+        return response;
     }
 
 
@@ -846,16 +574,13 @@ public class SysUserController extends BaseController {
 	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/updatePassword", method = RequestMethod.PUT)
 	public Result<?> changPassword(@RequestBody JSONObject json) {
-		String username = json.getString("username");
-		String oldpassword = json.getString("oldpassword");
-		String password = json.getString("password");
-		String confirmpassword = json.getString("confirmpassword");
-		SysUser user = this.sysUserService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, username));
-		if(user==null) {
-			return Result.error("用户不存在！");
-		}
-		return sysUserService.resetPassword(username,oldpassword,password,confirmpassword);
-	}
+        LoginUser user = getCurrentUser();
+        if (user == null || (json.containsKey("username") && !user.getUsername().equals(json.getString("username")))) {
+            throw new org.apache.shiro.authz.UnauthorizedException("只能修改本人密码");
+        }
+        return sysUserService.resetPassword(user.getUsername(), json.getString("oldpassword"),
+                json.getString("password"), json.getString("confirmpassword"));
+    }
 
     @RequestMapping(value = "/userRoleList", method = RequestMethod.GET)
     public Result<IPage<SysUser>> userRoleList(@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -878,33 +603,10 @@ public class SysUserController extends BaseController {
      */
     //@RequiresRoles({"admin"})
     @RequestMapping(value = "/addSysUserRole", method = RequestMethod.POST)
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result<String> addSysUserRole(@RequestBody SysUserRoleVO sysUserRoleVO) {
-        Result<String> result = new Result<String>();
-        try {
-            String sysRoleId = sysUserRoleVO.getRoleId();
-            for(String sysUserId:sysUserRoleVO.getUserIdList()) {
-                if (lessThanUserRoleLevel(sysUserId)){
-                    result.error500("权限不足");
-                    return result;
-                }
-                SysUserRole sysUserRole = new SysUserRole(sysUserId,sysRoleId);
-                QueryWrapper<SysUserRole> queryWrapper = new QueryWrapper<SysUserRole>();
-                queryWrapper.eq("role_id", sysRoleId).eq("user_id",sysUserId);
-                SysUserRole one = sysUserRoleService.getOne(queryWrapper);
-                if(one==null){
-                    sysUserRoleService.save(sysUserRole);
-                }
-
-            }
-            result.setMessage("添加成功!");
-            result.setSuccess(true);
-            return result;
-        }catch(Exception e) {
-            log.error(e.getMessage(), e);
-            result.setSuccess(false);
-            result.setMessage("出错了: " + e.getMessage());
-            return result;
-        }
+        accountAdministration.changeRole(sysUserRoleVO.getRoleId(), sysUserRoleVO.getUserIdList(), true);
+        return new Result<String>().success("添加成功!");
     }
     /**
      *   删除指定角色的用户关系
@@ -913,24 +615,12 @@ public class SysUserController extends BaseController {
      */
     //@RequiresRoles({"admin"})
     @RequestMapping(value = "/deleteUserRole", method = RequestMethod.DELETE)
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result<SysUserRole> deleteUserRole(@RequestParam(name="roleId") String roleId,
                                                     @RequestParam(name="userId",required=true) String userId
     ) {
-        Result<SysUserRole> result = new Result<SysUserRole>();
-        if (lessThanUserRoleLevel(userId)){
-            result.error500("权限不足");
-            return result;
-        }
-        try {
-            QueryWrapper<SysUserRole> queryWrapper = new QueryWrapper<SysUserRole>();
-            queryWrapper.eq("role_id", roleId).eq("user_id",userId);
-            sysUserRoleService.remove(queryWrapper);
-            result.success("删除成功!");
-        }catch(Exception e) {
-            log.error(e.getMessage(), e);
-            result.error500("删除失败！");
-        }
-        return result;
+        accountAdministration.changeRole(roleId, Collections.singletonList(userId), false);
+        return new Result<SysUserRole>().success("删除成功!");
     }
 
     /**
@@ -941,26 +631,12 @@ public class SysUserController extends BaseController {
      */
     //@RequiresRoles({"admin"})
     @RequestMapping(value = "/deleteUserRoleBatch", method = RequestMethod.DELETE)
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result<SysUserRole> deleteUserRoleBatch(
             @RequestParam(name="roleId") String roleId,
             @RequestParam(name="userIds",required=true) String userIds) {
-        Result<SysUserRole> result = new Result<SysUserRole>();
-        for (String id: userIds.split(",")){
-            if (lessThanUserRoleLevel(id)){
-                result.error500("权限不足");
-                return result;
-            }
-        }
-        try {
-            QueryWrapper<SysUserRole> queryWrapper = new QueryWrapper<SysUserRole>();
-            queryWrapper.eq("role_id", roleId).in("user_id",Arrays.asList(userIds.split(",")));
-            sysUserRoleService.remove(queryWrapper);
-            result.success("删除成功!");
-        }catch(Exception e) {
-            log.error(e.getMessage(), e);
-            result.error500("删除失败！");
-        }
-        return result;
+        accountAdministration.changeRole(roleId, AccountAdministrationService.ids(userIds), false);
+        return new Result<SysUserRole>().success("删除成功!");
     }
 
     /**
@@ -1288,7 +964,9 @@ public class SysUserController extends BaseController {
      * @return logicDeletedUserList
      */
     @GetMapping("/recycleBin")
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result getRecycleBin() {
+        accountAdministration.requireAdministrator();
         List<SysUser> logicDeletedUserList = sysUserService.queryLogicDeleted();
         if (logicDeletedUserList.size() > 0) {
             // 批量查询用户的所属部门
@@ -1308,14 +986,9 @@ public class SysUserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/putRecycleBin", method = RequestMethod.PUT)
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result putRecycleBin(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
-        String userIds = jsonObject.getString("userIds");
-        if (StringUtils.isNotBlank(userIds)) {
-            SysUser updateUser = new SysUser();
-            updateUser.setUpdateBy(JwtUtil.getUserNameByToken(request));
-            updateUser.setUpdateTime(new Date());
-            sysUserService.revertLogicDeleted(Arrays.asList(userIds.split(",")), updateUser);
-        }
+        accountAdministration.recycle(AccountAdministrationService.ids(jsonObject.getString("userIds")), true);
         return Result.ok("还原成功");
     }
 
@@ -1326,10 +999,9 @@ public class SysUserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/deleteRecycleBin", method = RequestMethod.DELETE)
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result deleteRecycleBin(@RequestParam("userIds") String userIds) {
-        if (StringUtils.isNotBlank(userIds)) {
-            sysUserService.removeLogicDeleted(Arrays.asList(userIds.split(",")));
-        }
+        accountAdministration.recycle(AccountAdministrationService.ids(userIds), false);
         return Result.ok("删除成功");
     }
 
@@ -1340,24 +1012,9 @@ public class SysUserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/appEdit", method = RequestMethod.PUT)
-    public Result<SysUser> appEdit(@RequestBody JSONObject jsonObject) {
-        Result<SysUser> result = new Result<SysUser>();
-        try {
-            SysUser sysUser = sysUserService.getById(jsonObject.getString("id"));
-            sysBaseAPI.addLog("移动端编辑用户，id： " +jsonObject.getString("id") ,CommonConstant.LOG_TYPE_2, 2);
-            if(sysUser==null) {
-                result.error500("未找到对应用户!");
-            }else {
-                SysUser user = JSON.parseObject(jsonObject.toJSONString(), SysUser.class);
-                user.setUpdateTime(new Date());
-                user.setPassword(sysUser.getPassword());
-                sysUserService.updateById(user);
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            result.error500("操作失败!");
-        }
-        return result;
+    public Result<SysUser> appEdit(@RequestBody UserProfileRequest request) {
+        userProfiles.update(request);
+        return new Result<SysUser>().success("修改成功!");
     }
 
 }

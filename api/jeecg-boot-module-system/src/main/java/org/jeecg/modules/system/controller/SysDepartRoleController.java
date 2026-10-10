@@ -1,5 +1,7 @@
 package org.jeecg.modules.system.controller;
 
+import org.apache.shiro.authz.annotation.Logical;
+
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -100,6 +102,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	//@RequiresRoles({"admin"})
 	@ApiOperation(value="部门角色-添加", notes="部门角色-添加")
 	@PostMapping(value = "/add")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> add(@RequestBody SysDepartRole sysDepartRole) {
 		sysDepartRoleService.save(sysDepartRole);
 		return Result.ok("添加成功！");
@@ -114,6 +117,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	//@RequiresRoles({"admin"})
 	@ApiOperation(value="部门角色-编辑", notes="部门角色-编辑")
 	@PutMapping(value = "/edit")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> edit(@RequestBody SysDepartRole sysDepartRole) {
 		sysDepartRoleService.updateById(sysDepartRole);
 		return Result.ok("编辑成功!");
@@ -129,6 +133,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	@AutoLog(value = "部门角色-通过id删除")
 	@ApiOperation(value="部门角色-通过id删除", notes="部门角色-通过id删除")
 	@DeleteMapping(value = "/delete")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
 		sysDepartRoleService.removeById(id);
 		return Result.ok("删除成功!");
@@ -144,6 +149,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	@AutoLog(value = "部门角色-批量删除")
 	@ApiOperation(value="部门角色-批量删除", notes="部门角色-批量删除")
 	@DeleteMapping(value = "/deleteBatch")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		this.sysDepartRoleService.removeByIds(Arrays.asList(ids.split(",")));
 		return Result.ok("批量删除成功！");
@@ -184,6 +190,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	  * @return
 	  */
 	 @RequestMapping(value = "/deptRoleUserAdd", method = RequestMethod.POST)
+	 @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	 public Result<?> deptRoleAdd(@RequestBody JSONObject json) {
 		 String newRoleId = json.getString("newRoleId");
 		 String oldRoleId = json.getString("oldRoleId");
@@ -239,6 +246,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
 	  * 保存数据规则至角色菜单关联表
 	  */
 	 @PostMapping(value = "/datarule")
+	 @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	 public Result<?> saveDatarule(@RequestBody JSONObject jsonObject) {
 		 try {
 			 String permissionId = jsonObject.getString("permissionId");
@@ -281,6 +289,7 @@ public class SysDepartRoleController extends JeecgController<SysDepartRole, ISys
    * @return
    */
   @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
+  @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
   public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
       return super.importExcel(request, response, SysDepartRole.class);
   }

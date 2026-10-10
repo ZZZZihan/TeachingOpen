@@ -150,12 +150,18 @@
 			update_time = #{entity.updateTime}
 		WHERE
 			del_flag = 1
-			AND id IN (${userIds})
+			AND id IN <foreach collection="userIds" item="userId" open="(" separator="," close=")">#{userId}</foreach>
 	</update>
+
+    <select id="lockAdministrationUsers" resultType="org.jeecg.modules.system.entity.SysUser">
+        SELECT * FROM sys_user WHERE id IN
+        <foreach collection="userIds" item="userId" open="(" separator="," close=")">#{userId}</foreach>
+        ORDER BY id FOR UPDATE
+    </select>
 
 	<!-- 彻底删除被逻辑删除的用户 -->
 	<delete id="deleteLogicDeleted">
-		DELETE FROM sys_user WHERE del_flag = 1 AND id IN (${userIds})
+		DELETE FROM sys_user WHERE del_flag = 1 AND id IN <foreach collection="userIds" item="userId" open="(" separator="," close=")">#{userId}</foreach>
 	</delete>
 
     <!-- 更新空字符串为null -->

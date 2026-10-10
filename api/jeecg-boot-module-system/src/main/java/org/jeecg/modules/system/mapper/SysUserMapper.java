@@ -117,12 +117,14 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 	/**
 	 * 还原被逻辑删除的用户
 	 */
-	int revertLogicDeleted(@Param("userIds") String userIds, @Param("entity") SysUser entity);
+	int revertLogicDeleted(@Param("userIds") List<String> userIds, @Param("entity") SysUser entity);
 
 	/**
 	 * 彻底删除被逻辑删除的用户
 	 */
-	int deleteLogicDeleted(@Param("userIds") String userIds);
+	int deleteLogicDeleted(@Param("userIds") List<String> userIds);
+
+    List<SysUser> lockAdministrationUsers(@Param("userIds") List<String> userIds);
 
 	List<SysUser> getUserList(Page<SysUser> page, @Param("ew")QueryWrapper<SysUser> queryWrapper);
     /** 更新空字符串为null【此写法有sql注入风险，禁止随便用】 */
