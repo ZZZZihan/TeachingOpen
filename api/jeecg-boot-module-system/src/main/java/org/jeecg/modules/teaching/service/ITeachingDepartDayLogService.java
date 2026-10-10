@@ -13,4 +13,7 @@ import org.jeecg.modules.teaching.enums.DepartDayLogType;
 public interface ITeachingDepartDayLogService extends IService<TeachingDepartDayLog> {
     public void addLog(String departId, DepartDayLogType type);
 
+    /** Record one additional-work assignment in the caller's transaction. */
+    void recordAdditionalWorkAssignment(String departId);
+
 }

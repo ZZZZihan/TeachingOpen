@@ -35,7 +35,7 @@
           </a-form-item>
 
           <a-form-item label="手机号码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-            <a-input placeholder="请输入手机号码" v-decorator="[ 'phone', validatorRules.phone]" />
+            <a-input disabled placeholder="手机号码由管理员维护" v-decorator="[ 'phone', validatorRules.phone]" />
           </a-form-item>
           <a-form-item>
             <a-button type="primary" @click="handleSubmit">提交</a-button>
@@ -135,11 +135,11 @@ export default {
           that.confirmLoading = true
           // let avatar = that.userInfo.avatar
           if (!values.birthday) {
-            values.birthday = ''
+            values.birthday = null
           } else {
             values.birthday = values.birthday.format(this.dateFormat)
           }
-          let formData = Object.assign(this.userInfo, values)
+          let formData = Object.assign({ id: this.userInfo.id }, pick(values, 'realname', 'avatar', 'birthday', 'sex', 'email'))
           // formData.avatar = avatar
           // that.addDepartsToUser(that,formData); // 调用根据当前用户添加部门信息的方法
           let obj = putAction(that.url.editUser, formData).then(res => {

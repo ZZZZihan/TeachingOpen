@@ -157,7 +157,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/sys/config/getCurrentConfig", "anon");
 		filterChainDefinitionMap.put("/sys/config/getConfig", "anon");
 		//字典
-		filterChainDefinitionMap.put("/sys/dict/getDictItems/**", "anon");
+			filterChainDefinitionMap.put("/sys/dict/getDictItems/**", "optionalJwt");
 		//社区
 		filterChainDefinitionMap.put("/teaching/teachingWork/userInfo", "anon");
 		filterChainDefinitionMap.put("/teaching/teachingWork/studentWorkInfo", "optionalJwt");
