@@ -12,9 +12,9 @@
 
 已有原生站点可传入审阅过的源配置及 SHA-256，生成器严格校验受支持的单站点形态，保留最新前端路径、HTML 缓存规则、缺失 JS/CSS 的 404、原安全头及本机 8088 业务入口。最终阶段公网 HTTP 跳转，本机 8088 仍提供业务。额外未知 include/listener/规则会拒绝生成。激活时传预期活动配置摘要，在锁内、Nginx 命令和备份之前拒绝其他发布造成的配置漂移。
 
-证书使用 Let’s Encrypt 免费 IP 证书方案；主要持续成本是自动续期、实际证书检查、发现失败和维护。提供隔离的 Certbot 状态目录、每天两次续期及每小时实际服务证书检查的 systemd 示例。检查失败只进入 systemd/journal，没有配置主动消息通知。具体启用和回退步骤见 [操作说明](../../deploy/IP_HTTPS.md)。
+证书使用 Let’s Encrypt 免费 IP 证书方案；主要持续成本是自动续期、实际证书检查、发现失败和维护。提供隔离的 Certbot 状态目录、每天两次续期及每小时实际服务证书检查的 systemd 示例。检查失败进入 systemd/journal；当前试行补充本机只读监控程序，供 Codex 对话每小时检查和按变化告警。服务器续期独立于本机，主动通知依赖本机在线及 Codex/Workbench 可用。具体启用和回退步骤见 [操作说明](../../deploy/IP_HTTPS.md)。
 
-续期 wrapper 除了检查 Certbot 退出码，还核对实际 TLS 叶证书与磁盘 `cert.pem` 的指纹。Certbot 成功但 deploy-hook 未正确加载证书时，先检查 Nginx 配置，再 reload 并复查；下一次无需签发的运行也能修复残留的旧证书加载。命令和总耗时均有上限，超时终止子进程组，避免超过 systemd 的 300 秒限制。每小时只读检查也核对指纹，不把仍有效的旧证书误报为新证书已加载。
+续期 wrapper 除了检查 Certbot 退出码，还核对实际 TLS 叶证书与磁盘 `cert.pem` 的指纹。Certbot 成功但 deploy-hook 未正确加载证书时，先检查 Nginx 配置，再 reload 并复查；下一次无需签发的运行也能修复残留的旧证书加载。Certbot 失败最多尝试三次，间隔 5 秒、10 秒，所有尝试与退避共享 240 秒窗口；预算不足或磁盘证书已经改变时停止重试。完整流程截止时间为 295 秒，超时终止子进程组，避免超过 systemd 的 300 秒限制。未增加强制签发；Nginx 检查与 reload 仍按原恢复流程单次执行。每小时只读检查也核对指纹，不把仍有效的旧证书误报为新证书已加载。
 
 ## 本地已经执行的验证
 
@@ -36,6 +36,7 @@
 python3 -m unittest discover -s deploy -p 'test_ip_https.py' -v
 python3 -m unittest discover -s deploy -p 'test_check_ip_certificate.py' -v
 python3 -m unittest discover -s deploy -p 'test_renew_ip_certificate.py' -v
+python3 -m unittest discover -s deploy -p 'test_monitor_ip_https.py' -v
 docker pull nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
 python3 deploy/test_ip_https_runtime.py --output ci-results/ip-https-runtime.json
 python3 deploy/test_ip_https_proxy.py --java-home "$JAVA_HOME" --m2 "$MAVEN_CACHE"
@@ -79,9 +80,19 @@ python3 deploy/test_ip_https_proxy.py --java-home "$JAVA_HOME" --m2 "$MAVEN_CACH
 
 本次脱敏证据保存在外层工作区 `.devspace/artifacts/ip-https-retry-20261010/`：`renewal-dry-run-result.json`、`renewal-hardening-installed.json`、`renewal-services-verified.json`、`timers-enabled.json`、`public-access-verified.json`、`real-login-verification.json`、`browser-login-verification.json`、`runtime-integration.json`。私有账号文件、证书私钥及完整服务器配置不进入 Git。先前试行目录的回退结论是历史状态，不代表本次最终状态。
 
+## 2026-10-10 有限重试与对话告警补充
+
+- 在用户同意继续并行试行并选择当前 Codex 对话告警后，为 Certbot 失败加入最多三次尝试及 5 秒、10 秒退避。所有尝试共享 240 秒，完整程序截止时间 295 秒，保留实际证书验证和恢复预算。命令不可用、输入无效或公开证书不可读时直接失败；证书已经改变时停止 CA 重试。现有有效证书不因普通续期失败而被撤下。
+- 新增 11 项续期失败/预算场景，证书检查与续期测试合计 **32 项通过**。真实本地合成子进程验证首次失败后恢复与三次全败停止；目标主机 Python 3.10.12 上隔离执行相同 32 项测试全部通过。生产 wrapper 已在摘要校验和备份后原子安装，实际 service 运行 **0.336 秒**、`Result=success`、一次尝试；证书未到换证条件，正式证书没有改变，未执行 reload 恢复。此次手动运行不属于未来自动换证证据。
+- 新增 **21 项监控测试通过**，整合重跑 34 项切换工具、32 项证书/续期及 21 项监控测试，合计 **87 项通过**。监控测试涵盖状态去重、48/24 小时风险升级、采集缺失与恢复、oneshot 正常退出、首次换证与延迟调度证据、持续慢流/慢响应头截止时间及私有状态文件。本机只读监控同时核对服务器定时器、上次 service 结果、实际 TLS/磁盘叶证书和公网 HTTP/HTTPS 入口。状态去重；新故障、48/24 小时/已过期风险升级、恢复以及首次可信新叶产生事件。定时记录与成功换证记录能够对应时另给出保守的调度证据事件；没有证据时不把手动操作称为自动续期。公网内容最多读取 1 MiB，采集有界，不控制生产服务。
+- 已完成首次基线和最终版本第二次真实只读检查，均健康、无待通知变化，验证健康状态不会重复提醒；服务器与公网叶证书一致，两个 timer 正常，HTTP/HTTPS 继续返回相同首页。Codex 当前对话的每小时 heartbeat 已创建并启用，状态文件权限为 0600；相同故障不重复提醒。本机告警通道的保存与复查结果在本轮最终回执记录；创建调度不能代替未来消息实际投递的验证。
+- 本轮只替换续期 wrapper，没有切换 Nginx 站点或重启后端。单文件回退脚本及原文件已分别保存在本机/服务器私有目录，并通过语法和摘要检查；未执行此次回退。完整 HTTPS 试行回退仍使用前节保留的受保护流程。
+
+本轮脱敏证据保存在外层工作区 `.devspace/artifacts/ip-https-reliability-20261010/`，包括目标隔离测试、真实合成进程、安装回执、实际 service 验证、本机监控结果及自动化记录。运行状态、凭据和实例专用自动化配置不进入 Git。
+
 ## 后续观察与业务验收边界
 
-- 尚未观察未来 timer 到期后真正签发并加载新正式证书。当前证据是完整 staging 续期演练、实际生产 service 检查及 timer 启用。失败会进入 systemd/journal，未接入主动消息告警；需要维护者定期查看并处理失败，不能宣称已实现自动通知或已证明长期稳定性。
+- 尚未观察未来 timer 到期后真正签发并加载新正式证书。当前证据是完整 staging 续期演练、实际生产 service 检查及 timer 启用。服务器失败记录继续保留，新增 Codex 对话监控按变化提醒；本机离线期间通知可能延迟。监控创建和手动检查不证明未来定时告警已实际投递，也不证明长期稳定性。
 - Cookie 属性及浏览器存储/清除已通过；尚未用受保护媒体验证浏览器自动携带 Cookie 后的授权访问与退出后失效。公开图片 200 不能替代此项。
 - 在已授权的账号和数据范围内验证管理员与师生路径、视频起播和定位、附件、三个编辑器加载及保存、通知与云变量 WSS；历史内容中的绝对 HTTP 资源仍需实际数据审计。公开登录页正常不替代这些业务验证。
 - 后续配置切换前重新核对活动配置摘要、稳定公网 IP 和可达性。HTTP→HTTPS 会改变浏览器 origin，应先保存未提交内容并重新登录；完整业务与持续续期验证完成后，按后续授权决定是否更新注册二维码、入口或切换最终阶段。
