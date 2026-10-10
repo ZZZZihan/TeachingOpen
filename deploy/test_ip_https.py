@@ -825,6 +825,35 @@ class RuntimeDiagnosticsTests(unittest.TestCase):
                         invoke(fixture)
                 echo.assert_called_once_with(stage, method, path, 502, {}, b'original response')
 
+    def test_stability_check_runs_all_four_methods_in_ten_rounds_without_sleep(self):
+        fixture = self.fixture()
+
+        def echo(method, path, *, tls=False, body=None):
+            response = f'method={method}\nuri={path}\nbody={body or ""}\nscheme=http\nforwarded_proto=http'.encode()
+            return 200, {'cross-origin-resource-policy': 'same-site'}, response
+
+        with patch.object(fixture, 'request', side_effect=echo) as request, \
+                patch.object(runtime_test.time, 'sleep', side_effect=AssertionError('no stability sleeps')):
+            fixture.api_stability('bootstrap HTTP')
+        self.assertEqual(request.call_count, 40)
+        self.assertEqual([call.args[0] for call in request.call_args_list], ['GET', 'POST', 'PUT', 'DELETE'] * 10)
+        self.assertEqual(fixture.report['api_stability']['rounds_completed'], 10)
+        self.assertEqual(fixture.report['api_stability']['request_retries'], 0)
+        self.assertTrue(all(row['passed'] for row in fixture.report['checks']))
+
+    def test_stability_failure_stops_without_retry_and_preserves_round_and_method(self):
+        fixture = self.fixture()
+        with patch.object(fixture, 'request', return_value=(502, {}, b'upstream unavailable')) as request:
+            with self.assertRaisesRegex(AssertionError, 'consecutive round 1/10'):
+                fixture.api_stability('bootstrap HTTP')
+        self.assertEqual(request.call_count, 1)
+        self.assertEqual(fixture.report['api_stability']['rounds_completed'], 0)
+        details = fixture.report['checks'][-1]['details']
+        self.assertEqual(details['stage'], 'bootstrap HTTP consecutive round 1/10')
+        self.assertEqual(details['method'], 'GET')
+        self.assertEqual(details['status'], 502)
+        self.assertEqual(details['body_preview'], 'upstream unavailable')
+
     def failure_report(self, verify, *, logs_error=None, cleanup_error=None):
         events = []
 

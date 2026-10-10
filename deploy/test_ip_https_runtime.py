@@ -693,6 +693,17 @@ sys.exit(result.returncode)
                         and values.get("forwarded_proto") == ("https" if tls else "http"), values.get("scheme"))
             self.record(f"{stage} API {method} keeps same-site CORP", headers.get("cross-origin-resource-policy") == "same-site")
 
+    def api_stability(self, stage):
+        """Exercise consecutive fixture connections without sleeps or retries."""
+        progress = {"rounds_required": 10, "rounds_completed": 0,
+                    "methods_per_round": ["GET", "POST", "PUT", "DELETE"],
+                    "maximum_requests": 40, "request_retries": 0, "inter_request_delay_seconds": 0}
+        self.report["api_stability"] = progress
+        for number in range(1, progress["rounds_required"] + 1):
+            self.api(f"{stage} consecutive round {number}/{progress['rounds_required']}")
+            progress["rounds_completed"] = number
+        self.record(f"{stage} consecutive API fixture stability completes 10 rounds", True, progress)
+
     def websocket(self):
         plain = socket.create_connection(("127.0.0.1", self.https_port), timeout=5)
         with self.context.wrap_socket(plain, server_hostname=IDENTITY) as connection:
@@ -744,6 +755,7 @@ sys.exit(result.returncode)
         self.record("bootstrap HTTP SPA fallback works", b"synthetic-ip-https-spa" in self.request("GET", "/courses/fixture")[2])
         self.acme("bootstrap HTTP")
         self.api("bootstrap HTTP")
+        self.api_stability("bootstrap HTTP")
         original = (self.directory / "active.conf").read_bytes()
         previous_workers = self.workers()
         modified = self.directory / "modified-trial.conf"
