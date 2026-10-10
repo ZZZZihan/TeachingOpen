@@ -16,7 +16,7 @@
             ref="treeSelect"
             placeholder="请选择父级节点"
             v-decorator="['pid', validatorRules.pid]"
-            dict="sys_category,name,id"
+            dict="category_tree"
             pidField="pid"
             pidValue="0">
           </j-tree-select>
