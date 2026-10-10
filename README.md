@@ -68,18 +68,20 @@
 
 ## 本地体验
 
-本页暂不提供公开演示链接。希望体验完整流程，可以按[本地开发与运行指南](docs/local-development.md)启动示例环境，分别使用学生、教师和管理员账号进入平台。
+在线试用：[天工教学平台](http://101.201.225.116/index)。当前使用 IP 与 HTTP，注册需填写手机号、姓名、学校和身份。
 
-**本页介绍的产品代码位于 `integration/product-candidate` 分支；默认 `main` 尚未合入完整集成版本。** 获取代码时请明确选择分支：
+本机体验可按[本地开发与运行指南](docs/local-development.md)启动独立示例环境，分别使用学生、教师和管理员账号进入平台。
+
+**完整集成版本统一从 `main` 获取。** 本次汇总保留各功能 PR 的历史，注册行为以当前手机号资料注册为准：
 
 ```sh
-git clone --branch integration/product-candidate https://github.com/ZZZZihan/TeachingOpen.git
+git clone --branch main https://github.com/ZZZZihan/TeachingOpen.git
 cd TeachingOpen
 ```
 
 完整运行需要前端、Java 后端、MySQL 和 Redis。开发指南包含工具准备、构建、示例数据初始化、启动与登录步骤；示例账号口令由本地初始化工具生成。
 
-原生开发指南对应 macOS arm64 工具布局；Linux/arm64 的候选包运行方式见[容器运行说明](https://github.com/ZZZZihan/TeachingOpen/blob/integration/product-candidate/deploy/CANDIDATE.md)。其他系统的工具路径和运行环境需要单独适配。
+原生开发指南对应 macOS arm64 工具布局；Linux/arm64 的候选包运行方式见[容器运行说明](https://github.com/ZZZZihan/TeachingOpen/blob/main/deploy/CANDIDATE.md)。其他系统的工具路径和运行环境需要单独适配。
 
 ## 技术与兼容性
 
@@ -100,9 +102,9 @@ cd TeachingOpen
 | 想了解什么 | 从这里开始 |
 | --- | --- |
 | 在本机运行项目 | [本地开发与运行指南](docs/local-development.md) |
-| 前端安装与构建 | [前端构建说明](https://github.com/ZZZZihan/TeachingOpen/blob/integration/product-candidate/web/BUILDING.md) |
-| 后端与独立开发环境 | [后端运行说明](https://github.com/ZZZZihan/TeachingOpen/blob/integration/product-candidate/api/BUILDING.md) |
-| 候选包与容器运行 | [候选包说明](https://github.com/ZZZZihan/TeachingOpen/blob/integration/product-candidate/deploy/CANDIDATE.md) |
+| 前端安装与构建 | [前端构建说明](https://github.com/ZZZZihan/TeachingOpen/blob/main/web/BUILDING.md) |
+| 后端与独立开发环境 | [后端运行说明](https://github.com/ZZZZihan/TeachingOpen/blob/main/api/BUILDING.md) |
+| 候选包与容器运行 | [候选包说明](https://github.com/ZZZZihan/TeachingOpen/blob/main/deploy/CANDIDATE.md) |
 | 已检查的教学流程 | [三角色流程记录](https://github.com/ZZZZihan/TeachingOpen/blob/205e1ca10d68b7341c9f23fec9ece379365f5f9a/docs/optimization/authenticated-role-flow-2026-10-05.md) |
 | 问题反馈与开发进度 | [Issues](https://github.com/ZZZZihan/TeachingOpen/issues) · [Pull Requests](https://github.com/ZZZZihan/TeachingOpen/pulls) |
 
@@ -117,4 +119,4 @@ docs/      开发指南、界面截图与工程记录
 
 ## 来源与许可
 
-本项目基于 [TeachingOpen](https://gitee.com/chengyu2333/teaching-open) 开源代码持续开发，保留上游来源与版权信息。仓库许可证为 [Apache License 2.0](LICENSE)，第三方组件遵循各自随附许可。校园标识与照片的来源见[校园视觉记录](https://github.com/ZZZZihan/TeachingOpen/blob/integration/product-candidate/docs/optimization/tiangong-branding-pr.md)，相关素材权利归原权利人。
+本项目基于 [TeachingOpen](https://gitee.com/chengyu2333/teaching-open) 开源代码持续开发，保留上游来源与版权信息。仓库许可证为 [Apache License 2.0](LICENSE)，第三方组件遵循各自随附许可。校园标识与照片的来源见[校园视觉记录](https://github.com/ZZZZihan/TeachingOpen/blob/main/docs/optimization/tiangong-branding-pr.md)，相关素材权利归原权利人。
