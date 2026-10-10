@@ -15,12 +15,14 @@ from queue import Empty, Queue
 from threading import Thread
 import time
 from uuid import uuid4
+from zoneinfo import ZoneInfo
 
 from local_http import FixtureApi
 from local_runtime import mysql_command
 
 
 BASE = '/teaching/teachingAdditionalWork'
+BUSINESS_ZONE = ZoneInfo('Asia/Shanghai')
 
 
 class MySqlSession:
@@ -135,17 +137,25 @@ def verify(args):
             return {'workName': name, 'workDept': department, 'status': 1, 'codeType': 0,
                     'workDesc': '仅合成权限验收', **extra}
 
+        def business_day():
+            return "'" + datetime.now(BUSINESS_ZONE).date().isoformat() + "'"
+
+        original_day_assignments = int(sql("SELECT COALESCE(SUM(additional_work_assign_count),0) "
+                                           "FROM teaching_depart_day_log WHERE depart_id='fixture_class_a' "
+                                           "AND create_time=" + business_day()))
+
         def concurrent_assignments(label, initial_count, mixed=False):
+            day = business_day()
             # Both distinct writers establish their role-read RR snapshot before
             # waiting on this class lock. One cannot publish before both waiters
             # are observed in actual InnoDB lock metadata.
-            sql("DELETE FROM teaching_depart_day_log WHERE depart_id='fixture_class_a' AND create_time=CURRENT_DATE")
+            sql("DELETE FROM teaching_depart_day_log WHERE depart_id='fixture_class_a' AND create_time=" + day)
             first_day = label in ('first-day', 'mix-first')
             if not first_day:
                 sql("INSERT INTO teaching_depart_day_log (id,depart_id,depart_name,create_time,additional_work_assign_count,"
                     "unit_open_count,course_work_assign_count,course_work_correct_count,course_work_submit_count,"
                     "additional_work_correct_count,additional_work_submit_count) VALUES ('" + prefix + '_' + label
-                    + "','fixture_class_a','合成并发验收',CURRENT_DATE," + ('NULL' if initial_count is None else str(initial_count))
+                    + "','fixture_class_a','合成并发验收'," + day + ',' + ('NULL' if initial_count is None else str(initial_count))
                     + ',2,3,4,5,6,7)')
             if mixed:
                 # Exercise the actual legacy addLog caller, preserving its owned marker afterward.
@@ -187,13 +197,13 @@ def verify(args):
                   len(task_ids) == assignments and all(result and result.get('success') is True for result in results))
             check(label + ' concurrent events preserve exactly one day row and assignment increments',
                   sql("SELECT COUNT(*),SUM(additional_work_assign_count) FROM teaching_depart_day_log "
-                      "WHERE depart_id='fixture_class_a' AND create_time=CURRENT_DATE")
+                      "WHERE depart_id='fixture_class_a' AND create_time=" + day)
                   == '1\t' + str((initial_count or 0) + assignments))
             expected_units = (0 if first_day else 2) + (1 if mixed else 0)
             check(label + ' unit event increments only its counter and other statistics are preserved',
                   sql("SELECT unit_open_count,course_work_assign_count,course_work_correct_count,course_work_submit_count,"
                       "additional_work_correct_count,additional_work_submit_count FROM teaching_depart_day_log "
-                      "WHERE depart_id='fixture_class_a' AND create_time=CURRENT_DATE")
+                      "WHERE depart_id='fixture_class_a' AND create_time=" + day)
                   == str(expected_units) + ('\t0\t0\t0\t0\t0' if first_day else '\t3\t4\t5\t6\t7'))
             check(label + ' committed assignments have Redis markers',
                   all(api.cache('SISMEMBER', 'departLog:addiWorkAssign:fixture_class_a', json.dumps(task_id)) == '1'
@@ -232,6 +242,10 @@ def verify(args):
             denied('old out-of-scope class blocks moving task back', 'PUT', '/edit', 'teacher_a', body(new_a, id=task_a))
             denied('old out-of-scope class blocks deletion', 'DELETE', '/delete?id=' + task_a, 'teacher_a')
             sql("UPDATE teaching_additional_work SET work_dept='fixture_class_a' WHERE id='" + task_a + "'")
+            check('sequential events use one explicit Shanghai business date',
+                  sql("SELECT COUNT(*),SUM(additional_work_assign_count) FROM teaching_depart_day_log "
+                      "WHERE depart_id='fixture_class_a' AND create_time=" + business_day())
+                  == '1\t' + str(original_day_assignments + 1))
             # The task INSERT fails in the actual MySQL transaction, not a stub.
             sql('CREATE TRIGGER ' + trigger + " BEFORE INSERT ON teaching_additional_work FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='synthetic task failure'")
             try:
@@ -249,7 +263,7 @@ def verify(args):
             concurrent_assignments('mix-exist', 7, mixed=True)
             concurrent_assignments('mix-first', 0, mixed=True)
             # First-day log INSERT must also roll back the preceding task INSERT.
-            sql("DELETE FROM teaching_depart_day_log WHERE depart_id='fixture_class_a' AND create_time=CURRENT_DATE")
+            sql("DELETE FROM teaching_depart_day_log WHERE depart_id='fixture_class_a' AND create_time=" + business_day())
             sql('CREATE TRIGGER ' + trigger + " BEFORE INSERT ON teaching_depart_day_log FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='synthetic first-day log failure'")
             try:
                 denied('first-day log failure rolls back task and Redis', 'POST', '/add', 'teacher_a', body(prefix + '_firstlogfail'))
@@ -284,7 +298,7 @@ def verify(args):
         check('original additional-work tasks preserved', hashlib.sha256(sql('SELECT * FROM teaching_additional_work ORDER BY id').encode()).hexdigest() == existing_snapshot)
         check('original class statistics restored', sql('SELECT * FROM teaching_depart_day_log ORDER BY id') == original_logs)
         report = {'observed_utc': datetime.now(timezone.utc).isoformat(), 'scope': 'owned synthetic HTTP/MySQL',
-                  'jar_sha256': api.jar_sha256, 'production_connected': False, 'checks': checks,
+                  'jar_sha256': api.jar_sha256, 'business_timezone': 'Asia/Shanghai', 'production_connected': False, 'checks': checks,
                   'passed': len(checks), 'failed': 0}
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
         return report
