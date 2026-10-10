@@ -15,6 +15,7 @@ from zipfile import ZipFile
 
 from local_http import FixtureApi
 from local_runtime import mysql_command
+from day_log_boundary import verify_manual_writes
 
 
 def legacy_authorization_payload(runtime, jar):
@@ -137,6 +138,8 @@ def verify(args):
         try:
             for actor in ('admin', 'teacher_a', 'teacher_b', 'student_a', 'student_b'):
                 api.login(actor)
+            jar = (args.jar or Path(__file__).resolve().parents[1] / 'jeecg-boot-module-system/target/teaching-open-2.8.0.jar').resolve()
+            verify_manual_writes(api, jar, sql, check, snapshot)
             role_body = {'roleId': 'fixture_role_admin', 'userIdList': ['fixture_student_a']}
             for actor in ('student_a', 'teacher_a'):
                 denied(actor + ' cannot self-grant admin', 'POST', '/sys/user/addSysUserRole', actor, role_body)
