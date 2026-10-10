@@ -1,0 +1,17 @@
+[Unit]
+Description=TeachingOpen monthly ECS public traffic bandwidth control
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/bin/python3 /usr/local/lib/teachingopen-traffic-control/traffic_control.py --config /etc/teachingopen-traffic-control.json
+StateDirectory=teachingopen-traffic-control
+StateDirectoryMode=0700
+UMask=0077
+TimeoutStartSec=120s
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+NoNewPrivileges=true

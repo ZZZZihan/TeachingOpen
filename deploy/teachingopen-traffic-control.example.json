@@ -1,0 +1,12 @@
+{
+  "region": "cn-beijing",
+  "instance_id": "i-REPLACE_WITH_INSTANCE_ID",
+  "public_ip": "REPLACE_WITH_PUBLIC_IP",
+  "created_at": "REPLACE_WITH_CREATION_TIME_IN_ISO8601_WITH_TIMEZONE",
+  "baseline_mbps": 100,
+  "tiers": [[150, 5], [200, 1]],
+  "enabled": false,
+  "settle_seconds": 300,
+  "role_name": "TeachingOpenTrafficControl",
+  "state_path": "/var/lib/teachingopen-traffic-control/state.sqlite3"
+}

@@ -1,0 +1,12 @@
+[Unit]
+Description=Check TeachingOpen monthly ECS public traffic every minute
+
+[Timer]
+OnCalendar=*-*-* *:*:00
+Persistent=true
+RandomizedDelaySec=5
+AccuracySec=1s
+Unit=teachingopen-traffic-control.service
+
+[Install]
+WantedBy=timers.target
