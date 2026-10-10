@@ -56,10 +56,6 @@ sudo diff -u "$SITE" "$WORK/rendered/bootstrap.conf"
 
 源配置摘要绑定审阅过的原始字节；下面每次 `activate` 还传入预期的活动配置摘要。工具在加锁后、执行 Nginx 命令和创建备份前拒绝摘要不匹配。若其他发布改变了活动配置，重新核对、生成与验证候选，不要临时读取新摘要来绕过这个保护。仅使用同一工具的操作共享该锁；仍需避免与其他发布同时切换配置。
 
-把 `ip-https-proxy.properties.example` 中的配置合并进**现有完整私有应用配置**，先备份这份配置；不要用片段替换整个配置，也不要输出其中凭据。它只信任 loopback 代理，Nginx 会覆盖转发头。按实际服务方式受控重启后端，先核对 HTTP 正常及后端仅监听 loopback；HTTPS 登录 Cookie 检查放在后续 trial 证书与监听就绪后。这一步使 TLS 在 Nginx 终止后 Java 仍能识别安全连接，适用于现有 Nginx 1.18，无需为 `proxy_cookie_flags` 升级 Nginx。
-
-若完整后端候选提前准备，应用前比较活动配置与准备时备份的 SHA-256；不一致时基于新的完整配置重新合并 7 个属性，不能用旧候选覆盖后来修改的数据库连接或业务参数。
-
 ```sh
 sudo python3 "$SOURCE/deploy/ip_https.py" activate \
   --target "$SITE" --candidate "$WORK/rendered/bootstrap.conf" \
@@ -68,6 +64,12 @@ sudo python3 "$SOURCE/deploy/ip_https.py" activate \
 ```
 
 用随机无敏感内容的 challenge 文件，从外部网络确认 `http://IP/.well-known/acme-challenge/<token>` 返回精确内容；不存在的 token 必须 404。不能以 SPA 首页的 200 代替 challenge 成功。完成后删除自己创建的探测 token。
+
+**先激活 bootstrap 并确认 HTTP 正常，再启用后端的转发头信任。** 原 HTTP 配置未覆盖所有转发头；顺序颠倒会出现旧 Nginx 透传客户端头、而 Java 已信任该头的窗口。
+
+把 `ip-https-proxy.properties.example` 中的配置合并进**现有完整私有应用配置**，先备份这份配置；不要用片段替换整个配置，也不要输出其中凭据。它只信任 loopback 代理，Nginx 会覆盖转发头。按实际服务方式受控重启后端，先核对 HTTP 正常及后端仅监听 loopback；HTTPS 登录 Cookie 检查放在后续 trial 证书与监听就绪后。这一步使 TLS 在 Nginx 终止后 Java 仍能识别安全连接，适用于现有 Nginx 1.18，无需为 `proxy_cookie_flags` 升级 Nginx。
+
+若完整后端候选提前准备，应用前比较活动配置与准备时备份的 SHA-256；不一致时基于新的完整配置重新合并 7 个属性，不能用旧候选覆盖后来修改的数据库连接或业务参数。
 
 ## 2. 申请证书并试行 HTTPS
 
@@ -108,7 +110,7 @@ python3 "$SOURCE/deploy/check_ip_certificate.py" --ip "$PUBLIC_IP"
 
 ## 3. 自动续期与实际服务证书检查
 
-Let’s Encrypt IP 证书有效期为 160 小时。`teachingopen-ip-cert-renew.timer` 每天两次启动 Certbot，由 Certbot 判断是否到续期时间；只有成功续期后才执行 `nginx -t` 和 reload。专用 config/work/logs 路径及 `--cert-name` 防止触碰其他服务证书。
+Let’s Encrypt IP 证书有效期为 160 小时。`teachingopen-ip-cert-renew.timer` 每天两次启动 Certbot，由 Certbot 判断是否到续期时间；只有成功续期后才执行 `nginx -t` 和 reload。专用 config/work/logs 路径及 `--cert-name` 防止触碰其他服务证书。定时器已有最多 30 分钟的随机调度，因此服务和下方演练命令使用 `--no-random-sleep-on-renew`，避免 Certbot 5.8 默认额外等待最多 8 分钟而触发 300 秒服务超时；已在目标安装版本核对参数解析。
 
 ```sh
 sudo install -d -m 0755 /opt/teachingopen-https
@@ -125,7 +127,7 @@ sudo systemctl daemon-reload
 先对正式专用配置执行续期演练，确认 challenge、证书加载与服务保持正常，再启用两个 timer。演练成功时 deploy-hook 会 reload Nginx，仍加载正式证书。不可只以定时器存在证明续期成功。
 
 ```sh
-sudo /opt/teachingopen-certbot/bin/certbot renew --dry-run --run-deploy-hooks \
+sudo /opt/teachingopen-certbot/bin/certbot renew --dry-run --run-deploy-hooks --no-random-sleep-on-renew \
   --non-interactive --cert-name teachingopen-ip \
   --config-dir /var/lib/teachingopen-acme/config \
   --work-dir /var/lib/teachingopen-acme/work \
@@ -160,11 +162,13 @@ sudo python3 "$SOURCE/deploy/ip_https.py" rollback \
   --target "$SITE" --backup "$WORK/before-https" --nginx /usr/sbin/nginx
 ```
 
-这恢复到保留 HTTP 的 HTTPS 试行状态。若要再退到 bootstrap，使用 `before-trial`；再回到最初站点使用 `before-bootstrap`，按实际激活的逆序执行。每一步都先核对摘要、校验再 reload。配置有其他人的改动时工具拒绝覆盖，应先人工比较处理。
+这恢复到保留 HTTP 的 HTTPS 试行状态。若要再退到 bootstrap，使用 `before-trial`；恢复最初站点前还须按下一段处理后端信任配置。每一步都先核对摘要、校验再 reload。配置有其他人的改动时工具拒绝覆盖，应先人工比较处理。
+
+若撤销整个并行试行，先用 `before-trial` 回到 bootstrap（撤下 TLS，但仍覆盖转发头），停止本次两个 timer，再恢复完整后端配置并重启，确认 HTTP 正常后用 `before-bootstrap` 恢复原 Nginx。不要在后端仍信任转发头时先恢复会透传这些头的原站点。云安全组只撤销本轮实际新增的精确 443 规则，保留原有规则和其他人的后续变更。
 
 进程被 SIGKILL、主机断电等情况无法执行自动恢复；已提前落盘的备份和中间状态供下次显式 `rollback` 使用。工具允许恢复中断时已知的原配置/候选配置，仍拒绝未知改动。若报告 `recovery_required`，需按备份处理并核查 Nginx；不要反复启用新候选。成功返回仅证明配置检查和 reload 命令通过；旧 worker 可能短暂共存，之后还须用新连接确认实际响应、证书及业务。
 
-回到纯 HTTP 是明确的运维决定，真实用户的传输保护将暂时撤销。回退不恢复数据库、账号、课程或期间新增的数据；应用数据持续保留。HTTPS 签发资料和私钥也保留以便诊断。若完全撤下 HTTPS，停止本 PR 的两个 timer，保留日志/证书；后端可信代理片段可以保留（HTTP 下仍报告非安全请求），若需撤销则从备份恢复相应配置并受控重启后端。
+回到纯 HTTP 是明确的运维决定，真实用户的传输保护将暂时撤销。回退不恢复数据库、账号、课程或期间新增的数据；应用数据持续保留。HTTPS 签发资料和私钥也保留以便诊断。若停留在仍覆盖转发头的 bootstrap，后端可信代理片段可以保留；若恢复未覆盖这些头的原站点，必须先恢复后端配置并受控重启。完全撤下 HTTPS 时停止本 PR 的两个 timer，保留日志和证书。
 
 ## 官方依据与本地验证
 
