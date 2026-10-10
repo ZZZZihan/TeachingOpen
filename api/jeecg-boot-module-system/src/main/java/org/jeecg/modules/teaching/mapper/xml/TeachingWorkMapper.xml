@@ -9,6 +9,12 @@
         where id = #{workId} and del_flag = 0
     </update>
 
+    <!-- Likes change only the counter, and publication is checked at write time. -->
+    <update id="incrementStarCount">
+        update teaching_work set star_num = COALESCE(star_num, 0) + 1
+        where id = #{workId} and del_flag = 0 and work_status in ('3', '4')
+    </update>
+
     <select id="studentWorkInfo" resultType="org.jeecg.modules.teaching.model.StudentWorkModel">
         select teaching_work.*,sys_user.username,sys_user.realname, sys_user.avatar, sys_user.sex,
        (select file_path from sys_file where sys_file.id = teaching_work.work_file) workFileKey,
