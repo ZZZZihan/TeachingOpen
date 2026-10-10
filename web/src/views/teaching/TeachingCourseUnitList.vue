@@ -2,7 +2,7 @@
   <main class="course-workbench">
     <header class="course-heading">
       <div>
-        <p class="course-eyebrow">天津工业大学 · 教学管理</p>
+        <p class="course-eyebrow">TeachingOpen · 教学管理</p>
         <h1>课程单元</h1>
         <p class="course-lead">按课程整理教学单元，维护学习内容、作业要求与展示顺序。</p>
       </div>

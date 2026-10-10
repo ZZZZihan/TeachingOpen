@@ -23,7 +23,6 @@ import 'swiper/dist/css/swiper.css'
 
 import {
     ACCESS_TOKEN,
-    DEFAULT_COLOR,
     DEFAULT_THEME,
     DEFAULT_LAYOUT_MODE,
     DEFAULT_COLOR_WEAK,
@@ -47,6 +46,7 @@ import VueAreaLinkage from 'vue-area-linkage'
 import { getSysConfig, getMenu } from '@/api/manage'
 import { loadStartupData, showStartupError } from '@/utils/startup'
 import { platformBrandName } from '@/utils/platformBranding'
+import { restoreThemeColor } from '@/utils/themePreference'
 // 颜色选择器
 import vcolorpicker from 'vcolorpicker'
 
@@ -106,6 +106,8 @@ const start = async () => {
     }
     started = true
     starting = false
+    // Restore before child components mount, including the theme settings drawer.
+    store.commit('TOGGLE_COLOR', restoreThemeColor(Vue.ls, config.primaryColor))
     new Vue({
         router,
         store,
@@ -133,7 +135,6 @@ const start = async () => {
             store.commit('TOGGLE_CONTENT_WIDTH', Vue.ls.get(DEFAULT_CONTENT_WIDTH_TYPE, config.contentWidth))
             store.commit('TOGGLE_FIXED_HEADER_HIDDEN', Vue.ls.get(DEFAULT_FIXED_HEADER_HIDDEN, config.autoHideHeader))
             store.commit('TOGGLE_WEAK', Vue.ls.get(DEFAULT_COLOR_WEAK, config.colorWeak))
-            store.commit('TOGGLE_COLOR', Vue.ls.get(DEFAULT_COLOR, config.primaryColor))
             store.commit('SET_TOKEN', Vue.ls.get(ACCESS_TOKEN))
             store.commit('SET_MULTI_PAGE', Vue.ls.get(DEFAULT_MULTI_PAGE, config.multipage))
         },

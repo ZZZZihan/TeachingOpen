@@ -1,11 +1,11 @@
 <template>
   <div class="login-page">
     <section class="login-intro" aria-labelledby="intro-title">
-      <span class="eyebrow">天津工业大学 · 学习与创作</span>
-      <h1 id="intro-title">在天工，<br>学以致用。</h1>
+      <span class="eyebrow">TeachingOpen · 学习与创作</span>
+      <h1 id="intro-title">动手实践，<br>学以致用。</h1>
       <p>浏览课程，完成练习与创作。<br class="desktop-break">登录后继续你的学习任务。</p>
       <router-link to="/courseList" class="explore-link">先看看课程 <span aria-hidden="true">↗</span></router-link>
-      <div class="intro-bottom"><span class="intro-rule"></span>严谨 · 严格 · 求实 · 求是</div>
+      <div class="intro-bottom"><span class="intro-rule"></span>学习 · 实践 · 创造 · 分享</div>
     </section>
     <section class="login-form-panel" aria-labelledby="login-title">
       <div class="form-heading"><span class="eyebrow">你的学习空间</span><h2 id="login-title">欢迎回来</h2><p>使用手机号或已有教学平台账号登录。</p></div>
@@ -149,17 +149,17 @@ export default {
 
 <style scoped>
 .login-page { display: grid; grid-template-columns: 1fr 1fr; min-height: 680px; max-width: 1120px; margin: 0 auto; }
-.login-intro { background: #42243f; color: #fff; padding: 70px 56px 38px; display: flex; flex-direction: column; }
+.login-intro { background: #123e67; color: #fff; padding: 70px 56px 38px; display: flex; flex-direction: column; }
 .eyebrow { font-size: 11px; letter-spacing: .14em; font-weight: 600; }
-.login-intro .eyebrow { color: #e4d5e2; }
+.login-intro .eyebrow { color: #dce9f5; }
 .login-intro h1 { color: #fff; font-size: 44px; line-height: 1.4; letter-spacing: -.03em; font-weight: 500; margin: 66px 0 24px; }
-.login-intro p { color: #dfd1dd; font-size: 16px; line-height: 1.9; margin-bottom: 30px; }
+.login-intro p { color: #d5e5f5; font-size: 16px; line-height: 1.9; margin-bottom: 30px; }
 .explore-link { color: #fff; font-size: 14px; align-self: flex-start; padding-bottom: 7px; border-bottom: 1px solid #82949d; }
 .explore-link span { margin-left: 20px; }
-.intro-bottom { color: #d7c5d5; font-size: 12px; margin-top: auto; padding-top: 80px; }
-.intro-rule { display: inline-block; width: 28px; border-top: 2px solid #cfabcd; margin: 0 10px 4px 0; }
+.intro-bottom { color: #ccdef0; font-size: 12px; margin-top: auto; padding-top: 80px; }
+.intro-rule { display: inline-block; width: 28px; border-top: 2px solid #9bc5ed; margin: 0 10px 4px 0; }
 .login-form-panel { padding: 54px 64px 40px; background: #fff; }
-.form-heading .eyebrow { color: #74256a; }
+.form-heading .eyebrow { color: #146fc2; }
 .form-heading h2 { font-size: 30px; font-weight: 600; letter-spacing: -.03em; margin: 10px 0 8px; color: #20252b; }
 .form-heading p { color: #626b73; margin-bottom: 30px; font-size: 14px; }
 .field { margin-bottom: 21px; }
@@ -170,7 +170,7 @@ export default {
 input { display: block; box-sizing: border-box; width: 100%; min-width: 0; height: 46px; border: 1px solid #cbd1d6; border-radius: 3px; padding: 0 13px; background: #fff; color: #20252b; font: inherit; font-size: 15px; transition: border-color .15s; }
 input::placeholder { color: #858d94; }
 input[aria-invalid="true"] { border-color: #b63c46; }
-input:focus, button:focus-visible, a:focus-visible { outline: 2px solid #74256a; outline-offset: 3px; }
+input:focus, button:focus-visible, a:focus-visible { outline: 2px solid #146fc2; outline-offset: 3px; }
 input:disabled { background: #f7f8f8; }
 .password-input { position: relative; }
 .password-input input { padding-right: 60px; }
@@ -181,12 +181,12 @@ input:disabled { background: #f7f8f8; }
 .field-hint, .field-error { margin: 8px 0 0; font-size: 12px; line-height: 1.6; }
 .field-hint { color: #707980; }
 .field-error { color: #a2303c; }
-.form-error, .session-note { padding: 12px 14px; border-left: 2px solid #74256a; color: #92303a; background: #fbf2f2; font-size: 13px; line-height: 1.7; margin: 0 0 18px; }
-.submit-button { width: 100%; min-height: 46px; display: flex; align-items: center; justify-content: center; gap: 20px; background: #74256a; border: 1px solid #74256a; border-radius: 3px; color: #fff; font-size: 15px; cursor: pointer; }
-.submit-button:hover:not(:disabled) { background: #592052; }
+.form-error, .session-note { padding: 12px 14px; border-left: 2px solid #146fc2; color: #92303a; background: #fbf2f2; font-size: 13px; line-height: 1.7; margin: 0 0 18px; }
+.submit-button { width: 100%; min-height: 46px; display: flex; align-items: center; justify-content: center; gap: 20px; background: #146fc2; border: 1px solid #146fc2; border-radius: 3px; color: #fff; font-size: 15px; cursor: pointer; }
+.submit-button:hover:not(:disabled) { background: #095b9e; }
 button:disabled { cursor: not-allowed; opacity: .65; }
 .register-note { color: #737b82; font-size: 12px; line-height: 1.8; margin: 19px 0 25px; }
-.register-note a { color: #74256a; margin-left: 8px; }
+.register-note a { color: #146fc2; margin-left: 8px; }
 .back-home { font-size: 13px; color: #59646e; }
 @media (max-width: 1000px) { .login-intro { padding: 54px 30px 32px; } .login-intro h1 { font-size: 36px; } .login-form-panel { padding: 48px 32px 36px; } }
 @media (max-width: 680px) { .login-page { display: block; min-height: 0; } .login-intro { padding: 29px 24px; } .login-intro .eyebrow, .intro-bottom, .login-intro p, .explore-link { display: none; } .login-intro h1 { font-size: 26px; line-height: 1.5; margin: 0; } .login-intro h1 br { display: none; } .login-form-panel { padding: 32px 24px; } .form-heading h2 { font-size: 27px; } .form-heading p { margin-bottom: 26px; } }

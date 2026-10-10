@@ -4,6 +4,7 @@ import {
   DEFAULT_THEME,
   DEFAULT_LAYOUT_MODE,
   DEFAULT_COLOR,
+    DEFAULT_COLOR_USER_CHOICE,
   DEFAULT_COLOR_WEAK,
   DEFAULT_FIXED_HEADER,
   DEFAULT_FIXED_SIDEMENU,
@@ -67,10 +68,13 @@ const app = {
       Vue.ls.set(DEFAULT_CONTENT_WIDTH_TYPE, type)
       state.contentWidth = type
     },
-    TOGGLE_COLOR: (state, color) => {
-      Vue.ls.set(DEFAULT_COLOR, color)
-      state.color = color
-    },
+        TOGGLE_COLOR: (state, color) => {
+            Vue.ls.set(DEFAULT_COLOR, color)
+            state.color = color
+            if (typeof document !== 'undefined') {
+                document.documentElement.style.setProperty('--app-primary-color', color)
+            }
+        },
     TOGGLE_WEAK: (state, flag) => {
       Vue.ls.set(DEFAULT_COLOR_WEAK, flag)
       state.weak = flag
@@ -111,9 +115,11 @@ const app = {
     ToggleContentWidth({ commit }, type) {
       commit('TOGGLE_CONTENT_WIDTH', type)
     },
-    ToggleColor({ commit }, color) {
-      commit('TOGGLE_COLOR', color)
-    },
+        ToggleColor ({ commit }, color) {
+            // Only an explicit settings action marks a user choice; startup does not.
+            Vue.ls.set(DEFAULT_COLOR_USER_CHOICE, color)
+            commit('TOGGLE_COLOR', color)
+        },
     ToggleWeak({ commit }, weakFlag) {
       commit('TOGGLE_WEAK', weakFlag)
     },

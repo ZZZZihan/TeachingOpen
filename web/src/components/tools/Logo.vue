@@ -2,7 +2,7 @@
   <div class="logo">
     <router-link :to="{path:'/home'}" :aria-label="brandName" :title="brandName">
       <img v-if="logo && !logoFailed" :src="logo" :alt="brandName" @error="logoFailed = true">
-      <span v-else class="logo-mark" aria-hidden="true">天工</span>
+      <span v-else class="logo-mark" aria-hidden="true">AI</span>
       <h1 v-if="showTitle">{{ brandName }}</h1>
     </router-link>
   </div>
