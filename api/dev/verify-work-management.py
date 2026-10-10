@@ -198,9 +198,10 @@ def verify(args):
                 allowed('teacher sends to authorized class member', 'POST', 'sendWork', 'teacher_a', {'sendWorkId': PREFIX + 'a', 'userIdList': ['fixture_teacher_a']})
                 check('authorized send persists target owner', sql("SELECT COUNT(*) FROM teaching_work WHERE work_name='work-probe-a' AND user_id='fixture_teacher_a'") == '1')
                 sql("INSERT INTO teaching_work (id,user_id,depart_id,work_name,work_type,work_file,create_by,create_time) VALUES ('" + PREFIX + "collision','fixture_student_a','fixture_class_b','work-probe-a','1','','fixture_student_a','2026-10-03 00:00:00')")
-                collision_before = snapshot()
-                denied('same-name overwrite outside teacher class denied', 'POST', 'sendWork', 'teacher_a', {'sendWorkId': PREFIX + 'a', 'userIdList': ['fixture_student_a']})
-                check('denied send preserves every potential overwrite target', snapshot() == collision_before)
+                collision_before = sql("SELECT * FROM teaching_work WHERE id='" + PREFIX + "collision'")
+                allowed('same-name work in another class does not prevent a new clone', 'POST', 'sendWork', 'teacher_a', {'sendWorkId': PREFIX + 'a', 'userIdList': ['fixture_student_a']})
+                check('clone preserves the other-class same-name work', sql("SELECT * FROM teaching_work WHERE id='" + PREFIX + "collision'") == collision_before)
+                check('same-name clone has its own identity and remains a draft', sql("SELECT COUNT(*) FROM teaching_work WHERE work_name='work-probe-a' AND user_id='fixture_student_a' AND id NOT IN ('" + PREFIX + "a','" + PREFIX + "collision') AND work_status=0") == '1')
 
                 for actor in ('teacher_a', 'admin', 'dev'):
                     request_actor = 'admin' if actor == 'dev' else actor
