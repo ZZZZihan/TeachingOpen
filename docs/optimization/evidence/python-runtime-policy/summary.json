@@ -1,0 +1,261 @@
+{
+  "captured_date": "2026-10-09",
+  "scope": "local isolated runtime, synthetic code and backend; no production changes",
+  "baseline_commit": "6eee9aa1b9276192d9eea3f2639e2ba36b8f03ae",
+  "source_sha256": {
+    "web/nginx/default.conf": "8ca3498beb006d305e2c632ee7428d5578e83dc89c7560cd1fad4f6c374c59f3",
+    "资料/nginx.example.conf": "d2b1dd8091e18b9266656af26ae7e1d1c0c414261c3c01b6c656f39b8443ad22",
+    "web/public/python/execution.js": "569e766a111873a97b8a3b2b7d75367049b2ca8dc4b267955b7caa1dbadd68bf",
+    "web/public/python/runner.js": "4623602a5066e675dfc97f1c349a196ebc73fb9f853d964c299b6b0683332de9",
+    "web/tests/python-execution-frame.test.cjs": "6b71972b7608ef9a640b0a3e3bdcd29663b5fcc9085b6403b04a3e125984fc09",
+    "web/tests/python-source-loading.test.cjs": "7bac5e278f03be26240401dc529d4f50825c6ef87c043d1e6a10b752dbc66a86",
+    "web/tests/release-nginx/probe.py": "02321e98d021c7cefc8e3ce3e3ffec547bb245b68ec57695653fa96c2ba7274b",
+    "web/tests/python-execution-frame/nginx-browser-check.js": "8085bad78d0c67241849cf999d094d30781f2eb680441c17ad78e0fbce9220fc"
+  },
+  "frontend_tests": {
+    "passed": 692,
+    "failed": 0,
+    "command": "node --test tests/*.test.cjs",
+    "dependency_source": "existing course-discovery worktree node_modules via NODE_PATH"
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 0,
+    "files": [
+      "web/public/python/execution.js",
+      "web/public/python/runner.js"
+    ]
+  },
+  "nginx_image": {
+    "image_tag": "nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94",
+    "image_id": "sha256:a805dc02b9a7ee985b411db35996123b9bb3df80e79a9ab5b194751d3087defe",
+    "repo_digests": [
+      "nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94"
+    ],
+    "architecture": "arm64",
+    "os": "linux",
+    "server": "29.4.0",
+    "context": "orbstack",
+    "captured_utc": "2026-10-09T14:19:54.848338+00:00"
+  },
+  "nginx_version": "1.30.5",
+  "http_contracts": {
+    "baseline": {
+      "docker-release": {
+        "total": 103,
+        "passed": 71,
+        "failed": 32
+      },
+      "native-example": {
+        "total": 103,
+        "passed": 71,
+        "failed": 32
+      }
+    },
+    "fixed": {
+      "docker-release": {
+        "total": 103,
+        "passed": 103,
+        "failed": 0
+      },
+      "native-example": {
+        "total": 103,
+        "passed": 103,
+        "failed": 0
+      }
+    }
+  },
+  "baseline_browser": {
+    "state": "stop-error",
+    "output": "",
+    "errors": [
+      "Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameSite",
+      "Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameSite",
+      "Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameSite",
+      "Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameSite",
+      "Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameSite",
+      "Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameSite"
+    ]
+  },
+  "browser_regressions": {
+    "docker-release": [
+      {
+        "entry": "index",
+        "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+        "cases": [
+          {
+            "name": "actual component finite Python2 and literal HTML output",
+            "pass": true
+          },
+          {
+            "name": "input waits and submits through parent form",
+            "pass": true
+          },
+          {
+            "name": "cancel input destroys old frame and a rerun succeeds",
+            "pass": true
+          },
+          {
+            "name": "repeated run replaces a sleeping runner",
+            "pass": true
+          },
+          {
+            "name": "bounded 500ms JS busy work leaves parent timer and Stop usable",
+            "pass": true
+          },
+          {
+            "name": "turtle square, text and undo use runner DOM",
+            "pass": true
+          }
+        ],
+        "blocked_runner": {
+          "status": "运行环境加载失败，请重新运行。",
+          "state": "error",
+          "frames": 0,
+          "code": "print \"RECOVERED_WITHOUT_RELOAD\"\n",
+          "stopDisabled": true,
+          "workerStarts": 0
+        },
+        "recovered_output": "RECOVERED_WITHOUT_RELOAD\n",
+        "turtle_canvas_count": 2
+      },
+      {
+        "entry": "player",
+        "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+        "cases": [
+          {
+            "name": "actual component finite Python2 and literal HTML output",
+            "pass": true
+          },
+          {
+            "name": "input waits and submits through parent form",
+            "pass": true
+          },
+          {
+            "name": "cancel input destroys old frame and a rerun succeeds",
+            "pass": true
+          },
+          {
+            "name": "repeated run replaces a sleeping runner",
+            "pass": true
+          },
+          {
+            "name": "bounded 500ms JS busy work leaves parent timer and Stop usable",
+            "pass": true
+          },
+          {
+            "name": "turtle square, text and undo use runner DOM",
+            "pass": true
+          }
+        ],
+        "blocked_runner": {
+          "status": "运行环境加载失败，请重新运行。",
+          "state": "error",
+          "frames": 0,
+          "code": "print \"RECOVERED_WITHOUT_RELOAD\"\n",
+          "stopDisabled": true,
+          "workerStarts": 0
+        },
+        "recovered_output": "RECOVERED_WITHOUT_RELOAD\n",
+        "turtle_canvas_count": 2
+      }
+    ],
+    "native-example": [
+      {
+        "entry": "index",
+        "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+        "cases": [
+          {
+            "name": "actual component finite Python2 and literal HTML output",
+            "pass": true
+          },
+          {
+            "name": "input waits and submits through parent form",
+            "pass": true
+          },
+          {
+            "name": "cancel input destroys old frame and a rerun succeeds",
+            "pass": true
+          },
+          {
+            "name": "repeated run replaces a sleeping runner",
+            "pass": true
+          },
+          {
+            "name": "bounded 500ms JS busy work leaves parent timer and Stop usable",
+            "pass": true
+          },
+          {
+            "name": "turtle square, text and undo use runner DOM",
+            "pass": true
+          }
+        ],
+        "blocked_runner": {
+          "status": "运行环境加载失败，请重新运行。",
+          "state": "error",
+          "frames": 0,
+          "code": "print \"RECOVERED_WITHOUT_RELOAD\"\n",
+          "stopDisabled": true,
+          "workerStarts": 0
+        },
+        "recovered_output": "RECOVERED_WITHOUT_RELOAD\n",
+        "turtle_canvas_count": 2
+      },
+      {
+        "entry": "player",
+        "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+        "cases": [
+          {
+            "name": "actual component finite Python2 and literal HTML output",
+            "pass": true
+          },
+          {
+            "name": "input waits and submits through parent form",
+            "pass": true
+          },
+          {
+            "name": "cancel input destroys old frame and a rerun succeeds",
+            "pass": true
+          },
+          {
+            "name": "repeated run replaces a sleeping runner",
+            "pass": true
+          },
+          {
+            "name": "bounded 500ms JS busy work leaves parent timer and Stop usable",
+            "pass": true
+          },
+          {
+            "name": "turtle square, text and undo use runner DOM",
+            "pass": true
+          }
+        ],
+        "blocked_runner": {
+          "status": "运行环境加载失败，请重新运行。",
+          "state": "error",
+          "frames": 0,
+          "code": "print \"RECOVERED_WITHOUT_RELOAD\"\n",
+          "stopDisabled": true,
+          "workerStarts": 0
+        },
+        "recovered_output": "RECOVERED_WITHOUT_RELOAD\n",
+        "turtle_canvas_count": 2
+      }
+    ]
+  },
+  "screenshots_visually_checked": [
+    "index-turtle.png",
+    "player-turtle.png"
+  ],
+  "verification_limits": [
+    "Agent implementation and self-review only; no independent review or human acceptance",
+    "No full Vue application rebuild, backend test or production deployment",
+    "Busy-work case verifies responsive controls only, not OS-level instantaneous CPU termination",
+    "Chromium only; not a full Python library or cross-browser acceptance"
+  ],
+  "cleanup": {
+    "owned_browser_sessions_closed": 3,
+    "owned_browser_nginx_containers_removed": 3,
+    "receipt": "Local artifact browser-nginx/cleanup.json"
+  }
+}
