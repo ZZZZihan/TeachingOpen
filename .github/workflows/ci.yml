@@ -109,7 +109,7 @@ jobs:
         run: >-
           mvn -B -ntp -s dev/maven-settings.xml
           -DskipTests=false
-          -Dtest=RichTextSanitizerTest,AccountRegistrationServiceTest,AccountRecoveryServiceTest,AccountRecoverySessionTest,PublicUserDirectoryTest
+          -Dtest=RichTextSanitizerTest,AccountRegistrationServiceTest,AccountRecoveryServiceTest,AccountRecoverySessionTest,PublicUserDirectoryTest,CourseMapPositionServiceTest,PublicDictionaryBoundaryTest,DisabledTransitBoundaryTest,AccountAuthorizationTest,AdditionalWorkAuthorizationTest,AdditionalWorkStatisticsTest
           -Dsurefire.failIfNoSpecifiedTests=false
           clean package
       - name: Require executed core tests

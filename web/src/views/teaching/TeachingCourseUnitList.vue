@@ -19,7 +19,7 @@
             v-model="queryParam.courseId"
             type="list"
             :defaultShowAll="true"
-            dictCode="teaching_course,course_name,id"
+            dictCode="course_options"
             placeholder="全部课程"
             aria-labelledby="unit-course-label" />
         </div>
