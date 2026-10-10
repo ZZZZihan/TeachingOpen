@@ -1,0 +1,33 @@
+{
+  "url": "http://127.0.0.1:18142/user/alteration",
+  "source_candidate": "f92cc7dd5f960786aa3a698918d4db8d8d4a4fa6",
+  "classification": "Actual full application new dist + exact Java JAR on private production-content copy; anonymous step 1 only",
+  "captcha_image_loaded": true,
+  "no_credentials_entered": true,
+  "widths": [
+    {
+      "innerWidth": 390,
+      "clientWidth": 382,
+      "scrollWidth": 382
+    },
+    {
+      "innerWidth": 768,
+      "clientWidth": 760,
+      "scrollWidth": 760
+    },
+    {
+      "innerWidth": 1440,
+      "clientWidth": 1432,
+      "scrollWidth": 1432
+    }
+  ],
+  "console_errors_warnings": [],
+  "controls_restored": true,
+  "measurement_note": "Viewport initially targeted selected mock tab, leaving actual tab636px. First CDP width429 was nominally misnamed390. Retained originals; confirmed-* filenames record measured390/768/1440. Final default screenshot after clearing CDP.",
+  "screenshots": [
+    "candidate-confirmed-css390.jpg",
+    "candidate-confirmed-css768.jpg",
+    "candidate-confirmed-css1440.jpg",
+    "candidate-recovery-default.jpg"
+  ]
+}

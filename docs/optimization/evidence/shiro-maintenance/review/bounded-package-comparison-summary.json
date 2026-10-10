@@ -1,0 +1,19 @@
+{
+  "scope": "owned shiro-1003 backend18165 only; temporary old/new JAR switch for normal account freeze; no cache clearing",
+  "started_utc": "2026-10-03T11:05:04.315535+00:00",
+  "old_jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "new_jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "checks": [
+    {
+      "case": "old packaged baseline health UP",
+      "passed": true
+    },
+    {
+      "case": "frozen new candidate restored and health UP",
+      "passed": true
+    }
+  ],
+  "finished_utc": "2026-10-03T11:05:27.937102+00:00",
+  "baseline_probe_exit_status": 1,
+  "evidence_kind": "read-only inspection of testing Agent owned old/new switch; private host paths and raw logs omitted"
+}

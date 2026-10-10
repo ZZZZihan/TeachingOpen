@@ -1,0 +1,77 @@
+{
+  "base_pr": 14,
+  "base_commit": "1b5bfe930983ae8b35ef4967b0bf29546a963234",
+  "jar_sha256": "bdb450061cfcdaf8a8e2b47beacf26ad32f312cbca2d3302ca8f4eae3c94d70d",
+  "backend_build_exit_code": 0,
+  "java_tests": "skipped by parent POM",
+  "web_build_exit_code": 0,
+  "frontend_controlled_checks": 35,
+  "checks": {
+    "after.json": {
+      "passed": 235,
+      "total": 235
+    },
+    "attachments-combined.json": {
+      "passed": 41,
+      "total": 41
+    },
+    "before.json": {
+      "passed": 15,
+      "total": 15
+    },
+    "course-management-combined.json": {
+      "passed": 188,
+      "total": 188
+    },
+    "learning-units-combined.json": {
+      "passed": 80,
+      "total": 80
+    },
+    "role-cache-combined.json": {
+      "passed": 11,
+      "total": 11
+    },
+    "submission-combined.json": {
+      "passed": 95,
+      "total": 95
+    },
+    "work-management-combined.json": {
+      "passed": 134,
+      "total": 134
+    }
+  },
+  "source_sha256": {
+    "api/dev/verify-community-work.py": "0f73477aebc9c61e7a2e58a6978a5cd18c76ccda692804feb64d7228e4f846a1",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/config/ShiroConfig.java": "9a3e4a8fe7ba43041a50f661a221f58d2a10d572cbc9ca15e5962f807b571543",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/shiro/authc/aop/OptionalJwtFilter.java": "eb598e1abd0792047ba7cbde34c86bdeec565f988442e9c726ea4219916c0f17",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingWorkController.java": "c80cfe354de740080ab20b25a9f8f852dd83694cd55f8b1154d1b5b1a8b2867f",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/TeachingAccessService.java": "35d0b4777f6261d9efa5de89859db54ee7c11c005822ba22c0e2f3f61d7c8707",
+    "web/public/js/common.js": "74136c9db141882d5819ca222e05ea7d623691a3b88baa34cd967f2c69515c0c",
+    "web/public/scratchjr/js/common.js": "d61b0872d4244740e8aa572155aa2cb4f5dba3d016f66c93e25561dde960c205",
+    "web/src/views/home/WorkDetail.vue": "2a46e3c3b7bc58bb948b90a2b5962dd5b8112b8c0679b48eb2b3b46304863894",
+    "web/tests/community-work.test.cjs": "bd8cd5c93df71d8e7bc97fef7e7c3165a2446df64b81d2e4df44c02dc5a3a870"
+  },
+  "evidence_sha256": {
+    "after.json": "18b015cad2757fba0a462c7e0426e3d2ea2e6226d624ead323b311c970ceb931",
+    "attachments-combined.json": "cac7d555fa29be50add627a4b42800c3fa30888058b7d6214b5aec78e454a577",
+    "before.json": "4b3df0f5479371c6ed247a48bd42ae3018aae2c89368092f3a66b9eb6404676b",
+    "build-summary.txt": "5f65c6b2ba1c8ef1ba21dfd3716d00ead405d2ead8e9215bc07f7fe928fb5703",
+    "course-management-combined.json": "7688e9b6d5da3556fd003a68219381c95d3a6193ab3e2d995a8358d83f3ae847",
+    "learning-units-combined.json": "5fad1237785714144c703377aece31d17d7d7cda0a21f33502fe34c8a64fe880",
+    "role-cache-combined.json": "0245f4f86a27c95ca280515e486714e7f4c6dcc3764ed1af31c0ff4853f1600f",
+    "submission-combined.json": "2f071fa3d493ff790b12fc2b18e413c93fcf9a0729eed704c86bbe391ade036e",
+    "work-management-combined.json": "4950e3c491736d242334910c62af09bd28c75ec73fbda4480799a14495ebf51f"
+  },
+  "build_log_sha256": "1ec6bae80d419a9fa7df09fe8702306d04be3dc4df3cbc3c7bed02a5859e5e72",
+  "web_build_log_sha256": "c6358156f8e181c71bbe13bc3267ef4465f70d372a90e2d3ac1428014c89f004",
+  "web_test_log_sha256": "cf238b985295d23e0d00295db3d8fd5ec2c3e23e470dc25acabd50a25559b142",
+  "protected_original_source_file_count": 5634,
+  "protected_original_source_changed": 0,
+  "limitations": [
+    "No browser editor acceptance; controlled JS request behavior and real HTTP separately verified",
+    "Generic file APIs, direct static URLs and public profile privacy remain pending",
+    "No concurrency or atomic counter acceptance",
+    "UI PRs 6/7 not included; preview 18102 unchanged",
+    "No merge or production deployment"
+  ]
+}

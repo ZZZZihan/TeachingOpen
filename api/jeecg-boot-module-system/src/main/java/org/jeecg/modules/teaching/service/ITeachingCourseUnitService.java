@@ -1,6 +1,7 @@
 package org.jeecg.modules.teaching.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import java.util.List;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.jeecg.modules.teaching.entity.TeachingCourseUnit;
@@ -19,6 +20,9 @@ public interface ITeachingCourseUnitService extends IService<TeachingCourseUnit>
     IPage<CourseUnitModel> getCourseUnitList(Page<CourseUnitModel> page, QueryWrapper<CourseUnitModel> queryWrapper);
 
     CourseUnitWorkModel getCourseWorkUnit(String unitId, String id);
+
+    /** Update a validated batch atomically; a missing target rolls back every update. */
+    boolean updateExistingUnits(List<TeachingCourseUnit> units);
 
     String getUserDepartIdByUnitId(String userId, String unitId);
 }

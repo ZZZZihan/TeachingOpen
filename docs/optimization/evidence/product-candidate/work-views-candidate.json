@@ -1,0 +1,50 @@
+{
+  "generated_utc": "2026-10-02T22:51:58.273051+00:00",
+  "source_commit": "ab0c7c3419d74346eb9b80c39a2e4b69293cf2d9",
+  "previous_commit": "58b9fca5be742c887a6e5d74934cf942d3ff3e00",
+  "integrated_pr": "https://github.com/ZZZZihan/TeachingOpen/pull/32",
+  "pr_head": "cd31827920bfda2b06b482f216798d3e57d10e1f",
+  "api_tree": "776ced5714522ff892fcf0a76e0c207c3501f654",
+  "web_tree": "bb2496d96d994e3a7e3fd3dd34169420a761ae39",
+  "api_tree_equals_tested_pr": true,
+  "frontend_tree_unchanged": true,
+  "candidate_http_checks": {
+    "passed": 56,
+    "total": 56
+  },
+  "isolated_pr_checks": {
+    "passed": 415,
+    "total": 415,
+    "scope": "PR runtime, not rerun in full on integration"
+  },
+  "backend_pid": 81380,
+  "jar_sha256": "3ac73c633fd337d85f15e388182d37f2928939f2ba67cccc6765cd2074865b37",
+  "jar_provenance": "Clean build of product 03297e3; exact API tree reused on integration",
+  "frontend_dist_files_unchanged": 4884,
+  "http_assets": {
+    "/index.html": "2389c437574e6bfe99236b4ecee12d41bc034ba10f6a8f87d615011eceff9b34",
+    "/js/app.65b2b49b.js": "e7cf2b53b482c05c12ccd49cdfa57fbfc6bba7a831a415ae8c57e74ea5cef59c"
+  },
+  "protected_anonymous_status": 401,
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "business_data_preservation": {
+    "tables_checked": 69,
+    "changed_tables": [
+      "sys_log"
+    ],
+    "all_68_business_tables_equal": true,
+    "attachments_equal": true
+  },
+  "frontend_build_and_tests_rerun": false,
+  "browser_e2e": false,
+  "remote_merged": false,
+  "production_changed": false,
+  "work_read_audit_field_fix_verified": true,
+  "evidence_sha256": {
+    "work-views-api.json": "8aa44af763995855a822ab6ba6663744ffd520b8c3668c78d56766d0fb6368ec"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "observed_utc": "2026-10-02T19:15:15.927086+00:00",
+  "base_commit": "1bc4468934b353aafda5609d71533bb65fb2d326",
+  "jar_sha256": "c76dfb9032b92eb6f4bf86ef152e16fadc7504436b81fe1e4d49990f6883738f",
+  "source_sha256": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/controller/SysPermissionController.java": "cbfdd139e07cba5ec5340c27ad220f97bacb4adc6274ac0d449fade1a8b60b8d",
+    "api/dev/verify-permission-menu.py": "6efdc9a9c37c87611a03642548dd23d8598d77b9efb4b479d6d6ca4f9e290a36",
+    "web/src/api/api.js": "58b870e0594c3c534ce7b431eb57a07d8a39ba1247162eff479d53e52909e769",
+    "web/src/store/modules/user.js": "02c9a3f5bb1e71c47764b5e8e8f8237725ddaa7ba54f5d4f8378f0bc7042dd94",
+    "web/tests/permission-menu.test.cjs": "a6a2270c151600abb9abc6a0790af3c6a9a0464ad229a33c284432a585f1a1e2"
+  },
+  "backend_build": "Zulu 8.0.504 / Maven 3.9.16; clean package 3 modules SUCCESS; Java tests skipped by parent POM",
+  "frontend": {
+    "tests_passed": 41,
+    "tests_total": 41,
+    "new_tests": 2,
+    "node": "v26.7.0",
+    "build": "success; 6 existing CSS-order/size warnings and outdated Browserslist data",
+    "dist_files": 4863,
+    "dist_path_hashes_aggregate_sha256": "3ba564554bcaaca256995a2c0115033d53d4319fba5ecf322d13b9063cbbfe71",
+    "lint": "Not passing; baseline 392 errors/282 warnings -> candidate 380/280, no per-rule increase"
+  },
+  "actual_http_suites": {
+    "after.json": {
+      "jar_sha256": "c76dfb9032b92eb6f4bf86ef152e16fadc7504436b81fe1e4d49990f6883738f",
+      "passed": 34,
+      "total": 34
+    },
+    "auth-status-combined.json": {
+      "jar_sha256": "c76dfb9032b92eb6f4bf86ef152e16fadc7504436b81fe1e4d49990f6883738f",
+      "passed": 7,
+      "total": 7
+    },
+    "role-cache-combined.json": {
+      "jar_sha256": "c76dfb9032b92eb6f4bf86ef152e16fadc7504436b81fe1e4d49990f6883738f",
+      "passed": 11,
+      "total": 11
+    },
+    "course-management-combined.json": {
+      "jar_sha256": "c76dfb9032b92eb6f4bf86ef152e16fadc7504436b81fe1e4d49990f6883738f",
+      "passed": 188,
+      "total": 188
+    }
+  },
+  "cleanup_and_protection": "protection.json; menu fixture restores five table snapshots and logs out all fixture actors",
+  "self_review": "Current agent source review, real failure/recovery checks, diff whitespace and credential-output check; no independent or human acceptance",
+  "limits": [
+    "No product visual change or browser login acceptance in this PR",
+    "PR19 Draft frontend still uses the legacy query parameter and awaits integration",
+    "Existing online helper routes and global button configuration contract retained",
+    "No complete menu/role administration authorization audit",
+    "No production, migration, load or full editor workflow acceptance"
+  ],
+  "test_harness_followup": "Pass the real Vuex action context shape including state, so the same credential assertions also execute with PR19 sessionVersion checks. 41/41 rerun; no production source or built artifact changed."
+}

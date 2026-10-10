@@ -1,0 +1,76 @@
+{
+  "base_pr": 15,
+  "base_commit": "57c120e48c128944f5d6989a95cff6dab0752ca9",
+  "jar_sha256": "b5998be119428e00ed3d5469cbcb311175a8104eb2cd983f37362dcb981e2c1b",
+  "backend_build_exit_code": 0,
+  "maven_java_tests": "skipped by parent POM",
+  "packaged_stream_fault_checks": 3,
+  "frontend_build": "not rerun; no frontend changes",
+  "checks": {
+    "after.json": {
+      "passed": 46,
+      "total": 46
+    },
+    "attachments-combined.json": {
+      "passed": 41,
+      "total": 41
+    },
+    "before.json": {
+      "passed": 6,
+      "total": 6
+    },
+    "community-combined.json": {
+      "passed": 235,
+      "total": 235
+    },
+    "course-management-combined.json": {
+      "passed": 188,
+      "total": 188
+    },
+    "learning-units-combined.json": {
+      "passed": 80,
+      "total": 80
+    },
+    "role-cache-combined.json": {
+      "passed": 11,
+      "total": 11
+    },
+    "submission-combined.json": {
+      "passed": 95,
+      "total": 95
+    },
+    "work-management-combined.json": {
+      "passed": 134,
+      "total": 134
+    }
+  },
+  "source_sha256": {
+    "api/jeecg-boot-base-common/src/main/java/org/jeecg/common/system/controller/CommonController.java": "ca5769df8a977b4a63d3ad9ff21df06f228bf0324d4cd12b8971d383970c2d8c",
+    "api/jeecg-boot-base-common/src/main/java/org/jeecg/common/util/LocalFileUpload.java": "1f3661071bf1a26d1ed4288ac26289ad36de337e6d4356c38961744f132f80ea",
+    "api/dev/verify-local-upload.py": "5bc1ecc56959659fcbaa91d8c7860b8b3152e02c9a8a7a2dbdd5835b74b366c4",
+    "api/dev/VerifyLocalUploadFailure.java": "7c9984c05c75cd8a3f57f5aa8475d812f2be6cc707b87949b67ab080cf918f67"
+  },
+  "evidence_sha256": {
+    "after.json": "f2af40971359c9614f740d78b1a426d0346816d41101094eadffefafdef5369c",
+    "attachments-combined.json": "a1f12c714fd8403b4c95556f3ab92570e252f579c59d1b13468a1bb0ec5786ef",
+    "before.json": "15e8804eb2591f3cdf08848a75092ef67f5ef927569f228277d74a8c10bc06f8",
+    "build-summary.txt": "c5300af1a13886240f003072941ec429ebd6ecd99015df380ed2f37316078312",
+    "community-combined.json": "e7b0379c40c80496e7da263feeed48358d2cf33de36e01549a3b2b0c650fb284",
+    "course-management-combined.json": "327451336e8f0cba67e1aeec20e12f11bf346bb39f654d755f9ca2405bac6614",
+    "learning-units-combined.json": "47834be726f7179d25350562e93c45fd1f9b0d7ea8d92581715e55682a9e9bd3",
+    "role-cache-combined.json": "a88860e1d2a211909ceb03c652cd094c20e67fd7b724e675b063a6e29106d4b5",
+    "submission-combined.json": "754fab53588a1a225bd947ab3240d9f5b86e51ef5ebc5949065cbdbd6857edbb",
+    "work-management-combined.json": "bae9bf1cb815f472e9807137d84b46c83043e425c06af21deca7dca9e52f38ec"
+  },
+  "build_log_sha256": "606b4223bad16c58881a99c4e275bab333a20f4fea8f62839fcfea8733fce527",
+  "protected_original_source_file_count": 5634,
+  "protected_original_source_changed": 0,
+  "limitations": [
+    "Generic file CRUD ownership and static download authorization remain pending",
+    "Real HTTP editor-shaped upload/save/reopen is not browser editor acceptance",
+    "Cloud upload and other upload entry points not accepted",
+    "No disk-full/crash recovery or concurrent hostile host directory mutation proof",
+    "No capacity baseline; 2 MiB byte-correctness sample only",
+    "No merge or production deployment; preview 18102 unchanged"
+  ]
+}

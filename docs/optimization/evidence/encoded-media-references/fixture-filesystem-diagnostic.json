@@ -1,0 +1,14 @@
+{
+  "same_file_after_second_write": true,
+  "same_device_inode": true,
+  "entries_after_second_write": [
+    "exact+name.png"
+  ],
+  "original_lower_sha256": "13169a1f1e42f23ae5406457c95c19aae9792d0450ee304902084b304759a762",
+  "lower_after_upper_write_sha256": "a874f6ba8eacb1f718857b968c1702435ac2b6e800b5299baa0dd6df34213bfc",
+  "uppercase_payload_sha256": "a874f6ba8eacb1f718857b968c1702435ac2b6e800b5299baa0dd6df34213bfc",
+  "candidate_failed_expected_sha256": "13169a1f1e42f23ae5406457c95c19aae9792d0450ee304902084b304759a762",
+  "candidate_failed_actual_sha256": "a874f6ba8eacb1f718857b968c1702435ac2b6e800b5299baa0dd6df34213bfc",
+  "all_attachment_inventory_restored": true,
+  "scope": "Actual task-owned upload filesystem; case-neighbor write overwrote target fixture, not a product authorization conclusion"
+}

@@ -1,0 +1,36 @@
+{
+  "base_commit": "85f8a7d0a995047feb8ce486224d7bf991878e62",
+  "purpose": "Delegate editor/player execution to the shared Worker coordinator with an opaque turtle renderer; preserve earlier output, persistence and URL patches.",
+  "files": [
+    {
+      "path": "web/public/python/static/js/app.js",
+      "before_sha256": "81254a2410f3788f86f6981265502cd62643d54169ad5400a666745faf3af80a",
+      "after_sha256": "7fe0ead2ed4816056f809db42ea4b442c9c573d3c1217317f0a996d743904e4f",
+      "replacements": [
+        {
+          "before": "runit:function(){var t=this;this.clear(),u.pre=\"output\",u.configure({output:t.terminalOut,read:t.builtinRead}),(u.TurtleGraphics||(u.TurtleGraphics={})).target=\"mycanvas\",u.misceval.asyncToPromise(function(){return u.importMainWithBody(\"<stdin>\",!1,t.getCode(),!0)}).then(function(e){t.$message.success(\"执行完毕\")},function(e){t.$message.error(e.toString())})}",
+          "after": "runit:function(){return window.TeachingPythonExecution.run(this.getCode())}"
+        },
+        {
+          "before": "clear:function(){window.TeachingPythonOutput.clear(document.getElementById(\"output\")),document.getElementById(\"mycanvas\").innerHTML=\"\"}",
+          "after": "clear:function(){window.TeachingPythonExecution.clear()}"
+        }
+      ]
+    },
+    {
+      "path": "web/public/python/static/js/appPlayer.js",
+      "before_sha256": "c58d3cbc733d294f56413d3f5d5a41c7c409474f22bda74eeb0ba9b1d3bf7ba9",
+      "after_sha256": "604e61b6ba09f8c42354037efae4327492778024e3ef7ca0e75c6d915172b5c0",
+      "replacements": [
+        {
+          "before": "runit:function(){var t=this;this.clear(),u.pre=\"output\",u.configure({output:t.outf,read:t.builtinRead}),(u.TurtleGraphics||(u.TurtleGraphics={})).target=\"mycanvas\",u.misceval.asyncToPromise(function(){return u.importMainWithBody(\"<stdin>\",!1,t.code,!0)}).then(function(e){t.$message.success(\"执行完毕\")},function(e){console.log(e),t.$message.error(e.toString())})}",
+          "after": "runit:function(){return window.TeachingPythonExecution.run(this.code)}"
+        },
+        {
+          "before": "clear:function(){window.TeachingPythonOutput.clear(document.getElementById(\"output\")),document.getElementById(\"mycanvas\").innerHTML=\"\"}",
+          "after": "clear:function(){window.TeachingPythonExecution.clear()}"
+        }
+      ]
+    }
+  ]
+}

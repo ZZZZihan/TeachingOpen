@@ -1,0 +1,36 @@
+{
+  "classification": "Root CUA actual SFC/UserLayout with synthetic loopback HTTP, not real account recovery",
+  "product_manifest_sha256": "0707ccd4cd7e647b60dfe90260102b51bba5b25f144267ed88e1220c38cd4e66",
+  "checks": [
+    "empty account/captcha show associated errors and focus account",
+    "full dummy phone separate from masked hint",
+    "first synthetic SMS failure permits retry",
+    "retry shows 10:00 resend wait and focuses SMS field",
+    "empty new-password fields validate without entering credentials",
+    "completion fixture has explicit login link",
+    "captcha image failure disables next and exposes retry",
+    "image reload recovers next button"
+  ],
+  "widths": [
+    {
+      "innerWidth": 390,
+      "scrollWidth": 390
+    },
+    {
+      "innerWidth": 768,
+      "scrollWidth": 768
+    },
+    {
+      "innerWidth": 1440,
+      "scrollWidth": 1440
+    }
+  ],
+  "limitations": [
+    "No CAPTCHA solved",
+    "No new password entered",
+    "Completion was a presentation fixture, not backend reset",
+    "No physical SMS sent"
+  ],
+  "observed_issue": "Initial preview deep link loaded relative /user/preview.js as HTML; fixed build script absolute /preview.js in d8be5d7. Reloaded successfully. Prior console error retained; no additional console errors/warnings observed.",
+  "viewport_reset": true
+}

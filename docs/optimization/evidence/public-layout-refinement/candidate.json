@@ -1,0 +1,34 @@
+{
+  "previous_candidate_commit": "c8f46ed333d0690e6d7497da3d30d721e7fa56e2",
+  "reference": "https://www.deeplearning.ai/courses",
+  "user_review": "Previous blue card design rejected; this revision awaits user visual review",
+  "controlled_tests": {
+    "passed": 36,
+    "total": 36
+  },
+  "eslint_changed_source_files": 5,
+  "build_exit_code": 0,
+  "browser_observations_checked": 9,
+  "source_sha256": {
+    "web/src/views/home/layouts/HomeLayout.vue": "2de36d4a53f34a8e2930b65e26c7dfee1d3cd53158b4a06f4486dca2bb887a62",
+    "web/src/views/home/modules/Header.vue": "73bd830e61880621fcab7c62892c5cff6f90ad5457d39084f49fbae6e5ca8706",
+    "web/src/views/home/modules/Footer.vue": "f27f7c5d2c8644dd04c0cf83d0312049886088d446e5fe3b9d1fccfa8c6edc17",
+    "web/src/views/home/modules/CourseCard.vue": "a48da78aa776041a578dd06a04eab26614b2d403abcd318f873ba8aabf10b1b1",
+    "web/src/views/home/modules/CoursePreview.vue": "dba5ccc0427735b223f203aff279d7060c7086d227230e094adcc7b94ea3e5bf",
+    "web/tests/course-preview.test.cjs": "8f3ffad9e42964066b2eff9ecd1cc524e9b4f42081b46a2b054f639de121a8ab"
+  },
+  "dist_entry_sha256": "e8d9d4f27aa1838e739c06a9f6c5d281015c9c22db660e1eaa0174db753b172a",
+  "dist_files_count": 4864,
+  "dist_manifest_sha256": "ed56b0fc97957c3c970dcf089640b5daaa84d6e1f0f7ac40bcbdb1b9d3f6231f",
+  "log_sha256": {
+    "public-layout-refinement-tests.log": "92138749d6b85b03e56526ab3e636c8f22921822859ca419832f78ff4c3b6bd9",
+    "public-layout-refinement-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "public-layout-refinement-build.log": "7963689eed5450535957a9ed0ea5f0304582b8f8c8bd3e3ab24768b8ed64e764"
+  },
+  "limitations": [
+    "Local synthetic public pages only; no full student/teacher/admin workflow acceptance",
+    "Existing global HTTP interceptor still emits duplicate generic failure notifications during backend outage",
+    "Custom configuration compatibility was exercised on preceding c8f46ed candidate, not repeated in this revision",
+    "Existing CSS order, asset size and outdated Browserslist warnings remain"
+  ]
+}

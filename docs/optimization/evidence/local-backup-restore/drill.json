@@ -1,0 +1,42 @@
+{
+  "generated_utc": "2026-10-02T22:16:03.028779+00:00",
+  "product_commit": "8b28f66480ee9fc3e71c20aa091cd0139a396366",
+  "base_commit": "c38c9c1352bfc671d317b072d638955cf4207267",
+  "product_files_sha256": {
+    "api/dev/prepare-local.py": "4a7a9e6feaf15154ff6f1cf639385f19578e1f6abb6957495fbceae2d6136947",
+    "api/dev/backup-local.py": "84392ad487e5ebc76109619a5f3a9bd036c1e7b5dcfb42a0f25206186c2f1144",
+    "api/dev/local_recovery.py": "9d91a1b2b26166efaab23e912225107780199f811b202fce0d6a4b93fd7095af",
+    "api/dev/test_local_recovery.py": "1c798341bc7a93d92c63baf7bd92648a58549f9d9be5abcda715cdb93d5864a6",
+    "api/dev/verify-recovered-business.py": "e23039286d263121762f2ad2b1642d288121fd27839b4d050e95cd980a601a51"
+  },
+  "python": "3.14.7",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "unit_tests": {
+    "passed": 15,
+    "total": 15,
+    "new": 12
+  },
+  "actual_checks": {
+    "passed": 39,
+    "total": 39,
+    "running_source_rejected_before_directory_creation": true
+  },
+  "source_backend_pid": 57077,
+  "restored_backend_pid": 58299,
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP",
+    "18131": "UP"
+  },
+  "source_files_preserved": 5634,
+  "source_stop_to_health_seconds": 18.521,
+  "first_business_attempt": {
+    "result": "401 on cookie-only download",
+    "cause": "probe expected teaching_media instead of configured teaching_media_<port>",
+    "resolution": "probe corrected; application unchanged; 26 checks rerun successfully"
+  },
+  "browser_e2e": false,
+  "production_changed": false,
+  "remote_merged": false
+}

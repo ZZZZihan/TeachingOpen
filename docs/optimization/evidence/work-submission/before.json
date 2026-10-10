@@ -1,0 +1,78 @@
+{
+  "observed_utc": "2026-10-02T17:02:38.587406+00:00",
+  "jar_sha256": "7248b1d189e868783bdfa847792dafe6966710a050a767acd0bfdc5b40996c5c",
+  "expected_legacy": true,
+  "passed": 17,
+  "total": 17,
+  "cases": [
+    {
+      "case": "legacy accepts protected fields and publication status",
+      "passed": true
+    },
+    {
+      "case": "legacy forged metadata and counters persist",
+      "passed": true
+    },
+    {
+      "case": "legacy accepts course",
+      "passed": true
+    },
+    {
+      "case": "legacy accepts assignment",
+      "passed": true
+    },
+    {
+      "case": "legacy accepts unpublished",
+      "passed": true
+    },
+    {
+      "case": "legacy accepts ended",
+      "passed": true
+    },
+    {
+      "case": "legacy accepts foreign_id",
+      "passed": true
+    },
+    {
+      "case": "legacy accepts missing_id",
+      "passed": true
+    },
+    {
+      "case": "legacy accepts foreign_file",
+      "passed": true
+    },
+    {
+      "case": "legacy owner can rebind assignment",
+      "passed": true
+    },
+    {
+      "case": "legacy task identity and creation time changed",
+      "passed": true
+    },
+    {
+      "case": "legacy draft save",
+      "passed": true
+    },
+    {
+      "case": "legacy draft counted as a course submission",
+      "passed": true
+    },
+    {
+      "case": "all original business and history rows restored",
+      "passed": true
+    },
+    {
+      "case": "all original file bytes restored",
+      "passed": true
+    },
+    {
+      "case": "all original submission cache memberships restored",
+      "passed": true
+    },
+    {
+      "case": "temporary database failure trigger removed",
+      "passed": true
+    }
+  ],
+  "scope": "actual synthetic HTTP submission and re-read, DB/history/cache/files; editor-shaped payloads are not browser editor acceptance; no concurrency or global file-API acceptance"
+}

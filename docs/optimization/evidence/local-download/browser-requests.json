@@ -1,0 +1,168 @@
+{
+  "observed_utc": "2026-10-02T18:35:50.616977+00:00",
+  "jar_sha256": "b7715c0c4bdaeb6531e952d3240b80ff4b727743930d0a2213ceede3b66371a8",
+  "requests": [
+    {
+      "method": "GET",
+      "asset": "probe.png",
+      "status": 401,
+      "bytes": 0,
+      "cookie_present": false,
+      "range": null
+    },
+    {
+      "method": "GET",
+      "asset": "probe.txt",
+      "status": 401,
+      "bytes": 0,
+      "cookie_present": false,
+      "range": "bytes=0-4"
+    },
+    {
+      "method": "GET",
+      "asset": "probe.mp4",
+      "status": 401,
+      "bytes": 0,
+      "cookie_present": false,
+      "range": "bytes=0-"
+    },
+    {
+      "method": "HEAD",
+      "asset": "probe.txt",
+      "status": 401,
+      "bytes": 0,
+      "cookie_present": false,
+      "range": null
+    },
+    {
+      "method": "GET",
+      "asset": "probe.txt",
+      "status": 401,
+      "bytes": 0,
+      "cookie_present": false,
+      "range": null
+    },
+    {
+      "method": "GET",
+      "asset": "probe.png",
+      "status": 200,
+      "bytes": 630,
+      "cookie_present": true,
+      "range": null
+    },
+    {
+      "method": "GET",
+      "asset": "probe.txt",
+      "status": 206,
+      "bytes": 5,
+      "cookie_present": true,
+      "range": "bytes=0-4"
+    },
+    {
+      "method": "GET",
+      "asset": "probe.mp4",
+      "status": 206,
+      "bytes": 3693,
+      "cookie_present": true,
+      "range": "bytes=0-"
+    },
+    {
+      "method": "HEAD",
+      "asset": "probe.txt",
+      "status": 200,
+      "bytes": 0,
+      "cookie_present": true,
+      "range": null
+    },
+    {
+      "method": "GET",
+      "asset": "probe.txt",
+      "status": 200,
+      "bytes": 23,
+      "cookie_present": true,
+      "range": null
+    },
+    {
+      "method": "GET",
+      "asset": "probe.png",
+      "status": 403,
+      "bytes": 0,
+      "cookie_present": true,
+      "range": null
+    },
+    {
+      "method": "GET",
+      "asset": "probe.txt",
+      "status": 403,
+      "bytes": 0,
+      "cookie_present": true,
+      "range": "bytes=0-4"
+    },
+    {
+      "method": "GET",
+      "asset": "probe.mp4",
+      "status": 403,
+      "bytes": 0,
+      "cookie_present": true,
+      "range": "bytes=0-"
+    },
+    {
+      "method": "HEAD",
+      "asset": "probe.txt",
+      "status": 403,
+      "bytes": 0,
+      "cookie_present": true,
+      "range": null
+    },
+    {
+      "method": "GET",
+      "asset": "probe.txt",
+      "status": 403,
+      "bytes": 0,
+      "cookie_present": true,
+      "range": null
+    },
+    {
+      "method": "GET",
+      "asset": "probe.png",
+      "status": 401,
+      "bytes": 0,
+      "cookie_present": false,
+      "range": null
+    },
+    {
+      "method": "GET",
+      "asset": "probe.txt",
+      "status": 401,
+      "bytes": 0,
+      "cookie_present": false,
+      "range": "bytes=0-4"
+    },
+    {
+      "method": "GET",
+      "asset": "probe.mp4",
+      "status": 401,
+      "bytes": 0,
+      "cookie_present": false,
+      "range": "bytes=0-"
+    },
+    {
+      "method": "HEAD",
+      "asset": "probe.txt",
+      "status": 401,
+      "bytes": 0,
+      "cookie_present": false,
+      "range": null
+    },
+    {
+      "method": "GET",
+      "asset": "probe.txt",
+      "status": 401,
+      "bytes": 0,
+      "cookie_present": false,
+      "range": null
+    }
+  ],
+  "fixture_removed": true,
+  "scope": "controlled browser media fixture; authentication obtained through actual local APIs outside browser; not product login/editor acceptance"
+}

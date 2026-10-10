@@ -41,7 +41,7 @@ public class TeachingCourseDeptServiceImpl extends ServiceImpl<TeachingCourseDep
     @Override
     public boolean checkCoursePermission(String courseId, String userId) {
         TeachingCourse course = teachingCourseService.getById(courseId);
-        if (course != null && course.getIsShared()){
+        if (course != null && Boolean.TRUE.equals(course.getIsShared())){
             return true;
         }
         List<String> departIds = sysUserDepartService.userDepartIds(userId);

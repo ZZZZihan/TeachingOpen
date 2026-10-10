@@ -1,361 +1,93 @@
 <template>
-  <div class="main user-layout-register">
-    <h3><span>注册</span></h3>
-    <a-form ref="formRegister" :autoFormCreate="(form)=>{this.form = form}" id="formRegister">
-      <a-form-item
-        fieldDecoratorId="username"
-        :fieldDecoratorOptions="{rules: [{ required: true, message: '用户名不能为空'}, { validator: this.checkUsername }], validateTrigger: ['change', 'blur'], validateFirst: true}">
-        <a-input size="large" type="text" autocomplete="false" placeholder="请输入用户名"></a-input>
-      </a-form-item>
-
-      <a-popover placement="rightTop" trigger="click" :visible="state.passwordLevelChecked">
-        <template slot="content">
-          <div :style="{ width: '240px' }">
-            <div :class="['user-register', passwordLevelClass]">强度：<span>{{ passwordLevelName }}</span></div>
-            <a-progress :percent="state.percent" :showInfo="false" :strokeColor=" passwordLevelColor "/>
-            <div style="margin-top: 10px;">
-              <span>请至少输入 6 个字符。请不要使用容易被猜到的密码。</span>
-            </div>
-          </div>
-        </template>
-        <a-form-item
-          fieldDecoratorId="password"
-          :fieldDecoratorOptions="{rules: [{ required: false}, { validator: this.handlePasswordLevel }], validateTrigger: ['change', 'blur'], validateFirst: true}">
-          <a-input size="large" type="password" @click="handlePasswordInputClick" autocomplete="false" placeholder="至少6位密码，区分大小写"></a-input>
-        </a-form-item>
-      </a-popover>
-
-      <a-form-item
-        fieldDecoratorId="password2"
-        :fieldDecoratorOptions="{rules: [{ required: true, message: '至少6位密码，区分大小写' }, { validator: this.handlePasswordCheck }], validateTrigger: ['change', 'blur'], validateFirst: true}">
-
-        <a-input size="large" type="password" autocomplete="false" placeholder="确认密码"></a-input>
-      </a-form-item>
-      
-       <!-- <a-form-item
-        fieldDecoratorId="email"
-        :fieldDecoratorOptions="{rules: [{ required: true, type: 'email', message: '请输入正确的邮箱地址' }, { validator: this.handleEmailCheck }], validateTrigger: ['change', 'blur'], validateFirst: true}">
-        <a-input size="large" type="text" placeholder="邮箱"></a-input>
-      </a-form-item> -->
-      
-      <a-form-item
-        fieldDecoratorId="mobile"
-        :fieldDecoratorOptions="{rules: [{ required: true, pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号' }, { validator: this.handlePhoneCheck } ], validateTrigger: ['change', 'blur'], validateFirst: true}">
-        <a-input size="large" placeholder="11 位手机号">
-          <a-select slot="addonBefore" size="large" defaultValue="+86">
-            <a-select-option value="+86">+86</a-select-option>
-          </a-select>
-        </a-input>
-      </a-form-item>
-      <!--
-      <a-row :gutter="16">
-        <a-col class="gutter-row" :span="16">
-          <a-form-item
-            fieldDecoratorId="captcha"
-            :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入验证码' }], validateTrigger: 'blur', validateFirst: true}">
-            <a-input size="large" type="text" placeholder="验证码">
-              <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }"/>
-            </a-input>
-          </a-form-item>
-        </a-col>
-        <a-col class="gutter-row" :span="8">
-          <a-button
-            class="getCaptcha"
-            size="large"
-            :disabled="state.smsSendBtn"
-            @click.stop.prevent="getCaptcha"
-            v-text="!state.smsSendBtn && '获取验证码'||(state.time+' s')"></a-button>
-        </a-col>
-      </a-row> -->
-
-      <a-form-item>
-        <a-button
-          size="large"
-          type="primary"
-          htmlType="submit"
-          class="register-button"
-          :loading="registerBtn"
-          @click.stop.prevent="handleSubmit"
-          :disabled="registerBtn">注册
-        </a-button>
-        <router-link class="login" :to="{ name: 'login' }">使用已有账户登录</router-link>
-      </a-form-item>
-
-    </a-form>
-  </div>
+  <main class="registration-page">
+    <div class="registration-heading"><span>天津工业大学 · 学习与创作</span><h1>创建你的账号</h1><p>使用手机号和密码登录教学平台。</p></div>
+    <form novalidate :aria-busy="submitting" @submit.prevent="submit">
+      <div v-for="field in fields" :key="field.key" class="field">
+        <label :for="'register-' + field.key">{{ field.label }}</label>
+        <input :id="'register-' + field.key" v-model="form[field.key]" :name="field.key" :type="field.type || 'text'" :autocomplete="field.autocomplete" :maxlength="field.maximum" :inputmode="field.key === 'phone' ? 'tel' : null" :disabled="submitting" :aria-invalid="!!errors[field.key]" :aria-describedby="errors[field.key] ? field.key + '-error' : null">
+        <p v-if="errors[field.key]" :id="field.key + '-error'" class="field-error">{{ errors[field.key] }}</p>
+      </div>
+      <fieldset :disabled="submitting"><legend>身份</legend><label><input v-model="form.identity" type="radio" name="identity" value="student"> 学生</label><label><input v-model="form.identity" type="radio" name="identity" value="teacher"> 教师</label><p v-if="errors.identity" class="field-error">{{ errors.identity }}</p></fieldset>
+      <p class="privacy-note">姓名将脱敏展示，学校和身份将展示在首页。教师身份用于个人资料，教学管理权限由管理员开通。</p>
+      <p v-if="submitError" role="alert" class="field-error">{{ submitError }}</p>
+      <button type="submit" :disabled="submitting">{{ submitting ? '正在注册…' : '注册账号' }}</button>
+      <router-link class="login-link" to="/user/login">使用已有账号登录</router-link>
+    </form>
+  </main>
 </template>
 
 <script>
-  import {mixinDevice} from '@/utils/mixin.js'
-  import {getSmsCaptcha} from '@/api/login'
-  import {getAction, postAction} from '@/api/manage'
-  import {checkOnlyUser} from '@/api/api'
+import { postAction } from '@/api/manage'
+import { isMainlandPhone, passwordProblem, recoveryError } from '@/utils/accountRecovery'
 
-  const levelNames = {
-    0: '低',
-    1: '低',
-    2: '中',
-    3: '强'
-  }
-  const levelClass = {
-    0: 'error',
-    1: 'error',
-    2: 'warning',
-    3: 'success'
-  }
-  const levelColor = {
-    0: '#ff0000',
-    1: '#ff0000',
-    2: '#ff7e05',
-    3: '#52c41a',
-  }
-  export default {
-    name: "Register",
-    components: {},
-    mixins: [mixinDevice],
-    data() {
-      return {
-        form: null,
-
-        state: {
-          time: 60,
-          smsSendBtn: false,
-          passwordLevel: 0,
-          passwordLevelChecked: false,
-          percent: 10,
-          progressColor: '#FF0000'
-        },
-        registerBtn: false
-      }
-    },
-    computed: {
-      passwordLevelClass() {
-        return levelClass[this.state.passwordLevel]
-      },
-      passwordLevelName() {
-        return levelNames[this.state.passwordLevel]
-      },
-      passwordLevelColor() {
-        return levelColor[this.state.passwordLevel]
-      }
+export default {
+    name: 'Register',
+    data () {
+        return {
+            submitting: false, submitError: '', errors: {},
+            form: { phone: '', password: '', confirmation: '', realname: '', school: '', identity: '' },
+            fields: [
+                { key: 'phone', label: '手机号', autocomplete: 'username', maximum: 11 },
+                { key: 'password', label: '密码（8–64位，包含字母、数字和特殊符号）', type: 'password', autocomplete: 'new-password', maximum: 64 },
+                { key: 'confirmation', label: '确认密码', type: 'password', autocomplete: 'new-password', maximum: 64 },
+                { key: 'realname', label: '姓名', autocomplete: 'name', maximum: 100 },
+                { key: 'school', label: '学校（请填写全称）', autocomplete: 'organization', maximum: 256 }
+            ]
+        }
     },
     methods: {
-      checkUsername(rule, value, callback) {
-        var params = {
-          username: value,
-        };
-        checkOnlyUser(params).then((res) => {
-          if (res.success) {
-            callback()
-          } else {
-            callback("用户名已存在!")
-          }
-        })
-      },
-      handleEmailCheck(rule, value, callback) {
-        var params = {
-          email: value,
-        };
-        checkOnlyUser(params).then((res) => {
-          if (res.success) {
-            callback()
-          } else {
-            callback("邮箱已存在!")
-          }
-        })
-      },
-      handlePasswordLevel(rule, value, callback) {
-
-        let level = 0
-        let reg = /^[\w]{6,}$/;
-        if (!reg.test(value)) {
-          callback(new Error('密码由6位以上数字、大小写字母和特殊符号组成!'))
-        }
-        // 判断这个字符串中有没有数字
-        if (/[0-9]/.test(value)) {
-          level++
-        }
-        // 判断字符串中有没有字母
-        if (/[a-zA-Z]/.test(value)) {
-          level++
-        }
-        // 判断字符串中有没有特殊符号
-        if (/[^0-9a-zA-Z_]/.test(value)) {
-          level++
-        }
-        this.state.passwordLevel = level
-        this.state.percent = level * 30
-        if (level >= 2) {
-          if (level >= 3) {
-            this.state.percent = 100
-          }
-          callback()
-        } else {
-          if (level === 0) {
-            this.state.percent = 10
-          }
-          callback(new Error('密码强度不够'))
-        }
-      },
-
-      handlePasswordCheck(rule, value, callback) {
-        let password = this.form.getFieldValue('password')
-        //console.log('value', value)
-        if (value === undefined) {
-          callback(new Error('请输入密码'))
-        }
-        if (value && password && value.trim() !== password.trim()) {
-          callback(new Error('两次密码不一致'))
-        }
-        callback()
-      },
-
-      handlePhoneCheck(rule, value, callback) {
-        var params = {
-          phone: value,
-        };
-        checkOnlyUser(params).then((res) => {
-          if (res.success) {
-            callback()
-          } else {
-            callback("手机号已存在!")
-          }
-        })
-      },
-
-      handlePasswordInputClick() {
-        if (!this.isMobile()) {
-          this.state.passwordLevelChecked = true
-          return;
-        }
-        this.state.passwordLevelChecked = false
-      },
-
-      handleSubmit() {
-        this.form.validateFields((err, values) => {
-          if (!err) {
-            var register = {
-              username: values.username,
-              password: values.password,
-              email: values.email,
-              phone: values.mobile,
-              smscode: values.captcha
-            };
-            postAction("/sys/user/register", register).then((res) => {
-              if (!res.success) {
-                this.registerFailed(res.message)
-              } else {
-                this.$router.push({name: 'registerResult', params: {...values}})
-              }
-            })
-          }
-        })
-      },
-
-      getCaptcha(e) {
-        e.preventDefault()
-        let that = this
-        this.form.validateFields(['mobile'], {force: true}, (err, values) => {
-            if (!err) {
-              this.state.smsSendBtn = true;
-              let interval = window.setInterval(() => {
-                if (that.state.time-- <= 0) {
-                  that.state.time = 60;
-                  that.state.smsSendBtn = false;
-                  window.clearInterval(interval);
+        async submit () {
+            if (this.submitting) return
+            const form = this.form
+            const errors = {}
+            if (!isMainlandPhone(form.phone.trim())) errors.phone = '请输入正确的11位手机号。'
+            const passwordError = passwordProblem(form.password)
+            if (passwordError) errors.password = passwordError.replace('新密码', '密码')
+            if (!form.confirmation || form.password !== form.confirmation) errors.confirmation = '两次输入的密码需一致。'
+            if (!form.realname.trim()) errors.realname = '请填写姓名。'
+            if (!form.school.trim()) errors.school = '请填写学校。'
+            if (!['student', 'teacher'].includes(form.identity)) errors.identity = '请选择身份。'
+            this.errors = errors
+            this.submitError = ''
+            if (Object.keys(errors).length) return
+            this.submitting = true
+            try {
+                const response = await postAction('/sys/user/register', {
+                    phone: form.phone.trim(), password: form.password,
+                    realname: form.realname.trim(), school: form.school.trim(), identity: form.identity
+                })
+                if (!response.success) {
+                    this.submitError = response.message || '注册失败，请稍后重试。'
+                    return
                 }
-              }, 1000);
-              const hide = this.$message.loading('验证码发送中..', 0);
-              const params = {
-                mobile: values.mobile,
-                smsmode: "1"
-              };
-              postAction("/sys/sms", params).then((res) => {
-                if (!res.success) {
-                  this.registerFailed(res.message);
-                  setTimeout(hide, 0);
-                }
-                setTimeout(hide, 500);
-              }).catch(err => {
-                setTimeout(hide, 1);
-                clearInterval(interval);
-                that.state.time = 60;
-                that.state.smsSendBtn = false;
-                this.requestFailed(err);
-              });
+                form.password = ''
+                form.confirmation = ''
+                await this.$router.push({ name: 'registerResult', params: { phone: form.phone.trim() } })
+            } catch (error) {
+                this.submitError = recoveryError(error, '注册请求失败，请稍后重试。')
+            } finally {
+                this.submitting = false
             }
-          }
-        );
-      },
-      registerFailed(message) {
-        this.$notification['error']({
-          message: "注册失败",
-          description: message,
-          duration: 2,
-        });
-
-      },
-      requestFailed(err) {
-        this.$notification['error']({
-          message: '错误',
-          description: ((err.response || {}).data || {}).message || "请求出现错误，请稍后再试",
-          duration: 4,
-        });
-        this.registerBtn = false;
-      },
-    },
-    watch: {
-      'state.passwordLevel'(val) {
-        console.log(val)
-
-      }
+        }
     }
-  }
+}
 </script>
-<style lang="less">
-  .user-register {
 
-    &.error {
-      color: #ff0000;
-    }
-
-    &.warning {
-      color: #ff7e05;
-    }
-
-    &.success {
-      color: #52c41a;
-    }
-
-  }
-
-  .user-layout-register {
-    .ant-input-group-addon:first-child {
-      background-color: #fff;
-    }
-  }
-</style>
-<style lang="less" scoped>
-  .user-layout-register {
-
-    & > h3 {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-
-    .getCaptcha {
-      display: block;
-      width: 100%;
-      height: 40px;
-    }
-
-    .register-button {
-      width: 50%;
-    }
-
-    .login {
-      float: right;
-      line-height: 40px;
-    }
-  }
+<style scoped>
+.registration-page { max-width: 480px; margin: 36px auto; padding: 24px; color: #27333b; }
+.registration-heading span { color: #74256a; font-size: 12px; }
+h1 { margin: 12px 0; font-size: 30px; }
+.registration-heading p, .privacy-note { color: #69747c; line-height: 1.7; }
+.field { margin-top: 18px; }
+.field label { display: block; margin-bottom: 8px; }
+.field input { width: 100%; padding: 12px; border: 1px solid #bec6cc; border-radius: 4px; }
+.field input:focus { outline: 2px solid #74256a; outline-offset: 2px; }
+fieldset { margin: 20px 0; border: 0; padding: 0; }
+fieldset label { display: inline-block; margin-right: 24px; }
+legend { margin-bottom: 10px; font-size: 14px; }
+.field-error { color: #a12834; margin-top: 8px; }
+.privacy-note { font-size: 12px; }
+button { width: 100%; padding: 12px; background: #74256a; color: white; border: 0; border-radius: 4px; cursor: pointer; }
+button:disabled { opacity: .65; cursor: wait; }
+.login-link { display: block; text-align: center; margin-top: 18px; color: #74256a; }
 </style>

@@ -34,7 +34,7 @@ const queryTreeListForRole = (params)=>getAction("/sys/role/queryTreeList",param
 const queryListAsync = (params)=>getAction("/sys/permission/queryListAsync",params);
 const queryRolePermission = (params)=>getAction("/sys/permission/queryRolePermission",params);
 const saveRolePermission = (params)=>postAction("/sys/permission/saveRolePermission",params);
-const queryPermissionsByUser = (params)=>getAction("/sys/permission/getUserPermissionByToken",params);
+const queryPermissionsByUser = () => getAction('/sys/permission/getUserPermissionByToken')
 const loadAllRoleIds = (params)=>getAction("/sys/permission/loadAllRoleIds",params);
 const getPermissionRuleList = (params)=>getAction("/sys/permission/getPermRuleListByPermId",params);
 const queryPermissionRule = (params)=>getAction("/sys/permission/queryPermissionRule",params);
@@ -183,6 +183,5 @@ export {
   deleteDictItems,
   deleteDictItemsCache
 }
-
 
 

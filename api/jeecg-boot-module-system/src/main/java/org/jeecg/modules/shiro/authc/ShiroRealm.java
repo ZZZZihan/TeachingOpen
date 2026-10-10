@@ -115,17 +115,26 @@ public class ShiroRealm extends AuthorizingRealm {
 		}
 
 		// 查询用户信息
-		log.debug("———校验token是否有效————checkUserTokenIsEffect——————— "+ token);
+		log.debug("checkUserTokenIsEffect: checking authentication token");
+        // Account state must not be taken from a cached LoginUser: a concurrent
+        // cache miss can put an older value back after a committed freeze.
+        SysUser currentUser = sysUserService.getUserByName(username);
+        if (currentUser == null) {
+            throw new AuthenticationException("用户不存在!");
+        }
+        if (!CommonConstant.USER_UNFREEZE.equals(currentUser.getStatus())) {
+            throw new AuthenticationException("账号已被锁定,请联系管理员!");
+        }
         LoginUser loginUser = sysBaseAPI.getUserByName(username);
 		if (loginUser == null) {
 			throw new AuthenticationException("用户不存在!");
 		}
-        // 判断用户状态
-        if (loginUser.getStatus() != 1) {
-            throw new AuthenticationException("账号已被锁定,请联系管理员!");
-        }
-		// 校验token是否超时失效 & 或者账号密码是否错误
-		if (!jwtTokenRefresh(token, username, loginUser.getPassword())) {
+		// Check the original token against the live DB credential before any
+		// refresh. Cache eviction alone cannot revoke the previous password's
+		// sessions: jwtTokenRefresh can otherwise re-sign an old cached token.
+		// Expiry is intentionally left to the existing Redis refresh mechanism.
+		if (!JwtUtil.verifySignature(token, username, currentUser.getPassword())
+				|| !jwtTokenRefresh(token, username, currentUser.getPassword())) {
 			throw new AuthenticationException("Token失效，请重新登录!");
 		}
 
@@ -154,7 +163,7 @@ public class ShiroRealm extends AuthorizingRealm {
 				// 设置超时时间
 				redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, newAuthorization);
 				redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME);
-                log.info("——————————用户在线操作，更新token保证不掉线—————————jwtTokenRefresh——————— "+ token);
+                log.info("jwtTokenRefresh: refreshed active session");
 			}
             //update-begin--Author:scott  Date:20191005  for：解决每次请求，都重写redis中 token缓存问题
 //			else {

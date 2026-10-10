@@ -1,0 +1,41 @@
+{
+  "base_commit": "75586a844bcce3c715f02fd057964ea4eb9b28f3",
+  "files": [
+    {
+      "path": "web/public/python/static/js/app.js",
+      "before_sha256": "66b7c1453fce20dc17caf0486237556cabbc3013962739ab9dddcaa38b9610b7",
+      "replacements": [
+        {
+          "before": "clear:function(){document.getElementById(\"output\").innerHTML=\"\",document.getElementById(\"mycanvas\").innerHTML=\"\"}",
+          "after": "clear:function(){window.TeachingPythonOutput.clear(document.getElementById(\"output\")),document.getElementById(\"mycanvas\").innerHTML=\"\"}"
+        },
+        {
+          "before": "terminalOut:function(t){var e=document.getElementById(\"output\");e.innerHTML=e.innerHTML+t}",
+          "after": "terminalOut:function(t){window.TeachingPythonOutput.append(document.getElementById(\"output\"),t)}"
+        },
+        {
+          "before": "n(\"pre\",{attrs:{id:\"output\"}},",
+          "after": "n(\"pre\",{attrs:{id:\"output\",tabindex:\"0\",\"aria-label\":\"程序输出\"}},"
+        }
+      ]
+    },
+    {
+      "path": "web/public/python/static/js/appPlayer.js",
+      "before_sha256": "1c9e94b4d1f74d5454f6b8c26e51de505609cbe4247406a45af295bcf77ba491",
+      "replacements": [
+        {
+          "before": "clear:function(){document.getElementById(\"output\").innerHTML=\"\",document.getElementById(\"mycanvas\").innerHTML=\"\"}",
+          "after": "clear:function(){window.TeachingPythonOutput.clear(document.getElementById(\"output\")),document.getElementById(\"mycanvas\").innerHTML=\"\"}"
+        },
+        {
+          "before": "outf:function(t){var e=document.getElementById(\"output\");e.innerHTML=e.innerHTML+t}",
+          "after": "outf:function(t){window.TeachingPythonOutput.append(document.getElementById(\"output\"),t)}"
+        },
+        {
+          "before": "n(\"pre\",{attrs:{id:\"output\"}},",
+          "after": "n(\"pre\",{attrs:{id:\"output\",tabindex:\"0\",\"aria-label\":\"程序输出\"}},"
+        }
+      ]
+    }
+  ]
+}

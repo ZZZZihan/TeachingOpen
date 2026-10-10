@@ -1,0 +1,151 @@
+{
+  "passed": 24,
+  "total": 24,
+  "cases": [
+    {
+      "port": 18112,
+      "path": "/css/app.34569fa6.css",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "/css/chunk-vendors.0626b6c1.css",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "/index",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "/js/app.0798f1e4.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "/js/chunk-vendors.13f7ce24.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "/js/common.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "/js/polyfill.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18112,
+      "path": "/logo.png",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "/css/app.34569fa6.css",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "/css/chunk-vendors.0626b6c1.css",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "/index",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "/js/app.0798f1e4.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "/js/chunk-vendors.13f7ce24.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "/js/common.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "/js/polyfill.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18142,
+      "path": "/logo.png",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "/css/app.34569fa6.css",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "/css/chunk-vendors.0626b6c1.css",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "/index",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "/js/app.0798f1e4.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "/js/chunk-vendors.13f7ce24.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "/js/common.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "/js/polyfill.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "port": 18150,
+      "path": "/logo.png",
+      "status": 200,
+      "passed": true
+    }
+  ],
+  "dist_unchanged": true
+}

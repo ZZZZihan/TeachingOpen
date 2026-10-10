@@ -2,6 +2,8 @@ package org.jeecg.modules.message.websocket;
 
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.constant.WebsocketConst;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,7 @@ public class TestController {
     private WebSocket webSocket;
  
     @PostMapping("/sendAll")
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result<String> sendAll(@RequestBody JSONObject jsonObject) {
     	Result<String> result = new Result<String>();
     	String message = jsonObject.getString("message");
@@ -31,6 +34,7 @@ public class TestController {
     }
 
     @PostMapping("/sendUser")
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result<String> sendUser(@RequestBody JSONObject jsonObject) {
     	Result<String> result = new Result<String>();
     	String userId = jsonObject.getString("userId");

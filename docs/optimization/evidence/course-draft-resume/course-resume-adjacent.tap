@@ -1,0 +1,472 @@
+TAP version 13
+# Subtest: 阅读器：按实际内容选择初始视图，记录失败不会阻止阅读
+ok 1 - 阅读器：按实际内容选择初始视图，记录失败不会阻止阅读
+  ---
+  duration_ms: 4.213875
+  type: 'test'
+  ...
+# Subtest: 阅读器：旧单元日志失败不污染新单元，关闭后不恢复状态
+ok 2 - 阅读器：旧单元日志失败不污染新单元，关闭后不恢复状态
+  ---
+  duration_ms: 1.954083
+  type: 'test'
+  ...
+# Subtest: 阅读器：切换和关闭暂停视频、移除源并卸载 iframe，重试重建媒体
+ok 3 - 阅读器：切换和关闭暂停视频、移除源并卸载 iframe，重试重建媒体
+  ---
+  duration_ms: 1.003542
+  type: 'test'
+  ...
+# Subtest: 阅读器：迟到的视频事件不能污染新播放器
+ok 4 - 阅读器：迟到的视频事件不能污染新播放器
+  ---
+  duration_ms: 0.503333
+  type: 'test'
+  ...
+# Subtest: 阅读器：生命周期移除三个相同监听器，缓存停用关闭媒体
+ok 5 - 阅读器：生命周期移除三个相同监听器，缓存停用关闭媒体
+  ---
+  duration_ms: 0.458958
+  type: 'test'
+  ...
+# Subtest: 阅读器：空 iframe 与跨域 document 不能触发异常
+ok 6 - 阅读器：空 iframe 与跨域 document 不能触发异常
+  ---
+  duration_ms: 0.513125
+  type: 'test'
+  ...
+# Subtest: 阅读器：案例点击监听不重复，退出只操作自己的全屏
+ok 7 - 阅读器：案例点击监听不重复，退出只操作自己的全屏
+  ---
+  duration_ms: 0.440709
+  type: 'test'
+  ...
+# Subtest: 阅读器：ScratchJr 与 Python 保留完整任务和特殊字符文件参数
+ok 8 - 阅读器：ScratchJr 与 Python 保留完整任务和特殊字符文件参数
+  ---
+  duration_ms: 2.53325
+  type: 'test'
+  ...
+# Subtest: 阅读器：Scratch 案例的嵌套地址能由实际公共解析器解码
+ok 9 - 阅读器：Scratch 案例的嵌套地址能由实际公共解析器解码
+  ---
+  duration_ms: 1.17675
+  type: 'test'
+  ...
+# Subtest: 公共查询解析器：不带 opt-in 的历史链接保持百分号与大小写契约
+ok 10 - 公共查询解析器：不带 opt-in 的历史链接保持百分号与大小写契约
+  ---
+  duration_ms: 1.076667
+  type: 'test'
+  ...
+# Subtest: 阅读器：资料配置异常不破坏其他资料，拒绝可执行协议
+ok 11 - 阅读器：资料配置异常不破坏其他资料，拒绝可执行协议
+  ---
+  duration_ms: 1.021916
+  type: 'test'
+  ...
+# Subtest: 桥接没有 CONFIG 缓存也可本地上传、登记、提交；每次 API 使用当前令牌
+ok 12 - 桥接没有 CONFIG 缓存也可本地上传、登记、提交；每次 API 使用当前令牌
+  ---
+  duration_ms: 20.527291
+  type: 'test'
+  ...
+# Subtest: 文件返回 HTML 登录页不会作为代码载入；401 有明确提示且解除忙状态
+ok 13 - 文件返回 HTML 登录页不会作为代码载入；401 有明确提示且解除忙状态
+  ---
+  duration_ms: 13.694667
+  type: 'test'
+  ...
+# Subtest: 文件登记路径不匹配、业务失败不能进入提交成功状态
+ok 14 - 文件登记路径不匹配、业务失败不能进入提交成功状态
+  ---
+  duration_ms: 6.410792
+  type: 'test'
+  ...
+# Subtest: 云上传使用服务器前缀和单次凭据，不向云传平台会话；验证返回键后登记
+ok 15 - 云上传使用服务器前缀和单次凭据，不向云传平台会话；验证返回键后登记
+  ---
+  duration_ms: 6.67025
+  type: 'test'
+  ...
+# Subtest: 未保存改动或正在保存时有离页提示，打开后未修改不触发
+ok 16 - 未保存改动或正在保存时有离页提示，打开后未修改不触发
+  ---
+  duration_ms: 5.952208
+  type: 'test'
+  ...
+# Subtest: 预编译编辑器只在下一轮渲染完成后挂接；本地导出和提交读取当前 Ace 内容
+ok 17 - 预编译编辑器只在下一轮渲染完成后挂接；本地导出和提交读取当前 Ace 内容
+  ---
+  duration_ms: 1.870166
+  type: 'test'
+  ...
+# Subtest: 基线复现：旧桥接保存成功后不记住 ID，第二次改名保存仍是新建请求
+ok 18 - 基线复现：旧桥接保存成功后不记住 ID，第二次改名保存仍是新建请求
+  ---
+  duration_ms: 11.877333
+  type: 'test'
+  ...
+# Subtest: 新链接完整往返名称、中文、百分号和查询地址；旧裸文件链接兼容
+ok 19 - 新链接完整往返名称、中文、百分号和查询地址；旧裸文件链接兼容
+  ---
+  duration_ms: 0.563958
+  type: 'test'
+  ...
+# Subtest: 已有作品只加载一个目标，并从记录恢复课程和班级归属
+ok 20 - 已有作品只加载一个目标，并从记录恢复课程和班级归属
+  ---
+  duration_ms: 0.798459
+  type: 'test'
+  ...
+# Subtest: 课程 url 与作业 workFile 均加载；重做读取模板但更新原作品 ID
+ok 21 - 课程 url 与作业 workFile 均加载；重做读取模板但更新原作品 ID
+  ---
+  duration_ms: 0.242209
+  type: 'test'
+  ...
+# Subtest: 慢速或失败读取禁止保存、不会回退默认示例，恢复后可以重试
+ok 22 - 慢速或失败读取禁止保存、不会回退默认示例，恢复后可以重试
+  ---
+  duration_ms: 0.222958
+  type: 'test'
+  ...
+# Subtest: 保存锁覆盖上传到提交，连续点击只使用固定的一次快照
+ok 23 - 保存锁覆盖上传到提交，连续点击只使用固定的一次快照
+  ---
+  duration_ms: 0.130959
+  type: 'test'
+  ...
+# Subtest: 成功后改名与修改代码仍使用返回 ID，默认场景为 create
+ok 24 - 成功后改名与修改代码仍使用返回 ID，默认场景为 create
+  ---
+  duration_ms: 0.135709
+  type: 'test'
+  ...
+# Subtest: 上传或登记失败均不提交；重试只使用成功文件
+ok 25 - 上传或登记失败均不提交；重试只使用成功文件
+  ---
+  duration_ms: 0.19525
+  type: 'test'
+  ...
+# Subtest: 提交失败保留 ID；未改动重试复用文件，改变快照重新上传
+ok 26 - 提交失败保留 ID；未改动重试复用文件，改变快照重新上传
+  ---
+  duration_ms: 0.180792
+  type: 'test'
+  ...
+# Subtest: 空代码和非法名称不上传；缺少结果 ID 不能宣称成功
+ok 27 - 空代码和非法名称不上传；缺少结果 ID 不能宣称成功
+  ---
+  duration_ms: 0.217
+  type: 'test'
+  ...
+# Subtest: 未知或不完整作品不能降级为可保存的空编辑器
+ok 28 - 未知或不完整作品不能降级为可保存的空编辑器
+  ---
+  duration_ms: 0.80925
+  type: 'test'
+  ...
+# Subtest: index ace: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+ok 29 - index ace: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+  ---
+  duration_ms: 22.316542
+  type: 'test'
+  ...
+# Subtest: index codemirror: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+ok 30 - index codemirror: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+  ---
+  duration_ms: 3.991167
+  type: 'test'
+  ...
+# Subtest: index: 404 and network errors keep Run disabled, expose retry, and retry makes exactly one further GET
+ok 31 - index: 404 and network errors keep Run disabled, expose retry, and retry makes exactly one further GET
+  ---
+  duration_ms: 6.166584
+  type: 'test'
+  ...
+# Subtest: index: loading changes are preserved, including a late response and a change during apply nextTick
+ok 32 - index: loading changes are preserved, including a late response and a change during apply nextTick
+  ---
+  duration_ms: 4.895667
+  type: 'test'
+  ...
+# Subtest: index: missing raw editor times out application without becoming runnable
+ok 33 - index: missing raw editor times out application without becoming runnable
+  ---
+  duration_ms: 5.973625
+  type: 'test'
+  ...
+# Subtest: player ace: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+ok 34 - player ace: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+  ---
+  duration_ms: 4.334792
+  type: 'test'
+  ...
+# Subtest: player codemirror: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+ok 35 - player codemirror: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+  ---
+  duration_ms: 2.986167
+  type: 'test'
+  ...
+# Subtest: player: 404 and network errors keep Run disabled, expose retry, and retry makes exactly one further GET
+ok 36 - player: 404 and network errors keep Run disabled, expose retry, and retry makes exactly one further GET
+  ---
+  duration_ms: 5.369833
+  type: 'test'
+  ...
+# Subtest: player: loading changes are preserved, including a late response and a change during apply nextTick
+ok 37 - player: loading changes are preserved, including a late response and a change during apply nextTick
+  ---
+  duration_ms: 3.820542
+  type: 'test'
+  ...
+# Subtest: player: missing raw editor times out application without becoming runnable
+ok 38 - player: missing raw editor times out application without becoming runnable
+  ---
+  duration_ms: 5.829333
+  type: 'test'
+  ...
+# Subtest: player missing/empty/bad URL reports an actionable error without fetching a template
+ok 39 - player missing/empty/bad URL reports an actionable error without fetching a template
+  ---
+  duration_ms: 14.394709
+  type: 'test'
+  ...
+# Subtest: editor without source loads its established template once and repeated mount is idempotent
+ok 40 - editor without source loads its established template once and repeated mount is idempotent
+  ---
+  duration_ms: 2.635875
+  type: 'test'
+  ...
+# Subtest: preview mount is idempotent both during and after successful load
+ok 41 - preview mount is idempotent both during and after successful load
+  ---
+  duration_ms: 3.108542
+  type: 'test'
+  ...
+# Subtest: ace: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("")
+ok 42 - ace: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("")
+  ---
+  duration_ms: 2.492416
+  type: 'test'
+  ...
+# Subtest: ace: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("print 42\\n")
+ok 43 - ace: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("print 42\\n")
+  ---
+  duration_ms: 2.462375
+  type: 'test'
+  ...
+# Subtest: codemirror: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("")
+ok 44 - codemirror: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("")
+  ---
+  duration_ms: 2.380625
+  type: 'test'
+  ...
+# Subtest: codemirror: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("print 42\\n")
+ok 45 - codemirror: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("print 42\\n")
+  ---
+  duration_ms: 2.46325
+  type: 'test'
+  ...
+# Subtest: both actual CodeMirror wrapper setters apply synchronously and cannot overwrite later edits at 300ms
+ok 46 - both actual CodeMirror wrapper setters apply synchronously and cannot overwrite later edits at 300ms
+  ---
+  duration_ms: 2.452417
+  type: 'test'
+  ...
+# Subtest: helper rejects bad addresses and typed content failures while accepting empty Python text
+ok 47 - helper rejects bad addresses and typed content failures while accepting empty Python text
+  ---
+  duration_ms: 10.679292
+  type: 'test'
+  ...
+# Subtest: 15s timeout aborts one native fetch, keeps Run blocked, and ignores the late response before successful retry
+ok 48 - 15s timeout aborts one native fetch, keeps Run blocked, and ignores the late response before successful retry
+  ---
+  duration_ms: 2.505333
+  type: 'test'
+  ...
+# Subtest: workId retains metadata-first single source GET; save uploads current raw bytes and reopening keeps the same identity
+ok 49 - workId retains metadata-first single source GET; save uploads current raw bytes and reopening keeps the same identity
+  ---
+  duration_ms: 5.16
+  type: 'test'
+  ...
+# Subtest: source substitutions reverse to the untouched PR52 bundle hashes before all historical patch layers
+ok 50 - source substitutions reverse to the untouched PR52 bundle hashes before all historical patch layers
+  ---
+  duration_ms: 29.763084
+  type: 'test'
+  ...
+# Subtest: 没有 CONFIG 缓存仍能从原生 VM 生成 SB3/PNG，登记成对 ID 并保存
+ok 51 - 没有 CONFIG 缓存仍能从原生 VM 生成 SB3/PNG，登记成对 ID 并保存
+  ---
+  duration_ms: 17.878917
+  type: 'test'
+  ...
+# Subtest: HTTP 错误、HTML 伪文件与无效项目都阻止编辑并保留重试入口
+ok 52 - HTTP 错误、HTML 伪文件与无效项目都阻止编辑并保留重试入口
+  ---
+  duration_ms: 2.564709
+  type: 'test'
+  ...
+# Subtest: 封面生成失败、登记不匹配或上传 401 不提交且保留编辑能力
+ok 53 - 封面生成失败、登记不匹配或上传 401 不提交且保留编辑能力
+  ---
+  duration_ms: 2.802625
+  type: 'test'
+  ...
+# Subtest: 模拟七牛使用同一组唯一前缀但不同扩展名，不传平台令牌
+ok 54 - 模拟七牛使用同一组唯一前缀但不同扩展名，不传平台令牌
+  ---
+  duration_ms: 1.776458
+  type: 'test'
+  ...
+# Subtest: 云上传报错解除忙状态，禁止提交未登记的一对文件
+ok 55 - 云上传报错解除忙状态，禁止提交未登记的一对文件
+  ---
+  duration_ms: 1.030042
+  type: 'test'
+  ...
+# Subtest: 实际 VM 的项目变化和标题输入触发未保存提示；成功保存后清除离页提示
+ok 56 - 实际 VM 的项目变化和标题输入触发未保存提示；成功保存后清除离页提示
+  ---
+  duration_ms: 1.044417
+  type: 'test'
+  ...
+# Subtest: 标准及旧链接只解码一次，保留百分号与 URL 自身的转义
+ok 57 - 标准及旧链接只解码一次，保留百分号与 URL 自身的转义
+  ---
+  duration_ms: 0.977375
+  type: 'test'
+  ...
+# Subtest: 继续作业优先读取 ID，重做才使用模板，课程无文件时请求单元信息
+ok 58 - 继续作业优先读取 ID，重做才使用模板，课程无文件时请求单元信息
+  ---
+  duration_ms: 1.120833
+  type: 'test'
+  ...
+# Subtest: 读取失败不以默认项目覆盖，解除忙状态但禁止保存，重试可恢复
+ok 59 - 读取失败不以默认项目覆盖，解除忙状态但禁止保存，重试可恢复
+  ---
+  duration_ms: 0.168209
+  type: 'test'
+  ...
+# Subtest: 连续保存每次使用新的文件对，非云作品也保留 ID、状态及任务绑定
+ok 60 - 连续保存每次使用新的文件对，非云作品也保留 ID、状态及任务绑定
+  ---
+  duration_ms: 0.581959
+  type: 'test'
+  ...
+# Subtest: 慢上传期间再次点击不会捕获第二份快照；状态和标题固定
+ok 61 - 慢上传期间再次点击不会捕获第二份快照；状态和标题固定
+  ---
+  duration_ms: 3.176125
+  type: 'test'
+  ...
+# Subtest: 文件对等待全部结束，一方失败不会让另一方跨入下一次保存
+ok 62 - 文件对等待全部结束，一方失败不会让另一方跨入下一次保存
+  ---
+  duration_ms: 0.557666
+  type: 'test'
+  ...
+# Subtest: 捕获、上传和业务失败均保留编辑内容并能重试；失败不更新 ID
+ok 63 - 捕获、上传和业务失败均保留编辑内容并能重试；失败不更新 ID
+  ---
+  duration_ms: 0.3405
+  type: 'test'
+  ...
+# Subtest: 空封面、缺失登记 ID、错误作品类型和缺失保存 ID不能假报成功
+ok 64 - 空封面、缺失登记 ID、错误作品类型和缺失保存 ID不能假报成功
+  ---
+  duration_ms: 0.218042
+  type: 'test'
+  ...
+# Subtest: 初始状态禁止保存，非法状态和空白或超长名称不上传
+ok 65 - 初始状态禁止保存，非法状态和空白或超长名称不上传
+  ---
+  duration_ms: 0.119084
+  type: 'test'
+  ...
+# Subtest: 基线复现：旧页面第二次先上传封面，会携带上次项目 ID 提交
+ok 66 - 基线复现：旧页面第二次先上传封面，会携带上次项目 ID 提交
+  ---
+  duration_ms: 11.179042
+  type: 'test'
+  ...
+# Subtest: ScratchJr 使用独立类型与默认模板，不能打开 Scratch 项目后误覆盖
+ok 67 - ScratchJr 使用独立类型与默认模板，不能打开 Scratch 项目后误覆盖
+  ---
+  duration_ms: 0.225209
+  type: 'test'
+  ...
+# Subtest: ScratchJr 取服务器作品并生成 SJR/PNG，保存 ID、类型、任务与新令牌
+ok 68 - ScratchJr 取服务器作品并生成 SJR/PNG，保存 ID、类型、任务与新令牌
+  ---
+  duration_ms: 16.31875
+  type: 'test'
+  ...
+# Subtest: 本机新作保留本机名；已有平台 ID 忽略陈旧 pmd5
+ok 69 - 本机新作保留本机名；已有平台 ID 忽略陈旧 pmd5
+  ---
+  duration_ms: 2.034
+  type: 'test'
+  ...
+# Subtest: HTTP 失败与 HTML 文件不启动引擎、不允许提交
+ok 70 - HTTP 失败与 HTML 文件不启动引擎、不允许提交
+  ---
+  duration_ms: 1.241083
+  type: 'test'
+  ...
+# Subtest: 引擎错误销毁实例，旧回调不解除新实例的加载锁
+ok 71 - 引擎错误销毁实例，旧回调不解除新实例的加载锁
+  ---
+  duration_ms: 1.278125
+  type: 'test'
+  ...
+# Subtest: 封面无效、文件登记不匹配、401 均保留编辑且不业务提交
+ok 72 - 封面无效、文件登记不匹配、401 均保留编辑且不业务提交
+  ---
+  duration_ms: 3.41375
+  type: 'test'
+  ...
+# Subtest: 预览模式隐藏提交，原生云保存入口也不能写入
+ok 73 - 预览模式隐藏提交，原生云保存入口也不能写入
+  ---
+  duration_ms: 0.827792
+  type: 'test'
+  ...
+# Subtest: 标题与原生变化触发离页提醒；成功保存后清除
+ok 74 - 标题与原生变化触发离页提醒；成功保存后清除
+  ---
+  duration_ms: 1.230916
+  type: 'test'
+  ...
+# Subtest: 引擎仅含声明的六处局部修补，恢复后字节哈希等于上游基线
+ok 75 - 引擎仅含声明的六处局部修补，恢复后字节哈希等于上游基线
+  ---
+  duration_ms: 7.7895
+  type: 'test'
+  ...
+# Subtest: Web 界面初始化不再引用不存在的 fcn 或安排第二次启动
+ok 76 - Web 界面初始化不再引用不存在的 fcn 或安排第二次启动
+  ---
+  duration_ms: 0.77875
+  type: 'test'
+  ...
+# Subtest: 基线复现：ScratchJr 第二次封面回调混用上一轮项目编号
+ok 77 - 基线复现：ScratchJr 第二次封面回调混用上一轮项目编号
+  ---
+  duration_ms: 10.333
+  type: 'test'
+  ...
+1..77
+# tests 77
+# suites 0
+# pass 77
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 216.760958

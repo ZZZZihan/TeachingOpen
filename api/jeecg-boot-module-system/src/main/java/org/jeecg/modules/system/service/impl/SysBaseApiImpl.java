@@ -59,6 +59,18 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @Service
 public class SysBaseApiImpl implements ISysBaseAPI {
+    @Autowired private org.jeecg.modules.system.service.LocalDownloadAccessService localDownloads;
+
+    @Override
+    public int localDownloadStatus(String path) { return localDownloads.status(path); }
+
+	@Autowired
+	private org.jeecg.modules.system.service.ISysFileService uploadedFileService;
+
+	@Override
+	public void recordLocalUpload(String path, String originalName) {
+		uploadedFileService.recordUpload(path, originalName, 1);
+	}
 	/** 当前系统数据库类型 */
 	private static String DB_TYPE = "";
 	@Autowired

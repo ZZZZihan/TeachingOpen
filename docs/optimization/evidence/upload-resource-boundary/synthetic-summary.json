@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "scope": "Actual local HTTP and MySQL with five synthetic accounts; no browser, production or human acceptance.",
+  "same_boundary_probe_sha256": "cd8a799e0a928e16a3530686e167ca28a7ebebd88844360a8b1c140de1a1b487",
+  "old": {
+    "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+    "observed_utc": "2026-10-04T17:30:57.703346+00:00",
+    "passed": 247,
+    "total": 451,
+    "exit_code": 1,
+    "failures": 204,
+    "failure_categories": {
+      "canonical": 0,
+      "public route": 144,
+      "case alias": 48,
+      "published upload": 3,
+      "webapp asset": 9,
+      "collision": 0
+    },
+    "restoration": {
+      "table_count": 69,
+      "non_audit_table_count": 68,
+      "same_table_set": true,
+      "changed_schemas": [],
+      "changed_non_audit_tables": [],
+      "attachments_equal": true,
+      "webapp_files_equal": true,
+      "synthetic_user_columns_restored": true
+    }
+  },
+  "fixed": {
+    "jar_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869",
+    "observed_utc": "2026-10-04T17:32:29.334703+00:00",
+    "boundary_passed": 451,
+    "boundary_total": 451,
+    "report_passed": 452,
+    "report_total": 452,
+    "exit_code": 0,
+    "canonical_download_regression": {
+      "passed": 88,
+      "total": 88,
+      "probe_sha256": "a3ec1444d1ad88d658ea6c697182a6f89bec668de2220225d6cc5b4e0332f11d"
+    },
+    "restoration": {
+      "table_count": 69,
+      "non_audit_table_count": 68,
+      "same_table_set": true,
+      "changed_schemas": [],
+      "changed_non_audit_tables": [],
+      "attachments_equal": true,
+      "webapp_files_equal": true,
+      "synthetic_user_columns_restored": true
+    }
+  },
+  "examples": [
+    {
+      "case": "public route cannot expose upload <owned>_root.png anonymous GET",
+      "old": {
+        "passed": false,
+        "http_status": 200,
+        "response_bytes": 41,
+        "content_type": "image/png",
+        "content_length": "41",
+        "content_range": null
+      },
+      "fixed": {
+        "passed": true,
+        "http_status": 401,
+        "response_bytes": 70,
+        "content_type": "application/json;charset=UTF-8",
+        "content_length": "70",
+        "content_range": null
+      }
+    },
+    {
+      "case": "public route cannot expose upload <owned>_root.png anonymous HEAD",
+      "old": {
+        "passed": false,
+        "http_status": 200,
+        "response_bytes": 0,
+        "content_type": "image/png",
+        "content_length": "41",
+        "content_range": null
+      },
+      "fixed": {
+        "passed": true,
+        "http_status": 401,
+        "response_bytes": 0,
+        "content_type": "application/json;charset=UTF-8",
+        "content_length": "70",
+        "content_range": null
+      }
+    },
+    {
+      "case": "public route cannot expose upload <owned>_root.png anonymous Range",
+      "old": {
+        "passed": false,
+        "http_status": 206,
+        "response_bytes": 8,
+        "content_type": "image/png",
+        "content_length": "8",
+        "content_range": "bytes 0-7/41"
+      },
+      "fixed": {
+        "passed": true,
+        "http_status": 401,
+        "response_bytes": 70,
+        "content_type": "application/json;charset=UTF-8",
+        "content_length": "70",
+        "content_range": null
+      }
+    },
+    {
+      "case": "public route cannot expose upload generic/<owned>.txt anonymous GET",
+      "old": {
+        "passed": false,
+        "http_status": 200,
+        "response_bytes": 49,
+        "content_type": "text/plain",
+        "content_length": "49",
+        "content_range": null
+      },
+      "fixed": {
+        "passed": true,
+        "http_status": 401,
+        "response_bytes": 70,
+        "content_type": "application/json;charset=UTF-8",
+        "content_length": "70",
+        "content_range": null
+      }
+    },
+    {
+      "case": "public route cannot expose upload sys/common/pdf/<owned>.txt anonymous Range",
+      "old": {
+        "passed": false,
+        "http_status": 206,
+        "response_bytes": 8,
+        "content_type": "text/plain",
+        "content_length": "8",
+        "content_range": "bytes 0-7/56"
+      },
+      "fixed": {
+        "passed": true,
+        "http_status": 401,
+        "response_bytes": 70,
+        "content_type": "application/json;charset=UTF-8",
+        "content_length": "70",
+        "content_range": null
+      }
+    },
+    {
+      "case": "webapp asset retains exact public bytes <owned>/<owned>_nested.png anonymous GET",
+      "old": {
+        "passed": false,
+        "http_status": 200,
+        "response_bytes": 43,
+        "content_type": "image/png",
+        "content_length": "43",
+        "content_range": null
+      },
+      "fixed": {
+        "passed": true,
+        "http_status": 200,
+        "response_bytes": 50,
+        "content_type": "image/png",
+        "content_length": "50",
+        "content_range": null
+      }
+    },
+    {
+      "case": "canonical <owned>_root.png student_a GET",
+      "old": {
+        "passed": true,
+        "http_status": 200,
+        "response_bytes": 41,
+        "content_type": "image/png",
+        "content_length": "41",
+        "content_range": null
+      },
+      "fixed": {
+        "passed": true,
+        "http_status": 200,
+        "response_bytes": 41,
+        "content_type": "image/png",
+        "content_length": "41",
+        "content_range": null
+      }
+    },
+    {
+      "case": "canonical <owned>_root.png student_b GET",
+      "old": {
+        "passed": true,
+        "http_status": 403,
+        "response_bytes": 0,
+        "content_type": null,
+        "content_length": "0",
+        "content_range": null
+      },
+      "fixed": {
+        "passed": true,
+        "http_status": 403,
+        "response_bytes": 0,
+        "content_type": null,
+        "content_length": "0",
+        "content_range": null
+      }
+    },
+    {
+      "case": "packaged classpath asset retains exact bytes generic/web/viewer.html GET",
+      "old": {
+        "passed": true,
+        "http_status": 200,
+        "response_bytes": 19553,
+        "content_type": "text/html",
+        "content_length": "19553",
+        "content_range": null
+      },
+      "fixed": {
+        "passed": true,
+        "http_status": 200,
+        "response_bytes": 19553,
+        "content_type": "text/html",
+        "content_length": "19553",
+        "content_range": null
+      }
+    }
+  ],
+  "probe_tool_sha256": {
+    "local_http.py": "6d7aa60a8141d4fa5d4ff19ce26da5127d9cf23bd167b4bd6e9b08a34c0cc54c",
+    "local_recovery.py": "9d91a1b2b26166efaab23e912225107780199f811b202fce0d6a4b93fd7095af",
+    "local_runtime.py": "3da053aec48dad58c77b8c4a7ad1aa11562f1f586edea4cf3ce6c92d7583bee8",
+    "run-backend.py": "e99e0d1576bd6cedfff5991c7cd3819c561c01b82d88eceba63f063c45dec3ed",
+    "prepare-local.py": "4a7a9e6feaf15154ff6f1cf639385f19578e1f6abb6957495fbceae2d6136947",
+    "seed-fixtures.py": "ffa7b134d192a383a53f238370f27fa93ecd2bc33f2845adf5680d8a8fedac75",
+    "verify-local-download.py": "a3ec1444d1ad88d658ea6c697182a6f89bec668de2220225d6cc5b4e0332f11d"
+  },
+  "retained_private_diagnostics": {
+    "first_fixture_attempt": {
+      "passed": 1,
+      "total": 2,
+      "infrastructure_error_type": "RuntimeError",
+      "cause": "Owned fixture file ID exceeded work_file VARCHAR(32); cleanup restored all baseline state"
+    },
+    "intermediate_boundary_attempt": {
+      "passed": 241,
+      "total": 445,
+      "failed": 204
+    },
+    "minimal_old_anonymous_canary": {
+      "canonical_http_status": 401,
+      "public_route_http_status": 200,
+      "exact_private_bytes": true
+    }
+  },
+  "limitations": [
+    "Uses the API FixtureApi login helper and the synthetic Redis CAPTCHA; no browser authentication acceptance.",
+    "The fixed dedicated runtime has five synthetic accounts; no production users or service state tested.",
+    "JAR build skipped unit tests; the boundary matrix and download regression were executed separately over real local HTTP.",
+    "Final comparison uses exactly the same 451 boundary assertions. The fixed report has one additional aggregate assertion for the existing 88-case download regression."
+  ]
+}

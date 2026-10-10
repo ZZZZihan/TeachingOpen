@@ -1,0 +1,126 @@
+{
+  "cases": [
+    {
+      "case": "actual A role options contain the two A roles and exclude B",
+      "passed": true
+    },
+    {
+      "case": "actual A cancellation submits successfully",
+      "passed": true
+    },
+    {
+      "case": "saving empty A selection removes the original A role in DB",
+      "passed": true
+    },
+    {
+      "case": "saving empty A selection preserves the B role in DB",
+      "passed": false
+    },
+    {
+      "case": "actual A addition submits successfully",
+      "passed": true
+    },
+    {
+      "case": "saving A selection adds the selected A role in DB",
+      "passed": true
+    },
+    {
+      "case": "saving A selection preserves the B role in DB",
+      "passed": false
+    },
+    {
+      "case": "role launcher completed without infrastructure errors",
+      "passed": true
+    },
+    {
+      "case": "69 schemas 68 non-audit row sets and all attachments restored",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "kind": "transport",
+      "value": "Actual DeptRoleUserModal methods, real HTTP, immediate owned DB checks; no Vue/AntD rendering."
+    },
+    {
+      "kind": "requests",
+      "operations": [
+        {
+          "method": "GET",
+          "route": "/sys/sysDepartRole/getDeptRoleList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepartRole/getDeptRoleByUserId",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "POST",
+          "route": "/sys/sysDepartRole/deptRoleUserAdd",
+          "old_role_scopes": [
+            "A",
+            "B"
+          ],
+          "new_role_scopes": [],
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "POST",
+          "route": "/sys/sysDepartRole/deptRoleUserAdd",
+          "old_role_scopes": [],
+          "new_role_scopes": [
+            "B"
+          ],
+          "success": true,
+          "code": 200
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepartRole/getDeptRoleList",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "GET",
+          "route": "/sys/sysDepartRole/getDeptRoleByUserId",
+          "success": true,
+          "code": 0
+        },
+        {
+          "method": "POST",
+          "route": "/sys/sysDepartRole/deptRoleUserAdd",
+          "old_role_scopes": [
+            "B"
+          ],
+          "new_role_scopes": [
+            "A"
+          ],
+          "success": true,
+          "code": 200
+        }
+      ]
+    }
+  ],
+  "source_hashes": {
+    "web/src/views/system/modules/DeptRoleUserModal.vue": "16610793b07af94710346aa4f693862db80e8d6df7c0fb406c849bd0827fe1b7"
+  },
+  "source_ref": "8f58b32362899047da0136e41278368fd26c88f0",
+  "exit_code": 1,
+  "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+  "wrapper_sha256": "6558bb703d9cf7700d9448eac16199c5a0416dbbfb8207d7d89b98bac0a55965",
+  "probe_sha256": "dc38ff23bbc64cf65ed66418b0ef989c6701e0dc28137c56b4d76b38d931c5e3",
+  "restoration": {
+    "table_count": 69,
+    "non_audit_table_count": 68,
+    "same_table_set": true,
+    "changed_schemas": [],
+    "changed_non_audit_tables": [],
+    "all_attachment_entries_equal": true
+  },
+  "total": 9,
+  "passed": 7
+}

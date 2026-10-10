@@ -1,0 +1,33 @@
+{
+  "database_snapshot": {
+    "observed_utc": "2026-10-03T05:38:58.980138+00:00",
+    "bytes": 2167779,
+    "sha256": "54b7bc48c80dfafd405bf0907502fb46c3de90ee50bc25540e7fe0f547a6435c",
+    "permission": "0o600",
+    "observed_counts": {
+      "tables": 69,
+      "courses": 5,
+      "units": 83,
+      "works": 3,
+      "users": 7
+    }
+  },
+  "assets": {
+    "files": 384,
+    "bytes": 9042431103,
+    "source_and_copy_sha256_match": true,
+    "scope": "All asset bytes match source measured after copy; database and assets are not an atomic cross-resource snapshot."
+  },
+  "source_health_after": {
+    "teaching-open": "active",
+    "nginx": "active",
+    "mysql": "active",
+    "redis-server": "active",
+    "main_pid": 45629,
+    "nrestarts": 0,
+    "active_since": "2026-09-11 16:00:49 CST",
+    "homepage_http": 200
+  },
+  "sanitized": false,
+  "raw_data_in_git": false
+}

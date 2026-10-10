@@ -1,0 +1,221 @@
+
+> vue-antd-jeecg@2.2.0 build
+> vue-cli-service build --dest /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/python-execution-next-dist
+
+
+-  Building for production...
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ WARNING  Compiled with 12 warnings5:32:03 PM
+
+ warning
+
+chunk chunk-295b2f45 [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/chart/MiniArea.vue?vue&type=style&index=0&id=1efcadbe&prod&lang=less&scoped=true
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/chart/MiniBar.vue?vue&type=style&index=0&id=ebc8c03c&prod&lang=less&scoped=true
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , ,
+
+ warning
+
+chunk chunk-337319f0 [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/views/jeecg/tablist/form/JeecgOrderCustomerModal.vue?vue&type=style&index=0&id=800ce91c&prod&scoped=true&lang=css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/views/jeecg/tablist/form/JeecgOrderDMainModal.vue?vue&type=style&index=0&id=3947da84&prod&scoped=true&lang=css
+   - couldn't fulfill desired order of chunk group(s)
+
+ warning
+
+chunk chunk-337319f0 [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/views/jeecg/tablist/JeecgOrderDMainList.vue?vue&type=style&index=0&id=1bacfb3c&prod&scoped=true&lang=css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/views/jeecg/tablist/JeecgOrderCustomerList.vue?vue&type=style&index=0&id=032e064e&prod&scoped=true&lang=css
+   - couldn't fulfill desired order of chunk group(s)
+
+ warning
+
+chunk chunk-39e07799 [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/views/system/modules/DepartWindow.vue?vue&type=style&index=0&id=7a73cd8c&prod&scoped=true&lang=css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/views/system/modules/UserModal.vue?vue&type=style&index=0&id=6a72d602&prod&scoped=true&lang=css
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , , ,
+
+ warning
+
+chunk chunk-5f72b73b [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecgbiz/modal/JSelectDepartModal.vue?vue&type=style&index=0&id=6bef2136&prod&lang=less&scoped=true
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JUpload.vue?vue&type=style&index=0&id=43191c84&prod&lang=less
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , ,
+
+ warning
+
+chunk chunk-5f72b73b [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecgbiz/JSelectDepart.vue?vue&type=style&index=0&id=bd02b66e&prod&scoped=true&lang=css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JUpload.vue?vue&type=style&index=0&id=43191c84&prod&lang=less
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , ,
+
+ warning
+
+chunk chunk-5f72b73b [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-3-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-3-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/codemirror/lib/codemirror.css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JUpload.vue?vue&type=style&index=0&id=43191c84&prod&lang=less
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , ,
+
+ warning
+
+chunk chunk-5f72b73b [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-3-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-3-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/codemirror/theme/panda-syntax.css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JUpload.vue?vue&type=style&index=0&id=43191c84&prod&lang=less
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , ,
+
+ warning
+
+chunk chunk-5f72b73b [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-3-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-3-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/codemirror/addon/hint/show-hint.css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JUpload.vue?vue&type=style&index=0&id=43191c84&prod&lang=less
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , ,
+
+ warning
+
+chunk chunk-5f72b73b [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JCodeEditor.vue?vue&type=style&index=0&id=223238d2&prod&lang=less
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JUpload.vue?vue&type=style&index=0&id=43191c84&prod&lang=less
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , ,
+
+ warning
+
+asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets:
+  js/chunk-036659b6.b7f18316.js (1.24 MiB)
+  js/chunk-2d0ab315.149bc1f3.js (754 KiB)
+  js/chunk-2dcb7cd7.b84f256a.js (1.87 MiB)
+  js/chunk-5f72b73b.41e60bb5.js (406 KiB)
+  css/chunk-vendors.0626b6c1.css (548 KiB)
+  js/chunk-vendors.a2dd1501.js (7.91 MiB)
+  blockly/blockly_compressed.js (909 KiB)
+  python/static/js/appPlayer.js (955 KiB)
+  python/static/js/app.js (958 KiB)
+  python/static/css/appPlayer.css (523 KiB)
+  python/static/css/app.css (523 KiB)
+  python/static/js/vendor.js (2.41 MiB)
+  scratch3/js/scratch.js (1.38 MiB)
+  scratch3/lib.min.js (12.5 MiB)
+  scratch3/static/assets/9fd052aaf1b4701ff0134d124d6327a3.jpg (269 KiB)
+  scratch3/static/assets/d7eb1e753d603d291d24509c5389d92b.jpg (271 KiB)
+  scratch3/static/internalapi/asset/0015433a406a53f00b792424b823268c.png (420 KiB)
+  scratch3/static/internalapi/asset/050615fe992a00d6af0e664e497ebf53.png (329 KiB)
+  scratch3/static/internalapi/asset/0b4a15ba028bf205ec051390d6ac4de7.png (248 KiB)
+  scratch3/static/internalapi/asset/1517c21786d2d0edc2f3037408d850bd.png (286 KiB)
+  scratch3/static/internalapi/asset/1679049718869e1f548e1e8823e29c1c.png (262 KiB)
+  scratch3/static/internalapi/asset/18e5a88512296cd96417449496bd8711.wav (269 KiB)
+  scratch3/static/internalapi/asset/19211d5ecd34214b6aba947790e63bb0.wav (338 KiB)
+  scratch3/static/internalapi/asset/1ef98019fc94ea65a1b55d5521285c7a.png (259 KiB)
+  scratch3/static/internalapi/asset/2129c842f28d6881f622fdc3497ff2da.png (306 KiB)
+  scratch3/static/internalapi/asset/25a6ede51a96d4e55de2ffb81ae96f8c.png (302 KiB)
+  scratch3/static/internalapi/asset/2de108f3098e92f5c5976cf75d38e99d.png (414 KiB)
+  scratch3/static/internalapi/asset/30085b2d27beb5acdbe895d8b3e64b04.svg (333 KiB)
+  scratch3/static/internalapi/asset/47282ff0f7047c6fab9c94b531abf721.png (374 KiB)
+  scratch3/static/internalapi/asset/4f45f79af8e8dac3d41eb5a06ade61d4.png (272 KiB)
+  scratch3/static/internalapi/asset/4f66053598bea0905e1559ab9d5a6e31.png (498 KiB)
+  scratch3/static/internalapi/asset/5b0a970202b464915915260c03f05455.png (403 KiB)
+  scratch3/static/internalapi/asset/5d747ec036755a4b129f0d5b978bc61c.png (501 KiB)
+  scratch3/static/internalapi/asset/5fab1922f254ae9fd150162c3e392bef.png (509 KiB)
+  scratch3/static/internalapi/asset/646ea2f42ab04b54f1359ccfac958561.wav (299 KiB)
+  scratch3/static/internalapi/asset/6cab934df643d2fc508cfa90c0c4059b.png (287 KiB)
+  scratch3/static/internalapi/asset/82d867fcd9f1b5f49e29c2f853d55665.png (441 KiB)
+  scratch3/static/internalapi/asset/84f7b490f0f536cc1337ab7948aa3aa7.wav (431 KiB)
+  scratch3/static/internalapi/asset/89691587a169d935a58c48c3d4e78534.wav (315 KiB)
+  scratch3/static/internalapi/asset/8c2ae70ee6a15c8d58004df7c4718de1.wav (288 KiB)
+  scratch3/static/internalapi/asset/92968ac16b2f0c3f7835a6dacd172c7b.png (361 KiB)
+  scratch3/static/internalapi/asset/93d71e8b8a96cc007b8d68f36acd338a.png (249 KiB)
+  scratch3/static/internalapi/asset/962201a2b712a302fb087f8f0dcb2076.png (381 KiB)
+  scratch3/static/internalapi/asset/951765ee7f7370f120c9df20b577c22f.png (437 KiB)
+  scratch3/static/internalapi/asset/968f0ede6e70e1dbb763d6fd4c5003e0.png (411 KiB)
+  scratch3/static/internalapi/asset/9b020b8c7cb6a9592f7303add9441d8f.png (253 KiB)
+  scratch3/static/internalapi/asset/9b5cdbd596da1b6149f56b794b6394f4.png (455 KiB)
+  scratch3/static/internalapi/asset/a23fbf972001c94637b568992f8fd7bd.png (457 KiB)
+  scratch3/static/internalapi/asset/c2b097bc5cdb6a14ef5485202bc5ee76.png (392 KiB)
+  scratch3/static/internalapi/asset/c4e9e84fd9244ca43986c2bdb6669ae8.wav (345 KiB)
+  scratch3/static/internalapi/asset/c587075453ace1584cf155d6a8de604d.wav (322 KiB)
+  scratch3/static/internalapi/asset/c7c0b27b959193a0b570a9639cfe8158.png (297 KiB)
+  scratch3/static/internalapi/asset/c8d90320d2966c08af8cdd1c6a7a93b5.png (384 KiB)
+  scratch3/static/internalapi/asset/c9847be305920807c5597d81576dd0c4.svg (271 KiB)
+  scratch3/static/internalapi/asset/d3344650f594bcecdf46aa4a9441badd.svg (310 KiB)
+  scratch3/static/internalapi/asset/da102a69d135973e0fc139131dec785a.png (342 KiB)
+  scratch3/static/internalapi/asset/e1914ed7917267f1c2ef2b48004cade9.png (372 KiB)
+  scratch3/static/internalapi/asset/e213e09ed852c621ba87cde7f95eec79.wav (345 KiB)
+  scratch3/static/internalapi/asset/e5f794c8756ca0cead5cb7e7fe354c41.png (497 KiB)
+  scratch3/static/internalapi/asset/ea86ca30b346f27ca5faf1254f6a31e3.png (252 KiB)
+  scratch3/static/internalapi/asset/efb625f7e0b199b15f69e116cd053cea.png (444 KiB)
+  scratch3/static/internalapi/asset/f4f908da19e2753f3ed679d7b37650ca.png (314 KiB)
+  scratch3/static/internalapi/asset/f84989feee2cf462a1c597169777ee3c.png (279 KiB)
+  scratch3/static/json_index/costumes.json (334 KiB)
+  scratch3/static/json_index/sprites.json (539 KiB)
+  scratchjr/app.bundle.js (1.18 MiB)
+  scratchjr/assets/ui/backgrounds.png (497 KiB)
+  scratchjr/samples/chicken.wav (294 KiB)
+  scratchjr/samples/Dance_magic.wav (368 KiB)
+  scratchjr/samples/Dance_slowmo.wav (435 KiB)
+  scratchjr/samples/f63d8716c8262eb633b29c118966d782.svg (471 KiB)
+  scratchjr/assets/lobby/intro.mp4 (11.7 MiB)
+  scratchjr/app.bundle.js.gz (264 KiB)
+  js/chunk-036659b6.b7f18316.js.gz (390 KiB)
+  scratch3/js/scratch.js.gz (411 KiB)
+  js/chunk-2dcb7cd7.b84f256a.js.gz (527 KiB)
+  python/static/js/vendor.js.gz (740 KiB)
+  js/chunk-vendors.a2dd1501.js.gz (2.45 MiB)
+  scratch3/lib.min.js.gz (4.36 MiB)
+
+ warning
+
+entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  app (8.71 MiB)
+      css/chunk-vendors.0626b6c1.css
+      js/chunk-vendors.a2dd1501.js
+      css/app.34569fa6.css
+      js/app.8ceacb01.js
+
+
+  File                                      Size             Gzipped
+
+  ../../../python-execution-next-dist/sc    12770.88 KiB     4477.56 KiB
+  ratch3/lib.min.js
+  ../../../python-execution-next-dist/js    105.16 KiB       37.71 KiB
+  /vue.min.js
+  ../../../python-execution-next-dist/js    85.48 KiB        29.70 KiB
+  /jquery.min.js
+  ../../../python-execution-next-dist/sc    85.48 KiB        29.70 KiB
+  ratchjr/js/jquery.min.js
+
+
+  Images and other types of assets omitted.
+
+ DONE  Build complete. The ../../../python-execution-next-dist directory is ready to be deployed.
+ INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html

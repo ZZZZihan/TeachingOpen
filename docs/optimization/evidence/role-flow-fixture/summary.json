@@ -1,0 +1,34 @@
+{
+  "scope": "pure fixture tests and local synthetic asset inspection",
+  "pure_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s api/dev -p test_role_flow_fixture.py -v",
+    "passed": 15,
+    "database_connections": 0,
+    "service_starts": 0,
+    "browser_logins": 0
+  },
+  "assets": {
+    "origin": "self-authored prior local test fixtures",
+    "video": {
+      "codec": "h264",
+      "width": 640,
+      "height": 360,
+      "duration_seconds": 10
+    },
+    "sb3": "two targets with original SVG assets",
+    "sjr": "one empty page with original PNG thumbnail",
+    "runtime_assets": 8
+  },
+  "pending": [
+    "root real create/verify",
+    "candidate JAR/dist startup",
+    "authorized ordinary captcha login",
+    "real three-role browser flow acceptance"
+  ],
+  "tools_sha256": {
+    "role_flow_fixture.py": "2cb63d80d12c90ac505ed0d62c7168ac2fe26ea3f8af98ad68e3993cc12cf303",
+    "seed-role-flows.py": "f05a39e13344fbf380aa1040102dcbb90ef2781e50d08e04e6f1916a8fb34cab",
+    "test_role_flow_fixture.py": "857f51750d9d7748833195846f795ba2214e89aac00aa4920b13b293aef22ca4"
+  },
+  "record_stage": "Author freeze before root actual execution; completed root results are in root-validation.json"
+}

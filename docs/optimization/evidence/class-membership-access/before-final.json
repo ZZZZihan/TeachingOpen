@@ -1,0 +1,512 @@
+{
+  "cases": [
+    {
+      "case": "anonymous cannot add A membership",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous cannot one A membership",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous cannot batch A membership",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "anonymous cannot clear A membership",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "student_a cannot add A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "student_a cannot one A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "student_a cannot batch A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "student_a cannot clear A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "student_b cannot add A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "student_b cannot one A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "student_b cannot batch A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "student_b cannot clear A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "teacher_a cannot add A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "teacher_a cannot one A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "teacher_a cannot batch A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "teacher_a cannot clear A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "teacher_b cannot add A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "teacher_b cannot one A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "teacher_b cannot batch A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "teacher_b cannot clear A membership",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin adds one existing account without duplicate relation",
+      "passed": true,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "admin repeated add is idempotent",
+      "passed": true,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "admin normal one clears only target associations and department roles",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin normal batch clears only target associations and department roles",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "admin normal clear clears only target associations and department roles",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev adds one existing account without duplicate relation",
+      "passed": true,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "dev repeated add is idempotent",
+      "passed": true,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "dev normal one clears only target associations and department roles",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev normal batch clears only target associations and department roles",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "dev normal clear clears only target associations and department roles",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "add rejects empty department unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "add rejects missing department unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "one rejects empty department unchanged",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "one rejects missing department unchanged",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "batch rejects empty department unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "batch rejects missing department unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "clear rejects empty department unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "clear rejects missing department unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "add rejects empty users atomically",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "add rejects mixed missing user atomically",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "add rejects blank user atomically",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "one rejects missing user atomically",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "batch rejects mixed missing user atomically",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "batch rejects interior empty token atomically",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "batch rejects empty users atomically",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "add rejects department case alias unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "one rejects department case alias unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "batch rejects department case alias unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "clear rejects department case alias unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "add rejects user case alias unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "one rejects user case alias unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "batch rejects user case alias unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "add rejects deleted department unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "one rejects deleted department unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "batch rejects deleted department unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "clear rejects deleted department unchanged",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "add rejects deleted user without partial mutation",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "one rejects deleted user without partial mutation",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "batch rejects deleted user without partial mutation",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "clear rejects deleted user without partial mutation",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "one rejects nonmember atomically",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "batch rejects nonmember atomically",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "batch accepts duplicate IDs and legacy trailing comma",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "one refuses any higher-level target without partial removal",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "batch refuses any higher-level target without partial removal",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "clear refuses any higher-level target without partial removal",
+      "passed": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "add rolls back on sys_user_depart INSERT fault",
+      "passed": false,
+      "injected_fault_reached": true,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "add hides SQL details on sys_user_depart INSERT fault",
+      "passed": false,
+      "http_status": 200,
+      "code": 0
+    },
+    {
+      "case": "one rolls back on sys_depart_role_user DELETE fault",
+      "passed": false,
+      "injected_fault_reached": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "one hides SQL details on sys_depart_role_user DELETE fault",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "batch rolls back on sys_depart_role_user DELETE fault",
+      "passed": false,
+      "injected_fault_reached": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "batch hides SQL details on sys_depart_role_user DELETE fault",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "clear rolls back on sys_depart_role_user DELETE fault",
+      "passed": false,
+      "injected_fault_reached": false,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "clear hides SQL details on sys_depart_role_user DELETE fault",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "one rolls back on sys_user_depart DELETE fault",
+      "passed": true,
+      "injected_fault_reached": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "one hides SQL details on sys_user_depart DELETE fault",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "batch rolls back on sys_user_depart DELETE fault",
+      "passed": true,
+      "injected_fault_reached": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "batch hides SQL details on sys_user_depart DELETE fault",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "clear rolls back on sys_user_depart DELETE fault",
+      "passed": true,
+      "injected_fault_reached": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "clear hides SQL details on sys_user_depart DELETE fault",
+      "passed": false,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "two concurrent adds leave one association",
+      "passed": false
+    },
+    {
+      "case": "all schemas non-audit rows and attachments restored",
+      "passed": true
+    }
+  ],
+  "scope": "Real local HTTP and MySQL, synthetic accounts only; no browser or production acceptance.",
+  "restoration": {
+    "table_count": 69,
+    "non_audit_table_count": 68,
+    "same_table_set": true,
+    "changed_schemas": [],
+    "changed_non_audit_tables": [],
+    "attachments_equal": true
+  },
+  "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+  "probe_sha256": "b9b6c0c3f90b28f67cd353ebdf95a584abb90dfe0a11714200205c6abaf86053",
+  "total": 82,
+  "passed": 28
+}

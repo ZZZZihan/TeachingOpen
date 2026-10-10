@@ -1,0 +1,52 @@
+{
+  "product_commit": "ae536aee4076737104815c06263c42dbf2250bb3",
+  "base_commit": "75586a844bcce3c715f02fd057964ea4eb9b28f3",
+  "frontend_tests": {
+    "passed": 159,
+    "failed": 0,
+    "new": 10
+  },
+  "lint": {
+    "file": "web/public/python/output.js",
+    "errors": 0,
+    "warnings": 0
+  },
+  "build": {
+    "success": true,
+    "existing_warnings": 6
+  },
+  "browser": {
+    "final_observations": 15,
+    "authentication": "none; loopback fixture only",
+    "widths": [
+      1440,
+      768,
+      390
+    ],
+    "note": "Control+End did not scroll; PageDown on focused output did. Intermediate 200000-unit limit timed out during narrow-screen scrolling and was replaced with 20000; final screenshots succeeded."
+  },
+  "backend": "unchanged, no backend tests rerun or database writes",
+  "files_sha256": {
+    "after-editor.png": "e00dbf1c047e61afcd2ddb68d8c2865d53754cca682e52dab3be411f3f530d3b",
+    "after-player.png": "21c5241fc18028c532cd0dc16f01aa39a6f31b8f1c088b7676fe6bda90bb02ed",
+    "assets.json": "017aadb2e466ed3f3d88f428e831f9f02398ac1854cc0d437cef12e313339a90",
+    "before-editor.json": "fd3880aad219555d1127a3d98a0f2cdb0ca7781a5d0e4dff179c6b06b2ebc2c3",
+    "before-editor.png": "3315f258dc0fc8706def54d8327cbd7ec866d59afd00ec421082998c384531ec",
+    "before-player.json": "a3f705d1527d6e2c790eaf1b14556ca12fbca094aafbb7d2d5ee87068b815f89",
+    "before-player.png": "d94ed3dd44ad45b9968298362c8430abe6d826e8e57972c8a6f1c8c5d58d2070",
+    "browser-observations.json": "bbbf5339eb2ea79222a855e87328a1f802a59e10e577173ead580f0bc84fc207",
+    "fixture-state.json": "e8f8f341c18f670d9cebb1343fc8d820708931d7fe625c500c7fb3a70bfd7fb2",
+    "frontend-tests.txt": "772d9c34e9f23efaf797110c3dd96b5dc71a3ed5a4c6880c2b28449231928879",
+    "long-output-1440.png": "c0dd0a0b1b38823182a0322a21051f28262bdf4e7add3daadb3fac150b55bf3d",
+    "long-output-390.png": "3580b109f0df800ee0ab63e72caecc68e7b4c82648f115f0784162fda68c7a53",
+    "long-output-768.png": "1824d36918e605b677f8b34a63facc0bdafdf93d873f65718eb4499606c9a827",
+    "long-output-player.png": "1b81ef5a6d19f796c29a422b0bac49241d389791dcd1d85adec599c111f8e810",
+    "output-lint.txt": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "pre-adjustment-observations.json": "54ba71df3f2dd213c60de434ce20d1390f1ccbb731dc57d3163ca753530a5ad0",
+    "preservation.json": "875dbf7891ece78e5ee4985bc4c1d3d2f9d4ff73540feab5582263d4e4bda906",
+    "production-build.txt": "b997e5112201b58635c6a0ef6a139232ea6bb8f94d12955e43a7fc9c5fa25e09",
+    "responsive.json": "799b24b4f45d7ca95e3665c7efa4c3c50347738b465f3a621e41545ef60964b8",
+    "runtime-error.png": "ac4b79185719042bd9606571be241aaa6426da5f4960348a906f8e284dc1fe23",
+    "turtle.png": "b16e031e3944aa9cfdf4c260f441b35483a8fee205e792e42b3b1e0cc4f2219f"
+  }
+}

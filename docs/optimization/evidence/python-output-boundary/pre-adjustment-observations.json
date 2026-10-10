@@ -1,0 +1,101 @@
+{
+  "note": "Intermediate 200000-unit design; reduced to 20000 after tab 29 timed out during narrow-screen scroll/screenshot",
+  "observations": [
+    {
+      "case": "editor literal output",
+      "children": [],
+      "html": "&lt;strong data-output-probe=\"literal\"&gt;HTML 必须保持原样&lt;/strong&gt;\n&amp;lt;b&amp;gt; 3 &lt; 5 &amp; 8 &gt; 2\n中文与符号：你好 😀\n42\n",
+      "text": "<strong data-output-probe=\"literal\">HTML 必须保持原样</strong>\n&lt;b&gt; 3 < 5 & 8 > 2\n中文与符号：你好 😀\n42\n"
+    },
+    {
+      "case": "player literal output",
+      "children": [],
+      "html": "&lt;strong data-output-probe=\"literal\"&gt;HTML 必须保持原样&lt;/strong&gt;\n&amp;lt;b&amp;gt; 3 &lt; 5 &amp; 8 &gt; 2\n中文与符号：你好 😀\n42\n",
+      "text": "<strong data-output-probe=\"literal\">HTML 必须保持原样</strong>\n&lt;b&gt; 3 < 5 & 8 > 2\n中文与符号：你好 😀\n42\n"
+    },
+    {
+      "case": "player clear",
+      "text": ""
+    },
+    {
+      "case": "editor 210000 characters",
+      "length": 200054,
+      "nodeTypes": [
+        3,
+        1
+      ],
+      "notices": 1,
+      "tail": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\n输出较长，已停止显示后续内容（显示上限约 20 万字符）。程序仍可继续运行；清空或重新运行可重置输出区。"
+    },
+    {
+      "case": "editor clears truncated output",
+      "text": ""
+    },
+    {
+      "case": "10000 print calls",
+      "end": "('line', 9998)\n('line', 9999)\n",
+      "length": 148890,
+      "nodeTypes": [
+        3
+      ],
+      "start": "('line', 0)\n('line', 1)\n('line"
+    },
+    {
+      "case": "runtime error remains visible",
+      "zeroDivision": true
+    },
+    {
+      "case": "turtle after division error",
+      "canvases": [
+        {
+          "height": "400",
+          "width": "400"
+        },
+        {
+          "height": "400",
+          "width": "400"
+        }
+      ],
+      "output": "turtle done: 42\n"
+    },
+    {
+      "case": "clear also removes turtle",
+      "canvasCount": 0,
+      "output": ""
+    },
+    {
+      "case": "saved source reopens through fixture",
+      "status": "作品已打开",
+      "turtleCodeVisible": true
+    }
+  ],
+  "responsive": [
+    {
+      "document": 1440,
+      "label": "程序输出",
+      "outputHeight": 400,
+      "outputScrollHeight": 77914,
+      "outputWidth": 480,
+      "tabindex": "0",
+      "viewport": 1440
+    },
+    {
+      "document": 768,
+      "label": "程序输出",
+      "outputHeight": 400,
+      "outputScrollHeight": 48954,
+      "outputWidth": 748,
+      "tabindex": "0",
+      "viewport": 768
+    },
+    {
+      "document": 390,
+      "label": "程序输出",
+      "outputHeight": 400,
+      "outputScrollHeight": 102610,
+      "outputWidth": 370,
+      "tabindex": "0",
+      "viewport": 390
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "binding": {
+    "assets_result_sha256": "ce5dc2b2f86faec5017b73eaf4944e4689d8f7ecdeb219a6851d7e3cc7a677ab",
+    "config_sha256": "ee4ae279616785ab301a147c747118e601e61a977b0eeb41e7c71420484e8355",
+    "manifest_sha256": "bb4380486c95f6ddd2aa8b362ffed6213e2614485a090e27f4c82ef825cdc100",
+    "schema_policy_sha256": "641617eaff6f6df5d2cdb9e0d4227f29260b8eb650984453f0d0a8ea9c4fc796",
+    "source_manifest_sha256": "ed521f84edbeb46f146711fbd35dc48c8d516dc1595d00ed9d987572e650debc",
+    "source_sha256": "54b7bc48c80dfafd405bf0907502fb46c3de90ee50bc25540e7fe0f547a6435c"
+  },
+  "completed": true,
+  "counts": {
+    "assets": 297,
+    "failed": 0,
+    "inventory_only": 86,
+    "media_checked": 211,
+    "passed": 211
+  },
+  "extensions": {
+    "jpg": 83,
+    "md": 83,
+    "mp4": 83,
+    "pdf": 45,
+    "png": 3
+  },
+  "failures": {},
+  "format": 1,
+  "kind": "teachingopen-private-media-audit-summary",
+  "passed": true,
+  "report_directory": "reports/media-audit-97884e1289a045afa647ebed8816299d",
+  "safety": {
+    "after": {
+      "bytes": 5941586119,
+      "file_count": 297,
+      "scope": "all_upload_file_stat_metadata_only",
+      "stat_inventory_sha256": "4a997a56eb12bdaf8ae9a237be0360dace2e8015257a25f78c3c3d42962721b1"
+    },
+    "after_error_code": null,
+    "before": {
+      "bytes": 5941586119,
+      "file_count": 297,
+      "scope": "all_upload_file_stat_metadata_only",
+      "stat_inventory_sha256": "4a997a56eb12bdaf8ae9a237be0360dace2e8015257a25f78c3c3d42962721b1"
+    },
+    "binding_after": {
+      "assets_result_sha256": "ce5dc2b2f86faec5017b73eaf4944e4689d8f7ecdeb219a6851d7e3cc7a677ab",
+      "config_sha256": "ee4ae279616785ab301a147c747118e601e61a977b0eeb41e7c71420484e8355",
+      "manifest_sha256": "bb4380486c95f6ddd2aa8b362ffed6213e2614485a090e27f4c82ef825cdc100",
+      "schema_policy_sha256": "641617eaff6f6df5d2cdb9e0d4227f29260b8eb650984453f0d0a8ea9c4fc796",
+      "source_manifest_sha256": "ed521f84edbeb46f146711fbd35dc48c8d516dc1595d00ed9d987572e650debc",
+      "source_sha256": "54b7bc48c80dfafd405bf0907502fb46c3de90ee50bc25540e7fe0f547a6435c"
+    },
+    "full_asset_content_hash_performed": false,
+    "selected_content_hash_scope": "source_manifest_claim_only",
+    "unchanged": true
+  },
+  "selection_counts": {
+    "md": 1,
+    "mp4": 4,
+    "pdf": 2
+  },
+  "statistics": {
+    "md": {
+      "bytes": {
+        "max": 6601,
+        "min": 634
+      },
+      "headings": {
+        "max": 35,
+        "min": 0
+      },
+      "lines": {
+        "max": 326,
+        "min": 5
+      },
+      "newline_counts": {
+        "cr": 0,
+        "crlf": 0,
+        "lf": 9083
+      },
+      "utf8_bom": 0
+    },
+    "mp4": {
+      "audio_groups": {
+        "aac/1": 83
+      },
+      "bytes": {
+        "max": 96459689,
+        "min": 18052955
+      },
+      "duration_seconds": {
+        "max": 558.634167,
+        "min": 51.633333
+      },
+      "layouts": {
+        "moov_after_mdat": 60,
+        "moov_before_mdat": 23
+      },
+      "video_codecs": {
+        "h264": 83
+      },
+      "video_profiles": {
+        "High": 83
+      }
+    },
+    "pdf": {
+      "bytes": {
+        "max": 7624328,
+        "min": 102118
+      },
+      "encrypted": 0,
+      "pages": {
+        "max": 30,
+        "min": 4
+      },
+      "versions": {
+        "1.4": 19,
+        "1.7": 26
+      }
+    }
+  },
+  "tool_binding": {
+    "audit_cli_sha256": "79a06cc4e86747e1b338b03bdf33a091b5d51569810e2bb7c19eda057350e2b1",
+    "audit_module_sha256": "b4bc63664ee603cc70b784ff856c728b3712b3ab4b20cb1ceb2ccbc4fc6547b3",
+    "ffprobe_sha256": "008d2de26bd19f7fa497d0b7d9d45880e0240de46dc984916be759fd35bdd135",
+    "pdfinfo_sha256": "75f0ed374a2587d8e4d163638cd317358bd0725753e7576e8ada8e90f46a6a22"
+  }
+}

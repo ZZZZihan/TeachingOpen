@@ -1,0 +1,76 @@
+[
+  {
+    "case": "after submitted 1440",
+    "document": 1440,
+    "feedbacks": 2,
+    "viewport": 1440,
+    "zeroVisible": true
+  },
+  {
+    "case": "before submitted 1440",
+    "document": 1440,
+    "feedbacks": 0,
+    "viewport": 1440,
+    "zeroVisible": false
+  },
+  {
+    "case": "after submitted 768",
+    "document": 768,
+    "feedbacks": 2,
+    "viewport": 768,
+    "zeroVisible": true
+  },
+  {
+    "case": "before submitted 768",
+    "document": 768,
+    "feedbacks": 0,
+    "viewport": 768,
+    "zeroVisible": false
+  },
+  {
+    "case": "after submitted 390",
+    "document": 390,
+    "feedbacks": 2,
+    "viewport": 390,
+    "zeroVisible": true
+  },
+  {
+    "case": "before submitted 390",
+    "document": 390,
+    "feedbacks": 0,
+    "viewport": 390,
+    "zeroVisible": false
+  },
+  {
+    "case": "HTTP 503 list",
+    "result": "Error state displayed; no empty-success or stuck loading"
+  },
+  {
+    "case": "Empty submitted filter",
+    "result": "Distinct empty state with all assignments action"
+  },
+  {
+    "case": "Pagination",
+    "result": "10 synthetic tasks: second page shows tasks 9 and 10, next disabled"
+  },
+  {
+    "case": "Actual page + modal + synthetic HTTP submission",
+    "result": "Uploaded authored observation-report.txt; submit closed modal and refreshed pending list from 2 to 1 without manual refresh"
+  },
+  {
+    "case": "Submitted filter after modal success",
+    "result": "New task shown as submitted and waiting for review; 4 submitted rows"
+  },
+  {
+    "case": "Keyboard filter navigation",
+    "result": "Tab focused all assignments with visible outline; Enter selected it"
+  },
+  {
+    "case": "Retry after server recovery",
+    "result": "Restored fixture mode independently; clicked actual retry button; all 5 tasks return"
+  },
+  {
+    "case": "Submitted file link",
+    "result": "Opens authored text resource in a new tab; source list remains available"
+  }
+]

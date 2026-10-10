@@ -1,0 +1,32 @@
+[
+  {
+    "suite": "auth-status",
+    "passed": 7,
+    "total": 7,
+    "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396"
+  },
+  {
+    "suite": "role-cache",
+    "passed": 11,
+    "total": 11,
+    "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396"
+  },
+  {
+    "suite": "permission-menu",
+    "passed": 34,
+    "total": 34,
+    "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396"
+  },
+  {
+    "suite": "recovered-business",
+    "passed": 29,
+    "total": 29,
+    "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396"
+  },
+  {
+    "suite": "container-http",
+    "passed": 9,
+    "total": 9,
+    "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396"
+  }
+]

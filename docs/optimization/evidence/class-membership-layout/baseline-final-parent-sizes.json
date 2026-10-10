@@ -1,0 +1,65 @@
+[
+  {
+    "body": 390,
+    "containers": [
+      {
+        "class": "ant-card",
+        "client": 338,
+        "left": 26.6484375,
+        "right": 364.6484375,
+        "scroll": 410
+      },
+      {
+        "class": "ant-table-body",
+        "client": 290,
+        "left": 50.6484375,
+        "right": 340.6484375,
+        "scroll": 386
+      }
+    ],
+    "document": 390,
+    "width": 390
+  },
+  {
+    "body": 768,
+    "containers": [
+      {
+        "class": "ant-card",
+        "client": 419,
+        "left": 323.5,
+        "right": 742,
+        "scroll": 419
+      },
+      {
+        "class": "ant-table-body",
+        "client": 371,
+        "left": 347.5,
+        "right": 718,
+        "scroll": 386
+      }
+    ],
+    "document": 768,
+    "width": 768
+  },
+  {
+    "body": 1440,
+    "containers": [
+      {
+        "class": "ant-card",
+        "client": 612,
+        "left": 631.828125,
+        "right": 1243.9921875,
+        "scroll": 612
+      },
+      {
+        "class": "ant-table-body",
+        "client": 564,
+        "left": 655.828125,
+        "right": 1219.9921875,
+        "scroll": 564
+      }
+    ],
+    "document": 1440,
+    "width": 1440
+  }
+]

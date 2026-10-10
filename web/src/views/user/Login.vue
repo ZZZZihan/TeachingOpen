@@ -1,534 +1,193 @@
 <template>
-  <div class="main">
-    <a-form :form="form" class="user-layout-login" ref="formLogin" id="formLogin">
-      <a-tabs
-        :activeKey="customActiveKey"
-        :tabBarStyle="{ textAlign: 'center', borderBottom: 'unset' }"
-        @change="handleTabClick">
-        <a-tab-pane key="tab1" tab="账号密码登录">
-          <a-form-item>
-            <a-input
-              size="large"
-              v-decorator="['username',{initialValue:'', rules: validatorRules.username.rules}]"
-              type="text"
-              autocomplete="off"
-              placeholder="请输入帐户名">
-              <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
-            </a-input>
-          </a-form-item>
-
-          <a-form-item>
-            <a-input
-              v-decorator="['password',{initialValue:'', rules: validatorRules.password.rules}]"
-              size="large"
-              type="password"
-              autocomplete="off"
-              placeholder="密码">
-              <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
-            </a-input>
-          </a-form-item>
-
-          <a-row :gutter="0">
-            <a-col :span="16">
-              <a-form-item>
-                <a-input
-                  v-decorator="['inputCode',validatorRules.inputCode]"
-                  size="large"
-                  type="text"
-                  @change="inputCodeChange"
-                  placeholder="请输入验证码">
-                  <a-icon slot="prefix" type="smile" :style="{ color: 'rgba(0,0,0,.25)' }"/>
-                </a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :span="8" style="text-align: right">
-              <img v-if="requestCodeSuccess" style="margin-top: 2px;" :src="randCodeImage" @click="handleChangeCheckCode"/>
-              <img v-else style="margin-top: 2px;" src="../../assets/checkcode.png" @click="handleChangeCheckCode"/>
-            </a-col>
-          </a-row>
-
-
-        </a-tab-pane>
-        <a-tab-pane key="tab2" tab="手机号登陆" v-if="false">
-          <a-form-item>
-            <a-input
-              v-decorator="['mobile',validatorRules.mobile]"
-              size="large"
-              type="text"
-              placeholder="手机号">
-              <a-icon slot="prefix" type="mobile" :style="{ color: 'rgba(0,0,0,.25)' }"/>
-            </a-input>
-          </a-form-item>
-
-          <a-row :gutter="16">
-            <a-col class="gutter-row" :span="16">
-              <a-form-item>
-                <a-input
-                  v-decorator="['captcha',validatorRules.captcha]"
-                  size="large"
-                  type="text"
-                  placeholder="请输入验证码">
-                  <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }"/>
-                </a-input>
-              </a-form-item>
-            </a-col>
-            <a-col class="gutter-row" :span="8">
-              <a-button
-                class="getCaptcha"
-                tabindex="-1"
-                :disabled="state.smsSendBtn"
-                @click.stop.prevent="getCaptcha"
-                v-text="!state.smsSendBtn && '获取验证码' || (state.time+' s')"></a-button>
-            </a-col>
-          </a-row>
-        </a-tab-pane>
-      </a-tabs>
-
-      <a-form-item>
-        <a-checkbox v-decorator="['rememberMe', {initialValue: true, valuePropName: 'checked'}]" >自动登陆</a-checkbox>
-        <router-link :to="{ name: 'alteration'}" class="forge-password" style="float: right;">
-          忘记密码
-        </router-link>
-       <router-link v-if="$store.getters.sysConfig.allowReg=='1'" :to="{ name: 'register'}" class="forge-password" style="float: right;margin-right: 10px" >
-          注册账户
-        </router-link>
-      </a-form-item>
-
-      <a-form-item style="margin-top:24px">
-        <a-button
-          size="large"
-          type="primary"
-          htmlType="submit"
-          class="login-button"
-          :loading="loginBtn"
-          @click.stop.prevent="handleSubmit"
-          :disabled="loginBtn">确定
-        </a-button>
-      </a-form-item>
-
-      <div>
-        <a href="/">返回首页</a>
-      </div>
-    </a-form>
-
-    <two-step-captcha
-      v-if="requiredTwoStepCaptcha"
-      :visible="stepCaptchaVisible"
-      @success="stepCaptchaSuccess"
-      @cancel="stepCaptchaCancel"></two-step-captcha>
-
-    <a-modal
-      title="登录部门选择"
-      :width="450"
-      :visible="departVisible"
-      :closable="false"
-      :maskClosable="false">
-
-      <template slot="footer">
-        <a-button type="primary" @click="departOk">确认</a-button>
-      </template>
-
-      <a-form>
-        <a-form-item
-          :labelCol="{span:4}"
-          :wrapperCol="{span:20}"
-          style="margin-bottom:10px"
-          :validate-status="validate_status">
-          <a-tooltip placement="topLeft" >
-            <template slot="title">
-              <span>您隶属于多部门，请选择登录部门</span>
-            </template>
-            <a-avatar style="backgroundColor:#87d068" icon="gold" />
-          </a-tooltip>
-          <a-select @change="departChange" :class="{'valid-error':validate_status=='error'}" placeholder="请选择登录部门" style="margin-left:10px;width: 80%">
-            <a-icon slot="suffixIcon" type="gold" />
-            <a-select-option
-              v-for="d in departList"
-              :key="d.id"
-              :value="d.orgCode">
-              {{ d.departName }}
-            </a-select-option>
-          </a-select>
-        </a-form-item>
-      </a-form>
-
-
-
-    </a-modal>
-
+  <div class="login-page">
+    <section class="login-intro" aria-labelledby="intro-title">
+      <span class="eyebrow">天津工业大学 · 学习与创作</span>
+      <h1 id="intro-title">在天工，<br>学以致用。</h1>
+      <p>浏览课程，完成练习与创作。<br class="desktop-break">登录后继续你的学习任务。</p>
+      <router-link to="/courseList" class="explore-link">先看看课程 <span aria-hidden="true">↗</span></router-link>
+      <div class="intro-bottom"><span class="intro-rule"></span>严谨 · 严格 · 求实 · 求是</div>
+    </section>
+    <section class="login-form-panel" aria-labelledby="login-title">
+      <div class="form-heading"><span class="eyebrow">你的学习空间</span><h2 id="login-title">欢迎回来</h2><p>使用手机号或已有教学平台账号登录。</p></div>
+      <p v-if="$route.query.reason === 'expired'" class="session-note" role="status">登录已过期，请重新登录后继续。</p>
+      <form novalidate :aria-busy="submitting" @submit.prevent="submit">
+        <div class="field">
+          <label for="login-username">手机号或账号</label>
+          <input
+            id="login-username"
+            ref="username"
+            v-model="username"
+            name="username"
+            autocomplete="username"
+            placeholder="请输入手机号或已有账号"
+            :disabled="submitting"
+            :aria-invalid="!!errors.username"
+            :aria-describedby="errors.username ? 'username-error' : null">
+          <p v-if="errors.username" id="username-error" class="field-error">{{ errors.username }}</p>
+        </div>
+        <div class="field">
+          <div class="field-label"><label for="login-password">密码</label><router-link to="/user/alteration">忘记密码？</router-link></div>
+          <div class="password-input"><input
+            id="login-password"
+            ref="password"
+            v-model="password"
+            name="password"
+            :type="showPassword ? 'text' : 'password'"
+            autocomplete="current-password"
+            placeholder="请输入密码"
+            :disabled="submitting"
+            :aria-invalid="!!errors.password"
+            :aria-describedby="errors.password ? 'password-error' : null"><button type="button" :disabled="submitting" :aria-pressed="showPassword" :aria-label="showPassword ? '隐藏密码' : '显示密码'" @click="showPassword = !showPassword">{{ showPassword ? '隐藏' : '显示' }}</button></div>
+          <p v-if="errors.password" id="password-error" class="field-error">{{ errors.password }}</p>
+        </div>
+        <div class="field">
+          <div class="field-label"><label for="login-captcha">验证码</label><button class="text-button" type="button" :disabled="captchaLoading || submitting" @click="refreshCaptcha">换一张</button></div>
+          <div class="captcha-row"><input
+            id="login-captcha"
+            ref="captcha"
+            v-model="captcha"
+            name="captcha"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="输入图中字符"
+            :disabled="submitting"
+            :aria-invalid="!!errors.captcha"
+            aria-describedby="captcha-help"><button class="captcha-image" type="button" :disabled="captchaLoading || submitting" :aria-label="captchaImage ? '刷新验证码图片' : '重新加载验证码'" @click="refreshCaptcha"><img v-if="captchaImage" :src="captchaImage" alt="登录验证码" @error="captchaFailed"><span v-else>{{ captchaLoading ? '加载中…' : '点击重试' }}</span></button></div>
+          <p id="captcha-help" :class="errors.captcha || captchaError ? 'field-error' : 'field-hint'" aria-live="polite">{{ errors.captcha || captchaError || '看不清？点击图片或换一张。' }}</p>
+        </div>
+        <p v-if="submitError" ref="submitError" class="form-error" role="alert" tabindex="-1">{{ submitError }}</p>
+        <button class="submit-button" type="submit" :disabled="submitting || captchaLoading || !captchaImage">{{ submitting ? '正在登录…' : '登录并继续' }}<span v-if="!submitting" aria-hidden="true">→</span></button>
+      </form>
+      <p v-if="allowRegistration" class="register-note">还没有账号？<router-link to="/user/register">注册账号</router-link></p>
+      <p v-else class="register-note">没有账号？请联系你的教师或平台管理员。</p>
+      <router-link to="/index" class="back-home">← 返回首页</router-link>
+    </section>
   </div>
 </template>
 
 <script>
-  //import md5 from "md5"
-  import api from '@/api'
-  import TwoStepCaptcha from '@/components/tools/TwoStepCaptcha'
-  import { mapActions } from "vuex"
-  import { timeFix } from "@/utils/util"
-  import Vue from 'vue'
-  import { ACCESS_TOKEN ,ENCRYPTED_STRING, INDEX_MAIN_PAGE_PATH} from "@/store/mutation-types"
-  import { putAction,postAction,getAction } from '@/api/manage'
-  import { encryption , getEncryptedString } from '@/utils/encryption/aesEncrypt'
-  import store from '@/store/'
-  import { USER_INFO } from "@/store/mutation-types"
+import { getLoginCaptcha } from '@/api/login'
+import { safeRedirect, loginErrorMessage } from '@/utils/session'
 
-  export default {
-    components: {
-      TwoStepCaptcha
-    },
+export default {
+    name: 'Login',
     data () {
-      return {
-        customActiveKey: "tab1",
-        loginBtn: false,
-        // login type: 0 email, 1 username, 2 telephone
-        loginType: 0,
-        requiredTwoStepCaptcha: false,
-        stepCaptchaVisible: false,
-        form: this.$form.createForm(this),
-        encryptedString:{
-          key:"",
-          iv:"",
-        },
-        state: {
-          time: 60,
-          smsSendBtn: false,
-        },
-        validatorRules:{
-          username:{rules: [{ required: true, message: '请输入用户名!'},{validator: this.handleUsernameOrEmail}]},
-          password:{rules: [{ required: true, message: '请输入密码!',validator: 'click'}]},
-          mobile:{rules: [{validator:this.validateMobile}]},
-          captcha:{rule: [{ required: true, message: '请输入验证码!'}]},
-          inputCode:{rules: [{ required: true, message: '请输入验证码!'}]}
-        },
-        verifiedCode:"",
-        inputCodeContent:"",
-        inputCodeNull:true,
-
-        departList:[],
-        departVisible:false,
-        departSelected:"",
-        currentUsername:"",
-        validate_status:"",
-        currdatetime:'',
-        randCodeImage:'',
-        requestCodeSuccess:false
-      }
+        return { username: this.$route.params.username || '',
+            password: '',
+            captcha: '',
+            showPassword: false,
+            errors: {},
+            submitError: '',
+            submitting: false,
+            captchaImage: '',
+            captchaError: '',
+            captchaLoading: false,
+            checkKey: '',
+            requestVersion: 0,
+            disposed: false }
     },
-    created () {
-      this.currdatetime = new Date().getTime();
-      Vue.ls.remove(ACCESS_TOKEN)
-      this.getRouterData();
-      this.handleChangeCheckCode();
-      // update-begin- --- author:scott ------ date:20190805 ---- for:密码加密逻辑暂时注释掉，有点问题
-      //this.getEncrypte();
-      // update-end- --- author:scott ------ date:20190805 ---- for:密码加密逻辑暂时注释掉，有点问题
+    computed: {
+        allowRegistration () { return (this.$store.getters.sysConfig || {}).allowReg === '1' }
     },
+    created () { this.refreshCaptcha() },
+    beforeDestroy () { this.disposed = true; this.requestVersion++ },
     methods: {
-      ...mapActions([ "Login", "Logout","PhoneLogin","ThirdLogin" ]),
-      //第三方登录
-      onThirdLogin(source){
-        let url = window._CONFIG['domianURL']+`/thirdLogin/render/${source}`
-        window.open(url, `login ${source}`, 'height=500, width=500, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no')
-        let that = this;
-        let receiveMessage = function(event){
-          var origin = event.origin
-          console.log("origin",origin);
-
-          let token = event.data
-          console.log("event.data",token)
-          that.ThirdLogin(token).then(res=>{
-            if(res.success){
-              that.loginSuccess()
-            }else{
-              that.requestFailed(res);
+        captchaFailed () {
+            this.captchaImage = ''
+            this.captchaError = '验证码未能加载，请点击重试。'
+        },
+        async refreshCaptcha () {
+            const version = ++this.requestVersion
+            this.checkKey = `${Date.now()}-${version}`
+            this.captcha = ''
+            this.errors = { ...this.errors, captcha: '' }
+            this.captchaImage = ''
+            this.captchaError = ''
+            this.captchaLoading = true
+            try {
+                const response = await getLoginCaptcha(this.checkKey)
+                if (this.disposed || version !== this.requestVersion) return
+                if (!response.success || typeof response.result !== 'string' || !response.result.startsWith('data:image/')) throw new Error('验证码加载失败')
+                this.captchaImage = response.result
+            } catch (_) {
+                if (!this.disposed && version === this.requestVersion) this.captchaFailed()
+            } finally {
+                if (!this.disposed && version === this.requestVersion) this.captchaLoading = false
             }
-          })
-        }
-        window.addEventListener("message", receiveMessage, false);
-      },
-      // handler
-      handleUsernameOrEmail (rule, value, callback) {
-        const regex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-        if (regex.test(value)) {
-          this.loginType = 0
-        } else {
-          this.loginType = 1
-        }
-        callback()
-      },
-      handleTabClick (key) {
-        this.customActiveKey = key
-        // this.form.resetFields()
-      },
-      handleSubmit () {
-        let that = this
-        let loginParams = {};
-        that.loginBtn = true;
-        // 使用账户密码登陆
-        if (that.customActiveKey === 'tab1') {
-          that.form.validateFields([ 'username', 'password','inputCode', 'rememberMe' ], { force: true }, (err, values) => {
-            if (!err) {
-              loginParams.username = values.username
-              // update-begin- --- author:scott ------ date:20190805 ---- for:密码加密逻辑暂时注释掉，有点问题
-              //loginParams.password = md5(values.password)
-              //loginParams.password = encryption(values.password,that.encryptedString.key,that.encryptedString.iv)
-              loginParams.password = values.password
-              loginParams.remember_me = values.rememberMe
-              // update-begin- --- author:scott ------ date:20190805 ---- for:密码加密逻辑暂时注释掉，有点问题
-              loginParams.captcha = that.inputCodeContent
-              loginParams.checkKey = that.currdatetime
-              console.log("登录参数",loginParams)
-              that.Login(loginParams).then((res) => {
-                // this.departConfirm(res)
-                this.loginSuccess()
-              }).catch((err) => {
-                that.requestFailed(err);
-              });
-
-
-            }else {
-              that.loginBtn = false;
+        },
+        async submit () {
+            if (this.submitting || this.captchaLoading || !this.captchaImage) return
+            this.errors = {}
+            this.submitError = ''
+            if (!this.username.trim()) this.errors.username = '请输入账号。'
+            if (!this.password) this.errors.password = '请输入密码。'
+            if (!this.captcha.trim()) this.errors.captcha = '请输入验证码。'
+            const first = Object.keys(this.errors)[0]
+            if (first) { this.$nextTick(() => this.$refs[first].focus()); return }
+            this.submitting = true
+            try {
+                await this.$store.dispatch('Login', { username: this.username.trim(),
+                    password: this.password,
+                    captcha: this.captcha.trim(),
+                    checkKey: this.checkKey })
+                if (this.disposed) return
+                this.password = ''
+                await this.$router.replace(safeRedirect(this.$route.query.redirect))
+            } catch (error) {
+                if (this.disposed) return
+                this.submitError = loginErrorMessage(error)
+                await this.refreshCaptcha()
+                if (!this.disposed) this.$nextTick(() => this.$refs.submitError && this.$refs.submitError.focus())
+            } finally {
+                if (!this.disposed) this.submitting = false
             }
-          })
-          // 使用手机号登陆
-        } else {
-          that.form.validateFields([ 'mobile', 'captcha', 'rememberMe' ], { force: true }, (err, values) => {
-            if (!err) {
-              loginParams.mobile = values.mobile
-              loginParams.captcha = values.captcha
-              loginParams.remember_me = values.rememberMe
-              that.PhoneLogin(loginParams).then((res) => {
-                console.log(res.result);
-                // this.departConfirm(res)
-                this.loginSuccess()
-              }).catch((err) => {
-                that.requestFailed(err);
-              })
-
-            }
-          })
         }
-      },
-      getCaptcha (e) {
-        e.preventDefault();
-        let that = this;
-        this.form.validateFields([ 'mobile' ], { force: true },(err,values) => {
-            if(!values.mobile){
-              that.cmsFailed("请输入手机号");
-            }else if (!err) {
-              this.state.smsSendBtn = true;
-              let interval = window.setInterval(() => {
-                if (that.state.time-- <= 0) {
-                  that.state.time = 60;
-                  that.state.smsSendBtn = false;
-                  window.clearInterval(interval);
-                }
-              }, 1000);
-
-              const hide = this.$message.loading('验证码发送中..', 0);
-              let smsParams = {};
-                  smsParams.mobile=values.mobile;
-                  smsParams.smsmode="0";
-              postAction("/sys/sms",smsParams)
-                .then(res => {
-                  if(!res.success){
-                    setTimeout(hide, 0);
-                    this.cmsFailed(res.message);
-                  }
-                  console.log(res);
-                  setTimeout(hide, 500);
-                })
-                .catch(err => {
-                  setTimeout(hide, 1);
-                  clearInterval(interval);
-                  that.state.time = 60;
-                  that.state.smsSendBtn = false;
-                  this.requestFailed(err);
-                });
-            }
-          }
-        );
-      },
-      stepCaptchaSuccess () {
-        this.loginSuccess()
-      },
-      stepCaptchaCancel () {
-        this.Logout().then(() => {
-          this.loginBtn = false
-          this.stepCaptchaVisible = false
-        })
-      },
-      handleChangeCheckCode(){
-        this.currdatetime = new Date().getTime();
-        getAction(`/sys/randomImage/${this.currdatetime}`).then(res=>{
-          if(res.success){
-            this.randCodeImage = res.result
-            this.requestCodeSuccess=true
-          }else{
-            this.$message.error(res.message)
-            this.requestCodeSuccess=false
-          }
-        }).catch(()=>{
-          this.requestCodeSuccess=false
-        })
-      },
-      loginSuccess () {
-        // update-begin- author:sunjianlei --- date:20190812 --- for: 登录成功后不解除禁用按钮，防止多次点击
-        // this.loginBtn = false
-        // update-end- author:sunjianlei --- date:20190812 --- for: 登录成功后不解除禁用按钮，防止多次点击
-        this.$router.push({ path: INDEX_MAIN_PAGE_PATH })
-        this.$notification.success({
-          message: '欢迎',
-          description: `${timeFix()}，欢迎回来`,
-        });
-      },
-      cmsFailed(err){
-        this.$notification[ 'error' ]({
-          message: "登录失败",
-          description:err,
-          duration: 4,
-        });
-      },
-      requestFailed (err) {
-        this.$notification[ 'error' ]({
-          message: '登录失败',
-          description: ((err.response || {}).data || {}).message || err.message || "请求出现错误，请稍后再试",
-          duration: 4,
-        });
-        this.loginBtn = false;
-      },
-      validateMobile(rule,value,callback){
-        if (!value || new RegExp(/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/).test(value)){
-          callback();
-        }else{
-          callback("您的手机号码格式不正确!");
-        }
-
-      },
-      validateInputCode(rule,value,callback){
-        if(!value || this.verifiedCode==this.inputCodeContent){
-          callback();
-        }else{
-          callback("您输入的验证码不正确!");
-        }
-      },
-      generateCode(value){
-        this.verifiedCode = value.toLowerCase()
-      },
-      inputCodeChange(e){
-        this.inputCodeContent = e.target.value
-      },
-      departConfirm(res){
-        if(res.success){
-          let multi_depart = res.result.multi_depart
-          //0:无部门 1:一个部门 2:多个部门
-          if(multi_depart==0){
-            this.loginSuccess()
-            this.$notification.warn({
-              message: '提示',
-              description: `您尚未归属部门,请确认账号信息`,
-              duration:3
-            });
-          }else if(multi_depart==2){
-            this.departVisible=true
-            this.currentUsername=this.form.getFieldValue("username")
-            this.departList = res.result.departs
-          }else {
-            this.loginSuccess()
-          }
-        }else{
-          this.requestFailed(res)
-          this.Logout();
-        }
-      },
-      departOk(){
-        if(!this.departSelected){
-          this.validate_status='error'
-          return false
-        }
-       let obj = {
-          orgCode:this.departSelected,
-          username:this.form.getFieldValue("username")
-        }
-        putAction("/sys/selectDepart",obj).then(res=>{
-          if(res.success){
-            const userInfo = res.result.userInfo;
-            Vue.ls.set(USER_INFO, userInfo, 7 * 24 * 60 * 60 * 1000);
-            store.commit('SET_INFO', userInfo);
-            //console.log("---切换组织机构---userInfo-------",store.getters.userInfo.orgCode);
-            this.departClear()
-            this.loginSuccess()
-          }else{
-            this.requestFailed(res)
-            this.Logout().then(()=>{
-              this.departClear()
-            });
-          }
-        })
-      },
-      departClear(){
-        this.departList=[]
-        this.departSelected=""
-        this.currentUsername=""
-        this.departVisible=false
-        this.validate_status=''
-      },
-      departChange(value){
-        this.validate_status='success'
-        this.departSelected = value
-      },
-    getRouterData(){
-      this.$nextTick(() => {
-        if (this.$route.params.username) {
-          this.form.setFieldsValue({
-            'username': this.$route.params.username
-          });
-        }
-      })
-    },
-    //获取密码加密规则
-    getEncrypte(){
-      var encryptedString = Vue.ls.get(ENCRYPTED_STRING);
-      if(encryptedString == null){
-        getEncryptedString().then((data) => {
-          this.encryptedString = data
-        });
-      }else{
-        this.encryptedString = encryptedString;
-      }
-    },
     }
-  }
+}
 </script>
 
-<style lang="less" scoped>
-
-  .user-layout-login {
-    label {
-      font-size: 14px;
-    }
-
-    .getCaptcha {
-      display: block;
-      width: 100%;
-      height: 40px;
-    }
-
-    .forge-password {
-      font-size: 14px;
-    }
-
-    button.login-button {
-      padding: 0 15px;
-      font-size: 16px;
-      height: 40px;
-      width: 100%;
-    }
-  }
-
-</style>
-<style>
-  .valid-error .ant-select-selection__placeholder{
-    color: #f5222d;
-  }
+<style scoped>
+.login-page { display: grid; grid-template-columns: 1fr 1fr; min-height: 680px; max-width: 1120px; margin: 0 auto; }
+.login-intro { background: #42243f; color: #fff; padding: 70px 56px 38px; display: flex; flex-direction: column; }
+.eyebrow { font-size: 11px; letter-spacing: .14em; font-weight: 600; }
+.login-intro .eyebrow { color: #e4d5e2; }
+.login-intro h1 { color: #fff; font-size: 44px; line-height: 1.4; letter-spacing: -.03em; font-weight: 500; margin: 66px 0 24px; }
+.login-intro p { color: #dfd1dd; font-size: 16px; line-height: 1.9; margin-bottom: 30px; }
+.explore-link { color: #fff; font-size: 14px; align-self: flex-start; padding-bottom: 7px; border-bottom: 1px solid #82949d; }
+.explore-link span { margin-left: 20px; }
+.intro-bottom { color: #d7c5d5; font-size: 12px; margin-top: auto; padding-top: 80px; }
+.intro-rule { display: inline-block; width: 28px; border-top: 2px solid #cfabcd; margin: 0 10px 4px 0; }
+.login-form-panel { padding: 54px 64px 40px; background: #fff; }
+.form-heading .eyebrow { color: #74256a; }
+.form-heading h2 { font-size: 30px; font-weight: 600; letter-spacing: -.03em; margin: 10px 0 8px; color: #20252b; }
+.form-heading p { color: #626b73; margin-bottom: 30px; font-size: 14px; }
+.field { margin-bottom: 21px; }
+.field label { display: block; color: #20252b; font-size: 14px; font-weight: 500; margin-bottom: 9px; }
+.field-label { display: flex; justify-content: space-between; align-items: baseline; }
+.field-label a, .text-button { color: #59646e; font-size: 12px; }
+.text-button { border: 0; padding: 0; background: none; cursor: pointer; }
+input { display: block; box-sizing: border-box; width: 100%; min-width: 0; height: 46px; border: 1px solid #cbd1d6; border-radius: 3px; padding: 0 13px; background: #fff; color: #20252b; font: inherit; font-size: 15px; transition: border-color .15s; }
+input::placeholder { color: #858d94; }
+input[aria-invalid="true"] { border-color: #b63c46; }
+input:focus, button:focus-visible, a:focus-visible { outline: 2px solid #74256a; outline-offset: 3px; }
+input:disabled { background: #f7f8f8; }
+.password-input { position: relative; }
+.password-input input { padding-right: 60px; }
+.password-input button { position: absolute; right: 1px; top: 1px; height: 44px; border: 0; padding: 0 12px; background: transparent; color: #59646e; font-size: 12px; cursor: pointer; }
+.captcha-row { display: grid; grid-template-columns: minmax(0, 1fr) 126px; gap: 12px; }
+.captcha-image { padding: 0; border: 1px solid #cbd1d6; border-radius: 3px; background: #f6f7f8; cursor: pointer; color: #59646e; overflow: hidden; }
+.captcha-image img { width: 100%; height: 44px; object-fit: contain; }
+.field-hint, .field-error { margin: 8px 0 0; font-size: 12px; line-height: 1.6; }
+.field-hint { color: #707980; }
+.field-error { color: #a2303c; }
+.form-error, .session-note { padding: 12px 14px; border-left: 2px solid #74256a; color: #92303a; background: #fbf2f2; font-size: 13px; line-height: 1.7; margin: 0 0 18px; }
+.submit-button { width: 100%; min-height: 46px; display: flex; align-items: center; justify-content: center; gap: 20px; background: #74256a; border: 1px solid #74256a; border-radius: 3px; color: #fff; font-size: 15px; cursor: pointer; }
+.submit-button:hover:not(:disabled) { background: #592052; }
+button:disabled { cursor: not-allowed; opacity: .65; }
+.register-note { color: #737b82; font-size: 12px; line-height: 1.8; margin: 19px 0 25px; }
+.register-note a { color: #74256a; margin-left: 8px; }
+.back-home { font-size: 13px; color: #59646e; }
+@media (max-width: 1000px) { .login-intro { padding: 54px 30px 32px; } .login-intro h1 { font-size: 36px; } .login-form-panel { padding: 48px 32px 36px; } }
+@media (max-width: 680px) { .login-page { display: block; min-height: 0; } .login-intro { padding: 29px 24px; } .login-intro .eyebrow, .intro-bottom, .login-intro p, .explore-link { display: none; } .login-intro h1 { font-size: 26px; line-height: 1.5; margin: 0; } .login-intro h1 br { display: none; } .login-form-panel { padding: 32px 24px; } .form-heading h2 { font-size: 27px; } .form-heading p { margin-bottom: 26px; } }
 </style>

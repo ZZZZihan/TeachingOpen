@@ -1,0 +1,8 @@
+{
+  "scope": "final frozen test source SHA; no product rebuild after final JAR freeze",
+  "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "sha256": {
+    "api/dev/verify-shiro-maintenance.py": "2b068fd2537826a139b7d8d91ac22f7c287bc4856f7ee8af5f7894fba71e9cb7",
+    "api/jeecg-boot-module-system/src/test/java/org/jeecg/maintenance/VerifyShiroMaintenance.java": "8ed42d58f305c2325ee6a80c608031f3d8ecab65999b36a5fe34f864e00f7920"
+  }
+}

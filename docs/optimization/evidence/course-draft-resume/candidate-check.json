@@ -1,0 +1,95 @@
+{
+  "integration_head": "faf1b1f23a268e6f9919088ab2a65abcda76b708",
+  "api_tree": "cff429b0a7f9d0fcb76e2072b59f7d121a10e3e9",
+  "web_tree": "0e7a55e3fa47965b5dfeb0698f224e1823cf3711",
+  "dist_files": 4893,
+  "dist_bytes": 211470810,
+  "dist_manifest_sha256": "81ff2a16225aee2f652e17990992472e33cea2b2f000c6524c4fa7a92d29f6d8",
+  "http_byte_checks": [
+    {
+      "port": 18112,
+      "path": "index.html",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "02051519d10077c034cd574051e4a83c42291d44cac023905599d883609631d8"
+    },
+    {
+      "port": 18112,
+      "path": "scratch3/persistence.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "a335e902d727401c5044cd99f2faea28c7f9c3e0210da537d07bcfdf00066b40"
+    },
+    {
+      "port": 18112,
+      "path": "python/persistence.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "7305e2bd9ee18ddf8fa419a1ea436a7f14c23d6d0aa50b1e3d7d7829209499be"
+    },
+    {
+      "port": 18112,
+      "path": "python/editor-bridge.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "7eec9c27025cde073c9f7a7ce717cbed14758c6ae5c5108339b01935aa3032d7"
+    },
+    {
+      "port": 18142,
+      "path": "index.html",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "02051519d10077c034cd574051e4a83c42291d44cac023905599d883609631d8"
+    },
+    {
+      "port": 18142,
+      "path": "scratch3/persistence.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "a335e902d727401c5044cd99f2faea28c7f9c3e0210da537d07bcfdf00066b40"
+    },
+    {
+      "port": 18142,
+      "path": "python/persistence.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "7305e2bd9ee18ddf8fa419a1ea436a7f14c23d6d0aa50b1e3d7d7829209499be"
+    },
+    {
+      "port": 18142,
+      "path": "python/editor-bridge.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "7eec9c27025cde073c9f7a7ce717cbed14758c6ae5c5108339b01935aa3032d7"
+    },
+    {
+      "port": 18150,
+      "path": "index.html",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "02051519d10077c034cd574051e4a83c42291d44cac023905599d883609631d8"
+    },
+    {
+      "port": 18150,
+      "path": "scratch3/persistence.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "a335e902d727401c5044cd99f2faea28c7f9c3e0210da537d07bcfdf00066b40"
+    },
+    {
+      "port": 18150,
+      "path": "python/persistence.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "7305e2bd9ee18ddf8fa419a1ea436a7f14c23d6d0aa50b1e3d7d7829209499be"
+    },
+    {
+      "port": 18150,
+      "path": "python/editor-bridge.js",
+      "status": 200,
+      "exact_bytes": true,
+      "sha256": "7eec9c27025cde073c9f7a7ce717cbed14758c6ae5c5108339b01935aa3032d7"
+    }
+  ],
+  "changed_public_sources_match": true
+}

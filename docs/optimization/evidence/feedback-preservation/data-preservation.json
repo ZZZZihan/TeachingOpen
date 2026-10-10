@@ -1,0 +1,24 @@
+{
+  "recovery-a": {
+    "tables": 69,
+    "changed_tables": [
+      "sys_log"
+    ],
+    "non_audit_equal": true,
+    "attachments_equal": true,
+    "audit_rows_before": 3977,
+    "audit_rows_after": 4086
+  },
+  "course-role-runtime": {
+    "tables": 69,
+    "changed_tables": [],
+    "non_audit_equal": true,
+    "attachments_equal": true,
+    "audit_rows_before": 3108,
+    "audit_rows_after": 3108
+  },
+  "original_source": {
+    "files": 5731,
+    "equal": true
+  }
+}

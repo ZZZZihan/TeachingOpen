@@ -1,0 +1,34 @@
+{
+  "probe_sha256": "5f887bfc5c576a14a6b7e16fdab2312482391ecb2ff0dafc1c5f432bf21e579f",
+  "files": [
+    {
+      "path": "baseline-initial.json",
+      "sha256": "d296433cf092c060e0512fdce861be2ebeda24c05e4a990c84fc6c30cefab251",
+      "passed": 9,
+      "total": 36,
+      "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e"
+    },
+    {
+      "path": "baseline-final.json",
+      "sha256": "ff6aa9d5643937f3a71d96ff9a6d5d33562ab7ed4795b790d8fd679e3642b9d8",
+      "passed": 10,
+      "total": 38,
+      "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e"
+    },
+    {
+      "path": "candidate-initial.json",
+      "sha256": "cb59cfe15f2c492ed9ddafbb24d2996d971011757bbc0f4eed832de45ced9f6e",
+      "passed": 37,
+      "total": 38,
+      "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af"
+    },
+    {
+      "path": "candidate-final.json",
+      "sha256": "d57b978175a9938286e9b23b6de5da30f4f93ebb70552d44b1fb00659a209f9f",
+      "passed": 38,
+      "total": 38,
+      "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af"
+    }
+  ],
+  "notes": "Initial failures are preserved. Final candidate corrects the existing permission business code from the initial mistaken 403 expectation to 510; old observed code 200 still fails. This is not a claim that old and new ran byte-identical scripts."
+}

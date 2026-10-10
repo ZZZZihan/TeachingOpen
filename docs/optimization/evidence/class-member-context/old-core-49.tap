@@ -1,0 +1,891 @@
+TAP version 13
+# Browserslist: caniuse-lite is outdated. Please run:
+#   npx update-browserslist-db@latest
+#   Why you should do it regularly: https://github.com/browserslist/update-db\#readme
+# Subtest: opening B clears A selected users, stale list and pagination before B response
+not ok 1 - opening B clears A selected users, stale list and pagination before B response
+  ---
+  duration_ms: 230.762542
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:131:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   'user-a'
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0: 'user-a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:133:31)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: batchDel captured in A cannot dispatch after switch B
+not ok 2 - batchDel captured in A cannot dispatch after switch B
+  ---
+  duration_ms: 92.597
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:140:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:145:32)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: batchDel captured in A cannot dispatch after reopen A
+not ok 3 - batchDel captured in A cannot dispatch after reopen A
+  ---
+  duration_ms: 89.481125
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:140:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:145:32)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: batchDel captured in A cannot dispatch after clear
+not ok 4 - batchDel captured in A cannot dispatch after clear
+  ---
+  duration_ms: 93.023333
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:140:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:145:32)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: handleRemoveAll captured in A cannot dispatch after switch B
+not ok 5 - handleRemoveAll captured in A cannot dispatch after switch B
+  ---
+  duration_ms: 86.364958
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:140:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:145:32)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: handleRemoveAll captured in A cannot dispatch after reopen A
+not ok 6 - handleRemoveAll captured in A cannot dispatch after reopen A
+  ---
+  duration_ms: 86.03025
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:140:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:145:32)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: handleRemoveAll captured in A cannot dispatch after clear
+not ok 7 - handleRemoveAll captured in A cannot dispatch after clear
+  ---
+  duration_ms: 88.133375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:140:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:145:32)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: row captured in A cannot dispatch after switch B
+not ok 8 - row captured in A cannot dispatch after switch B
+  ---
+  duration_ms: 81.237542
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:140:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:145:32)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: row captured in A cannot dispatch after reopen A
+not ok 9 - row captured in A cannot dispatch after reopen A
+  ---
+  duration_ms: 83.924875
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:140:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:145:32)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: row captured in A cannot dispatch after clear
+ok 10 - row captured in A cannot dispatch after clear
+  ---
+  duration_ms: 88.942375
+  type: 'test'
+  ...
+# Subtest: control: normal B batchDel preserves the backend contract and refreshes B
+ok 11 - control: normal B batchDel preserves the backend contract and refreshes B
+  ---
+  duration_ms: 81.0365
+  type: 'test'
+  ...
+# Subtest: control: normal B handleRemoveAll preserves the backend contract and refreshes B
+ok 12 - control: normal B handleRemoveAll preserves the backend contract and refreshes B
+  ---
+  duration_ms: 84.016792
+  type: 'test'
+  ...
+# Subtest: control: normal B row preserves the backend contract and refreshes B
+ok 13 - control: normal B row preserves the backend contract and refreshes B
+  ---
+  duration_ms: 82.521875
+  type: 'test'
+  ...
+# Subtest: changed user selection invalidates a bulk confirmation before dispatch
+not ok 14 - changed user selection invalidates a bulk confirmation before dispatch
+  ---
+  duration_ms: 83.871
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:160:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:162:62)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late A checkbox event cannot inject foreign user IDs into B cancellation
+not ok 15 - late A checkbox event cannot inject foreign user IDs into B cancellation
+  ---
+  duration_ms: 84.6935
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:164:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:167:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: B batchDel ignores repeated clicks and duplicate confirmation callbacks
+not ok 16 - B batchDel ignores repeated clicks and duplicate confirmation callbacks
+  ---
+  duration_ms: 84.999833
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:170:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    2 !== 1
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:173:57)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: B handleRemoveAll ignores repeated clicks and duplicate confirmation callbacks
+not ok 17 - B handleRemoveAll ignores repeated clicks and duplicate confirmation callbacks
+  ---
+  duration_ms: 83.351125
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:170:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    2 !== 1
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:173:57)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: B row ignores repeated clicks and duplicate confirmation callbacks
+not ok 18 - B row ignores repeated clicks and duplicate confirmation callbacks
+  ---
+  duration_ms: 81.956708
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:170:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    2 !== 1
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:174:42)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: older A confirmation cannot release or submit an active B confirmation
+not ok 19 - older A confirmation cannot release or submit an active B confirmation
+  ---
+  duration_ms: 80.063792
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:177:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:180:56)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late A list success cannot overwrite B user list or count
+not ok 20 - late A list success cannot overwrite B user list or count
+  ---
+  duration_ms: 80.667042
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:183:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      [
+        {
+    +     avatar: 'avatar-a',
+    +     id: 'user-a',
+    +     realname: '合成学生 a',
+    -     avatar: 'avatar-b',
+    -     id: 'user-b',
+    -     realname: '合成学生 b',
+          userIdentity: '1',
+    +     username: 'student-a'
+    -     username: 'student-b'
+        }
+      ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      id: 'user-b'
+      username: 'student-b'
+      realname: '合成学生 b'
+      userIdentity: '1'
+      avatar: 'avatar-b'
+  actual:
+    0:
+      id: 'user-a'
+      username: 'student-a'
+      realname: '合成学生 a'
+      userIdentity: '1'
+      avatar: 'avatar-a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:186:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: newer member query within B wins when older response arrives last
+not ok 21 - newer member query within B wins when older response arrives last
+  ---
+  duration_ms: 79.682792
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:188:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + 'user-b-old'
+    - 'user-b-new'
+              ^
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'user-b-new'
+  actual: 'user-b-old'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:191:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late A list network cannot publish a notice or unlock B pending read
+not ok 22 - late A list network cannot publish a notice or unlock B pending read
+  ---
+  duration_ms: 87.360583
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:194:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    false !== true
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:197:27)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: current B member list network resets busy state and can retry in B
+not ok 23 - current B member list network resets busy state and can retry in B
+  ---
+  duration_ms: 81.503
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:200:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+
+      assert.ok(h.i.listError || h.env.notices.some(value => ['error', 'warning'].includes(value.type)))
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:203:61)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late A list business cannot publish a notice or unlock B pending read
+not ok 24 - late A list business cannot publish a notice or unlock B pending read
+  ---
+  duration_ms: 82.690375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:194:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    false !== true
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:197:27)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: current B member list business resets busy state and can retry in B
+not ok 25 - current B member list business resets busy state and can retry in B
+  ---
+  duration_ms: 81.959541
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:200:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+
+      assert.ok(h.i.listError || h.env.notices.some(value => ['error', 'warning'].includes(value.type)))
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:203:61)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late member list after clear cannot repopulate an inactive panel
+not ok 26 - late member list after clear cannot repopulate an inactive panel
+  ---
+  duration_ms: 79.4855
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:209:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   {
+    +     avatar: 'avatar-a',
+    +     id: 'user-a',
+    +     realname: '合成学生 a',
+    +     userIdentity: '1',
+    +     username: 'student-a'
+    +   }
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      id: 'user-a'
+      username: 'student-a'
+      realname: '合成学生 a'
+      userIdentity: '1'
+      avatar: 'avatar-a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:212:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: late member list after destroy cannot repopulate an inactive panel
+not ok 27 - late member list after destroy cannot repopulate an inactive panel
+  ---
+  duration_ms: 81.387
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:209:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   {
+    +     avatar: 'avatar-a',
+    +     id: 'user-a',
+    +     realname: '合成学生 a',
+    +     userIdentity: '1',
+    +     username: 'student-a'
+    +   }
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0:
+      id: 'user-a'
+      username: 'student-a'
+      realname: '合成学生 a'
+      userIdentity: '1'
+      avatar: 'avatar-a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:212:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: malformed member rows never enter selection or cancellation and allow a valid retry
+not ok 28 - malformed member rows never enter selection or cancellation and allow a valid retry
+  ---
+  duration_ms: 84.396
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:215:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   null
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:217:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: already dispatched A batchDel response (true) cannot refresh or deselect B
+not ok 29 - already dispatched A batchDel response (true) cannot refresh or deselect B
+  ---
+  duration_ms: 80.560875
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:222:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    3 !== 2
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:225:70)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: already dispatched A batchDel response (false) cannot refresh or deselect B
+not ok 30 - already dispatched A batchDel response (false) cannot refresh or deselect B
+  ---
+  duration_ms: 79.082708
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:222:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:225:114)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: already dispatched A handleRemoveAll response (true) cannot refresh or deselect B
+not ok 31 - already dispatched A handleRemoveAll response (true) cannot refresh or deselect B
+  ---
+  duration_ms: 76.620333
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:222:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    3 !== 2
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:225:70)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: already dispatched A handleRemoveAll response (false) cannot refresh or deselect B
+not ok 32 - already dispatched A handleRemoveAll response (false) cannot refresh or deselect B
+  ---
+  duration_ms: 78.5955
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:222:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:225:114)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: already dispatched A row response (true) cannot refresh or deselect B
+not ok 33 - already dispatched A row response (true) cannot refresh or deselect B
+  ---
+  duration_ms: 105.3555
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:222:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    3 !== 2
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:225:70)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: already dispatched A row response (false) cannot refresh or deselect B
+not ok 34 - already dispatched A row response (false) cannot refresh or deselect B
+  ---
+  duration_ms: 84.841833
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:222:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:225:114)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: selector reopened in B clears A selected users, table and query before its response
+not ok 35 - selector reopened in B clears A selected users, table and query before its response
+  ---
+  duration_ms: 87.4565
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:230:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + [
+    +   'user-a'
+    + ]
+    - []
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+    0: 'user-a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:234:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: old selector emission from A cannot add A users to B
+not ok 36 - old selector emission from A cannot add A users to B
+  ---
+  duration_ms: 81.135375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:237:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:240:58)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: control: a normal B selector confirmation adds only selected B users and refreshes B
+ok 37 - control: a normal B selector confirmation adds only selected B users and refreshes B
+  ---
+  duration_ms: 82.479084
+  type: 'test'
+  ...
+# Subtest: late A selector list cannot replace the B selectable-user table
+not ok 38 - late A selector list cannot replace the B selectable-user table
+  ---
+  duration_ms: 82.064667
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:247:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      [
+        {
+    +     avatar: 'avatar-a',
+    +     id: 'user-a',
+    +     realname: '合成学生 a',
+    -     avatar: 'avatar-b',
+    -     id: 'user-b',
+    -     realname: '合成学生 b',
+          userIdentity: '1',
+    +     username: 'student-a'
+    -     username: 'student-b'
+        }
+      ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      id: 'user-b'
+      username: 'student-b'
+      realname: '合成学生 b'
+      userIdentity: '1'
+      avatar: 'avatar-b'
+  actual:
+    0:
+      id: 'user-a'
+      username: 'student-a'
+      realname: '合成学生 a'
+      userIdentity: '1'
+      avatar: 'avatar-a'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:250:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: selector cannot emit IDs absent from its current displayed users
+not ok 39 - selector cannot emit IDs absent from its current displayed users
+  ---
+  duration_ms: 88.347
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:252:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    1 !== 0
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/class-member-context/web/tests/class-member-context.test.cjs:254:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+1..39
+# tests 39
+# suites 0
+# pass 5
+# fail 34
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3537.561792

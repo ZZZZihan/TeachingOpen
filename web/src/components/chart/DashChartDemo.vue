@@ -45,6 +45,7 @@
 </template>
 
 <script>
+  import './install'
   import { registerShape } from 'viser-vue';
 
   registerShape('point', 'pointer', {

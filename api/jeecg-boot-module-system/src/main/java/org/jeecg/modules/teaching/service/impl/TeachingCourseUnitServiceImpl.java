@@ -9,6 +9,9 @@ import org.jeecg.modules.teaching.model.CourseUnitModel;
 import org.jeecg.modules.teaching.model.CourseUnitWorkModel;
 import org.jeecg.modules.teaching.service.ITeachingCourseUnitService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import java.util.List;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
@@ -20,6 +23,19 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
  */
 @Service
 public class TeachingCourseUnitServiceImpl extends ServiceImpl<TeachingCourseUnitMapper, TeachingCourseUnit> implements ITeachingCourseUnitService {
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean updateExistingUnits(List<TeachingCourseUnit> units) {
+        for (TeachingCourseUnit unit : units) {
+            // Check the actual write, not an earlier read that can race with deletion.
+            if (!updateById(unit)) {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Override
     public IPage<CourseUnitModel> getCourseUnitList(Page<CourseUnitModel> page, QueryWrapper<CourseUnitModel> queryWrapper) {

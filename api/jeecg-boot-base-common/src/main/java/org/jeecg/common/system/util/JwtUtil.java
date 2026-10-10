@@ -49,6 +49,20 @@ public class JwtUtil {
 		}
 	}
 
+	/** Verify the original signature without expiry, so valid expired sessions
+	 * can retain the existing Redis-backed refresh contract. Password changes
+	 * invalidate every token signed with the previous credential. */
+	public static boolean verifySignature(String token, String username, String secret) {
+		try {
+			DecodedJWT jwt = JWT.decode(token);
+			if (!username.equals(jwt.getClaim("username").asString()) || !"HS256".equals(jwt.getAlgorithm())) return false;
+			Algorithm.HMAC256(secret).verify(jwt);
+			return true;
+		} catch (Exception exception) {
+			return false;
+		}
+	}
+
 	/**
 	 * 获得token中的信息无需secret解密也能获得
 	 *

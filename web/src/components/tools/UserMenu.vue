@@ -29,7 +29,7 @@
     <header-notice class="action"/>
     <a-dropdown>
       <span class="action action-full ant-dropdown-link user-dropdown-menu">
-        <a-avatar class="avatar" size="small" :src="getAvatar()"/>
+        <a-avatar class="avatar" size="small" icon="user" :src="getAvatar()" style="color: #667085; background-color: #eef0f3;"/>
         <span v-if="isDesktop()">欢迎您，{{ nickname() }}</span>
       </span>
       <a-menu slot="overlay" class="user-dropdown-menu-wrapper">
@@ -96,6 +96,7 @@
   import { mapActions, mapGetters,mapState } from 'vuex'
   import { mixinDevice } from '@/utils/mixin.js'
   import { getFileAccessHttpUrl } from "@/api/manage"
+import { brandingFileUrl, brandingValue } from '@/utils/platformBranding'
 
   export default {
     name: "UserMenu",
@@ -159,16 +160,18 @@
       ...mapActions(["Logout"]),
       ...mapGetters(["nickname", "avatar","userInfo"]),
       getFileAccessHttpUrl,
-      getAvatar(){
-        let avatarUrl = '/logo.png'
-        if (this.$store.getters.sysConfig.avatar && this.$store.getters.sysConfig.qiniuDomain) {
-          avatarUrl = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.avatar
-        }
-        if(this.getFileAccessHttpUrl(this.avatar())){
-          avatarUrl = this.getFileAccessHttpUrl(this.avatar())
-        } 
-        return avatarUrl
-      },
+        getAvatar () {
+            const config = this.$store.state.user.sysConfig || {}
+            const personalUrl = brandingFileUrl(config, this.avatar(), this.getFileAccessHttpUrl)
+            if (personalUrl) return personalUrl
+            const configuredAvatar = brandingValue(config.avatar)
+            if (!configuredAvatar) return ''
+            if (/^https?:\/\//i.test(configuredAvatar)) return configuredAvatar
+            const domain = brandingValue(config.qiniuDomain)
+            return domain
+                ? `${domain.replace(/\/+$/, '')}/${configuredAvatar.replace(/^\/+/, '')}`
+                : brandingFileUrl(config, configuredAvatar, this.getFileAccessHttpUrl)
+        },
       handleHome(){
         window.location.href = location.protocol + "//" + window.location.host
       },
@@ -248,6 +251,9 @@
         color: inherit;
       }
     }
+  }
+  .user-wrapper .action .avatar /deep/ .anticon {
+    color: #667085;
   }
   /* update-end author:sunjianlei date:20191220 for: 解决全局样式冲突问题 */
   /* update_end author:zhaoxin date:20191129 for: 让搜索框颜色能随主题颜色变换*/

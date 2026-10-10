@@ -1,0 +1,24 @@
+PASS actual login supplies media cookie
+PASS anonymous editor submission rejected
+PASS upload exact Scratch bytes version1.sb3
+PASS register matching owned Scratch file version1.sb3
+PASS upload exact Scratch bytes version1.png
+PASS register matching owned Scratch file version1.png
+PASS real backend saves version 1
+PASS same work ID after version 1
+PASS reopen metadata retains name type and file 1
+PASS media-cookie-only project download equals browser bytes 1
+PASS media-cookie-only cover download equals browser bytes 1
+PASS upload exact Scratch bytes version2.sb3
+PASS register matching owned Scratch file version2.sb3
+PASS upload exact Scratch bytes version2.png
+PASS register matching owned Scratch file version2.png
+PASS real backend saves version 2
+PASS same work ID after version 2
+PASS reopen metadata retains name type and file 2
+PASS media-cookie-only project download equals browser bytes 2
+PASS media-cookie-only cover download equals browser bytes 2
+PASS rename did not create duplicate work
+PASS other student cannot reopen private submission
+PASS work file and history rows restored
+PASS original upload bytes restored

@@ -13,5 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @Version: V1.0
  */
 public interface SysFileMapper extends BaseMapper<SysFile> {
-
+    int hasCourseMediaTable();
+    int courseMediaReferenceCount(@Param("file") SysFile file);
+    int referenceCount(@Param("file") SysFile file);
 }

@@ -1,0 +1,70 @@
+{
+  "base_pr": 13,
+  "base_commit": "4f2235b31c5d5fb45552b8e69363435934115ad9",
+  "backend_build_exit_code": 0,
+  "java_tests": "skipped by parent POM",
+  "web_build_exit_code": 0,
+  "frontend_controlled_checks": 32,
+  "web_dependency_install": "reused course-discovery isolated node_modules; package.json and lockfile byte-identical; no reinstall this turn",
+  "jar_sha256": "5a9710129b3cb0e4bee90388ce2981b8249e7524475190eb36321cf9582135f6",
+  "checks": {
+    "before.json": {
+      "passed": 17,
+      "total": 17
+    },
+    "learning-units-combined.json": {
+      "passed": 80,
+      "total": 80
+    },
+    "after.json": {
+      "passed": 95,
+      "total": 95
+    },
+    "role-cache-combined.json": {
+      "passed": 11,
+      "total": 11
+    },
+    "work-management-combined.json": {
+      "passed": 134,
+      "total": 134
+    },
+    "course-management-combined.json": {
+      "passed": 188,
+      "total": 188
+    },
+    "attachments-combined.json": {
+      "passed": 41,
+      "total": 41
+    }
+  },
+  "source_sha256": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingWorkController.java": "aafe834e3d7b95dfd7adb85db1d3e0035ffc0475819171e6e0cc367b9a0bb50b",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/TeachingWorkSubmissionService.java": "528eaf2775905f2ad82d738aa45825952aad8d59f1cc310f5dc89ffb5478a01a",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/vo/StudentWorkSubmission.java": "2c077a332b72d6568433daa6d784c7494fe1054495f33f211a435f8d3a9a1593",
+    "api/dev/verify-work-submission.py": "6baeb45121650e509972f24a14f1cdbe5caccad29df945f8f4943f8566f55434",
+    "web/src/views/teaching/modules/TeachingWorkSubmitModal.vue": "6c65f08ca997c11fef19eba7a284455d857991a412367d5f01ad7b6230490bcc"
+  },
+  "evidence_sha256": {
+    "before.json": "e665c7743f81d7f9e9204936d92bfab3c3ab6b9373a80a12491a05445871042b",
+    "learning-units-combined.json": "58dfc78bdf3b5835fb99c66eeac2fa2c16672f0aea546c0d29377d812825d32c",
+    "build-summary.txt": "711f54fe3c11f2ab434846d0d5fa69354bc54f032027ca67b0a5fc069aae4c4d",
+    "after.json": "14e25322fc28b06291ed7068e0510bc091be70347fc8110919181ba461747e1f",
+    "role-cache-combined.json": "c17c278b00779e42df06fe6934fae36f3fad53b1bda2bdc1b85c944e3cf6e4c4",
+    "work-management-combined.json": "bca88fbac80c7f5730ccd98246f620c03890f0c4a358411e2817c9f43d696172",
+    "course-management-combined.json": "de4a65c6648bab3e9d983d969d43306620f526d08ea2b598099977f5b7881206",
+    "attachments-combined.json": "4fa2ef169e49efe34e27f74b6e8d6d64d73cc0780dee6377b47771ae3788667e"
+  },
+  "build_log_sha256": "9e3b6464dd722e4630a27b981be14a68ae8be51dab68ad396ff7dde1c10ecc04",
+  "web_build_log_sha256": "1cdcb8c00eb06a3302810200deb0566d5ffaaf85522cb8e59182d1ec49890e04",
+  "web_test_log_sha256": "f6a8022fae99e5ffda1e21a0911274a1cf6c119b6de2f17c01839fdee22f09ab",
+  "protected_original_source_file_count": 5634,
+  "protected_original_source_changed": 0,
+  "limitations": [
+    "No browser editor or actual upload widget acceptance; editor-shaped HTTP payloads only",
+    "File checks depend on sys_file creator metadata; generic file API authorization remains pending",
+    "No concurrent new-work unique constraint or Redis outage/crash consistency proof",
+    "Public community endpoints and full post-review resubmission flow remain pending",
+    "Public UI PRs 6/7 not included in this backend branch; 18102 preview unchanged",
+    "No merge or production deployment"
+  ]
+}

@@ -1,0 +1,835 @@
+TAP version 13
+# Subtest: both HTML entry points load the real query helper before both prebuilt Python bundles
+not ok 1 - both HTML entry points load the real query helper before both prebuilt Python bundles
+  ---
+  duration_ms: 16.491083
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:15:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    player includes one shared query helper
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:19:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.start (node:internal/test_runner/test:1257:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: all three actual callers mark modern Python links for one standard outer decode
+not ok 2 - all three actual callers mark modern Python links for one standard outer decode
+  ---
+  duration_ms: 8.385917
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:26:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    teacher opts into the standard outer query encoding
+    
+    null !== 'uri'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'uri'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:29:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: nested query and literal plus
+not ok 3 - teacher actual caller reaches both actual Python component downloads: nested query and literal plus
+  ---
+  duration_ms: 24.916042
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'https%3A%2F%2Ffiles.test%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb%26next%3D%2Fchild%3Fx%3D1%26y%3D2'
+    - 'https://files.test/seed.py?revision=1&label=a+b&next=/child?x=1&y=2'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/seed.py?revision=1&label=a+b&next=/child?x=1&y=2'
+  actual: 'https%3A%2F%2Ffiles.test%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb%26next%3D%2Fchild%3Fx%3D1%26y%3D2'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: space and Chinese
+not ok 4 - teacher actual caller reaches both actual Python component downloads: space and Chinese
+  ---
+  duration_ms: 23.131375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'https%3A%2F%2Ffiles.test%2F%25E8%25AF%25BE%25E7%25A8%258B%2520%25E7%25A4%25BA%25E4%25BE%258B.py%3Flabel%3D%25E4%25B8%25AD%25E6%2596%2587%2520%25E7%25A9%25BA%25E6%25A0%25BC'
+    - 'https://files.test/%E8%AF%BE%E7%A8%8B%20%E7%A4%BA%E4%BE%8B.py?label=%E4%B8%AD%E6%96%87%20%E7%A9%BA%E6%A0%BC'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/%E8%AF%BE%E7%A8%8B%20%E7%A4%BA%E4%BE%8B.py?label=%E4%B8%AD%E6%96%87%20%E7%A9%BA%E6%A0%BC'
+  actual: 'https%3A%2F%2Ffiles.test%2F%25E8%25AF%25BE%25E7%25A8%258B%2520%25E7%25A4%25BA%25E4%25BE%258B.py%3Flabel%3D%25E4%25B8%25AD%25E6%2596%2587%2520%25E7%25A9%25BA%25E6%25A0%25BC'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: percent escapes belong to the file
+not ok 5 - teacher actual caller reaches both actual Python component downloads: percent escapes belong to the file
+  ---
+  duration_ms: 24.631417
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'https%3A%2F%2Ffiles.test%2Fa%252Fb%2526c%2525.py%3Ftoken%3Dx%252Fy%2526z%252526%26literal%3D100%2525'
+    - 'https://files.test/a%2Fb%26c%25.py?token=x%2Fy%26z%2526&literal=100%25'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/a%2Fb%26c%25.py?token=x%2Fy%26z%2526&literal=100%25'
+  actual: 'https%3A%2F%2Ffiles.test%2Fa%252Fb%2526c%2525.py%3Ftoken%3Dx%252Fy%2526z%252526%26literal%3D100%2525'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: hash belongs to the file
+not ok 6 - teacher actual caller reaches both actual Python component downloads: hash belongs to the file
+  ---
+  duration_ms: 23.814667
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'https%3A%2F%2Ffiles.test%2Fseed.py%3Frevision%3D1%23%25E4%25B8%25AD%25E6%2596%2587%2B%2520%25E7%25A9%25BA%25E6%25A0%25BC%2526'
+    - 'https://files.test/seed.py?revision=1#%E4%B8%AD%E6%96%87+%20%E7%A9%BA%E6%A0%BC%26'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/seed.py?revision=1#%E4%B8%AD%E6%96%87+%20%E7%A9%BA%E6%A0%BC%26'
+  actual: 'https%3A%2F%2Ffiles.test%2Fseed.py%3Frevision%3D1%23%25E4%25B8%25AD%25E6%2596%2587%2B%2520%25E7%25A9%25BA%25E6%25A0%25BC%2526'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: relative file with query and percent escape
+not ok 7 - teacher actual caller reaches both actual Python component downloads: relative file with query and percent escape
+  ---
+  duration_ms: 23.047125
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'http%3A%2F%2Fpreview.test%2Ffixtures%2Fa%252Fb.py%3Frevision%3D1%26label%3Da%2Bb'
+    - 'http://preview.test/fixtures/a%2Fb.py?revision=1&label=a+b'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'http://preview.test/fixtures/a%2Fb.py?revision=1&label=a+b'
+  actual: 'http%3A%2F%2Fpreview.test%2Ffixtures%2Fa%252Fb.py%3Frevision%3D1%26label%3Da%2Bb'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: teacher actual caller reaches both actual Python component downloads: relative file without initial slash
+not ok 8 - teacher actual caller reaches both actual Python component downloads: relative file without initial slash
+  ---
+  duration_ms: 24.359125
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'http%3A%2F%2Fpreview.test%2Ffixtures%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb'
+    - 'http://preview.test/fixtures/seed.py?revision=1&label=a+b'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'http://preview.test/fixtures/seed.py?revision=1&label=a+b'
+  actual: 'http%3A%2F%2Fpreview.test%2Ffixtures%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: nested query and literal plus
+not ok 9 - course actual caller reaches both actual Python component downloads: nested query and literal plus
+  ---
+  duration_ms: 24.951667
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'https%3A%2F%2Ffiles.test%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb%26next%3D%2Fchild%3Fx%3D1%26y%3D2'
+    - 'https://files.test/seed.py?revision=1&label=a+b&next=/child?x=1&y=2'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/seed.py?revision=1&label=a+b&next=/child?x=1&y=2'
+  actual: 'https%3A%2F%2Ffiles.test%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb%26next%3D%2Fchild%3Fx%3D1%26y%3D2'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: space and Chinese
+not ok 10 - course actual caller reaches both actual Python component downloads: space and Chinese
+  ---
+  duration_ms: 23.334792
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'https%3A%2F%2Ffiles.test%2F%25E8%25AF%25BE%25E7%25A8%258B%2520%25E7%25A4%25BA%25E4%25BE%258B.py%3Flabel%3D%25E4%25B8%25AD%25E6%2596%2587%2520%25E7%25A9%25BA%25E6%25A0%25BC'
+    - 'https://files.test/%E8%AF%BE%E7%A8%8B%20%E7%A4%BA%E4%BE%8B.py?label=%E4%B8%AD%E6%96%87%20%E7%A9%BA%E6%A0%BC'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/%E8%AF%BE%E7%A8%8B%20%E7%A4%BA%E4%BE%8B.py?label=%E4%B8%AD%E6%96%87%20%E7%A9%BA%E6%A0%BC'
+  actual: 'https%3A%2F%2Ffiles.test%2F%25E8%25AF%25BE%25E7%25A8%258B%2520%25E7%25A4%25BA%25E4%25BE%258B.py%3Flabel%3D%25E4%25B8%25AD%25E6%2596%2587%2520%25E7%25A9%25BA%25E6%25A0%25BC'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: percent escapes belong to the file
+not ok 11 - course actual caller reaches both actual Python component downloads: percent escapes belong to the file
+  ---
+  duration_ms: 23.890458
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'https%3A%2F%2Ffiles.test%2Fa%252Fb%2526c%2525.py%3Ftoken%3Dx%252Fy%2526z%252526%26literal%3D100%2525'
+    - 'https://files.test/a%2Fb%26c%25.py?token=x%2Fy%26z%2526&literal=100%25'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/a%2Fb%26c%25.py?token=x%2Fy%26z%2526&literal=100%25'
+  actual: 'https%3A%2F%2Ffiles.test%2Fa%252Fb%2526c%2525.py%3Ftoken%3Dx%252Fy%2526z%252526%26literal%3D100%2525'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: hash belongs to the file
+not ok 12 - course actual caller reaches both actual Python component downloads: hash belongs to the file
+  ---
+  duration_ms: 22.820625
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'https%3A%2F%2Ffiles.test%2Fseed.py%3Frevision%3D1%23%25E4%25B8%25AD%25E6%2596%2587%2B%2520%25E7%25A9%25BA%25E6%25A0%25BC%2526'
+    - 'https://files.test/seed.py?revision=1#%E4%B8%AD%E6%96%87+%20%E7%A9%BA%E6%A0%BC%26'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/seed.py?revision=1#%E4%B8%AD%E6%96%87+%20%E7%A9%BA%E6%A0%BC%26'
+  actual: 'https%3A%2F%2Ffiles.test%2Fseed.py%3Frevision%3D1%23%25E4%25B8%25AD%25E6%2596%2587%2B%2520%25E7%25A9%25BA%25E6%25A0%25BC%2526'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: relative file with query and percent escape
+not ok 13 - course actual caller reaches both actual Python component downloads: relative file with query and percent escape
+  ---
+  duration_ms: 22.69175
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'http%3A%2F%2Fpreview.test%2Ffixtures%2Fa%252Fb.py%3Frevision%3D1%26label%3Da%2Bb'
+    - 'http://preview.test/fixtures/a%2Fb.py?revision=1&label=a+b'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'http://preview.test/fixtures/a%2Fb.py?revision=1&label=a+b'
+  actual: 'http%3A%2F%2Fpreview.test%2Ffixtures%2Fa%252Fb.py%3Frevision%3D1%26label%3Da%2Bb'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: course actual caller reaches both actual Python component downloads: relative file without initial slash
+not ok 14 - course actual caller reaches both actual Python component downloads: relative file without initial slash
+  ---
+  duration_ms: 23.859625
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'http%3A%2F%2Fpreview.test%2Ffixtures%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb'
+    - 'http://preview.test/fixtures/seed.py?revision=1&label=a+b'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'http://preview.test/fixtures/seed.py?revision=1&label=a+b'
+  actual: 'http%3A%2F%2Fpreview.test%2Ffixtures%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: nested query and literal plus
+not ok 15 - community actual caller reaches both actual Python component downloads: nested query and literal plus
+  ---
+  duration_ms: 25.417833
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'https://files.test/seed.py?revision=1'
+    - 'https://files.test/seed.py?revision=1&label=a+b&next=/child?x=1&y=2'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/seed.py?revision=1&label=a+b&next=/child?x=1&y=2'
+  actual: 'https://files.test/seed.py?revision=1'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: space and Chinese
+not ok 16 - community actual caller reaches both actual Python component downloads: space and Chinese
+  ---
+  duration_ms: 24.68825
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'https://files.test/%E8%AF%BE%E7%A8%8B%20%E7%A4%BA%E4%BE%8B.py?label=%E4%B8%AD%E6%96%87%20%E7%A9%BA%E6%A0%BC'
+    - 'https://files.test/课程 示例.py?label=中文 空格'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/课程 示例.py?label=中文 空格'
+  actual: 'https://files.test/%E8%AF%BE%E7%A8%8B%20%E7%A4%BA%E4%BE%8B.py?label=%E4%B8%AD%E6%96%87%20%E7%A9%BA%E6%A0%BC'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: percent escapes belong to the file
+not ok 17 - community actual caller reaches both actual Python component downloads: percent escapes belong to the file
+  ---
+  duration_ms: 24.829208
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'https://files.test/a%2Fb%26c%25.py?token=x%2Fy%26z%2526'
+    - 'https://files.test/a%2Fb%26c%25.py?token=x%2Fy%26z%2526&literal=100%25'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/a%2Fb%26c%25.py?token=x%2Fy%26z%2526&literal=100%25'
+  actual: 'https://files.test/a%2Fb%26c%25.py?token=x%2Fy%26z%2526'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: hash belongs to the file
+not ok 18 - community actual caller reaches both actual Python component downloads: hash belongs to the file
+  ---
+  duration_ms: 25.088458
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'https://files.test/seed.py?revision=1'
+    - 'https://files.test/seed.py?revision=1#中文+ 空格%26'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/seed.py?revision=1#中文+ 空格%26'
+  actual: 'https://files.test/seed.py?revision=1'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: relative file with query and percent escape
+not ok 19 - community actual caller reaches both actual Python component downloads: relative file with query and percent escape
+  ---
+  duration_ms: 25.574875
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + '/fixtures/a%2Fb.py?revision=1'
+    - '/fixtures/a%2Fb.py?revision=1&label=a+b'
+                                    ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '/fixtures/a%2Fb.py?revision=1&label=a+b'
+  actual: '/fixtures/a%2Fb.py?revision=1'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: community actual caller reaches both actual Python component downloads: relative file without initial slash
+not ok 20 - community actual caller reaches both actual Python component downloads: relative file without initial slash
+  ---
+  duration_ms: 25.992667
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:35:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    appPlayer decodes the entire outer query value once
+    + actual - expected
+    
+    + 'fixtures/seed.py?revision=1'
+    - 'fixtures/seed.py?revision=1&label=a+b'
+                                  ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'fixtures/seed.py?revision=1&label=a+b'
+  actual: 'fixtures/seed.py?revision=1'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:41:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: appPlayer encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+not ok 21 - appPlayer encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+  ---
+  duration_ms: 18.863
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:52:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '%2Ffixtures%2F%E7%A9%BA+%E6%A0%BC%252F%2526%2525.py%3Fa%3Dx%2By%26b%3D%E4%B8%AD%E6%96%87+%E7%A9%BA%E6%A0%BC%26c%3D100%25%26d%3D%23%E7%89%87%E6%AE%B5%2B+%2526'
+    - '/fixtures/空 格%2F%26%25.py?a=x+y&b=中文 空格&c=100%&d=#片段+ %26'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '/fixtures/空 格%2F%26%25.py?a=x+y&b=中文 空格&c=100%&d=#片段+ %26'
+  actual: '%2Ffixtures%2F%E7%A9%BA+%E6%A0%BC%252F%2526%2525.py%3Fa%3Dx%2By%26b%3D%E4%B8%AD%E6%96%87+%E7%A9%BA%E6%A0%BC%26c%3D100%25%26d%3D%23%E7%89%87%E6%AE%B5%2B+%2526'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:56:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: appPlayer first duplicate URL wins without reparsing embedded URL parameters
+not ok 22 - appPlayer first duplicate URL wins without reparsing embedded URL parameters
+  ---
+  duration_ms: 17.745375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:59:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '%2Ffixtures%2Ffirst.py%3Furl%3D%2Fnested.py%26lang%3Dinner'
+    - '/fixtures/first.py?url=/nested.py&lang=inner'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '/fixtures/first.py?url=/nested.py&lang=inner'
+  actual: '%2Ffixtures%2Ffirst.py%3Furl%3D%2Fnested.py%26lang%3Dinner'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:63:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: appPlayer missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+not ok 23 - appPlayer missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+  ---
+  duration_ms: 90.501875
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:67:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    missing or empty first value has the established sentinel
+    + actual - expected
+    
+    + '/fragment.py'
+    - 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: '/fragment.py'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:70:14)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: appPlayer ordinary raw relative links remain usable and malformed percent encoding does not throw
+ok 24 - appPlayer ordinary raw relative links remain usable and malformed percent encoding does not throw
+  ---
+  duration_ms: 83.446125
+  type: 'test'
+  ...
+# Subtest: appPlayer legacy raw addresses preserve their own percent escapes and literal plus
+ok 25 - appPlayer legacy raw addresses preserve their own percent escapes and literal plus
+  ---
+  duration_ms: 100.284375
+  type: 'test'
+  ...
+# Subtest: appPlayer legacy whole-value encoded recognized addresses decode once
+not ok 26 - appPlayer legacy whole-value encoded recognized addresses decode once
+  ---
+  duration_ms: 16.235208
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:106:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'https%3A%2F%2Ffiles.test%2Fa%252Fb%2526c%2B100%2525.py%3Flabel%3Da%2Bb%26revision%3D1'
+    - 'https://files.test/a%2Fb%26c+100%25.py?label=a+b&revision=1'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/a%2Fb%26c+100%25.py?label=a+b&revision=1'
+  actual: 'https%3A%2F%2Ffiles.test%2Fa%252Fb%2526c%2B100%2525.py%3Flabel%3Da%2Bb%26revision%3D1'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:114:14)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: app encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+not ok 27 - app encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+  ---
+  duration_ms: 15.563458
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:52:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '%2Ffixtures%2F%E7%A9%BA+%E6%A0%BC%252F%2526%2525.py%3Fa%3Dx%2By%26b%3D%E4%B8%AD%E6%96%87+%E7%A9%BA%E6%A0%BC%26c%3D100%25%26d%3D%23%E7%89%87%E6%AE%B5%2B+%2526'
+    - '/fixtures/空 格%2F%26%25.py?a=x+y&b=中文 空格&c=100%&d=#片段+ %26'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '/fixtures/空 格%2F%26%25.py?a=x+y&b=中文 空格&c=100%&d=#片段+ %26'
+  actual: '%2Ffixtures%2F%E7%A9%BA+%E6%A0%BC%252F%2526%2525.py%3Fa%3Dx%2By%26b%3D%E4%B8%AD%E6%96%87+%E7%A9%BA%E6%A0%BC%26c%3D100%25%26d%3D%23%E7%89%87%E6%AE%B5%2B+%2526'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:56:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: app first duplicate URL wins without reparsing embedded URL parameters
+not ok 28 - app first duplicate URL wins without reparsing embedded URL parameters
+  ---
+  duration_ms: 16.613666
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:59:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '%2Ffixtures%2Ffirst.py%3Furl%3D%2Fnested.py%26lang%3Dinner'
+    - '/fixtures/first.py?url=/nested.py&lang=inner'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '/fixtures/first.py?url=/nested.py&lang=inner'
+  actual: '%2Ffixtures%2Ffirst.py%3Furl%3D%2Fnested.py%26lang%3Dinner'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:63:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: app missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+not ok 29 - app missing and empty URL keep the original lifecycle fallback and do not use fragment-only parameters
+  ---
+  duration_ms: 82.517375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:67:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    missing or empty first value has the established sentinel
+    + actual - expected
+    
+    + '/fragment.py'
+    - 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: '/fragment.py'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:70:14)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: app ordinary raw relative links remain usable and malformed percent encoding does not throw
+ok 30 - app ordinary raw relative links remain usable and malformed percent encoding does not throw
+  ---
+  duration_ms: 84.209708
+  type: 'test'
+  ...
+# Subtest: app legacy raw addresses preserve their own percent escapes and literal plus
+ok 31 - app legacy raw addresses preserve their own percent escapes and literal plus
+  ---
+  duration_ms: 98.481166
+  type: 'test'
+  ...
+# Subtest: app legacy whole-value encoded recognized addresses decode once
+not ok 32 - app legacy whole-value encoded recognized addresses decode once
+  ---
+  duration_ms: 16.429042
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:106:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'https%3A%2F%2Ffiles.test%2Fa%252Fb%2526c%2B100%2525.py%3Flabel%3Da%2Bb%26revision%3D1'
+    - 'https://files.test/a%2Fb%26c+100%25.py?label=a+b&revision=1'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'https://files.test/a%2Fb%26c+100%25.py?label=a+b&revision=1'
+  actual: 'https%3A%2F%2Ffiles.test%2Fa%252Fb%2526c%2B100%2525.py%3Flabel%3Da%2Bb%26revision%3D1'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:114:14)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: the shared parser keeps editor workFile escapes while preserving the existing name and ID query behavior
+not ok 33 - the shared parser keeps editor workFile escapes while preserving the existing name and ID query behavior
+  ---
+  duration_ms: 15.365333
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:120:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'work%26one'
+    - 'work&one'
+           ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'work&one'
+  actual: 'work%26one'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url.test.cjs:124:10)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1397:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+    Test.postRun (node:internal/test_runner/test:1537:19)
+    Test.run (node:internal/test_runner/test:1462:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 4
+# fail 29
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1177.144792

@@ -6,7 +6,7 @@ import org.jeecg.modules.system.entity.SysDepart;
 import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.mapper.SysDepartMapper;
 import org.jeecg.modules.system.mapper.SysUserMapper;
-import org.jeecg.modules.system.service.ISysFileService;
+import org.jeecg.modules.teaching.service.TeachingWorkAttachmentService;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
 import org.jeecg.modules.teaching.entity.TeachingWorkComment;
@@ -22,6 +22,8 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationAdapter;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
@@ -47,7 +49,7 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	@Autowired
 	private TeachingWorkCommentMapper teachingWorkCommentMapper;
 	@Autowired
-	private ISysFileService sysFileService;
+	private TeachingWorkAttachmentService workAttachmentService;
 
 
 	@Override
@@ -75,19 +77,19 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	public void updateMain(TeachingWork teachingWork,List<TeachingWorkCorrect> teachingWorkCorrectList,List<TeachingWorkComment> teachingWorkCommentList) {
 		teachingWorkMapper.updateById(teachingWork);
 		
-		//1.先删除子表数据
-		teachingWorkCorrectMapper.deleteByMainId(teachingWork.getId());
-		teachingWorkCommentMapper.deleteByMainId(teachingWork.getId());
-		
-		//2.子表数据重新插入
-		if(teachingWorkCorrectList!=null && teachingWorkCorrectList.size()>0) {
+		// A partial edit must not clear a collection that the caller did not send.
+		// Null (including an omitted property) preserves it; [] explicitly clears it.
+		// Keep replacement inside this transaction so a failed insert restores all rows.
+		if(teachingWorkCorrectList!=null) {
+			teachingWorkCorrectMapper.deleteByMainId(teachingWork.getId());
 			for(TeachingWorkCorrect entity:teachingWorkCorrectList) {
 				//外键设置
 				entity.setWorkId(teachingWork.getId());
 				teachingWorkCorrectMapper.insert(entity);
 			}
 		}
-		if(teachingWorkCommentList!=null && teachingWorkCommentList.size()>0) {
+		if(teachingWorkCommentList!=null) {
+			teachingWorkCommentMapper.deleteByMainId(teachingWork.getId());
 			for(TeachingWorkComment entity:teachingWorkCommentList) {
 				//外键设置
 				entity.setWorkId(teachingWork.getId());
@@ -105,10 +107,18 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 		}
 		teachingWorkCorrectMapper.deleteByMainId(id);
 		teachingWorkCommentMapper.deleteByMainId(id);
-		//删除文件
-		sysFileService.deleteWithFile(work.getWorkCover());
-		sysFileService.deleteWithFile(work.getWorkFile());
 		teachingWorkMapper.deleteById(id);
+		// Sent copies share these IDs. Never remove bytes before the whole delete
+		// transaction (including a batch and its feedback rows) has committed.
+		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			@Override
+			public void afterCommit() {
+				workAttachmentService.cleanupAfterWorkDeletion(work.getWorkCover());
+				if (!Objects.equals(work.getWorkCover(), work.getWorkFile())) {
+					workAttachmentService.cleanupAfterWorkDeletion(work.getWorkFile());
+				}
+			}
+		});
 	}
 
 	@Override
@@ -122,6 +132,11 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	@Override
 	public StudentWorkModel studentWorkInfo(String workId) {
 		return this.baseMapper.studentWorkInfo(workId);
+	}
+
+	@Override
+	public boolean incrementViewCount(String workId) {
+		return this.baseMapper.incrementViewCount(workId) == 1;
 	}
 
 	@Override
@@ -176,30 +191,31 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 
 	@Override
 	public List<AdditionalWorkModel> userAdditionalWork(String userId, String departId, Boolean submit, Integer status) {
-		//有2个问题：
-		// 1.如果学生班级有相同课程，那么学生提交的作业无法区分班级
-		// 2.如果布置的作业同时在学生的两个班级，那么班级名无法区分
-
-		List<SysDepart> mineClassrooms = new ArrayList<>();
-		mineClassrooms = sysDepartMapper.queryUserClassroom(userId);
-		if (!StringUtils.isEmpty(departId)){
-			mineClassrooms.stream().filter(sysDepart -> sysDepart.getId().equals(departId));
-		}
-		if(mineClassrooms == null || mineClassrooms.size()==0){
-			return new ArrayList<>();
-		}
-		List departIds = mineClassrooms.stream().map(SysDepart::getId).collect(Collectors.toList());
-		List<AdditionalWorkModel> additionalWorkModels = this.baseMapper.userAdditionalWork(userId, departIds, submit, status);
-		//step 封装班级信息
-		for (AdditionalWorkModel workModel: additionalWorkModels){
-			for (SysDepart depart: mineClassrooms){
-				if (workModel.getWorkDept().contains(depart.getId())){
-					workModel.setDepartId(depart.getId());
-					workModel.setDepartName(depart.getDepartName());
-				}
+		List<SysDepart> memberships = sysDepartMapper.queryUserClassroom(userId);
+		if (memberships == null) return Collections.emptyList();
+		List<SysDepart> classrooms = memberships.stream()
+				.filter(depart -> !"1".equals(depart.getDelFlag()))
+				.filter(depart -> !StringUtils.hasText(departId) || depart.getId().equals(departId.trim()))
+				.sorted(Comparator.comparing(SysDepart::getId)).collect(Collectors.toList());
+		if (classrooms.isEmpty()) return Collections.emptyList();
+		List<String> departIds = classrooms.stream().map(SysDepart::getId).collect(Collectors.toList());
+		List<AdditionalWorkModel> rows = this.baseMapper.userAdditionalWork(userId, departIds, submit, status);
+		List<AdditionalWorkModel> result = new ArrayList<>();
+		for (AdditionalWorkModel row : rows) {
+			Set<String> assigned = Arrays.stream(row.getWorkDept().split(","))
+					.map(String::trim).collect(Collectors.toSet());
+			// Keep the saved work's class, as the submission service does. An
+			// assignment shared with another class must not rebind that work.
+			Optional<SysDepart> classroom = classrooms.stream().filter(depart -> assigned.contains(depart.getId()))
+					.filter(depart -> !StringUtils.hasText(row.getMineWorkDepartId()) || depart.getId().equals(row.getMineWorkDepartId()))
+					.findFirst();
+			if (classroom.isPresent()) {
+				row.setDepartId(classroom.get().getId());
+				row.setDepartName(classroom.get().getDepartName());
+				result.add(row);
 			}
 		}
-		return additionalWorkModels;
+		return result;
 	}
 
 }

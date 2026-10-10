@@ -1,0 +1,17 @@
+{
+  "same_frozen_script": "f97fa6e661460da30a80c0e582cf150795823c8775207ae66c491189b46663d9",
+  "identical_ordered_113_case_names": true,
+  "identical_expected_values": true,
+  "baseline": {
+    "passed": 83,
+    "total": 113,
+    "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7"
+  },
+  "candidate": {
+    "passed": 113,
+    "total": 113,
+    "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42"
+  },
+  "candidate_failed": [],
+  "both_cleanups_without_error": true
+}

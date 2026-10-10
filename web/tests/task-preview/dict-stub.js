@@ -1,0 +1,1 @@
+export default { props: ['value', 'defaultDictOptions'], template: '<a-radio-group :value="value" @change="$emit(\'change\', $event)"><a-radio-button v-for="item in defaultDictOptions" :key="item.value" :value="item.value">{{ item.title }}</a-radio-button></a-radio-group>' }

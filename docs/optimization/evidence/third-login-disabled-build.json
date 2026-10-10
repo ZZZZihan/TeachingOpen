@@ -1,0 +1,14 @@
+{
+  "base_commit": "6d798ac",
+  "controller_sha256": "005ee0a5c60721d8d4f7cc2e79d424ddbf4577beb08424665de11d86ea332bd7",
+  "build_exit_code": 0,
+  "java_tests_skipped": true,
+  "build_log_sha256": "dd158e776b36ceeb58ea5082fcbca1ee75f63f9219cbd613ed33b64d852c31a5",
+  "summary": [
+    "[INFO] jeecg-boot-parent .................................. SUCCESS [  0.143 s]",
+    "[INFO] jeecg-boot-base-common ............................. SUCCESS [  2.938 s]",
+    "[INFO] teaching-open ...................................... SUCCESS [  5.217 s]",
+    "[INFO] BUILD SUCCESS",
+    "[INFO] Finished at: 2026-10-02T22:12:44+08:00"
+  ]
+}

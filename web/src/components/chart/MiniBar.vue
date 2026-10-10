@@ -8,6 +8,7 @@
 </template>
 
 <script>
+  import './install'
   import moment from 'dayjs'
 
   const sourceData = []

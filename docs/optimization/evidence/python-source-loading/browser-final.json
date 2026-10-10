@@ -1,0 +1,496 @@
+[
+  {
+    "entry": "player",
+    "scenario": "normal",
+    "pass": true,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      }
+    ],
+    "attempts": 1,
+    "initial": {
+      "phase": "ready",
+      "message": "程序已打开，可以运行。",
+      "retryVisible": false,
+      "code": "print(\"Python persistence fixture\")\nprint(6 * 7)\n",
+      "readOnly": true,
+      "runDisabled": false,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "player",
+    "scenario": "slow",
+    "pass": true,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      }
+    ],
+    "attempts": 1,
+    "during": {
+      "phase": "loading",
+      "message": "正在打开程序文件…",
+      "retryVisible": false,
+      "code": "",
+      "readOnly": "true",
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    },
+    "initial": {
+      "phase": "ready",
+      "message": "程序已打开，可以运行。",
+      "retryVisible": false,
+      "code": "print(\"Python persistence fixture\")\nprint(6 * 7)\n",
+      "readOnly": true,
+      "runDisabled": false,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "player",
+    "scenario": "404-retry",
+    "pass": true,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      },
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      }
+    ],
+    "attempts": 2,
+    "initial": {
+      "phase": "load-error",
+      "message": "未能打开程序。程序文件不存在或已被移除（404），请检查作品地址后重试。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": "true",
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    },
+    "recovered": {
+      "phase": "ready",
+      "message": "程序已打开，可以运行。",
+      "retryVisible": false,
+      "code": "print(\"Python persistence fixture\")\nprint(6 * 7)\n",
+      "readOnly": true,
+      "runDisabled": false,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "player",
+    "scenario": "network-retry",
+    "pass": true,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      },
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      }
+    ],
+    "attempts": 2,
+    "initial": {
+      "phase": "load-error",
+      "message": "未能打开程序。网络暂时不可用，程序文件尚未打开，请检查网络后重试。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": "true",
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    },
+    "recovered": {
+      "phase": "ready",
+      "message": "程序已打开，可以运行。",
+      "retryVisible": false,
+      "code": "print(\"Python persistence fixture\")\nprint(6 * 7)\n",
+      "readOnly": true,
+      "runDisabled": false,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "player",
+    "scenario": "invalid-url",
+    "pass": true,
+    "requests": [],
+    "attempts": 0,
+    "initial": {
+      "phase": "load-error",
+      "message": "未能打开程序。程序文件地址不可用，请从作品页面重新打开。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": "true",
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "player",
+    "scenario": "html-response",
+    "pass": true,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      }
+    ],
+    "attempts": 1,
+    "initial": {
+      "phase": "load-error",
+      "message": "未能打开程序。返回内容不是程序文件，请检查作品地址后重试。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": "true",
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "player",
+    "scenario": "empty-file",
+    "pass": true,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      }
+    ],
+    "attempts": 1,
+    "initial": {
+      "phase": "ready",
+      "message": "程序已打开，可以运行。",
+      "retryVisible": false,
+      "code": "",
+      "readOnly": true,
+      "runDisabled": false,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "index",
+    "scenario": "normal",
+    "pass": true,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      }
+    ],
+    "attempts": 1,
+    "initial": {
+      "phase": "ready",
+      "message": "可以开始编写代码",
+      "retryVisible": false,
+      "code": "print(\"Python persistence fixture\")\nprint(6 * 7)\n",
+      "readOnly": false,
+      "runDisabled": false,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "index",
+    "scenario": "slow",
+    "pass": true,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      }
+    ],
+    "attempts": 1,
+    "during": {
+      "phase": "loading",
+      "message": "正在打开作品…",
+      "retryVisible": false,
+      "code": "",
+      "readOnly": true,
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    },
+    "initial": {
+      "phase": "ready",
+      "message": "可以开始编写代码",
+      "retryVisible": false,
+      "code": "print(\"Python persistence fixture\")\nprint(6 * 7)\n",
+      "readOnly": false,
+      "runDisabled": false,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "index",
+    "scenario": "404-retry",
+    "pass": true,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      },
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      }
+    ],
+    "attempts": 2,
+    "initial": {
+      "phase": "load-error",
+      "message": "未能打开作品。程序文件不存在或已被移除（404），请检查作品地址后重试。当前内容已保留。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": true,
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    },
+    "recovered": {
+      "phase": "ready",
+      "message": "可以开始编写代码",
+      "retryVisible": false,
+      "code": "print(\"Python persistence fixture\")\nprint(6 * 7)\n",
+      "readOnly": false,
+      "runDisabled": false,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "index",
+    "scenario": "network-retry",
+    "pass": true,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      },
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      }
+    ],
+    "attempts": 2,
+    "initial": {
+      "phase": "load-error",
+      "message": "未能打开作品。网络暂时不可用，程序文件尚未打开，请检查网络后重试。当前内容已保留。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": true,
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    },
+    "recovered": {
+      "phase": "ready",
+      "message": "可以开始编写代码",
+      "retryVisible": false,
+      "code": "print(\"Python persistence fixture\")\nprint(6 * 7)\n",
+      "readOnly": false,
+      "runDisabled": false,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "index",
+    "scenario": "invalid-url",
+    "pass": true,
+    "requests": [],
+    "attempts": 0,
+    "initial": {
+      "phase": "load-error",
+      "message": "未能打开作品。程序文件地址不可用，请从作品页面重新打开。当前内容已保留。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": true,
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "index",
+    "scenario": "html-response",
+    "pass": true,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      }
+    ],
+    "attempts": 1,
+    "initial": {
+      "phase": "load-error",
+      "message": "未能打开作品。返回内容不是程序文件，请检查作品地址后重试。当前内容已保留。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": true,
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "index",
+    "scenario": "empty-file",
+    "pass": true,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18160/fixtures/seed.py?part=a%2Bb&label=50%25",
+        "method": "GET",
+        "hasAccessToken": false
+      }
+    ],
+    "attempts": 1,
+    "initial": {
+      "phase": "ready",
+      "message": "可以开始编写代码",
+      "retryVisible": false,
+      "code": "",
+      "readOnly": false,
+      "runDisabled": false,
+      "editors": 1,
+      "overflow": false
+    },
+    "pageErrors": []
+  },
+  {
+    "entry": "player",
+    "width": 390,
+    "pass": true,
+    "ui": {
+      "phase": "load-error",
+      "message": "未能打开程序。程序文件不存在或已被移除（404），请检查作品地址后重试。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": "true",
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    }
+  },
+  {
+    "entry": "player",
+    "width": 768,
+    "pass": true,
+    "ui": {
+      "phase": "load-error",
+      "message": "未能打开程序。程序文件不存在或已被移除（404），请检查作品地址后重试。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": "true",
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    }
+  },
+  {
+    "entry": "player",
+    "width": 1440,
+    "pass": true,
+    "ui": {
+      "phase": "load-error",
+      "message": "未能打开程序。程序文件不存在或已被移除（404），请检查作品地址后重试。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": "true",
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    }
+  },
+  {
+    "entry": "index",
+    "width": 390,
+    "pass": true,
+    "ui": {
+      "phase": "load-error",
+      "message": "未能打开作品。程序文件不存在或已被移除（404），请检查作品地址后重试。当前内容已保留。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": true,
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    }
+  },
+  {
+    "entry": "index",
+    "width": 768,
+    "pass": true,
+    "ui": {
+      "phase": "load-error",
+      "message": "未能打开作品。程序文件不存在或已被移除（404），请检查作品地址后重试。当前内容已保留。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": true,
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    }
+  },
+  {
+    "entry": "index",
+    "width": 1440,
+    "pass": true,
+    "ui": {
+      "phase": "load-error",
+      "message": "未能打开作品。程序文件不存在或已被移除（404），请检查作品地址后重试。当前内容已保留。",
+      "retryVisible": true,
+      "code": "",
+      "readOnly": true,
+      "runDisabled": true,
+      "editors": 1,
+      "overflow": false
+    }
+  }
+]

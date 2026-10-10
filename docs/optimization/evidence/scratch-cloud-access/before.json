@@ -1,0 +1,65 @@
+{
+  "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396",
+  "expected_legacy": true,
+  "cases": [
+    {
+      "case": "legacy anonymous reads private values",
+      "passed": true
+    },
+    {
+      "case": "legacy other student reads private values",
+      "passed": true
+    },
+    {
+      "case": "legacy cross-class teacher reads private values",
+      "passed": true
+    },
+    {
+      "case": "legacy anonymous writes without handshake",
+      "passed": true
+    },
+    {
+      "case": "legacy nonexistent project accepts writes",
+      "passed": true
+    },
+    {
+      "case": "legacy owner create fails due service bean lookup",
+      "passed": true
+    },
+    {
+      "case": "legacy logged-out receiver still receives",
+      "passed": true
+    },
+    {
+      "case": "legacy project switch leaves old subscription",
+      "passed": true
+    },
+    {
+      "case": "legacy deleted work values readable",
+      "passed": true
+    },
+    {
+      "case": "raw cloud credential logging matches expected boundary",
+      "passed": true
+    },
+    {
+      "case": "raw cloud value logging matches expected boundary",
+      "passed": true
+    },
+    {
+      "case": "all non-audit database tables restored",
+      "passed": true
+    },
+    {
+      "case": "all attachment bytes unchanged",
+      "passed": true
+    },
+    {
+      "case": "all original cloud keys and values unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 14,
+  "total": 14,
+  "scope": "Real Java/Redis/MySQL via local same-origin WebSocket, synthetic projects and CLI login only; not browser or shipped editor acceptance"
+}

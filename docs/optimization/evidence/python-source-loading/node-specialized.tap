@@ -1,0 +1,436 @@
+TAP version 13
+# Subtest: 桥接没有 CONFIG 缓存也可本地上传、登记、提交；每次 API 使用当前令牌
+ok 1 - 桥接没有 CONFIG 缓存也可本地上传、登记、提交；每次 API 使用当前令牌
+  ---
+  duration_ms: 17.6795
+  type: 'test'
+  ...
+# Subtest: 文件返回 HTML 登录页不会作为代码载入；401 有明确提示且解除忙状态
+ok 2 - 文件返回 HTML 登录页不会作为代码载入；401 有明确提示且解除忙状态
+  ---
+  duration_ms: 13.503333
+  type: 'test'
+  ...
+# Subtest: 文件登记路径不匹配、业务失败不能进入提交成功状态
+ok 3 - 文件登记路径不匹配、业务失败不能进入提交成功状态
+  ---
+  duration_ms: 6.269541
+  type: 'test'
+  ...
+# Subtest: 云上传使用服务器前缀和单次凭据，不向云传平台会话；验证返回键后登记
+ok 4 - 云上传使用服务器前缀和单次凭据，不向云传平台会话；验证返回键后登记
+  ---
+  duration_ms: 5.674833
+  type: 'test'
+  ...
+# Subtest: 未保存改动或正在保存时有离页提示，打开后未修改不触发
+ok 5 - 未保存改动或正在保存时有离页提示，打开后未修改不触发
+  ---
+  duration_ms: 5.311792
+  type: 'test'
+  ...
+# Subtest: 预编译编辑器只在下一轮渲染完成后挂接；本地导出和提交读取当前 Ace 内容
+ok 6 - 预编译编辑器只在下一轮渲染完成后挂接；本地导出和提交读取当前 Ace 内容
+  ---
+  duration_ms: 1.676583
+  type: 'test'
+  ...
+# Subtest: HTML, entities and event attributes are literal output across chunks
+ok 7 - HTML, entities and event attributes are literal output across chunks
+  ---
+  duration_ms: 0.589083
+  type: 'test'
+  ...
+# Subtest: many print calls reuse one text node instead of reparsing or multiplying nodes
+ok 8 - many print calls reuse one text node instead of reparsing or multiplying nodes
+  ---
+  duration_ms: 1.264958
+  type: 'test'
+  ...
+# Subtest: exact display limit preserves all data; excess adds exactly one fixed notice
+ok 9 - exact display limit preserves all data; excess adds exactly one fixed notice
+  ---
+  duration_ms: 0.643417
+  type: 'test'
+  ...
+# Subtest: truncation preserves surrogate pairs inside a chunk and across a boundary
+ok 10 - truncation preserves surrogate pairs inside a chunk and across a boundary
+  ---
+  duration_ms: 0.190375
+  type: 'test'
+  ...
+# Subtest: clear removes the notice and allows full output again; nodes keep independent limits
+ok 11 - clear removes the notice and allows full output again; nodes keep independent limits
+  ---
+  duration_ms: 0.09275
+  type: 'test'
+  ...
+# Subtest: replaced DOM content starts a fresh buffer and missing output is harmless
+ok 12 - replaced DOM content starts a fresh buffer and missing output is harmless
+  ---
+  duration_ms: 0.057958
+  type: 'test'
+  ...
+# Subtest: app actual component appends through the shared buffer and execution cleanup
+ok 13 - app actual component appends through the shared buffer and execution cleanup
+  ---
+  duration_ms: 4.428333
+  type: 'test'
+  ...
+# Subtest: appPlayer actual component appends through the shared buffer and execution cleanup
+ok 14 - appPlayer actual component appends through the shared buffer and execution cleanup
+  ---
+  duration_ms: 1.992417
+  type: 'test'
+  ...
+# Subtest: both HTML entry points load output helper before vendor bundles and share output styles
+ok 15 - both HTML entry points load output helper before vendor bundles and share output styles
+  ---
+  duration_ms: 0.292125
+  type: 'test'
+  ...
+# Subtest: source-loading, execution and URL substitutions reverse before the six output substitutions and preserve every historical vendor base
+ok 16 - source-loading, execution and URL substitutions reverse before the six output substitutions and preserve every historical vendor base
+  ---
+  duration_ms: 28.119625
+  type: 'test'
+  ...
+# Subtest: both HTML entry points load the real query helper before their one page-specific Python bundle
+ok 17 - both HTML entry points load the real query helper before their one page-specific Python bundle
+  ---
+  duration_ms: 1.387792
+  type: 'test'
+  ...
+# Subtest: all three actual callers mark modern Python links for one standard outer decode
+ok 18 - all three actual callers mark modern Python links for one standard outer decode
+  ---
+  duration_ms: 2.238458
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches preview and editor source downloads: nested query and literal plus
+ok 19 - teacher actual caller reaches preview and editor source downloads: nested query and literal plus
+  ---
+  duration_ms: 23.3995
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches preview and editor source downloads: space and Chinese
+ok 20 - teacher actual caller reaches preview and editor source downloads: space and Chinese
+  ---
+  duration_ms: 5.200083
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches preview and editor source downloads: percent escapes belong to the file
+ok 21 - teacher actual caller reaches preview and editor source downloads: percent escapes belong to the file
+  ---
+  duration_ms: 4.432333
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches preview and editor source downloads: hash belongs to the file
+ok 22 - teacher actual caller reaches preview and editor source downloads: hash belongs to the file
+  ---
+  duration_ms: 4.442
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches preview and editor source downloads: relative file with query and percent escape
+ok 23 - teacher actual caller reaches preview and editor source downloads: relative file with query and percent escape
+  ---
+  duration_ms: 4.801541
+  type: 'test'
+  ...
+# Subtest: teacher actual caller reaches preview and editor source downloads: relative file without initial slash
+ok 24 - teacher actual caller reaches preview and editor source downloads: relative file without initial slash
+  ---
+  duration_ms: 4.520708
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches preview and editor source downloads: nested query and literal plus
+ok 25 - course actual caller reaches preview and editor source downloads: nested query and literal plus
+  ---
+  duration_ms: 4.571041
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches preview and editor source downloads: space and Chinese
+ok 26 - course actual caller reaches preview and editor source downloads: space and Chinese
+  ---
+  duration_ms: 4.467833
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches preview and editor source downloads: percent escapes belong to the file
+ok 27 - course actual caller reaches preview and editor source downloads: percent escapes belong to the file
+  ---
+  duration_ms: 5.6695
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches preview and editor source downloads: hash belongs to the file
+ok 28 - course actual caller reaches preview and editor source downloads: hash belongs to the file
+  ---
+  duration_ms: 4.395625
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches preview and editor source downloads: relative file with query and percent escape
+ok 29 - course actual caller reaches preview and editor source downloads: relative file with query and percent escape
+  ---
+  duration_ms: 4.513292
+  type: 'test'
+  ...
+# Subtest: course actual caller reaches preview and editor source downloads: relative file without initial slash
+ok 30 - course actual caller reaches preview and editor source downloads: relative file without initial slash
+  ---
+  duration_ms: 4.658167
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches preview and editor source downloads: nested query and literal plus
+ok 31 - community actual caller reaches preview and editor source downloads: nested query and literal plus
+  ---
+  duration_ms: 4.143208
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches preview and editor source downloads: space and Chinese
+ok 32 - community actual caller reaches preview and editor source downloads: space and Chinese
+  ---
+  duration_ms: 4.275041
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches preview and editor source downloads: percent escapes belong to the file
+ok 33 - community actual caller reaches preview and editor source downloads: percent escapes belong to the file
+  ---
+  duration_ms: 4.042375
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches preview and editor source downloads: hash belongs to the file
+ok 34 - community actual caller reaches preview and editor source downloads: hash belongs to the file
+  ---
+  duration_ms: 4.209417
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches preview and editor source downloads: relative file with query and percent escape
+ok 35 - community actual caller reaches preview and editor source downloads: relative file with query and percent escape
+  ---
+  duration_ms: 3.807791
+  type: 'test'
+  ...
+# Subtest: community actual caller reaches preview and editor source downloads: relative file without initial slash
+ok 36 - community actual caller reaches preview and editor source downloads: relative file without initial slash
+  ---
+  duration_ms: 4.038
+  type: 'test'
+  ...
+# Subtest: appPlayer encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+ok 37 - appPlayer encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+  ---
+  duration_ms: 1.545209
+  type: 'test'
+  ...
+# Subtest: appPlayer first duplicate URL wins without reparsing embedded URL parameters
+ok 38 - appPlayer first duplicate URL wins without reparsing embedded URL parameters
+  ---
+  duration_ms: 1.962042
+  type: 'test'
+  ...
+# Subtest: appPlayer missing and empty URL preserve editor template fallback and preview no-source feedback without using fragment-only parameters
+ok 39 - appPlayer missing and empty URL preserve editor template fallback and preview no-source feedback without using fragment-only parameters
+  ---
+  duration_ms: 8.510209
+  type: 'test'
+  ...
+# Subtest: appPlayer ordinary raw relative links remain usable and malformed percent encoding does not throw
+ok 40 - appPlayer ordinary raw relative links remain usable and malformed percent encoding does not throw
+  ---
+  duration_ms: 9.849417
+  type: 'test'
+  ...
+# Subtest: appPlayer legacy raw addresses preserve their own percent escapes and literal plus
+ok 41 - appPlayer legacy raw addresses preserve their own percent escapes and literal plus
+  ---
+  duration_ms: 9.538958
+  type: 'test'
+  ...
+# Subtest: appPlayer legacy whole-value encoded recognized addresses decode once
+ok 42 - appPlayer legacy whole-value encoded recognized addresses decode once
+  ---
+  duration_ms: 6.711
+  type: 'test'
+  ...
+# Subtest: app encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+ok 43 - app encoded url retains nested delimiters, percent escapes, literal plus and Unicode in one decode
+  ---
+  duration_ms: 1.673375
+  type: 'test'
+  ...
+# Subtest: app first duplicate URL wins without reparsing embedded URL parameters
+ok 44 - app first duplicate URL wins without reparsing embedded URL parameters
+  ---
+  duration_ms: 1.917875
+  type: 'test'
+  ...
+# Subtest: app missing and empty URL preserve editor template fallback and preview no-source feedback without using fragment-only parameters
+ok 45 - app missing and empty URL preserve editor template fallback and preview no-source feedback without using fragment-only parameters
+  ---
+  duration_ms: 8.368167
+  type: 'test'
+  ...
+# Subtest: app ordinary raw relative links remain usable and malformed percent encoding does not throw
+ok 46 - app ordinary raw relative links remain usable and malformed percent encoding does not throw
+  ---
+  duration_ms: 8.475333
+  type: 'test'
+  ...
+# Subtest: app legacy raw addresses preserve their own percent escapes and literal plus
+ok 47 - app legacy raw addresses preserve their own percent escapes and literal plus
+  ---
+  duration_ms: 11.371292
+  type: 'test'
+  ...
+# Subtest: app legacy whole-value encoded recognized addresses decode once
+ok 48 - app legacy whole-value encoded recognized addresses decode once
+  ---
+  duration_ms: 6.942666
+  type: 'test'
+  ...
+# Subtest: the shared parser keeps editor workFile escapes while preserving the existing name and ID query behavior
+ok 49 - the shared parser keeps editor workFile escapes while preserving the existing name and ID query behavior
+  ---
+  duration_ms: 3.347458
+  type: 'test'
+  ...
+# Subtest: index ace: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+ok 50 - index ace: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+  ---
+  duration_ms: 19.04475
+  type: 'test'
+  ...
+# Subtest: index codemirror: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+ok 51 - index codemirror: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+  ---
+  duration_ms: 3.143125
+  type: 'test'
+  ...
+# Subtest: index: 404 and network errors keep Run disabled, expose retry, and retry makes exactly one further GET
+ok 52 - index: 404 and network errors keep Run disabled, expose retry, and retry makes exactly one further GET
+  ---
+  duration_ms: 6.388417
+  type: 'test'
+  ...
+# Subtest: index: loading changes are preserved, including a late response and a change during apply nextTick
+ok 53 - index: loading changes are preserved, including a late response and a change during apply nextTick
+  ---
+  duration_ms: 4.722375
+  type: 'test'
+  ...
+# Subtest: index: missing raw editor times out application without becoming runnable
+ok 54 - index: missing raw editor times out application without becoming runnable
+  ---
+  duration_ms: 7.171375
+  type: 'test'
+  ...
+# Subtest: player ace: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+ok 55 - player ace: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+  ---
+  duration_ms: 2.869625
+  type: 'test'
+  ...
+# Subtest: player codemirror: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+ok 56 - player codemirror: one actual entry performs one GET, waits for raw editor, then enables Worker Run
+  ---
+  duration_ms: 2.40525
+  type: 'test'
+  ...
+# Subtest: player: 404 and network errors keep Run disabled, expose retry, and retry makes exactly one further GET
+ok 57 - player: 404 and network errors keep Run disabled, expose retry, and retry makes exactly one further GET
+  ---
+  duration_ms: 4.568625
+  type: 'test'
+  ...
+# Subtest: player: loading changes are preserved, including a late response and a change during apply nextTick
+ok 58 - player: loading changes are preserved, including a late response and a change during apply nextTick
+  ---
+  duration_ms: 4.001375
+  type: 'test'
+  ...
+# Subtest: player: missing raw editor times out application without becoming runnable
+ok 59 - player: missing raw editor times out application without becoming runnable
+  ---
+  duration_ms: 5.833709
+  type: 'test'
+  ...
+# Subtest: player missing/empty/bad URL reports an actionable error without fetching a template
+ok 60 - player missing/empty/bad URL reports an actionable error without fetching a template
+  ---
+  duration_ms: 11.398417
+  type: 'test'
+  ...
+# Subtest: editor without source loads its established template once and repeated mount is idempotent
+ok 61 - editor without source loads its established template once and repeated mount is idempotent
+  ---
+  duration_ms: 2.396583
+  type: 'test'
+  ...
+# Subtest: preview mount is idempotent both during and after successful load
+ok 62 - preview mount is idempotent both during and after successful load
+  ---
+  duration_ms: 2.930959
+  type: 'test'
+  ...
+# Subtest: ace: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("")
+ok 63 - ace: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("")
+  ---
+  duration_ms: 2.403458
+  type: 'test'
+  ...
+# Subtest: ace: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("print 42\\n")
+ok 64 - ace: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("print 42\\n")
+  ---
+  duration_ms: 2.293875
+  type: 'test'
+  ...
+# Subtest: codemirror: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("")
+ok 65 - codemirror: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("")
+  ---
+  duration_ms: 2.541084
+  type: 'test'
+  ...
+# Subtest: codemirror: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("print 42\\n")
+ok 66 - codemirror: empty/same-code application leaves no delayed setter able to overwrite post-ready edits ("print 42\\n")
+  ---
+  duration_ms: 2.19425
+  type: 'test'
+  ...
+# Subtest: both actual CodeMirror wrapper setters apply synchronously and cannot overwrite later edits at 300ms
+ok 67 - both actual CodeMirror wrapper setters apply synchronously and cannot overwrite later edits at 300ms
+  ---
+  duration_ms: 2.500917
+  type: 'test'
+  ...
+# Subtest: helper rejects bad addresses and typed content failures while accepting empty Python text
+ok 68 - helper rejects bad addresses and typed content failures while accepting empty Python text
+  ---
+  duration_ms: 10.886542
+  type: 'test'
+  ...
+# Subtest: 15s timeout aborts one native fetch, keeps Run blocked, and ignores the late response before successful retry
+ok 69 - 15s timeout aborts one native fetch, keeps Run blocked, and ignores the late response before successful retry
+  ---
+  duration_ms: 2.604292
+  type: 'test'
+  ...
+# Subtest: workId retains metadata-first single source GET; save uploads current raw bytes and reopening keeps the same identity
+ok 70 - workId retains metadata-first single source GET; save uploads current raw bytes and reopening keeps the same identity
+  ---
+  duration_ms: 5.339416
+  type: 'test'
+  ...
+# Subtest: source substitutions reverse to the untouched PR52 bundle hashes before all historical patch layers
+ok 71 - source substitutions reverse to the untouched PR52 bundle hashes before all historical patch layers
+  ---
+  duration_ms: 28.709875
+  type: 'test'
+  ...
+1..71
+# tests 71
+# suites 0
+# pass 71
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 242.791083

@@ -1,5 +1,5 @@
 <template>
-  <div :id="containerId" style="position: relative">
+  <div :id="containerId" class="j-upload" style="position: relative">
 
     <!--  ---------------------------- begin 图片左右换位置 ------------------------------------- -->
     <div class="movety-container" :style="{top:top+'px',left:left+'px',display:moveDisplay}" style="padding:0 8px;position: absolute;z-index: 91;height: 32px;width: 104px;text-align: center;">
@@ -287,18 +287,14 @@
       },
       //获取七牛TOKEN
       getQiniuToken(){
-        return new Promise((resolve, reject) => {
-          getAction(this.tokenAction.qiniu, {}).then(res => {
-            if(res.success){
-              this.uploadToken = res.result
-              resolve()
-              return;
-            }else{
-              this.$message.error(res.message)
-              reject()
-            }
-          })
-        });
+        return getAction(this.tokenAction.qiniu, {}).then(res => {
+          if (!res.success || !res.keyPrefix) {
+            this.$message.error(res.message || '无法获取上传凭证')
+            throw new Error('Upload credential unavailable')
+          }
+          this.uploadToken = res.result
+          return res.keyPrefix
+        })
       },
       //获取文件key
       getFileFullName(suffix){
@@ -416,15 +412,16 @@
         //获取文件key
         let suffix = file.name.split(".")
         if(suffix.length>1){suffix = suffix.pop()}else{suffix = ""}
-        this.uploadKey[file.uid] = this.getFileFullName(suffix)
-        this.$emit("selected", this.uploadKey[file.uid], file);
-        //获取上传token
-        switch(this.uploadTarget){
-          case UPLOAD_TARGET_QINIU:
-            return this.getQiniuToken();
-          default:
-            return true
+        if (this.uploadTarget === UPLOAD_TARGET_QINIU) {
+          return this.getQiniuToken().then(prefix => {
+            // Each revision gets a new object; credentials cannot overwrite a shared attachment.
+            this.uploadKey[file.uid] = prefix + uuidGenerator() + (suffix ? '.' + suffix : '')
+            this.$emit("selected", this.uploadKey[file.uid], file)
+          })
         }
+        this.uploadKey[file.uid] = this.getFileFullName(suffix)
+        this.$emit("selected", this.uploadKey[file.uid], file)
+        return true
       },
       //上传完毕后文件列表发送变化
       handleChange(info) {
@@ -624,6 +621,7 @@
 </script>
 
 <style lang="less">
+.j-upload {
 .uploadty-disabled{
   .ant-upload-list-item {
     .anticon-close{
@@ -643,4 +641,5 @@
     line-height: 28px;
   }
   //---------------------------- end 图片左右换位置 -------------------------------------
+}
 </style>

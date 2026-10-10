@@ -1,0 +1,950 @@
+{
+  "observed_utc": "2026-10-03T00:25:34.779361+00:00",
+  "jar_sha256": "b87319a8e411d8f48c37de9e5589c486460c5c5f0306d8f5026281b5737a9b09",
+  "expected_legacy": false,
+  "passed": 235,
+  "total": 235,
+  "cases": [
+    {
+      "case": "None greatWork only explicit live public states",
+      "passed": true
+    },
+    {
+      "case": "None greatWork omits grading feedback",
+      "passed": true
+    },
+    {
+      "case": "None leaderboard only explicit live public states",
+      "passed": true
+    },
+    {
+      "case": "None leaderboard omits grading feedback",
+      "passed": true
+    },
+    {
+      "case": "student_a greatWork only explicit live public states",
+      "passed": true
+    },
+    {
+      "case": "student_a greatWork omits grading feedback",
+      "passed": true
+    },
+    {
+      "case": "student_a leaderboard only explicit live public states",
+      "passed": true
+    },
+    {
+      "case": "student_a leaderboard omits grading feedback",
+      "passed": true
+    },
+    {
+      "case": "admin greatWork only explicit live public states",
+      "passed": true
+    },
+    {
+      "case": "admin greatWork omits grading feedback",
+      "passed": true
+    },
+    {
+      "case": "admin leaderboard only explicit live public states",
+      "passed": true
+    },
+    {
+      "case": "admin leaderboard omits grading feedback",
+      "passed": true
+    },
+    {
+      "case": "status filter cannot widen public list 0",
+      "passed": true
+    },
+    {
+      "case": "status filter cannot widen public list 1",
+      "passed": true
+    },
+    {
+      "case": "status filter cannot widen public list 2",
+      "passed": true
+    },
+    {
+      "case": "status filter cannot widen public list 9",
+      "passed": true
+    },
+    {
+      "case": "author filter cannot expose private works",
+      "passed": true
+    },
+    {
+      "case": "visibility applies before pagination",
+      "passed": true
+    },
+    {
+      "case": "None denied draft studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied draft getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied draft starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied draft comment without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied draft studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied draft getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied draft starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied draft comment without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied draft studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied draft getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied draft starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied draft comment without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied submitted studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied submitted getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied submitted starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied submitted comment without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied submitted studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied submitted getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied submitted starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied submitted comment without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied submitted studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied submitted getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied submitted starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied submitted comment without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied graded studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied graded getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied graded starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied graded comment without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied graded studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied graded getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied graded starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied graded comment without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied graded studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied graded getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied graded starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied graded comment without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied unknown studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied unknown getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied unknown starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied unknown comment without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied unknown studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied unknown getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied unknown starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied unknown comment without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied unknown studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied unknown getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied unknown starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied unknown comment without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied deleted studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied deleted getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied deleted starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied deleted comment without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a denied deleted studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a denied deleted getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a denied deleted starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a denied deleted comment without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied deleted studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied deleted getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied deleted starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied deleted comment without effects",
+      "passed": true
+    },
+    {
+      "case": "admin denied deleted studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "admin denied deleted getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "admin denied deleted starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "admin denied deleted comment without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied deleted studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied deleted getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied deleted starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied deleted comment without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied deleted_draft studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied deleted_draft getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied deleted_draft starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied deleted_draft comment without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a denied deleted_draft studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a denied deleted_draft getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a denied deleted_draft starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a denied deleted_draft comment without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied deleted_draft studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied deleted_draft getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied deleted_draft starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied deleted_draft comment without effects",
+      "passed": true
+    },
+    {
+      "case": "admin denied deleted_draft studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "admin denied deleted_draft getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "admin denied deleted_draft starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "admin denied deleted_draft comment without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied deleted_draft studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied deleted_draft getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied deleted_draft starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied deleted_draft comment without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied missing studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied missing getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied missing starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "None denied missing comment without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a denied missing studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a denied missing getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a denied missing starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a denied missing comment without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied missing studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied missing getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied missing starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied missing comment without effects",
+      "passed": true
+    },
+    {
+      "case": "admin denied missing studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "admin denied missing getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "admin denied missing starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "admin denied missing comment without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied missing studentWorkInfo without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied missing getWorkComments without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied missing starWork without effects",
+      "passed": true
+    },
+    {
+      "case": "student_b denied missing comment without effects",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed draft detail and one view",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed draft comment read",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed draft like",
+      "passed": true
+    },
+    {
+      "case": "student_a repeated draft like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed draft comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed draft detail and one view",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed draft comment read",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed draft like",
+      "passed": true
+    },
+    {
+      "case": "teacher_a repeated draft like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed draft comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "admin allowed draft detail and one view",
+      "passed": true
+    },
+    {
+      "case": "admin allowed draft comment read",
+      "passed": true
+    },
+    {
+      "case": "admin allowed draft like",
+      "passed": true
+    },
+    {
+      "case": "admin repeated draft like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin allowed draft comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed submitted detail and one view",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed submitted comment read",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed submitted like",
+      "passed": true
+    },
+    {
+      "case": "student_a repeated submitted like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed submitted comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed submitted detail and one view",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed submitted comment read",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed submitted like",
+      "passed": true
+    },
+    {
+      "case": "teacher_a repeated submitted like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed submitted comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "admin allowed submitted detail and one view",
+      "passed": true
+    },
+    {
+      "case": "admin allowed submitted comment read",
+      "passed": true
+    },
+    {
+      "case": "admin allowed submitted like",
+      "passed": true
+    },
+    {
+      "case": "admin repeated submitted like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin allowed submitted comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed graded detail and one view",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed graded comment read",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed graded like",
+      "passed": true
+    },
+    {
+      "case": "student_a repeated graded like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed graded comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed graded detail and one view",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed graded comment read",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed graded like",
+      "passed": true
+    },
+    {
+      "case": "teacher_a repeated graded like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed graded comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "admin allowed graded detail and one view",
+      "passed": true
+    },
+    {
+      "case": "admin allowed graded comment read",
+      "passed": true
+    },
+    {
+      "case": "admin allowed graded like",
+      "passed": true
+    },
+    {
+      "case": "admin repeated graded like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin allowed graded comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed unknown detail and one view",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed unknown comment read",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed unknown like",
+      "passed": true
+    },
+    {
+      "case": "student_a repeated unknown like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a allowed unknown comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed unknown detail and one view",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed unknown comment read",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed unknown like",
+      "passed": true
+    },
+    {
+      "case": "teacher_a repeated unknown like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a allowed unknown comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "admin allowed unknown detail and one view",
+      "passed": true
+    },
+    {
+      "case": "admin allowed unknown comment read",
+      "passed": true
+    },
+    {
+      "case": "admin allowed unknown like",
+      "passed": true
+    },
+    {
+      "case": "admin repeated unknown like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin allowed unknown comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "None allowed published detail and one view",
+      "passed": true
+    },
+    {
+      "case": "None allowed published comment read",
+      "passed": true
+    },
+    {
+      "case": "None allowed published like",
+      "passed": true
+    },
+    {
+      "case": "None repeated published like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous cannot comment on published",
+      "passed": true
+    },
+    {
+      "case": "student_b allowed published detail and one view",
+      "passed": true
+    },
+    {
+      "case": "student_b allowed published comment read",
+      "passed": true
+    },
+    {
+      "case": "student_b allowed published like",
+      "passed": true
+    },
+    {
+      "case": "student_b repeated published like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b allowed published comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "teacher_b allowed published detail and one view",
+      "passed": true
+    },
+    {
+      "case": "teacher_b allowed published comment read",
+      "passed": true
+    },
+    {
+      "case": "teacher_b allowed published like",
+      "passed": true
+    },
+    {
+      "case": "teacher_b repeated published like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b allowed published comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "None allowed featured detail and one view",
+      "passed": true
+    },
+    {
+      "case": "None allowed featured comment read",
+      "passed": true
+    },
+    {
+      "case": "None allowed featured like",
+      "passed": true
+    },
+    {
+      "case": "None repeated featured like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous cannot comment on featured",
+      "passed": true
+    },
+    {
+      "case": "student_b allowed featured detail and one view",
+      "passed": true
+    },
+    {
+      "case": "student_b allowed featured comment read",
+      "passed": true
+    },
+    {
+      "case": "student_b allowed featured like",
+      "passed": true
+    },
+    {
+      "case": "student_b repeated featured like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b allowed featured comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "teacher_b allowed featured detail and one view",
+      "passed": true
+    },
+    {
+      "case": "teacher_b allowed featured comment read",
+      "passed": true
+    },
+    {
+      "case": "teacher_b allowed featured like",
+      "passed": true
+    },
+    {
+      "case": "teacher_b repeated featured like is unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b allowed featured comment with server identity",
+      "passed": true
+    },
+    {
+      "case": "withdrawn public work blocks anonymous studentWorkInfo",
+      "passed": true
+    },
+    {
+      "case": "withdrawn public work blocks anonymous getWorkComments",
+      "passed": true
+    },
+    {
+      "case": "withdrawn public work blocks anonymous starWork",
+      "passed": true
+    },
+    {
+      "case": "owner can reopen withdrawn work",
+      "passed": true
+    },
+    {
+      "case": "withdrawn work immediately disappears from ranking",
+      "passed": true
+    },
+    {
+      "case": "malformed token rejected on public studentWorkInfo",
+      "passed": true
+    },
+    {
+      "case": "malformed token rejected on public getWorkComments",
+      "passed": true
+    },
+    {
+      "case": "malformed token rejected on public starWork",
+      "passed": true
+    },
+    {
+      "case": "empty token rejected on public studentWorkInfo",
+      "passed": true
+    },
+    {
+      "case": "empty token rejected on public getWorkComments",
+      "passed": true
+    },
+    {
+      "case": "empty token rejected on public starWork",
+      "passed": true
+    },
+    {
+      "case": "revoked token rejected on studentWorkInfo",
+      "passed": true
+    },
+    {
+      "case": "revoked token rejected on getWorkComments",
+      "passed": true
+    },
+    {
+      "case": "revoked token rejected on starWork",
+      "passed": true
+    },
+    {
+      "case": "anonymous public request still works after authenticated requests",
+      "passed": true
+    },
+    {
+      "case": "anonymous identity does not inherit previous owner",
+      "passed": true
+    },
+    {
+      "case": "original work feedback comment file rows restored",
+      "passed": true
+    },
+    {
+      "case": "original file bytes unchanged",
+      "passed": true
+    },
+    {
+      "case": "temporary like cache removed",
+      "passed": true
+    }
+  ],
+  "scope": "real synthetic HTTP/auth/DB/cache and disclosure checks; no browser editor, direct static-file security, concurrency or full public-profile privacy acceptance"
+}

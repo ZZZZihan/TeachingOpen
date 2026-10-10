@@ -1,0 +1,9 @@
+{
+  "baseline": "4dfcec81b0742de480c7631264f89b932893e23f",
+  "classification": "controlled execution of original source, synthetic values only",
+  "parallel_401_requests": 3,
+  "notifications": 3,
+  "forced_page_reloads": 1,
+  "response_handler_credential_logs": 1,
+  "login_plaintext_parameter_logs": 1
+}

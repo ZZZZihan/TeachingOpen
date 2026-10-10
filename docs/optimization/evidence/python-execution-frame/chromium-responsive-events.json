@@ -1,0 +1,227 @@
+{
+  "all": [
+    {
+      "entry": "player",
+      "width": 390,
+      "canvasBefore": 0,
+      "visible": true,
+      "geometry": {
+        "overflow": false,
+        "controls": {
+          "x": 0,
+          "width": 390
+        },
+        "frame": {
+          "x": 1,
+          "width": 388,
+          "height": 300
+        },
+        "state": {
+          "runId": "dd60ce8d4b2b65d6d22fdee8f8643347",
+          "pendingRunId": null,
+          "state": "completed",
+          "remainingMs": 29983
+        },
+        "output": "EVENTS_READY\nMOUSE_CALLBACK\nKEY_CALLBACK\n"
+      },
+      "canvases": [
+        {
+          "width": 388,
+          "height": 300,
+          "opaquePixels": 66
+        },
+        {
+          "width": 388,
+          "height": 300,
+          "opaquePixels": 246
+        }
+      ]
+    },
+    {
+      "entry": "player",
+      "width": 768,
+      "canvasBefore": 0,
+      "visible": true,
+      "geometry": {
+        "overflow": false,
+        "controls": {
+          "x": 0,
+          "width": 768
+        },
+        "frame": {
+          "x": 1,
+          "width": 766,
+          "height": 300
+        },
+        "state": {
+          "runId": "204a6578b31831d7c5e31b56ceb3197b",
+          "pendingRunId": null,
+          "state": "completed",
+          "remainingMs": 29983
+        },
+        "output": "EVENTS_READY\nMOUSE_CALLBACK\nKEY_CALLBACK\n"
+      },
+      "canvases": [
+        {
+          "width": 766,
+          "height": 300,
+          "opaquePixels": 66
+        },
+        {
+          "width": 766,
+          "height": 300,
+          "opaquePixels": 595
+        }
+      ]
+    },
+    {
+      "entry": "player",
+      "width": 1440,
+      "canvasBefore": 0,
+      "visible": true,
+      "geometry": {
+        "overflow": false,
+        "controls": {
+          "x": 0,
+          "width": 1440
+        },
+        "frame": {
+          "x": 1,
+          "width": 1438,
+          "height": 360
+        },
+        "state": {
+          "runId": "0e9971f7a9dfd10ae15256186547dd48",
+          "pendingRunId": null,
+          "state": "completed",
+          "remainingMs": 29983
+        },
+        "output": "EVENTS_READY\nMOUSE_CALLBACK\nKEY_CALLBACK\n"
+      },
+      "canvases": [
+        {
+          "width": 1438,
+          "height": 360,
+          "opaquePixels": 66
+        },
+        {
+          "width": 1438,
+          "height": 360,
+          "opaquePixels": 1261
+        }
+      ]
+    },
+    {
+      "entry": "editor",
+      "width": 390,
+      "canvasBefore": 0,
+      "visible": true,
+      "geometry": {
+        "overflow": false,
+        "controls": {
+          "x": 10,
+          "width": 370
+        },
+        "frame": {
+          "x": 11,
+          "width": 368,
+          "height": 300
+        },
+        "state": {
+          "runId": "9d71f1d9c3a8511245ff046f12f8a171",
+          "pendingRunId": null,
+          "state": "completed",
+          "remainingMs": 29983
+        },
+        "output": "EVENTS_READY\nMOUSE_CALLBACK\nKEY_CALLBACK\n"
+      },
+      "canvases": [
+        {
+          "width": 368,
+          "height": 300,
+          "opaquePixels": 66
+        },
+        {
+          "width": 368,
+          "height": 300,
+          "opaquePixels": 231
+        }
+      ]
+    },
+    {
+      "entry": "editor",
+      "width": 768,
+      "canvasBefore": 0,
+      "visible": true,
+      "geometry": {
+        "overflow": false,
+        "controls": {
+          "x": 10,
+          "width": 748
+        },
+        "frame": {
+          "x": 11,
+          "width": 746,
+          "height": 300
+        },
+        "state": {
+          "runId": "12c5b9e50f91c44473df42bc37e0c2d8",
+          "pendingRunId": null,
+          "state": "completed",
+          "remainingMs": 29985
+        },
+        "output": "EVENTS_READY\nMOUSE_CALLBACK\nKEY_CALLBACK\n"
+      },
+      "canvases": [
+        {
+          "width": 746,
+          "height": 300,
+          "opaquePixels": 66
+        },
+        {
+          "width": 746,
+          "height": 300,
+          "opaquePixels": 575
+        }
+      ]
+    },
+    {
+      "entry": "editor",
+      "width": 1440,
+      "canvasBefore": 0,
+      "visible": true,
+      "geometry": {
+        "overflow": false,
+        "controls": {
+          "x": 950,
+          "width": 480
+        },
+        "frame": {
+          "x": 951,
+          "width": 478,
+          "height": 360
+        },
+        "state": {
+          "runId": "ab160404c355c18bb1e9ad222aaa7bd1",
+          "pendingRunId": null,
+          "state": "completed",
+          "remainingMs": 29984
+        },
+        "output": "EVENTS_READY\nMOUSE_CALLBACK\nKEY_CALLBACK\n"
+      },
+      "canvases": [
+        {
+          "width": 478,
+          "height": 360,
+          "opaquePixels": 66
+        },
+        {
+          "width": 478,
+          "height": 360,
+          "opaquePixels": 352
+        }
+      ]
+    }
+  ],
+  "pageErrors": []
+}

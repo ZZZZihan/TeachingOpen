@@ -1,0 +1,11 @@
+{
+  "passed": 12,
+  "total": 12,
+  "successful": true,
+  "scope": "Anonymous real loopback GET and read-only SQL on a private production-content copy; no login, Redis access, student files, writes, browser acceptance or production delivery.",
+  "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+  "changed_business_tables": [],
+  "http_requests_completed": 10,
+  "owned_process_verified": true,
+  "business_table_count": 7
+}

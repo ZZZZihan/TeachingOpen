@@ -1,0 +1,139 @@
+{
+  "passed": 19,
+  "total": 19,
+  "checks": [
+    {
+      "case": 1,
+      "method": "HEAD",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "case": 2,
+      "method": "HEAD",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "case": 3,
+      "method": "HEAD",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "case": 4,
+      "method": "HEAD",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "case": 5,
+      "method": "HEAD",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "case": 6,
+      "method": "HEAD",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "case": 7,
+      "method": "HEAD",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "case": 8,
+      "method": "HEAD",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "case": 9,
+      "method": "GET",
+      "expected_status": 206,
+      "actual_status": 206,
+      "passed": true
+    },
+    {
+      "case": 10,
+      "method": "GET",
+      "expected_status": 206,
+      "actual_status": 206,
+      "passed": true
+    },
+    {
+      "case": 11,
+      "method": "GET",
+      "expected_status": 416,
+      "actual_status": 416,
+      "passed": true
+    },
+    {
+      "case": 12,
+      "method": "GET",
+      "expected_status": 416,
+      "actual_status": 416,
+      "passed": true
+    },
+    {
+      "case": 13,
+      "method": "GET",
+      "expected_status": 404,
+      "actual_status": 404,
+      "passed": true
+    },
+    {
+      "case": 14,
+      "method": "GET",
+      "expected_status": 404,
+      "actual_status": 404,
+      "passed": true
+    },
+    {
+      "case": 15,
+      "method": "GET",
+      "expected_status": 403,
+      "actual_status": 403,
+      "passed": true
+    },
+    {
+      "case": 16,
+      "method": "GET",
+      "expected_status": 403,
+      "actual_status": 403,
+      "passed": true
+    },
+    {
+      "case": 17,
+      "method": "PUT",
+      "expected_status": 405,
+      "actual_status": 405,
+      "passed": true
+    },
+    {
+      "case": 18,
+      "method": "POST",
+      "expected_status": 405,
+      "actual_status": 405,
+      "passed": true
+    },
+    {
+      "case": 19,
+      "method": "DELETE",
+      "expected_status": 405,
+      "actual_status": 405,
+      "passed": true
+    }
+  ]
+}

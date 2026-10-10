@@ -1,0 +1,27 @@
+{
+  "course-resume-full-frontend.tap": {
+    "original_sha256": "ac9c9b6378f088c0e82e07c948d6cea88a4628ae609760b6c41b61336fe9eceb",
+    "published_sha256": "ac9c9b6378f088c0e82e07c948d6cea88a4628ae609760b6c41b61336fe9eceb",
+    "formatting_only": "strip trailing whitespace; original local log retained; results unchanged"
+  },
+  "course-resume-candidate.tap": {
+    "original_sha256": "83823b987d008e5029e1614474d56cbd7e6108a357284b6c4a03da5fc474e3f6",
+    "published_sha256": "83823b987d008e5029e1614474d56cbd7e6108a357284b6c4a03da5fc474e3f6",
+    "formatting_only": "strip trailing whitespace; original local log retained; results unchanged"
+  },
+  "course-resume-adjacent.tap": {
+    "original_sha256": "4c42decd14d47f738097791359e6045b246b69226b9f7f2b879e7650a2687690",
+    "published_sha256": "4c42decd14d47f738097791359e6045b246b69226b9f7f2b879e7650a2687690",
+    "formatting_only": "strip trailing whitespace; original local log retained; results unchanged"
+  },
+  "course-resume-full-frontend-no-deps.tap": {
+    "original_sha256": "9bd87259b53b01d3c7d7ad1e3cc333e837fe25d18d1c933b85e9e1c761d679a8",
+    "published_sha256": "9bd87259b53b01d3c7d7ad1e3cc333e837fe25d18d1c933b85e9e1c761d679a8",
+    "formatting_only": "strip trailing whitespace; original local log retained; results unchanged"
+  },
+  "course-resume-baseline.tap": {
+    "original_sha256": "4e971fc023b44781d2b28ed7275f6c106b3ef42d8692d1cc74ffdd44d91b5c20",
+    "published_sha256": "72a93b1e1532d6f38f7f5d5b1e7dce817dd1cca5e3bfce3e07a117d011240b8a",
+    "formatting_only": "strip trailing whitespace; original local log retained; results unchanged"
+  }
+}

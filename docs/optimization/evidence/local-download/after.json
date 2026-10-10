@@ -1,0 +1,361 @@
+{
+  "observed_utc": "2026-10-02T18:33:56.041121+00:00",
+  "jar_sha256": "b7715c0c4bdaeb6531e952d3240b80ff4b727743930d0a2213ceede3b66371a8",
+  "expected_legacy": false,
+  "passed": 88,
+  "total": 88,
+  "cases": [
+    {
+      "case": "login issues media cookie admin",
+      "passed": true
+    },
+    {
+      "case": "login issues media cookie student_a",
+      "passed": true
+    },
+    {
+      "case": "login issues media cookie student_b",
+      "passed": true
+    },
+    {
+      "case": "login issues media cookie teacher_a",
+      "passed": true
+    },
+    {
+      "case": "login issues media cookie teacher_b",
+      "passed": true
+    },
+    {
+      "case": "private GET denied None",
+      "passed": true
+    },
+    {
+      "case": "private HEAD denied None",
+      "passed": true
+    },
+    {
+      "case": "private range denied None",
+      "passed": true
+    },
+    {
+      "case": "private GET denied student_b",
+      "passed": true
+    },
+    {
+      "case": "private HEAD denied student_b",
+      "passed": true
+    },
+    {
+      "case": "private range denied student_b",
+      "passed": true
+    },
+    {
+      "case": "private GET denied teacher_b",
+      "passed": true
+    },
+    {
+      "case": "private HEAD denied teacher_b",
+      "passed": true
+    },
+    {
+      "case": "private range denied teacher_b",
+      "passed": true
+    },
+    {
+      "case": "private permitted student_a",
+      "passed": true
+    },
+    {
+      "case": "private permitted teacher_a",
+      "passed": true
+    },
+    {
+      "case": "private permitted admin",
+      "passed": true
+    },
+    {
+      "case": "case-insensitive database lookup cannot alias a key",
+      "passed": true
+    },
+    {
+      "case": "external symlink denied None",
+      "passed": true
+    },
+    {
+      "case": "external symlink denied admin",
+      "passed": true
+    },
+    {
+      "case": "internal symlink denied",
+      "passed": true
+    },
+    {
+      "case": "unregistered orphan denied",
+      "passed": true
+    },
+    {
+      "case": "admin may recover legacy orphan",
+      "passed": true
+    },
+    {
+      "case": "media cookie is HttpOnly same-site host-only path-scoped",
+      "passed": true
+    },
+    {
+      "case": "cookie-only image-style request permitted",
+      "passed": true
+    },
+    {
+      "case": "foreign header overrides owner cookie",
+      "passed": true
+    },
+    {
+      "case": "invalid header does not fall back to cookie",
+      "passed": true
+    },
+    {
+      "case": "media cookie cannot authorize normal API",
+      "passed": true
+    },
+    {
+      "case": "range bytes=0-4",
+      "passed": true
+    },
+    {
+      "case": "range bytes=5-",
+      "passed": true
+    },
+    {
+      "case": "range bytes=-6",
+      "passed": true
+    },
+    {
+      "case": "range bytes=2-999",
+      "passed": true
+    },
+    {
+      "case": "range bytes=-999",
+      "passed": true
+    },
+    {
+      "case": "range bytes=-99999999999999999999999",
+      "passed": true
+    },
+    {
+      "case": "range bytes=2-99999999999999999999999",
+      "passed": true
+    },
+    {
+      "case": "invalid/unsatisfiable bytes=999-",
+      "passed": true
+    },
+    {
+      "case": "invalid/unsatisfiable bytes=-0",
+      "passed": true
+    },
+    {
+      "case": "invalid/unsatisfiable bytes=9-2",
+      "passed": true
+    },
+    {
+      "case": "invalid/unsatisfiable bytes=bad",
+      "passed": true
+    },
+    {
+      "case": "invalid/unsatisfiable bytes=9999999999999999999999999999-",
+      "passed": true
+    },
+    {
+      "case": "unsupported/conditional range sends full entity {'Range': 'items=0-4'}",
+      "passed": true
+    },
+    {
+      "case": "unsupported/conditional range sends full entity {'Range': 'bytes=0-1,3-4'}",
+      "passed": true
+    },
+    {
+      "case": "unsupported/conditional range sends full entity {'Range': 'bytes=0-4', 'If-Range': '\"old-version\"'}",
+      "passed": true
+    },
+    {
+      "case": "HEAD ignores range and sends no body",
+      "passed": true
+    },
+    {
+      "case": "empty file downloads",
+      "passed": true
+    },
+    {
+      "case": "empty range is unsatisfiable",
+      "passed": true
+    },
+    {
+      "case": "safe delivery png",
+      "passed": true
+    },
+    {
+      "case": "safe delivery mp4",
+      "passed": true
+    },
+    {
+      "case": "safe delivery pdf",
+      "passed": true
+    },
+    {
+      "case": "safe delivery svg",
+      "passed": true
+    },
+    {
+      "case": "safe delivery html",
+      "passed": true
+    },
+    {
+      "case": "safe delivery js",
+      "passed": true
+    },
+    {
+      "case": "published work anonymous bytes",
+      "passed": true
+    },
+    {
+      "case": "unpublish immediately denies anonymous range",
+      "passed": true
+    },
+    {
+      "case": "home course cover remains public",
+      "passed": true
+    },
+    {
+      "case": "substring course reference is not permission",
+      "passed": true
+    },
+    {
+      "case": "external URL is not local permission",
+      "passed": true
+    },
+    {
+      "case": "deleted home course cannot grant public access",
+      "passed": true
+    },
+    {
+      "case": "non-shared unauthorized course is denied",
+      "passed": true
+    },
+    {
+      "case": "enrolled student reads visible unit video",
+      "passed": true
+    },
+    {
+      "case": "foreign student denied unit video",
+      "passed": true
+    },
+    {
+      "case": "anonymous denied unit video",
+      "passed": true
+    },
+    {
+      "case": "deleted unit cannot grant media access",
+      "passed": true
+    },
+    {
+      "case": "hidden unit video denied student",
+      "passed": true
+    },
+    {
+      "case": "null visibility remains hidden",
+      "passed": true
+    },
+    {
+      "case": "authorized unit rich-text media",
+      "passed": true
+    },
+    {
+      "case": "private rich-text media denied foreign student",
+      "passed": true
+    },
+    {
+      "case": "enabled configuration image public",
+      "passed": true
+    },
+    {
+      "case": "disabled configuration does not expose file",
+      "passed": true
+    },
+    {
+      "case": "published news media public",
+      "passed": true
+    },
+    {
+      "case": "draft news media denied",
+      "passed": true
+    },
+    {
+      "case": "assigned additional-work starter readable",
+      "passed": true
+    },
+    {
+      "case": "unassigned student denied starter",
+      "passed": true
+    },
+    {
+      "case": "closed additional-work starter denied",
+      "passed": true
+    },
+    {
+      "case": "owner can reopen historical attachment",
+      "passed": true
+    },
+    {
+      "case": "class teacher can read historical attachment",
+      "passed": true
+    },
+    {
+      "case": "foreign teacher denied history",
+      "passed": true
+    },
+    {
+      "case": "publishing current work does not publish history",
+      "passed": true
+    },
+    {
+      "case": "history name mentioning file is not authority",
+      "passed": true
+    },
+    {
+      "case": "invalid/missing path refuses bytes ../download-probe-outside.txt",
+      "passed": true
+    },
+    {
+      "case": "invalid/missing path refuses bytes %2e%2e/download-probe-outside.txt",
+      "passed": true
+    },
+    {
+      "case": "invalid/missing path refuses bytes %5cprivate.txt",
+      "passed": true
+    },
+    {
+      "case": "invalid/missing path refuses bytes missing.txt",
+      "passed": true
+    },
+    {
+      "case": "invalid/missing path refuses bytes private.txt,",
+      "passed": true
+    },
+    {
+      "case": "logout expires media cookie",
+      "passed": true
+    },
+    {
+      "case": "revoked cookie rejected",
+      "passed": true
+    },
+    {
+      "case": "fixture rows restored",
+      "passed": true
+    },
+    {
+      "case": "probe files and links removed",
+      "passed": true
+    }
+  ]
+}

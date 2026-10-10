@@ -1,0 +1,1060 @@
+{
+  "observed_at_utc": "2026-10-04T21:28:34.012877+00:00",
+  "review_scope": "Independent read-only repository/report/hash audit of gates1/4/8/9/10; no tests/build/HTTP/DB/browser/service/production actions",
+  "candidate": {
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate",
+    "commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65",
+    "api_tree": "150a3a0b738c3e635c5bf1eb7be467c4d0ee2266",
+    "web_tree": "e63b7764a0e8b4b647cfb75f516f40cac37c1255",
+    "status": "?? .playwright-cli/\n?? output/"
+  },
+  "plan": {
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal",
+    "commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6",
+    "gate_lines": [
+      71,
+      74,
+      78,
+      79,
+      80
+    ]
+  },
+  "current_backend": {
+    "jar": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/account-recovery-20261005/api-author/teaching-open-account-recovery.jar",
+    "sha256": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016",
+    "production_main_and_pom_files": 1030,
+    "built_source_commit": "69e1cca5a59026977f12f4e56b0c8fde2910b8a9",
+    "changed_vs_built_source": [],
+    "working_file_diff": [],
+    "libraries": 209,
+    "same_library_names_as_old_inventory": true,
+    "external_same": 208,
+    "external_total": 208,
+    "changed_library_archives": [
+      "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar"
+    ]
+  },
+  "current_dist": {
+    "manifest": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/student-work-loading-20261005/dist-manifest.json",
+    "manifest_sha256": "9f9a89fb12fc2a3c674988059c86665bcc0a80617bd53b8445f996708b5929da",
+    "declared_files": 4895,
+    "actual_files": 4895,
+    "declared_bytes": 211925716,
+    "matching_hash_and_size": 4895,
+    "different_or_missing": [],
+    "unexpected": []
+  },
+  "git_comparisons": [
+    {
+      "reference_commit": "872109fde9020ab5ad8e42a9cc445f06224589dd",
+      "paths": [
+        "api",
+        "web"
+      ],
+      "changed": []
+    },
+    {
+      "reference_commit": "b7a7d788734315c8cdb183e4f79b2853198b4018",
+      "paths": [
+        "api/dev/local_recovery.py",
+        "api/dev/backup-local.py",
+        "api/dev/scratch_cloud_recovery.py",
+        "api/dev/verify-cloud-recovered.py",
+        "api/dev/local_candidate.py",
+        "api/dev/benchmark-local-http.py"
+      ],
+      "changed": []
+    },
+    {
+      "reference_commit": "9945646b7ad996455795f9f7b6ec2d31fcae36a0",
+      "paths": [
+        "api/jeecg-boot-module-system/src/main/java/org/jeecg/config/WebMvcConfiguration.java"
+      ],
+      "changed": []
+    },
+    {
+      "reference_commit": "49bea7da3552c554a8412f777eeec48d9a5ac9f2",
+      "paths": [
+        "api/jeecg-boot-module-system/src/main/java/org/jeecg/config/ShiroConfig.java",
+        "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/shiro/authc/aop/MediaCookie.java"
+      ],
+      "changed": []
+    },
+    {
+      "reference_commit": "630a639c8a9f73ff367d20404d6e656a90046662",
+      "paths": [
+        "web/vue.config.js"
+      ],
+      "changed": []
+    }
+  ],
+  "root_pr_snapshot": {
+    "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/root-current.json",
+    "captured_at": "2026-10-04T21:22:15.647348+00:00",
+    "remote_not_requeried_by_reviewer": true,
+    "total": 72,
+    "all_commits_locally_present": true,
+    "exact_heads_in_candidate_ancestry": 71,
+    "non_ancestors": [
+      1
+    ],
+    "draft_pr_numbers": [
+      19,
+      21,
+      22,
+      23,
+      25,
+      26,
+      27,
+      28,
+      29,
+      37,
+      41,
+      44
+    ],
+    "prs": [
+      {
+        "number": 72,
+        "head": "fcaaf6d82dfaa8b3a0120c4104a6b07d8e8ad1f3",
+        "base": "fix/student-feedback-readable",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 71,
+        "head": "f0980ce2d8c8a06e635bf09aca3a8b7d16edbcb7",
+        "base": "fix/account-recovery-ui",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 70,
+        "head": "c2c3eacbe54a1a44314c83f17e4d27027686553a",
+        "base": "fix/class-membership-layout",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 69,
+        "head": "03954459774c885c099e786ecce26848e0b02926",
+        "base": "fix/upload-resource-boundary",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 68,
+        "head": "1e93ef2c932dccfae19916ae046e421aa2aae83c",
+        "base": "fix/release-nginx-api",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 67,
+        "head": "a9cc45678d4a61f960a863e968af38609cea4d4b",
+        "base": "feature/production-read-benchmark",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 66,
+        "head": "8b444cd35330f26283aa9ff8b85c9b291d836c48",
+        "base": "main",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 65,
+        "head": "956a4c167794d4648f559fc8932fecf4111f2101",
+        "base": "fix/class-membership-access",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 64,
+        "head": "3483f3a3729ad84b359db43dfe93e03fa4e32c0e",
+        "base": "feature/production-data-fixture",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 63,
+        "head": "a1dd2c3bef24fdd69a5aa5563550b1707df1bb4f",
+        "base": "fix/class-member-context",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 62,
+        "head": "328a021224521674654c8c6f03c01be7fbb7ae2f",
+        "base": "fix/encoded-media-references",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 61,
+        "head": "df4e707234c04d1c8932335e4f779e58be25835e",
+        "base": "fix/class-course-context",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 60,
+        "head": "8f58b32362899047da0136e41278368fd26c88f0",
+        "base": "fix/course-draft-resume",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 59,
+        "head": "253f3fb4c44b500b6e4824adbf89da51ac89d50c",
+        "base": "fix/python-source-loading",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 58,
+        "head": "c923ea03a0c5a75cb8f36dee1e90f6587702c0d6",
+        "base": "fix/unicode-media-paths",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 57,
+        "head": "dc4c398a8559efa5eef46280305242156cc7ae61",
+        "base": "fix/local-worker-csp",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 56,
+        "head": "152aaef2231c1282df39055350db93aafe89a818",
+        "base": "fix/account-freeze-state",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 55,
+        "head": "6235e7e2586a4ce914257faa11c7552bf628c04c",
+        "base": "fix/shiro-maintenance",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 54,
+        "head": "c1ab0f80e1179ee4f81c3e1865741bf6a6fc159b",
+        "base": "fix/course-update-outcome",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 53,
+        "head": "8f5bf1e272e57a3460c0414b506925c1395a18d2",
+        "base": "feature/python-execution-frame",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 52,
+        "head": "f906f8e782795ddd670725e85ffa4ea1756b665c",
+        "base": "fix/python-preview-url",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 51,
+        "head": "630a639c8a9f73ff367d20404d6e656a90046662",
+        "base": "fix/python-preview-url",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 50,
+        "head": "85f8a7d0a995047feb8ce486224d7bf991878e62",
+        "base": "fix/course-summary-text",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 49,
+        "head": "a60d2b456bb312a1212d0905f521184639c011a5",
+        "base": "feature/scratch-cloud-recovery",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 48,
+        "head": "50f052e87d5a9c06965a31de3ed538136aeaff9f",
+        "base": "feature/production-data-fixture",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 47,
+        "head": "b7a7d788734315c8cdb183e4f79b2853198b4018",
+        "base": "feature/production-data-fixture",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 46,
+        "head": "6ee37a8b974373536748dbef9128814287f2dede",
+        "base": "feature/admin-course-workbench",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 45,
+        "head": "5f896ac572ec637bb3d4a92223d7c699e6b30182",
+        "base": "fix/course-update-outcome",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 44,
+        "head": "11e8958080c6eeff397474031a2621036fd2b382",
+        "base": "fix/course-form-recovery",
+        "isDraft": true,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 43,
+        "head": "3fb70f1919289d777ccffe936f3a7a8b889a749b",
+        "base": "fix/teacher-work-search",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 42,
+        "head": "fbf8097f0616cb865ce6ee109ca806b42f4767ef",
+        "base": "feature/teacher-workbench",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 41,
+        "head": "2a530a517d9eaaea5b4aa53a2f494edf521e4996",
+        "base": "feature/tiangong-branding",
+        "isDraft": true,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 40,
+        "head": "6484a0133ba6bdd2afb6b9ba75d96806dcd6d7ea",
+        "base": "fix/feedback-comment-preservation",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 39,
+        "head": "f6f1938e73ebaa67b12c35ec0ffb169d4f459765",
+        "base": "fix/scratch-cloud-client",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 38,
+        "head": "33200898b4f42e13f0d352054183c299ee91cddf",
+        "base": "fix/scratch-cloud-access",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 37,
+        "head": "193b8bfb349e7b2aa40d51f145b54b07e48ca236",
+        "base": "fix/python-output-boundary",
+        "isDraft": true,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 36,
+        "head": "9ae13f63dc3309f5aa8a8d4219f935a9cccc747c",
+        "base": "fix/local-websocket-proxy",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 35,
+        "head": "c41b8ba615bee4d17dec290035fc25da9cb77540",
+        "base": "fix/notification-websocket-access",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 34,
+        "head": "20f52ca13df1d8649cace5927651b5b194f8a0c8",
+        "base": "fix/tomcat-maintenance",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 33,
+        "head": "afab74393edbc711b349a99fd1e90506e4755eb0",
+        "base": "fix/work-view-metadata",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 32,
+        "head": "cd31827920bfda2b06b482f216798d3e57d10e1f",
+        "base": "feature/local-candidate-switch",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 31,
+        "head": "40bdd77e2f7dd9c20b385d63c6efeb672296a512",
+        "base": "feature/local-backup-restore",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 30,
+        "head": "fd1cd542ad71148580249b230ac4c1e2b7d66792",
+        "base": "fix/assignment-list-contract",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 29,
+        "head": "292dd7ea3830a22e719d80b12efcab26c81b4ed5",
+        "base": "fix/scratchjr-editor-persistence",
+        "isDraft": true,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 28,
+        "head": "75586a844bcce3c715f02fd057964ea4eb9b28f3",
+        "base": "fix/scratch-editor-persistence",
+        "isDraft": true,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 27,
+        "head": "45dd581e03054a2609a1aba80464cb44e0f8594b",
+        "base": "fix/python-editor-persistence",
+        "isDraft": true,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 26,
+        "head": "e772f0212885f01878ba9acc828686c4a30cf1d4",
+        "base": "feature/student-assignment-feedback",
+        "isDraft": true,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 25,
+        "head": "7ab1dd5dacc957f308acca44fe34b16dd09fd512",
+        "base": "fix/assignment-file-submit",
+        "isDraft": true,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 24,
+        "head": "c38c9c1352bfc671d317b072d638955cf4207267",
+        "base": "fix/permission-menu-identity",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 23,
+        "head": "95f5bfe179a7eefe86ca7a2fd41423bc7ba87191",
+        "base": "feature/learning-reader",
+        "isDraft": true,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 22,
+        "head": "1bd5fecc9f634612cca7180d7211148ecb8ea1dd",
+        "base": "feature/learning-entry",
+        "isDraft": true,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 21,
+        "head": "8d3a3fe78ec1015cf4c04e5fa16fdc46aa0034e5",
+        "base": "feature/login-experience",
+        "isDraft": true,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 20,
+        "head": "bad0e272969d0b0543381ba61276d68f03393950",
+        "base": "fix/local-file-download-access",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 19,
+        "head": "54b34492427adb118de4b9f58c92dfd997b2f5c2",
+        "base": "feature/course-discovery",
+        "isDraft": true,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 18,
+        "head": "1bc4468934b353aafda5609d71533bb65fb2d326",
+        "base": "fix/file-record-ownership",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 17,
+        "head": "a999d45b8f38c2cf2d3c125fc1cd04ba3e285ef6",
+        "base": "fix/local-upload-boundary",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 16,
+        "head": "4c1d70123e45a3b6e9feccf30f57e0ce483c5e1d",
+        "base": "fix/community-work-access",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 15,
+        "head": "57c120e48c128944f5d6989a95cff6dab0752ca9",
+        "base": "fix/student-work-submission",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 14,
+        "head": "1b5bfe930983ae8b35ef4967b0bf29546a963234",
+        "base": "fix/shared-work-attachments",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 13,
+        "head": "4f2235b31c5d5fb45552b8e69363435934115ad9",
+        "base": "fix/work-management-access",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 12,
+        "head": "8250c7b8fc1d2c7ddc80add806b6f8053cfc9355",
+        "base": "fix/auth-token-logging",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 11,
+        "head": "7a35ffd618331e4fdff36c1cbb97cffc5aa94adf",
+        "base": "fix/learning-unit-access",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 10,
+        "head": "d2cd67110201d3641d2bbe0848dc1c79bfa7ec0a",
+        "base": "fix/shiro-cache-database",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 9,
+        "head": "0a21e33f8faee573ec7695d93a638c7b87ece1a6",
+        "base": "fix/course-management-roles",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 8,
+        "head": "4027a8975aec4776485d81432549b244769cce3d",
+        "base": "fix/authentication-http-status",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 7,
+        "head": "4dfcec81b0742de480c7631264f89b932893e23f",
+        "base": "feature/public-layout",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 6,
+        "head": "17f4a7cbdd23c8fad81dc1ac4c82a0a26e3e5f6f",
+        "base": "main",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 5,
+        "head": "57d2a0819db8eb870f22592e2854299368b8e729",
+        "base": "feature/isolated-local-runtime",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 4,
+        "head": "8c1827d5af6e26b2eaae7ee4fe3e70317f952bdb",
+        "base": "fix/disabled-third-login",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 3,
+        "head": "0748a32f709adc2f1691a72bd80aa7f37bb222e7",
+        "base": "fix/backend-oracle-build",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 2,
+        "head": "6d798ac76094794ee8cbe8500f0418fabf15eb5c",
+        "base": "main",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": true
+      },
+      {
+        "number": 1,
+        "head": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6",
+        "base": "main",
+        "isDraft": false,
+        "commit_locally_present": true,
+        "exact_head_in_candidate_ancestry": false
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/productization-goal-2026-10-02.md",
+      "exists": true,
+      "sha256": "434769032d6372ebccfbfca5406023a134899df9859dae77fdbe0208aca74f42",
+      "bytes": 157823,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/student-work-loading-followup-2026-10-05.md",
+      "exists": true,
+      "sha256": "f8b9411116e629384ee949481a300cc4d76218eb47de728fe001cf9574dc2bf8",
+      "bytes": 2753,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/student-work-loading-candidate.json",
+      "exists": true,
+      "sha256": "9d80af701b5960e46451479e787eed7544c4244d3a3d582cca55a1e287a33b13",
+      "bytes": 5883,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/student-feedback-readable-candidate.json",
+      "exists": true,
+      "sha256": "e9a1268daaa2cbdd7934e23572afc6b3b2f6c47ec84b6e30543dfa928cf21d80",
+      "bytes": 4722,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/account-recovery-candidate.json",
+      "exists": true,
+      "sha256": "c8d6b7e7b7e5e5ffe6844dc2f78e61a06c7746e2c347b72148d4f15935ecf309",
+      "bytes": 4892,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/candidate-release.json",
+      "exists": true,
+      "sha256": "52e84ee84a25b85d3367e55bf0d163b9f6bda63ce52d2cfc4df91ccdf482327c",
+      "bytes": 6098,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/backup-restore-candidate.json",
+      "exists": true,
+      "sha256": "ba9d4a2189ea24b1081d35b5d749fb142e049624245cbaecd61984e95d896377",
+      "bytes": 1801,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/candidate-switch-candidate.json",
+      "exists": true,
+      "sha256": "5cb3f4387b828a1b574b3b4cefc1f2a6038bca85b87338443b631fbfcb2fec6e",
+      "bytes": 2708,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/cloud-recovery-candidate.json",
+      "exists": true,
+      "sha256": "11a2289a704589cb2256eb8b3b312bc98eaaa28f468751cbec5552576162d534",
+      "bytes": 1349,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/frontend-prefetch-candidate.json",
+      "exists": true,
+      "sha256": "8ce99f93e5945e14887f79e08df27f834b883bd85e9fbbd40a6da3160db39afb",
+      "bytes": 4595,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/production-read-benchmark-candidate.json",
+      "exists": true,
+      "sha256": "c4c5383215245fa3acb7e9505d5e18746f25c4677bce9883b5d62ceeda9e5e8b",
+      "bytes": 1995,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/role-flow-candidate.json",
+      "exists": true,
+      "sha256": "9addaeb663b9ac3227031bd3f8bc6a6320401870f68b48f869344dd40ea9c828",
+      "bytes": 1276,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/product-candidate/upload-resource-boundary-candidate.json",
+      "exists": true,
+      "sha256": "dd9dccae5902d3bcfed76bc7906b940f7cf358a2256ba81c41329094e2131772",
+      "bytes": 7840,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/dependency-release-20261005/review.md",
+      "exists": true,
+      "sha256": "ebb9569bf61903cb78fb055760309505b2176f62083b1f735650708b5a42b173",
+      "bytes": 15323,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/dependency-release-20261005/inventory.json",
+      "exists": true,
+      "sha256": "9302d59766ec0dcc6205e09ed5a437c58080383ad8cfbbfdd40cf663e25d80ca",
+      "bytes": 101464,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/dependency-release-20261005/inventory-summary.json",
+      "exists": true,
+      "sha256": "5a5fd936f3cfa111478949a12180360338e05723d99f783323488205efbe368a",
+      "bytes": 4434,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/productization-goal/docs/optimization/evidence/dependency-release-20261005/official-sources.json",
+      "exists": true,
+      "sha256": "a1b08cefaa24ea655273f0fadc69c62cc9ca85e690cbc304861d272981f6a1a8",
+      "bytes": 14180,
+      "read_commit": "9d47b934b7ad2262142a6d2ec25394efd1b0c3e6"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/api/BUILDING.md",
+      "exists": true,
+      "sha256": "1b549eedb01565f1d21dec83701272a395f2cd8a7d39260017f32b1c48d3602f",
+      "bytes": 21702,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/api/dev/toolchain.json",
+      "exists": true,
+      "sha256": "8d56df2bf300565398d38a64906e07b0badba6894f794cbc67fc73197aa43a40",
+      "bytes": 1676,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/api/dev/maven-settings.xml",
+      "exists": true,
+      "sha256": "e89e5d81032455d4dfe256e1fd905be42208697e072978a05886af89b9ed9021",
+      "bytes": 258,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/BUILDING.md",
+      "exists": true,
+      "sha256": "3d5179789ccacb1f58da8ac256c386939cf16a6c7f7eca64167770796d8d9501",
+      "bytes": 2784,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/package-lock.json",
+      "exists": true,
+      "sha256": "100033635ce1d01f5ee7b8cd1385bc958edde7ad5686d441d205b49ea7e78e74",
+      "bytes": 1695792,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/oracle-build.json",
+      "exists": true,
+      "sha256": "d00c943b2c4983a4474c2219d07e251afa686055f120b448bd0b399f3762b254",
+      "bytes": 1307,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/install-round1.txt",
+      "exists": true,
+      "sha256": "bf560117437ca99f0166ce0268d978258b557c465cb52dfb377cfeb9dede2934",
+      "bytes": 28,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/class-membership-access/build-record.json",
+      "exists": true,
+      "sha256": "aad5eb2632e8a05ee50e432c7c4415ecad62de63c540b48fa991b6893cc19c51",
+      "bytes": 884,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/class-membership-access/comparison.json",
+      "exists": true,
+      "sha256": "ae9a43e99397e2e8ca941c05763d818fd6e0341629830053d430a59a1cf3ad65",
+      "bytes": 631,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/class-membership-access-pr.md",
+      "exists": true,
+      "sha256": "85459f90940366555b926133787f923bf38de387be03f384d1e2d9d6c5b52d2a",
+      "bytes": 2348,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/upload-resource-boundary-pr.md",
+      "exists": true,
+      "sha256": "a2b158aae79a4b0a5968fd9395b4fd5d3c46eae62bed875405b37673afc59b5a",
+      "bytes": 9965,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/upload-resource-boundary/synthetic-summary.json",
+      "exists": true,
+      "sha256": "1ff66c403b1357662dbcaa97d86026af4ff209eb24984423ada80ed3cadde36a",
+      "bytes": 8163,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/role-flow-fixture-pr.md",
+      "exists": true,
+      "sha256": "1b15c6dd6f8e349ffe4b4616653eacc3e9cabde20ee4d8313e57f41eb83af207",
+      "bytes": 15304,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/candidate-release-pr.md",
+      "exists": true,
+      "sha256": "04eede4c63f699639c7ba77280571c99172def3283550040600a1c456de10e45",
+      "bytes": 6817,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/candidate-release/runtime.json",
+      "exists": true,
+      "sha256": "7d796d7099fb7af58520245ce61f19cfbc18bc3af35f84c504e290a48f2056a3",
+      "bytes": 12432,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/local-backup-restore-pr.md",
+      "exists": true,
+      "sha256": "5e8fd624562c17c1b71a12563696ad9ccac4d5b576b4c7c237ece10b6276dada",
+      "bytes": 4869,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/local-backup-restore/manifest.json",
+      "exists": true,
+      "sha256": "be08908c0c6b1134f21ce0ab555c7ccc06a51afc83293603ac165ef6a60ead0b",
+      "bytes": 822,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/local-candidate-switch-pr.md",
+      "exists": true,
+      "sha256": "b29def7094088e5fbc094a847a730309a6ac0115e99313646bc4d507a149f74b",
+      "bytes": 5204,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/local-candidate-switch/manifest.json",
+      "exists": true,
+      "sha256": "29a14051ca43325d9eb92830916c8e839bcb8caa0970043e00381404605f287f",
+      "bytes": 1516,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/scratch-cloud-recovery-pr.md",
+      "exists": true,
+      "sha256": "661bb63dcb0224bed814d2778154808807139ff1e2459b713d7404ed935f8d9f",
+      "bytes": 7710,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/scratch-cloud-recovery/actual-java-recovery.json",
+      "exists": true,
+      "sha256": "fd484e687f6aed95fd0931b93eaf9ff472b204a3602b2ec8d6901870c1ca06b7",
+      "bytes": 2276,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/tomcat-maintenance-pr.md",
+      "exists": true,
+      "sha256": "fd8b99eaf0ed4f08687292a5d964feada898b767cd86535db9128a54b7eda8cb",
+      "bytes": 6616,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/frontend-route-prefetch-pr.md",
+      "exists": true,
+      "sha256": "590ca6e87e83ef180541bd99c37659f5eda6127b8b02f8e00177843bed0da7d1",
+      "bytes": 6843,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/production-read-benchmark-pr.md",
+      "exists": true,
+      "sha256": "49bccc67c1144a00b9e539ec96da7cfa4fa7ac8905c5cdfc92bba679912a9aa1",
+      "bytes": 6374,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/docs/optimization/evidence/production-read-benchmark/aggregate.json",
+      "exists": true,
+      "sha256": "b5773b5f70f39ea11eeb4c3706b218ae1ae6998af2453a8f016ad5b569da7394",
+      "bytes": 17326,
+      "read_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/account-recovery-20261005/api-author/author-build-receipt.json",
+      "exists": true,
+      "sha256": "cce2e505c8bd19c34fa0e619e41626729ae4d7336cf984ced0b64d6705d0eacf",
+      "bytes": 1169,
+      "read_commit": "private local report, not tracked commit"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/account-recovery-20261005/api-author/build-final.log",
+      "exists": true,
+      "sha256": "73818bd3b33d1e8777231a44bbc474f7ade6db64ed6e94d8cfdf7339f498fd58",
+      "bytes": 19193,
+      "read_commit": "private local report, not tracked commit"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/account-recovery-20261005/review/integration-source-check.json",
+      "exists": true,
+      "sha256": "e943c330a006429888e77df136494404f1cfc0d9dc9c430efae9eed4ddd120bf",
+      "bytes": 1674,
+      "read_commit": "private local report, not tracked commit"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/session-cookie-20261005/source-review.md",
+      "exists": true,
+      "sha256": "a66d318f60cbbd3ee68b39663aa2bdef20a7f851517b6af0f88f9b24a4e40989",
+      "bytes": 11714,
+      "read_commit": "private local report, not tracked commit"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/student-work-loading-20261005/candidate-tests.log",
+      "exists": true,
+      "sha256": "f47c0e5e41cb367fdbcfe0ceab9a21b9d12c67fcd5be27346c37cb9c0c5f868c",
+      "bytes": 63383,
+      "read_commit": "private local report, not tracked commit"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/student-work-loading-20261005/candidate-build.log",
+      "exists": true,
+      "sha256": "89061cf039a51872bbb3eff44c363af04b86c5ea109eda3a5161fb4ea2bc732b",
+      "bytes": 104636,
+      "read_commit": "private local report, not tracked commit"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/student-work-loading-20261005/dist-manifest.json",
+      "exists": true,
+      "sha256": "9f9a89fb12fc2a3c674988059c86665bcc0a80617bd53b8445f996708b5929da",
+      "bytes": 803656,
+      "read_commit": "private local report, not tracked commit"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/student-work-loading-candidate-1005/manifest.json",
+      "exists": true,
+      "sha256": "e20f87524a1cc31872b1c2a6fb8e5c0bb854e478e28bdd608a0b225830c8de59",
+      "bytes": 891601,
+      "read_commit": "private local report, not tracked commit"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/student-work-loading-20261005/bundle-verify.json",
+      "exists": true,
+      "sha256": "a8c675b9d40fa416977f165886e9b1ba79a96829ece421744ec18b2867209e20",
+      "bytes": 510,
+      "read_commit": "private local report, not tracked commit"
+    },
+    {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/completion-audit-20261005/root-current.json",
+      "exists": true,
+      "sha256": "50dc94184f6bc1c79495f281f35e8738c16637394326c76000c6192b4b59d7ff",
+      "bytes": 27357,
+      "read_commit": "private local report, not tracked commit"
+    }
+  ]
+}

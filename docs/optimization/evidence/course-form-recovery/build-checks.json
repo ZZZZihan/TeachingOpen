@@ -1,0 +1,24 @@
+{
+  "product_commit": "14430e1",
+  "frontend_tests": {
+    "passed": 222,
+    "total": 222,
+    "new_checks": 20,
+    "legacy_behavior_reproductions": 2
+  },
+  "eslint": {
+    "files": [
+      "CourseFormRecovery.js",
+      "TeachingCourseModal.vue",
+      "TeachingCourseUnitModal.vue"
+    ],
+    "exit": 0,
+    "errors": 0,
+    "warnings": 0
+  },
+  "build": {
+    "exit": 0,
+    "warnings": "Existing 6 webpack warning groups and outdated Browserslist database; no new dependency."
+  },
+  "browser_scope": "Actual Vue course/unit dialogs, Ant Design, JModal; synthetic HTTP, upload/rich text/dict/depart/map substitutes. No platform login."
+}

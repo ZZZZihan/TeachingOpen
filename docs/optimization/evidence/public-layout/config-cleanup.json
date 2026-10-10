@@ -1,0 +1,12 @@
+{
+  "scope": "owned synthetic runtime on MySQL port 13316; no original runtime changes",
+  "initial_counts": {
+    "sys_config": 0,
+    "teaching_menu": 0
+  },
+  "final_counts": {
+    "sys_config": 0,
+    "teaching_menu": 0
+  },
+  "removed_only_task_fixture_ids": true
+}

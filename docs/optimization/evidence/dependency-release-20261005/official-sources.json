@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "scope": "Focused primary-source maintenance and advisory review; not a comprehensive vulnerability database export",
+  "sources": [
+    {
+      "id": "azul-roadmap",
+      "publisher": "Azul",
+      "url": "https://www.azul.com/products/azul-support-roadmap/",
+      "page_date": null,
+      "date_note": "Publication/update date not displayed; current lifecycle table queried on 2026-10-05.",
+      "applies_to": "Azul Core Java 8 commercial support roadmap",
+      "facts": [
+        "Java 8 Production Support ends December 2030; LTS Extended Support adds two years.",
+        "Vendor roadmap is not proof of an active support subscription or target runtime patch state."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "azul-version-map",
+      "publisher": "Azul",
+      "url": "https://docs.azul.com/core/version-search",
+      "page_date": null,
+      "date_note": "August 2026 version section; September 2026 CSPU explicitly dated 2026-09-15 and limited to FIPS bundles.",
+      "applies_to": "Zulu 8.96.0.205 / OpenJDK 8u504-b01",
+      "facts": [
+        "August 2026 PSU maps 8.96.0.205 to 8u504-b01.",
+        "September 8.96.0.302 is FIPS-only; the frozen build uses ordinary CA Zulu, so that table row does not justify a forced patch replacement."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "boot21-eol",
+      "publisher": "Spring",
+      "url": "https://spring.io/blog/2019/12/10/spring-boot-2-1-x-eol-november-1st-2020/",
+      "page_date": "2019-12-10",
+      "date_note": "Announced maintenance end 2020-11-01.",
+      "applies_to": "Spring Boot 2.1.x",
+      "facts": [
+        "Spring Boot 2.1.x maintenance ended 2020-11-01."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "spring51-roadmap",
+      "publisher": "Spring",
+      "url": "https://spring.io/blog/2019/12/03/spring-framework-maintenance-roadmap-in-2020-including-4-3-eol/",
+      "page_date": "2019-12-03",
+      "applies_to": "Spring Framework 5.1.x",
+      "facts": [
+        "5.1.x phased out in 2020; by the end of 2020 only 5.2 and 5.3 were active."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "spring-current-support",
+      "publisher": "spring-projects",
+      "url": "https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Versions",
+      "page_date": "2026-02-05",
+      "date_note": "Last edit shown on page.",
+      "applies_to": "Framework 5.3 / 6.2 / 7.0 lifecycle and Java/Jakarta baselines",
+      "facts": [
+        "5.3 OSS support ended August 2024; 6.2 OSS support ends June 2026, with commercial alternatives.",
+        "Framework 7 uses Jakarta EE11 and JDK17+; 5.3 is the last javax generation."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "spring4shell",
+      "publisher": "Spring",
+      "url": "https://spring.io/security/cve-2022-22965/",
+      "page_date": "2022-03-31",
+      "applies_to": "Spring MVC/WebFlux data binding on affected versions; published exploit requires JDK9+,Tomcat,WAR",
+      "facts": [
+        "Known exploit prerequisites do not match the frozen Java8 executable JAR.",
+        "Official notice warns other exploit forms may exist; this is not a broad Spring security clearance."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "shiro3-release",
+      "publisher": "Apache Shiro",
+      "url": "https://shiro.apache.org/blog/2026/06/apache-shiro-300-released.html",
+      "page_date": "2026-06-29",
+      "applies_to": "Shiro1.x/2.x EOL; Shiro3 platform baseline",
+      "facts": [
+        "1.x and 2.x considered EOL.",
+        "Shiro3 requires JDK17+, Jakarta namespace, Spring6/7 and Boot3/4; hardening defaults and APIs change."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "shiro-security",
+      "publisher": "Apache Shiro",
+      "url": "https://shiro.apache.org/security-reports.html",
+      "page_date": null,
+      "date_note": "Current page displays 2026 and 2023 advisories but no item publication dates; CVE years are not treated as publication dates.",
+      "applies_to": "Shiro1.13.0 and conditional module/configuration advisories",
+      "facts": [
+        "CVE-2023-46749/46750 fixes are in 1.13.0.",
+        "CVE-2026-23903 is conditional on protected static files and case-insensitive filesystem.",
+        "Recent session/secure-cookie and rememberMe advisories require configuration reachability evaluation.",
+        "Guice, Jakarta integration and LDAP advisories require those modules or realms; the frozen inventory/config does not select them."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "tomcat-support",
+      "publisher": "Apache Tomcat",
+      "url": "https://tomcat.apache.org/whichversion.html",
+      "page_date": null,
+      "date_note": "Publication/update date not displayed; queried current support table.",
+      "applies_to": "Tomcat9.0.122,Java8+,Servlet4",
+      "facts": [
+        "Tomcat9.0.x currently supported; latest listed9.0.122; Java8+."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "tomcat-security",
+      "publisher": "Apache Tomcat",
+      "url": "https://tomcat.apache.org/security-9.html",
+      "page_date": "2026-09-15",
+      "date_note": "Top fixed-in9.0.122 section; representative advisories publicly disclosed2026-09-23.",
+      "applies_to": "Tomcat9.x fixed-in9.0.122 advisories",
+      "facts": [
+        "CVE-2026-87022 affects through9.0.121; fixed9.0.122.",
+        "The page lists no later fixed-in release at query time; that is not proof of no vulnerabilities."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "vue2-eol",
+      "publisher": "Vue",
+      "url": "https://v2.vuejs.org/eol/",
+      "page_date": null,
+      "date_note": "EOL date2023-12-31 and final2.7.16 are explicit; publication/update date not displayed.",
+      "applies_to": "Vue2.x",
+      "facts": [
+        "Vue2 no longer receives community features,updates,fixes after2023-12-31.",
+        "Vue2.7.16 is final community release; official page links commercial support partnerHeroDevs."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "vue-compiler-advisory",
+      "publisher": "HeroDevs (Vue official extended-support partner; first-party NES maintainer advisory)",
+      "url": "https://www.herodevs.com/vulnerability-directory/cve-2024-9506",
+      "page_date": "2024-10-14",
+      "date_note": "Published date explicit; approximate NES fix date2024-07-25. This is not a Vue core-team advisory.",
+      "applies_to": "Vue2 compiler/parser,>=2.0.0 <3.0.0; malformed template input",
+      "facts": [
+        "Vue2.7.16 and its template compiler match the version range; runtime or build exposure requires untrusted input reaching template compilation.",
+        "Frozen application configuration defaults to runtime-only Vue; source search found no Vue.compile/direct full-build import in web/src. This is bounded static evidence, not a whole public asset proof."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "vue-cli-maintenance",
+      "publisher": "Vue CLI",
+      "url": "https://cli.vuejs.org/",
+      "page_date": null,
+      "date_note": "Publication/update date and CLI3-specific EOL date not displayed.",
+      "applies_to": "VueCLI project; current locked3.12.1",
+      "facts": [
+        "Project in maintenance mode and directs new projects to create-vue/Vite.",
+        "No current CLI3 support guarantee derived from the page."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "antd-security",
+      "publisher": "vueComponent",
+      "url": "https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/SECURITY.md",
+      "page_date": null,
+      "date_note": "Current raw page has no date and still includes unfilled template instructions.",
+      "applies_to": "Ant Design Vue1.x",
+      "facts": [
+        "Policy table labels1.x supported; no SLA or patch schedule.",
+        "Cannot call1.7.8 officially EOL from this source, or treat the table as evidence of recent fixes."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "antd178-readme",
+      "publisher": "vueComponent",
+      "url": "https://raw.githubusercontent.com/vueComponent/ant-design-vue/1.7.8/README.md",
+      "page_date": null,
+      "date_note": "TaggedREADME not publication-dated.",
+      "applies_to": "Ant Design Vue1.7.8 vsVue3 component-library migration",
+      "facts": [
+        "README says Vue3 support starts2.x.",
+        "Installed1.7.8 package peers requireVue^2.6.0 and matching compiler."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "webpack-security-policy",
+      "publisher": "webpack",
+      "url": "https://github.com/webpack/webpack/security/policy",
+      "page_date": null,
+      "date_note": "Page has reporting policy but no supported-version table or webpack4 EOL date.",
+      "applies_to": "webpack project",
+      "facts": [
+        "No formal webpack4 support/end date obtained from this policy."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "webpack-dom-clobbering",
+      "publisher": "webpack maintainers",
+      "url": "https://github.com/webpack/webpack/security/advisories/GHSA-4vvj-4cpr-p986",
+      "page_date": "2024-08-27",
+      "applies_to": "CVE-2024-43788;<5.93.0 as published; AutoPublicPathRuntimeModule and attacker-controlled scriptlessHTML",
+      "facts": [
+        "Version-range hit alone is not a current production reachability proof.",
+        "Current app.fff8dd9f.js uses fixedpublicPath/ and has no document.currentScript string; no payload executed."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "webpack5-migration",
+      "publisher": "webpack",
+      "url": "https://webpack.js.org/migrate/5/",
+      "page_date": null,
+      "date_note": "Publication/update date not displayed.",
+      "applies_to": "webpack4→5 plugins/loaders/configuration/runtime migration",
+      "facts": [
+        "Plugin/loader compatibility and emitted runtime need verification; changing version alone is insufficient."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "boot3-migration",
+      "publisher": "spring-projects",
+      "url": "https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide",
+      "page_date": "2025-12-15",
+      "date_note": "Last edit shown. Guide describes migration process, not current3.0 support.",
+      "applies_to": "Boot2→3 migration baseline",
+      "facts": [
+        "Recommends upgrading to latest2.7 first; Boot3 requiresJDK17 andSpring6.",
+        "JavaEE dependencies/imports migratejavax→jakarta; URLmatching/autoconfig changes must be reviewed."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    },
+    {
+      "id": "vue3-compat",
+      "publisher": "Vue",
+      "url": "https://v3-migration.vuejs.org/migration-build.html",
+      "page_date": null,
+      "date_note": "Publication/update date not displayed.",
+      "applies_to": "Vue2→Vue3 migration build",
+      "facts": [
+        "@vue/compat covers public APIs; Vue2 internal-API-dependent libraries may prevent migration."
+      ],
+      "queried_date": "2026-10-05",
+      "queried_timezone": "Asia/Shanghai",
+      "retrieved_via": "web tool",
+      "review_timestamp_utc": "2026-10-04T17:02:54.435731+00:00"
+    }
+  ]
+}

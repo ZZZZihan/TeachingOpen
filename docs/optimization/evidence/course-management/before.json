@@ -1,0 +1,55 @@
+{
+  "observed_utc": "2026-10-02T15:42:46.554308+00:00",
+  "jar_sha256": "f80ff81aead130311d14801cabbe7747333f670037409f96cc7ee1530d3e0626",
+  "base_url": "http://127.0.0.1:18111/api",
+  "expected_legacy": true,
+  "scope": "real HTTP login, role gates, database and attachments; import role gate only, not workbook import; no full role UI acceptance",
+  "captcha_method": "real HTTP generation; read only task-owned synthetic Redis",
+  "protected_routes": 26,
+  "passed": 9,
+  "total": 9,
+  "cases": [
+    {
+      "case": "legacy student can create a course",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "legacy student course write persisted",
+      "passed": true
+    },
+    {
+      "case": "legacy teacher can edit unit batch",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "legacy teacher unit write persisted",
+      "passed": true
+    },
+    {
+      "case": "legacy student can change assignment",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "legacy student assignment write persisted",
+      "passed": true
+    },
+    {
+      "case": "all original course/unit/assignment/file rows restored",
+      "passed": true
+    },
+    {
+      "case": "synthetic admin role restored and temporary dev role removed",
+      "passed": true
+    },
+    {
+      "case": "all original attachment bytes preserved and probe removed",
+      "passed": true
+    }
+  ]
+}

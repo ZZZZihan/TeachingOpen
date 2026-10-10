@@ -1,0 +1,234 @@
+{
+  "candidate_commit": "628803513c58867e985f4acb6d8d40c2c1836530",
+  "branding_pr": "https://github.com/ZZZZihan/TeachingOpen/pull/39",
+  "branding_head": "f6f1938e73ebaa67b12c35ec0ffb169d4f459765",
+  "api_tree": "0845e3f50113a357dbce0f13d96c7c0ae9eebff9",
+  "backend_process": {
+    "pid": 58396,
+    "jar_path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/feedback-comment-preservation/api/jeecg-boot-module-system/target/teaching-open-2.8.0.jar",
+    "jar_sha256": "b87319a8e411d8f48c37de9e5589c486460c5c5f0306d8f5026281b5737a9b09",
+    "profile": "dev,localtest",
+    "log_path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/course-role-runtime/logs/backend-19746ac88988.log"
+  },
+  "frontend_process": {
+    "pid": 46477,
+    "dist_path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/product-candidate/web/dist",
+    "source_commit": "628803513c58867e985f4acb6d8d40c2c1836530",
+    "integration_candidate_commit": "628803513c58867e985f4acb6d8d40c2c1836530",
+    "log_path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/course-role-runtime/logs/scratch-client-frontend.log",
+    "process_start": "Sat Oct  3 08:17:21 2026",
+    "runner_source_commit": "8ca9e35f5ea8341c28daf1ef423dc0990be12412",
+    "runner_sha256": "f730ca9fe77b196b60a1f8d0af56592321bb74f0f1bac5ab2c1883dc3b3a020b",
+    "previous_dist_path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/tiangong-previous-dist",
+    "updated_at": "2026-10-03T00:55:14.664621+00:00"
+  },
+  "frontend_test_passed": 204,
+  "frontend_test_total": 204,
+  "build_success": true,
+  "build_warnings": 6,
+  "dist_files": 4889,
+  "dist_manifest_sha256": "b0c6492a851b6b7fb0fbcefd2131cbb8570b2ed1d46e64763b2ef12d2cabed74",
+  "http_byte_checks": [
+    {
+      "path": "index.html",
+      "sha256": "819e0a879d4a255fbbcaf50835a7eba630d80fd69440466cbaee61b34d83c5c1",
+      "bytes": 27499
+    },
+    {
+      "path": "img/campus.7acad0db.jpg",
+      "sha256": "bb4dc06dfa1346eb4f432efe739e82e42a3c7498feef87523b7ecdeff68d2ef4",
+      "bytes": 133778
+    },
+    {
+      "path": "img/wordmark.271c59bd.png",
+      "sha256": "1e36742940a1c9d3af0765ba92c089d1314f5b9f9519393ec4ac3210b0209218",
+      "bytes": 8673
+    },
+    {
+      "path": "js/app.616995fd.js",
+      "sha256": "2d1a91b6ebcb72043b7df64d3bdd1a65fb8136766abace16501f4b9fbb8e2fce",
+      "bytes": 229795
+    }
+  ],
+  "browser": {
+    "scope": "Actual built frontend; anonymous synthetic backend; no login or CAPTCHA input",
+    "checks": [
+      {
+        "name": "home 1440",
+        "passed": true,
+        "detail": {
+          "path": "/index",
+          "width": 1440,
+          "scroll": 1432
+        }
+      },
+      {
+        "name": "home 768",
+        "passed": true,
+        "detail": {
+          "path": "/index",
+          "width": 768,
+          "scroll": 760
+        }
+      },
+      {
+        "name": "home 390",
+        "passed": true,
+        "detail": {
+          "path": "/index",
+          "width": 390,
+          "scroll": 382
+        }
+      },
+      {
+        "name": "bundled school images decoded",
+        "passed": true,
+        "detail": [
+          {
+            "src": "/img/wordmark.271c59bd.png",
+            "naturalWidth": 265,
+            "complete": true
+          },
+          {
+            "src": "/img/campus.7acad0db.jpg",
+            "naturalWidth": 499,
+            "complete": true
+          }
+        ]
+      },
+      {
+        "name": "official links open safely",
+        "passed": true,
+        "detail": [
+          {
+            "href": "https://www.tiangong.edu.cn/",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          },
+          {
+            "href": "https://news.tiangong.edu.cn/2022/0617/c7646a77757/page.htm",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          },
+          {
+            "href": "https://www.tiangong.edu.cn/",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          },
+          {
+            "href": "https://lib.tiangong.edu.cn/",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          }
+        ]
+      },
+      {
+        "name": "mobile menu expands",
+        "passed": true
+      },
+      {
+        "name": "navigation collapses on route",
+        "passed": true
+      },
+      {
+        "name": "courses 1440",
+        "passed": true,
+        "detail": {
+          "path": "/courseList",
+          "width": 1440,
+          "scroll": 1432
+        }
+      },
+      {
+        "name": "courses 768",
+        "passed": true,
+        "detail": {
+          "path": "/courseList",
+          "width": 768,
+          "scroll": 760
+        }
+      },
+      {
+        "name": "courses 390",
+        "passed": true,
+        "detail": {
+          "path": "/courseList",
+          "width": 390,
+          "scroll": 382
+        }
+      },
+      {
+        "name": "course dialog uses university primary",
+        "passed": true,
+        "detail": "rgb(116, 37, 106)"
+      },
+      {
+        "name": "course entry preserves login destination",
+        "passed": true,
+        "detail": "http://127.0.0.1:18112/user/login?redirect=%2Fteaching%2FmineCourse%2FcourseUnitCard%3Fid%3Dfixture_course_a"
+      },
+      {
+        "name": "login 1440",
+        "passed": true,
+        "detail": {
+          "path": "/user/login",
+          "width": 1440,
+          "scroll": 1432
+        }
+      },
+      {
+        "name": "login 768",
+        "passed": true,
+        "detail": {
+          "path": "/user/login",
+          "width": 768,
+          "scroll": 760
+        }
+      },
+      {
+        "name": "login 390",
+        "passed": true,
+        "detail": {
+          "path": "/user/login",
+          "width": 390,
+          "scroll": 382
+        }
+      },
+      {
+        "name": "login fields empty and captcha image loads",
+        "passed": true,
+        "detail": {
+          "inputs": [
+            {
+              "name": "username",
+              "value": ""
+            },
+            {
+              "name": "password",
+              "value": ""
+            },
+            {
+              "name": "captcha",
+              "value": ""
+            }
+          ],
+          "captcha": 105
+        }
+      }
+    ]
+  },
+  "business_tables_unchanged": 68,
+  "uploads_unchanged": true,
+  "original_source_files_unchanged": 5731,
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "limits": [
+    "Anonymous browser only; no CAPTCHA input or authenticated management UI acceptance.",
+    "Reused exact #38 backend JAR; did not rerun backend suites.",
+    "PR39 7 mocked fallback/config cases not rerun on integration; integration reran its 16 actual anonymous cases.",
+    "No production changes, remote merge or human visual approval."
+  ]
+}

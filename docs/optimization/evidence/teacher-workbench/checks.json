@@ -1,0 +1,200 @@
+{
+  "product_commit": "852221a",
+  "base_pr": 39,
+  "backend_pr": 40,
+  "frontend_checks": {
+    "passed": 202,
+    "total": 202
+  },
+  "visual_observations": [
+    {
+      "page": "before-list",
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "page": "before-list",
+      "width": 768,
+      "scrollWidth": 768
+    },
+    {
+      "page": "before-list",
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "page": "after-list",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "rows": 3
+    },
+    {
+      "page": "after-grading",
+      "width": 1440,
+      "dialogWidth": 900,
+      "zeroSelected": true
+    },
+    {
+      "page": "after-list",
+      "width": 768,
+      "scrollWidth": 768,
+      "rows": 3
+    },
+    {
+      "page": "after-grading",
+      "width": 768,
+      "dialogWidth": 736,
+      "zeroSelected": true
+    },
+    {
+      "page": "after-list",
+      "width": 390,
+      "scrollWidth": 390,
+      "rows": 3
+    },
+    {
+      "page": "after-grading",
+      "width": 390,
+      "dialogWidth": 374,
+      "zeroSelected": true
+    }
+  ],
+  "interaction_checks": [
+    {
+      "name": "unsubmitted search text stays out of status-only query",
+      "passed": true
+    },
+    {
+      "name": "explicit search narrows visible work",
+      "passed": true
+    },
+    {
+      "name": "list failure clears stale rows and preserves filter",
+      "passed": true
+    },
+    {
+      "name": "retry recovers same filtered list",
+      "passed": true
+    },
+    {
+      "name": "unread grading cannot be overwritten",
+      "passed": true
+    },
+    {
+      "name": "grading read retry restores form",
+      "passed": true
+    },
+    {
+      "name": "discussion failure is separate from grading read",
+      "passed": true
+    },
+    {
+      "name": "discussion retries in place",
+      "passed": true
+    },
+    {
+      "name": "comment field has database-compatible maximum",
+      "passed": true
+    },
+    {
+      "name": "failed save retains zero and feedback",
+      "passed": true
+    },
+    {
+      "name": "in-flight save disables repeated submission and close",
+      "passed": true
+    },
+    {
+      "name": "escape cannot close in-flight save",
+      "passed": true
+    },
+    {
+      "name": "one successful retry sends zero and omits discussion",
+      "passed": true
+    },
+    {
+      "name": "reopening reads saved zero and feedback",
+      "passed": true
+    },
+    {
+      "name": "cancel confirmation preserves unsaved input",
+      "passed": true
+    },
+    {
+      "name": "Scratch preview uses work id",
+      "passed": true
+    },
+    {
+      "name": "preview dialog fits 1440",
+      "passed": true,
+      "box": {
+        "x": 170,
+        "y": 40,
+        "width": 1100,
+        "height": 856.59375
+      }
+    },
+    {
+      "name": "preview dialog fits 768",
+      "passed": true,
+      "box": {
+        "x": 16,
+        "y": 40,
+        "width": 736,
+        "height": 856.59375
+      }
+    },
+    {
+      "name": "preview dialog fits 390",
+      "passed": true,
+      "box": {
+        "x": 8,
+        "y": 8,
+        "width": 374,
+        "height": 870.1875
+      }
+    },
+    {
+      "name": "close unmounts preview iframe",
+      "passed": true
+    },
+    {
+      "name": "file preview has safe external link and no iframe",
+      "passed": true
+    },
+    {
+      "name": "server pagination displays real total",
+      "passed": true
+    },
+    {
+      "name": "JSON export failure is shown instead of downloaded as workbook",
+      "passed": true
+    },
+    {
+      "name": "empty list shows recovery option",
+      "passed": true
+    },
+    {
+      "name": "keyboard selects next score",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "teacher-after-grading-1440.png",
+    "teacher-after-grading-390-footer.png",
+    "teacher-after-grading-390.png",
+    "teacher-after-grading-768.png",
+    "teacher-after-list-1440.png",
+    "teacher-after-list-390.png",
+    "teacher-after-list-768.png",
+    "teacher-before-grading-1440.png",
+    "teacher-before-list-1440.png",
+    "teacher-before-list-390.png",
+    "teacher-before-list-768.png",
+    "teacher-empty.png",
+    "teacher-grading-read-error.png",
+    "teacher-grading-save-error.png",
+    "teacher-list-error.png"
+  ],
+  "scope": "Actual Vue/Ant Design components with loopback synthetic HTTP; no authenticated application shell; editor frames are explicit substitutes, not engine acceptance."
+}

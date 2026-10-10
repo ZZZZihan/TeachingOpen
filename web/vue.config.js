@@ -27,6 +27,9 @@ module.exports = {
     }
   },
   chainWebpack: (config) => {
+    // Load lazy route assets when visited instead of prefetching every async chunk.
+    config.plugins.delete('prefetch')
+
     config.resolve.alias
       .set('@$', resolve('src'))
       .set('@api', resolve('src/api'))
@@ -60,7 +63,7 @@ module.exports = {
       less: {
         modifyVars: {
           /* less 变量覆盖，用于自定义 ant design 主题 */
-          'primary-color': '#1890FF',
+          'primary-color': '#74256A',
           'link-color': '#1890FF',
           'border-radius-base': '4px'
         },

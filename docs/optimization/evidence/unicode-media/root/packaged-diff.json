@@ -1,0 +1,20 @@
+{
+  "old_jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+  "new_jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "changed_application_entries": [
+    "BOOT-INF/classes/org/jeecg/config/ShiroConfig.class"
+  ],
+  "added_application_entries": [
+    "BOOT-INF/classes/org/jeecg/modules/shiro/authc/aop/LocalMediaInvalidRequestFilter$1.class",
+    "BOOT-INF/classes/org/jeecg/modules/shiro/authc/aop/LocalMediaInvalidRequestFilter$UnicodePathChecks.class",
+    "BOOT-INF/classes/org/jeecg/modules/shiro/authc/aop/LocalMediaInvalidRequestFilter.class"
+  ],
+  "removed_application_entries": [],
+  "external_libraries_count": 208,
+  "external_libraries_byte_equal": true,
+  "changed_library_containers": [
+    "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar"
+  ],
+  "common_payload_entries": 111,
+  "common_payload_entries_equal": true
+}

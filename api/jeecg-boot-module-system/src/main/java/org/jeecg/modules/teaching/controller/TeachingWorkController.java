@@ -1,6 +1,5 @@
 package org.jeecg.modules.teaching.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -10,11 +9,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.authz.annotation.Logical;
 import org.jeecg.common.api.vo.DictResult;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.aspect.annotation.PermissionData;
 import org.jeecg.common.constant.CacheConstant;
+import org.jeecg.common.exception.JeecgBootException;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.IPUtils;
@@ -26,7 +29,6 @@ import org.jeecg.modules.common.util.Ow365Util;
 import org.jeecg.modules.common.util.QiniuUtil;
 import org.jeecg.modules.system.entity.SysFile;
 import org.jeecg.modules.system.entity.SysUser;
-import org.jeecg.modules.system.service.ISysDataLogService;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.system.service.ISysUserService;
@@ -40,6 +42,7 @@ import org.jeecg.modules.teaching.model.StudentWorkModel;
 import org.jeecg.modules.teaching.model.WorkCommentModel;
 import org.jeecg.modules.teaching.service.*;
 import org.jeecg.modules.teaching.vo.StudentWorkSendVO;
+import org.jeecg.modules.teaching.vo.StudentWorkSubmission;
 import org.jeecg.modules.teaching.vo.TeachingWorkPage;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
 import org.jeecgframework.poi.excel.def.NormalExcelConstants;
@@ -48,6 +51,8 @@ import org.jeecgframework.poi.excel.entity.ImportParams;
 import org.jeecgframework.poi.excel.view.JeecgEntityExcelView;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.util.UriUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -56,6 +61,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -73,6 +79,10 @@ import static org.jeecg.common.util.oConvertUtils.isNotEmpty;
 @Slf4j
 public class TeachingWorkController extends BaseController {
 	@Autowired
+	private TeachingAccessService teachingAccessService;
+	@Autowired
+	private TeachingWorkSubmissionService workSubmissionService;
+	@Autowired
 	private ITeachingWorkService teachingWorkService;
 	@Autowired
 	private ITeachingWorkCorrectService teachingWorkCorrectService;
@@ -83,8 +93,6 @@ public class TeachingWorkController extends BaseController {
 	@Autowired
 	private ISysDepartService sysDepartService;
 	@Autowired
-	private ISysDataLogService sysDataLogService;
-	@Autowired
 	private RedisUtil redisUtil;
 	@Autowired
 	private QiniuUtil qiniuUtil;
@@ -92,12 +100,12 @@ public class TeachingWorkController extends BaseController {
 	private Ow365Util ow365Util;
 	 @Autowired
 	 private ISysFileService sysFileService;
+	 @Value("${jeecg.path.staticDomain}")
+	 private String localFileDomain;
 	 @Autowired
 	 private ITeachingDepartDayLogService teachingDepartDayLogService;
 	 @Autowired
 	 private ITeachingAdditionalWorkService teachingAdditionalWorkService;
-	 @Autowired
-	 private ITeachingCourseUnitService teachingCourseUnitService;
 
 	 @GetMapping("userInfo")
 	 public Result<?> getUserInfo(@RequestParam String userId){
@@ -163,102 +171,59 @@ public class TeachingWorkController extends BaseController {
 	 public DictResult<List<AdditionalWorkModel>> mineAdditionalWork(
 			 @RequestParam(required = false) String departId,
 			 @RequestParam(required = false) Boolean submit,
-			 @RequestParam(required = false) Integer status) {
+			 @RequestParam(required = false) Integer status, HttpServletResponse response) {
+		 response.setHeader("Cache-Control", "no-store");
 		 DictResult<List<AdditionalWorkModel>> result = new DictResult<>();
 		 String userId = getCurrentUser().getId();
-		 List<AdditionalWorkModel> list = teachingWorkService.userAdditionalWork(userId, departId, submit, status);
-		 for (AdditionalWorkModel work : list) {
-			 if (StringUtils.isNotBlank(work.getMineWorkUrl())){
-				 SysFile file = sysFileService.getById(work.getMineWorkUrl());
-				 if (file != null && StringUtils.isNotBlank(file.getFilePath())){
-					 work.setMineWorkUrl(QiniuConfig.domain + "/" + file.getFilePath());
+		 try {
+			 List<AdditionalWorkModel> list = teachingWorkService.userAdditionalWork(userId, departId, submit, status);
+			 for (AdditionalWorkModel work : list) {
+				 work.setMineWorkUrl(assignmentFileUrl(work.getMineWorkUrl()));
+				 work.setMineWorkCover(assignmentFileUrl(work.getMineWorkCover()));
+				 if (StringUtils.isNotBlank(work.getWorkDocumentUrl())) {
+					 work.setWorkDocumentUrl(ow365Util.getFileUrlStr(work.getWorkDocumentUrl()));
 				 }
 			 }
-			 if (StringUtils.isNotBlank(work.getMineWorkCover())){
-				 SysFile file = sysFileService.getById(work.getMineWorkCover());
-				 if (file != null && StringUtils.isNotBlank(file.getFilePath())){
-					 work.setMineWorkCover(QiniuConfig.domain + "/" + file.getFilePath());
-				 }
-			 }
-			 if(StringUtils.isNotBlank(work.getWorkDocumentUrl())){
-				 work.setWorkDocumentUrl(ow365Util.getFileUrlStr(work.getWorkDocumentUrl()));
-			 }
+			 result.setResult(list);
+		 } catch (RuntimeException error) {
+			 log.error("加载学生作业列表失败", error);
+			 response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+			 result.setSuccess(false);
+			 result.setCode(503);
+			 result.setMessage("作业列表暂时不可用，请稍后重试。");
 		 }
-		 result.setResult(list);
 		 return result;
+	 }
+
+	 private String assignmentFileUrl(String fileId) {
+		 if (StringUtils.isBlank(fileId)) return "";
+		 SysFile file = sysFileService.getById(fileId);
+		 if (file == null || StringUtils.isBlank(file.getFilePath())) return "";
+		 String domain = Integer.valueOf(1).equals(file.getFileLocation()) ? localFileDomain
+				 : Integer.valueOf(2).equals(file.getFileLocation()) ? QiniuConfig.domain : "";
+		 if (StringUtils.isBlank(domain)) return "";
+		 return domain.replaceAll("/+$", "") + "/" + UriUtils.encodePath(file.getFilePath(), StandardCharsets.UTF_8);
 	 }
 
 	 /**
 	  * 提交作业
-	  * @param teachingWork
+	  * @param submission
 	  *
 	  * @return
 	  */
 	 @PostMapping(value = "/submit")
-	 public Result<TeachingWork> add(@RequestBody TeachingWork teachingWork) {
-		 Result<TeachingWork> result = new Result<TeachingWork>();
+	 public Result<TeachingWork> submit(@RequestBody StudentWorkSubmission submission) {
+		 Result<TeachingWork> result = new Result<>();
 		 try {
-			 List<TeachingWork> oldWorks = new ArrayList<>();
-			 if (isNotEmpty(teachingWork.getId())){
-				oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>() {{
-					put("user_id", getCurrentUser().getId());
-					put("id", teachingWork.getId());
-				}});
-			 }else if (isNotEmpty(teachingWork.getAdditionalId())) {
-				 oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>() {{
-					 put("user_id", getCurrentUser().getId());
-					 put("additional_id", teachingWork.getAdditionalId());
-				 }});
-			 }else if(isNotEmpty(teachingWork.getCourseId())){
-				 oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>() {{
-					 put("user_id", getCurrentUser().getId());
-					 put("course_id", teachingWork.getCourseId());
-				 }});
-			 }else{
-				 oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>(){{
-					 put("work_name", teachingWork.getWorkName());
-					 put("user_id", getCurrentUser().getId());
-					 put("work_type", teachingWork.getWorkType());
-				 }});
-			 }
-			 teachingWork.setId(null);
-			 teachingWork.setUserId(getCurrentUser().getId());
-			 if (StringUtils.isNotBlank(teachingWork.getCourseId())){
-				 String departId = teachingCourseUnitService.getUserDepartIdByUnitId(getCurrentUser().getId(), teachingWork.getCourseId());
-				 teachingWork.setDepartId(departId);
-			 }
-			 if (!oldWorks.isEmpty()){
-				 teachingWork.setId(oldWorks.get(0).getId());
-				 teachingWork.setCreateTime(new Date());
-				 //teachingWork.setUpdateTime(new Date());
-				 result.setResult(teachingWork);
-				 result.success("更新成功！");
-				 //保留原作品的历史记录
-				 sysDataLogService.addDataLog("teaching_work", teachingWork.getId(), JSONObject.toJSONString(teachingWork));
-			 }else{
-				 result.setResult(teachingWork);
-				 result.success("添加成功！");
-			 }
-			 teachingWorkService.saveOrUpdate(teachingWork);
-
-			 //班级每日教学记录
-			 if (isNotEmpty(teachingWork.getAdditionalId()) && isNotEmpty(teachingWork.getDepartId())){
-				 String key = String.format("departLog:addiWorkSubmit:%s", teachingWork.getDepartId());
-				 if (!redisUtil.sHasKey(key, teachingWork.getId())) {
-					 redisUtil.sSet(key, teachingWork.getId());
-					 teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.ADDITIONAL_WORK_SUBMIT_COUNT);
-				 }
-			 }
-			 if (isNotEmpty(teachingWork.getCourseId()) && isNotEmpty(teachingWork.getDepartId())){
-				 String key = String.format("departLog:courseWorkSubmit:%s", teachingWork.getDepartId());
-				 if (!redisUtil.sHasKey(key, teachingWork.getId())) {
-					 redisUtil.sSet(key, teachingWork.getId());
-					 teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.COURSE_WORK_SUBMIT_COUNT);
-				 }
-			 }
-		 } catch (Exception e) {
-			 log.error(e.getMessage(),e);
-			 result.error500("系统内部错误");
+			 result.setResult(workSubmissionService.submit(submission));
+			 result.success("保存成功！");
+		 } catch (AuthorizationException | JeecgBootException error) {
+			 throw error;
+		 } catch (RuntimeException error) {
+			 // The service proxy has rolled back before this catch. Keep storage
+			 // diagnostics in server logs, not in a student's API response.
+			 log.error("作品保存失败", error);
+			 result.error500("作品保存失败，请稍后重试");
 		 }
 		 return result;
 	 }
@@ -266,8 +231,25 @@ public class TeachingWorkController extends BaseController {
 	 @AutoLog("发送作业给其他用户")
 	 @ApiOperation(value = "发送作业给其他用户", notes = "发送作业给其他用户")
 	 @PostMapping("/sendWork")
+	@RequiresRoles(value = {"admin", "dev", "teacher"}, logical = Logical.OR)
 	 public Result<TeachingWork> sendWork(@RequestBody StudentWorkSendVO studentWorkSendVO){
 		 Result<TeachingWork> result = new Result<>();
+		 if (studentWorkSendVO.getUserIdList() == null || studentWorkSendVO.getUserIdList().isEmpty()) {
+			 result.error500("请选择接收用户");
+			 return result;
+		 }
+		 TeachingWork source = teachingWorkService.getById(studentWorkSendVO.getSendWorkId());
+		 teachingAccessService.requireReadWork(source);
+		 // Validate every recipient and any same-name overwrite before the first write.
+		 for (String userId : studentWorkSendVO.getUserIdList()) {
+			 TeachingWork recipient = new TeachingWork();
+			 recipient.setUserId(userId);
+			 recipient.setDepartId(source.getDepartId());
+			 teachingAccessService.requireManageWork(recipient);
+		 }
+		 List<TeachingWork> overwritten = teachingWorkService.list(new QueryWrapper<TeachingWork>()
+				 .eq("work_name", source.getWorkName()).in("user_id", studentWorkSendVO.getUserIdList()));
+		 for (TeachingWork existing : overwritten) teachingAccessService.requireManageWork(existing);
 		 int count = teachingWorkService.sendWork(studentWorkSendVO);
 		 result.setSuccess(true);
 		 result.setMessage(String.format("发送成功，共%d个用户", count));
@@ -286,6 +268,7 @@ public class TeachingWorkController extends BaseController {
 	@AutoLog(value = "作业列表-分页列表查询")
 	@ApiOperation(value="作业列表-分页列表查询", notes="作业列表-分页列表查询")
 	@GetMapping(value = "/list")
+	@RequiresRoles(value = {"admin", "dev", "teacher"}, logical = Logical.OR)
 	@PermissionData(pageComponent = "teaching/TeachingWorkList")
 	public Result<?> queryPageList(StudentWorkModel studentWorkModel,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -299,6 +282,10 @@ public class TeachingWorkController extends BaseController {
 		queryWrapper.eq(null != studentWorkModel.getUsername(), "teaching_work.create_by", studentWorkModel.getUsername())
 				.like(null != studentWorkModel.getWorkName(), "work_name", studentWorkModel.getWorkName())
 				.like(null != studentWorkModel.getRealname(), "realname", studentWorkModel.getRealname());
+		// These text fields already have their intended LIKE predicates above.
+		// Do not let the generic generator append equality to the fuzzy filters.
+		studentWorkModel.setWorkName(null);
+		studentWorkModel.setRealname(null);
 		QueryGenerator.installMplus(queryWrapper, studentWorkModel, req.getParameterMap());
 		//获取时间参数
 		Map<String, String[]> param = req.getParameterMap();
@@ -306,20 +293,13 @@ public class TeachingWorkController extends BaseController {
 		String updateTime_end = param.containsKey("teaching_work.updateTime_end")?param.get("teaching_work.updateTime_end")[0]:null;
 		queryWrapper.ge(null != updateTime_begin, "teaching_work.create_time", updateTime_begin).
 				le(null != updateTime_end, "teaching_work.create_time",updateTime_end);
-		//非admin和dev角色，只显示自己管理的部门下的用户的作品
-		List<String> myDeptIds = new ArrayList<>();
-		if(!hasRole("admin") && !hasRole("dev")){
-			myDeptIds = sysDepartService.getMySubDepIdsByDepId(getCurrentUser().getDepartIds());
-			if (myDeptIds==null || myDeptIds.isEmpty()){
-				return Result.error("您没有负责的班级");
-			}
-		}
+		teachingAccessService.limitManagedWorks(queryWrapper);
 		if (StringUtils.isNotBlank(tag)){
 			String keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), tag);
 			Set<Object> tagWorkIds = redisUtil.sGet(keyTag);
 			queryWrapper.in(tagWorkIds!=null&&!tagWorkIds.isEmpty(),"teaching_work.id", tagWorkIds);
 		}
-		IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper,myDeptIds);
+		IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper,null);
 		for (StudentWorkModel workModel: pageList.getRecords()){
 			String key = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), workModel.getId());
 			Object tagObj = redisUtil.get(key);
@@ -334,8 +314,17 @@ public class TeachingWorkController extends BaseController {
 	public Result<?> greatWorkList(@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize){
 		IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), new QueryWrapper<StudentWorkModel>()
-				.eq("teaching_work.work_status", 2), null);
+				.eq("teaching_work.work_status", "4").eq("teaching_work.del_flag", 0), null);
+		removePublicGrading(pageList);
 		return Result.ok(pageList);
+	}
+
+	private void removePublicGrading(IPage<StudentWorkModel> page) {
+		// This mapper also serves the private teacher/student work lists.
+		page.getRecords().forEach(work -> {
+			work.setTeacherComment(null);
+			work.setScore(null);
+		});
 	}
 
 	 @ApiOperation(value = "点赞作品")
@@ -343,6 +332,7 @@ public class TeachingWorkController extends BaseController {
 	 public Result starWork(@RequestParam(name = "workId") String workId, HttpServletRequest request) {
 		 Result<TeachingWork> result = new Result<TeachingWork>();
 		 TeachingWork teachingWork = teachingWorkService.getById(workId);
+		 teachingAccessService.requireCommunityWork(teachingWork);
 		 if (teachingWork == null) {
 			 result.error500("未找到对作业");
 		 } else {
@@ -375,7 +365,7 @@ public class TeachingWorkController extends BaseController {
 									  @RequestParam(required = false) String userId, //用户ID
 									  HttpServletRequest request) {
 		 QueryWrapper<StudentWorkModel> queryWrapper = new QueryWrapper<StudentWorkModel>();
-		 queryWrapper.ge("teaching_work.work_status", 3);
+		 queryWrapper.in("teaching_work.work_status", "3", "4").eq("teaching_work.del_flag", 0);
 		 queryWrapper.eq(StringUtils.isNotBlank(userId), "teaching_work.user_id", userId);
 		 queryWrapper.eq(workStatus!=null, "teaching_work.work_status", workStatus);
 		 switch (orderBy){
@@ -391,20 +381,18 @@ public class TeachingWorkController extends BaseController {
 		 }
 
 		 IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper, null);
+		 removePublicGrading(pageList);
 		 return Result.ok(pageList);
 	 }
 
 	 @GetMapping("/studentWorkInfo")
 	 public DictResult<StudentWorkModel> studentWorkInfo(@RequestParam(name = "workId") String workId){
+		 teachingAccessService.requireCommunityWork(teachingWorkService.getById(workId));
 		 DictResult<StudentWorkModel> result = new DictResult<StudentWorkModel>();
 		 StudentWorkModel teachingWork = teachingWorkService.studentWorkInfo(workId);
-		 if (teachingWork == null) {
+		 if (teachingWork == null || !teachingWorkService.incrementViewCount(workId)) {
 			 result.error500("未找到对作业");
 		 } else {
-		 	TeachingWork work = new TeachingWork();
-		 	work.setId(teachingWork.getId());
-		 	work.setViewNum(teachingWork.getViewNum() + 1);
-		 	teachingWorkService.updateById(work);
 			 result.setResult(teachingWork);
 			 result.setSuccess(true);
 		 }
@@ -422,6 +410,7 @@ public class TeachingWorkController extends BaseController {
 	 public DictResult<?> getWorkComment(@RequestParam String workId,
 									 @RequestParam(defaultValue = "1") Integer page,
 									 @RequestParam(defaultValue = "10") Integer pageSize){
+		 teachingAccessService.requireCommunityWork(teachingWorkService.getById(workId));
 		 DictResult<List<WorkCommentModel>> result = new DictResult<>();
 		 List<WorkCommentModel> comments = teachingWorkCommentService.getWorkComments(workId, page, pageSize);
 		 result.setResult(comments);
@@ -430,7 +419,7 @@ public class TeachingWorkController extends BaseController {
 
 	 @PostMapping(value = "/saveComment")
 	 public Result saveComment(@RequestBody TeachingWorkComment comment, HttpServletRequest request) {
-		 String ip = IPUtils.getIpAddr(request);
+		 teachingAccessService.requireCommunityWork(teachingWorkService.getById(comment.getWorkId()));
 		 String userId = getCurrentUser().getId();
 		 TeachingWorkComment c = new TeachingWorkComment();
 		 c.setWorkId(comment.getWorkId());
@@ -503,9 +492,11 @@ public class TeachingWorkController extends BaseController {
 	@AutoLog(value = "作业列表-添加")
 	@ApiOperation(value="作业列表-添加", notes="作业列表-添加")
 	@PostMapping(value = "/add")
+	@RequiresRoles(value = {"admin", "dev", "teacher"}, logical = Logical.OR)
 	public Result<?> add(@RequestBody TeachingWorkPage teachingWorkPage) {
 		TeachingWork teachingWork = new TeachingWork();
 		BeanUtils.copyProperties(teachingWorkPage, teachingWork);
+		teachingAccessService.requireManageWork(teachingWork);
 		teachingWorkService.saveMain(teachingWork, teachingWorkPage.getTeachingWorkCorrectList(),teachingWorkPage.getTeachingWorkCommentList());
 		return Result.ok(teachingWork);
 	}
@@ -519,6 +510,7 @@ public class TeachingWorkController extends BaseController {
 	@AutoLog(value = "作业列表-编辑")
 	@ApiOperation(value="作业列表-编辑", notes="作业列表-编辑")
 	@PutMapping(value = "/edit")
+	@RequiresRoles(value = {"admin", "dev", "teacher"}, logical = Logical.OR)
 	public Result<?> edit(@RequestBody TeachingWorkPage teachingWorkPage) {
 		TeachingWork teachingWork = new TeachingWork();
 		BeanUtils.copyProperties(teachingWorkPage, teachingWork);
@@ -526,6 +518,14 @@ public class TeachingWorkController extends BaseController {
 		if(teachingWorkEntity==null) {
 			return Result.error("未找到对应数据");
 		}
+		teachingAccessService.requireManageWork(teachingWorkEntity);
+		// Feedback cannot transfer the stored owner, class or assignment.
+		teachingWork.setUserId(teachingWorkEntity.getUserId());
+		teachingWork.setDepartId(teachingWorkEntity.getDepartId());
+		teachingWork.setCourseId(teachingWorkEntity.getCourseId());
+		teachingWork.setAdditionalId(teachingWorkEntity.getAdditionalId());
+		teachingWork.setCreateBy(teachingWorkEntity.getCreateBy());
+		teachingWork.setCreateTime(teachingWorkEntity.getCreateTime());
 		teachingWorkService.updateMain(teachingWork, teachingWorkPage.getTeachingWorkCorrectList(),teachingWorkPage.getTeachingWorkCommentList());
 		if (StringUtils.isNotBlank(teachingWork.getDepartId())){
 			if (StringUtils.isNotEmpty(teachingWork.getAdditionalId())){
@@ -555,11 +555,11 @@ public class TeachingWorkController extends BaseController {
 	@AutoLog(value = "作业列表-通过id删除")
 	@ApiOperation(value="作业列表-通过id删除", notes="作业列表-通过id删除")
 	@DeleteMapping(value = "/delete")
+	@RequiresRoles(value = {"admin", "dev", "teacher"}, logical = Logical.OR)
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
 		TeachingWork work = this.teachingWorkService.getById(id);
 		if (work != null){
-			sysFileService.deleteWithFile(work.getWorkFile());
-			sysFileService.deleteWithFile(work.getWorkCover());
+			teachingAccessService.requireManageWork(work);
 			teachingWorkService.delMain(id);
 		}
 		return Result.ok("删除成功!");
@@ -574,13 +574,12 @@ public class TeachingWorkController extends BaseController {
 	@AutoLog(value = "作业列表-批量删除")
 	@ApiOperation(value="作业列表-批量删除", notes="作业列表-批量删除")
 	@DeleteMapping(value = "/deleteBatch")
+	@RequiresRoles(value = {"admin", "dev", "teacher"}, logical = Logical.OR)
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		List<String> idList = Arrays.asList(ids.split(","));
 		List<TeachingWork> workList = this.teachingWorkService.list(new QueryWrapper<TeachingWork>().in("id", idList));
-		for (TeachingWork work: workList){
-			sysFileService.deleteWithFile(work.getWorkFile());
-			sysFileService.deleteWithFile(work.getWorkCover());
-		}
+		// Check the whole batch before any file or row is deleted.
+		for (TeachingWork work: workList) teachingAccessService.requireManageWork(work);
 		this.teachingWorkService.delBatchMain(idList);
 		return Result.ok("批量删除成功！");
 	}
@@ -596,6 +595,7 @@ public class TeachingWorkController extends BaseController {
 	@GetMapping(value = "/queryById")
 	public Result<?> queryById(@RequestParam(name="id",required=true) String id) {
 		TeachingWork teachingWork = teachingWorkService.getById(id);
+		teachingAccessService.requireReadWork(teachingWork);
 		if(teachingWork==null) {
 			return Result.error("未找到对应数据");
 		}
@@ -613,6 +613,7 @@ public class TeachingWorkController extends BaseController {
 	@ApiOperation(value="作业批改集合-通过id查询", notes="作业批改-通过id查询")
 	@GetMapping(value = "/queryTeachingWorkCorrectByMainId")
 	public Result<?> queryTeachingWorkCorrectListByMainId(@RequestParam(name="id",required=true) String id) {
+		teachingAccessService.requireReadWork(teachingWorkService.getById(id));
 		List<TeachingWorkCorrect> teachingWorkCorrectList = teachingWorkCorrectService.selectByMainId(id);
 		return Result.ok(teachingWorkCorrectList);
 	}
@@ -626,6 +627,7 @@ public class TeachingWorkController extends BaseController {
 	@ApiOperation(value="作品评论集合-通过id查询", notes="作品评论-通过id查询")
 	@GetMapping(value = "/queryTeachingWorkCommentByMainId")
 	public Result<?> queryTeachingWorkCommentListByMainId(@RequestParam(name="id",required=true) String id) {
+		teachingAccessService.requireReadWork(teachingWorkService.getById(id));
 		List<TeachingWorkComment> teachingWorkCommentList = teachingWorkCommentService.selectByMainId(id);
 		return Result.ok(teachingWorkCommentList);
 	}
@@ -637,12 +639,14 @@ public class TeachingWorkController extends BaseController {
     * @param teachingWork
     */
     @RequestMapping(value = "/exportXls")
+	@RequiresRoles(value = {"admin", "dev", "teacher"}, logical = Logical.OR)
     public ModelAndView exportXls(HttpServletRequest request, TeachingWork teachingWork) {
       // Step.1 组装查询条件查询数据
       QueryWrapper<TeachingWork> queryWrapper = QueryGenerator.initQueryWrapper(teachingWork, request.getParameterMap());
       LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
 
       //Step.2 获取导出数据
+      teachingAccessService.limitManagedWorks(queryWrapper);
       List<TeachingWork> queryList = teachingWorkService.list(queryWrapper);
       // 过滤选中数据
       String selections = request.getParameter("selections");
@@ -683,6 +687,7 @@ public class TeachingWorkController extends BaseController {
     * @return
     */
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
       MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
       Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();

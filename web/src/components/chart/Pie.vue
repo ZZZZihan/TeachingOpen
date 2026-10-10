@@ -9,6 +9,7 @@
 </template>
 
 <script>
+  import './install'
   const DataSet = require('@antv/data-set')
   import { ChartEventMixins } from './mixins/ChartMixins'
 

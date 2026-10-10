@@ -25,6 +25,7 @@ import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysDictService;
 import org.jeecg.modules.system.service.ISysLogService;
 import org.jeecg.modules.system.service.ISysUserService;
+import org.jeecg.modules.system.service.PasswordResetService;
 import org.jeecg.modules.system.util.RandImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,6 +44,7 @@ import java.util.*;
 @Api(tags="用户登录")
 @Slf4j
 public class LoginController {
+    @Autowired private org.jeecg.modules.shiro.authc.aop.MediaCookie mediaCookie;
 	@Autowired
 	private ISysUserService sysUserService;
 	@Autowired
@@ -51,6 +53,8 @@ public class LoginController {
 	private ISysLogService logService;
 	@Autowired
     private RedisUtil redisUtil;
+	@Autowired
+	private PasswordResetService passwordResetService;
 	@Autowired
     private ISysDepartService sysDepartService;
 	@Autowired
@@ -130,6 +134,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/logout")
 	public Result<Object> logout(HttpServletRequest request,HttpServletResponse response) {
+		mediaCookie.write(request, response, "", true);
 		//用户退出逻辑
 	    String token = request.getHeader(DefContants.X_ACCESS_TOKEN);
 	    if(oConvertUtils.isEmpty(token)) {
@@ -239,10 +244,14 @@ public class LoginController {
 	@PostMapping(value = "/sms")
 	public Result<String> sms(@RequestBody JSONObject jsonObject) {
 		Result<String> result = new Result<String>();
-		String mobile = jsonObject.get("mobile").toString();
-		//手机号模式 登录模式: "2"  注册模式: "1"
-		String smsmode=jsonObject.get("smsmode").toString();
-		log.info(mobile);
+		String mobile = PasswordResetService.string(jsonObject, "mobile");
+		String smsmode = PasswordResetService.string(jsonObject, "smsmode");
+		if (CommonConstant.SMS_TPL_TYPE_2.equals(smsmode)) {
+			return passwordResetService.sendCode(PasswordResetService.string(jsonObject, "username"), mobile);
+		}
+		if (mobile == null || smsmode == null) {
+			return result.error500("手机号和短信模式不能为空！");
+		}
 		if(oConvertUtils.isEmpty(mobile)){
 			result.setMessage("手机号不允许为空！");
 			result.setSuccess(false);
@@ -279,14 +288,11 @@ public class LoginController {
 				}
 				
 				/**
-				 * smsmode 短信模板方式  0 .登录模板、1.注册模板、2.忘记密码模板
+				 * smsmode 0 登录模板、1 注册模板；2 已由专用恢复分支处理
 				 */
 				if (CommonConstant.SMS_TPL_TYPE_0.equals(smsmode)) {
 					//登录模板
 					b = DySmsHelper.sendSms(mobile, obj, DySmsEnum.LOGIN_TEMPLATE_CODE);
-				} else if(CommonConstant.SMS_TPL_TYPE_2.equals(smsmode)) {
-					//忘记密码模板
-					b = DySmsHelper.sendSms(mobile, obj, DySmsEnum.FORGET_PASSWORD_TEMPLATE_CODE);
 				}
 			}
 
@@ -387,6 +393,7 @@ public class LoginController {
 			obj.put("multi_depart", 2);
 		}
 		obj.put("token", token);
+        mediaCookie.issue(token);
 		obj.put("userInfo", sysUser);
 		obj.put("sysAllDictItems", sysDictService.queryAllDictItems());
 		result.setResult(obj);
@@ -482,6 +489,7 @@ public class LoginController {
 		redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME);
 		//token 信息
 		obj.put("token", token);
+        mediaCookie.issue(token);
 		result.setResult(obj);
 		result.setSuccess(true);
 		result.setCode(200);

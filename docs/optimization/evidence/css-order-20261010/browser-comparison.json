@@ -1,0 +1,40 @@
+{
+  "baseline": "c1f449c3eeda332c1c750fae8853af09946a4404",
+  "environment": "Local production dist, Chromium, synthetic API, 1440x1000 viewport; no production access",
+  "styles": [
+    {
+      "build": "baseline",
+      "styles": {
+        "editorPosition": "relative",
+        "editorHeight": 120,
+        "unrelatedPosition": "relative",
+        "unrelatedCursorHeight": "18.3906px"
+      },
+      "errors": []
+    },
+    {
+      "build": "candidate",
+      "styles": {
+        "editorPosition": "relative",
+        "editorHeight": 120,
+        "unrelatedPosition": "static",
+        "unrelatedCursorHeight": "0px"
+      },
+      "errors": []
+    }
+  ],
+  "pixelComparisons": [
+    {
+      "component": "code editor",
+      "width": 480,
+      "height": 120,
+      "differenceBounds": null
+    },
+    {
+      "component": "upload row",
+      "width": 572,
+      "height": 32,
+      "differenceBounds": null
+    }
+  ]
+}

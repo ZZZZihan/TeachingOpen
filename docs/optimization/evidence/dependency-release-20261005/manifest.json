@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "query_date": "2026-10-05",
+  "timezone": "Asia/Shanghai",
+  "files": {
+    "inventory-summary.json": {
+      "bytes": 4434,
+      "sha256": "5a5fd936f3cfa111478949a12180360338e05723d99f783323488205efbe368a"
+    },
+    "inventory.json": {
+      "bytes": 101464,
+      "sha256": "9302d59766ec0dcc6205e09ed5a437c58080383ad8cfbbfdd40cf663e25d80ca"
+    },
+    "official-sources.json": {
+      "bytes": 14180,
+      "sha256": "a1b08cefaa24ea655273f0fadc69c62cc9ca85e690cbc304861d272981f6a1a8"
+    },
+    "review.md": {
+      "bytes": 15323,
+      "sha256": "ebb9569bf61903cb78fb055760309505b2176f62083b1f735650708b5a42b173"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "suite": "auth-status",
+    "exit_code": 0,
+    "seconds": 0.42,
+    "log": "auth-status.log",
+    "passed": 7,
+    "total": 7,
+    "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+    "scope": "real local HTTP, CAPTCHA, login and logout; no role/asset permission acceptance"
+  },
+  {
+    "suite": "local-download",
+    "exit_code": 0,
+    "seconds": 2.5,
+    "log": "local-download.log",
+    "passed": 88,
+    "total": 88,
+    "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42"
+  },
+  {
+    "suite": "local-upload",
+    "exit_code": 0,
+    "seconds": 2.47,
+    "log": "local-upload-final.log",
+    "passed": 46,
+    "total": 46,
+    "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+    "scope": "actual local multipart uploads and filesystem bytes; does not prove file ownership, downloads, cloud upload or browser editor workflows"
+  },
+  {
+    "suite": "file-ownership",
+    "exit_code": 0,
+    "seconds": 18.28,
+    "log": "file-ownership.log",
+    "passed": 76,
+    "total": 76,
+    "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42"
+  },
+  {
+    "suite": "learning-units",
+    "exit_code": 0,
+    "seconds": 2.27,
+    "log": "learning-units.log",
+    "passed": 80,
+    "total": 80,
+    "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+    "scope": "real HTTP login and unit list/detail responses, synthetic DB fixtures and cleanup; not browser editors or direct attachment-download authorization"
+  }
+]

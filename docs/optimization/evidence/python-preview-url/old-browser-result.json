@@ -1,0 +1,18 @@
+{
+  "recorded_utc": "2026-10-03T07:56:57.132630+00:00",
+  "candidate": "7102a32e44621102998afed520fc06cdb06fb4ec",
+  "browser": "Playwright CLI Chromium headed",
+  "actual_browser": true,
+  "backend": "controlled loopback HTTP fixture; no Java backend or authentication",
+  "fixture_port": 18154,
+  "file_url": "http://127.0.0.1:18154/fixtures/seed.py?revision=1&label=a+b",
+  "actual_wrong_request": "/python/http%3A%2F%2F127.0.0.1%3A18154%2Ffixtures%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb",
+  "wrong_request_status": 404,
+  "wrong_request_count": 2,
+  "observed_editor": "empty; snapshot and screenshot retained",
+  "cause": "Both player mounted and editor created parse url without decoding; player.html loads both bundles.",
+  "file_sha256": {
+    "app.js": "737d67e8412ae79eeae3b9bb2412fe7d13518aba76024dadad93b5e54401842c",
+    "appPlayer.js": "2bb033a7762902ad586db47a6a0b57cf455c3b10ee07c3dd390f07db2670ea11"
+  }
+}

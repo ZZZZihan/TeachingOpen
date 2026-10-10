@@ -1,0 +1,109 @@
+GET api
+GET api
+GET api
+GET api
+POST api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+POST api
+POST api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET static
+GET static
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+test_duplicate_and_unterminated_are_rejected (test_extract_schema.ExtractSchemaTest.test_duplicate_and_unterminated_are_rejected) ... ok
+test_quoted_semicolon_and_escaped_quotes (test_extract_schema.ExtractSchemaTest.test_quoted_semicolon_and_escaped_quotes) ... ok
+test_upstream_contains_only_69_empty_table_definitions (test_extract_schema.ExtractSchemaTest.test_upstream_contains_only_69_empty_table_definitions) ... ok
+test_backend_disconnect_closes_client (test_frontend_proxy.FrontendProxyTest.test_backend_disconnect_closes_client) ... ok
+test_client_disconnect_closes_upstream (test_frontend_proxy.FrontendProxyTest.test_client_disconnect_closes_upstream) ... ok
+test_foreign_origin_is_rejected_before_backend (test_frontend_proxy.FrontendProxyTest.test_foreign_origin_is_rejected_before_backend) ... ok
+test_fragmented_http_body_is_not_truncated (test_frontend_proxy.FrontendProxyTest.test_fragmented_http_body_is_not_truncated) ... ok
+test_handshake_and_early_frames_preserved (test_frontend_proxy.FrontendProxyTest.test_handshake_and_early_frames_preserved) ... ok
+test_idle_connection_is_reaped (test_frontend_proxy.FrontendProxyTest.test_idle_connection_is_reaped) ... ok
+test_invalid_upgrade_requests_do_not_reach_backend (test_frontend_proxy.FrontendProxyTest.test_invalid_upgrade_requests_do_not_reach_backend) ... ok
+test_large_stream_and_concurrent_connection (test_frontend_proxy.FrontendProxyTest.test_large_stream_and_concurrent_connection) ... ok
+test_missing_backend_fails_and_recovers (test_frontend_proxy.FrontendProxyTest.test_missing_backend_fails_and_recovers) ... ok
+test_nonbrowser_client_without_origin_is_supported (test_frontend_proxy.FrontendProxyTest.test_nonbrowser_client_without_origin_is_supported) ... ok
+test_ordinary_http_and_static_routes_keep_contract (test_frontend_proxy.FrontendProxyTest.test_ordinary_http_and_static_routes_keep_contract) ... ok
+test_upstream_refusal_and_invalid_handshakes (test_frontend_proxy.FrontendProxyTest.test_upstream_refusal_and_invalid_handshakes) ... ok
+test_auto_increment_is_not_schema_migration (test_local_candidate.LocalCandidateTest.test_auto_increment_is_not_schema_migration) ... ok
+test_backend_stop_refuses_same_jar_in_another_runtime (test_local_candidate.LocalCandidateTest.test_backend_stop_refuses_same_jar_in_another_runtime) ... ok
+test_corrupt_target_leaves_active_running (test_local_candidate.LocalCandidateTest.test_corrupt_target_leaves_active_running) ... ok
+test_failed_initial_start_stays_stopped (test_local_candidate.LocalCandidateTest.test_failed_initial_start_stays_stopped) ... ok
+test_failed_recovery_retains_both_references (test_local_candidate.LocalCandidateTest.test_failed_recovery_retains_both_references) ... ok
+test_failed_start_restores_previous (test_local_candidate.LocalCandidateTest.test_failed_start_restores_previous) ... ok
+test_foreign_listener_not_stopped (test_local_candidate.LocalCandidateTest.test_foreign_listener_not_stopped) ... ok
+test_intact_bundle_and_changed_bytes (test_local_candidate.LocalCandidateTest.test_intact_bundle_and_changed_bytes) ... ok
+test_interruption_requires_explicit_recover (test_local_candidate.LocalCandidateTest.test_interruption_requires_explicit_recover) ... ok
+test_manifest_replacement_rejected (test_local_candidate.LocalCandidateTest.test_manifest_replacement_rejected) ... ok
+test_manual_rollback_uses_recorded_previous (test_local_candidate.LocalCandidateTest.test_manual_rollback_uses_recorded_previous) ... ok
+test_parallel_operation_rejected (test_local_candidate.LocalCandidateTest.test_parallel_operation_rejected) ... ok
+test_reused_pid_not_stopped (test_local_candidate.LocalCandidateTest.test_reused_pid_not_stopped) ... ok
+test_schema_difference_refuses_before_stop (test_local_candidate.LocalCandidateTest.test_schema_difference_refuses_before_stop) ... ok
+test_successful_switch_remembers_previous (test_local_candidate.LocalCandidateTest.test_successful_switch_remembers_previous) ... ok
+test_busy_source_does_not_create_snapshot (test_local_recovery.LocalRecoveryTest.test_busy_source_does_not_create_snapshot) ... ok
+test_corrupt_payload_rejected_before_target_creation (test_local_recovery.LocalRecoveryTest.test_corrupt_payload_rejected_before_target_creation) ... ok
+test_empty_value_row_remains_distinct_from_zero_rows (test_local_recovery.LocalRecoveryTest.test_empty_value_row_remains_distinct_from_zero_rows) ... ok
+test_existing_target_preserved (test_local_recovery.LocalRecoveryTest.test_existing_target_preserved) ... ok
+test_extra_payload_rejected (test_local_recovery.LocalRecoveryTest.test_extra_payload_rejected) ... ok
+test_invalid_database_manifest_refused (test_local_recovery.LocalRecoveryTest.test_invalid_database_manifest_refused) ... ok
+test_missing_manifest_is_incomplete (test_local_recovery.LocalRecoveryTest.test_missing_manifest_is_incomplete) ... ok
+test_nested_and_linked_paths_rejected (test_local_recovery.LocalRecoveryTest.test_nested_and_linked_paths_rejected) ... ok
+test_shared_directory_rejected (test_local_recovery.LocalRecoveryTest.test_shared_directory_rejected) ... ok
+test_source_ports_cannot_be_reused (test_local_recovery.LocalRecoveryTest.test_source_ports_cannot_be_reused) ... ok
+test_symlink_and_fifo_rejected (test_local_recovery.LocalRecoveryTest.test_symlink_and_fifo_rejected) ... ok
+test_valid_snapshot_and_private_payload (test_local_recovery.LocalRecoveryTest.test_valid_snapshot_and_private_payload) ... ok
+test_baseline_verify_failure_prevents_launch (test_production_fixture.BackendGuardTests.test_baseline_verify_failure_prevents_launch) ... ok
+test_live_prior_record_prevents_launch (test_production_fixture.BackendGuardTests.test_live_prior_record_prevents_launch) ... ok
+test_stop_after_business_mutation_uses_identity_without_database_verify (test_production_fixture.BackendGuardTests.test_stop_after_business_mutation_uses_identity_without_database_verify) ... ok
+test_stop_rejects_changed_pid_without_signaling (test_production_fixture.BackendGuardTests.test_stop_rejects_changed_pid_without_signaling) ... ok
+test_symlink_record_prevents_launch (test_production_fixture.BackendGuardTests.test_symlink_record_prevents_launch) ... ok
+test_wrong_jar_is_rejected_before_process_launch (test_production_fixture.BackendGuardTests.test_wrong_jar_is_rejected_before_process_launch) ... ok
+test_dump_directives_are_discarded (test_production_fixture.DumpParserTests.test_dump_directives_are_discarded) ... ok
+test_quotes_backslashes_unicode_multiline_and_binary (test_production_fixture.DumpParserTests.test_quotes_backslashes_unicode_multiline_and_binary) ... ok
+test_reject_cross_database_or_executable_statements (test_production_fixture.DumpParserTests.test_reject_cross_database_or_executable_statements) ... ok
+test_reject_expressions_including_parenthesized_literal (test_production_fixture.DumpParserTests.test_reject_expressions_including_parenthesized_literal) ... ok
+test_reject_external_table_files_or_foreign_key_targets (test_production_fixture.DumpParserTests.test_reject_external_table_files_or_foreign_key_targets) ... ok
+test_reject_unknown_table_column_type_and_order (test_production_fixture.DumpParserTests.test_reject_unknown_table_column_type_and_order) ... ok
+test_sql_like_payload_is_inert (test_production_fixture.DumpParserTests.test_sql_like_payload_is_inert) ... ok
+test_unterminated_or_incomplete_dump_is_rejected (test_production_fixture.DumpParserTests.test_unterminated_or_incomplete_dump_is_rejected) ... ok
+test_identifiers_roles_routes_and_relationships_preserved (test_production_fixture.IdentityTests.test_identifiers_roles_routes_and_relationships_preserved) ... ok
+test_source_dangling_links_are_not_fabricated (test_production_fixture.IdentityTests.test_source_dangling_links_are_not_fabricated) ... ok
+test_unknown_operator_maps_and_student_files_withheld (test_production_fixture.IdentityTests.test_unknown_operator_maps_and_student_files_withheld) ... ok
+test_generated_literals_roundtrip_and_schema_stays_unchanged (test_production_fixture.RealMysqlLiteralTests.test_generated_literals_roundtrip_and_schema_stays_unchanged) ... skipped 'explicit dedicated runtime required'
+test_escaped_json_links_and_unknown_asset_are_not_assumed_verified (test_production_fixture.ResourceTests.test_escaped_json_links_and_unknown_asset_are_not_assumed_verified) ... ok
+test_known_static_relocation_preserves_text_and_other_external_urls (test_production_fixture.ResourceTests.test_known_static_relocation_preserves_text_and_other_external_urls) ... ok
+test_paths_reject_traversal_absolute_and_encoded_forms (test_production_fixture.ResourceTests.test_paths_reject_traversal_absolute_and_encoded_forms) ... ok
+test_symlink_components_are_rejected (test_production_fixture.ResourceTests.test_symlink_components_are_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 64 tests in 1.239s
+
+OK (skipped=1)

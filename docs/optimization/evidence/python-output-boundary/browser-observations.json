@@ -1,0 +1,87 @@
+[
+  {
+    "case": "editor literal text",
+    "children": [],
+    "text": "<strong data-output-probe=\"literal\">HTML 必须保持原样</strong>\n&lt;b&gt; 3 < 5 & 8 > 2\n中文与符号：你好 😀\n42\n"
+  },
+  {
+    "case": "runtime error",
+    "visible": true
+  },
+  {
+    "case": "turtle after error",
+    "canvasCount": 2,
+    "text": "turtle done: 42\n"
+  },
+  {
+    "case": "clear text and turtle",
+    "canvasCount": 0,
+    "text": ""
+  },
+  {
+    "case": "210000 characters capped at 20000",
+    "bodyLength": 20000,
+    "length": 20053,
+    "nodes": [
+      1,
+      3
+    ],
+    "notice": "输出较长，已停止显示后续内容（显示上限约 2 万字符）。程序仍可继续运行；清空或重新运行可重置输出区。\n\n",
+    "tailPrinted": false
+  },
+  {
+    "case": "Control+End did not move output; PageDown checked separately",
+    "clientHeight": 286,
+    "scrollHeight": 7899,
+    "scrollTop": 0
+  },
+  {
+    "case": "save long-output program",
+    "status": "作业已提交。再次修改会更新同一份作品。"
+  },
+  {
+    "case": "player long output",
+    "bodyLength": 20000,
+    "length": 20053,
+    "noticeCount": 1
+  },
+  {
+    "case": "PageDown scrolls focused output",
+    "active": "output",
+    "emptyCanvasHidden": true,
+    "scrollTop": 266
+  },
+  {
+    "case": "clear after truncation",
+    "text": ""
+  },
+  {
+    "case": "10000 print calls",
+    "bodyLength": 20000,
+    "bodyStart": "('line', 0)\n('line', 1)\n('line",
+    "length": 20053,
+    "nodes": [
+      1,
+      3
+    ]
+  },
+  {
+    "case": "rerun resets limit and notice",
+    "notices": 0,
+    "text": "<strong data-output-probe=\"literal\">HTML 必须保持原样</strong>\n&lt;b&gt; 3 < 5 & 8 > 2\n中文与符号：你好 😀\n42\n"
+  },
+  {
+    "case": "saved original code reopens and runs",
+    "text": "<strong data-output-probe=\"literal\">HTML 必须保持原样</strong>\n&lt;b&gt; 3 < 5 & 8 > 2\n中文与符号：你好 😀\n42\n",
+    "status": "作品已打开"
+  },
+  {
+    "case": "player clears truncation",
+    "text": ""
+  },
+  {
+    "case": "player literal text after reload",
+    "children": [],
+    "text": "<strong data-output-probe=\"literal\">HTML 必须保持原样</strong>\n&lt;b&gt; 3 < 5 & 8 > 2\n中文与符号：你好 😀\n42\n"
+  }
+]

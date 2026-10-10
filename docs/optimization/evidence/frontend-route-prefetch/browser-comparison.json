@@ -1,0 +1,295 @@
+{
+  "old": {
+    "port": 18162,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "cache": "Network cache disabled and browser cache cleared before each sample; resource timing buffer 2000; fixed 2500ms after visible course cards; server/OS caches untouched.",
+    "scope": "Same anonymous isolated production-derived API/data, same source base; five loopback samples without network/CPU throttling. No capacity or public-network latency claim.",
+    "rows": [
+      {
+        "sample": 1,
+        "courseReadyMs": 312,
+        "domContentLoadedMs": 192,
+        "loadMs": 280,
+        "fcpMs": 100,
+        "sameOriginResourceCount": 395,
+        "transferBytes": 23581181,
+        "encodedBytes": 23462681,
+        "decodedBytes": 23462681,
+        "jsRequests": 235,
+        "jsBytes": 16427732,
+        "cssRequests": 151,
+        "cssBytes": 1070291,
+        "prefetchHints": 378,
+        "preloadHints": 4,
+        "courseCards": 3,
+        "overflow": false
+      },
+      {
+        "sample": 2,
+        "courseReadyMs": 317,
+        "domContentLoadedMs": 192,
+        "loadMs": 300,
+        "fcpMs": 96,
+        "sameOriginResourceCount": 395,
+        "transferBytes": 23581181,
+        "encodedBytes": 23462681,
+        "decodedBytes": 23462681,
+        "jsRequests": 235,
+        "jsBytes": 16427732,
+        "cssRequests": 151,
+        "cssBytes": 1070291,
+        "prefetchHints": 378,
+        "preloadHints": 4,
+        "courseCards": 3,
+        "overflow": false
+      },
+      {
+        "sample": 3,
+        "courseReadyMs": 321,
+        "domContentLoadedMs": 190,
+        "loadMs": 308,
+        "fcpMs": 100,
+        "sameOriginResourceCount": 395,
+        "transferBytes": 23581181,
+        "encodedBytes": 23462681,
+        "decodedBytes": 23462681,
+        "jsRequests": 235,
+        "jsBytes": 16427732,
+        "cssRequests": 151,
+        "cssBytes": 1070291,
+        "prefetchHints": 378,
+        "preloadHints": 4,
+        "courseCards": 3,
+        "overflow": false
+      },
+      {
+        "sample": 4,
+        "courseReadyMs": 318,
+        "domContentLoadedMs": 182,
+        "loadMs": 299,
+        "fcpMs": 100,
+        "sameOriginResourceCount": 395,
+        "transferBytes": 23581181,
+        "encodedBytes": 23462681,
+        "decodedBytes": 23462681,
+        "jsRequests": 235,
+        "jsBytes": 16427732,
+        "cssRequests": 151,
+        "cssBytes": 1070291,
+        "prefetchHints": 378,
+        "preloadHints": 4,
+        "courseCards": 3,
+        "overflow": false
+      },
+      {
+        "sample": 5,
+        "courseReadyMs": 322,
+        "domContentLoadedMs": 183,
+        "loadMs": 307,
+        "fcpMs": 100,
+        "sameOriginResourceCount": 395,
+        "transferBytes": 23581181,
+        "encodedBytes": 23462681,
+        "decodedBytes": 23462681,
+        "jsRequests": 235,
+        "jsBytes": 16427732,
+        "cssRequests": 151,
+        "cssBytes": 1070291,
+        "prefetchHints": 378,
+        "preloadHints": 4,
+        "courseCards": 3,
+        "overflow": false
+      }
+    ],
+    "summary": {
+      "courseReadyMs": {
+        "min": 312,
+        "median": 318,
+        "max": 322
+      },
+      "fcpMs": {
+        "min": 96,
+        "median": 100,
+        "max": 100
+      },
+      "loadMs": {
+        "min": 280,
+        "median": 300,
+        "max": 308
+      },
+      "sameOriginResourceCount": {
+        "min": 395,
+        "median": 395,
+        "max": 395
+      },
+      "transferBytes": {
+        "min": 23581181,
+        "median": 23581181,
+        "max": 23581181
+      },
+      "jsBytes": {
+        "min": 16427732,
+        "median": 16427732,
+        "max": 16427732
+      },
+      "cssBytes": {
+        "min": 1070291,
+        "median": 1070291,
+        "max": 1070291
+      }
+    }
+  },
+  "new": {
+    "port": 18163,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "cache": "Network cache disabled and browser cache cleared before each sample; resource timing buffer 2000; fixed 2500ms after visible course cards; server/OS caches untouched.",
+    "scope": "Same anonymous isolated production-derived API/data, same source base; five loopback samples without network/CPU throttling. No capacity or public-network latency claim.",
+    "rows": [
+      {
+        "sample": 1,
+        "courseReadyMs": 437,
+        "domContentLoadedMs": 351,
+        "loadMs": 351,
+        "fcpMs": 92,
+        "sameOriginResourceCount": 17,
+        "transferBytes": 15396141,
+        "encodedBytes": 15391041,
+        "decodedBytes": 15391041,
+        "jsRequests": 5,
+        "jsBytes": 8805608,
+        "cssRequests": 3,
+        "cssBytes": 620775,
+        "prefetchHints": 0,
+        "preloadHints": 4,
+        "courseCards": 3,
+        "overflow": false
+      },
+      {
+        "sample": 2,
+        "courseReadyMs": 238,
+        "domContentLoadedMs": 179,
+        "loadMs": 221,
+        "fcpMs": 84,
+        "sameOriginResourceCount": 17,
+        "transferBytes": 15396141,
+        "encodedBytes": 15391041,
+        "decodedBytes": 15391041,
+        "jsRequests": 5,
+        "jsBytes": 8805608,
+        "cssRequests": 3,
+        "cssBytes": 620775,
+        "prefetchHints": 0,
+        "preloadHints": 4,
+        "courseCards": 3,
+        "overflow": false
+      },
+      {
+        "sample": 3,
+        "courseReadyMs": 225,
+        "domContentLoadedMs": 171,
+        "loadMs": 211,
+        "fcpMs": 88,
+        "sameOriginResourceCount": 17,
+        "transferBytes": 15396141,
+        "encodedBytes": 15391041,
+        "decodedBytes": 15391041,
+        "jsRequests": 5,
+        "jsBytes": 8805608,
+        "cssRequests": 3,
+        "cssBytes": 620775,
+        "prefetchHints": 0,
+        "preloadHints": 4,
+        "courseCards": 3,
+        "overflow": false
+      },
+      {
+        "sample": 4,
+        "courseReadyMs": 260,
+        "domContentLoadedMs": 187,
+        "loadMs": 227,
+        "fcpMs": 100,
+        "sameOriginResourceCount": 17,
+        "transferBytes": 15396141,
+        "encodedBytes": 15391041,
+        "decodedBytes": 15391041,
+        "jsRequests": 5,
+        "jsBytes": 8805608,
+        "cssRequests": 3,
+        "cssBytes": 620775,
+        "prefetchHints": 0,
+        "preloadHints": 4,
+        "courseCards": 3,
+        "overflow": false
+      },
+      {
+        "sample": 5,
+        "courseReadyMs": 243,
+        "domContentLoadedMs": 183,
+        "loadMs": 222,
+        "fcpMs": 96,
+        "sameOriginResourceCount": 17,
+        "transferBytes": 15396141,
+        "encodedBytes": 15391041,
+        "decodedBytes": 15391041,
+        "jsRequests": 5,
+        "jsBytes": 8805608,
+        "cssRequests": 3,
+        "cssBytes": 620775,
+        "prefetchHints": 0,
+        "preloadHints": 4,
+        "courseCards": 3,
+        "overflow": false
+      }
+    ],
+    "summary": {
+      "courseReadyMs": {
+        "min": 225,
+        "median": 243,
+        "max": 437
+      },
+      "fcpMs": {
+        "min": 84,
+        "median": 92,
+        "max": 100
+      },
+      "loadMs": {
+        "min": 211,
+        "median": 222,
+        "max": 351
+      },
+      "sameOriginResourceCount": {
+        "min": 17,
+        "median": 17,
+        "max": 17
+      },
+      "transferBytes": {
+        "min": 15396141,
+        "median": 15396141,
+        "max": 15396141
+      },
+      "jsBytes": {
+        "min": 8805608,
+        "median": 8805608,
+        "max": 8805608
+      },
+      "cssBytes": {
+        "min": 620775,
+        "median": 620775,
+        "max": 620775
+      }
+    }
+  },
+  "reduction": {
+    "request_count": 378,
+    "transfer_bytes": 8185040,
+    "transfer_percent": 34.71
+  },
+  "base": "85f8a7d0a995047feb8ce486224d7bf991878e62",
+  "scope": "Same base50 branch, same local API 18141/private copy. Old/new loopback proxies share same server implementation. UI/test scope anonymous only. Protocol fixes resource timing buffer at2000 and wait2500ms."
+}

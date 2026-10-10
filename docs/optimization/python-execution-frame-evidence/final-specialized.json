@@ -1,0 +1,48 @@
+{
+  "command": [
+    "/opt/homebrew/Cellar/node/26.7.0/bin/node",
+    "--test",
+    "--test-reporter=tap",
+    "web/tests/python-execution-frame.test.cjs",
+    "web/tests/python-worker-turtle.test.cjs",
+    "web/tests/python-output.test.cjs",
+    "web/tests/python-preview-url.test.cjs"
+  ],
+  "source_ref": "working tree",
+  "head_sha": "85f8a7d0a995047feb8ce486224d7bf991878e62",
+  "node_version": "v26.7.0",
+  "exit_code": 0,
+  "tests": 72,
+  "passed": 72,
+  "failed": 0,
+  "skipped": 0,
+  "source_sha256": {
+    "web/public/python/execution.js": "7bee1342f48d6429da72a56c208987e18952b5e5338cf8c3103d6580acfd57b2",
+    "web/public/python/runner.js": "839da74880c93cf82995686fac04d57763954163e7c23219de4ad754065a9ee2",
+    "web/public/python/runner-loader.js": "912a1b32c74a045d6e92938001798a671c7d55caa2d27cf85f05d664712e38bc",
+    "web/public/python/worker.js": "1112ddbe3f2a835e70f07ef96493e4d407c009d732f5f01caeee9ff09a752d55",
+    "web/public/python/worker-turtle.js": "1e12514c91f700d70dbcb91585ba34299cbbf830e73e111a8c2cfad8208afc26",
+    "web/public/python/turtle-renderer.js": "0a38bd5b90d34fed6c36567cbacfa03353e50bcb971014ffa6b06144b0acd195",
+    "web/public/python/execution.css": "cf11b8cf21116337cff52306f9f69e5439e979bf11222c1568677392bc0569d0",
+    "web/public/python/runner.css": "218672c06379200140834a8abd5ef38db1ed7d53d9e46a38382893f8f52ac447",
+    "web/public/python/output.js": "93fb2cf5cddd604f03ef724e5aac7f6479afe196b17f7be82864049acd795482",
+    "web/public/python/static/js/vendor.js": "ed339dcbdc8bcf0a8b224a2181c5eb506caedddd534511a620fdf985f18429c8",
+    "web/public/python/static/js/app.js": "7fe0ead2ed4816056f809db42ea4b442c9c573d3c1217317f0a996d743904e4f",
+    "web/public/python/static/js/appPlayer.js": "604e61b6ba09f8c42354037efae4327492778024e3ef7ca0e75c6d915172b5c0",
+    "web/public/python/index.html": "b176f75c1c87a76459435dda8cf9a069db541263c14f4a50c1177416aba5367f",
+    "web/public/python/player.html": "a0f8596168e9aaee37b928ba3c26895f3c707adb647e37cf69caade5336dc4cb"
+  },
+  "absent_source_files": [],
+  "source_changed_during_run": [],
+  "suite_sha256": {
+    "web/tests/python-execution-frame.test.cjs": "d34c1e2484dac8e163f8f3ef2e572baac33eb9e9b69af8b8de483a65bb7e61c4",
+    "web/tests/python-worker-turtle.test.cjs": "0a74239c1c05c240b0d3a67fec760793736dfc6ba03ed1deb8022d8741b0f198",
+    "web/tests/python-output.test.cjs": "e8270d6dd5fa958bafd7eb7618a3b035dfd574fdd7f4ff7b095fe53c4a6cab99",
+    "web/tests/python-preview-url.test.cjs": "efcbfa352baf5fd77440e562bea987442135d0f92539051081ccbd953dc96eb6",
+    "web/tests/python-execution-frame/harness.cjs": "1874c4ffdb4ced531e017a7a3ea4df09ea931d72ff4a951ceaa19e82f1ec9473",
+    "web/tests/python-execution-frame/runtime-fixture.cjs": "540fe52f848dbd09b2ab7f763737f4325aae640d7ef13de443cb6d557e6b3ab4",
+    "web/tests/python-execution-frame/run-report.cjs": "23a683324c5bebe497f216a846c9845290524306f22674e193f5b7a6de471663"
+  },
+  "tap_path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-execution-frame/docs/optimization/python-execution-frame-evidence/final-specialized.tap",
+  "scope": "Actual shipped component methods, coordinator and renderer-host protocol with controlled DOM/MessageChannel/clock. Real inherited Skulpt, Worker entry, turtle proxy and original turtle renderer execute finite Python2 in separate Node VM realms. Canvas drawing is a no-op surface. Controlled transport/clock is not browser scheduling, OS CPU termination, pixels, production or human acceptance."
+}

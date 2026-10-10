@@ -1,0 +1,27 @@
+{
+  "base_commit": "6ee37a8b974373536748dbef9128814287f2dede",
+  "files": [
+    {
+      "path": "web/public/python/static/js/app.js",
+      "before_sha256": "737d67e8412ae79eeae3b9bb2412fe7d13518aba76024dadad93b5e54401842c",
+      "after_sha256": "81254a2410f3788f86f6981265502cd62643d54169ad5400a666745faf3af80a",
+      "replacements": [
+        {
+          "before": "urlParam:function(t){var e=new RegExp(\"[\\\\?&]\"+t+\"=([^&#]*)\").exec(window.location.href);return e&&e[1]||0}",
+          "after": "urlParam:function(t){return window.PythonPersistence.query(window.location.search)[t]||0}"
+        }
+      ]
+    },
+    {
+      "path": "web/public/python/static/js/appPlayer.js",
+      "before_sha256": "2bb033a7762902ad586db47a6a0b57cf455c3b10ee07c3dd390f07db2670ea11",
+      "after_sha256": "c58d3cbc733d294f56413d3f5d5a41c7c409474f22bda74eeb0ba9b1d3bf7ba9",
+      "replacements": [
+        {
+          "before": "urlParam:function(t){var e=new RegExp(\"[\\\\?&]\"+t+\"=([^&#]*)\").exec(window.location.href);return e&&e[1]||0}",
+          "after": "urlParam:function(t){return window.PythonPersistence.query(window.location.search)[t]||0}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "observed_utc": "2026-10-03T10:36:44.877942+00:00",
+  "ports": {
+    "mysql": 13366,
+    "redis": 16439,
+    "backend": 18165,
+    "frontend": 18166
+  },
+  "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "checks": {
+    "owned_synthetic_database": true,
+    "owned_redis": true,
+    "packaged_app_matches_worktree": true,
+    "health_up": true,
+    "schema_69_tables": true,
+    "three_roles": true,
+    "two_courses": true,
+    "fixture_attachments": true,
+    "private_credentials": true
+  },
+  "passed": 9,
+  "total": 9,
+  "scope": "environment readiness only; no role/authorization/business acceptance"
+}

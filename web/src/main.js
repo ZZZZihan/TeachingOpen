@@ -7,7 +7,6 @@ import store from './store/'
 import { VueAxios } from '@/utils/request'
 
 import Antd from 'ant-design-vue'
-import Viser from 'viser-vue'
 import 'ant-design-vue/dist/antd.less' // or 'ant-design-vue/dist/antd.less'
 
 import '@/permission' // permission control
@@ -47,17 +46,14 @@ import '@/assets/less/JAreaLinkage.less'
 import VueAreaLinkage from 'vue-area-linkage'
 import { getSysConfig, getMenu } from '@/api/manage'
 import { loadStartupData, showStartupError } from '@/utils/startup'
+import { platformBrandName } from '@/utils/platformBranding'
 // 颜色选择器
 import vcolorpicker from 'vcolorpicker'
-
-require('@jeecg/antd-online-beta220')
-require('@jeecg/antd-online-beta220/dist/OnlineForm.css')
 
 Vue.config.productionTip = false
 Vue.use(Storage, config.storageOptions)
 Vue.use(Antd)
 Vue.use(VueAxios, router)
-Vue.use(Viser)
 Vue.use(hasPermission)
 Vue.use(JDictSelectTag)
 Vue.use(Print)
@@ -114,9 +110,7 @@ const start = async () => {
         router,
         store,
         created () {
-            if (sysConfig.brandName) {
-                window.document.title = sysConfig.brandName
-            }
+            window.document.title = platformBrandName(sysConfig)
             if (sysConfig.customJS) {
                 let script = document.createElement('script')
                 script.type = 'text/javascript'

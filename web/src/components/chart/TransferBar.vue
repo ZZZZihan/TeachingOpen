@@ -15,6 +15,7 @@
 </template>
 
 <script>
+  import './install'
 
   export default {
     name: 'Bar',

@@ -1,0 +1,95 @@
+{
+  "observed_utc": "2026-10-02T18:37:47.813071+00:00",
+  "base_commit": "a999d45b8f38c2cf2d3c125fc1cd04ba3e285ef6",
+  "jar_sha256": "b7715c0c4bdaeb6531e952d3240b80ff4b727743930d0a2213ceede3b66371a8",
+  "changed_api_source_sha256": {
+    "api/dev/application-localtest.properties.template": "8854226931f4aea3fd076f90ff0c0e73b932fff2ef885a0fb4d19f6034b8ce64",
+    "api/dev/local_http.py": "6d7aa60a8141d4fa5d4ff19ce26da5127d9cf23bd167b4bd6e9b08a34c0cc54c",
+    "api/dev/serve-media-probe.py": "b3a7355876c9bd82b8d800b1e73f6453628efebb12f75f2b4e2b0c86dafec179",
+    "api/dev/verify-local-download.py": "a3ec1444d1ad88d658ea6c697182a6f89bec668de2220225d6cc5b4e0332f11d",
+    "api/jeecg-boot-base-common/src/main/java/org/jeecg/common/system/api/ISysBaseAPI.java": "74113cdfd3799f9e31a4cabe53193a7b198293fbfa80bd0fc06b872331fd7f30",
+    "api/jeecg-boot-base-common/src/main/java/org/jeecg/common/system/controller/CommonController.java": "9783b0a06174c3571f2669ee41497cc4d1dba3f0be5f55e434de887fb1db0f35",
+    "api/jeecg-boot-base-common/src/main/java/org/jeecg/common/util/LocalFileDownload.java": "fb8f11f45450757eccbb1bdc3ea57203bc0c1fe1e78c8c2aff3687e1953a19af",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/config/ShiroConfig.java": "ccdae744cfb8bb966e13f5d0f54c6be895b125a5e489bb11a65847dd75d535d4",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/shiro/authc/aop/JwtFilter.java": "c30bfe537bcb999c032d1e041f316a6365ace0831635cd8cb89ed96e37afa6c1",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/shiro/authc/aop/MediaCookie.java": "838f2a76f4218c35d65c7e2db1ba08979115d6c1ea9abec5cd1700a9708b2aca",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/shiro/authc/aop/MediaJwtFilter.java": "5134dff292e69b578770f2939fb12c0bfd4a18c104cd7f1dc00e2b7d309bec05",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/shiro/authc/aop/OptionalJwtFilter.java": "c2c88c0f6cdd03843cea1a06c45d5659c720e71a367afec6250a6f379cd17d3e",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/controller/LoginController.java": "2942107fff5a333ce5d707bf33374009d2e46ada0bf93ab559c59ea0341a816d",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/LocalDownloadAccessService.java": "a959cb119a5e023ea93cd6eff1ce727f0c55bbd8a9229bbd058ac6d695bd07b1",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/impl/SysBaseApiImpl.java": "f674fdc667e50b4816e2e61f9f485722a8c9fc824d56b248b23f831c7635ed90",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/impl/TeachingCourseDeptServiceImpl.java": "b2bed6032cf66e2bdc6759aecd31df0ed72b1caf4f56ec8316588a0e92da61d8"
+  },
+  "build": {
+    "java": "Zulu 8.0.504",
+    "maven": "3.9.16",
+    "command": "mvn -B -f api/pom.xml -s api/dev/maven-settings.xml -Dmaven.repo.local=<isolated-cache> clean package",
+    "result": "3 modules SUCCESS; Maven Java tests skipped by parent POM"
+  },
+  "actual_http_suites": {
+    "after.json": {
+      "passed": 88,
+      "total": 88
+    },
+    "community-work-combined.json": {
+      "passed": 235,
+      "total": 235
+    },
+    "course-management-combined.json": {
+      "passed": 188,
+      "total": 188
+    },
+    "file-ownership-combined.json": {
+      "passed": 76,
+      "total": 76
+    },
+    "learning-units-combined.json": {
+      "passed": 80,
+      "total": 80
+    },
+    "local-upload-combined.json": {
+      "passed": 46,
+      "total": 46
+    },
+    "role-cache-combined.json": {
+      "passed": 11,
+      "total": 11
+    },
+    "work-attachments-combined.json": {
+      "passed": 41,
+      "total": 41
+    },
+    "work-management-combined.json": {
+      "passed": 134,
+      "total": 134
+    },
+    "work-submission-combined.json": {
+      "passed": 95,
+      "total": 95
+    }
+  },
+  "browser": {
+    "observations": 5,
+    "requests": 20,
+    "fixture_removed": true
+  },
+  "cleanup": {
+    "synthetic_users": 5,
+    "remaining_files": 2,
+    "remaining_works": 2,
+    "remaining_triggers": 0,
+    "temporary_browser_server_stopped": true
+  },
+  "checks": [
+    "git diff --check",
+    "Python compile of test/client scripts",
+    "5634 original source file hashes unchanged"
+  ],
+  "limits": [
+    "No frontend product visual change or human acceptance",
+    "No cloud/private-CDN or production verification",
+    "No full browser editor/teacher/admin workflow",
+    "No large-data performance or concurrent hostile filesystem mutation proof",
+    "Separate domains/custom URL formats and optional media/asset modules require explicit read policy"
+  ]
+}

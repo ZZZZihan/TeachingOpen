@@ -1,0 +1,30 @@
+{
+  "base_pr": 8,
+  "base_commit": "4027a8975aec4776485d81432549b244769cce3d",
+  "build_exit_code": 0,
+  "java_tests": "skipped by parent POM",
+  "cache_before_checks": 11,
+  "cache_after_checks": 11,
+  "combined_course_checks": 188,
+  "jar_sha256": "32c9702c0c1ca804d7a094fab6342cee6d390d6763dfe92f61f57efec5767d08",
+  "source_sha256": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/config/ShiroConfig.java": "7855f64d771445a349dca30abd33ebd1d2434531f8110c8fea1f92dd0476dd8a",
+    "api/dev/verify-role-cache.py": "9c969efb2adc58aeb0f39825e767c1cbe75d8c20d326bcbd98099f06208818cf"
+  },
+  "evidence_sha256": {
+    "before.json": "51f1542568feea25685965f23e416c3c105d38fc472ced8f801c8192546b013a",
+    "after.json": "7d3dbbce1103a8d86c3158e3dd2c59d4075b4af5edf40851f98018d7c1657353",
+    "course-management-combined.json": "52ed8dd97af02c91b5e65db9d31efc986699c968f5ff3189a39b7fb0d9b2d0a6"
+  },
+  "log_sha256": {
+    "role-cache-build.log": "952c99f1aec6467f35a6be41d7e981fe3b63f41e54d3deddc1d66a8f489619da",
+    "role-cache-before.log": "d41a5952e535db257c769fcc8e5767f63ea271fe59585439eba8fc6e2e1101e7",
+    "role-cache-after.log": "d41a5952e535db257c769fcc8e5767f63ea271fe59585439eba8fc6e2e1101e7",
+    "role-cache-combined.log": "1a0da54c05aa212b19b3d6798c9b5a1a31f26edc75ccc27dce2e79a8dc808736"
+  },
+  "limitations": [
+    "Single standalone Redis database 1 exercised",
+    "Role SQL changes followed by real logout/login, not full production role editor acceptance",
+    "No production changes or full role browser acceptance"
+  ]
+}

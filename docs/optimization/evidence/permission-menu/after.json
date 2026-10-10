@@ -1,0 +1,150 @@
+{
+  "observed_utc": "2026-10-02T19:13:01.828267+00:00",
+  "jar_sha256": "c76dfb9032b92eb6f4bf86ef152e16fadc7504436b81fe1e4d49990f6883738f",
+  "expected_legacy": false,
+  "scope": "actual HTTP, authentication, role/department SQL fixtures, bounded menu-table unavailability, private log scan; no browser login or administrative menu-editor acceptance",
+  "passed": 34,
+  "total": 34,
+  "cases": [
+    {
+      "case": "header-only request without URL credential",
+      "passed": true,
+      "http_status": 200
+    },
+    {
+      "case": "empty menu table returns valid arrays without mandatory dashboard",
+      "passed": true,
+      "http_status": 200,
+      "code": 200
+    },
+    {
+      "case": "student_a menu response succeeds",
+      "passed": true
+    },
+    {
+      "case": "admin menu response succeeds",
+      "passed": true
+    },
+    {
+      "case": "teacher_a menu response succeeds",
+      "passed": true
+    },
+    {
+      "case": "admin assigned dashboard and controls retained",
+      "passed": true
+    },
+    {
+      "case": "teacher role menu and controls retained",
+      "passed": true
+    },
+    {
+      "case": "student role and department menus combined",
+      "passed": true
+    },
+    {
+      "case": "hidden child and cache configuration preserved",
+      "passed": true
+    },
+    {
+      "case": "deleted menu and disabled/deleted assigned controls excluded",
+      "passed": true
+    },
+    {
+      "case": "global button configuration retains status and excludes deleted",
+      "passed": true
+    },
+    {
+      "case": "student_b menu response succeeds",
+      "passed": true
+    },
+    {
+      "case": "department menu is not shared with another student",
+      "passed": true
+    },
+    {
+      "case": "query other account cannot override authenticated identity",
+      "passed": true
+    },
+    {
+      "case": "query invalid signature cannot override authenticated identity",
+      "passed": true
+    },
+    {
+      "case": "ignored legacy parameter leaves current menu unchanged",
+      "passed": true
+    },
+    {
+      "case": "ignored legacy parameter leaves current menu unchanged",
+      "passed": true
+    },
+    {
+      "case": "ignored legacy parameter leaves current menu unchanged",
+      "passed": true
+    },
+    {
+      "case": "menu responses are not cacheable",
+      "passed": true
+    },
+    {
+      "case": "anonymous is denied by real authentication",
+      "passed": true
+    },
+    {
+      "case": "query-only credential is denied by real authentication",
+      "passed": true
+    },
+    {
+      "case": "invalid header with valid query is denied by real authentication",
+      "passed": true
+    },
+    {
+      "case": "read and denied requests preserve permission tables",
+      "passed": true
+    },
+    {
+      "case": "student_a menu response succeeds",
+      "passed": true
+    },
+    {
+      "case": "revoked child and department assignment disappear on next request",
+      "passed": true
+    },
+    {
+      "case": "student_a menu response succeeds",
+      "passed": true
+    },
+    {
+      "case": "restored assignments reappear without logout",
+      "passed": true
+    },
+    {
+      "case": "database failure returns recoverable generic HTTP error",
+      "passed": true,
+      "http_status": 503
+    },
+    {
+      "case": "student_a menu response succeeds",
+      "passed": true
+    },
+    {
+      "case": "restored database recovers without clearing session",
+      "passed": true
+    },
+    {
+      "case": "logged-out header cannot use another query credential",
+      "passed": true
+    },
+    {
+      "case": "menu request credential exposure matches candidate",
+      "passed": true
+    },
+    {
+      "case": "no login password exported to captured logs",
+      "passed": true
+    },
+    {
+      "case": "all original permission tables restored byte-for-byte",
+      "passed": true
+    }
+  ]
+}

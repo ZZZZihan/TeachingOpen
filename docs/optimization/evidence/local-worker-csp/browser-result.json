@@ -1,0 +1,101 @@
+{
+  "recorded_utc": "2026-10-03T07:40:56.578754+00:00",
+  "base_commit": "b7a7d788734315c8cdb183e4f79b2853198b4018",
+  "browser": "Playwright CLI Chromium headed; anonymous actual Scratch page",
+  "old_port": 18150,
+  "new_port": 18151,
+  "product_proxy_sha256": "03b717118c4d6a3e888f863143df8b127536c8f073a08adfa40836b7dd4a700f",
+  "frontend_tree": "3a29ce07efe47f080860ecc72509d4ecf02f769e",
+  "results": {
+    "compare-browser": {
+      "old": {
+        "created": [
+          {
+            "kind": "blob",
+            "messages": 0,
+            "errors": 1,
+            "supportsFetch": false,
+            "fetchedBuffers": 0
+          }
+        ],
+        "violations": [
+          {
+            "directive": "worker-src",
+            "blocked": "blob"
+          }
+        ],
+        "ready": true,
+        "canvas": 2
+      },
+      "new": {
+        "created": [
+          {
+            "kind": "blob",
+            "messages": 1,
+            "errors": 0,
+            "supportsFetch": true,
+            "fetchedBuffers": 0
+          }
+        ],
+        "violations": [],
+        "ready": true,
+        "canvas": 2
+      }
+    },
+    "probe-browser": {
+      "app": {
+        "created": [
+          {
+            "kind": "blob",
+            "messages": 1,
+            "errors": 0,
+            "supportsFetch": true,
+            "fetchedBuffers": 0
+          }
+        ],
+        "violations": []
+      },
+      "asset": "/scratch3/static/assets/bb7c6671cf8cdffe1001dc509d20881c.svg",
+      "assetBytes": 1229,
+      "assetSha256": "93a43578b1a5aee04906c0bb229729d32674c83fe6d322683e22662ae6aeedfb",
+      "selfWorker": {
+        "bytes": 1229,
+        "sha256": "93a43578b1a5aee04906c0bb229729d32674c83fe6d322683e22662ae6aeedfb"
+      },
+      "blobWorker": {
+        "bytes": 1229,
+        "sha256": "93a43578b1a5aee04906c0bb229729d32674c83fe6d322683e22662ae6aeedfb"
+      },
+      "blobScript": "blocked",
+      "blobScriptRan": false,
+      "crossOriginScript": "blocked",
+      "crossOriginFetch": "blocked",
+      "dataWorker": "blocked",
+      "violations": [
+        {
+          "directive": "script-src-elem",
+          "blocked": "blob"
+        },
+        {
+          "directive": "script-src-elem",
+          "blocked": "http://127.0.0.1:18152/worker-csp-script-probe.js"
+        },
+        {
+          "directive": "connect-src",
+          "blocked": "http://127.0.0.1:18152/worker-csp-connect-probe"
+        },
+        {
+          "directive": "worker-src",
+          "blocked": "data"
+        }
+      ],
+      "ready": true
+    }
+  },
+  "limits": [
+    "App instrument proves actual blob Worker startup, not its default-project asset fetch. Controlled Workers execute the unchanged shipped asset-fetch script, both self and blob, against same-origin SVG.",
+    "Negative probes deliberately produce CSP console errors; no zero-console-error claim.",
+    "Loopback alternate origin was used to exercise remote-source exclusion; no external server traffic.",
+    "No authenticated login, save, complex Scratch project or performance acceptance."
+  ]
+}

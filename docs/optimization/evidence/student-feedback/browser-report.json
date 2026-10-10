@@ -1,0 +1,100 @@
+{
+  "scope": "CUA real Vue/AntD SFCs with read-only synthetic HTTP. Real Index to MineWorks mapping; ordinary container replaces authenticated BasicLayout. Not teacher-to-student persisted browser flow.",
+  "preview_manifest_sha256": "a8326ae88056d8f4cc8a91e3ecd5babe73e5e5c2c888e679a8643e96c385a56a",
+  "product_source_matches": true,
+  "checks": {
+    "center_1440": {
+      "document": 1440,
+      "feedbacks": 10,
+      "columns": [
+        321,
+        321,
+        321,
+        321
+      ]
+    },
+    "center_768_nested": {
+      "document": 768,
+      "columns": [
+        302,
+        302
+      ]
+    },
+    "center_390_nested": {
+      "document": 390,
+      "card": 294,
+      "button_height": 44
+    },
+    "table_390_nested": {
+      "document": 390,
+      "body": 310,
+      "table_scroll": 1420,
+      "keyboard_arrow_right_scroll": 160
+    },
+    "table_768_nested": {
+      "document": 768,
+      "body": 624,
+      "table_scroll": 1420
+    },
+    "keyboard_open_zero_card": true,
+    "escape_returns_focus": true,
+    "keyboard_open_comment_only_table": true,
+    "html_text": {
+      "literal": true,
+      "element_children": 0
+    },
+    "long_mobile": {
+      "full_characters": 1386,
+      "dialog_width": 358,
+      "body_width": 358,
+      "body_scroll_width": 358
+    },
+    "table_1440": {
+      "document": 1440,
+      "body": 1344,
+      "table_scroll": 1420,
+      "feedbacks": 10
+    }
+  },
+  "preview_issue": "Resolved in after-final2: registers real utils/filter; console warn/error for fresh18307 origin empty; same4 product hashes as final2",
+  "draft_failed_attempt": "One rapid Escape then different-row click did not leave a dialog open; final same flow in distinct observed UI steps passed. Independent offline initial close/reopen race reproduced and fixed; do not conflate races.",
+  "screenshots": [
+    "after-center-1440.jpg",
+    "after-center-390-nested.jpg",
+    "after-center-768.jpg",
+    "after-comment-only-390.jpg",
+    "after-list-390-nested.jpg",
+    "after-list-768.jpg",
+    "after-long-390.jpg",
+    "after-plain-text-1440.jpg"
+  ],
+  "screenshots_note": "Viewport screenshot API scales/clips screenshot independent of measured CSS width. Final delivery uses full-page capture or documented clip and read-only DOM metrics.",
+  "final2_manifest_sha256": "caa5fad201d0ce355b714aaf05a2b141d7fa82dae00e6efff0e29dd289bb85a3",
+  "final2_followup": {
+    "origin": "http://127.0.0.1:18307",
+    "console_errors_warnings": 0,
+    "desktop_feedbacks": 10,
+    "desktop_document_width": 1440,
+    "mobile_keyboard_zero_dialog_text_checked": true,
+    "viewport_overrides_reset": true
+  },
+  "final_screenshots": [
+    "final-center-1440.jpg",
+    "final-center-390.jpg",
+    "final-dialog-390.jpg"
+  ],
+  "final3_followup": {
+    "manifest_sha256": "ce21a90606ffb16e060324b4bb23af018bfef76c5dda19594c1c8489a5972534",
+    "parent_changes_whitespace_only": true,
+    "long_comment_keyboard_End": {
+      "length": 1115,
+      "scrollHeight": 1442,
+      "clientHeight": 360,
+      "scrollTop": 1082,
+      "tail_visible": true
+    },
+    "width": 390,
+    "document_scroll_width": 390,
+    "viewport_reset": true
+  }
+}

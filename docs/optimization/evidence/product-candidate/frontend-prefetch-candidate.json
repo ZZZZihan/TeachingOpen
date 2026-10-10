@@ -1,0 +1,147 @@
+{
+  "recorded_utc": "2026-10-03T08:53:13.371888+00:00",
+  "dist_file_count": 4880,
+  "dist_bytes": 211364677,
+  "dist_manifest_sha256": "783306d8057e348d94edf94585ffc77dbd7e93869e4ecb340b731d3df1ecb228",
+  "previous_dist": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/frontend-prefetch-previous-dist",
+  "prefetch_hints": 0,
+  "preload_hints": 4,
+  "candidate": "c4d5f152f3cbe0e06412fc8c4980bd74ad584504",
+  "api_tree": "201408ca4eef6ce37a217f699329cf7146f9d71a",
+  "web_tree": "2eb9e459f7ac03afc808ba54a8fbf0fe9d2df3d8",
+  "pr51_url": "https://github.com/ZZZZihan/TeachingOpen/pull/51",
+  "pr51_commit": "630a639c8a9f73ff367d20404d6e656a90046662",
+  "pr51_base": "fix/python-preview-url",
+  "candidate_frontend_tests": {
+    "passed": 338,
+    "total": 338,
+    "exit_code": 0
+  },
+  "branch_frontend_tests": {
+    "passed": 318,
+    "total": 318
+  },
+  "new_frontend_build": true,
+  "build_exit_code": 0,
+  "build_warnings": 12,
+  "frontend_http": [
+    {
+      "port": 18112,
+      "pid": 49543,
+      "runtime": "course-role-runtime",
+      "matched_http_resources": [
+        "index.html",
+        "python/persistence.js",
+        "python/player.html",
+        "python/static/js/app.js",
+        "python/static/js/appPlayer.js",
+        "js/polyfill.js",
+        "js/common.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/app.8ceacb01.js"
+      ]
+    },
+    {
+      "port": 18142,
+      "pid": 49545,
+      "runtime": "prod-fixture-1003",
+      "matched_http_resources": [
+        "index.html",
+        "python/persistence.js",
+        "python/player.html",
+        "python/static/js/app.js",
+        "python/static/js/appPlayer.js",
+        "js/polyfill.js",
+        "js/common.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/app.8ceacb01.js"
+      ]
+    },
+    {
+      "port": 18150,
+      "pid": 49547,
+      "runtime": "role-flow-1003",
+      "matched_http_resources": [
+        "index.html",
+        "python/persistence.js",
+        "python/player.html",
+        "python/static/js/app.js",
+        "python/static/js/appPlayer.js",
+        "js/polyfill.js",
+        "js/common.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/app.8ceacb01.js"
+      ]
+    }
+  ],
+  "healthy_backends": {
+    "18111": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18141": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18149": {
+      "http": 200,
+      "status": "UP"
+    }
+  },
+  "candidate_browser_results": [
+    {
+      "port": 18142,
+      "courseOk": true,
+      "communityOk": true,
+      "loginFormVisible": true,
+      "loginNavigationMs": 49,
+      "userChunkResponsesBeforeClick": 0,
+      "userChunkResponsesAfterClick": 1,
+      "chunkStatuses": [
+        200
+      ],
+      "pageErrors": [],
+      "scope": "Anonymous navigation and form display only; no login, CAPTCHA interaction, code/credential injection or form submission."
+    }
+  ],
+  "candidate_browser_scope": "Actual combined dist against the private local production-derived API; anonymous navigation and form display only. No login or CAPTCHA interaction.",
+  "same_base_comparison": {
+    "base": "85f8a7d0a995047feb8ce486224d7bf991878e62",
+    "samples_per_version": 5,
+    "old_same_origin_resource_requests": 395,
+    "new_same_origin_resource_requests": 17,
+    "old_transfer_bytes": 23581181,
+    "new_transfer_bytes": 15396141,
+    "reduction_percent": 34.71,
+    "scope": "1440x1000 Chromium loopback; browser cache disabled/cleared; timing buffer 2000; wait 2500ms after cards/images; OS/server cache unchanged; no throttling. Request/byte result only, not universal latency/capacity proof."
+  },
+  "new_java_build": false,
+  "java_artifact_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "no_service_restart": true,
+  "independent_review": "Separate Agent read-only config/build/route map review; not a second 318-test or browser execution.",
+  "real_role_browser_acceptance": false,
+  "production_changed": false,
+  "github_merged": false,
+  "goal": "active",
+  "build_notes": [
+    "12 CSS order/asset-size warnings; Browserslist database stale.",
+    "Inherited blocked external errlog script remains; no uncaught pageerror in navigation."
+  ],
+  "source_workspace_modified": false,
+  "source_manifest_revalidated_this_turn": false,
+  "temporary_proxies": [
+    {
+      "pid": 77685,
+      "port": 18162,
+      "stop_signal_sent": true,
+      "listening": false
+    },
+    {
+      "pid": 80935,
+      "port": 18163,
+      "stop_signal_sent": true,
+      "listening": false
+    }
+  ],
+  "temporary_browser_session_closed": true
+}

@@ -58,6 +58,16 @@ public interface ISysUserService extends IService<SysUser> {
 	 * @return
 	 */
 	public boolean deleteBatchUsers(String userIds);
+
+	/**
+	 * 整批冻结或解冻用户，沿用当前用户与目标用户的角色等级规则。
+	 * 参数或任一目标不合法、更新失败时抛出异常，整批不提交。
+	 *
+	 * @param userIds 逗号分隔的用户 ID，兼容重复 ID 和尾逗号
+	 * @param status 1 正常，2 冻结
+	 * @param operatorId 当前认证用户的 ID，不能从请求正文获取
+	 */
+	void updateUserStatus(String userIds, String status, String operatorId);
 	
 	public SysUser getUserByName(String username);
 	

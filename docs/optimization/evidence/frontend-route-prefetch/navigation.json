@@ -1,0 +1,57 @@
+{
+  "source": "Integrated local browser navigation checks",
+  "base": "85f8a7d0a995047feb8ce486224d7bf991878e62",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "scope": "Anonymous navigation and form display only; no login, CAPTCHA interaction, code/credential injection or form submission.",
+  "sequence": [
+    "anonymous /index with 3 course cards",
+    "click all courses to /courseList with 3 course cards",
+    "click footer community link to /home with 3 editor cards",
+    "click header learning/login link to /user/login with account and password form visible"
+  ],
+  "rows": [
+    {
+      "port": 18162,
+      "courseOk": true,
+      "communityOk": true,
+      "loginFormVisible": true,
+      "loginNavigationMs": 102,
+      "userChunkResponsesBeforeClick": 0,
+      "userChunkResponsesAfterClick": 1,
+      "chunkStatuses": [
+        200
+      ],
+      "pageErrors": [],
+      "scope": "Anonymous navigation and form display only; no login, CAPTCHA interaction, code/credential injection or form submission."
+    },
+    {
+      "port": 18163,
+      "courseOk": true,
+      "communityOk": true,
+      "loginFormVisible": true,
+      "loginNavigationMs": 51,
+      "userChunkResponsesBeforeClick": 0,
+      "userChunkResponsesAfterClick": 1,
+      "chunkStatuses": [
+        200
+      ],
+      "pageErrors": [],
+      "scope": "Anonymous navigation and form display only; no login, CAPTCHA interaction, code/credential injection or form submission."
+    }
+  ],
+  "uncaught_pageerror_scope": "pageErrors records only uncaught pageerror events, not console errors or warnings.",
+  "inherited_console_findings": {
+    "both_versions": "Local CSP blocks the existing external errlog.js script; unchanged by this patch.",
+    "earlier_exploration": "Existing Ant aria-hidden focus warning also observed in the old version."
+  },
+  "initial_probe": {
+    "status": "locator timeout",
+    "reason": "Exact accessible link name did not match icon-inclusive accessible name.",
+    "correction": "Use fresh snapshot and preview-heading/header href selectors; corrected navigation passed.",
+    "original_failure_record": ".devspace/frontend-route-prefetch-browser/navigation.log"
+  },
+  "timing_scope": "One navigation sample per version; loginNavigationMs is an observation and is not a latency improvement claim."
+}

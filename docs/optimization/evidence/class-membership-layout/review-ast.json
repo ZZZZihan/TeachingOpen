@@ -1,0 +1,19 @@
+{
+  "ref": "df4e707234c04d1c8932335e4f779e58be25835e",
+  "result": [
+    {
+      "file": "src/views/system/modules/DeptUserInfo.vue",
+      "sha256": "edb9adba2a7e74ec900ef403356ab85173ba900242781fba0ef482e20221cfdc",
+      "businessAstEqualExceptColumnWidths": true,
+      "baseBusinessAstSha256": "a99c3ef21e6da1f48d7e19e185d578691e043f03a07920c8d8182f08ad3f3448",
+      "candidateBusinessAstSha256": "a99c3ef21e6da1f48d7e19e185d578691e043f03a07920c8d8182f08ad3f3448"
+    },
+    {
+      "file": "src/views/system/modules/SelectUserModal.vue",
+      "sha256": "b1b39ce5557dc43f8ab619bb4c2202cdd73f4abd537510e5fe6c587d1ad7c8f1",
+      "businessAstEqualExceptColumnWidths": true,
+      "baseBusinessAstSha256": "60fb4d0ef8aea07f9e6a4c162db176781b039359a72a32fc96d4d0eea943926c",
+      "candidateBusinessAstSha256": "60fb4d0ef8aea07f9e6a4c162db176781b039359a72a32fc96d4d0eea943926c"
+    }
+  ]
+}

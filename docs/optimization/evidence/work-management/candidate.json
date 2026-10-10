@@ -1,0 +1,37 @@
+{
+  "base_pr": 11,
+  "base_commit": "7a35ffd618331e4fdff36c1cbb97cffc5aa94adf",
+  "build_exit_code": 0,
+  "java_tests": "skipped by parent POM",
+  "before_checks": 13,
+  "after_checks": 134,
+  "combined_learning_checks": 80,
+  "combined_course_checks": 188,
+  "combined_cache_checks": 11,
+  "jar_sha256": "8a6edbc4b8404ca50a670d97dc0000294c9958dd3aa1bb277e101cfa5da09cdb",
+  "source_sha256": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingWorkController.java": "44b5485095777242b194d5d7c5e8f972b2ccf1b7d06acde97458c4453fc6f8e6",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/TeachingAccessService.java": "cca93da82a664ed988b79c3084d535abad97c1c9e03f3621353b25e3048b6cb7",
+    "api/dev/verify-work-management.py": "3deac7940cb1cab0325e77c0a20e47a68f689244133ef3454384312ff2a785ff",
+    "api/dev/ReadXlsCells.java": "c663be4ec5c5247e2ca87e6fecbd122482aabc4dfdc46926bfe5dd643a10d62f"
+  },
+  "evidence_sha256": {
+    "before.json": "210ae6e642afe9180e5dc4f438585e05a005bb6eb665543b734956112853afda",
+    "after.json": "ea1e40e578b48cdfa6241cc32a7a997feb7193b1c18c2fb2a66aa74f1b97fba2",
+    "learning-units-combined.json": "5bd0aaed19d58f04034bd418e0a9b77190644cbdf9e3868f5996273828e9273a",
+    "course-management-combined.json": "75408a50af014b4ff8a05ee895b345dce9c8d3a1bca964646356bccb69b1da5e",
+    "role-cache-combined.json": "5b471b30dae84f5dbd14780ce22b0f8e440723b75aac5910ae5cfaa81fd14dca"
+  },
+  "build_log_sha256": "3ff6f2afa9a2579e0504537516695227d179f57221075e0231f3cbca94da8fb6",
+  "management_role_gated_endpoints": 8,
+  "owner_or_manager_read_endpoints": 3,
+  "known_unfixed": [
+    "sent work shares source attachment; deleting source removes recipient file, reproduced in after.json"
+  ],
+  "limitations": [
+    "Empty import role gate only, no valid workbook import",
+    "Student submission and community endpoints remain separate pending fixes",
+    "No browser or concurrent transaction acceptance",
+    "No production changes"
+  ]
+}

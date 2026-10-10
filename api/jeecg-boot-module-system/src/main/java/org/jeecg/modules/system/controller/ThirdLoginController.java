@@ -18,6 +18,7 @@ import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ import java.util.List;
  * @since 2018-12-17
  */
 @Controller
+@ConditionalOnProperty(prefix = "justauth", name = "enabled", havingValue = "true", matchIfMissing = true)
 @RequestMapping("/thirdLogin")
 @Slf4j
 public class ThirdLoginController {

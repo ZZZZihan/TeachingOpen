@@ -1,0 +1,1072 @@
+TAP version 13
+# Browserslist: caniuse-lite is outdated. Please run:
+#   npx update-browserslist-db@latest
+#   Why you should do it regularly: https://github.com/browserslist/update-db\#readme
+# Subtest: course baseline: draft query enters a pagination request before query submission
+ok 1 - course baseline: draft query enters a pagination request before query submission
+  ---
+  duration_ms: 252.032375
+  type: 'test'
+  ...
+# Subtest: course baseline: late response overwrites newer query
+ok 2 - course baseline: late response overwrites newer query
+  ---
+  duration_ms: 58.324666
+  type: 'test'
+  ...
+# Subtest: course baseline: business rejection silently retains old rows
+ok 3 - course baseline: business rejection silently retains old rows
+  ---
+  duration_ms: 49.032541
+  type: 'test'
+  ...
+# Subtest: course baseline: repeated delete dispatches two actual DELETE requests
+ok 4 - course baseline: repeated delete dispatches two actual DELETE requests
+  ---
+  duration_ms: 49.349958
+  type: 'test'
+  ...
+# Subtest: unit baseline: draft query enters a pagination request before query submission
+ok 5 - unit baseline: draft query enters a pagination request before query submission
+  ---
+  duration_ms: 45.594166
+  type: 'test'
+  ...
+# Subtest: unit baseline: late response overwrites newer query
+ok 6 - unit baseline: late response overwrites newer query
+  ---
+  duration_ms: 48.853958
+  type: 'test'
+  ...
+# Subtest: unit baseline: business rejection silently retains old rows
+ok 7 - unit baseline: business rejection silently retains old rows
+  ---
+  duration_ms: 42.318083
+  type: 'test'
+  ...
+# Subtest: unit baseline: repeated delete dispatches two actual DELETE requests
+ok 8 - unit baseline: repeated delete dispatches two actual DELETE requests
+  ---
+  duration_ms: 45.258208
+  type: 'test'
+  ...
+# Subtest: unit baseline: initial route sends both unfiltered and filtered list requests
+ok 9 - unit baseline: initial route sends both unfiltered and filtered list requests
+  ---
+  duration_ms: 43.344958
+  type: 'test'
+  ...
+# Subtest: course: one initial request, preserving route filter and raw maintenance fields
+ok 10 - course: one initial request, preserving route filter and raw maintenance fields
+  ---
+  duration_ms: 29.513833
+  type: 'test'
+  ...
+# Subtest: course: query and reset return to page one, preserve page size and draft isolation
+ok 11 - course: query and reset return to page one, preserve page size and draft isolation
+  ---
+  duration_ms: 18.284167
+  type: 'test'
+  ...
+# Subtest: course: page size and sorting carry applied filters, reject invalid or busy changes
+ok 12 - course: page size and sorting carry applied filters, reject invalid or busy changes
+  ---
+  duration_ms: 21.2945
+  type: 'test'
+  ...
+# Subtest: course: failures and malformed responses clear stale rows and recover same query
+ok 13 - course: failures and malformed responses clear stale rows and recover same query
+  ---
+  duration_ms: 17.527167
+  type: 'test'
+  ...
+# Subtest: course: old success cannot replace newer rows or stop the active loading state
+ok 14 - course: old success cannot replace newer rows or stop the active loading state
+  ---
+  duration_ms: 20.023125
+  type: 'test'
+  ...
+# Subtest: course: an older network failure cannot put a current successful query in error
+ok 15 - course: an older network failure cannot put a current successful query in error
+  ---
+  duration_ms: 17.713625
+  type: 'test'
+  ...
+# Subtest: course: selection reflects current rows and is cleared for page changes
+ok 16 - course: selection reflects current rows and is cleared for page changes
+  ---
+  duration_ms: 19.5125
+  type: 'test'
+  ...
+# Subtest: course: repeated deletion dispatches once, list refresh keeps the delete lock
+ok 17 - course: repeated deletion dispatches once, list refresh keeps the delete lock
+  ---
+  duration_ms: 18.200791
+  type: 'test'
+  ...
+# Subtest: course: delete rejection retains rows, shows outcome warning and manual retry recovers
+ok 18 - course: delete rejection retains rows, shows outcome warning and manual retry recovers
+  ---
+  duration_ms: 20.993
+  type: 'test'
+  ...
+# Subtest: course: deleting a last-page item falls back to the last valid page
+ok 19 - course: deleting a last-page item falls back to the last valid page
+  ---
+  duration_ms: 15.3945
+  type: 'test'
+  ...
+# Subtest: course: batch confirmation cannot stack, uses a snapshot, and can be cancelled
+ok 20 - course: batch confirmation cannot stack, uses a snapshot, and can be cancelled
+  ---
+  duration_ms: 19.785375
+  type: 'test'
+  ...
+# Subtest: course: late list and delete results after disposal cannot change data or notify success
+ok 21 - course: late list and delete results after disposal cannot change data or notify success
+  ---
+  duration_ms: 31.734625
+  type: 'test'
+  ...
+# Subtest: course: maintenance add and edit use inherited actual refs
+ok 22 - course: maintenance add and edit use inherited actual refs
+  ---
+  duration_ms: 18.835
+  type: 'test'
+  ...
+# Subtest: course: export uses applied filters and selected IDs, one download at a time
+ok 23 - course: export uses applied filters and selected IDs, one download at a time
+  ---
+  duration_ms: 17.072416
+  type: 'test'
+  ...
+# Subtest: course: export rejects an HTTP-200 JSON denial instead of downloading it
+ok 24 - course: export rejects an HTTP-200 JSON denial instead of downloading it
+  ---
+  duration_ms: 19.973125
+  type: 'test'
+  ...
+# Subtest: unit: one initial request, preserving route filter and raw maintenance fields
+ok 25 - unit: one initial request, preserving route filter and raw maintenance fields
+  ---
+  duration_ms: 16.52925
+  type: 'test'
+  ...
+# Subtest: unit: query and reset return to page one, preserve page size and draft isolation
+ok 26 - unit: query and reset return to page one, preserve page size and draft isolation
+  ---
+  duration_ms: 19.080167
+  type: 'test'
+  ...
+# Subtest: unit: page size and sorting carry applied filters, reject invalid or busy changes
+ok 27 - unit: page size and sorting carry applied filters, reject invalid or busy changes
+  ---
+  duration_ms: 18.383
+  type: 'test'
+  ...
+# Subtest: unit: failures and malformed responses clear stale rows and recover same query
+ok 28 - unit: failures and malformed responses clear stale rows and recover same query
+  ---
+  duration_ms: 14.909542
+  type: 'test'
+  ...
+# Subtest: unit: old success cannot replace newer rows or stop the active loading state
+ok 29 - unit: old success cannot replace newer rows or stop the active loading state
+  ---
+  duration_ms: 18.271917
+  type: 'test'
+  ...
+# Subtest: unit: an older network failure cannot put a current successful query in error
+ok 30 - unit: an older network failure cannot put a current successful query in error
+  ---
+  duration_ms: 15.170041
+  type: 'test'
+  ...
+# Subtest: unit: selection reflects current rows and is cleared for page changes
+ok 31 - unit: selection reflects current rows and is cleared for page changes
+  ---
+  duration_ms: 20.6175
+  type: 'test'
+  ...
+# Subtest: unit: repeated deletion dispatches once, list refresh keeps the delete lock
+ok 32 - unit: repeated deletion dispatches once, list refresh keeps the delete lock
+  ---
+  duration_ms: 16.770875
+  type: 'test'
+  ...
+# Subtest: unit: delete rejection retains rows, shows outcome warning and manual retry recovers
+ok 33 - unit: delete rejection retains rows, shows outcome warning and manual retry recovers
+  ---
+  duration_ms: 20.328291
+  type: 'test'
+  ...
+# Subtest: unit: deleting a last-page item falls back to the last valid page
+ok 34 - unit: deleting a last-page item falls back to the last valid page
+  ---
+  duration_ms: 17.651667
+  type: 'test'
+  ...
+# Subtest: unit: batch confirmation cannot stack, uses a snapshot, and can be cancelled
+ok 35 - unit: batch confirmation cannot stack, uses a snapshot, and can be cancelled
+  ---
+  duration_ms: 18.654833
+  type: 'test'
+  ...
+# Subtest: unit: late list and delete results after disposal cannot change data or notify success
+ok 36 - unit: late list and delete results after disposal cannot change data or notify success
+  ---
+  duration_ms: 30.604209
+  type: 'test'
+  ...
+# Subtest: unit: maintenance add and edit use inherited actual refs
+ok 37 - unit: maintenance add and edit use inherited actual refs
+  ---
+  duration_ms: 19.421208
+  type: 'test'
+  ...
+# Subtest: unit: export uses applied filters and selected IDs, one download at a time
+ok 38 - unit: export uses applied filters and selected IDs, one download at a time
+  ---
+  duration_ms: 16.069125
+  type: 'test'
+  ...
+# Subtest: unit: export rejects an HTTP-200 JSON denial instead of downloading it
+ok 39 - unit: export rejects an HTTP-200 JSON denial instead of downloading it
+  ---
+  duration_ms: 18.592708
+  type: 'test'
+  ...
+# Subtest: course: dictionaries and course-unit navigation keep their existing targets
+ok 40 - course: dictionaries and course-unit navigation keep their existing targets
+  ---
+  duration_ms: 14.245542
+  type: 'test'
+  ...
+# Subtest: unit: route changes submit one fresh course filter and discard late previous results
+ok 41 - unit: route changes submit one fresh course filter and discard late previous results
+  ---
+  duration_ms: 19.332708
+  type: 'test'
+  ...
+# Subtest: unit: route arrays cannot become a backend course filter
+ok 42 - unit: route arrays cannot become a backend course filter
+  ---
+  duration_ms: 20.678625
+  type: 'test'
+  ...
+# Subtest: unit: upload failure and business rejection retain data and expose safe recovery text
+ok 43 - unit: upload failure and business rejection retain data and expose safe recovery text
+  ---
+  duration_ms: 22.066166
+  type: 'test'
+  ...
+# Subtest: unit: import success refreshes applied scope, while code 201 keeps a safe detail report
+ok 44 - unit: import success refreshes applied scope, while code 201 keeps a safe detail report
+  ---
+  duration_ms: 34.620083
+  type: 'test'
+  ...
+# Subtest: course: quick page jump retains applied query and resets invalid page input
+ok 45 - course: quick page jump retains applied query and resets invalid page input
+  ---
+  duration_ms: 14.581416
+  type: 'test'
+  ...
+# Subtest: course: unsafe resources do not become links, and a broken cover falls back
+ok 46 - course: unsafe resources do not become links, and a broken cover falls back
+  ---
+  duration_ms: 14.888167
+  type: 'test'
+  ...
+# Subtest: unit: quick page jump retains applied query and resets invalid page input
+ok 47 - unit: quick page jump retains applied query and resets invalid page input
+  ---
+  duration_ms: 15.884833
+  type: 'test'
+  ...
+# Subtest: unit: unsafe resources do not become links, and a broken cover falls back
+ok 48 - unit: unsafe resources do not become links, and a broken cover falls back
+  ---
+  duration_ms: 14.936084
+  type: 'test'
+  ...
+# Subtest: course: visible applied filter labels are snapshots and do not expose department IDs
+ok 49 - course: visible applied filter labels are snapshots and do not expose department IDs
+  ---
+  duration_ms: 18.612125
+  type: 'test'
+  ...
+# Subtest: unit: visible parent-course query summary uses a label snapshot
+ok 50 - unit: visible parent-course query summary uses a label snapshot
+  ---
+  duration_ms: 15.037375
+  type: 'test'
+  ...
+# Subtest: course: stale batch confirmation cannot delete after a new query or reset
+ok 51 - course: stale batch confirmation cannot delete after a new query or reset
+  ---
+  duration_ms: 31.319166
+  type: 'test'
+  ...
+# Subtest: unit: stale batch confirmation cannot delete after a new query or reset
+ok 52 - unit: stale batch confirmation cannot delete after a new query or reset
+  ---
+  duration_ms: 30.747625
+  type: 'test'
+  ...
+# Subtest: unit: stale batch confirmation cannot delete after the parent route changes
+ok 53 - unit: stale batch confirmation cannot delete after the parent route changes
+  ---
+  duration_ms: 14.819708
+  type: 'test'
+  ...
+# Subtest: course: changed selection invalidates confirmation and allows a fresh prompt
+ok 54 - course: changed selection invalidates confirmation and allows a fresh prompt
+  ---
+  duration_ms: 30.354125
+  type: 'test'
+  ...
+# Subtest: course: an old confirmation callback cannot unlock or submit a newer prompt
+ok 55 - course: an old confirmation callback cannot unlock or submit a newer prompt
+  ---
+  duration_ms: 16.448083
+  type: 'test'
+  ...
+# Subtest: unit: changed selection invalidates confirmation and allows a fresh prompt
+ok 56 - unit: changed selection invalidates confirmation and allows a fresh prompt
+  ---
+  duration_ms: 27.703458
+  type: 'test'
+  ...
+# Subtest: unit: an old confirmation callback cannot unlock or submit a newer prompt
+ok 57 - unit: an old confirmation callback cannot unlock or submit a newer prompt
+  ---
+  duration_ms: 17.23725
+  type: 'test'
+  ...
+# Browserslist: caniuse-lite is outdated. Please run:
+#   npx update-browserslist-db@latest
+#   Why you should do it regularly: https://github.com/browserslist/update-db\#readme
+# Subtest: switching classes clears relation keys, selected rows, old list and pagination before B responds
+ok 58 - switching classes clears relation keys, selected rows, old list and pagination before B responds
+  ---
+  duration_ms: 213.96475
+  type: 'test'
+  ...
+# Subtest: bulk confirmation captured in A cannot dispatch after switch B
+ok 59 - bulk confirmation captured in A cannot dispatch after switch B
+  ---
+  duration_ms: 29.943209
+  type: 'test'
+  ...
+# Subtest: row confirmation rendered in A cannot dispatch after switch B
+ok 60 - row confirmation rendered in A cannot dispatch after switch B
+  ---
+  duration_ms: 24.092959
+  type: 'test'
+  ...
+# Subtest: bulk confirmation captured in A cannot dispatch after clear
+ok 61 - bulk confirmation captured in A cannot dispatch after clear
+  ---
+  duration_ms: 27.202292
+  type: 'test'
+  ...
+# Subtest: row confirmation rendered in A cannot dispatch after clear
+ok 62 - row confirmation rendered in A cannot dispatch after clear
+  ---
+  duration_ms: 23.151291
+  type: 'test'
+  ...
+# Subtest: bulk confirmation captured in A cannot dispatch after reopen A
+ok 63 - bulk confirmation captured in A cannot dispatch after reopen A
+  ---
+  duration_ms: 27.653667
+  type: 'test'
+  ...
+# Subtest: row confirmation rendered in A cannot dispatch after reopen A
+ok 64 - row confirmation rendered in A cannot dispatch after reopen A
+  ---
+  duration_ms: 31.8625
+  type: 'test'
+  ...
+# Subtest: changing the relation selection invalidates an open bulk confirmation (0)
+ok 65 - changing the relation selection invalidates an open bulk confirmation (0)
+  ---
+  duration_ms: 20.474583
+  type: 'test'
+  ...
+# Subtest: changing the relation selection invalidates an open bulk confirmation (1)
+ok 66 - changing the relation selection invalidates an open bulk confirmation (1)
+  ---
+  duration_ms: 18.56625
+  type: 'test'
+  ...
+# Subtest: B bulk deletion dispatches one frozen B ID list despite repeated clicks and confirmation callbacks
+ok 67 - B bulk deletion dispatches one frozen B ID list despite repeated clicks and confirmation callbacks
+  ---
+  duration_ms: 21.179166
+  type: 'test'
+  ...
+# Subtest: control: one normal B bulk confirmation deletes only B and refreshes B
+ok 68 - control: one normal B bulk confirmation deletes only B and refreshes B
+  ---
+  duration_ms: 19.464458
+  type: 'test'
+  ...
+# Subtest: an old cancelled confirmation cannot unlock or submit a newer B prompt
+ok 69 - an old cancelled confirmation cannot unlock or submit a newer B prompt
+  ---
+  duration_ms: 23.288417
+  type: 'test'
+  ...
+# Subtest: normal B row deletion preserves the original relation ID and suppresses repeated dispatch
+ok 70 - normal B row deletion preserves the original relation ID and suppresses repeated dispatch
+  ---
+  duration_ms: 20.159166
+  type: 'test'
+  ...
+# Subtest: control: one normal B row confirmation keeps the actual DELETE contract
+ok 71 - control: one normal B row confirmation keeps the actual DELETE contract
+  ---
+  duration_ms: 22.746708
+  type: 'test'
+  ...
+# Subtest: late A relation-list success cannot replace B list, count or loading state
+ok 72 - late A relation-list success cannot replace B list, count or loading state
+  ---
+  duration_ms: 18.80825
+  type: 'test'
+  ...
+# Subtest: newer list query within one class wins when responses arrive in reverse order
+ok 73 - newer list query within one class wins when responses arrive in reverse order
+  ---
+  duration_ms: 21.684125
+  type: 'test'
+  ...
+# Subtest: malformed relation records containing null never enter the table or deletion path
+ok 74 - malformed relation records containing null never enter the table or deletion path
+  ---
+  duration_ms: 18.368458
+  type: 'test'
+  ...
+# Subtest: stale A list network does not publish a B error or unlock B's pending read
+ok 75 - stale A list network does not publish a B error or unlock B's pending read
+  ---
+  duration_ms: 19.821
+  type: 'test'
+  ...
+# Subtest: current B list network exposes recoverable failure and can retry without losing its scope
+ok 76 - current B list network exposes recoverable failure and can retry without losing its scope
+  ---
+  duration_ms: 18.444542
+  type: 'test'
+  ...
+# Subtest: stale A list business does not publish a B error or unlock B's pending read
+ok 77 - stale A list business does not publish a B error or unlock B's pending read
+  ---
+  duration_ms: 21.513625
+  type: 'test'
+  ...
+# Subtest: current B list business exposes recoverable failure and can retry without losing its scope
+ok 78 - current B list business exposes recoverable failure and can retry without losing its scope
+  ---
+  duration_ms: 18.416875
+  type: 'test'
+  ...
+# Subtest: late relation read after clear cannot repopulate an inactive panel
+ok 79 - late relation read after clear cannot repopulate an inactive panel
+  ---
+  duration_ms: 19.828375
+  type: 'test'
+  ...
+# Subtest: late relation read after destroy cannot repopulate an inactive panel
+ok 80 - late relation read after destroy cannot repopulate an inactive panel
+  ---
+  duration_ms: 17.731
+  type: 'test'
+  ...
+# Subtest: already dispatched A bulk response (true) cannot refresh, clear selection or notify in B
+ok 81 - already dispatched A bulk response (true) cannot refresh, clear selection or notify in B
+  ---
+  duration_ms: 19.608416
+  type: 'test'
+  ...
+# Subtest: already dispatched A bulk response (false) cannot refresh, clear selection or notify in B
+ok 82 - already dispatched A bulk response (false) cannot refresh, clear selection or notify in B
+  ---
+  duration_ms: 20.664042
+  type: 'test'
+  ...
+# Subtest: late A write completion cannot release B write lock or stack a second B write
+ok 83 - late A write completion cannot release B write lock or stack a second B write
+  ---
+  duration_ms: 20.659834
+  type: 'test'
+  ...
+# Subtest: showing the course selector for B clears A selection, rows, draft query and pagination
+ok 84 - showing the course selector for B clears A selection, rows, draft query and pagination
+  ---
+  duration_ms: 1.2295
+  type: 'test'
+  ...
+# Subtest: course selector late A result cannot replace the visible B choices
+ok 85 - course selector late A result cannot replace the visible B choices
+  ---
+  duration_ms: 1.013625
+  type: 'test'
+  ...
+# Subtest: malformed course records containing null cannot become selectable course IDs
+ok 86 - malformed course records containing null cannot become selectable course IDs
+  ---
+  duration_ms: 0.977708
+  type: 'test'
+  ...
+# Subtest: selector stale A network cannot unlock B or expose an error in B
+ok 87 - selector stale A network cannot unlock B or expose an error in B
+  ---
+  duration_ms: 0.779459
+  type: 'test'
+  ...
+# Subtest: selector current B network blocks emitting until a manual scoped retry succeeds
+ok 88 - selector current B network blocks emitting until a manual scoped retry succeeds
+  ---
+  duration_ms: 0.82475
+  type: 'test'
+  ...
+# Subtest: selector stale A business cannot unlock B or expose an error in B
+ok 89 - selector stale A business cannot unlock B or expose an error in B
+  ---
+  duration_ms: 0.634292
+  type: 'test'
+  ...
+# Subtest: selector current B business blocks emitting until a manual scoped retry succeeds
+ok 90 - selector current B business blocks emitting until a manual scoped retry succeeds
+  ---
+  duration_ms: 0.725041
+  type: 'test'
+  ...
+# Subtest: closed course selector ignores a late read instead of restoring old choices
+ok 91 - closed course selector ignores a late read instead of restoring old choices
+  ---
+  duration_ms: 0.741791
+  type: 'test'
+  ...
+# Subtest: B selector emits an immutable original department and course-ID snapshot once
+ok 92 - B selector emits an immutable original department and course-ID snapshot once
+  ---
+  duration_ms: 0.652583
+  type: 'test'
+  ...
+# Subtest: a delayed selector emit from A cannot add after switch B
+ok 93 - a delayed selector emit from A cannot add after switch B
+  ---
+  duration_ms: 18.220417
+  type: 'test'
+  ...
+# Subtest: a delayed selector emit from A cannot add after clear
+ok 94 - a delayed selector emit from A cannot add after clear
+  ---
+  duration_ms: 20.921708
+  type: 'test'
+  ...
+# Subtest: a delayed selector emit from A cannot add after reopen A
+ok 95 - a delayed selector emit from A cannot add after reopen A
+  ---
+  duration_ms: 19.235167
+  type: 'test'
+  ...
+# Subtest: actual B parent-selector chain adds only B chosen IDs and prevents repeated writes
+ok 96 - actual B parent-selector chain adds only B chosen IDs and prevents repeated writes
+  ---
+  duration_ms: 19.198875
+  type: 'test'
+  ...
+# Subtest: control: one ordinary B course selection preserves the addOrUpdate endpoint and body
+ok 97 - control: one ordinary B course selection preserves the addOrUpdate endpoint and body
+  ---
+  duration_ms: 18.319208
+  type: 'test'
+  ...
+# Subtest: unscoped legacy selector arrays cannot silently write old courses to the current class
+ok 98 - unscoped legacy selector arrays cannot silently write old courses to the current class
+  ---
+  duration_ms: 20.547792
+  type: 'test'
+  ...
+# Subtest: already dispatched A add response (true) leaves B list, selection and notices alone
+ok 99 - already dispatched A add response (true) leaves B list, selection and notices alone
+  ---
+  duration_ms: 20.198417
+  type: 'test'
+  ...
+# Subtest: already dispatched A add response (false) leaves B list, selection and notices alone
+ok 100 - already dispatched A add response (false) leaves B list, selection and notices alone
+  ---
+  duration_ms: 21.001417
+  type: 'test'
+  ...
+# Subtest: late A add completion cannot release the current B add lock
+ok 101 - late A add completion cannot release the current B add lock
+  ---
+  duration_ms: 18.493167
+  type: 'test'
+  ...
+# Subtest: normal B opening-time editor keeps relation identity and locks validation and duplicate writes
+ok 102 - normal B opening-time editor keeps relation identity and locks validation and duplicate writes
+  ---
+  duration_ms: 21.184
+  type: 'test'
+  ...
+# Subtest: control: one B opening-time update preserves the existing edit endpoint and refresh callback
+ok 103 - control: one B opening-time update preserves the existing edit endpoint and refresh callback
+  ---
+  duration_ms: 18.24075
+  type: 'test'
+  ...
+# Subtest: switching the parent closes both child dialogs and invalidates editor validation before dispatch
+ok 104 - switching the parent closes both child dialogs and invalidates editor validation before dispatch
+  ---
+  duration_ms: 20.836292
+  type: 'test'
+  ...
+# Subtest: late editor nextTick cannot fill a newer record or a closed dialog
+ok 105 - late editor nextTick cannot fill a newer record or a closed dialog
+  ---
+  duration_ms: 0.674542
+  type: 'test'
+  ...
+# Subtest: late A form validation cannot dispatch a write after editor closes and opens B
+ok 106 - late A form validation cannot dispatch a write after editor closes and opens B
+  ---
+  duration_ms: 0.485458
+  type: 'test'
+  ...
+# Subtest: late A opening-time completion cannot release the currently validating B dialog
+ok 107 - late A opening-time completion cannot release the currently validating B dialog
+  ---
+  duration_ms: 0.985458
+  type: 'test'
+  ...
+# Subtest: opening-time validation error unlocks the same dialog without sending a request
+ok 108 - opening-time validation error unlocks the same dialog without sending a request
+  ---
+  duration_ms: 0.571667
+  type: 'test'
+  ...
+# Subtest: late A opening-time response (true) cannot close or notify in the reopened B editor
+ok 109 - late A opening-time response (true) cannot close or notify in the reopened B editor
+  ---
+  duration_ms: 0.820875
+  type: 'test'
+  ...
+# Subtest: late A opening-time response (false) cannot close or notify in the reopened B editor
+ok 110 - late A opening-time response (false) cannot close or notify in the reopened B editor
+  ---
+  duration_ms: 0.69475
+  type: 'test'
+  ...
+# Subtest: ordinary standalone edit(record) remains compatible and writes the same relation
+ok 111 - ordinary standalone edit(record) remains compatible and writes the same relation
+  ---
+  duration_ms: 0.618667
+  type: 'test'
+  ...
+# Subtest: ordinary standalone new-record edit(record) remains compatible with the existing POST endpoint
+ok 112 - ordinary standalone new-record edit(record) remains compatible with the existing POST endpoint
+  ---
+  duration_ms: 0.668917
+  type: 'test'
+  ...
+# Subtest: standalone: validation values cannot overwrite the original relation, class or course identity
+ok 113 - standalone: validation values cannot overwrite the original relation, class or course identity
+  ---
+  duration_ms: 0.758209
+  type: 'test'
+  ...
+# Subtest: parent context: validation values cannot overwrite the original relation, class or course identity
+ok 114 - parent context: validation values cannot overwrite the original relation, class or course identity
+  ---
+  duration_ms: 18.319209
+  type: 'test'
+  ...
+# Subtest: the actual editor and popup callback fill only registered openTime fields
+ok 115 - the actual editor and popup callback fill only registered openTime fields
+  ---
+  duration_ms: 0.505208
+  type: 'test'
+  ...
+# Subtest: opening-time business failure keeps values available for manual retry
+ok 116 - opening-time business failure keeps values available for manual retry
+  ---
+  duration_ms: 0.775833
+  type: 'test'
+  ...
+# Subtest: destroyed opening-time editor ignores late validation and response
+ok 117 - destroyed opening-time editor ignores late validation and response
+  ---
+  duration_ms: 1.207708
+  type: 'test'
+  ...
+# Subtest: delayed parent refresh event from edited A cannot refresh current B
+ok 118 - delayed parent refresh event from edited A cannot refresh current B
+  ---
+  duration_ms: 21.291833
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal baseline: rejection closes old dialog; duplicate clicks send twice
+ok 119 - TeachingCourseModal baseline: rejection closes old dialog; duplicate clicks send twice
+  ---
+  duration_ms: 26.874375
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal locks validation, writes, closing and switching until success
+ok 120 - TeachingCourseModal locks validation, writes, closing and switching until success
+  ---
+  duration_ms: 2.338833
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal business failure retains fields and false switches; manual retry succeeds
+ok 121 - TeachingCourseModal business failure retains fields and false switches; manual retry succeeds
+  ---
+  duration_ms: 3.894458
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal network error preserves new input and warns of uncertain creation; no automatic retry
+ok 122 - TeachingCourseModal network error preserves new input and warns of uncertain creation; no automatic retry
+  ---
+  duration_ms: 1.702166
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal validation failure unlocks without request
+ok 123 - TeachingCourseModal validation failure unlocks without request
+  ---
+  duration_ms: 0.620625
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal malformed success cannot close or report success
+ok 124 - TeachingCourseModal malformed success cannot close or report success
+  ---
+  duration_ms: 2.9965
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal dirty cancel supports continuing, prevents stacked prompts, clean cancel closes
+ok 125 - TeachingCourseModal dirty cancel supports continuing, prevents stacked prompts, clean cancel closes
+  ---
+  duration_ms: 0.619125
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal switch-only change is dirty; stale confirmation cannot close another record
+ok 126 - TeachingCourseModal switch-only change is dirty; stale confirmation cannot close another record
+  ---
+  duration_ms: 0.627209
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal delayed nextTick cannot populate newer or closed dialog
+ok 127 - TeachingCourseModal delayed nextTick cannot populate newer or closed dialog
+  ---
+  duration_ms: 0.542208
+  type: 'test'
+  ...
+# Subtest: TeachingCourseModal destroyed dialog ignores validation and save response
+ok 128 - TeachingCourseModal destroyed dialog ignores validation and save response
+  ---
+  duration_ms: 4.207208
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal baseline: rejection closes old dialog; duplicate clicks send twice
+ok 129 - TeachingCourseUnitModal baseline: rejection closes old dialog; duplicate clicks send twice
+  ---
+  duration_ms: 14.602292
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal locks validation, writes, closing and switching until success
+ok 130 - TeachingCourseUnitModal locks validation, writes, closing and switching until success
+  ---
+  duration_ms: 1.797791
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal business failure retains fields and false switches; manual retry succeeds
+ok 131 - TeachingCourseUnitModal business failure retains fields and false switches; manual retry succeeds
+  ---
+  duration_ms: 3.298958
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal network error preserves new input and warns of uncertain creation; no automatic retry
+ok 132 - TeachingCourseUnitModal network error preserves new input and warns of uncertain creation; no automatic retry
+  ---
+  duration_ms: 1.318042
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal validation failure unlocks without request
+ok 133 - TeachingCourseUnitModal validation failure unlocks without request
+  ---
+  duration_ms: 0.588917
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal malformed success cannot close or report success
+ok 134 - TeachingCourseUnitModal malformed success cannot close or report success
+  ---
+  duration_ms: 10.846792
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal dirty cancel supports continuing, prevents stacked prompts, clean cancel closes
+ok 135 - TeachingCourseUnitModal dirty cancel supports continuing, prevents stacked prompts, clean cancel closes
+  ---
+  duration_ms: 0.71925
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal switch-only change is dirty; stale confirmation cannot close another record
+ok 136 - TeachingCourseUnitModal switch-only change is dirty; stale confirmation cannot close another record
+  ---
+  duration_ms: 0.481125
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal delayed nextTick cannot populate newer or closed dialog
+ok 137 - TeachingCourseUnitModal delayed nextTick cannot populate newer or closed dialog
+  ---
+  duration_ms: 0.429625
+  type: 'test'
+  ...
+# Subtest: TeachingCourseUnitModal destroyed dialog ignores validation and save response
+ok 138 - TeachingCourseUnitModal destroyed dialog ignores validation and save response
+  ---
+  duration_ms: 3.280083
+  type: 'test'
+  ...
+# Subtest: 暖缓存菜单在鉴权拒绝后撤销，导航同步更新且能显示新菜单
+ok 139 - 暖缓存菜单在鉴权拒绝后撤销，导航同步更新且能显示新菜单
+  ---
+  duration_ms: 10.342
+  type: 'test'
+  ...
+# Subtest: local return paths preserve query/hash, unsafe and login-loop targets fall back
+ok 140 - local return paths preserve query/hash, unsafe and login-loop targets fall back
+  ---
+  duration_ms: 0.802125
+  type: 'test'
+  ...
+# Subtest: login validation moves focus to first missing field without network submission
+ok 141 - login validation moves focus to first missing field without network submission
+  ---
+  duration_ms: 9.188458
+  type: 'test'
+  ...
+# Subtest: pending login is single-flight, successful login clears password and restores full path
+ok 142 - pending login is single-flight, successful login clears password and restores full path
+  ---
+  duration_ms: 2.91125
+  type: 'test'
+  ...
+# Subtest: failed login remains on form, retains account, refreshes consumed captcha and announces inline error
+ok 143 - failed login remains on form, retains account, refreshes consumed captcha and announces inline error
+  ---
+  duration_ms: 9.993084
+  type: 'test'
+  ...
+# Subtest: captcha connection failure is retryable and stale response cannot replace a newer image
+ok 144 - captcha connection failure is retryable and stale response cannot replace a newer image
+  ---
+  duration_ms: 4.045166
+  type: 'test'
+  ...
+# Subtest: unmounted login ignores late captcha and successful navigation
+ok 145 - unmounted login ignores late captcha and successful navigation
+  ---
+  duration_ms: 6.78
+  type: 'test'
+  ...
+# Subtest: network errors give actionable feedback without exposing server stack details
+ok 146 - network errors give actionable feedback without exposing server stack details
+  ---
+  duration_ms: 0.29425
+  type: 'test'
+  ...
+# Subtest: logout after refresh sends persisted token and synchronously clears roles, routes and button auth even offline
+ok 147 - logout after refresh sends persisted token and synchronously clears roles, routes and button auth even offline
+  ---
+  duration_ms: 3.106416
+  type: 'test'
+  ...
+# Subtest: empty menus are accepted; malformed permission data does not overwrite existing auth
+ok 148 - empty menus are accepted; malformed permission data does not overwrite existing auth
+  ---
+  duration_ms: 2.557875
+  type: 'test'
+  ...
+# Subtest: late permission response after logout cannot restore previous account authority
+ok 149 - late permission response after logout cannot restore previous account authority
+  ---
+  duration_ms: 1.889667
+  type: 'test'
+  ...
+# Subtest: cancelled login cannot resurrect a session and successful account switch drops stale privileges
+ok 150 - cancelled login cannot resurrect a session and successful account switch drops stale privileges
+  ---
+  duration_ms: 4.696166
+  type: 'test'
+  ...
+# Subtest: parallel expired requests produce one notice, keep page until choice, and retain return URL
+ok 151 - parallel expired requests produce one notice, keep page until choice, and retain return URL
+  ---
+  duration_ms: 3.081625
+  type: 'test'
+  ...
+# Subtest: late 401 from previous account cannot clear a new session
+ok 152 - late 401 from previous account cannot clear a new session
+  ---
+  duration_ms: 1.312583
+  type: 'test'
+  ...
+# Subtest: login errors stay local; 403 does not log out; menu 401 clears without duplicate modal
+ok 153 - login errors stay local; 403 does not log out; menu 401 clears without duplicate modal
+  ---
+  duration_ms: 1.038208
+  type: 'test'
+  ...
+# Subtest: auth requests do not attach stale token; logout retains explicit token
+ok 154 - auth requests do not attach stale token; logout retains explicit token
+  ---
+  duration_ms: 0.609709
+  type: 'test'
+  ...
+# Subtest: public routes remain usable while permission service is unavailable
+ok 155 - public routes remain usable while permission service is unavailable
+  ---
+  duration_ms: 1.426458
+  type: 'test'
+  ...
+# Subtest: protected cold entry keeps query/hash, loads once even with concurrent navigation and empty menu
+ok 156 - protected cold entry keeps query/hash, loads once even with concurrent navigation and empty menu
+  ---
+  duration_ms: 0.534584
+  type: 'test'
+  ...
+# Subtest: permission failure finishes navigation on recovery page, keeps session, retries fresh request
+ok 157 - permission failure finishes navigation on recovery page, keeps session, retries fresh request
+  ---
+  duration_ms: 0.492083
+  type: 'test'
+  ...
+# Subtest: auth failure redirects to login and changed-account response cannot register old routes
+ok 158 - auth failure redirects to login and changed-account response cannot register old routes
+  ---
+  duration_ms: 0.431292
+  type: 'test'
+  ...
+# Subtest: 旧表单实际复现：0 分且评语为空时被序列化为空列表
+ok 159 - 旧表单实际复现：0 分且评语为空时被序列化为空列表
+  ---
+  duration_ms: 18.208625
+  type: 'test'
+  ...
+# Subtest: 读取未完成或失败不能保存，重新读取可以恢复
+ok 160 - 读取未完成或失败不能保存，重新读取可以恢复
+  ---
+  duration_ms: 7.145333
+  type: 'test'
+  ...
+# Subtest: 零分实际提交，忽略列表受保护字段与已读取讨论，保存只发送一次
+ok 161 - 零分实际提交，忽略列表受保护字段与已读取讨论，保存只发送一次
+  ---
+  duration_ms: 3.082458
+  type: 'test'
+  ...
+# Subtest: 只有评语可以保存，改一个评分时保留额外反馈与第一条 ID
+ok 162 - 只有评语可以保存，改一个评分时保留额外反馈与第一条 ID
+  ---
+  duration_ms: 1.355208
+  type: 'test'
+  ...
+# Subtest: 仅改作品信息不重发评分；清空已有反馈时显式提交空列表
+ok 163 - 仅改作品信息不重发评分；清空已有反馈时显式提交空列表
+  ---
+  duration_ms: 1.827833
+  type: 'test'
+  ...
+# Subtest: 网络和业务失败保留输入，不显示成功、不关弹窗；再次保存可成功
+ok 164 - 网络和业务失败保留输入，不显示成功、不关弹窗；再次保存可成功
+  ---
+  duration_ms: 2.378667
+  type: 'test'
+  ...
+# Subtest: 切换作品、关闭或销毁后，迟到读取不能填入新弹窗
+ok 165 - 切换作品、关闭或销毁后，迟到读取不能填入新弹窗
+  ---
+  duration_ms: 1.740042
+  type: 'test'
+  ...
+# Subtest: 讨论失败可单独重试，保存不依赖旧讨论快照
+ok 166 - 讨论失败可单独重试，保存不依赖旧讨论快照
+  ---
+  duration_ms: 12.823667
+  type: 'test'
+  ...
+# Subtest: 无效评分、名称和状态不提交；未保存退出需要明确放弃
+ok 167 - 无效评分、名称和状态不提交；未保存退出需要明确放弃
+  ---
+  duration_ms: 5.439083
+  type: 'test'
+  ...
+# Subtest: 列表状态使用真实参数，未提交的搜索不随状态切换生效
+ok 168 - 列表状态使用真实参数，未提交的搜索不随状态切换生效
+  ---
+  duration_ms: 4.311042
+  type: 'test'
+  ...
+# Subtest: 旧列表响应不能覆盖新筛选，拒绝和畸形响应有恢复状态
+ok 169 - 旧列表响应不能覆盖新筛选，拒绝和畸形响应有恢复状态
+  ---
+  duration_ms: 1.880708
+  type: 'test'
+  ...
+# Subtest: 删除末页后回退有效页，翻页清空选择；销毁后不接受响应
+ok 170 - 删除末页后回退有效页，翻页清空选择；销毁后不接受响应
+  ---
+  duration_ms: 3.015667
+  type: 'test'
+  ...
+# Subtest: 标签草稿按作品重置，失败保留输入，重复点击不重复写入
+ok 171 - 标签草稿按作品重置，失败保留输入，重复点击不重复写入
+  ---
+  duration_ms: 1.024209
+  type: 'test'
+  ...
+# Subtest: 导出只使用已生效条件，姓名和标签筛选要求选中，JSON 错误不能伪装 Excel
+ok 172 - 导出只使用已生效条件，姓名和标签筛选要求选中，JSON 错误不能伪装 Excel
+  ---
+  duration_ms: 2.836791
+  type: 'test'
+  ...
+# Subtest: 预览编码完整查询参数，拒绝可执行 URL，关闭不假设 Scratch VM 存在
+ok 173 - 预览编码完整查询参数，拒绝可执行 URL，关闭不假设 Scratch VM 存在
+  ---
+  duration_ms: 1.441208
+  type: 'test'
+  ...
+# Subtest: 打开作品保留既有编辑器入口并隔离新窗口 opener；缺图不再重试原地址
+ok 174 - 打开作品保留既有编辑器入口并隔离新窗口 opener；缺图不再重试原地址
+  ---
+  duration_ms: 1.11475
+  type: 'test'
+  ...
+# Subtest: oversized feedback is retained locally instead of sending an invalid save
+ok 175 - oversized feedback is retained locally instead of sending an invalid save
+  ---
+  duration_ms: 3.229083
+  type: 'test'
+  ...
+# Subtest: fuzzy-name export requires selected results and omits the incompatible exact-name filter
+ok 176 - fuzzy-name export requires selected results and omits the incompatible exact-name filter
+  ---
+  duration_ms: 0.692583
+  type: 'test'
+  ...
+1..176
+# tests 176
+# suites 0
+# pass 176
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2384.882167

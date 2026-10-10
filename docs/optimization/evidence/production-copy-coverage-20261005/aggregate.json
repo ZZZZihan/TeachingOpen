@@ -1,0 +1,496 @@
+{
+  "format": 1,
+  "status": "COMPLETED",
+  "started_utc": "2026-10-04T16:40:50.259331+00:00",
+  "completed_utc": "2026-10-04T16:40:51.373894+00:00",
+  "scope_code": "PRIVATE_COPY_READ_ONLY_SQL_AND_ASSET_STAT",
+  "candidate_head": "64cce174aac6cf3699985b4bc88a30cc70c2f67f",
+  "running_jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+  "guard": "PASS",
+  "metrics": {
+    "schema_tables": 69,
+    "source_retained_counts": {
+      "teaching_course": 5,
+      "teaching_course_unit": 83,
+      "teaching_additional_work": 0
+    },
+    "source_dangling_department_ids": 7,
+    "source_dangling_user_ids": 5,
+    "courses": 5,
+    "units": 83,
+    "additional_works": 0,
+    "unit_work_type_codes": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "NULL": 83,
+      "OTHER": 0
+    },
+    "unit_work_type_consumer": {
+      "1": "SCRATCH3",
+      "2": "SCRATCH3",
+      "3": "SCRATCHJR",
+      "4": "PYTHON_TURTLE",
+      "NULL": "FALLBACK",
+      "OTHER": "FALLBACK"
+    },
+    "unit_video_source_codes": {
+      "1": 83,
+      "2": 0,
+      "3": 0,
+      "NULL": 0,
+      "OTHER": 0
+    },
+    "unit_video_nonblank_by_source": {
+      "1": 83,
+      "2": 0,
+      "3": 0,
+      "NULL": 0,
+      "OTHER": 0
+    },
+    "additional_work_type_codes": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "NULL": 0,
+      "OTHER": 0
+    },
+    "unit_visibility": {
+      "show_course_video": {
+        "TRUE": 83,
+        "FALSE": 0,
+        "NULL": 0,
+        "nonblank_enabled": 83,
+        "nonblank_hidden": 0
+      },
+      "show_course_case": {
+        "TRUE": 83,
+        "FALSE": 0,
+        "NULL": 0,
+        "nonblank_enabled": 0,
+        "nonblank_hidden": 0
+      },
+      "show_course_ppt": {
+        "TRUE": 45,
+        "FALSE": 38,
+        "NULL": 0,
+        "nonblank_enabled": 45,
+        "nonblank_hidden": 0
+      },
+      "show_course_plan": {
+        "TRUE": 83,
+        "FALSE": 0,
+        "NULL": 0,
+        "nonblank_enabled": 83,
+        "nonblank_hidden": 0
+      }
+    },
+    "unit_combinations": {
+      "video_and_case_and_work": 0,
+      "body_without_video": 0,
+      "no_video_case_or_body": 0,
+      "multiple_course_ppt_refs": 0,
+      "multiple_course_plan_refs": 0
+    },
+    "unit_body_shape": {
+      "nonblank": 83,
+      "contains_html_tag": 83,
+      "contains_image_tag": 0,
+      "contains_media_tag": 0,
+      "utf8_bytes_total": 292831
+    },
+    "asset_inventory": {
+      "manifest_files": 297,
+      "reference_list_unique_paths": 297,
+      "manifest_path_set_matches_references": true,
+      "files_present_size_match": 297,
+      "missing_or_unsafe_files": 0,
+      "size_mismatch_files": 0,
+      "manifest_bytes": 5941586119,
+      "observed_present_bytes": 5941586119,
+      "hashes_recalculated_this_audit": false,
+      "acquisition_external_reference_occurrences": 2,
+      "acquisition_unsafe_reference_occurrences": 0,
+      "extensions": {
+        ".jpg": 83,
+        ".mp4": 83,
+        ".pdf": 45,
+        ".png": 3,
+        ".md": 83
+      }
+    },
+    "course_plan_format": {
+      "MARKDOWN_FILENAME_SUFFIX": 83,
+      "content_format_verified": false,
+      "actual_preview_verified": false
+    }
+  },
+  "field_coverage": {
+    "teaching_course": {
+      "course_cover": {
+        "rows_nonblank": 3,
+        "rows_blank_or_null": 2,
+        "reference_occurrences": 3,
+        "LOCAL_IN_MANIFEST": 3,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 3,
+        "extensions": {
+          ".png": 3
+        }
+      },
+      "course_desc": {
+        "rows_nonblank": 3,
+        "rows_blank_or_null": 2,
+        "reference_occurrences": 0,
+        "LOCAL_IN_MANIFEST": 0,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 0,
+        "extensions": {}
+      },
+      "course_icon": {
+        "rows_nonblank": 0,
+        "rows_blank_or_null": 5,
+        "reference_occurrences": 0,
+        "LOCAL_IN_MANIFEST": 0,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 0,
+        "extensions": {}
+      },
+      "course_map": {
+        "rows_nonblank": 0,
+        "rows_blank_or_null": 5,
+        "reference_occurrences": 0,
+        "LOCAL_IN_MANIFEST": 0,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 0,
+        "extensions": {}
+      }
+    },
+    "teaching_course_unit": {
+      "course_case": {
+        "rows_nonblank": 0,
+        "rows_blank_or_null": 83,
+        "reference_occurrences": 0,
+        "LOCAL_IN_MANIFEST": 0,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 0,
+        "extensions": {}
+      },
+      "course_plan": {
+        "rows_nonblank": 83,
+        "rows_blank_or_null": 0,
+        "reference_occurrences": 83,
+        "LOCAL_IN_MANIFEST": 83,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 83,
+        "extensions": {
+          ".md": 83
+        }
+      },
+      "course_ppt": {
+        "rows_nonblank": 45,
+        "rows_blank_or_null": 38,
+        "reference_occurrences": 45,
+        "LOCAL_IN_MANIFEST": 45,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 45,
+        "extensions": {
+          ".pdf": 45
+        }
+      },
+      "course_video": {
+        "rows_nonblank": 83,
+        "rows_blank_or_null": 0,
+        "reference_occurrences": 83,
+        "LOCAL_IN_MANIFEST": 83,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 83,
+        "extensions": {
+          ".mp4": 83
+        }
+      },
+      "course_work": {
+        "rows_nonblank": 0,
+        "rows_blank_or_null": 83,
+        "reference_occurrences": 0,
+        "LOCAL_IN_MANIFEST": 0,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 0,
+        "extensions": {}
+      },
+      "course_work_answer": {
+        "rows_nonblank": 0,
+        "rows_blank_or_null": 83,
+        "reference_occurrences": 0,
+        "LOCAL_IN_MANIFEST": 0,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 0,
+        "extensions": {}
+      },
+      "media_content": {
+        "rows_nonblank": 83,
+        "rows_blank_or_null": 0,
+        "reference_occurrences": 2,
+        "LOCAL_IN_MANIFEST": 0,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 2,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 0,
+        "extensions": {}
+      },
+      "unit_cover": {
+        "rows_nonblank": 83,
+        "rows_blank_or_null": 0,
+        "reference_occurrences": 83,
+        "LOCAL_IN_MANIFEST": 83,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 83,
+        "extensions": {
+          ".jpg": 83
+        }
+      },
+      "unit_intro": {
+        "rows_nonblank": 83,
+        "rows_blank_or_null": 0,
+        "reference_occurrences": 0,
+        "LOCAL_IN_MANIFEST": 0,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 0,
+        "extensions": {}
+      }
+    },
+    "teaching_additional_work": {
+      "work_cover": {
+        "rows_nonblank": 0,
+        "rows_blank_or_null": 0,
+        "reference_occurrences": 0,
+        "LOCAL_IN_MANIFEST": 0,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 0,
+        "extensions": {}
+      },
+      "work_desc": {
+        "rows_nonblank": 0,
+        "rows_blank_or_null": 0,
+        "reference_occurrences": 0,
+        "LOCAL_IN_MANIFEST": 0,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 0,
+        "extensions": {}
+      },
+      "work_document_url": {
+        "rows_nonblank": 0,
+        "rows_blank_or_null": 0,
+        "reference_occurrences": 0,
+        "LOCAL_IN_MANIFEST": 0,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 0,
+        "extensions": {}
+      },
+      "work_url": {
+        "rows_nonblank": 0,
+        "rows_blank_or_null": 0,
+        "reference_occurrences": 0,
+        "LOCAL_IN_MANIFEST": 0,
+        "LOCAL_NOT_IN_MANIFEST": 0,
+        "EXTERNAL": 0,
+        "UNSAFE": 0,
+        "EMPTY": 0,
+        "unique_local_references": 0,
+        "extensions": {}
+      }
+    }
+  },
+  "relationships": {
+    "units_missing_course": 0,
+    "courses_without_units": 2,
+    "course_unit_counts_sorted": [
+      14,
+      24,
+      45
+    ],
+    "course_dept_rows": 4,
+    "course_dept_missing_course": 4,
+    "course_dept_missing_department": 4,
+    "course_dept_missing_any": 4,
+    "course_dept_distinct_missing_departments": 3,
+    "course_dept_inner_join_survivors": 0,
+    "course_dept_duplicate_pair_groups": 0,
+    "user_dept_rows": 3,
+    "user_dept_missing_department": 3,
+    "user_dept_missing_user": 3,
+    "current_departments": 1,
+    "courses_represented_only_by_missing_class_edges": 0,
+    "course_embedded_depart_ids": {
+      "reference_tokens": 0,
+      "missing_tokens": 0,
+      "distinct_missing_tokens": 0
+    },
+    "additional_work_depart_ids": {
+      "reference_tokens": 0,
+      "missing_tokens": 0,
+      "distinct_missing_tokens": 0
+    }
+  },
+  "selected_business_tables_before": {
+    "teaching_course": {
+      "rows": 5,
+      "sha256": "48a20be4fb2b342e5c8ca43a29feea89147eb19b3472f7c3a465045731fe4b73"
+    },
+    "teaching_course_unit": {
+      "rows": 83,
+      "sha256": "2a6439c898e52dabe64979ad9cd16a77aa843bf1f788208e338d610c06a12991"
+    },
+    "teaching_course_dept": {
+      "rows": 4,
+      "sha256": "4c5eca1b213e692ea9c4b88fd81c3cac041e771623a9871ee8bd0ca0e6c6e97f"
+    },
+    "teaching_additional_work": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "teaching_student": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "teaching_work": {
+      "rows": 3,
+      "sha256": "63a53bdcc25016ff2441f57aa0ed69d1b3764f1c6f5f241262ac5fe5b49af066"
+    },
+    "teaching_work_correct": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "sys_depart": {
+      "rows": 1,
+      "sha256": "cd876397e988b50cc3fa3b341ddadb2152d2fbf2280f2c462bdaa09c64dfadf7"
+    },
+    "sys_user_depart": {
+      "rows": 3,
+      "sha256": "f0049cb44490bd57fee6098ea2fc38758b13e8593c2a7965ac62bc15227ffc6f"
+    }
+  },
+  "selected_business_tables_after": {
+    "teaching_course": {
+      "rows": 5,
+      "sha256": "48a20be4fb2b342e5c8ca43a29feea89147eb19b3472f7c3a465045731fe4b73"
+    },
+    "teaching_course_unit": {
+      "rows": 83,
+      "sha256": "2a6439c898e52dabe64979ad9cd16a77aa843bf1f788208e338d610c06a12991"
+    },
+    "teaching_course_dept": {
+      "rows": 4,
+      "sha256": "4c5eca1b213e692ea9c4b88fd81c3cac041e771623a9871ee8bd0ca0e6c6e97f"
+    },
+    "teaching_additional_work": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "teaching_student": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "teaching_work": {
+      "rows": 3,
+      "sha256": "63a53bdcc25016ff2441f57aa0ed69d1b3764f1c6f5f241262ac5fe5b49af066"
+    },
+    "teaching_work_correct": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "sys_depart": {
+      "rows": 1,
+      "sha256": "cd876397e988b50cc3fa3b341ddadb2152d2fbf2280f2c462bdaa09c64dfadf7"
+    },
+    "sys_user_depart": {
+      "rows": 3,
+      "sha256": "f0049cb44490bd57fee6098ea2fc38758b13e8593c2a7965ac62bc15227ffc6f"
+    }
+  },
+  "selected_business_tables_unchanged": true,
+  "http_requests": 0,
+  "browser_actions": 0,
+  "student_file_bytes_read": 0,
+  "redis_accesses": 0,
+  "service_actions": 0,
+  "database_writes": 0,
+  "product_files_modified": 0,
+  "limitations": [
+    "AGGREGATES_ONLY_NO_NAMES_TEXT_IDENTITIES_OR_RESOURCE_PATHS",
+    "NO_VIDEO_PLAYBACK_OR_EDITOR_SAVE_OR_ATTACHMENT_PREVIEW_ACCEPTANCE",
+    "EXTERNAL_REFERENCE_TARGETS_NOT_REQUESTED",
+    "ASSET_STAT_ONLY_PRIOR_HASH_VERIFICATION_NOT_REPEATED",
+    "SOURCE_DATABASE_AND_ASSET_ACQUISITION_NOT_ATOMIC",
+    "NO_PRODUCTION_OR_HUMAN_ACCEPTANCE",
+    "9_SELECTED_TABLE_DIGESTS_NOT_ALL_69_TABLE_DIGESTS"
+  ],
+  "sql_execution": {
+    "audit_select_statements": 58,
+    "guard_select_statements": 2,
+    "before_after_digest_select_statements": 36,
+    "coverage_select_statements": 20,
+    "preflight_select_statements": 11,
+    "session_select_statements_including_preflight": 69,
+    "count_basis": "Derived from reviewed fixed query call sites; former tracked list contained 28 selects, excluding guard 2 and base 7-table before/after digest 28. 28 tracked = 20 coverage + 8 extra 2-table digest. Not an HTTP/API request count.",
+    "transaction_policy": "Each SELECT uses START TRANSACTION READ ONLY followed by ROLLBACK."
+  },
+  "finding_codes": [
+    "COURSE_WITHOUT_UNITS_2",
+    "NO_EXERCISE_TEMPLATE_OR_CASE_COVERAGE",
+    "ALL_WORK_TYPES_NULL_83",
+    "COURSE_CLASS_DANGLING_EDGE_4",
+    "USER_CLASS_DANGLING_EDGE_3",
+    "MARKDOWN_PREVIEW_NOT_ACCEPTED",
+    "EXTERNAL_BODY_REFERENCE_NOT_REQUESTED_2"
+  ],
+  "conclusion_code": "ASSET_MANIFEST_STAT_COMPLETE_BEHAVIOR_AND_EXERCISE_COVERAGE_OPEN"
+}

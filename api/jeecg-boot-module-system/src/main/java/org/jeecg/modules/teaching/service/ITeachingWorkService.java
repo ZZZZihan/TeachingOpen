@@ -46,6 +46,9 @@ public interface ITeachingWorkService extends IService<TeachingWork> {
 
 	StudentWorkModel studentWorkInfo(String workId);
 
+	/** Count one authorized detail read without changing content metadata. */
+	boolean incrementViewCount(String workId);
+
 	Page<StudentWorkModel> listWorkModel(Page<StudentWorkModel> page, QueryWrapper<StudentWorkModel> queryWrapper, List<String> deptIds);
 
     int sendWork(StudentWorkSendVO studentWorkSendVO);

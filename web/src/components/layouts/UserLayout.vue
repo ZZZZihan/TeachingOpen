@@ -1,139 +1,45 @@
 <template>
-  <div id="userLayout" :class="['user-layout-wrapper', device]">
-    <div class="container">
-      <div class="top">
-        <div class="header">
-          <img :src="logo" class="logo" alt="logo">
-          <h3 class="title">{{brandName}}</h3>
-        </div>
-        <div class="desc">
-          {{brandDesc}}
-        </div>
-      </div>
-
-      <route-view></route-view>
-
-      <div class="footer" v-html="$store.getters.sysConfig.footer">
-      </div>
-    </div>
+  <div id="userLayout" class="user-layout-wrapper">
+    <CampusMasthead />
+    <header class="user-header"><router-link to="/index" class="brand"><img v-if="logoUrl && !logoFailed" :src="logoUrl" alt="" @error="logoFailed = true"><span>{{ brandName }}</span></router-link><router-link to="/courseList" class="header-link">探索课程 <span aria-hidden="true">↗</span></router-link></header>
+    <main :class="['user-content', { 'compact-form': !widePage }]"><route-view /></main>
+    <footer class="user-footer"><div v-if="config.footer" v-html="config.footer"></div><span v-else>天津工业大学 · {{ brandName }}</span></footer>
   </div>
 </template>
 
 <script>
-  import RouteView from "@/components/layouts/RouteView"
-  import { mixinDevice } from '@/utils/mixin.js'
-  import { getFileAccessHttpUrl } from '@/api/manage'
-  export default {
-    name: "UserLayout",
-    components: { RouteView },
-    mixins: [mixinDevice],
-    data () {
-      return {
-         brandName: this.$store.getters.sysConfig.brandName,
-         brandDesc: this.$store.getters.sysConfig.brandDesc,
-         logo: '/logo.png'
-      }
+import CampusMasthead from '@/components/brand/CampusMasthead'
+import RouteView from '@/components/layouts/RouteView'
+import { getFileAccessHttpUrl } from '@/api/manage'
+export default {
+    name: 'UserLayout',
+    components: { RouteView, CampusMasthead },
+    data () { return { logoFailed: false } },
+    computed: {
+        config () { return this.$store.state.user.sysConfig || {} },
+        brandName () { return (this.config.brandName || '').trim() || '人工智能教学平台' },
+        logoUrl () { return this.config.logo ? getFileAccessHttpUrl(this.config.logo) : '' },
+        widePage () { return this.$route.name === 'login' }
     },
-    created() {
-      if(this.$store.getters.sysConfig.logo){
-        this.logo = getFileAccessHttpUrl(this.$store.getters.sysConfig.logo)
-      }
-    },
-    mounted () {
-      document.body.classList.add('userLayout')
-    },
-    beforeDestroy () {
-      document.body.classList.remove('userLayout')
-    },
-  }
+    watch: { logoUrl () { this.logoFailed = false } },
+    mounted () { document.body.classList.add('userLayout') },
+    beforeDestroy () { document.body.classList.remove('userLayout') }
+}
 </script>
 
 <style lang="less" scoped>
-  #userLayout.user-layout-wrapper {
-    height: 100%;
-
-    &.mobile {
-      .container {
-        .main {
-          max-width: 368px;
-          width: 98%;
-        }
-      }
-    }
-
-    .container {
-      width: 100%;
-      min-height: 100%;
-      background: #f0f2f5 url(~@/assets/background.svg) no-repeat 50%;
-      background-size: 100%;
-      padding: 50px 0 44px;
-      position: relative;
-
-      a {
-        text-decoration: none;
-      }
-
-      .top {
-        text-align: center;
-
-        .header {
-          max-height: 144px;
-          line-height: 44px;
-
-          .logo {
-            max-height: 88px;
-            vertical-align: top;
-            margin-right: 16px;
-            border-style: none;
-          }
-
-          .title {
-            font-size: 33px;
-            color: rgba(0, 0, 0, .85);
-            font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            font-weight: 600;
-            position: relative;
-            top: 2px;
-          }
-        }
-        .desc {
-          font-size: 14px;
-          color: rgba(0, 0, 0, 0.45);
-          margin-top: 12px;
-          margin-bottom: 40px;
-        }
-      }
-
-      .main {
-        min-width: 260px;
-        width: 368px;
-        margin: 0 auto 60px;
-      }
-
-      .footer {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        padding: 0 16px;
-        margin: 48px 0 24px;
-        text-align: center;
-
-        .links {
-          margin-bottom: 8px;
-          font-size: 14px;
-          a {
-            color: rgba(0, 0, 0, 0.45);
-            transition: all 0.3s;
-            &:not(:last-child) {
-              margin-right: 40px;
-            }
-          }
-        }
-        .copyright {
-          color: rgba(0, 0, 0, 0.45);
-          font-size: 14px;
-        }
-      }
-    }
-  }
+.user-layout-wrapper { min-height: 100vh; background: #f5f6f7; color: #20252b; display: flex; flex-direction: column; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+.user-header { height: 64px; padding: 0 max(32px, calc((100% - 1120px) / 2)); display: flex; align-items: center; justify-content: space-between; gap: 20px; background: #fff; border-bottom: 1px solid #e1e4e8; flex-shrink: 0; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 600; color: #20252b; min-width: 0; overflow-wrap: anywhere; line-height: 1.3; }
+.brand img { width: 36px; height: 36px; object-fit: contain; }
+.brand-symbol { font-size: 31px; font-weight: 700; letter-spacing: -4px; padding-right: 4px; flex-shrink: 0; }
+.brand-symbol span { color: #74256a; }
+.header-link { flex-shrink: 0; color: #59646e; font-size: 13px; }
+.header-link span { margin-left: 12px; }
+a:focus-visible { outline: 2px solid #74256a; outline-offset: 4px; }
+.user-content { padding: 48px 32px 32px; flex: 1; }
+.compact-form { width: 100%; max-width: 500px; margin: 48px auto 0; padding: 32px; background: #fff; flex: 0 0 auto; }
+.compact-form /deep/ .main { width: 100%; min-width: 0; margin: 0; }
+.user-footer { text-align: center; padding: 24px; margin-top: auto; color: #737b82; font-size: 12px; overflow-wrap: anywhere; }
+@media (max-width: 680px) { .user-header { height: 68px; padding: 0 24px; } .brand { font-size: 17px; } .header-link { font-size: 12px; } .header-link span { display: none; } .user-content { padding: 0; } .compact-form { margin: 24px auto 0; padding: 24px; } .user-footer { padding: 24px 16px; } }
 </style>

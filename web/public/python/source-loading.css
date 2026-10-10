@@ -1,0 +1,5 @@
+.source-loading-bar { border-bottom-color: #e8e1ef; background: #faf8fc; color: #51425d; }
+.source-loading-bar .persistence-label { color: #672c8b; }
+.source-loading-bar #retry-load { border-color: #b49bc4; color: #672c8b; }
+.source-loading-bar #retry-load:focus-visible { outline-color: #672c8b; }
+.source-loading-bar #persistence-status[data-phase='ready'] { color: #672c8b; }

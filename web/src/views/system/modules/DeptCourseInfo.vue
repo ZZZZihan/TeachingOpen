@@ -2,7 +2,7 @@
   <a-card :bordered="false">
     <!-- 操作按钮区域 -->
     <div class="table-operator" :md="24" :sm="24" style="margin: 0 0px 10px 2px">
-      <a-button :disabled="currentDept.orgCategory!=3" @click="handleAddCourse" type="primary" icon="plus">添加已有课程</a-button>
+      <a-button :disabled="currentDept.orgCategory!=3 || operationsDisabled" @click="handleAddCourse" type="primary" icon="plus">添加已有课程</a-button>
 
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
@@ -10,7 +10,7 @@
             <a-icon type="delete" />删除关系
           </a-menu-item>
         </a-menu>
-        <a-button style="margin-left: 8px">
+        <a-button :disabled="operationsDisabled" style="margin-left: 8px">
           批量操作
           <a-icon type="down" />
         </a-button>
@@ -19,6 +19,9 @@
 
     <!-- table区域-begin -->
     <div>
+      <a-alert v-if="listError" type="error" show-icon style="margin-bottom: 16px">
+        <span slot="message">{{ listError }} <a @click="loadData()">重试</a></span>
+      </a-alert>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
         <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择
         <a style="font-weight: 600">
@@ -36,20 +39,18 @@
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
-        :loading="loading"
+        :loading="loading || mutationLoading"
         :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
         @change="handleTableChange"
       >
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEditCourse(record)">设置开课时间</a>
+          <a :disabled="operationsDisabled" @click="handleEditCourse(record)">设置开课时间</a>
 
           <!-- <a @click="setOpenTime(record)">开课时间</a> -->
 
           <a-divider type="vertical" />
 
-          <a-popconfirm title="确定要删除吗?" @confirm="() => handleDelete(record.id)">
-            <a>删除</a>
-          </a-popconfirm>
+          <a :disabled="operationsDisabled" @click="confirmDelete(record)">删除</a>
 
           <a-divider type="vertical" />
         </span>
@@ -82,6 +83,13 @@ export default {
       description: '课程信息',
       currentDeptId: '',
       currentDept: {},
+      contextVersion: 0,
+      listRequestId: 0,
+      selectionVersion: 0,
+      writeRequestId: 0,
+      mutationLoading: false,
+      deletePrompt: null,
+      listError: '',
       // 表头
       columns: [
         // {
@@ -122,6 +130,14 @@ export default {
     }
   },
   created() {},
+  computed: {
+    operationsDisabled() {
+      return !this.currentDeptId || this.loading || this.mutationLoading || !!this.listError
+    }
+  },
+  beforeDestroy() {
+    this.clearList()
+  },
 
   methods: {
     loadData(arg) {
@@ -129,18 +145,31 @@ export default {
         this.$message.error('请设置url.list属性!')
         return
       }
-      //加载数据 若传入参数1则加载第一页的内容
       if (arg === 1) {
         this.ipagination.current = 1
       }
-      if (this.currentDeptId === '') return
-      var params = this.getQueryParams() //查询条件
-      params.deptId = this.currentDeptId
-      getAction(this.url.list, params).then(res => {
-        if (res.success) {
+      if (!this.currentDeptId) return
+      const context = this.captureContext()
+      const requestId = ++this.listRequestId
+      const params = Object.assign({}, this.getQueryParams(), { deptId: context.deptId })
+      this.loading = true
+      this.listError = ''
+      this.dataSource = []
+      this.ipagination.total = 0
+      this.onClearSelected()
+      const isCurrent = () => this.isCurrentContext(context) && requestId === this.listRequestId
+      return getAction(this.url.list, params).then(res => {
+        if (!isCurrent()) return
+        if (res && res.success === true && res.result && this.isValidRecords(res.result.records)) {
           this.dataSource = res.result.records
-          this.ipagination.total = res.result.total
+          this.ipagination.total = Number(res.result.total) || 0
+        } else {
+          this.listError = '课程关系加载失败，请重试。'
         }
+      }).catch(() => {
+        if (isCurrent()) this.listError = '课程关系加载失败，请重试。'
+      }).finally(() => {
+        if (isCurrent()) this.loading = false
       })
     },
     batchDel: function() {
@@ -148,100 +177,167 @@ export default {
         this.$message.error('请设置url.deleteBatch属性!')
         return
       }
+      if (this.operationsDisabled || this.deletePrompt) return
       if (this.selectedRowKeys.length <= 0) {
         this.$message.warning('请选择一条记录！')
         return
-      } else {
-        var ids = ''
-        for (var a = 0; a < this.selectedRowKeys.length; a++) {
-          ids += this.selectedRowKeys[a] + ','
-        }
-        var that = this
-        console.log(this.currentDeptId)
-        this.$confirm({
-          title: '确认删除',
-          content: '是否删除选中数据?',
-          onOk: function() {
-            deleteAction(that.url.deleteBatch, { ids: ids }).then(res => {
-              if (res.success) {
-                that.$message.success(res.message)
-                that.loadData()
-                that.onClearSelected()
-              } else {
-                that.$message.warning(res.message)
-              }
-            })
-          }
-        })
       }
+      const snapshot = Object.assign(this.captureContext(), {
+        relationIds: this.selectedRowKeys.slice(),
+        selectionVersion: this.selectionVersion
+      })
+      this.deletePrompt = snapshot
+      this.$confirm({
+        title: '确认删除',
+        content: `是否删除班级“${this.currentDept.departName || snapshot.deptId}”选中的课程关系?`,
+        onOk: () => this.confirmDeletion(snapshot, true),
+        onCancel: () => this.cancelDeletion(snapshot)
+      })
     },
-    handleDelete: function(id) {
+    confirmDelete(record) {
+      if (this.operationsDisabled || this.deletePrompt || !this.isCurrentRelation(record)) return
+      const snapshot = Object.assign(this.captureContext(), { relationIds: [record.id], record })
+      this.deletePrompt = snapshot
+      this.$confirm({
+        title: '确认删除',
+        content: `是否删除班级“${this.currentDept.departName || snapshot.deptId}”的这条课程关系?`,
+        onOk: () => this.confirmDeletion(snapshot, false),
+        onCancel: () => this.cancelDeletion(snapshot)
+      })
+    },
+    confirmDeletion(snapshot, batch) {
+      if (this.deletePrompt !== snapshot) return
+      this.deletePrompt = null
+      return batch ? this.deleteRelations(snapshot, true) : this.handleDelete(snapshot.relationIds[0], snapshot)
+    },
+    cancelDeletion(snapshot) {
+      if (this.deletePrompt === snapshot) this.deletePrompt = null
+    },
+    handleDelete: function(id, snapshot) {
       if (!this.url.delete) {
         this.$message.error('请设置url.delete属性!')
         return
       }
-      var that = this
-      deleteAction(that.url.delete, { id: id }).then(res => {
-        if (res.success) {
-          that.$message.success(res.message)
-          if (this.selectedRowKeys.length > 0) {
-            for (let i = 0; i < this.selectedRowKeys.length; i++) {
-              if (this.selectedRowKeys[i] == id) {
-                this.selectedRowKeys.splice(i, 1)
-                break
-              }
-            }
-          }
-          that.loadData()
-        } else {
-          that.$message.warning(res.message)
-        }
-      })
+      if (!snapshot || snapshot.relationIds[0] !== id) return
+      return this.deleteRelations(snapshot, false)
     },
     open(record) {
-      console.log(record)
-      this.currentDept = record
-      this.currentDeptId = record.id
-      this.loadData(1)
+      this.resetContext(record)
+      return this.loadData(1)
     },
     clearList() {
-      this.currentDeptId = ''
+      this.resetContext()
+    },
+    resetContext(record) {
+      this.contextVersion++
+      this.listRequestId++
+      this.currentDept = Object.assign({}, record || {})
+      this.currentDeptId = record && record.id ? record.id : ''
+      this.onClearSelected()
       this.dataSource = []
+      this.ipagination.current = 1
+      this.ipagination.total = 0
+      this.loading = false
+      this.listError = ''
+      this.mutationLoading = false
+      this.deletePrompt = null
+      if (this.$refs.selectCourseModal) this.$refs.selectCourseModal.handleCancel()
+      if (this.$refs.editCourse) this.$refs.editCourse.close()
+    },
+    captureContext() {
+      return { deptId: this.currentDeptId, contextVersion: this.contextVersion }
+    },
+    isCurrentContext(context) {
+      return !!context && !!context.deptId && context.deptId === this.currentDeptId && context.contextVersion === this.contextVersion
+    },
+    isCurrentRelation(record) {
+      return !!record && this.dataSource.indexOf(record) !== -1 && (!record.deptId || record.deptId === this.currentDeptId)
+    },
+    isValidRecords(records) {
+      return Array.isArray(records) && records.every(row => row && typeof row === 'object' && !Array.isArray(row) && (typeof row.id === 'string' || typeof row.id === 'number') && row.id !== '')
+    },
+    onSelectChange(keys, rows) {
+      if (this.operationsDisabled || !keys.every(id => this.dataSource.some(row => row.id === id))) return
+      this.selectedRowKeys = keys.slice()
+      this.selectionRows = rows.slice()
+      this.selectionVersion++
+    },
+    onClearSelected() {
+      this.selectedRowKeys = []
+      this.selectionRows = []
+      this.selectionVersion++
+    },
+    deleteRelations(snapshot, batch) {
+      const ids = snapshot.relationIds
+      const sameSelection = !batch || (snapshot.selectionVersion === this.selectionVersion && ids.length === this.selectedRowKeys.length && ids.every(id => this.selectedRowKeys.indexOf(id) !== -1))
+      const currentRelations = ids.length > 0 && ids.every(id => this.dataSource.some(row => row.id === id && (!row.deptId || row.deptId === snapshot.deptId)))
+      if (!this.isCurrentContext(snapshot) || !sameSelection || !currentRelations || (!batch && !this.isCurrentRelation(snapshot.record))) {
+        this.$message.warning('班级或选择已变化，请重新选择课程关系。')
+        return
+      }
+      if (this.operationsDisabled) return
+      const requestId = ++this.writeRequestId
+      this.mutationLoading = true
+      const isCurrent = () => this.isCurrentContext(snapshot) && requestId === this.writeRequestId
+      const url = batch ? this.url.deleteBatch : this.url.delete
+      const params = batch ? { ids: ids.join(',') + ',' } : { id: ids[0] }
+      return deleteAction(url, params).then(res => {
+        if (!isCurrent()) return
+        if (res && res.success === true) {
+          this.$message.success(res.message || '删除成功')
+          return this.loadData()
+        }
+        this.$message.warning('删除未成功，请重试。')
+      }).catch(() => {
+        if (isCurrent()) this.$message.warning('未能确认删除结果，请刷新列表后核对。')
+      }).finally(() => {
+        if (isCurrent()) this.mutationLoading = false
+      })
     },
     hasSelectDept() {
-      if (this.currentDeptId == null) {
+      if (!this.currentDeptId) {
         this.$message.error('请选择一个部门!')
         return false
       }
       return true
     },
     handleAddCourse() {
-      if (this.currentDeptId == '') {
-        this.$message.error('请选择一个部门!')
-      } else {
-        this.$refs.selectCourseModal.show(this.currentDeptId)
-      }
+      if (this.operationsDisabled || this.currentDept.orgCategory != 3) return
+      this.$refs.selectCourseModal.show(this.currentDeptId, this.contextVersion)
     },
     handleEditCourse(record) {
-      this.$refs.editCourse.edit(record)
+      if (this.operationsDisabled || !this.isCurrentRelation(record)) return
+      const context = this.captureContext()
+      context.isCurrent = () => this.isCurrentContext(context)
+      this.$refs.editCourse.edit(record, context)
       this.$refs.editCourse.title = '编辑'
       this.$refs.editCourse.disableSubmit = false
     },
+    modalFormOk(context) {
+      if (this.isCurrentContext(context)) return this.loadData()
+    },
     selectOK(data) {
-      let params = {}
-      params.deptId = this.currentDeptId
-      params.courseIdList = []
-      for (var a = 0; a < data.length; a++) {
-        params.courseIdList.push(data[a])
+      if (!this.isCurrentContext(data)) {
+        this.$message.warning('班级已变化，请重新选择课程。')
+        return
       }
-      console.log(params)
-      postAction(this.url.addOrUpdate, params).then(res => {
-        if (res.success) {
-          this.$message.success(res.message)
-          this.loadData()
-        } else {
-          this.$message.warning(res.message)
+      if (this.operationsDisabled || this.currentDept.orgCategory != 3 || !Array.isArray(data.courseIdList) || data.courseIdList.length === 0) return
+      const context = this.captureContext()
+      const params = { deptId: data.deptId, courseIdList: data.courseIdList.slice() }
+      const requestId = ++this.writeRequestId
+      this.mutationLoading = true
+      const isCurrent = () => this.isCurrentContext(context) && requestId === this.writeRequestId
+      return postAction(this.url.addOrUpdate, params).then(res => {
+        if (!isCurrent()) return
+        if (res && res.success === true) {
+          this.$message.success(res.message || '添加成功')
+          return this.loadData()
         }
+        this.$message.warning('添加未成功，请重新选择课程后重试。')
+      }).catch(() => {
+        if (isCurrent()) this.$message.warning('未能确认添加结果，请刷新列表后核对。')
+      }).finally(() => {
+        if (isCurrent()) this.mutationLoading = false
       })
     }
   }

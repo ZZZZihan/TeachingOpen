@@ -1,0 +1,83 @@
+{
+  "generated_utc": "2026-10-02T23:36:21.000396+00:00",
+  "source_commit": "8881cbe524526d39bf835cd8b433d385579f2ca1",
+  "previous_commit": "0caaab3bb03f2fe433cd946823bd19b7089c791c",
+  "pr": "https://github.com/ZZZZihan/TeachingOpen/pull/35",
+  "pr_head": "c41b8ba615bee4d17dec290035fc25da9cb77540",
+  "product_commit": "a99f0ec3440071300730ddf12f48674d40619392",
+  "api_tree": "571898c5c50648dadacef6e9f410fd1c5b824392",
+  "web_tree": "dc434125f306aab68e0d12e79a500364d5d33f8f",
+  "api_tree_equals_pr": true,
+  "web_tree_unchanged": true,
+  "application_java_trees_unchanged": true,
+  "python_tests": {
+    "passed": 42,
+    "total": 42
+  },
+  "real_proxy_checks": {
+    "notifications": {
+      "passed": 44,
+      "total": 44
+    },
+    "client": {
+      "passed": 5,
+      "total": 5
+    },
+    "container": {
+      "passed": 9,
+      "total": 9
+    },
+    "http": {
+      "passed": 13,
+      "total": 13
+    }
+  },
+  "real_proxy_total": 71,
+  "frontend_build_repeated": false,
+  "frontend_tests_repeated": false,
+  "frontend_previous_verified_tests": 179,
+  "frontend_actual_build_commit": "7a0fe014d5de5c68335461321d8c1c1aa0553257",
+  "dist_files": 4884,
+  "dist_bytes_unchanged": true,
+  "http_assets": {
+    "/index.html": "a5b1fba9890e1682bdcf8b866d7edbbf3aadaf712a408244cb99c9b87c6c148b",
+    "/js/app.f75d88dd.js": "ec1de4c26557b893d39b69bed2219be670f6eea09dec9c941cfe25bcc0cc59fc"
+  },
+  "backend_pid": 7035,
+  "frontend_pid": 15798,
+  "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396",
+  "runner_sha256": "f730ca9fe77b196b60a1f8d0af56592321bb74f0f1bac5ab2c1883dc3b3a020b",
+  "data_preservation": {
+    "tables_checked": 69,
+    "changed_tables": [
+      "sys_log"
+    ],
+    "all_non_audit_tables_equal": true,
+    "attachments_equal": true,
+    "sys_log_rows_before": 3022,
+    "sys_log_rows_after": 3043
+  },
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "isolated_recovery_stopped_ports": {
+    "13336": true,
+    "16409": true,
+    "18131": true,
+    "18132": true
+  },
+  "notification_ui_auto_enabled": false,
+  "browser_e2e": false,
+  "production_changed": false,
+  "remote_merged": false,
+  "scope": "Actual same-origin proxy transport and CLI synthetic HTTP; no browser login, Scratch cloud variable business or UI acceptance",
+  "evidence_sha256": {
+    "websocket-proxy-client.json": "f464cdec8ce3805cf435290f4e0a5e41fed47e2d63c40cf7c6bcc96ece6840c4",
+    "websocket-proxy-container.json": "6da557f3c17d3ce7d38dc6276d756dfd81e34ec52a456958ae3282c1dc18dd12",
+    "websocket-proxy-http.json": "546755ea0fd3b30b216c6612bbc7dc0fc16663d15ab7c82170f4c79235b72ae5",
+    "websocket-proxy-notifications.json": "50a6a76d654fdd279b3b52a537d5474988df23f027eaada7c5ae25c1d36a3d54",
+    "websocket-proxy-python-tests.txt": "d00bf7f9fe7307f384a3f5b483fb7bea64a81745bc8b4e4e346be4b0f149285d"
+  }
+}

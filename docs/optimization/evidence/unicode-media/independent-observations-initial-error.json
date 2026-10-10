@@ -1,0 +1,7 @@
+{
+  "scope": "Separate observational probe; not one of the 186 main assertions",
+  "stage": "synthetic teaching_work INSERT",
+  "error_type": "RuntimeError",
+  "reason": "Owned SQL operation failed; no SQL, credentials or response body persisted",
+  "cleanup": "finally removed own sys_config/teaching_work/sys_file namespace and sandbox, logged out accounts and restored full original users; full inventory equality not yet reported in this initial aborted probe"
+}

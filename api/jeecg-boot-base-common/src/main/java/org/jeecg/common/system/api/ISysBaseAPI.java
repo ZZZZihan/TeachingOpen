@@ -288,6 +288,12 @@ public interface ISysBaseAPI {
 	 */
 	public String upload(MultipartFile file,String bizPath,String uploadType);
 
+	/** Bind a completed local upload to the authenticated uploader. */
+	void recordLocalUpload(String path, String originalName);
+
+	/** 200, 401 or 403 after checking current local-file references. */
+	int localDownloadStatus(String path);
+
 	/**
 	 * 文件上传 自定义桶
 	 * @param file

@@ -17,8 +17,7 @@
         :type="collapsed ? 'menu-unfold' : 'menu-fold'"
         @click="toggle"/>
 
-      <span v-if="device === 'desktop'">欢迎使用 {{brandName}}</span>
-      <span v-else>{{brandName}}</span>
+      <span class="header-brand" :title="brandName">{{ brandName }}</span>
 
       <user-menu :theme="theme"/>
     </div>
@@ -52,6 +51,7 @@
   import Logo from '../tools/Logo'
 
   import { mixin } from '@/utils/mixin.js'
+import { platformBrandName } from '@/utils/platformBranding'
 
   export default {
     name: 'GlobalHeader',
@@ -96,9 +96,13 @@
           topNavHeader: {},
           headerIndexRight: {},
           topSmenuStyle: {}
-        },
-        brandName: this.$store.getters.sysConfig.brandName
+            }
       }
+    },
+    computed: {
+        brandName () {
+            return platformBrandName(this.$store.state.user.sysConfig)
+        }
     },
     watch: {
       /** 监听设备变化 */
@@ -188,11 +192,30 @@
     }
 
     .header {
+      display: flex;
+      align-items: center;
       z-index: 2;
       color: white;
       height: @height;
       background-color: @primary-color;
       transition: background 300ms;
+
+      .trigger, .user-wrapper {
+        flex-shrink: 0;
+      }
+
+      .user-wrapper {
+        margin-left: auto;
+      }
+
+      .header-brand {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 14px;
+        font-weight: 500;
+      }
 
       /* dark 样式 */
       &.dark {

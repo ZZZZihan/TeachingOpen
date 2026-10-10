@@ -1,0 +1,17 @@
+{
+  "pixels": [
+    {
+      "width": 1278,
+      "height": 360,
+      "visiblePixels": 70,
+      "bluePixels": 46
+    },
+    {
+      "width": 1278,
+      "height": 360,
+      "visiblePixels": 677,
+      "bluePixels": 439
+    }
+  ],
+  "frameURL": "about:srcdoc"
+}

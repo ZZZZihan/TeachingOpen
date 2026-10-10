@@ -1,0 +1,17 @@
+{
+  "base_commit": "3fb70f1919289d777ccffe936f3a7a8b889a749b",
+  "captured_utc": "2026-10-03T10:37:16.464421+00:00",
+  "scope": "read-only assembly review; no product edits/dependency installs/services or application tests; implementation still mutable",
+  "baseline": [
+    {
+      "path": "api/pom.xml",
+      "sha256": "cd79f0e397627bf32a9e112b78546d4388960837bfa0e8f39f9c907cfe094722",
+      "evidence_file": "baseline-pom.xml"
+    },
+    {
+      "path": "api/jeecg-boot-module-system/src/main/java/org/jeecg/config/ShiroConfig.java",
+      "sha256": "ccdae744cfb8bb966e13f5d0f54c6be895b125a5e489bb11a65847dd75d535d4",
+      "evidence_file": "baseline-ShiroConfig.java"
+    }
+  ]
+}

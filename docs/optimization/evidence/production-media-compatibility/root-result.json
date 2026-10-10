@@ -1,0 +1,59 @@
+{
+  "format": 1,
+  "candidate_head_tested": "49bea7da3552c554a8412f777eeec48d9a5ac9f2",
+  "backend_sha256": "9eb18d42d365dd4fba7044d57ed33aaa0fdb543f8468dd67c10c9dc83de05869",
+  "dist_manifest_sha256": "0b38b4690bac046186f3f4127eb8dc666aada7e2a413216a1a1a917f4bf2d120",
+  "offline_media": {
+    "passed": 211,
+    "total": 211,
+    "jpg_png_inventory_only": 86
+  },
+  "browser": {
+    "version": "154.0.8037.93",
+    "video_samples_passed": 5,
+    "pdf_first_page_and_thumbnails_rendered": 2,
+    "markdown_plaintext_sha256_equal": 1,
+    "selected_full_content_hashes_match_acquisition_manifest": true,
+    "asset_count": 8,
+    "courses_with_units": 3,
+    "video_courses_covered": 3,
+    "database_courses": 5
+  },
+  "all_upload_stat_metadata_and_7_business_tables_unchanged": true,
+  "no_authentication_or_learning_persistence": true,
+  "tool_sha256_final": "ad102c2c28f511efe7e55e44a87aded228ab6bc0842cf629c10aeed74c913bd1",
+  "actual_audit_sha256": "b4bc63664ee603cc70b784ff856c728b3712b3ab4b20cb1ceb2ccbc4fc6547b3",
+  "final_tool_difference": "one report limitation string about ATX-shaped headings; executable behavior unchanged; final source not rerun on actual assets",
+  "tool_tests": {
+    "passed": 33,
+    "total": 33,
+    "skipped": 0
+  },
+  "harness_http": {
+    "passed": 19,
+    "total": 19
+  },
+  "private_artifacts": "local .devspace/artifacts/real-media-browser-20261005; selection, body, screenshots, URLs and logs excluded from Git",
+  "instrumentation_note": "First video run succeeded wait conditions but 250ms observer could report stale video metrics. Preserved first run privately; repeated five samples capturing direct HTMLVideoElement values. Browser console only favicon404 errors observed.",
+  "screenshots_private_sha256": {
+    "video-desktop-direct.png": "3ad36c2dd0d288ceb47cd71af03766fe8b2c8503eb85fb5b10055984615d8081",
+    "sample06-pdf.png": "af5afb755cf9b96ec15a3e809e4e847d1a768c6c5630d3d07932e32804851a5b",
+    "sample07-pdf.png": "29b3a92546a4dc10428c22157b2d437fa1ebfff36d5a8c663e493442611c8c3c",
+    "sample08-md.png": "1b5ceed0ad462deef8f731f79d0ff8f3b7384468922bb11b856841514cb76dc1"
+  },
+  "root_scripts_sha256": {
+    "root-check.py": "0eed191624a356d87320e3a139bdc2723e62bf8d358e41c13b3776924a07f944",
+    "select-root.py": "84e155c1fbc88f475b2644c65eed9d3bb20c6b40247d5846af7ef9a678ab7b46",
+    "browser-video-check-direct.cjs": "7276ebebe24cbfe24950e2100c1a17bee83b679dd4dccc70b6c40c94fde8d66e",
+    "browser-document-check.cjs": "1d428d7f531ab884170b367e896d1e5c538522f151d62585486c6fd78ee89828"
+  },
+  "limitations": [
+    "Only five of83 videos played, with selected segments not full-length decode",
+    "No subjective audio-quality check or browser-matrix/weak-network claim",
+    "PDF screenshots inspect first visible pages/thumbnails, not every page",
+    "MD displayed as plain text, not Markdown rendering",
+    "Actual reader compiled separately with memory-only learning API and local URL adapter; no login/authorization/formal preview-provider acceptance",
+    "All211 metadata parsed;86 images inventory-only; all297 contents not fully rehashed",
+    "No production modification or deployment"
+  ]
+}

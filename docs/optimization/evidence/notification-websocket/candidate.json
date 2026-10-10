@@ -1,0 +1,54 @@
+{
+  "observed_utc": "2026-10-02T23:21:25.034506+00:00",
+  "product_commit": "10a3f167b90fe4f270792e035985c4a38aedb305",
+  "jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396",
+  "packaged_jar_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396",
+  "bundle_manifest_sha256": "e483c7e52260e38bd0c271843675133de8995cb55fac544ddf19e24ce2488969",
+  "backend_java": "Zulu OpenJDK 8u504",
+  "maven": "3.9.16",
+  "java_tests": "skipped by existing parent POM",
+  "frontend_build_exit_code": 0,
+  "frontend_tests": {
+    "passed": 52,
+    "total": 52,
+    "new_cases": 11
+  },
+  "real_api_and_client_checks": {
+    "passed": 139,
+    "total": 139,
+    "socket": 44,
+    "native_node_client": 5,
+    "regressions": 90
+  },
+  "source_files_sha256": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/message/websocket/WebSocket.java": "760857d817eefcde20a0a26c7d09519603cf2c5ceb58a79873500b8ffbfeffa0",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/message/websocket/TestController.java": "964089527d7914e3ac5755464fadcfb20c8724803807800604a854d5235cbaf3",
+    "web/src/components/tools/HeaderNotice.vue": "3b54537f12e033682fab3d5a2559d7f7e2fa3b331a49246dd5db566352acd86d",
+    "web/src/utils/notificationSocket.js": "a089dd4937f3d2f1ef9ad74adb1cf1a116ca67411c96aafab41d0dea96ddea1f",
+    "api/dev/verify-notification-websocket.py": "20cdb042c1a7314c7af04a16a358ef6a185e52b7e279688b64905f13abaff47a",
+    "api/dev/verify-notification-client.py": "71fe88a4866f8951080c5e56bf5ce4b40b60607762c94d5b48644c426165d10f",
+    "web/tests/notification-client-live.mjs": "b75f4057f91c323c430f4e1d774e87227ecbed4c87b344d940122a153470a8fe",
+    "web/tests/notification-socket.test.cjs": "63bc4af880ee4cdfbee01bc83c50f0562ae4c8b930b10482a19b44d81b6ed5e6"
+  },
+  "additional_verifiers": "Native Node client probe added after product commit; no application changes since the clean builds",
+  "runtime_ports_closed": {
+    "13336": true,
+    "16409": true,
+    "18131": true,
+    "18132": true
+  },
+  "candidate_state": {
+    "status": "stopped",
+    "active": {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-notification-fix",
+      "manifest_sha256": "e483c7e52260e38bd0c271843675133de8995cb55fac544ddf19e24ce2488969"
+    },
+    "previous": {
+      "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-tomcat-maintenance",
+      "manifest_sha256": "15c5794938bd94299849bb98245d9c0222899a5bcb776c8607bf3fef56c01d43"
+    }
+  },
+  "browser_ui_verified": false,
+  "layout_changed": false,
+  "production_changed": false
+}

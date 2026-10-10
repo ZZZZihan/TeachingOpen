@@ -1,0 +1,23 @@
+{
+  "observed_utc": "2026-10-04T18:38:25.775591+00:00",
+  "candidate_commit": "8ad3f13db83fe7b48063c99c0f5d33ad42358c67",
+  "source_tracked_clean": true,
+  "existing_services": {
+    "18111": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18141": {
+      "http": 200,
+      "status": "UP"
+    },
+    "18149": {
+      "http": 200,
+      "status": "UP"
+    }
+  },
+  "docker_version": "29.4.0 linux/arm64",
+  "compose_version": "5.1.2",
+  "initial_running_containers": [],
+  "scope": "Existing host Docker daemon; no production connection; planned disposable synthetic Linux arm64 stack; supplied prebuilt artifacts are not rebuilt."
+}

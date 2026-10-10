@@ -1,0 +1,98 @@
+{
+  "scope": "Independent offline real SFC script/template rendering and Vue events; transport is stubbed; no DOM/browser/HTTP/DB.",
+  "baseline": false,
+  "sourceRoot": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/student-feedback-readable",
+  "sourceSha256": {
+    "mixins/JeecgListMixin.js": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+    "utils/studentWorkFeedback.js": "85cce96b39e491db4044db1cc2a5b15744fbf807a31412649280e0a239cf8f12",
+    "components/teaching/StudentWorkFeedback.vue": "d833bb9ad51985c4445024f795baaa71e6542c3cb4f687a4ab800dbb9b8ecc5e",
+    "views/account/center/MineWorkList.vue": "c3473fbeb513f899ca57cfc7651acd7b6b524d0def0df140217da9fa073a7395",
+    "views/account/center/page/MineWorks.vue": "3669b118f874c0b65c04c560373afeed20abb76169b39ce55b874748ac9d7ce4",
+    "views/account/center/page/index.js": "10bc81f202a8c2010b1839943edfd14823874875f4db9b3295d36f402cba6545",
+    "views/account/center/Index.vue": "97f1ecd5cf18326fd3a4e8ec2f00c48613b458f0573b73e7213d73e050eb4b1c"
+  },
+  "passed": 20,
+  "total": 20,
+  "cases": [
+    {
+      "name": "numeric zero and string zero are valid scores, never missing",
+      "passed": true
+    },
+    {
+      "name": "ordinary teacher Integer scores remain exact and render no editable rate",
+      "passed": true
+    },
+    {
+      "name": "absent, empty and nonnumeric typed scores never coerce to zero",
+      "passed": true
+    },
+    {
+      "name": "invalid scores cannot become valid grades through Number conversion",
+      "passed": true
+    },
+    {
+      "name": "absent and whitespace-only comments do not offer an empty dialog",
+      "passed": true
+    },
+    {
+      "name": "comment-only feedback remains readable and explicitly ungraded",
+      "passed": true
+    },
+    {
+      "name": "long Unicode text has a bounded summary and exact complete dialog text",
+      "passed": true
+    },
+    {
+      "name": "HTML-like teacher text and work name remain literal, never innerHTML",
+      "passed": true
+    },
+    {
+      "name": "real native button opens correct work title, score and full comment",
+      "passed": true
+    },
+    {
+      "name": "modal cancel then afterClose clears detail and restores connected trigger focus once",
+      "passed": true
+    },
+    {
+      "name": "previous close callback cannot erase a reopened dialog or steal its focus",
+      "passed": true
+    },
+    {
+      "name": "different work props close the old dialog before the next one opens",
+      "passed": true
+    },
+    {
+      "name": "same work feedback update invalidates old detail rather than leaving stale comments",
+      "passed": true
+    },
+    {
+      "name": "destroyed or disconnected trigger is never focused by delayed close",
+      "passed": true
+    },
+    {
+      "name": "table actually binds each returned row to the real shared feedback component",
+      "passed": true
+    },
+    {
+      "name": "table list replacement cannot retain the previous work detail",
+      "passed": true
+    },
+    {
+      "name": "actual Index card actually binds each returned row to the real shared feedback component",
+      "passed": true
+    },
+    {
+      "name": "actual Index card list replacement cannot retain the previous work detail",
+      "passed": true
+    },
+    {
+      "name": "table keyboard scrolling acts only on the region, preserving nested controls",
+      "passed": true
+    },
+    {
+      "name": "feedback display and dialogs never issue a mutation or extra feedback request",
+      "passed": true
+    }
+  ]
+}

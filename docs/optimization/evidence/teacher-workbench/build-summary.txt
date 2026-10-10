@@ -1,0 +1,29 @@
+Browserslist: caniuse-lite is outdated. Please run:
+Browserslist: caniuse-lite is outdated. Please run:
+Browserslist: caniuse-lite is outdated. Please run:
+ WARNING  Compiled with 12 warnings9:23:24 AM
+ warning  
+Conflicting order. Following module has been added:
+ warning  
+Conflicting order. Following module has been added:
+ warning  
+Conflicting order. Following module has been added:
+ warning  
+Conflicting order. Following module has been added:
+ warning  
+Conflicting order. Following module has been added:
+ warning  
+Conflicting order. Following module has been added:
+ warning  
+Conflicting order. Following module has been added:
+ warning  
+Conflicting order. Following module has been added:
+ warning  
+Conflicting order. Following module has been added:
+ warning  
+Conflicting order. Following module has been added:
+ warning  
+asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+ warning  
+entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+ DONE  Build complete. The dist directory is ready to be deployed.

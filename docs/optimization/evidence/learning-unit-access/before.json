@@ -1,0 +1,48 @@
+{
+  "observed_utc": "2026-10-02T16:05:58.972431+00:00",
+  "jar_sha256": "32c9702c0c1ca804d7a094fab6342cee6d390d6763dfe92f61f57efec5767d08",
+  "expected_legacy": true,
+  "scope": "real HTTP login and unit list/detail responses, synthetic DB fixtures and cleanup; not browser editors or direct attachment-download authorization",
+  "passed": 9,
+  "total": 9,
+  "cases": [
+    {
+      "case": "student_b can read unassigned private unit before fix",
+      "passed": true
+    },
+    {
+      "case": "teacher_b can read unassigned private unit before fix",
+      "passed": true
+    },
+    {
+      "case": "student detail leaks all four hidden resources before fix",
+      "passed": true
+    },
+    {
+      "case": "student list already hides disabled resources",
+      "passed": true
+    },
+    {
+      "case": "unassigned admin list denied before fix",
+      "passed": true
+    },
+    {
+      "case": "nullable display flag fails student list before fix",
+      "passed": true,
+      "http_status": 200,
+      "code": 500
+    },
+    {
+      "case": "all original business rows restored",
+      "passed": true
+    },
+    {
+      "case": "original identity and role restored; probe role removed",
+      "passed": true
+    },
+    {
+      "case": "all original attachment bytes unchanged",
+      "passed": true
+    }
+  ]
+}

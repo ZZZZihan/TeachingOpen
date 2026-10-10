@@ -1,0 +1,875 @@
+
+> vue-antd-jeecg@2.2.0 build
+> vue-cli-service build
+
+
+-  Building for production...
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ WARNING  Compiled with 12 warnings11:24:31 PM
+
+ warning
+
+chunk chunk-295b2f45 [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/chart/MiniArea.vue?vue&type=style&index=0&id=1efcadbe&prod&lang=less&scoped=true
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/chart/MiniBar.vue?vue&type=style&index=0&id=ebc8c03c&prod&lang=less&scoped=true
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , ,
+
+ warning
+
+chunk chunk-337319f0 [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/views/jeecg/tablist/form/JeecgOrderCustomerModal.vue?vue&type=style&index=0&id=800ce91c&prod&scoped=true&lang=css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/views/jeecg/tablist/form/JeecgOrderDMainModal.vue?vue&type=style&index=0&id=3947da84&prod&scoped=true&lang=css
+   - couldn't fulfill desired order of chunk group(s)
+
+ warning
+
+chunk chunk-337319f0 [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/views/jeecg/tablist/JeecgOrderDMainList.vue?vue&type=style&index=0&id=1bacfb3c&prod&scoped=true&lang=css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/views/jeecg/tablist/JeecgOrderCustomerList.vue?vue&type=style&index=0&id=032e064e&prod&scoped=true&lang=css
+   - couldn't fulfill desired order of chunk group(s)
+
+ warning
+
+chunk chunk-5f72b73b [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecgbiz/modal/JSelectDepartModal.vue?vue&type=style&index=0&id=6bef2136&prod&lang=less&scoped=true
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JUpload.vue?vue&type=style&index=0&id=43191c84&prod&lang=less
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , ,
+
+ warning
+
+chunk chunk-5f72b73b [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecgbiz/JSelectDepart.vue?vue&type=style&index=0&id=bd02b66e&prod&scoped=true&lang=css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JUpload.vue?vue&type=style&index=0&id=43191c84&prod&lang=less
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , ,
+
+ warning
+
+chunk chunk-5f72b73b [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-3-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-3-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/codemirror/lib/codemirror.css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JUpload.vue?vue&type=style&index=0&id=43191c84&prod&lang=less
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , ,
+
+ warning
+
+chunk chunk-5f72b73b [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-3-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-3-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/codemirror/theme/panda-syntax.css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JUpload.vue?vue&type=style&index=0&id=43191c84&prod&lang=less
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , ,
+
+ warning
+
+chunk chunk-5f72b73b [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-3-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-3-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/codemirror/addon/hint/show-hint.css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JUpload.vue?vue&type=style&index=0&id=43191c84&prod&lang=less
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , ,
+
+ warning
+
+chunk chunk-5f72b73b [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JCodeEditor.vue?vue&type=style&index=0&id=223238d2&prod&lang=less
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--10-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--10-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/less-loader/dist/cjs.js??ref--10-oneOf-1-3!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/components/jeecg/JUpload.vue?vue&type=style&index=0&id=43191c84&prod&lang=less
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , ,
+
+ warning
+
+chunk chunk-eba63c02 [mini-css-extract-plugin]
+Conflicting order. Following module has been added:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/views/system/modules/DepartWindow.vue?vue&type=style&index=0&id=7a73cd8c&prod&scoped=true&lang=css
+despite it was not able to fulfill desired ordering with these modules:
+ * css /Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/css-loader??ref--6-oneOf-1-1!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib/loaders/stylePostLoader.js!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/postcss-loader/src??ref--6-oneOf-1-2!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-discovery/web/node_modules/vue-loader/lib??vue-loader-options!./src/views/system/modules/UserModal.vue?vue&type=style&index=0&id=6751014c&prod&scoped=true&lang=css
+   - couldn't fulfill desired order of chunk group(s)
+   - while fulfilling desired order of chunk group(s) , , , ,
+
+ warning
+
+asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets:
+  js/chunk-036659b6.b7f18316.js (1.24 MiB)
+  js/chunk-2d0ab315.149bc1f3.js (754 KiB)
+  js/chunk-5f72b73b.41e60bb5.js (406 KiB)
+  js/chunk-7e170d67.e19b5155.js (1.9 MiB)
+  css/chunk-vendors.0626b6c1.css (548 KiB)
+  js/chunk-vendors.13f7ce24.js (7.91 MiB)
+  blockly/blockly_compressed.js (909 KiB)
+  python/static/css/appPlayer.css (523 KiB)
+  python/static/css/app.css (523 KiB)
+  python/static/js/app.js (957 KiB)
+  python/static/js/appPlayer.js (955 KiB)
+  python/static/js/vendor.js (2.41 MiB)
+  scratch3/js/scratch.js (1.38 MiB)
+  scratch3/lib.min.js (12.5 MiB)
+  scratch3/static/assets/9fd052aaf1b4701ff0134d124d6327a3.jpg (269 KiB)
+  scratch3/static/assets/d7eb1e753d603d291d24509c5389d92b.jpg (271 KiB)
+  scratch3/static/internalapi/asset/0015433a406a53f00b792424b823268c.png (420 KiB)
+  scratch3/static/internalapi/asset/050615fe992a00d6af0e664e497ebf53.png (329 KiB)
+  scratch3/static/internalapi/asset/0b4a15ba028bf205ec051390d6ac4de7.png (248 KiB)
+  scratch3/static/internalapi/asset/1679049718869e1f548e1e8823e29c1c.png (262 KiB)
+  scratch3/static/internalapi/asset/1517c21786d2d0edc2f3037408d850bd.png (286 KiB)
+  scratch3/static/internalapi/asset/18e5a88512296cd96417449496bd8711.wav (269 KiB)
+  scratch3/static/internalapi/asset/19211d5ecd34214b6aba947790e63bb0.wav (338 KiB)
+  scratch3/static/internalapi/asset/1ef98019fc94ea65a1b55d5521285c7a.png (259 KiB)
+  scratch3/static/internalapi/asset/2129c842f28d6881f622fdc3497ff2da.png (306 KiB)
+  scratch3/static/internalapi/asset/25a6ede51a96d4e55de2ffb81ae96f8c.png (302 KiB)
+  scratch3/static/internalapi/asset/2de108f3098e92f5c5976cf75d38e99d.png (414 KiB)
+  scratch3/static/internalapi/asset/30085b2d27beb5acdbe895d8b3e64b04.svg (333 KiB)
+  scratch3/static/internalapi/asset/47282ff0f7047c6fab9c94b531abf721.png (374 KiB)
+  scratch3/static/internalapi/asset/4f45f79af8e8dac3d41eb5a06ade61d4.png (272 KiB)
+  scratch3/static/internalapi/asset/4f66053598bea0905e1559ab9d5a6e31.png (498 KiB)
+  scratch3/static/internalapi/asset/5b0a970202b464915915260c03f05455.png (403 KiB)
+  scratch3/static/internalapi/asset/5d747ec036755a4b129f0d5b978bc61c.png (501 KiB)
+  scratch3/static/internalapi/asset/5fab1922f254ae9fd150162c3e392bef.png (509 KiB)
+  scratch3/static/internalapi/asset/646ea2f42ab04b54f1359ccfac958561.wav (299 KiB)
+  scratch3/static/internalapi/asset/6cab934df643d2fc508cfa90c0c4059b.png (287 KiB)
+  scratch3/static/internalapi/asset/82d867fcd9f1b5f49e29c2f853d55665.png (441 KiB)
+  scratch3/static/internalapi/asset/84f7b490f0f536cc1337ab7948aa3aa7.wav (431 KiB)
+  scratch3/static/internalapi/asset/89691587a169d935a58c48c3d4e78534.wav (315 KiB)
+  scratch3/static/internalapi/asset/8c2ae70ee6a15c8d58004df7c4718de1.wav (288 KiB)
+  scratch3/static/internalapi/asset/92968ac16b2f0c3f7835a6dacd172c7b.png (361 KiB)
+  scratch3/static/internalapi/asset/93d71e8b8a96cc007b8d68f36acd338a.png (249 KiB)
+  scratch3/static/internalapi/asset/951765ee7f7370f120c9df20b577c22f.png (437 KiB)
+  scratch3/static/internalapi/asset/962201a2b712a302fb087f8f0dcb2076.png (381 KiB)
+  scratch3/static/internalapi/asset/968f0ede6e70e1dbb763d6fd4c5003e0.png (411 KiB)
+  scratch3/static/internalapi/asset/9b020b8c7cb6a9592f7303add9441d8f.png (253 KiB)
+  scratch3/static/internalapi/asset/9b5cdbd596da1b6149f56b794b6394f4.png (455 KiB)
+  scratch3/static/internalapi/asset/a23fbf972001c94637b568992f8fd7bd.png (457 KiB)
+  scratch3/static/internalapi/asset/c2b097bc5cdb6a14ef5485202bc5ee76.png (392 KiB)
+  scratch3/static/internalapi/asset/c4e9e84fd9244ca43986c2bdb6669ae8.wav (345 KiB)
+  scratch3/static/internalapi/asset/c587075453ace1584cf155d6a8de604d.wav (322 KiB)
+  scratch3/static/internalapi/asset/c7c0b27b959193a0b570a9639cfe8158.png (297 KiB)
+  scratch3/static/internalapi/asset/c8d90320d2966c08af8cdd1c6a7a93b5.png (384 KiB)
+  scratch3/static/internalapi/asset/c9847be305920807c5597d81576dd0c4.svg (271 KiB)
+  scratch3/static/internalapi/asset/d3344650f594bcecdf46aa4a9441badd.svg (310 KiB)
+  scratch3/static/internalapi/asset/da102a69d135973e0fc139131dec785a.png (342 KiB)
+  scratch3/static/internalapi/asset/e1914ed7917267f1c2ef2b48004cade9.png (372 KiB)
+  scratch3/static/internalapi/asset/e213e09ed852c621ba87cde7f95eec79.wav (345 KiB)
+  scratch3/static/internalapi/asset/e5f794c8756ca0cead5cb7e7fe354c41.png (497 KiB)
+  scratch3/static/internalapi/asset/ea86ca30b346f27ca5faf1254f6a31e3.png (252 KiB)
+  scratch3/static/internalapi/asset/efb625f7e0b199b15f69e116cd053cea.png (444 KiB)
+  scratch3/static/internalapi/asset/f4f908da19e2753f3ed679d7b37650ca.png (314 KiB)
+  scratch3/static/internalapi/asset/f84989feee2cf462a1c597169777ee3c.png (279 KiB)
+  scratch3/static/json_index/costumes.json (334 KiB)
+  scratch3/static/json_index/sprites.json (539 KiB)
+  scratchjr/app.bundle.js (1.18 MiB)
+  scratchjr/assets/ui/backgrounds.png (497 KiB)
+  scratchjr/samples/chicken.wav (294 KiB)
+  scratchjr/samples/Dance_magic.wav (368 KiB)
+  scratchjr/samples/Dance_slowmo.wav (435 KiB)
+  scratchjr/samples/f63d8716c8262eb633b29c118966d782.svg (471 KiB)
+  scratchjr/assets/lobby/intro.mp4 (11.7 MiB)
+  scratchjr/app.bundle.js.gz (264 KiB)
+  js/chunk-036659b6.b7f18316.js.gz (390 KiB)
+  scratch3/js/scratch.js.gz (411 KiB)
+  js/chunk-7e170d67.e19b5155.js.gz (533 KiB)
+  python/static/js/vendor.js.gz (740 KiB)
+  js/chunk-vendors.13f7ce24.js.gz (2.45 MiB)
+  scratch3/lib.min.js.gz (4.36 MiB)
+
+ warning
+
+entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  app (8.71 MiB)
+      css/chunk-vendors.0626b6c1.css
+      js/chunk-vendors.13f7ce24.js
+      css/app.34569fa6.css
+      js/app.0798f1e4.js
+
+
+  File                                      Size             Gzipped
+
+  dist/scratch3/lib.min.js                  12770.88 KiB     4477.56 KiB
+  dist/js/vue.min.js                        105.16 KiB       37.71 KiB
+  dist/js/jquery.min.js                     85.48 KiB        29.70 KiB
+  dist/scratchjr/js/jquery.min.js           85.48 KiB        29.70 KiB
+  dist/js/qiniu.min.js                      67.90 KiB        22.58 KiB
+  dist/scratchjr/js/qiniu.min.js            67.90 KiB        22.58 KiB
+  dist/js/jquery.qrcode.min.js              19.46 KiB        6.84 KiB
+  dist/js/vue-resource.min.js               14.91 KiB        5.35 KiB
+  dist/js/jquery.cokie.min.js               1.27 KiB         0.68 KiB
+  dist/scratchjr/js/jquery.cokie.min.js     1.27 KiB         0.68 KiB
+  dist/js/chunk-vendors.13f7ce24.js         8098.35 KiB      2512.63 KiB
+  dist/python/static/js/vendor.js           2464.25 KiB      742.28 KiB
+  dist/js/chunk-7e170d67.e19b5155.js        1942.58 KiB      534.81 KiB
+  dist/scratch3/js/scratch.js               1416.22 KiB      412.43 KiB
+  dist/js/chunk-036659b6.b7f18316.js        1268.80 KiB      392.19 KiB
+  dist/scratchjr/app.bundle.js              1209.42 KiB      265.15 KiB
+  dist/python/static/js/app.js              957.28 KiB       212.70 KiB
+  dist/python/static/js/appPlayer.js        955.34 KiB       212.16 KiB
+  dist/blockly/blockly_compressed.js        908.75 KiB       167.86 KiB
+  dist/js/chunk-2d0ab315.149bc1f3.js        753.74 KiB       171.21 KiB
+  dist/js/chunk-5f72b73b.41e60bb5.js        406.24 KiB       129.47 KiB
+  dist/js/polyfill.js                       225.00 KiB       57.31 KiB
+  dist/js/app.0798f1e4.js                   224.45 KiB       60.44 KiB
+  dist/js/chunk-5c00e860.540af690.js        197.96 KiB       59.59 KiB
+  dist/js/chunk-c595fa56.18057171.js        167.60 KiB       57.44 KiB
+  dist/blockly/msg/messages.js              104.85 KiB       17.66 KiB
+  dist/blockly/blocks_compressed.js         84.93 KiB        15.45 KiB
+  dist/js/chunk-7de7fae8.93c12c18.js        75.62 KiB        20.24 KiB
+  dist/js/chunk-dd40ab38.bc845db1.js        69.84 KiB        23.51 KiB
+  dist/js/chunk-6fd0967e.30e65d20.js        69.35 KiB        20.20 KiB
+  dist/js/chunk-51bdb774.60175c5a.js        63.73 KiB        16.52 KiB
+  dist/js/chunk-0106ce24.3519b993.js        60.35 KiB        17.13 KiB
+  dist/js/chunk-42e8a7a4.0fab5887.js        57.05 KiB        16.80 KiB
+  dist/blockly/msg/js/kn.js                 52.69 KiB        8.13 KiB
+  dist/js/user.52dc3841.js                  51.53 KiB        14.94 KiB
+  dist/blockly/msg/js/tcy.js                49.60 KiB        8.08 KiB
+  dist/js/chunk-00c97493.a9ca1a4e.js        49.03 KiB        12.13 KiB
+  dist/blockly/msg/js/ta.js                 47.68 KiB        7.91 KiB
+  dist/js/chunk-b15c5b3c.8eb09e0a.js        46.73 KiB        13.17 KiB
+  dist/blockly/msg/js/hi.js                 46.46 KiB        8.08 KiB
+  dist/blockly/msg/js/th.js                 45.91 KiB        7.46 KiB
+  dist/blockly/javascript_compressed.js     44.96 KiB        8.85 KiB
+  dist/blockly/msg/js/el.js                 43.97 KiB        8.37 KiB
+  dist/blockly/dart_compressed.js           43.97 KiB        9.34 KiB
+  dist/js/home.db56c930.js                  43.88 KiB        13.43 KiB
+  dist/blockly/msg/js/shn.js                43.80 KiB        7.42 KiB
+  dist/blockly/msg/js/bn.js                 41.81 KiB        7.73 KiB
+  dist/blockly/php_compressed.js            41.77 KiB        8.84 KiB
+  dist/blockly/msg/js/hy.js                 41.49 KiB        7.80 KiB
+  dist/blockly/msg/js/ru.js                 41.26 KiB        7.86 KiB
+  dist/blockly/msg/js/uk.js                 40.55 KiB        7.85 KiB
+  dist/blockly/msg/js/be-tarask.js          40.52 KiB        7.98 KiB
+  dist/blockly/msg/js/be.js                 40.43 KiB        7.87 KiB
+  dist/js/chunk-e897d88e.3f0b4b51.js        40.41 KiB        11.55 KiB
+  dist/blockly/msg/js/bg.js                 40.38 KiB        7.68 KiB
+  dist/blockly/python_compressed.js         39.98 KiB        8.85 KiB
+  dist/blockly/msg/js/mnw.js                39.83 KiB        7.26 KiB
+  dist/blockly/msg/js/fa.js                 39.66 KiB        7.82 KiB
+  dist/blockly/msg/js/bcc.js                39.58 KiB        7.83 KiB
+  dist/blockly/msg/js/lo.js                 39.57 KiB        7.13 KiB
+  dist/blockly/msg/js/dty.js                39.36 KiB        7.35 KiB
+  dist/blockly/msg/js/ba.js                 39.32 KiB        7.88 KiB
+  dist/blockly/msg/js/sr.js                 39.26 KiB        7.74 KiB
+  dist/blockly/msg/js/ab.js                 39.20 KiB        7.68 KiB
+  dist/blockly/msg/js/xmf.js                38.98 KiB        7.16 KiB
+  dist/blockly/msg/js/te.js                 38.97 KiB        7.21 KiB
+  dist/blockly/msg/js/lki.js                38.84 KiB        7.87 KiB
+  dist/blockly/msg/js/ug-arab.js            38.79 KiB        7.60 KiB
+  dist/blockly/msg/js/my.js                 38.62 KiB        6.96 KiB
+  dist/js/chunk-699e8c58.7687f687.js        38.29 KiB        11.75 KiB
+  dist/blockly/msg/js/mk.js                 38.27 KiB        7.53 KiB
+  dist/blockly/msg/js/ml.js                 38.14 KiB        6.87 KiB
+  dist/blockly/msg/js/ne.js                 38.07 KiB        6.79 KiB
+  dist/blockly/msg/js/kbd-cyrl.js           37.96 KiB        7.22 KiB
+  dist/blockly/msg/js/km.js                 37.84 KiB        6.74 KiB
+  dist/blockly/msg/js/ka.js                 37.76 KiB        6.53 KiB
+  dist/blockly/msg/js/la.js                 37.75 KiB        6.46 KiB
+  dist/blockly/msg/js/pa.js                 37.75 KiB        6.88 KiB
+  dist/blockly/msg/js/si.js                 37.75 KiB        6.58 KiB
+  dist/blockly/msg/js/cdo.js                37.75 KiB        6.47 KiB
+  dist/blockly/msg/js/mzn.js                37.75 KiB        6.46 KiB
+  dist/blockly/msg/js/frr.js                37.74 KiB        6.46 KiB
+  dist/blockly/msg/js/ace.js                37.73 KiB        6.47 KiB
+  dist/blockly/msg/js/ast.js                37.73 KiB        6.46 KiB
+  dist/blockly/msg/js/am.js                 37.73 KiB        6.69 KiB
+  dist/blockly/msg/js/inh.js                37.73 KiB        7.01 KiB
+  dist/blockly/msg/js/sw.js                 37.71 KiB        6.46 KiB
+  dist/blockly/msg/js/sco.js                37.70 KiB        6.47 KiB
+  dist/blockly/msg/js/ky.js                 37.68 KiB        6.97 KiB
+  dist/js/chunk-c1c21bbc.bdaa2549.js        37.67 KiB        9.64 KiB
+  dist/blockly/msg/js/yue.js                37.64 KiB        6.53 KiB
+  dist/blockly/msg/js/hak.js                37.59 KiB        6.55 KiB
+  dist/blockly/msg/js/ar.js                 37.56 KiB        7.56 KiB
+  dist/js/chunk-654a0926.0e7d213b.js        37.53 KiB        10.45 KiB
+  dist/blockly/msg/js/ti.js                 37.48 KiB        6.77 KiB
+  dist/blockly/msg/js/af.js                 37.42 KiB        6.54 KiB
+  dist/blockly/msg/js/ksh.js                37.41 KiB        6.73 KiB
+  dist/blockly/msg/js/uz.js                 37.41 KiB        6.60 KiB
+  dist/blockly/msg/js/ur.js                 37.38 KiB        7.32 KiB
+  dist/blockly/msg/js/olo.js                37.32 KiB        6.57 KiB
+  dist/blockly/msg/js/ps.js                 37.32 KiB        6.73 KiB
+  dist/blockly/msg/js/ku-latn.js            37.31 KiB        6.58 KiB
+  dist/blockly/msg/js/zgh.js                37.23 KiB        6.86 KiB
+  dist/blockly/msg/js/fo.js                 37.20 KiB        6.62 KiB
+  dist/blockly/msg/js/gn.js                 37.17 KiB        6.67 KiB
+  dist/blockly/msg/js/mg.js                 37.14 KiB        6.62 KiB
+  dist/blockly/msg/js/sd.js                 37.05 KiB        7.33 KiB
+  dist/blockly/msg/js/skr-arab.js           36.83 KiB        7.11 KiB
+  dist/blockly/msg/js/lrc.js                36.76 KiB        7.11 KiB
+  dist/js/chunk-00962386.41054ed0.js        36.75 KiB        11.77 KiB
+  dist/blockly/msg/js/he.js                 36.57 KiB        7.34 KiB
+  dist/blockly/msg/js/vi.js                 36.54 KiB        7.36 KiB
+  dist/blockly/msg/js/gor.js                36.51 KiB        6.79 KiB
+  dist/blockly/msg/js/tl.js                 36.40 KiB        7.04 KiB
+  dist/blockly/msg/js/lb.js                 36.19 KiB        7.01 KiB
+  dist/blockly/lua_compressed.js            36.04 KiB        7.94 KiB
+  dist/blockly/msg/js/gl.js                 35.87 KiB        6.89 KiB
+  dist/blockly/msg/js/ee.js                 35.80 KiB        7.13 KiB
+  dist/blockly/msg/js/bs.js                 35.50 KiB        6.96 KiB
+  dist/blockly/msg/js/ko.js                 35.44 KiB        7.77 KiB
+  dist/blockly/msg/js/oc.js                 35.18 KiB        7.11 KiB
+  dist/blockly/msg/js/eu.js                 35.00 KiB        7.10 KiB
+  dist/blockly/msg/js/ig.js                 34.87 KiB        6.79 KiB
+  dist/blockly/msg/js/az.js                 34.84 KiB        7.35 KiB
+  dist/blockly/msg/js/ja.js                 34.70 KiB        7.33 KiB
+  dist/blockly/msg/js/fr.js                 34.65 KiB        7.21 KiB
+  dist/blockly/msg/js/tlh.js                34.64 KiB        6.64 KiB
+  dist/blockly/msg/js/en-gb.js              34.43 KiB        6.48 KiB
+  dist/blockly/msg/js/hrx.js                34.42 KiB        7.34 KiB
+  dist/blockly/msg/js/diq.js                34.00 KiB        7.53 KiB
+  dist/blockly/msg/js/lt.js                 33.88 KiB        7.72 KiB
+  dist/blockly/msg/js/hu.js                 33.88 KiB        7.36 KiB
+  dist/blockly/msg/js/es.js                 33.86 KiB        6.85 KiB
+  dist/blockly/msg/js/ro.js                 33.84 KiB        7.24 KiB
+  dist/blockly/msg/js/ca.js                 33.79 KiB        6.98 KiB
+  dist/blockly/msg/js/br.js                 33.79 KiB        7.02 KiB
+  dist/blockly/msg/js/sc.js                 33.78 KiB        6.90 KiB
+  dist/blockly/msg/js/sq.js                 33.72 KiB        7.29 KiB
+  dist/blockly/msg/js/it.js                 33.69 KiB        6.77 KiB
+  dist/blockly/msg/js/yo.js                 33.60 KiB        7.07 KiB
+  dist/blockly/msg/js/ha.js                 33.57 KiB        6.92 KiB
+  dist/blockly/msg/js/pms.js                33.52 KiB        6.95 KiB
+  dist/blockly/msg/js/cs.js                 33.50 KiB        7.40 KiB
+  dist/blockly/msg/js/lv.js                 33.49 KiB        7.15 KiB
+  dist/blockly/msg/js/ia.js                 33.48 KiB        6.61 KiB
+  dist/blockly/msg/js/de.js                 33.43 KiB        7.13 KiB
+  dist/blockly/msg/js/ms.js                 33.42 KiB        7.18 KiB
+  dist/blockly/msg/js/pt-br.js              33.40 KiB        6.92 KiB
+  dist/blockly/msg/js/da.js                 33.40 KiB        6.85 KiB
+  dist/blockly/msg/js/pt.js                 33.29 KiB        6.92 KiB
+  dist/blockly/msg/js/et.js                 33.28 KiB        7.00 KiB
+  dist/blockly/msg/js/nl.js                 33.25 KiB        7.04 KiB
+  dist/blockly/msg/js/eo.js                 33.18 KiB        6.92 KiB
+  dist/blockly/msg/js/fi.js                 33.09 KiB        6.99 KiB
+  dist/blockly/msg/js/tr.js                 33.09 KiB        7.01 KiB
+  dist/blockly/msg/js/sv.js                 33.07 KiB        6.91 KiB
+  dist/blockly/msg/js/id.js                 33.03 KiB        6.89 KiB
+  dist/blockly/msg/js/pl.js                 32.94 KiB        7.20 KiB
+  dist/js/chunk-33c06197.1fee5a7d.js        32.83 KiB        10.54 KiB
+  dist/blockly/msg/js/nb.js                 32.76 KiB        6.94 KiB
+  dist/blockly/msg/js/kab.js                32.69 KiB        6.79 KiB
+  dist/blockly/msg/js/sk.js                 32.49 KiB        7.09 KiB
+  dist/blockly/msg/js/hr.js                 32.42 KiB        6.89 KiB
+  dist/blockly/msg/js/sr-latn.js            32.35 KiB        7.19 KiB
+  dist/blockly/msg/js/zh-hant.js            32.28 KiB        7.06 KiB
+  dist/blockly/msg/js/zh-hans.js            32.12 KiB        7.15 KiB
+  dist/blockly/msg/js/is.js                 32.06 KiB        7.05 KiB
+  dist/blockly/msg/js/sl.js                 31.67 KiB        6.72 KiB
+  dist/python/turtle-renderer.js            31.53 KiB        5.85 KiB
+  dist/blockly/msg/js/en.js                 31.30 KiB        6.34 KiB
+  dist/js/chunk-eba63c02.bc88ca16.js        31.25 KiB        9.49 KiB
+  dist/js/chunk-64e9f4d9.437547da.js        31.18 KiB        8.27 KiB
+  dist/js/chunk-48792450.fceac453.js        30.33 KiB        9.52 KiB
+  dist/js/chunk-337319f0.0158d65c.js        30.16 KiB        7.81 KiB
+  dist/js/chunk-e1275998.2b65b2c6.js        29.32 KiB        8.19 KiB
+  dist/js/chunk-da74b6ea.5725031c.js        28.61 KiB        9.17 KiB
+  dist/js/chunk-5394f16f.c78a77b5.js        27.50 KiB        8.32 KiB
+  dist/js/chunk-35ebffbf.94cb2b89.js        27.35 KiB        7.41 KiB
+  dist/js/chunk-56892c62.4770079a.js        26.92 KiB        9.08 KiB
+  dist/js/chunk-4ee438f8.03437d9b.js        26.40 KiB        8.58 KiB
+  dist/js/chunk-34fc7cbc.6d24c25b.js        25.80 KiB        6.97 KiB
+  dist/js/chunk-8148b846.9bbb2766.js        25.48 KiB        8.70 KiB
+  dist/js/chunk-577a7cd0.cf887ff4.js        25.39 KiB        8.54 KiB
+  dist/js/chunk-4df55040.d9042ce3.js        25.23 KiB        8.96 KiB
+  dist/js/chunk-7fd011d4.a68a9ba5.js        25.06 KiB        8.04 KiB
+  dist/js/chunk-061af9cd.f205e513.js        24.97 KiB        3.76 KiB
+  dist/js/chunk-3452d4e4.3abfdfed.js        24.77 KiB        7.02 KiB
+  dist/js/chunk-ad990116.ce7a4ffd.js        24.06 KiB        7.99 KiB
+  dist/js/chunk-2a465c9b.c15dd303.js        23.09 KiB        6.98 KiB
+  dist/js/chunk-2b2afeb4.a2905b06.js        22.81 KiB        6.26 KiB
+  dist/js/chunk-dab567ea.4a36a0a7.js        22.81 KiB        7.69 KiB
+  dist/js/chunk-feaee3de.eefb887f.js        22.65 KiB        3.97 KiB
+  dist/js/chunk-114bb9d4.d85d0f4d.js        22.41 KiB        6.10 KiB
+  dist/js/chunk-0ca556c5.31276d0b.js        21.14 KiB        6.61 KiB
+  dist/js/chunk-885abb1e.344d12fd.js        20.80 KiB        6.83 KiB
+  dist/js/chunk-32dddb77.1b13e96f.js        19.97 KiB        6.36 KiB
+  dist/js/chunk-7b31e229.fdc86a56.js        19.83 KiB        5.52 KiB
+  dist/js/chunk-d103020a.467f9593.js        19.68 KiB        6.33 KiB
+  dist/js/chunk-4d3c2ec8.5d3f8a32.js        19.59 KiB        6.43 KiB
+  dist/js/chunk-9eb3b5b2.57ae3a9c.js        19.41 KiB        5.72 KiB
+  dist/js/chunk-70d2de14.ee9b8886.js        19.32 KiB        6.14 KiB
+  dist/js/chunk-38329d04.b9b14c09.js        19.24 KiB        8.33 KiB
+  dist/blockly/code.js                      19.16 KiB        6.42 KiB
+  dist/scratch3/chunks/ar-steps.js          19.07 KiB        6.22 KiB
+  dist/js/chunk-4d8e1b1d.215304e4.js        18.90 KiB        6.02 KiB
+  dist/js/chunk-3e135bc8.3fe2828b.js        18.01 KiB        5.99 KiB
+  dist/scratch3/extension-worker.js         17.78 KiB        5.56 KiB
+  dist/js/chunk-702a59b0.02660ce8.js        17.74 KiB        5.94 KiB
+  dist/js/chunk-382b809a.abca09dd.js        17.63 KiB        5.17 KiB
+  dist/js/chunk-774f2a3a.d7afefb9.js        17.62 KiB        6.22 KiB
+  dist/python/execution.js                  17.58 KiB        4.87 KiB
+  dist/js/chunk-2a3f17f4.b58d79e9.js        17.44 KiB        5.61 KiB
+  dist/js/chunk-d4d526a2.0c9c7ace.js        17.35 KiB        5.95 KiB
+  dist/js/chunk-2e2cadca.3de6e09a.js        17.33 KiB        5.27 KiB
+  dist/js/chunk-60691329.95c6d622.js        17.32 KiB        5.40 KiB
+  dist/js/chunk-380317be.9ff33ec5.js        16.95 KiB        5.71 KiB
+  dist/js/chunk-21a8d479.6ce04269.js        16.89 KiB        5.82 KiB
+  dist/js/chunk-4cf1490f.d4cb25d9.js        16.82 KiB        6.52 KiB
+  dist/js/chunk-3cb6f54d.efe167d9.js        16.63 KiB        5.46 KiB
+  dist/js/chunk-571e4483.fb1340ba.js        16.48 KiB        4.94 KiB
+  dist/js/chunk-9a2bd16a.b0332b47.js        16.41 KiB        6.11 KiB
+  dist/js/chunk-3e58d502.d667a763.js        16.14 KiB        5.89 KiB
+  dist/js/chunk-6c1dfd96.788cd419.js        16.07 KiB        5.49 KiB
+  dist/js/chunk-a08a698a.c43f3074.js        15.93 KiB        5.63 KiB
+  dist/scratch3/chunks/pt_BR-steps.js       15.65 KiB        5.27 KiB
+  dist/scratch3/chunks/zh_CN-steps.js       15.65 KiB        5.28 KiB
+  dist/scratch3/chunks/zh_TW-steps.js       15.65 KiB        5.27 KiB
+  dist/scratch3/chunks/sw-steps.js          15.64 KiB        5.29 KiB
+  dist/scratch3/chunks/tr-steps.js          15.64 KiB        5.28 KiB
+  dist/scratch3/chunks/uk-steps.js          15.64 KiB        5.28 KiB
+  dist/scratch3/chunks/zu-steps.js          15.64 KiB        5.28 KiB
+  dist/scratch3/chunks/am-steps.js          15.64 KiB        5.29 KiB
+  dist/scratch3/chunks/es-steps.js          15.64 KiB        5.28 KiB
+  dist/scratch3/chunks/ja-steps.js          15.64 KiB        5.28 KiB
+  dist/scratch3/chunks/fr-steps.js          15.64 KiB        5.28 KiB
+  dist/js/chunk-10204d6b.5da8f96b.js        15.25 KiB        6.60 KiB
+  dist/js/chunk-49a94d80.23d18766.js        15.17 KiB        4.91 KiB
+  dist/js/chunk-155de80d.dcb0f961.js        14.76 KiB        4.94 KiB
+  dist/js/chunk-89c64976.1843fedf.js        14.57 KiB        4.55 KiB
+  dist/js/chunk-846e4bd2.491fab79.js        14.23 KiB        5.07 KiB
+  dist/js/chunk-3f550f3e.8df6728f.js        14.22 KiB        4.83 KiB
+  dist/js/chunk-750e3f31.12311602.js        13.21 KiB        3.89 KiB
+  dist/js/chunk-060084d5.0de5c96a.js        12.98 KiB        3.31 KiB
+  dist/js/chunk-63108879.7e37b85d.js        12.53 KiB        4.53 KiB
+  dist/js/chunk-a4a5036e.60f30e86.js        12.44 KiB        4.78 KiB
+  dist/js/chunk-9da903d8.d7ba9c2f.js        12.42 KiB        4.45 KiB
+  dist/js/chunk-655600c2.4120033c.js        12.17 KiB        3.88 KiB
+  dist/js/chunk-2b125264.dd59de80.js        12.09 KiB        4.21 KiB
+  dist/js/chunk-43aea182.5b027fb5.js        12.02 KiB        4.38 KiB
+  dist/js/chunk-2811eab1.f2b5f877.js        11.82 KiB        6.22 KiB
+  dist/js/chunk-8e1d9894.024d1cf4.js        11.55 KiB        4.10 KiB
+  dist/js/chunk-71c04522.e417c734.js        11.47 KiB        4.21 KiB
+  dist/tinymce/langs/zh_CN.js               11.25 KiB        3.95 KiB
+  dist/python/runner.js                     11.21 KiB        3.32 KiB
+  dist/js/chunk-19c7fca4.8d358e25.js        11.12 KiB        4.08 KiB
+  dist/js/chunk-507301b0.ff404561.js        11.03 KiB        4.10 KiB
+  dist/js/chunk-73594c9e.cf80b5dc.js        10.86 KiB        4.06 KiB
+  dist/scratch3/cloud-client.js             10.83 KiB        3.41 KiB
+  dist/scratchjr/editor-bridge.js           10.82 KiB        3.79 KiB
+  dist/js/chunk-b62d3396.c64c72eb.js        10.60 KiB        3.27 KiB
+  dist/js/chunk-21b08424.deacc757.js        10.46 KiB        3.56 KiB
+  dist/js/chunk-0a8ffb9c.48a299da.js        10.35 KiB        3.67 KiB
+  dist/js/chunk-bde14650.d487af8b.js        10.24 KiB        3.58 KiB
+  dist/js/chunk-c387b504.df04539b.js        10.23 KiB        3.75 KiB
+  dist/js/chunk-4375d9ca.b9fbe865.js        10.21 KiB        3.98 KiB
+  dist/js/chunk-5679af42.812c4fa1.js        9.93 KiB         3.55 KiB
+  dist/js/chunk-2d0e8c90.b50ec2a0.js        9.83 KiB         2.62 KiB
+  dist/scratch3/static/extensions/exampl    9.76 KiB         3.07 KiB
+  e-extension.js
+  dist/js/chunk-2352e4ec.4f1456a2.js        9.73 KiB         3.61 KiB
+  dist/js/chunk-57bb7720.ad2bf9f0.js        9.51 KiB         3.11 KiB
+  dist/js/chunk-ad1e6236.ed4ae026.js        9.36 KiB         3.45 KiB
+  dist/js/chunk-5d11afae.af9cffe1.js        9.15 KiB         3.67 KiB
+  dist/js/chunk-2f5fd4d0.577a4b83.js        9.13 KiB         3.50 KiB
+  dist/v2.js                                9.08 KiB         3.46 KiB
+  dist/js/chunk-aa9df71a.401f2761.js        8.98 KiB         3.45 KiB
+  dist/scratch3/editor-bridge.js            8.94 KiB         3.24 KiB
+  dist/js/chunk-4c5df1b8.91f0c08a.js        8.71 KiB         3.08 KiB
+  dist/js/chunk-5c6cac6a.fe5af05e.js        8.70 KiB         3.07 KiB
+  dist/python/worker-turtle.js              8.69 KiB         2.57 KiB
+  dist/js/common.js                         8.47 KiB         2.86 KiB
+  dist/js/chunk-162dee7b.7b9ef9ff.js        8.38 KiB         2.97 KiB
+  dist/js/chunk-2839cb58.796e58b1.js        8.22 KiB         2.71 KiB
+  dist/js/chunk-2d22d262.3d18f3f8.js        8.12 KiB         2.41 KiB
+  dist/python/persistence.js                7.98 KiB         2.88 KiB
+  dist/js/chunk-194374b3.56c08830.js        7.88 KiB         2.75 KiB
+  dist/js/chunk-ccaa20dc.18b8a061.js        7.86 KiB         2.93 KiB
+  dist/js/chunk-0568f6a4.5406b3d8.js        7.85 KiB         3.07 KiB
+  dist/scratch3/persistence.js              7.84 KiB         2.88 KiB
+  dist/python/source-loading.js             7.84 KiB         2.66 KiB
+  dist/js/chunk-d56de2f6.cf49fd5f.js        7.60 KiB         2.77 KiB
+  dist/js/chunk-295b2f45.de46b0b2.js        7.26 KiB         2.48 KiB
+  dist/js/chunk-63e7cfd2.819d8c8f.js        7.15 KiB         2.84 KiB
+  dist/js/chunk-2d20fed6.43d28533.js        7.14 KiB         2.71 KiB
+  dist/js/chunk-6f9e13e4.eaa4a018.js        7.12 KiB         2.78 KiB
+  dist/js/chunk-fc3a60d8.7abd969c.js        7.11 KiB         2.27 KiB
+  dist/js/chunk-56833d87.1b1efea6.js        7.01 KiB         2.49 KiB
+  dist/js/chunk-05ad0f38.e55e93a9.js        6.90 KiB         3.98 KiB
+  dist/js/chunk-f6cfc46a.bda697aa.js        6.82 KiB         2.55 KiB
+  dist/js/chunk-68fd7438.051da3cb.js        6.73 KiB         2.14 KiB
+  dist/js/chunk-1931d078.1c924716.js        6.71 KiB         2.39 KiB
+  dist/python/editor-bridge.js              6.61 KiB         2.58 KiB
+  dist/js/chunk-773edb85.58dcb4ec.js        6.60 KiB         2.02 KiB
+  dist/js/chunk-0fc9ab06.7fc8826e.js        6.57 KiB         2.11 KiB
+  dist/js/chunk-2bd4832e.08481b80.js        6.47 KiB         2.07 KiB
+  dist/js/chunk-7816dbd1.0b6f7086.js        6.45 KiB         2.43 KiB
+  dist/js/chunk-1de2f5c1.d88e2e12.js        6.26 KiB         2.47 KiB
+  dist/js/chunk-29acf03b.3e0b6f86.js        6.25 KiB         2.56 KiB
+  dist/js/chunk-e9ca1ee8.8ba718db.js        6.24 KiB         2.35 KiB
+  dist/js/chunk-544a773d.df590255.js        6.06 KiB         2.42 KiB
+  dist/blockly/storage.js                   5.99 KiB         1.78 KiB
+  dist/js/chunk-690d59a8.fe8dad42.js        5.93 KiB         2.30 KiB
+  dist/js/chunk-30d2e363.70283449.js        5.90 KiB         2.15 KiB
+  dist/js/chunk-b7066220.5d9cdd6b.js        5.87 KiB         2.38 KiB
+  dist/js/chunk-7e62704e.8fde263e.js        5.83 KiB         2.06 KiB
+  dist/js/chunk-564f2ed8.e5c49337.js        5.78 KiB         2.38 KiB
+  dist/js/chunk-d03eead4.f0f8f9cb.js        5.72 KiB         2.23 KiB
+  dist/js/chunk-6919257a.01a08765.js        5.66 KiB         2.28 KiB
+  dist/js/chunk-2d0d30b9.d324c4fd.js        5.62 KiB         2.05 KiB
+  dist/js/chunk-c3477bb8.7bb08ab0.js        5.58 KiB         2.38 KiB
+  dist/js/chunk-4ff90fe6.59763366.js        5.52 KiB         1.94 KiB
+  dist/js/chunk-0c878aea.226cfed5.js        5.45 KiB         1.90 KiB
+  dist/js/chunk-9de5a37c.560d9b16.js        5.40 KiB         2.17 KiB
+  dist/js/chunk-0bffafdf.4e2a85d8.js        5.39 KiB         2.15 KiB
+  dist/js/chunk-2d0d4043.e6bd8f72.js        5.38 KiB         1.98 KiB
+  dist/python/worker.js                     5.28 KiB         2.08 KiB
+  dist/js/chunk-34cb0060.23bd68dd.js        5.17 KiB         2.16 KiB
+  dist/js/chunk-0404f611.3c1c3908.js        5.05 KiB         2.23 KiB
+  dist/js/chunk-5bb66b2b.f9e92561.js        4.93 KiB         2.08 KiB
+  dist/js/chunk-14a3441f.1ca269e1.js        4.92 KiB         2.09 KiB
+  dist/js/chunk-2d238446.7e437801.js        4.90 KiB         2.03 KiB
+  dist/js/chunk-30736557.beae6504.js        4.81 KiB         1.98 KiB
+  dist/js/chunk-2d0d01f4.a5045fa4.js        4.60 KiB         1.71 KiB
+  dist/js/chunk-2d0da383.cff838c8.js        4.53 KiB         1.73 KiB
+  dist/js/chunk-2d23019d.d70d5255.js        4.47 KiB         1.86 KiB
+  dist/js/chunk-2d0c4e25.13cb0aa6.js        4.38 KiB         2.02 KiB
+  dist/js/chunk-41628c0b.d885862a.js        4.29 KiB         1.79 KiB
+  dist/js/chunk-2d0cef18.f6c46876.js        4.22 KiB         1.38 KiB
+  dist/js/chunk-06e9670c.50b7591d.js        4.17 KiB         1.56 KiB
+  dist/js/chunk-4f8d3122.155bcd91.js        4.17 KiB         1.61 KiB
+  dist/js/chunk-2d221f96.452e57be.js        4.11 KiB         1.23 KiB
+  dist/js/chunk-2d216d93.5d6e3f38.js        4.08 KiB         1.55 KiB
+  dist/js/chunk-4b168cec.ad60984c.js        3.97 KiB         1.15 KiB
+  dist/js/chunk-676c7816.51cd1bc6.js        3.96 KiB         1.60 KiB
+  dist/js/chunk-3f00a3bc.39a67a2d.js        3.95 KiB         1.68 KiB
+  dist/js/chunk-05f1eee6.4fc2e4b9.js        3.94 KiB         1.67 KiB
+  dist/js/chunk-2d0e9974.1fcc80d5.js        3.79 KiB         1.12 KiB
+  dist/scratch3/js/keyboard.js              3.78 KiB         1.14 KiB
+  dist/js/chunk-09b939f2.f6129c75.js        3.74 KiB         1.53 KiB
+  dist/js/chunk-6f971f70.93327a56.js        3.74 KiB         1.80 KiB
+  dist/js/chunk-32b42889.cd223a5d.js        3.73 KiB         1.58 KiB
+  dist/js/chunk-30c74116.7264f4bc.js        3.61 KiB         1.40 KiB
+  dist/js/chunk-30c913cb.9a2d91b4.js        3.61 KiB         1.40 KiB
+  dist/js/chunk-1d9973c8.3cc16bcb.js        3.59 KiB         1.40 KiB
+  dist/js/chunk-0067c404.855eeee8.js        3.47 KiB         1.50 KiB
+  dist/js/chunk-2b19b8cc.99a9ac4c.js        3.24 KiB         1.17 KiB
+  dist/js/chunk-976c9a12.a7191921.js        3.19 KiB         1.53 KiB
+  dist/js/chunk-2d0c1d57.47b58a27.js        3.16 KiB         1.27 KiB
+  dist/js/chunk-7bec7679.052d3d13.js        3.13 KiB         1.40 KiB
+  dist/js/chunk-2d229a09.5feb5cf8.js        3.13 KiB         1.29 KiB
+  dist/js/chunk-2d0c230b.77e092d8.js        2.97 KiB         1.40 KiB
+  dist/js/chunk-3edc4aee.9b45aebe.js        2.97 KiB         1.41 KiB
+  dist/scratch3/player-bridge.js            2.93 KiB         1.28 KiB
+  dist/scratch3/player-layout.js            2.93 KiB         1.12 KiB
+  dist/scratch3/chunks/compatibilitytest    2.91 KiB         1.26 KiB
+  ing.js
+  dist/js/chunk-0d4eb5c9.0c63b640.js        2.86 KiB         1.31 KiB
+  dist/scratch3/chunks/gui.js               2.77 KiB         1.27 KiB
+  dist/js/chunk-2d0a3776.c5098797.js        2.76 KiB         1.05 KiB
+  dist/js/chunk-2d0dec69.8a2fa714.js        2.71 KiB         1.03 KiB
+  dist/js/chunk-2d22cc26.ee2e52c8.js        2.69 KiB         1.05 KiB
+  dist/scratchjr/js/common.js               2.60 KiB         1.16 KiB
+  dist/js/chunk-434972e2.692a3ec1.js        2.57 KiB         1.18 KiB
+  dist/js/chunk-2d0c45fa.c9f1cdcd.js        2.40 KiB         1.15 KiB
+  dist/js/chunk-2b0363f7.55368bce.js        2.38 KiB         1.01 KiB
+  dist/js/chunk-2d0b9b65.b2f93232.js        2.37 KiB         0.95 KiB
+  dist/js/chunk-2d21dfe7.a2174918.js        2.36 KiB         1.16 KiB
+  dist/python/output.js                     2.33 KiB         1.05 KiB
+  dist/js/chunk-2d0cfe94.5628551f.js        2.32 KiB         1.15 KiB
+  dist/js/chunk-2d0b1e33.960fd84e.js        2.29 KiB         1.14 KiB
+  dist/js/chunk-2203d43c.ad797ef5.js        2.26 KiB         1.00 KiB
+  dist/js/chunk-2d0a3c6b.75e00f70.js        2.23 KiB         1.09 KiB
+  dist/js/chunk-f4145dd0.ba1cbe8e.js        2.20 KiB         0.87 KiB
+  dist/js/chunk-2d0a3cbb.8b332cb7.js        2.08 KiB         1.07 KiB
+  dist/js/chunk-30ac2e57.1cb2f0f4.js        2.07 KiB         1.02 KiB
+  dist/blockly/msg/th.js                    2.06 KiB         0.82 KiB
+  dist/js/chunk-2d238425.a2bc0cba.js        2.02 KiB         0.96 KiB
+  dist/js/chunk-2cb2ced6.eaa3d1ff.js        2.00 KiB         1.21 KiB
+  dist/js/chunk-952ad1d6.8007ee4c.js        1.95 KiB         0.91 KiB
+  dist/blockly/msg/ta.js                    1.88 KiB         0.75 KiB
+  dist/js/chunk-e1e3409e.89ca11dc.js        1.88 KiB         0.93 KiB
+  dist/js/chunk-06f9e3f4.938be13a.js        1.85 KiB         0.92 KiB
+  dist/scratch3/chunks/player.js            1.82 KiB         0.88 KiB
+  dist/js/chunk-12b753e2.d6ce53e8.js        1.81 KiB         0.87 KiB
+  dist/js/chunk-2d209ae6.86e8d6f4.js        1.78 KiB         0.81 KiB
+  dist/js/chunk-2d859ad4.2db88f0c.js        1.78 KiB         0.86 KiB
+  dist/js/chunk-55b71812.f369b118.js        1.70 KiB         0.67 KiB
+  dist/js/chunk-2d0ba8d9.4347b8aa.js        1.63 KiB         0.86 KiB
+  dist/js/chunk-42f73310.a5da9ad6.js        1.61 KiB         0.79 KiB
+  dist/js/chunk-642a1c2a.d0c79c24.js        1.58 KiB         0.84 KiB
+  dist/js/chunk-6b3ffd30.36348f86.js        1.58 KiB         0.84 KiB
+  dist/scratch3/1ec1a83be92ce3c05727.wor    1.57 KiB         0.70 KiB
+  ker.js
+  dist/js/fail.27dc29c8.js                  1.57 KiB         0.83 KiB
+  dist/blockly/msg/el.js                    1.56 KiB         0.81 KiB
+  dist/blockly/msg/mk.js                    1.55 KiB         0.74 KiB
+  dist/js/chunk-2d0dde11.2e618eb0.js        1.53 KiB         0.72 KiB
+  dist/blockly/msg/ru.js                    1.50 KiB         0.77 KiB
+  dist/python/runner-loader.js              1.49 KiB         0.61 KiB
+  dist/blockly/msg/be-tarask.js             1.47 KiB         0.76 KiB
+  dist/blockly/msg/sr.js                    1.44 KiB         0.72 KiB
+  dist/blockly/msg/uk.js                    1.44 KiB         0.76 KiB
+  dist/js/chunk-2d0e1f65.895c4e71.js        1.35 KiB         0.74 KiB
+  dist/blockly/msg/fa.js                    1.33 KiB         0.68 KiB
+  dist/js/chunk-2d0f05f3.c9c25634.js        1.30 KiB         0.67 KiB
+  dist/blockly/msg/ar.js                    1.29 KiB         0.67 KiB
+  dist/js/chunk-406a8dea.d2f44c9d.js        1.29 KiB         0.74 KiB
+  dist/blockly/msg/he.js                    1.27 KiB         0.64 KiB
+  dist/js/chunk-2d0c8bc6.aa88f8c1.js        1.23 KiB         0.70 KiB
+  dist/blockly/msg/ja.js                    1.22 KiB         0.67 KiB
+  dist/blockly/msg/hr.js                    1.18 KiB         0.68 KiB
+  dist/js/chunk-2d22566e.c04420b7.js        1.13 KiB         0.58 KiB
+  dist/blockly/msg/vi.js                    1.10 KiB         0.63 KiB
+  dist/blockly/msg/en.js                    1.10 KiB         0.60 KiB
+  dist/blockly/msg/ko.js                    1.08 KiB         0.64 KiB
+  dist/blockly/msg/de.js                    1.07 KiB         0.59 KiB
+  dist/blockly/msg/nl.js                    1.05 KiB         0.56 KiB
+  dist/blockly/msg/ia.js                    1.05 KiB         0.55 KiB
+  dist/blockly/msg/ro.js                    1.04 KiB         0.59 KiB
+  dist/blockly/msg/tr.js                    1.04 KiB         0.60 KiB
+  dist/blockly/msg/it.js                    1.04 KiB         0.57 KiB
+  dist/blockly/msg/fr.js                    1.03 KiB         0.59 KiB
+  dist/blockly/msg/oc.js                    1.03 KiB         0.58 KiB
+  dist/blockly/msg/ca.js                    1.03 KiB         0.58 KiB
+  dist/blockly/msg/hrx.js                   1.03 KiB         0.58 KiB
+  dist/blockly/msg/br.js                    1.02 KiB         0.56 KiB
+  dist/blockly/msg/pms.js                   1.02 KiB         0.59 KiB
+  dist/blockly/msg/pl.js                    1.01 KiB         0.62 KiB
+  dist/blockly/msg/sc.js                    1.01 KiB         0.57 KiB
+  dist/blockly/msg/ms.js                    1.00 KiB         0.55 KiB
+  dist/blockly/msg/et.js                    1.00 KiB         0.57 KiB
+  dist/blockly/msg/es.js                    1.00 KiB         0.56 KiB
+  dist/blockly/msg/sk.js                    0.99 KiB         0.58 KiB
+  dist/scratch3/chunks/blocksonly.js        0.99 KiB         0.56 KiB
+  dist/blockly/msg/hu.js                    0.98 KiB         0.57 KiB
+  dist/blockly/msg/pt-br.js                 0.98 KiB         0.56 KiB
+  dist/blockly/msg/kab.js                   0.98 KiB         0.56 KiB
+  dist/blockly/msg/is.js                    0.98 KiB         0.58 KiB
+  dist/js/chunk-489b2ce2.48ec6399.js        0.98 KiB         0.56 KiB
+  dist/blockly/msg/sv.js                    0.97 KiB         0.56 KiB
+  dist/js/chunk-d668e76e.dedb856d.js        0.97 KiB         0.52 KiB
+  dist/blockly/msg/da.js                    0.97 KiB         0.55 KiB
+  dist/blockly/msg/nb.js                    0.96 KiB         0.54 KiB
+  dist/js/chunk-558dea90.161a943c.js        0.92 KiB         0.46 KiB
+  dist/blockly/msg/zh-hant.js               0.92 KiB         0.61 KiB
+  dist/blockly/msg/zh-hans.js               0.91 KiB         0.62 KiB
+  dist/js/chunk-2d0c9207.5a37fb0a.js        0.90 KiB         0.57 KiB
+  dist/blockly/msg/cs.js                    0.89 KiB         0.55 KiB
+  dist/python/static/js/manifest.js         0.82 KiB         0.46 KiB
+  dist/blockly/msg/tlh.js                   0.81 KiB         0.44 KiB
+  dist/js/chunk-2d221fbb.429a3d8f.js        0.66 KiB         0.46 KiB
+  dist/js/chunk-2d0be1b3.7c915960.js        0.57 KiB         0.46 KiB
+  dist/js/chunk-28b4d9b5.a65f739c.js        0.54 KiB         0.36 KiB
+  dist/scratchjr/engine-bridge.js           0.53 KiB         0.29 KiB
+  dist/js/chunk-2d0aecfc.b7fa93d5.js        0.37 KiB         0.28 KiB
+  dist/js/chunk-2d0e4e51.33167c7b.js        0.37 KiB         0.28 KiB
+  dist/js/chunk-2d20e7f3.67f88518.js        0.36 KiB         0.27 KiB
+  dist/js/chunk-2d0ae949.9d3da360.js        0.31 KiB         0.25 KiB
+  dist/js/chunk-2d0e95df.201b105b.js        0.31 KiB         0.25 KiB
+  dist/css/chunk-vendors.0626b6c1.css       548.23 KiB       76.39 KiB
+  dist/python/static/css/app.css            523.03 KiB       61.74 KiB
+  dist/python/static/css/appPlayer.css      522.90 KiB       61.72 KiB
+  dist/css/chunk-7e170d67.de46b51b.css      169.64 KiB       28.01 KiB
+  dist/tinymce/skins/lightgray/skin.min.    46.44 KiB        7.71 KiB
+  css
+  dist/css/app.34569fa6.css                 46.27 KiB        8.75 KiB
+  dist/scratchjr/css/editor.css             27.04 KiB        4.57 KiB
+  dist/css/chunk-55b71812.0b117d60.css      25.03 KiB        3.92 KiB
+  dist/tinymce/skins/lightgray/content.m    17.63 KiB        4.76 KiB
+  in.css
+  dist/css/chunk-6fd0967e.c21797cc.css      15.10 KiB        3.10 KiB
+  dist/scratchjr/css/paintlook.css          13.51 KiB        2.24 KiB
+  dist/css/chunk-0106ce24.a35435f8.css      12.63 KiB        2.50 KiB
+  dist/scratchjr/css/lobby.css              12.40 KiB        2.47 KiB
+  dist/css/chunk-b15c5b3c.4d007399.css      12.25 KiB        2.38 KiB
+  dist/css/chunk-654a0926.0e07c169.css      11.83 KiB        2.44 KiB
+  dist/css/home.fcf4f702.css                11.73 KiB        2.65 KiB
+  dist/css/chunk-da74b6ea.320c615c.css      10.14 KiB        2.26 KiB
+  dist/scratchjr/css/editorstage.css        9.84 KiB         1.82 KiB
+  dist/css/chunk-5f72b73b.b4e95fae.css      9.41 KiB         2.49 KiB
+  dist/scratchjr/inapp/style/interface.c    9.24 KiB         1.86 KiB
+  ss
+  dist/css/chunk-5c00e860.28e3d180.css      8.27 KiB         2.79 KiB
+  dist/scratchjr/inapp/style/paint.css      7.58 KiB         1.55 KiB
+  dist/scratchjr/css/start.css              7.58 KiB         1.53 KiB
+  dist/css/user.5dcfe9fd.css                7.33 KiB         1.98 KiB
+  dist/scratchjr/css/editormodal.css        6.39 KiB         1.34 KiB
+  dist/css/chunk-7de7fae8.b41b3d5d.css      6.21 KiB         1.28 KiB
+  dist/css/chunk-846e4bd2.9f6992b2.css      6.14 KiB         1.66 KiB
+  dist/css/scratch.css                      5.91 KiB         1.37 KiB
+  dist/css/chunk-5c6cac6a.eebeecfc.css      5.21 KiB         1.34 KiB
+  dist/scratchjr/css/thumbs.css             5.08 KiB         1.08 KiB
+  dist/scratchjr/css/editorleftpanel.css    5.06 KiB         1.04 KiB
+  dist/css/chunk-702a59b0.7d4477a4.css      4.82 KiB         1.38 KiB
+  dist/css/chunk-9da903d8.2de60649.css      4.79 KiB         1.25 KiB
+  dist/css/chunk-dab567ea.a3769a24.css      4.63 KiB         1.29 KiB
+  dist/css/chunk-a4a5036e.f56fba57.css      4.45 KiB         1.19 KiB
+  dist/scratchjr/css/librarymodal.css       4.24 KiB         1.08 KiB
+  dist/scratch3/css/keyboard.css            3.84 KiB         1.04 KiB
+  dist/css/chunk-c595fa56.e975bd7f.css      3.09 KiB         0.89 KiB
+  dist/css/chunk-564f2ed8.8b388d9d.css      2.99 KiB         0.80 KiB
+  dist/blockly/style.css                    2.82 KiB         0.94 KiB
+  dist/css/chunk-34fc7cbc.ef6e6c8c.css      2.81 KiB         0.80 KiB
+  dist/css/chunk-38329d04.2a947bbb.css      2.58 KiB         0.72 KiB
+  dist/scratchjr/inapp/style/blocks.css     2.54 KiB         0.60 KiB
+  dist/scratch3/persistence.css             2.52 KiB         0.99 KiB
+  dist/css/chunk-1d9973c8.933a16c3.css      2.48 KiB         0.79 KiB
+  dist/scratchjr/persistence.css            2.48 KiB         0.96 KiB
+  dist/scratch3/css/player.css              2.20 KiB         0.90 KiB
+  dist/css/chunk-061af9cd.f19f0e09.css      2.16 KiB         0.67 KiB
+  dist/css/chunk-aa9df71a.6d3444a4.css      2.16 KiB         0.51 KiB
+  dist/css/chunk-4c5df1b8.475e368d.css      2.16 KiB         0.65 KiB
+  dist/python/execution.css                 2.05 KiB         0.69 KiB
+  dist/css/chunk-4df55040.19555c98.css      1.95 KiB         0.71 KiB
+  dist/css/chunk-feaee3de.967da1e0.css      1.85 KiB         0.58 KiB
+  dist/scratchjr/css/font.css               1.84 KiB         0.42 KiB
+  dist/scratchjr/css/gs.css                 1.84 KiB         0.56 KiB
+  dist/css/chunk-4f8d3122.4094007d.css      1.79 KiB         0.61 KiB
+  dist/css/chunk-00c97493.546a2aa6.css      1.75 KiB         0.62 KiB
+  dist/css/chunk-51bdb774.5b065727.css      1.74 KiB         0.58 KiB
+  dist/css/chunk-699e8c58.cfc1f769.css      1.70 KiB         0.68 KiB
+  dist/css/chunk-3e135bc8.22af1422.css      1.69 KiB         0.67 KiB
+  dist/python/persistence.css               1.66 KiB         0.70 KiB
+  dist/css/chunk-295b2f45.396bfac0.css      1.59 KiB         0.53 KiB
+  dist/css/chunk-e1275998.c5684bfb.css      1.50 KiB         0.47 KiB
+  dist/css/chunk-56892c62.4c6aa613.css      1.47 KiB         0.62 KiB
+  dist/scratchjr/inapp/style/style.css      1.43 KiB         0.43 KiB
+  dist/css/chunk-3edc4aee.2b17d657.css      1.43 KiB         0.56 KiB
+  dist/css/chunk-2811eab1.5c386c8b.css      1.42 KiB         0.45 KiB
+  dist/css/chunk-2b2afeb4.cfaeb402.css      1.38 KiB         0.48 KiB
+  dist/css/chunk-42e8a7a4.29e86403.css      1.34 KiB         0.51 KiB
+  dist/css/chunk-4cf1490f.c390c357.css      1.32 KiB         0.48 KiB
+  dist/css/chunk-2a3f17f4.d380ff1a.css      1.30 KiB         0.55 KiB
+  dist/css/chunk-c1c21bbc.100042a5.css      1.25 KiB         0.54 KiB
+  dist/css/chunk-9eb3b5b2.44134057.css      1.23 KiB         0.42 KiB
+  dist/css/chunk-2b19b8cc.f8034e67.css      1.22 KiB         0.43 KiB
+  dist/css/chunk-0fc9ab06.ccb56ca0.css      1.16 KiB         0.39 KiB
+  dist/css/chunk-773edb85.2d4e500f.css      1.15 KiB         0.46 KiB
+  dist/css/chunk-00962386.9171a97b.css      1.10 KiB         0.48 KiB
+  dist/css/chunk-337319f0.4058e8b0.css      1.09 KiB         0.42 KiB
+  dist/css/chunk-577a7cd0.45dfd909.css      1.09 KiB         0.46 KiB
+  dist/css/chunk-8148b846.45dfd909.css      1.09 KiB         0.46 KiB
+  dist/css/chunk-4ee438f8.3e6bfddc.css      1.06 KiB         0.49 KiB
+  dist/css/chunk-10204d6b.577973de.css      1.06 KiB         0.43 KiB
+  dist/css/chunk-89c64976.575b3b3b.css      1.02 KiB         0.46 KiB
+  dist/css/chunk-06f9e3f4.4295cf26.css      0.98 KiB         0.31 KiB
+  dist/scratchjr/css/base.css               0.93 KiB         0.44 KiB
+  dist/css/chunk-2b0363f7.11ff595c.css      0.93 KiB         0.39 KiB
+  dist/css/chunk-21a8d479.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-2b125264.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-33c06197.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-35ebffbf.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-43aea182.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-48792450.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-4d3c2ec8.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-63108879.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-71c04522.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-774f2a3a.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-7e62704e.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-885abb1e.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-8e1d9894.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-ad990116.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-d4d526a2.e7383359.css      0.88 KiB         0.40 KiB
+  dist/css/chunk-32b42889.770ec732.css      0.86 KiB         0.41 KiB
+  dist/css/chunk-7bec7679.7ada141d.css      0.83 KiB         0.34 KiB
+  dist/css/chunk-41628c0b.eb862428.css      0.82 KiB         0.35 KiB
+  dist/css/chunk-6f971f70.efeee1be.css      0.81 KiB         0.37 KiB
+  dist/css/chunk-30ac2e57.062ee2cf.css      0.80 KiB         0.25 KiB
+  dist/css/chunk-3452d4e4.11178f23.css      0.78 KiB         0.31 KiB
+  dist/css/chunk-406a8dea.8d634e04.css      0.76 KiB         0.31 KiB
+  dist/css/chunk-642a1c2a.8d634e04.css      0.76 KiB         0.31 KiB
+  dist/css/chunk-6b3ffd30.8d634e04.css      0.76 KiB         0.31 KiB
+  dist/css/fail.8d634e04.css                0.76 KiB         0.31 KiB
+  dist/css/chunk-12b753e2.04e56ad4.css      0.74 KiB         0.32 KiB
+  dist/css/chunk-d103020a.91ff4083.css      0.74 KiB         0.30 KiB
+  dist/css/chunk-64e9f4d9.00b9f146.css      0.73 KiB         0.36 KiB
+  dist/css/chunk-68fd7438.2d00e250.css      0.73 KiB         0.31 KiB
+  dist/css/chunk-5d11afae.456e1e4f.css      0.71 KiB         0.35 KiB
+  dist/css/chunk-2cb2ced6.74fb9069.css      0.71 KiB         0.34 KiB
+  dist/css/chunk-0067c404.d312bf7a.css      0.71 KiB         0.29 KiB
+  dist/css/chunk-06e9670c.b5afa136.css      0.70 KiB         0.30 KiB
+  dist/css/chunk-2203d43c.b5afa136.css      0.70 KiB         0.30 KiB
+  dist/css/chunk-2d859ad4.b5afa136.css      0.70 KiB         0.30 KiB
+  dist/css/chunk-558dea90.b5afa136.css      0.70 KiB         0.30 KiB
+  dist/css/chunk-114bb9d4.79c50e69.css      0.69 KiB         0.30 KiB
+  dist/css/chunk-7b31e229.81db018d.css      0.69 KiB         0.30 KiB
+  dist/css/chunk-60691329.5f72ea11.css      0.67 KiB         0.27 KiB
+  dist/css/chunk-05f1eee6.3efc8181.css      0.65 KiB         0.31 KiB
+  dist/scratchjr/inapp/style/about.css      0.63 KiB         0.31 KiB
+  dist/css/chunk-4ff90fe6.3dde3ba9.css      0.62 KiB         0.28 KiB
+  dist/css/chunk-571e4483.3dde3ba9.css      0.62 KiB         0.28 KiB
+  dist/css/chunk-7fd011d4.ae2ba9d8.css      0.60 KiB         0.29 KiB
+  dist/css/chunk-eba63c02.fdb58424.css      0.60 KiB         0.30 KiB
+  dist/css/chunk-2e2cadca.8940d21e.css      0.59 KiB         0.31 KiB
+  dist/css/chunk-70d2de14.8940d21e.css      0.59 KiB         0.31 KiB
+  dist/css/chunk-7816dbd1.8940d21e.css      0.59 KiB         0.31 KiB
+  dist/css/chunk-a08a698a.8940d21e.css      0.59 KiB         0.31 KiB
+  dist/css/chunk-2a465c9b.8329642a.css      0.55 KiB         0.25 KiB
+  dist/css/chunk-32dddb77.0609365a.css      0.55 KiB         0.25 KiB
+  dist/python/output.css                    0.54 KiB         0.37 KiB
+  dist/css/chunk-489b2ce2.1cd05732.css      0.53 KiB         0.27 KiB
+  dist/css/chunk-0ca556c5.14729d91.css      0.51 KiB         0.24 KiB
+  dist/css/chunk-194374b3.f129e419.css      0.51 KiB         0.24 KiB
+  dist/css/chunk-4b168cec.17096404.css      0.51 KiB         0.24 KiB
+  dist/css/chunk-d03eead4.6aa2395f.css      0.51 KiB         0.24 KiB
+  dist/css/chunk-63e7cfd2.8f5d093f.css      0.48 KiB         0.25 KiB
+  dist/css/chunk-fc3a60d8.e72b810f.css      0.44 KiB         0.22 KiB
+  dist/css/chunk-507301b0.6b39647e.css      0.42 KiB         0.21 KiB
+  dist/css/chunk-2bd4832e.6f847da2.css      0.42 KiB         0.28 KiB
+  dist/css/chunk-434972e2.6f847da2.css      0.42 KiB         0.28 KiB
+  dist/css/chunk-952ad1d6.fbd798d2.css      0.38 KiB         0.21 KiB
+  dist/css/chunk-49a94d80.40215ed3.css      0.38 KiB         0.20 KiB
+  dist/python/source-loading.css            0.37 KiB         0.19 KiB
+  dist/css/chunk-f4145dd0.6f8d04e9.css      0.31 KiB         0.18 KiB
+  dist/css/chunk-73594c9e.62f918ab.css      0.29 KiB         0.15 KiB
+  dist/css/chunk-4d8e1b1d.561d368d.css      0.29 KiB         0.15 KiB
+  dist/css/chunk-060084d5.acd07ebf.css      0.24 KiB         0.20 KiB
+  dist/css/chunk-e897d88e.76fe97d8.css      0.24 KiB         0.18 KiB
+  dist/css/chunk-750e3f31.18b4a5a3.css      0.23 KiB         0.14 KiB
+  dist/css/chunk-ccaa20dc.58b819d0.css      0.23 KiB         0.14 KiB
+  dist/css/chunk-9a2bd16a.3c8b1650.css      0.23 KiB         0.17 KiB
+  dist/css/chunk-0c878aea.6ed61d7a.css      0.22 KiB         0.16 KiB
+  dist/css/chunk-6c1dfd96.6208fe33.css      0.22 KiB         0.15 KiB
+  dist/css/chunk-e1e3409e.7e01cfe9.css      0.22 KiB         0.15 KiB
+  dist/css/chunk-3f00a3bc.7ef6f74a.css      0.21 KiB         0.15 KiB
+  dist/css/chunk-d668e76e.5d37fdc8.css      0.20 KiB         0.14 KiB
+  dist/python/runner.css                    0.20 KiB         0.13 KiB
+  dist/css/chunk-3e58d502.a76f4840.css      0.19 KiB         0.17 KiB
+  dist/css/chunk-5394f16f.220d6891.css      0.19 KiB         0.16 KiB
+  dist/css/chunk-6f9e13e4.4f99c460.css      0.19 KiB         0.16 KiB
+  dist/css/chunk-b62d3396.220d6891.css      0.19 KiB         0.16 KiB
+  dist/css/chunk-42f73310.392b41ac.css      0.17 KiB         0.12 KiB
+  dist/css/chunk-0404f611.4df42a33.css      0.15 KiB         0.12 KiB
+  dist/css/chunk-655600c2.13eb71a8.css      0.14 KiB         0.12 KiB
+  dist/css/chunk-0d4eb5c9.333a6acf.css      0.14 KiB         0.11 KiB
+  dist/css/chunk-976c9a12.97e8b587.css      0.12 KiB         0.10 KiB
+  dist/css/chunk-21b08424.32dd9cd1.css      0.12 KiB         0.12 KiB
+  dist/css/chunk-28b4d9b5.8fef9d58.css      0.11 KiB         0.10 KiB
+  dist/css/chunk-676c7816.c158e6b9.css      0.09 KiB         0.10 KiB
+  dist/css/chunk-544a773d.b579b8f6.css      0.07 KiB         0.08 KiB
+  dist/css/chunk-c387b504.8ac92d69.css      0.06 KiB         0.07 KiB
+  dist/css/chunk-0a8ffb9c.828dfd31.css      0.05 KiB         0.07 KiB
+  dist/css/chunk-382b809a.e2de2a81.css      0.05 KiB         0.07 KiB
+  dist/css/chunk-bde14650.23e6a9f5.css      0.05 KiB         0.07 KiB
+
+  Images and other types of assets omitted.
+
+ DONE  Build complete. The dist directory is ready to be deployed.
+ INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html

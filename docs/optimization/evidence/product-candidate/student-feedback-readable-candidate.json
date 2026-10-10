@@ -1,0 +1,123 @@
+{
+  "date": "2026-10-05",
+  "goal": "active",
+  "pr": {
+    "number": 71,
+    "state": "OPEN",
+    "isDraft": false,
+    "head": "f0980ce2d8c8a06e635bf09aca3a8b7d16edbcb7",
+    "base": "fix/account-recovery-ui",
+    "statusCheckRollup": []
+  },
+  "product_commit": "f8071b1ba1a955a1fff517a57212e52e85babc22",
+  "measured_candidate": "69002a1450306e73f13c7d0763d026dad7b8c335",
+  "final_candidate": "49d8c32aaa74b2dcb300f7aaa4b2653d7dd9929e",
+  "final_api_web_diff_empty": true,
+  "jar_sha256": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016",
+  "dist": {
+    "candidate": "69002a1450306e73f13c7d0763d026dad7b8c335",
+    "files": 4894,
+    "bytes": 211848370,
+    "manifest_sha256": "83656f53e6674ab211b1754087cd5110cebd93fca7560bff9643d8f175be27ca",
+    "backup": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/student-feedback-20261005/previous-dist",
+    "old_manifest_match": true,
+    "new_dist_verified": true,
+    "backend_restarted": false
+  },
+  "checks": {
+    "author_focused": 13,
+    "author_branch": 597,
+    "independent_offline": 20,
+    "candidate_node": 617,
+    "new_files_lint_errors": 0,
+    "new_files_lint_warnings": 0,
+    "legacy_parent_lint_errors_before": 82,
+    "legacy_parent_lint_errors_after": 77,
+    "legacy_parent_lint_warnings_before_and_after": 227,
+    "build_exit": 0,
+    "build_warnings": 12,
+    "container_runtime": 45,
+    "local_static_resources": 24
+  },
+  "container": {
+    "passed": 45,
+    "total": 45,
+    "all_passed": true,
+    "fingerprints": {
+      "manifest_sha256": "b4fd5be56af7018989827f4eedafacbbf3547cc0e9cf81d5f0ac88d18ff9533f",
+      "generator_sha256": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67",
+      "source_commit": "69002a1450306e73f13c7d0763d026dad7b8c335",
+      "artifact_inputs": {
+        "dist_manifest_sha256": "83656f53e6674ab211b1754087cd5110cebd93fca7560bff9643d8f175be27ca",
+        "jar_sha256": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016"
+      }
+    }
+  },
+  "cleanup": {
+    "closed": {
+      "18304": true,
+      "18305": true,
+      "18306": true,
+      "18307": true,
+      "18190": true
+    },
+    "owned_containers_removed": true,
+    "owned_networks_removed": true,
+    "data_retained": true,
+    "health": {
+      "18111": "UP",
+      "18141": "UP",
+      "18149": "UP"
+    },
+    "backend_identity_unchanged": {
+      "course-role-runtime": true,
+      "role-flow-1003": true,
+      "prod-fixture-1003": true
+    },
+    "stopped_previews": [
+      {
+        "port": 18304,
+        "pid": 18491
+      },
+      {
+        "port": 18305,
+        "pid": 20018
+      },
+      {
+        "port": 18306,
+        "pid": 21375
+      },
+      {
+        "port": 18307,
+        "pid": 24221
+      }
+    ]
+  },
+  "private_evidence_hashes": {
+    "candidate-tests.log": "9fc0e33e38124a429b13d728c06253ed702973b0bfe20ef9f861161688e21ca3",
+    "candidate-build.log": "831da3f10fb42e5f5988eed9f2f635105af8feb91b963bc86c5360a7930f3113",
+    "browser/final-report.json": "7dd187a7be1135ddda18167c97b29c971cffada8f37ceb0c66e990be7fa85108",
+    "review/review.md": "eff247872a5b6f27cc5a90492e2cb815a692d4a748aa48991d2e3e4c19620e27",
+    "review/feedback-offline.json": "ac7c15eace6a143bf883fe8e866db38031b948f6cc4e0f1555e1b8020b8e389e",
+    "review/final-source-manifest.json": "f2ce62435c793d3aa68e481e1a07c7ba655b5f307ca1f5befbade84994a7f981",
+    "container-runtime.json": "804b9232fd86bb37d885a5811513e0b17eeaca18296425655449b445c353d3d2",
+    "bundle-create-02.json": "ea608d4ccfaee90d215680da3b994410d2e195b585c59a1ada24be7fbc61484d",
+    "bundle-verify.json": "0412d51251c4c5a8c9c251feac6cd5dcd1040c65dc9e603b65ba22acb0dee2db",
+    "static-smoke.json": "193000ff6f4264e9540347d49545278e541f309ddb05808872137074dc8ec9f5",
+    "cleanup.json": "6991c7f6a4942685d234cdb97f83d7a94d491fa6d6e02fbb84e29e92a4ffccdb"
+  },
+  "remaining": [
+    "Ordinary authenticated student-teacher-admin browser chain",
+    "Editor open/save/reopen/submit complete browser evidence",
+    "User visual acceptance",
+    "Target deployment and case-sensitive Linux filesystem validation"
+  ],
+  "failures_retained": [
+    "Less min native CSS evaluation failed in initial preview; original log overwritten, fact and resolution recorded",
+    "Draft close/reopen race reproduced independently and fixed",
+    "Preview global filter missing, then actual filter restored",
+    "Bundle output location guard rejected initial nested path; no services started",
+    "Initial static parser omitted unquoted attributes; fixed parser checks24resources"
+  ],
+  "production": "No connection to Z820 or production writes. Existing private course copy18142 remains available; no backend restart."
+}

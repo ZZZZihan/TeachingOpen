@@ -1,0 +1,397 @@
+TAP version 13
+# Browserslist: caniuse-lite is outdated. Please run:
+#   npx update-browserslist-db@latest
+#   Why you should do it regularly: https://github.com/browserslist/update-db\#readme
+# Subtest: opening B clears A selected users, stale list and pagination before B response
+ok 1 - opening B clears A selected users, stale list and pagination before B response
+  ---
+  duration_ms: 174.195959
+  type: 'test'
+  ...
+# Subtest: batchDel captured in A cannot dispatch after switch B
+ok 2 - batchDel captured in A cannot dispatch after switch B
+  ---
+  duration_ms: 29.119583
+  type: 'test'
+  ...
+# Subtest: batchDel captured in A cannot dispatch after reopen A
+ok 3 - batchDel captured in A cannot dispatch after reopen A
+  ---
+  duration_ms: 23.159625
+  type: 'test'
+  ...
+# Subtest: batchDel captured in A cannot dispatch after clear
+ok 4 - batchDel captured in A cannot dispatch after clear
+  ---
+  duration_ms: 24.6045
+  type: 'test'
+  ...
+# Subtest: handleRemoveAll captured in A cannot dispatch after switch B
+ok 5 - handleRemoveAll captured in A cannot dispatch after switch B
+  ---
+  duration_ms: 23.3695
+  type: 'test'
+  ...
+# Subtest: handleRemoveAll captured in A cannot dispatch after reopen A
+ok 6 - handleRemoveAll captured in A cannot dispatch after reopen A
+  ---
+  duration_ms: 23.5905
+  type: 'test'
+  ...
+# Subtest: handleRemoveAll captured in A cannot dispatch after clear
+ok 7 - handleRemoveAll captured in A cannot dispatch after clear
+  ---
+  duration_ms: 18.953625
+  type: 'test'
+  ...
+# Subtest: row captured in A cannot dispatch after switch B
+ok 8 - row captured in A cannot dispatch after switch B
+  ---
+  duration_ms: 29.922
+  type: 'test'
+  ...
+# Subtest: row captured in A cannot dispatch after reopen A
+ok 9 - row captured in A cannot dispatch after reopen A
+  ---
+  duration_ms: 19.912666
+  type: 'test'
+  ...
+# Subtest: row captured in A cannot dispatch after clear
+ok 10 - row captured in A cannot dispatch after clear
+  ---
+  duration_ms: 21.097208
+  type: 'test'
+  ...
+# Subtest: control: normal B batchDel preserves the backend contract and refreshes B
+ok 11 - control: normal B batchDel preserves the backend contract and refreshes B
+  ---
+  duration_ms: 18.724791
+  type: 'test'
+  ...
+# Subtest: control: normal B handleRemoveAll preserves the backend contract and refreshes B
+ok 12 - control: normal B handleRemoveAll preserves the backend contract and refreshes B
+  ---
+  duration_ms: 22.947291
+  type: 'test'
+  ...
+# Subtest: control: normal B row preserves the backend contract and refreshes B
+ok 13 - control: normal B row preserves the backend contract and refreshes B
+  ---
+  duration_ms: 17.806458
+  type: 'test'
+  ...
+# Subtest: changed user selection invalidates a bulk confirmation before dispatch
+ok 14 - changed user selection invalidates a bulk confirmation before dispatch
+  ---
+  duration_ms: 19.654334
+  type: 'test'
+  ...
+# Subtest: late A checkbox event cannot inject foreign user IDs into B cancellation
+ok 15 - late A checkbox event cannot inject foreign user IDs into B cancellation
+  ---
+  duration_ms: 16.659333
+  type: 'test'
+  ...
+# Subtest: B batchDel ignores repeated clicks and duplicate confirmation callbacks
+ok 16 - B batchDel ignores repeated clicks and duplicate confirmation callbacks
+  ---
+  duration_ms: 23.858292
+  type: 'test'
+  ...
+# Subtest: B handleRemoveAll ignores repeated clicks and duplicate confirmation callbacks
+ok 17 - B handleRemoveAll ignores repeated clicks and duplicate confirmation callbacks
+  ---
+  duration_ms: 17.797167
+  type: 'test'
+  ...
+# Subtest: B row ignores repeated clicks and duplicate confirmation callbacks
+ok 18 - B row ignores repeated clicks and duplicate confirmation callbacks
+  ---
+  duration_ms: 20.407292
+  type: 'test'
+  ...
+# Subtest: older A confirmation cannot release or submit an active B confirmation
+ok 19 - older A confirmation cannot release or submit an active B confirmation
+  ---
+  duration_ms: 17.453125
+  type: 'test'
+  ...
+# Subtest: late A list success cannot overwrite B user list or count
+ok 20 - late A list success cannot overwrite B user list or count
+  ---
+  duration_ms: 18.848625
+  type: 'test'
+  ...
+# Subtest: newer member query within B wins when older response arrives last
+ok 21 - newer member query within B wins when older response arrives last
+  ---
+  duration_ms: 17.54775
+  type: 'test'
+  ...
+# Subtest: late A list network cannot publish a notice or unlock B pending read
+ok 22 - late A list network cannot publish a notice or unlock B pending read
+  ---
+  duration_ms: 18.677917
+  type: 'test'
+  ...
+# Subtest: current B member list network resets busy state and can retry in B
+ok 23 - current B member list network resets busy state and can retry in B
+  ---
+  duration_ms: 18.264709
+  type: 'test'
+  ...
+# Subtest: late A list business cannot publish a notice or unlock B pending read
+ok 24 - late A list business cannot publish a notice or unlock B pending read
+  ---
+  duration_ms: 19.688209
+  type: 'test'
+  ...
+# Subtest: current B member list business resets busy state and can retry in B
+ok 25 - current B member list business resets busy state and can retry in B
+  ---
+  duration_ms: 17.236333
+  type: 'test'
+  ...
+# Subtest: late member list after clear cannot repopulate an inactive panel
+ok 26 - late member list after clear cannot repopulate an inactive panel
+  ---
+  duration_ms: 23.720791
+  type: 'test'
+  ...
+# Subtest: late member list after destroy cannot repopulate an inactive panel
+ok 27 - late member list after destroy cannot repopulate an inactive panel
+  ---
+  duration_ms: 17.337083
+  type: 'test'
+  ...
+# Subtest: malformed member rows never enter selection or cancellation and allow a valid retry
+ok 28 - malformed member rows never enter selection or cancellation and allow a valid retry
+  ---
+  duration_ms: 19.248208
+  type: 'test'
+  ...
+# Subtest: already dispatched A batchDel response (true) cannot refresh or deselect B
+ok 29 - already dispatched A batchDel response (true) cannot refresh or deselect B
+  ---
+  duration_ms: 17.95675
+  type: 'test'
+  ...
+# Subtest: already dispatched A batchDel response (false) cannot refresh or deselect B
+ok 30 - already dispatched A batchDel response (false) cannot refresh or deselect B
+  ---
+  duration_ms: 20.070542
+  type: 'test'
+  ...
+# Subtest: already dispatched A handleRemoveAll response (true) cannot refresh or deselect B
+ok 31 - already dispatched A handleRemoveAll response (true) cannot refresh or deselect B
+  ---
+  duration_ms: 17.516208
+  type: 'test'
+  ...
+# Subtest: already dispatched A handleRemoveAll response (false) cannot refresh or deselect B
+ok 32 - already dispatched A handleRemoveAll response (false) cannot refresh or deselect B
+  ---
+  duration_ms: 20.296458
+  type: 'test'
+  ...
+# Subtest: already dispatched A row response (true) cannot refresh or deselect B
+ok 33 - already dispatched A row response (true) cannot refresh or deselect B
+  ---
+  duration_ms: 18.929042
+  type: 'test'
+  ...
+# Subtest: already dispatched A row response (false) cannot refresh or deselect B
+ok 34 - already dispatched A row response (false) cannot refresh or deselect B
+  ---
+  duration_ms: 19.268625
+  type: 'test'
+  ...
+# Subtest: selector reopened in B clears A selected users, table and query before its response
+ok 35 - selector reopened in B clears A selected users, table and query before its response
+  ---
+  duration_ms: 17.883833
+  type: 'test'
+  ...
+# Subtest: old selector emission from A cannot add A users to B
+ok 36 - old selector emission from A cannot add A users to B
+  ---
+  duration_ms: 20.262541
+  type: 'test'
+  ...
+# Subtest: control: a normal B selector confirmation adds only selected B users and refreshes B
+ok 37 - control: a normal B selector confirmation adds only selected B users and refreshes B
+  ---
+  duration_ms: 17.320417
+  type: 'test'
+  ...
+# Subtest: late A selector list cannot replace the B selectable-user table
+ok 38 - late A selector list cannot replace the B selectable-user table
+  ---
+  duration_ms: 19.034167
+  type: 'test'
+  ...
+# Subtest: selector cannot emit IDs absent from its current displayed users
+ok 39 - selector cannot emit IDs absent from its current displayed users
+  ---
+  duration_ms: 37.008625
+  type: 'test'
+  ...
+# Subtest: a repeated selector OK or replayed B emission cannot dispatch duplicate additions
+ok 40 - a repeated selector OK or replayed B emission cannot dispatch duplicate additions
+  ---
+  duration_ms: 20.004375
+  type: 'test'
+  ...
+# Subtest: B selector list failure blocks a stale selection and recovers on its next read
+ok 41 - B selector list failure blocks a stale selection and recovers on its next read
+  ---
+  duration_ms: 18.555375
+  type: 'test'
+  ...
+# Subtest: legacy selector add() preserves its ordinary array event contract
+ok 42 - legacy selector add() preserves its ordinary array event contract
+  ---
+  duration_ms: 0.817542
+  type: 'test'
+  ...
+# Subtest: legacy selector direct visible entry still emits an array and clears a previous session
+ok 43 - legacy selector direct visible entry still emits an array and clears a previous session
+  ---
+  duration_ms: 0.8995
+  type: 'test'
+  ...
+# Subtest: B bulk cancellation network releases its lock and accepts a fresh confirmation
+ok 44 - B bulk cancellation network releases its lock and accepts a fresh confirmation
+  ---
+  duration_ms: 16.512458
+  type: 'test'
+  ...
+# Subtest: B bulk cancellation business releases its lock and accepts a fresh confirmation
+ok 45 - B bulk cancellation business releases its lock and accepts a fresh confirmation
+  ---
+  duration_ms: 19.698125
+  type: 'test'
+  ...
+# Subtest: A user add validation completing after switch B cannot submit or close B's editor
+ok 46 - A user add validation completing after switch B cannot submit or close B's editor
+  ---
+  duration_ms: 17.525084
+  type: 'test'
+  ...
+# Subtest: control: normal B user add submits its original identity and class and emits a compatible OK
+ok 47 - control: normal B user add submits its original identity and class and emits a compatible OK
+  ---
+  duration_ms: 19.760666
+  type: 'test'
+  ...
+# Subtest: A user edit validation completing after switch B cannot submit or close B's editor
+ok 48 - A user edit validation completing after switch B cannot submit or close B's editor
+  ---
+  duration_ms: 17.551375
+  type: 'test'
+  ...
+# Subtest: control: normal B user edit submits its original identity and class and emits a compatible OK
+ok 49 - control: normal B user edit submits its original identity and class and emits a compatible OK
+  ---
+  duration_ms: 20.49775
+  type: 'test'
+  ...
+# Subtest: late A user department and role reads cannot overwrite B editor identity or assignments
+ok 50 - late A user department and role reads cannot overwrite B editor identity or assignments
+  ---
+  duration_ms: 17.393291
+  type: 'test'
+  ...
+# Subtest: queued user form nextTick after clear cannot fill or revive the closed A editor
+ok 51 - queued user form nextTick after clear cannot fill or revive the closed A editor
+  ---
+  duration_ms: 18.3875
+  type: 'test'
+  ...
+# Subtest: already dispatched A user edit completion cannot close B form or refresh B membership
+ok 52 - already dispatched A user edit completion cannot close B form or refresh B membership
+  ---
+  duration_ms: 17.213584
+  type: 'test'
+  ...
+# Subtest: legacy UserModal edit(record) preserves ordinary user management save and zero-argument OK
+ok 53 - legacy UserModal edit(record) preserves ordinary user management save and zero-argument OK
+  ---
+  duration_ms: 0.939041
+  type: 'test'
+  ...
+# Subtest: B user submit locks both pending validation and the in-flight save against repeated clicks
+ok 54 - B user submit locks both pending validation and the in-flight save against repeated clicks
+  ---
+  duration_ms: 19.550084
+  type: 'test'
+  ...
+# Subtest: A role assignment opened before switch B cannot save after switch, and normal B assignment still works
+ok 55 - A role assignment opened before switch B cannot save after switch, and normal B assignment still works
+  ---
+  duration_ms: 17.280875
+  type: 'test'
+  ...
+# Subtest: late A assigned-role and available-role reads cannot replace B role selections
+ok 56 - late A assigned-role and available-role reads cannot replace B role selections
+  ---
+  duration_ms: 18.488792
+  type: 'test'
+  ...
+# Subtest: already dispatched A role save completion cannot close a newly opened B assignment
+ok 57 - already dispatched A role save completion cannot close a newly opened B assignment
+  ---
+  duration_ms: 16.56125
+  type: 'test'
+  ...
+# Subtest: legacy role add(record, departId) preserves the ordinary request and zero-argument OK
+ok 58 - legacy role add(record, departId) preserves the ordinary request and zero-argument OK
+  ---
+  duration_ms: 0.931625
+  type: 'test'
+  ...
+# Subtest: role save waits for both reads, retries failed loading, and sends only one pending write
+ok 59 - role save waits for both reads, retries failed loading, and sends only one pending write
+  ---
+  duration_ms: 0.787583
+  type: 'test'
+  ...
+# Subtest: editing A configured roles must not request removal of a role assigned outside A options
+ok 60 - editing A configured roles must not request removal of a role assigned outside A options
+  ---
+  duration_ms: 0.961375
+  type: 'test'
+  ...
+# Subtest: queued A import transport is refused after switch B before sending any upload
+ok 61 - queued A import transport is refused after switch B before sending any upload
+  ---
+  duration_ms: 18.604208
+  type: 'test'
+  ...
+# Subtest: late A import completion cannot notify, clear selection or refresh B membership
+ok 62 - late A import completion cannot notify, clear selection or refresh B membership
+  ---
+  duration_ms: 17.498083
+  type: 'test'
+  ...
+# Subtest: control: B import preserves its class action and successful feedback refreshes B
+ok 63 - control: B import preserves its class action and successful feedback refreshes B
+  ---
+  duration_ms: 18.947667
+  type: 'test'
+  ...
+# Subtest: current B import failure permits another upload without stale A completion unlocking it
+ok 64 - current B import failure permits another upload without stale A completion unlocking it
+  ---
+  duration_ms: 17.238667
+  type: 'test'
+  ...
+1..64
+# tests 64
+# suites 0
+# pass 64
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1420.017167

@@ -1,0 +1,14 @@
+{
+  "create_succeeded": true,
+  "verify_before_start_succeeded": true,
+  "manifest_sha256": "bfa1d14a77458d4276a5b9519e1f0691d83bd7bc8c7fa894232a6e13261303a5",
+  "tables": 69,
+  "rows": 116,
+  "accounts": 5,
+  "new_courses": 1,
+  "new_units": 3,
+  "new_tasks": 1,
+  "files": 10,
+  "synthetic_only": true,
+  "browser_acceptance": false
+}

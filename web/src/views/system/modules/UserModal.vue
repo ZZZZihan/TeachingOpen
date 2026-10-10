@@ -19,7 +19,10 @@
 
     </template>
 
-    <a-spin :spinning="confirmLoading">
+    <a-spin :spinning="confirmLoading || loading">
+      <a-alert v-if="loadError || saveError" type="error" show-icon style="margin-bottom: 16px">
+        <span slot="message">{{ loadError || saveError }} <a v-if="loadError" @click="loadSessionData()">重试读取</a></span>
+      </a-alert>
       <a-form :form="form">
 
         <a-form-item label="身份" :labelCol="labelCol" :wrapperCol="wrapperCol">
@@ -137,13 +140,11 @@
 
       </a-form>
     </a-spin>
-    <depart-window ref="departWindow" @ok="modalFormOk"></depart-window>
+    <depart-window :key="sessionVersion" ref="departWindow" @ok="modalFormOk"></depart-window>
 
     <div class="drawer-bootom-button" v-show="!disableSubmit">
-      <a-popconfirm title="确定放弃编辑？" @confirm="handleCancel" okText="确定" cancelText="取消">
-        <a-button style="margin-right: .8rem">取消</a-button>
-      </a-popconfirm>
-      <a-button @click="handleSubmit" type="primary" :loading="confirmLoading">提交</a-button>
+      <a-button @click="confirmCancel" style="margin-right: .8rem">取消</a-button>
+      <a-button @click="handleSubmit" :disabled="loading || !!loadError" type="primary" :loading="confirmLoading">提交</a-button>
     </div>
   </a-drawer>
 </template>
@@ -251,6 +252,14 @@
         },
         uploadLoading:false,
         confirmLoading: false,
+        loading: false,
+        sessionVersion: 0,
+        loadRequestId: 0,
+        editContext: null,
+        cancelPrompt: null,
+        departWindowVersion: 0,
+        loadError: '',
+        saveError: '',
         headers:{},
         form:this.$form.createForm(this),
         picUrl: "",
@@ -269,6 +278,7 @@
       this.headers = {"X-Access-Token":token}
 
     },
+    beforeDestroy () { this.close() },
     computed:{
       uploadAction:function () {
         return this.url.fileUpload;
@@ -287,23 +297,38 @@
         }
         this.modaltoggleFlag = !this.modaltoggleFlag;
       },
-      initialRoleList(){
-        queryMySubRole().then((res)=>{
-          if(res.success){
-            this.roleList = res.result;
-          }else{
-            console.log(res.message);
-          }
-        });
+      isCurrentSession(version) {
+        return this.visible && version === this.sessionVersion && (!this.editContext || !this.editContext.isCurrent || this.editContext.isCurrent())
       },
-      loadUserRoles(userid){
-        queryUserRole({userid:userid}).then((res)=>{
-          if(res.success){
-            this.selectedRole = res.result;
-          }else{
-            console.log(res.message);
-          }
-        });
+      isCurrentRead(version, requestId) { return this.isCurrentSession(version) && requestId === this.loadRequestId },
+      initialRoleList(version = this.sessionVersion, requestId = this.loadRequestId) {
+        return queryMySubRole().then(res => {
+          if (!this.isCurrentRead(version, requestId)) return false
+          if (!res || res.success !== true || !Array.isArray(res.result) || !res.result.every(row => row && typeof row.id === 'string' && row.id)) return false
+          this.roleList = res.result
+          if (!this.model.id && !this.roleDisabled && this.userIdentity === '1') this.selectedRole = this.roleList.filter(role => role.roleCode === 'student' || role.roleName === '学生').map(role => role.id)
+          return true
+        }).catch(() => false)
+      },
+      loadUserRoles(userid, version = this.sessionVersion, requestId = this.loadRequestId) {
+        if (!userid) return Promise.resolve(true)
+        return queryUserRole({ userid }).then(res => {
+          if (!this.isCurrentRead(version, requestId)) return false
+          if (!res || res.success !== true || !Array.isArray(res.result) || !res.result.every(id => typeof id === 'string' && id)) return false
+          this.selectedRole = res.result.slice()
+          return true
+        }).catch(() => false)
+      },
+      loadSessionData() {
+        const version = this.sessionVersion
+        if (!this.isCurrentSession(version)) return
+        const requestId = ++this.loadRequestId
+        const userId = this.userId
+        this.loading = true
+        this.loadError = ''
+        return Promise.all([this.initialRoleList(version, requestId), this.loadUserRoles(userId, version, requestId), this.loadCheckedDeparts(version, requestId)]).then(results => {
+          if (this.isCurrentRead(version, requestId) && !results.every(Boolean)) this.loadError = '用户的角色或班级信息读取未完成，请重试后保存。'
+        }).finally(() => { if (this.isCurrentRead(version, requestId)) this.loading = false })
       },
       refresh () {
           this.selectedDepartKeys=[];
@@ -315,37 +340,49 @@
           this.departId=[];
           this.changeIdentity("1")
       },
-      add () {
-        this.picUrl = "";
-        this.refresh();
-        this.edit({activitiSync:'1', userIdentity:'1'});
+      add (context) {
+        const departs = context ? [context.deptId] : (this.departDisabled && Array.isArray(this.userDepartModel.departIdList) ? this.userDepartModel.departIdList.slice() : [])
+        const roles = this.roleDisabled ? this.selectedRole.slice() : []
+        this.picUrl = ''
+        this.refresh()
+        this.userDepartModel = { userId: '', departIdList: departs }
+        this.selectedRole = roles
+        return this.edit({ activitiSync: '1', userIdentity: '1' }, context)
       },
-      edit (record) {
-        this.resetScreenSize(); // 调用此方法,根据屏幕宽度自适应调整抽屉的宽度
-        let that = this;
-        that.initialRoleList();
-        that.checkedDepartNameString = "";
-        that.form.resetFields();
-        if(record.hasOwnProperty("id")){
-          that.loadUserRoles(record.id);
-          setTimeout(() => {
-            this.fileList = record.avatar;
-          }, 5)
-        }
-        that.userId = record.id;
-        that.visible = true;
-        that.model = Object.assign({}, record);
-        that.$nextTick(() => {
-          that.form.setFieldsValue(pick(this.model,'username','sex','realname','email','phone','activitiSync','workNo','telephone','post','school'))
-        });
-        //身份为上级显示负责部门，否则不显示
-        this.changeIdentity(this.model.userIdentity)
-        
-        // 调用查询用户对应的部门信息的方法
-        that.checkedDepartKeys = [];
-        that.loadCheckedDeparts();
+      edit (record, context) {
+        const version = ++this.sessionVersion
+        this.loadRequestId++
+        this.editContext = context ? Object.assign({}, context) : null
+        this.confirmLoading = false
+        this.cancelPrompt = null
+        this.departWindowVersion = 0
+        this.loadError = ''
+        this.saveError = ''
+        this.resetScreenSize()
+        this.checkedDepartNameString = ''
+        this.checkedDepartNames = []
+        this.checkedDepartKeys = []
+        this.selectedDepartKeys = []
+        this.resultDepartOptions = []
+        this.departIds = []
+        this.roleList = []
+        if (record.id) { this.selectedRole = []; this.userDepartModel = { userId: record.id, departIdList: [] } }
+        this.form.resetFields()
+        this.userId = record.id || ''
+        this.model = Object.assign({}, record)
+        this.fileList = record.avatar || []
+        this.visible = true
+        this.changeIdentity(this.model.userIdentity, true)
+        this.$nextTick(() => {
+          if (!this.isCurrentSession(version)) return
+          const fields = ['username', 'sex', 'realname', 'email', 'phone', 'telephone', 'school']
+          if (this.isShow.workNo) fields.push('workNo')
+          if (this.isShow.post) fields.push('post')
+          this.form.setFieldsValue(pick(this.model, ...fields))
+        })
+        return this.loadSessionData()
       },
-      changeIdentity(userIdentity){
+      changeIdentity(userIdentity, preserveRoles){
         if(userIdentity=="2"){
             this.userIdentity="2";
             this.isShow = {
@@ -353,7 +390,7 @@
               workNo:true,
               post:true
             }
-            this.selectedRole = []
+            if (!preserveRoles) this.selectedRole = []
         }else{
             this.userIdentity="1";
             this.isShow = {
@@ -362,7 +399,7 @@
               post:false
             }
             //查找学生角色
-            this.selectedRole = this.roleList.filter(role=>{
+            if (!preserveRoles) this.selectedRole = this.roleList.filter(role=>{
               if(role.roleCode == "student" || role.roleName == "学生"){
                 return role
               }
@@ -374,39 +411,31 @@
         }
       },
       //
-      loadCheckedDeparts(){
-        let that = this;
-        if(!that.userId){return}
-        getAction(that.url.userWithDepart,{userId:that.userId}).then((res)=>{
-          that.checkedDepartNames = [];
-          if(res.success){
-            var depart=[];
-            var departId=[];
-            for (let i = 0; i < res.result.length; i++) {
-              that.checkedDepartNames.push(res.result[i].title);
-              this.checkedDepartNameString = this.checkedDepartNames.join(",");
-              that.checkedDepartKeys.push(res.result[i].key);
-              //新增负责部门选择下拉框
-              depart.push({
-                  key:res.result[i].key,
-                  title:res.result[i].title
-              })
-              departId.push(res.result[i].key)
-            }
-            that.resultDepartOptions=depart;
-            //判断部门id是否存在，不存在择直接默认当前所在部门
-            if(this.model.departIds){
-                this.departIds=this.model.departIds.split(",");
-            }else{
-                this.departIds=departId;
-            }
-            that.userDepartModel.departIdList = that.checkedDepartKeys
-          }else{
-            console.log(res.message);
-          }
-        })
+      loadCheckedDeparts(version = this.sessionVersion, requestId = this.loadRequestId) {
+        if (!this.userId) return Promise.resolve(true)
+        const userId = this.userId
+        return getAction(this.url.userWithDepart, { userId }).then(res => {
+          if (!this.isCurrentRead(version, requestId) || userId !== this.userId) return false
+          if (!res || res.success !== true || !Array.isArray(res.result) || !res.result.every(row => row && typeof row.key === 'string' && row.key)) return false
+          this.checkedDepartNames = res.result.map(row => row.title)
+          this.checkedDepartNameString = this.checkedDepartNames.join(',')
+          this.checkedDepartKeys = res.result.map(row => row.key)
+          this.resultDepartOptions = res.result.map(row => ({ key: row.key, title: row.title }))
+          this.departIds = this.model.departIds ? this.model.departIds.split(',') : this.checkedDepartKeys.slice()
+          this.userDepartModel = { userId, departIdList: this.checkedDepartKeys.slice() }
+          return true
+        }).catch(() => false)
       },
       close () {
+        this.sessionVersion++
+        this.loadRequestId++
+        this.editContext = null
+        this.confirmLoading = false
+        this.loading = false
+        this.cancelPrompt = null
+        this.departWindowVersion = 0
+        this.form.resetFields()
+        if (this.$refs.departWindow && this.$refs.departWindow.visible) this.$refs.departWindow.close()
         this.$emit('close');
         this.visible = false;
         this.disableSubmit = false;
@@ -418,71 +447,60 @@
         this.selectedDepartKeys = [];
         this.resultDepartOptions=[];
         this.departIds=[];
+        this.roleList=[];
         this.changeIdentity("1")
         this.userIdentity="1";
         this.fileList=[];
       },
       moment,
+      confirmCancel() {
+        if (!this.visible || this.cancelPrompt) return
+        const prompt = { version: this.sessionVersion }
+        this.cancelPrompt = prompt
+        this.$confirm({ title: '确定放弃编辑？',
+          onOk: () => { if (this.cancelPrompt === prompt && this.isCurrentSession(prompt.version)) this.close() },
+          onCancel: () => { if (this.cancelPrompt === prompt) this.cancelPrompt = null }
+        })
+      },
       handleSubmit () {
-
-        const that = this;
-        // 触发表单验证
+        const version = this.sessionVersion
+        if (!this.isCurrentSession(version) || this.disableSubmit || this.loading || this.loadError || this.confirmLoading) return
+        const context = this.editContext ? Object.assign({}, this.editContext) : null
+        const model = Object.assign({}, this.model)
+        const roleIds = this.selectedRole.slice()
+        const departIdList = context && !model.id ? [context.deptId] : this.userDepartModel.departIdList.slice()
+        const responsibleIds = this.departIds.slice()
+        const userIdentity = this.userIdentity, userId = this.userId
+        const avatar = Array.isArray(this.fileList) ? this.fileList.slice() : this.fileList
+        this.confirmLoading = true
+        this.saveError = ''
         this.form.validateFields((err, values) => {
-          if (!err) {
-            that.confirmLoading = true;
-            if(!values.birthday){
-              values.birthday = '';
-            }else{
-              values.birthday = values.birthday.format(this.dateFormat);
-            }
-            let formData = Object.assign(this.model, values);
-            if(that.fileList != ''){
-              formData.avatar = that.fileList;
-            }else{
-              formData.avatar = null;
-            }
-            formData.selectedroles = this.selectedRole.length>0?this.selectedRole.join(","):'';
-            if(formData.selectedroles == ''){
-              that.$message.warning('请选择角色');
-              that.confirmLoading = false;
-              return;
-            }
-            formData.selecteddeparts = this.userDepartModel.departIdList.length>0?this.userDepartModel.departIdList.join(","):'';
-            if(formData.selecteddeparts == ''){
-              that.$message.warning('请选择班级');
-              that.confirmLoading = false;
-              return;
-            }
-            formData.userIdentity=this.userIdentity;
-            //如果是上级择传入departIds,否则为空
-            if(this.userIdentity==="2"){
-              formData.departIds=this.departIds.join(",");
-            }else{
-              formData.departIds="";
-            }
-            // that.addDepartsToUser(that,formData); // 调用根据当前用户添加部门信息的方法
-            let obj;
-            if(!this.model.id){
-              formData.id = this.userId;
-              obj=addUser(formData);
-            }else{
-              obj=editUser(formData);
-            }
-            obj.then((res)=>{
-              if(res.success){
-                that.$message.success(res.message);
-                that.$emit('ok');
-              }else{
-                that.$message.warning(res.message);
-              }
-            }).finally(() => {
-              that.confirmLoading = false;
-              that.checkedDepartNames = [];
-              that.userDepartModel.departIdList = {userId:'',departIdList:[]};
-              that.close();
-            })
-
+          if (!this.isCurrentSession(version)) return
+          if (err) { this.confirmLoading = false; return }
+          if (!roleIds.length || !departIdList.length) {
+            this.$message.warning(!roleIds.length ? '请选择角色' : '请选择班级')
+            this.confirmLoading = false
+            return
           }
+          const formData = Object.assign({}, model, values)
+          formData.id = model.id || userId
+          formData.birthday = values.birthday ? (typeof values.birthday.format === 'function' ? values.birthday.format(this.dateFormat) : values.birthday) : ''
+          formData.avatar = avatar && avatar.length ? avatar : null
+          formData.selectedroles = roleIds.join(',')
+          formData.selecteddeparts = departIdList.join(',')
+          formData.userIdentity = userIdentity
+          formData.departIds = userIdentity === '2' ? responsibleIds.join(',') : ''
+          const request = model.id ? editUser : addUser
+          request(formData).then(res => {
+            if (!this.isCurrentSession(version)) return
+            if (res && res.success === true) {
+              this.$message.success(res.message || '用户已保存')
+              if (context) this.$emit('ok', context)
+              else this.$emit('ok')
+              if (this.isCurrentSession(version)) this.close()
+            } else this.saveError = '用户未保存成功，填写内容已保留，请重试。'
+          }).catch(() => { if (this.isCurrentSession(version)) this.saveError = '未能确认保存结果，请核对用户列表后重试。' })
+            .finally(() => { if (this.isCurrentSession(version)) this.confirmLoading = false })
         })
       },
       handleCancel () {
@@ -508,6 +526,14 @@
           callback()
         }
       },
+      validateDuplicate(params, message, callback) {
+        const version = this.sessionVersion
+        return duplicateCheck(params).then(res => {
+          if (!this.isCurrentSession(version)) return
+          if (res && res.success === true) callback()
+          else callback(message)
+        }).catch(() => { if (this.isCurrentSession(version)) callback('验证未完成，请重试。') })
+      },
       validatePhone(rule, value, callback){
         if(!value){
           callback()
@@ -522,13 +548,7 @@
               fieldVal: value,
               dataId: this.userId
             };
-            duplicateCheck(params).then((res) => {
-              if (res.success) {
-                callback()
-              } else {
-                callback("手机号已存在!")
-              }
-            })
+            this.validateDuplicate(params, '手机号已存在!', callback)
           }else{
             callback("请输入正确格式的手机号码!");
           }
@@ -545,14 +565,7 @@
               fieldVal: value,
               dataId: this.userId
             };
-            duplicateCheck(params).then((res) => {
-              console.log(res)
-              if (res.success) {
-                callback()
-              } else {
-                callback("邮箱已存在!")
-              }
-            })
+            this.validateDuplicate(params, '邮箱已存在!', callback)
           }else{
             callback("请输入正确格式的邮箱!")
           }
@@ -565,13 +578,7 @@
           fieldVal: value,
           dataId: this.userId
         };
-        duplicateCheck(params).then((res) => {
-          if (res.success) {
-          callback()
-        } else {
-          callback("用户名已存在!")
-        }
-      })
+        this.validateDuplicate(params, '用户名已存在!', callback)
       },
       validateWorkNo(rule, value, callback){
         var params = {
@@ -580,13 +587,7 @@
           fieldVal: value,
           dataId: this.userId
         };
-        duplicateCheck(params).then((res) => {
-          if (res.success) {
-            callback()
-          } else {
-            callback("工号已存在!")
-          }
-        })
+        this.validateDuplicate(params, '工号已存在!', callback)
       },
       handleConfirmBlur  (e) {
         const value = e.target.value;
@@ -628,11 +629,14 @@
       },
       // 搜索用户对应的部门API
       onSearch(){
+        if (!this.visible || this.departDisabled || this.confirmLoading) return
+        this.departWindowVersion = this.sessionVersion
         this.$refs.departWindow.add(this.checkedDepartKeys,this.userId);
       },
 
       // 获取用户对应部门弹出框提交给返回的数据
       modalFormOk (formData) {
+        if (!this.visible || this.departDisabled || this.departWindowVersion !== this.sessionVersion) return
         this.checkedDepartNames = [];
         this.selectedDepartKeys = [];
         this.checkedDepartNameString = '';

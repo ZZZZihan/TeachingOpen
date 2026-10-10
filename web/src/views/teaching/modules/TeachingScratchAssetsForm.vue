@@ -97,11 +97,11 @@ import pick from 'lodash.pick'
 import { validateDuplicateValue } from '@/utils/util'
 import JFormContainer from '@/components/jeecg/JFormContainer'
 import JDate from '@/components/jeecg/JDate'
+import JUpload from '@/components/jeecg/JUpload'
 import JSelectDepart from '@/components/jeecgbiz/JSelectDepart'
 import JSelectUserByDep from '@/components/jeecgbiz/JSelectUserByDep'
 import JDictSelectTag from '@/components/dict/JDictSelectTag'
 import JCodeEditor from '@/components/jeecg/JCodeEditor'
-import JUpload from '@/components/jeecg/JUpload'
 import JCategorySelect from '@/components/jeecg/JCategorySelect'
 
 export default {

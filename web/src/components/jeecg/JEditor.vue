@@ -128,10 +128,10 @@ export default {
               switch (that.uploadTarget) {
                 case UPLOAD_TARGET_QINIU:
                   getAction(that.tokenAction.qiniu, {}).then((token_res) => {
-                    if (token_res.success) {
+                    if (token_res.success && token_res.keyPrefix) {
                       formData.append('file', file, uuidGenerator() + file.name)
                       formData.append('token', token_res.result)
-                      formData.append('key', uuidGenerator() + file.name)
+                      formData.append('key', token_res.keyPrefix + uuidGenerator() + file.name)
                       uploadAction(that.uploadAction.qiniu, formData, function (progressEvent) {
                         let complete = (((progressEvent.loaded / progressEvent.total) * 100) | 0)
 
@@ -192,10 +192,10 @@ export default {
           switch (this.uploadTarget) {
             case UPLOAD_TARGET_QINIU:
               getAction(this.tokenAction.qiniu, {}).then((token_res) => {
-                if (token_res.success) {
+                if (token_res.success && token_res.keyPrefix) {
                   formData.append('file', blobInfo.blob(), uuidGenerator() + blobInfo.filename())
                   formData.append('token', token_res.result)
-                  formData.append('key', uuidGenerator() + blobInfo.filename())
+                  formData.append('key', token_res.keyPrefix + uuidGenerator() + blobInfo.filename())
                   uploadAction(this.uploadAction.qiniu, formData).then((res) => {
                     let img = this.getDownloadUrl(res.key)
                     success(img)

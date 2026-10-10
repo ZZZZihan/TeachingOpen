@@ -1,0 +1,40 @@
+{
+  "cases": [
+    {
+      "case": "edit accepted: workStatus,teachingWorkCorrectList",
+      "passed": true
+    },
+    {
+      "case": "zero-score feedback persisted",
+      "passed": true
+    },
+    {
+      "case": "legacy grade deletes omitted comments",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: workName",
+      "passed": true
+    },
+    {
+      "case": "legacy metadata edit deletes feedback and comments",
+      "passed": true
+    },
+    {
+      "case": "all 68 non-audit database tables restored",
+      "passed": true
+    },
+    {
+      "case": "all attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 7,
+  "total": 7,
+  "expected_legacy": true,
+  "jar_sha256": "ba9a03697641afdb8ee1781ab20848e1865fdfa4ee4c1c1ac317156f7efcb72f",
+  "changed_tables": [
+    "sys_log"
+  ],
+  "scope": "Actual synthetic HTTP, MySQL transaction failures and readback. No authenticated browser or concurrent-write stress test."
+}

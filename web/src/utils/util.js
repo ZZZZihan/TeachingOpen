@@ -1,6 +1,6 @@
 import * as api from '@/api/api'
 import { isURL } from '@/utils/validate'
-import onlineCommons from '@jeecg/antd-online-beta220'
+import { resolveOnlineRoute } from './onlineRoute'
 import { INDEX_MAIN_PAGE_PATH} from "@/store/mutation-types"
 
 export function timeFix() {
@@ -116,27 +116,9 @@ function  generateChildRouters (data) {
       item.meta.url = URL;
     }
 
-    //online菜单路由加载逻辑
-    let componentPath
-    if(item.component=="modules/online/cgform/OnlCgformHeadList"){
-      componentPath = onlineCommons.OnlCgformHeadList
-    }else if(item.component=="modules/online/cgform/OnlCgformCopyList"){
-      componentPath = onlineCommons.OnlCgformCopyList
-    }else if(item.component=="modules/online/cgform/auto/OnlCgformAutoList"){
-      componentPath = onlineCommons.OnlCgformAutoList
-    }else if(item.component=="modules/online/cgform/auto/OnlCgformTreeList"){
-      componentPath = onlineCommons.OnlCgformTreeList
-    }else if(item.component=="modules/online/cgform/auto/erp/OnlCgformErpList"){
-      componentPath = onlineCommons.OnlCgformErpList
-    }else if(item.component=="modules/online/cgform/auto/innerTable/OnlCgformInnerTableList"){
-      componentPath = onlineCommons.OnlCgformInnerTableList
-    }else if(item.component=="modules/online/cgreport/OnlCgreportHeadList"){
-      componentPath = onlineCommons.OnlCgreportHeadList
-    }else if(item.component=="modules/online/cgreport/auto/OnlCgreportAutoList"){
-      componentPath = onlineCommons.OnlCgreportAutoList
-    }else{
-      componentPath = resolve => require(['@/' + component+'.vue'], resolve)
-    }
+    // Online forms load only when their route is visited.
+    const componentPath = resolveOnlineRoute(item.component) ||
+      (resolve => require(['@/' + component+'.vue'], resolve))
 
     let menu =  {
       path: item.path,

@@ -1,0 +1,10 @@
+{
+  "protected_source_count": 5634,
+  "changed_source_count": 0,
+  "runtime_health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP",
+    "18102_index_http": 200
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "mode": "normal",
+  "reads": [
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    },
+    {
+      "workId": "seed-work",
+      "mode": "normal"
+    }
+  ],
+  "uploads": [
+    {
+      "path": "fixture/1.py",
+      "name": "我的练习 & 100%.py",
+      "sha256": "a54e1a823df4a1ccb5b9b15f2492d742ae7aa754eadae6539d446bed58a0d60f",
+      "failed": false
+    },
+    {
+      "path": "fixture/2.py",
+      "name": "我的练习 & 100%.py",
+      "sha256": "0b64239717bde7649d44ec12bf4e0a656d75f8ceea64bb8ed71989666b5e9226",
+      "failed": false
+    },
+    {
+      "path": "fixture/3.py",
+      "name": "我的练习 & 100%.py",
+      "sha256": "39dbf8857def83cbdda13d70be947dee65b0cabafaf06653b1f224a675d34773",
+      "failed": false
+    }
+  ],
+  "registrations": [
+    {
+      "fileType": 2,
+      "fileName": "我的练习 & 100%.py",
+      "fileTag": "学生作业-python",
+      "filePath": "fixture/1.py",
+      "fileLocation": 1,
+      "id": "file-1",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "我的练习 & 100%.py",
+      "fileTag": "学生作业-python",
+      "filePath": "fixture/2.py",
+      "fileLocation": 1,
+      "id": "file-2",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "我的练习 & 100%.py",
+      "fileTag": "学生作业-python",
+      "filePath": "fixture/3.py",
+      "fileLocation": 1,
+      "id": "file-3",
+      "failed": false
+    }
+  ],
+  "submissions": [
+    {
+      "id": "seed-work",
+      "workName": "我的练习 & 100%",
+      "workFile": "file-1",
+      "workCover": "",
+      "workType": 4,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-python",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "failed": false
+    },
+    {
+      "id": "seed-work",
+      "workName": "我的练习 & 100%",
+      "workFile": "file-2",
+      "workCover": "",
+      "workType": 4,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-python",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "failed": false
+    },
+    {
+      "id": "seed-work",
+      "workName": "我的练习 & 100%",
+      "workFile": "file-3",
+      "workCover": "",
+      "workType": 4,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-python",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "failed": false
+    }
+  ],
+  "works": {
+    "seed-work": {
+      "id": "seed-work",
+      "workName": "我的练习 & 100%",
+      "workFile": "file-3",
+      "workCover": "",
+      "workType": 4,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "task-python",
+      "departId": "class-fixture",
+      "workScene": "additional",
+      "workFileKey_url": "/fixture/3.py"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "integration_head": "032f5d50641fe53351ad608bf0079fce2e9080a9",
+  "product_commit": "ee25b493674bb37c995c758e029be88e32d88b87",
+  "backend_input_count": 1031,
+  "backend_matches_frozen_build": true,
+  "frozen_jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+  "dist_files": 4893,
+  "dist_bytes": 211568970,
+  "dist_identical_to_pr61": true,
+  "prior_manifest_sha256": "9d7589a49ebfceced30d3daf452f13094727bf160c04ff84295c09030c9c3005",
+  "frontend_rebuilt": false
+}

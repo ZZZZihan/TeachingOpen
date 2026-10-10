@@ -1,73 +1,50 @@
 import Vue from 'vue'
 import router from './router'
 import store from './store'
-import NProgress from 'nprogress' // progress bar
-import 'nprogress/nprogress.css' // progress bar style
-import notification from 'ant-design-vue/es/notification'
-import { ACCESS_TOKEN,INDEX_MAIN_PAGE_PATH } from '@/store/mutation-types'
-import { generateIndexRouter } from "@/utils/util"
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { generateIndexRouter } from '@/utils/util'
+import { safeRedirect } from '@/utils/session'
 
-NProgress.configure({ showSpinner: false }) // NProgress Configuration
-
-const whiteList = ['/user/login', '/user/register', '/user/register-result','/user/alteration', '/home', '/index', '/workList','/courseList', '/friend-detail', '/work-detail', '/newsList', '/news-detail'] // no redirect whitelist
-
-router.beforeEach((to, from, next) => {
-  NProgress.start() // start progress bar
-
-  if (Vue.ls.get(ACCESS_TOKEN)) {
-    /* has token */
-    if (to.path === '/user/login') {
-      next({ path: INDEX_MAIN_PAGE_PATH })
-      NProgress.done()
-    } else {
-      if (store.getters.permissionList.length === 0) {
-        store.dispatch('GetPermissionList').then(res => {
-              const menuData = res.result.menu;
-              console.log(res.message)
-              if (menuData === null || menuData === "" || menuData === undefined) {
-                return;
-              }
-              let constRoutes = [];
-              constRoutes = generateIndexRouter(menuData);
-              // 添加主界面路由
-              store.dispatch('UpdateAppRouter',  { constRoutes }).then(() => {
-                // 根据roles权限生成可访问的路由表
-                // 动态添加可访问路由表
-                router.addRoutes(store.getters.addRouters)
-                const redirect = decodeURIComponent(from.query.redirect || to.path)
-                if (to.path === redirect) {
-                  // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
-                  next({ ...to, replace: true })
-                } else {
-                  // 跳转到目的路由
-                  next({ path: redirect })
-                }
-              })
-            })
-          .catch(() => {
-           /* notification.error({
-              message: '系统提示',
-              description: '请求用户信息失败，请重试！'
-            })*/
-            store.dispatch('Logout').then(() => {
-              next({ path: '/user/login', query: { redirect: to.fullPath } })
-            })
-          })
-      } else {
-        next()
-      }
+NProgress.configure({ showSpinner: false })
+const publicPaths = ['/', '/user/login', '/user/register', '/user/register-result', '/user/alteration', '/home', '/index', '/workList', '/courseList', '/friend-detail', '/work-detail', '/newsList', '/news-detail', '/404']
+let permissionRequest = null
+let permissionToken = null
+function loadPermissions (token) {
+    if (!permissionRequest || permissionToken !== token) {
+        permissionToken = token
+        const pending = store.dispatch('GetPermissionList').then(res => {
+            if (Vue.ls.get(ACCESS_TOKEN) !== token) throw new Error('Session changed')
+            const constRoutes = generateIndexRouter(res.result.menu)
+            store.commit('SET_ROUTERS', constRoutes)
+            router.addRoutes(constRoutes)
+            store.commit('SET_PERMISSIONS_LOADED', true)
+        }).finally(() => { if (permissionRequest === pending) permissionRequest = null })
+        permissionRequest = pending
     }
-  } else {
-    if (whiteList.indexOf(to.path) !== -1) {
-      // 在免登录白名单，直接进入
-      next()
-    } else {
-      next({ path: '/user/login', query: { redirect: to.fullPath } })
-      NProgress.done() // if current page is login will not trigger afterEach hook, so manually handle it
-    }
-  }
-})
+    return permissionRequest
+}
 
-router.afterEach(() => {
-  NProgress.done() // finish progress bar
+router.beforeEach(async (to, from, next) => {
+    NProgress.start()
+    const token = Vue.ls.get(ACCESS_TOKEN)
+    if (to.path === '/user/login' && token) { next(safeRedirect(to.query.redirect)); return }
+    if (publicPaths.includes(to.path)) { next(); return }
+    if (!token) {
+        next({ path: '/user/login', query: { redirect: safeRedirect(to.fullPath) }, replace: true })
+        return
+    }
+    if (to.path === '/user/session') { next(); return }
+    if (store.state.user.permissionsLoaded) { next(); return }
+    try {
+        await loadPermissions(token)
+        if (Vue.ls.get(ACCESS_TOKEN) !== token) { next(false); NProgress.done(); return }
+        next({ path: to.fullPath, replace: true })
+    } catch (_) {
+        if (!Vue.ls.get(ACCESS_TOKEN)) next({ path: '/user/login', query: { redirect: safeRedirect(to.fullPath), reason: 'expired' }, replace: true })
+        else if (Vue.ls.get(ACCESS_TOKEN) !== token) { next(false); NProgress.done() } else next({ path: '/user/session', query: { redirect: safeRedirect(to.fullPath) }, replace: true })
+    }
 })
+router.afterEach(() => NProgress.done())
+router.onError(() => NProgress.done())

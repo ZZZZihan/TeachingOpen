@@ -1,0 +1,12 @@
+{
+  "after.json": "24e61be05dbe786072359bf9817e4ef55f8162dde9e53c599e5a2c828415dd5e",
+  "before.json": "59906deebaf15d8418f8dd47a99c5d3a3180fa2960108794a86aee2bbc4b129a",
+  "build.txt": "6e0588c1943739d9689d6a02f51aa54b03426f85936e3faec339610516ebdde6",
+  "candidate.json": "c143c44cf49337fb773a86a1a9aeda6e66d260a8ea44a89f9544149c23f4700d",
+  "data-preservation.json": "a512639ef74ce89a2cd3cf2f51474326f3369f518f78ca6d898fc1f3c1a0c5b9",
+  "jar-diff.json": "b8b25efe08f6ad1381beba20ab703f7d8183b843a799a85336de00cc04d8a2e0",
+  "probe-correction.json": "e1dfdf6f419608c44e366479a3c616d6df8daef2dae30b29aa34a828adf2e184",
+  "regression-community.json": "5e24f875910861a8aa5050ea3fa292326707729135a694f5cf648d26e5f69bc3",
+  "regression-submission.json": "7d6a7dff8e1d4d00b63ac5d70e60fb8cd4b642055315434bde81db2929dda5d6",
+  "regression-work-management.json": "8dd2c645a6d6f04daa489e31ba973d3286e9fc09ce1d2720346f243a609e879a"
+}

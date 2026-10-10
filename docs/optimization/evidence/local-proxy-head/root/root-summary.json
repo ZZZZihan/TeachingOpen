@@ -1,0 +1,47 @@
+{
+  "scope": "main-agent source review and actual isolated Java backend with exact frozen proxy; synthetic CLI logins only",
+  "proxy_sha256": "d765e08c8bcbb09b315e21e82d432d8f1938e037a93edee30d9fb7b23db33af2",
+  "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "frozen_unicode_probe": {
+    "passed": 183,
+    "total": 186,
+    "exit_code": 1,
+    "failed_assertions": [
+      "malformed path refuses bytes empty path segment GET",
+      "malformed path refuses bytes empty path segment HEAD",
+      "malformed path refuses Range empty path segment"
+    ],
+    "interpretation": "Three unchanged assertions require rejection of duplicate separator; separate 18/18 prove canonical permission and exact byte identity. No product failure hidden as pass."
+  },
+  "proxy_head_case": {
+    "case": "same-origin proxy Chinese public cover HEAD",
+    "passed": true,
+    "expected_status": 200,
+    "http_status": 200,
+    "body_bytes": 0,
+    "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "headers": {
+      "content-type": "image/png",
+      "content-disposition": "inline; filename*=UTF-8''%E8%AF%BE%E7%A8%8B%E5%B0%81%E9%9D%A2.png",
+      "content-length": "73",
+      "cache-control": "no-store",
+      "accept-ranges": "bytes",
+      "x-content-type-options": "nosniff"
+    }
+  },
+  "observations_script_executed": true,
+  "canonical_permission_checks": 18,
+  "notification_via_frontend": {
+    "passed": 44,
+    "total": 44
+  },
+  "scratch_via_frontend": {
+    "passed": 52,
+    "total": 52
+  },
+  "initial_cli_precondition_error": {
+    "exit_code": 2,
+    "reason": "root first invocation omitted required --label; no runtime work occurred; fresh final output used"
+  },
+  "known_followup": "Legal %2B-only stored URL reference still does not match current permission candidate query; separate compatibility bug."
+}

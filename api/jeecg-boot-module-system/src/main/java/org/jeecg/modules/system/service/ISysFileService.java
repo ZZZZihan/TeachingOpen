@@ -10,6 +10,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @Version: V1.0
  */
 public interface ISysFileService extends IService<SysFile> {
+    SysFile recordUpload(String path, String originalName, int location);
+    boolean isReferenced(SysFile file);
     //同时删除文件
     boolean deleteWithFile(String id);
     //通过文件key删除文件

@@ -1,0 +1,50 @@
+[
+  {
+    "file": "web/src/views/account/center/MineWorkList.vue",
+    "baseline_errors": 56,
+    "baseline_warnings": 154,
+    "current_errors": 56,
+    "current_warnings": 154,
+    "new_messages": []
+  },
+  {
+    "file": "web/src/views/account/center/page/MineWorks.vue",
+    "baseline_errors": 26,
+    "baseline_warnings": 73,
+    "current_errors": 26,
+    "current_warnings": 73,
+    "new_messages": []
+  },
+  {
+    "file": "web/src/views/account/course/MyAdditionalWorkList.vue",
+    "baseline_errors": 0,
+    "baseline_warnings": 0,
+    "current_errors": 0,
+    "current_warnings": 0,
+    "new_messages": []
+  },
+  {
+    "file": "web/src/views/home/WorkDetail.vue",
+    "baseline_errors": 34,
+    "baseline_warnings": 165,
+    "current_errors": 34,
+    "current_warnings": 165,
+    "new_messages": []
+  },
+  {
+    "file": "web/src/views/teaching/TeachingWorkList.vue",
+    "baseline_errors": 84,
+    "baseline_warnings": 235,
+    "current_errors": 84,
+    "current_warnings": 235,
+    "new_messages": []
+  },
+  {
+    "file": "web/src/views/teaching/modules/TeachingWorkPreviewModal.vue",
+    "baseline_errors": 11,
+    "baseline_warnings": 58,
+    "current_errors": 11,
+    "current_warnings": 58,
+    "new_messages": []
+  }
+]

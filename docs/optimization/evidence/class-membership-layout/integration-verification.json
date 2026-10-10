@@ -1,0 +1,388 @@
+{
+  "tested_integration_head": "02f96115e8150d1876381b37546111f49cce51b3",
+  "product_commit": "5192b9d7da5fb7b013a3658563e101c13efb9bbe",
+  "preview_source_hashes": {
+    "src/views/system/modules/DeptUserInfo.vue": "edb9adba2a7e74ec900ef403356ab85173ba900242781fba0ef482e20221cfdc",
+    "src/views/system/modules/SelectUserModal.vue": "b1b39ce5557dc43f8ab619bb4c2202cdd73f4abd537510e5fe6c587d1ad7c8f1",
+    "src/views/system/modules/UserModal.vue": "fd2779130889aad87a617babdcd68b698095fca4c0c56cdc4b9ee58bf31362f5",
+    "src/views/system/modules/DeptRoleUserModal.vue": "5d7da557941c6dda75278bb2ab0fd6b57497c46a72bc7369fc593d88443058c9",
+    "src/views/system/DepartList.vue": "f9037dfe3b2fda3c83108439d0f753fcee5a0385b3d3a5e613dbaa98d293d1e0",
+    "src/mixins/JeecgListMixin.js": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+    "src/assets/less/common.less": "dda7d1e26e70d8cca0e6f4241e12623de3345d9bb2d11f57ca426b74888c95dd",
+    "vue.config.js": "7d439f519c15bc23d82f298c01e514531dcc106561ae32760937b66983d73c83"
+  },
+  "product_parent_mixin_global_hashes_identical": true,
+  "theme_configuration_identical": true,
+  "existing_build_config_difference": "Integration already disables prefetch. Initial all-file equality precheck stopped before any swap; reviewed diff and compared actual theme configuration.",
+  "frontend_tests": {
+    "pass": 581,
+    "total": 581,
+    "skip": 0
+  },
+  "build_exit": 0,
+  "build_warnings": 12,
+  "files": 4893,
+  "bytes": 211629143,
+  "manifest_sha256": "0b38b4690bac046186f3f4127eb8dc666aada7e2a413216a1a1a917f4bf2d120",
+  "changed_or_added": [
+    "css/chunk-0bcd4458.5d04de9c.css",
+    "css/chunk-11c834b9.457d4a95.css",
+    "css/chunk-12a26e81.8ae107b8.css",
+    "css/chunk-3f13ca42.63b48236.css",
+    "css/chunk-61697717.c258c2ba.css",
+    "css/chunk-66bce646.f24383ef.css",
+    "css/chunk-726b53e2.6c040a0f.css",
+    "index.html",
+    "js/app.fff8dd9f.js",
+    "js/app.fff8dd9f.js.gz",
+    "js/chunk-0bcd4458.083773bc.js",
+    "js/chunk-0bcd4458.083773bc.js.gz",
+    "js/chunk-11c834b9.4b370f4d.js",
+    "js/chunk-11c834b9.4b370f4d.js.gz",
+    "js/chunk-12a26e81.51c5cce5.js",
+    "js/chunk-12a26e81.51c5cce5.js.gz",
+    "js/chunk-3f13ca42.926bcca9.js",
+    "js/chunk-3f13ca42.926bcca9.js.gz",
+    "js/chunk-61697717.41a0e20f.js",
+    "js/chunk-66bce646.889c7cab.js",
+    "js/chunk-66bce646.889c7cab.js.gz",
+    "js/chunk-726b53e2.fdf712e0.js",
+    "js/chunk-726b53e2.fdf712e0.js.gz"
+  ],
+  "removed": [
+    "css/chunk-00c97493.546a2aa6.css",
+    "css/chunk-114bb9d4.79c50e69.css",
+    "css/chunk-194374b3.f129e419.css",
+    "css/chunk-51bdb774.5b065727.css",
+    "css/chunk-64e9f4d9.00b9f146.css",
+    "css/chunk-6fd0967e.c21797cc.css",
+    "css/chunk-7e170d67.de46b51b.css",
+    "js/app.0798f1e4.js",
+    "js/app.0798f1e4.js.gz",
+    "js/chunk-00c97493.a9ca1a4e.js",
+    "js/chunk-00c97493.a9ca1a4e.js.gz",
+    "js/chunk-114bb9d4.d85d0f4d.js",
+    "js/chunk-114bb9d4.d85d0f4d.js.gz",
+    "js/chunk-194374b3.56c08830.js",
+    "js/chunk-51bdb774.60175c5a.js",
+    "js/chunk-51bdb774.60175c5a.js.gz",
+    "js/chunk-64e9f4d9.437547da.js",
+    "js/chunk-64e9f4d9.437547da.js.gz",
+    "js/chunk-6fd0967e.30e65d20.js",
+    "js/chunk-6fd0967e.30e65d20.js.gz",
+    "js/chunk-7e170d67.e19b5155.js",
+    "js/chunk-7e170d67.e19b5155.js.gz"
+  ],
+  "previous_dist_matches_pr61": true,
+  "previous_dist_files": 4893,
+  "previous_dist_bytes": 211568970,
+  "proxy_checks": [
+    {
+      "port": 18112,
+      "path": "css/chunk-0bcd4458.5d04de9c.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-11c834b9.457d4a95.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-12a26e81.8ae107b8.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-3f13ca42.63b48236.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-61697717.c258c2ba.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-66bce646.f24383ef.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "css/chunk-726b53e2.6c040a0f.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "index.html",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/app.fff8dd9f.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-0bcd4458.083773bc.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-11c834b9.4b370f4d.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-12a26e81.51c5cce5.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-3f13ca42.926bcca9.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-61697717.41a0e20f.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-66bce646.889c7cab.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18112,
+      "path": "js/chunk-726b53e2.fdf712e0.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-0bcd4458.5d04de9c.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-11c834b9.457d4a95.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-12a26e81.8ae107b8.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-3f13ca42.63b48236.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-61697717.c258c2ba.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-66bce646.f24383ef.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "css/chunk-726b53e2.6c040a0f.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "index.html",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/app.fff8dd9f.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-0bcd4458.083773bc.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-11c834b9.4b370f4d.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-12a26e81.51c5cce5.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-3f13ca42.926bcca9.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-61697717.41a0e20f.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-66bce646.889c7cab.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18142,
+      "path": "js/chunk-726b53e2.fdf712e0.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-0bcd4458.5d04de9c.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-11c834b9.457d4a95.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-12a26e81.8ae107b8.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-3f13ca42.63b48236.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-61697717.c258c2ba.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-66bce646.f24383ef.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "css/chunk-726b53e2.6c040a0f.css",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "index.html",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/app.fff8dd9f.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-0bcd4458.083773bc.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-11c834b9.4b370f4d.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-12a26e81.51c5cce5.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-3f13ca42.926bcca9.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-61697717.41a0e20f.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-66bce646.889c7cab.js",
+      "status": 200,
+      "byte_match": true
+    },
+    {
+      "port": 18150,
+      "path": "js/chunk-726b53e2.fdf712e0.js",
+      "status": 200,
+      "byte_match": true
+    }
+  ],
+  "backend_health": [
+    {
+      "port": 18111,
+      "http": 200,
+      "health": "UP"
+    },
+    {
+      "port": 18141,
+      "http": 200,
+      "health": "UP"
+    },
+    {
+      "port": 18149,
+      "http": 200,
+      "health": "UP"
+    }
+  ],
+  "backend_unchanged": true,
+  "frozen_backend_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0"
+}

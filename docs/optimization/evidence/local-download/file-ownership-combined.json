@@ -1,0 +1,313 @@
+{
+  "observed_utc": "2026-10-02T18:34:12.466300+00:00",
+  "jar_sha256": "b7715c0c4bdaeb6531e952d3240b80ff4b727743930d0a2213ceede3b66371a8",
+  "expected_legacy": false,
+  "passed": 76,
+  "total": 76,
+  "cases": [
+    {
+      "case": "student_a list respects server ownership",
+      "passed": true
+    },
+    {
+      "case": "student_b list respects server ownership",
+      "passed": true
+    },
+    {
+      "case": "teacher_a list respects server ownership",
+      "passed": true
+    },
+    {
+      "case": "teacher_b list respects server ownership",
+      "passed": true
+    },
+    {
+      "case": "admin list respects server ownership",
+      "passed": true
+    },
+    {
+      "case": "owner reads own file",
+      "passed": true
+    },
+    {
+      "case": "administrator reads foreign file",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot read unrelated upload",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot rename unrelated upload",
+      "passed": true
+    },
+    {
+      "case": "student_a denied delete",
+      "passed": true
+    },
+    {
+      "case": "student_a denied deleteByPath",
+      "passed": true
+    },
+    {
+      "case": "student_a denied deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot export all files",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot import metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot read unrelated upload",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot rename unrelated upload",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied delete",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied deleteByPath",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot export all files",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot import metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot read unrelated upload",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot rename unrelated upload",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied delete",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied deleteByPath",
+      "passed": true
+    },
+    {
+      "case": "teacher_b denied deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot export all files",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot import metadata",
+      "passed": true
+    },
+    {
+      "case": "untrusted path cannot become owned file-owner-probe-b.txt",
+      "passed": true
+    },
+    {
+      "case": "untrusted path cannot become owned ../escape",
+      "passed": true
+    },
+    {
+      "case": "untrusted path cannot become owned nonexistent.sb3",
+      "passed": true
+    },
+    {
+      "case": "untrusted path cannot become owned foreign/cloud.sb3",
+      "passed": true
+    },
+    {
+      "case": "mixed-owner batch changes neither file",
+      "passed": true
+    },
+    {
+      "case": "missing item in batch changes no bytes",
+      "passed": true
+    },
+    {
+      "case": "empty batch is rejected",
+      "passed": true
+    },
+    {
+      "case": "administrator receives real binary XLS export",
+      "passed": true
+    },
+    {
+      "case": "repeat registration keeps server identity and only updates display",
+      "passed": true
+    },
+    {
+      "case": "edit cannot rewrite path location creator or deletion state",
+      "passed": true
+    },
+    {
+      "case": "upstream file category 4 remains editable",
+      "passed": true
+    },
+    {
+      "case": "upstream file category 5 remains editable",
+      "passed": true
+    },
+    {
+      "case": "invalid display is atomic fileName",
+      "passed": true
+    },
+    {
+      "case": "invalid display is atomic fileName",
+      "passed": true
+    },
+    {
+      "case": "invalid display is atomic fileTag",
+      "passed": true
+    },
+    {
+      "case": "invalid display is atomic fileType",
+      "passed": true
+    },
+    {
+      "case": "teaching_course resource preserves referenced file",
+      "passed": true
+    },
+    {
+      "case": "teaching_course_unit resource preserves referenced file",
+      "passed": true
+    },
+    {
+      "case": "teaching_additional_work resource preserves referenced file",
+      "passed": true
+    },
+    {
+      "case": "teaching_news resource preserves referenced file",
+      "passed": true
+    },
+    {
+      "case": "teaching_scratch_assets resource preserves referenced file",
+      "passed": true
+    },
+    {
+      "case": "optional media module protects its referenced file",
+      "passed": true
+    },
+    {
+      "case": "recipient reads shared attachment",
+      "passed": true
+    },
+    {
+      "case": "class teacher reads shared attachment",
+      "passed": true
+    },
+    {
+      "case": "other teacher cannot read private shared attachment",
+      "passed": true
+    },
+    {
+      "case": "uploader cannot delete still-referenced file",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot delete still-referenced file",
+      "passed": true
+    },
+    {
+      "case": "signed-in viewer can resolve published attachment",
+      "passed": true
+    },
+    {
+      "case": "existing work history protects previous attachment",
+      "passed": true
+    },
+    {
+      "case": "configuration HTML reference protects bytes",
+      "passed": true
+    },
+    {
+      "case": "physical alias prevents reclamation",
+      "passed": true
+    },
+    {
+      "case": "ambiguous path cannot select an arbitrary record",
+      "passed": true
+    },
+    {
+      "case": "real upload creates server-owned live record",
+      "passed": true
+    },
+    {
+      "case": "editor registration reuses uploaded record",
+      "passed": true
+    },
+    {
+      "case": "other student cannot claim freshly uploaded bytes",
+      "passed": true
+    },
+    {
+      "case": "owner removes unused uploaded object",
+      "passed": true
+    },
+    {
+      "case": "metadata write failure removes new bytes and reports failure",
+      "passed": true
+    },
+    {
+      "case": "unreclaimable directory preserves metadata",
+      "passed": true
+    },
+    {
+      "case": "legacy symlink metadata cannot delete another physical object",
+      "passed": true
+    },
+    {
+      "case": "owner deletes unreferenced own bytes by path",
+      "passed": true
+    },
+    {
+      "case": "administrator deletes unreferenced foreign bytes",
+      "passed": true
+    },
+    {
+      "case": "authorized batch deletes both exact objects",
+      "passed": true
+    },
+    {
+      "case": "local runtime does not issue cloud credentials getToken",
+      "passed": true
+    },
+    {
+      "case": "local runtime does not issue cloud credentials getTokenByKey",
+      "passed": true
+    },
+    {
+      "case": "anonymous list requires login",
+      "passed": true
+    },
+    {
+      "case": "anonymous queryById requires login",
+      "passed": true
+    },
+    {
+      "case": "original file and work rows restored",
+      "passed": true
+    },
+    {
+      "case": "original upload bytes restored",
+      "passed": true
+    }
+  ]
+}

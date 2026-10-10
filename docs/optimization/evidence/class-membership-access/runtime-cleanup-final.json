@@ -1,0 +1,22 @@
+{
+  "owned_pids": {
+    "backend": 93629,
+    "mysql": 81275,
+    "redis": 81282
+  },
+  "alive": {
+    "backend": false,
+    "mysql": false,
+    "redis": false
+  },
+  "listeners": {
+    "13373": false,
+    "16446": false,
+    "18181": false,
+    "18182": false
+  },
+  "passed": true,
+  "runtime_retained": true,
+  "frontend_started": false,
+  "previous_port_closed_pid_exiting_retained": true
+}

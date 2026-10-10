@@ -1,0 +1,24 @@
+[INFO] --- spring-boot:2.1.3.RELEASE:repackage (repackage) @ teaching-open ---
+[INFO] Replacing main artifact with repackaged archive
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for jeecg-boot-parent 2.8.0:
+[INFO]
+[INFO] jeecg-boot-parent .................................. SUCCESS [  0.155 s]
+[INFO] jeecg-boot-base-common ............................. SUCCESS [  3.014 s]
+[INFO] teaching-open ...................................... SUCCESS [  5.447 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  8.757 s
+[INFO] Finished at: 2026-10-03T02:09:10+08:00
+[INFO] ------------------------------------------------------------------------
+
+Frontend: production build completed; existing size and outdated Browserslist notices remain.
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 88.253583

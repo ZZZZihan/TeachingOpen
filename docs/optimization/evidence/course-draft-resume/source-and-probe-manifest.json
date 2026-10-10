@@ -1,0 +1,16 @@
+{
+  "product_commit": "ed7930f80d426f66b748acd55a6204e759b8cbac",
+  "baseline_commit": "8f5bf1e272e57a3460c0414b506925c1395a18d2",
+  "live_results_candidate_was_uncommitted": true,
+  "live_candidate_source_matches_product_commit": true,
+  "files": {
+    "web/public/scratch3/persistence.js": "a335e902d727401c5044cd99f2faea28c7f9c3e0210da537d07bcfdf00066b40",
+    "web/public/python/persistence.js": "7305e2bd9ee18ddf8fa419a1ea436a7f14c23d6d0aa50b1e3d7d7829209499be",
+    "web/public/python/editor-bridge.js": "7eec9c27025cde073c9f7a7ce717cbed14758c6ae5c5108339b01935aa3032d7",
+    "web/tests/course-draft-resume-live.cjs": "a27ed3f7fd9ef1dc035dae031607afc871b34075468403ab1834e3203e3ea2d6",
+    "api/dev/verify-course-draft-resume.py": "acf49d48bc5f7a031c2c30dfcf99aafa6f0e7399f82a82ca256a86a101a69343"
+  },
+  "initial_probe_setup_error": "Missing local_http because frontend-only PR53 base lacks runtime tooling; before any login/write. Final command sets PYTHONPATH to PR58 api/dev.",
+  "initial_probe_adjustment": "First Python baseline reopened with empty title, so validation prevented the second save; final same-old-new probe explicitly fills valid title before second save and keeps loaded content unchanged. Initial 17/31 and 31/31 preserved.",
+  "scope": "Persistence API contract only; no claim of CAPTCHA browser login or actual editor-engine rendering."
+}

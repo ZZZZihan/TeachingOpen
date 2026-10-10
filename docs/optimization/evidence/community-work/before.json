@@ -1,0 +1,70 @@
+{
+  "observed_utc": "2026-10-02T17:24:04.910847+00:00",
+  "jar_sha256": "5a9710129b3cb0e4bee90388ce2981b8249e7524475190eb36321cf9582135f6",
+  "expected_legacy": true,
+  "passed": 15,
+  "total": 15,
+  "cases": [
+    {
+      "case": "legacy anonymous detail leaks draft",
+      "passed": true
+    },
+    {
+      "case": "legacy anonymous detail leaks submitted",
+      "passed": true
+    },
+    {
+      "case": "legacy anonymous detail leaks graded",
+      "passed": true
+    },
+    {
+      "case": "legacy anonymous detail leaks deleted",
+      "passed": true
+    },
+    {
+      "case": "legacy anonymous private comments exposed",
+      "passed": true
+    },
+    {
+      "case": "legacy unauthorized starWork changes data",
+      "passed": true
+    },
+    {
+      "case": "legacy unauthorized saveComment changes data",
+      "passed": true
+    },
+    {
+      "case": "legacy missing-work comment accepted",
+      "passed": true
+    },
+    {
+      "case": "legacy featured list exposes graded work",
+      "passed": true
+    },
+    {
+      "case": "legacy ranking exposes unknown and deleted states",
+      "passed": true
+    },
+    {
+      "case": "legacy public list discloses teacher feedback and score",
+      "passed": true
+    },
+    {
+      "case": "legacy invalid credential bypasses anonymous detail route",
+      "passed": true
+    },
+    {
+      "case": "original work feedback comment file rows restored",
+      "passed": true
+    },
+    {
+      "case": "original file bytes unchanged",
+      "passed": true
+    },
+    {
+      "case": "temporary like cache removed",
+      "passed": true
+    }
+  ],
+  "scope": "real synthetic HTTP/auth/DB/cache and disclosure checks; no browser editor, direct static-file security, concurrency or full public-profile privacy acceptance"
+}

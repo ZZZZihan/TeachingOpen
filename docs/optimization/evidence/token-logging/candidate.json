@@ -1,0 +1,35 @@
+{
+  "base_pr": 10,
+  "base_commit": "d2cd67110201d3641d2bbe0848dc1c79bfa7ec0a",
+  "build_exit_code": 0,
+  "java_tests": "skipped by parent POM",
+  "logging_before_checks": 13,
+  "logging_after_checks": 13,
+  "combined_learning_checks": 80,
+  "combined_course_checks": 188,
+  "combined_cache_checks": 11,
+  "jar_sha256": "ccb4f4732ac91b4b27ab8ee43b41bd7d735a4a641cedb314c5cefcd916bc8889",
+  "source_sha256": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/shiro/authc/ShiroRealm.java": "6cf0115adb550ac2367dd15df65641fc1accc44c09ce2e8eeaac317c98eb1497",
+    "api/dev/verify-token-logging.py": "f2d181a6911a40296570c03c42080b2f38d058ba7c2b874b6fbbdf00d9aba308"
+  },
+  "evidence_sha256": {
+    "before.json": "0cacc6a0331bf621ed127f98c1b924c86477a4c2d36ac315a6b36006b7066e09",
+    "after.json": "af8a68a492d3a78b6534cd2d33ebfd39db3b385d68443f8d53b3a4cae9b2faf3",
+    "learning-units-combined.json": "1a1f43f020f3e4a89f04957ee9924ac6c223740ebae6cc7cbf0bb4d424e312c8",
+    "course-management-combined.json": "295d8aa64111ead714b674ac913541b411861ef3dd651046cb32ae42589b2299",
+    "role-cache-combined.json": "8b11e04c1b38365f62112dbf02842d6d0eb790f2026d9e78b43a918b84abbbd5"
+  },
+  "build_log_sha256": "6f5a2187a7f4a19fd18492caa0b450b28fa86ad34c83788e561689fd4ba0333a",
+  "runtime_original_config_restored": true,
+  "normal_config_restart_checks": [
+    "health UP",
+    "assigned unit accessible",
+    "logged-out credential HTTP 401"
+  ],
+  "limitations": [
+    "Only two ShiroRealm events and captured request interval checked",
+    "No comprehensive application/proxy logging audit",
+    "No historical log cleanup or production changes"
+  ]
+}

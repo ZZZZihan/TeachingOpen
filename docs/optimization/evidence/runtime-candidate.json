@@ -1,0 +1,32 @@
+{
+  "base_head": "0748a32f709adc2f1691a72bd80aa7f37bb222e7",
+  "new_runtime_ports": {
+    "mysql": 13316,
+    "redis": 16389,
+    "backend": 18101,
+    "frontend": 18102
+  },
+  "source_sha256": {
+    "api/dev/start-local.py": "6cc71011f34480dc44d0e495fc73435945ce14affecc31155f6b968ce5e02ac5",
+    "api/dev/extract-schema.py": "afd0b01fb96b4447acb858bc55eaa6bbbd3f5dfe63da36fddba125612f99a120",
+    "api/dev/FixturePassword.java": "4f434352bf554ddaf8eadafed7c251fe404e3bc787562ad7400b432740ddc759",
+    "api/dev/run-backend.py": "96ad2c01970e528b6d4c9e34357f043241712614e4d9fe4354eeb78e2bb4c25a",
+    "api/dev/maven-settings.xml": "e89e5d81032455d4dfe256e1fd905be42208697e072978a05886af89b9ed9021",
+    "api/dev/local_runtime.py": "3da053aec48dad58c77b8c4a7ad1aa11562f1f586edea4cf3ce6c92d7583bee8",
+    "api/dev/verify-environment.py": "0d49872d5c3f3ba0ad517837958a307b2a8ef45b58624602206b1d6ea9ddfd35",
+    "api/dev/prepare-local.py": "3bae9f5607d611b12780c733fba66643a5039898787dd77e7bd8819e5a6126a8",
+    "api/dev/stop-local.py": "78d9cf10724346c165e3fb15312ad627932a312e9099c2dd200a6545edc6f903",
+    "api/dev/serve-frontend.py": "1b8e625ea943a59324a6d3c8f1bea57d8138f531cc372b8a88378d262f504a31",
+    "api/dev/seed-fixtures.py": "ffa7b134d192a383a53f238370f27fa93ecd2bc33f2845adf5680d8a8fedac75",
+    "api/dev/application-localtest.properties.template": "54671a1894a8d987081be982fc44917aa97e2416539a5dbf54110705d42cb345",
+    "api/dev/check-disabled-third-login.py": "8936c6e8667bd9065134661a261c780e7c794089cdf3cb266da9de4c4c042958",
+    "api/dev/toolchain.json": "8d56df2bf300565398d38a64906e07b0badba6894f794cbc67fc73197aa43a40",
+    "api/dev/test_extract_schema.py": "493b577a27de19410bf2b3dd952fc3675a1dd6b7b76a9eb36f9b51f6c849c21a",
+    "api/BUILDING.md": "d7614652f1b56368ebf735350227db0562a8786b9826debba8d8ff881a8589c3",
+    "docs/optimization/local-runtime-pr.md": "4f2000fb0dee852f78da4094c812af6dd69074a93be697f66e798e6de730bc9b"
+  },
+  "build_exit_code": 0,
+  "java_tests_skipped": true,
+  "build_log_sha256": "f84cdb49e27ff8473d0a3e9f7d2eed3608ca7ff84a9d6668c52597e96fdfc8de",
+  "validation": "3 DDL tests; 9 readiness checks; 11 lifecycle/proxy checks; 9 readiness checks after restart; occupied/existing-directory/invalid-port refusal"
+}

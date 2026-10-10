@@ -1,0 +1,106 @@
+{
+  "old_jar": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "new_jar": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+  "old_checks": [
+    21,
+    21
+  ],
+  "new_checks": [
+    21,
+    21
+  ],
+  "timed_requests_each": 384,
+  "rows": [
+    {
+      "endpoint": "home_courses",
+      "workers": 1,
+      "old_median_ms": 4.564,
+      "new_median_ms": 6.808,
+      "old_p95_ms": 5.329,
+      "new_p95_ms": 10.231,
+      "old_successes": 48,
+      "new_successes": 48,
+      "requests_each": 48
+    },
+    {
+      "endpoint": "home_courses",
+      "workers": 4,
+      "old_median_ms": 5.223,
+      "new_median_ms": 8.263,
+      "old_p95_ms": 7.669,
+      "new_p95_ms": 25.975,
+      "old_successes": 48,
+      "new_successes": 48,
+      "requests_each": 48
+    },
+    {
+      "endpoint": "assigned_course",
+      "workers": 1,
+      "old_median_ms": 3.546,
+      "new_median_ms": 6.584,
+      "old_p95_ms": 4.824,
+      "new_p95_ms": 9.948,
+      "old_successes": 48,
+      "new_successes": 48,
+      "requests_each": 48
+    },
+    {
+      "endpoint": "assigned_course",
+      "workers": 4,
+      "old_median_ms": 4.851,
+      "new_median_ms": 8.302,
+      "old_p95_ms": 13.443,
+      "new_p95_ms": 12.338,
+      "old_successes": 48,
+      "new_successes": 48,
+      "requests_each": 48
+    },
+    {
+      "endpoint": "work_detail",
+      "workers": 1,
+      "old_median_ms": 3.567,
+      "new_median_ms": 5.441,
+      "old_p95_ms": 4.66,
+      "new_p95_ms": 10.1,
+      "old_successes": 48,
+      "new_successes": 48,
+      "requests_each": 48
+    },
+    {
+      "endpoint": "work_detail",
+      "workers": 4,
+      "old_median_ms": 5.428,
+      "new_median_ms": 7.537,
+      "old_p95_ms": 6.095,
+      "new_p95_ms": 43.106,
+      "old_successes": 48,
+      "new_successes": 48,
+      "requests_each": 48
+    },
+    {
+      "endpoint": "draft_save",
+      "workers": 1,
+      "old_median_ms": 3.546,
+      "new_median_ms": 5.266,
+      "old_p95_ms": 4.733,
+      "new_p95_ms": 6.468,
+      "old_successes": 48,
+      "new_successes": 48,
+      "requests_each": 48
+    },
+    {
+      "endpoint": "draft_save",
+      "workers": 4,
+      "old_median_ms": 4.749,
+      "new_median_ms": 6.418,
+      "old_p95_ms": 5.345,
+      "new_p95_ms": 13.122,
+      "old_successes": 48,
+      "new_successes": 48,
+      "requests_each": 48
+    }
+  ],
+  "method": "localhost, fresh HTTP/1.1 connection per timed request; one batch per endpoint/concurrency, shared developer hardware, original synthetic fixtures plus five temporary works",
+  "limitations": "No throttled WAN, browser rendering, large dataset, saturation, sustained load, TLS, HTTP/2 or production capacity conclusion.",
+  "warmup_history_limitation": "Old accepted run was the second full benchmark after a first-login fixture-initialization failure; new accepted run was its first full benchmark. JVM/JIT histories differ; latency differences are not a causal estimate of the added SQL."
+}

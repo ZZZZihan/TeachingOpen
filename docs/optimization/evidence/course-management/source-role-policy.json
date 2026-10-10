@@ -1,0 +1,42 @@
+{
+  "source": "api/db/teachingopen2.8.sql",
+  "source_sha256": "3a4d6ca698018da0710b2d8ed8bb03a623e9b74ec2640d11b89f377cd17f3d09",
+  "method": "Read only original role/menu bindings; no upstream user or business rows imported",
+  "menus": {
+    "admin": [
+      {
+        "name": "作业管理",
+        "component": "teaching/TeachingWorkList"
+      },
+      {
+        "name": "课程包管理",
+        "component": "teaching/TeachingCourseList"
+      },
+      {
+        "name": "课程单元管理",
+        "component": "teaching/TeachingCourseUnitList"
+      }
+    ],
+    "dev": [
+      {
+        "name": "作业管理",
+        "component": "teaching/TeachingWorkList"
+      },
+      {
+        "name": "课程包管理",
+        "component": "teaching/TeachingCourseList"
+      },
+      {
+        "name": "课程单元管理",
+        "component": "teaching/TeachingCourseUnitList"
+      }
+    ],
+    "teacher": [
+      {
+        "name": "作业管理",
+        "component": "teaching/TeachingWorkList"
+      }
+    ],
+    "student": []
+  }
+}

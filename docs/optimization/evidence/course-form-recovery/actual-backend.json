@@ -1,0 +1,118 @@
+{
+  "cases": [
+    {
+      "case": "course admin creation accepted",
+      "passed": true
+    },
+    {
+      "case": "course created fields persist including false and zero",
+      "passed": true
+    },
+    {
+      "case": "course edit accepted",
+      "passed": true
+    },
+    {
+      "case": "course edited content can reopen",
+      "passed": true
+    },
+    {
+      "case": "course edit denied teacher_a",
+      "passed": true
+    },
+    {
+      "case": "course denied edit preserves row teacher_a",
+      "passed": true
+    },
+    {
+      "case": "course edit denied student_a",
+      "passed": true
+    },
+    {
+      "case": "course denied edit preserves row student_a",
+      "passed": true
+    },
+    {
+      "case": "course edit denied None",
+      "passed": true
+    },
+    {
+      "case": "course denied edit preserves row None",
+      "passed": true
+    },
+    {
+      "case": "unit admin creation accepted",
+      "passed": true
+    },
+    {
+      "case": "unit created fields persist including false and zero",
+      "passed": true
+    },
+    {
+      "case": "unit edit accepted",
+      "passed": true
+    },
+    {
+      "case": "unit edited content can reopen",
+      "passed": true
+    },
+    {
+      "case": "unit edit denied teacher_a",
+      "passed": true
+    },
+    {
+      "case": "unit denied edit preserves row teacher_a",
+      "passed": true
+    },
+    {
+      "case": "unit edit denied student_a",
+      "passed": true
+    },
+    {
+      "case": "unit denied edit preserves row student_a",
+      "passed": true
+    },
+    {
+      "case": "unit edit denied None",
+      "passed": true
+    },
+    {
+      "case": "unit denied edit preserves row None",
+      "passed": true
+    },
+    {
+      "case": "unit normal deletion works",
+      "passed": true
+    },
+    {
+      "case": "course normal deletion works",
+      "passed": true
+    },
+    {
+      "case": "68 non-audit tables restored",
+      "passed": true
+    },
+    {
+      "case": "attachments unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 24,
+  "total": 24,
+  "observations_not_fixed": [
+    {
+      "case": "course edit of nonexistent ID",
+      "http": 200,
+      "success": true,
+      "row_count": "0"
+    },
+    {
+      "case": "unit edit of nonexistent ID",
+      "http": 200,
+      "success": true,
+      "row_count": "0"
+    }
+  ],
+  "jar_sha256": "d89ef0667d90854195792b30d2af4b469738bb86c65498bd7c68ce350aeb3ac8",
+  "scope": "Real isolated HTTP and MySQL with synthetic CLI authentication; separate from component browser checks."
+}

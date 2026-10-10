@@ -1,0 +1,208 @@
+{
+  "verified_date": "2026-10-05",
+  "implementation_checks_date": "2026-10-04",
+  "pr": "https://github.com/ZZZZihan/TeachingOpen/pull/62",
+  "state": "OPEN",
+  "isDraft": false,
+  "ci_checks": [],
+  "branch_head": "328a021224521674654c8c6f03c01be7fbb7ae2f",
+  "base_pr": 58,
+  "product_commit": "ee25b493674bb37c995c758e029be88e32d88b87",
+  "integration_head": "1b244d17e83395ec0c709042352c391f6020d73f",
+  "integration_tested_at": "032f5d50641fe53351ad608bf0079fce2e9080a9",
+  "checks": {
+    "old": [
+      28,
+      82
+    ],
+    "new": [
+      82,
+      82
+    ],
+    "identical_script_sha256": "b9b6c0c3f90b28f67cd353ebdf95a584abb90dfe0a11714200205c6abaf86053",
+    "identical_case_names": true,
+    "new_faults_reached": 7,
+    "restoration_old": {
+      "table_count": 69,
+      "non_audit_table_count": 68,
+      "same_table_set": true,
+      "changed_schemas": [],
+      "changed_non_audit_tables": [],
+      "attachments_equal": true
+    },
+    "restoration_new": {
+      "table_count": 69,
+      "non_audit_table_count": 68,
+      "same_table_set": true,
+      "changed_schemas": [],
+      "changed_non_audit_tables": [],
+      "attachments_equal": true
+    }
+  },
+  "regression": {
+    "suites": [
+      {
+        "suite": "auth-status",
+        "passed": 7,
+        "total": 7,
+        "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+        "exit_code": 0
+      },
+      {
+        "suite": "role-cache",
+        "passed": 11,
+        "total": 11,
+        "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+        "exit_code": 0
+      },
+      {
+        "suite": "course-management",
+        "passed": 188,
+        "total": 188,
+        "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+        "exit_code": 0
+      },
+      {
+        "suite": "learning-units",
+        "passed": 80,
+        "total": 80,
+        "jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+        "exit_code": 0
+      }
+    ],
+    "passed": 286,
+    "total": 286,
+    "record_writer_failure_retained": true,
+    "initial_runner_exit_code": 1,
+    "continued_runner_exit_code": 0
+  },
+  "package": {
+    "old_jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+    "new_jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+    "source_files_verified": {
+      "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/controller/SysDepartController.java": "852f9f488c3c7dc4bd1185da40fa3fc003407972612258f284d0f67d5c45117d",
+      "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/controller/SysUserController.java": "03765d8321bf4cf9f9194ea1eede4f8aff1b87fdbd8af380d683ba423a1cb955",
+      "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/ISysUserDepartService.java": "c7edd821906b243d64bf72f30fdce38add1241c0ff49738e7c11c5ba6a1c91d1",
+      "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/impl/SysUserDepartServiceImpl.java": "b7d0d67c129d1a6b4b704a6476b153fdcd032fae50075c66df2e57253166b518"
+    },
+    "external_dependencies_identical": 208,
+    "common_module_entries_identical": 111,
+    "changed_application_entries": [
+      "BOOT-INF/classes/org/jeecg/modules/system/controller/SysDepartController.class",
+      "BOOT-INF/classes/org/jeecg/modules/system/controller/SysUserController.class",
+      "BOOT-INF/classes/org/jeecg/modules/system/controller/SysDepartController$2.class",
+      "BOOT-INF/classes/org/jeecg/modules/system/controller/SysDepartController$1.class",
+      "BOOT-INF/classes/org/jeecg/modules/system/service/ISysUserDepartService.class",
+      "BOOT-INF/classes/org/jeecg/modules/system/service/impl/SysUserDepartServiceImpl.class"
+    ],
+    "added_entries": [],
+    "removed_entries": []
+  },
+  "candidate": {
+    "integration_head": "032f5d50641fe53351ad608bf0079fce2e9080a9",
+    "product_commit": "ee25b493674bb37c995c758e029be88e32d88b87",
+    "backend_input_count": 1031,
+    "backend_matches_frozen_build": true,
+    "frozen_jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+    "dist_files": 4893,
+    "dist_bytes": 211568970,
+    "dist_identical_to_pr61": true,
+    "prior_manifest_sha256": "9d7589a49ebfceced30d3daf452f13094727bf160c04ff84295c09030c9c3005",
+    "frontend_rebuilt": false
+  },
+  "runtime_cleanup": {
+    "owned_pids": {
+      "backend": 93629,
+      "mysql": 81275,
+      "redis": 81282
+    },
+    "alive": {
+      "backend": false,
+      "mysql": false,
+      "redis": false
+    },
+    "listeners": {
+      "13373": false,
+      "16446": false,
+      "18181": false,
+      "18182": false
+    },
+    "passed": true,
+    "runtime_retained": true,
+    "frontend_started": false,
+    "previous_port_closed_pid_exiting_retained": true
+  },
+  "backend_switch": [
+    {
+      "runtime": "course-role-runtime",
+      "previous_pid": 20583,
+      "old_jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+      "new_jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+      "healthy": true,
+      "new_pid": 1402,
+      "rollback_needed": false
+    },
+    {
+      "runtime": "role-flow-1003",
+      "previous_pid": 20637,
+      "old_jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+      "new_jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+      "healthy": true,
+      "new_pid": 1604,
+      "rollback_needed": false
+    },
+    {
+      "runtime": "prod-fixture-1003",
+      "previous_pid": 20934,
+      "old_jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+      "new_jar_sha256": "f03ac420301977cea26e14d9de0bab03f0d8a5c0e7ec92854363ad07347060c0",
+      "healthy": true,
+      "new_pid": 1963,
+      "rollback_needed": false
+    }
+  ],
+  "combination": {
+    "date": "2026-10-04",
+    "branch_tools": {
+      "ran": 42,
+      "passed": 42,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    "integration_tools": {
+      "ran": 121,
+      "passed": 120,
+      "skipped": 1,
+      "exit_code": 0
+    },
+    "integration_frontend": {
+      "ran": 581,
+      "passed": 581,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    "combined_frontend_http": [
+      13,
+      13
+    ],
+    "proxy_resources": [
+      24,
+      24
+    ],
+    "private_copy_readonly": [
+      12,
+      12
+    ],
+    "frontend_rebuilt": false,
+    "combination_tested_at": "032f5d50641fe53351ad608bf0079fce2e9080a9"
+  },
+  "remaining": [
+    "390px administration overflow",
+    "authenticated three-role browser acceptance",
+    "human visual review",
+    "supported platform maintenance"
+  ],
+  "remote_merge": false,
+  "production_modified": false,
+  "final_integration_backend_matches_frozen_source": true
+}

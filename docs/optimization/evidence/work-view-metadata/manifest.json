@@ -1,0 +1,45 @@
+{
+  "files": {
+    "build.txt": {
+      "sha256": "1ac3406807ef8b914b8171addf4d4546958b67ca9ebd20dfe90a2b09577de8ad",
+      "bytes": 9521
+    },
+    "candidate.json": {
+      "sha256": "4833de0ab384a7d487ac63dc75717bec5806ecd0769f7532e4f58c19e9edd2c3",
+      "bytes": 2596
+    },
+    "community.json": {
+      "sha256": "334ebb9cc17652f24b15de3de3f14fcf8c9ca3462ea8a955e812c01463c598d6",
+      "bytes": 23469
+    },
+    "data-preservation.json": {
+      "sha256": "c75b1c8f2a2b582d69c40629f1c0388ee1aa099637b3fbde97dc6ca896b7193b",
+      "bytes": 214
+    },
+    "fixed.json": {
+      "sha256": "be25c8781b75bb74b5c5ee48e3dd9d6d29c8db53cb25e0ebd773a928bd37c027",
+      "bytes": 6952
+    },
+    "legacy.json": {
+      "sha256": "f7b386bf9b68f16a70f47a395a001e0adcc2f1d25f53b374dcb969e19c6d0b4e",
+      "bytes": 5632
+    },
+    "recovery-fixed.json": {
+      "sha256": "4891fdaadcb50d141230d336d6ad59320a248bf8ef95a58e00bb3fffffbea7d1",
+      "bytes": 3106
+    },
+    "recovery-legacy.json": {
+      "sha256": "51bfa753809065fa8d7ef83b889e10ceb31ce1e71f1a9a21b7160de4442eaa07",
+      "bytes": 3109
+    },
+    "source-preservation.json": {
+      "sha256": "993747df84a825231d431ec88bba0697154c6856388b3f8686982b6d12492fcf",
+      "bytes": 154
+    },
+    "submission.json": {
+      "sha256": "2ff9bd0a932fa44355e08105e41a2f0b951054cf328fb6c546a47a4ca7a95c75",
+      "bytes": 10016
+    }
+  },
+  "scope": "actual isolated synthetic runtime; engineering self-check"
+}

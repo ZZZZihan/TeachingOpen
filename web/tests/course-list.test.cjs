@@ -15,7 +15,7 @@ function mountCourseList (userAgent = 'desktop') {
     component: null,
     navigator: { userAgent },
     console,
-    Header: {}, Banner: {}, Footer: {}, UserEnter: {}, QrCode: {},
+    Header: {}, Banner: {}, Footer: {}, UserEnter: {}, QrCode: {}, CourseFilters: {}, CourseCard: {},
     getFileAccessHttpUrl: value => value,
     getAction: (url, params) => new Promise((resolve, reject) => {
       requests.push({ url, params, resolve, reject })

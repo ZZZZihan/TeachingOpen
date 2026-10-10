@@ -1,0 +1,127 @@
+{
+  "jar_sha256": "85f7746a3ae4b143f1a4ca4e5c043e11c81bf7d69f32c72b7dbaa190f6a0e85c",
+  "snapshot_manifest_sha256": "e9a6a78d11e93a54226507a7085c056db145dc782001c579bb390ea314dc390b",
+  "cases": [
+    {
+      "case": "restored account login admin",
+      "passed": true
+    },
+    {
+      "case": "restored runtime issues port-scoped media cookie admin",
+      "passed": true
+    },
+    {
+      "case": "restored account login teacher_a",
+      "passed": true
+    },
+    {
+      "case": "restored runtime issues port-scoped media cookie teacher_a",
+      "passed": true
+    },
+    {
+      "case": "restored account login teacher_b",
+      "passed": true
+    },
+    {
+      "case": "restored runtime issues port-scoped media cookie teacher_b",
+      "passed": true
+    },
+    {
+      "case": "restored account login student_a",
+      "passed": true
+    },
+    {
+      "case": "restored runtime issues port-scoped media cookie student_a",
+      "passed": true
+    },
+    {
+      "case": "restored account login student_b",
+      "passed": true
+    },
+    {
+      "case": "restored runtime issues port-scoped media cookie student_b",
+      "passed": true
+    },
+    {
+      "case": "assigned course readable student_a",
+      "passed": true
+    },
+    {
+      "case": "restored work references restored attachment student_a",
+      "passed": true
+    },
+    {
+      "case": "restored attachment bytes readable with media cookie student_a",
+      "passed": true
+    },
+    {
+      "case": "assigned course readable student_b",
+      "passed": true
+    },
+    {
+      "case": "restored work references restored attachment student_b",
+      "passed": true
+    },
+    {
+      "case": "restored attachment bytes readable with media cookie student_b",
+      "passed": true
+    },
+    {
+      "case": "authorized private work read teacher_a",
+      "passed": true
+    },
+    {
+      "case": "authorized private work read admin",
+      "passed": true
+    },
+    {
+      "case": "private work denied None",
+      "passed": true
+    },
+    {
+      "case": "private restored attachment denied None",
+      "passed": true
+    },
+    {
+      "case": "private work denied student_b",
+      "passed": true
+    },
+    {
+      "case": "private restored attachment denied student_b",
+      "passed": true
+    },
+    {
+      "case": "private work denied teacher_b",
+      "passed": true
+    },
+    {
+      "case": "private restored attachment denied teacher_b",
+      "passed": true
+    },
+    {
+      "case": "restored work views persist in target database",
+      "passed": true
+    },
+    {
+      "case": "work modification actor and time unchanged by reads a",
+      "passed": false
+    },
+    {
+      "case": "work modification actor and time unchanged by reads b",
+      "passed": false
+    },
+    {
+      "case": "all work columns and rows unchanged after counter cleanup",
+      "passed": true
+    },
+    {
+      "case": "attachment files unchanged by business reads",
+      "passed": true
+    }
+  ],
+  "total": 29,
+  "passed": 27,
+  "business_read_verified": false,
+  "browser_e2e": false,
+  "audit_logs_retained": true
+}

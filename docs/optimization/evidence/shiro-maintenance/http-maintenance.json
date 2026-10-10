@@ -1,0 +1,81 @@
+{
+  "scope": "actual candidate JAR HTTP in owned synthetic runtime; finite media paths and optional-JWT/rememberMe compatibility; no production or browser acceptance",
+  "checks": [
+    {
+      "case": "public media preserves space name.txt bytes",
+      "passed": true
+    },
+    {
+      "case": "public media preserves plus+name.txt bytes",
+      "passed": true
+    },
+    {
+      "case": "public media preserves 50%name.txt bytes",
+      "passed": true
+    },
+    {
+      "case": "finite invalid media path denied 1",
+      "passed": true
+    },
+    {
+      "case": "finite invalid media path denied 2",
+      "passed": true
+    },
+    {
+      "case": "finite invalid media path denied 3",
+      "passed": true
+    },
+    {
+      "case": "finite invalid media path denied 4",
+      "passed": true
+    },
+    {
+      "case": "optional JWT rejects a supplied malformed credential",
+      "passed": true
+    },
+    {
+      "case": "harmless rememberMe cookie cannot authenticate",
+      "passed": true
+    },
+    {
+      "case": "disabled rememberMe emits no rememberMe cookie",
+      "passed": true
+    },
+    {
+      "case": "credential is valid before temporary account disable",
+      "passed": true
+    },
+    {
+      "case": "disabled account rejects its previously valid credential",
+      "passed": false
+    },
+    {
+      "case": "disabled account state is restored",
+      "passed": true
+    },
+    {
+      "case": "same credential works after account state restoration",
+      "passed": true
+    },
+    {
+      "case": "public media reference rows restored",
+      "passed": true
+    },
+    {
+      "case": "owned media files removed",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "case": "Unicode media filename existing restriction; not support acceptance",
+      "http_status": 401,
+      "returned_expected_bytes": false
+    }
+  ],
+  "observed_utc": "2026-10-03T10:59:09.911156+00:00",
+  "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "phase": "http",
+  "passed": 15,
+  "total": 16
+}

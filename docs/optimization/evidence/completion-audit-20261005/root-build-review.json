@@ -1,0 +1,15 @@
+{
+  "source_commit": "06ab2040780f33296e93c97d29d00e80cbcc2f65",
+  "build_exit_code": 0,
+  "new_jar_sha256": "3f2347f87f270c126b24101998dfb47b4746c101488b483935e770cfc19c81e1",
+  "frozen_jar_sha256": "67568eeaecea8e8d7342088767eeef2d7fcee45d61afffa0fb559b7808664016",
+  "outer_file_count": 1207,
+  "outer_file_path_sets_equal": true,
+  "outer_payload_differences": [
+    "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar"
+  ],
+  "internal_common_file_count": 111,
+  "internal_common_all_file_bytes_equal": true,
+  "result": "PASS",
+  "scope": "Root independent file comparison, not another build or runtime test"
+}

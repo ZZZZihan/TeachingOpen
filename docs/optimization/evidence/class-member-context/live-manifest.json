@@ -1,0 +1,76 @@
+{
+  "scope": "Independent actual SFC method, HTTP and DB checks in owned synthetic runtime. No production or browser authentication operation.",
+  "old_source_ref": "8f58b32362899047da0136e41278368fd26c88f0",
+  "jar_sha256": "4578567dcedc18bf8a5f69758f8209d9b7bc74fc24f24f0d50196ec97e684c42",
+  "tools_sha256": {
+    "api/dev/class-member-context-live.py": "5808ff2a29b4d321c428d65f46ce54a128cfd6f98de5b82f90d48d0d71f04bd5",
+    "api/dev/class-member-role-live.py": "f915e1db08ee92acb7757a97a14470e1d0b63fe38b8ef8aeb65f163f8e8c7d8f",
+    "web/tests/class-member-context-live.cjs": "09642c42b5c546bbacde13a4457ab215f0e101fd45f9a3d371c894cfaa4f87da",
+    "web/tests/class-member-role-live.cjs": "452e136481cbe1c8422c3cf9a5c50f3d790078524dab9def7d342d1512802677"
+  },
+  "final_products_sha256": {
+    "web/src/views/system/modules/DeptUserInfo.vue": "f69c235df231ba801224d26a7bb168d4df29699e11687d3de3db3c68cf2a42b1",
+    "web/src/views/system/modules/SelectUserModal.vue": "0b5f4636eb8164173aa3778da2e9479d08a23d918dfc3bb9bc0b39810e2a8562",
+    "web/src/views/system/modules/UserModal.vue": "fd2779130889aad87a617babdcd68b698095fca4c0c56cdc4b9ee58bf31362f5",
+    "web/src/views/system/modules/DeptRoleUserModal.vue": "5d7da557941c6dda75278bb2ab0fd6b57497c46a72bc7369fc593d88443058c9"
+  },
+  "evidence_sha256": {
+    "live-after.json": "4d8a34e3060aec2e0a6eed29e56b777fa68af5dc8ea550e250fcb608715647e5",
+    "live-before-final.json": "3918ce2a3f5ac09dbc6ac3aefc49a585483afc8d49748e87abc650841f151fa2",
+    "live-before.json": "564a6a04557d9661ddc30c1c4d35c04fee12e155bb121a5f9830a474b1062652",
+    "live-role-after-final.json": "a10b801cae5ba04019e259db2fd0e0e06e5241615a46ff4e450cc1607c6e3345",
+    "live-role-after.json": "08357a2f8adc7dc9bd8bddee7bc8abc324702c319b6a9283f2ef21197106f4a6",
+    "live-role-before-final.json": "fa885a6a7af3dffa51ac5c3bb36128c153c1942e9c0251e248b59524e542621f",
+    "live-role-before.json": "a79f964a1135a9664c15f02003bace162bd0508946cc8d75560c9745bdf49a5e",
+    "live-runtime-cleanup-final.json": "f1087fc8be31f14f5eb26814547c36f88d26b7730221e362967f902c5eaf5ff2",
+    "live-runtime-cleanup-immediate.json": "bf9574583901759d9c93eaba3198150ad28818402978e427634e27b1f455a8ca",
+    "live-runtime-initialization.json": "1e1bcae663c948205bb360302e81766c5ffe8b7f7c40d918c86ade91e506707e",
+    "live-tests.md": "017e43120339940f92d69b9ae937dc466593da0e3adc8356196a70bb10de8b69"
+  },
+  "results": {
+    "core_old": {
+      "passed": 12,
+      "total": 22
+    },
+    "core_new": {
+      "passed": 22,
+      "total": 22
+    },
+    "role_old": {
+      "passed": 7,
+      "total": 9
+    },
+    "role_new": {
+      "passed": 9,
+      "total": 9
+    }
+  },
+  "node_version": "26.7.0",
+  "python_version": "3.14.7",
+  "credential_value_scan": {
+    "scanned_files": 15,
+    "jwt_value_matches": 0,
+    "owned_password_value_matches": 0
+  },
+  "cleanup": {
+    "owned_pids": {
+      "backend": 58019,
+      "mysql": 57617,
+      "redis": 57622
+    },
+    "alive": {
+      "backend": false,
+      "mysql": false,
+      "redis": false
+    },
+    "listeners": {
+      "13372": false,
+      "16445": false,
+      "18178": false,
+      "18179": false
+    },
+    "passed": true,
+    "runtime_retained": true,
+    "frontend_started": false
+  }
+}

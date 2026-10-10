@@ -1,0 +1,32 @@
+{
+  "command": [
+    "/opt/homebrew/Cellar/node/26.7.0/bin/node",
+    "--test",
+    "--test-reporter=tap",
+    "web/tests/python-preview-url.test.cjs"
+  ],
+  "source_ref": "6ee37a8b974373536748dbef9128814287f2dede",
+  "head_sha": "6ee37a8b974373536748dbef9128814287f2dede",
+  "node_version": "v26.7.0",
+  "exit_code": 1,
+  "tests": 33,
+  "passed": 4,
+  "failed": 29,
+  "skipped": 0,
+  "source_sha256": {
+    "web/public/python/static/js/app.js": "737d67e8412ae79eeae3b9bb2412fe7d13518aba76024dadad93b5e54401842c",
+    "web/public/python/static/js/appPlayer.js": "2bb033a7762902ad586db47a6a0b57cf455c3b10ee07c3dd390f07db2670ea11",
+    "web/public/python/persistence.js": "8275bb32de10cfaf14929d7666f0de53345e6e110197d19e5de3f371fc0fad1f",
+    "web/public/python/player.html": "57f39c4004d7455ac42dabdf34a6b41616219c2909c53f3b1e7aebc5baa2600f",
+    "web/src/views/teaching/modules/TeachingWorkPreviewModal.vue": "4cc6a9544f25a4aca4af335aaa24ec62edad241dfae36b1f57cc265f1b21bd3e",
+    "web/src/views/account/course/modules/UnitViewModal.vue": "cf15fdb263b624b58acce54dbdf17d34c6adee439c9972c2f8f722265a457cf5",
+    "web/src/views/home/WorkDetail.vue": "400783e0db5dbf64ab46fedc99aca6f282ab2f58de4ee42ed178262c66c01530"
+  },
+  "suite_sha256": {
+    "web/tests/python-preview-url.test.cjs": "efcbfa352baf5fd77440e562bea987442135d0f92539051081ccbd953dc96eb6",
+    "web/tests/python-preview-url/harness.cjs": "478e2b0644eb55147024d40b2449071a89850f1d5881703fa9d4fdfd07680d3b",
+    "web/tests/python-preview-url/run-report.cjs": "18bdc5b63d4b35539c0004f8dc70503d5ee6f43264fd40da1fcb4af5c6efb8ff"
+  },
+  "tap_path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/python-preview-url/web/tests/python-preview-url/base-red.tap",
+  "scope": "Actual prebuilt component methods and actual SFC caller methods in controlled Node VM; no Java API, authenticated browser or human acceptance."
+}

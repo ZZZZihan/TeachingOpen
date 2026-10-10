@@ -1,0 +1,26 @@
+{
+  "document": 1272,
+  "images": [
+    {
+      "alt": "登录验证码",
+      "complete": true,
+      "width": 105
+    }
+  ],
+  "inputs": [
+    {
+      "empty": true,
+      "label": "请输入账号"
+    },
+    {
+      "empty": true,
+      "label": "请输入密码"
+    },
+    {
+      "empty": true,
+      "label": "输入图中字符"
+    }
+  ],
+  "url": "http://127.0.0.1:18112/user/login?redirect=%2Fteaching%2FmineCourse%2FcourseUnitCard%3Fid%3Dfixture_course_a",
+  "width": 1280
+}

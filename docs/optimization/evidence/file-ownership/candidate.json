@@ -1,0 +1,105 @@
+{
+  "observed_utc": "2026-10-02T18:13:01.309812+00:00",
+  "branch": "fix/file-record-ownership",
+  "base_commit": "4c1d70123e45a3b6e9feccf30f57e0ce483c5e1d",
+  "jar_sha256": "25b87ef3a4d7775af60c9fc1be6f150e5756223f203d096e1ba0a04cb38057a2",
+  "results": {
+    "learning-units-combined.json": {
+      "passed": 80,
+      "total": 80
+    },
+    "work-attachments-combined.json": {
+      "passed": 41,
+      "total": 41
+    },
+    "qiniu-policy.json": {
+      "passed": 14,
+      "total": 14
+    },
+    "community-work-combined.json": {
+      "passed": 235,
+      "total": 235
+    },
+    "after.json": {
+      "passed": 76,
+      "total": 76
+    },
+    "local-upload-combined.json": {
+      "passed": 46,
+      "total": 46
+    },
+    "role-cache-combined.json": {
+      "passed": 11,
+      "total": 11
+    },
+    "work-management-combined.json": {
+      "passed": 134,
+      "total": 134
+    },
+    "work-submission-combined.json": {
+      "passed": 95,
+      "total": 95
+    },
+    "course-management-combined.json": {
+      "passed": 188,
+      "total": 188
+    }
+  },
+  "source_files_sha256": {
+    "api/dev/VerifyQiniuOwnership.java": "09f076088f106673a482f9ef0204a37183b3ba1f24cb6adf6f3a0ac434692102",
+    "api/dev/verify-file-ownership.py": "87be53ab641464bd38a79c5a559654beffbe4be75d46f0fbd296f961e522d0af",
+    "api/dev/verify-local-upload.py": "4c3dab0ddd095e461da39ce1e56ae036bdfa4b8f00e7117d42549acdf83ba5e9",
+    "api/dev/verify-qiniu-policy.py": "5b74e0b2411b534b8a28c3fdfa8b692d0a42df2912c99ef323c34d8101c4a198",
+    "api/jeecg-boot-base-common/src/main/java/org/jeecg/common/system/api/ISysBaseAPI.java": "74505b6e272f413d2c9a09922bab6322cd53151c459882c8396873b14ab11198",
+    "api/jeecg-boot-base-common/src/main/java/org/jeecg/common/system/controller/CommonController.java": "334120229a09b060209b02721405a5c93f070f69fe827e4d9749d7c00940c382",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/common/controller/QiniuController.java": "1bb4c47f6eef376c213d15f3d4c76411214711e369e1cf1b867215aae1b2bb2b",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/common/util/QiniuUploadPolicy.java": "2f59ef72b919cf36701b034d60477361df9c142b59b14ab8897bed15d22d5576",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/common/util/QiniuUtil.java": "438854498dd223fb6c13df04c0588b9a227a828f6462db4a89ff41d7513a5cd8",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/controller/SysFileController.java": "62478b3289daaf6f1d3612aae4ef0c9e544f2e0ac6c9af67433bdd0de0c55df0",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/mapper/SysFileMapper.java": "ec3262cf599e65669028803e3ee5aa3e8e4320c10604a79809505ea73f11c460",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/mapper/xml/SysFileMapper.xml": "aa4f25524d0e2d6301f42350c05cdc4c689721eaa866b6371cb58fcc42c96530",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/FileAccessService.java": "0fb7af2f38c4b79b73f159ab6b19ac7dee2f5ef40275d8fbb975dce62eefa629",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/ISysFileService.java": "d8130baf5159e13ef1c3f04d30bbd1c48fe55f3ad5b5410ea4f77b5e955b9cef",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/impl/SysBaseApiImpl.java": "387f5e3c0ccd1fbd47a2e768c2c7ceef066f551adf5d61dc05c59aa237826e06",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/impl/SysFileServiceImpl.java": "68ab1307787f181b8db1f42d5cd340212beb25ef0c7b2b667cc4e6d5c311b145",
+    "web/public/js/common.js": "11d714e1e463c1503dce27a8d37014a4b5b63d748f40b802507abaf580e9e9d8",
+    "web/public/scratchjr/js/common.js": "3ca8545c3a64fadd83eec61d65d40efb30d84f205243e2f9a055c61310cc970e",
+    "web/src/components/jeecg/JEditor.vue": "d861d344527ee2a150836358e9d55b71e52dbe9ea4d2f935376a3db013b5386b",
+    "web/src/components/jeecg/JUpload.vue": "90dbdcb7fc986367dc8c4ffe8b92a25ca7f825a0031d8f1878be349ad39ef23e",
+    "web/tests/file-ownership.test.cjs": "8725e0461d4dd091fb63724d73a1efe42aae5502526cb86aff58b878b0ebf685"
+  },
+  "original_source_files_verified_unchanged": 5634,
+  "cleanup_and_fixture_counts": {
+    "temporary_file_probe_records": "0",
+    "temporary_media_table": "0",
+    "temporary_triggers": "0",
+    "users": "5",
+    "files": "2",
+    "works": "2"
+  },
+  "frontend": {
+    "controlled_tests": 39,
+    "production_build": "passed",
+    "eslint": "not passed: baseline 620 errors; candidate 608"
+  },
+  "limits": [
+    "local synthetic candidate, not human acceptance or production",
+    "cloud policy offline only",
+    "anonymous static downloads and complete browser editor workflows outstanding"
+  ],
+  "evidence_sha256": {
+    "after.json": "7086e45fe522837f11cf7f70d2ddf080d2c064b0215b8a6d567a6589ed607c27",
+    "before.json": "63459ae4c18210d4c22dda9d6229903c3b255e711a19b2b93a19b5b0846cb0cd",
+    "build-summary.txt": "8aadb3f93cc3251dc8fa30415a12b0f77afe502918903853420342daaa8f66fc",
+    "community-work-combined.json": "8d94051d4cdc363388a0a27a39ea377b583352ff9db1dc84550dba3007ae9103",
+    "course-management-combined.json": "fb7bd3b53076513b3f126da0c863c803aac77716cab72c27e0ca5a4fbd2ffd95",
+    "learning-units-combined.json": "b74cfbb3399ffbda7bc6c2c9eed94f88ed403465da04cb09117d9ad472ff976b",
+    "lint-baseline.json": "b067c5e9bd51aeedb41d05cc0098bb85d8395ed7419c039d1bdf6df03d34bfb0",
+    "local-upload-combined.json": "e2be0840320ab783341a18a9f2acbc27a9a4ccff40e0949d26ca6c0d86c778d1",
+    "qiniu-policy.json": "a8aaf617a5ef054283cd2b77eca9aee63f5b43de368329455dcbedc94d7213fb",
+    "role-cache-combined.json": "3ca750163b2455e8149e88476d48be6aeb0212e5efd983db2fc13f7d56e35f5e",
+    "work-attachments-combined.json": "f816bf84fc319f3c756f9368aab29e630297d58ca8d1acd30da5bf2df6f98fe1",
+    "work-management-combined.json": "8c544182a5bdca169a20c7e83e5e1c837baf76a0df6f40f6b28fca9ec26521b6",
+    "work-submission-combined.json": "6f2326fa3581506a49b0184888bf00293057f0c29201545ea6b527dddea958cf"
+  }
+}

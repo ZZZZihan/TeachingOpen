@@ -1,0 +1,10 @@
+{
+  "command": "JAVA_HOME=<Java 8u504 Contents/Home> mvn -B -s dev/maven-settings.xml -Dmaven.repo.local=<task m2> clean package",
+  "cwd": "api",
+  "status": "BUILD SUCCESS",
+  "java_unit_tests": "skipped by existing parent POM",
+  "java": "8u504",
+  "maven": "3.9.16",
+  "total_time_seconds": 8.676,
+  "build_log_sha256": "23ca96ef9716ff840bf441f0668ecc723cb6caf92d75645b18be0e084c24ced6"
+}

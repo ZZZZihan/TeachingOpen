@@ -1,0 +1,58 @@
+{
+  "scope": "actual reader document links; native PDF view and plaintext MD; preview URL adapter",
+  "results": [
+    {
+      "sample": "sample06",
+      "kind": "pdf",
+      "rendered": {
+        "embedTypes": [],
+        "readyState": "complete"
+      },
+      "urlAssetId": "5d7cf8b6f8f82eec3a0a0b7d90eb15833b3b8ef7aba5067fd65f6a9fd90e3893",
+      "screenshot": "sample06-pdf.png",
+      "visual_inspection": {
+        "inspected_by": "root",
+        "native_viewer_first_page_and_thumbnails_rendered": true,
+        "all_pages_visually_inspected": false
+      },
+      "asset_id": "5d7cf8b6f8f82eec3a0a0b7d90eb15833b3b8ef7aba5067fd65f6a9fd90e3893",
+      "associated_course_ids": [
+        "course01"
+      ]
+    },
+    {
+      "sample": "sample07",
+      "kind": "pdf",
+      "rendered": {
+        "embedTypes": [],
+        "readyState": "complete"
+      },
+      "urlAssetId": "79347a5ac6b57123b10b47d42d2e370b57e7b8e3e2c137de7e2b27c74ed3439a",
+      "screenshot": "sample07-pdf.png",
+      "visual_inspection": {
+        "inspected_by": "root",
+        "native_viewer_first_page_and_thumbnails_rendered": true,
+        "all_pages_visually_inspected": false
+      },
+      "asset_id": "79347a5ac6b57123b10b47d42d2e370b57e7b8e3e2c137de7e2b27c74ed3439a",
+      "associated_course_ids": [
+        "course01"
+      ]
+    },
+    {
+      "sample": "sample08",
+      "kind": "md",
+      "text": {
+        "bytes": 5417,
+        "sha256": "f9fbaa2203c90f912f01d403af64fa52b4905c8d1e74c3aa826746fe6b256dc8",
+        "lines": 326
+      },
+      "urlAssetId": "f91ae56071fdb0ad9b8f98781916ce988206a34ad19bd4d6144e16b876a8c213",
+      "exact_plaintext_sha256_matches": true,
+      "asset_id": "f91ae56071fdb0ad9b8f98781916ce988206a34ad19bd4d6144e16b876a8c213",
+      "associated_course_ids": [
+        "course01"
+      ]
+    }
+  ]
+}

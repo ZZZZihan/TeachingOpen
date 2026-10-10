@@ -1,0 +1,44 @@
+{
+  "scope": "Actual DeptUserInfo, SelectUserModal, UserModal, DeptRoleUserModal Vue SFCs and Ant Design components; synthetic in-memory API. No authenticated browser or backend acceptance. Department, avatar, position helpers replaced only in harness.",
+  "baseline_source_ref": "8f58b32362899047da0136e41278368fd26c88f0",
+  "baseline_browser": {
+    "open_class": "class-a",
+    "action": "Open clear-class confirmation; scheduled parent switches to B after five seconds; click the still-open OK button",
+    "observed_request": {
+      "method": "get",
+      "url": "/sys/sysDepart/removeAll",
+      "data": {
+        "id": "class-b"
+      }
+    },
+    "observed_result": "Class B changed from sample_b row to No Data",
+    "evidence": [
+      "preview-baseline-cleared-b.txt",
+      "preview-baseline-cleared-b.jpg"
+    ],
+    "old_user_edit": "Actual UserModal displayed user-a data, console error/warn empty in this observation"
+  },
+  "baseline_viewports": [
+    {
+      "bodyWidth": 412,
+      "scrollWidth": 411,
+      "width": 390
+    },
+    {
+      "bodyWidth": 768,
+      "scrollWidth": 768,
+      "width": 768
+    },
+    {
+      "bodyWidth": 1440,
+      "scrollWidth": 1440,
+      "width": 1440
+    }
+  ],
+  "remaining": [
+    "Verify candidate browser when author source is ready",
+    "Legacy 390px panel overflow is a separate UI issue",
+    "Complete authenticated role flows still pending CAPTCHA action-time confirmation"
+  ],
+  "artifact_note": "Initial screenshot save attempt used an undefined fs binding after the UI action; subsequent save used imported node fs and retained the resulting DOM/screenshots."
+}

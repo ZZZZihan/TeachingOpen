@@ -1,0 +1,120 @@
+{
+  "recorded_utc": "2026-10-03T06:31:59.167246+00:00",
+  "product_commit": "3f68a31",
+  "base_commit": "11e8958",
+  "candidate_build_commit": "b878a2bc4e170413f4ee8068520323735aece2fe",
+  "candidate_api_tree": "37aa15d47970b22d94aa910dd152a4858c10bae7",
+  "candidate_web_tree": "3a29ce07efe47f080860ecc72509d4ecf02f769e",
+  "source_sha256": {
+    "web/src/views/home/modules/CourseCard.vue": "bf98c71cc655d7bb581a48b222894417774bbdfea448fcc09d81fbed07113a50",
+    "web/src/views/home/modules/courseSummaryText.js": "8255bf082923ebecf7c2fce7f0bedf9b02cb64cb79da85daf6f8390e77fd5ab3",
+    "web/tests/course-summary-text.test.cjs": "ff423da84aec2055ce4a82357fc4ece8e2f463f9d8bbcb5378c4d8c01b9d00c4"
+  },
+  "branch_tests": {
+    "total": 285,
+    "passed": 285,
+    "new": 6,
+    "skipped": 0
+  },
+  "candidate_tests": {
+    "total": 305,
+    "passed": 305,
+    "skipped": 0
+  },
+  "branch_and_candidate_builds": "successful; 12 CSS-order/size warnings and old caniuse-lite warning remain",
+  "lint": {
+    "product_files": 2,
+    "errors": 0,
+    "warnings": 0
+  },
+  "logs": {
+    "branch-tests": {
+      "original_sha256": "2c556ea642347ea10e13a2e247c6d61d49666fe51468a578e5d7df60d8288bb3",
+      "saved_sha256": "2c556ea642347ea10e13a2e247c6d61d49666fe51468a578e5d7df60d8288bb3",
+      "normalization": "rstrip each line and remove trailing blank lines; preserve order; empty lint log retained"
+    },
+    "branch-build": {
+      "original_sha256": "c30573a503e1f439a74eb49705d8460e523cfcc2d061458f32c4fd6b0447a633",
+      "saved_sha256": "75d4ceecf2cc3f325b89e8ede3877d2e3dd6ca4108e58c905c19dff10b22fb22",
+      "normalization": "rstrip each line and remove trailing blank lines; preserve order; empty lint log retained"
+    },
+    "branch-lint": {
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "saved_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "normalization": "rstrip each line and remove trailing blank lines; preserve order; empty lint log retained"
+    },
+    "candidate-tests": {
+      "original_sha256": "ea9ac365dc6cc71589ccbc69ec2a61984fc92776506a7be6c71d0f54cc04648f",
+      "saved_sha256": "ea9ac365dc6cc71589ccbc69ec2a61984fc92776506a7be6c71d0f54cc04648f",
+      "normalization": "rstrip each line and remove trailing blank lines; preserve order; empty lint log retained"
+    },
+    "candidate-build": {
+      "original_sha256": "e93a5d25517663c8aa4232d4f3092ccf1d867a2ba93d89953ee8374ffd67b975",
+      "saved_sha256": "4ef0852bda60c3ea92a39a948638230859ee2d5ff6dd1bdaf7d25fea79d730a9",
+      "normalization": "rstrip each line and remove trailing blank lines; preserve order; empty lint log retained"
+    }
+  },
+  "backend_jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "boundaries": [
+    "Unit/component/build checks, actual anonymous browser observations, independent source review and human acceptance are separate.",
+    "No login, production changes, browser token injection or original private course content in this evidence.",
+    "The helper supports common named entities and valid numeric entities, not a complete HTML parser.",
+    "No backend or dependency change."
+  ],
+  "dist": {
+    "files": 4880,
+    "http_samples": 10,
+    "http": [
+      {
+        "port": 18112,
+        "asset": "index.html",
+        "matches": true
+      },
+      {
+        "port": 18112,
+        "asset": "js/polyfill.js",
+        "matches": true
+      },
+      {
+        "port": 18112,
+        "asset": "js/common.js",
+        "matches": true
+      },
+      {
+        "port": 18112,
+        "asset": "js/chunk-vendors.a2dd1501.js",
+        "matches": true
+      },
+      {
+        "port": 18112,
+        "asset": "js/app.ef325f47.js",
+        "matches": true
+      },
+      {
+        "port": 18142,
+        "asset": "index.html",
+        "matches": true
+      },
+      {
+        "port": 18142,
+        "asset": "js/polyfill.js",
+        "matches": true
+      },
+      {
+        "port": 18142,
+        "asset": "js/common.js",
+        "matches": true
+      },
+      {
+        "port": 18142,
+        "asset": "js/chunk-vendors.a2dd1501.js",
+        "matches": true
+      },
+      {
+        "port": 18142,
+        "asset": "js/app.ef325f47.js",
+        "matches": true
+      }
+    ]
+  }
+}

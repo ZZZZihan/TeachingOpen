@@ -11,3 +11,8 @@
 
 ## data
 deploy/data
+
+## private local development runtimes and Python bytecode
+.devspace/
+__pycache__/
+*.pyc

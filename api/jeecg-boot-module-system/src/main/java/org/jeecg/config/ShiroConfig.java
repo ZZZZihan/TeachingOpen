@@ -13,6 +13,10 @@ import org.crazycake.shiro.RedisManager;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.shiro.authc.ShiroRealm;
 import org.jeecg.modules.shiro.authc.aop.JwtFilter;
+import org.jeecg.modules.shiro.authc.aop.LocalMediaInvalidRequestFilter;
+import org.jeecg.modules.shiro.authc.aop.MediaCookie;
+import org.jeecg.modules.shiro.authc.aop.MediaJwtFilter;
+import org.jeecg.modules.shiro.authc.aop.OptionalJwtFilter;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -47,6 +51,9 @@ public class ShiroConfig {
     @Value("${spring.redis.password}")
     private String redisPassword;
 
+    @Value("${spring.redis.database:0}")
+    private int redisDatabase;
+
 	/**
 	 * Filter Chain定义说明 
 	 * 
@@ -54,16 +61,19 @@ public class ShiroConfig {
 	 * 2、当设置多个过滤器时，全部验证通过，才视为通过
 	 * 3、部分过滤器可指定参数，如perms，roles
 	 */
-	@Bean("shiroFilter")
-	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+    // The combined starter registers this factory by name; both names share one bean.
+	@Bean(name = {"shiroFilterFactoryBean", "shiroFilter"})
+	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, MediaCookie mediaCookie) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 		// 拦截器
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+        // Must precede configurable exclusions and generic extension allowlists.
+        filterChainDefinitionMap.put("/sys/common/static/**", "mediaJwt");
 		if(oConvertUtils.isNotEmpty(excludeUrls)){
 			String[] permissionUrl = excludeUrls.split(",");
 			for(String url : permissionUrl){
-				filterChainDefinitionMap.put(url,"anon");
+				if (!"/sys/common/static/**".equals(url)) filterChainDefinitionMap.put(url,"anon");
 			}
 		}
 
@@ -85,7 +95,6 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/sys/user/phoneVerification", "anon");//用户忘记密码验证手机号
 		filterChainDefinitionMap.put("/sys/user/passwordChange", "anon");//用户更改密码
 		filterChainDefinitionMap.put("/auth/2step-code", "anon");//登录验证码
-		filterChainDefinitionMap.put("/sys/common/static/**", "anon");//图片预览 &下载文件不限制token
 		filterChainDefinitionMap.put("/sys/common/pdf/**", "anon");//pdf预览
 		filterChainDefinitionMap.put("/generic/**", "anon");//pdf预览需要文件
 		filterChainDefinitionMap.put("/", "anon");
@@ -142,6 +151,7 @@ public class ShiroConfig {
 		//支付
 		filterChainDefinitionMap.put("/teaching/teachingOrder/createOrder", "anon");
 		//菜单
+		filterChainDefinitionMap.put("/teaching/user/publicDirectory", "anon");
 		filterChainDefinitionMap.put("/teaching/menu/getUserMenu", "anon");
 		//配置
 		filterChainDefinitionMap.put("/sys/config/getCurrentConfig", "anon");
@@ -150,11 +160,11 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/sys/dict/getDictItems/**", "anon");
 		//社区
 		filterChainDefinitionMap.put("/teaching/teachingWork/userInfo", "anon");
-		filterChainDefinitionMap.put("/teaching/teachingWork/studentWorkInfo", "anon");
+		filterChainDefinitionMap.put("/teaching/teachingWork/studentWorkInfo", "optionalJwt");
 		filterChainDefinitionMap.put("/teaching/teachingWork/greatWork", "anon");
-		filterChainDefinitionMap.put("/teaching/teachingWork/starWork", "anon");
+		filterChainDefinitionMap.put("/teaching/teachingWork/starWork", "optionalJwt");
 		filterChainDefinitionMap.put("/teaching/teachingWork/leaderboard", "anon");
-		filterChainDefinitionMap.put("/teaching/teachingWork/getWorkComments", "anon");
+		filterChainDefinitionMap.put("/teaching/teachingWork/getWorkComments", "optionalJwt");
 		filterChainDefinitionMap.put("/teaching/teachingCourse/getHomeCourse", "anon");
 
 		filterChainDefinitionMap.put("/teaching/teachingNews/newsList", "anon");
@@ -165,7 +175,11 @@ public class ShiroConfig {
 
 		// 添加自己的过滤器并且取名为jwt
 		Map<String, Filter> filterMap = new HashMap<String, Filter>(1);
-		filterMap.put("jwt", new JwtFilter());
+		// Retain Shiro's global path guard, with Unicode scoped to local media reads.
+		filterMap.put("invalidRequest", new LocalMediaInvalidRequestFilter());
+		filterMap.put("jwt", new JwtFilter(mediaCookie));
+		filterMap.put("optionalJwt", new OptionalJwtFilter(mediaCookie));
+		filterMap.put("mediaJwt", new MediaJwtFilter(mediaCookie));
 		shiroFilterFactoryBean.setFilters(filterMap);
 		// <!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边
 		filterChainDefinitionMap.put("/**", "jwt");
@@ -181,6 +195,8 @@ public class ShiroConfig {
 	public DefaultWebSecurityManager securityManager(ShiroRealm myRealm) {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(myRealm);
+        // This JWT application does not use Shiro's remembered identity cookies.
+        securityManager.setRememberMeManager(null);
 
 		/*
 		 * 关闭shiro自带的session，详情见文档
@@ -256,6 +272,7 @@ public class ShiroConfig {
         RedisManager redisManager = new RedisManager();
 		redisManager.setHost(host);
 		redisManager.setPort(oConvertUtils.getInt(port));
+		redisManager.setDatabase(redisDatabase);
 		redisManager.setTimeout(0);
         if (!StringUtils.isEmpty(redisPassword)) {
             redisManager.setPassword(redisPassword);

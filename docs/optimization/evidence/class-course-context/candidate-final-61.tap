@@ -1,0 +1,379 @@
+TAP version 13
+# Browserslist: caniuse-lite is outdated. Please run:
+#   npx update-browserslist-db@latest
+#   Why you should do it regularly: https://github.com/browserslist/update-db\#readme
+# Subtest: switching classes clears relation keys, selected rows, old list and pagination before B responds
+ok 1 - switching classes clears relation keys, selected rows, old list and pagination before B responds
+  ---
+  duration_ms: 268.601
+  type: 'test'
+  ...
+# Subtest: bulk confirmation captured in A cannot dispatch after switch B
+ok 2 - bulk confirmation captured in A cannot dispatch after switch B
+  ---
+  duration_ms: 28.851625
+  type: 'test'
+  ...
+# Subtest: row confirmation rendered in A cannot dispatch after switch B
+ok 3 - row confirmation rendered in A cannot dispatch after switch B
+  ---
+  duration_ms: 21.978625
+  type: 'test'
+  ...
+# Subtest: bulk confirmation captured in A cannot dispatch after clear
+ok 4 - bulk confirmation captured in A cannot dispatch after clear
+  ---
+  duration_ms: 26.38375
+  type: 'test'
+  ...
+# Subtest: row confirmation rendered in A cannot dispatch after clear
+ok 5 - row confirmation rendered in A cannot dispatch after clear
+  ---
+  duration_ms: 22.04825
+  type: 'test'
+  ...
+# Subtest: bulk confirmation captured in A cannot dispatch after reopen A
+ok 6 - bulk confirmation captured in A cannot dispatch after reopen A
+  ---
+  duration_ms: 24.121208
+  type: 'test'
+  ...
+# Subtest: row confirmation rendered in A cannot dispatch after reopen A
+ok 7 - row confirmation rendered in A cannot dispatch after reopen A
+  ---
+  duration_ms: 19.384542
+  type: 'test'
+  ...
+# Subtest: changing the relation selection invalidates an open bulk confirmation (0)
+ok 8 - changing the relation selection invalidates an open bulk confirmation (0)
+  ---
+  duration_ms: 29.600666
+  type: 'test'
+  ...
+# Subtest: changing the relation selection invalidates an open bulk confirmation (1)
+ok 9 - changing the relation selection invalidates an open bulk confirmation (1)
+  ---
+  duration_ms: 19.372958
+  type: 'test'
+  ...
+# Subtest: B bulk deletion dispatches one frozen B ID list despite repeated clicks and confirmation callbacks
+ok 10 - B bulk deletion dispatches one frozen B ID list despite repeated clicks and confirmation callbacks
+  ---
+  duration_ms: 22.138542
+  type: 'test'
+  ...
+# Subtest: control: one normal B bulk confirmation deletes only B and refreshes B
+ok 11 - control: one normal B bulk confirmation deletes only B and refreshes B
+  ---
+  duration_ms: 18.968333
+  type: 'test'
+  ...
+# Subtest: an old cancelled confirmation cannot unlock or submit a newer B prompt
+ok 12 - an old cancelled confirmation cannot unlock or submit a newer B prompt
+  ---
+  duration_ms: 23.1935
+  type: 'test'
+  ...
+# Subtest: normal B row deletion preserves the original relation ID and suppresses repeated dispatch
+ok 13 - normal B row deletion preserves the original relation ID and suppresses repeated dispatch
+  ---
+  duration_ms: 18.724459
+  type: 'test'
+  ...
+# Subtest: control: one normal B row confirmation keeps the actual DELETE contract
+ok 14 - control: one normal B row confirmation keeps the actual DELETE contract
+  ---
+  duration_ms: 25.036875
+  type: 'test'
+  ...
+# Subtest: late A relation-list success cannot replace B list, count or loading state
+ok 15 - late A relation-list success cannot replace B list, count or loading state
+  ---
+  duration_ms: 18.413875
+  type: 'test'
+  ...
+# Subtest: newer list query within one class wins when responses arrive in reverse order
+ok 16 - newer list query within one class wins when responses arrive in reverse order
+  ---
+  duration_ms: 24.564667
+  type: 'test'
+  ...
+# Subtest: malformed relation records containing null never enter the table or deletion path
+ok 17 - malformed relation records containing null never enter the table or deletion path
+  ---
+  duration_ms: 18.418666
+  type: 'test'
+  ...
+# Subtest: stale A list network does not publish a B error or unlock B's pending read
+ok 18 - stale A list network does not publish a B error or unlock B's pending read
+  ---
+  duration_ms: 20.540292
+  type: 'test'
+  ...
+# Subtest: current B list network exposes recoverable failure and can retry without losing its scope
+ok 19 - current B list network exposes recoverable failure and can retry without losing its scope
+  ---
+  duration_ms: 17.737708
+  type: 'test'
+  ...
+# Subtest: stale A list business does not publish a B error or unlock B's pending read
+ok 20 - stale A list business does not publish a B error or unlock B's pending read
+  ---
+  duration_ms: 19.435333
+  type: 'test'
+  ...
+# Subtest: current B list business exposes recoverable failure and can retry without losing its scope
+ok 21 - current B list business exposes recoverable failure and can retry without losing its scope
+  ---
+  duration_ms: 17.805958
+  type: 'test'
+  ...
+# Subtest: late relation read after clear cannot repopulate an inactive panel
+ok 22 - late relation read after clear cannot repopulate an inactive panel
+  ---
+  duration_ms: 19.925084
+  type: 'test'
+  ...
+# Subtest: late relation read after destroy cannot repopulate an inactive panel
+ok 23 - late relation read after destroy cannot repopulate an inactive panel
+  ---
+  duration_ms: 17.091959
+  type: 'test'
+  ...
+# Subtest: already dispatched A bulk response (true) cannot refresh, clear selection or notify in B
+ok 24 - already dispatched A bulk response (true) cannot refresh, clear selection or notify in B
+  ---
+  duration_ms: 19.883709
+  type: 'test'
+  ...
+# Subtest: already dispatched A bulk response (false) cannot refresh, clear selection or notify in B
+ok 25 - already dispatched A bulk response (false) cannot refresh, clear selection or notify in B
+  ---
+  duration_ms: 17.509084
+  type: 'test'
+  ...
+# Subtest: late A write completion cannot release B write lock or stack a second B write
+ok 26 - late A write completion cannot release B write lock or stack a second B write
+  ---
+  duration_ms: 22.708375
+  type: 'test'
+  ...
+# Subtest: showing the course selector for B clears A selection, rows, draft query and pagination
+ok 27 - showing the course selector for B clears A selection, rows, draft query and pagination
+  ---
+  duration_ms: 1.140959
+  type: 'test'
+  ...
+# Subtest: course selector late A result cannot replace the visible B choices
+ok 28 - course selector late A result cannot replace the visible B choices
+  ---
+  duration_ms: 0.702333
+  type: 'test'
+  ...
+# Subtest: malformed course records containing null cannot become selectable course IDs
+ok 29 - malformed course records containing null cannot become selectable course IDs
+  ---
+  duration_ms: 0.73325
+  type: 'test'
+  ...
+# Subtest: selector stale A network cannot unlock B or expose an error in B
+ok 30 - selector stale A network cannot unlock B or expose an error in B
+  ---
+  duration_ms: 0.662625
+  type: 'test'
+  ...
+# Subtest: selector current B network blocks emitting until a manual scoped retry succeeds
+ok 31 - selector current B network blocks emitting until a manual scoped retry succeeds
+  ---
+  duration_ms: 0.741958
+  type: 'test'
+  ...
+# Subtest: selector stale A business cannot unlock B or expose an error in B
+ok 32 - selector stale A business cannot unlock B or expose an error in B
+  ---
+  duration_ms: 0.540792
+  type: 'test'
+  ...
+# Subtest: selector current B business blocks emitting until a manual scoped retry succeeds
+ok 33 - selector current B business blocks emitting until a manual scoped retry succeeds
+  ---
+  duration_ms: 0.553333
+  type: 'test'
+  ...
+# Subtest: closed course selector ignores a late read instead of restoring old choices
+ok 34 - closed course selector ignores a late read instead of restoring old choices
+  ---
+  duration_ms: 0.509666
+  type: 'test'
+  ...
+# Subtest: B selector emits an immutable original department and course-ID snapshot once
+ok 35 - B selector emits an immutable original department and course-ID snapshot once
+  ---
+  duration_ms: 0.693417
+  type: 'test'
+  ...
+# Subtest: a delayed selector emit from A cannot add after switch B
+ok 36 - a delayed selector emit from A cannot add after switch B
+  ---
+  duration_ms: 17.168959
+  type: 'test'
+  ...
+# Subtest: a delayed selector emit from A cannot add after clear
+ok 37 - a delayed selector emit from A cannot add after clear
+  ---
+  duration_ms: 20.196583
+  type: 'test'
+  ...
+# Subtest: a delayed selector emit from A cannot add after reopen A
+ok 38 - a delayed selector emit from A cannot add after reopen A
+  ---
+  duration_ms: 17.7305
+  type: 'test'
+  ...
+# Subtest: actual B parent-selector chain adds only B chosen IDs and prevents repeated writes
+ok 39 - actual B parent-selector chain adds only B chosen IDs and prevents repeated writes
+  ---
+  duration_ms: 20.523375
+  type: 'test'
+  ...
+# Subtest: control: one ordinary B course selection preserves the addOrUpdate endpoint and body
+ok 40 - control: one ordinary B course selection preserves the addOrUpdate endpoint and body
+  ---
+  duration_ms: 17.354458
+  type: 'test'
+  ...
+# Subtest: unscoped legacy selector arrays cannot silently write old courses to the current class
+ok 41 - unscoped legacy selector arrays cannot silently write old courses to the current class
+  ---
+  duration_ms: 20.007791
+  type: 'test'
+  ...
+# Subtest: already dispatched A add response (true) leaves B list, selection and notices alone
+ok 42 - already dispatched A add response (true) leaves B list, selection and notices alone
+  ---
+  duration_ms: 18.921958
+  type: 'test'
+  ...
+# Subtest: already dispatched A add response (false) leaves B list, selection and notices alone
+ok 43 - already dispatched A add response (false) leaves B list, selection and notices alone
+  ---
+  duration_ms: 21.01
+  type: 'test'
+  ...
+# Subtest: late A add completion cannot release the current B add lock
+ok 44 - late A add completion cannot release the current B add lock
+  ---
+  duration_ms: 18.557958
+  type: 'test'
+  ...
+# Subtest: normal B opening-time editor keeps relation identity and locks validation and duplicate writes
+ok 45 - normal B opening-time editor keeps relation identity and locks validation and duplicate writes
+  ---
+  duration_ms: 20.314583
+  type: 'test'
+  ...
+# Subtest: control: one B opening-time update preserves the existing edit endpoint and refresh callback
+ok 46 - control: one B opening-time update preserves the existing edit endpoint and refresh callback
+  ---
+  duration_ms: 17.247875
+  type: 'test'
+  ...
+# Subtest: switching the parent closes both child dialogs and invalidates editor validation before dispatch
+ok 47 - switching the parent closes both child dialogs and invalidates editor validation before dispatch
+  ---
+  duration_ms: 20.140708
+  type: 'test'
+  ...
+# Subtest: late editor nextTick cannot fill a newer record or a closed dialog
+ok 48 - late editor nextTick cannot fill a newer record or a closed dialog
+  ---
+  duration_ms: 0.859667
+  type: 'test'
+  ...
+# Subtest: late A form validation cannot dispatch a write after editor closes and opens B
+ok 49 - late A form validation cannot dispatch a write after editor closes and opens B
+  ---
+  duration_ms: 0.527875
+  type: 'test'
+  ...
+# Subtest: late A opening-time completion cannot release the currently validating B dialog
+ok 50 - late A opening-time completion cannot release the currently validating B dialog
+  ---
+  duration_ms: 0.906125
+  type: 'test'
+  ...
+# Subtest: opening-time validation error unlocks the same dialog without sending a request
+ok 51 - opening-time validation error unlocks the same dialog without sending a request
+  ---
+  duration_ms: 0.508375
+  type: 'test'
+  ...
+# Subtest: late A opening-time response (true) cannot close or notify in the reopened B editor
+ok 52 - late A opening-time response (true) cannot close or notify in the reopened B editor
+  ---
+  duration_ms: 0.618292
+  type: 'test'
+  ...
+# Subtest: late A opening-time response (false) cannot close or notify in the reopened B editor
+ok 53 - late A opening-time response (false) cannot close or notify in the reopened B editor
+  ---
+  duration_ms: 0.6635
+  type: 'test'
+  ...
+# Subtest: ordinary standalone edit(record) remains compatible and writes the same relation
+ok 54 - ordinary standalone edit(record) remains compatible and writes the same relation
+  ---
+  duration_ms: 0.678625
+  type: 'test'
+  ...
+# Subtest: ordinary standalone new-record edit(record) remains compatible with the existing POST endpoint
+ok 55 - ordinary standalone new-record edit(record) remains compatible with the existing POST endpoint
+  ---
+  duration_ms: 0.912209
+  type: 'test'
+  ...
+# Subtest: standalone: validation values cannot overwrite the original relation, class or course identity
+ok 56 - standalone: validation values cannot overwrite the original relation, class or course identity
+  ---
+  duration_ms: 12.323708
+  type: 'test'
+  ...
+# Subtest: parent context: validation values cannot overwrite the original relation, class or course identity
+ok 57 - parent context: validation values cannot overwrite the original relation, class or course identity
+  ---
+  duration_ms: 20.775625
+  type: 'test'
+  ...
+# Subtest: the actual editor and popup callback fill only registered openTime fields
+ok 58 - the actual editor and popup callback fill only registered openTime fields
+  ---
+  duration_ms: 0.789333
+  type: 'test'
+  ...
+# Subtest: opening-time business failure keeps values available for manual retry
+ok 59 - opening-time business failure keeps values available for manual retry
+  ---
+  duration_ms: 0.814292
+  type: 'test'
+  ...
+# Subtest: destroyed opening-time editor ignores late validation and response
+ok 60 - destroyed opening-time editor ignores late validation and response
+  ---
+  duration_ms: 1.193542
+  type: 'test'
+  ...
+# Subtest: delayed parent refresh event from edited A cannot refresh current B
+ok 61 - delayed parent refresh event from edited A cannot refresh current B
+  ---
+  duration_ms: 19.127542
+  type: 'test'
+  ...
+1..61
+# tests 61
+# suites 0
+# pass 61
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1280.819875

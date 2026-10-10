@@ -1,0 +1,7 @@
+[INFO] Tests are skipped.
+[INFO] Tests are skipped.
+[INFO] jeecg-boot-parent .................................. SUCCESS [  0.145 s]
+[INFO] jeecg-boot-base-common ............................. SUCCESS [  2.685 s]
+[INFO] teaching-open ...................................... SUCCESS [  4.872 s]
+[INFO] BUILD SUCCESS
+[INFO] Total time:  7.832 s

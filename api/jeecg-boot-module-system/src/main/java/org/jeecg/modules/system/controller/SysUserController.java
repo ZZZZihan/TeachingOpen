@@ -7,12 +7,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.jeecg.common.api.vo.Result;
@@ -78,13 +78,13 @@ public class SysUserController extends BaseController {
 	@Autowired
 	private ISysRoleService sysRoleService;
     @Autowired
-    private ISysDepartRoleUserService departRoleUserService;
-    @Autowired
-    private ISysDepartRoleService departRoleService;
-    @Autowired
     private ISysConfigService sysConfigService;
 	@Autowired
 	private RedisUtil redisUtil;
+	@Autowired
+	private PasswordResetService passwordResetService;
+    @Autowired
+    private AccountRegistrationService accountRegistrationService;
 
     @Value("${jeecg.path.upload}")
     private String upLoadPath;
@@ -299,28 +299,25 @@ public class SysUserController extends BaseController {
 	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/frozenBatch", method = RequestMethod.PUT)
 	public Result<SysUser> frozenBatch(@RequestBody JSONObject jsonObject) {
+		SecurityUtils.getSubject().checkPermission("user:status");
 		Result<SysUser> result = new Result<SysUser>();
 		try {
-			String ids = jsonObject.getString("ids");
-			String status = jsonObject.getString("status");
-			String[] arr = ids.split(",");
-			for (String id : arr) {
-				if(oConvertUtils.isNotEmpty(id)) {
-                    if (lessThanUserRoleLevel(id)){
-                        result.error500("权限不足");
-                        return result;
-                    }
-					this.sysUserService.update(new SysUser().setStatus(Integer.parseInt(status)),
-							new UpdateWrapper<SysUser>().lambda().eq(SysUser::getId,id));
-				}
+			LoginUser operator = getCurrentUser();
+			if (operator == null) {
+				return result.error500("权限不足");
 			}
+			if (jsonObject == null) {
+				return result.error500("请求参数不能为空");
+			}
+			sysUserService.updateUserStatus(jsonObject.getString("ids"),
+					jsonObject.getString("status"), operator.getId());
+			return result.success("操作成功!");
+		} catch (IllegalArgumentException e) {
+			return result.error500(e.getMessage());
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			result.error500("操作失败"+e.getMessage());
+			log.error("冻结或解冻用户失败", e);
+			return result.error500("操作失败");
 		}
-		result.success("操作成功!");
-		return result;
-
     }
 
     @RequestMapping(value = "/queryById", method = RequestMethod.GET)
@@ -1058,95 +1055,42 @@ public class SysUserController extends BaseController {
     /**
      * 给指定部门添加对应的用户
      */
-    //@RequiresRoles({"admin"})
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     @RequestMapping(value = "/editSysDepartWithUser", method = RequestMethod.POST)
     public Result<String> editSysDepartWithUser(@RequestBody SysDepartUsersVO sysDepartUsersVO) {
         Result<String> result = new Result<String>();
-        try {
-            String sysDepId = sysDepartUsersVO.getDepId();
-            for(String sysUserId:sysDepartUsersVO.getUserIdList()) {
-                SysUserDepart sysUserDepart = new SysUserDepart(null,sysUserId,sysDepId);
-                QueryWrapper<SysUserDepart> queryWrapper = new QueryWrapper<SysUserDepart>();
-                queryWrapper.eq("dep_id", sysDepId).eq("user_id",sysUserId);
-                SysUserDepart one = sysUserDepartService.getOne(queryWrapper);
-                if(one==null){
-                    sysUserDepartService.save(sysUserDepart);
-                }
-            }
-            result.setMessage("添加成功!");
-            result.setSuccess(true);
-            return result;
-        }catch(Exception e) {
-            log.error(e.getMessage(), e);
-            result.setSuccess(false);
-            result.setMessage("出错了: " + e.getMessage());
-            return result;
-        }
+        sysUserDepartService.addUsersToDepart(sysDepartUsersVO.getDepId(), sysDepartUsersVO.getUserIdList());
+        result.setMessage("添加成功!");
+        result.setSuccess(true);
+        return result;
     }
 
     /**
      *   删除指定机构的用户关系
      */
-    //@RequiresRoles({"admin"})
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     @RequestMapping(value = "/deleteUserInDepart", method = RequestMethod.DELETE)
     public Result<SysUserDepart> deleteUserInDepart(@RequestParam(name="depId") String depId,
                                                     @RequestParam(name="userId",required=true) String userId
     ) {
         Result<SysUserDepart> result = new Result<SysUserDepart>();
-        if (lessThanUserRoleLevel(userId)){
-            result.error500("权限不足");
-            return result;
-        }
-        try {
-            QueryWrapper<SysUserDepart> queryWrapper = new QueryWrapper<SysUserDepart>();
-            queryWrapper.eq("dep_id", depId).eq("user_id",userId);
-            boolean b = sysUserDepartService.remove(queryWrapper);
-            if(b){
-                List<SysDepartRole> sysDepartRoleList = departRoleService.list(new QueryWrapper<SysDepartRole>().eq("depart_id",depId));
-                List<String> roleIds = sysDepartRoleList.stream().map(SysDepartRole::getId).collect(Collectors.toList());
-                if(roleIds != null && roleIds.size()>0){
-                    QueryWrapper<SysDepartRoleUser> query = new QueryWrapper<>();
-                    query.eq("user_id",userId).in("drole_id",roleIds);
-                    departRoleUserService.remove(query);
-                }
-                result.success("删除成功!");
-            }else{
-                result.error500("当前选中部门与用户无关联关系!");
-            }
-        }catch(Exception e) {
-            log.error(e.getMessage(), e);
-            result.error500("删除失败！");
-        }
+        sysUserDepartService.removeUsersFromDepart(depId, Collections.singletonList(userId));
+        result.success("删除成功!");
         return result;
     }
 
     /**
      * 批量删除指定机构的用户关系
      */
-    //@RequiresRoles({"admin"})
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     @RequestMapping(value = "/deleteUserInDepartBatch", method = RequestMethod.DELETE)
     public Result<SysUserDepart> deleteUserInDepartBatch(
             @RequestParam(name="depId") String depId,
             @RequestParam(name="userIds",required=true) String userIds) {
         Result<SysUserDepart> result = new Result<SysUserDepart>();
-        for (String id: userIds.split(",")){
-            if (lessThanUserRoleLevel(id)){
-                result.error500("权限不足");
-                return result;
-            }
-        }
-        try {
-            QueryWrapper<SysUserDepart> queryWrapper = new QueryWrapper<SysUserDepart>();
-            queryWrapper.eq("dep_id", depId).in("user_id",Arrays.asList(userIds.split(",")));
-            boolean b = sysUserDepartService.remove(queryWrapper);
-            if(b){
-                departRoleUserService.removeDeptRoleUser(Arrays.asList(userIds.split(",")),depId);
-            }
-            result.success("删除成功!");
-        }catch(Exception e) {
-            log.error(e.getMessage(), e);
-            result.error500("删除失败！");
-        }
+        // The existing department UI appends a comma to the final selected ID.
+        sysUserDepartService.removeUsersFromDepart(depId, Arrays.asList(userIds.split(",")));
+        result.success("删除成功!");
         return result;
     }
     
@@ -1183,87 +1127,9 @@ public class SysUserController extends BaseController {
 	 * @return
 	 */
 	@PostMapping("/register")
-	public Result<JSONObject> userRegister(@RequestBody JSONObject jsonObject, SysUser user) {
-		Result<JSONObject> result = new Result<JSONObject>();
-		String phone = jsonObject.getString("phone");
-		String smscode = jsonObject.getString("smscode");
-		Object code = redisUtil.get(phone);
-		String username = jsonObject.getString("username");
-		String realname = jsonObject.getString("realname");
-		//未设置用户名，则用手机号作为用户名
-		if(oConvertUtils.isEmpty(username)){
-            username = phone;
-        }
-        //未设置密码，则随机生成一个密码
-		String password = jsonObject.getString("password");
-		if(oConvertUtils.isEmpty(password)){
-            password = RandomUtil.randomString(8);
-        }
-		String email = jsonObject.getString("email");
-		SysUser sysUser1 = sysUserService.getUserByName(username);
-		if (sysUser1 != null) {
-			result.setMessage("用户名已注册");
-			result.setSuccess(false);
-			return result;
-		}
-		SysUser sysUser2 = sysUserService.getUserByPhone(phone);
-		if (sysUser2 != null) {
-			result.setMessage("该手机号已注册");
-			result.setSuccess(false);
-			return result;
-		}
-
-		if(oConvertUtils.isNotEmpty(email)){
-            SysUser sysUser3 = sysUserService.getUserByEmail(email);
-            if (sysUser3 != null) {
-                result.setMessage("邮箱已被注册");
-                result.setSuccess(false);
-                return result;
-            }
-        }
-        if(oConvertUtils.isNotEmpty(phone) && oConvertUtils.isNotEmpty(smscode)){
-            if (!smscode.equals(code)) {
-                result.setMessage("手机验证码错误");
-                result.setSuccess(false);
-                return result;
-            }
-        }
-
-        String allowReg = sysConfigService.getConfigItem("allowReg");
-        if (!"1".equals(allowReg)){
-            result.setSuccess(false);
-            result.setMessage("未开放注册");
-            return result;
-        }
-        String defaultRole = sysConfigService.getConfigItem("_defaultRole");
-        String defaultDepart = sysConfigService.getConfigItem("_defaultDepart");
-
-		try {
-			user.setCreateTime(new Date());// 设置创建时间
-			String salt = oConvertUtils.randomGen(8);
-			String passwordEncode = PasswordUtil.encrypt(username, password, salt);
-			user.setSalt(salt);
-			user.setUsername(username);
-			user.setRealname(realname);
-			user.setPassword(passwordEncode);
-			user.setEmail(email);
-			user.setPhone(phone);
-			user.setStatus(CommonConstant.USER_UNFREEZE);
-			user.setDelFlag(CommonConstant.DEL_FLAG_0);
-			user.setActivitiSync(CommonConstant.ACT_SYNC_0);
-			sysUserService.save(user);
-            if (defaultRole != null){
-                sysUserService.addUserWithRole(user,defaultRole);
-            }
-            if (defaultDepart != null){
-                sysUserService.addUserWithDepart(user, defaultDepart);
-            }
-            result.success("注册成功");
-		} catch (Exception e) {
-			result.error500("注册失败");
-		}
-		return result;
-	}
+    public Result<JSONObject> userRegister(@RequestBody JSONObject request) {
+        return accountRegistrationService.register(request);
+    }
 
 	/**
 	 * 根据用户名或手机号查询用户信息
@@ -1314,69 +1180,17 @@ public class SysUserController extends BaseController {
 		return phone;
 	}
 	
-	/**
-	 * 用户手机号验证
-	 */
+	/** Only verifies a recovery code; never extends its TTL or returns it. */
 	@PostMapping("/phoneVerification")
 	public Result<String> phoneVerification(@RequestBody JSONObject jsonObject) {
-		Result<String> result = new Result<String>();
-		String phone = jsonObject.getString("phone");
-		String smscode = jsonObject.getString("smscode");
-		Object code = redisUtil.get(phone);
-		if (!smscode.equals(code)) {
-			result.setMessage("手机验证码错误");
-			result.setSuccess(false);
-			return result;
-		}
-		redisUtil.set(phone, smscode);
-		result.setResult(smscode);
-		result.setSuccess(true);
-		return result;
+		return passwordResetService.verify(jsonObject);
 	}
-	
-	/**
-	 * 用户更改密码
-	 */
-	@GetMapping("/passwordChange")
-	public Result<SysUser> passwordChange(@RequestParam(name="username")String username,
-										  @RequestParam(name="password")String password,
-			                              @RequestParam(name="smscode")String smscode,
-			                              @RequestParam(name="phone") String phone) {
-        Result<SysUser> result = new Result<SysUser>();
-        if(oConvertUtils.isEmpty(username) || oConvertUtils.isEmpty(password) || oConvertUtils.isEmpty(smscode)  || oConvertUtils.isEmpty(phone) ) {
-            result.setMessage("重置密码失败！");
-            result.setSuccess(false);
-            return result;
-        }
 
-        SysUser sysUser=new SysUser();
-        Object object= redisUtil.get(phone);
-        if(null==object) {
-        	result.setMessage("短信验证码失效！");
-            result.setSuccess(false);
-            return result;
-        }
-        if(!smscode.equals(object)) {
-        	result.setMessage("短信验证码不匹配！");
-            result.setSuccess(false);
-            return result;
-        }
-        sysUser = this.sysUserService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername,username).eq(SysUser::getPhone,phone));
-        if (sysUser == null) {
-            result.setMessage("未找到用户！");
-            result.setSuccess(false);
-            return result;
-        } else {
-            String salt = oConvertUtils.randomGen(8);
-            sysUser.setSalt(salt);
-            String passwordEncode = PasswordUtil.encrypt(sysUser.getUsername(), password, salt);
-            sysUser.setPassword(passwordEncode);
-            this.sysUserService.updateById(sysUser);
-            result.setSuccess(true);
-            result.setMessage("密码重置完成！");
-            return result;
-        }
-    }
+	/** Passwords and codes must be supplied in a JSON body, never a GET query. */
+	@PostMapping("/passwordChange")
+	public Result<String> passwordChange(@RequestBody JSONObject jsonObject) {
+		return passwordResetService.reset(jsonObject);
+	}
 	
 
 	/**

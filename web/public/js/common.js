@@ -1,5 +1,9 @@
 window.version = 'TO2.8'
 window.urlParams = function (paramName) {
+  // New lesson links opt into standard query decoding. Preserve legacy raw links.
+  if (/[?&]queryEncoding=uri(?:&|$)/.test(window.location.search) && typeof URLSearchParams !== 'undefined') {
+    return new URLSearchParams(window.location.search).get(paramName) || ''
+  }
   var reg = new RegExp('[?&]' + paramName + '=([^&]*)[&]?', 'i')
   var paramVal = window.location.search.match(reg)
   if(paramVal == null) return ''
@@ -76,6 +80,10 @@ window.getWorkInfo = function(workId, cb) {
   $.ajax({
     url: '/api/teaching/teachingWork/studentWorkInfo',
     data: { workId: workId },
+    beforeSend: function (request) {
+      var token = getUserToken()
+      if (token) request.setRequestHeader('X-Access-Token', token)
+    },
     success: function (res) {
       if (res.code == 0) {
         cb(res.result)
@@ -107,6 +115,8 @@ window.getScratchAssets = function(assetType, cb){
 }
 
 window.getQiniuToken = function(onSuccess, onError) {
+  window.qiniuUploadPrefix = '';
+  if (getSysConfig('uploadType') !== 'qiniu') return undefined;
   var qn_token;
   $.ajax({
     url: '/api/common/qiniu/getToken?t=' + new Date().getTime(),
@@ -115,9 +125,9 @@ window.getQiniuToken = function(onSuccess, onError) {
     },
     async: false,
     success: function(res) {
-      console.log(res)
-      if (res.code == 200) {
+      if (res.success && res.code == 200 && res.keyPrefix) {
         qn_token = res.result
+        window.qiniuUploadPrefix = res.keyPrefix
         if (onSuccess) {
           onSuccess(res)
         }
@@ -192,6 +202,11 @@ window.getQiniuToken = function(onSuccess, onError) {
 
   
   function upload2Qiniu(file, key, fileName, observer) {
+    if (!qn_token || !window.qiniuUploadPrefix) {
+      if (observer && observer.error) observer.error(new Error('无法获取上传凭证，请重新登录后重试'))
+      return
+    }
+    key = window.qiniuUploadPrefix + key
     var config = {
       useCdnDomain: true,
       region: qiniu.region[getSysConfig('qiniuArea')],

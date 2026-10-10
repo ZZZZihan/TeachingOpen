@@ -3,6 +3,10 @@ package org.jeecg.modules.teaching.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.authz.annotation.Logical;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,8 +22,8 @@ import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.teaching.entity.TeachingCourseUnit;
 import org.jeecg.modules.teaching.model.CourseUnitModel;
 import org.jeecg.modules.teaching.model.CourseUnitWorkModel;
-import org.jeecg.modules.teaching.service.ITeachingCourseDeptService;
 import org.jeecg.modules.teaching.service.ITeachingCourseUnitService;
+import org.jeecg.modules.teaching.service.TeachingAccessService;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -49,7 +53,7 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	@Autowired
 	private ITeachingCourseUnitService teachingCourseUnitService;
 	@Autowired
-	private ITeachingCourseDeptService teachingCourseDeptService;
+	private TeachingAccessService teachingAccessService;
 	 @Autowired
 	 private ISysFileService sysFileService;
 	 @Autowired
@@ -64,9 +68,8 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 								@RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
 								HttpServletRequest req) throws Exception {
 		 //验证权限
-		 if (!teachingCourseDeptService.checkCoursePermission(courseId, getCurrentUser().getId())){
-			 return Result.error("无课程权限");
-		 }
+		 teachingAccessService.requireCourse(courseId);
+		 LoginUser user = getCurrentUser();
 
 		 QueryWrapper<CourseUnitModel> queryWrapper = new QueryWrapper<>();
 		 queryWrapper.eq("course_id", courseId);
@@ -75,17 +78,12 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 		 IPage<CourseUnitModel> pageList = teachingCourseUnitService.getCourseUnitList(page, queryWrapper);
 
 		 for (CourseUnitModel model: pageList.getRecords()){
+			 applyStudentVisibility(model, user);
 			 if(StringUtils.isNotBlank(model.getCoursePpt())){
 				 model.setCoursePpt(ow365Util.getFileUrlStr(model.getCoursePpt()));
 			 }
 			 if(StringUtils.isNotBlank(model.getCoursePlan())){
 				 model.setCoursePlan(ow365Util.getFileUrlStr(model.getCoursePlan()));
-			 }
-		 	if (getCurrentUser().getUserIdentity() == null || getCurrentUser().getUserIdentity().equals(1)){
-				 model.setCourseVideo(model.getShowCourseVideo()?model.getCourseVideo(): null);
-				 model.setCourseCase(model.getShowCourseCase()?model.getCourseCase(): null);
-				 model.setCoursePlan(model.getShowCoursePlan()?model.getCoursePlan(): null);
-				 model.setCoursePpt(model.getShowCoursePpt()?model.getCoursePpt(): null);
 			 }
 		 }
 		 return Result.ok(pageList);
@@ -105,6 +103,7 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	@AutoLog(value = "课程单元-分页列表查询")
 	@ApiOperation(value="课程单元-分页列表查询", notes="课程单元-分页列表查询")
 	@GetMapping(value = "/list")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	@PermissionData
 	public Result<?> queryPageList(CourseUnitModel teachingCourseUnit,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -121,17 +120,26 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	 public DictResult<CourseUnitWorkModel> getUnitWorkInfo(@RequestParam String unitId) {
 		 DictResult<CourseUnitWorkModel> result = new DictResult<CourseUnitWorkModel>();
 		 LoginUser user = getCurrentUser();
-		 if (user == null){
-			 //未登录
-		 }
 		 CourseUnitWorkModel teachingCourseUnit = teachingCourseUnitService.getCourseWorkUnit(unitId, user.getId());
 		 if(teachingCourseUnit==null) {
 			 result.error500("未找到对应实体");
 		 }else {
+			 teachingAccessService.requireCourse(teachingCourseUnit.getCourseId());
+			 applyStudentVisibility(teachingCourseUnit, user);
 			 result.setResult(teachingCourseUnit);
 			 result.setSuccess(true);
 		 }
 		 return result;
+	 }
+
+	 /** Apply the same display switches to the learning list and editor detail. */
+	 private void applyStudentVisibility(TeachingCourseUnit unit, LoginUser user) {
+		 if (user.getUserIdentity() == null || Integer.valueOf(1).equals(user.getUserIdentity())) {
+			 unit.setCourseVideo(Boolean.TRUE.equals(unit.getShowCourseVideo()) ? unit.getCourseVideo() : null);
+			 unit.setCourseCase(Boolean.TRUE.equals(unit.getShowCourseCase()) ? unit.getCourseCase() : null);
+			 unit.setCoursePlan(Boolean.TRUE.equals(unit.getShowCoursePlan()) ? unit.getCoursePlan() : null);
+			 unit.setCoursePpt(Boolean.TRUE.equals(unit.getShowCoursePpt()) ? unit.getCoursePpt() : null);
+		 }
 	 }
 	
 	/**
@@ -143,6 +151,7 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	@AutoLog(value = "课程单元-添加")
 	@ApiOperation(value="课程单元-添加", notes="课程单元-添加")
 	@PostMapping(value = "/add")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> add(@RequestBody TeachingCourseUnit teachingCourseUnit) {
 		teachingCourseUnitService.save(teachingCourseUnit);
 		return Result.ok("添加成功！");
@@ -157,16 +166,34 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	@AutoLog(value = "课程单元-编辑")
 	@ApiOperation(value="课程单元-编辑", notes="课程单元-编辑")
 	@PutMapping(value = "/edit")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> edit(@RequestBody TeachingCourseUnit teachingCourseUnit) {
-		teachingCourseUnitService.updateById(teachingCourseUnit);
+		if (teachingCourseUnit == null || StringUtils.isBlank(teachingCourseUnit.getId())) {
+			return Result.error(400, "请提供课程单元 ID");
+		}
+		if (!teachingCourseUnitService.updateById(teachingCourseUnit)) {
+			return Result.error(404, "课程单元已不存在，请刷新后重试");
+		}
 		return Result.ok("编辑成功!");
 	}
 
 	 @AutoLog(value = "课程单元地图-编辑")
 	 @ApiOperation(value="课程单元地图-编辑", notes="课程单元地图-编辑")
 	 @PutMapping(value = "/editBatch")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	 public Result<?> editMap(@RequestBody ArrayList<TeachingCourseUnit> unitList){
-		 teachingCourseUnitService.updateBatchById(unitList);
+		 if (unitList == null || unitList.isEmpty()) {
+			 return Result.error(400, "请选择需要更新的课程单元");
+		 }
+		 Set<String> ids = new HashSet<>();
+		 for (TeachingCourseUnit unit : unitList) {
+			 if (unit == null || StringUtils.isBlank(unit.getId()) || !ids.add(unit.getId())) {
+				 return Result.error(400, "课程单元 ID 不能为空或重复");
+			 }
+		 }
+		 if (!teachingCourseUnitService.updateExistingUnits(unitList)) {
+			 return Result.error(404, "部分课程单元已不存在，本次修改未保存，请刷新后重试");
+		 }
 		 return Result.ok("编辑成功!");
 	 }
 
@@ -179,6 +206,7 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	@AutoLog(value = "课程单元-通过id删除")
 	@ApiOperation(value="课程单元-通过id删除", notes="课程单元-通过id删除")
 	@DeleteMapping(value = "/delete")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
 		TeachingCourseUnit unit = teachingCourseUnitService.getById(id);
 		if (unit != null){
@@ -203,6 +231,7 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	@AutoLog(value = "课程单元-批量删除")
 	@ApiOperation(value="课程单元-批量删除", notes="课程单元-批量删除")
 	@DeleteMapping(value = "/deleteBatch")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		List<String> idList = Arrays.asList(ids.split(","));
 		List<TeachingCourseUnit> unitList = teachingCourseUnitService.list(new QueryWrapper<TeachingCourseUnit>().in("id", idList));
@@ -228,6 +257,7 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	@AutoLog(value = "课程单元-通过id查询")
 	@ApiOperation(value="课程单元-通过id查询", notes="课程单元-通过id查询")
 	@GetMapping(value = "/queryById")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> queryById(@RequestParam(name="id",required=true) String id) {
 		TeachingCourseUnit teachingCourseUnit = teachingCourseUnitService.getById(id);
 		if(teachingCourseUnit==null) {
@@ -243,6 +273,7 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
     * @param teachingCourseUnit
     */
     @RequestMapping(value = "/exportXls")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public ModelAndView exportXls(HttpServletRequest request, TeachingCourseUnit teachingCourseUnit) {
         return super.exportXls(request, teachingCourseUnit, TeachingCourseUnit.class, "课程单元");
     }
@@ -255,6 +286,7 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
     * @return
     */
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
         return super.importExcel(request, response, TeachingCourseUnit.class);
     }

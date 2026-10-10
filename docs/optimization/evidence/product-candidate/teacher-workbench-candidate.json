@@ -1,0 +1,662 @@
+{
+  "candidate_commit": "cd522775d8b321508a6480062ab464deb87a7c55",
+  "api_tree": "ace637205ef6da378a65ef0b640fec0face87420",
+  "web_tree": "2e0bd49fbf0b80b65e4038811c0d094c85fb0d0c",
+  "backend_pr": 40,
+  "teacher_ui_pr": 41,
+  "teacher_ui_draft": true,
+  "backend": {
+    "pid": 86529,
+    "jar_path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/teacher-work-search/api/jeecg-boot-module-system/target/teaching-open-2.8.0.jar",
+    "jar_sha256": "d89ef0667d90854195792b30d2af4b469738bb86c65498bd7c68ce350aeb3ac8"
+  },
+  "frontend": {
+    "pid": 46477,
+    "files": 4878,
+    "checks": {
+      "passed": 222,
+      "total": 222
+    },
+    "build": "success with existing warnings",
+    "previous_dist": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/teacher-previous-dist"
+  },
+  "actual_backend_checks": {
+    "search": {
+      "legacy_expectations": false,
+      "jar_sha256": "d89ef0667d90854195792b30d2af4b469738bb86c65498bd7c68ce350aeb3ac8",
+      "passed": 25,
+      "total": 25,
+      "exception": null,
+      "cases": [
+        {
+          "case": "exact work name remains usable",
+          "passed": true
+        },
+        {
+          "case": "work name substring matches own pending work",
+          "passed": true
+        },
+        {
+          "case": "work name infix matches own work",
+          "passed": true
+        },
+        {
+          "case": "student name substring with exact work name",
+          "passed": true
+        },
+        {
+          "case": "both fuzzy fields compose with status",
+          "passed": true
+        },
+        {
+          "case": "both exact text fields remain usable",
+          "passed": true
+        },
+        {
+          "case": "unknown student name yields no work",
+          "passed": true
+        },
+        {
+          "case": "all states and descending order",
+          "passed": true
+        },
+        {
+          "case": "ascending order and first page",
+          "passed": true
+        },
+        {
+          "case": "second page retains same total",
+          "passed": true
+        },
+        {
+          "case": "exact username filter remains usable",
+          "passed": true
+        },
+        {
+          "case": "username remains exact",
+          "passed": true
+        },
+        {
+          "case": "status mismatch yields no work",
+          "passed": true
+        },
+        {
+          "case": "scene mismatch yields no work",
+          "passed": true
+        },
+        {
+          "case": "type mismatch yields no work",
+          "passed": true
+        },
+        {
+          "case": "class filter cannot widen teacher scope",
+          "passed": true
+        },
+        {
+          "case": "other teacher sees only own class match",
+          "passed": true
+        },
+        {
+          "case": "other teacher cannot retrieve exact class A work",
+          "passed": true
+        },
+        {
+          "case": "admin can search across both classes",
+          "passed": true
+        },
+        {
+          "case": "unmatched work name returns empty",
+          "passed": true
+        },
+        {
+          "case": "quote text is a bound search value",
+          "passed": true
+        },
+        {
+          "case": "list denied student_a",
+          "passed": true
+        },
+        {
+          "case": "list denied None",
+          "passed": true
+        },
+        {
+          "case": "all non-audit tables restored",
+          "passed": true
+        },
+        {
+          "case": "attachment bytes unchanged",
+          "passed": true
+        }
+      ],
+      "observations": [
+        {
+          "case": "exact work name remains usable",
+          "http": 200,
+          "total": 1,
+          "ids": [
+            "fixture_search_0"
+          ]
+        },
+        {
+          "case": "work name substring matches own pending work",
+          "http": 200,
+          "total": 1,
+          "ids": [
+            "fixture_search_0"
+          ]
+        },
+        {
+          "case": "work name infix matches own work",
+          "http": 200,
+          "total": 1,
+          "ids": [
+            "fixture_search_0"
+          ]
+        },
+        {
+          "case": "student name substring with exact work name",
+          "http": 200,
+          "total": 1,
+          "ids": [
+            "fixture_search_0"
+          ]
+        },
+        {
+          "case": "both fuzzy fields compose with status",
+          "http": 200,
+          "total": 1,
+          "ids": [
+            "fixture_search_1"
+          ]
+        },
+        {
+          "case": "both exact text fields remain usable",
+          "http": 200,
+          "total": 1,
+          "ids": [
+            "fixture_search_0"
+          ]
+        },
+        {
+          "case": "unknown student name yields no work",
+          "http": 200,
+          "total": 0,
+          "ids": []
+        },
+        {
+          "case": "all states and descending order",
+          "http": 200,
+          "total": 2,
+          "ids": [
+            "fixture_search_1",
+            "fixture_search_0"
+          ]
+        },
+        {
+          "case": "ascending order and first page",
+          "http": 200,
+          "total": 2,
+          "ids": [
+            "fixture_search_0"
+          ]
+        },
+        {
+          "case": "second page retains same total",
+          "http": 200,
+          "total": 2,
+          "ids": [
+            "fixture_search_1"
+          ]
+        },
+        {
+          "case": "exact username filter remains usable",
+          "http": 200,
+          "total": 1,
+          "ids": [
+            "fixture_search_0"
+          ]
+        },
+        {
+          "case": "username remains exact",
+          "http": 200,
+          "total": 0,
+          "ids": []
+        },
+        {
+          "case": "status mismatch yields no work",
+          "http": 200,
+          "total": 0,
+          "ids": []
+        },
+        {
+          "case": "scene mismatch yields no work",
+          "http": 200,
+          "total": 0,
+          "ids": []
+        },
+        {
+          "case": "type mismatch yields no work",
+          "http": 200,
+          "total": 0,
+          "ids": []
+        },
+        {
+          "case": "class filter cannot widen teacher scope",
+          "http": 200,
+          "total": 0,
+          "ids": []
+        },
+        {
+          "case": "other teacher sees only own class match",
+          "http": 200,
+          "total": 1,
+          "ids": [
+            "fixture_search_2"
+          ]
+        },
+        {
+          "case": "other teacher cannot retrieve exact class A work",
+          "http": 200,
+          "total": 0,
+          "ids": []
+        },
+        {
+          "case": "admin can search across both classes",
+          "http": 200,
+          "total": 3,
+          "ids": [
+            "fixture_search_2",
+            "fixture_search_1",
+            "fixture_search_0"
+          ]
+        },
+        {
+          "case": "unmatched work name returns empty",
+          "http": 200,
+          "total": 0,
+          "ids": []
+        },
+        {
+          "case": "quote text is a bound search value",
+          "http": 200,
+          "total": 0,
+          "ids": []
+        }
+      ],
+      "scope": "Actual synthetic HTTP and database checks; legacy mode reproduces broken fuzzy search, not fixed acceptance."
+    },
+    "teacher_ui_contract": {
+      "cases": [
+        {
+          "case": "list accepted &workStatus=1",
+          "passed": true
+        },
+        {
+          "case": "pending filter returns only own-class pending row",
+          "passed": true
+        },
+        {
+          "case": "list provides fields consumed by grading and preview",
+          "passed": true
+        },
+        {
+          "case": "list accepted &workStatus=2",
+          "passed": true
+        },
+        {
+          "case": "graded filter returns own-class graded row",
+          "passed": true
+        },
+        {
+          "case": "list accepted ",
+          "passed": true
+        },
+        {
+          "case": "all states retains class scope and descending order",
+          "passed": true
+        },
+        {
+          "case": "list accepted &departId=fixture_class_b",
+          "passed": true
+        },
+        {
+          "case": "cross-class explicit filter cannot widen scope",
+          "passed": true
+        },
+        {
+          "case": "list accepted &workScene=additional",
+          "passed": true
+        },
+        {
+          "case": "scene filter applies",
+          "passed": true
+        },
+        {
+          "case": "list accepted &workType=4",
+          "passed": true
+        },
+        {
+          "case": "type filter applies",
+          "passed": true
+        },
+        {
+          "case": "fresh work read for grading",
+          "passed": true
+        },
+        {
+          "case": "initial feedback is genuinely empty",
+          "passed": true
+        },
+        {
+          "case": "student discussion accepted",
+          "passed": true
+        },
+        {
+          "case": "minimal grading payload accepted with zero",
+          "passed": true
+        },
+        {
+          "case": "student reads saved zero",
+          "passed": true
+        },
+        {
+          "case": "discussion rows preserved",
+          "passed": true
+        },
+        {
+          "case": "minimal save preserves owner, file and class",
+          "passed": true
+        },
+        {
+          "case": "list accepted &workStatus=1",
+          "passed": true
+        },
+        {
+          "case": "graded row leaves pending queue",
+          "passed": true
+        },
+        {
+          "case": "unchanged feedback omitted from metadata save",
+          "passed": true
+        },
+        {
+          "case": "grading denied student_a",
+          "passed": true
+        },
+        {
+          "case": "denied save preserves work and feedback student_a",
+          "passed": true
+        },
+        {
+          "case": "grading denied teacher_b",
+          "passed": true
+        },
+        {
+          "case": "denied save preserves work and feedback teacher_b",
+          "passed": true
+        },
+        {
+          "case": "grading denied None",
+          "passed": true
+        },
+        {
+          "case": "denied save preserves work and feedback None",
+          "passed": true
+        },
+        {
+          "case": "all 68 non-audit tables restored",
+          "passed": true
+        },
+        {
+          "case": "attachment bytes unchanged",
+          "passed": true
+        }
+      ],
+      "passed": 31,
+      "total": 31,
+      "jar_sha256": "d89ef0667d90854195792b30d2af4b469738bb86c65498bd7c68ce350aeb3ac8",
+      "scope": "Actual synthetic CLI authentication, teacher UI endpoint/parameter/payload contract, MySQL readback; not authenticated browser or editor engine acceptance."
+    }
+  },
+  "anonymous_browser": {
+    "scope": "Actual built frontend; anonymous synthetic backend; no login or CAPTCHA input",
+    "checks": [
+      {
+        "name": "home 1440",
+        "passed": true,
+        "detail": {
+          "path": "/index",
+          "width": 1440,
+          "scroll": 1432
+        }
+      },
+      {
+        "name": "home 768",
+        "passed": true,
+        "detail": {
+          "path": "/index",
+          "width": 768,
+          "scroll": 760
+        }
+      },
+      {
+        "name": "home 390",
+        "passed": true,
+        "detail": {
+          "path": "/index",
+          "width": 390,
+          "scroll": 382
+        }
+      },
+      {
+        "name": "bundled school images decoded",
+        "passed": true,
+        "detail": [
+          {
+            "src": "/img/wordmark.271c59bd.png",
+            "naturalWidth": 265,
+            "complete": true
+          },
+          {
+            "src": "/img/campus.7acad0db.jpg",
+            "naturalWidth": 499,
+            "complete": true
+          }
+        ]
+      },
+      {
+        "name": "official links open safely",
+        "passed": true,
+        "detail": [
+          {
+            "href": "https://www.tiangong.edu.cn/",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          },
+          {
+            "href": "https://news.tiangong.edu.cn/2022/0617/c7646a77757/page.htm",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          },
+          {
+            "href": "https://www.tiangong.edu.cn/",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          },
+          {
+            "href": "https://lib.tiangong.edu.cn/",
+            "target": "_blank",
+            "rel": "noopener noreferrer"
+          }
+        ]
+      },
+      {
+        "name": "mobile menu expands",
+        "passed": true
+      },
+      {
+        "name": "navigation collapses on route",
+        "passed": true
+      },
+      {
+        "name": "courses 1440",
+        "passed": true,
+        "detail": {
+          "path": "/courseList",
+          "width": 1440,
+          "scroll": 1432
+        }
+      },
+      {
+        "name": "courses 768",
+        "passed": true,
+        "detail": {
+          "path": "/courseList",
+          "width": 768,
+          "scroll": 760
+        }
+      },
+      {
+        "name": "courses 390",
+        "passed": true,
+        "detail": {
+          "path": "/courseList",
+          "width": 390,
+          "scroll": 382
+        }
+      },
+      {
+        "name": "course dialog uses university primary",
+        "passed": true,
+        "detail": "rgb(116, 37, 106)"
+      },
+      {
+        "name": "course entry preserves login destination",
+        "passed": true,
+        "detail": "http://127.0.0.1:18112/user/login?redirect=%2Fteaching%2FmineCourse%2FcourseUnitCard%3Fid%3Dfixture_course_a"
+      },
+      {
+        "name": "login 1440",
+        "passed": true,
+        "detail": {
+          "path": "/user/login",
+          "width": 1440,
+          "scroll": 1432
+        }
+      },
+      {
+        "name": "login 768",
+        "passed": true,
+        "detail": {
+          "path": "/user/login",
+          "width": 768,
+          "scroll": 760
+        }
+      },
+      {
+        "name": "login 390",
+        "passed": true,
+        "detail": {
+          "path": "/user/login",
+          "width": 390,
+          "scroll": 382
+        }
+      },
+      {
+        "name": "login fields empty and captcha image loads",
+        "passed": true,
+        "detail": {
+          "inputs": [
+            {
+              "name": "username",
+              "value": ""
+            },
+            {
+              "name": "password",
+              "value": ""
+            },
+            {
+              "name": "captcha",
+              "value": ""
+            }
+          ],
+          "captcha": 105
+        }
+      }
+    ]
+  },
+  "http_verification": {
+    "http_checks": [
+      {
+        "path": "index.html",
+        "http": 200,
+        "sha256": "393f7e7df265b3e82e23159f8a1b90ecd3a8c659685642b62bbbb0ab8ee9f896"
+      },
+      {
+        "path": "js/polyfill.js",
+        "http": 200,
+        "sha256": "75ee1eaf39c8a336d4e1a716608129e81b1fbc391dced1bd2fad2aef1d20cb56"
+      },
+      {
+        "path": "js/common.js",
+        "http": 200,
+        "sha256": "332fbf27c8626a23db454737fac678a1e13013bcde9c58ebaf2835212c302a6d"
+      },
+      {
+        "path": "js/chunk-vendors.a2dd1501.js",
+        "http": 200,
+        "sha256": "28a640ed157e30ff5d4527e31505e771bf9fa5d3bf4e1dff04173c89d7b2578b"
+      },
+      {
+        "path": "js/app.282d8ec8.js",
+        "http": 200,
+        "sha256": "a85c19a19146f4d86d9ae95481dadc6e6e45acc94843aeed34b29775f9540161"
+      },
+      {
+        "path": "js/chunk-5f155e69.dffea0f1.js",
+        "http": 200,
+        "sha256": "e9a0e1d2030efd1ad65474c2cbfbe7313805d25f03f3e5b211aa4fdf45d0cc40"
+      },
+      {
+        "path": "js/chunk-3d70b6f7.02496d20.js",
+        "http": 200,
+        "sha256": "b249d464ca1427b04f4b16be10d5386c9a39072ab75130d50b5976644206b70e"
+      }
+    ],
+    "verification_runtime_ports_closed": {
+      "13336": true,
+      "16409": true,
+      "18131": true,
+      "18132": true
+    },
+    "teacher_preview_url": "http://127.0.0.1:18133/"
+  },
+  "preservation": {
+    "non_audit_tables": 68,
+    "unchanged": true,
+    "attachments_unchanged": true,
+    "original_source": {
+      "files": 5731,
+      "unchanged": true
+    }
+  },
+  "backend_health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "limits": [
+    "Teacher component browser uses synthetic HTTP, dictionary/recipient/old-table and iframe substitutes.",
+    "Actual authenticated application shell, editor workflow, human visual acceptance and production remain unverified.",
+    "Goal remains active; no remote merge or production deployment."
+  ],
+  "preview": {
+    "pid": 88527,
+    "port": 18133,
+    "script": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/teacher-workbench/web/tests/teacher-preview/server.py",
+    "source_commit": "852221a",
+    "synthetic": true,
+    "retained_for_user_preview": true
+  }
+}

@@ -1,0 +1,62 @@
+test_backend_disconnect_closes_client (test_frontend_proxy.FrontendProxyTest.test_backend_disconnect_closes_client) ... GET api
+ok
+test_client_disconnect_closes_upstream (test_frontend_proxy.FrontendProxyTest.test_client_disconnect_closes_upstream) ... GET api
+ok
+test_error_responses_keep_local_csp (test_frontend_proxy.FrontendProxyTest.test_error_responses_keep_local_csp) ... GET static
+GET static
+GET api
+GET api
+ok
+test_foreign_origin_is_rejected_before_backend (test_frontend_proxy.FrontendProxyTest.test_foreign_origin_is_rejected_before_backend) ... GET api
+GET api
+ok
+test_fragmented_http_body_is_not_truncated (test_frontend_proxy.FrontendProxyTest.test_fragmented_http_body_is_not_truncated) ... POST api
+ok
+test_handshake_and_early_frames_preserved (test_frontend_proxy.FrontendProxyTest.test_handshake_and_early_frames_preserved) ... GET api
+ok
+test_idle_connection_is_reaped (test_frontend_proxy.FrontendProxyTest.test_idle_connection_is_reaped) ... GET api
+ok
+test_invalid_upgrade_requests_do_not_reach_backend (test_frontend_proxy.FrontendProxyTest.test_invalid_upgrade_requests_do_not_reach_backend) ... GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+POST api
+POST api
+GET api
+GET api
+ok
+test_large_stream_and_concurrent_connection (test_frontend_proxy.FrontendProxyTest.test_large_stream_and_concurrent_connection) ... GET api
+GET api
+ok
+test_missing_backend_fails_and_recovers (test_frontend_proxy.FrontendProxyTest.test_missing_backend_fails_and_recovers) ... GET api
+GET api
+GET api
+ok
+test_nonbrowser_client_without_origin_is_supported (test_frontend_proxy.FrontendProxyTest.test_nonbrowser_client_without_origin_is_supported) ... GET api
+ok
+test_ordinary_http_and_static_routes_keep_contract (test_frontend_proxy.FrontendProxyTest.test_ordinary_http_and_static_routes_keep_contract) ... GET api
+GET static
+GET static
+ok
+test_upstream_refusal_and_invalid_handshakes (test_frontend_proxy.FrontendProxyTest.test_upstream_refusal_and_invalid_handshakes) ... GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 8.983s
+
+OK

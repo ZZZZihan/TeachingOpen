@@ -1,0 +1,93 @@
+{
+  "format": 1,
+  "kind": "safe-private-source-fixture-test-evidence",
+  "recorded_utc": "2026-10-03T06:16:28.523577+00:00",
+  "python_version": "3.14.7",
+  "source_head": "3fb70f1919289d777ccffe936f3a7a8b889a749b",
+  "source_files_sha256": {
+    "api/dev/production-fixture-schema.json": "641617eaff6f6df5d2cdb9e0d4227f29260b8eb650984453f0d0a8ea9c4fc796",
+    "api/dev/production-fixture.py": "104c31b55bcd36b615e429d50420ce11600148c128438bc6a836fb7f069a31eb",
+    "api/dev/production_fixture.py": "c82af6eeb1869b3ce264a13559287bbded6a12aa599fb93700a63cc8ff66611c",
+    "api/dev/run-production-fixture.py": "c0f5248c43254a966f5ee2ae3c8aec8221dabdb13cfd42decd4e31dfa583f60c",
+    "api/dev/snapshot_backend.py": "604926b7437430bf71440148913c61c5667e269fd4fc47076c8d6be07396bce2",
+    "api/dev/test_production_fixture.py": "a60d41e79783efce628a124a3d1bd8efc70835225814652fe80d0e1ed17bdba7"
+  },
+  "saved_default_runs": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "api/dev",
+        "-p",
+        "test_production_fixture.py",
+        "-v"
+      ],
+      "started_utc": "2026-10-03T06:16:27.058179+00:00",
+      "finished_utc": "2026-10-03T06:16:27.179803+00:00",
+      "wall_seconds": 0.12095,
+      "exit_code": 0,
+      "tests": 22,
+      "skipped": 1,
+      "log": "pure-tool-tests.log",
+      "log_sha256": "51c4ff1ce413ab16fc193528c8d71484a45655b0534f4e9ca3f4b75b8fc81776",
+      "dedicated_runtime_environment_variable": "unset explicitly",
+      "real_mysql_test_executed": false,
+      "passed": 21
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "api/dev",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "started_utc": "2026-10-03T06:16:27.179919+00:00",
+      "finished_utc": "2026-10-03T06:16:28.523506+00:00",
+      "wall_seconds": 1.343292,
+      "exit_code": 0,
+      "tests": 64,
+      "skipped": 1,
+      "log": "pure-dev-suite.log",
+      "log_sha256": "e61ecd111ccccb5a67393b4e5d280329d59df5ff59337fd86db39b42d94ca865",
+      "dedicated_runtime_environment_variable": "unset explicitly",
+      "real_mysql_test_executed": false,
+      "passed": 63
+    }
+  ],
+  "historical_real_mysql_run": {
+    "date_local": "2026-10-03",
+    "command_normalized": "TEACHING_SNAPSHOT_TEST_RUNTIME=<new-private-runtime> python3 -m unittest discover -s api/dev -p test_production_fixture.py -v",
+    "tests": 16,
+    "skipped": 0,
+    "exit_code": 0,
+    "unittest_reported_seconds": 12.145,
+    "raw_log_file_available": false,
+    "evidence_class": "execution record from conversation tool output; not a saved original log",
+    "conversation_tool_session_id": 96963,
+    "scope": "Before application startup: generated UTF-8 text and binary literals round-tripped through the dedicated MySQL; own probe table dropped; full baseline verified again.",
+    "not_reexecuted_for_this_evidence_pass": true,
+    "source_bytes_digest_at_run_available": false
+  },
+  "historical_full_suite_run": {
+    "tests": 64,
+    "skipped": 1,
+    "exit_code": 0,
+    "unittest_reported_seconds": 1.211,
+    "raw_log_file_available": false,
+    "conversation_tool_session_id": 5967
+  },
+  "boundaries": [
+    "No raw source SQL, account metadata, credentials, resource path list, preserved course text or original media names in this evidence pack.",
+    "The opt-in dedicated MySQL test remains skipped in both saved reruns.",
+    "No source runtime/database, production server or running application was modified by the evidence pass.",
+    "Historical execution record is not an original log, independent replay or user acceptance."
+  ]
+}

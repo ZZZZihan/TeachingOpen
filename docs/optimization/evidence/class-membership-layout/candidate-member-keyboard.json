@@ -1,0 +1,22 @@
+{
+  "actions": [
+    {
+      "left": 221.5,
+      "right": 265.5,
+      "text": "编辑"
+    },
+    {
+      "left": 269.5,
+      "right": 333.5,
+      "text": "更多"
+    }
+  ],
+  "body": 390,
+  "table": [
+    {
+      "client": 326,
+      "left": 595,
+      "scroll": 921
+    }
+  ]
+}

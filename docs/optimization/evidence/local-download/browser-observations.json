@@ -1,0 +1,36 @@
+{
+  "observed_utc": "2026-10-02T18:37:47.767202+00:00",
+  "jar_sha256": "b7715c0c4bdaeb6531e952d3240b80ff4b727743930d0a2213ceede3b66371a8",
+  "browser": "Codex In-app Browser",
+  "fixture_origin": "http://127.0.0.1:18113",
+  "cases": [
+    {
+      "case": "anonymous PNG/video/Range/HEAD/raw requests refused",
+      "passed": true,
+      "http": 401
+    },
+    {
+      "case": "owner cookie-only PNG decodes 320x180; MP4 metadata is 320x180/3s; Range gives 206/5 bytes; HEAD 200/0 bytes; raw 200/23 bytes",
+      "passed": true,
+      "screenshot": "browser-owner.png"
+    },
+    {
+      "case": "play button plays MP4 to time=3, duration=3, ended=true",
+      "passed": true,
+      "screenshot": "browser-owner.png"
+    },
+    {
+      "case": "other student PNG/video/Range/HEAD/raw refused",
+      "passed": true,
+      "http": 403,
+      "screenshot": "browser-foreign.png"
+    },
+    {
+      "case": "logout clears credential and media requests refused",
+      "passed": true,
+      "http": 401,
+      "screenshot": "browser-logout.png"
+    }
+  ],
+  "scope": "Self-check through actual browser UI against controlled synthetic media harness; not product login UI, CAPTCHA UI, editor, or human acceptance"
+}

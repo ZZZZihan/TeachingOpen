@@ -1,0 +1,232 @@
+{
+  "candidate_commit": "20e3c801e54f8daa99bc62e49b10a337e3ed8590",
+  "api_tree": "b05b354d41fe931f85c563a6fb770e802c520534",
+  "web_tree": "5cc4536c7647aed1458cb18bc20e92f0af88e924",
+  "production_source_and_pom_files": 1026,
+  "production_source_and_pom_match": true,
+  "frontend_source_unchanged": true,
+  "frontend_dist": {
+    "files": 4893,
+    "bytes": 211466267,
+    "manifest_sha256": "453a9f32aeb0f3d534146e790ae62ab49bae4c23405127c640cc6ce86e0d6065",
+    "equals_previous_manifest": true
+  },
+  "frontend_http": [
+    {
+      "port": 18112,
+      "matched_resources": 7,
+      "paths": [
+        "index.html",
+        "css/app.34569fa6.css",
+        "css/chunk-vendors.0626b6c1.css",
+        "js/app.8ceacb01.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/common.js",
+        "js/polyfill.js"
+      ],
+      "bytes_equal": true
+    },
+    {
+      "port": 18142,
+      "matched_resources": 7,
+      "paths": [
+        "index.html",
+        "css/app.34569fa6.css",
+        "css/chunk-vendors.0626b6c1.css",
+        "js/app.8ceacb01.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/common.js",
+        "js/polyfill.js"
+      ],
+      "bytes_equal": true
+    },
+    {
+      "port": 18150,
+      "matched_resources": 7,
+      "paths": [
+        "index.html",
+        "css/app.34569fa6.css",
+        "css/chunk-vendors.0626b6c1.css",
+        "js/app.8ceacb01.js",
+        "js/chunk-vendors.a2dd1501.js",
+        "js/common.js",
+        "js/polyfill.js"
+      ],
+      "bytes_equal": true
+    }
+  ],
+  "backend_health": [
+    {
+      "runtime": "course-role-runtime",
+      "port": 18111,
+      "pid": 71897,
+      "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+      "http_status": 200,
+      "health": "UP"
+    },
+    {
+      "runtime": "role-flow-1003",
+      "port": 18149,
+      "pid": 71980,
+      "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+      "http_status": 200,
+      "health": "UP"
+    },
+    {
+      "runtime": "prod-fixture-1003",
+      "port": 18141,
+      "pid": 72317,
+      "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+      "http_status": 200,
+      "health": "UP"
+    }
+  ],
+  "observed_utc": "2026-10-03T12:12:44.489040+00:00",
+  "pr": 55,
+  "pr_commit": "6235e7e2586a4ce914257faa11c7552bf628c04c",
+  "product_commit": "87cf40225057fb043ec76adc21d140eeae2079f0",
+  "backend_jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+  "backend_switch": [
+    {
+      "runtime": "course-role-runtime",
+      "previous_pid": 44139,
+      "old_jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "new_jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+      "healthy": true,
+      "new_pid": 71897,
+      "rollback_needed": false
+    },
+    {
+      "runtime": "role-flow-1003",
+      "previous_pid": 44219,
+      "old_jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "new_jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+      "healthy": true,
+      "new_pid": 71980,
+      "rollback_needed": false
+    },
+    {
+      "runtime": "prod-fixture-1003",
+      "previous_pid": 44512,
+      "old_jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "new_jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+      "healthy": true,
+      "new_pid": 72317,
+      "rollback_needed": false
+    }
+  ],
+  "candidate_dev_tests": {
+    "run": 114,
+    "passed": 113,
+    "skipped": 1,
+    "optional_skip": "MySQL production-fixture optional test",
+    "exit_code": 0,
+    "private_log_sha256": "df7d7cdc9836d0c1e33dda85907c2d37ff1c151ec24d4b9bf9664df0e968c534"
+  },
+  "candidate_auth": {
+    "observed_utc": "2026-10-03T12:10:57.444716+00:00",
+    "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+    "expected_legacy_500": false,
+    "cases": [
+      {
+        "case": "missing login credential",
+        "http_status": 401,
+        "passed": true
+      },
+      {
+        "case": "empty login credential",
+        "http_status": 401,
+        "passed": true
+      },
+      {
+        "case": "malformed login credential",
+        "http_status": 401,
+        "passed": true
+      },
+      {
+        "case": "anonymous public courses",
+        "http_status": 200,
+        "passed": true
+      },
+      {
+        "case": "preflight remains available",
+        "http_status": 200,
+        "passed": true
+      },
+      {
+        "case": "valid student credential",
+        "http_status": 200,
+        "passed": true
+      },
+      {
+        "case": "revoked login credential",
+        "http_status": 401,
+        "passed": true
+      }
+    ],
+    "passed": 7,
+    "total": 7,
+    "scope": "real local HTTP, CAPTCHA, login and logout; no role/asset permission acceptance"
+  },
+  "production_content": {
+    "observed_utc": "2026-10-03T12:10:56.318074+00:00",
+    "passed": 12,
+    "total": 12,
+    "successful": true,
+    "owned_process_verified": true,
+    "jar_sha256": "bca9e5c8f1aa78ab536901e92e2ae3d96433ad0eb4c7599bdaf12174c2c785af",
+    "changed_business_tables": []
+  },
+  "production_content_business_tables_checked": 7,
+  "production_content_private_report_sha256": "60a8e2bcbee4f53c552672ff2f70f49b0297925b3731574744596755ca5fac54",
+  "cleanup": {
+    "temporary_ports_stopped": {
+      "13367": true,
+      "16440": true,
+      "18167": true,
+      "18168": true
+    },
+    "debug_configuration_restored_exactly": true,
+    "data_and_failure_evidence_retained": true
+  },
+  "branch_verification": {
+    "specialist": {
+      "passed": 38,
+      "total": 38
+    },
+    "legacy_final_desired_behavior_comparison": {
+      "passed": 10,
+      "total": 38
+    },
+    "related_regressions": {
+      "passed": 249,
+      "total": 249
+    },
+    "dev_unittest": {
+      "passed": 42,
+      "total": 42
+    },
+    "java8_clean_package_exit_code": 0,
+    "surefire": "skipped",
+    "independent_review": "no blocker in scoped change; review limitations retained in PR55"
+  },
+  "limitations": [
+    "One extra current-user SQL per token validation; limited old/new benchmark has unequal warm-up history and cannot establish causal latency cost or capacity",
+    "Controlled late-cache injection, not a naturally reproduced race schedule",
+    "No cancellation of requests whose authentication completed before freeze",
+    "Shiro 1.13 remains an EOL interim on Java8",
+    "No authenticated three-role browser, human visual acceptance, production deployment or GitHub merge"
+  ],
+  "frontend_tests_and_browser_not_repeated": "PR53 frontend 389/389, build and earlier browser results remain historical. This backend-only candidate reuses byte-identical dist and rechecks HTTP assets and real-content API; no new browser claim.",
+  "original_source_worktree_untouched": true,
+  "historical_original_source_manifest_not_reverified": true,
+  "production_service_untouched": true,
+  "long_lived_previews_preserved": [
+    18112,
+    18142,
+    18150,
+    18133,
+    18137
+  ],
+  "other_task_18152_untouched": true
+}

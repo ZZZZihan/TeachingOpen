@@ -1,0 +1,12 @@
+{
+  "baseline_jar": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "first_login_changed_tables": [
+    "sys_log",
+    "sys_user"
+  ],
+  "org_code_after_login": "A99A01",
+  "seed_org_code_is_null": true,
+  "expected_metadata_initialization": true,
+  "warm_benchmark_passed": true,
+  "initial_failed_benchmark_retained": true
+}

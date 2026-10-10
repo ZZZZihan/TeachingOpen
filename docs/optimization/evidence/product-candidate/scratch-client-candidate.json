@@ -1,0 +1,88 @@
+{
+  "generated_utc": "2026-10-03T00:18:47.138321+00:00",
+  "source_commit": "8ca9e35f5ea8341c28daf1ef423dc0990be12412",
+  "previous_commit": "082813c47db020fdc02c6d30ba340457d00cef1a",
+  "pr": "https://github.com/ZZZZihan/TeachingOpen/pull/37",
+  "pr_head": "193b8bfb349e7b2aa40d51f145b54b07e48ca236",
+  "product_commit": "1370f9c29d167d3aa6ddef91784a0b66851603be",
+  "api_tree": "f877f1dc2e2cd28f68d34e455c5f458a004f3297",
+  "web_tree": "e1e7874798f80304f603cf1154482834d7985a0d",
+  "backend_restarted": false,
+  "backend_pid": 32858,
+  "frontend_pid": 46477,
+  "jar_sha256": "ba9a03697641afdb8ee1781ab20848e1865fdfa4ee4c1c1ac317156f7efcb72f",
+  "frontend_build_repeated": true,
+  "frontend_checks": 204,
+  "frontend_lint": {
+    "files": 3,
+    "errors": 0,
+    "warnings": 0
+  },
+  "existing_build_warnings": 6,
+  "dist_files": 4887,
+  "http_assets": {
+    "/index.html": "a5b1fba9890e1682bdcf8b866d7edbbf3aadaf712a408244cb99c9b87c6c148b",
+    "/scratch3/index.html": "31a3a7a0ff7c2cb9fe1c22067bd3b19ad26e293c26412ec985021908222c8111",
+    "/scratch3/player.html": "414e5988be63cbd507db2bb663373a7fe1ea31ee0ad880467f71c34665818ecd",
+    "/scratch3/cloud-client.js": "326db0d51748b5ba03499ce8b2da23a61aa82f6676e3280e8628fa2a22ed2e72",
+    "/scratch3/player-bridge.js": "ed90eba4ee089f2f73361964ecf36a6a641140ec2833822c3dd3406ec4ace3c4",
+    "/scratch3/player-layout.js": "778f3dc96356fe82b45216e8b0f047ee1dd7637403e35a13fb0bb3abe59f671c",
+    "/scratch3/editor-bridge.js": "4ea6d29110ba39b9ac1bb482852a850fc3ca78f3d84dd9e371294fe6bd91ec43",
+    "/scratch3/lib.min.js": "83a7bb1e001957303c4f609879d094886d1f4c51235161f3c9d9e2e2d28abf40"
+  },
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "real_client_checks": {
+    "passed": 15,
+    "total": 15
+  },
+  "real_http_checks": {
+    "passed": 13,
+    "total": 13
+  },
+  "real_checks_total": 28,
+  "previous_backend_114_checks_repeated": false,
+  "anonymous_browser": {
+    "origin": "http://127.0.0.1:18112",
+    "actual_engine": true,
+    "vm_value": "41",
+    "provider": true,
+    "phase": "readonly",
+    "viewport": [
+      1440,
+      900
+    ],
+    "document_width": 1440,
+    "scope": "Public player actual production dist; comprehensive anonymous editor/player behavior was exercised on identical Scratch files in PR37 preview.",
+    "known_error": "Existing blob Worker CSP block remains."
+  },
+  "authenticated_browser": false,
+  "data_preservation": {
+    "tables_checked": 69,
+    "changed_tables": [
+      "sys_log"
+    ],
+    "non_audit_equal": true,
+    "attachments_equal": true,
+    "audit_rows_before": 3098,
+    "audit_rows_after": 3108
+  },
+  "original_source_files": 5731,
+  "original_source_unchanged": true,
+  "remote_merged": false,
+  "production_changed": false,
+  "goal_status": "active",
+  "previous_dist_preserved": ".devspace/scratch-client-previous-dist",
+  "evidence_sha256": {
+    "scratch-client-tests.txt": "6928fe4e7764131095403d891e00eab266275e1d7f047319d066be6acd49c1f1",
+    "scratch-client-http.json": "26c64471da05c118f501adf010a518d4374f53dacfdd9272252866dcb2c43b5b",
+    "scratch-client-lint.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scratch-client-real.json": "c0bf26bcfd8e2630d14c301db6ec07d867669205244f0b331354ce427cb914e5",
+    "scratch-client-build.txt": "fd80afb64a663edfd0417d893f9e7ec01bf96c3b08bc331e812c37f35c5a0368",
+    "scratch-client-browser-cleanup.json": "0c026f495b35f4853d79bf75200231e0e4a4207bc2209db2065dfdc53f064c0f",
+    "scratch-client-browser.png": "01c7d9844a428c34f59db2b4a6912af2c5289b7d7d9c3b514391088b53b72910"
+  }
+}

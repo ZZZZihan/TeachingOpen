@@ -1,0 +1,13 @@
+{
+  "scope": "Actual member SFCs, DepartList parent and list mixin. Memory API; account peripherals, department edit/upload/course/permission panels substituted. Not authenticated E2E.",
+  "sha256": {
+    "src/views/system/modules/DeptUserInfo.vue": "edb9adba2a7e74ec900ef403356ab85173ba900242781fba0ef482e20221cfdc",
+    "src/views/system/modules/SelectUserModal.vue": "b1b39ce5557dc43f8ab619bb4c2202cdd73f4abd537510e5fe6c587d1ad7c8f1",
+    "src/views/system/modules/UserModal.vue": "fd2779130889aad87a617babdcd68b698095fca4c0c56cdc4b9ee58bf31362f5",
+    "src/views/system/modules/DeptRoleUserModal.vue": "5d7da557941c6dda75278bb2ab0fd6b57497c46a72bc7369fc593d88443058c9",
+    "src/views/system/DepartList.vue": "f9037dfe3b2fda3c83108439d0f753fcee5a0385b3d3a5e613dbaa98d293d1e0",
+    "src/mixins/JeecgListMixin.js": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+    "src/assets/less/common.less": "dda7d1e26e70d8cca0e6f4241e12623de3345d9bb2d11f57ca426b74888c95dd",
+    "vue.config.js": "7d439f519c15bc23d82f298c01e514531dcc106561ae32760937b66983d73c83"
+  }
+}

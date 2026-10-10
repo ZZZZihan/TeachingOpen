@@ -1,0 +1,43 @@
+{
+  "scope": "actual candidate JAR HTTP; one owned fixture account disabled via normal frozenBatch endpoint and restored; user cache untouched; no production",
+  "checks": [
+    {
+      "case": "credential is valid before temporary account disable",
+      "passed": true
+    },
+    {
+      "case": "normal account freeze endpoint updates database state",
+      "passed": true
+    },
+    {
+      "case": "disabled account rejects its previously valid credential",
+      "passed": false
+    },
+    {
+      "case": "normal account restore endpoint updates database state",
+      "passed": true
+    },
+    {
+      "case": "disabled account state is restored",
+      "passed": true
+    },
+    {
+      "case": "same credential works after account state restoration",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "case": "previously valid credential while fixture account disabled; cache untouched",
+      "fixture_disabled_in_database": true,
+      "http_status": 200,
+      "api_code": 0,
+      "api_success": true
+    }
+  ],
+  "observed_utc": "2026-10-03T11:05:16.687423+00:00",
+  "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "phase": "frozen",
+  "passed": 5,
+  "total": 6
+}

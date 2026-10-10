@@ -1,0 +1,15 @@
+127.0.0.1 - - [03/Oct/2026 15:52:50] "GET /python/player.html?lang=turtle&url=http%3A%2F%2F127.0.0.1%3A18154%2Ffixtures%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb HTTP/1.1" 200 -
+127.0.0.1 - - [03/Oct/2026 15:52:50] "GET /python/static/css/appPlayer.css HTTP/1.1" 200 -
+127.0.0.1 - - [03/Oct/2026 15:52:50] "GET /python/static/css/app.css HTTP/1.1" 200 -
+127.0.0.1 - - [03/Oct/2026 15:52:50] "GET /python/output.css HTTP/1.1" 200 -
+127.0.0.1 - - [03/Oct/2026 15:52:50] "GET /python/output.js HTTP/1.1" 200 -
+127.0.0.1 - - [03/Oct/2026 15:52:50] "GET /python/static/js/vendor.js HTTP/1.1" 200 -
+127.0.0.1 - - [03/Oct/2026 15:52:50] "GET /python/static/js/manifest.js HTTP/1.1" 200 -
+127.0.0.1 - - [03/Oct/2026 15:52:50] "GET /python/static/js/appPlayer.js HTTP/1.1" 200 -
+127.0.0.1 - - [03/Oct/2026 15:52:50] "GET /python/static/js/app.js HTTP/1.1" 200 -
+127.0.0.1 - - [03/Oct/2026 15:52:50] code 404, message File not found
+127.0.0.1 - - [03/Oct/2026 15:52:50] "GET /python/http%3A%2F%2F127.0.0.1%3A18154%2Ffixtures%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb HTTP/1.1" 404 -
+127.0.0.1 - - [03/Oct/2026 15:52:50] code 404, message File not found
+127.0.0.1 - - [03/Oct/2026 15:52:50] "GET /python/http%3A%2F%2F127.0.0.1%3A18154%2Ffixtures%2Fseed.py%3Frevision%3D1%26label%3Da%2Bb HTTP/1.1" 404 -
+127.0.0.1 - - [03/Oct/2026 15:52:50] code 404, message File not found
+127.0.0.1 - - [03/Oct/2026 15:52:50] "GET /favicon.ico HTTP/1.1" 404 -

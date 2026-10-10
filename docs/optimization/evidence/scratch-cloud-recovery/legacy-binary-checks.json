@@ -1,0 +1,13 @@
+{
+  "legacy_format1_restored_by_new_tool": true,
+  "database_tables": 69,
+  "all_database_and_attachment_digests_equal": true,
+  "legacy_cloud_missing_explicit": true,
+  "legacy_redis_empty": true,
+  "actual_redis_binary_roundtrip": true,
+  "fields": 4,
+  "binary_nul_invalid_utf8_unicode_newline_empty_preserved": true,
+  "persistent_ttl": true,
+  "own_probe_key_removed": true,
+  "java_semantics_for_binary_claimed": false
+}

@@ -1,0 +1,11 @@
+{
+  "jar_sha256": "f6bf4480baa8bef02e9162f3f0aeeb570c28b421187023559043d067cbaab93e",
+  "expected": "up",
+  "port": 18093,
+  "profile": "dev,localtest",
+  "justauth_enabled": false,
+  "healthy": true,
+  "public_courses": true,
+  "probe_process_stopped": true,
+  "passed": true
+}

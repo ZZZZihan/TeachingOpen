@@ -1,0 +1,132 @@
+{
+  "cases": [
+    {
+      "case": "list accepted &workStatus=1",
+      "passed": true
+    },
+    {
+      "case": "pending filter returns only own-class pending row",
+      "passed": true
+    },
+    {
+      "case": "list provides fields consumed by grading and preview",
+      "passed": true
+    },
+    {
+      "case": "list accepted &workStatus=2",
+      "passed": true
+    },
+    {
+      "case": "graded filter returns own-class graded row",
+      "passed": true
+    },
+    {
+      "case": "list accepted ",
+      "passed": true
+    },
+    {
+      "case": "all states retains class scope and descending order",
+      "passed": true
+    },
+    {
+      "case": "list accepted &departId=fixture_class_b",
+      "passed": true
+    },
+    {
+      "case": "cross-class explicit filter cannot widen scope",
+      "passed": true
+    },
+    {
+      "case": "list accepted &workScene=additional",
+      "passed": true
+    },
+    {
+      "case": "scene filter applies",
+      "passed": true
+    },
+    {
+      "case": "list accepted &workType=4",
+      "passed": true
+    },
+    {
+      "case": "type filter applies",
+      "passed": true
+    },
+    {
+      "case": "fresh work read for grading",
+      "passed": true
+    },
+    {
+      "case": "initial feedback is genuinely empty",
+      "passed": true
+    },
+    {
+      "case": "student discussion accepted",
+      "passed": true
+    },
+    {
+      "case": "minimal grading payload accepted with zero",
+      "passed": true
+    },
+    {
+      "case": "student reads saved zero",
+      "passed": true
+    },
+    {
+      "case": "discussion rows preserved",
+      "passed": true
+    },
+    {
+      "case": "minimal save preserves owner, file and class",
+      "passed": true
+    },
+    {
+      "case": "list accepted &workStatus=1",
+      "passed": true
+    },
+    {
+      "case": "graded row leaves pending queue",
+      "passed": true
+    },
+    {
+      "case": "unchanged feedback omitted from metadata save",
+      "passed": true
+    },
+    {
+      "case": "grading denied student_a",
+      "passed": true
+    },
+    {
+      "case": "denied save preserves work and feedback student_a",
+      "passed": true
+    },
+    {
+      "case": "grading denied teacher_b",
+      "passed": true
+    },
+    {
+      "case": "denied save preserves work and feedback teacher_b",
+      "passed": true
+    },
+    {
+      "case": "grading denied None",
+      "passed": true
+    },
+    {
+      "case": "denied save preserves work and feedback None",
+      "passed": true
+    },
+    {
+      "case": "all 68 non-audit tables restored",
+      "passed": true
+    },
+    {
+      "case": "attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 31,
+  "total": 31,
+  "jar_sha256": "d89ef0667d90854195792b30d2af4b469738bb86c65498bd7c68ce350aeb3ac8",
+  "scope": "Actual synthetic CLI authentication, teacher UI endpoint/parameter/payload contract, MySQL readback; not authenticated browser or editor engine acceptance."
+}

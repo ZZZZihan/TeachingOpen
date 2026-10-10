@@ -1,0 +1,45 @@
+{
+  "observed_utc": "2026-10-02T14:32:47.660041+00:00",
+  "jar_sha256": "12abc96ea90af54f5a92ce52f8fe1b118bfa6c451939682e3589ccc040b6ad55",
+  "expected_legacy_500": true,
+  "cases": [
+    {
+      "case": "missing login credential",
+      "http_status": 500,
+      "passed": true
+    },
+    {
+      "case": "empty login credential",
+      "http_status": 500,
+      "passed": true
+    },
+    {
+      "case": "malformed login credential",
+      "http_status": 500,
+      "passed": true
+    },
+    {
+      "case": "anonymous public courses",
+      "http_status": 200,
+      "passed": true
+    },
+    {
+      "case": "preflight remains available",
+      "http_status": 200,
+      "passed": true
+    },
+    {
+      "case": "valid student credential",
+      "http_status": 200,
+      "passed": true
+    },
+    {
+      "case": "revoked login credential",
+      "http_status": 500,
+      "passed": true
+    }
+  ],
+  "passed": 7,
+  "total": 7,
+  "scope": "real local HTTP, CAPTCHA, login and logout; no role/asset permission acceptance"
+}

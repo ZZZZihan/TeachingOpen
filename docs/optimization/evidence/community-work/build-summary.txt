@@ -1,0 +1,13 @@
+[INFO] Tests are skipped.
+[INFO] Tests are skipped.
+[INFO] Reactor Summary for jeecg-boot-parent 2.8.0:
+[INFO] jeecg-boot-parent .................................. SUCCESS [  0.161 s]
+[INFO] jeecg-boot-base-common ............................. SUCCESS [  2.939 s]
+[INFO] teaching-open ...................................... SUCCESS [  5.167 s]
+[INFO] BUILD SUCCESS
+[INFO] Total time:  8.401 s
+[INFO] Finished at: 2026-10-03T01:25:17+08:00
+
+Frontend: npm test exit 0, 35/35 controlled checks; npm run build exit 0.
+Dependencies reused from isolated course-discovery, with byte-identical package files.
+Java tests are skipped by parent POM; no browser editor acceptance.

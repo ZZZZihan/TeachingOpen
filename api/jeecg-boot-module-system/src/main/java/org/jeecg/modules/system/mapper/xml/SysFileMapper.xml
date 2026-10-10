@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.jeecg.modules.system.mapper.SysFileMapper">
-
+    <select id="referenceCount" resultType="int">
+        SELECT IF(
+          EXISTS (SELECT 1 FROM teaching_work WHERE work_file=#{file.id} OR work_cover=#{file.id})
+          OR EXISTS (SELECT 1 FROM sys_file WHERE id != #{file.id} AND file_path=#{file.filePath} AND file_location=#{file.fileLocation})
+          OR EXISTS (
+            SELECT 1 FROM (
+              SELECT CONCAT_WS(',',course_icon,course_cover,course_map,course_desc) AS links FROM teaching_course
+              UNION ALL SELECT CONCAT_WS(',',unit_cover,course_video,course_case,course_ppt,course_work,course_work_answer,course_plan,unit_intro,media_content) FROM teaching_course_unit
+              UNION ALL SELECT CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc) FROM teaching_additional_work
+              UNION ALL SELECT h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id WHERE h.data_table='teaching_work'
+              UNION ALL SELECT avatar FROM sys_user
+              UNION ALL SELECT config_value FROM sys_config
+              UNION ALL SELECT news_content FROM teaching_news
+              UNION ALL SELECT CONCAT_WS(',',asset_data,md5_ext) FROM teaching_scratch_assets
+            ) resource_links
+            WHERE LOCATE(#{file.filePath}, links)>0 OR LOCATE(#{file.id}, links)>0
+          ), 1, 0)
+    </select>
+    <select id="hasCourseMediaTable" resultType="int">
+        SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name='teaching_course_media'
+    </select>
+    <select id="courseMediaReferenceCount" resultType="int">
+        SELECT COUNT(*) FROM teaching_course_media WHERE LOCATE(#{file.filePath},media_path)>0 OR LOCATE(#{file.id},media_path)>0
+    </select>
 </mapper>

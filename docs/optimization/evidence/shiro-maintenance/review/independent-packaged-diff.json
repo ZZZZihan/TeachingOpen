@@ -1,0 +1,64 @@
+{
+  "audit_kind": "independent read-only ZIP/hash inventory; no runtime tests",
+  "baseline_jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "final_jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+  "libraries": {
+    "before_count": 209,
+    "after_count": 209,
+    "removed": [
+      "BOOT-INF/lib/encoder-1.2.2.jar",
+      "BOOT-INF/lib/shiro-cache-1.7.0.jar",
+      "BOOT-INF/lib/shiro-config-core-1.7.0.jar",
+      "BOOT-INF/lib/shiro-config-ogdl-1.7.0.jar",
+      "BOOT-INF/lib/shiro-core-1.7.0.jar",
+      "BOOT-INF/lib/shiro-crypto-cipher-1.7.0.jar",
+      "BOOT-INF/lib/shiro-crypto-core-1.7.0.jar",
+      "BOOT-INF/lib/shiro-crypto-hash-1.7.0.jar",
+      "BOOT-INF/lib/shiro-event-1.7.0.jar",
+      "BOOT-INF/lib/shiro-lang-1.7.0.jar",
+      "BOOT-INF/lib/shiro-spring-1.7.0.jar",
+      "BOOT-INF/lib/shiro-spring-boot-starter-1.7.0.jar",
+      "BOOT-INF/lib/shiro-web-1.7.0.jar"
+    ],
+    "added": [
+      "BOOT-INF/lib/encoder-1.2.3.jar",
+      "BOOT-INF/lib/shiro-cache-1.13.0.jar",
+      "BOOT-INF/lib/shiro-config-core-1.13.0.jar",
+      "BOOT-INF/lib/shiro-config-ogdl-1.13.0.jar",
+      "BOOT-INF/lib/shiro-core-1.13.0.jar",
+      "BOOT-INF/lib/shiro-crypto-cipher-1.13.0.jar",
+      "BOOT-INF/lib/shiro-crypto-core-1.13.0.jar",
+      "BOOT-INF/lib/shiro-crypto-hash-1.13.0.jar",
+      "BOOT-INF/lib/shiro-event-1.13.0.jar",
+      "BOOT-INF/lib/shiro-lang-1.13.0.jar",
+      "BOOT-INF/lib/shiro-spring-1.13.0.jar",
+      "BOOT-INF/lib/shiro-spring-boot-starter-1.13.0.jar",
+      "BOOT-INF/lib/shiro-web-1.13.0.jar"
+    ],
+    "changed": [
+      "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar"
+    ],
+    "unchanged_count": 195
+  },
+  "application_classes_including_base_common": {
+    "before_count": 462,
+    "after_count": 462,
+    "removed": [],
+    "added": [],
+    "changed": [
+      "BOOT-INF/classes/org/jeecg/config/ShiroConfig.class"
+    ],
+    "unchanged_count": 461
+  },
+  "base_common_entries": {
+    "before_count": 111,
+    "after_count": 111,
+    "removed": [],
+    "added": [],
+    "changed": [],
+    "unchanged_count": 111
+  },
+  "candidate_app_class_majors": [
+    52
+  ]
+}

@@ -1,0 +1,55 @@
+- main:
+  - paragraph: 本机合成组件检查 · 实际 Vue / Ant Design 三个组件 · API 为内存替代 · 未登录平台
+  - heading "班级课程管理" [level=1]
+  - navigation:
+    - button "班级 A":
+      - generic: 班级 A
+    - button "班级 B":
+      - generic: 班级 B
+    - button "清空班级":
+      - generic: 清空班级
+    - button "5 秒后切换 B":
+      - generic: 5 秒后切换 B
+    - checkbox "慢响应"
+    - text: 慢响应
+  - heading "合成班级 B" [level=2]
+  - 'button "icon: plus 添加已有课程"':
+    - 'generic "icon: plus"':
+    - generic: 添加已有课程
+  - generic: 已选择 0 项 清空
+  - table:
+    - rowgroup:
+      - row "课程名 开课时间 操作":
+        - columnheader:
+          - checkbox
+        - columnheader "课程名":
+          - generic: 课程名
+        - columnheader "开课时间":
+          - generic: 开课时间
+        - columnheader "操作":
+          - generic: 操作
+    - rowgroup:
+      - row "合成 B 课程 2026-10-05 10:30:00 设置开课时间 删除":
+        - cell:
+          - checkbox
+        - cell "合成 B 课程"
+        - cell "2026-10-05 10:30:00"
+        - cell "设置开课时间 删除":
+          - text: 设置开课时间
+          - separator
+          - text: 删除
+          - separator
+  - list:
+    - listitem: 1-1 共1条
+    - listitem "Previous Page":
+      - 'generic "icon: left"':
+    - listitem "1":
+      - generic: "1"
+    - listitem "Next Page":
+      - 'generic "icon: right"':
+    - combobox:
+      - generic "10 / page"
+      - 'generic "icon: down"':
+  - generic "合成 API 请求记录"
+  - generic: "[ { \"method\": \"get\", \"url\": \"/teaching/teachingCourseDept/list\", \"data\": { \"column\": \"teachingCourseDept.createTime\", \"order\": \"desc\", \"field\": \"id,,courseName,openTime,action\", \"pageNo\": 1, \"pageSize\": 10, \"deptId\": \"class-a\" } }, { \"method\": \"get\", \"url\": \"/teaching/teachingCourseDept/list\", \"data\": { \"column\": \"teachingCourseDept.createTime\", \"order\": \"desc\", \"field\": \"id,,courseName,openTime,action\", \"pageNo\": 1, \"pageSize\": 10, \"deptId\": \"class-b\" } }, { \"method\": \"put\", \"url\": \"/teaching/teachingCourseDept/edit\", \"data\": { \"id\": \"relation-b\", \"deptId\": \"class-b\", \"courseId\": \"course-b\", \"courseName\": \"合成 B 课程\", \"openTime\": \"2026-10-05 10:30:00\" } }, { \"method\": \"get\", \"url\": \"/teaching/teachingCourseDept/list\", \"data\": { \"column\": \"teachingCourseDept.createTime\", \"order\": \"desc\", \"field\": \"id,,courseName,openTime,action\", \"pageNo\": 1, \"pageSize\": 10, \"deptId\": \"class-b\" } } ]"
+- generic: ":"

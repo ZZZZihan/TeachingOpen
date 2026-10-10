@@ -1,0 +1,166 @@
+{
+  "scope": "Independent offline actual Vue/SFC, real Index/card and real JeecgListMixin; transport deferred stub. No DOM/AntD animation/browser/HTTP/DB/service.",
+  "runtime": {
+    "node": "v26.7.0",
+    "vue": "2.7.16",
+    "templateCompiler": "2.7.16"
+  },
+  "baseline": false,
+  "sourceRoot": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/student-work-loading",
+  "sourceSha256": {
+    "utils/util.js": "345808587091ffd401f4c1cd7ebac55655db9439b02d9eae5aa6cb56176da6db",
+    "mixins/JeecgListMixin.js": "a0ed6a57f8534efae911766c115d3b4cc8f7c22fdd183b317561cbe74aa001ce",
+    "utils/studentWorkFeedback.js": "85cce96b39e491db4044db1cc2a5b15744fbf807a31412649280e0a239cf8f12",
+    "components/teaching/StudentWorkFeedback.vue": "d833bb9ad51985c4445024f795baaa71e6542c3cb4f687a4ab800dbb9b8ecc5e",
+    "components/teaching/StudentWorkListState.vue": "e247415bd1ae15f2cdff7fd4b50b8ff911bd996e7158bb13d5ac160563af1ba4",
+    "utils/studentWorkList.js": "85fa1b51395cba4389c7a954f21db1f1ca467e623bed9d79b4c74a26d889bbe4",
+    "views/account/center/MineWorkList.vue": "9a96a37861171406bc8e732a30ac354fbc3e2bfb58ad7cc1b51033c16ffe2409",
+    "views/account/center/page/MineWorks.vue": "4e37de887be41a8a7ed2d25bd0c24c951d9f8591456a37eac76e21bac88ae176",
+    "views/account/center/page/index.js": "10bc81f202a8c2010b1839943edfd14823874875f4db9b3295d36f402cba6545",
+    "views/account/center/Index.vue": "97f1ecd5cf18326fd3a4e8ec2f00c48613b458f0573b73e7213d73e050eb4b1c"
+  },
+  "passed": 35,
+  "total": 35,
+  "cases": [
+    {
+      "name": "table actual initial loading is distinct from successful empty and ordinary feedback",
+      "passed": true
+    },
+    {
+      "name": "table network rejection settles into safe error, native retry recovers",
+      "passed": true
+    },
+    {
+      "name": "table HTTP 500 rejection settles into safe error, native retry recovers",
+      "passed": true
+    },
+    {
+      "name": "table timeout rejection settles into safe error, native retry recovers",
+      "passed": true
+    },
+    {
+      "name": "table business false settles into safe error, native retry recovers",
+      "passed": true
+    },
+    {
+      "name": "table business code510 settles into safe error, native retry recovers",
+      "passed": true
+    },
+    {
+      "name": "table malformed resolved bodies settle as error and remain retryable",
+      "passed": true
+    },
+    {
+      "name": "table refresh clears old rows and selections before pending, error never looks successful-empty",
+      "passed": true
+    },
+    {
+      "name": "table late old success cannot overwrite new success or status",
+      "passed": true
+    },
+    {
+      "name": "table old success/finally cannot settle the newer pending request",
+      "passed": true
+    },
+    {
+      "name": "table late old failure cannot overwrite new success or status",
+      "passed": true
+    },
+    {
+      "name": "table old failure/finally cannot settle the newer pending request",
+      "passed": true
+    },
+    {
+      "name": "table late old success cannot swallow the newer error",
+      "passed": true
+    },
+    {
+      "name": "table destroyed pending success cannot write back or send another load",
+      "passed": true
+    },
+    {
+      "name": "table destroyed pending failure cannot write back or send another load",
+      "passed": true
+    },
+    {
+      "name": "card actual initial loading is distinct from successful empty and ordinary feedback",
+      "passed": true
+    },
+    {
+      "name": "card network rejection settles into safe error, native retry recovers",
+      "passed": true
+    },
+    {
+      "name": "card HTTP 500 rejection settles into safe error, native retry recovers",
+      "passed": true
+    },
+    {
+      "name": "card timeout rejection settles into safe error, native retry recovers",
+      "passed": true
+    },
+    {
+      "name": "card business false settles into safe error, native retry recovers",
+      "passed": true
+    },
+    {
+      "name": "card business code510 settles into safe error, native retry recovers",
+      "passed": true
+    },
+    {
+      "name": "card malformed resolved bodies settle as error and remain retryable",
+      "passed": true
+    },
+    {
+      "name": "card refresh clears old rows and selections before pending, error never looks successful-empty",
+      "passed": true
+    },
+    {
+      "name": "card late old success cannot overwrite new success or status",
+      "passed": true
+    },
+    {
+      "name": "card old success/finally cannot settle the newer pending request",
+      "passed": true
+    },
+    {
+      "name": "card late old failure cannot overwrite new success or status",
+      "passed": true
+    },
+    {
+      "name": "card old failure/finally cannot settle the newer pending request",
+      "passed": true
+    },
+    {
+      "name": "card late old success cannot swallow the newer error",
+      "passed": true
+    },
+    {
+      "name": "card destroyed pending success cannot write back or send another load",
+      "passed": true
+    },
+    {
+      "name": "card destroyed pending failure cannot write back or send another load",
+      "passed": true
+    },
+    {
+      "name": "table native retry preserves failed query/page snapshot despite unsubmitted input edits",
+      "passed": true
+    },
+    {
+      "name": "table failed params are insulated from transport object mutation",
+      "passed": true
+    },
+    {
+      "name": "table successful empty page with positive total retains a pagination recovery path",
+      "passed": true
+    },
+    {
+      "name": "table list status is isolated from the unchanged mixin loading flag",
+      "passed": true
+    },
+    {
+      "name": "actual table vnode survives page-change loading for the AntD deferred body callback",
+      "passed": true
+    }
+  ]
+}

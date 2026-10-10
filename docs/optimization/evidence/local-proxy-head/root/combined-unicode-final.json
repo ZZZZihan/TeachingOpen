@@ -1,0 +1,3591 @@
+{
+  "observed_utc": "2026-10-03T12:50:36.837908+00:00",
+  "label": "candidate",
+  "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "script_sha256": "3bac3af26370e5313c256b6d16813889a38daebaf683a591d8159e4382657f25",
+  "scope": "Actual loopback HTTP and database with five task-owned synthetic CLI accounts; legitimate multipart Unicode biz/bizPath uploads; full-row/schema and attachment restoration. No browser, production, playable video, capacity or manual acceptance claim.",
+  "expected_behavior_identical_before_after": true,
+  "passed": 183,
+  "total": 186,
+  "cases": [
+    {
+      "case": "synthetic login issues media cookie admin",
+      "passed": true
+    },
+    {
+      "case": "synthetic login issues media cookie teacher_a",
+      "passed": true
+    },
+    {
+      "case": "synthetic login issues media cookie teacher_b",
+      "passed": true
+    },
+    {
+      "case": "synthetic login issues media cookie student_a",
+      "passed": true
+    },
+    {
+      "case": "synthetic login issues media cookie student_b",
+      "passed": true
+    },
+    {
+      "case": "public Chinese course cover GET",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E8%AF%BE%E7%A8%8B%E5%B0%81%E9%9D%A2.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "public Chinese course cover HEAD",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "http_status": 200,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E8%AF%BE%E7%A8%8B%E5%B0%81%E9%9D%A2.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "public Chinese course cover Range",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E8%AF%BE%E7%A8%8B%E5%B0%81%E9%9D%A2.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "same-origin proxy Chinese public cover GET",
+      "passed": true,
+      "expected_status": 200,
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E8%AF%BE%E7%A8%8B%E5%B0%81%E9%9D%A2.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "same-origin proxy Chinese public cover HEAD",
+      "passed": true,
+      "expected_status": 200,
+      "http_status": 200,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E8%AF%BE%E7%A8%8B%E5%B0%81%E9%9D%A2.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "same-origin proxy Chinese public cover GET Range",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E8%AF%BE%E7%A8%8B%E5%B0%81%E9%9D%A2.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "private Chinese work student_a GET",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "private Chinese work student_a HEAD",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "http_status": 200,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "private Chinese work student_a Range",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "private Chinese work teacher_a GET",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "private Chinese work teacher_a HEAD",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "http_status": 200,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "private Chinese work teacher_a Range",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "private Chinese work admin GET",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "private Chinese work admin HEAD",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "http_status": 200,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "private Chinese work admin Range",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "private Chinese work denied None GET",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "private Chinese work denied None HEAD",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "private Chinese work Range denied None",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "private Chinese work denied student_b GET",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "private Chinese work denied student_b HEAD",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "private Chinese work Range denied student_b",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "private Chinese work denied teacher_b GET",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "private Chinese work denied teacher_b HEAD",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "private Chinese work Range denied teacher_b",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Chinese unit video permitted student_a",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%B8%AD%E6%96%87%E8%A7%86%E9%A2%91.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Chinese unit video Range student_a",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%B8%AD%E6%96%87%E8%A7%86%E9%A2%91.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Chinese unit video permitted teacher_a",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%B8%AD%E6%96%87%E8%A7%86%E9%A2%91.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Chinese unit video Range teacher_a",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%B8%AD%E6%96%87%E8%A7%86%E9%A2%91.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Chinese unit video permitted admin",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%B8%AD%E6%96%87%E8%A7%86%E9%A2%91.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Chinese unit video Range admin",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%B8%AD%E6%96%87%E8%A7%86%E9%A2%91.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Chinese unit video denied None",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Chinese unit video HEAD denied None",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Chinese unit video denied student_b",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Chinese unit video HEAD denied student_b",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Chinese unit video denied teacher_b",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Chinese unit video HEAD denied teacher_b",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Chinese unit rich image permitted student_a",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "ea7ecf1c070827b7164e13050f172fb94f045e041877ccf621f9d5460090cd36",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "ea7ecf1c070827b7164e13050f172fb94f045e041877ccf621f9d5460090cd36",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E5%AF%8C%E6%96%87%E6%9C%AC%E5%9B%BE%E7%89%87.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Chinese unit rich image Range student_a",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E5%AF%8C%E6%96%87%E6%9C%AC%E5%9B%BE%E7%89%87.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Chinese unit rich image permitted teacher_a",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "ea7ecf1c070827b7164e13050f172fb94f045e041877ccf621f9d5460090cd36",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "ea7ecf1c070827b7164e13050f172fb94f045e041877ccf621f9d5460090cd36",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E5%AF%8C%E6%96%87%E6%9C%AC%E5%9B%BE%E7%89%87.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Chinese unit rich image Range teacher_a",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E5%AF%8C%E6%96%87%E6%9C%AC%E5%9B%BE%E7%89%87.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Chinese unit rich image permitted admin",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "ea7ecf1c070827b7164e13050f172fb94f045e041877ccf621f9d5460090cd36",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "ea7ecf1c070827b7164e13050f172fb94f045e041877ccf621f9d5460090cd36",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E5%AF%8C%E6%96%87%E6%9C%AC%E5%9B%BE%E7%89%87.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Chinese unit rich image Range admin",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E5%AF%8C%E6%96%87%E6%9C%AC%E5%9B%BE%E7%89%87.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Chinese unit rich image denied None",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Chinese unit rich image HEAD denied None",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Chinese unit rich image denied student_b",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Chinese unit rich image HEAD denied student_b",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Chinese unit rich image denied teacher_b",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Chinese unit rich image HEAD denied teacher_b",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "hidden Chinese unit video denied enrolled student",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "hidden Chinese unit video retained for class teacher",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%B8%AD%E6%96%87%E8%A7%86%E9%A2%91.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "deleted Chinese unit image denied enrolled student",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "actual Unicode biz multipart succeeds",
+      "passed": true,
+      "expected_status": 200,
+      "business_success": true,
+      "http_status": 200,
+      "body_bytes": 150,
+      "body_sha256": "05fd8cee6b92649c2db8996a50a283ae571d6f5689c605d4428e5fc140ab3ff4",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "actual Unicode biz upload bytes and ownership recorded",
+      "passed": true,
+      "matching_metadata_rows": 1
+    },
+    {
+      "case": "actual Unicode biz uploaded object GET",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''19c81b47e0964ea2a7e5beb2fa7f8f45.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "actual Unicode biz uploaded object HEAD",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "http_status": 200,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''19c81b47e0964ea2a7e5beb2fa7f8f45.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "actual Unicode biz uploaded object Range",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''19c81b47e0964ea2a7e5beb2fa7f8f45.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "actual Unicode biz work readable by class teacher",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''19c81b47e0964ea2a7e5beb2fa7f8f45.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "actual Unicode biz uploaded object cross-class denied",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "actual Unicode biz uploaded object anonymous denied",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "actual Unicode bizPath multipart succeeds",
+      "passed": true,
+      "expected_status": 200,
+      "business_success": true,
+      "http_status": 200,
+      "body_bytes": 160,
+      "body_sha256": "aefa34af68c611d36f3dc61ed27b2adb60d37942b19f685df168f2997f46dc76",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "actual Unicode bizPath upload bytes and ownership recorded",
+      "passed": true,
+      "matching_metadata_rows": 1
+    },
+    {
+      "case": "actual Unicode bizPath uploaded object GET",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''fc3beaca4b1d489ab997695ca74defe1.%E4%B8%AD%E6%96%87.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "actual Unicode bizPath uploaded object HEAD",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "http_status": 200,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''fc3beaca4b1d489ab997695ca74defe1.%E4%B8%AD%E6%96%87.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "actual Unicode bizPath uploaded object Range",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''fc3beaca4b1d489ab997695ca74defe1.%E4%B8%AD%E6%96%87.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "actual Unicode bizPath work readable by class teacher",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''fc3beaca4b1d489ab997695ca74defe1.%E4%B8%AD%E6%96%87.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "actual Unicode bizPath uploaded object cross-class denied",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "actual Unicode bizPath uploaded object anonymous denied",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "anonymous actual Unicode multipart upload denied",
+      "passed": true,
+      "expected_status": 401,
+      "business_success": false,
+      "http_status": 401,
+      "body_bytes": 70,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "content-length": "70"
+      }
+    },
+    {
+      "case": "anonymous Unicode upload writes no business rows or bytes",
+      "passed": true
+    },
+    {
+      "case": "encoded local reference preserves exact bytes 中文根.png",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%B8%AD%E6%96%87%E6%A0%B9.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "encoded local reference preserves exact bytes space name.png",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''space%20name.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "encoded local reference preserves exact bytes plus+name.png",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''plus%2Bname.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "encoded local reference preserves exact bytes 50%name.png",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''50%25name.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "encoded local reference preserves exact bytes 课件.中文.png",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E8%AF%BE%E4%BB%B6.%E4%B8%AD%E6%96%87.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "encoded local reference preserves exact bytes 封面A.png",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "dde943c9ca69dfa77888bf7380f122834c5390738185c4e8d7f73646d0bdcbc6",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E5%B0%81%E9%9D%A2A.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "encoded local reference preserves exact bytes 封面Ａ.png",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E5%B0%81%E9%9D%A2%EF%BC%A1.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "ASCII private control remains readable by owner",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "ea7ecf1c070827b7164e13050f172fb94f045e041877ccf621f9d5460090cd36",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "ea7ecf1c070827b7164e13050f172fb94f045e041877ccf621f9d5460090cd36",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''private.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "ASCII private control remains denied cross class",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "case-insensitive DB lookup cannot alias private storage key",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "encoded same-origin course cover reference remains public",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "2b09d9bf0d124c7a0243d5b9c6b9c1988fccbd47716e109eede18d5d9a27901f",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E8%AF%BE%E7%A8%8B%E5%B0%81%E9%9D%A2.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "external-origin Chinese reference grants no anonymous access",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "substring Chinese reference grants no anonymous access",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "deleted homepage Chinese cover no longer public",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "cookie-only Chinese private image returns actual PNG",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "cookie-only Chinese private HEAD",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "http_status": 200,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "cookie-only Chinese private Range",
+      "passed": true,
+      "expected_status": 206,
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "same-origin proxy cookie-only Chinese private PNG bytes",
+      "passed": true,
+      "expected_status": 200,
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "foreign token takes precedence over owner media cookie",
+      "passed": true,
+      "expected_status": [
+        403
+      ],
+      "http_status": 403,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "invalid token cannot fall back to owner media cookie",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 70,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "content-length": "70",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "supplied invalid token still rejects public Chinese cover",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 70,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "content-length": "70",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "frozen owner Chinese media denied GET",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 70,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "content-length": "70",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "frozen owner ASCII media denied GET",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 70,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "content-length": "70",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "frozen owner Chinese media denied HEAD",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "frozen owner ASCII media denied HEAD",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "frozen owner cookie Chinese media denied",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 70,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "content-length": "70",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "restored owner Chinese media readable",
+      "passed": true,
+      "expected_status": 200,
+      "expected_body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "Unicode symlink refuses bytes 外部链接.png",
+      "passed": true,
+      "expected_status": [
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Unicode symlink refuses bytes 内部链接.png",
+      "passed": true,
+      "expected_status": [
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Unicode intermediate symlink refuses bytes",
+      "passed": true,
+      "expected_status": [
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes literal semicolon GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 243,
+      "body_sha256": "2b48e89a142939f320e9bf2c8361a2a00476909245f4dad2c7862c5e4dfc080c",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes literal semicolon HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range literal semicolon",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 243,
+      "body_sha256": "2b48e89a142939f320e9bf2c8361a2a00476909245f4dad2c7862c5e4dfc080c",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded semicolon GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 245,
+      "body_sha256": "427848d7d58bc21582279654c9a9edbb1d15b683134ccaebd81ff7e6591b5952",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded semicolon HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range encoded semicolon",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 245,
+      "body_sha256": "427848d7d58bc21582279654c9a9edbb1d15b683134ccaebd81ff7e6591b5952",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded backslash GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 435,
+      "body_sha256": "141d0eee920f04eae74509434b49e8c473014166b90ec31e6f03596a782bf89f",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded backslash HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses Range encoded backslash",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 435,
+      "body_sha256": "141d0eee920f04eae74509434b49e8c473014166b90ec31e6f03596a782bf89f",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes literal backslash GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 435,
+      "body_sha256": "141d0eee920f04eae74509434b49e8c473014166b90ec31e6f03596a782bf89f",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes literal backslash HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses Range literal backslash",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 435,
+      "body_sha256": "141d0eee920f04eae74509434b49e8c473014166b90ec31e6f03596a782bf89f",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes dot segment GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 233,
+      "body_sha256": "1edef2d03d7c586dfa5c4ebd24ac492f350e729dc6c9bea0feb7834e4bfdf6c0",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes dot segment HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range dot segment",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 233,
+      "body_sha256": "1edef2d03d7c586dfa5c4ebd24ac492f350e729dc6c9bea0feb7834e4bfdf6c0",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes parent segment GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 271,
+      "body_sha256": "3d07743b7e7420e478936d32fef5eee8f483a69a208ec12e848f7e63eba95115",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes parent segment HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range parent segment",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 271,
+      "body_sha256": "3d07743b7e7420e478936d32fef5eee8f483a69a208ec12e848f7e63eba95115",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded dot segment GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 235,
+      "body_sha256": "ab0bdcc98442d3fbbc976b46fe1c34a5f4d56cf8c4fc05ff9a75d17606472a32",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded dot segment HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range encoded dot segment",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 235,
+      "body_sha256": "ab0bdcc98442d3fbbc976b46fe1c34a5f4d56cf8c4fc05ff9a75d17606472a32",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded parent segment GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 275,
+      "body_sha256": "f558b3c33761c023098d2ad6967455d34e707408c843922a44364fbccf68dfd5",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded parent segment HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range encoded parent segment",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 275,
+      "body_sha256": "f558b3c33761c023098d2ad6967455d34e707408c843922a44364fbccf68dfd5",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes double encoded parent GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 242,
+      "body_sha256": "98ced5e9017b4f41710bb3413c5553bf69361d5f6d455f8b102e25c5065018e3",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes double encoded parent HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range double encoded parent",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 242,
+      "body_sha256": "98ced5e9017b4f41710bb3413c5553bf69361d5f6d455f8b102e25c5065018e3",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded slash GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 435,
+      "body_sha256": "141d0eee920f04eae74509434b49e8c473014166b90ec31e6f03596a782bf89f",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded slash HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses Range encoded slash",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 435,
+      "body_sha256": "141d0eee920f04eae74509434b49e8c473014166b90ec31e6f03596a782bf89f",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes double encoded slash GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 239,
+      "body_sha256": "43cffde7eb0e4889e0aad77285a5ce0fe129a2a7d41bc495c3fa128aa07d1742",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes double encoded slash HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range double encoded slash",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 239,
+      "body_sha256": "43cffde7eb0e4889e0aad77285a5ce0fe129a2a7d41bc495c3fa128aa07d1742",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes double encoded Unicode basename GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes double encoded Unicode basename HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range double encoded Unicode basename",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes empty path segment GET",
+      "passed": false,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 200,
+      "body_bytes": 73,
+      "body_sha256": "90afed40f4d8882b1bbbaadd56b059168492ff1a3ac679d10b7a8d2bd6115672",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes empty path segment HEAD",
+      "passed": false,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 200,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-length": "73",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "malformed path refuses Range empty path segment",
+      "passed": false,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 206,
+      "body_bytes": 7,
+      "body_sha256": "b9fb1883c658e0011fd11adce4c5c415852627c70d076e876686d5fdc1d0583e",
+      "headers": {
+        "content-type": "image/png",
+        "content-disposition": "inline; filename*=UTF-8''%E4%BD%9C%E4%B8%9A%E9%A2%84%E8%A7%88.png",
+        "content-range": "bytes 2-8/73",
+        "content-length": "7",
+        "cache-control": "no-store",
+        "accept-ranges": "bytes",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded NUL GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 435,
+      "body_sha256": "141d0eee920f04eae74509434b49e8c473014166b90ec31e6f03596a782bf89f",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded NUL HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses Range encoded NUL",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 435,
+      "body_sha256": "141d0eee920f04eae74509434b49e8c473014166b90ec31e6f03596a782bf89f",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded LF GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 234,
+      "body_sha256": "7cde22a0cf83ef7aeb2b1659e2e222812c76ff22bf11dc7c9631325f4995f7be",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded LF HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range encoded LF",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 234,
+      "body_sha256": "7cde22a0cf83ef7aeb2b1659e2e222812c76ff22bf11dc7c9631325f4995f7be",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded DEL GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 234,
+      "body_sha256": "00126131f52a40081049add12ff1db23ae28271597808a5b12ce5945d7afd04f",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes encoded DEL HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range encoded DEL",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 234,
+      "body_sha256": "00126131f52a40081049add12ff1db23ae28271597808a5b12ce5945d7afd04f",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes Unicode C1 control GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 237,
+      "body_sha256": "91d9e18d04418392584f6bbf50b51420d9799f4482db767757cd0c947b8b4e26",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes Unicode C1 control HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range Unicode C1 control",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 237,
+      "body_sha256": "91d9e18d04418392584f6bbf50b51420d9799f4482db767757cd0c947b8b4e26",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes illegal UTF8 continuation GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes illegal UTF8 continuation HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range illegal UTF8 continuation",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes illegal UTF8 overlong slash GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes illegal UTF8 overlong slash HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range illegal UTF8 overlong slash",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes illegal UTF8 surrogate GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes illegal UTF8 surrogate HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range illegal UTF8 surrogate",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes illegal UTF8 out of range GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes illegal UTF8 out of range HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range illegal UTF8 out of range",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes illegal UTF8 truncated GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes illegal UTF8 truncated HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses Range illegal UTF8 truncated",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes invalid percent escape GET",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 435,
+      "body_sha256": "141d0eee920f04eae74509434b49e8c473014166b90ec31e6f03596a782bf89f",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses bytes invalid percent escape HEAD",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "malformed path refuses Range invalid percent escape",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 400,
+      "body_bytes": 435,
+      "body_sha256": "141d0eee920f04eae74509434b49e8c473014166b90ec31e6f03596a782bf89f",
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "435"
+      }
+    },
+    {
+      "case": "Unicode lookalike does not alias real file fullwidth slash",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Unicode lookalike does not alias real file division slash",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Unicode lookalike does not alias real file fullwidth dot",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "Unicode lookalike does not alias real file fullwidth semicolon",
+      "passed": true,
+      "expected_status": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "http_status": 404,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "content-length": "0",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "owner actual logout succeeds",
+      "passed": true
+    },
+    {
+      "case": "logged-out token denied Chinese GET",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 70,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "content-length": "70",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "logged-out token denied Chinese HEAD",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "logged-out cookie denied Chinese",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 70,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "content-length": "70",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "logged-out token denied ASCII GET",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 70,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "content-length": "70",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "logged-out token denied ASCII HEAD",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 0,
+      "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "headers": {
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "logged-out cookie denied ASCII",
+      "passed": true,
+      "expected_status": [
+        401
+      ],
+      "http_status": 401,
+      "body_bytes": 70,
+      "body_sha256": "6331c65fd790144fc28b6e16062fdd94a47711ebe1ff69cad4a31f399eddc750",
+      "headers": {
+        "content-type": "application/json;charset=UTF-8",
+        "content-length": "70",
+        "cache-control": "no-store"
+      }
+    },
+    {
+      "case": "all complete business rows and table schemas restored except ordinary sys_log",
+      "passed": true,
+      "changed_tables": [],
+      "table_count": 69
+    },
+    {
+      "case": "all original attachment bytes directories modes and links restored",
+      "passed": true,
+      "changed_paths": [],
+      "original_entries": 2
+    }
+  ],
+  "observations": [],
+  "error_type": null,
+  "database_before": {
+    "jeecg_monthly_growth_analysis": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "dea36a961a98eb1a85bea148ccb8bdd3c0587d6e4667368ccdfd04dc88fb110f"
+    },
+    "jeecg_order_customer": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "8ad6e001732b3b60a6974fddef317d439c7f960b2d2755d07d74aec990ce8d32"
+    },
+    "jeecg_order_main": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "0856c69ac62f64f3e5f3ca2278403f982dae5ad7ef4bbff28f0f82f64720addb"
+    },
+    "jeecg_order_ticket": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "8678e0a1f447ce5437b2ea54cbf7c54c5f31659d2b9d62c2b7437ea54f513a53"
+    },
+    "jeecg_project_nature_income": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "891e7ce42a9ba567b86b14a4dc5f5e1dbdffdb37392e96e0a4e5b754de8f1c8d"
+    },
+    "onl_cgform_button": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "cf16ded26bfc1cb530e3d66422153d22c0a928c8219d3a7e2e5b606da7b1b8d8"
+    },
+    "onl_cgform_enhance_java": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "a8b2b058e610f49ce3dfd6866f2ae30e13e65fc0488db5bb4d537d90b74c4acc"
+    },
+    "onl_cgform_enhance_js": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "b28e3db956eec9ea14504eac008ac3fd5b8700b88b3564fef966b4fedb110980"
+    },
+    "onl_cgform_enhance_sql": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "e2fc22f33a0f6e4633534bd454f20d6bea45badcd90251cc1166df03caed16d1"
+    },
+    "onl_cgform_field": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "ba9deefadb3039c6b97403f970ab24b32709eaeadeb0d7bb0f13ca991a2c3e70"
+    },
+    "onl_cgform_head": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "6acb76098104b38d5c0eb5a7eb132d603241e56037be3cbc5c2dd7483c92521a"
+    },
+    "onl_cgform_index": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "92cd7c872625a841cf7b3124409acb415693fea24da6c8783d2059676965fb70"
+    },
+    "onl_cgreport_head": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "cf7cfefb102ab0d2040fe52a146603717e82399986c179d91b655032dedbb80b"
+    },
+    "onl_cgreport_item": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "93a10f4078944c676d54f24fb8feff8034983286d4f53324702bb486b5a43912"
+    },
+    "onl_cgreport_param": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "b5cfb518ea12937d23aa124ce32f119b9e4f585fa61b61236e9f44debfda9b07"
+    },
+    "oss_file": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "a1b0d08e81f5d15fd7035fd2d9a55dac213231a5dd7d324e5aa1a01c95bb3af9"
+    },
+    "qrtz_blob_triggers": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "3b91471cfcd7d7a8a8bee14cc8a1c072fc3681a83d2f7c101155959c4521ac77"
+    },
+    "qrtz_calendars": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "001345014b3c08db29da09acf854e99c4435d90568c11190f669079b18b3daba"
+    },
+    "qrtz_cron_triggers": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "a5af6216b9533aa0dd8d87b1fbdf5f3aedd5109a9cefd94e3a90b5908e614f64"
+    },
+    "qrtz_fired_triggers": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "275612bcf5db525623a1ec168459cd3a1c4354124e141e1418d65c48845f20c4"
+    },
+    "qrtz_job_details": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "9a0a14b956faf3f680cf9b74972e10711d787f5243ddd56e35caeaedab2688d2"
+    },
+    "qrtz_locks": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "5e856ffffa69bec677a328cf21a15afaeeabc3e44173b73cda87db85012681bc"
+    },
+    "qrtz_paused_trigger_grps": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "163dbb1d91a0fc9bbad60e3a7bd3eb517a8063db3b30fa45d3b1a533131ead4c"
+    },
+    "qrtz_scheduler_state": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "4a6f0795bf9d2bb5193a5072a792f456b72047a1ae0f813d87661774015e75a5"
+    },
+    "qrtz_simple_triggers": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "97d19272e8050327793e08b12ae233f7a640ecea07551b7bcacd99c2298c680c"
+    },
+    "qrtz_simprop_triggers": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "5a46b6de9e0d4b0a8b47cba20f6aac5a6957436bfa454a28073649d61b481b95"
+    },
+    "qrtz_triggers": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "5b5eef3267171cbc986ca3b75c15cd2292bb9133b907cea8a3eac38cc32f7182"
+    },
+    "sys_announcement": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "2ef4f49246f17a86d56821d1aea27e1248f98542ffdbadd03ee57913c68a6e6c"
+    },
+    "sys_announcement_send": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "6b783df835a269fef464464fef076a124b6411cc239c1169afb42956910c3b28"
+    },
+    "sys_category": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "24c3557c5e4e8294f28b3ef9b517cf696f1e6e0d67ed19863ebaeb8f2b13613e"
+    },
+    "sys_check_rule": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "62f12c099ffdc2094fd1b1b28b6ae40012fa56374460ab3354b6c56d5ac0a753"
+    },
+    "sys_config": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "f8dbcaab30bb24e51a15076ae7b4e158d9a6de887e80998be7dc8e68810c2a80"
+    },
+    "sys_data_log": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "8d9140546cd37d0f70e795bf0f0f6e510e72ad95b3cced181e856ab7fd6739f3"
+    },
+    "sys_data_source": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "3d5f052a5c1903ab586b72341df9f614bb70bf92b1b7580f2bde9925de30ab3c"
+    },
+    "sys_depart": {
+      "rows": 3,
+      "rows_sha256": "6c48996e3f9199c8b71e9065f180137f0ce59367a2d25d64d31ad9dfa6311a25",
+      "schema_sha256": "092ce57e7e5f233f5f222ffac9b9977284d9d06d4938c2698f5951e8d1f954c4"
+    },
+    "sys_depart_permission": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "e937161fb818038675d72e90d5f317e645bd83fe943251dd4ab42ff24737271e"
+    },
+    "sys_depart_role": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "47bfa727922cfb216317a5905ad4c69ee95b4ff600d014548d519199c374d58e"
+    },
+    "sys_depart_role_permission": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "f334b66e07da031206543a02b339f543ab689fcc21f4df864329403b3791a3d0"
+    },
+    "sys_depart_role_user": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "6539f69576556ee258a1fdd6e4d90a350dea74986d5fc9f1d59b8188a7b037fe"
+    },
+    "sys_dict": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "a676930d58d4ad42634e87091f10d5f811728088309fb638c2bbb04ce4faed2e"
+    },
+    "sys_dict_item": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "33ece2dc2adee82f1711a05b980b7c09b2f8394b79b093476c3309245a7603b5"
+    },
+    "sys_file": {
+      "rows": 2,
+      "rows_sha256": "c3752afcb834bcbce9f3216497fa56cedaef539da6ba3d45a52a3d19949cecc1",
+      "schema_sha256": "8cdd358937380738246ce80ec12235eabd5ce9a964347c7217176a9fad3ddb02"
+    },
+    "sys_fill_rule": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "e894f0afae1dacc2a3dc156a6f34dc652567915be932d38004abb89280f11a68"
+    },
+    "sys_log": {
+      "rows": 152,
+      "rows_sha256": "1b0c73da7da52649f284dcc77b3c211f688106ebb55f7f18e4d645b68ae9fc2b",
+      "schema_sha256": "394d6b1b75a640df5cc7561f261afb14b2790268399a496c39cbd2019fcf6a3c"
+    },
+    "sys_permission": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "03abc0f81e9aa8fcbc631b33366440b806d7c248e3ba74864f079eeee2350c7d"
+    },
+    "sys_permission_data_rule": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "7f701593e67d1ddd1432c50db647eabcf90f778f53dff6942b1cc59e2bbe02b6"
+    },
+    "sys_position": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "198a59b5210fbca630dc61ae30a8e97e4b8499df894f1e3c62499dce7a556417"
+    },
+    "sys_quartz_job": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "4f841819ea8df3369788c47ba525e671f9bcafbba12b5e0f744ba83af5b63371"
+    },
+    "sys_role": {
+      "rows": 3,
+      "rows_sha256": "92c0c5dd1dbe427e34c407832d1cdf224400912d19b2df9a2c558f7bf3556be7",
+      "schema_sha256": "352f49bd68392b228b9b4ae24eab2fd389b5bf36ec866a7b5f48efdfc9dd7da3"
+    },
+    "sys_role_permission": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "e6334f8d5107a803c9cd44ccc5f0941a4b0bdcd7054521771f2a2bf9c4823b15"
+    },
+    "sys_sms": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "edfdcfe7fbbc369394c394f6dd9c6772cc50040442a2a36b78e1e6e0907b4988"
+    },
+    "sys_sms_template": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "59098a8cae97d73b237497a90c2346ef527c15dcffe244c14e100dfd30c5f5f2"
+    },
+    "sys_user": {
+      "rows": 5,
+      "rows_sha256": "ee0026cb8176cf064abe31156e2da2ef069fc577195b7c81ad97078d53bff01d",
+      "schema_sha256": "a6ef87bc5f8645204f854bed94122283830d73248abe2ea208b8dc2cbdb2b474"
+    },
+    "sys_user_agent": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "1d94797e124d6be6cb99d2619af13d40a590579e457c659bc913545f0231f2a1"
+    },
+    "sys_user_depart": {
+      "rows": 5,
+      "rows_sha256": "a9b619b317720023a2541278e0351e3f7db444d18f7d46e89847288e66fbf372",
+      "schema_sha256": "cc4171dbeb153d3eda9233c1f69fc21410a8fa9b90eefea66cf16d58cd693517"
+    },
+    "sys_user_role": {
+      "rows": 5,
+      "rows_sha256": "f61448450c5290625a2822f92f75d8b8029a8ac66cdc28163c390203806ea741",
+      "schema_sha256": "2d1f701f344adb90ba8a072b4f5b9aba551ebe254827fb5554e3785b7caa06c4"
+    },
+    "teaching_additional_work": {
+      "rows": 2,
+      "rows_sha256": "5bd29ec7f46b29088535c3bd65527e1ce40ba5ea53441668746618e556a46deb",
+      "schema_sha256": "896eacc72563eb6bf95f61a34be63340364da9372765ddd238ecf6c6b3f4fb3a"
+    },
+    "teaching_course": {
+      "rows": 2,
+      "rows_sha256": "ccd8afb27fc38ccbf28abc8cacbd8e58482e71d15bbbdcd397733a29f22d7d3b",
+      "schema_sha256": "ae4edcbca17f483d07885d5636c7edfae3f28e78422b4afdf6c0d1ed67c540c3"
+    },
+    "teaching_course_dept": {
+      "rows": 2,
+      "rows_sha256": "3a4f01cb7b7dd41560dd5ec8472799891bb750d7b53de908ae278c453410eb95",
+      "schema_sha256": "0c1a2a0fe62895ce62ba9102c25d8368ec5fc96ceb927919c162a6de19ad761c"
+    },
+    "teaching_course_unit": {
+      "rows": 2,
+      "rows_sha256": "db6924dc55de5111076794965b1a2c671e236d9a8374a5daf8f41104d7ddc775",
+      "schema_sha256": "037c188a7b77e1b8690a9aa1b5063716bf5c569ad7288eec39494858712c8a01"
+    },
+    "teaching_depart_day_log": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "7ff2d1f7ec142a28fe90fa63c68854e6cc61d3d60e3524d51407e58f6c5db250"
+    },
+    "teaching_menu": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "bb47627179b04924a5ab6111f0dc58f469d277a3953fc831a22f4f903d9ae54c"
+    },
+    "teaching_news": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "900216373aca8b67fabfdd882877eb64f0e2d993cf15b8510336849735ec3a57"
+    },
+    "teaching_scratch_assets": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "b06abdd9751286b731244e204b7db1abdff71c81fb63649af5963d108dcd4a7a"
+    },
+    "teaching_student": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "73fd8039de5e0b0b928ebe3ef3036837a57afd0d6fcba7df9cfd5a8223a9abea"
+    },
+    "teaching_work": {
+      "rows": 2,
+      "rows_sha256": "1790d7c0af4f9066203b079fb273fa909e69a2178ac7b44ba0076699bfd51a16",
+      "schema_sha256": "552f7ee28d7031ca800089abb2bf8ce885b587722318208766e4c85686295d17"
+    },
+    "teaching_work_comment": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "0db83992bf4c57475ba03c9dc79464d7af4b248b97fe848b5c3d97c0399424ef"
+    },
+    "teaching_work_correct": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "a227a94b126b52b80d222ea6b20200e67393e51bd6390d9ccca76de16d80dd17"
+    },
+    "wechat_user": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "63dc00e940521b97d66f0f6d64fc8e70f6b710de2678b3f924ca07a308ffc251"
+    }
+  },
+  "database_after": {
+    "jeecg_monthly_growth_analysis": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "dea36a961a98eb1a85bea148ccb8bdd3c0587d6e4667368ccdfd04dc88fb110f"
+    },
+    "jeecg_order_customer": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "8ad6e001732b3b60a6974fddef317d439c7f960b2d2755d07d74aec990ce8d32"
+    },
+    "jeecg_order_main": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "0856c69ac62f64f3e5f3ca2278403f982dae5ad7ef4bbff28f0f82f64720addb"
+    },
+    "jeecg_order_ticket": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "8678e0a1f447ce5437b2ea54cbf7c54c5f31659d2b9d62c2b7437ea54f513a53"
+    },
+    "jeecg_project_nature_income": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "891e7ce42a9ba567b86b14a4dc5f5e1dbdffdb37392e96e0a4e5b754de8f1c8d"
+    },
+    "onl_cgform_button": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "cf16ded26bfc1cb530e3d66422153d22c0a928c8219d3a7e2e5b606da7b1b8d8"
+    },
+    "onl_cgform_enhance_java": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "a8b2b058e610f49ce3dfd6866f2ae30e13e65fc0488db5bb4d537d90b74c4acc"
+    },
+    "onl_cgform_enhance_js": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "b28e3db956eec9ea14504eac008ac3fd5b8700b88b3564fef966b4fedb110980"
+    },
+    "onl_cgform_enhance_sql": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "e2fc22f33a0f6e4633534bd454f20d6bea45badcd90251cc1166df03caed16d1"
+    },
+    "onl_cgform_field": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "ba9deefadb3039c6b97403f970ab24b32709eaeadeb0d7bb0f13ca991a2c3e70"
+    },
+    "onl_cgform_head": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "6acb76098104b38d5c0eb5a7eb132d603241e56037be3cbc5c2dd7483c92521a"
+    },
+    "onl_cgform_index": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "92cd7c872625a841cf7b3124409acb415693fea24da6c8783d2059676965fb70"
+    },
+    "onl_cgreport_head": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "cf7cfefb102ab0d2040fe52a146603717e82399986c179d91b655032dedbb80b"
+    },
+    "onl_cgreport_item": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "93a10f4078944c676d54f24fb8feff8034983286d4f53324702bb486b5a43912"
+    },
+    "onl_cgreport_param": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "b5cfb518ea12937d23aa124ce32f119b9e4f585fa61b61236e9f44debfda9b07"
+    },
+    "oss_file": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "a1b0d08e81f5d15fd7035fd2d9a55dac213231a5dd7d324e5aa1a01c95bb3af9"
+    },
+    "qrtz_blob_triggers": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "3b91471cfcd7d7a8a8bee14cc8a1c072fc3681a83d2f7c101155959c4521ac77"
+    },
+    "qrtz_calendars": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "001345014b3c08db29da09acf854e99c4435d90568c11190f669079b18b3daba"
+    },
+    "qrtz_cron_triggers": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "a5af6216b9533aa0dd8d87b1fbdf5f3aedd5109a9cefd94e3a90b5908e614f64"
+    },
+    "qrtz_fired_triggers": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "275612bcf5db525623a1ec168459cd3a1c4354124e141e1418d65c48845f20c4"
+    },
+    "qrtz_job_details": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "9a0a14b956faf3f680cf9b74972e10711d787f5243ddd56e35caeaedab2688d2"
+    },
+    "qrtz_locks": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "5e856ffffa69bec677a328cf21a15afaeeabc3e44173b73cda87db85012681bc"
+    },
+    "qrtz_paused_trigger_grps": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "163dbb1d91a0fc9bbad60e3a7bd3eb517a8063db3b30fa45d3b1a533131ead4c"
+    },
+    "qrtz_scheduler_state": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "4a6f0795bf9d2bb5193a5072a792f456b72047a1ae0f813d87661774015e75a5"
+    },
+    "qrtz_simple_triggers": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "97d19272e8050327793e08b12ae233f7a640ecea07551b7bcacd99c2298c680c"
+    },
+    "qrtz_simprop_triggers": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "5a46b6de9e0d4b0a8b47cba20f6aac5a6957436bfa454a28073649d61b481b95"
+    },
+    "qrtz_triggers": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "5b5eef3267171cbc986ca3b75c15cd2292bb9133b907cea8a3eac38cc32f7182"
+    },
+    "sys_announcement": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "2ef4f49246f17a86d56821d1aea27e1248f98542ffdbadd03ee57913c68a6e6c"
+    },
+    "sys_announcement_send": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "6b783df835a269fef464464fef076a124b6411cc239c1169afb42956910c3b28"
+    },
+    "sys_category": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "24c3557c5e4e8294f28b3ef9b517cf696f1e6e0d67ed19863ebaeb8f2b13613e"
+    },
+    "sys_check_rule": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "62f12c099ffdc2094fd1b1b28b6ae40012fa56374460ab3354b6c56d5ac0a753"
+    },
+    "sys_config": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "f8dbcaab30bb24e51a15076ae7b4e158d9a6de887e80998be7dc8e68810c2a80"
+    },
+    "sys_data_log": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "8d9140546cd37d0f70e795bf0f0f6e510e72ad95b3cced181e856ab7fd6739f3"
+    },
+    "sys_data_source": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "3d5f052a5c1903ab586b72341df9f614bb70bf92b1b7580f2bde9925de30ab3c"
+    },
+    "sys_depart": {
+      "rows": 3,
+      "rows_sha256": "6c48996e3f9199c8b71e9065f180137f0ce59367a2d25d64d31ad9dfa6311a25",
+      "schema_sha256": "092ce57e7e5f233f5f222ffac9b9977284d9d06d4938c2698f5951e8d1f954c4"
+    },
+    "sys_depart_permission": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "e937161fb818038675d72e90d5f317e645bd83fe943251dd4ab42ff24737271e"
+    },
+    "sys_depart_role": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "47bfa727922cfb216317a5905ad4c69ee95b4ff600d014548d519199c374d58e"
+    },
+    "sys_depart_role_permission": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "f334b66e07da031206543a02b339f543ab689fcc21f4df864329403b3791a3d0"
+    },
+    "sys_depart_role_user": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "6539f69576556ee258a1fdd6e4d90a350dea74986d5fc9f1d59b8188a7b037fe"
+    },
+    "sys_dict": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "a676930d58d4ad42634e87091f10d5f811728088309fb638c2bbb04ce4faed2e"
+    },
+    "sys_dict_item": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "33ece2dc2adee82f1711a05b980b7c09b2f8394b79b093476c3309245a7603b5"
+    },
+    "sys_file": {
+      "rows": 2,
+      "rows_sha256": "c3752afcb834bcbce9f3216497fa56cedaef539da6ba3d45a52a3d19949cecc1",
+      "schema_sha256": "8cdd358937380738246ce80ec12235eabd5ce9a964347c7217176a9fad3ddb02"
+    },
+    "sys_fill_rule": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "e894f0afae1dacc2a3dc156a6f34dc652567915be932d38004abb89280f11a68"
+    },
+    "sys_log": {
+      "rows": 163,
+      "rows_sha256": "323a166562070671ae4892583ca0ff48bf8e522d9b08d781c79048a62ba5e0e3",
+      "schema_sha256": "394d6b1b75a640df5cc7561f261afb14b2790268399a496c39cbd2019fcf6a3c"
+    },
+    "sys_permission": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "03abc0f81e9aa8fcbc631b33366440b806d7c248e3ba74864f079eeee2350c7d"
+    },
+    "sys_permission_data_rule": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "7f701593e67d1ddd1432c50db647eabcf90f778f53dff6942b1cc59e2bbe02b6"
+    },
+    "sys_position": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "198a59b5210fbca630dc61ae30a8e97e4b8499df894f1e3c62499dce7a556417"
+    },
+    "sys_quartz_job": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "4f841819ea8df3369788c47ba525e671f9bcafbba12b5e0f744ba83af5b63371"
+    },
+    "sys_role": {
+      "rows": 3,
+      "rows_sha256": "92c0c5dd1dbe427e34c407832d1cdf224400912d19b2df9a2c558f7bf3556be7",
+      "schema_sha256": "352f49bd68392b228b9b4ae24eab2fd389b5bf36ec866a7b5f48efdfc9dd7da3"
+    },
+    "sys_role_permission": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "e6334f8d5107a803c9cd44ccc5f0941a4b0bdcd7054521771f2a2bf9c4823b15"
+    },
+    "sys_sms": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "edfdcfe7fbbc369394c394f6dd9c6772cc50040442a2a36b78e1e6e0907b4988"
+    },
+    "sys_sms_template": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "59098a8cae97d73b237497a90c2346ef527c15dcffe244c14e100dfd30c5f5f2"
+    },
+    "sys_user": {
+      "rows": 5,
+      "rows_sha256": "ee0026cb8176cf064abe31156e2da2ef069fc577195b7c81ad97078d53bff01d",
+      "schema_sha256": "a6ef87bc5f8645204f854bed94122283830d73248abe2ea208b8dc2cbdb2b474"
+    },
+    "sys_user_agent": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "1d94797e124d6be6cb99d2619af13d40a590579e457c659bc913545f0231f2a1"
+    },
+    "sys_user_depart": {
+      "rows": 5,
+      "rows_sha256": "a9b619b317720023a2541278e0351e3f7db444d18f7d46e89847288e66fbf372",
+      "schema_sha256": "cc4171dbeb153d3eda9233c1f69fc21410a8fa9b90eefea66cf16d58cd693517"
+    },
+    "sys_user_role": {
+      "rows": 5,
+      "rows_sha256": "f61448450c5290625a2822f92f75d8b8029a8ac66cdc28163c390203806ea741",
+      "schema_sha256": "2d1f701f344adb90ba8a072b4f5b9aba551ebe254827fb5554e3785b7caa06c4"
+    },
+    "teaching_additional_work": {
+      "rows": 2,
+      "rows_sha256": "5bd29ec7f46b29088535c3bd65527e1ce40ba5ea53441668746618e556a46deb",
+      "schema_sha256": "896eacc72563eb6bf95f61a34be63340364da9372765ddd238ecf6c6b3f4fb3a"
+    },
+    "teaching_course": {
+      "rows": 2,
+      "rows_sha256": "ccd8afb27fc38ccbf28abc8cacbd8e58482e71d15bbbdcd397733a29f22d7d3b",
+      "schema_sha256": "ae4edcbca17f483d07885d5636c7edfae3f28e78422b4afdf6c0d1ed67c540c3"
+    },
+    "teaching_course_dept": {
+      "rows": 2,
+      "rows_sha256": "3a4f01cb7b7dd41560dd5ec8472799891bb750d7b53de908ae278c453410eb95",
+      "schema_sha256": "0c1a2a0fe62895ce62ba9102c25d8368ec5fc96ceb927919c162a6de19ad761c"
+    },
+    "teaching_course_unit": {
+      "rows": 2,
+      "rows_sha256": "db6924dc55de5111076794965b1a2c671e236d9a8374a5daf8f41104d7ddc775",
+      "schema_sha256": "037c188a7b77e1b8690a9aa1b5063716bf5c569ad7288eec39494858712c8a01"
+    },
+    "teaching_depart_day_log": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "7ff2d1f7ec142a28fe90fa63c68854e6cc61d3d60e3524d51407e58f6c5db250"
+    },
+    "teaching_menu": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "bb47627179b04924a5ab6111f0dc58f469d277a3953fc831a22f4f903d9ae54c"
+    },
+    "teaching_news": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "900216373aca8b67fabfdd882877eb64f0e2d993cf15b8510336849735ec3a57"
+    },
+    "teaching_scratch_assets": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "b06abdd9751286b731244e204b7db1abdff71c81fb63649af5963d108dcd4a7a"
+    },
+    "teaching_student": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "73fd8039de5e0b0b928ebe3ef3036837a57afd0d6fcba7df9cfd5a8223a9abea"
+    },
+    "teaching_work": {
+      "rows": 2,
+      "rows_sha256": "1790d7c0af4f9066203b079fb273fa909e69a2178ac7b44ba0076699bfd51a16",
+      "schema_sha256": "552f7ee28d7031ca800089abb2bf8ce885b587722318208766e4c85686295d17"
+    },
+    "teaching_work_comment": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "0db83992bf4c57475ba03c9dc79464d7af4b248b97fe848b5c3d97c0399424ef"
+    },
+    "teaching_work_correct": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "a227a94b126b52b80d222ea6b20200e67393e51bd6390d9ccca76de16d80dd17"
+    },
+    "wechat_user": {
+      "rows": 0,
+      "rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schema_sha256": "63dc00e940521b97d66f0f6d64fc8e70f6b710de2678b3f924ca07a308ffc251"
+    }
+  },
+  "attachments_before_sha256": "1af383896ce0ca9224799cd7217f0fd1b48acf1a2504589ef8c232430e876208",
+  "attachments_after_sha256": "1af383896ce0ca9224799cd7217f0fd1b48acf1a2504589ef8c232430e876208"
+}

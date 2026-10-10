@@ -1,0 +1,37 @@
+{
+  "platform": "macOS arm64",
+  "verified_date": "2026-10-02",
+  "tools": [
+    {
+      "archive": "zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64.tar.gz",
+      "download_url": "https://cdn.azul.com/zulu/bin/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64.tar.gz",
+      "verified_against": "Azul metadata API SHA-256",
+      "size": 103714410,
+      "sha256": "58bb3c08f2aa63d9743cf31899fa4b8c6c9effefce9479e7288c26621c3bb21b"
+    },
+    {
+      "archive": "apache-maven-3.9.16-bin.tar.gz",
+      "download_url": "https://downloads.apache.org/maven/maven-3/3.9.16/binaries/apache-maven-3.9.16-bin.tar.gz",
+      "verified_against": "Apache SHA-512",
+      "size": 9278065,
+      "sha256": "80ffca22aed9e8b9713a232f3394fd81d7f20322df75efdb2b047dbd3e3a23bb",
+      "sha512": "831a8591fe20c8243b1dbe7d71e3244f31d1665b0804b2e825e38cbbe5ce0cafb8338851f90780735568773e0a6cd07bbec107cda0b896b008b861075358b6f6"
+    },
+    {
+      "archive": "redis-7.2.9-curl.tar.gz",
+      "download_url": "https://download.redis.io/releases/redis-7.2.9.tar.gz",
+      "verified_against": "redis/redis-hashes official SHA-256",
+      "size": 3394517,
+      "sha256": "2343cc49db3beb9d2925a44e13032805a608821a58f25bd874c84881115a20b7"
+    },
+    {
+      "archive": "mysql-8.4.6-macos15-arm64.tar.gz",
+      "download_url": "https://cdn.mysql.com/archives/mysql-8.4/mysql-8.4.6-macos15-arm64.tar.gz",
+      "verified_against": "Oracle archive MD5 and GPG signature",
+      "size": 166683072,
+      "sha256": "56ac9150b9d8fc757a36a2661a1214f5b09e5352d0a220e7a6c302685a5fca10",
+      "md5": "f297e6f92c9c2d8df7e6ee437639286a",
+      "gpg_fingerprint": "BCA43417C3B485DD128EC6D4B7B3B788A8D3785C"
+    }
+  ]
+}

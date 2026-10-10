@@ -1,0 +1,173 @@
+{
+  "generated_utc": "2026-10-03T00:15:48.056339+00:00",
+  "product_commit": "1370f9c29d167d3aa6ddef91784a0b66851603be",
+  "base_commit": "292dd7ea3830a22e719d80b12efcab26c81b4ed5",
+  "runtime_pr": 36,
+  "proxy_pr": 35,
+  "browser": "Playwright Chromium, anonymous only, actual shipped Scratch VM and real local Java backend",
+  "authenticated_browser": false,
+  "observations": [
+    {
+      "behavior": "Legacy public player on port 18134 drops its port; no cloud snapshot",
+      "observed": {
+        "configured_endpoint": "127.0.0.1/api/websocket/scratch/cloudData",
+        "vm_value": 0,
+        "redis_value": "54"
+      }
+    },
+    {
+      "behavior": "New actual VM public player receives snapshot",
+      "observed": {
+        "vm_value": "41",
+        "provider": true,
+        "browser_authenticated": false
+      }
+    },
+    {
+      "behavior": "Anonymous green flag modifies local value only",
+      "observed": {
+        "vm_value": 7,
+        "redis_value": "41"
+      }
+    },
+    {
+      "behavior": "Author message reaches anonymous browser without reload",
+      "observed": {
+        "vm_value": "53"
+      }
+    },
+    {
+      "behavior": "Withdrawing public work stops receiving new updates",
+      "observed": {
+        "phase": "denied",
+        "vm_value": "53",
+        "redis_value": "54",
+        "retry_visible": true
+      }
+    },
+    {
+      "behavior": "Republishing then clicking retry receives current snapshot",
+      "observed": {
+        "phase": "readonly",
+        "vm_value": "54"
+      }
+    },
+    {
+      "behavior": "Actual public editor binds after project load",
+      "observed": {
+        "opened": true,
+        "vm_value": "54",
+        "provider": true,
+        "phase": "readonly"
+      }
+    },
+    {
+      "behavior": "Actual unsaved editor permits cloud checkbox but does not open remote namespace",
+      "observed": {
+        "name": "☁ 本地分数",
+        "isCloud": true,
+        "value": 0,
+        "provider": false
+      }
+    },
+    {
+      "behavior": "Asset-only player keeps cloud variables local",
+      "observed": {
+        "value": 0,
+        "provider": false,
+        "status": "案例中的变量仅在本机运行，不连接云端。"
+      }
+    },
+    {
+      "behavior": "Fullscreen hands wrapper geometry to engine and restores after exit",
+      "observed": {
+        "fullscreen_wrapper_style": "",
+        "after_exit_stage_bottom": 864,
+        "after_exit_status_top": 872
+      }
+    },
+    {
+      "behavior": "Player fits width and available height",
+      "observed": [
+        {
+          "width": 390,
+          "height": 844,
+          "stage_bottom": 336.65,
+          "status_top": 816
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "stage_bottom": 620.3,
+          "status_top": 996
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "stage_bottom": 864,
+          "status_top": 872
+        }
+      ]
+    },
+    {
+      "behavior": "Editor header keeps actions visible on narrow viewport; workspace scrolls internally",
+      "observed": {
+        "width": 390,
+        "document_scroll_width": 390,
+        "header_bottom": 149.97,
+        "save_rect": [
+          16,
+          94.97,
+          82,
+          40
+        ],
+        "submit_rect": [
+          106,
+          94.97,
+          82,
+          40
+        ],
+        "screenshots_widths": [
+          390,
+          768,
+          1440
+        ]
+      }
+    }
+  ],
+  "known_console_error": "Existing blob Worker blocked by proxy CSP in both legacy and new pages; not fixed or relaxed here.",
+  "controlled_frontend_checks": 184,
+  "real_client_checks": 15,
+  "new_javascript_lint": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "build_succeeded": true,
+  "existing_build_warnings": 6,
+  "screenshots": [
+    "cloud-editor-local-1440.png",
+    "cloud-editor-local-390.png",
+    "cloud-editor-local-768.png",
+    "cloud-editor-public.png",
+    "cloud-player-1440.png",
+    "cloud-player-390.png",
+    "cloud-player-768.png",
+    "cloud-player-asset-only.png",
+    "cloud-player-legacy-1440.png",
+    "cloud-public-fit.png",
+    "cloud-withdrawn.png"
+  ],
+  "product_file_sha256": {
+    "web/public/scratch3/index.html": "31a3a7a0ff7c2cb9fe1c22067bd3b19ad26e293c26412ec985021908222c8111",
+    "web/public/scratch3/player-bridge.js": "ed90eba4ee089f2f73361964ecf36a6a641140ec2833822c3dd3406ec4ace3c4",
+    "web/public/scratch3/editor-bridge.js": "4ea6d29110ba39b9ac1bb482852a850fc3ca78f3d84dd9e371294fe6bd91ec43",
+    "web/public/scratch3/cloud-client.js": "326db0d51748b5ba03499ce8b2da23a61aa82f6676e3280e8628fa2a22ed2e72",
+    "web/public/scratch3/player-layout.js": "778f3dc96356fe82b45216e8b0f047ee1dd7637403e35a13fb0bb3abe59f671c",
+    "web/public/scratch3/player.html": "414e5988be63cbd507db2bb663373a7fe1ea31ee0ad880467f71c34665818ecd",
+    "web/public/scratch3/lib.min.js": "83a7bb1e001957303c4f609879d094886d1f4c51235161f3c9d9e2e2d28abf40",
+    "web/public/scratch3/persistence.css": "87bad08be616c0a316bab9d39342dbd53294b646f91f526b1546349bc690330d"
+  },
+  "build_product_files_equal": true,
+  "remote_merged": false,
+  "production_changed": false
+}

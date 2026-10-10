@@ -1,0 +1,158 @@
+{
+  "preview": "after3",
+  "sourceManifestSHA256": "c33ce3380564a252d606c1e2c4cfc37d0e68eb47de7e9c4d2e5b26e83246ba59",
+  "scope": "Actual Vue/AntD parent SFCs, frozen src, synthetic readonly HTTP. Authenticated shell, global HTTP interceptor and tag-failure scenarios not covered. Timeout transport shortened to1.2s, product60s unchanged.",
+  "checks": [
+    {
+      "case": "empty-page2",
+      "pagination": "11-20 共25条\n1\n2\n3"
+    },
+    {
+      "case": "page1-recovery",
+      "rows": 10
+    },
+    {
+      "case": "table-error-layout-390",
+      "documentWidth": 390,
+      "retryHeight": 44,
+      "tableVisible": false,
+      "width": 390
+    },
+    {
+      "case": "table-error-layout-768",
+      "documentWidth": 768,
+      "retryHeight": 44,
+      "tableVisible": false,
+      "width": 768
+    },
+    {
+      "case": "table-error-layout-1440",
+      "documentWidth": 1440,
+      "retryHeight": 44,
+      "tableVisible": false,
+      "width": 1440
+    },
+    {
+      "case": "table-final-business",
+      "error": "作品列表暂不可用\n\n暂时无法读取作品，请确认当前账号的访问权限后重试。\n\n重试将使用刚才已发送的查询条件和页码。\n\n重新加载",
+      "loading": false,
+      "tableVisible": false
+    },
+    {
+      "case": "table-final-malformed",
+      "error": "作品列表暂不可用\n\n作品列表返回的数据不完整，请稍后重试。\n\n重试将使用刚才已发送的查询条件和页码。\n\n重新加载",
+      "loading": false,
+      "tableVisible": false
+    },
+    {
+      "case": "table-final-network",
+      "error": "作品列表暂不可用\n\n读取作品失败，请检查网络后重试。\n\n重试将使用刚才已发送的查询条件和页码。\n\n重新加载",
+      "loading": false,
+      "tableVisible": false
+    },
+    {
+      "case": "table-final-timeout",
+      "error": "作品列表暂不可用\n\n读取作品超时，请检查网络后重试。\n\n重试将使用刚才已发送的查询条件和页码。\n\n重新加载",
+      "loading": false,
+      "tableVisible": false
+    },
+    {
+      "case": "table-final-empty",
+      "empty": "没有符合当前查询的作品\n\n可以修改查询条件后再查询。",
+      "loading": false,
+      "tableVisible": false
+    },
+    {
+      "case": "card-error-layout-1440",
+      "containerWidth": 1344,
+      "containerX": 48,
+      "documentWidth": 1440,
+      "gridColumn": "1 / -1",
+      "retryHeight": 44,
+      "stateWidth": 1344,
+      "stateX": 48,
+      "width": 1440
+    },
+    {
+      "case": "card-error-layout-768",
+      "containerWidth": 672,
+      "containerX": 48,
+      "documentWidth": 768,
+      "gridColumn": "1 / -1",
+      "retryHeight": 44,
+      "stateWidth": 672,
+      "stateX": 48,
+      "width": 768
+    },
+    {
+      "case": "card-error-layout-390",
+      "containerWidth": 318,
+      "containerX": 36,
+      "documentWidth": 390,
+      "gridColumn": "1 / -1",
+      "retryHeight": 44,
+      "stateWidth": 318,
+      "stateX": 36,
+      "width": 390
+    },
+    {
+      "case": "card-keyboard-retry",
+      "cards": 10,
+      "documentWidth": 390,
+      "error": false
+    },
+    {
+      "case": "feedback-after-retry",
+      "text": true
+    },
+    {
+      "case": "card-final-business",
+      "error": "作品列表暂不可用\n\n暂时无法读取作品，请确认当前账号的访问权限后重试。\n\n重新加载",
+      "loading": false
+    },
+    {
+      "case": "card-final-malformed",
+      "error": "作品列表暂不可用\n\n作品列表返回的数据不完整，请稍后重试。\n\n重新加载",
+      "loading": false
+    },
+    {
+      "case": "card-final-network",
+      "error": "作品列表暂不可用\n\n读取作品失败，请检查网络后重试。\n\n重新加载",
+      "loading": false
+    },
+    {
+      "case": "card-final-timeout",
+      "error": "作品列表暂不可用\n\n读取作品超时，请检查网络后重试。\n\n重新加载",
+      "loading": false
+    },
+    {
+      "case": "card-final-empty",
+      "empty": "还没有作品\n\n创作并保存作品后，会在这里显示。",
+      "loading": false
+    },
+    {
+      "case": "card-final-pending",
+      "text": "正在读取作品\n\n请稍候，正在获取你的作品。"
+    },
+    {
+      "case": "card-final-late-response",
+      "text": "还没有作品\n\n创作并保存作品后，会在这里显示。"
+    },
+    {
+      "case": "table-final-keyboard-query-snapshot",
+      "documentWidth": 390,
+      "error": false,
+      "input": "未提交的修改",
+      "rowText": [
+        "\t1\t零分也有具体反馈\t无此图片\t2\t1\t已批改\t暂无\t\n\n评分\n0 / 5\n\n这次提交还",
+        "\t2\t零分，无评语\t无此图片\t2\t1\t已批改\t暂无\t\n\n评分\n0 / 5\n\n暂无评语\n\n\t"
+      ],
+      "rows": 2
+    }
+  ],
+  "console": [],
+  "initialIssues": [
+    "Less1/-1 compiled to-1; fixed start/end",
+    "Table unmounted on pagination caused getBodyTable nextTick error; fixed v-show preserving instance"
+  ]
+}

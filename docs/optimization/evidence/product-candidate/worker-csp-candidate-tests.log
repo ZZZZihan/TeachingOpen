@@ -1,0 +1,49 @@
+...GET api
+.GET api
+.GET static
+GET static
+GET api
+GET api
+.GET api
+GET api
+.POST api
+.GET api
+.GET api
+.GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+POST api
+POST api
+GET api
+GET api
+.GET api
+GET api
+.GET api
+GET api
+GET api
+.GET api
+.GET api
+GET static
+GET static
+.GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+GET api
+...................................................s...............................................
+----------------------------------------------------------------------
+Ran 114 tests in 9.324s
+
+OK (skipped=1)

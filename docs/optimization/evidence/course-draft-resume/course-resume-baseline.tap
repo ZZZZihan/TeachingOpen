@@ -1,0 +1,1478 @@
+TAP version 13
+# Subtest: Scratch: actual course entry opens the template only before any own work exists
+ok 1 - Scratch: actual course entry opens the template only before any own work exists
+  ---
+  duration_ms: 14.8685
+  type: 'test'
+  ...
+# Subtest: Scratch: save, close and reopen from the same real course URL keeps content, title and ID
+not ok 2 - Scratch: save, close and reopen from the same real course URL keeps content, title and ID
+  ---
+  duration_ms: 10.616375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:161:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + []
+    - [
+    -   'owned-course-2'
+    - ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'owned-course-2'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:175:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: a discovered work restores all record bindings rather than entrance hints
+not ok 3 - Scratch: a discovered work restores all record bindings rather than entrance hints
+  ---
+  duration_ms: 10.692291
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:189:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + '入口旧名称'
+    - '本人修改 & 100% + 中文'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '本人修改 & 100% + 中文'
+  actual: '入口旧名称'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:193:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: discovery failure blocks template fallback and upload; retry discovers own content
+not ok 4 - Scratch: discovery failure blocks template fallback and upload; retry discovers own content
+  ---
+  duration_ms: 9.448166
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:202:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + 'teacher original'
+    - 'student revision 1, retained after closing'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'student revision 1, retained after closing'
+  actual: 'teacher original'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:208:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: details failure keeps save disabled and a manual retry reads the same own work
+not ok 5 - Scratch: details failure keeps save disabled and a manual retry reads the same own work
+  ---
+  duration_ms: 8.7845
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:212:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:215:5)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: missing details cannot fall back to the template or upload
+not ok 6 - Scratch: missing details cannot fall back to the template or upload
+  ---
+  duration_ms: 9.313334
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: wrong work type cannot fall back to the template or upload
+not ok 7 - Scratch: wrong work type cannot fall back to the template or upload
+  ---
+  duration_ms: 10.036
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: missing own attachment cannot fall back to the template or upload
+not ok 8 - Scratch: missing own attachment cannot fall back to the template or upload
+  ---
+  duration_ms: 8.863167
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: other unit cannot fall back to the template or upload
+not ok 9 - Scratch: other unit cannot fall back to the template or upload
+  ---
+  duration_ms: 8.582791
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: conflicting work ID cannot fall back to the template or upload
+not ok 10 - Scratch: conflicting work ID cannot fall back to the template or upload
+  ---
+  duration_ms: 8.744333
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: missing unit blocks the first course load despite an entrance file hint
+ok 11 - Scratch: missing unit blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 10.018833
+  type: 'test'
+  ...
+# Subtest: Scratch: wrong template type blocks the first course load despite an entrance file hint
+not ok 12 - Scratch: wrong template type blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 9.053417
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: missing template attachment blocks the first course load despite an entrance file hint
+ok 13 - Scratch: missing template attachment blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 8.792458
+  type: 'test'
+  ...
+# Subtest: Scratch: conflicting unit ID blocks the first course load despite an entrance file hint
+not ok 14 - Scratch: conflicting unit ID blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 8.647375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: malformed own work ID blocks the first course load despite an entrance file hint
+not ok 15 - Scratch: malformed own work ID blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 8.56175
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: explicit workId remains authoritative and restores own record bindings
+ok 16 - Scratch: explicit workId remains authoritative and restores own record bindings
+  ---
+  duration_ms: 8.503709
+  type: 'test'
+  ...
+# Subtest: Scratch: deliberate course reset uses the verified template but keeps the existing work and bindings
+not ok 17 - Scratch: deliberate course reset uses the verified template but keeps the existing work and bindings
+  ---
+  duration_ms: 8.088667
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:265:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + ''
+    - 'owned-course-2'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'owned-course-2'
+  actual: ''
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:269:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: explicit additional-work reset retains the task and original work ID
+not ok 18 - Scratch: explicit additional-work reset retains the task and original work ID
+  ---
+  duration_ms: 8.513375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:282:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + []
+    - [
+    -   'owned-course-2'
+    - ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'owned-course-2'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:291:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: explicit reset with a conflicting course cannot overwrite the existing work
+not ok 19 - Scratch: explicit reset with a conflicting course cannot overwrite the existing work
+  ---
+  duration_ms: 7.83475
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:301:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:305:5)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: explicit reset with a conflicting additional task cannot overwrite the existing work
+not ok 20 - Scratch: explicit reset with a conflicting additional task cannot overwrite the existing work
+  ---
+  duration_ms: 8.352708
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:308:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:314:5)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: pending discovery locks load and save until the own work has opened
+not ok 21 - Scratch: pending discovery locks load and save until the own work has opened
+  ---
+  duration_ms: 7.981291
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:317:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + ''
+    - 'owned-course-2'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'owned-course-2'
+  actual: ''
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:329:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Scratch: reading the saved attachment fails closed; retry preserves the own identity
+not ok 22 - Scratch: reading the saved attachment fails closed; retry preserves the own identity
+  ---
+  duration_ms: 8.501
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:333:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:337:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: actual course entry opens the template only before any own work exists
+not ok 23 - ScratchJr: actual course entry opens the template only before any own work exists
+  ---
+  duration_ms: 8.044917
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:150:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + []
+    - [
+    -   'unit & 中文 + 100%'
+    - ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'unit & 中文 + 100%'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:153:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: save, close and reopen from the same real course URL keeps content, title and ID
+not ok 24 - ScratchJr: save, close and reopen from the same real course URL keeps content, title and ID
+  ---
+  duration_ms: 8.088916
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:161:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + []
+    - [
+    -   'unit & 中文 + 100%'
+    - ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'unit & 中文 + 100%'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:174:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: a discovered work restores all record bindings rather than entrance hints
+not ok 25 - ScratchJr: a discovered work restores all record bindings rather than entrance hints
+  ---
+  duration_ms: 6.636916
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:189:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + '入口旧名称'
+    - '本人修改 & 100% + 中文'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '本人修改 & 100% + 中文'
+  actual: '入口旧名称'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:193:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: discovery failure blocks template fallback and upload; retry discovers own content
+not ok 26 - ScratchJr: discovery failure blocks template fallback and upload; retry discovers own content
+  ---
+  duration_ms: 7.60075
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:202:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:205:5)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: details failure keeps save disabled and a manual retry reads the same own work
+not ok 27 - ScratchJr: details failure keeps save disabled and a manual retry reads the same own work
+  ---
+  duration_ms: 7.934584
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:212:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:215:5)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: missing details cannot fall back to the template or upload
+not ok 28 - ScratchJr: missing details cannot fall back to the template or upload
+  ---
+  duration_ms: 7.259333
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: wrong work type cannot fall back to the template or upload
+not ok 29 - ScratchJr: wrong work type cannot fall back to the template or upload
+  ---
+  duration_ms: 7.140542
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: missing own attachment cannot fall back to the template or upload
+not ok 30 - ScratchJr: missing own attachment cannot fall back to the template or upload
+  ---
+  duration_ms: 7.4065
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: other unit cannot fall back to the template or upload
+not ok 31 - ScratchJr: other unit cannot fall back to the template or upload
+  ---
+  duration_ms: 7.732459
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: conflicting work ID cannot fall back to the template or upload
+not ok 32 - ScratchJr: conflicting work ID cannot fall back to the template or upload
+  ---
+  duration_ms: 6.690417
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: missing unit blocks the first course load despite an entrance file hint
+not ok 33 - ScratchJr: missing unit blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 7.196625
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: wrong template type blocks the first course load despite an entrance file hint
+not ok 34 - ScratchJr: wrong template type blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 7.63725
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: missing template attachment blocks the first course load despite an entrance file hint
+not ok 35 - ScratchJr: missing template attachment blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 7.647959
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: conflicting unit ID blocks the first course load despite an entrance file hint
+not ok 36 - ScratchJr: conflicting unit ID blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 7.9505
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: malformed own work ID blocks the first course load despite an entrance file hint
+not ok 37 - ScratchJr: malformed own work ID blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 7.685959
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: explicit workId remains authoritative and restores own record bindings
+ok 38 - ScratchJr: explicit workId remains authoritative and restores own record bindings
+  ---
+  duration_ms: 7.478125
+  type: 'test'
+  ...
+# Subtest: ScratchJr: deliberate course reset uses the verified template but keeps the existing work and bindings
+not ok 39 - ScratchJr: deliberate course reset uses the verified template but keeps the existing work and bindings
+  ---
+  duration_ms: 6.787875
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:265:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + ''
+    - 'owned-course-3'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'owned-course-3'
+  actual: ''
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:269:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: explicit additional-work reset retains the task and original work ID
+not ok 40 - ScratchJr: explicit additional-work reset retains the task and original work ID
+  ---
+  duration_ms: 6.532708
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:282:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + []
+    - [
+    -   'owned-course-3'
+    - ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'owned-course-3'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:291:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: explicit reset with a conflicting course cannot overwrite the existing work
+not ok 41 - ScratchJr: explicit reset with a conflicting course cannot overwrite the existing work
+  ---
+  duration_ms: 6.38125
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:301:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:305:5)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: explicit reset with a conflicting additional task cannot overwrite the existing work
+not ok 42 - ScratchJr: explicit reset with a conflicting additional task cannot overwrite the existing work
+  ---
+  duration_ms: 6.693
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:308:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:314:5)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: pending discovery locks load and save until the own work has opened
+not ok 43 - ScratchJr: pending discovery locks load and save until the own work has opened
+  ---
+  duration_ms: 6.976167
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:317:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:325:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: ScratchJr: reading the saved attachment fails closed; retry preserves the own identity
+not ok 44 - ScratchJr: reading the saved attachment fails closed; retry preserves the own identity
+  ---
+  duration_ms: 7.004542
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:333:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:337:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: actual course entry opens the template only before any own work exists
+not ok 45 - Python: actual course entry opens the template only before any own work exists
+  ---
+  duration_ms: 7.120125
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:150:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + []
+    - [
+    -   'unit & 中文 + 100%'
+    - ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'unit & 中文 + 100%'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:153:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: save, close and reopen from the same real course URL keeps content, title and ID
+not ok 46 - Python: save, close and reopen from the same real course URL keeps content, title and ID
+  ---
+  duration_ms: 6.804209
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:161:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + []
+    - [
+    -   'unit & 中文 + 100%'
+    - ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'unit & 中文 + 100%'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:174:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: a discovered work restores all record bindings rather than entrance hints
+not ok 47 - Python: a discovered work restores all record bindings rather than entrance hints
+  ---
+  duration_ms: 6.798292
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:189:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + '入口旧名称'
+    - '本人修改 & 100% + 中文'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '本人修改 & 100% + 中文'
+  actual: '入口旧名称'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:193:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: discovery failure blocks template fallback and upload; retry discovers own content
+not ok 48 - Python: discovery failure blocks template fallback and upload; retry discovers own content
+  ---
+  duration_ms: 6.546042
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:202:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:205:5)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: details failure keeps save disabled and a manual retry reads the same own work
+not ok 49 - Python: details failure keeps save disabled and a manual retry reads the same own work
+  ---
+  duration_ms: 6.583625
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:212:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:215:5)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: missing details cannot fall back to the template or upload
+not ok 50 - Python: missing details cannot fall back to the template or upload
+  ---
+  duration_ms: 6.439833
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: wrong work type cannot fall back to the template or upload
+not ok 51 - Python: wrong work type cannot fall back to the template or upload
+  ---
+  duration_ms: 6.301666
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: missing own attachment cannot fall back to the template or upload
+not ok 52 - Python: missing own attachment cannot fall back to the template or upload
+  ---
+  duration_ms: 6.321917
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: other unit cannot fall back to the template or upload
+not ok 53 - Python: other unit cannot fall back to the template or upload
+  ---
+  duration_ms: 6.765166
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: conflicting work ID cannot fall back to the template or upload
+not ok 54 - Python: conflicting work ID cannot fall back to the template or upload
+  ---
+  duration_ms: 6.5175
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:224:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:232:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: missing unit blocks the first course load despite an entrance file hint
+not ok 55 - Python: missing unit blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 6.576584
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: wrong template type blocks the first course load despite an entrance file hint
+not ok 56 - Python: wrong template type blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 6.866625
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: missing template attachment blocks the first course load despite an entrance file hint
+not ok 57 - Python: missing template attachment blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 6.606417
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: conflicting unit ID blocks the first course load despite an entrance file hint
+not ok 58 - Python: conflicting unit ID blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 6.637875
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: malformed own work ID blocks the first course load despite an entrance file hint
+not ok 59 - Python: malformed own work ID blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 7.157125
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:237:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:245:7)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: explicit workId remains authoritative and restores own record bindings
+ok 60 - Python: explicit workId remains authoritative and restores own record bindings
+  ---
+  duration_ms: 6.567833
+  type: 'test'
+  ...
+# Subtest: Python: deliberate course reset uses the verified template but keeps the existing work and bindings
+not ok 61 - Python: deliberate course reset uses the verified template but keeps the existing work and bindings
+  ---
+  duration_ms: 7.028
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:265:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + ''
+    - 'owned-course-4'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'owned-course-4'
+  actual: ''
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:269:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: explicit additional-work reset retains the task and original work ID
+not ok 62 - Python: explicit additional-work reset retains the task and original work ID
+  ---
+  duration_ms: 6.645834
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:282:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + []
+    - [
+    -   'owned-course-4'
+    - ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'owned-course-4'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:291:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: explicit reset with a conflicting course cannot overwrite the existing work
+not ok 63 - Python: explicit reset with a conflicting course cannot overwrite the existing work
+  ---
+  duration_ms: 6.8585
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:301:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:305:5)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: explicit reset with a conflicting additional task cannot overwrite the existing work
+not ok 64 - Python: explicit reset with a conflicting additional task cannot overwrite the existing work
+  ---
+  duration_ms: 6.740375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:308:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    cannotOverwrite (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:136:10)
+    async TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:314:5)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: pending discovery locks load and save until the own work has opened
+not ok 65 - Python: pending discovery locks load and save until the own work has opened
+  ---
+  duration_ms: 6.608375
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:317:3'
+  failureType: 'testCodeFailure'
+  error: 'release is not a function'
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:327:5)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python: reading the saved attachment fails closed; retry preserves the own identity
+not ok 66 - Python: reading the saved attachment fails closed; retry preserves the own identity
+  ---
+  duration_ms: 6.588875
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:333:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:337:12)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+# Subtest: Python actual editor bridge discovers the course work, reads its saved file and submits the same identity
+not ok 67 - Python actual editor bridge discovers the course work, reads its saved file and submits the same identity
+  ---
+  duration_ms: 51.497083
+  type: 'test'
+  location: '/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:352:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + ''
+    - '本人修改 & 100% + 中文'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '本人修改 & 100% + 中文'
+  actual: ''
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/worktrees/course-draft-resume/web/tests/course-draft-resume.test.cjs:403:10)
+    async Test.run (node:internal/test_runner/test:1404:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+  ...
+1..67
+# tests 67
+# suites 0
+# pass 6
+# fail 61
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 692.516291

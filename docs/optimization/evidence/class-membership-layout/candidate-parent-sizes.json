@@ -1,0 +1,107 @@
+[
+  {
+    "body": 390,
+    "containers": [
+      {
+        "class": "member-workspace ant-card",
+        "client": 278,
+        "left": 56,
+        "right": 334,
+        "scroll": 278
+      },
+      {
+        "class": "member-search-form ant-form ant-form-vertical",
+        "client": 244,
+        "left": 73,
+        "right": 317,
+        "scroll": 244
+      },
+      {
+        "class": "ant-table-body",
+        "client": 278,
+        "left": 56,
+        "right": 334,
+        "scroll": 921
+      },
+      {
+        "class": "ant-pagination mini ant-table-pagination",
+        "client": 278,
+        "left": 56,
+        "right": 334,
+        "scroll": 278
+      }
+    ],
+    "document": 390,
+    "width": 390
+  },
+  {
+    "body": 768,
+    "containers": [
+      {
+        "class": "member-workspace ant-card",
+        "client": 359,
+        "left": 353.5,
+        "right": 712,
+        "scroll": 359
+      },
+      {
+        "class": "member-search-form ant-form ant-form-vertical",
+        "client": 325,
+        "left": 370.5,
+        "right": 695,
+        "scroll": 325
+      },
+      {
+        "class": "ant-table-body",
+        "client": 359,
+        "left": 353.5,
+        "right": 712,
+        "scroll": 921
+      },
+      {
+        "class": "ant-pagination mini ant-table-pagination",
+        "client": 359,
+        "left": 353.5,
+        "right": 712,
+        "scroll": 359
+      }
+    ],
+    "document": 768,
+    "width": 768
+  },
+  {
+    "body": 1440,
+    "containers": [
+      {
+        "class": "member-workspace ant-card",
+        "client": 552,
+        "left": 661.828125,
+        "right": 1213.9921875,
+        "scroll": 552
+      },
+      {
+        "class": "member-search-form ant-form ant-form-vertical",
+        "client": 518,
+        "left": 678.828125,
+        "right": 1196.9921875,
+        "scroll": 518
+      },
+      {
+        "class": "ant-table-body",
+        "client": 552,
+        "left": 661.828125,
+        "right": 1213.9921875,
+        "scroll": 921
+      },
+      {
+        "class": "ant-pagination mini ant-table-pagination",
+        "client": 552,
+        "left": 661.828125,
+        "right": 1213.9921875,
+        "scroll": 552
+      }
+    ],
+    "document": 1440,
+    "width": 1440
+  }
+]

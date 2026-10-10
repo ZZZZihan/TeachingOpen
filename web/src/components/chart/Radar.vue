@@ -11,6 +11,7 @@
 </template>
 
 <script>
+  import './install'
   const axis1Opts = {
     dataKey: 'item',
     line: null,

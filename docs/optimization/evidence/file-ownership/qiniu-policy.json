@@ -1,0 +1,65 @@
+{
+  "observed_utc": "2026-10-02T18:10:56.063175+00:00",
+  "jar_sha256": "25b87ef3a4d7775af60c9fc1be6f150e5756223f203d096e1ba0a04cb38057a2",
+  "scope": "offline generated policy and rejected keys; no cloud upload/stat/delete executed",
+  "passed": 14,
+  "total": 14,
+  "cases": [
+    {
+      "case": "different users have distinct object prefixes",
+      "passed": true
+    },
+    {
+      "case": "generic token is confined to current user and insert-only",
+      "passed": true
+    },
+    {
+      "case": "exact-key token still forbids overwrite",
+      "passed": true
+    },
+    {
+      "case": "foreign or malformed key rejected 1",
+      "passed": true
+    },
+    {
+      "case": "foreign or malformed key rejected 2",
+      "passed": true
+    },
+    {
+      "case": "foreign or malformed key rejected 3",
+      "passed": true
+    },
+    {
+      "case": "foreign or malformed key rejected 4",
+      "passed": true
+    },
+    {
+      "case": "foreign or malformed key rejected 5",
+      "passed": true
+    },
+    {
+      "case": "foreign or malformed key rejected 6",
+      "passed": true
+    },
+    {
+      "case": "foreign or malformed key rejected 7",
+      "passed": true
+    },
+    {
+      "case": "foreign or malformed key rejected 8",
+      "passed": true
+    },
+    {
+      "case": "foreign or malformed key rejected 9",
+      "passed": true
+    },
+    {
+      "case": "foreign or malformed key rejected 10",
+      "passed": true
+    },
+    {
+      "case": "upload policy is time bounded",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "exit_code": 0,
+  "elapsed_seconds": 4.011,
+  "hashes_before": {
+    "probe_candidate_runtime.py": "68a7c76899de0490b1b0a2530dae8267841867d88ecf92dc5a2432f1de3f16dd",
+    "candidate_release.py": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67"
+  },
+  "hashes_after": {
+    "probe_candidate_runtime.py": "68a7c76899de0490b1b0a2530dae8267841867d88ecf92dc5a2432f1de3f16dd",
+    "candidate_release.py": "ee6eae518411b09290c68a81ab76c40a43f55c83c7e3e80ce5bff2417beb1f67"
+  },
+  "unchanged_during_run": true,
+  "report_sha256": "7d796d7099fb7af58520245ce61f19cfbc18bc3af35f84c504e290a48f2056a3"
+}

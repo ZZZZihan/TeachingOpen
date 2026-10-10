@@ -1,0 +1,90 @@
+{
+  "scope": "read-only source/call path and old/new packaged byte identity; no normal-admin freeze execution by reviewer",
+  "product_class_identity": [
+    {
+      "class": "org/jeecg/modules/system/controller/SysUserController.class",
+      "before_sha256": "be1d1c8abd7beb24e037982710870af84a52e4cdbd85bc7f377e21f5a1cc878a",
+      "after_sha256": "be1d1c8abd7beb24e037982710870af84a52e4cdbd85bc7f377e21f5a1cc878a",
+      "byte_identical": true
+    },
+    {
+      "class": "org/jeecg/modules/system/service/impl/SysUserServiceImpl.class",
+      "before_sha256": "124902474d1de9e17ee831e78b9c74ffc5cd747d35a740ed63786112882ed6b5",
+      "after_sha256": "124902474d1de9e17ee831e78b9c74ffc5cd747d35a740ed63786112882ed6b5",
+      "byte_identical": true
+    },
+    {
+      "class": "org/jeecg/modules/system/service/impl/SysBaseApiImpl.class",
+      "before_sha256": "fc597997d9138e4539b9c31b991090fa7901da5c60dee2341e5e516b5e047ade",
+      "after_sha256": "fc597997d9138e4539b9c31b991090fa7901da5c60dee2341e5e516b5e047ade",
+      "byte_identical": true
+    },
+    {
+      "class": "org/jeecg/modules/system/service/ISysUserService.class",
+      "before_sha256": "43b0900678ee1d1e705c1de98916e9eb144386fc2d59d78003920ce25bab0e4f",
+      "after_sha256": "43b0900678ee1d1e705c1de98916e9eb144386fc2d59d78003920ce25bab0e4f",
+      "byte_identical": true
+    },
+    {
+      "class": "org/jeecg/modules/shiro/authc/ShiroRealm.class",
+      "before_sha256": "4640366a66720c74edee3fa0d9b93871f0ef2ea64a64e338fabddc088f4caade",
+      "after_sha256": "4640366a66720c74edee3fa0d9b93871f0ef2ea64a64e338fabddc088f4caade",
+      "byte_identical": true
+    },
+    {
+      "class": "org/jeecg/config/RedisConfig.class",
+      "before_sha256": "94549f769173eaa0a8ee57dbd1f7ca07269f26db9769633a49fc630946811095",
+      "after_sha256": "94549f769173eaa0a8ee57dbd1f7ca07269f26db9769633a49fc630946811095",
+      "byte_identical": true
+    },
+    {
+      "class": "org/jeecg/modules/system/aspect/AutoLogAspect.class",
+      "before_sha256": "c05e030eb814cdcdca4ad580480c9da0e050fa05547fb44e5dd4e2f9f1bf1102",
+      "after_sha256": "c05e030eb814cdcdca4ad580480c9da0e050fa05547fb44e5dd4e2f9f1bf1102",
+      "byte_identical": true
+    },
+    {
+      "class": "org/jeecg/modules/system/aspect/PermissionDataAspect.class",
+      "before_sha256": "49b31ac63ee4c07ed6d87fd7b433bee2c13348c93a900e0b2298c0ff13e541bb",
+      "after_sha256": "49b31ac63ee4c07ed6d87fd7b433bee2c13348c93a900e0b2298c0ff13e541bb",
+      "byte_identical": true
+    }
+  ],
+  "mybatis_library": {
+    "name": "BOOT-INF/lib/mybatis-plus-extension-3.1.2.jar",
+    "before_sha256": "af19bfc74738987af498adee09e57e3a5a68fc19a3c265636d24072fe4856471",
+    "after_sha256": "af19bfc74738987af498adee09e57e3a5a68fc19a3c265636d24072fe4856471",
+    "byte_identical": true
+  },
+  "static_path": {
+    "cached_user": "SysBaseApiImpl.getUserByName @Cacheable SYS_USERS_CACHE/#username copies DB status into LoginUser",
+    "jwt_status_check": "ShiroRealm.checkUserTokenIsEffect reads cached LoginUser and checks status !=1",
+    "spring_cache_default_ttl_hours": 6,
+    "frozenBatch": "SysUserController calls ISysUserService.update(entity,wrapper); SysUserServiceImpl has no override or cache eviction on this entry",
+    "unproven_scope": "reviewer did not execute normal-admin freeze; actual paired new/old execution supplied independently by testing Agent and recorded below"
+  },
+  "paired_runtime_evidence": {
+    "evidence_kind": "read-only inspection of other Agent real synthetic normal frozenBatch HTTP; no cache clearing",
+    "new": {
+      "evidence": "normal-account-freeze-new.json",
+      "jar_sha256": "232508e514d6221fda0f64975936e22ed370e8fe7eb29eea7e1c3bbc798bda8e",
+      "passed": 5,
+      "total": 6,
+      "database_disabled_confirmed": true,
+      "old_credential_http_status": 200,
+      "api_code": 0,
+      "api_success": true
+    },
+    "old": {
+      "evidence": "normal-account-freeze-old.json",
+      "jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+      "passed": 5,
+      "total": 6,
+      "database_disabled_confirmed": true,
+      "old_credential_http_status": 200,
+      "api_code": 0,
+      "api_success": true
+    },
+    "conclusion": "same bounded normal-admin flow fails old and new; existing defect, not new Shiro maintenance regression; remains unfixed"
+  }
+}

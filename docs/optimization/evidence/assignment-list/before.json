@@ -1,0 +1,97 @@
+{
+  "observed_utc": "2026-10-02T20:29:08.285012+00:00",
+  "jar_sha256": "c76dfb9032b92eb6f4bf86ef152e16fadc7504436b81fe1e4d49990f6883738f",
+  "expected_legacy": true,
+  "passed": 12,
+  "total": 12,
+  "cases": [
+    {
+      "case": "student_a list {'submit': 'false'}",
+      "passed": true
+    },
+    {
+      "case": "student_a list {}",
+      "passed": true
+    },
+    {
+      "case": "student_a list {'departId': 'fixture_class_b'}",
+      "passed": true
+    },
+    {
+      "case": "legacy draft OR bypasses assignment state and class",
+      "passed": true
+    },
+    {
+      "case": "legacy substring class leaks task",
+      "passed": true
+    },
+    {
+      "case": "legacy foreign department filter ignored",
+      "passed": true
+    },
+    {
+      "case": "legacy deleted work treated as submitted",
+      "passed": true
+    },
+    {
+      "case": "legacy local file gets cloud URL",
+      "passed": true
+    },
+    {
+      "case": "legacy decorated URL double prefixes",
+      "passed": true
+    },
+    {
+      "case": "original rows restored",
+      "passed": true
+    },
+    {
+      "case": "original files restored",
+      "passed": true
+    },
+    {
+      "case": "fault table removed",
+      "passed": true
+    }
+  ],
+  "observed": {
+    "unsubmitted_ids": [
+      "draft",
+      "ended",
+      "foreign",
+      "pending",
+      "substring",
+      "withdrawn"
+    ],
+    "all_ids": [
+      "deleted",
+      "draft",
+      "graded",
+      "missingfile",
+      "pending",
+      "shared",
+      "submitted",
+      "substring"
+    ],
+    "foreign_filter_ids": [
+      "deleted",
+      "draft",
+      "graded",
+      "missingfile",
+      "pending",
+      "shared",
+      "submitted",
+      "substring"
+    ],
+    "local_file_response": {
+      "mineWorkName": "assignment-probe-work-submitted",
+      "mineWorkStatus": 1,
+      "mineWorkId": "fixture_aprobe_w_submitted",
+      "mineWorkUrl": "http://127.0.0.1:9/assignment-probe # report.txt",
+      "mineWorkCover": "http://127.0.0.1:9/assignment-probe # report.txt",
+      "mineWorkUrl_url": "/api/sys/common/static/http://127.0.0.1:9/assignment-probe # report.txt",
+      "mineWorkCover_url": "/api/sys/common/static/http://127.0.0.1:9/assignment-probe # report.txt"
+    }
+  },
+  "scope": "Actual local synthetic authenticated HTTP, SQL, file bytes; cloud URL formatting only, no browser or real Qiniu upload acceptance."
+}

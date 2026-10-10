@@ -1,0 +1,10 @@
+{
+  "temporary_ports_stopped": {
+    "13367": true,
+    "16440": true,
+    "18167": true,
+    "18168": true
+  },
+  "debug_configuration_restored_exactly": true,
+  "data_and_failure_evidence_retained": true
+}

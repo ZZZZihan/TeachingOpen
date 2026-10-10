@@ -1,0 +1,518 @@
+{
+  "mode": "normal",
+  "reads": [
+    {
+      "workId": "saved-2",
+      "mode": "slow-project"
+    },
+    {
+      "workId": "saved-2",
+      "mode": "normal"
+    },
+    {
+      "workId": "saved-2",
+      "mode": "load-error"
+    },
+    {
+      "workId": "saved-2",
+      "mode": "normal"
+    },
+    {
+      "workId": "saved-3",
+      "mode": "normal"
+    }
+  ],
+  "uploads": [
+    {
+      "path": "fixture/1.png",
+      "name": "Scratch 实验 & 100%.png",
+      "sha256": "a2541c3e4002754d6d494a335439e5ff40280778c1147c8ba5fd1fe12a5ec673",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/2.sb3",
+      "name": "Scratch 实验 & 100%.sb3",
+      "sha256": "2bd2f20df8d0adc3beb940a13269b60ba7c678396a6d2fba58e017af0d292c73",
+      "failed": false,
+      "targets": [
+        {
+          "name": "Stage",
+          "isStage": true,
+          "x": null,
+          "y": null
+        },
+        {
+          "name": "练习角色",
+          "isStage": false,
+          "x": 100,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "path": "fixture/3.png",
+      "name": "Scratch 第二版 & 100%.png",
+      "sha256": "a8ffd68110887fc7320895a691cf69c1789705273da9a739bcbf38fa88dd2e22",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/4.sb3",
+      "name": "Scratch 第二版 & 100%.sb3",
+      "sha256": "4171149a383a975ab1851482184b1ccb7ef6d7440ecf9770e1be1b04dcbb67cf",
+      "failed": false,
+      "targets": [
+        {
+          "name": "Stage",
+          "isStage": true,
+          "x": null,
+          "y": null
+        },
+        {
+          "name": "练习角色",
+          "isStage": false,
+          "x": -80,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "path": "fixture/5.sb3",
+      "name": "Scratch 第二版 & 100%.sb3",
+      "sha256": "8f76a1b4b894d593bc46b9fefe59adfd2e76c96428d1789d17b1f124f616e9c2",
+      "failed": false,
+      "targets": [
+        {
+          "name": "Stage",
+          "isStage": true,
+          "x": null,
+          "y": null
+        },
+        {
+          "name": "练习角色",
+          "isStage": false,
+          "x": -80,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "path": "fixture/6.png",
+      "name": "Scratch 第二版 & 100%.png",
+      "sha256": "a8ffd68110887fc7320895a691cf69c1789705273da9a739bcbf38fa88dd2e22",
+      "failed": true,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/7.sb3",
+      "name": "Scratch 第二版 & 100%.sb3",
+      "sha256": "573607976c7988ba54cc47094238b672ea60c5bc15bc49e2213faadd47406d3d",
+      "failed": false,
+      "targets": [
+        {
+          "name": "Stage",
+          "isStage": true,
+          "x": null,
+          "y": null
+        },
+        {
+          "name": "练习角色",
+          "isStage": false,
+          "x": -80,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "path": "fixture/8.png",
+      "name": "Scratch 第二版 & 100%.png",
+      "sha256": "a8ffd68110887fc7320895a691cf69c1789705273da9a739bcbf38fa88dd2e22",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/9.sb3",
+      "name": "Scratch 第二版 & 100%.sb3",
+      "sha256": "90ae29d9f53b2b43651497182153120a2871d5431c86066e2645710a0bc0d4cd",
+      "failed": false,
+      "targets": [
+        {
+          "name": "Stage",
+          "isStage": true,
+          "x": null,
+          "y": null
+        },
+        {
+          "name": "练习角色",
+          "isStage": false,
+          "x": -80,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "path": "fixture/10.png",
+      "name": "Scratch 第二版 & 100%.png",
+      "sha256": "7f7779521547b0436b6d696dc0bac2aaec96f04cbe88cbd933039b98ab522aa2",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/11.sb3",
+      "name": "Scratch 第二版 & 100%.sb3",
+      "sha256": "c6a8069678288bc34a20775f078995a20bdd6be7206e2091a689607595f4402d",
+      "failed": false,
+      "targets": [
+        {
+          "name": "Stage",
+          "isStage": true,
+          "x": null,
+          "y": null
+        },
+        {
+          "name": "练习角色",
+          "isStage": false,
+          "x": -80,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "path": "fixture/12.png",
+      "name": "Scratch 第二版 & 100%.png",
+      "sha256": "a8ffd68110887fc7320895a691cf69c1789705273da9a739bcbf38fa88dd2e22",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/13.sb3",
+      "name": "Scratch 第二版 & 100%.sb3",
+      "sha256": "c4c54f40228ece5178d2b1a5073e4ef66451f3ea664d12b6fed829444d93d437",
+      "failed": false,
+      "targets": [
+        {
+          "name": "Stage",
+          "isStage": true,
+          "x": null,
+          "y": null
+        },
+        {
+          "name": "练习角色",
+          "isStage": false,
+          "x": -80,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "path": "fixture/14.png",
+      "name": "Scratch 第二版 & 100%.png",
+      "sha256": "a8ffd68110887fc7320895a691cf69c1789705273da9a739bcbf38fa88dd2e22",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    },
+    {
+      "path": "fixture/15.sb3",
+      "name": "课程 Scratch 练习.sb3",
+      "sha256": "e8b7cd305ec878bd866526c3cbeaa99f48006531b2bf66b36cdd26bf39884fb3",
+      "failed": false,
+      "targets": [
+        {
+          "name": "Stage",
+          "isStage": true,
+          "x": null,
+          "y": null
+        },
+        {
+          "name": "练习角色",
+          "isStage": false,
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "path": "fixture/16.png",
+      "name": "课程 Scratch 练习.png",
+      "sha256": "6b0933cd1b69f83255a652fe9936e79ac46791be6f264c957d25551fc51cb284",
+      "failed": false,
+      "header_hex": "89504e470d0a1a0a"
+    }
+  ],
+  "registrations": [
+    {
+      "fileType": 2,
+      "fileName": "Scratch 实验 & 100%.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/1.png",
+      "fileLocation": 1,
+      "id": "file-1",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "Scratch 实验 & 100%.sb3",
+      "fileTag": "学生作业-sb3",
+      "filePath": "fixture/2.sb3",
+      "fileLocation": 1,
+      "id": "file-2",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "Scratch 第二版 & 100%.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/3.png",
+      "fileLocation": 1,
+      "id": "file-3",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "Scratch 第二版 & 100%.sb3",
+      "fileTag": "学生作业-sb3",
+      "filePath": "fixture/4.sb3",
+      "fileLocation": 1,
+      "id": "file-4",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "Scratch 第二版 & 100%.sb3",
+      "fileTag": "学生作业-sb3",
+      "filePath": "fixture/5.sb3",
+      "fileLocation": 1,
+      "id": "file-5",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "Scratch 第二版 & 100%.sb3",
+      "fileTag": "学生作业-sb3",
+      "filePath": "fixture/7.sb3",
+      "fileLocation": 1,
+      "id": "file-6",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "Scratch 第二版 & 100%.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/8.png",
+      "fileLocation": 1,
+      "id": "file-7",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "Scratch 第二版 & 100%.sb3",
+      "fileTag": "学生作业-sb3",
+      "filePath": "fixture/9.sb3",
+      "fileLocation": 1,
+      "id": "file-8",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "Scratch 第二版 & 100%.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/10.png",
+      "fileLocation": 1,
+      "id": "file-9",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "Scratch 第二版 & 100%.sb3",
+      "fileTag": "学生作业-sb3",
+      "filePath": "fixture/11.sb3",
+      "fileLocation": 1,
+      "id": "file-10",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "Scratch 第二版 & 100%.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/12.png",
+      "fileLocation": 1,
+      "id": "file-11",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "Scratch 第二版 & 100%.sb3",
+      "fileTag": "学生作业-sb3",
+      "filePath": "fixture/13.sb3",
+      "fileLocation": 1,
+      "id": "file-12",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "Scratch 第二版 & 100%.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/14.png",
+      "fileLocation": 1,
+      "id": "file-13",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "课程 Scratch 练习.sb3",
+      "fileTag": "学生作业-sb3",
+      "filePath": "fixture/15.sb3",
+      "fileLocation": 1,
+      "id": "file-14",
+      "failed": false
+    },
+    {
+      "fileType": 2,
+      "fileName": "课程 Scratch 练习.png",
+      "fileTag": "学生作业-封面",
+      "filePath": "fixture/16.png",
+      "fileLocation": 1,
+      "id": "file-15",
+      "failed": false
+    }
+  ],
+  "submissions": [
+    {
+      "id": "",
+      "workName": "Scratch 实验 & 100%",
+      "workFile": "file-2",
+      "workCover": "file-1",
+      "workType": 2,
+      "workStatus": 0,
+      "courseId": "",
+      "additionalId": "",
+      "departId": "",
+      "workScene": "create",
+      "hasCloudData": false,
+      "failed": false
+    },
+    {
+      "id": "saved-2",
+      "workName": "Scratch 第二版 & 100%",
+      "workFile": "file-4",
+      "workCover": "file-3",
+      "workType": 2,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "",
+      "departId": "",
+      "workScene": "create",
+      "hasCloudData": false,
+      "failed": false
+    },
+    {
+      "id": "saved-2",
+      "workName": "Scratch 第二版 & 100%",
+      "workFile": "file-6",
+      "workCover": "file-7",
+      "workType": 2,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "",
+      "departId": "",
+      "workScene": "create",
+      "hasCloudData": false,
+      "failed": false
+    },
+    {
+      "id": "saved-2",
+      "workName": "Scratch 第二版 & 100%",
+      "workFile": "file-8",
+      "workCover": "file-9",
+      "workType": 2,
+      "workStatus": 0,
+      "courseId": "",
+      "additionalId": "",
+      "departId": "",
+      "workScene": "create",
+      "hasCloudData": false,
+      "failed": false
+    },
+    {
+      "id": "saved-2",
+      "workName": "Scratch 第二版 & 100%",
+      "workFile": "file-10",
+      "workCover": "file-11",
+      "workType": 2,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "",
+      "departId": "",
+      "workScene": "create",
+      "hasCloudData": false,
+      "failed": true
+    },
+    {
+      "id": "saved-2",
+      "workName": "Scratch 第二版 & 100%",
+      "workFile": "file-12",
+      "workCover": "file-13",
+      "workType": 2,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "",
+      "departId": "",
+      "workScene": "create",
+      "hasCloudData": false,
+      "failed": false
+    },
+    {
+      "id": "",
+      "workName": "课程 Scratch 练习",
+      "workFile": "file-14",
+      "workCover": "file-15",
+      "workType": 2,
+      "workStatus": 0,
+      "courseId": "course-fixture",
+      "additionalId": "",
+      "departId": "",
+      "workScene": "course",
+      "hasCloudData": false,
+      "failed": false
+    }
+  ],
+  "works": {
+    "seed-work": {
+      "id": "seed-work",
+      "workName": "我的 Scratch 练习 & 100%",
+      "workType": "2",
+      "workFileKey_url": "/fixtures/sample.sb3?revision=1&label=a+b",
+      "additionalId": "task-scratch",
+      "departId": "class-fixture"
+    },
+    "saved-2": {
+      "id": "saved-2",
+      "workName": "Scratch 第二版 & 100%",
+      "workFile": "file-12",
+      "workCover": "file-13",
+      "workType": 2,
+      "workStatus": 1,
+      "courseId": "",
+      "additionalId": "",
+      "departId": "",
+      "workScene": "create",
+      "hasCloudData": false,
+      "workFileKey_url": "/fixture/13.sb3"
+    },
+    "saved-3": {
+      "id": "saved-3",
+      "workName": "课程 Scratch 练习",
+      "workFile": "file-14",
+      "workCover": "file-15",
+      "workType": 2,
+      "workStatus": 0,
+      "courseId": "course-fixture",
+      "additionalId": "",
+      "departId": "",
+      "workScene": "course",
+      "hasCloudData": false,
+      "workFileKey_url": "/fixture/15.sb3"
+    }
+  }
+}

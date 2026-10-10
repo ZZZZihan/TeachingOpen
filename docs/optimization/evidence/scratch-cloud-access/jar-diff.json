@@ -1,0 +1,11 @@
+{
+  "before_sha256": "fdc60a9974eed65cc25de13e5a38931bba0f14122e0f3c2adeeb59ec03771396",
+  "after_sha256": "ba9a03697641afdb8ee1781ab20848e1865fdfa4ee4c1c1ac317156f7efcb72f",
+  "changed_entries": [
+    "BOOT-INF/classes/org/jeecg/modules/message/websocket/ScratchCloudStore.class",
+    "BOOT-INF/classes/org/jeecg/modules/message/websocket/ScratchWebSocket.class",
+    "BOOT-INF/classes/org/jeecg/modules/teaching/service/TeachingAccessService.class",
+    "BOOT-INF/lib/jeecg-boot-base-common-2.8.0.jar"
+  ],
+  "common_jar_content_changes": []
+}

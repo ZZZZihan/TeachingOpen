@@ -217,10 +217,10 @@ export default {
           this.frameHref = '/scratch3/player.html?workId=' + record.id
           return
         case '3':
-          this.frameHref = '/scratchjr/editor.html?mode=look&workFile=' + record.workFileKey_url
+          this.frameHref = '/scratchjr/editor.html?queryEncoding=uri&mode=look&workFile=' + encodeURIComponent(record.workFileKey_url)
           return
         case '4':
-          this.frameHref = '/python/player.html?lang=turtle&url=' + record.workFileKey_url
+          this.frameHref = '/python/player.html?' + new URLSearchParams({ queryEncoding: 'uri', lang: 'turtle', url: record.workFileKey_url }).toString()
           return
         case '10':
           this.frameHref = '/blockly/index.html?lang=zh-hans&workId=' + record.id
@@ -242,14 +242,21 @@ export default {
       this.loadingMore = true
       getAction('/teaching/teachingWork/getWorkComments', { workId: this.workId, page: this.commentsPage }).then(
         (res) => {
-          this.loadingMore = false
+          if (!res.success || !Array.isArray(res.result)) {
+            this.commentsPage -= 1
+            return
+          }
           if (res.result.length == 0 && this.commentsPage > 1) {
             this.$message.info('已加载完啦！')
           } else {
             this.comments = this.comments.concat(res.result)
           }
         }
-      )
+      ).catch(() => {
+        this.commentsPage -= 1
+      }).finally(() => {
+        this.loadingMore = false
+      })
     },
     comment() {
       if (this.commentContent != '') {

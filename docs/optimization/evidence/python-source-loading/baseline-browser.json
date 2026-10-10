@@ -1,0 +1,212 @@
+{
+  "baseline_commit": "f906f8e782795ddd670725e85ffa4ea1756b665c",
+  "browser": "Chromium via Playwright CLI",
+  "synthetic_http_only": true,
+  "results": [
+    {
+      "entry": "player",
+      "missing": false,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:18159/fixtures/seed.py",
+          "method": "GET"
+        },
+        {
+          "url": "http://127.0.0.1:18159/fixtures/seed.py",
+          "method": "GET"
+        }
+      ],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:18159/fixtures/seed.py",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18159/fixtures/seed.py",
+          "status": 200
+        }
+      ],
+      "pageErrors": [],
+      "ui": {
+        "title": "Teaching Python Mobile",
+        "text": "运 行 清 空\n1\n2\n3\nprint(\"Python persistence fixture\")\nprint(6 * 7)",
+        "editors": 1,
+        "sourceStatus": null,
+        "phase": null,
+        "retryVisible": false,
+        "buttons": [
+          {
+            "text": "运 行",
+            "disabled": false
+          },
+          {
+            "text": "清 空",
+            "disabled": false
+          }
+        ],
+        "code": "print(\"Python persistence fixture\")print(6 * 7)"
+      }
+    },
+    {
+      "entry": "player",
+      "missing": true,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:18159/fixtures/missing.py",
+          "method": "GET"
+        },
+        {
+          "url": "http://127.0.0.1:18159/fixtures/missing.py",
+          "method": "GET"
+        }
+      ],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:18159/fixtures/missing.py",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:18159/fixtures/missing.py",
+          "status": 404
+        }
+      ],
+      "pageErrors": [
+        "Error: Request failed with status code 404",
+        "Error: Request failed with status code 404"
+      ],
+      "ui": {
+        "title": "Teaching Python Mobile",
+        "text": "运 行 清 空\n1",
+        "editors": 1,
+        "sourceStatus": null,
+        "phase": null,
+        "retryVisible": false,
+        "buttons": [
+          {
+            "text": "运 行",
+            "disabled": false
+          },
+          {
+            "text": "清 空",
+            "disabled": false
+          }
+        ],
+        "code": ""
+      }
+    },
+    {
+      "entry": "index",
+      "missing": false,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:18159/fixtures/seed.py",
+          "method": "GET"
+        },
+        {
+          "url": "http://127.0.0.1:18159/fixtures/seed.py",
+          "method": "GET"
+        }
+      ],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:18159/fixtures/seed.py",
+          "status": 200
+        },
+        {
+          "url": "http://127.0.0.1:18159/fixtures/seed.py",
+          "status": 200
+        }
+      ],
+      "pageErrors": [],
+      "ui": {
+        "title": "Teaching Python",
+        "text": "PYTHON 工作区\n可以开始编写代码\n文件\n提 交运行清空返 回\n1\n2\n3\nprint(\"Python persistence fixture\")\nprint(6 * 7)",
+        "editors": 1,
+        "sourceStatus": "可以开始编写代码",
+        "phase": "ready",
+        "retryVisible": false,
+        "buttons": [
+          {
+            "text": "重新打开",
+            "disabled": false
+          },
+          {
+            "text": "提 交",
+            "disabled": false
+          },
+          {
+            "text": "运行",
+            "disabled": false
+          },
+          {
+            "text": "清空",
+            "disabled": false
+          },
+          {
+            "text": "返 回",
+            "disabled": false
+          }
+        ],
+        "code": "print(\"Python persistence fixture\")print(6 * 7)"
+      }
+    },
+    {
+      "entry": "index",
+      "missing": true,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:18159/fixtures/missing.py",
+          "method": "GET"
+        },
+        {
+          "url": "http://127.0.0.1:18159/fixtures/missing.py",
+          "method": "GET"
+        }
+      ],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:18159/fixtures/missing.py",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:18159/fixtures/missing.py",
+          "status": 404
+        }
+      ],
+      "pageErrors": [
+        "Error: Request failed with status code 404"
+      ],
+      "ui": {
+        "title": "Teaching Python",
+        "text": "PYTHON 工作区\n未能打开作品。网络或服务暂时不可用；请重试，避免覆盖原作品。\n重新打开\n文件\n提 交运行清空返 回\n1",
+        "editors": 1,
+        "sourceStatus": "未能打开作品。网络或服务暂时不可用；请重试，避免覆盖原作品。",
+        "phase": "load-error",
+        "retryVisible": true,
+        "buttons": [
+          {
+            "text": "重新打开",
+            "disabled": false
+          },
+          {
+            "text": "提 交",
+            "disabled": true
+          },
+          {
+            "text": "运行",
+            "disabled": false
+          },
+          {
+            "text": "清空",
+            "disabled": false
+          },
+          {
+            "text": "返 回",
+            "disabled": false
+          }
+        ],
+        "code": ""
+      }
+    }
+  ]
+}

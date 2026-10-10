@@ -1,0 +1,24 @@
+[
+  {
+    "variant": "initial Shiro BOM",
+    "jar_sha256": "257893ec1ad48220e77126664ab7f1c3344c261d702f4b659caa5627819849e6",
+    "error": "NoClassDefFoundError: org/springframework/core/metrics/ApplicationStartup",
+    "cause": "Shiro BOM raised some Spring components to5.3.30 while core remained5.1.5",
+    "log": "backend-initial.log",
+    "health_up": false,
+    "pid": 27201,
+    "process_exited": true,
+    "private_log_sha256": "76d1c24e4d6a862ac71fd2d9ce8322a0bbc646fb4d6d46ea8da49f37ba572686"
+  },
+  {
+    "variant": "Shiro property only without factory alias",
+    "jar_sha256": "3a80c0b824f08500c4cc710f35eba8f47fb0ea0f546865214043cf81ff22f7c0",
+    "error": "NoSuchBeanDefinitionException: No bean named 'shiroFilterFactoryBean' available",
+    "cause": "1.13 web auto registration invokes factory bean by conventional name; current manual bean named shiroFilter",
+    "log": "backend-property-only.log",
+    "health_up": false,
+    "pid": 28273,
+    "process_exited": true,
+    "private_log_sha256": "40dbbf5e86ca5d1963c5d2f1c8cd297b8148495b0a747176f23a600826b1afe2"
+  }
+]

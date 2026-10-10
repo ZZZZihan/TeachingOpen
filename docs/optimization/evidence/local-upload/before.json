@@ -1,0 +1,34 @@
+{
+  "observed_utc": "2026-10-02T17:36:40.167360+00:00",
+  "jar_sha256": "bdb450061cfcdaf8a8e2b47beacf26ad32f312cbca2d3302ca8f4eae3c94d70d",
+  "expected_legacy": true,
+  "passed": 6,
+  "total": 6,
+  "cases": [
+    {
+      "case": "legacy parent directory escapes configured upload root",
+      "passed": true
+    },
+    {
+      "case": "legacy symlink writes outside upload root",
+      "passed": true
+    },
+    {
+      "case": "legacy editor directory parameter ignored",
+      "passed": true
+    },
+    {
+      "case": "upload does not silently change existing file or work records",
+      "passed": true
+    },
+    {
+      "case": "original upload bytes restored",
+      "passed": true
+    },
+    {
+      "case": "owned external probe and links removed",
+      "passed": true
+    }
+  ],
+  "scope": "actual local multipart uploads and filesystem bytes; does not prove file ownership, downloads, cloud upload or browser editor workflows"
+}

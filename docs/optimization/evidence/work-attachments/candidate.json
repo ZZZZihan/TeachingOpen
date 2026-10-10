@@ -1,0 +1,60 @@
+{
+  "base_pr": 12,
+  "base_commit": "8250c7b8fc1d2c7ddc80add806b6f8053cfc9355",
+  "build_exit_code": 0,
+  "java_tests": "skipped by parent POM",
+  "jar_sha256": "7248b1d189e868783bdfa847792dafe6966710a050a767acd0bfdc5b40996c5c",
+  "checks": {
+    "before.json": {
+      "passed": 12,
+      "total": 12
+    },
+    "learning-units-combined.json": {
+      "passed": 80,
+      "total": 80
+    },
+    "after.json": {
+      "passed": 41,
+      "total": 41
+    },
+    "role-cache-combined.json": {
+      "passed": 11,
+      "total": 11
+    },
+    "work-management-combined.json": {
+      "passed": 134,
+      "total": 134
+    },
+    "course-management-combined.json": {
+      "passed": 188,
+      "total": 188
+    }
+  },
+  "source_sha256": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/impl/SysFileServiceImpl.java": "0a45c847444749a3ef376793c82a3a5c1a02505063801dbaf44e9888e6062e37",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingWorkController.java": "3653f648855c1504180f24221fa2888ee7fd5fd7b8a64551255ee67db5829006",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/impl/TeachingWorkServiceImpl.java": "fd139ab3c89be425f10e58efbacacf66324b5d6a483ea6bdab2e10da405878fe",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/TeachingWorkAttachmentService.java": "e7f572454f2a3fe482aaa31956627c6c5b82edf4a643e2bbcab1952f2eb06a3d",
+    "api/dev/verify-work-attachments.py": "77b316c83f504451d369e817876bfd9e0bca94370631e3691e94f918ddbcb0dd",
+    "api/dev/verify-work-management.py": "9b140f642496c4aae9fbe31515ac1b0cceefd2d54a57efe02a7fc1ec79a44c15"
+  },
+  "evidence_sha256": {
+    "before.json": "d95f9a9c2bd5bf98a6e3a0d26e3551dae1ec64f69dc7186b02819ee4caa3010a",
+    "learning-units-combined.json": "f7f32b15b70c45c301154fd57f9c3fc20a61e09ced3fe50fef14ae0a806eda93",
+    "build-summary.txt": "1bbfcd323d4e05dacb81332e4bd61436dac7f2e380f044425e5ac85908c555b0",
+    "after.json": "0b66421096de3173e907b3f58acf9aecf05f444c5638407b9cf128d480939c67",
+    "role-cache-combined.json": "4adf05328a55535be31047367b2a14ede11da5da2dfbb7df8c98487de02b3429",
+    "work-management-combined.json": "aa6f38fec0610caf88cb74b5618cf1ab15947ebfd494b35685dcc4f07de9a395",
+    "course-management-combined.json": "bbb05a081703137c849beeed2c68a5dd99467579b25610a36a024bc0c74bf260"
+  },
+  "build_log_sha256": "33c69f25eb83472aced8137cd8ed9dc2e9928b0ff9f14f684b93dfe2080872d5",
+  "protected_original_source_file_count": 5634,
+  "protected_original_source_changed": 0,
+  "limitations": [
+    "Sequential synthetic local requests; no concurrent writer acceptance",
+    "No Qiniu or browser editor acceptance",
+    "Alias collisions and failed cleanup may retain files; no durable retry queue",
+    "Generic file APIs and raw-path references in other resources remain separate work",
+    "No merge or production deployment"
+  ]
+}

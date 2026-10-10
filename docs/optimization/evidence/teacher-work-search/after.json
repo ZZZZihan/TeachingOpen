@@ -1,0 +1,265 @@
+{
+  "legacy_expectations": false,
+  "jar_sha256": "d89ef0667d90854195792b30d2af4b469738bb86c65498bd7c68ce350aeb3ac8",
+  "passed": 25,
+  "total": 25,
+  "exception": null,
+  "cases": [
+    {
+      "case": "exact work name remains usable",
+      "passed": true
+    },
+    {
+      "case": "work name substring matches own pending work",
+      "passed": true
+    },
+    {
+      "case": "work name infix matches own work",
+      "passed": true
+    },
+    {
+      "case": "student name substring with exact work name",
+      "passed": true
+    },
+    {
+      "case": "both fuzzy fields compose with status",
+      "passed": true
+    },
+    {
+      "case": "both exact text fields remain usable",
+      "passed": true
+    },
+    {
+      "case": "unknown student name yields no work",
+      "passed": true
+    },
+    {
+      "case": "all states and descending order",
+      "passed": true
+    },
+    {
+      "case": "ascending order and first page",
+      "passed": true
+    },
+    {
+      "case": "second page retains same total",
+      "passed": true
+    },
+    {
+      "case": "exact username filter remains usable",
+      "passed": true
+    },
+    {
+      "case": "username remains exact",
+      "passed": true
+    },
+    {
+      "case": "status mismatch yields no work",
+      "passed": true
+    },
+    {
+      "case": "scene mismatch yields no work",
+      "passed": true
+    },
+    {
+      "case": "type mismatch yields no work",
+      "passed": true
+    },
+    {
+      "case": "class filter cannot widen teacher scope",
+      "passed": true
+    },
+    {
+      "case": "other teacher sees only own class match",
+      "passed": true
+    },
+    {
+      "case": "other teacher cannot retrieve exact class A work",
+      "passed": true
+    },
+    {
+      "case": "admin can search across both classes",
+      "passed": true
+    },
+    {
+      "case": "unmatched work name returns empty",
+      "passed": true
+    },
+    {
+      "case": "quote text is a bound search value",
+      "passed": true
+    },
+    {
+      "case": "list denied student_a",
+      "passed": true
+    },
+    {
+      "case": "list denied None",
+      "passed": true
+    },
+    {
+      "case": "all non-audit tables restored",
+      "passed": true
+    },
+    {
+      "case": "attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "case": "exact work name remains usable",
+      "http": 200,
+      "total": 1,
+      "ids": [
+        "fixture_search_0"
+      ]
+    },
+    {
+      "case": "work name substring matches own pending work",
+      "http": 200,
+      "total": 1,
+      "ids": [
+        "fixture_search_0"
+      ]
+    },
+    {
+      "case": "work name infix matches own work",
+      "http": 200,
+      "total": 1,
+      "ids": [
+        "fixture_search_0"
+      ]
+    },
+    {
+      "case": "student name substring with exact work name",
+      "http": 200,
+      "total": 1,
+      "ids": [
+        "fixture_search_0"
+      ]
+    },
+    {
+      "case": "both fuzzy fields compose with status",
+      "http": 200,
+      "total": 1,
+      "ids": [
+        "fixture_search_1"
+      ]
+    },
+    {
+      "case": "both exact text fields remain usable",
+      "http": 200,
+      "total": 1,
+      "ids": [
+        "fixture_search_0"
+      ]
+    },
+    {
+      "case": "unknown student name yields no work",
+      "http": 200,
+      "total": 0,
+      "ids": []
+    },
+    {
+      "case": "all states and descending order",
+      "http": 200,
+      "total": 2,
+      "ids": [
+        "fixture_search_1",
+        "fixture_search_0"
+      ]
+    },
+    {
+      "case": "ascending order and first page",
+      "http": 200,
+      "total": 2,
+      "ids": [
+        "fixture_search_0"
+      ]
+    },
+    {
+      "case": "second page retains same total",
+      "http": 200,
+      "total": 2,
+      "ids": [
+        "fixture_search_1"
+      ]
+    },
+    {
+      "case": "exact username filter remains usable",
+      "http": 200,
+      "total": 1,
+      "ids": [
+        "fixture_search_0"
+      ]
+    },
+    {
+      "case": "username remains exact",
+      "http": 200,
+      "total": 0,
+      "ids": []
+    },
+    {
+      "case": "status mismatch yields no work",
+      "http": 200,
+      "total": 0,
+      "ids": []
+    },
+    {
+      "case": "scene mismatch yields no work",
+      "http": 200,
+      "total": 0,
+      "ids": []
+    },
+    {
+      "case": "type mismatch yields no work",
+      "http": 200,
+      "total": 0,
+      "ids": []
+    },
+    {
+      "case": "class filter cannot widen teacher scope",
+      "http": 200,
+      "total": 0,
+      "ids": []
+    },
+    {
+      "case": "other teacher sees only own class match",
+      "http": 200,
+      "total": 1,
+      "ids": [
+        "fixture_search_2"
+      ]
+    },
+    {
+      "case": "other teacher cannot retrieve exact class A work",
+      "http": 200,
+      "total": 0,
+      "ids": []
+    },
+    {
+      "case": "admin can search across both classes",
+      "http": 200,
+      "total": 3,
+      "ids": [
+        "fixture_search_2",
+        "fixture_search_1",
+        "fixture_search_0"
+      ]
+    },
+    {
+      "case": "unmatched work name returns empty",
+      "http": 200,
+      "total": 0,
+      "ids": []
+    },
+    {
+      "case": "quote text is a bound search value",
+      "http": 200,
+      "total": 0,
+      "ids": []
+    }
+  ],
+  "scope": "Actual synthetic HTTP and database checks; legacy mode reproduces broken fuzzy search, not fixed acceptance."
+}

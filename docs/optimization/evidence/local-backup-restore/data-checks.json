@@ -1,0 +1,38 @@
+{
+  "cases": [
+    {
+      "case": "restored 69 table schemas and all 3019 rows exactly match snapshot",
+      "passed": true
+    },
+    {
+      "case": "restored attachment bytes match snapshot",
+      "passed": true
+    },
+    {
+      "case": "source database unchanged after capture and restore",
+      "passed": true
+    },
+    {
+      "case": "source attachments unchanged after capture and restore",
+      "passed": true
+    },
+    {
+      "case": "target infrastructure credentials independently rotated",
+      "passed": true
+    },
+    {
+      "case": "fixture login preserved",
+      "passed": true
+    },
+    {
+      "case": "fresh Redis contains no source sessions",
+      "passed": true
+    },
+    {
+      "case": "read lock released after exception",
+      "passed": true
+    }
+  ],
+  "passed": 8,
+  "total": 8
+}

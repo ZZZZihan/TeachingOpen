@@ -1,0 +1,11 @@
+[Unit]
+Description=TeachingOpen backup every six hours (Beijing time)
+
+[Timer]
+OnCalendar=*-*-* 00,06,12,18:20:00 Asia/Shanghai
+Persistent=true
+AccuracySec=1min
+Unit=teachingopen-backup.service
+
+[Install]
+WantedBy=timers.target

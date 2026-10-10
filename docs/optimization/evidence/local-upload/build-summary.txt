@@ -1,0 +1,12 @@
+[INFO] Tests are skipped.
+[INFO] Tests are skipped.
+[INFO] Reactor Summary for jeecg-boot-parent 2.8.0:
+[INFO] jeecg-boot-parent .................................. SUCCESS [  0.142 s]
+[INFO] jeecg-boot-base-common ............................. SUCCESS [  2.634 s]
+[INFO] teaching-open ...................................... SUCCESS [  4.990 s]
+[INFO] BUILD SUCCESS
+[INFO] Total time:  7.897 s
+[INFO] Finished at: 2026-10-03T01:40:16+08:00
+
+Standalone packaged Java streaming-failure checks: 3/3 executed successfully via Java 8.
+No frontend source changes; frontend build not repeated in this PR.

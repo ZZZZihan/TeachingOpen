@@ -1,0 +1,24 @@
+[
+  {
+    "file": "src/components/jeecg/JUpload.vue",
+    "before": {
+      "errors": 562,
+      "warnings": 533
+    },
+    "after": {
+      "errors": 550,
+      "warnings": 530
+    }
+  },
+  {
+    "file": "src/components/jeecg/JEditor.vue",
+    "before": {
+      "errors": 58,
+      "warnings": 331
+    },
+    "after": {
+      "errors": 58,
+      "warnings": 331
+    }
+  }
+]

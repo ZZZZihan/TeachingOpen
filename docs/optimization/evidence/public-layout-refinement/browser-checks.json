@@ -1,0 +1,60 @@
+[
+  {
+    "cards": 2,
+    "courses": [
+      "合成测试课程a",
+      "合成测试课程b"
+    ],
+    "hero": "学好人工智能，\n从动手开始。",
+    "phase": "index-1440",
+    "scrollWidth": 1432,
+    "width": 1440
+  },
+  {
+    "cards": 2,
+    "phase": "index-768",
+    "scrollWidth": 760,
+    "width": 768
+  },
+  {
+    "cards": 2,
+    "phase": "index-390",
+    "scrollWidth": 382,
+    "width": 390
+  },
+  {
+    "phase": "mobile-keyboard-menu",
+    "expanded": "true"
+  },
+  {
+    "description": "仅用于本地验收",
+    "left": 8,
+    "phase": "home-card-detail",
+    "right": 382,
+    "width": 390
+  },
+  {
+    "phase": "home-card-login-redirect",
+    "url": "http://127.0.0.1:18102/user/login?redirect=%2Fteaching%2FmineCourse%2FcourseUnitCard%3Fid%3Dfixture_course_a"
+  },
+  {
+    "phase": "home-backend-down",
+    "error": "课程暂时无法加载。\n\n重新加载课程"
+  },
+  {
+    "phase": "home-backend-recovered",
+    "cards": 2,
+    "errorVisible": 0
+  },
+  {
+    "cards": 2,
+    "images": [
+      {
+        "loaded": true,
+        "src": "/api/sys/common/static/refinement-course-cover.png"
+      }
+    ],
+    "missingCardText": "公开课程\n合成测试课程a\n仅用于本地验收\n课程学习\n了解课程",
+    "phase": "home-mixed-covers"
+  }
+]

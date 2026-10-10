@@ -1,0 +1,70 @@
+{
+  "generated_utc": "2026-10-02T22:39:23.995879+00:00",
+  "source_commit": "58b9fca5be742c887a6e5d74934cf942d3ff3e00",
+  "previous_commit": "b30f597524347de7de7f1ce2f22d5f9dc4ecc9dc",
+  "integrated_pr": "https://github.com/ZZZZihan/TeachingOpen/pull/31",
+  "pr_head": "40bdd77e2f7dd9c20b385d63c6efeb672296a512",
+  "api_tree": "befd98c657ca07af12e4350336864efd0a0efb21",
+  "web_tree": "bb2496d96d994e3a7e3fd3dd34169420a761ae39",
+  "application_code_resources_unchanged": true,
+  "switch_tool_sources_equal_tested_pr": true,
+  "python_tests": {
+    "passed": 30,
+    "total": 30
+  },
+  "bundles_reverified": {
+    "candidate-a": {
+      "reference": {
+        "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-a",
+        "manifest_sha256": "4b28822b71911449e61813b9bf2f87b771f0b907ddf70b964b99e287ab2ced8a"
+      },
+      "files_verified": 4885
+    },
+    "candidate-b": {
+      "reference": {
+        "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-b",
+        "manifest_sha256": "2617aabc9a683c467a364de34975bf27e414d21cb5f62ef9209bd6b1b1a74547"
+      },
+      "files_verified": 4887
+    }
+  },
+  "restored_runtime_status": {
+    "recorded": {
+      "status": "stopped",
+      "active": {
+        "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-a",
+        "manifest_sha256": "4b28822b71911449e61813b9bf2f87b771f0b907ddf70b964b99e287ab2ced8a"
+      },
+      "previous": {
+        "path": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/candidate-b",
+        "manifest_sha256": "2617aabc9a683c467a364de34975bf27e414d21cb5f62ef9209bd6b1b1a74547"
+      }
+    },
+    "observed": {},
+    "both_processes_listening": false
+  },
+  "previous_dist_files_unchanged": 4884,
+  "http_assets": {
+    "/index.html": "2389c437574e6bfe99236b4ecee12d41bc034ba10f6a8f87d615011eceff9b34",
+    "/js/app.65b2b49b.js": "e7cf2b53b482c05c12ccd49cdfa57fbfc6bba7a831a415ae8c57e74ea5cef59c"
+  },
+  "protected_anonymous_status": 401,
+  "health": {
+    "18091": "UP",
+    "18101": "UP",
+    "18111": "UP"
+  },
+  "backend_pid": 57077,
+  "jar_sha256": "85f7746a3ae4b143f1a4ca4e5c043e11c81bf7d69f32c72b7dbaa190f6a0e85c",
+  "jar_rebuilt": false,
+  "frontend_build_and_tests_rerun": false,
+  "switch_drill_rerun_on_integration": false,
+  "reason": "switch implementation matches tested PR; new integration checks cover unit suite, actual bundle integrity and current server artifacts",
+  "browser_e2e": false,
+  "remote_merged": false,
+  "production_changed": false,
+  "pending_work_read_audit_field_fix": true,
+  "evidence_sha256": {
+    "candidate-switch-python-tests.txt": "f85a37dd7f071a68e7630dbc7a6ac15d5d89abb0bfed1d874752d16fdb9a6986"
+  }
+}

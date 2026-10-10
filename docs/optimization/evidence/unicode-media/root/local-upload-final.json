@@ -1,0 +1,194 @@
+{
+  "observed_utc": "2026-10-03T12:40:42.485130+00:00",
+  "jar_sha256": "95d9ad3ad4ada70897974071fec283a0c29bb703e2cdcb41397e80f77ebbd7c7",
+  "expected_legacy": false,
+  "passed": 46,
+  "total": 46,
+  "cases": [
+    {
+      "case": "parent directory rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "nested traversal rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "editor alias traversal rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "absolute directory rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "backslash traversal rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "drive path rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "dot segment rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "NUL directory rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "outside symlink rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "inside symlink rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "existing file directory rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "unwritable directory rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "conflicting aliases rejected without byte changes",
+      "passed": true
+    },
+    {
+      "case": "missing multipart file returns safe failure",
+      "passed": true
+    },
+    {
+      "case": "non-multipart upload returns safe error without writes",
+      "passed": true
+    },
+    {
+      "case": "anonymous upload denied before writing",
+      "passed": true
+    },
+    {
+      "case": "invalid token upload denied before writing",
+      "passed": true
+    },
+    {
+      "case": "student_a biz upload preserves returned relative path and bytes",
+      "passed": true
+    },
+    {
+      "case": "student_a bizPath upload preserves returned relative path and bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a biz upload preserves returned relative path and bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a bizPath upload preserves returned relative path and bytes",
+      "passed": true
+    },
+    {
+      "case": "admin biz upload preserves returned relative path and bytes",
+      "passed": true
+    },
+    {
+      "case": "admin bizPath upload preserves returned relative path and bytes",
+      "passed": true
+    },
+    {
+      "case": "default root succeeds with exact bytes inside root",
+      "passed": true
+    },
+    {
+      "case": "matching aliases succeeds with exact bytes inside root",
+      "passed": true
+    },
+    {
+      "case": "empty Python file succeeds with exact bytes inside root",
+      "passed": true
+    },
+    {
+      "case": "ScratchJr extension succeeds with exact bytes inside root",
+      "passed": true
+    },
+    {
+      "case": "Unicode directory and file succeeds with exact bytes inside root",
+      "passed": true
+    },
+    {
+      "case": "extensionless file succeeds with exact bytes inside root",
+      "passed": true
+    },
+    {
+      "case": "compound extension succeeds with exact bytes inside root",
+      "passed": true
+    },
+    {
+      "case": "client path basename succeeds with exact bytes inside root",
+      "passed": true
+    },
+    {
+      "case": "two MiB file succeeds with exact bytes inside root",
+      "passed": true
+    },
+    {
+      "case": "same client filename cannot overwrite earlier bytes",
+      "passed": true
+    },
+    {
+      "case": "legacy local base64 editor marker retained without disk write",
+      "passed": true
+    },
+    {
+      "case": "uploaded path can be registered by existing editor request",
+      "passed": true
+    },
+    {
+      "case": "uploaded file can be saved as an actual student draft",
+      "passed": true
+    },
+    {
+      "case": "owner reopens draft with nested uploaded file URL",
+      "passed": true
+    },
+    {
+      "case": "actual HTTP download returns uploaded draft bytes",
+      "passed": true
+    },
+    {
+      "case": "nested upload retains byte-range reads",
+      "passed": true
+    },
+    {
+      "case": "normal work deletion reclaims pipeline file metadata and bytes",
+      "passed": true
+    },
+    {
+      "case": "packaged streaming fault 0 cleans partial bytes",
+      "passed": true
+    },
+    {
+      "case": "packaged streaming fault 1 cleans partial bytes",
+      "passed": true
+    },
+    {
+      "case": "packaged streaming fault 2 cleans partial bytes",
+      "passed": true
+    },
+    {
+      "case": "upload does not silently change existing file or work records",
+      "passed": true
+    },
+    {
+      "case": "original upload bytes restored",
+      "passed": true
+    },
+    {
+      "case": "owned external probe and links removed",
+      "passed": true
+    }
+  ],
+  "scope": "actual local multipart uploads and filesystem bytes; does not prove file ownership, downloads, cloud upload or browser editor workflows"
+}

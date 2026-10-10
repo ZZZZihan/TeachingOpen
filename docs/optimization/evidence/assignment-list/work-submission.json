@@ -1,0 +1,390 @@
+{
+  "observed_utc": "2026-10-02T20:33:14.148338+00:00",
+  "jar_sha256": "85f7746a3ae4b143f1a4ca4e5c043e11c81bf7d69f32c72b7dbaa190f6a0e85c",
+  "expected_legacy": false,
+  "passed": 95,
+  "total": 95,
+  "cases": [
+    {
+      "case": "anonymous submission rejected",
+      "passed": true
+    },
+    {
+      "case": "anonymous submission rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot submit another owner ID",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot submit another owner ID preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot submit another owner ID",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot submit another owner ID preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "admin cannot submit another owner ID",
+      "passed": true
+    },
+    {
+      "case": "admin cannot submit another owner ID preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "missing explicit ID cannot become a new work",
+      "passed": true
+    },
+    {
+      "case": "missing explicit ID cannot become a new work preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "other class course rejected",
+      "passed": true
+    },
+    {
+      "case": "other class course rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "missing course unit rejected",
+      "passed": true
+    },
+    {
+      "case": "missing course unit rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "assignment b rejected",
+      "passed": true
+    },
+    {
+      "case": "assignment b rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "assignment unpublished rejected",
+      "passed": true
+    },
+    {
+      "case": "assignment unpublished rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "assignment ended rejected",
+      "passed": true
+    },
+    {
+      "case": "assignment ended rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "assignment substring rejected",
+      "passed": true
+    },
+    {
+      "case": "assignment substring rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "assignment empty rejected",
+      "passed": true
+    },
+    {
+      "case": "assignment empty rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "assignment missing rejected",
+      "passed": true
+    },
+    {
+      "case": "assignment missing rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "mixed task identities rejected",
+      "passed": true
+    },
+    {
+      "case": "mixed task identities rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "owner cannot rebind task",
+      "passed": true
+    },
+    {
+      "case": "owner cannot rebind task preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "owner cannot add a second task",
+      "passed": true
+    },
+    {
+      "case": "owner cannot add a second task preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "student cannot set status 2",
+      "passed": true
+    },
+    {
+      "case": "student cannot set status 2 preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "student cannot set status 3",
+      "passed": true
+    },
+    {
+      "case": "student cannot set status 3 preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "student cannot set status 4",
+      "passed": true
+    },
+    {
+      "case": "student cannot set status 4 preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "student cannot set status -1",
+      "passed": true
+    },
+    {
+      "case": "student cannot set status -1 preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "student cannot set status 99",
+      "passed": true
+    },
+    {
+      "case": "student cannot set status 99 preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "new foreign file rejected",
+      "passed": true
+    },
+    {
+      "case": "new foreign file rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "foreign cover rejected",
+      "passed": true
+    },
+    {
+      "case": "foreign cover rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "unregistered file rejected",
+      "passed": true
+    },
+    {
+      "case": "unregistered file rejected preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "personal creation ignores protected fields",
+      "passed": true
+    },
+    {
+      "case": "new owner audit fields and counters are server controlled",
+      "passed": true
+    },
+    {
+      "case": "owner saves course draft with spoofed metadata",
+      "passed": true
+    },
+    {
+      "case": "existing identity audit origin and counters preserved",
+      "passed": true
+    },
+    {
+      "case": "draft does not increment daily submission or reserve cache",
+      "passed": true
+    },
+    {
+      "case": "history records actual previous version",
+      "passed": true
+    },
+    {
+      "case": "course submit with omitted task fields retains original task",
+      "passed": true
+    },
+    {
+      "case": "server resolves course class and submitted status",
+      "passed": true
+    },
+    {
+      "case": "retry without work ID updates same assigned work",
+      "passed": true
+    },
+    {
+      "case": "sequential retry keeps one course work and one submission count",
+      "passed": true
+    },
+    {
+      "case": "editor/file payload type 2",
+      "passed": true
+    },
+    {
+      "case": "editor/file payload type 3",
+      "passed": true
+    },
+    {
+      "case": "editor/file payload type 4",
+      "passed": true
+    },
+    {
+      "case": "editor/file payload type 0",
+      "passed": true
+    },
+    {
+      "case": "file modal payload submits assigned work",
+      "passed": true
+    },
+    {
+      "case": "assignment class and scene are derived",
+      "passed": true
+    },
+    {
+      "case": "choose an eligible class on a multi-class assignment",
+      "passed": true
+    },
+    {
+      "case": "eligible selected class stored",
+      "passed": true
+    },
+    {
+      "case": "multi-class retry cannot transfer existing work",
+      "passed": true
+    },
+    {
+      "case": "existing assignment class remains stable",
+      "passed": true
+    },
+    {
+      "case": "revoked assignment membership prevents later update",
+      "passed": true
+    },
+    {
+      "case": "revoked assignment membership prevents later update preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "unassigned shared course accepts personal practice",
+      "passed": true
+    },
+    {
+      "case": "shared practice does not invent a class",
+      "passed": true
+    },
+    {
+      "case": "class-bound shared work saves while assigned",
+      "passed": true
+    },
+    {
+      "case": "shared visibility cannot bypass revoked class binding",
+      "passed": true
+    },
+    {
+      "case": "shared visibility cannot bypass revoked class binding preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "deleted unit rejects submission",
+      "passed": true
+    },
+    {
+      "case": "deleted unit rejects submission preserves rows files and submission cache",
+      "passed": true
+    },
+    {
+      "case": "personal name collision cannot overwrite course work",
+      "passed": true
+    },
+    {
+      "case": "course work identity survives personal-name collision",
+      "passed": true
+    },
+    {
+      "case": "owned sent copy can retain shared source attachment",
+      "passed": true
+    },
+    {
+      "case": "legitimate shared attachment preserved",
+      "passed": true
+    },
+    {
+      "case": "saved course work reopens through actual owner API",
+      "passed": true
+    },
+    {
+      "case": "reopened attachment exact HTTP bytes",
+      "passed": true
+    },
+    {
+      "case": "injected update failure reports failure",
+      "passed": true
+    },
+    {
+      "case": "storage error response contains no SQL diagnostics",
+      "passed": true
+    },
+    {
+      "case": "failed update rolls back work history metrics and cache",
+      "passed": true
+    },
+    {
+      "case": "retry succeeds after database failure removed",
+      "passed": true
+    },
+    {
+      "case": "daily-record failure reports failure instead of partial success",
+      "passed": true
+    },
+    {
+      "case": "daily-record error response contains no SQL diagnostics",
+      "passed": true
+    },
+    {
+      "case": "daily-record failure rolls back new work and leaves no cache reservation",
+      "passed": true
+    },
+    {
+      "case": "retry new submission after daily-record failure",
+      "passed": true
+    },
+    {
+      "case": "all original business and history rows restored",
+      "passed": true
+    },
+    {
+      "case": "all original file bytes restored",
+      "passed": true
+    },
+    {
+      "case": "all original submission cache memberships restored",
+      "passed": true
+    },
+    {
+      "case": "temporary database failure trigger removed",
+      "passed": true
+    }
+  ],
+  "scope": "actual synthetic HTTP submission and re-read, DB/history/cache/files; editor-shaped payloads are not browser editor acceptance; no concurrency or global file-API acceptance"
+}

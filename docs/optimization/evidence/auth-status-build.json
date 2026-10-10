@@ -1,0 +1,15 @@
+{
+  "base_commit": "8c1827d",
+  "build_command": "JAVA_HOME=<portable Java 8> mvn -B -s dev/maven-settings.xml -Dmaven.repo.local=<project cache> clean package",
+  "exit_code": 0,
+  "reactor_modules_success": 3,
+  "java_unit_tests": "skipped by parent POM",
+  "build_log_sha256": "9725f7466fc4fd3a706c13ae96674fe4092b2397c22c39ea7ce2945cf5bc003c",
+  "jar_sha256": "f80ff81aead130311d14801cabbe7747333f670037409f96cc7ee1530d3e0626",
+  "changed_source_sha256": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/shiro/authc/aop/JwtFilter.java": "39e5818310387bb283783fa14e7fcde5b511eb191744589c7d835df65c9eed3f",
+    "api/dev/local_http.py": "967aaec60ff6878374eb2452f72b1408d064d10d3a735af9b90700869f880741",
+    "api/dev/verify-auth-status.py": "6679927a0f21b674b8633617713e39b6691ff2ba6a2cac90316a9bd069c637c6"
+  },
+  "verification": "real local HTTP before/after: 7 expected observations each"
+}

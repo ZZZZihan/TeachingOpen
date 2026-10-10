@@ -1,2 +1,8 @@
 FROM mysql:8.0
-COPY db/teachingopen*.sql /docker-entrypoint-initdb.d/
+# Only an empty /var/lib/mysql executes these files. Restarting an existing DB
+# does not migrate it; use the explicit verified upgrade/backup procedure.
+# This legacy image still includes the upstream seed. Formal launch bundles
+# provide their reviewed schema and data separately and never reuse that seed.
+COPY db/teachingopen2.8.sql /docker-entrypoint-initdb.d/01-schema-and-legacy-seed.sql
+COPY db/phone-profile-registration.sql /docker-entrypoint-initdb.d/03-phone-profile-registration.sql
+COPY db/enable-phone-registration.sql /docker-entrypoint-initdb.d/04-enable-phone-registration.sql

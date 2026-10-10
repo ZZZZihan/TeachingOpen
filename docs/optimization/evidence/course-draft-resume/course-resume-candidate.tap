@@ -1,0 +1,412 @@
+TAP version 13
+# Subtest: Scratch: actual course entry opens the template only before any own work exists
+ok 1 - Scratch: actual course entry opens the template only before any own work exists
+  ---
+  duration_ms: 17.283834
+  type: 'test'
+  ...
+# Subtest: Scratch: save, close and reopen from the same real course URL keeps content, title and ID
+ok 2 - Scratch: save, close and reopen from the same real course URL keeps content, title and ID
+  ---
+  duration_ms: 14.997375
+  type: 'test'
+  ...
+# Subtest: Scratch: a discovered work restores all record bindings rather than entrance hints
+ok 3 - Scratch: a discovered work restores all record bindings rather than entrance hints
+  ---
+  duration_ms: 9.742333
+  type: 'test'
+  ...
+# Subtest: Scratch: discovery failure blocks template fallback and upload; retry discovers own content
+ok 4 - Scratch: discovery failure blocks template fallback and upload; retry discovers own content
+  ---
+  duration_ms: 9.907417
+  type: 'test'
+  ...
+# Subtest: Scratch: details failure keeps save disabled and a manual retry reads the same own work
+ok 5 - Scratch: details failure keeps save disabled and a manual retry reads the same own work
+  ---
+  duration_ms: 9.226959
+  type: 'test'
+  ...
+# Subtest: Scratch: missing details cannot fall back to the template or upload
+ok 6 - Scratch: missing details cannot fall back to the template or upload
+  ---
+  duration_ms: 8.996708
+  type: 'test'
+  ...
+# Subtest: Scratch: wrong work type cannot fall back to the template or upload
+ok 7 - Scratch: wrong work type cannot fall back to the template or upload
+  ---
+  duration_ms: 8.336542
+  type: 'test'
+  ...
+# Subtest: Scratch: missing own attachment cannot fall back to the template or upload
+ok 8 - Scratch: missing own attachment cannot fall back to the template or upload
+  ---
+  duration_ms: 9.003708
+  type: 'test'
+  ...
+# Subtest: Scratch: other unit cannot fall back to the template or upload
+ok 9 - Scratch: other unit cannot fall back to the template or upload
+  ---
+  duration_ms: 8.818541
+  type: 'test'
+  ...
+# Subtest: Scratch: conflicting work ID cannot fall back to the template or upload
+ok 10 - Scratch: conflicting work ID cannot fall back to the template or upload
+  ---
+  duration_ms: 7.886166
+  type: 'test'
+  ...
+# Subtest: Scratch: missing unit blocks the first course load despite an entrance file hint
+ok 11 - Scratch: missing unit blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 8.795625
+  type: 'test'
+  ...
+# Subtest: Scratch: wrong template type blocks the first course load despite an entrance file hint
+ok 12 - Scratch: wrong template type blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 8.379083
+  type: 'test'
+  ...
+# Subtest: Scratch: missing template attachment blocks the first course load despite an entrance file hint
+ok 13 - Scratch: missing template attachment blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 8.907834
+  type: 'test'
+  ...
+# Subtest: Scratch: conflicting unit ID blocks the first course load despite an entrance file hint
+ok 14 - Scratch: conflicting unit ID blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 8.567334
+  type: 'test'
+  ...
+# Subtest: Scratch: malformed own work ID blocks the first course load despite an entrance file hint
+ok 15 - Scratch: malformed own work ID blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 7.969167
+  type: 'test'
+  ...
+# Subtest: Scratch: explicit workId remains authoritative and restores own record bindings
+ok 16 - Scratch: explicit workId remains authoritative and restores own record bindings
+  ---
+  duration_ms: 8.885417
+  type: 'test'
+  ...
+# Subtest: Scratch: deliberate course reset uses the verified template but keeps the existing work and bindings
+ok 17 - Scratch: deliberate course reset uses the verified template but keeps the existing work and bindings
+  ---
+  duration_ms: 8.938583
+  type: 'test'
+  ...
+# Subtest: Scratch: explicit additional-work reset retains the task and original work ID
+ok 18 - Scratch: explicit additional-work reset retains the task and original work ID
+  ---
+  duration_ms: 8.354708
+  type: 'test'
+  ...
+# Subtest: Scratch: explicit reset with a conflicting course cannot overwrite the existing work
+ok 19 - Scratch: explicit reset with a conflicting course cannot overwrite the existing work
+  ---
+  duration_ms: 7.664833
+  type: 'test'
+  ...
+# Subtest: Scratch: explicit reset with a conflicting additional task cannot overwrite the existing work
+ok 20 - Scratch: explicit reset with a conflicting additional task cannot overwrite the existing work
+  ---
+  duration_ms: 8.167083
+  type: 'test'
+  ...
+# Subtest: Scratch: pending discovery locks load and save until the own work has opened
+ok 21 - Scratch: pending discovery locks load and save until the own work has opened
+  ---
+  duration_ms: 8.8
+  type: 'test'
+  ...
+# Subtest: Scratch: reading the saved attachment fails closed; retry preserves the own identity
+ok 22 - Scratch: reading the saved attachment fails closed; retry preserves the own identity
+  ---
+  duration_ms: 8.041791
+  type: 'test'
+  ...
+# Subtest: ScratchJr: actual course entry opens the template only before any own work exists
+ok 23 - ScratchJr: actual course entry opens the template only before any own work exists
+  ---
+  duration_ms: 8.219708
+  type: 'test'
+  ...
+# Subtest: ScratchJr: save, close and reopen from the same real course URL keeps content, title and ID
+ok 24 - ScratchJr: save, close and reopen from the same real course URL keeps content, title and ID
+  ---
+  duration_ms: 7.601166
+  type: 'test'
+  ...
+# Subtest: ScratchJr: a discovered work restores all record bindings rather than entrance hints
+ok 25 - ScratchJr: a discovered work restores all record bindings rather than entrance hints
+  ---
+  duration_ms: 7.183875
+  type: 'test'
+  ...
+# Subtest: ScratchJr: discovery failure blocks template fallback and upload; retry discovers own content
+ok 26 - ScratchJr: discovery failure blocks template fallback and upload; retry discovers own content
+  ---
+  duration_ms: 7.327792
+  type: 'test'
+  ...
+# Subtest: ScratchJr: details failure keeps save disabled and a manual retry reads the same own work
+ok 27 - ScratchJr: details failure keeps save disabled and a manual retry reads the same own work
+  ---
+  duration_ms: 7.625708
+  type: 'test'
+  ...
+# Subtest: ScratchJr: missing details cannot fall back to the template or upload
+ok 28 - ScratchJr: missing details cannot fall back to the template or upload
+  ---
+  duration_ms: 6.569375
+  type: 'test'
+  ...
+# Subtest: ScratchJr: wrong work type cannot fall back to the template or upload
+ok 29 - ScratchJr: wrong work type cannot fall back to the template or upload
+  ---
+  duration_ms: 7.655541
+  type: 'test'
+  ...
+# Subtest: ScratchJr: missing own attachment cannot fall back to the template or upload
+ok 30 - ScratchJr: missing own attachment cannot fall back to the template or upload
+  ---
+  duration_ms: 7.812625
+  type: 'test'
+  ...
+# Subtest: ScratchJr: other unit cannot fall back to the template or upload
+ok 31 - ScratchJr: other unit cannot fall back to the template or upload
+  ---
+  duration_ms: 8.080959
+  type: 'test'
+  ...
+# Subtest: ScratchJr: conflicting work ID cannot fall back to the template or upload
+ok 32 - ScratchJr: conflicting work ID cannot fall back to the template or upload
+  ---
+  duration_ms: 6.401666
+  type: 'test'
+  ...
+# Subtest: ScratchJr: missing unit blocks the first course load despite an entrance file hint
+ok 33 - ScratchJr: missing unit blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 7.098209
+  type: 'test'
+  ...
+# Subtest: ScratchJr: wrong template type blocks the first course load despite an entrance file hint
+ok 34 - ScratchJr: wrong template type blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 7.36275
+  type: 'test'
+  ...
+# Subtest: ScratchJr: missing template attachment blocks the first course load despite an entrance file hint
+ok 35 - ScratchJr: missing template attachment blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 7.174875
+  type: 'test'
+  ...
+# Subtest: ScratchJr: conflicting unit ID blocks the first course load despite an entrance file hint
+ok 36 - ScratchJr: conflicting unit ID blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 8.018916
+  type: 'test'
+  ...
+# Subtest: ScratchJr: malformed own work ID blocks the first course load despite an entrance file hint
+ok 37 - ScratchJr: malformed own work ID blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 7.2075
+  type: 'test'
+  ...
+# Subtest: ScratchJr: explicit workId remains authoritative and restores own record bindings
+ok 38 - ScratchJr: explicit workId remains authoritative and restores own record bindings
+  ---
+  duration_ms: 6.613542
+  type: 'test'
+  ...
+# Subtest: ScratchJr: deliberate course reset uses the verified template but keeps the existing work and bindings
+ok 39 - ScratchJr: deliberate course reset uses the verified template but keeps the existing work and bindings
+  ---
+  duration_ms: 6.915
+  type: 'test'
+  ...
+# Subtest: ScratchJr: explicit additional-work reset retains the task and original work ID
+ok 40 - ScratchJr: explicit additional-work reset retains the task and original work ID
+  ---
+  duration_ms: 6.753
+  type: 'test'
+  ...
+# Subtest: ScratchJr: explicit reset with a conflicting course cannot overwrite the existing work
+ok 41 - ScratchJr: explicit reset with a conflicting course cannot overwrite the existing work
+  ---
+  duration_ms: 6.599959
+  type: 'test'
+  ...
+# Subtest: ScratchJr: explicit reset with a conflicting additional task cannot overwrite the existing work
+ok 42 - ScratchJr: explicit reset with a conflicting additional task cannot overwrite the existing work
+  ---
+  duration_ms: 6.444959
+  type: 'test'
+  ...
+# Subtest: ScratchJr: pending discovery locks load and save until the own work has opened
+ok 43 - ScratchJr: pending discovery locks load and save until the own work has opened
+  ---
+  duration_ms: 6.227083
+  type: 'test'
+  ...
+# Subtest: ScratchJr: reading the saved attachment fails closed; retry preserves the own identity
+ok 44 - ScratchJr: reading the saved attachment fails closed; retry preserves the own identity
+  ---
+  duration_ms: 6.452542
+  type: 'test'
+  ...
+# Subtest: Python: actual course entry opens the template only before any own work exists
+ok 45 - Python: actual course entry opens the template only before any own work exists
+  ---
+  duration_ms: 6.993208
+  type: 'test'
+  ...
+# Subtest: Python: save, close and reopen from the same real course URL keeps content, title and ID
+ok 46 - Python: save, close and reopen from the same real course URL keeps content, title and ID
+  ---
+  duration_ms: 7.151833
+  type: 'test'
+  ...
+# Subtest: Python: a discovered work restores all record bindings rather than entrance hints
+ok 47 - Python: a discovered work restores all record bindings rather than entrance hints
+  ---
+  duration_ms: 6.441916
+  type: 'test'
+  ...
+# Subtest: Python: discovery failure blocks template fallback and upload; retry discovers own content
+ok 48 - Python: discovery failure blocks template fallback and upload; retry discovers own content
+  ---
+  duration_ms: 7.04575
+  type: 'test'
+  ...
+# Subtest: Python: details failure keeps save disabled and a manual retry reads the same own work
+ok 49 - Python: details failure keeps save disabled and a manual retry reads the same own work
+  ---
+  duration_ms: 6.623208
+  type: 'test'
+  ...
+# Subtest: Python: missing details cannot fall back to the template or upload
+ok 50 - Python: missing details cannot fall back to the template or upload
+  ---
+  duration_ms: 6.812667
+  type: 'test'
+  ...
+# Subtest: Python: wrong work type cannot fall back to the template or upload
+ok 51 - Python: wrong work type cannot fall back to the template or upload
+  ---
+  duration_ms: 6.9895
+  type: 'test'
+  ...
+# Subtest: Python: missing own attachment cannot fall back to the template or upload
+ok 52 - Python: missing own attachment cannot fall back to the template or upload
+  ---
+  duration_ms: 6.637791
+  type: 'test'
+  ...
+# Subtest: Python: other unit cannot fall back to the template or upload
+ok 53 - Python: other unit cannot fall back to the template or upload
+  ---
+  duration_ms: 6.308375
+  type: 'test'
+  ...
+# Subtest: Python: conflicting work ID cannot fall back to the template or upload
+ok 54 - Python: conflicting work ID cannot fall back to the template or upload
+  ---
+  duration_ms: 6.6265
+  type: 'test'
+  ...
+# Subtest: Python: missing unit blocks the first course load despite an entrance file hint
+ok 55 - Python: missing unit blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 6.8275
+  type: 'test'
+  ...
+# Subtest: Python: wrong template type blocks the first course load despite an entrance file hint
+ok 56 - Python: wrong template type blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 6.423083
+  type: 'test'
+  ...
+# Subtest: Python: missing template attachment blocks the first course load despite an entrance file hint
+ok 57 - Python: missing template attachment blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 6.61675
+  type: 'test'
+  ...
+# Subtest: Python: conflicting unit ID blocks the first course load despite an entrance file hint
+ok 58 - Python: conflicting unit ID blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 6.93825
+  type: 'test'
+  ...
+# Subtest: Python: malformed own work ID blocks the first course load despite an entrance file hint
+ok 59 - Python: malformed own work ID blocks the first course load despite an entrance file hint
+  ---
+  duration_ms: 6.582625
+  type: 'test'
+  ...
+# Subtest: Python: explicit workId remains authoritative and restores own record bindings
+ok 60 - Python: explicit workId remains authoritative and restores own record bindings
+  ---
+  duration_ms: 6.697292
+  type: 'test'
+  ...
+# Subtest: Python: deliberate course reset uses the verified template but keeps the existing work and bindings
+ok 61 - Python: deliberate course reset uses the verified template but keeps the existing work and bindings
+  ---
+  duration_ms: 6.57425
+  type: 'test'
+  ...
+# Subtest: Python: explicit additional-work reset retains the task and original work ID
+ok 62 - Python: explicit additional-work reset retains the task and original work ID
+  ---
+  duration_ms: 6.95625
+  type: 'test'
+  ...
+# Subtest: Python: explicit reset with a conflicting course cannot overwrite the existing work
+ok 63 - Python: explicit reset with a conflicting course cannot overwrite the existing work
+  ---
+  duration_ms: 6.723667
+  type: 'test'
+  ...
+# Subtest: Python: explicit reset with a conflicting additional task cannot overwrite the existing work
+ok 64 - Python: explicit reset with a conflicting additional task cannot overwrite the existing work
+  ---
+  duration_ms: 6.498458
+  type: 'test'
+  ...
+# Subtest: Python: pending discovery locks load and save until the own work has opened
+ok 65 - Python: pending discovery locks load and save until the own work has opened
+  ---
+  duration_ms: 6.764666
+  type: 'test'
+  ...
+# Subtest: Python: reading the saved attachment fails closed; retry preserves the own identity
+ok 66 - Python: reading the saved attachment fails closed; retry preserves the own identity
+  ---
+  duration_ms: 6.879833
+  type: 'test'
+  ...
+# Subtest: Python actual editor bridge discovers the course work, reads its saved file and submits the same identity
+ok 67 - Python actual editor bridge discovers the course work, reads its saved file and submits the same identity
+  ---
+  duration_ms: 49.171458
+  type: 'test'
+  ...
+1..67
+# tests 67
+# suites 0
+# pass 67
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 686.064167

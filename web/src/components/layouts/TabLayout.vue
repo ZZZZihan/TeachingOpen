@@ -36,6 +36,7 @@
   import Contextmenu from '@/components/menu/Contextmenu'
   import { mixin, mixinDevice } from '@/utils/mixin.js'
   import { triggerWindowResizeEvent } from '@/utils/util'
+import { platformBrandName, platformPageTitle } from '@/utils/platformBranding'
 
   const indexKey = '/dashboard/index'
 
@@ -69,6 +70,9 @@
     },
     /* update_end author:wuxianquan date:20190828 for: 关闭当前tab页，供子页面调用->望菜单能配置外链，直接弹出新页面而不是嵌入iframe #428 */
     computed: {
+        brandName () {
+            return platformBrandName(this.$store.state.user.sysConfig)
+        },
       multipage() {
         //判断如果是手机模式，自动切换为单页面模式
         if (this.isMobile()) {
@@ -96,6 +100,9 @@
     mounted() {
     },
     watch: {
+        brandName () {
+            this.changeTitle(this.$route.meta && this.$route.meta.title)
+        },
       '$route': function(newRoute) {
         //console.log("新的路由",newRoute)
         this.activePage = newRoute.fullPath
@@ -163,15 +170,15 @@
       // update-end-author:sunjianlei date:20191223 for: 修复从单页模式切换回多页模式后首页不居第一位的 BUG
 
       // update-begin-author:sunjianlei date:20200120 for: 动态更改页面标题
-      changeTitle(title) {
-        let projectTitle = this.$store.getters.sysConfig.brandName
-        // 首页特殊处理
-        if (this.$route.path === indexKey) {
-          document.title = projectTitle
-        } else {
-          document.title = title + ' · ' + projectTitle
-        }
-      },
+        changeTitle (title) {
+            const config = this.$store.state.user.sysConfig
+            // 首页特殊处理
+            if (this.$route.path === indexKey) {
+                document.title = platformBrandName(config)
+            } else {
+                document.title = platformPageTitle(config, title)
+            }
+        },
       // update-end-author:sunjianlei date:20200120 for: 动态更改页面标题
 
       changePage(key) {

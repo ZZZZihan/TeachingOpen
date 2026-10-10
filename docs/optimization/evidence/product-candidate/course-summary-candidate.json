@@ -1,0 +1,97 @@
+{
+  "recorded_utc": "2026-10-03T06:36:35.924729+00:00",
+  "build_candidate": "b878a2bc4e170413f4ee8068520323735aece2fe",
+  "delivery_candidate": "0b89d854b4145115d51521ebf3741d507d66e5bf",
+  "delivery_merge_scope": "documentation only; API/web trees identical to build candidate",
+  "api_tree": "37aa15d47970b22d94aa910dd152a4858c10bae7",
+  "web_tree": "3a29ce07efe47f080860ecc72509d4ecf02f769e",
+  "product_commit": "3f68a31",
+  "pr_delivery_commit": "6ee37a8",
+  "pull_request": "https://github.com/ZZZZihan/TeachingOpen/pull/46",
+  "frontend_tests": {
+    "total": 305,
+    "passed": 305,
+    "skipped": 0
+  },
+  "dist": {
+    "files": 4880,
+    "http_samples": 10,
+    "http": [
+      {
+        "port": 18112,
+        "asset": "index.html",
+        "matches": true
+      },
+      {
+        "port": 18112,
+        "asset": "js/polyfill.js",
+        "matches": true
+      },
+      {
+        "port": 18112,
+        "asset": "js/common.js",
+        "matches": true
+      },
+      {
+        "port": 18112,
+        "asset": "js/chunk-vendors.a2dd1501.js",
+        "matches": true
+      },
+      {
+        "port": 18112,
+        "asset": "js/app.ef325f47.js",
+        "matches": true
+      },
+      {
+        "port": 18142,
+        "asset": "index.html",
+        "matches": true
+      },
+      {
+        "port": 18142,
+        "asset": "js/polyfill.js",
+        "matches": true
+      },
+      {
+        "port": 18142,
+        "asset": "js/common.js",
+        "matches": true
+      },
+      {
+        "port": 18142,
+        "asset": "js/chunk-vendors.a2dd1501.js",
+        "matches": true
+      },
+      {
+        "port": 18142,
+        "asset": "js/app.ef325f47.js",
+        "matches": true
+      }
+    ]
+  },
+  "backend_jar_sha256": "c2898fa71e75294fe03bc1401388a7c50126c2964030c3739dd949c840a9a364",
+  "preview": {
+    "synthetic": "http://127.0.0.1:18112/index",
+    "production_derived_copy": "http://127.0.0.1:18142/index",
+    "backend_ports": [
+      18111,
+      18141
+    ],
+    "verified_health": "HTTP 200 / UP at /api/actuator/health"
+  },
+  "original_source": {
+    "files": 5731,
+    "sha256_mismatches": 0
+  },
+  "production_copy_tool_pr": {
+    "url": "https://github.com/ZZZZihan/TeachingOpen/pull/45",
+    "delivery_commit": "5f896ac",
+    "not_merged_into_application_candidate": true
+  },
+  "boundaries": [
+    "No GitHub merge or production deployment.",
+    "305 frontend tests are separate from 12 production-copy API/content checks and browser observations.",
+    "Actual images/DOM/course text and credentials remain private.",
+    "One existing CSP analytics refusal remains."
+  ]
+}
