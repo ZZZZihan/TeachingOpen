@@ -52,6 +52,71 @@ def codes(result):
 
 
 class MonitorTests(unittest.TestCase):
+    def test_remote_rechecks_once_when_renewal_finishes_after_lock_contention(self):
+        class CertificateBusy(TimeoutError):
+            pass
+
+        for outcome in ('passed', 'busy', 'invalid', 'expired'):
+            with self.subTest(outcome=outcome):
+                lock_calls = []
+
+                def lock(**kwargs):
+                    lock_calls.append(kwargs)
+                    if len(lock_calls) == 1 or outcome == 'busy':
+                        raise CertificateBusy()
+                    return contextlib.nullcontext()
+
+                def check(*args, **kwargs):
+                    if outcome == 'invalid':
+                        raise ssl.SSLCertVerificationError('untrusted')
+                    if outcome == 'expired':
+                        error = ssl.SSLCertVerificationError('expired')
+                        error.verify_code = 10
+                        raise error
+                    return certificate(remote=True)
+
+                class Loader(importlib.abc.Loader):
+                    def create_module(self, spec):
+                        return None
+
+                    def exec_module(self, module):
+                        module.certificate_lock = lock
+                        module.check_certificate = check
+
+                units = observation()[0]['units']
+
+                def run(arguments, **kwargs):
+                    if arguments[0] == 'systemctl':
+                        kind = 'renew' if '-renew.' in arguments[2] else 'check'
+                        suffix = 'timer' if arguments[2].endswith('.timer') else 'service'
+                        fields = units[kind+'_'+suffix]
+                        output = '\n'.join(k+'='+str(v) for k, v in fields.items())
+                    elif arguments[0] == 'busctl':
+                        output = 't '+str((MONOTONIC-600)*1000000)
+                    else:
+                        output = ''
+                    return types.SimpleNamespace(returncode=0, stdout=output)
+
+                output = io.StringIO()
+                spec = importlib.util.spec_from_loader('checker', Loader())
+                with patch('subprocess.run', side_effect=run), patch('time.monotonic', return_value=MONOTONIC), \
+                        patch('importlib.util.spec_from_file_location', return_value=spec), contextlib.redirect_stdout(output):
+                    exec(monitor.REMOTE, {'IP': '8.8.8.8', 'CERTIFICATE': monitor.CERTIFICATE})
+                remote = json.loads(output.getvalue())
+                self.assertEqual(lock_calls, [{'shared': True, 'wait_seconds': 0}]*2)
+                result, _ = evaluate((remote, certificate(), {'status': 'passed'}))
+                if outcome == 'passed':
+                    self.assertEqual(remote['certificate']['status'], 'passed')
+                    self.assertEqual(result['status'], 'healthy')
+                    self.assertFalse(result['attention_required'])
+                elif outcome == 'expired':
+                    self.assertEqual(remote['certificate'], {'status': 'failed', 'error': 'tls_expired'})
+                    self.assertIn('loopback_tls_expired', codes(result))
+                    self.assertEqual(result['status'], 'critical')
+                else:
+                    self.assertIn('loopback_tls_failed', codes(result))
+                    self.assertTrue(result['attention_required'])
+
     def test_healthy_baseline_and_no_change_are_quiet(self):
         result, state = evaluate(observation())
         self.assertEqual(result['status'], 'healthy')

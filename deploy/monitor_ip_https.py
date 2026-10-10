@@ -72,10 +72,12 @@ try:
     spec = importlib.util.spec_from_file_location('checker','/opt/teachingopen-https/check_ip_certificate.py')
     checker = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(checker)
-    with checker.certificate_lock(shared=True, wait_seconds=0):
-        checked = checker.check_certificate(IP,minimum_hours=0.000001,connect_host='127.0.0.1',
-                                            expected_certificate=CERTIFICATE,timeout=5)
-    out['certificate'] = dict(status='passed', **cert(checked))
+    def read_certificate():
+        with checker.certificate_lock(shared=True, wait_seconds=0):
+            checked = checker.check_certificate(IP,minimum_hours=0.000001,connect_host='127.0.0.1',
+                                                expected_certificate=CERTIFICATE,timeout=5)
+        return dict(status='passed', **cert(checked))
+    out['certificate'] = read_certificate()
 except Exception as e:
     if type(e).__name__ == 'CertificateBusy':
         out['certificate'] = {'status':'deferred','error':'renewal_in_progress'}
@@ -88,6 +90,14 @@ except Exception as e:
                     current.get('ExecMainStartTimestampMonotonic','').isdigit()):
                 out['units']['renew_service'].update(ActiveState='activating',
                     ExecMainStartTimestampMonotonic=int(current['ExecMainStartTimestampMonotonic']))
+            elif current.get('ActiveState') in ('inactive','active','failed'):
+                # Renewal may also have finished before this refreshed snapshot.
+                # Only one successful locked TLS read can clear the deferral.
+                try:
+                    out['certificate'] = read_certificate()
+                except Exception as retry_error:
+                    if type(retry_error).__name__ != 'CertificateBusy':
+                        out['certificate'] = {'status':'failed','error':error(retry_error)}
         except Exception:
             pass  # Missing bounded-running evidence remains a failure below.
     else:
