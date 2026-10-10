@@ -1,0 +1,195 @@
+{
+  "scope": "registration without phone/SMS; local synthetic data only",
+  "frontend_tests": {
+    "passed": 593,
+    "total": 593,
+    "new_registration_tests": 9
+  },
+  "registration_junit": {
+    "passed": 10,
+    "total": 10,
+    "skipped": 0
+  },
+  "http": {
+    "passed": 29,
+    "total": 29,
+    "cases": [
+      {
+        "case": "closed registration rejects account creation",
+        "passed": true
+      },
+      {
+        "case": "GET registration cannot create an account",
+        "passed": true
+      },
+      {
+        "case": "invalid username input is rejected list",
+        "passed": true
+      },
+      {
+        "case": "invalid username input is rejected str",
+        "passed": true
+      },
+      {
+        "case": "invalid realname input is rejected str",
+        "passed": true
+      },
+      {
+        "case": "invalid realname input is rejected str",
+        "passed": true
+      },
+      {
+        "case": "invalid password input is rejected str",
+        "passed": true
+      },
+      {
+        "case": "invalid password input is rejected list",
+        "passed": true
+      },
+      {
+        "case": "privileged default role is rejected",
+        "passed": true
+      },
+      {
+        "case": "missing default class is rejected",
+        "passed": true
+      },
+      {
+        "case": "anonymous registration succeeds without phone or SMS code",
+        "passed": true
+      },
+      {
+        "case": "registration response contains username only",
+        "passed": true
+      },
+      {
+        "case": "server controls identity/status and stores encrypted password",
+        "passed": true
+      },
+      {
+        "case": "server default student role and class applied exactly once",
+        "passed": true
+      },
+      {
+        "case": "client phone and SMS fields are ignored; stored phone is NULL",
+        "passed": true
+      },
+      {
+        "case": "same username is rejected without altering existing account",
+        "passed": true
+      },
+      {
+        "case": "registered account signs in with actual CAPTCHA and new password",
+        "passed": true
+      },
+      {
+        "case": "new student can read its assigned courses",
+        "passed": true
+      },
+      {
+        "case": "concurrent same-username registrations create one account",
+        "passed": true
+      },
+      {
+        "case": "concurrent same-username loser rolls back relationships",
+        "passed": true
+      },
+      {
+        "case": "different accounts can both have NULL phone with existing unique index",
+        "passed": true
+      },
+      {
+        "case": "empty configured defaults permit account without relationships",
+        "passed": true
+      },
+      {
+        "case": "sys_user_role fault rolls back account and all relationships",
+        "passed": true
+      },
+      {
+        "case": "sys_user_role failure returns fixed non-sensitive retry state",
+        "passed": true
+      },
+      {
+        "case": "sys_user_role rollback leaves account retryable",
+        "passed": true
+      },
+      {
+        "case": "sys_user_depart fault rolls back account and all relationships",
+        "passed": true
+      },
+      {
+        "case": "sys_user_depart failure returns fixed non-sensitive retry state",
+        "passed": true
+      },
+      {
+        "case": "sys_user_depart rollback leaves account retryable",
+        "passed": true
+      },
+      {
+        "case": "all four fixture tables fully restored",
+        "passed": true
+      }
+    ],
+    "jar_sha256": "2c915235285e11312514b1d577172a0bad3b80073f1d5afc831595f6ff25e429",
+    "scope": "Real loopback HTTP, synthetic MySQL/Redis. No phone/SMS registration or production access."
+  },
+  "validation_contexts": {
+    "source_build": "PR source plus only PR #2 Oracle driver coordinate in a temporary copy",
+    "runtime": "PR #69 backend chain plus registration source"
+  },
+  "source_sha256": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/RegistrationService.java": "1050aa14a75f5f810d4b58bb7dd824780ba4da60a880e1c86ff1e4eb09f879f7",
+    "api/jeecg-boot-module-system/src/test/java/org/jeecg/registration/RegistrationServiceTest.java": "34613e4318c4e7bef3b77a15d23f286038052817310282c5226dcaf2f7b9627d",
+    "web/src/views/user/Register.vue": "ec78092e6d2daaf9eaae092f4493cbc731911c11799d51df454cff810f5b0e97",
+    "web/src/views/user/RegisterResult.vue": "65e0385ffbd2f1be5ce9c6519421e5144232aa5f541d06ad20e8a9242cc78b01",
+    "web/src/api/registration.js": "22aabafa51c416377a29a91b8489288386f48fa41b8778fb00fc9d190b41c733",
+    "web/src/utils/registration.js": "367330c1f8eac984bfef41d72017ada196e90e7243b9afe38abdfdf2d4477112",
+    "web/tests/registration.test.cjs": "fd8f5023083ef3b2dcc8ca87b5420aa961cdc0dfff529cd6adc845adcac04705",
+    "api/dev/verify-registration.py": "d710f233d5cf04f50853c7e73e5fa4e5f9bd8ab9d73c92393a81c68d5c66656d"
+  },
+  "jar_sha256": {
+    "source_plus_oracle": "997833bd37409ab7487264a1efea1dc513f5bb2c104767ab2bf51664750e608b",
+    "integrated_runtime": "2c915235285e11312514b1d577172a0bad3b80073f1d5afc831595f6ff25e429"
+  },
+  "browser": {
+    "status": "passed",
+    "viewports": [
+      {
+        "width": 390,
+        "height": 844,
+        "document_width": 382,
+        "input_width": 334,
+        "field_count": 4
+      },
+      {
+        "width": 1440,
+        "height": 1000,
+        "document_width": 1432,
+        "field_count": 4
+      }
+    ],
+    "checks": [
+      "four fields without phone or SMS code",
+      "empty submit focuses username and marks four invalid fields",
+      "successful real registration",
+      "result route contains username only",
+      "login username prefilled and password empty",
+      "real password and CAPTCHA login reaches index with synthetic user name",
+      "closed registration displays notice without form"
+    ],
+    "console": "registration flow has one CSP-blocked legacy remote telemetry error, no registration component exception",
+    "images_sha256": {
+      "register-before-390.png": "274b7676cb52a0cb0b6e6b4c74c9d927a3710fad8a8a009db39c278428aa1236",
+      "register-no-phone-390.png": "bfe3cd5ee9e1d0cf61df06cf719cbf57a268c80f011fd2b2a00005006f67e17e",
+      "register-no-phone-1440.png": "e9c21f3f3c1e705b15ff03d297c5fd59985681d8c3dc42b9a3d10aeec5dd5947",
+      "register-no-phone-result-390.png": "2a46ffc82fcd7c9e4cc6ca5c6f54178644624d8c2722c852ec32dccd339f377a",
+      "register-no-phone-login-prefill-390.png": "9e8bf1ce220f459cd3e7a8b40a385b419199df49a6225a81b2f3a1eda5cd5513",
+      "register-no-phone-login-success-1440.png": "98946b4a4e31d338d38e92de4d8b3d34b133049595be3f5ab2aea2e8a40af092",
+      "register-no-phone-closed-1440.png": "72c5caf31b1d104997c8e89308f18ab3c4459ee1300555ddac337a163f7207a6"
+    },
+    "cleanup_logout_warning": "Existing logout confirmation dialog emits a browser aria-hidden/focus warning; outside the registration component."
+  },
+  "production_changed": false,
+  "merged": false
+}
