@@ -70,7 +70,7 @@
               :wrapperCol="wrapperCol"
               label="模板内容"
               style="margin-left: 4px;width: 126%">
-              <j-editor  v-model="templateEditorContent"></j-editor>
+              <j-editor :active="visible" :session="editorSession"  v-model="templateEditorContent"></j-editor>
             </a-form-item>
           </a-col>
         </a-row>
@@ -95,6 +95,7 @@
       return {
         title: "操作",
         visible: false,
+        editorSession: 0,
         disable: true,
         model: {},
         labelCol: {
@@ -129,6 +130,7 @@
         this.edit({});
       },
       edit(record) {
+        this.editorSession++
         this.form.resetFields();
         this.model = Object.assign({}, record);
         this.useEditor = (record.templateType==2 || record.templateType==4)

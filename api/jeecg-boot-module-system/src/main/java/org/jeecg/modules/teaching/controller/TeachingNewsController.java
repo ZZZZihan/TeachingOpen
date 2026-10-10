@@ -35,6 +35,9 @@ import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.jeecg.common.aspect.annotation.AutoLog;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.jeecg.modules.teaching.util.RichTextSanitizer;
 
  /**
  * @Description: 资讯
@@ -68,9 +71,10 @@ public class TeachingNewsController extends JeecgController<TeachingNews, ITeach
 	 @GetMapping(value = "/newsDetail")
 	 public Result<?> newsDetail(@RequestParam(name="id",required=true) String id) {
 		 TeachingNews teachingNews = teachingNewsService.getById(id);
-		 if(teachingNews==null || teachingNews.getNewsStatus() <= 0) {
+		 if(teachingNews==null || teachingNews.getNewsStatus() == null || teachingNews.getNewsStatus() <= 0) {
 			 return Result.error("未找到对应数据");
 		 }
+		 sanitizeContent(teachingNews);
 		 return Result.ok(teachingNews);
 	 }
 
@@ -95,6 +99,7 @@ public class TeachingNewsController extends JeecgController<TeachingNews, ITeach
 		QueryWrapper<TeachingNews> queryWrapper = QueryGenerator.initQueryWrapper(teachingNews, req.getParameterMap());
 		Page<TeachingNews> page = new Page<TeachingNews>(pageNo, pageSize);
 		IPage<TeachingNews> pageList = teachingNewsService.page(page, queryWrapper);
+		pageList.getRecords().forEach(this::sanitizeContent);
 		return Result.ok(pageList);
 	}
 	
@@ -107,6 +112,7 @@ public class TeachingNewsController extends JeecgController<TeachingNews, ITeach
 	@AutoLog(value = "资讯-添加")
 	@ApiOperation(value="资讯-添加", notes="资讯-添加")
 	@PostMapping(value = "/add")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> add(@RequestBody TeachingNews teachingNews) {
 		teachingNewsService.save(teachingNews);
 		return Result.ok("添加成功！");
@@ -121,6 +127,7 @@ public class TeachingNewsController extends JeecgController<TeachingNews, ITeach
 	@AutoLog(value = "资讯-编辑")
 	@ApiOperation(value="资讯-编辑", notes="资讯-编辑")
 	@PutMapping(value = "/edit")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> edit(@RequestBody TeachingNews teachingNews) {
 		teachingNewsService.updateById(teachingNews);
 		return Result.ok("编辑成功!");
@@ -135,6 +142,7 @@ public class TeachingNewsController extends JeecgController<TeachingNews, ITeach
 	@AutoLog(value = "资讯-通过id删除")
 	@ApiOperation(value="资讯-通过id删除", notes="资讯-通过id删除")
 	@DeleteMapping(value = "/delete")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
 		teachingNewsService.removeById(id);
 		return Result.ok("删除成功!");
@@ -149,6 +157,7 @@ public class TeachingNewsController extends JeecgController<TeachingNews, ITeach
 	@AutoLog(value = "资讯-批量删除")
 	@ApiOperation(value="资讯-批量删除", notes="资讯-批量删除")
 	@DeleteMapping(value = "/deleteBatch")
+	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		this.teachingNewsService.removeByIds(Arrays.asList(ids.split(",")));
 		return Result.ok("批量删除成功!");
@@ -168,6 +177,7 @@ public class TeachingNewsController extends JeecgController<TeachingNews, ITeach
 		if(teachingNews==null) {
 			return Result.error("未找到对应数据");
 		}
+		sanitizeContent(teachingNews);
 		return Result.ok(teachingNews);
 	}
 
@@ -179,7 +189,9 @@ public class TeachingNewsController extends JeecgController<TeachingNews, ITeach
     */
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, TeachingNews teachingNews) {
-        return super.exportXls(request, teachingNews, TeachingNews.class, "资讯");
+        ModelAndView view = super.exportXls(request, teachingNews, TeachingNews.class, "资讯");
+        ((List<TeachingNews>) view.getModel().get(NormalExcelConstants.DATA_LIST)).forEach(this::sanitizeContent);
+        return view;
     }
 
     /**
@@ -190,8 +202,13 @@ public class TeachingNewsController extends JeecgController<TeachingNews, ITeach
     * @return
     */
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
+    @RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
         return super.importExcel(request, response, TeachingNews.class);
+    }
+
+    private void sanitizeContent(TeachingNews news) {
+        news.setNewsContent(RichTextSanitizer.sanitize(news.getNewsContent()));
     }
 
 }

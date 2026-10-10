@@ -7,6 +7,8 @@ function resolve (dir) {
 
 // vue.config.js
 module.exports = {
+  // Tiptap's maintained vanilla API works in Vue 2; transpile its modern JS for webpack 4.
+  transpileDependencies: [/@tiptap/, /prosemirror/, /dompurify/],
   /*
     Vue-cli3:
     Crashed when using Webpack `import()` #2463
@@ -24,9 +26,17 @@ module.exports = {
       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
       // Terser 1.x hashes its disk cache with MD4, unavailable in modern OpenSSL.
       config.optimization.minimizer[0].options.cache = false
+      if (process.env.TEACHING_DEPENDENCY_REPORT === '1') {
+        const RuntimeDependencyReport = require('./runtime-dependency-report.cjs')
+        config.plugins.push(new RuntimeDependencyReport())
+      }
     }
   },
   chainWebpack: (config) => {
+    // webpack 4 predates package exports; point the official ProseMirror wrapper subpaths at their ESM files.
+    for (const name of ['changeset', 'commands', 'dropcursor', 'gapcursor', 'history', 'inputrules', 'keymap', 'model', 'schema-list', 'state', 'tables', 'transform', 'view']) {
+      config.resolve.alias.set('@tiptap/pm/' + name + '$', resolve('node_modules/@tiptap/pm/dist/' + name + '/index.js'))
+    }
     // Load lazy route assets when visited instead of prefetching every async chunk.
     config.plugins.delete('prefetch')
 
