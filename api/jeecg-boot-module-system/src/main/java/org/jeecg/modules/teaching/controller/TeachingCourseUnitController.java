@@ -1,10 +1,7 @@
 package org.jeecg.modules.teaching.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.authz.annotation.Logical;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +18,7 @@ import org.jeecg.modules.common.util.QiniuUtil;
 import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.teaching.entity.TeachingCourseUnit;
 import org.jeecg.modules.teaching.model.CourseUnitModel;
+import org.jeecg.modules.teaching.model.CourseMapUpdateRequest;
 import org.jeecg.modules.teaching.model.CourseUnitWorkModel;
 import org.jeecg.modules.teaching.service.ITeachingCourseUnitService;
 import org.jeecg.modules.teaching.service.TeachingAccessService;
@@ -171,6 +169,10 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 		if (teachingCourseUnit == null || StringUtils.isBlank(teachingCourseUnit.getId())) {
 			return Result.error(400, "请提供课程单元 ID");
 		}
+		// Map positions have their own atomic endpoint. An old content form must
+		// never write coordinates read before a newer map save.
+		teachingCourseUnit.setMapX(null);
+		teachingCourseUnit.setMapY(null);
 		if (!teachingCourseUnitService.updateById(teachingCourseUnit)) {
 			return Result.error(404, "课程单元已不存在，请刷新后重试");
 		}
@@ -181,21 +183,16 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	 @ApiOperation(value="课程单元地图-编辑", notes="课程单元地图-编辑")
 	 @PutMapping(value = "/editBatch")
 	@RequiresRoles(value = {"admin", "dev"}, logical = Logical.OR)
-	 public Result<?> editMap(@RequestBody ArrayList<TeachingCourseUnit> unitList){
-		 if (unitList == null || unitList.isEmpty()) {
-			 return Result.error(400, "请选择需要更新的课程单元");
-		 }
-		 Set<String> ids = new HashSet<>();
-		 for (TeachingCourseUnit unit : unitList) {
-			 if (unit == null || StringUtils.isBlank(unit.getId()) || !ids.add(unit.getId())) {
-				 return Result.error(400, "课程单元 ID 不能为空或重复");
-			 }
-		 }
-		 if (!teachingCourseUnitService.updateExistingUnits(unitList)) {
-			 return Result.error(404, "部分课程单元已不存在，本次修改未保存，请刷新后重试");
-		 }
-		 return Result.ok("编辑成功!");
-	 }
+	 public Result<?> editMap(@RequestBody CourseMapUpdateRequest request){
+         try {
+             if (!teachingCourseUnitService.updateMapPositions(request)) {
+                 return Result.error(409, "部分课程单元已不存在或不属于当前课程，本次修改未保存，请刷新后重试");
+             }
+             return Result.ok("编辑成功!");
+         } catch (IllegalArgumentException invalid) {
+             return Result.error(400, invalid.getMessage());
+         }
+     }
 
 	/**
 	 *   通过id删除
