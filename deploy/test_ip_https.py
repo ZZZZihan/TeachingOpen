@@ -854,6 +854,26 @@ class RuntimeDiagnosticsTests(unittest.TestCase):
         self.assertEqual(details['status'], 502)
         self.assertEqual(details['body_preview'], 'upstream unavailable')
 
+    def test_fixture_starts_persistent_upstream_with_loopback_binding(self):
+        fixture = self.fixture()
+        inspection = [{'NetworkSettings': {'Ports': {
+            '80/tcp': [{'HostIp': '127.0.0.1', 'HostPort': '18001'}],
+            '443/tcp': [{'HostIp': '127.0.0.1', 'HostPort': '18002'}]}}}]
+        results = [subprocess.CompletedProcess([], 0, fixture.name, ''),
+                   subprocess.CompletedProcess([], 0, json.dumps(inspection), '')]
+        with patch.object(runtime_test, 'command', side_effect=results) as command, \
+                patch.object(fixture, 'wait_until'), patch.object(fixture, 'worker_permissions'), \
+                patch.object(fixture, 'nginx', return_value=subprocess.CompletedProcess([], 0)):
+            fixture.start()
+        arguments = command.call_args_list[0].args[0]
+        script = arguments[-1]
+        self.assertIn('nc -lk -s 127.0.0.1 -p 18080 -e /fixture/upstream.sh & ', script)
+        self.assertNotIn('while true', script)
+        self.assertEqual([arguments[index + 1] for index, value in enumerate(arguments) if value == '--publish'],
+                         ['127.0.0.1::80', '127.0.0.1::443'])
+        self.assertTrue(fixture.started)
+        self.assertEqual((fixture.http_port, fixture.https_port), (18001, 18002))
+
     def failure_report(self, verify, *, logs_error=None, cleanup_error=None):
         events = []
 

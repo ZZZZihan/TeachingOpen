@@ -375,7 +375,9 @@ sys.exit(result.returncode)
                           "--publish", "127.0.0.1::80", "--publish", "127.0.0.1::443",
                           "--mount", f"type=bind,source={self.directory},target=/fixture,readonly",
                           "--entrypoint", "/bin/sh", self.image, "-c",
-                          "while true; do nc -l -s 127.0.0.1 -p 18080 -e /fixture/upstream.sh; done & "
+                          # Keep the listening socket open while each echo child exits.
+                          # A one-shot nc loop leaves a connection-refused gap between requests.
+                          "nc -lk -s 127.0.0.1 -p 18080 -e /fixture/upstream.sh & "
                           "exec nginx -c /fixture/nginx.conf -g 'daemon off;'"])
         self.started = bool(result.stdout.strip())
         inspection = json.loads(command(["docker", "inspect", self.name]).stdout)[0]
