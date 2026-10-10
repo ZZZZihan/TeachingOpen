@@ -7,7 +7,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.AutoLog;
@@ -20,12 +19,12 @@ import org.jeecg.modules.teaching.enums.DepartDayLogType;
 import org.jeecg.modules.teaching.service.ITeachingCourseUnitService;
 import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -202,9 +201,9 @@ public class TeachingDepartDayLogController extends JeecgController<TeachingDepa
    @AutoLog(value = "班级每日教学记录-添加")
    @ApiOperation(value="班级每日教学记录-添加", notes="班级每日教学记录-添加")
    @PostMapping(value = "/add")
+   @ResponseStatus(HttpStatus.FORBIDDEN)
    public Result<?> add(@RequestBody TeachingDepartDayLog teachingDepartDayLog) {
-       teachingDepartDayLogService.save(teachingDepartDayLog);
-       return Result.ok("添加成功！");
+       return manualWriteDisabled();
    }
    
    /**
@@ -216,9 +215,9 @@ public class TeachingDepartDayLogController extends JeecgController<TeachingDepa
    @AutoLog(value = "班级每日教学记录-编辑")
    @ApiOperation(value="班级每日教学记录-编辑", notes="班级每日教学记录-编辑")
    @PutMapping(value = "/edit")
+   @ResponseStatus(HttpStatus.FORBIDDEN)
    public Result<?> edit(@RequestBody TeachingDepartDayLog teachingDepartDayLog) {
-       teachingDepartDayLogService.updateById(teachingDepartDayLog);
-       return Result.ok("编辑成功!");
+       return manualWriteDisabled();
    }
    
    /**
@@ -230,9 +229,9 @@ public class TeachingDepartDayLogController extends JeecgController<TeachingDepa
    @AutoLog(value = "班级每日教学记录-通过id删除")
    @ApiOperation(value="班级每日教学记录-通过id删除", notes="班级每日教学记录-通过id删除")
    @DeleteMapping(value = "/delete")
+   @ResponseStatus(HttpStatus.FORBIDDEN)
    public Result<?> delete(@RequestParam(name="id",required=true) String id) {
-       teachingDepartDayLogService.removeById(id);
-       return Result.ok("删除成功!");
+       return manualWriteDisabled();
    }
    
    /**
@@ -244,9 +243,9 @@ public class TeachingDepartDayLogController extends JeecgController<TeachingDepa
    @AutoLog(value = "班级每日教学记录-批量删除")
    @ApiOperation(value="班级每日教学记录-批量删除", notes="班级每日教学记录-批量删除")
    @DeleteMapping(value = "/deleteBatch")
+   @ResponseStatus(HttpStatus.FORBIDDEN)
    public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
-       this.teachingDepartDayLogService.removeByIds(Arrays.asList(ids.split(",")));
-       return Result.ok("批量删除成功!");
+       return manualWriteDisabled();
    }
    
    /**
@@ -285,8 +284,18 @@ public class TeachingDepartDayLogController extends JeecgController<TeachingDepa
    * @return
    */
    @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
+   @ResponseStatus(HttpStatus.FORBIDDEN)
    public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
-       return super.importExcel(request, response, TeachingDepartDayLog.class);
+       return manualWriteDisabled();
+   }
+
+   /**
+    * These are derived event counters. Even administrators must not bypass the
+    * shared department/day lock in addLog with generated CRUD or Excel import.
+    * Keep the legacy routes so callers receive an explicit refusal.
+    */
+   private Result<?> manualWriteDisabled() {
+       return Result.error(HttpStatus.FORBIDDEN.value(), "班级每日教学记录由教学事件自动生成，不支持人工修改");
    }
 
 }
