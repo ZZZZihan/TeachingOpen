@@ -23,7 +23,7 @@ const member = compiler.parseComponent(read(memberFile))
 const shell = compiler.parseComponent(read('src/components/page/GlobalLayout.vue'))
 const scoped = compileStyle({ source: member.styles[0].content, filename: memberFile, id: 'data-v-member-scroll-test', scoped: true })
 assert.deepEqual(scoped.errors, [])
-const styles = less.render(shell.styles[0].content).then(result => ({ shell: result.css, member: scoped.code }))
+const styles = less.render(shell.styles[0].content, require('../vue.config').css.loaderOptions.less).then(result => ({ shell: result.css, member: scoped.code }))
 
 // These are real compiled selectors, matched against Antd's nested table structure.
 // The width calculation below is a bounded model using the observed 310/921px

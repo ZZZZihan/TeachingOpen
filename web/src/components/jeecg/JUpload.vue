@@ -12,6 +12,7 @@
 
     <a-upload
       name="file"
+      :key="session"
       :multiple="multiple"
       :action="getUploadAction()"
       :headers="headers"
@@ -19,7 +20,7 @@
       :fileList="fileList"
       :beforeUpload="beforeUpload"
       @change="handleChange"
-      :disabled="disabled"
+      :disabled="disabled || !active"
       :returnUrl="returnUrl"
       :listType="complistType"
       @preview="handlePreview"
@@ -101,6 +102,10 @@
         uploadKey: {},
         newFileList: [],
         uploadGoOn:true,
+        uploadVersion: 0,
+        uploadOperations: {},
+        confirmedFiles: [],
+        uploadState: 'ready',
         previewVisible: false,
         //---------------------------- begin 图片左右换位置 -------------------------------------
         previewImage: '',
@@ -115,6 +120,9 @@
       }
     },
     props:{
+      // A dialog revision invalidates callbacks from a previous editing session.
+      session: { type: Number, default: 0 },
+      active: { type: Boolean, default: true },
       //按钮文本
       text:{
         type:String,
@@ -203,6 +211,8 @@
       },
     },
     watch:{
+      session() { this.invalidateUploads() },
+      active(value) { if (!value) this.invalidateUploads() },
       value:{
         immediate: true,
         handler() {
@@ -235,7 +245,43 @@
       //---------------------------- end 图片左右换位置 -------------------------------------
     },
 
+    beforeDestroy() {
+      this.uploadVersion += 1
+    },
+
     methods:{
+      invalidateUploads() {
+        this.uploadVersion += 1
+        this.uploadOperations = {}
+        this.fileList = this.confirmedFiles.slice()
+        this.setUploadState()
+      },
+      isCurrentUpload(operation) {
+        return this.active && operation && operation.version === this.uploadVersion &&
+          this.uploadOperations[operation.uid] === operation
+      },
+      setUploadState() {
+        const states = Object.keys(this.uploadOperations).map(uid => this.uploadOperations[uid].status)
+        this.uploadState = states.includes('uploading') ? 'uploading' :
+          states.includes('registering') ? 'registering' : states.includes('error') ? 'error' : 'ready'
+        this.$emit('upload-state', { state: this.uploadState, session: this.session })
+      },
+      uploadFailed(operation, file, message) {
+        if (!this.isCurrentUpload(operation)) return
+        operation.status = 'error'
+        file.status = 'error'
+        this.fileList = this.confirmedFiles.concat(file)
+        this.setUploadState()
+        this.$message.error(message || `${file.name} 上传失败，请重试或移除失败文件。`)
+      },
+      storageKey(response) {
+        const key = this.uploadTarget === UPLOAD_TARGET_QINIU ? response && !response.error && response.success !== false && response.key :
+          response && response.success === true && response.message
+        // Storage keys are opaque paths, never a human-readable backend error.
+        return typeof key === 'string' && key.length > 0 && key.length <= 2048 &&
+          !/[\s,\\?#]/.test(key) && !key.startsWith('/') && !key.includes('..') &&
+          !/^[a-z][a-z0-9+.-]*:/i.test(key) ? key : null
+      },
       //获取上传目标地址
       getUploadAction(){
         switch(this.uploadTarget){
@@ -286,12 +332,12 @@
         } 
       },
       //获取七牛TOKEN
-      getQiniuToken(){
+      getQiniuToken(operation){
         return getAction(this.tokenAction.qiniu, {}).then(res => {
-          if (!res.success || !res.keyPrefix) {
-            this.$message.error(res.message || '无法获取上传凭证')
+          if (!res || res.success !== true || !res.keyPrefix || !res.result) {
             throw new Error('Upload credential unavailable')
           }
+          if (!this.isCurrentUpload(operation)) throw new Error('Upload session expired')
           this.uploadToken = res.result
           return res.keyPrefix
         })
@@ -303,16 +349,11 @@
       },
       //保存文件记录
       saveToDB: function(fileName, filePath, fileLocation, fileTag){
-          return postAction("/system/sysFile/add", {
-            fileName: fileName,
-            filePath: filePath,
-            fileLocation: fileLocation,
-            fileTag: fileTag
-          }).then(res=>{
-            if(res.success){
-              this.$emit("saved", res.result)
-            }
-          })
+        return postAction("/system/sysFile/add", { fileName, filePath, fileLocation, fileTag }).then(res => {
+          if (!res || res.success !== true || !res.result || typeof res.result.id !== 'string' ||
+              !res.result.id || res.result.filePath !== filePath) throw new Error('Upload registration failed')
+          return res.result
+        })
       },
       //删除文件记录
       delFromBD(filePath){
@@ -323,11 +364,12 @@
       initFileListArr(val){
         if(!val || val.length==0){
           this.fileList = [];
+          this.confirmedFiles = [];
           return;
         }
         let fileList = [];
         for(var a=0;a<val.length;a++){
-          let url = getDownloadUrl(val[a].filePath);
+          let url = this.getDownloadUrl(val[a].filePath);
           fileList.push({
             uid:uidGenerator(),
             name:val[a].fileName,
@@ -340,6 +382,7 @@
           })
         }
         this.fileList = fileList
+        this.confirmedFiles = fileList.slice()
       },
       //从value生成文件列表
       initFileList(paths){
@@ -347,6 +390,7 @@
           //return [];
           // update-begin- --- author:os_chengtgen ------ date:20190729 ---- for:issues:326,Jupload组件初始化bug
           this.fileList = [];
+          this.confirmedFiles = [];
           return;
           // update-end- --- author:os_chengtgen ------ date:20190729 ---- for:issues:326,Jupload组件初始化bug
         }
@@ -370,6 +414,7 @@
         console.log("initFileList")
         console.log(fileList)
         this.fileList = fileList
+        this.confirmedFiles = fileList.slice()
       },
       handlePathChange(){
         let uploadFiles = this.fileList
@@ -381,7 +426,7 @@
 
         for(var a=0;a<uploadFiles.length;a++){
           // update-begin-author:lvdandan date:20200603 for:【TESTA-514】【开源issue】多个文件同时上传时，控制台报错
-          if(uploadFiles[a].status === 'done' ) {
+          if(uploadFiles[a].status === 'done' && (uploadFiles[a]._uploadReady || uploadFiles[a].response.status === 'history')) {
             arr.push(uploadFiles[a].response.message)
           }else{
             return;
@@ -395,105 +440,101 @@
       },
       //上传之前
       beforeUpload(file){
-        this.uploadGoOn=true
-        var fileType = file.type;
-        
-        if(this.fileType===FILE_TYPE_IMG){
-          if(fileType.indexOf('image')<0){
-            this.$message.warning('请上传图片');
-            this.uploadGoOn=false
-            return false;
-          }
-        }
-        if(file.size > this.maxFileSize * 1024 * 1024){
-          this.$message.warning("文件超过"+this.maxFileSize+"MB")
+        if (!this.active || this.disabled) return false
+        if (this.fileType === FILE_TYPE_IMG && !file.type.startsWith('image/')) {
+          this.$message.warning('请上传图片')
           return false
         }
-        //获取文件key
-        let suffix = file.name.split(".")
-        if(suffix.length>1){suffix = suffix.pop()}else{suffix = ""}
+        if (file.size > this.maxFileSize * 1024 * 1024) {
+          this.$message.warning("文件超过" + this.maxFileSize + "MB")
+          return false
+        }
+        // Retrying a failed selection clears only failed operations, not concurrent uploads.
+        Object.keys(this.uploadOperations).forEach(uid => {
+          if (this.uploadOperations[uid].status === 'error') this.$delete(this.uploadOperations, uid)
+        })
+        const operation = { uid: file.uid, version: this.uploadVersion, status: 'uploading' }
+        this.$set(this.uploadOperations, file.uid, operation)
+        this.setUploadState()
+        const parts = file.name.split('.')
+        const suffix = parts.length > 1 ? parts.pop() : ''
         if (this.uploadTarget === UPLOAD_TARGET_QINIU) {
-          return this.getQiniuToken().then(prefix => {
-            // Each revision gets a new object; credentials cannot overwrite a shared attachment.
+          return this.getQiniuToken(operation).then(prefix => {
+            if (!this.isCurrentUpload(operation)) return Promise.reject(new Error('Upload session expired'))
             this.uploadKey[file.uid] = prefix + uuidGenerator() + (suffix ? '.' + suffix : '')
-            this.$emit("selected", this.uploadKey[file.uid], file)
+            this.$emit('selected', this.uploadKey[file.uid], file)
+          }).catch(error => {
+            this.uploadFailed(operation, file, '无法获取上传凭证，请重试。')
+            throw error
           })
         }
         this.uploadKey[file.uid] = this.getFileFullName(suffix)
-        this.$emit("selected", this.uploadKey[file.uid], file)
+        this.$emit('selected', this.uploadKey[file.uid], file)
         return true
       },
-      //上传完毕后文件列表发送变化
-      handleChange(info) {
-        if(!info.file.status && this.uploadGoOn === false){
-          info.fileList.pop();
+      async handleChange(info) {
+        const file = info.file
+        const operation = this.uploadOperations[file.uid]
+        if (!this.active) return
+        if (file.status === 'removed') {
+          // Removing a failed/pending file also invalidates its registration callback.
+          if (operation) this.$delete(this.uploadOperations, file.uid)
+          const confirmed = this.confirmedFiles.find(item => item.uid === file.uid)
+          if (confirmed) this.handleDelete(confirmed)
+          this.confirmedFiles = this.confirmedFiles.filter(item => item.uid !== file.uid)
+          this.fileList = this.fileList.filter(item => item.uid !== file.uid)
+          this.setUploadState()
+          this.emitConfirmedFiles()
+          return
         }
-        let fileList = info.fileList
-        console.log("--文件列表改变--")
-        console.log(info)
-        if(this.number>0 && fileList.length>this.number){
-          //删除超出部分文件
-          this.handleDelete(fileList[0])
-          fileList = fileList.slice(-this.number);
+        if (!this.isCurrentUpload(operation)) return
+        if (file.status === 'uploading') {
+          this.fileList = info.fileList
+          return
         }
-        if(info.file.status==='done'){
-          switch(this.uploadTarget){
-            case UPLOAD_TARGET_LOCAL:
-              if(info.file.response.success){
-                fileList = fileList.map((file) => {
-                  if (file.response && file.response.message) {
-                    file.url = this.getDownloadUrl(file.response.message)
-                    this.saveToDB(file.name,file.response.message,1,"后台上传")
-                  }
-                  return file;
-                });
-              }
-            case UPLOAD_TARGET_QINIU:
-              if(info.file.response.key){ //当上传成功后才会有key
-                fileList = fileList.map((file) => {
-                  if (file.response && file.response.key) {
-                    file.response.message = file.response.key
-                    file.url = this.getDownloadUrl(file.response.key)
-                    this.saveToDB(file.name,file.response.key,2,"后台上传")
-                  }
-                  return file;
-                });
-              }
-          }
-          this.$message.success(`${info.file.name} 上传成功!`);
-        }else if (info.file.status === 'error') {
-          this.$message.error(`${info.file.name} 上传失败.`);
-        }else if(info.file.status === 'removed'){
-          this.handleDelete(info.file)
+        if (file.status === 'error') {
+          this.uploadFailed(operation, file)
+          return
         }
-        this.fileList = fileList
-        if(info.file.status==='done' || info.file.status === 'removed'){
-          //returnUrl为true时仅返回文件路径
-          if(this.returnUrl){
-            this.handlePathChange()
-          }else{
-            //returnUrl为false时返回文件名称、文件路径及文件大小
-            this.newFileList = [];
-            for(var a=0;a<fileList.length;a++){
-              // update-begin-author:lvdandan date:20200603 for:【TESTA-514】【开源issue】多个文件同时上传时，控制台报错
-              if(fileList[a].status === 'done' ) {
-                var fileJson = {
-                  fileName:fileList[a].name,
-                  filePath:fileList[a].response.message,
-                  fileSize:fileList[a].size
-                };
-                this.newFileList.push(fileJson);
-              }else{
-                return;
-              }
-              // update-end-author:lvdandan date:20200603 for:【TESTA-514】【开源issue】多个文件同时上传时，控制台报错
-            }
-            this.$emit('change', this.newFileList);
-          }
+        if (file.status !== 'done' || operation.status !== 'uploading') return
+        const key = this.storageKey(file.response)
+        if (!key) {
+          this.uploadFailed(operation, file, '文件上传未成功，请重试或移除失败文件。')
+          return
         }
-        
-        console.log(fileList)
-        console.log("--文件列表改变结束--")
+        operation.status = 'registering'
+        this.setUploadState()
+        try {
+          const registered = await this.saveToDB(file.name, key, this.uploadTarget === UPLOAD_TARGET_QINIU ? 2 : 1, '后台上传')
+          if (!this.isCurrentUpload(operation)) return
+          file.response = { ...file.response, message: key }
+          file.url = this.getDownloadUrl(key)
+          file._uploadReady = true
+          operation.status = 'ready'
+          const confirmed = this.confirmedFiles.filter(item => item.uid !== file.uid).concat(file)
+          // Implicit replacement must not delete the attachment still stored in the course.
+          this.confirmedFiles = this.number > 0 ? confirmed.slice(-this.number) : confirmed
+          this.fileList = this.confirmedFiles.concat(info.fileList.filter(item => {
+            const other = this.uploadOperations[item.uid]
+            return other && other.status !== 'ready' && item.uid !== file.uid
+          }))
+          this.setUploadState()
+          this.emitConfirmedFiles()
+          this.$emit('saved', registered)
+          this.$message.success(`${file.name} 上传成功!`)
+        } catch (error) {
+          this.uploadFailed(operation, file, '文件登记未成功，请重试或移除失败文件。')
+        }
+      },
+      emitConfirmedFiles() {
+        if (this.uploadState !== 'ready') return
+        if (this.returnUrl) {
+          this.$emit('change', this.confirmedFiles.map(file => file.response.message).join(','))
+        } else {
+          this.$emit('change', this.confirmedFiles.map(file => ({
+            fileName: file.name, filePath: file.response.message, fileSize: file.size
+          })))
+        }
       },
       handleDelete(file){
         console.log("删除文件");
@@ -516,6 +557,7 @@
       },
       //---------------------------- begin 图片左右换位置 -------------------------------------
       moveLast(){
+        if (this.disabled || this.uploadState !== 'ready') return
         //console.log(ev)
         //console.log(this.fileList)
         //console.log(this.currentImg)
@@ -540,6 +582,7 @@
         }
       },
       moveNext(){
+        if (this.disabled || this.uploadState !== 'ready') return
         let index = this.getIndexByUrl();
         if(index==this.fileList.length-1){
           this.$message.warn('已到最后~')

@@ -27,8 +27,8 @@ export default {
 .student-list-state { min-width: 0; padding: 32px 20px; text-align: center; border: 1px solid #e1e4e8; border-radius: 3px; background: #fafafb; color: #59646e; overflow-wrap: anywhere; }
 .student-list-state h3 { margin: 10px 0 8px; color: #20252b; font-size: 16px; font-weight: 500; }
 .student-list-state p { font-size: 13px; line-height: 1.8; margin: 0 0 8px; }
-.student-list-state .anticon { color: #74256a; font-size: 22px; }
-.student-list-retry { min-height: 44px; margin-top: 12px; padding: 8px 20px; border: 1px solid #74256a; border-radius: 3px; background: #74256a; color: #fff; font: inherit; font-size: 14px; cursor: pointer; }
-.student-list-retry:focus-visible { outline: 2px solid #74256a; outline-offset: 3px; }
+.student-list-state .anticon { color: #146fc2; font-size: 22px; }
+.student-list-retry { min-height: 44px; margin-top: 12px; padding: 8px 20px; border: 1px solid #146fc2; border-radius: 3px; background: #146fc2; color: #fff; font: inherit; font-size: 14px; cursor: pointer; }
+.student-list-retry:focus-visible { outline: 2px solid #146fc2; outline-offset: 3px; }
 @media (max-width: 600px) { .student-list-state { padding: 24px 16px; } }
 </style>

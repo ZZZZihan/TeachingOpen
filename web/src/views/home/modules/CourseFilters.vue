@@ -85,13 +85,13 @@ export default {
 .filter-field select:disabled { background: #f1f3f5; color: #7b879b; cursor: not-allowed; }
 .search-input { display: flex; }
 .search-input input { border-radius: 4px 0 0 4px; }
-.search-button { flex-shrink: 0; height: 42px; padding: 0 12px; border: 1px solid #74256a; border-radius: 0 4px 4px 0; background: #74256a; color: #fff; cursor: pointer; font-size: 12px; }
-.search-button:hover { background: #592052; }
+.search-button { flex-shrink: 0; height: 42px; padding: 0 12px; border: 1px solid #146fc2; border-radius: 0 4px 4px 0; background: #146fc2; color: #fff; cursor: pointer; font-size: 12px; }
+.search-button:hover { background: #095b9e; }
 .reset-button { align-self: flex-start; padding: 0 0 3px; border: 0; border-bottom: 1px solid #bdc5cc; background: transparent; color: #687684; cursor: pointer; white-space: nowrap; font-size: 12px; }
-.reset-button:hover, .filter-error button:hover { color: #74256a; }
+.reset-button:hover, .filter-error button:hover { color: #146fc2; }
 .filter-error { margin-top: 16px; color: #80561c; font-size: 12px; line-height: 1.8; }
-.filter-error button { border: 0; background: transparent; color: #74256a; text-decoration: underline; cursor: pointer; }
-input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid #74256a; outline-offset: 3px; }
+.filter-error button { border: 0; background: transparent; color: #146fc2; text-decoration: underline; cursor: pointer; }
+input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid #146fc2; outline-offset: 3px; }
 @media (max-width: 1000px) { .course-filters { padding-bottom: 26px; border-bottom: 1px solid #dfe4e9; } .filters-title { display: none; } .filter-form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: end; } .search-field { grid-column: 1; } .reset-button { align-self: center; justify-self: start; margin-top: 24px; } }
 @media (max-width: 600px) { .filter-form { gap: 18px 14px; } .search-field { grid-column: span 2; } .reset-button { margin-top: 0; } }
 </style>

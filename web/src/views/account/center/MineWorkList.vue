@@ -344,11 +344,11 @@ export default {
 @import '~@assets/less/common.less';
 .mine-work-list { min-width: 0; max-width: 100%; }
 .work-table-region { min-width: 0; max-width: 100%; }
-.work-table-region:focus-visible { outline: 2px solid #74256a; outline-offset: 3px; }
+.work-table-region:focus-visible { outline: 2px solid #146fc2; outline-offset: 3px; }
 .mine-work-list /deep/ .ant-table-body { overflow-x: auto !important; }
 .mine-work-list /deep/ td { overflow-wrap: anywhere; word-break: break-word; }
-.work-action { border: 0; background: none; color: #74256a; font: inherit; padding: 2px 0; cursor: pointer; }
-.work-action:focus-visible { outline: 2px solid #74256a; outline-offset: 3px; }
+.work-action { border: 0; background: none; color: #146fc2; font: inherit; padding: 2px 0; cursor: pointer; }
+.work-action:focus-visible { outline: 2px solid #146fc2; outline-offset: 3px; }
 .table-scroll-hint { display: none; color: #737b82; font-size: 12px; line-height: 1.7; margin: 0 0 12px; }
 @media (max-width: 900px) { .table-scroll-hint { display: block; } }
 @media (max-width: 600px) { .mine-work-list /deep/ > .ant-card-body { padding: 16px; } .mine-work-list /deep/ .ant-form-item { display: flex; } .mine-work-list /deep/ .ant-form-item-control-wrapper { flex: 1; min-width: 0; } .mine-work-list /deep/ .ant-form-item-label { flex-shrink: 0; } .mine-work-list /deep/ .ant-select { width: 100%; } }

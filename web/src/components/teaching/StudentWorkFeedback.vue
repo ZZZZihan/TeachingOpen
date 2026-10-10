@@ -62,20 +62,20 @@ export default {
 .student-work-feedback { text-align: left; min-width: 0; color: #20252b; }
 .feedback-score { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; margin: 0 0 8px; font-size: 13px; }
 .feedback-score > span { color: #737b82; }
-.feedback-score strong { color: #74256a; font-weight: 600; }
+.feedback-score strong { color: #146fc2; font-weight: 600; }
 .feedback-score.score-missing strong { color: #59646e; font-weight: 400; }
 .feedback-summary { white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; max-height: 5.4em; font-size: 13px; line-height: 1.8; margin: 0 0 9px; }
 .feedback-empty { color: #737b82; font-size: 12px; margin: 0; }
-.feedback-open { background: none; border: 0; padding: 2px 0; color: #74256a; font: inherit; font-size: 12px; cursor: pointer; text-align: left; min-height: 44px; display: inline-flex; align-items: center; }
+.feedback-open { background: none; border: 0; padding: 2px 0; color: #146fc2; font: inherit; font-size: 12px; cursor: pointer; text-align: left; min-height: 44px; display: inline-flex; align-items: center; }
 .feedback-open span { margin-left: 5px; }
-.feedback-open:focus-visible, .feedback-close:focus-visible { outline: 2px solid #74256a; outline-offset: 3px; }
+.feedback-open:focus-visible, .feedback-close:focus-visible { outline: 2px solid #146fc2; outline-offset: 3px; }
 .feedback-detail-score { color: #59646e; font-size: 14px; margin: 0 0 22px; }
-.feedback-detail-score strong { color: #74256a; }
+.feedback-detail-score strong { color: #146fc2; }
 .feedback-detail-heading { color: #20252b; font-size: 14px; font-weight: 600; margin: 0 0 10px; }
 .feedback-comment-region { max-height: min(45vh, 360px); overflow-y: auto; margin-bottom: 24px; padding: 3px; }
-.feedback-comment-region:focus-visible { outline: 2px solid #74256a; outline-offset: 2px; }
+.feedback-comment-region:focus-visible { outline: 2px solid #146fc2; outline-offset: 2px; }
 .feedback-full-comment { white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; font-size: 14px; line-height: 1.9; margin: 0; }
-.feedback-close { min-height: 44px; border: 1px solid #74256a; border-radius: 3px; background: #74256a; color: #fff; padding: 8px 20px; font: inherit; font-size: 14px; cursor: pointer; }
+.feedback-close { min-height: 44px; border: 1px solid #146fc2; border-radius: 3px; background: #146fc2; color: #fff; padding: 8px 20px; font: inherit; font-size: 14px; cursor: pointer; }
 </style>
 <style>
 .student-feedback-dialog .ant-modal { max-width: calc(100vw - 32px); margin: 0 auto; padding-bottom: 24px; }

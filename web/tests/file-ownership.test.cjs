@@ -53,20 +53,23 @@ test('editor object upload uses the server prefix and reports missing credential
 
 test('JUpload waits for the prefix and uses distinct keys for repeated filenames', async () => {
   const source = readFileSync(resolve(__dirname, '../src/components/jeecg/JUpload.vue'), 'utf8')
-  const method = source.slice(source.indexOf('      beforeUpload(file){'), source.indexOf('      //上传完毕后文件列表发送变化'))
-  let sequence = 0
-  const context = { FILE_TYPE_IMG: 1, UPLOAD_TARGET_QINIU: 'qiniu', uuidGenerator: () => 'unique' + (++sequence) }
+  const context = { Vue: { ls: { get: () => ({uploadType:'qiniu'}) } }, SYS_CONFIG:'config', ACCESS_TOKEN:'token',
+    window: { _CONFIG: { domianURL:'' } }, console, component: null }
   vm.createContext(context)
-  const methods = vm.runInContext('({' + method + '})', context)
+  vm.runInContext(source.match(/<script>([\s\S]*?)<\/script>/)[1].replace(/^\s*import .*$/gm, '').replace('export default', 'component ='), context)
   const selected = []
-  const state = { fileType: 2, maxFileSize: 10, uploadTarget: 'qiniu', uploadKey: {},
-    getQiniuToken: () => Promise.resolve('user-upload/a/'), $emit: (_, key) => selected.push(key) }
-  await Promise.all(['one', 'two'].map(uid => methods.beforeUpload.call(state, { uid, name: 'same.py', size: 20, type: 'text/plain' })))
+  const state = { ...context.component.data.call({ $store: { getters: { sysConfig: {} } } }),
+    active: true, disabled: false, session: 0, fileType: 'file', maxFileSize: 10, uploadTarget: 'qiniu',
+    $set: (object, key, value) => { object[key] = value }, $delete: (object, key) => { delete object[key] },
+    $message: { error () {} }, $emit: (event, key) => { if (event === 'selected') selected.push(key) } }
+  for (const [key, method] of Object.entries(context.component.methods)) state[key] = method.bind(state)
+  state.getQiniuToken = () => Promise.resolve('user-upload/a/')
+  await Promise.all(['one', 'two'].map(uid => state.beforeUpload( { uid, name: 'same.py', size: 20, type: 'text/plain' })))
   assert.equal(selected.length, 2)
   assert.notEqual(selected[0], selected[1])
   assert.ok(selected.every(key => key.startsWith('user-upload/a/') && key.endsWith('.py')))
   state.getQiniuToken = () => Promise.reject(new Error('offline'))
-  await assert.rejects(methods.beforeUpload.call(state, { uid: 'three', name: 'same.py', size: 20, type: 'text/plain' }))
+  await assert.rejects(state.beforeUpload( { uid: 'three', name: 'same.py', size: 20, type: 'text/plain' }))
   assert.equal(state.uploadKey.three, undefined)
   assert.equal(selected.length, 2)
 })

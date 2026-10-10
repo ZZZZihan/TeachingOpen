@@ -20,7 +20,7 @@
         <a-row :gutter="24">
           <a-col :span="12">
             <a-form-item label="字典表下拉">
-              <j-dict-select-tag v-model="formData.user" placeholder="请选择用户" dictCode="sys_user,realname,id"/>
+              <j-dict-select-tag v-model="formData.user" placeholder="请选择用户" dictCode="system_users"/>
             </a-form-item>
           </a-col>
           <a-col :span="12">选中值：{{ formData.user}}</a-col>
@@ -30,7 +30,7 @@
         <a-row :gutter="24">
           <a-col :span="12">
             <a-form-item label="字典表下拉(带条件)">
-              <j-dict-select-tag v-model="formData.user2" placeholder="请选择用户" dictCode="sys_user,realname,id,username!='admin' order by create_time"/>
+              <j-dict-select-tag v-model="formData.user2" placeholder="请选择用户" dictCode="system_users_without_admin"/>
             </a-form-item>
           </a-col>
           <a-col :span="12">选中值：{{ formData.user2}}</a-col>
@@ -55,7 +55,7 @@
               <j-search-select-tag
                 placeholder="请做出你的选择"
                 v-model="formData.asyncSelectValue"
-                dict="sys_depart,depart_name,id"
+                dict="system_departments"
                 :async="true">
               </j-search-select-tag>
             </a-form-item>
@@ -256,7 +256,7 @@
               <j-tree-select
                 v-model="formData.treeSelect"
                 placeholder="请选择菜单"
-                dict="sys_permission,name,id"
+                dict="system_permissions"
                 pidField="parent_id"
                 pidValue=""
               />
@@ -271,7 +271,7 @@
               <j-tree-select
                 v-model="formData.treeSelectMultiple"
                 placeholder="请选择菜单"
-                dict="sys_permission,name,id"
+                dict="system_permissions"
                 pidField="parent_id"
                 pidValue=""
                 multiple

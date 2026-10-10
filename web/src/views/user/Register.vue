@@ -1,6 +1,6 @@
 <template>
   <main class="registration-page">
-    <div class="registration-heading"><span>天津工业大学 · 学习与创作</span><h1>创建你的账号</h1><p>使用手机号和密码登录教学平台。</p></div>
+    <div class="registration-heading"><span>TeachingOpen · 学习与创作</span><h1>创建你的账号</h1><p>使用手机号和密码登录教学平台。</p></div>
     <form novalidate :aria-busy="submitting" @submit.prevent="submit">
       <div v-for="field in fields" :key="field.key" class="field">
         <label :for="'register-' + field.key">{{ field.label }}</label>
@@ -75,19 +75,19 @@ export default {
 
 <style scoped>
 .registration-page { max-width: 480px; margin: 36px auto; padding: 24px; color: #27333b; }
-.registration-heading span { color: #74256a; font-size: 12px; }
+.registration-heading span { color: #146fc2; font-size: 12px; }
 h1 { margin: 12px 0; font-size: 30px; }
 .registration-heading p, .privacy-note { color: #69747c; line-height: 1.7; }
 .field { margin-top: 18px; }
 .field label { display: block; margin-bottom: 8px; }
 .field input { width: 100%; padding: 12px; border: 1px solid #bec6cc; border-radius: 4px; }
-.field input:focus { outline: 2px solid #74256a; outline-offset: 2px; }
+.field input:focus { outline: 2px solid #146fc2; outline-offset: 2px; }
 fieldset { margin: 20px 0; border: 0; padding: 0; }
 fieldset label { display: inline-block; margin-right: 24px; }
 legend { margin-bottom: 10px; font-size: 14px; }
 .field-error { color: #a12834; margin-top: 8px; }
 .privacy-note { font-size: 12px; }
-button { width: 100%; padding: 12px; background: #74256a; color: white; border: 0; border-radius: 4px; cursor: pointer; }
+button { width: 100%; padding: 12px; background: #146fc2; color: white; border: 0; border-radius: 4px; cursor: pointer; }
 button:disabled { opacity: .65; cursor: wait; }
-.login-link { display: block; text-align: center; margin-top: 18px; color: #74256a; }
+.login-link { display: block; text-align: center; margin-top: 18px; color: #146fc2; }
 </style>

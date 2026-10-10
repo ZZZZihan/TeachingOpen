@@ -100,7 +100,7 @@
     }
   }
 </script>
-<style scoped>
+<style lang="less" scoped>
   .table-operator {
     margin-bottom: 10px
   }
@@ -110,6 +110,6 @@
   }
 
   .clName .ant-tree li .ant-tree-node-content-wrapper.ant-tree-node-selected {
-    background-color: #1890FF !important;
+    background-color: var(--app-primary-color, @primary-color) !important;
   }
 </style>

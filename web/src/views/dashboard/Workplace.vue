@@ -261,7 +261,7 @@
         font-size: 14px;
 
         &:hover {
-          color: #1890ff;
+          color: var(--app-primary-color, @primary-color);
         }
       }
     }
@@ -284,7 +284,7 @@
         flex: 1 1 0;
 
         &:hover {
-          color: #1890ff;
+          color: var(--app-primary-color, @primary-color);
         }
       }
       .datetime {
@@ -331,7 +331,7 @@
       }
       &:hover {
         span {
-          color: #1890ff;
+          color: var(--app-primary-color, @primary-color);
         }
       }
     }

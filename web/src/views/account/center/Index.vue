@@ -169,7 +169,7 @@
           }
           &:hover {
             span {
-              color: #1890ff;
+              color: var(--app-primary-color, @primary-color);
             }
           }
         }

@@ -38,11 +38,11 @@ export default {
 }
 </style>
 <style scoped>
-.work-preview iframe { display: block; width: 100%; height: min(70vh, 720px); border: 1px solid #e6e0e5; background: #faf7f9; }
+.work-preview iframe { display: block; width: 100%; height: min(70vh, 720px); border: 1px solid #d5e5f5; background: #f4f8fd; }
 .preview-note { font-size: 12px; color: #746b75; line-height: 1.8; }
 .file-preview { padding: 50px 14px; text-align: center; color: #746b75; }
-.file-preview > .anticon { font-size: 38px; color: #93668d; }
+.file-preview > .anticon { font-size: 38px; color: #648ab2; }
 .file-preview h3 { margin: 20px 0 12px; color: #28252c; font-size: 20px; }
 .file-preview p { font-size: 13px; line-height: 1.8; }
-.file-preview a { display: inline-block; margin-top: 12px; color: #74256a; }
+.file-preview a { display: inline-block; margin-top: 12px; color: #146fc2; }
 </style>

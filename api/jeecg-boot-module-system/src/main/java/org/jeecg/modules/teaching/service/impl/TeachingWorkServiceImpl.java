@@ -7,9 +7,19 @@ import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.mapper.SysDepartMapper;
 import org.jeecg.modules.system.mapper.SysUserMapper;
 import org.jeecg.modules.teaching.service.TeachingWorkAttachmentService;
+import org.jeecg.modules.teaching.service.TeachingAccessService;
+import org.jeecg.common.exception.JeecgBootException;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
 import org.jeecg.modules.teaching.entity.TeachingWorkComment;
+import org.jeecg.modules.teaching.entity.TeachingCourse;
+import org.jeecg.modules.teaching.entity.TeachingCourseUnit;
+import org.jeecg.modules.teaching.entity.TeachingCourseDept;
+import org.jeecg.modules.teaching.entity.TeachingAdditionalWork;
+import org.jeecg.modules.teaching.mapper.TeachingCourseMapper;
+import org.jeecg.modules.teaching.mapper.TeachingCourseUnitMapper;
+import org.jeecg.modules.teaching.mapper.TeachingCourseDeptMapper;
+import org.jeecg.modules.teaching.mapper.TeachingAdditionalWorkMapper;
 import org.jeecg.modules.teaching.mapper.TeachingWorkCorrectMapper;
 import org.jeecg.modules.teaching.mapper.TeachingWorkCommentMapper;
 import org.jeecg.modules.teaching.mapper.TeachingWorkMapper;
@@ -17,7 +27,6 @@ import org.jeecg.modules.teaching.model.AdditionalWorkModel;
 import org.jeecg.modules.teaching.model.StudentWorkModel;
 import org.jeecg.modules.teaching.service.ITeachingWorkService;
 import org.jeecg.modules.teaching.vo.StudentWorkSendVO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +59,16 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	private TeachingWorkCommentMapper teachingWorkCommentMapper;
 	@Autowired
 	private TeachingWorkAttachmentService workAttachmentService;
+	@Autowired
+	private TeachingAccessService teachingAccessService;
+	@Autowired
+	private TeachingCourseMapper teachingCourseMapper;
+	@Autowired
+	private TeachingCourseUnitMapper teachingCourseUnitMapper;
+	@Autowired
+	private TeachingCourseDeptMapper teachingCourseDeptMapper;
+	@Autowired
+	private TeachingAdditionalWorkMapper teachingAdditionalWorkMapper;
 
 
 	@Override
@@ -140,53 +159,125 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	}
 
 	@Override
+	public boolean incrementStarCount(String workId) {
+		return this.baseMapper.incrementStarCount(workId) == 1;
+	}
+
+	@Override
 	public Page<StudentWorkModel> listWorkModel(Page<StudentWorkModel> page, QueryWrapper<StudentWorkModel> queryWrapper,List<String> deptIds) {
 		return page.setRecords(this.baseMapper.listWorkModel(page, queryWrapper,deptIds));
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public int sendWork(StudentWorkSendVO studentWorkSendVO) {
-		int count = 0;
-		List<String> studentIds = studentWorkSendVO.getUserIdList();
-		String workId = studentWorkSendVO.getSendWorkId();
-		TeachingWork sourceWork = this.getById(workId);
-		if (sourceWork == null){
-			return 0;
+		if (studentWorkSendVO == null || !StringUtils.hasText(studentWorkSendVO.getSendWorkId())
+				|| studentWorkSendVO.getUserIdList() == null || studentWorkSendVO.getUserIdList().isEmpty()) {
+			throw new JeecgBootException("请选择源作品和接收用户");
 		}
-		List<TeachingWork> workList = new ArrayList<>();
-		//遍历学生ID
-		for (String userId: studentIds){
-			SysUser user = sysUserMapper.selectById(userId);
-			if (user == null){ continue; }
+		List<String> recipientIds = new ArrayList<>(studentWorkSendVO.getUserIdList());
+		if (recipientIds.stream().anyMatch(id -> !StringUtils.hasText(id))
+				|| new HashSet<>(recipientIds).size() != recipientIds.size()) {
+			throw new JeecgBootException("接收用户不能为空或重复");
+		}
+		Collections.sort(recipientIds);
+		TeachingWork sourceWork = teachingWorkMapper.selectOne(new QueryWrapper<TeachingWork>()
+				.eq("id", studentWorkSendVO.getSendWorkId()).last("FOR UPDATE"));
+		teachingAccessService.requireReadWork(sourceWork);
+		if (sourceWork == null || !Integer.valueOf(0).equals(sourceWork.getDelFlag())) {
+			throw new JeecgBootException("源作品不存在或已删除");
+		}
+		if (StringUtils.hasText(sourceWork.getCourseId()) && StringUtils.hasText(sourceWork.getAdditionalId())) {
+			throw new JeecgBootException("源作品任务归属异常，不能克隆");
+		}
+		// Validate the entire batch before INSERT. Fixed user-lock order serializes
+		// concurrent clone batches for the same recipients without using names as IDs.
+		Map<String, String> recipientDeparts = new HashMap<>();
+		for (String userId : recipientIds) {
+			SysUser user = sysUserMapper.selectOne(new QueryWrapper<SysUser>().eq("id", userId).last("FOR UPDATE"));
+			if (user == null || !userId.equals(user.getId()) || !Integer.valueOf(0).equals(user.getDelFlag()) || !Integer.valueOf(1).equals(user.getStatus())) {
+				throw new JeecgBootException("接收用户不存在或不可用，本批次未创建作品");
+			}
+			TeachingWork recipient = new TeachingWork();
+			recipient.setUserId(userId);
+			recipient.setDepartId(cloneTaskDepart(sourceWork, userId));
+			teachingAccessService.requireManageWork(recipient);
+			recipientDeparts.put(userId, recipient.getDepartId());
+			if (StringUtils.hasText(sourceWork.getCourseId()) || StringUtils.hasText(sourceWork.getAdditionalId())) {
+				QueryWrapper<TeachingWork> conflict = new QueryWrapper<TeachingWork>().eq("user_id", userId).eq("del_flag", 0);
+				if (StringUtils.hasText(sourceWork.getCourseId())) conflict.eq("course_id", sourceWork.getCourseId());
+				else conflict.eq("additional_id", sourceWork.getAdditionalId());
+				if (!teachingWorkMapper.selectList(conflict.last("FOR UPDATE")).isEmpty()) {
+					throw new JeecgBootException("接收用户已有该任务的作品，请继续编辑原作品；本批次未创建作品");
+				}
+			}
+		}
+		for (String userId : recipientIds) {
+			// Copy only content and task identity. A clone has its own draft status,
+			// metrics, audit identity and cloud namespace, with no feedback children.
 			TeachingWork work = new TeachingWork();
-			BeanUtils.copyProperties(sourceWork, work);
 			work.setUserId(userId);
-			work.setCreateTime(new Date());
-			work.setCreateBy(user.getUsername());
-			work.setUpdateTime(null);
-			work.setUpdateBy(null);
+			work.setDepartId(recipientDeparts.get(userId));
+			work.setCourseId(sourceWork.getCourseId());
+			work.setAdditionalId(sourceWork.getAdditionalId());
+			work.setWorkName(sourceWork.getWorkName());
+			work.setWorkType(sourceWork.getWorkType());
+			work.setWorkFile(sourceWork.getWorkFile());
+			work.setWorkCover(sourceWork.getWorkCover());
+			work.setWorkScene(StringUtils.hasText(work.getCourseId()) ? "course"
+					: StringUtils.hasText(work.getAdditionalId()) ? "additional" : "create");
+			work.setHasCloudData(false);
+			work.setWorkStatus("0");
 			work.setViewNum(0);
+			work.setStarNum(0);
+			work.setCollectNum(0);
 			work.setDelFlag(0);
-			work.setId(null);
-			//覆盖老作业
-			List<TeachingWork> oldWork = teachingWorkMapper.selectByMap(new HashMap<String, Object>(){{
-				put("work_name", sourceWork.getWorkName());
-				put("user_id", userId);
-			}});
-			if (oldWork.size() > 0){
-				work.setId(oldWork.get(0).getId());
-			}else{
-				work.setId(null);
-			}
-			workList.add(work);
-			try{
-				this.saveOrUpdate(work);
-				count++;
-			}catch (Exception e){
-				e.printStackTrace();
-			}
+			if (teachingWorkMapper.insert(work) != 1) throw new JeecgBootException("作品克隆失败，请稍后重试");
 		}
-		return count;
+		return recipientIds.size();
+	}
+
+	/** Validate the recipient, independent of the actor's administrative role.
+	 * A task-bound source keeps its class; an unbound source derives a valid class
+	 * as submission does. Standalone works have no task eligibility restriction. */
+	private String cloneTaskDepart(TeachingWork source, String userId) {
+		if (!StringUtils.hasText(source.getCourseId()) && !StringUtils.hasText(source.getAdditionalId())) {
+			return source.getDepartId();
+		}
+		List<SysDepart> departments = sysDepartMapper.queryUserDeparts(userId);
+		Set<String> memberships = departments == null ? Collections.emptySet() : departments.stream()
+				.filter(depart -> !"1".equals(depart.getDelFlag())).map(SysDepart::getId).collect(Collectors.toSet());
+		List<String> eligible;
+		boolean sharedCourse = false;
+		if (StringUtils.hasText(source.getCourseId())) {
+			TeachingCourseUnit unit = teachingCourseUnitMapper.selectOne(new QueryWrapper<TeachingCourseUnit>()
+					.eq("id", source.getCourseId()).last("FOR UPDATE"));
+			TeachingCourse course = unit == null ? null : teachingCourseMapper.selectOne(new QueryWrapper<TeachingCourse>()
+					.eq("id", unit.getCourseId()).last("FOR UPDATE"));
+			if (unit == null || course == null || Integer.valueOf(1).equals(unit.getDelFlag())
+					|| Integer.valueOf(1).equals(course.getDelFlag())) {
+				throw new JeecgBootException("源作品任务不存在或已删除，本批次未创建作品");
+			}
+			sharedCourse = Boolean.TRUE.equals(course.getIsShared());
+			eligible = memberships.isEmpty() ? Collections.emptyList() : teachingCourseDeptMapper.selectList(
+					new QueryWrapper<TeachingCourseDept>().eq("course_id", course.getId()).in("dept_id", memberships).last("FOR UPDATE"))
+					.stream().map(TeachingCourseDept::getDeptId).filter(memberships::contains).distinct().sorted().collect(Collectors.toList());
+		} else {
+			TeachingAdditionalWork task = teachingAdditionalWorkMapper.selectOne(new QueryWrapper<TeachingAdditionalWork>()
+					.eq("id", source.getAdditionalId()).last("FOR UPDATE"));
+			if (task == null || !Integer.valueOf(1).equals(task.getStatus()) || !StringUtils.hasText(task.getWorkDept())) {
+				throw new JeecgBootException("源作品任务不存在或已停用，本批次未创建作品");
+			}
+			eligible = Arrays.stream(task.getWorkDept().split(",")).map(String::trim).filter(memberships::contains)
+					.distinct().sorted().collect(Collectors.toList());
+		}
+		if (StringUtils.hasText(source.getDepartId())) {
+			if (eligible.contains(source.getDepartId())) return source.getDepartId();
+		} else {
+			if (!eligible.isEmpty()) return eligible.get(0);
+			if (sharedCourse) return "";
+		}
+		throw new JeecgBootException("接收用户不属于源作品班级或已无任务提交资格，本批次未创建作品");
 	}
 
 	@Override

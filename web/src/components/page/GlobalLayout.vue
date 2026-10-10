@@ -339,7 +339,7 @@
 
           .avatar {
             margin: 20px 10px 20px 0;
-            color: #1890ff;
+            color: var(--app-primary-color, @primary-color);
             background: hsla(0, 0%, 100%, .85);
             vertical-align: middle;
           }

@@ -446,17 +446,17 @@
 .member-workspace-context {
   max-width: 100%;
   padding: 5px 10px;
-  border: 1px solid #e4dce3;
+  border: 1px solid #d5e5f5;
   border-radius: 4px;
-  color: #74256a;
-  background: #fcfafc;
+  color: #146fc2;
+  background: #f8fbff;
   overflow-wrap: anywhere;
 }
 .member-search-panel {
   padding: 16px;
-  border: 1px solid #e9e2e8;
+  border: 1px solid #d5e5f5;
   border-radius: 6px;
-  background: #fcfafc;
+  background: #f8fbff;
 }
 .member-search-form {
   display: grid;
@@ -496,7 +496,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 18px 0;
-  border-bottom: 1px solid #eee8ed;
+  border-bottom: 1px solid #d5e5f5;
 }
 .member-workspace /deep/ .ant-btn {
   margin: 0;
@@ -506,16 +506,16 @@
   height: 36px;
 }
 .member-workspace /deep/ .ant-btn-primary:not([disabled]) {
-  background: #74256a;
-  border-color: #74256a;
+  background: #146fc2;
+  border-color: #146fc2;
 }
 .member-workspace /deep/ .ant-btn-primary:not([disabled]):hover {
-  background: #592052;
-  border-color: #592052;
+  background: #095b9e;
+  border-color: #095b9e;
 }
 .member-workspace /deep/ .ant-btn-link:not([disabled]),
 .member-workspace a {
-  color: #74256a;
+  color: #146fc2;
 }
 .member-danger-action:not([disabled]) {
   color: #a63b41;
@@ -546,7 +546,7 @@
   color: #534757;
 }
 .member-selection-status strong {
-  color: #74256a;
+  color: #146fc2;
 }
 .member-scroll-hint {
   margin: 0;
@@ -560,7 +560,7 @@
   border-radius: 4px;
 }
 .member-table-region:focus-visible {
-  outline: 2px solid #74256a;
+  outline: 2px solid #146fc2;
   outline-offset: 3px;
 }
 .member-table-region /deep/ .ant-table-wrapper,
@@ -578,7 +578,7 @@
 }
 .member-table-region /deep/ .ant-table-thead > tr > th {
   color: #534757;
-  background: #f8f5f8;
+  background: #f4f8fd;
   font-size: 13px;
   font-weight: 600;
   white-space: nowrap;

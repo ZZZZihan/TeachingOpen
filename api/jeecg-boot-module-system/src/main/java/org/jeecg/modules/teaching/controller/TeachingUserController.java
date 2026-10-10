@@ -22,6 +22,7 @@ import java.util.Date;
 @RequestMapping("/teaching/user")
 @RestController
 public class TeachingUserController extends BaseController {
+    @Autowired private org.jeecg.modules.system.service.UserProfileService userProfiles;
 
     @Autowired
     private ISysBaseAPI sysBaseAPI;
@@ -69,26 +70,9 @@ public class TeachingUserController extends BaseController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.PUT)
-    public Result<SysUser> edit(@RequestBody JSONObject jsonObject) {
-        Result<SysUser> result = new Result<SysUser>();
-        try {
-            SysUser sysUser = sysUserService.getById(jsonObject.getString("id"));
-            sysBaseAPI.addLog("修改用户资料，id： " +jsonObject.getString("id") , CommonConstant.LOG_TYPE_2, 2);
-            if(sysUser==null) {
-                result.error500("未找到对应实体");
-            }else {
-                SysUser user = JSON.parseObject(jsonObject.toJSONString(), SysUser.class);
-                user.setUpdateTime(new Date());
-                //String passwordEncode = PasswordUtil.encrypt(user.getUsername(), user.getPassword(), sysUser.getSalt());
-                user.setPassword(sysUser.getPassword());
-                sysUserService.updateById(user);
-                result.success("修改成功!");
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            result.error500("操作失败");
-        }
-        return result;
+    public Result<SysUser> edit(@RequestBody org.jeecg.modules.system.model.UserProfileRequest request) {
+        userProfiles.update(request);
+        return new Result<SysUser>().success("修改成功!");
     }
 
 }
