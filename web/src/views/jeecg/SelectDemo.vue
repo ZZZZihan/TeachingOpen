@@ -434,6 +434,7 @@
 <script>
 
   import JDictSelectTag from '../../components/dict/JDictSelectTag.vue'
+  import JUpload from '@/components/jeecg/JUpload'
   import JSelectDepart from '@/components/jeecgbiz/JSelectDepart'
   import JSelectUserByDep from '@/components/jeecgbiz/JSelectUserByDep'
   import JSelectMultiUser from '@/components/jeecgbiz/JSelectMultiUser'
@@ -449,7 +450,6 @@
   import JCron from "@/components/jeecg/JCron.vue";
   import JTreeSelect from '@/components/jeecg/JTreeSelect'
   import JSuperQuery from '@/components/jeecg/JSuperQuery'
-  import JUpload from '@/components/jeecg/JUpload'
   import JImageUpload from '@/components/jeecg/JImageUpload'
   import JSelectPosition from '@comp/jeecgbiz/JSelectPosition'
   import JCategorySelect from '@comp/jeecg/JCategorySelect'

@@ -38,12 +38,8 @@
   import pick from 'lodash.pick'
   import { getAction } from '@/api/manage'
   import { queryIdTree,queryMyDepartTreeList } from '@/api/api'
-  import userModal from './UserModal'
   export default {
     name: "DepartWindow",
-    components: {
-      userModal,
-    },
     data () {
       return {
         checkedKeys:[], // 存储选中的部门id

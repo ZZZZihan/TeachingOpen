@@ -1,0 +1,42 @@
+{
+  "assets": [
+    {
+      "path": "js/polyfill.js",
+      "bytes": 230405,
+      "gzipBytes": 58104
+    },
+    {
+      "path": "js/common.js",
+      "bytes": 8678,
+      "gzipBytes": 2919
+    },
+    {
+      "path": "css/app.c8c22682.css",
+      "bytes": 48533,
+      "gzipBytes": 9060
+    },
+    {
+      "path": "css/chunk-vendors.fe39c46e.css",
+      "bytes": 484452,
+      "gzipBytes": 62228
+    },
+    {
+      "path": "js/app.237bf566.js",
+      "bytes": 231051,
+      "gzipBytes": 62059
+    },
+    {
+      "path": "js/chunk-vendors.56f0f48c.js",
+      "bytes": 2276740,
+      "gzipBytes": 689329
+    }
+  ],
+  "totals": {
+    "bytes": 3279859,
+    "gzipBytes": 883699
+  },
+  "limits": {
+    "bytes": 3407872,
+    "gzipBytes": 943718.4
+  }
+}

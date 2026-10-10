@@ -47,6 +47,7 @@
 </template>
 
 <script>
+  import './install'
 
   const sourceDataConst = [
     { transfer: '一月', value: 813 },

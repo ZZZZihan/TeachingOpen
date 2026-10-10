@@ -7,7 +7,6 @@ import store from './store/'
 import { VueAxios } from '@/utils/request'
 
 import Antd from 'ant-design-vue'
-import Viser from 'viser-vue'
 import 'ant-design-vue/dist/antd.less' // or 'ant-design-vue/dist/antd.less'
 
 import '@/permission' // permission control
@@ -51,14 +50,10 @@ import { platformBrandName } from '@/utils/platformBranding'
 // 颜色选择器
 import vcolorpicker from 'vcolorpicker'
 
-require('@jeecg/antd-online-beta220')
-require('@jeecg/antd-online-beta220/dist/OnlineForm.css')
-
 Vue.config.productionTip = false
 Vue.use(Storage, config.storageOptions)
 Vue.use(Antd)
 Vue.use(VueAxios, router)
-Vue.use(Viser)
 Vue.use(hasPermission)
 Vue.use(JDictSelectTag)
 Vue.use(Print)
