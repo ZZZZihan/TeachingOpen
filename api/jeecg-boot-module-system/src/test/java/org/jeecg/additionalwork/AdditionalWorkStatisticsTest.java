@@ -2,6 +2,7 @@ package org.jeecg.additionalwork;
 
 import org.apache.ibatis.builder.xml.XMLMapperBuilder;
 import org.apache.ibatis.mapping.BoundSql;
+import org.apache.ibatis.type.StringTypeHandler;
 import org.apache.ibatis.session.Configuration;
 import org.jeecg.common.exception.JeecgBootException;
 import org.jeecg.modules.system.entity.SysDepart;
@@ -17,10 +18,14 @@ import org.mockito.InOrder;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.io.InputStream;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -42,7 +47,7 @@ public class AdditionalWorkStatisticsTest {
         when(departments.getOne(any())).thenReturn(department);
         when(logs.selectDayIdForUpdate(eq("class-a"), anyString())).thenReturn("current-day");
         when(logs.incrementDayCounter(eq("current-day"), eq("class-a"), anyString(), eq("ADDITIONAL_WORK_ASSIGN_COUNT"))).thenReturn(1);
-        when(logs.insert(any())).thenReturn(1);
+        when(logs.insertDayLog(any(), anyString())).thenReturn(1);
     }
 
     @Test public void existingDayUsesCurrentReadAndAtomicIncrementAfterDepartmentLock() {
@@ -51,6 +56,7 @@ public class AdditionalWorkStatisticsTest {
         order.verify(departments).getOne(any());
         order.verify(logs).selectDayIdForUpdate(eq("class-a"), anyString());
         order.verify(logs).incrementDayCounter(eq("current-day"), eq("class-a"), anyString(), eq("ADDITIONAL_WORK_ASSIGN_COUNT"));
+        verify(logs, never()).insertDayLog(any(), anyString());
         verify(logs, never()).insert(any());
         verify(logs, never()).updateById(any());
         verify(logs, never()).selectList(any());
@@ -60,7 +66,7 @@ public class AdditionalWorkStatisticsTest {
         when(logs.selectDayIdForUpdate(eq("class-a"), anyString())).thenReturn(null);
         service.recordAdditionalWorkAssignment("class-a");
         ArgumentCaptor<TeachingDepartDayLog> capture = ArgumentCaptor.forClass(TeachingDepartDayLog.class);
-        verify(logs).insert(capture.capture());
+        verify(logs).insertDayLog(capture.capture(), anyString());
         TeachingDepartDayLog inserted = capture.getValue();
         assertEquals("class-a", inserted.getDepartId()); assertEquals("合成班级", inserted.getDepartName());
         assertEquals(Integer.valueOf(1), inserted.getAdditionalWorkAssignCount());
@@ -70,7 +76,8 @@ public class AdditionalWorkStatisticsTest {
         assertEquals(Integer.valueOf(0), inserted.getCourseWorkSubmitCount());
         assertEquals(Integer.valueOf(0), inserted.getAdditionalWorkCorrectCount());
         assertEquals(Integer.valueOf(0), inserted.getAdditionalWorkSubmitCount());
-        assertNotNull(inserted.getCreateTime());
+        assertNotNull(inserted.getId());
+        assertNull("DATE insertion must use the explicit business day", inserted.getCreateTime());
         verify(logs, never()).incrementDayCounter(anyString(), anyString(), anyString(), anyString());
     }
 
@@ -81,7 +88,7 @@ public class AdditionalWorkStatisticsTest {
 
     @Test(expected = JeecgBootException.class) public void zeroInsertedRowsAbortTheTaskTransaction() {
         when(logs.selectDayIdForUpdate(eq("class-a"), anyString())).thenReturn(null);
-        when(logs.insert(any())).thenReturn(0);
+        when(logs.insertDayLog(any(), anyString())).thenReturn(0);
         service.recordAdditionalWorkAssignment("class-a");
     }
 
@@ -96,7 +103,7 @@ public class AdditionalWorkStatisticsTest {
         when(logs.selectDayIdForUpdate(eq("class-a"), anyString())).thenReturn(null);
         for (DepartDayLogType type : DepartDayLogType.values()) service.addLog("class-a", type);
         ArgumentCaptor<TeachingDepartDayLog> capture = ArgumentCaptor.forClass(TeachingDepartDayLog.class);
-        verify(logs, times(7)).insert(capture.capture());
+        verify(logs, times(7)).insertDayLog(capture.capture(), anyString());
         List<TeachingDepartDayLog> inserted = capture.getAllValues();
         for (int event = 0; event < 7; event++) {
             TeachingDepartDayLog log = inserted.get(event);
@@ -119,6 +126,7 @@ public class AdditionalWorkStatisticsTest {
         }
         verify(departments, times(7)).getOne(any());
         verify(logs, times(7)).selectDayIdForUpdate(eq("class-a"), anyString());
+        verify(logs, never()).insertDayLog(any(), anyString());
         verify(logs, never()).insert(any());
         verify(logs, never()).updateById(any());
         verify(logs, never()).selectList(any());
@@ -138,8 +146,52 @@ public class AdditionalWorkStatisticsTest {
                 catch (JeecgBootException expected) { }
             }
         }
+        verify(logs, never()).insertDayLog(any(), anyString());
         verify(logs, never()).insert(any());
         verify(logs, never()).updateById(any());
+    }
+
+    @Test public void firstDayUsesTheSameShanghaiDateAcrossJvmZonesAndMidnight() {
+        TimeZone original = TimeZone.getDefault();
+        String[][] events = {
+                {"2026-10-10T15:59:59.999Z", "2026-10-10"},
+                {"2026-10-10T16:00:00Z", "2026-10-11"},
+                {"2026-12-31T16:00:00Z", "2027-01-01"},
+                {"2024-02-28T16:00:00Z", "2024-02-29"}
+        };
+        try {
+            for (String zone : new String[] {"UTC", "Asia/Shanghai", "America/Los_Angeles"}) {
+                TimeZone.setDefault(TimeZone.getTimeZone(zone));
+                for (String[] event : events) {
+                    setup();
+                    ReflectionTestUtils.setField(service, "clock", Clock.fixed(Instant.parse(event[0]), ZoneOffset.UTC));
+                    when(logs.selectDayIdForUpdate(eq("class-a"), anyString())).thenReturn(null);
+                    service.recordAdditionalWorkAssignment("class-a");
+                    verify(logs).selectDayIdForUpdate("class-a", event[1]);
+                    ArgumentCaptor<TeachingDepartDayLog> inserted = ArgumentCaptor.forClass(TeachingDepartDayLog.class);
+                    verify(logs).insertDayLog(inserted.capture(), eq(event[1]));
+                    assertNotNull(inserted.getValue().getId());
+                    assertNull("no timestamp may determine the persisted DATE", inserted.getValue().getCreateTime());
+                    verify(logs, never()).insert(any());
+                }
+            }
+        } finally {
+            TimeZone.setDefault(original);
+        }
+    }
+
+    @Test public void existingDayUsesTheSameShanghaiDateForReadAndIncrement() {
+        TimeZone original = TimeZone.getDefault();
+        try {
+            TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+            ReflectionTestUtils.setField(service, "clock", Clock.fixed(Instant.parse("2026-10-10T16:41:24Z"), ZoneOffset.UTC));
+            service.recordAdditionalWorkAssignment("class-a");
+            verify(logs).selectDayIdForUpdate("class-a", "2026-10-11");
+            verify(logs).incrementDayCounter("current-day", "class-a", "2026-10-11", "ADDITIONAL_WORK_ASSIGN_COUNT");
+            verify(logs, never()).insertDayLog(any(), anyString());
+        } finally {
+            TimeZone.setDefault(original);
+        }
     }
 
     @Test public void actualMapperSqlHasOneNullSafeAtomicTargetAndBindsUntrustedValues() throws Exception {
@@ -171,5 +223,13 @@ public class AdditionalWorkStatisticsTest {
         assertTrue(configuration.getMappedStatement(namespace + "incrementDayCounter").getBoundSql(parameters).getSql().contains("id = id"));
         String current = configuration.getMappedStatement(namespace + "selectDayIdForUpdate").getBoundSql(parameters).getSql();
         assertTrue(current.contains("FOR UPDATE"));
+        parameters.put("log", new TeachingDepartDayLog().setId("date-probe").setDepartId("class-a"));
+        BoundSql insert = configuration.getMappedStatement(namespace + "insertDayLog").getBoundSql(parameters);
+        assertTrue(insert.getSql().contains("create_time"));
+        assertFalse(insert.getSql().contains("2026-10-10"));
+        assertEquals("day", insert.getParameterMappings().get(3).getProperty());
+        assertTrue("ISO date must use string binding, never JDBC timestamp conversion",
+                insert.getParameterMappings().get(3).getTypeHandler() instanceof StringTypeHandler);
+        assertFalse(insert.getParameterMappings().stream().anyMatch(mapping -> "log.createTime".equals(mapping.getProperty())));
     }
 }
