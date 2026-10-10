@@ -7,6 +7,7 @@
     :maskClosable="false"
     :keyboard="!confirmLoading"
     :closable="!confirmLoading"
+    :okButtonProps="{ props: { disabled: confirmLoading || !uploadsReady } }"
     :cancelButtonProps="{ props: { disabled: confirmLoading } }"
     okText="保存"
     switchFullscreen
@@ -40,7 +41,7 @@
             <a-textarea v-decorator="[ 'unitIntro', validatorRules.unitIntro]" placeholder="请输入单元简介"></a-textarea>
           </a-form-item>
           <a-form-item label="课程封面" :labelCol="labelCol" :wrapperCol="wrapperCol">
-            <j-upload v-decorator="['unitCover', validatorRules.unitCover]" :number="1" :trigger-change="true"></j-upload>
+            <j-upload v-decorator="['unitCover', validatorRules.unitCover]" :number="1" :trigger-change="true" :session="uploadSession" :active="visible" :disabled="confirmLoading" @upload-state="onUploadState('unitCover', $event)"></j-upload>
           </a-form-item>
           <a-form-item label="课程视频" :labelCol="labelCol" :wrapperCol="wrapperCol">
             <a-card>
@@ -50,43 +51,44 @@
                 <a-radio :value="3">外部</a-radio>
               </a-radio-group>
               <a-divider></a-divider>
-              <j-upload v-if="model.courseVideoSource==1" v-decorator="['courseVideo', validatorRules.courseVideo]" :number="1" :trigger-change="true"></j-upload>
+              <j-upload v-if="model.courseVideoSource==1" v-decorator="['courseVideo', validatorRules.courseVideo]" :number="1" :trigger-change="true" :session="uploadSession" :active="visible" :disabled="confirmLoading" @upload-state="onUploadState('courseVideo', $event)"></j-upload>
               <a-input v-if="model.courseVideoSource==2" v-decorator="[ 'courseVideo', validatorRules.courseVideo]" placeholder="请输入视频地址"></a-input>
               <a-textarea v-if="model.courseVideoSource==3" v-decorator="['courseVideo']" placeholder="请输入外部播放器代码"></a-textarea>
             </a-card>
             <a-switch checkedChildren="对学生显示" unCheckedChildren="对学生隐藏" v-model="model.showCourseVideo" defaultChecked/>
           </a-form-item>
           <a-form-item label="课程案例" :labelCol="labelCol" :wrapperCol="wrapperCol">
-            <j-upload v-decorator="['courseCase', validatorRules.courseCase]" :number="1" :trigger-change="true"></j-upload>
+            <j-upload v-decorator="['courseCase', validatorRules.courseCase]" :number="1" :trigger-change="true" :session="uploadSession" :active="visible" :disabled="confirmLoading" @upload-state="onUploadState('courseCase', $event)"></j-upload>
             <a-switch checkedChildren="对学生显示" unCheckedChildren="对学生隐藏" v-model="model.showCourseCase" defaultChecked/>
           </a-form-item>
           <a-form-item label="课程资料" :labelCol="labelCol" :wrapperCol="wrapperCol">
-            <j-upload v-decorator="['coursePpt', validatorRules.coursePpt]" :trigger-change="true"></j-upload>
+            <j-upload v-decorator="['coursePpt', validatorRules.coursePpt]" :trigger-change="true" :session="uploadSession" :active="visible" :disabled="confirmLoading" @upload-state="onUploadState('coursePpt', $event)"></j-upload>
             <a-switch checkedChildren="对学生显示" unCheckedChildren="对学生隐藏" v-model="model.showCoursePpt" />
           </a-form-item>
           <a-form-item label="课程教案" :labelCol="labelCol" :wrapperCol="wrapperCol">
-            <j-upload v-decorator="['coursePlan', validatorRules.coursePlan]" :trigger-change="true"></j-upload>
+            <j-upload v-decorator="['coursePlan', validatorRules.coursePlan]" :trigger-change="true" :session="uploadSession" :active="visible" :disabled="confirmLoading" @upload-state="onUploadState('coursePlan', $event)"></j-upload>
             <a-switch checkedChildren="对学生显示" unCheckedChildren="对学生隐藏" v-model="model.showCoursePlan" />
           </a-form-item>
           <a-form-item label="作业类型" :labelCol="labelCol" :wrapperCol="wrapperCol">
             <j-dict-select-tag type="list" v-decorator="['courseWorkType', {initialValue: 2}, validatorRules.courseWorkType]" :trigger-change="true" dictCode="work_type" placeholder="请选择作业类型"/>
           </a-form-item>
           <a-form-item label="预设作业" :labelCol="labelCol" :wrapperCol="wrapperCol">
-            <j-upload v-decorator="['courseWork', validatorRules.courseWork]" :number="1" :trigger-change="true"></j-upload>
+            <j-upload v-decorator="['courseWork', validatorRules.courseWork]" :number="1" :trigger-change="true" :session="uploadSession" :active="visible" :disabled="confirmLoading" @upload-state="onUploadState('courseWork', $event)"></j-upload>
           </a-form-item>
           <a-form-item label="课程内容" :labelCol="labelCol" :wrapperCol="wrapperCol" >
             <j-editor v-decorator="['mediaContent', { trigger: 'input' }]" />
           </a-form-item>
           <a-form-item label="地图坐标" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <p>坐标由地图编辑器保存；新建单元或更换所属课程后，请先保存单元。</p>
             <a-row>
               <a-col :span="8">
                 <a-form-item label="X" :labelCol="labelCol" :wrapperCol="wrapperCol">
-                  <a-input-number v-decorator="['mapX', validatorRules.mapX]" placeholder="请输入地图X坐标" />
+                  <a-input-number v-decorator="['mapX', validatorRules.mapX]" disabled placeholder="请输入地图X坐标" />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
                 <a-form-item label="Y" :labelCol="labelCol" :wrapperCol="wrapperCol">
-                  <a-input-number v-decorator="['mapY', validatorRules.mapY]" placeholder="请输入地图Y坐标" />
+                  <a-input-number v-decorator="['mapY', validatorRules.mapY]" disabled placeholder="请输入地图Y坐标" />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
@@ -101,7 +103,7 @@
       <a-button type="primary" @click="handleOk">确定</a-button>
       <a-button type="default" @click="handleCancel">取消</a-button>
     </div> -->
-    <TeachingMapEditor ref="mapEditor" />
+    <TeachingMapEditor ref="mapEditor" @saved="onMapSaved" />
   </j-modal>
 </template>
 
@@ -183,15 +185,23 @@ export default {
         this.initCourseList()
     },
     methods: {
-        initCourseList () {
-            const that = this
-            getAction(this.url.courseList, { 'pageNo': 1, 'pageSize': 999 }).then((res) => {
-                if (res.success) {
-                    that.courseList = res.result.records
-                } else {
-                    that.$message.warning('课程列表获取失败：' + res.message)
-                }
-            })
+        async initCourseList () {
+            const courses = []
+            try {
+                let pageNo = 1
+                let total = 0
+                do {
+                    const res = await getAction(this.url.courseList, { pageNo, pageSize: 100 })
+                    if (!res || res.success !== true || !res.result || !Array.isArray(res.result.records)) throw new Error('Course list unavailable')
+                    total = Number(res.result.total)
+                    if (!Number.isSafeInteger(total) || total < 0 || (!res.result.records.length && courses.length < total)) throw new Error('Incomplete course list')
+                    courses.push(...res.result.records)
+                    pageNo += 1
+                } while (courses.length < total)
+                if (!this._isDestroyed) this.courseList = courses
+            } catch (error) {
+                if (!this._isDestroyed) this.$message.warning('课程列表获取未成功，请重新打开页面后重试。')
+            }
         },
         add () {
             this.edit({
@@ -214,6 +224,7 @@ export default {
             })
         },
         onCourseVideoSourceChange (v) {
+            this.$delete(this.uploadStates, 'courseVideo')
             this.form.setFieldsValue({ courseVideo: '', courseVideoExtern: '' })
             this.model.courseVideoExtern = ''
             this.model.courseVideo = ''
@@ -228,7 +239,22 @@ export default {
         },
         // 显示地图编辑器
         showMapEdit () {
-            this.$refs.mapEditor.openById(this.model.courseId, this.model.id)
+            if (this.confirmLoading) return
+            const courseId = this.form.getFieldValue('courseId')
+            if (!this.model.id || !courseId || courseId !== this.model.courseId) {
+                this.$message.warning('请先保存单元及所属课程，再打开地图编辑器。')
+                return
+            }
+            this.$refs.mapEditor.openById(courseId, this.model.id)
+        },
+        onMapSaved (result) {
+            const courseId = this.form.getFieldValue('courseId')
+            if (!this.visible || !result || result.courseId !== this.model.courseId || result.courseId !== courseId) return
+            const unit = result.units.find(position => position.id === this.model.id)
+            if (!unit) return
+            this.model.mapX = unit.mapX
+            this.model.mapY = unit.mapY
+            this.form.setFieldsValue({ mapX: unit.mapX, mapY: unit.mapY })
         }
     }
 }

@@ -1,7 +1,7 @@
 package org.jeecg.modules.teaching.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import java.util.List;
+import org.jeecg.modules.teaching.model.CourseMapUpdateRequest;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.jeecg.modules.teaching.entity.TeachingCourseUnit;
@@ -21,8 +21,8 @@ public interface ITeachingCourseUnitService extends IService<TeachingCourseUnit>
 
     CourseUnitWorkModel getCourseWorkUnit(String unitId, String id);
 
-    /** Update a validated batch atomically; a missing target rolls back every update. */
-    boolean updateExistingUnits(List<TeachingCourseUnit> units);
+    /** Validate the complete batch and update coordinates atomically. */
+    boolean updateMapPositions(CourseMapUpdateRequest request);
 
     String getUserDepartIdByUnitId(String userId, String unitId);
 }
