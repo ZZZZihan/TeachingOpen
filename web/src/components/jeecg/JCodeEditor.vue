@@ -1,5 +1,5 @@
 <template>
-  <div v-bind="fullScreenParentProps">
+  <div class="j-code-editor" v-bind="fullScreenParentProps">
     <a-icon v-if="fullScreen" class="full-screen-icon" :type="iconType" @click="()=>fullCoder=!fullCoder"/>
 
     <div class="code-editor-cust full-screen-child">
@@ -329,6 +329,7 @@
 </script>
 
 <style lang="less">
+.j-code-editor {
   .code-editor-cust{
     flex-grow:1;
     display:flex;
@@ -367,7 +368,7 @@
   }
 
   /* 全屏样式 */
-  .full-screen-parent {
+  &.full-screen-parent {
     position: relative;
 
     .full-screen-icon {
@@ -425,5 +426,6 @@
 
 .CodeMirror-cursor{
   height:18.4px !important;
+}
 }
 </style>
