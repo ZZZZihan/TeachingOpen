@@ -1,8 +1,11 @@
 package org.jeecg.duplicate;
 
 import java.io.InputStream;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
@@ -19,6 +22,8 @@ import org.jeecg.modules.system.mapper.SysUserMapper;
 import org.jeecg.modules.system.mapper.SysUserRoleMapper;
 import org.jeecg.modules.system.model.DuplicateCheckVo;
 import org.jeecg.modules.system.service.DuplicateCheckService;
+import org.jeecgframework.codegenerate.generate.pojo.ColumnVo;
+import org.jeecgframework.codegenerate.generate.pojo.onetomany.SubTableVo;
 import org.junit.*;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -210,13 +215,15 @@ public class DuplicateCheckSecurityTest {
         }
     }
 
-    @Test public void realCodeGeneratorTemplateUsesNamedPurposesAndStopsUnknownUniqueChecks() throws Exception {
+    private freemarker.template.Configuration generatorTemplateConfiguration() {
         freemarker.template.Configuration config = new freemarker.template.Configuration(freemarker.template.Configuration.VERSION_2_3_28);
         config.setClassLoaderForTemplateLoading(getClass().getClassLoader(), "jeecg/code-template-online/common");
         config.setDefaultEncoding("UTF-8"); config.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         config.setLogTemplateExceptions(false);
-        Template template = config.getTemplate("validatorRulesTemplate/core.ftl");
-        String[][] configured = {
+        return config;
+    }
+
+    private static final String[][] GENERATOR_PURPOSES = {
                 {"sys_user", "username", "user_username"}, {"sys_user", "phone", "user_phone"},
                 {"sys_user", "email", "user_email"}, {"sys_user", "work_no", "user_work_no"},
                 {"sys_role", "role_code", "role_code"}, {"sys_dict", "dict_code", "dict_code"},
@@ -224,11 +231,32 @@ public class DuplicateCheckSecurityTest {
                 {"sys_depart_role", "role_code", "depart_role_code"}, {"sys_sms_template", "template_code", "message_template_code"},
                 {"sys_fill_rule", "rule_code", "fill_rule_code"}, {"sys_check_rule", "rule_code", "check_rule_code"},
                 {"sys_data_source", "code", "data_source_code"}
-        };
+    };
+
+    private ColumnVo uniqueColumn(String fieldDbName) {
+        ColumnVo column = new ColumnVo();
+        column.setIsShow("Y"); column.setNullable("N"); column.setFieldName("testCode");
+        column.setFieldValidType("only"); column.setFiledComment("合成编码"); column.setFieldDbName(fieldDbName);
+        return column;
+    }
+
+    private SubTableVo subtable(String tableName, String fieldDbName) {
+        SubTableVo sub = new SubTableVo(); sub.setTableName(tableName);
+        sub.setColums(Collections.singletonList(uniqueColumn(fieldDbName)));
+        return sub;
+    }
+
+    private String render(Template template, Map<String, Object> model) throws Exception {
+        StringWriter rendered = new StringWriter(); template.process(model, rendered);
+        return rendered.toString();
+    }
+
+    @Test public void realCodeGeneratorTemplateUsesNamedPurposesAndStopsUnknownUniqueChecks() throws Exception {
+        Template template = generatorTemplateConfiguration().getTemplate("validatorRulesTemplate/core.ftl");
         Map<String, Object> po = new HashMap<>(); po.put("isShow", "Y"); po.put("nullable", "N");
         po.put("fieldName", "testCode"); po.put("fieldValidType", "only"); po.put("filedComment", "合成编码");
         Map<String, Object> model = new HashMap<>(); model.put("po", po);
-        for (String[] purpose : configured) {
+        for (String[] purpose : GENERATOR_PURPOSES) {
             model.put("tableName", purpose[0]); po.put("fieldDbName", purpose[1]);
             StringWriter rendered = new StringWriter(); template.process(model, rendered);
             assertTrue(rendered.toString().contains("validateDuplicateValue('" + purpose[2] + "', value, this.model.id, callback)"));
@@ -239,5 +267,54 @@ public class DuplicateCheckSecurityTest {
             try { template.process(model, new StringWriter()); fail("unconfigured unique validator must stop generation"); }
             catch (TemplateException expected) { assertTrue(expected.getMessage().contains("未配置此字段的唯一校验用途")); }
         }
+    }
+
+    @Test public void realMainAndSubtableEntrypointsSelectTheirOwnNamedPurposes() throws Exception {
+        freemarker.template.Configuration config = generatorTemplateConfiguration();
+        Template main = config.getTemplate("validatorRulesTemplate/main.ftl");
+        Template child = config.getTemplate("validatorRulesTemplate/sub.ftl");
+        for (String[] purpose : GENERATOR_PURPOSES) {
+            Map<String, Object> model = new HashMap<>(); model.put("tableName", purpose[0]);
+            model.put("columns", Collections.singletonList(uniqueColumn(purpose[1])));
+            String expected = "validateDuplicateValue('" + purpose[2] + "', value, this.model.id, callback)";
+            assertTrue("main: " + purpose[0], render(main, model).contains(expected));
+            // sys_role and sys_depart_role have the same field but different query and authorization purposes.
+            model.put("tableName", "sys_role"); model.put("sub", subtable(purpose[0], purpose[1]));
+            String rendered = render(child, model);
+            assertTrue("child: " + purpose[0], rendered.contains(expected));
+            if (!"role_code".equals(purpose[2])) assertFalse(rendered.contains("validateDuplicateValue('role_code',"));
+            model.put("tableName", "unconfigured_parent");
+            assertTrue("child must not depend on a configured parent", render(child, model).contains(expected));
+        }
+    }
+
+    @Test public void realEntrypointsStopUnknownUniqueChecksWithoutFallingBackToParent() throws Exception {
+        freemarker.template.Configuration config = generatorTemplateConfiguration();
+        for (String entry : Arrays.asList("main", "sub")) {
+            Template template = config.getTemplate("validatorRulesTemplate/" + entry + ".ftl");
+            for (String[] unknown : new String[][]{{"sys_user", "password"}, {"sys_user", "salt"},
+                    {"unconfigured_child", "role_code"}, {"", "role_code"}, {null, "role_code"}}) {
+                Map<String, Object> model = new HashMap<>();
+                model.put("tableName", "main".equals(entry) ? unknown[0] : "sys_role");
+                model.put("columns", Collections.singletonList(uniqueColumn(unknown[1])));
+                model.put("sub", subtable(unknown[0], unknown[1]));
+                try { render(template, model); fail(entry + " must stop unconfigured unique generation"); }
+                catch (TemplateException expected) { assertTrue(expected.getMessage().contains("未配置此字段的唯一校验用途")); }
+            }
+        }
+    }
+
+    @Test public void realMainAndSubtableIncludesDoNotRetainAnotherTablesPurpose() throws Exception {
+        freemarker.template.Configuration config = generatorTemplateConfiguration();
+        Template template = new Template("combined-validators.ftl", new StringReader(
+                "<#include 'validatorRulesTemplate/main.ftl'>"
+                + "<#list children as sub><#include 'validatorRulesTemplate/sub.ftl'></#list>"
+                + "<#include 'validatorRulesTemplate/main.ftl'>"), config);
+        Map<String, Object> model = new HashMap<>(); model.put("tableName", "sys_role");
+        model.put("columns", Collections.singletonList(uniqueColumn("role_code")));
+        model.put("children", Arrays.asList(subtable("sys_depart_role", "role_code"), subtable("sys_dict", "dict_code")));
+        Matcher purposes = Pattern.compile("validateDuplicateValue\\('([^']+)'", Pattern.MULTILINE).matcher(render(template, model));
+        List<String> observed = new ArrayList<>(); while (purposes.find()) observed.add(purposes.group(1));
+        assertEquals(Arrays.asList("role_code", "depart_role_code", "dict_code", "role_code"), observed);
     }
 }
