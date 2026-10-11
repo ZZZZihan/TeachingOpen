@@ -1,0 +1,42 @@
+PASS teacher grades own class through actual business API
+PASS unique private feedback is committed
+PASS student_b cross-class business queryById is an authorization refusal
+PASS student_b cross-class business queryById returns no private marker
+PASS student_b cross-class business queryById leaves audit history work feedback and roles unchanged
+PASS student_b cross-class business queryTeachingWorkCorrectByMainId is an authorization refusal
+PASS student_b cross-class business queryTeachingWorkCorrectByMainId returns no private marker
+PASS student_b cross-class business queryTeachingWorkCorrectByMainId leaves audit history work feedback and roles unchanged
+PASS teacher_b cross-class business queryById is an authorization refusal
+PASS teacher_b cross-class business queryById returns no private marker
+PASS teacher_b cross-class business queryById leaves audit history work feedback and roles unchanged
+PASS teacher_b cross-class business queryTeachingWorkCorrectByMainId is an authorization refusal
+PASS teacher_b cross-class business queryTeachingWorkCorrectByMainId returns no private marker
+PASS teacher_b cross-class business queryTeachingWorkCorrectByMainId leaves audit history work feedback and roles unchanged
+PASS student_a legitimate feedback read
+PASS student_a receives the committed feedback
+PASS teacher_a legitimate feedback read
+PASS teacher_a receives the committed feedback
+PASS baseline actual grading aspect retained private DTO in audit
+PASS student_b baseline raw history route /sys/log/list
+PASS student_b baseline history exposes the same private feedback
+PASS student_b baseline raw history route /sys/dataLog/list
+PASS student_b baseline history exposes the same private feedback
+PASS student_b baseline raw history route /sys/dataLog/queryCompareList
+PASS student_b baseline history exposes the same private feedback
+PASS student_b baseline raw history route /sys/dataLog/queryDataVerList
+PASS student_b baseline history exposes the same private feedback
+PASS teacher_b baseline raw history route /sys/log/list
+PASS teacher_b baseline history exposes the same private feedback
+PASS teacher_b baseline raw history route /sys/dataLog/list
+PASS teacher_b baseline history exposes the same private feedback
+PASS teacher_b baseline raw history route /sys/dataLog/queryCompareList
+PASS teacher_b baseline history exposes the same private feedback
+PASS teacher_b baseline raw history route /sys/dataLog/queryDataVerList
+PASS teacher_b baseline history exposes the same private feedback
+PASS baseline ordinary account deletes one audit row
+PASS baseline unauthorized single delete persisted
+PASS baseline ordinary account batch deletes audit rows
+PASS baseline unauthorized batch delete persisted
+PASS baseline ordinary account clears every audit row
+PASS baseline unauthorized allclear persisted
+PASS all original audit history work feedback statistics and role rows restored
