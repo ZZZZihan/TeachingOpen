@@ -90,6 +90,9 @@ public class PaginationBoundaryTest {
         when(service.getRoleNamesByUserIds(anyList())).thenReturn(Collections.emptyMap());
 
         ModelAndView exported = exportUsers(service);
+        org.jeecgframework.poi.excel.entity.ExportParams export = (org.jeecgframework.poi.excel.entity.ExportParams)
+                exported.getModel().get(NormalExcelConstants.PARAMS);
+        assertArrayEquals(new String[]{"密码"}, export.getExclusions());
         @SuppressWarnings("unchecked")
         List<SysUser> exportedUsers = (List<SysUser>) exported.getModel().get(NormalExcelConstants.DATA_LIST);
         assertEquals(101, exportedUsers.size());
@@ -154,7 +157,9 @@ public class PaginationBoundaryTest {
     private static ModelAndView exportUsers(ISysUserService service) {
         SysUserController controller = new SysUserController();
         ReflectionTestUtils.setField(controller, "sysUserService", service);
-        ReflectionTestUtils.setField(controller, "userQueryAccess", mock(org.jeecg.modules.system.service.UserQueryAccessService.class));
+        org.jeecg.modules.system.service.UserQueryAccessService access = mock(org.jeecg.modules.system.service.UserQueryAccessService.class);
+        when(access.isAdministrator(any())).thenReturn(true);
+        ReflectionTestUtils.setField(controller, "userQueryAccess", access);
         Subject subject = mock(Subject.class);
         LoginUser principal = new LoginUser();
         principal.setRealname("Synthetic exporter");
