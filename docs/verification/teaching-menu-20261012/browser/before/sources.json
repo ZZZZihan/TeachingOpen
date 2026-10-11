@@ -1,0 +1,26 @@
+{
+  "ref": "93d4cfe8",
+  "resolved_ref": "93d4cfe8e911bccbaf1d20094357fa0b88076a86",
+  "files": [
+    {
+      "file": "web/src/views/home/modules/Header.vue",
+      "sha256": "5dacc304bd38384b9177783b7b978d1abda17866478ad5e0d78ab13085fa27ae"
+    },
+    {
+      "file": "web/src/components/menu/tmenu.js",
+      "sha256": "18a42ca9985c6e487b294199b0c81e01607dd28087b5ff856412008d846622ae"
+    },
+    {
+      "file": "web/src/components/brand/CampusMasthead.vue",
+      "sha256": "a184cc67dceedf14a05d49f03293408874bad60db9573745842a1db1db34dd41"
+    },
+    {
+      "file": "web/src/assets/brand/wordmark.svg",
+      "sha256": "e354b36a3c97b4af3a7a30853a390561a6148c1b0fd562181eca1183d3e7cdbd"
+    },
+    {
+      "file": "web/src/store/mutation-types.js",
+      "sha256": "b8691015e7461ca9c27b962bb3afef00d2f0da972051357ef22652179b4e4da6"
+    }
+  ]
+}

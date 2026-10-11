@@ -1,0 +1,30 @@
+{
+  "ref": "13e215da4970fa4838038cdb6fab27174138c38e",
+  "resolved_ref": "13e215da4970fa4838038cdb6fab27174138c38e",
+  "files": [
+    {
+      "file": "web/src/views/home/modules/Header.vue",
+      "sha256": "5dacc304bd38384b9177783b7b978d1abda17866478ad5e0d78ab13085fa27ae"
+    },
+    {
+      "file": "web/src/components/menu/tmenu.js",
+      "sha256": "2b5e2f7d7adb1db0f2a6bb4ac540e0de1fc8992c1a5e0bde4b9ec5f9a46e0249"
+    },
+    {
+      "file": "web/src/components/brand/CampusMasthead.vue",
+      "sha256": "a184cc67dceedf14a05d49f03293408874bad60db9573745842a1db1db34dd41"
+    },
+    {
+      "file": "web/src/assets/brand/wordmark.svg",
+      "sha256": "e354b36a3c97b4af3a7a30853a390561a6148c1b0fd562181eca1183d3e7cdbd"
+    },
+    {
+      "file": "web/src/store/mutation-types.js",
+      "sha256": "b8691015e7461ca9c27b962bb3afef00d2f0da972051357ef22652179b4e4da6"
+    },
+    {
+      "file": "web/src/utils/teachingMenuUrl.js",
+      "sha256": "8160cf7601788e9c7e30a08148d1effa148d462dd7cb386371da8a7a5e27fbdb"
+    }
+  ]
+}
