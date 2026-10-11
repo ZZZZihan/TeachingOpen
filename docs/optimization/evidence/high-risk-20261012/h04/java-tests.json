@@ -1,0 +1,31 @@
+{
+  "base": "a3f4e10ceafcbe405093a3abe06a20225a17d3f6",
+  "suites": {
+    "LocalFileReferenceAuthorizationTest": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "WorkCloneServiceTest": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "AdditionalWorkAuthorizationTest": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "WorkAttachmentAuthorizationTest": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "tests": 44,
+  "result": "passed"
+}

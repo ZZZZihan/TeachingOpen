@@ -10,20 +10,11 @@ import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.mapper.TeachingWorkMapper;
 import org.jeecg.modules.teaching.service.TeachingAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.HtmlUtils;
 import org.springframework.web.util.UriUtils;
 
-import java.net.URI;
-import java.nio.ByteBuffer;
-import java.nio.charset.CharacterCodingException;
-import java.nio.charset.CodingErrorAction;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /** Resolve local bytes through current authoritative resource relationships on every request. */
 @Service
@@ -34,8 +25,7 @@ public class LocalDownloadAccessService {
     @Autowired private ISysUserDepartService departments;
     @Autowired private JdbcTemplate jdbc;
     @Autowired private ObjectMapper json;
-    @Value("${jeecg.path.staticDomain}") private String staticDomain;
-    private static final Pattern HTML_LINK = Pattern.compile("(?i)\\b(?:src|href|poster)\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))");
+    @Autowired private LocalFileReferenceResolver references;
 
     public int status(String key) {
         LoginUser user = access.currentUser();
@@ -119,62 +109,6 @@ public class LocalDownloadAccessService {
         return false;
     }
     private boolean references(String value,String key) {
-        if (value == null || value.isEmpty()) return false;
-        for (String part:value.split(",")) if (exact(part.trim(),key)) return true;
-        Matcher links = HTML_LINK.matcher(value);
-        while (links.find()) {
-            String link=links.group(1)!=null?links.group(1):links.group(2)!=null?links.group(2):links.group(3);
-            if (exact(HtmlUtils.htmlUnescape(link),key)) return true;
-        }
-        if (value.trim().startsWith("{") || value.trim().startsWith("[")) {
-            try { return jsonReferences(json.readTree(value),key,0); } catch (java.io.IOException invalid) { return false; }
-        }
-        return false;
-    }
-    private boolean jsonReferences(JsonNode node,String key,int depth) {
-        if (node == null || depth > 20) return false;
-        if (node.isTextual()) return exact(node.asText(),key);
-        if (node.isContainerNode()) for (JsonNode child:node) if (jsonReferences(child,key,depth+1)) return true;
-        return false;
-    }
-    private boolean exact(String value,String key) {
-        if (value.equals(key)) return true;
-        String base=staticDomain.replaceAll("/+$","");
-        try {
-            URI reference=new URI(value);
-            URI configured=new URI(base);
-            // Absolute references must match the configured origin, not merely its path.
-            if (!Objects.equals(reference.getScheme(),configured.getScheme())
-                    || !Objects.equals(reference.getRawAuthority(),configured.getRawAuthority())) return false;
-            // URI.getPath replaces malformed UTF-8 with U+FFFD. Reject it instead of
-            // allowing invalid octets to identify a different, valid storage key.
-            if (!validUtf8Escapes(reference.getRawPath())) return false;
-            return Objects.equals(reference.getPath(),configured.getPath()+"/"+key);
-        } catch (java.net.URISyntaxException invalid) { return false; }
-    }
-
-    private boolean validUtf8Escapes(String rawPath) {
-        if (rawPath == null) return false;
-        int index = rawPath.indexOf('%');
-        if (index < 0) return true;
-        byte[] octets = new byte[(rawPath.length()-index)/3];
-        while (index >= 0) {
-            int count = 0;
-            // URI construction already validated every %HH escape. Validate each
-            // contiguous octet run without decoding again or treating '+' as a space.
-            do {
-                octets[count++] = (byte) ((Character.digit(rawPath.charAt(index+1),16) << 4)
-                        | Character.digit(rawPath.charAt(index+2),16));
-                index += 3;
-            } while (index < rawPath.length() && rawPath.charAt(index) == '%');
-            try {
-                StandardCharsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT)
-                        .onUnmappableCharacter(CodingErrorAction.REPORT).decode(ByteBuffer.wrap(octets,0,count));
-            } catch (CharacterCodingException invalid) {
-                return false;
-            }
-            index = rawPath.indexOf('%',index);
-        }
-        return true;
+        return references.resolve(value).keys().contains(key);
     }
 }

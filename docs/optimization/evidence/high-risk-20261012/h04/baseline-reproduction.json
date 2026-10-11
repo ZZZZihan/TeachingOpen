@@ -1,0 +1,56 @@
+{
+  "cases": [
+    {
+      "case": "initial teacher access metadata remains forbidden",
+      "passed": true
+    },
+    {
+      "case": "initial teacher access actual private bytes remain forbidden",
+      "passed": true
+    },
+    {
+      "case": "baseline teacher can attach a previously private file",
+      "passed": true
+    },
+    {
+      "case": "baseline forged reference permits file metadata",
+      "passed": true
+    },
+    {
+      "case": "baseline forged reference permits exact private bytes",
+      "passed": true
+    },
+    {
+      "case": "after baseline reference removed metadata remains forbidden",
+      "passed": true
+    },
+    {
+      "case": "after baseline reference removed actual private bytes remain forbidden",
+      "passed": true
+    },
+    {
+      "case": "baseline assignment URL can manufacture read access",
+      "passed": true
+    },
+    {
+      "case": "baseline assignment reference permits exact private bytes",
+      "passed": true
+    },
+    {
+      "case": "all original business rows restored",
+      "passed": true
+    },
+    {
+      "case": "all original file bytes restored",
+      "passed": true
+    }
+  ],
+  "passed": 11,
+  "failed": 0,
+  "total": 11,
+  "jar_sha256": "efad54740308684c120895ddfacc5b36ddb6436cc3c4527183cb7d99f00b18c5",
+  "expected_legacy": true,
+  "exception": null,
+  "created_at": "2026-10-11T09:16:42.614444+00:00",
+  "scope": "Synthetic HTTP/login, owned MySQL state, upload/send/grade/save, private metadata and exact local bytes; no production or Qiniu execution."
+}

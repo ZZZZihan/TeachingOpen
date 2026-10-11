@@ -8,9 +8,7 @@ import org.jeecg.common.exception.JeecgBootException;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.RedisUtil;
 import org.jeecg.modules.system.service.ISysDataLogService;
-import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.system.service.ISysUserDepartService;
-import org.jeecg.modules.system.entity.SysFile;
 import org.jeecg.modules.teaching.entity.*;
 import org.jeecg.modules.teaching.enums.DepartDayLogType;
 import org.jeecg.modules.teaching.vo.StudentWorkSubmission;
@@ -34,7 +32,7 @@ public class TeachingWorkSubmissionService {
     @Autowired private ITeachingAdditionalWorkService assignments;
     @Autowired private ISysUserDepartService userDeparts;
     @Autowired private ISysDataLogService history;
-    @Autowired private ISysFileService files;
+    @Autowired private TeachingWorkAttachmentAccessService attachmentAccess;
     @Autowired private ITeachingDepartDayLogService dailyLog;
     @Autowired private RedisUtil redis;
 
@@ -95,8 +93,7 @@ public class TeachingWorkSubmissionService {
             throw new JeecgBootException("请提供有效的作品名称、类型和文件");
         }
         saved.setWorkCover(request.getWorkCover());
-        requireAttachment(user, saved.getWorkFile(), existing);
-        if (StringUtils.isNotBlank(saved.getWorkCover())) requireAttachment(user, saved.getWorkCover(), existing);
+        attachmentAccess.requireWrite(saved, existing);
         saved.setHasCloudData(request.getHasCloudData());
         saved.setWorkStatus(status);
         saved.setDepartId(depart);
@@ -181,13 +178,4 @@ public class TeachingWorkSubmissionService {
         });
     }
 
-    private void requireAttachment(LoginUser user, String fileId, TeachingWork existing) {
-        SysFile file = files.getById(fileId);
-        boolean retained = existing != null && (fileId.equals(existing.getWorkFile()) || fileId.equals(existing.getWorkCover()));
-        // Sent works legitimately retain another author's shared attachment.
-        // A replacement must be a registered file uploaded by the current user.
-        if (file == null || (!retained && !user.getUsername().equals(file.getCreateBy()))) {
-            throw new UnauthorizedException("无附件使用权限");
-        }
-    }
 }
