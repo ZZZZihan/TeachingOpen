@@ -4,14 +4,16 @@
 
 ## 合并检查
 
-- **Frontend tests and build**：沿用 `web/.nvmrc` 与锁文件，禁用依赖安装脚本，运行前端测试、实际 Chromium 通知组件渲染安全回归和生产构建；缺少浏览器直接失败，不跳过 DOM 检查。获取完整 Git 历史，以运行已有的旧版本回归对照测试。
+- **Frontend tests and build**：沿用 `web/.nvmrc` 与锁文件，禁用依赖安装脚本，运行前端测试、实际 Chromium 通知组件渲染、上传凭据及 Header/TMenu 导航回归和生产构建；缺少浏览器直接失败，不跳过浏览器检查。获取完整 Git 历史，以运行已有的旧版本回归对照测试。
 - **Backup and migration tools**：执行备份、升级清单、发布包、空表提取以及 CI 守卫的合成测试，不实际运行备份或拉取服务器数据。另运行公网 IP HTTPS 工具单元测试与固定镜像的隔离 Nginx/TLS 验证：临时测试 CA、回环端口、合成 API/WebSocket/媒体、实际配置切换与回退，不请求公网证书、不连接生产。只保存不含私钥的汇总 JSON。
-- **Backend and MySQL registration**：Java 8 干净构建并显式开启 `check_java_results.py` 所列的核心 Java 单元测试。构建选择与 Surefire 报告校验读取同一清单，缺少或跳过任何核心测试都会失败。原 `SampleTest` 依赖固定旧业务样例，`SecurityToolsTest` 仅打印加解密结果，因此不列入核心检查。
+- **Backend and MySQL registration**：Java 8 干净构建并显式开启 `check_java_results.py` 所列的 39 套核心 Java 测试。构建选择与 Surefire 报告校验读取同一清单，缺少或跳过任何核心测试都会失败。CI 自身回归还枚举仓库的 `*Test.java`，防止新增套件遗漏。原 `SampleTest` 依赖固定旧业务样例，`SecurityToolsTest` 仅打印加解密结果，因此不列入核心检查。
 - **CI required**：汇总前三项，只有全部成功才通过；失败、取消或跳过均不能通过。作为分支必需状态检查使用，避免单项路径过滤导致检查缺失。
 
 后端构建后还用当前依赖执行 `deploy/test_ip_https_proxy.py`：实际 Spring Boot 配置绑定、Tomcat RemoteIpValve 与原 MediaCookie 源码，核对仅信任 127.0.0.1 的协议转发及 Secure Cookie。该测试无需数据库或监听 socket，不能代替线上登录验收。
 
 每个 PR 的新提交取消同一 PR 的旧运行。没有定时触发。Node/npm 版本遵循现有项目；Actions 使用完整提交 SHA 固定，任务只有仓库读取权限，不使用生产凭据。
+
+菜单浏览器回归使用 `--ref "$GITHUB_SHA"` 编译真实 Header/TMenu，在 1440×1000 和 390×1200 视口通过 Chromium 鼠标输入测试危险链接、合法子菜单、站内路由、静态编辑器和 HTTPS 同页/新页跳转。HTTPS 目标全部在发起网络连接前拦截为合成响应，任何意外外联或浏览器错误均失败。`check_menu_browser_results.py` 要求本次 checkout 的完整 SHA、6 份源码的 Git blob 哈希、至少完整的 28 项行为和 18 次点击、8 张截图及一致计数；拒绝旧版本模式、其他提交、Node/JSDOM 替代和不完整报告。前端单独保存合成 JSON 与 PNG，不上传编译 bundle 或浏览器用户目录。
 
 ## 注册数据库验证
 
@@ -21,7 +23,9 @@
 
 复用 `deploy/verify_registration.py` 的 32 项 HTTP/SQL 检查：姓名/学校与补充汉字、手机号与口令保存、学生/教师身份、禁止提权、重复与并发注册、验证码登录、管理接口拒绝、资料写入失败时事务回滚、失败后重试及公开目录脱敏。结果记录 MySQL 版本、表数和实际 CI 提交。
 
-注册验收结束后，`review_mysql.py` 新建另一套五账号合成数据库，运行 `PROBES` 中的完整 HTTP/MySQL 必需清单，包括课程修改、作品提交、反馈保留与本轮权限回归。注册入口及独立 review 入口都会先检查全部文件；任一探针缺失或改名，在创建运行目录、连接数据库、启动应用前失败。当前门禁不提供静默缩减或历史提交兼容模式。
+注册验收结束后，`review_mysql.py` 新建另一套五账号合成数据库，串行运行 `PROBES` 中的 27 组完整 HTTP/MySQL 必需清单，包括课程修改、作品提交、反馈保留、菜单/日志/共享素材/全局管理权限、历史附加作业读取、编码文件引用和文件删除锁竞争。注册入口及独立 review 入口都会先检查全部文件；任一探针缺失或改名，在创建运行目录、连接数据库、启动应用前失败。当前门禁不提供静默缩减或历史提交兼容模式。
+
+文件并发探针使用受控触发器、命名锁和实际 `performance_schema` 等待记录，双向竞争各执行 3 次，并验证文件删除失败、元数据 SQL 失败及重试。AutoLog 探针最后执行，只对本次合成教师/作业的审计 INSERT 注入真实 SQL 故障，验证业务提交、统计仅一次、无敏感内容的 WARN 和后续正常审计。它通过与当前进程绑定的私有 `backend-process.json` 读取固定日志路径；适配器把 PID、JAR 哈希、配置和日志绑定到当前候选，拒绝不匹配、符号链接、缺失或非私有文件。日志内容不作为 artifact 上传。OSS/Minio 的 HTTP 检查不调用真实云，正常云操作仅由 Java mock 覆盖。
 
 review fixture 单独使用 JDBC Quartz，真实验证任务增改、暂停、恢复和拒绝操作前后的数据库状态；保持 `auto-startup=false`、`overwrite-existing-jobs=false` 与 `initialize-schema=never`。仅在新建的空合成库中，将历史 DDL 的 11 张小写 Quartz 表名及外键目标规范为 `StdJDBCDelegate` 使用的 `QRTZ_` 大写名称，保留定义及其他表名；同时核验 MySQL 的 `lower_case_table_names=0` 和实际表名。汇总报告记录这一配置。没有修改服务器大小写设置、历史源 SQL 或生产配置。
 

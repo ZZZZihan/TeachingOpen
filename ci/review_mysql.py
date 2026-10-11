@@ -48,6 +48,15 @@ PROBES = (
     'verify-user-query-boundaries.py',
     'verify-work-reference-authorization.py',
     'verify-local-media-index.py',
+    'verify-teaching-menu-security.py',
+    'verify-audit-log-authorization.py',
+    'verify-file-deletion-concurrency.py',
+    'verify-file-encoded-reference-deletion.py',
+    'verify-additional-work-read-authorization.py',
+    'verify-shared-resource-boundaries.py',
+    'verify-global-rule-boundaries.py',
+    'verify-global-management-authorization.py',
+    'verify-audit-failure.py',
 )
 
 
@@ -72,6 +81,7 @@ def validate_report(report, jar_sha256):
     if (not isinstance(cases, list) or not cases
             or any(not isinstance(case, dict) or case.get('passed') is not True for case in cases)
             or report.get('exception') or report.get('failed', 0) != 0 or report.get('expected_legacy')
+            or report.get('completed', True) is not True
             or report.get('jar_sha256') != jar_sha256):
         raise RuntimeError('Review probe did not produce complete passing candidate evidence')
     passed = report.get('passed')
@@ -126,6 +136,8 @@ class CiFixtureContext:
         self.process = None
         self.jar_sha256 = hashlib.sha256(self.jar.read_bytes()).hexdigest()
         self.config = self.runtime / 'application.properties'
+        self.log_path = self.runtime / 'logs/application.log'
+        self.process_record = self.runtime / 'backend-process.json'
         self.properties = None
 
     def guard(self, runtime=None, jar=None):
@@ -165,6 +177,23 @@ class CiFixtureContext:
                    '-n', str(REDIS_DATABASE)] + list(args)
         return run(command, env=dict(os.environ, REDISCLI_AUTH=self.redis_password)).decode().strip()
 
+    def _process_metadata(self):
+        return {'pid': self.process.pid, 'jar_path': str(self.jar), 'jar_sha256': self.jar_sha256,
+                'application_config': str(self.config), 'log_path': str(self.log_path)}
+
+    def _assert_private_log(self):
+        if (not self.log_path.is_file() or self.log_path.resolve() != self.log_path
+                or self.log_path.stat().st_mode & 0o077):
+            raise RuntimeError('CI candidate log must be the private owned application log')
+
+    def record_process(self):
+        """Expose the actual log to fault probes without publishing its contents."""
+        self.guard()
+        if self.process is None or self.process.poll() is not None:
+            raise RuntimeError('Cannot record a stopped CI candidate process')
+        self._assert_private_log()
+        private_file(self.process_record, json.dumps(self._process_metadata()) + '\n')
+
     def assert_candidate(self, runtime, jar):
         self.guard(runtime, jar or self.jar)
         if (self.process is None or self.process.poll() is not None
@@ -172,6 +201,16 @@ class CiFixtureContext:
                 or self.config.stat().st_mode & 0o077
                 or hashlib.sha256(self.jar.read_bytes()).hexdigest() != self.jar_sha256):
             raise RuntimeError('CI fixture application is not the configured candidate process')
+        self._assert_private_log()
+        if (not self.process_record.is_file() or self.process_record.resolve() != self.process_record
+                or self.process_record.stat().st_mode & 0o077):
+            raise RuntimeError('CI candidate process record must be private and owned')
+        try:
+            metadata = json.loads(self.process_record.read_text())
+        except (OSError, ValueError):
+            raise RuntimeError('CI candidate process record is unreadable') from None
+        if metadata != self._process_metadata():
+            raise RuntimeError('CI candidate process record does not match its process, JAR, configuration and log')
         command = subprocess.check_output(['ps', '-p', str(self.process.pid), '-o', 'command='], text=True)
         if str(self.jar) not in command or '--spring.config.location=file:' + str(self.config) not in command:
             raise RuntimeError('CI candidate process command does not match the private configuration')
@@ -284,11 +323,12 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
         private_file(context.config, context.properties)
         output = ROOT / 'ci-results'
         output.mkdir(exist_ok=True)
-        with (runtime / 'logs/application.log').open('wb') as log:
+        with os.fdopen(os.open(context.log_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), 'wb') as log:
             context.process = subprocess.Popen([str(java_home / 'bin/java'), '-Xms256m', '-Xmx1024m',
                 '-jar', str(context.jar), '--spring.config.location=file:' + str(context.config)],
                 cwd=runtime / 'webapp', stdout=log, stderr=log)
             try:
+                context.record_process()
                 for _ in range(120):
                     if context.process.poll() is not None:
                         raise RuntimeError('Review application exited before health check')

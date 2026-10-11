@@ -36,6 +36,16 @@ EXPECTED = {
     'LocalMediaReferenceIndexTest',
     'WorkEventStatisticsTest',
     'LiveAuthenticationScopeTest',
+    'TeachingMenuSecurityTest',
+    'AuditLogAuthorizationTest',
+    'AutoLogSafetyTest',
+    'FileDeletionConcurrencyTest',
+    'FileDeletionReadBoundaryTest',
+    'FileEncodedReferenceDeletionTest',
+    'AdditionalWorkReadAuthorizationTest',
+    'ScratchAssetAdministrationTest',
+    'GlobalRuleAdministrationTest',
+    'GlobalManagementAuthorizationTest',
 }
 
 
