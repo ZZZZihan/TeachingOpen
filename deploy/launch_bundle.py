@@ -19,11 +19,11 @@ spec.loader.exec_module(paths)
 
 FORMAT = 1
 JAR = 'api/jeecg-boot-module-system/target/teaching-open-2.8.0.jar'
-MIGRATIONS = ['api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql', 'api/db/unit-view-events.sql']
-MIGRATION_NAMES = ['01-phone-profile-registration.sql', '02-enable-phone-registration.sql', '03-unit-view-events.sql']
+MIGRATIONS = ['api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql', 'api/db/unit-view-events.sql', 'api/db/work-events.sql']
+MIGRATION_NAMES = ['01-phone-profile-registration.sql', '02-enable-phone-registration.sql', '03-unit-view-events.sql', '04-work-events.sql']
 SUPPORT = ['deploy/launch_bundle.py', 'deploy/candidate_release.py', 'deploy/LAUNCH_BUNDLE.md',
            'deploy/application-launch.properties.template', 'api/dev/prepare_launch_data.py',
-           'deploy/registration_upgrade.py']
+           'deploy/registration_upgrade.py', 'deploy/work_event_review.py']
 
 
 def git(source, *args):
@@ -267,6 +267,7 @@ def create(args):
     for name, frozen_name in zip(MIGRATIONS, MIGRATION_NAMES):
         copy_file(output, 'migrations/' + frozen_name, source / name)
     copy_file(output, 'migrations/registration_upgrade.py', source / 'deploy/registration_upgrade.py')
+    copy_file(output, 'migrations/work_event_review.py', source / 'deploy/work_event_review.py')
     write_file(output, 'migrations/migration-manifest.json', paths.json_bytes(upgrade_manifest(source)))
     copy_file(output, 'migrations/Dockerfile.db.reference', source / 'api/Dockerfile.db')
     copy_file(output, 'config/application-launch.properties.template', source / 'deploy/application-launch.properties.template')
@@ -363,6 +364,8 @@ def verify_bundle(bundle, expected_manifest=None, source=None):
         raise ValueError('Runbook or configuration template differs')
     if receipt(bundle / 'migrations/registration_upgrade.py') != value['source_files']['deploy/registration_upgrade.py']:
         raise ValueError('Upgrade runner source differs')
+    if receipt(bundle / 'migrations/work_event_review.py') != value['source_files']['deploy/work_event_review.py']:
+        raise ValueError('Work event review tool differs from frozen source')
     if paths.sha256(bundle / 'migrations/migration-manifest.json') != value['registration_upgrade_manifest_sha256']:
         raise ValueError('Upgrade manifest fingerprint differs')
     upgrade = paths.read_json(bundle / 'migrations/migration-manifest.json')

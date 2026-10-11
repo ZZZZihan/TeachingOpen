@@ -31,8 +31,8 @@ SOURCE_INPUTS = (
     'api/dev/production_fixture.py', 'api/dev/scratch_cloud_recovery.py',
     'api/dev/FixturePassword.java', 'api/dev/application-localtest.properties.template',
     PASSWORD_UTIL, 'web/nginx/default.conf',
-    'api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql', 'api/db/unit-view-events.sql',
-    'deploy/registration_upgrade.py',
+    'api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql', 'api/db/unit-view-events.sql', 'api/db/work-events.sql',
+    'deploy/registration_upgrade.py', 'deploy/work_event_review.py',
 )
 CANARY = 'DO_NOT_PACKAGE_ORIGINAL_SOURCE_INSERT_9c207eb5'
 
@@ -497,12 +497,12 @@ class CandidateReleaseTests(unittest.TestCase):
         manifest = json.loads((self.base_bundle / 'manifest.json').read_text())
         self.assertEqual(manifest['fixtures']['initial_upload_files'], len(observed))
         self.assertEqual(manifest['fixture_counts'],
-                         {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 71})
+                         {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 73})
 
     def test_registration_migrations_follow_data_and_match_explicit_upgrade_inputs(self):
         manifest = json.loads((self.base_bundle / 'manifest.json').read_text())
         self.assertEqual(manifest['database_upgrade']['initialization_order'],
-            ['init/01-schema.sql', 'init/02-fixtures.sql', 'init/03-phone-profile-registration.sql',
+            ['init/01-schema.sql', 'init/01a-work-events.sql', 'init/02-fixtures.sql', 'init/03-phone-profile-registration.sql',
              'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql'])
         self.assertIs(manifest['database_upgrade']['automatic_apply'], False)
         self.assertIs(manifest['database_upgrade']['ddl_transactional'], False)
@@ -513,7 +513,8 @@ class CandidateReleaseTests(unittest.TestCase):
         for initial, explicit in (
                 ('init/03-phone-profile-registration.sql', 'upgrade/01-phone-profile-registration.sql'),
                 ('init/04-enable-phone-registration.sql', 'upgrade/02-enable-phone-registration.sql'),
-                ('init/05-unit-view-events.sql', 'upgrade/03-unit-view-events.sql')):
+                ('init/05-unit-view-events.sql', 'upgrade/03-unit-view-events.sql'),
+                ('init/01a-work-events.sql', 'upgrade/04-work-events.sql')):
             self.assertEqual((self.base_bundle / initial).read_bytes(), (self.base_bundle / explicit).read_bytes())
 
     def test_verify_rejects_registration_sql_tamper_even_with_resealed_file_inventory(self):

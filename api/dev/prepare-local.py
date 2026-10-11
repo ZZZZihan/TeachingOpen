@@ -76,8 +76,9 @@ def prepare(runtime, tools, ports, seed_fixtures=True):
     private_file(runtime / "schema-only.sql", schema)
     with (runtime / "schema-only.sql").open() as file:
         subprocess.run([str(mysql), "--defaults-extra-file=" + str(runtime / "config/mysql-admin-client.cnf"), "teachingopen_dev"], stdin=file, check=True)
-    with (api / "db/unit-view-events.sql").open() as file:
-        subprocess.run([str(mysql), "--defaults-extra-file=" + str(runtime / "config/mysql-admin-client.cnf"), "teachingopen_dev"], stdin=file, check=True)
+    for name in ("unit-view-events.sql", "work-events.sql"):
+        with (api / "db" / name).open() as file:
+            subprocess.run([str(mysql), "--defaults-extra-file=" + str(runtime / "config/mysql-admin-client.cnf"), "teachingopen_dev"], stdin=file, check=True)
     if seed_fixtures:
         subprocess.run(["python3", str(api / "dev/seed-fixtures.py"), "--runtime", str(runtime), "--java-home", str(java_home)], check=True)
     print("Fresh isolated runtime ready:", runtime)

@@ -10,6 +10,7 @@ import org.jeecg.modules.teaching.mapper.TeachingWorkMapper;
 import org.jeecg.modules.teaching.mapper.TeachingWorkCorrectMapper;
 import org.jeecg.modules.teaching.mapper.TeachingWorkCommentMapper;
 import org.jeecg.modules.teaching.service.TeachingAccessService;
+import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
 import org.jeecg.modules.teaching.service.TeachingWorkAttachmentAccessService;
 import org.jeecg.modules.teaching.service.impl.TeachingWorkServiceImpl;
 import org.junit.Before;
@@ -33,6 +34,7 @@ public class WorkAttachmentAuthorizationTest {
     private TeachingWorkCommentMapper comments;
     private TeachingWork stored;
     private SysFile file;
+    private ITeachingDepartDayLogService dailyLog;
 
     @Before public void setup() {
         service = new TeachingWorkServiceImpl();
@@ -40,6 +42,10 @@ public class WorkAttachmentAuthorizationTest {
         access = mock(TeachingAccessService.class); files = mock(ISysFileService.class);
         works = mock(TeachingWorkMapper.class); feedback = mock(TeachingWorkCorrectMapper.class);
         comments = mock(TeachingWorkCommentMapper.class);
+        dailyLog = mock(ITeachingDepartDayLogService.class);
+        ReflectionTestUtils.setField(service, "dailyLog", dailyLog);
+        when(works.insert(any())).thenReturn(1);
+        when(works.updateById(any())).thenReturn(1);
         ReflectionTestUtils.setField(attachments, "access", access);
         ReflectionTestUtils.setField(attachments, "files", files);
         ReflectionTestUtils.setField(service, "attachmentAccess", attachments);
@@ -67,7 +73,7 @@ public class WorkAttachmentAuthorizationTest {
         try { action.run(); fail("Private file reference must be rejected before writing"); }
         catch (UnauthorizedException expected) { assertEquals("无附件使用权限", expected.getMessage()); }
         verify(works, never()).insert(any()); verify(works, never()).updateById(any());
-        verifyZeroInteractions(feedback, comments);
+        verifyZeroInteractions(feedback, comments, dailyLog);
     }
 
     @Test public void teacherCannotAttachPrivateFileAndPublishOrReplaceFeedback() {
@@ -92,7 +98,7 @@ public class WorkAttachmentAuthorizationTest {
         file.setCreateBy("teacher");
         TeachingWork request = update("private", null);
         service.updateMain(request, null, null);
-        verify(works).updateById(request); verifyZeroInteractions(feedback, comments);
+        verify(works).updateById(request); verifyZeroInteractions(feedback, comments, dailyLog);
         assertEquals("student", request.getUserId()); assertEquals("class-a", request.getDepartId());
     }
 

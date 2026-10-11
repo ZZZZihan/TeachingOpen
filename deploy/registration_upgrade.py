@@ -19,6 +19,7 @@ MIGRATIONS = (
     ('api/db/phone-profile-registration.sql', '01-phone-profile-registration.sql'),
     ('api/db/enable-phone-registration.sql', '02-enable-phone-registration.sql'),
     ('api/db/unit-view-events.sql', '03-unit-view-events.sql'),
+    ('api/db/work-events.sql', '04-work-events.sql'),
 )
 MANIFEST = 'migration-manifest.json'
 
@@ -107,6 +108,7 @@ def run_mysql(command, sql):
     if result.returncode:
         # Do not expose SQL diagnostics: an unexpected database error can carry PII.
         raise RuntimeError('MySQL rejected migration/preflight; inspect the target privately before retrying')
+    return result.stdout.decode('utf-8').strip()
 
 
 def preflight(directory, client, option_file, database, manifest_sha256):
@@ -115,7 +117,7 @@ def preflight(directory, client, option_file, database, manifest_sha256):
     # Validate registration metadata and the additive unit-view ledger before
     # backup. Preflight creates/removes only the reserved migration procedures,
     # and skips user/table changes; registration activation is not run here.
-    for index in (0, 2):
+    for index in (0, 2, 3):
         run_mysql(command, 'SET @teachingopen_registration_preflight_only = 1;\n' +
             (Path(directory) / MIGRATIONS[index][1]).read_text(encoding='utf-8'))
     return manifest
@@ -167,9 +169,12 @@ def apply_upgrade(directory, client, mysqldump, option_file, database, manifest_
                 receipt_path.write_text(json.dumps(receipt, indent=2) + '\n', encoding='utf-8')
                 raise
             receipt['completed_steps'].append(step['file'])
-        receipt['status'] = 'upgrade_applied'
+        pending = int(run_mysql(command, "SELECT COUNT(*) FROM teaching_work_event WHERE event_state='LEGACY_REVIEW'"))
+        receipt['status'] = 'upgrade_applied_work_event_review_required' if pending else 'upgrade_applied'
+        receipt['work_events_pending_review'] = pending
         receipt_path.write_text(json.dumps(receipt, indent=2) + '\n', encoding='utf-8')
-        return {'status': 'upgrade_applied', 'database': database, 'backup_sha256': receipt['backup_sha256'],
+        return {'status': receipt['status'], 'work_events_pending_review': pending,
+            'database': database, 'backup_sha256': receipt['backup_sha256'],
             'manifest_sha256': manifest_sha256, 'services_started': False, 'ddl_transactional': False}
     except Exception:
         # Any partial DDL remains explicit. No guessed rollback or data deletion.

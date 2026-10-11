@@ -36,7 +36,7 @@ def verify(runtime, output):
         "owned_redis": redis_dir == ["dir", str(runtime / "redis-data")],
         "packaged_app_matches_worktree": True,
         "health_up": get("/actuator/health").get("status") == "UP",
-        "schema_71_tables": query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='teachingopen_dev'") == "71",
+        "schema_73_tables": query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='teachingopen_dev'") == "73",
         "three_roles": query("SELECT COUNT(*) FROM sys_role WHERE role_code IN ('admin','teacher','student')") == "3",
         "two_courses": courses.get("success") is True and {r["id"] for r in courses.get("result", {}).get("records", [])} == {"fixture_course_a", "fixture_course_b"},
         "fixture_attachments": all((runtime / "uploads" / ("fixture-work-" + suffix + ".txt")).read_text() == "synthetic work " + suffix + "\n" for suffix in ("a", "b")),

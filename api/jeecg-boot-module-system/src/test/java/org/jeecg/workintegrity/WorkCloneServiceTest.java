@@ -110,6 +110,17 @@ public class WorkCloneServiceTest {
         verify(works, never()).insert(any());
     }
 
+    @Test public void cloneLocksSortedRecipientsBeforeSourceToMatchSubmissionOrder() {
+        service.sendWork(request("z", "a"));
+        org.mockito.InOrder order = inOrder(works, users);
+        order.verify(works).selectOne(argThat(query -> !query.getSqlSegment().contains("FOR UPDATE")));
+        order.verify(users).selectOne(argThat(query -> query.getSqlSegment().contains("FOR UPDATE")
+                && ((QueryWrapper<SysUser>) query).getParamNameValuePairs().containsValue("a")));
+        order.verify(users).selectOne(argThat(query -> query.getSqlSegment().contains("FOR UPDATE")
+                && ((QueryWrapper<SysUser>) query).getParamNameValuePairs().containsValue("z")));
+        order.verify(works).selectOne(argThat(query -> query.getSqlSegment().contains("FOR UPDATE")));
+    }
+
     @Test public void cloneInsertsANewDraftAndNeverLooksUpByNameOrCopiesFeedback() {
         assertEquals(1, service.sendWork(request("a")));
         ArgumentCaptor<TeachingWork> capture = ArgumentCaptor.forClass(TeachingWork.class);

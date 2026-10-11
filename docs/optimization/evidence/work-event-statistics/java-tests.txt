@@ -1,0 +1,7 @@
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.482 s - in org.jeecg.workintegrity.WorkCloneServiceTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.329 s - in org.jeecg.additionalwork.WorkEventStatisticsTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.416 s - in org.jeecg.additionalwork.UnitViewStatisticsTest
+[INFO] Tests run: 37, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+[INFO] Total time:  6.526 s
+[INFO] Finished at: 2026-10-11T17:25:16+08:00

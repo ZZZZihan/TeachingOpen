@@ -1,0 +1,49 @@
+{
+  "scope": "Isolated synthetic data only; no production, merge, or deployment",
+  "java": {
+    "WorkEventStatisticsTest": 11,
+    "WorkCloneServiceTest": 12,
+    "UnitViewStatisticsTest": 14,
+    "failed": 0,
+    "skipped": 0,
+    "runtime": "Zulu OpenJDK 8u504; H2 2.2.224; actual Spring transactions and production event/day mapper"
+  },
+  "mysql_migration": {
+    "tests": 9,
+    "failed": 0,
+    "skipped": 0,
+    "runtime": "MySQL 8.4.6; newly created workevent_test_* databases only, removed after tests"
+  },
+  "candidate_packaging_tools": {
+    "tests": 73,
+    "failed": 0,
+    "skipped": 0
+  },
+  "launch_bundle_tools": {
+    "tests": 9,
+    "failed": 0,
+    "skipped": 0
+  },
+  "registration_upgrade_receipt": {
+    "passed": 6,
+    "native_existing_suite_not_run": 21
+  },
+  "M05": {
+    "form_tests": 30,
+    "real_vue_template_upload_tests": 16,
+    "failed": 0
+  },
+  "not_executed_here": [
+    "Combined final-commit HTTP/MySQL probes (owned by integration runner)",
+    "Authenticated browser end-to-end/screenshot acceptance",
+    "Full classroom concurrency/load",
+    "Production historical-event review/migration",
+    "Final candidate independent Pro acceptance"
+  ],
+  "integration_notes": [
+    "Apply work-events.sql before seed in fresh CI runtime",
+    "For existing synthetic runtime export complete LEGACY_REVIEW list and resolve using documented synthetic evidence",
+    "Preserve H04 attachmentAccess in merged saveMain/updateMain/submit; add mocks for the new dependency in WorkEventStatisticsTest",
+    "Register WorkEventStatisticsTest and enhanced feedback/submission probes in required CI lists"
+  ]
+}

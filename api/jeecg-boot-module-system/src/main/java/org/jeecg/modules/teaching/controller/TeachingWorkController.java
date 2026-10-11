@@ -36,7 +36,6 @@ import org.jeecg.modules.teaching.entity.TeachingAdditionalWork;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.entity.TeachingWorkComment;
 import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
-import org.jeecg.modules.teaching.enums.DepartDayLogType;
 import org.jeecg.modules.teaching.model.AdditionalWorkModel;
 import org.jeecg.modules.teaching.model.StudentWorkModel;
 import org.jeecg.modules.teaching.model.WorkCommentModel;
@@ -102,8 +101,6 @@ public class TeachingWorkController extends BaseController {
 	 private ISysFileService sysFileService;
 	 @Value("${jeecg.path.staticDomain}")
 	 private String localFileDomain;
-	 @Autowired
-	 private ITeachingDepartDayLogService teachingDepartDayLogService;
 	 @Autowired
 	 private ITeachingAdditionalWorkService teachingAdditionalWorkService;
 
@@ -520,22 +517,6 @@ public class TeachingWorkController extends BaseController {
 		teachingWork.setCreateBy(teachingWorkEntity.getCreateBy());
 		teachingWork.setCreateTime(teachingWorkEntity.getCreateTime());
 		teachingWorkService.updateMain(teachingWork, teachingWorkPage.getTeachingWorkCorrectList(),teachingWorkPage.getTeachingWorkCommentList());
-		if (StringUtils.isNotBlank(teachingWork.getDepartId())){
-			if (StringUtils.isNotEmpty(teachingWork.getAdditionalId())){
-				String key = String.format("departLog:addiWorkCorrect:%s", teachingWork.getDepartId());
-				if (!redisUtil.sHasKey(key, teachingWork.getId())) {
-					redisUtil.sSet(key, teachingWork.getId());
-					teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.ADDITIONAL_WORK_CORRECT_COUNT);
-				}
-			}
-			if (StringUtils.isNotEmpty(teachingWork.getCourseId())){
-				String key = String.format("departLog:courseWorkCorrect:%s", teachingWork.getDepartId());
-				if (!redisUtil.sHasKey(key, teachingWork.getId())) {
-					redisUtil.sSet(key, teachingWork.getId());
-					teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.COURSE_WORK_CORRECT_COUNT);
-				}
-			}
-		}
 		return Result.ok("编辑成功!");
 	}
 	

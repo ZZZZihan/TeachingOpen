@@ -166,7 +166,7 @@ class NativeMySQLMigrationTests(unittest.TestCase):
     def test_new_database_schema_then_data_then_upgrade(self):
         self.assertEqual(self.sql('SHOW TABLES;').stdout.count('\n'), 69)
         self.apply()
-        self.assertEqual(self.sql('SHOW TABLES;').stdout.count('\n'), 71)
+        self.assertEqual(self.sql('SHOW TABLES;').stdout.count('\n'), 73)
         result = self.sql("SELECT COUNT(*) FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name='sys_user' AND column_name IN ('realname','school') AND character_set_name='utf8mb4';")
         self.assertEqual(result.stdout.strip(), '2')
         self.assertEqual(self.sql("SELECT config_value,config_enabled FROM sys_config WHERE config_key='allowReg';").stdout.strip(), '1\t1')

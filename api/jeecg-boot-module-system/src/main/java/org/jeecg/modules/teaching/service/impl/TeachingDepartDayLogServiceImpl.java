@@ -1,6 +1,7 @@
 package org.jeecg.modules.teaching.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.jeecg.common.exception.JeecgBootException;
@@ -11,16 +12,21 @@ import org.jeecg.modules.system.mapper.SysUserMapper;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.teaching.entity.TeachingDepartDayLog;
 import org.jeecg.modules.teaching.entity.TeachingCourseUnit;
+import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.enums.DepartDayLogType;
 import org.jeecg.modules.teaching.enums.UnitViewLogResult;
+import org.jeecg.modules.teaching.enums.WorkEventType;
 import org.jeecg.modules.teaching.mapper.TeachingCourseUnitMapper;
 import org.jeecg.modules.teaching.mapper.TeachingDepartDayLogMapper;
+import org.jeecg.modules.teaching.mapper.TeachingWorkMapper;
 import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
 import org.jeecg.modules.teaching.service.LegacyUnitViewMarkerStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.time.Clock;
 import java.time.LocalDate;
@@ -46,6 +52,37 @@ public class TeachingDepartDayLogServiceImpl extends ServiceImpl<TeachingDepartD
     private TeachingCourseUnitMapper units;
     @Autowired
     private LegacyUnitViewMarkerStore legacyUnitViews;
+    @Autowired
+    private TeachingWorkMapper works;
+
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+    public void recordWorkEvent(String workId, WorkEventType eventType) {
+        if (eventType == null) throw new JeecgBootException("作品统计类型不能为空");
+        // Work -> department -> event -> daily row is the shared lock order.
+        // Read the stored task identity, never the caller's editable DTO.
+        TeachingWork work = works.selectOne(new QueryWrapper<TeachingWork>().eq("id", workId).last("FOR UPDATE"));
+        if (work == null || !Objects.equals(workId, work.getId())) throw new JeecgBootException("未找到目标作品");
+        boolean course = StringUtils.hasText(work.getCourseId());
+        boolean additional = StringUtils.hasText(work.getAdditionalId());
+        if (!StringUtils.hasText(work.getDepartId()) || (!course && !additional)) return;
+        if (course && additional) throw new JeecgBootException("作品任务归属异常，请联系教师处理");
+        if (baseMapper.workEventCutoverComplete() != 1) throw new JeecgBootException("作品统计迁移未完成，请联系管理员后重试");
+        DepartDayLogType counter = eventType == WorkEventType.SUBMIT
+                ? (course ? DepartDayLogType.COURSE_WORK_SUBMIT_COUNT : DepartDayLogType.ADDITIONAL_WORK_SUBMIT_COUNT)
+                : (course ? DepartDayLogType.COURSE_WORK_CORRECT_COUNT : DepartDayLogType.ADDITIONAL_WORK_CORRECT_COUNT);
+        SysDepart department = lockDepartment(work.getDepartId());
+        String state = baseMapper.selectWorkEventStateForUpdate(workId, eventType.name());
+        if ("COUNTED".equals(state) || "LEGACY_UNRESOLVED".equals(state)) return;
+        if ("LEGACY_REVIEW".equals(state)) throw new JeecgBootException("历史作品统计尚未核对，请联系管理员完成迁移后重试");
+        if (state != null && !"READY".equals(state)) throw new JeecgBootException("作品统计事件状态无效");
+        String day = LocalDate.now(clock.withZone(BUSINESS_ZONE)).toString();
+        int changed = state == null
+                ? baseMapper.insertWorkEvent(workId, eventType.name(), work.getDepartId(), day)
+                : baseMapper.countReadyWorkEvent(workId, eventType.name(), work.getDepartId(), day);
+        if (changed != 1) throw new JeecgBootException("作品统计事件保存失败");
+        incrementCounter(work.getDepartId(), department, counter, day, initialLog(counter));
+    }
 
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
