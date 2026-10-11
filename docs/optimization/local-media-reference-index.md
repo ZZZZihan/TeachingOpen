@@ -1,0 +1,45 @@
+# 本地媒体引用索引（M-06）
+
+媒体下载授权通过 `sys_local_file_reference` 的 `(reference_kind, reference_hash)` 索引取得相关业务对象，再读取当前业务内容、访问权限和发布状态核验。引用表只提供候选对象，不能独立授予文件访问权。SHA256 使用 UTF-8 原始引用值；查询后仍逐字比较 `reference_value`，避免哈希或数据库排序规则代替内容相等判断。
+
+索引覆盖现有五类正文来源：课程、课程单元、附加作业、系统配置和新闻，以及 `sys_data_log` 内作品文件/封面的历史记录。引用主键包括来源表、来源 ID、字段、引用种类和哈希；来源 ID 与原文采用 `utf8mb4_bin`，类型、字段和哈希采用 `ascii_bin`。原文使用 `MEDIUMTEXT`，不按短路径截断正文引用。`sys_file` 补充 `(file_path(191), file_location, del_flag)`，`teaching_work` 补充 `(work_file, del_flag)` 与 `(work_cover, del_flag)`，支持现有文件元数据路径。
+
+## 初始化和写入
+
+显式 SQL 迁移 `api/db/local-media-references.sql` 创建引用表和状态表，并只在状态行缺失时插入 `id=1, version=0`。它不扫描正文、不改业务行、不覆盖已有引用或已初始化状态，不创建数据库 trigger。六类正文/历史源和文件、作品元数据表必须使用 InnoDB，使引用与业务更新可在同一事务回滚。重复迁移校验现有结构和可见索引；遇到同名但不兼容的表、约束、索引或 trigger 时停止，保留现有结构供核查。
+
+应用首次启动对状态行加排他锁，在一个数据库事务内回填六类来源，并写入 `version=1` 和当前 `jeecg.path.staticDomain`。失败会回滚引用和状态，下一次启动可重试。后续启动只检查状态版本与域名，不重新扫描全部内容。普通业务写入先对状态行加共享锁，业务数据和引用更新使用同一个事务；管理员重建对状态行加排他锁，使重建与普通写入串行。
+
+只允许 `version=0` 初始化及 `version=1` 校验或受控重建；未知版本在修改引用前拒绝，显式重建也不会把新版本降为 1。
+
+管理员可使用 `POST /sys/localMediaReferences/rebuild` 显式重建。直接 SQL 导入、脱离业务 Service 的修改或媒体域名变化会使派生索引需要重新建立。域名变化时，使用已授权启动参数 `--jeecg.media.rebuild-index=true` 完成一次重建，成功后移除此参数；否则后续每次启动都会强制重建。直接导入完成后，应在重新开放写入和验收媒体访问前重建并验证。正常业务操作不需要人工重建。
+
+## 工具接线和升级顺序
+
+本地 `prepare-local.py`、CI 注册与权限隔离库、合成候选包、正式 launch 包及独立升级清单都包含新 SQL。独立升级的第五步是 `05-local-media-references.sql`；候选包初始化使用 `init/07-local-media-references.sql`，保留已有 `init/01a-work-events.sql` 在 fixture 数据之前运行的顺序。旧的 `api/Dockerfile.db` 遗漏作品事件 SQL，本次补入第六步并把媒体引用 SQL 放在第七步，使该初始化入口也满足应用依赖。
+
+原始结构为 69 张表，注册、单元浏览和作品事件迁移合计增加 4 张，本次再增加 2 张，完整升级后共 75 张。已有数据库升级仍需目标授权、停止写入、私有备份和恢复核验，使用 `deploy/registration_upgrade.py` 的显式 preflight/apply 流程。preflight 检查新表与索引兼容性，但不创建业务表或索引；DDL 的隐式提交边界沿用原升级工具。SQL 迁移成功与应用首次回填成功分别确认。
+
+CI 必需 Java suite 包含 `LocalMediaReferenceIndexTest`；权限回归集合包含 `verify-local-media-index.py`。环境就绪检查要求完整 75 张表且状态行为 `version=1`。
+
+## 验证
+
+`api/dev/test_local_media_migration.py` 提供显式 opt-in 的真实 MySQL 测试。设置 `LOCAL_MEDIA_TEST_RUNTIME` 为已经运行的 `.devspace` 合成环境后，它先验证 MySQL 数据目录、端口及五个 fixture 账号，只在随机新建的 `localmedia_test_*` 数据库执行迁移，结束后删除该测试自建库；不修改现有 `teachingopen_dev`，不启动或停止服务。测试覆盖 preflight 无表/索引变化、重复迁移保留引用和状态、三个元数据索引、TEXT 路径兼容、大小写 ID 和长 Unicode 原文、主键/种类/状态约束、不兼容结构及 trigger 拒绝。
+
+候选包与升级工具的 Python 测试覆盖新 SQL 缺失或变更拒绝、preflight 纳入新步骤、初始化与显式升级字节一致、升级顺序和 SHA256 收据核验。它们属于工具与文件级验证；真实 HTTP 授权、事务回滚和规模下查询行为由媒体索引 Java/HTTP 回归提供，CI、部署及人工验收仍单独记录。
+
+2026-10-11 本次工具验证：候选包测试 73 项、CI 边界测试 16 项、升级清单离线测试 8 项、launch 包测试 9 项、候选报告输出测试 8 项全部通过，共 114 项。Python 语法检查和 Git diff 空白检查通过。随后在 `.devspace/media-index-1011` 合成 MySQL 8.4.6 runtime 的随机独立数据库上，媒体迁移专项 10 项真实 MySQL 测试全部通过；重复迁移、长 Unicode、TEXT 路径和约束改坏后恢复重跑均通过。CHECK 语义兼容检查同时归一化 ASCII 与 UTF-8 的字面量引入符，避免 MySQL 的元数据展示差异被误判为不兼容结构。该测试只创建并清理测试自建库，没有迁移 runtime 主库或启停服务。升级清单的另外 21 项真实 MySQL 测试尚未执行；真实 MySQL 8.0、GitHub CI、部署和人工验收不在这次本地工具验证结果内。
+
+同日整合验证：完整必需 Java 回归 29 套件、264 项通过，零跳过；新增媒体索引专项真实 HTTP/MySQL 128 项通过，既有下载回归 88 项通过。独立静态复核发现 `SysDataLog` 原无显式表名，导致新历史记录索引写入触发空指针；已补 `@TableName("sys_data_log")` 并增加从 `addDataLog` 服务入口执行的回归，最终 Java 与 HTTP 专项均使用修正后的代码。复核未发现此范围内尚未解决的阻塞，复核与运行验证分别记录。
+
+专项验证包括普通新闻 API 新增、部分编辑、替换和删除，六类原始数据的显式历史回填，未授权重建拒绝且所有持久状态不变，索引 INSERT 故障下业务/索引共同回滚，两个真实并发编辑后持久正文与引用完全一致，以及旧引用、伪造候选、未发布内容和跨班访问拒绝。夹具结束后业务、索引、state 和文件字节快照精确恢复；新专项不会在普通 API 操作后补重建来掩盖同步错误。
+
+在 10 / 1,000 / 10,000 条无关新闻正文下，每个路径分别发送 20 次匿名请求。现有 `performance_schema` 摘要增量显示：未知 key 始终为 40 次下载相关 SELECT、0 行实际扫描；唯一公开新闻命中始终为 60 次 SELECT、40 行实际扫描。候选索引查询均为每请求 1 次，未知 key 扫描 0 行、唯一命中扫描 1 行；自然 EXPLAIN 使用 `idx_local_reference_lookup` 的两个 key parts，未强制索引。对于同一文件确有大量关联的情况，当前对象读取仍随真实关联数量增长。
+
+| 无关正文 | 未知文件 p95 | 唯一新闻引用 p95 |
+|---:|---:|---:|
+| 10 | 4.490 ms | 5.334 ms |
+| 1,000 | 4.127 ms | 7.417 ms |
+| 10,000 | 2.872 ms | 4.945 ms |
+
+上述 p95 是本机 loopback、顺序请求、一次预热后的 20 个样本，不作为吞吐或生产容量承诺；未重置计数、修改 instrumentation 或开启全局查询日志。本地最终验证 JAR SHA-256 为 `821a3c26bf4f9a6e590c6fb52a67d0f62d251a88e4da98d64e6c01495788641a`。CI 默认专项包含 10 / 1,000 两阶段；本地使用 `--max-unrelated-rows 10000` 加入第三阶段。

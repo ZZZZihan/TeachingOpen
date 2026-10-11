@@ -40,7 +40,7 @@ initial-data/mysql/seed.sql            仅管理员与真实课程的 CREATE sch
 initial-data/uploads/**                297 个课程文件
 initial-data/manifest.json             数据来源、净化计数与资源聚合指纹
 initial-data/assets-manifest.json      私有资源路径与逐文件指纹
-migrations/*.sql                      按最终源码冻结的注册与单元浏览事件升级 SQL
+migrations/*.sql                      按最终源码冻结的注册、教学事件与媒体引用升级 SQL
 migrations/migration-manifest.json    独立升级清单；外层 manifest 钉住其 SHA256
 migrations/registration_upgrade.py    明确的核验、预检、备份与应用入口
 migrations/Dockerfile.db.reference     既有数据库镜像初始化次序参考
@@ -59,11 +59,11 @@ RUNBOOK.md                            本说明
 
 ## 新环境初始化与已有环境升级
 
-新数据库仅在目标数据库确认为 0 个表的全新数据库且已获初始化授权后，按 manifest 的 `migration_order_new_database` 顺序执行：CREATE schema 与初始数据 SQL，再依次执行手机资料注册表升级、显式开启手机号资料注册、单元浏览事件表升级。初始 SQL 不含 DROP，只创建表；已有表会使初始化失败。导入前必须核对数据包并查询实际表数；非 0 表的环境拒绝使用 seed。不要使用 `mysql --force` 或忽略导入错误，以免部分创建、部分插入。导入失败应保留错误与隔离库，定位原因后另用一个新空库重试，不向业务环境继续灌入。
+新数据库仅在目标数据库确认为 0 个表的全新数据库且已获初始化授权后，按 manifest 的 `migration_order_new_database` 顺序执行：CREATE schema 与初始数据 SQL，再依次执行手机资料注册表升级、显式开启手机号资料注册、单元浏览事件表升级、作品事件升级和媒体引用索引升级。初始 SQL 不含 DROP，只创建表；已有表会使初始化失败。导入前必须核对数据包并查询实际表数；非 0 表的环境拒绝使用 seed。不要使用 `mysql --force` 或忽略导入错误，以免部分创建、部分插入。导入失败应保留错误与隔离库，定位原因后另用一个新空库重试，不向业务环境继续灌入。
 
 已有数据库只能在单独授权、备份与回滚材料完成后，执行 manifest 的 `migration_order_existing_database`，禁止导入 `seed.sql`。手机资料注册表升级脚本保留已有注册开关值；随后的 enable 脚本表示操作者显式开启注册，会把有效且唯一的开关值改为开启。注册升级的幂等性、开启步骤和管理员菜单权限由升级 SQL 的专项验证负责。Docker 官方初始化目录仅在数据库数据目录为空时执行，重启已有数据容器不会补跑升级 SQL。
 
-包内升级目录按 `01-phone-profile-registration.sql`、`02-enable-phone-registration.sql`、`03-unit-view-events.sql`、`04-work-events.sql` 四项排序。原始结构为 69 张表；注册档案和单元浏览事件各新增一张，作品事件与迁移凭证新增两张，完整升级后为 73 张。新增单元浏览事件迁移只建持久事件表，不清理旧 Redis 集合、不调整历史统计；旧标记在运行时保留为待核对状态。读取外层 manifest 的 `registration_upgrade_manifest_sha256` 作为 `$UPGRADE_MANIFEST_SHA256`，先执行离线核验：
+包内升级目录按 `01-phone-profile-registration.sql`、`02-enable-phone-registration.sql`、`03-unit-view-events.sql`、`04-work-events.sql`、`05-local-media-references.sql` 五项排序。原始结构为 69 张表；注册档案和单元浏览事件各新增一张，作品事件与迁移凭证新增两张，媒体引用与初始化状态新增两张，完整升级后为 75 张。新增单元浏览事件迁移只建持久事件表，不清理旧 Redis 集合、不调整历史统计；旧标记在运行时保留为待核对状态。媒体 SQL 只创建派生引用结构、元数据索引和 `version=0` 状态行；首次应用启动在事务内建立引用，后续启动校验版本和媒体域名。直接导入或媒体域名变化后，按 [媒体引用索引说明](../docs/optimization/local-media-reference-index.md) 显式重建。读取外层 manifest 的 `registration_upgrade_manifest_sha256` 作为 `$UPGRADE_MANIFEST_SHA256`，先执行离线核验：
 
 ```sh
 python3 "$BUNDLE_DIR/migrations/registration_upgrade.py" verify \

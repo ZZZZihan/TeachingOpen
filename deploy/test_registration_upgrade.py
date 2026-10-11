@@ -16,6 +16,7 @@ import stat
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import registration_upgrade as upgrade
 
@@ -50,6 +51,21 @@ class MigrationManifestTests(unittest.TestCase):
         (self.directory / upgrade.MIGRATIONS[0][1]).write_text('-- tampered SQL\n')
         with self.assertRaises(ValueError):
             upgrade.verify_migrations(self.directory, self.hash)
+
+    def test_missing_media_migration_rejected(self):
+        (self.directory / '05-local-media-references.sql').unlink()
+        with self.assertRaises(FileNotFoundError):
+            upgrade.verify_migrations(self.directory, self.hash)
+
+    def test_preflight_checks_media_schema_without_running_activation(self):
+        with patch.object(upgrade, 'mysql_command', return_value=['synthetic-client']), \
+                patch.object(upgrade, 'run_mysql') as execute:
+            upgrade.preflight(self.directory, None, None, 'unselected', self.hash)
+        statements = [call.args[1] for call in execute.call_args_list]
+        self.assertEqual(len(statements), 4)
+        self.assertTrue(all(sql.startswith('SET @teachingopen_registration_preflight_only = 1;') for sql in statements))
+        self.assertIn('CREATE PROCEDURE teachingopen_local_media_references_v1()', statements[-1])
+        self.assertNotIn((self.directory / '02-enable-phone-registration.sql').read_text(), statements)
 
     def test_resealed_manifest_rejected_by_external_hash(self):
         sql = self.directory / upgrade.MIGRATIONS[0][1]
@@ -166,7 +182,7 @@ class NativeMySQLMigrationTests(unittest.TestCase):
     def test_new_database_schema_then_data_then_upgrade(self):
         self.assertEqual(self.sql('SHOW TABLES;').stdout.count('\n'), 69)
         self.apply()
-        self.assertEqual(self.sql('SHOW TABLES;').stdout.count('\n'), 73)
+        self.assertEqual(self.sql('SHOW TABLES;').stdout.count('\n'), 75)
         result = self.sql("SELECT COUNT(*) FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name='sys_user' AND column_name IN ('realname','school') AND character_set_name='utf8mb4';")
         self.assertEqual(result.stdout.strip(), '2')
         self.assertEqual(self.sql("SELECT config_value,config_enabled FROM sys_config WHERE config_key='allowReg';").stdout.strip(), '1\t1')

@@ -18,6 +18,7 @@ from uuid import uuid4
 
 from local_http import FixtureApi
 from local_runtime import mysql_command
+from media_index_fixture import media_index_snapshot, rebuild_media_index_after_sql
 
 BASE = '/teaching/teachingDepartDayLog/unitViewLog?'
 CLASSES = ('fixture_class_a', 'fixture_class_b')
@@ -49,12 +50,15 @@ def verify(args):
 
     try:
         with FixtureApi(args.runtime.resolve(), args.jar) as api:
+            has_media_index = not getattr(args, 'expect_legacy', False)
             report['jar_sha256'] = api.jar_sha256
             def sql(statement):
                 result = subprocess.run(mysql_command(api.runtime) + ['teachingopen_dev'],
                     input=statement, text=True, capture_output=True, timeout=30)
                 if result.returncode:
                     raise RuntimeError('Owned unit-view fixture SQL failed')
+                if has_media_index:
+                    rebuild_media_index_after_sql(api, statement)
                 return result.stdout.strip()
 
             def rows(table):
@@ -78,6 +82,7 @@ def verify(args):
                     raise RuntimeError('Expected a persistent legacy set or an absent owned fixture key')
                 original_cache[key] = dump(key)
             original = db_snapshot()
+            original_media_index = media_index_snapshot(sql) if has_media_index else None
             report['baseline_sha256'] = original
             report['initial_ledger_rows'] = int(sql('SELECT COUNT(*) FROM teaching_unit_view_event'))
             audit_count = int(sql('SELECT COUNT(*) FROM sys_log'))
@@ -181,8 +186,12 @@ def verify(args):
                             raise RuntimeError('Owned unit-view Redis cleanup did not confirm success')
                 report['restored_sha256'] = db_snapshot()
                 report['business_rows_restored'] = report['restored_sha256'] == original
+                if has_media_index:
+                    report['media_index_restored'] = media_index_snapshot(sql) == original_media_index
                 report['legacy_cache_restored'] = all(dump(key) == value for key,value in original_cache.items())
             check('all affected fixture business rows are restored', report['business_rows_restored'])
+            if has_media_index:
+                check('original media reference index and state restored', report['media_index_restored'])
             check('both legacy cache keys are restored byte for byte', report['legacy_cache_restored'])
             check('normal request audit rows are retained', int(sql('SELECT COUNT(*) FROM sys_log')) >= audit_count)
     except Exception as failure:

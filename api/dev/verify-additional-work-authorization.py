@@ -20,6 +20,7 @@ from zoneinfo import ZoneInfo
 
 from local_http import FixtureApi
 from local_runtime import mysql_command
+from media_index_fixture import media_index_snapshot, rebuild_media_index_after_sql
 
 
 BASE = '/teaching/teachingAdditionalWork'
@@ -74,11 +75,14 @@ def verify(args):
     runtime = args.runtime.resolve()
     checks = []
     with FixtureApi(runtime, args.jar) as api:
+        has_media_index = not getattr(args, 'expect_legacy', False)
         def sql(statement):
             result = subprocess.run(mysql_command(runtime) + ['teachingopen_dev', '-e', statement],
                                     capture_output=True, text=True, timeout=20)
             if result.returncode:
                 raise RuntimeError('Owned additional-work fixture SQL failed')
+            if has_media_index:
+                rebuild_media_index_after_sql(api, statement)
             return result.stdout.strip()
 
         def check(name, passed):
@@ -155,6 +159,7 @@ def verify(args):
                                + ' FROM teaching_unit_view_event WHERE ' + unit_event_where).splitlines()
         original_events = sql('SELECT * FROM teaching_unit_view_event ORDER BY depart_id,unit_id')
         original_state = snapshot()
+        original_media_index = media_index_snapshot(sql) if has_media_index else None
 
         def body(name, department='fixture_class_a', **extra):
             return {'workName': name, 'workDept': department, 'status': 1, 'codeType': 0,
@@ -334,6 +339,8 @@ def verify(args):
                 if api.cache('DEL', unit_marker) not in ('0', '1'):
                     raise RuntimeError('Owned unit-view Redis cleanup did not confirm success')
         check('original additional-work tasks preserved', hashlib.sha256(sql('SELECT * FROM teaching_additional_work ORDER BY id').encode()).hexdigest() == existing_snapshot)
+        if has_media_index:
+            check('original media reference index and state restored', media_index_snapshot(sql) == original_media_index)
         check('original class statistics restored', sql('SELECT * FROM teaching_depart_day_log ORDER BY id') == original_logs)
         check('original lifetime unit events restored exactly', sql('SELECT * FROM teaching_unit_view_event ORDER BY depart_id,unit_id') == original_events)
         check('original unit-view Redis bytes restored exactly', dump_unit_marker() == original_unit_dump)

@@ -19,8 +19,8 @@ spec.loader.exec_module(paths)
 
 FORMAT = 1
 JAR = 'api/jeecg-boot-module-system/target/teaching-open-2.8.0.jar'
-MIGRATIONS = ['api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql', 'api/db/unit-view-events.sql', 'api/db/work-events.sql']
-MIGRATION_NAMES = ['01-phone-profile-registration.sql', '02-enable-phone-registration.sql', '03-unit-view-events.sql', '04-work-events.sql']
+MIGRATIONS = ['api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql', 'api/db/unit-view-events.sql', 'api/db/work-events.sql', 'api/db/local-media-references.sql']
+MIGRATION_NAMES = ['01-phone-profile-registration.sql', '02-enable-phone-registration.sql', '03-unit-view-events.sql', '04-work-events.sql', '05-local-media-references.sql']
 SUPPORT = ['deploy/launch_bundle.py', 'deploy/candidate_release.py', 'deploy/LAUNCH_BUNDLE.md',
            'deploy/application-launch.properties.template', 'api/dev/prepare_launch_data.py',
            'deploy/registration_upgrade.py', 'deploy/work_event_review.py']

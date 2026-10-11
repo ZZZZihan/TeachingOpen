@@ -13,6 +13,7 @@ from urllib.request import Request, urlopen
 
 from local_http import FixtureApi
 from local_runtime import mysql_command
+from media_index_fixture import media_index_snapshot, rebuild_media_index_after_sql
 
 PREFIX = 'fixture_rprobe_'
 NAME = 'reference-probe-'
@@ -27,8 +28,12 @@ def verify(args):
     cases = []
     error = None
     with FixtureApi(args.runtime.resolve(), args.jar) as api:
+        has_media_index = not getattr(args, 'expect_legacy', False)
         def sql(query):
-            return subprocess.check_output(mysql_command(api.runtime) + ['teachingopen_dev', '-e', query], text=True).strip()
+            result = subprocess.check_output(mysql_command(api.runtime) + ['teachingopen_dev', '-e', query], text=True).strip()
+            if has_media_index:
+                rebuild_media_index_after_sql(api, query)
+            return result
 
         def literal(value):
             return 'NULL' if value is None else "CONVERT(0x" + str(value).encode().hex() + " USING utf8mb4)" if str(value) else "''"
@@ -110,6 +115,7 @@ def verify(args):
         if api.cache('EXISTS', cache_key) != '0':
             raise RuntimeError('Existing reference-authorization probe cache')
         original_rows, original_files = rows(), files()
+        original_media_index = media_index_snapshot(sql) if has_media_index else None
         try:
             for actor in ('teacher_a', 'teacher_b', 'student_a', 'student_b', 'admin'):
                 api.login(actor)
@@ -225,6 +231,8 @@ def verify(args):
             if folder.exists():
                 shutil.rmtree(folder)
         check('all original business rows restored', rows() == original_rows, fatal=False)
+        if has_media_index:
+            check('original media reference index and state restored', media_index_snapshot(sql) == original_media_index, fatal=False)
         check('all original file bytes restored', files() == original_files, fatal=False)
         result = {'cases': cases, 'passed': sum(case['passed'] for case in cases), 'failed': sum(not case['passed'] for case in cases),
                   'total': len(cases), 'jar_sha256': api.jar_sha256, 'expected_legacy': args.expect_legacy, 'exception': error,

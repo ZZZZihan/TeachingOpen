@@ -8,16 +8,20 @@ from urllib.parse import urlencode
 from uuid import uuid4
 from local_http import FixtureApi
 from local_runtime import mysql_command
+from media_index_fixture import media_index_snapshot, rebuild_media_index_after_sql
 
 
 def verify(args):
     checks = []
     with FixtureApi(args.runtime.resolve(), args.jar) as api:
+        has_media_index = not getattr(args, 'expect_legacy', False)
         def sql(statement):
             result = subprocess.run(mysql_command(api.runtime) + ['teachingopen_dev', '-e', statement],
                                     capture_output=True, text=True, timeout=20)
             if result.returncode:
                 raise RuntimeError('Synthetic pagination SQL failed')
+            if has_media_index:
+                rebuild_media_index_after_sql(api, statement)
             return result.stdout.strip()
 
         def check(name, passed):
@@ -43,6 +47,7 @@ def verify(args):
                   and len(result['result']['records']) <= 100)
         prefix = 'page_probe_' + uuid4().hex[:10]
         original_count = sql('SELECT COUNT(*) FROM teaching_news')
+        original_media_index = media_index_snapshot(sql) if has_media_index else None
         try:
             sql('INSERT INTO teaching_news(id,news_title,news_content,news_status) VALUES ' + ','.join(
                 "('" + prefix + '_' + str(i) + "','" + prefix + "','synthetic',1)" for i in range(101)))
@@ -57,6 +62,8 @@ def verify(args):
         finally:
             sql("DELETE FROM teaching_news WHERE id LIKE '" + prefix + "_%'")
         check('original news records preserved', sql('SELECT COUNT(*) FROM teaching_news') == original_count)
+        if has_media_index:
+            check('original media reference index and state restored', media_index_snapshot(sql) == original_media_index)
         args.output.write_text(json.dumps({'scope': 'owned synthetic HTTP/MySQL', 'production_connected': False,
             'jar_sha256': api.jar_sha256, 'passed': len(checks), 'failed': 0, 'checks': checks}, indent=2) + '\n')
 

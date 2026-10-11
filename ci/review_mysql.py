@@ -41,6 +41,7 @@ PROBES = (
     'verify-announcement-authorization.py',
     'verify-user-query-boundaries.py',
     'verify-work-reference-authorization.py',
+    'verify-local-media-index.py',
 )
 
 
@@ -202,7 +203,7 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
     schema = load('review_schema', ROOT / 'api/dev/extract-schema.py').extract_schema(
         (ROOT / 'api/db/teachingopen2.8.sql').read_text())
     context.sql(schema)
-    migrations = ('unit-view-events.sql', 'work-events.sql')
+    migrations = ('unit-view-events.sql', 'work-events.sql', 'local-media-references.sql')
     for _ in range(2):
         for name in migrations:
             context.sql((ROOT / 'api/db' / name).read_text())

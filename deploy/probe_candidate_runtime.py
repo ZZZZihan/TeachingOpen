@@ -461,6 +461,8 @@ class Probe:
         api = self.api_client
         response = api.api('GET', '/actuator/health')
         self.check('actual_health_up', response[0] == 200 and (response[1] or {}).get('status') == 'UP', response)
+        self.check('schema_75_tables', api.sql('SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE()') == '75')
+        self.check('local_media_index_initialized', api.sql('SELECT COUNT(*) FROM sys_local_file_reference_state WHERE id=1 AND version=1') == '1')
         index = (self.bundle / 'web/dist/index.html').read_bytes()
         response = api.http('GET', '/index.html')
         self.check('index_matches_frozen_body', response[0] == 200 and sha(response[3]) == sha(index), response)

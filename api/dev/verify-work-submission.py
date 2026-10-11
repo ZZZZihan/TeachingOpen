@@ -12,6 +12,7 @@ from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from local_http import FixtureApi
 from local_recovery import mysql_command
+from media_index_fixture import media_index_snapshot, rebuild_media_index_after_sql
 
 PREFIX = 'fixture_sprobe_'
 NAME = 'submission-probe-'
@@ -25,8 +26,12 @@ TABLES = ('teaching_work', 'teaching_work_correct', 'teaching_work_comment', 'sy
 def verify(args):
     cases = []
     with FixtureApi(args.runtime.resolve(), args.jar) as api:
+        has_media_index = not getattr(args, 'expect_legacy', False)
         def sql(query):
-            return subprocess.check_output(mysql_command(api.runtime) + ['teachingopen_dev', '-e', query], text=True).strip()
+            result = subprocess.check_output(mysql_command(api.runtime) + ['teachingopen_dev', '-e', query], text=True).strip()
+            if has_media_index:
+                rebuild_media_index_after_sql(api, query)
+            return result
 
         def check(name, passed):
             cases.append({'case': name, 'passed': bool(passed)})
@@ -75,6 +80,7 @@ def verify(args):
             return ident
 
         original, original_files = snapshot(), file_snapshot()
+        original_media_index = media_index_snapshot(sql) if has_media_index else None
         cache_keys = ['departLog:' + kind + ':fixture_class_' + side for kind in ('addiWorkSubmit', 'courseWorkSubmit') for side in ('a', 'b')]
         original_cache = cache_snapshot()
         if sql('SELECT COUNT(*) FROM teaching_depart_day_log') != '0':
@@ -268,6 +274,8 @@ def verify(args):
             for path in owned_paths:
                 path.unlink(missing_ok=True)
         check('all original business and history rows restored', snapshot() == original)
+        if has_media_index:
+            check('original media reference index and state restored', media_index_snapshot(sql) == original_media_index)
         check('all original file bytes restored', file_snapshot() == original_files)
         check('all original submission cache memberships restored', cache_snapshot() == original_cache)
         check('temporary database failure trigger removed', sql("SELECT COUNT(*) FROM information_schema.TRIGGERS WHERE TRIGGER_SCHEMA=DATABASE() AND TRIGGER_NAME='" + TRIGGER + "'") == '0')

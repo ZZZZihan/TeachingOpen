@@ -4,6 +4,7 @@ import argparse,json
 from pathlib import Path
 from local_http import FixtureApi
 from local_recovery import database_inventory,file_inventory,sql,private_write
+from media_index_fixture import media_index_snapshot, rebuild_media_index_after_sql
 
 
 def verify(args):
@@ -16,13 +17,18 @@ def verify(args):
         if not ok:
             raise AssertionError(name)
     with FixtureApi(args.runtime,args.jar) as api:
+        has_media_index = not getattr(args, 'expect_legacy', False)
         # Actual login initializes the fixture user's selected organization.
         # Establish the probe baseline after that authentication setup.
         for actor in ('admin','student_a','teacher_a','teacher_b'):
             api.login(actor)
         before=database_inventory(api.runtime);files=file_inventory(api.runtime/'uploads')
         def query(statement):
-            return sql(api.runtime,'USE teachingopen_dev; '+statement)
+            result = sql(api.runtime,'USE teachingopen_dev; '+statement)
+            if has_media_index:
+                rebuild_media_index_after_sql(api, statement)
+            return result
+        original_media_index = media_index_snapshot(query) if has_media_index else None
         for table in ('teaching_course','teaching_course_unit'):
             if query("SELECT COUNT(*) FROM "+table+" WHERE id LIKE '"+prefix+"%'")!='0':
                 raise RuntimeError('Existing probe data must be preserved')
@@ -134,10 +140,13 @@ def verify(args):
             restored=all(before[t]==after[t] for t in before if t!='sys_log')
             changed_tables=[t for t in before if t!='sys_log' and before[t]!=after[t]]
             preserved=files==file_inventory(api.runtime/'uploads')
+            media_restored=not has_media_index or media_index_snapshot(query)==original_media_index
             cases.extend([{'case':'all non-audit tables restored','passed':restored},{'case':'all attachment bytes unchanged','passed':preserved}])
+            if has_media_index:
+                cases.append({'case':'original media reference index and state restored','passed':media_restored})
             result={'expected_legacy':args.expect_legacy,'jar_sha256':api.jar_sha256,'passed':sum(c['passed'] for c in cases),'total':len(cases),'exception':error,'changed_tables':changed_tables,'cases':cases,'observations':observations,'scope':'Real synthetic Spring/Shiro/MyBatis/MySQL HTTP, coordinate-only persistence, outer stale content form and real second-write trigger rollback. No production or authenticated browser acceptance.'}
             private_write(args.output,json.dumps(result,ensure_ascii=False,indent=2)+'\n')
-            if not restored or not preserved:
+            if not restored or not preserved or not media_restored:
                 raise AssertionError('Probe cleanup mismatch')
     if not all(c['passed'] for c in cases):
         raise AssertionError('Course update check failed')

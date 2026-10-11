@@ -76,7 +76,7 @@ def prepare(runtime, tools, ports, seed_fixtures=True):
     private_file(runtime / "schema-only.sql", schema)
     with (runtime / "schema-only.sql").open() as file:
         subprocess.run([str(mysql), "--defaults-extra-file=" + str(runtime / "config/mysql-admin-client.cnf"), "teachingopen_dev"], stdin=file, check=True)
-    for name in ("unit-view-events.sql", "work-events.sql"):
+    for name in ("unit-view-events.sql", "work-events.sql", "local-media-references.sql"):
         with (api / "db" / name).open() as file:
             subprocess.run([str(mysql), "--defaults-extra-file=" + str(runtime / "config/mysql-admin-client.cnf"), "teachingopen_dev"], stdin=file, check=True)
     if seed_fixtures:
