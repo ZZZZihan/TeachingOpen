@@ -54,3 +54,11 @@ python3 api/dev/preflight-rule-config.py \
 出现不兼容配置应停止相关上线检查并逐项核对；不自动回写旧数据，不提供放宽白名单开关。自定义 Java handler 必须单独审查后决定实现方式，不能仅为通过预检允许任意反射类。检查器不验证导出完整性、默认父级记录存在性、实时权限、实际生成/导入、并发和课堂容量；这些仍由目标版本对应核验和合成候选回归负责。
 
 仅合成数据的脚本验证：`evidence/rule-preflight/supported-report-r2.json` 与 `needs-review-report-r2.json` 记录兼容和拒绝结果；`evidence/global-rules-preflight-r2.log` 验证原导出字节不变、JAR SHA 绑定、缺少机构规则/自定义类/不支持表达式/重复 code 准确报告及拒绝覆盖证据。没有声称生产自定义配置已完成预检。
+
+## 合成 SQL 排序规则修正
+
+候选 `728f6aae` 的 Linux CI `38135704244` 与本地完整 HTTP 运行均在探针成功创建 fillRule 后失败。只读诊断确认，库内 `rule_code` 为 `utf8mb4_general_ci`、coercibility 2，而探针 `CONVERT(hex USING utf8mb4)` 为 `utf8mb4_0900_ai_ci`、coercibility 2，查询和 finally 删除均产生 MySQL `1267 (HY000)`。这是合成 SQL 字面量与现有 DDL 的冲突；本次不修改产品 schema 或账户授权。
+
+探针仅为自身字面量显式指定 `COLLATE utf8mb4_general_ci`，并在 SQL 失败时保留 MySQL 错误号和 SQLSTATE，不输出原语句、字段值或连接凭据。`ci/test_global_rule_sql.py` 的 3 条脱敏守卫通过，命令 `PYTHONPATH=ci python3 -m unittest test_global_rule_sql -v`。原失败与诊断保留在 `evidence/ci-gates/final-r2-38135704244/run.log`、`evidence/final-r2-attempt-1/global-rule-sql-diagnostic.json`。
+
+本代理新建独立 MySQL 的初始化在启动服务前发生 SIGSEGV，已停止该尝试并保留日志，不能声称本次修正的 SQL/HTTP 已实测通过。修复后真实 SQL、完整 global-rule 探针及 CI 由根代理在既有合成环境继续验证。

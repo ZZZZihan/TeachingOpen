@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import re
 import subprocess
 from tempfile import TemporaryDirectory
 from urllib.parse import quote, urlencode
@@ -15,6 +16,19 @@ from local_runtime import mysql_command
 helper_spec = importlib.util.spec_from_file_location('shared_resource_probe', Path(__file__).with_name('verify-shared-resource-boundaries.py'))
 helper = importlib.util.module_from_spec(helper_spec)
 helper_spec.loader.exec_module(helper)
+
+
+def q(value):
+    # CONVERT inherits utf8mb4_0900_ai_ci with the same coercibility as our
+    # schema's utf8mb4_general_ci columns. Bind only this synthetic literal.
+    return "(CONVERT(X'" + str(value).encode().hex() + "' USING utf8mb4) COLLATE utf8mb4_general_ci)"
+
+
+def sql_failure(stderr):
+    # Preserve actionable error codes without printing SQL, values or credentials.
+    error = re.search(r'\bERROR ([0-9]{1,5}) \(([A-Z0-9]{5})\)', stderr or '')
+    detail = ': MySQL ' + error[1] + ' (' + error[2] + ')' if error else ''
+    return RuntimeError('Global-rule synthetic SQL failed' + detail)
 
 
 def verify(args):
@@ -32,11 +46,8 @@ def verify(args):
             result = subprocess.run(mysql_command(api.runtime) + ['teachingopen_dev', '-e', statement],
                                     capture_output=True, text=True, timeout=20)
             if result.returncode:
-                raise RuntimeError('Global-rule synthetic SQL failed')
+                raise sql_failure(result.stderr)
             return result.stdout.strip()
-
-        def q(value):
-            return "CONVERT(X'" + str(value).encode().hex() + "' USING utf8mb4)"
 
         def snapshot():
             return {table: hashlib.sha256(sql('SELECT * FROM ' + table + ' ORDER BY id').encode()).hexdigest() for table in tables}
