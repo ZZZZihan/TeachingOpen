@@ -1,0 +1,1654 @@
+{
+  "scope": "Owned synthetic real HTTP/MySQL local-media CRUD, rebuild, rollback, concurrency and query plans",
+  "production_connected": false,
+  "expected_legacy": false,
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "verifier_sha256": "d10cb3c149874fbecb7c73812cdeeefd23b068c760a057efddfb0708eb327bd5",
+  "passed": 128,
+  "failed": 0,
+  "total": 128,
+  "cases": [
+    {
+      "case": "running candidate packages the local-media index implementation",
+      "passed": true
+    },
+    {
+      "case": "packaged downloader contains no old LOCATE query",
+      "passed": true
+    },
+    {
+      "case": "packaged index candidates use equality on reference hash",
+      "passed": true
+    },
+    {
+      "case": "LocalDownloadAccessService.java hot path has no LOCATE or CONCAT body scan",
+      "passed": true
+    },
+    {
+      "case": "LocalMediaReferenceIndex.java hot path has no LOCATE or CONCAT body scan",
+      "passed": true
+    },
+    {
+      "case": "new reference and state tables exist",
+      "passed": true
+    },
+    {
+      "case": "startup index is initialized at version one",
+      "passed": true
+    },
+    {
+      "case": "startup state stores a nonempty static domain",
+      "passed": true
+    },
+    {
+      "case": "fixture namespace absent in teaching_course",
+      "passed": true
+    },
+    {
+      "case": "fixture namespace absent in teaching_course_unit",
+      "passed": true
+    },
+    {
+      "case": "fixture namespace absent in teaching_additional_work",
+      "passed": true
+    },
+    {
+      "case": "fixture namespace absent in sys_config",
+      "passed": true
+    },
+    {
+      "case": "fixture namespace absent in teaching_news",
+      "passed": true
+    },
+    {
+      "case": "fixture namespace absent in sys_data_log",
+      "passed": true
+    },
+    {
+      "case": "fixture namespace absent in sys_file",
+      "passed": true
+    },
+    {
+      "case": "fixture namespace absent in teaching_work",
+      "passed": true
+    },
+    {
+      "case": "fixture namespace absent in teaching_course_dept",
+      "passed": true
+    },
+    {
+      "case": "fixture namespace absent from reference index",
+      "passed": true
+    },
+    {
+      "case": "random probe trigger does not exist",
+      "passed": true
+    },
+    {
+      "case": "random probe directory does not exist",
+      "passed": true
+    },
+    {
+      "case": "None cannot rebuild",
+      "passed": true
+    },
+    {
+      "case": "None denied rebuild preserves business index state and files",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot rebuild",
+      "passed": true
+    },
+    {
+      "case": "student_a denied rebuild preserves business index state and files",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot rebuild",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied rebuild preserves business index state and files",
+      "passed": true
+    },
+    {
+      "case": "ordinary news add succeeds",
+      "passed": true
+    },
+    {
+      "case": "ordinary add indexes the canonical local key",
+      "passed": true
+    },
+    {
+      "case": "ordinary added media returns exact public HTTP bytes",
+      "passed": true,
+      "actor": null,
+      "http_status": 200,
+      "expected_bytes_sha256": "8f50c0065f69d674f60b1f5e320aee86f2d41d3857d884cb93ca4a1b9ef0d912"
+    },
+    {
+      "case": "title-only partial news edit succeeds",
+      "passed": true
+    },
+    {
+      "case": "partial edit retains authoritative body and its index",
+      "passed": true
+    },
+    {
+      "case": "media replacement edit succeeds",
+      "passed": true
+    },
+    {
+      "case": "replacement removes old key and indexes once-decoded new key",
+      "passed": true
+    },
+    {
+      "case": "removed media is denied while original bytes still exist",
+      "passed": true,
+      "actor": null,
+      "http_status": 401,
+      "expected_bytes_sha256": "8f50c0065f69d674f60b1f5e320aee86f2d41d3857d884cb93ca4a1b9ef0d912"
+    },
+    {
+      "case": "encoded replacement returns exact public HTTP bytes",
+      "passed": true,
+      "actor": null,
+      "http_status": 200,
+      "expected_bytes_sha256": "b9285d2ae56b2daef1110658b4dbfdaa0a0ccf8efbb9b87e9d1b2c5bc0543175"
+    },
+    {
+      "case": "withdrawn media still has an index candidate",
+      "passed": true
+    },
+    {
+      "case": "indexed draft is not public",
+      "passed": true,
+      "actor": null,
+      "http_status": 401,
+      "expected_bytes_sha256": "b9285d2ae56b2daef1110658b4dbfdaa0a0ccf8efbb9b87e9d1b2c5bc0543175"
+    },
+    {
+      "case": "indexed draft remains forbidden to a student",
+      "passed": true,
+      "actor": "student_a",
+      "http_status": 403,
+      "expected_bytes_sha256": "b9285d2ae56b2daef1110658b4dbfdaa0a0ccf8efbb9b87e9d1b2c5bc0543175"
+    },
+    {
+      "case": "stale candidate exists after deliberate out-of-band fixture edit",
+      "passed": true
+    },
+    {
+      "case": "stale index hit cannot authorize bytes absent from current body",
+      "passed": true,
+      "actor": null,
+      "http_status": 401,
+      "expected_bytes_sha256": "b9285d2ae56b2daef1110658b4dbfdaa0a0ccf8efbb9b87e9d1b2c5bc0543175"
+    },
+    {
+      "case": "ordinary delete succeeds",
+      "passed": true
+    },
+    {
+      "case": "ordinary deletion removes source and all its reference rows",
+      "passed": true
+    },
+    {
+      "case": "legacy media keys have no sys_file record",
+      "passed": true
+    },
+    {
+      "case": "direct historical import is unavailable before explicit rebuild",
+      "passed": true,
+      "actor": null,
+      "http_status": 401,
+      "expected_bytes_sha256": "b68157032334bf6464c36362ff4943cb6efca119665174a485108c8c583095cd"
+    },
+    {
+      "case": "admin explicitly rebuilds imported media references",
+      "passed": true
+    },
+    {
+      "case": "rebuild indexes fixture source teaching_course",
+      "passed": true
+    },
+    {
+      "case": "rebuild indexes fixture source teaching_course_unit",
+      "passed": true
+    },
+    {
+      "case": "rebuild indexes fixture source teaching_additional_work",
+      "passed": true
+    },
+    {
+      "case": "rebuild indexes fixture source sys_config",
+      "passed": true
+    },
+    {
+      "case": "rebuild indexes fixture source teaching_news",
+      "passed": true
+    },
+    {
+      "case": "rebuild indexes fixture source sys_data_log",
+      "passed": true
+    },
+    {
+      "case": "legacy imported encoded HTML returns exact bytes after rebuild",
+      "passed": true,
+      "actor": null,
+      "http_status": 200,
+      "expected_bytes_sha256": "b68157032334bf6464c36362ff4943cb6efca119665174a485108c8c583095cd"
+    },
+    {
+      "case": "legacy bare storage key returns exact bytes after rebuild",
+      "passed": true,
+      "actor": null,
+      "http_status": 200,
+      "expected_bytes_sha256": "884dea502bd83e98f9550a33ab2d153f90308c2ebf6b69980b19a9728234c722"
+    },
+    {
+      "case": "HTML entity reference returns exact bytes after rebuild",
+      "passed": true,
+      "actor": null,
+      "http_status": 200,
+      "expected_bytes_sha256": "3ea0ed3327be9843462d8632d9483f3956b065a7dab7dca5ce1ce19fac83db64"
+    },
+    {
+      "case": "nested JSON assignment reference obeys member access",
+      "passed": true,
+      "actor": "student_a",
+      "http_status": 200,
+      "expected_bytes_sha256": "97ec39f0b927200e1b0339810f402c9bca084e342dc377405e49b74bfb690dd7"
+    },
+    {
+      "case": "nested JSON assignment reference rejects another class",
+      "passed": true,
+      "actor": "student_b",
+      "http_status": 403,
+      "expected_bytes_sha256": "97ec39f0b927200e1b0339810f402c9bca084e342dc377405e49b74bfb690dd7"
+    },
+    {
+      "case": "indexed unit does not confer course permission",
+      "passed": true,
+      "actor": "student_a",
+      "http_status": 403,
+      "expected_bytes_sha256": "1818806f8fceb939347123bf76d3519386aaa11d0a2c0fab7535f96f699174ad"
+    },
+    {
+      "case": "indexed draft remains private after rebuild",
+      "passed": true,
+      "actor": null,
+      "http_status": 401,
+      "expected_bytes_sha256": "d2745d43fc09f5b3b993fb60c4dc8e23cfd26cc73e859b013795d840977a3bf6"
+    },
+    {
+      "case": "history reference is indexed as file identity",
+      "passed": true
+    },
+    {
+      "case": "indexed work history authorizes its owner",
+      "passed": true,
+      "actor": "student_a",
+      "http_status": 200,
+      "expected_bytes_sha256": "cdb3b8025d11b285098f306e8ee426c6d1c44225d1cd90b6a0aa4b7c4055813b"
+    },
+    {
+      "case": "indexed work history rejects cross-class teacher",
+      "passed": true,
+      "actor": "teacher_b",
+      "http_status": 403,
+      "expected_bytes_sha256": "cdb3b8025d11b285098f306e8ee426c6d1c44225d1cd90b6a0aa4b7c4055813b"
+    },
+    {
+      "case": "unknown existing bytes remain forbidden anonymously",
+      "passed": true,
+      "actor": null,
+      "http_status": 401,
+      "expected_bytes_sha256": "cad0124144d1902ac47dd1306f56d55e8d9c71c62dda06dfbd6d6e9dbaf4f91a"
+    },
+    {
+      "case": "unknown existing bytes remain forbidden to a student",
+      "passed": true,
+      "actor": "student_a",
+      "http_status": 403,
+      "expected_bytes_sha256": "cad0124144d1902ac47dd1306f56d55e8d9c71c62dda06dfbd6d6e9dbaf4f91a"
+    },
+    {
+      "case": "forged exact index candidate cannot replace authoritative body",
+      "passed": true,
+      "actor": null,
+      "http_status": 401,
+      "expected_bytes_sha256": "cad0124144d1902ac47dd1306f56d55e8d9c71c62dda06dfbd6d6e9dbaf4f91a"
+    },
+    {
+      "case": "fault-edit positive fixture add succeeds",
+      "passed": true
+    },
+    {
+      "case": "owned insertion-fault trigger really fires",
+      "passed": true
+    },
+    {
+      "case": "direct trigger proof leaves all persisted state unchanged",
+      "passed": true
+    },
+    {
+      "case": "index insertion fault rejects ordinary news add",
+      "passed": true
+    },
+    {
+      "case": "index insertion fault rolls back body index state and bytes for add",
+      "passed": true
+    },
+    {
+      "case": "index insertion fault rejects ordinary news edit",
+      "passed": true
+    },
+    {
+      "case": "index insertion fault rolls back body index state and bytes for edit",
+      "passed": true
+    },
+    {
+      "case": "same ordinary add recovers after injected fault removal",
+      "passed": true
+    },
+    {
+      "case": "same ordinary edit recovers after injected fault removal",
+      "passed": true
+    },
+    {
+      "case": "recovered writes persist exact new canonical references",
+      "passed": true
+    },
+    {
+      "case": "concurrent update fixture created through business API",
+      "passed": true
+    },
+    {
+      "case": "two concurrent HTTP transaction updates both commit",
+      "passed": true
+    },
+    {
+      "case": "concurrent final body contains exactly one known race URL",
+      "passed": true
+    },
+    {
+      "case": "concurrent final index exactly matches authoritative persisted body",
+      "passed": true,
+      "actual_reference_values": [
+        "<p>race-a</p><img src=\"/api/sys/common/static/%6D%65%64%69%61%2D%69%6E%64%65%78%2D%38%64%61%31%65%39%30%62%36%62/%72%61%63%65%2D%61%2E%74%78%74\">",
+        "media-index-8da1e90b6b/race-a.txt"
+      ],
+      "expected_reference_values": [
+        "<p>race-a</p><img src=\"/api/sys/common/static/%6D%65%64%69%61%2D%69%6E%64%65%78%2D%38%64%61%31%65%39%30%62%36%62/%72%61%63%65%2D%61%2E%74%78%74\">",
+        "media-index-8da1e90b6b/race-a.txt"
+      ],
+      "expectation_basis": "Only one independently extracted src and its once-decoded fixture key, plus raw body if storage-key contract accepts it"
+    },
+    {
+      "case": "concurrent reference hashes match every exact persisted reference value",
+      "passed": true
+    },
+    {
+      "case": "concurrent old and losing local keys are absent",
+      "passed": true
+    },
+    {
+      "case": "concurrent winning body returns exact bytes",
+      "passed": true,
+      "actor": null,
+      "http_status": 200,
+      "expected_bytes_sha256": "9d7ef98e18134d6cc824ac4a9cf8b4d4d93a6869b7233f86cf8a85cefd907094"
+    },
+    {
+      "case": "explicit rebuild with 10 unrelated bodies succeeds",
+      "passed": true
+    },
+    {
+      "case": "scale fixture bodies and indexed candidates are present 10",
+      "passed": true
+    },
+    {
+      "case": "10 bodies: unknown uses natural indexed equality",
+      "passed": true,
+      "explain": {
+        "query_block": {
+          "select_id": 1,
+          "cost_info": {
+            "query_cost": "0.35"
+          },
+          "table": {
+            "table_name": "sys_local_file_reference",
+            "access_type": "ref",
+            "possible_keys": [
+              "idx_local_reference_lookup"
+            ],
+            "key": "idx_local_reference_lookup",
+            "used_key_parts": [
+              "reference_kind",
+              "reference_hash"
+            ],
+            "key_length": "74",
+            "ref": [
+              "const",
+              "const"
+            ],
+            "rows_examined_per_scan": 1,
+            "rows_produced_per_join": 1,
+            "filtered": "100.00",
+            "cost_info": {
+              "read_cost": "0.25",
+              "eval_cost": "0.10",
+              "prefix_cost": "0.35",
+              "data_read_per_join": "432"
+            },
+            "used_columns": [
+              "source_type",
+              "source_id",
+              "reference_kind",
+              "reference_hash",
+              "reference_value"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "case": "10 bodies: one legacy hit uses natural indexed equality",
+      "passed": true,
+      "explain": {
+        "query_block": {
+          "select_id": 1,
+          "cost_info": {
+            "query_cost": "0.35"
+          },
+          "table": {
+            "table_name": "sys_local_file_reference",
+            "access_type": "ref",
+            "possible_keys": [
+              "idx_local_reference_lookup"
+            ],
+            "key": "idx_local_reference_lookup",
+            "used_key_parts": [
+              "reference_kind",
+              "reference_hash"
+            ],
+            "key_length": "74",
+            "ref": [
+              "const",
+              "const"
+            ],
+            "rows_examined_per_scan": 1,
+            "rows_produced_per_join": 1,
+            "filtered": "100.00",
+            "cost_info": {
+              "read_cost": "0.25",
+              "eval_cost": "0.10",
+              "prefix_cost": "0.35",
+              "data_read_per_join": "432"
+            },
+            "used_columns": [
+              "source_type",
+              "source_id",
+              "reference_kind",
+              "reference_hash",
+              "reference_value"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "case": "10 unrelated bodies do not expose unknown existing bytes",
+      "passed": true,
+      "actor": null,
+      "http_status": 401,
+      "expected_bytes_sha256": "cad0124144d1902ac47dd1306f56d55e8d9c71c62dda06dfbd6d6e9dbaf4f91a"
+    },
+    {
+      "case": "10 unrelated bodies retain exact legacy access",
+      "passed": true,
+      "actor": null,
+      "http_status": 200,
+      "expected_bytes_sha256": "b68157032334bf6464c36362ff4943cb6efca119665174a485108c8c583095cd"
+    },
+    {
+      "case": "10 bodies: anonymous unknown warm-up retains correct HTTP access",
+      "passed": true
+    },
+    {
+      "case": "10 bodies: anonymous unknown measured responses retain exact access",
+      "passed": true
+    },
+    {
+      "case": "10 bodies: anonymous unknown has one indexed candidate query per request",
+      "passed": true,
+      "candidate_digest_deltas": [
+        {
+          "count": 20,
+          "rows_examined": 0,
+          "rows_sent": 0,
+          "digest": "9ad4f3ec93b7d9f54f0ac37f8ae9843dae7ff8b2bca6892492be979237a45c1f",
+          "digest_text": "SELECT `source_type` , `source_id` , `reference_value` FROM `sys_local_file_reference` WHERE `reference_kind` = ? AND `reference_hash` = ?",
+          "category": "candidate"
+        }
+      ]
+    },
+    {
+      "case": "10 bodies: anonymous unknown download SQL and examined rows stay bounded",
+      "passed": true,
+      "download_select_totals": {
+        "count": 40,
+        "rows_examined": 0,
+        "rows_sent": 0
+      }
+    },
+    {
+      "case": "10 bodies: anonymous one legacy hit warm-up retains correct HTTP access",
+      "passed": true
+    },
+    {
+      "case": "10 bodies: anonymous one legacy hit measured responses retain exact access",
+      "passed": true
+    },
+    {
+      "case": "10 bodies: anonymous one legacy hit has one indexed candidate query per request",
+      "passed": true,
+      "candidate_digest_deltas": [
+        {
+          "count": 20,
+          "rows_examined": 20,
+          "rows_sent": 20,
+          "digest": "9ad4f3ec93b7d9f54f0ac37f8ae9843dae7ff8b2bca6892492be979237a45c1f",
+          "digest_text": "SELECT `source_type` , `source_id` , `reference_value` FROM `sys_local_file_reference` WHERE `reference_kind` = ? AND `reference_hash` = ?",
+          "category": "candidate"
+        }
+      ]
+    },
+    {
+      "case": "10 bodies: anonymous one legacy hit download SQL and examined rows stay bounded",
+      "passed": true,
+      "download_select_totals": {
+        "count": 60,
+        "rows_examined": 40,
+        "rows_sent": 40
+      }
+    },
+    {
+      "case": "explicit rebuild with 1000 unrelated bodies succeeds",
+      "passed": true
+    },
+    {
+      "case": "scale fixture bodies and indexed candidates are present 1000",
+      "passed": true
+    },
+    {
+      "case": "1000 bodies: unknown uses natural indexed equality",
+      "passed": true,
+      "explain": {
+        "query_block": {
+          "select_id": 1,
+          "cost_info": {
+            "query_cost": "0.35"
+          },
+          "table": {
+            "table_name": "sys_local_file_reference",
+            "access_type": "ref",
+            "possible_keys": [
+              "idx_local_reference_lookup"
+            ],
+            "key": "idx_local_reference_lookup",
+            "used_key_parts": [
+              "reference_kind",
+              "reference_hash"
+            ],
+            "key_length": "74",
+            "ref": [
+              "const",
+              "const"
+            ],
+            "rows_examined_per_scan": 1,
+            "rows_produced_per_join": 1,
+            "filtered": "100.00",
+            "cost_info": {
+              "read_cost": "0.25",
+              "eval_cost": "0.10",
+              "prefix_cost": "0.35",
+              "data_read_per_join": "432"
+            },
+            "used_columns": [
+              "source_type",
+              "source_id",
+              "reference_kind",
+              "reference_hash",
+              "reference_value"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "case": "1000 bodies: one legacy hit uses natural indexed equality",
+      "passed": true,
+      "explain": {
+        "query_block": {
+          "select_id": 1,
+          "cost_info": {
+            "query_cost": "0.35"
+          },
+          "table": {
+            "table_name": "sys_local_file_reference",
+            "access_type": "ref",
+            "possible_keys": [
+              "idx_local_reference_lookup"
+            ],
+            "key": "idx_local_reference_lookup",
+            "used_key_parts": [
+              "reference_kind",
+              "reference_hash"
+            ],
+            "key_length": "74",
+            "ref": [
+              "const",
+              "const"
+            ],
+            "rows_examined_per_scan": 1,
+            "rows_produced_per_join": 1,
+            "filtered": "100.00",
+            "cost_info": {
+              "read_cost": "0.25",
+              "eval_cost": "0.10",
+              "prefix_cost": "0.35",
+              "data_read_per_join": "432"
+            },
+            "used_columns": [
+              "source_type",
+              "source_id",
+              "reference_kind",
+              "reference_hash",
+              "reference_value"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "case": "1000 unrelated bodies do not expose unknown existing bytes",
+      "passed": true,
+      "actor": null,
+      "http_status": 401,
+      "expected_bytes_sha256": "cad0124144d1902ac47dd1306f56d55e8d9c71c62dda06dfbd6d6e9dbaf4f91a"
+    },
+    {
+      "case": "1000 unrelated bodies retain exact legacy access",
+      "passed": true,
+      "actor": null,
+      "http_status": 200,
+      "expected_bytes_sha256": "b68157032334bf6464c36362ff4943cb6efca119665174a485108c8c583095cd"
+    },
+    {
+      "case": "1000 bodies: anonymous unknown warm-up retains correct HTTP access",
+      "passed": true
+    },
+    {
+      "case": "1000 bodies: anonymous unknown measured responses retain exact access",
+      "passed": true
+    },
+    {
+      "case": "1000 bodies: anonymous unknown has one indexed candidate query per request",
+      "passed": true,
+      "candidate_digest_deltas": [
+        {
+          "count": 20,
+          "rows_examined": 0,
+          "rows_sent": 0,
+          "digest": "9ad4f3ec93b7d9f54f0ac37f8ae9843dae7ff8b2bca6892492be979237a45c1f",
+          "digest_text": "SELECT `source_type` , `source_id` , `reference_value` FROM `sys_local_file_reference` WHERE `reference_kind` = ? AND `reference_hash` = ?",
+          "category": "candidate"
+        }
+      ]
+    },
+    {
+      "case": "1000 bodies: anonymous unknown download SQL and examined rows stay bounded",
+      "passed": true,
+      "download_select_totals": {
+        "count": 40,
+        "rows_examined": 0,
+        "rows_sent": 0
+      }
+    },
+    {
+      "case": "1000 bodies: anonymous one legacy hit warm-up retains correct HTTP access",
+      "passed": true
+    },
+    {
+      "case": "1000 bodies: anonymous one legacy hit measured responses retain exact access",
+      "passed": true
+    },
+    {
+      "case": "1000 bodies: anonymous one legacy hit has one indexed candidate query per request",
+      "passed": true,
+      "candidate_digest_deltas": [
+        {
+          "count": 20,
+          "rows_examined": 20,
+          "rows_sent": 20,
+          "digest": "9ad4f3ec93b7d9f54f0ac37f8ae9843dae7ff8b2bca6892492be979237a45c1f",
+          "digest_text": "SELECT `source_type` , `source_id` , `reference_value` FROM `sys_local_file_reference` WHERE `reference_kind` = ? AND `reference_hash` = ?",
+          "category": "candidate"
+        }
+      ]
+    },
+    {
+      "case": "1000 bodies: anonymous one legacy hit download SQL and examined rows stay bounded",
+      "passed": true,
+      "download_select_totals": {
+        "count": 60,
+        "rows_examined": 40,
+        "rows_sent": 40
+      }
+    },
+    {
+      "case": "explicit rebuild with 10000 unrelated bodies succeeds",
+      "passed": true
+    },
+    {
+      "case": "scale fixture bodies and indexed candidates are present 10000",
+      "passed": true
+    },
+    {
+      "case": "10000 bodies: unknown uses natural indexed equality",
+      "passed": true,
+      "explain": {
+        "query_block": {
+          "select_id": 1,
+          "cost_info": {
+            "query_cost": "0.35"
+          },
+          "table": {
+            "table_name": "sys_local_file_reference",
+            "access_type": "ref",
+            "possible_keys": [
+              "idx_local_reference_lookup"
+            ],
+            "key": "idx_local_reference_lookup",
+            "used_key_parts": [
+              "reference_kind",
+              "reference_hash"
+            ],
+            "key_length": "74",
+            "ref": [
+              "const",
+              "const"
+            ],
+            "rows_examined_per_scan": 1,
+            "rows_produced_per_join": 1,
+            "filtered": "100.00",
+            "cost_info": {
+              "read_cost": "0.25",
+              "eval_cost": "0.10",
+              "prefix_cost": "0.35",
+              "data_read_per_join": "432"
+            },
+            "used_columns": [
+              "source_type",
+              "source_id",
+              "reference_kind",
+              "reference_hash",
+              "reference_value"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "case": "10000 bodies: one legacy hit uses natural indexed equality",
+      "passed": true,
+      "explain": {
+        "query_block": {
+          "select_id": 1,
+          "cost_info": {
+            "query_cost": "0.35"
+          },
+          "table": {
+            "table_name": "sys_local_file_reference",
+            "access_type": "ref",
+            "possible_keys": [
+              "idx_local_reference_lookup"
+            ],
+            "key": "idx_local_reference_lookup",
+            "used_key_parts": [
+              "reference_kind",
+              "reference_hash"
+            ],
+            "key_length": "74",
+            "ref": [
+              "const",
+              "const"
+            ],
+            "rows_examined_per_scan": 1,
+            "rows_produced_per_join": 1,
+            "filtered": "100.00",
+            "cost_info": {
+              "read_cost": "0.25",
+              "eval_cost": "0.10",
+              "prefix_cost": "0.35",
+              "data_read_per_join": "432"
+            },
+            "used_columns": [
+              "source_type",
+              "source_id",
+              "reference_kind",
+              "reference_hash",
+              "reference_value"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "case": "10000 unrelated bodies do not expose unknown existing bytes",
+      "passed": true,
+      "actor": null,
+      "http_status": 401,
+      "expected_bytes_sha256": "cad0124144d1902ac47dd1306f56d55e8d9c71c62dda06dfbd6d6e9dbaf4f91a"
+    },
+    {
+      "case": "10000 unrelated bodies retain exact legacy access",
+      "passed": true,
+      "actor": null,
+      "http_status": 200,
+      "expected_bytes_sha256": "b68157032334bf6464c36362ff4943cb6efca119665174a485108c8c583095cd"
+    },
+    {
+      "case": "10000 bodies: anonymous unknown warm-up retains correct HTTP access",
+      "passed": true
+    },
+    {
+      "case": "10000 bodies: anonymous unknown measured responses retain exact access",
+      "passed": true
+    },
+    {
+      "case": "10000 bodies: anonymous unknown has one indexed candidate query per request",
+      "passed": true,
+      "candidate_digest_deltas": [
+        {
+          "count": 20,
+          "rows_examined": 0,
+          "rows_sent": 0,
+          "digest": "9ad4f3ec93b7d9f54f0ac37f8ae9843dae7ff8b2bca6892492be979237a45c1f",
+          "digest_text": "SELECT `source_type` , `source_id` , `reference_value` FROM `sys_local_file_reference` WHERE `reference_kind` = ? AND `reference_hash` = ?",
+          "category": "candidate"
+        }
+      ]
+    },
+    {
+      "case": "10000 bodies: anonymous unknown download SQL and examined rows stay bounded",
+      "passed": true,
+      "download_select_totals": {
+        "count": 40,
+        "rows_examined": 0,
+        "rows_sent": 0
+      }
+    },
+    {
+      "case": "10000 bodies: anonymous one legacy hit warm-up retains correct HTTP access",
+      "passed": true
+    },
+    {
+      "case": "10000 bodies: anonymous one legacy hit measured responses retain exact access",
+      "passed": true
+    },
+    {
+      "case": "10000 bodies: anonymous one legacy hit has one indexed candidate query per request",
+      "passed": true,
+      "candidate_digest_deltas": [
+        {
+          "count": 20,
+          "rows_examined": 20,
+          "rows_sent": 20,
+          "digest": "9ad4f3ec93b7d9f54f0ac37f8ae9843dae7ff8b2bca6892492be979237a45c1f",
+          "digest_text": "SELECT `source_type` , `source_id` , `reference_value` FROM `sys_local_file_reference` WHERE `reference_kind` = ? AND `reference_hash` = ?",
+          "category": "candidate"
+        }
+      ]
+    },
+    {
+      "case": "10000 bodies: anonymous one legacy hit download SQL and examined rows stay bounded",
+      "passed": true,
+      "download_select_totals": {
+        "count": 60,
+        "rows_examined": 40,
+        "rows_sent": 40
+      }
+    },
+    {
+      "case": "original source and business rows restored exactly",
+      "passed": true
+    },
+    {
+      "case": "original index rows restored exactly",
+      "passed": true
+    },
+    {
+      "case": "index initialization state unchanged",
+      "passed": true
+    },
+    {
+      "case": "original file bytes restored exactly",
+      "passed": true
+    },
+    {
+      "case": "owned injection trigger removed",
+      "passed": true
+    }
+  ],
+  "exception": null,
+  "observations": {
+    "packaged_download_class_sha256": "892c135b396ca1dfe6be97b040fbbbf015efee08396a060fd8a809d1363ae6ff",
+    "packaged_index_class_sha256": "efc7fdddf02a4b7384e3510e4418ce9ae442640f45055d3e7d6b1047028c5786",
+    "source_sha256": {
+      "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/LocalDownloadAccessService.java": "acbc4b629a665166c79418efeb8346ebe022ca411155e7fed878eeee7f260575",
+      "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/LocalMediaReferenceIndex.java": "1f698465f969b6853815632a4be691fbfcf199589dd78b4107709cb3bd1133db"
+    },
+    "performance_schema": {
+      "available": true,
+      "performance_schema_enabled": true,
+      "statements_digest_enabled": true,
+      "scope": "Read-only existing statement digest counters; no reset, consumer change, global log or instrumentation change"
+    },
+    "scaling_scope": "EXPLAIN equality/rows, existing statement digest deltas, and sequential local synthetic HTTP p95; no load/throughput capacity claim",
+    "unrelated_rows": 10000
+  },
+  "query_plans": [
+    {
+      "unrelated_bodies": 10,
+      "lookup": "unknown",
+      "explain": {
+        "query_block": {
+          "select_id": 1,
+          "cost_info": {
+            "query_cost": "0.35"
+          },
+          "table": {
+            "table_name": "sys_local_file_reference",
+            "access_type": "ref",
+            "possible_keys": [
+              "idx_local_reference_lookup"
+            ],
+            "key": "idx_local_reference_lookup",
+            "used_key_parts": [
+              "reference_kind",
+              "reference_hash"
+            ],
+            "key_length": "74",
+            "ref": [
+              "const",
+              "const"
+            ],
+            "rows_examined_per_scan": 1,
+            "rows_produced_per_join": 1,
+            "filtered": "100.00",
+            "cost_info": {
+              "read_cost": "0.25",
+              "eval_cost": "0.10",
+              "prefix_cost": "0.35",
+              "data_read_per_join": "432"
+            },
+            "used_columns": [
+              "source_type",
+              "source_id",
+              "reference_kind",
+              "reference_hash",
+              "reference_value"
+            ]
+          }
+        }
+      },
+      "actual_matching_rows": 0
+    },
+    {
+      "unrelated_bodies": 10,
+      "lookup": "one legacy hit",
+      "explain": {
+        "query_block": {
+          "select_id": 1,
+          "cost_info": {
+            "query_cost": "0.35"
+          },
+          "table": {
+            "table_name": "sys_local_file_reference",
+            "access_type": "ref",
+            "possible_keys": [
+              "idx_local_reference_lookup"
+            ],
+            "key": "idx_local_reference_lookup",
+            "used_key_parts": [
+              "reference_kind",
+              "reference_hash"
+            ],
+            "key_length": "74",
+            "ref": [
+              "const",
+              "const"
+            ],
+            "rows_examined_per_scan": 1,
+            "rows_produced_per_join": 1,
+            "filtered": "100.00",
+            "cost_info": {
+              "read_cost": "0.25",
+              "eval_cost": "0.10",
+              "prefix_cost": "0.35",
+              "data_read_per_join": "432"
+            },
+            "used_columns": [
+              "source_type",
+              "source_id",
+              "reference_kind",
+              "reference_hash",
+              "reference_value"
+            ]
+          }
+        }
+      },
+      "actual_matching_rows": 1
+    },
+    {
+      "unrelated_bodies": 1000,
+      "lookup": "unknown",
+      "explain": {
+        "query_block": {
+          "select_id": 1,
+          "cost_info": {
+            "query_cost": "0.35"
+          },
+          "table": {
+            "table_name": "sys_local_file_reference",
+            "access_type": "ref",
+            "possible_keys": [
+              "idx_local_reference_lookup"
+            ],
+            "key": "idx_local_reference_lookup",
+            "used_key_parts": [
+              "reference_kind",
+              "reference_hash"
+            ],
+            "key_length": "74",
+            "ref": [
+              "const",
+              "const"
+            ],
+            "rows_examined_per_scan": 1,
+            "rows_produced_per_join": 1,
+            "filtered": "100.00",
+            "cost_info": {
+              "read_cost": "0.25",
+              "eval_cost": "0.10",
+              "prefix_cost": "0.35",
+              "data_read_per_join": "432"
+            },
+            "used_columns": [
+              "source_type",
+              "source_id",
+              "reference_kind",
+              "reference_hash",
+              "reference_value"
+            ]
+          }
+        }
+      },
+      "actual_matching_rows": 0
+    },
+    {
+      "unrelated_bodies": 1000,
+      "lookup": "one legacy hit",
+      "explain": {
+        "query_block": {
+          "select_id": 1,
+          "cost_info": {
+            "query_cost": "0.35"
+          },
+          "table": {
+            "table_name": "sys_local_file_reference",
+            "access_type": "ref",
+            "possible_keys": [
+              "idx_local_reference_lookup"
+            ],
+            "key": "idx_local_reference_lookup",
+            "used_key_parts": [
+              "reference_kind",
+              "reference_hash"
+            ],
+            "key_length": "74",
+            "ref": [
+              "const",
+              "const"
+            ],
+            "rows_examined_per_scan": 1,
+            "rows_produced_per_join": 1,
+            "filtered": "100.00",
+            "cost_info": {
+              "read_cost": "0.25",
+              "eval_cost": "0.10",
+              "prefix_cost": "0.35",
+              "data_read_per_join": "432"
+            },
+            "used_columns": [
+              "source_type",
+              "source_id",
+              "reference_kind",
+              "reference_hash",
+              "reference_value"
+            ]
+          }
+        }
+      },
+      "actual_matching_rows": 1
+    },
+    {
+      "unrelated_bodies": 10000,
+      "lookup": "unknown",
+      "explain": {
+        "query_block": {
+          "select_id": 1,
+          "cost_info": {
+            "query_cost": "0.35"
+          },
+          "table": {
+            "table_name": "sys_local_file_reference",
+            "access_type": "ref",
+            "possible_keys": [
+              "idx_local_reference_lookup"
+            ],
+            "key": "idx_local_reference_lookup",
+            "used_key_parts": [
+              "reference_kind",
+              "reference_hash"
+            ],
+            "key_length": "74",
+            "ref": [
+              "const",
+              "const"
+            ],
+            "rows_examined_per_scan": 1,
+            "rows_produced_per_join": 1,
+            "filtered": "100.00",
+            "cost_info": {
+              "read_cost": "0.25",
+              "eval_cost": "0.10",
+              "prefix_cost": "0.35",
+              "data_read_per_join": "432"
+            },
+            "used_columns": [
+              "source_type",
+              "source_id",
+              "reference_kind",
+              "reference_hash",
+              "reference_value"
+            ]
+          }
+        }
+      },
+      "actual_matching_rows": 0
+    },
+    {
+      "unrelated_bodies": 10000,
+      "lookup": "one legacy hit",
+      "explain": {
+        "query_block": {
+          "select_id": 1,
+          "cost_info": {
+            "query_cost": "0.35"
+          },
+          "table": {
+            "table_name": "sys_local_file_reference",
+            "access_type": "ref",
+            "possible_keys": [
+              "idx_local_reference_lookup"
+            ],
+            "key": "idx_local_reference_lookup",
+            "used_key_parts": [
+              "reference_kind",
+              "reference_hash"
+            ],
+            "key_length": "74",
+            "ref": [
+              "const",
+              "const"
+            ],
+            "rows_examined_per_scan": 1,
+            "rows_produced_per_join": 1,
+            "filtered": "100.00",
+            "cost_info": {
+              "read_cost": "0.25",
+              "eval_cost": "0.10",
+              "prefix_cost": "0.35",
+              "data_read_per_join": "432"
+            },
+            "used_columns": [
+              "source_type",
+              "source_id",
+              "reference_kind",
+              "reference_hash",
+              "reference_value"
+            ]
+          }
+        }
+      },
+      "actual_matching_rows": 1
+    }
+  ],
+  "http_measurements": [
+    {
+      "unrelated_bodies": 10,
+      "lookup": "anonymous unknown",
+      "request_count": 20,
+      "http_ms": [
+        2.644082996994257,
+        1.6585420235060155,
+        1.8379170214757323,
+        1.357375003863126,
+        1.8183750216849148,
+        1.4323749928735197,
+        1.4391670119948685,
+        1.4468749868683517,
+        1.5875000390224159,
+        1.5993749839253724,
+        1.677374995779246,
+        1.840874960180372,
+        1.2948749936185777,
+        1.631040999200195,
+        1.4499169774353504,
+        1.4932089834474027,
+        1.3799999724142253,
+        1.589749997947365,
+        1.9559580250643194,
+        1.374749990645796
+      ],
+      "p95_ms": 1.9559580250643194,
+      "timing_scope": "Local synthetic loopback, sequential requests, one warm-up; no load/throughput capacity claim",
+      "download_select_digest_deltas": [
+        {
+          "count": 20,
+          "rows_examined": 0,
+          "rows_sent": 0,
+          "digest": "17cca7c2fde9a81e6925badab8dc3d11913709448c871ee338baf704d5bf345b",
+          "digest_text": "SELECT `id` , `create_time` , `update_by` , `create_by` , `update_time` , `sys_org_code` , `file_type` , `file_name` , `file_path` , `file_location` , `file_tag` , `del_flag` FROM `sys_file` WHERE `file_path` = ? AND `file_location` = ?",
+          "category": "registration"
+        },
+        {
+          "count": 20,
+          "rows_examined": 0,
+          "rows_sent": 0,
+          "digest": "9ad4f3ec93b7d9f54f0ac37f8ae9843dae7ff8b2bca6892492be979237a45c1f",
+          "digest_text": "SELECT `source_type` , `source_id` , `reference_value` FROM `sys_local_file_reference` WHERE `reference_kind` = ? AND `reference_hash` = ?",
+          "category": "candidate"
+        }
+      ],
+      "download_select_totals": {
+        "count": 40,
+        "rows_examined": 0,
+        "rows_sent": 0
+      }
+    },
+    {
+      "unrelated_bodies": 10,
+      "lookup": "anonymous one legacy hit",
+      "request_count": 20,
+      "http_ms": [
+        3.0585830099880695,
+        2.1149999811314046,
+        1.7658749711699784,
+        1.5889579663053155,
+        1.5978330047801137,
+        1.8111669924110174,
+        1.6025410150177777,
+        1.6797080170363188,
+        1.5239170170389116,
+        1.4371669967658818,
+        1.4574580127373338,
+        1.3781670131720603,
+        1.399416010826826,
+        1.7140419804491103,
+        1.5349999885074794,
+        1.4270410174503922,
+        1.5701670199632645,
+        1.6534579917788506,
+        1.7122499994002283,
+        1.616207999177277
+      ],
+      "p95_ms": 2.1149999811314046,
+      "timing_scope": "Local synthetic loopback, sequential requests, one warm-up; no load/throughput capacity claim",
+      "download_select_digest_deltas": [
+        {
+          "count": 20,
+          "rows_examined": 0,
+          "rows_sent": 0,
+          "digest": "17cca7c2fde9a81e6925badab8dc3d11913709448c871ee338baf704d5bf345b",
+          "digest_text": "SELECT `id` , `create_time` , `update_by` , `create_by` , `update_time` , `sys_org_code` , `file_type` , `file_name` , `file_path` , `file_location` , `file_tag` , `del_flag` FROM `sys_file` WHERE `file_path` = ? AND `file_location` = ?",
+          "category": "registration"
+        },
+        {
+          "count": 20,
+          "rows_examined": 20,
+          "rows_sent": 20,
+          "digest": "9ad4f3ec93b7d9f54f0ac37f8ae9843dae7ff8b2bca6892492be979237a45c1f",
+          "digest_text": "SELECT `source_type` , `source_id` , `reference_value` FROM `sys_local_file_reference` WHERE `reference_kind` = ? AND `reference_hash` = ?",
+          "category": "candidate"
+        },
+        {
+          "count": 20,
+          "rows_examined": 20,
+          "rows_sent": 20,
+          "digest": "be315ee39fd54557b9b9091c7f22c76f7dc562b3f4c0a470e01144a8bf02cf2f",
+          "digest_text": "SELECT * FROM `teaching_news` WHERE `id` IN (...)",
+          "category": "source"
+        }
+      ],
+      "download_select_totals": {
+        "count": 60,
+        "rows_examined": 40,
+        "rows_sent": 40
+      }
+    },
+    {
+      "unrelated_bodies": 1000,
+      "lookup": "anonymous unknown",
+      "request_count": 20,
+      "http_ms": [
+        2.2492080461233854,
+        1.2904999894089997,
+        1.0816249996423721,
+        1.0122499661520123,
+        1.1342089856043458,
+        2.143167017493397,
+        1.0607499862089753,
+        0.9990420076064765,
+        1.0628330055624247,
+        1.0526670375838876,
+        0.9499579900875688,
+        0.9032500092871487,
+        1.023709017317742,
+        0.918291974812746,
+        0.9450000361539423,
+        1.0201249970123172,
+        1.7414999892935157,
+        0.9039169526658952,
+        0.9199170162901282,
+        0.9496250422671437
+      ],
+      "p95_ms": 2.143167017493397,
+      "timing_scope": "Local synthetic loopback, sequential requests, one warm-up; no load/throughput capacity claim",
+      "download_select_digest_deltas": [
+        {
+          "count": 20,
+          "rows_examined": 0,
+          "rows_sent": 0,
+          "digest": "17cca7c2fde9a81e6925badab8dc3d11913709448c871ee338baf704d5bf345b",
+          "digest_text": "SELECT `id` , `create_time` , `update_by` , `create_by` , `update_time` , `sys_org_code` , `file_type` , `file_name` , `file_path` , `file_location` , `file_tag` , `del_flag` FROM `sys_file` WHERE `file_path` = ? AND `file_location` = ?",
+          "category": "registration"
+        },
+        {
+          "count": 20,
+          "rows_examined": 0,
+          "rows_sent": 0,
+          "digest": "9ad4f3ec93b7d9f54f0ac37f8ae9843dae7ff8b2bca6892492be979237a45c1f",
+          "digest_text": "SELECT `source_type` , `source_id` , `reference_value` FROM `sys_local_file_reference` WHERE `reference_kind` = ? AND `reference_hash` = ?",
+          "category": "candidate"
+        }
+      ],
+      "download_select_totals": {
+        "count": 40,
+        "rows_examined": 0,
+        "rows_sent": 0
+      }
+    },
+    {
+      "unrelated_bodies": 1000,
+      "lookup": "anonymous one legacy hit",
+      "request_count": 20,
+      "http_ms": [
+        2.690416993573308,
+        1.6958749620243907,
+        1.5355420182459056,
+        1.448916969820857,
+        1.4620000147260725,
+        1.3427089434117079,
+        2.475458022672683,
+        1.3943330268375576,
+        1.3065420207567513,
+        1.2538330047391355,
+        1.3355829869396985,
+        1.1922080302610993,
+        1.2188330292701721,
+        1.229999994393438,
+        1.7394159804098308,
+        1.2179170153103769,
+        1.827541971579194,
+        1.3361250166781247,
+        1.20433303527534,
+        1.422041968908161
+      ],
+      "p95_ms": 2.475458022672683,
+      "timing_scope": "Local synthetic loopback, sequential requests, one warm-up; no load/throughput capacity claim",
+      "download_select_digest_deltas": [
+        {
+          "count": 20,
+          "rows_examined": 0,
+          "rows_sent": 0,
+          "digest": "17cca7c2fde9a81e6925badab8dc3d11913709448c871ee338baf704d5bf345b",
+          "digest_text": "SELECT `id` , `create_time` , `update_by` , `create_by` , `update_time` , `sys_org_code` , `file_type` , `file_name` , `file_path` , `file_location` , `file_tag` , `del_flag` FROM `sys_file` WHERE `file_path` = ? AND `file_location` = ?",
+          "category": "registration"
+        },
+        {
+          "count": 20,
+          "rows_examined": 20,
+          "rows_sent": 20,
+          "digest": "9ad4f3ec93b7d9f54f0ac37f8ae9843dae7ff8b2bca6892492be979237a45c1f",
+          "digest_text": "SELECT `source_type` , `source_id` , `reference_value` FROM `sys_local_file_reference` WHERE `reference_kind` = ? AND `reference_hash` = ?",
+          "category": "candidate"
+        },
+        {
+          "count": 20,
+          "rows_examined": 20,
+          "rows_sent": 20,
+          "digest": "be315ee39fd54557b9b9091c7f22c76f7dc562b3f4c0a470e01144a8bf02cf2f",
+          "digest_text": "SELECT * FROM `teaching_news` WHERE `id` IN (...)",
+          "category": "source"
+        }
+      ],
+      "download_select_totals": {
+        "count": 60,
+        "rows_examined": 40,
+        "rows_sent": 40
+      }
+    },
+    {
+      "unrelated_bodies": 10000,
+      "lookup": "anonymous unknown",
+      "request_count": 20,
+      "http_ms": [
+        2.482583047822118,
+        1.6619590460322797,
+        1.4111249474808574,
+        1.1077499948441982,
+        1.295458001550287,
+        1.1423329706303775,
+        1.059125002939254,
+        1.579292002134025,
+        1.3004580396227539,
+        1.294374989811331,
+        1.1218750150874257,
+        1.1255419813096523,
+        1.6468340181745589,
+        1.8201250350102782,
+        1.500333019066602,
+        1.2388750328682363,
+        1.625457953196019,
+        1.2122089974582195,
+        1.1587920016609132,
+        1.0725829633884132
+      ],
+      "p95_ms": 1.8201250350102782,
+      "timing_scope": "Local synthetic loopback, sequential requests, one warm-up; no load/throughput capacity claim",
+      "download_select_digest_deltas": [
+        {
+          "count": 20,
+          "rows_examined": 0,
+          "rows_sent": 0,
+          "digest": "17cca7c2fde9a81e6925badab8dc3d11913709448c871ee338baf704d5bf345b",
+          "digest_text": "SELECT `id` , `create_time` , `update_by` , `create_by` , `update_time` , `sys_org_code` , `file_type` , `file_name` , `file_path` , `file_location` , `file_tag` , `del_flag` FROM `sys_file` WHERE `file_path` = ? AND `file_location` = ?",
+          "category": "registration"
+        },
+        {
+          "count": 20,
+          "rows_examined": 0,
+          "rows_sent": 0,
+          "digest": "9ad4f3ec93b7d9f54f0ac37f8ae9843dae7ff8b2bca6892492be979237a45c1f",
+          "digest_text": "SELECT `source_type` , `source_id` , `reference_value` FROM `sys_local_file_reference` WHERE `reference_kind` = ? AND `reference_hash` = ?",
+          "category": "candidate"
+        }
+      ],
+      "download_select_totals": {
+        "count": 40,
+        "rows_examined": 0,
+        "rows_sent": 0
+      }
+    },
+    {
+      "unrelated_bodies": 10000,
+      "lookup": "anonymous one legacy hit",
+      "request_count": 20,
+      "http_ms": [
+        2.551749988924712,
+        1.6090840217657387,
+        1.975207997020334,
+        1.8241250072605908,
+        1.5733330510556698,
+        1.696125022135675,
+        1.5799159882590175,
+        1.4707919908687472,
+        1.901416981127113,
+        1.7860420048236847,
+        1.735541969537735,
+        1.5040840371511877,
+        1.3254160294309258,
+        1.3792080571874976,
+        1.470707997214049,
+        1.8172080162912607,
+        1.6217500087805092,
+        1.9671250483952463,
+        1.7460000235587358,
+        1.5337499789893627
+      ],
+      "p95_ms": 1.975207997020334,
+      "timing_scope": "Local synthetic loopback, sequential requests, one warm-up; no load/throughput capacity claim",
+      "download_select_digest_deltas": [
+        {
+          "count": 20,
+          "rows_examined": 0,
+          "rows_sent": 0,
+          "digest": "17cca7c2fde9a81e6925badab8dc3d11913709448c871ee338baf704d5bf345b",
+          "digest_text": "SELECT `id` , `create_time` , `update_by` , `create_by` , `update_time` , `sys_org_code` , `file_type` , `file_name` , `file_path` , `file_location` , `file_tag` , `del_flag` FROM `sys_file` WHERE `file_path` = ? AND `file_location` = ?",
+          "category": "registration"
+        },
+        {
+          "count": 20,
+          "rows_examined": 20,
+          "rows_sent": 20,
+          "digest": "9ad4f3ec93b7d9f54f0ac37f8ae9843dae7ff8b2bca6892492be979237a45c1f",
+          "digest_text": "SELECT `source_type` , `source_id` , `reference_value` FROM `sys_local_file_reference` WHERE `reference_kind` = ? AND `reference_hash` = ?",
+          "category": "candidate"
+        },
+        {
+          "count": 20,
+          "rows_examined": 20,
+          "rows_sent": 20,
+          "digest": "be315ee39fd54557b9b9091c7f22c76f7dc562b3f4c0a470e01144a8bf02cf2f",
+          "digest_text": "SELECT * FROM `teaching_news` WHERE `id` IN (...)",
+          "category": "source"
+        }
+      ],
+      "download_select_totals": {
+        "count": 60,
+        "rows_examined": 40,
+        "rows_sent": 40
+      }
+    }
+  ],
+  "snapshots": {
+    "before": {
+      "business": {
+        "teaching_course": "077d5a4c45bfa0bb762be80dd5d56c7f38a37088faf98f69cfdacdb9f95371f6",
+        "teaching_course_unit": "318069471ccc06005024f3524cc6a89e56e5ccb805d4ab3018a77919f825cc27",
+        "teaching_additional_work": "9c3310cfd260b774f0b7dc0cefbccd9b25c58f3a89fcde01963d94a8650ffc48",
+        "sys_config": "c1d571652e0ee7598274b7e5b169222816970b4121f45804f65e5bfc6c48d0b2",
+        "teaching_news": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_data_log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_file": "810754a4d12d890b3042210802db9eeb6c209b81128e2ce26e6ed5e95c87ea45",
+        "teaching_work": "0f4d44e31af0f7a74ff4fe9580fb3c4076859c78dff0eb2df1684181ac93b138",
+        "teaching_course_dept": "ebf75b92c7454735fbf8b06455c05fba815994bed84650d157711afc553ed9be"
+      },
+      "index": "626f142677b6a6fe6df355772f56cdc121e8fee5384d171c7739cfb2c2ec730c",
+      "state": "8e1d0d6db3b5c3694cc108d40362f14fe676007c0e84a6fa4729aadd89a009ff",
+      "files": {
+        "fixture-work-a.txt": "b8e97693f377c4c50d46ae42c5c8a46053d0b56e01da2952991dfe0d2b776b2a",
+        "fixture-work-b.txt": "9e8a7284e1eec1ca3c2dd11ce741382cf02f463312d6af5bd948c765a84d29d8"
+      }
+    },
+    "with_fixtures": {
+      "business": {
+        "teaching_course": "a8d30c91324a05e842d098cddc08053b630da57e4803e99bf13c854fcfc92f53",
+        "teaching_course_unit": "8ffcc72c756ebf8bc41f33a49ca7be9e7e0c9f0c88ce6e8e658b1c15d86c2bf5",
+        "teaching_additional_work": "a4fb449af1d6f304452c1426ac3abddbf521c7b0f70d27e4b52453e7e297050e",
+        "sys_config": "c109cdfff0e746f5145f8722daed36aa19c36ec1fa5e6cccf9defe439642b053",
+        "teaching_news": "bb72403535c74ee15290fa67afa176188a8f677db6f1deebe91bd3453633805c",
+        "sys_data_log": "7081e97a7404f48e19bf98c77d1265f540855a93f2e2be73d71d166269f9cd44",
+        "sys_file": "687fe9e6edd66aaca562ff7423e5eed6052a8cd64fa7d3b18ed6f73c17327c3f",
+        "teaching_work": "5adf3e4d573f8b37f3b4698a6dc7d654267007c13803a01217087af2926c1453",
+        "teaching_course_dept": "ebf75b92c7454735fbf8b06455c05fba815994bed84650d157711afc553ed9be"
+      },
+      "index": "ec76f71f860997fa5ddb1cb6e22e40da24a7620942628219782d67f6fa22b9c2",
+      "state": "8e1d0d6db3b5c3694cc108d40362f14fe676007c0e84a6fa4729aadd89a009ff",
+      "files": {
+        "fixture-work-a.txt": "b8e97693f377c4c50d46ae42c5c8a46053d0b56e01da2952991dfe0d2b776b2a",
+        "fixture-work-b.txt": "9e8a7284e1eec1ca3c2dd11ce741382cf02f463312d6af5bd948c765a84d29d8",
+        "media-index-8da1e90b6b/unknown.txt": "cad0124144d1902ac47dd1306f56d55e8d9c71c62dda06dfbd6d6e9dbaf4f91a",
+        "media-index-8da1e90b6b/config.txt": "3ea0ed3327be9843462d8632d9483f3956b065a7dab7dca5ce1ce19fac83db64",
+        "media-index-8da1e90b6b/unit.txt": "1818806f8fceb939347123bf76d3519386aaa11d0a2c0fab7535f96f699174ad",
+        "media-index-8da1e90b6b/replacement.txt": "b9285d2ae56b2daef1110658b4dbfdaa0a0ccf8efbb9b87e9d1b2c5bc0543175",
+        "media-index-8da1e90b6b/assignment.txt": "97ec39f0b927200e1b0339810f402c9bca084e342dc377405e49b74bfb690dd7",
+        "media-index-8da1e90b6b/legacy.txt": "b68157032334bf6464c36362ff4943cb6efca119665174a485108c8c583095cd",
+        "media-index-8da1e90b6b/draft.txt": "d2745d43fc09f5b3b993fb60c4dc8e23cfd26cc73e859b013795d840977a3bf6",
+        "media-index-8da1e90b6b/live.txt": "8f50c0065f69d674f60b1f5e320aee86f2d41d3857d884cb93ca4a1b9ef0d912",
+        "media-index-8da1e90b6b/history.txt": "cdb3b8025d11b285098f306e8ee426c6d1c44225d1cd90b6a0aa4b7c4055813b",
+        "media-index-8da1e90b6b/course.txt": "884dea502bd83e98f9550a33ab2d153f90308c2ebf6b69980b19a9728234c722",
+        "media-index-8da1e90b6b/race-b.txt": "6f0e06cadcfc6e938f513de6c2b50b1d28ddc29b49eb4b4f0c9b08036c6b472b",
+        "media-index-8da1e90b6b/fault.txt": "aa1a1e02c2d870db9bf344fc00787e1e6e71bac64b69a16b14f4b10a9fb46eef",
+        "media-index-8da1e90b6b/race-a.txt": "9d7ef98e18134d6cc824ac4a9cf8b4d4d93a6869b7233f86cf8a85cefd907094"
+      }
+    },
+    "after_cleanup": {
+      "business": {
+        "teaching_course": "077d5a4c45bfa0bb762be80dd5d56c7f38a37088faf98f69cfdacdb9f95371f6",
+        "teaching_course_unit": "318069471ccc06005024f3524cc6a89e56e5ccb805d4ab3018a77919f825cc27",
+        "teaching_additional_work": "9c3310cfd260b774f0b7dc0cefbccd9b25c58f3a89fcde01963d94a8650ffc48",
+        "sys_config": "c1d571652e0ee7598274b7e5b169222816970b4121f45804f65e5bfc6c48d0b2",
+        "teaching_news": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_data_log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_file": "810754a4d12d890b3042210802db9eeb6c209b81128e2ce26e6ed5e95c87ea45",
+        "teaching_work": "0f4d44e31af0f7a74ff4fe9580fb3c4076859c78dff0eb2df1684181ac93b138",
+        "teaching_course_dept": "ebf75b92c7454735fbf8b06455c05fba815994bed84650d157711afc553ed9be"
+      },
+      "index": "626f142677b6a6fe6df355772f56cdc121e8fee5384d171c7739cfb2c2ec730c",
+      "state": "8e1d0d6db3b5c3694cc108d40362f14fe676007c0e84a6fa4729aadd89a009ff",
+      "files": {
+        "fixture-work-a.txt": "b8e97693f377c4c50d46ae42c5c8a46053d0b56e01da2952991dfe0d2b776b2a",
+        "fixture-work-b.txt": "9e8a7284e1eec1ca3c2dd11ce741382cf02f463312d6af5bd948c765a84d29d8"
+      }
+    }
+  },
+  "fixture_namespace": "lmi_8da1e90b6b_",
+  "created_at": "2026-10-11T11:57:58.242786+00:00"
+}

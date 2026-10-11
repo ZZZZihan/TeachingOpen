@@ -1,0 +1,355 @@
+{
+  "observed_utc": "2026-10-11T11:47:52.714719+00:00",
+  "scope": "owned synthetic HTTP/MySQL",
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "business_timezone": "Asia/Shanghai",
+  "production_connected": false,
+  "checks": [
+    {
+      "case": "student cannot add task",
+      "passed": true
+    },
+    {
+      "case": "student cannot add task leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher cannot assign another class",
+      "passed": true
+    },
+    {
+      "case": "teacher cannot assign another class leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher cannot assign a mixed class set",
+      "passed": true
+    },
+    {
+      "case": "teacher cannot assign a mixed class set leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher creates task in own class with legacy fields",
+      "passed": true
+    },
+    {
+      "case": "client cannot choose task id or owner",
+      "passed": true
+    },
+    {
+      "case": "task receives server creation time",
+      "passed": true
+    },
+    {
+      "case": "assignment Redis marker contains generated id",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot edit another task",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot edit another task leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot delete another task",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot delete another task leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot batch delete another task",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot batch delete another task leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot edit another task",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot edit another task leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot delete another task",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot delete another task leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot batch delete another task",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot batch delete another task leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher cannot move own task to another class",
+      "passed": true
+    },
+    {
+      "case": "teacher cannot move own task to another class leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "owner edits ordinary fields from legacy whole entity",
+      "passed": true
+    },
+    {
+      "case": "edit preserves owner creation time and organization",
+      "passed": true
+    },
+    {
+      "case": "other teacher creates own task",
+      "passed": true
+    },
+    {
+      "case": "mixed-owner batch deletes nothing",
+      "passed": true
+    },
+    {
+      "case": "mixed-owner batch deletes nothing leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "mixed-existing-and-missing batch deletes nothing",
+      "passed": true
+    },
+    {
+      "case": "mixed-existing-and-missing batch deletes nothing leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "old out-of-scope class blocks moving task back",
+      "passed": true
+    },
+    {
+      "case": "old out-of-scope class blocks moving task back leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "old out-of-scope class blocks deletion",
+      "passed": true
+    },
+    {
+      "case": "old out-of-scope class blocks deletion leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "sequential events use one explicit Shanghai business date",
+      "passed": true
+    },
+    {
+      "case": "database task failure leaves counters and tasks unchanged",
+      "passed": true
+    },
+    {
+      "case": "database task failure leaves counters and tasks unchanged leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "log failure rolls back previously inserted task",
+      "passed": true
+    },
+    {
+      "case": "log failure rolls back previously inserted task leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "existing probe uses MySQL REPEATABLE READ",
+      "passed": true
+    },
+    {
+      "case": "existing both HTTP writers wait on the same real class lock",
+      "passed": true
+    },
+    {
+      "case": "existing administrator and teacher both complete their events successfully",
+      "passed": true
+    },
+    {
+      "case": "existing concurrent events preserve exactly one day row and assignment increments",
+      "passed": true
+    },
+    {
+      "case": "existing unit event increments only its counter and other statistics are preserved",
+      "passed": true
+    },
+    {
+      "case": "existing committed assignments have Redis markers",
+      "passed": true
+    },
+    {
+      "case": "first-day probe uses MySQL REPEATABLE READ",
+      "passed": true
+    },
+    {
+      "case": "first-day both HTTP writers wait on the same real class lock",
+      "passed": true
+    },
+    {
+      "case": "first-day administrator and teacher both complete their events successfully",
+      "passed": true
+    },
+    {
+      "case": "first-day concurrent events preserve exactly one day row and assignment increments",
+      "passed": true
+    },
+    {
+      "case": "first-day unit event increments only its counter and other statistics are preserved",
+      "passed": true
+    },
+    {
+      "case": "first-day committed assignments have Redis markers",
+      "passed": true
+    },
+    {
+      "case": "null-count probe uses MySQL REPEATABLE READ",
+      "passed": true
+    },
+    {
+      "case": "null-count both HTTP writers wait on the same real class lock",
+      "passed": true
+    },
+    {
+      "case": "null-count administrator and teacher both complete their events successfully",
+      "passed": true
+    },
+    {
+      "case": "null-count concurrent events preserve exactly one day row and assignment increments",
+      "passed": true
+    },
+    {
+      "case": "null-count unit event increments only its counter and other statistics are preserved",
+      "passed": true
+    },
+    {
+      "case": "null-count committed assignments have Redis markers",
+      "passed": true
+    },
+    {
+      "case": "mix-exist probe uses MySQL REPEATABLE READ",
+      "passed": true
+    },
+    {
+      "case": "mix-exist both HTTP writers wait on the same real class lock",
+      "passed": true
+    },
+    {
+      "case": "mix-exist administrator and teacher both complete their events successfully",
+      "passed": true
+    },
+    {
+      "case": "mix-exist concurrent events preserve exactly one day row and assignment increments",
+      "passed": true
+    },
+    {
+      "case": "mix-exist unit event increments only its counter and other statistics are preserved",
+      "passed": true
+    },
+    {
+      "case": "mix-exist commits one completed unit event for this scenario",
+      "passed": true
+    },
+    {
+      "case": "mix-exist committed assignments have Redis markers",
+      "passed": true
+    },
+    {
+      "case": "mix-first probe uses MySQL REPEATABLE READ",
+      "passed": true
+    },
+    {
+      "case": "mix-first both HTTP writers wait on the same real class lock",
+      "passed": true
+    },
+    {
+      "case": "mix-first administrator and teacher both complete their events successfully",
+      "passed": true
+    },
+    {
+      "case": "mix-first concurrent events preserve exactly one day row and assignment increments",
+      "passed": true
+    },
+    {
+      "case": "mix-first unit event increments only its counter and other statistics are preserved",
+      "passed": true
+    },
+    {
+      "case": "mix-first commits one completed unit event for this scenario",
+      "passed": true
+    },
+    {
+      "case": "mix-first committed assignments have Redis markers",
+      "passed": true
+    },
+    {
+      "case": "first-day log failure rolls back task and Redis",
+      "passed": true
+    },
+    {
+      "case": "first-day log failure rolls back task and Redis leaves tasks statistics and Redis unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a can still read assigned additional work",
+      "passed": true
+    },
+    {
+      "case": "student_b can still read assigned additional work",
+      "passed": true
+    },
+    {
+      "case": "legacy additional-work import route remains unavailable",
+      "passed": true
+    },
+    {
+      "case": "owner batch delete accepts legacy trailing comma",
+      "passed": true
+    },
+    {
+      "case": "administrator may delete another teachers task",
+      "passed": true
+    },
+    {
+      "case": "both authorized deletions persisted",
+      "passed": true
+    },
+    {
+      "case": "original additional-work tasks preserved",
+      "passed": true
+    },
+    {
+      "case": "original media reference index and state restored",
+      "passed": true
+    },
+    {
+      "case": "original class statistics restored",
+      "passed": true
+    },
+    {
+      "case": "original lifetime unit events restored exactly",
+      "passed": true
+    },
+    {
+      "case": "original unit-view Redis bytes restored exactly",
+      "passed": true
+    },
+    {
+      "case": "original task statistics lifetime events and all marker digests restored",
+      "passed": true
+    }
+  ],
+  "passed": 86,
+  "failed": 0
+}

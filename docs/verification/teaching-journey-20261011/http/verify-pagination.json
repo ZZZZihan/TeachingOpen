@@ -1,0 +1,209 @@
+{
+  "scope": "owned synthetic HTTP/MySQL",
+  "production_connected": false,
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "passed": 50,
+  "failed": 0,
+  "checks": [
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageNo=-1",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageNo=0",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageNo=2147483648",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageNo=1.5",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageNo=abc",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageNo=",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageSize=-1",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageSize=0",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageSize=101",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageSize=99999999999999999999",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageSize=1.5",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageSize=abc",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects pageSize=",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList rejects duplicate pagination values",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingNews/newsList accepts positive bounded pagination",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageNo=-1",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageNo=0",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageNo=2147483648",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageNo=1.5",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageNo=abc",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageNo=",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageSize=-1",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageSize=0",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageSize=101",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageSize=99999999999999999999",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageSize=1.5",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageSize=abc",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects pageSize=",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list rejects duplicate pagination values",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingCourseUnit/list accepts positive bounded pagination",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageNo=-1",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageNo=0",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageNo=2147483648",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageNo=1.5",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageNo=abc",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageNo=",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageSize=-1",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageSize=0",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageSize=101",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageSize=99999999999999999999",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageSize=1.5",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageSize=abc",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects pageSize=",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine rejects duplicate pagination values",
+      "passed": true
+    },
+    {
+      "case": "/teaching/teachingWork/mine accepts positive bounded pagination",
+      "passed": true
+    },
+    {
+      "case": "published news page 1 returns a real bounded SQL page",
+      "passed": true
+    },
+    {
+      "case": "published news page 2 returns a real bounded SQL page",
+      "passed": true
+    },
+    {
+      "case": "101 published records remain reachable exactly once",
+      "passed": true
+    },
+    {
+      "case": "original news records preserved",
+      "passed": true
+    },
+    {
+      "case": "original media reference index and state restored",
+      "passed": true
+    }
+  ]
+}

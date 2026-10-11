@@ -1,0 +1,658 @@
+{
+  "success": true,
+  "requests": 160,
+  "outboundRequests": 0,
+  "scope": "local synthetic HTTP",
+  "roles": [
+    "student",
+    "teacher",
+    "dev",
+    "admin"
+  ],
+  "checks": [
+    {
+      "case": "(None, '/sys/dict/getDictItems/sex', None, 'permitted')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/getDictItems/course_options', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/loadDict/course_options', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/loadDictItem/course_options', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/getDictItems/registration_roles', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/loadDict/registration_roles', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/loadDictItem/registration_roles', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/getDictItems/category_tree', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/loadDict/category_tree', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/loadDictItem/category_tree', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/getDictItems/system_users', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/loadDict/system_users', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/loadDictItem/system_users', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/getDictItems/sys_user%2Crealname%2Cid', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/loadDict/sys_user%2Crealname%2Cid', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/loadDictItem/sys_user%2Crealname%2Cid', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/dict/queryTableData', {'table': 'sys_user', 'text': 'password', 'code': 'id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/getDictItems/course_options', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/loadDict/course_options', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/loadDictItem/course_options', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/getDictItems/registration_roles', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/loadDict/registration_roles', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/loadDictItem/registration_roles', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/getDictItems/category_tree', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/loadDict/category_tree', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/loadDictItem/category_tree', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/getDictItems/system_users', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/loadDict/system_users', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/loadDictItem/system_users', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/getDictItems/sys_user%2Crealname%2Cid', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/loadDict/sys_user%2Crealname%2Cid', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/loadDictItem/sys_user%2Crealname%2Cid', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/dict/queryTableData', {'table': 'sys_user', 'text': 'password', 'code': 'id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/getDictItems/course_options', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/loadDict/course_options', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/loadDictItem/course_options', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/getDictItems/registration_roles', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/loadDict/registration_roles', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/loadDictItem/registration_roles', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/getDictItems/category_tree', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/loadDict/category_tree', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/loadDictItem/category_tree', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/getDictItems/system_users', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/loadDict/system_users', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/loadDictItem/system_users', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/getDictItems/sys_user%2Crealname%2Cid', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/loadDict/sys_user%2Crealname%2Cid', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/loadDictItem/sys_user%2Crealname%2Cid', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/dict/queryTableData', {'table': 'sys_user', 'text': 'password', 'code': 'id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/getDictItems/sys_user%2Cpassword%2Cid', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadDict/sys_user%2Cpassword%2Cid', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadDictItem/sys_user%2Cpassword%2Cid', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/getDictItems/sys_user%2Csalt%2Cid', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadDict/sys_user%2Csalt%2Cid', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadDictItem/sys_user%2Csalt%2Cid', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/getDictItems/sys_user%2Cphone%2Cid', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadDict/sys_user%2Cphone%2Cid', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadDictItem/sys_user%2Cphone%2Cid', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/getDictItems/sys_user%2Crealname%2Cid%2Cusername%21%3D%27admin%27', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadDict/sys_user%2Crealname%2Cid%2Cusername%21%3D%27admin%27', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadDictItem/sys_user%2Crealname%2Cid%2Cusername%21%3D%27admin%27', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/getDictItems/sys_user%2Crealname%2Cid%2C', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadDict/sys_user%2Crealname%2Cid%2C', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadDictItem/sys_user%2Crealname%2Cid%2C', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/getDictItems/sys_user%252Cpassword%252Cid', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadDict/sys_user%252Cpassword%252Cid', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadDictItem/sys_user%252Cpassword%252Cid', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/queryTableData', {'table': 'sys_user', 'text': 'password', 'code': 'id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0', 'pidField': 'password'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0', 'hasChildField': 'salt'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0', 'condition': '{\"password\":\"probe\"}'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0', 'tableName': 'sys_user', 'text': 'password', 'code': 'id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', '/sys/dict/getDictItems/course_options', None, 'permitted')",
+      "passed": true
+    },
+    {
+      "case": "('admin', '/sys/dict/getDictItems/teaching_course%2Ccourse_name%2Cid', None, 'permitted')",
+      "passed": true
+    },
+    {
+      "case": "('admin', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0'}, 'permitted')",
+      "passed": true
+    },
+    {
+      "case": "('admin', '/sys/dict/loadDict/system_departments', {'keyword': '合成'}, 'permitted')",
+      "passed": true
+    },
+    {
+      "case": "('admin', '/sys/dict/loadDictItem/system_departments', {'key': 'synthetic-id'}, 'permitted')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/getDictItems/sys_user%2Cpassword%2Cid', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadDict/sys_user%2Cpassword%2Cid', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadDictItem/sys_user%2Cpassword%2Cid', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/getDictItems/sys_user%2Csalt%2Cid', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadDict/sys_user%2Csalt%2Cid', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadDictItem/sys_user%2Csalt%2Cid', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/getDictItems/sys_user%2Cphone%2Cid', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadDict/sys_user%2Cphone%2Cid', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadDictItem/sys_user%2Cphone%2Cid', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/getDictItems/sys_user%2Crealname%2Cid%2Cusername%21%3D%27admin%27', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadDict/sys_user%2Crealname%2Cid%2Cusername%21%3D%27admin%27', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadDictItem/sys_user%2Crealname%2Cid%2Cusername%21%3D%27admin%27', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/getDictItems/sys_user%2Crealname%2Cid%2C', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadDict/sys_user%2Crealname%2Cid%2C', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadDictItem/sys_user%2Crealname%2Cid%2C', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/getDictItems/sys_user%252Cpassword%252Cid', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadDict/sys_user%252Cpassword%252Cid', {'keyword': '合成'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadDictItem/sys_user%252Cpassword%252Cid', {'key': 'synthetic-id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/queryTableData', {'table': 'sys_user', 'text': 'password', 'code': 'id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0', 'pidField': 'password'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0', 'hasChildField': 'salt'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0', 'condition': '{\"password\":\"probe\"}'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0', 'tableName': 'sys_user', 'text': 'password', 'code': 'id'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', '/sys/dict/getDictItems/course_options', None, 'permitted')",
+      "passed": true
+    },
+    {
+      "case": "('dev', '/sys/dict/getDictItems/teaching_course%2Ccourse_name%2Cid', None, 'permitted')",
+      "passed": true
+    },
+    {
+      "case": "('dev', '/sys/dict/loadTreeData', {'dictCode': 'category_tree', 'pid': '0'}, 'permitted')",
+      "passed": true
+    },
+    {
+      "case": "('dev', '/sys/dict/loadDict/system_departments', {'keyword': '合成'}, 'permitted')",
+      "passed": true
+    },
+    {
+      "case": "('dev', '/sys/dict/loadDictItem/system_departments', {'key': 'synthetic-id'}, 'permitted')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/dict/getDictItems/registration_roles', None, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', '/sys/dict/getDictItems/registration_roles', None, 'permitted')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'GET', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'POST', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'POST', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'PUT', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'PUT', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'DELETE', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'DELETE', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'PATCH', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "(None, 'PATCH', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'GET', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'POST', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'POST', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'PUT', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'PUT', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'DELETE', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'DELETE', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'PATCH', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('student', 'PATCH', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'GET', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'POST', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'POST', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'PUT', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'PUT', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'DELETE', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'DELETE', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'PATCH', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('teacher', 'PATCH', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'GET', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'POST', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'POST', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'PUT', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'PUT', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'DELETE', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'DELETE', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'PATCH', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('dev', 'PATCH', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'GET', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'POST', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'POST', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'PUT', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'PUT', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'DELETE', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'DELETE', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'PATCH', '/sys/common/transitRESTful', {'url': 'http://127.0.0.1:63182/probe'}, 'denied')",
+      "passed": true
+    },
+    {
+      "case": "('admin', 'PATCH', '/sys/common/transitRESTful', {'url': 'http%3A%2F%2F127.0.0.1%3A63182%2Fprobe'}, 'denied')",
+      "passed": true
+    }
+  ],
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "production_connected": false,
+  "passed": 160,
+  "failed": 0
+}

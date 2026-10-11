@@ -1,0 +1,199 @@
+{
+  "scope": "owned synthetic shared Scratch management authorization and Excel validation",
+  "expected_legacy": false,
+  "production_connected": false,
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "verifier_sha256": "7467c8eca0207d54f54f7d7bc2d6b9f6fd6d5be0230db006837190dc738b0524",
+  "passed": 47,
+  "failed": 0,
+  "checks": [
+    {
+      "case": "student_a /list",
+      "passed": true
+    },
+    {
+      "case": "student_a /list preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "student_a /queryById",
+      "passed": true
+    },
+    {
+      "case": "student_a /queryById preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "student_a /exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a /exportXls preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "student_a /add",
+      "passed": true
+    },
+    {
+      "case": "student_a /add preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "student_a /edit",
+      "passed": true
+    },
+    {
+      "case": "student_a /edit preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "student_a /delete",
+      "passed": true
+    },
+    {
+      "case": "student_a /delete preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "student_a /deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "student_a /deleteBatch preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "student_a Excel import",
+      "passed": true
+    },
+    {
+      "case": "student_a Excel import preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /list",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /list preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /queryById",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /queryById preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /exportXls",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /exportXls preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /add",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /add preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /edit",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /edit preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /delete",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /delete preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /deleteBatch preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher_a Excel import",
+      "passed": true
+    },
+    {
+      "case": "teacher_a Excel import preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "student can use shared asset data",
+      "passed": true
+    },
+    {
+      "case": "historical malformed row is isolated from valid shared assets",
+      "passed": true
+    },
+    {
+      "case": "administrator can list and inspect",
+      "passed": true
+    },
+    {
+      "case": "administrator can add",
+      "passed": true
+    },
+    {
+      "case": "administrator can edit",
+      "passed": true
+    },
+    {
+      "case": "administrator can import actual Excel",
+      "passed": true
+    },
+    {
+      "case": "invalid Excel batch is rejected with no partial rows",
+      "passed": true
+    },
+    {
+      "case": "new live dev grant permits add with same token",
+      "passed": true
+    },
+    {
+      "case": "live dev can import actual Excel",
+      "passed": true
+    },
+    {
+      "case": "revoked dev same token cannot add",
+      "passed": true
+    },
+    {
+      "case": "revoked dev same token cannot add preserves database and bytes",
+      "passed": true
+    },
+    {
+      "case": "administrator can delete one",
+      "passed": true
+    },
+    {
+      "case": "administrator can delete batch",
+      "passed": true
+    },
+    {
+      "case": "removing shared-library indexes preserves referenced object bytes",
+      "passed": true
+    },
+    {
+      "case": "fixture cleanup restores shared-resource database and upload bytes",
+      "passed": true
+    }
+  ]
+}

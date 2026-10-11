@@ -1,0 +1,1156 @@
+{
+  "status": "passed",
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "mode": "fixed",
+  "cases": [
+    {
+      "case": "student_a add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a add leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a add sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a edit leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a edit sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a delete?id=fixture_h02_private is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a delete?id=fixture_h02_private leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a delete?id=fixture_h02_private sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a deleteBatch?ids=fixture_h02_private,fixture_h02_foreign is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a deleteBatch?ids=fixture_h02_private,fixture_h02_foreign leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a deleteBatch?ids=fixture_h02_private,fixture_h02_foreign sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a doReleaseData?id=fixture_h02_private is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a doReleaseData?id=fixture_h02_private leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a doReleaseData?id=fixture_h02_private sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a doReovkeData?id=fixture_h02_private is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a doReovkeData?id=fixture_h02_private leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a doReovkeData?id=fixture_h02_private sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a importExcel leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a importExcel sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a list leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a list sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a exportXls leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a exportXls sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt add leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt add sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt edit leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt edit sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt delete?id=fixture_h02_private_receipt is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt delete?id=fixture_h02_private_receipt leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt delete?id=fixture_h02_private_receipt sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt deleteBatch?ids=fixture_h02_private_receipt is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt deleteBatch?ids=fixture_h02_private_receipt leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt deleteBatch?ids=fixture_h02_private_receipt sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt list leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a raw receipt list sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/list leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/list sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/queryById?id=synthetic is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/queryById?id=synthetic leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/queryById?id=synthetic sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/exportXls leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/exportXls sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/add leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/add sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/edit leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/edit sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/importExcel leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/importExcel sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/delete?id=synthetic is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/delete?id=synthetic leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/delete?id=synthetic sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/deleteBatch?ids=synthetic is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/deleteBatch?ids=synthetic leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessage/deleteBatch?ids=synthetic sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/list leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/list sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/queryById?id=synthetic is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/queryById?id=synthetic leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/queryById?id=synthetic sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/exportXls leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/exportXls sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/add leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/add sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/edit leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/edit sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/importExcel leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/importExcel sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/delete?id=synthetic is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/delete?id=synthetic leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/delete?id=synthetic sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/deleteBatch?ids=synthetic is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/deleteBatch?ids=synthetic leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a /message/sysMessageTemplate/deleteBatch?ids=synthetic sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a template send is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a template send leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a template send sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a direct all-user socket send is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a direct all-user socket send leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a direct all-user socket send sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "student_a direct targeted socket send is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a direct targeted socket send leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a direct targeted socket send sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a add leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a add sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a edit leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a edit sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a delete?id=fixture_h02_private is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a delete?id=fixture_h02_private leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a delete?id=fixture_h02_private sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a deleteBatch?ids=fixture_h02_private,fixture_h02_foreign is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a deleteBatch?ids=fixture_h02_private,fixture_h02_foreign leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a deleteBatch?ids=fixture_h02_private,fixture_h02_foreign sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a doReleaseData?id=fixture_h02_private is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a doReleaseData?id=fixture_h02_private leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a doReleaseData?id=fixture_h02_private sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a doReovkeData?id=fixture_h02_private is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a doReovkeData?id=fixture_h02_private leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a doReovkeData?id=fixture_h02_private sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a importExcel leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a importExcel sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a list leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a list sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a exportXls leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a exportXls sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt add leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt add sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt edit leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt edit sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt delete?id=fixture_h02_private_receipt is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt delete?id=fixture_h02_private_receipt leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt delete?id=fixture_h02_private_receipt sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt deleteBatch?ids=fixture_h02_private_receipt is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt deleteBatch?ids=fixture_h02_private_receipt leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt deleteBatch?ids=fixture_h02_private_receipt sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt list leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a raw receipt list sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/list leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/list sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/queryById?id=synthetic is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/queryById?id=synthetic leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/queryById?id=synthetic sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/exportXls leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/exportXls sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/add leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/add sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/edit leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/edit sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/importExcel leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/importExcel sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/delete?id=synthetic is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/delete?id=synthetic leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/delete?id=synthetic sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/deleteBatch?ids=synthetic is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/deleteBatch?ids=synthetic leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessage/deleteBatch?ids=synthetic sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/list leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/list sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/queryById?id=synthetic is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/queryById?id=synthetic leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/queryById?id=synthetic sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/exportXls leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/exportXls sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/add leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/add sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/edit leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/edit sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/importExcel leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/importExcel sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/delete?id=synthetic is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/delete?id=synthetic leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/delete?id=synthetic sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/deleteBatch?ids=synthetic is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/deleteBatch?ids=synthetic leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a /message/sysMessageTemplate/deleteBatch?ids=synthetic sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a template send is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a template send leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a template send sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a direct all-user socket send is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a direct all-user socket send leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a direct all-user socket send sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "teacher_a direct targeted socket send is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a direct targeted socket send leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a direct targeted socket send sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "cross-recipient read is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "cross-recipient read leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "cross-recipient read sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "draft read is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "draft read leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "draft read sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "missing registration date cannot read expired ALL history is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "missing registration date cannot read expired ALL history leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing registration date cannot read expired ALL history sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "missing registration date cannot mark expired ALL history is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "missing registration date cannot mark expired ALL history leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing registration date cannot mark expired ALL history sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "cross-recipient receipt detail is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "cross-recipient receipt detail leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "cross-recipient receipt detail sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "cross-recipient mark read is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "cross-recipient mark read leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "cross-recipient mark read sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "SQL syntax is only an unknown identifier is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "SQL syntax is only an unknown identifier leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "SQL syntax is only an unknown identifier sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "cross-recipient sync is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "cross-recipient sync leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "cross-recipient sync sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "recipient reads sanitized historical HTML /sys/annountCement/queryById?id=fixture_h02_private",
+      "passed": true
+    },
+    {
+      "case": "foreign recipient data not exposed /sys/annountCement/queryById?id=fixture_h02_private",
+      "passed": true
+    },
+    {
+      "case": "ineligible expired ALL not exposed /sys/annountCement/queryById?id=fixture_h02_private",
+      "passed": true
+    },
+    {
+      "case": "recipient reads sanitized historical HTML /sys/annountCement/listByUser",
+      "passed": true
+    },
+    {
+      "case": "foreign recipient data not exposed /sys/annountCement/listByUser",
+      "passed": true
+    },
+    {
+      "case": "ineligible expired ALL not exposed /sys/annountCement/listByUser",
+      "passed": true
+    },
+    {
+      "case": "recipient reads sanitized historical HTML /sys/sysAnnouncementSend/getMyAnnouncementSend?userId=fixture_student_b",
+      "passed": true
+    },
+    {
+      "case": "foreign recipient data not exposed /sys/sysAnnouncementSend/getMyAnnouncementSend?userId=fixture_student_b",
+      "passed": true
+    },
+    {
+      "case": "ineligible expired ALL not exposed /sys/sysAnnouncementSend/getMyAnnouncementSend?userId=fixture_student_b",
+      "passed": true
+    },
+    {
+      "case": "owner marks own notice read",
+      "passed": true
+    },
+    {
+      "case": "owner mark-read preserves foreign receipt",
+      "passed": true
+    },
+    {
+      "case": "read sync only reaches owner session",
+      "passed": true
+    },
+    {
+      "case": "readAll preserves draft and other user rows",
+      "passed": true
+    },
+    {
+      "case": "readAll preserves ineligible expired ALL receipt",
+      "passed": true
+    },
+    {
+      "case": "known account predating ALL expiry retains entitled history",
+      "passed": true
+    },
+    {
+      "case": "known account inbox keeps entitled ALL history",
+      "passed": true
+    },
+    {
+      "case": "known account cannot read ALL expired before registration is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "known account cannot read ALL expired before registration leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "known account cannot read ALL expired before registration sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "administrator creates authored",
+      "passed": true
+    },
+    {
+      "case": "authoring binds server identity draft state and excludes dynamic component fields",
+      "passed": true
+    },
+    {
+      "case": "write sanitizer retains ordinary markup and strips active HTML",
+      "passed": true
+    },
+    {
+      "case": "creating a draft sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "admin publishes ALL and both recipients get refresh",
+      "passed": true
+    },
+    {
+      "case": "student_a still receives published ALL notices",
+      "passed": true
+    },
+    {
+      "case": "student_a with missing registration date reads active ALL /sys/annountCement/queryById?id=2109249996397256705",
+      "passed": true
+    },
+    {
+      "case": "student_a with missing registration date reads active ALL /sys/sysAnnouncementSend/getMyAnnouncementSend",
+      "passed": true
+    },
+    {
+      "case": "teacher_a still receives published ALL notices",
+      "passed": true
+    },
+    {
+      "case": "teacher_a with missing registration date reads active ALL /sys/annountCement/queryById?id=2109249996397256705",
+      "passed": true
+    },
+    {
+      "case": "teacher_a with missing registration date reads active ALL /sys/sysAnnouncementSend/getMyAnnouncementSend",
+      "passed": true
+    },
+    {
+      "case": "admin revokes with recipient refresh",
+      "passed": true
+    },
+    {
+      "case": "revoked notice no longer readable is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "revoked notice no longer readable leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked notice no longer readable sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "administrator creates targeted",
+      "passed": true
+    },
+    {
+      "case": "targeted publication only reaches assigned recipient",
+      "passed": true
+    },
+    {
+      "case": "admin audience edit succeeds and preserves publication identity",
+      "passed": true
+    },
+    {
+      "case": "audience edit refreshes new recipient",
+      "passed": true
+    },
+    {
+      "case": "removed audience receives no new content event",
+      "passed": true
+    },
+    {
+      "case": "removed recipient cannot reuse same token to read is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "removed recipient cannot reuse same token to read leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "removed recipient cannot reuse same token to read sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "new recipient reads reassigned notice",
+      "passed": true
+    },
+    {
+      "case": "live admin grant permits existing token",
+      "passed": true
+    },
+    {
+      "case": "live admin grant permits direct socket send on existing token",
+      "passed": true
+    },
+    {
+      "case": "live admin removal rejects same token with warm principal is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "live admin removal rejects same token with warm principal leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "live admin removal rejects same token with warm principal sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "live admin removal rejects same-token direct all-user socket send is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "live admin removal rejects same-token direct all-user socket send leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "live admin removal rejects same-token direct all-user socket send sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "live admin removal rejects same-token direct targeted socket send is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "live admin removal rejects same-token direct targeted socket send leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "live admin removal rejects same-token direct targeted socket send sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "receipt database failure rolls back parent notification",
+      "passed": true
+    },
+    {
+      "case": "rollback produces no broadcast",
+      "passed": true
+    },
+    {
+      "case": "real XLSX import uses authorized command path",
+      "passed": true
+    },
+    {
+      "case": "import strips HTML and resets untrusted sender/publication",
+      "passed": true
+    },
+    {
+      "case": "admin batch soft-delete completes",
+      "passed": true
+    },
+    {
+      "case": "deleted target unavailable to previous recipient is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "deleted target unavailable to previous recipient leaves notification/audience/outbound-message rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted target unavailable to previous recipient sends no socket event",
+      "passed": true
+    },
+    {
+      "case": "synthetic cleanup restores account registration dates",
+      "passed": true
+    },
+    {
+      "case": "synthetic cleanup restores notification tables",
+      "passed": true
+    }
+  ],
+  "passed": 286,
+  "total": 286,
+  "failed": 0,
+  "expected_legacy": false,
+  "scope": "synthetic HTTP/MySQL and authenticated localhost WebSocket; no production or external delivery"
+}

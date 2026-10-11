@@ -1,0 +1,3791 @@
+{
+  "observed_utc": "2026-10-11T11:47:47.961437+00:00",
+  "scope": "owned synthetic HTTP/MySQL",
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "verifier_sha256": "b677529fbb89e61dc9351c1ddba3bad712bd5f769ea0d280a04bac70ac8330ef",
+  "production_connected": false,
+  "passed": 614,
+  "failed": 0,
+  "checks": [
+    {
+      "case": "manual day-log import fixture is a real round-tripped XLS",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /add is closed",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /add is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /add is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /edit is closed",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /edit is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /edit is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /delete is closed",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /delete is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /delete is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /deleteBatch is closed",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /deleteBatch is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /deleteBatch is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /importExcel is closed",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /importExcel is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "student_a manual day-log /importExcel is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /add is closed",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /add is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /add is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /edit is closed",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /edit is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /edit is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /delete is closed",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /delete is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /delete is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /deleteBatch is closed",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /deleteBatch is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /deleteBatch is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /importExcel is closed",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /importExcel is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "student_b manual day-log /importExcel is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /add is closed",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /add is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /add is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /edit is closed",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /edit is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /edit is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /delete is closed",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /delete is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /delete is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /deleteBatch is closed",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /deleteBatch is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /deleteBatch is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /importExcel is closed",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /importExcel is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "teacher_a manual day-log /importExcel is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /add is closed",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /add is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /add is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /edit is closed",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /edit is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /edit is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /delete is closed",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /delete is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /delete is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /deleteBatch is closed",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /deleteBatch is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /deleteBatch is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /importExcel is closed",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /importExcel is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "teacher_b manual day-log /importExcel is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /add is closed",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /add is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /add is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /edit is closed",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /edit is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /edit is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /delete is closed",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /delete is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /delete is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /deleteBatch is closed",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /deleteBatch is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /deleteBatch is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /importExcel is closed",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /importExcel is closed preserves accounts tasks counters and Redis",
+      "passed": true
+    },
+    {
+      "case": "admin manual day-log /importExcel is closed preserves one class/day row",
+      "passed": true
+    },
+    {
+      "case": "manual day-log acceptance restores its original table state",
+      "passed": true
+    },
+    {
+      "case": "current teacher scope permits /teaching/teachingWork/queryById?id=fixture_work_a",
+      "passed": true
+    },
+    {
+      "case": "current teacher scope permits /system/sysFile/queryById?id=fixture_file_a",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: same token rejects GET /teaching/teachingWork/queryById?id=fixture_work_a",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: denial leaves work, feedback and files unchanged",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: old cached scope remains but grants no access",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: same token rejects PUT /teaching/teachingWork/edit",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: denial leaves work, feedback and files unchanged",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: old cached scope remains but grants no access",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: same token rejects GET /system/sysFile/queryById?id=fixture_file_a",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: denial leaves work, feedback and files unchanged",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: old cached scope remains but grants no access",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: same token rejects GET /sys/common/static/fixture-work-a.txt",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: denial leaves work, feedback and files unchanged",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: old cached scope remains but grants no access",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: same token rejects HEAD /sys/common/static/fixture-work-a.txt",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: denial leaves work, feedback and files unchanged",
+      "passed": true
+    },
+    {
+      "case": "late fill after eviction: old cached scope remains but grants no access",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: same token rejects GET /teaching/teachingWork/queryById?id=fixture_work_a",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: denial leaves work, feedback and files unchanged",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: old cached scope remains but grants no access",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: same token rejects PUT /teaching/teachingWork/edit",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: denial leaves work, feedback and files unchanged",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: old cached scope remains but grants no access",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: same token rejects GET /system/sysFile/queryById?id=fixture_file_a",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: denial leaves work, feedback and files unchanged",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: old cached scope remains but grants no access",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: same token rejects GET /sys/common/static/fixture-work-a.txt",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: denial leaves work, feedback and files unchanged",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: old cached scope remains but grants no access",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: same token rejects HEAD /sys/common/static/fixture-work-a.txt",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: denial leaves work, feedback and files unchanged",
+      "passed": true
+    },
+    {
+      "case": "retained after eviction failure: old cached scope remains but grants no access",
+      "passed": true
+    },
+    {
+      "case": "scope probe never mutates work or file state",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot self-grant admin",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot self-grant admin changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot reset another password",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot reset another password changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot add account",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot add account changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot edit account roles",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot edit account roles changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot import accounts /sys/user/importExcel",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot import accounts /sys/user/importExcel changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot import accounts /sys/user/importStudent",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot import accounts /sys/user/importStudent changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a permission graph blocked /sys/permission/add",
+      "passed": true
+    },
+    {
+      "case": "student_a permission graph blocked /sys/permission/add changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a permission graph blocked /sys/permission/saveRolePermission",
+      "passed": true
+    },
+    {
+      "case": "student_a permission graph blocked /sys/permission/saveRolePermission changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a permission graph blocked /sys/sysDepartRole/add",
+      "passed": true
+    },
+    {
+      "case": "student_a permission graph blocked /sys/sysDepartRole/add changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department management blocked /sys/sysDepart/add",
+      "passed": true
+    },
+    {
+      "case": "student_a department management blocked /sys/sysDepart/add changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department management blocked /sys/sysDepart/edit",
+      "passed": true
+    },
+    {
+      "case": "student_a department management blocked /sys/sysDepart/edit changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department management blocked /sys/sysDepart/delete?id=fixture_class_a",
+      "passed": true
+    },
+    {
+      "case": "student_a department management blocked /sys/sysDepart/delete?id=fixture_class_a changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department management blocked /sys/sysDepart/deleteBatch?ids=fixture_class_a",
+      "passed": true
+    },
+    {
+      "case": "student_a department management blocked /sys/sysDepart/deleteBatch?ids=fixture_class_a changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department management blocked /sys/sysDepart/importExcel",
+      "passed": true
+    },
+    {
+      "case": "student_a department management blocked /sys/sysDepart/importExcel changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department management blocked /sys/sysDepart/removeAll?id=fixture_class_a",
+      "passed": true
+    },
+    {
+      "case": "student_a department management blocked /sys/sysDepart/removeAll?id=fixture_class_a changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/add",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/add changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/edit",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/delete?id=missing",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/delete?id=missing changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/deleteBatch?ids=missing",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/deleteBatch?ids=missing changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/importExcel",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/importExcel changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/datarule",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/datarule changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/saveDeptRolePermission",
+      "passed": true
+    },
+    {
+      "case": "student_a department authorization blocked /sys/sysDepartPermission/saveDeptRolePermission changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot restore recycle bin",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot restore recycle bin changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot purge accounts",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot purge accounts changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot self-grant admin",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot self-grant admin changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot reset another password",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot reset another password changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot add account",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot add account changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot edit account roles",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot edit account roles changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot import accounts /sys/user/importExcel",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot import accounts /sys/user/importExcel changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot import accounts /sys/user/importStudent",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot import accounts /sys/user/importStudent changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a permission graph blocked /sys/permission/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_a permission graph blocked /sys/permission/add changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a permission graph blocked /sys/permission/saveRolePermission",
+      "passed": true
+    },
+    {
+      "case": "teacher_a permission graph blocked /sys/permission/saveRolePermission changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a permission graph blocked /sys/sysDepartRole/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_a permission graph blocked /sys/sysDepartRole/add changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department management blocked /sys/sysDepart/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department management blocked /sys/sysDepart/add changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department management blocked /sys/sysDepart/edit",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department management blocked /sys/sysDepart/edit changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department management blocked /sys/sysDepart/delete?id=fixture_class_a",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department management blocked /sys/sysDepart/delete?id=fixture_class_a changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department management blocked /sys/sysDepart/deleteBatch?ids=fixture_class_a",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department management blocked /sys/sysDepart/deleteBatch?ids=fixture_class_a changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department management blocked /sys/sysDepart/importExcel",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department management blocked /sys/sysDepart/importExcel changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department management blocked /sys/sysDepart/removeAll?id=fixture_class_a",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department management blocked /sys/sysDepart/removeAll?id=fixture_class_a changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/add changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/edit",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/delete?id=missing",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/delete?id=missing changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/deleteBatch?ids=missing",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/deleteBatch?ids=missing changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/importExcel",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/importExcel changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/datarule",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/datarule changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/saveDeptRolePermission",
+      "passed": true
+    },
+    {
+      "case": "teacher_a department authorization blocked /sys/sysDepartPermission/saveDeptRolePermission changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot restore recycle bin",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot restore recycle bin changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot purge accounts",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot purge accounts changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot redefine role identity /sys/role/add",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot redefine role identity /sys/role/add changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot redefine role identity /sys/role/edit",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot redefine role identity /sys/role/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot redefine role identity /sys/role/edit",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot redefine role identity /sys/role/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot redefine role identity /sys/role/delete?id=fixture_role_admin",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot redefine role identity /sys/role/delete?id=fixture_role_admin changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot redefine role identity /sys/role/deleteBatch?ids=fixture_role_student",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot redefine role identity /sys/role/deleteBatch?ids=fixture_role_student changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot redefine role identity /sys/role/importExcel",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot redefine role identity /sys/role/importExcel changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot redefine role identity /sys/role/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot redefine role identity /sys/role/add changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot redefine role identity /sys/role/edit",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot redefine role identity /sys/role/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot redefine role identity /sys/role/edit",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot redefine role identity /sys/role/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot redefine role identity /sys/role/delete?id=fixture_role_admin",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot redefine role identity /sys/role/delete?id=fixture_role_admin changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot redefine role identity /sys/role/deleteBatch?ids=fixture_role_student",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot redefine role identity /sys/role/deleteBatch?ids=fixture_role_student changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot redefine role identity /sys/role/importExcel",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot redefine role identity /sys/role/importExcel changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "admin cannot redefine role identity /sys/role/add",
+      "passed": true
+    },
+    {
+      "case": "admin cannot redefine role identity /sys/role/add changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "admin cannot redefine role identity /sys/role/edit",
+      "passed": true
+    },
+    {
+      "case": "admin cannot redefine role identity /sys/role/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "admin cannot redefine role identity /sys/role/edit",
+      "passed": true
+    },
+    {
+      "case": "admin cannot redefine role identity /sys/role/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "admin cannot redefine role identity /sys/role/delete?id=fixture_role_admin",
+      "passed": true
+    },
+    {
+      "case": "admin cannot redefine role identity /sys/role/delete?id=fixture_role_admin changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "admin cannot redefine role identity /sys/role/deleteBatch?ids=fixture_role_student",
+      "passed": true
+    },
+    {
+      "case": "admin cannot redefine role identity /sys/role/deleteBatch?ids=fixture_role_student changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "admin cannot redefine role identity /sys/role/importExcel",
+      "passed": true
+    },
+    {
+      "case": "admin cannot redefine role identity /sys/role/importExcel changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile alias rejects other ID /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "profile alias rejects other ID /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects password /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects password /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects salt /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects salt /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects status /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects status /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects delFlag /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects delFlag /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects departIds /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects departIds /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects phone /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects phone /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects userIdentity /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects userIdentity /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile alias rejects other ID /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "profile alias rejects other ID /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects password /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects password /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects salt /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects salt /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects status /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects status /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects delFlag /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects delFlag /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects departIds /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects departIds /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects phone /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects phone /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "profile rejects userIdentity /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "profile rejects userIdentity /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "self-password API cannot target a different username",
+      "passed": true
+    },
+    {
+      "case": "self-password API cannot target a different username changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "role batch validates all target IDs",
+      "passed": true
+    },
+    {
+      "case": "role batch validates all target IDs changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "case aliases are not accepted as exact target IDs",
+      "passed": true
+    },
+    {
+      "case": "case aliases are not accepted as exact target IDs changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot grant developer",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot grant developer changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "administrator creates account with validated roles and class",
+      "passed": true
+    },
+    {
+      "case": "new identity is server generated and active",
+      "passed": true
+    },
+    {
+      "case": "administrator edits allowed account fields",
+      "passed": true
+    },
+    {
+      "case": "administrative edit preserves credentials and account identity",
+      "passed": true
+    },
+    {
+      "case": "administrative edit commits selected memberships",
+      "passed": true
+    },
+    {
+      "case": "administrator logically deletes newly created account",
+      "passed": true
+    },
+    {
+      "case": "administrator purges newly deleted account",
+      "passed": true
+    },
+    {
+      "case": "student has no recycle access before grant",
+      "passed": true
+    },
+    {
+      "case": "student has no recycle access before grant changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "administrator grants an allowed role",
+      "passed": true
+    },
+    {
+      "case": "same token observes newly granted role",
+      "passed": true
+    },
+    {
+      "case": "administrator revokes role",
+      "passed": true
+    },
+    {
+      "case": "same token loses revoked role",
+      "passed": true
+    },
+    {
+      "case": "same token loses revoked role changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "live developer can edit its synthetic role",
+      "passed": true
+    },
+    {
+      "case": "live administrator has recycle access",
+      "passed": true
+    },
+    {
+      "case": "live permission authorizes status API",
+      "passed": true
+    },
+    {
+      "case": "canonical legacy administrator/developer cache is retained in owned Redis",
+      "passed": true
+    },
+    {
+      "case": "database revocation removes both old management roles",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/role/edit",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/role/edit changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/role/edit leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/role/add",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/role/add changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/role/add leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/role/delete?id=account_auth_cb5789b4d2",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/role/delete?id=account_auth_cb5789b4d2 changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/role/delete?id=account_auth_cb5789b4d2 leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/role/deleteBatch?ids=account_auth_cb5789b4d2",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/role/deleteBatch?ids=account_auth_cb5789b4d2 changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/role/deleteBatch?ids=account_auth_cb5789b4d2 leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/role/importExcel",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/role/importExcel changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/role/importExcel leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/role/datarule",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/role/datarule changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/role/datarule leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/add",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/add changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/add leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/permission/edit",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/permission/edit changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/permission/edit leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/edit",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/edit changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/edit leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/permission/delete?id=account_auth_cb5789b4d2_p",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/permission/delete?id=account_auth_cb5789b4d2_p changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/permission/delete?id=account_auth_cb5789b4d2_p leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/permission/deleteBatch?ids=account_auth_cb5789b4d2_p",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/permission/deleteBatch?ids=account_auth_cb5789b4d2_p changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/permission/deleteBatch?ids=account_auth_cb5789b4d2_p leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/saveRolePermission",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/saveRolePermission changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/saveRolePermission leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/saveDepartPermission",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/saveDepartPermission changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/saveDepartPermission leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/addPermissionRule",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/addPermissionRule changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/addPermissionRule leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/permission/editPermissionRule",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/permission/editPermissionRule changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/permission/editPermissionRule leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/editPermissionRule",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/editPermissionRule changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/permission/editPermissionRule leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/permission/deletePermissionRule?id=account_auth_cb5789b4d2_rule",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/permission/deletePermissionRule?id=account_auth_cb5789b4d2_rule changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/permission/deletePermissionRule?id=account_auth_cb5789b4d2_rule leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartRole/add",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartRole/add changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartRole/add leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/sysDepartRole/edit",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/sysDepartRole/edit changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/sysDepartRole/edit leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepartRole/delete?id=account_auth_cb5789b4d2_dr",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepartRole/delete?id=account_auth_cb5789b4d2_dr changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepartRole/delete?id=account_auth_cb5789b4d2_dr leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepartRole/deleteBatch?ids=account_auth_cb5789b4d2_dr",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepartRole/deleteBatch?ids=account_auth_cb5789b4d2_dr changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepartRole/deleteBatch?ids=account_auth_cb5789b4d2_dr leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartRole/deptRoleUserAdd",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartRole/deptRoleUserAdd changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartRole/deptRoleUserAdd leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartRole/datarule",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartRole/datarule changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartRole/datarule leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartRole/importExcel",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartRole/importExcel changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartRole/importExcel leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartPermission/add",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartPermission/add changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartPermission/add leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/sysDepartPermission/edit",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/sysDepartPermission/edit changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/sysDepartPermission/edit leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepartPermission/delete?id=account_auth_cb5789b4d2_dp",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepartPermission/delete?id=account_auth_cb5789b4d2_dp changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepartPermission/delete?id=account_auth_cb5789b4d2_dp leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepartPermission/deleteBatch?ids=account_auth_cb5789b4d2_dp",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepartPermission/deleteBatch?ids=account_auth_cb5789b4d2_dp changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepartPermission/deleteBatch?ids=account_auth_cb5789b4d2_dp leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartPermission/importExcel",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartPermission/importExcel changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartPermission/importExcel leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartPermission/datarule",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartPermission/datarule changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartPermission/datarule leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartPermission/saveDeptRolePermission",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartPermission/saveDeptRolePermission changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepartPermission/saveDeptRolePermission leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepart/add",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepart/add changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepart/add leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/sysDepart/edit",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/sysDepart/edit changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/sysDepart/edit leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepart/delete?id=account_auth_cb5789b4d2_missing",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepart/delete?id=account_auth_cb5789b4d2_missing changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepart/delete?id=account_auth_cb5789b4d2_missing leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepart/deleteBatch?ids=account_auth_cb5789b4d2_missing",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepart/deleteBatch?ids=account_auth_cb5789b4d2_missing changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/sysDepart/deleteBatch?ids=account_auth_cb5789b4d2_missing leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepart/importExcel",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepart/importExcel changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/sysDepart/importExcel leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache GET /sys/sysDepart/removeAll?id=account_auth_cb5789b4d2_missing",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache GET /sys/sysDepart/removeAll?id=account_auth_cb5789b4d2_missing changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache GET /sys/sysDepart/removeAll?id=account_auth_cb5789b4d2_missing leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/add",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/add changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/add leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/user/edit",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/user/edit changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/user/edit leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/delete?id=account_auth_cb5789b4d2_missing",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/delete?id=account_auth_cb5789b4d2_missing changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/delete?id=account_auth_cb5789b4d2_missing leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteBatch?ids=account_auth_cb5789b4d2_missing",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteBatch?ids=account_auth_cb5789b4d2_missing changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteBatch?ids=account_auth_cb5789b4d2_missing leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/user/changePassword",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/user/changePassword changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/user/changePassword leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/importExcel",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/importExcel changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/importExcel leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/importStudent",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/importStudent changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/importStudent leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/addSysUserRole",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/addSysUserRole changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/addSysUserRole leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteUserRole?roleId=fixture_role_student&userId=fixture_student_a",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteUserRole?roleId=fixture_role_student&userId=fixture_student_a changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteUserRole?roleId=fixture_role_student&userId=fixture_student_a leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteUserRoleBatch?roleId=fixture_role_student&userIds=fixture_student_a",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteUserRoleBatch?roleId=fixture_role_student&userIds=fixture_student_a changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteUserRoleBatch?roleId=fixture_role_student&userIds=fixture_student_a leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/editSysDepartWithUser",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/editSysDepartWithUser changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache POST /sys/user/editSysDepartWithUser leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteUserInDepart?depId=fixture_class_a&userId=fixture_student_a",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteUserInDepart?depId=fixture_class_a&userId=fixture_student_a changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteUserInDepart?depId=fixture_class_a&userId=fixture_student_a leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteUserInDepartBatch?depId=fixture_class_a&userIds=fixture_student_a",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteUserInDepartBatch?depId=fixture_class_a&userIds=fixture_student_a changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteUserInDepartBatch?depId=fixture_class_a&userIds=fixture_student_a leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache GET /sys/user/recycleBin",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache GET /sys/user/recycleBin changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache GET /sys/user/recycleBin leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/user/putRecycleBin",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/user/putRecycleBin changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/user/putRecycleBin leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteRecycleBin?userIds=account_auth_cb5789b4d2_missing",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteRecycleBin?userIds=account_auth_cb5789b4d2_missing changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache DELETE /sys/user/deleteRecycleBin?userIds=account_auth_cb5789b4d2_missing leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/user/frozenBatch",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/user/frozenBatch changes no account, department, or permission records",
+      "passed": true
+    },
+    {
+      "case": "revoked roles ignore retained old cache PUT /sys/user/frozenBatch leaves the old authorization cache intact",
+      "passed": true
+    },
+    {
+      "case": "normal account cannot be permanently deleted",
+      "passed": true
+    },
+    {
+      "case": "normal account cannot be permanently deleted changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "mixed normal and deleted targets preserve all rows",
+      "passed": true
+    },
+    {
+      "case": "mixed normal and deleted targets preserve all rows changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "SQL-shaped ID is only a bound value /sys/user/deleteRecycleBin",
+      "passed": true
+    },
+    {
+      "case": "SQL-shaped ID is only a bound value /sys/user/deleteRecycleBin changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "SQL-shaped ID is only a bound value /sys/user/putRecycleBin",
+      "passed": true
+    },
+    {
+      "case": "SQL-shaped ID is only a bound value /sys/user/putRecycleBin changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "relationship failure rolls back physical account deletion",
+      "passed": true
+    },
+    {
+      "case": "relationship failure rolls back physical account deletion changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "restore accepts valid recycle account",
+      "passed": true
+    },
+    {
+      "case": "restore changes deletion state only",
+      "passed": true
+    },
+    {
+      "case": "purge removes deleted account",
+      "passed": true
+    },
+    {
+      "case": "purge removes all related memberships",
+      "passed": true
+    },
+    {
+      "case": "own profile updates permitted fields",
+      "passed": true
+    },
+    {
+      "case": "own profile preserves all sensitive columns",
+      "passed": true
+    },
+    {
+      "case": "email validation warms authenticated profile /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "email validation has a synthetic serialized user cache /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects plain text /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects plain text /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects plain text /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects blank space /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects blank space /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects blank space /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects blank tab /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects blank tab /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects blank tab /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing domain /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing domain /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing domain /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing local part /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing local part /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing local part /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing domain suffix /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing domain suffix /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing domain suffix /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects multiple at signs /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects multiple at signs /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects multiple at signs /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects local space /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects local space /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects local space /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects leading space /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects leading space /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects leading space /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects trailing space /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects trailing space /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects trailing space /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects trailing newline /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects trailing newline /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects trailing newline /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects nonbreaking space /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects nonbreaking space /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects nonbreaking space /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects embedded BOM /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects embedded BOM /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects embedded BOM /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects C1 control /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects C1 control /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects C1 control /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects quoted C0 control /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects quoted C0 control /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects quoted C0 control /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects quoted DEL control /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects quoted DEL control /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects quoted DEL control /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects over 100 characters /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects over 100 characters /sys/user/appEdit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects over 100 characters /sys/user/appEdit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves ordinary address /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves ordinary address /sys/user/appEdit persists the exact email including null versus empty",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves ordinary address /sys/user/appEdit preserves sensitive identity credentials and account state",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves plus tag and subdomain /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves plus tag and subdomain /sys/user/appEdit persists the exact email including null versus empty",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves plus tag and subdomain /sys/user/appEdit preserves sensitive identity credentials and account state",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves null optional email /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves null optional email /sys/user/appEdit persists the exact email including null versus empty",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves null optional email /sys/user/appEdit preserves sensitive identity credentials and account state",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves empty optional email /sys/user/appEdit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves empty optional email /sys/user/appEdit persists the exact email including null versus empty",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves empty optional email /sys/user/appEdit preserves sensitive identity credentials and account state",
+      "passed": true
+    },
+    {
+      "case": "email validation warms authenticated profile /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "email validation has a synthetic serialized user cache /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects plain text /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects plain text /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects plain text /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects blank space /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects blank space /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects blank space /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects blank tab /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects blank tab /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects blank tab /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing domain /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing domain /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing domain /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing local part /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing local part /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing local part /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing domain suffix /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing domain suffix /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects missing domain suffix /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects multiple at signs /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects multiple at signs /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects multiple at signs /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects local space /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects local space /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects local space /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects leading space /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects leading space /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects leading space /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects trailing space /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects trailing space /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects trailing space /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects trailing newline /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects trailing newline /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects trailing newline /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects nonbreaking space /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects nonbreaking space /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects nonbreaking space /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects embedded BOM /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects embedded BOM /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects embedded BOM /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects C1 control /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects C1 control /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects C1 control /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects quoted C0 control /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects quoted C0 control /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects quoted C0 control /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects quoted DEL control /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects quoted DEL control /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects quoted DEL control /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects over 100 characters /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects over 100 characters /teaching/user/edit changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile rejects over 100 characters /teaching/user/edit preserves user and Shiro cache keys and values",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves ordinary address /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves ordinary address /teaching/user/edit persists the exact email including null versus empty",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves ordinary address /teaching/user/edit preserves sensitive identity credentials and account state",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves plus tag and subdomain /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves plus tag and subdomain /teaching/user/edit persists the exact email including null versus empty",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves plus tag and subdomain /teaching/user/edit preserves sensitive identity credentials and account state",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves null optional email /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves null optional email /teaching/user/edit persists the exact email including null versus empty",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves null optional email /teaching/user/edit preserves sensitive identity credentials and account state",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves empty optional email /teaching/user/edit",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves empty optional email /teaching/user/edit persists the exact email including null versus empty",
+      "passed": true
+    },
+    {
+      "case": "direct HTTP profile saves empty optional email /teaching/user/edit preserves sensitive identity credentials and account state",
+      "passed": true
+    },
+    {
+      "case": "reset uses canonical username and only credentials",
+      "passed": true
+    },
+    {
+      "case": "reset preserves identity and status",
+      "passed": true
+    },
+    {
+      "case": "old token is rejected after password reset",
+      "passed": true
+    },
+    {
+      "case": "old token is rejected after password reset changes no account or permission records",
+      "passed": true
+    },
+    {
+      "case": "original account and permission records restored",
+      "passed": true
+    }
+  ],
+  "profile_email_cases": [
+    {
+      "route": "/sys/user/appEdit",
+      "case": "plain text",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "blank space",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "blank tab",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "missing domain",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "missing local part",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "missing domain suffix",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "multiple at signs",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "local space",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "leading space",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "trailing space",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "trailing newline",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "nonbreaking space",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "embedded BOM",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "C1 control",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "quoted C0 control",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "quoted DEL control",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "over 100 characters",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "f381fc02ea4ef762afec4aa2ebd83d3a5ba5e5c6cdaa9f861d02ecca24a5ff61",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "ordinary address",
+      "http_status": 200,
+      "business_code": 200,
+      "accepted": true,
+      "persisted_email": "candidate@example.test"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "plus tag and subdomain",
+      "http_status": 200,
+      "business_code": 200,
+      "accepted": true,
+      "persisted_email": "first.last+tag@sub.example.com"
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "null optional email",
+      "http_status": 200,
+      "business_code": 200,
+      "accepted": true,
+      "persisted_email": null
+    },
+    {
+      "route": "/sys/user/appEdit",
+      "case": "empty optional email",
+      "http_status": 200,
+      "business_code": 200,
+      "accepted": true,
+      "persisted_email": ""
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "plain text",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "blank space",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "blank tab",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "missing domain",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "missing local part",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "missing domain suffix",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "multiple at signs",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "local space",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "leading space",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "trailing space",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "trailing newline",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "nonbreaking space",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "embedded BOM",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "C1 control",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "quoted C0 control",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "quoted DEL control",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "over 100 characters",
+      "http_status": 200,
+      "business_code": 500,
+      "accepted": false,
+      "database_before": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "database_after": {
+        "sys_user": "5453cd2604bda4331aa8041ffb758c1f645ce84acd77929d3b603e2d28b4d0f7",
+        "sys_user_role": "a6b0c28e204f9a44223edc66de1cd52e262a47bcfca10010676616f99597c393",
+        "sys_user_depart": "70b0f7d04545ab2d659caa9792a93fa4e191fd3dc12715fbaed1b489c72c19ea",
+        "sys_depart_role_user": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_permission": "cc47fb2f30938d38e0874b4ef22ec77e6d7da8b65687377bff77747dd82947a1",
+        "sys_role_permission": "b1964489f87a46d48624b203265c5d482ec08d8ef3fa3009aff87b7291b7003c",
+        "sys_depart_role": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart_role_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_role": "9c19b5494df387e998c6e537595296db3ee91b7f0f448c6963073ed06dc620a8",
+        "sys_depart_permission": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sys_depart": "94b7b09917be8b36855d7d346097d7b2c9e9e72b7a2b39f6b4a576a28ad24209",
+        "sys_permission_data_rule": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cache_before_sha1": "36a9509d5b59753d7b86987b7758353c6923851b",
+      "cache_after_sha1": "36a9509d5b59753d7b86987b7758353c6923851b"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "ordinary address",
+      "http_status": 200,
+      "business_code": 200,
+      "accepted": true,
+      "persisted_email": "candidate@example.test"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "plus tag and subdomain",
+      "http_status": 200,
+      "business_code": 200,
+      "accepted": true,
+      "persisted_email": "first.last+tag@sub.example.com"
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "null optional email",
+      "http_status": 200,
+      "business_code": 200,
+      "accepted": true,
+      "persisted_email": null
+    },
+    {
+      "route": "/teaching/user/edit",
+      "case": "empty optional email",
+      "http_status": 200,
+      "business_code": 200,
+      "accepted": true,
+      "persisted_email": ""
+    }
+  ]
+}

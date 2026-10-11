@@ -1,0 +1,174 @@
+{
+  "checked_at": "2026-10-11T11:48:05.286699+00:00",
+  "scope": "synthetic local HTTP and MySQL",
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "cases": [
+    {
+      "case": "authorized teacher creates a new clone despite another-course same name",
+      "passed": true
+    },
+    {
+      "case": "same-name clone receives a new identity",
+      "passed": true
+    },
+    {
+      "case": "other-course work and source preserve all their columns",
+      "passed": true
+    },
+    {
+      "case": "clone keeps content and task while starting a clean draft with actual creator",
+      "passed": true
+    },
+    {
+      "case": "clone has no copied grading or comments",
+      "passed": true
+    },
+    {
+      "case": "recipient can read its actual newly created draft",
+      "passed": true
+    },
+    {
+      "case": "clone changes neither file metadata nor attachment bytes",
+      "passed": true
+    },
+    {
+      "case": "noncanonical recipient cannot create an unusable draft 'FIXTURE_STUDENT_A'",
+      "passed": true
+    },
+    {
+      "case": "noncanonical recipient rejects a mixed batch without writes 'FIXTURE_STUDENT_A'",
+      "passed": true
+    },
+    {
+      "case": "noncanonical recipient cannot create an unusable draft 'fixture_student_a '",
+      "passed": true
+    },
+    {
+      "case": "noncanonical recipient rejects a mixed batch without writes 'fixture_student_a '",
+      "passed": true
+    },
+    {
+      "case": "multi-class teacher cannot clone A task to B-only recipient eligible_c",
+      "passed": true
+    },
+    {
+      "case": "administrator also checks recipient task eligibility eligible_c",
+      "passed": true
+    },
+    {
+      "case": "one eligible and one ineligible recipient rejects the entire batch eligible_c",
+      "passed": true
+    },
+    {
+      "case": "multi-class teacher cannot clone A task to B-only recipient eligible_a",
+      "passed": true
+    },
+    {
+      "case": "administrator also checks recipient task eligibility eligible_a",
+      "passed": true
+    },
+    {
+      "case": "one eligible and one ineligible recipient rejects the entire batch eligible_a",
+      "passed": true
+    },
+    {
+      "case": "A source remains bound to A when task also spans B eligible_c",
+      "passed": true
+    },
+    {
+      "case": "A source remains bound to A when task also spans B eligible_a",
+      "passed": true
+    },
+    {
+      "case": "deleted unit rejects task clone",
+      "passed": true
+    },
+    {
+      "case": "deleted parent course rejects task clone",
+      "passed": true
+    },
+    {
+      "case": "inactive additional task rejects clone",
+      "passed": true
+    },
+    {
+      "case": "removed A course assignment rejects A source despite valid B assignment",
+      "passed": true
+    },
+    {
+      "case": "eligible task recipient still receives a usable new draft",
+      "passed": true
+    },
+    {
+      "case": "recipient can actually save the task clone through student submission",
+      "passed": true
+    },
+    {
+      "case": "same task is rejected with an actionable conflict",
+      "passed": true
+    },
+    {
+      "case": "late task conflict rejects the entire batch before any write",
+      "passed": true
+    },
+    {
+      "case": "missing recipient rejects without partial writes",
+      "passed": true
+    },
+    {
+      "case": "duplicate recipient rejects without partial writes",
+      "passed": true
+    },
+    {
+      "case": "out-of-scope recipient rejects without partial writes",
+      "passed": true
+    },
+    {
+      "case": "student management rejects without partial writes",
+      "passed": true
+    },
+    {
+      "case": "deleted source cannot create any clone",
+      "passed": true
+    },
+    {
+      "case": "additional-task clone can create its first draft",
+      "passed": true
+    },
+    {
+      "case": "additional-task duplicate also fails without writes",
+      "passed": true
+    },
+    {
+      "case": "concurrent clones for the same task produce one draft and one conflict",
+      "passed": true
+    },
+    {
+      "case": "standalone clone permits another new identity on repeated requests",
+      "passed": true
+    },
+    {
+      "case": "second INSERT failure returns no success and rolls back the first INSERT",
+      "passed": true
+    },
+    {
+      "case": "batch can be retried successfully after the synthetic failure is removed",
+      "passed": true
+    },
+    {
+      "case": "all original business rows restored",
+      "passed": true
+    },
+    {
+      "case": "original media reference index and state restored",
+      "passed": true
+    },
+    {
+      "case": "all original attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "production_verified": false,
+  "browser_verified": false
+}

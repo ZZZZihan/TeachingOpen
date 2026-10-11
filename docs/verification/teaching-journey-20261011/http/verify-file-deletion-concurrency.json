@@ -1,0 +1,292 @@
+{
+  "cases": [
+    {
+      "case": "writer-first-1 acquires named barrier",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 actual teacher edit reached post-authorization row-write barrier",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 deletion is waiting on the actual referenced file row",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 waiting deletion has not erased physical bytes",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 authorized writer completes",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 delete reports referenced-file refusal",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 work stores the committed reference",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 referenced bytes and live metadata survive",
+      "passed": true
+    },
+    {
+      "case": "delete-first-1 acquires deletion barrier",
+      "passed": true
+    },
+    {
+      "case": "delete-first-1 actual delete holds file row before tombstone commit",
+      "passed": true
+    },
+    {
+      "case": "delete-first-1 actual reference writer waits on same file row",
+      "passed": true
+    },
+    {
+      "case": "delete-first-1 uncommitted deletion preserves bytes",
+      "passed": true
+    },
+    {
+      "case": "delete-first-1 deletion completes",
+      "passed": true
+    },
+    {
+      "case": "delete-first-1 first reference is rejected with authorization response",
+      "passed": true
+    },
+    {
+      "case": "delete-first-1 rejected writer leaves work unmodified",
+      "passed": true
+    },
+    {
+      "case": "delete-first-1 bytes and metadata are fully reclaimed",
+      "passed": true
+    },
+    {
+      "case": "writer-first-2 acquires named barrier",
+      "passed": true
+    },
+    {
+      "case": "writer-first-2 actual teacher edit reached post-authorization row-write barrier",
+      "passed": true
+    },
+    {
+      "case": "writer-first-2 deletion is waiting on the actual referenced file row",
+      "passed": true
+    },
+    {
+      "case": "writer-first-2 waiting deletion has not erased physical bytes",
+      "passed": true
+    },
+    {
+      "case": "writer-first-2 authorized writer completes",
+      "passed": true
+    },
+    {
+      "case": "writer-first-2 delete reports referenced-file refusal",
+      "passed": true
+    },
+    {
+      "case": "writer-first-2 work stores the committed reference",
+      "passed": true
+    },
+    {
+      "case": "writer-first-2 referenced bytes and live metadata survive",
+      "passed": true
+    },
+    {
+      "case": "delete-first-2 acquires deletion barrier",
+      "passed": true
+    },
+    {
+      "case": "delete-first-2 actual delete holds file row before tombstone commit",
+      "passed": true
+    },
+    {
+      "case": "delete-first-2 actual reference writer waits on same file row",
+      "passed": true
+    },
+    {
+      "case": "delete-first-2 uncommitted deletion preserves bytes",
+      "passed": true
+    },
+    {
+      "case": "delete-first-2 deletion completes",
+      "passed": true
+    },
+    {
+      "case": "delete-first-2 first reference is rejected with authorization response",
+      "passed": true
+    },
+    {
+      "case": "delete-first-2 rejected writer leaves work unmodified",
+      "passed": true
+    },
+    {
+      "case": "delete-first-2 bytes and metadata are fully reclaimed",
+      "passed": true
+    },
+    {
+      "case": "writer-first-3 acquires named barrier",
+      "passed": true
+    },
+    {
+      "case": "writer-first-3 actual teacher edit reached post-authorization row-write barrier",
+      "passed": true
+    },
+    {
+      "case": "writer-first-3 deletion is waiting on the actual referenced file row",
+      "passed": true
+    },
+    {
+      "case": "writer-first-3 waiting deletion has not erased physical bytes",
+      "passed": true
+    },
+    {
+      "case": "writer-first-3 authorized writer completes",
+      "passed": true
+    },
+    {
+      "case": "writer-first-3 delete reports referenced-file refusal",
+      "passed": true
+    },
+    {
+      "case": "writer-first-3 work stores the committed reference",
+      "passed": true
+    },
+    {
+      "case": "writer-first-3 referenced bytes and live metadata survive",
+      "passed": true
+    },
+    {
+      "case": "delete-first-3 acquires deletion barrier",
+      "passed": true
+    },
+    {
+      "case": "delete-first-3 actual delete holds file row before tombstone commit",
+      "passed": true
+    },
+    {
+      "case": "delete-first-3 actual reference writer waits on same file row",
+      "passed": true
+    },
+    {
+      "case": "delete-first-3 uncommitted deletion preserves bytes",
+      "passed": true
+    },
+    {
+      "case": "delete-first-3 deletion completes",
+      "passed": true
+    },
+    {
+      "case": "delete-first-3 first reference is rejected with authorization response",
+      "passed": true
+    },
+    {
+      "case": "delete-first-3 rejected writer leaves work unmodified",
+      "passed": true
+    },
+    {
+      "case": "delete-first-3 bytes and metadata are fully reclaimed",
+      "passed": true
+    },
+    {
+      "case": "actual local unlink failure reports failed cleanup",
+      "passed": true
+    },
+    {
+      "case": "unlink failure leaves bytes and committed tombstone",
+      "passed": true
+    },
+    {
+      "case": "local I/O failure pending record remains available to owner management list",
+      "passed": true
+    },
+    {
+      "case": "local I/O failure metadata read is refused",
+      "passed": true
+    },
+    {
+      "case": "local I/O failure pending bytes refused for teacher_a",
+      "passed": true
+    },
+    {
+      "case": "local I/O failure pending bytes refused for admin",
+      "passed": true
+    },
+    {
+      "case": "local I/O failure pending bytes refused for None",
+      "passed": true
+    },
+    {
+      "case": "local I/O failure new work reference refused",
+      "passed": true
+    },
+    {
+      "case": "local I/O failure other owner cannot perform cleanup retry",
+      "passed": true
+    },
+    {
+      "case": "same owner retries failed local cleanup successfully",
+      "passed": true
+    },
+    {
+      "case": "local cleanup retry removes bytes and metadata",
+      "passed": true
+    },
+    {
+      "case": "metadata DELETE SQL failure reports failed cleanup",
+      "passed": true
+    },
+    {
+      "case": "SQL cleanup failure retains tombstone after physical deletion",
+      "passed": true
+    },
+    {
+      "case": "SQL-failure tombstone cannot be referenced",
+      "passed": true
+    },
+    {
+      "case": "same owner retries missing-object metadata cleanup",
+      "passed": true
+    },
+    {
+      "case": "metadata retry completes",
+      "passed": true
+    },
+    {
+      "case": "ordinary work attaches an owned local file",
+      "passed": true
+    },
+    {
+      "case": "ordinary work deletion succeeds with post-commit attachment cleanup",
+      "passed": true
+    },
+    {
+      "case": "nested cleanup transaction reclaims now-unreferenced bytes and metadata",
+      "passed": true
+    },
+    {
+      "case": "all original business rows and media index restored",
+      "passed": true
+    },
+    {
+      "case": "all original upload bytes restored",
+      "passed": true
+    },
+    {
+      "case": "temporary barrier trigger removed",
+      "passed": true
+    }
+  ],
+  "passed": 70,
+  "failed": 0,
+  "total": 70,
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "expected_legacy": false,
+  "exception": null,
+  "created_at": "2026-10-11T11:54:04.043978+00:00",
+  "scope": "Actual HTTP writes/deletes, MySQL named/row locks (3 repetitions per order), unlink and metadata SQL failure, retry and post-commit work cleanup; owned synthetic runtime only."
+}
