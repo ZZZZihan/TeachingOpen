@@ -74,6 +74,13 @@ def write_json(path, value):
     Path(path).write_text(json.dumps(value, sort_keys=True, indent=2) + '\n')
 
 
+class CandidateSourceContractTests(unittest.TestCase):
+    def test_repository_nginx_matches_reviewed_pin(self):
+        module = load_module(ROOT / 'deploy/candidate_release.py', 'candidate_source_contract')
+        self.assertEqual(digest(ROOT / 'web/nginx/default.conf'), module.NGINX_SHA256,
+                         'Review the Nginx change and update the fixed candidate pin explicitly')
+
+
 class CandidateReleaseTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -283,6 +290,16 @@ class CandidateReleaseTests(unittest.TestCase):
         (self.source / 'README.fixture').write_text('staged uncommitted change\n')
         git(self.source, 'add', 'README.fixture')
         self.rejected_create()
+
+    def test_committed_unreviewed_nginx_is_rejected_before_output_creation(self):
+        path = self.source / 'web/nginx/default.conf'
+        path.write_bytes(path.read_bytes() + b'\n# unreviewed configuration change\n')
+        git(self.source, 'add', 'web/nginx/default.conf')
+        git(self.source, 'commit', '-qm', 'Unreviewed Nginx test change')
+        self.assertEqual(git(self.source, 'status', '--porcelain', '--untracked-files=no'), '')
+        with self.assertRaisesRegex(ValueError, 'Source Nginx differs from reviewed'):
+            self.create()
+        self.assertFalse(self.output.exists())
 
     def test_jar_hash_mismatch_is_rejected(self):
         self.rejected_create(jar_sha256='0' * 64)
@@ -636,6 +653,19 @@ class CandidateReleaseTests(unittest.TestCase):
         bundle = self.bundle_copy()
         (bundle / 'web/dist/js/app.js').write_text('different')
         self.rejected_verify(bundle)
+
+    def test_verify_rejects_broadened_nginx_even_with_resealed_receipts(self):
+        bundle = self.bundle_copy()
+        path = bundle / 'web/nginx.conf'
+        contents = path.read_text()
+        self.assertIn('$teaching_python_resource_policy always;', contents)
+        self.replace_bundle_file(bundle, 'web/nginx.conf', contents.replace(
+            '$teaching_python_resource_policy always;', '"cross-origin" always;'))
+        self.reseal_inventory(bundle)
+        self.edit_manifest(bundle, lambda manifest: manifest['helper_sha256'].update(
+            {'web/nginx/default.conf': digest(path)}))
+        with self.assertRaisesRegex(ValueError, 'Nginx must be the exact reviewed'):
+            self.module.verify_bundle(bundle)
 
     def test_verify_rejects_file_symlink(self):
         bundle = self.bundle_copy()

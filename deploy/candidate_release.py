@@ -14,7 +14,9 @@ import sys
 import tempfile
 
 FORMAT = 2
-NGINX_SHA256 = '93b019f547c36b708d46ac175368aee69a234495e6456b3e48e75d681e799a40'
+# Reviewed #66 proxy contract plus #92's eight exact public Python CORP exceptions
+# (85e19e8e60444f69d0ddebd86aee9905b239ae72). Keep this pin fixed, not source-derived.
+NGINX_SHA256 = '8ca3498beb006d305e2c632ee7428d5578e83dc89c7560cd1fad4f6c374c59f3'
 TEMPLATE_SHA256 = '8854226931f4aea3fd076f90ff0c0e73b932fff2ef885a0fb4d19f6034b8ce64'
 PLATFORM = 'linux/arm64'
 IMAGES = {
@@ -398,7 +400,7 @@ def verify_bundle(bundle):
     if read_json(bundle / 'compose.json') != compose_config(project, port):
         raise ValueError('Compose configuration differs from the bounded contract')
     if expected.get('web/nginx.conf', {}).get('sha256') != NGINX_SHA256:
-        raise ValueError('Nginx must be the exact reviewed #66 configuration')
+        raise ValueError('Nginx must be the exact reviewed candidate configuration (#66 + #92)')
     if expected.get('app/app.jar', {}).get('sha256') != manifest.get('artifact_inputs', {}).get('jar_sha256'):
         raise ValueError('JAR differs from the declared frozen input')
     return {'status': 'verified_immutable', 'bundle': str(bundle), 'source_commit': manifest['source_commit'],
@@ -426,7 +428,7 @@ def create_bundle(source, jar, jar_sha256, dist_manifest, dist_manifest_sha256, 
         raise ValueError('Every trusted helper input must be tracked by the frozen source commit')
     helper_hashes = {name: sha256(checked_path(source / name)) for name in HELPERS}
     if helper_hashes['web/nginx/default.conf'] != NGINX_SHA256:
-        raise ValueError('Source Nginx differs from reviewed #66')
+        raise ValueError('Source Nginx differs from reviewed candidate contract (#66 + #92)')
     if helper_hashes['api/dev/application-localtest.properties.template'] != TEMPLATE_SHA256:
         raise ValueError('Source localtest template differs from reviewed contract')
     if sha256(jar) != jar_sha256 or sha256(dist_manifest) != dist_manifest_sha256:
