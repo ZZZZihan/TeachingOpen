@@ -1,5 +1,8 @@
 package org.jeecg.modules.system.controller;
 
+import org.apache.shiro.authz.UnauthorizedException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 
 import java.util.Arrays;
 import java.util.Date;
@@ -13,8 +16,8 @@ import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.system.entity.SysDictItem;
 import org.jeecg.modules.system.service.ISysDictItemService;
+import org.jeecg.modules.system.service.DictionaryAdministrationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,6 +45,8 @@ public class SysDictItemController {
 
 	@Autowired
 	private ISysDictItemService sysDictItemService;
+	@Autowired
+	private DictionaryAdministrationService dictionaryAdministration;
 	
 	/**
 	 * @功能：查询字典数据
@@ -69,13 +74,15 @@ public class SysDictItemController {
 	 * @return
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	@CacheEvict(value= CacheConstant.SYS_DICT_CACHE, allEntries=true)
 	public Result<SysDictItem> add(@RequestBody SysDictItem sysDictItem) {
+		dictionaryAdministration.requireManager();
 		Result<SysDictItem> result = new Result<SysDictItem>();
 		try {
 			sysDictItem.setCreateTime(new Date());
-			sysDictItemService.save(sysDictItem);
+			dictionaryAdministration.addItem(sysDictItem);
 			result.success("保存成功！");
+		} catch (UnauthorizedException e) {
+			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
 			result.error500("操作失败");
@@ -89,15 +96,15 @@ public class SysDictItemController {
 	 * @return
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
-	@CacheEvict(value=CacheConstant.SYS_DICT_CACHE, allEntries=true)
 	public Result<SysDictItem> edit(@RequestBody SysDictItem sysDictItem) {
+		dictionaryAdministration.requireManager();
 		Result<SysDictItem> result = new Result<SysDictItem>();
 		SysDictItem sysdict = sysDictItemService.getById(sysDictItem.getId());
 		if(sysdict==null) {
 			result.error500("未找到对应实体");
 		}else {
 			sysDictItem.setUpdateTime(new Date());
-			boolean ok = sysDictItemService.updateById(sysDictItem);
+			boolean ok = dictionaryAdministration.editItem(sysDictItem);
 			//TODO 返回false说明什么？
 			if(ok) {
 				result.success("编辑成功!");
@@ -112,14 +119,14 @@ public class SysDictItemController {
 	 * @return
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	@CacheEvict(value=CacheConstant.SYS_DICT_CACHE, allEntries=true)
 	public Result<SysDictItem> delete(@RequestParam(name="id",required=true) String id) {
+		dictionaryAdministration.requireManager();
 		Result<SysDictItem> result = new Result<SysDictItem>();
 		SysDictItem joinSystem = sysDictItemService.getById(id);
 		if(joinSystem==null) {
 			result.error500("未找到对应实体");
 		}else {
-			boolean ok = sysDictItemService.removeById(id);
+			boolean ok = dictionaryAdministration.deleteItem(id);
 			if(ok) {
 				result.success("删除成功!");
 			}
@@ -133,16 +140,21 @@ public class SysDictItemController {
 	 * @return
 	 */
 	@RequestMapping(value = "/deleteBatch", method = RequestMethod.DELETE)
-	@CacheEvict(value=CacheConstant.SYS_DICT_CACHE, allEntries=true)
 	public Result<SysDictItem> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
+		dictionaryAdministration.requireManager();
 		Result<SysDictItem> result = new Result<SysDictItem>();
 		if(ids==null || "".equals(ids.trim())) {
 			result.error500("参数不识别！");
 		}else {
-			this.sysDictItemService.removeByIds(Arrays.asList(ids.split(",")));
+			dictionaryAdministration.deleteItems(Arrays.asList(ids.split(",")));
 			result.success("删除成功!");
 		}
 		return result;
 	}
 	
+    @ExceptionHandler(UnauthorizedException.class)
+    public Result<?> dictionaryManagementDenied(UnauthorizedException exception) {
+        return Result.error(403, "没有字典管理权限");
+    }
+
 }
