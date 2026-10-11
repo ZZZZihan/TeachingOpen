@@ -38,7 +38,7 @@
             <a-input disabled placeholder="手机号码由管理员维护" v-decorator="[ 'phone', validatorRules.phone]" />
           </a-form-item>
           <a-form-item>
-            <a-button type="primary" @click="handleSubmit">提交</a-button>
+            <a-button type="primary" :loading="confirmLoading" @click="handleSubmit">提交</a-button>
           </a-form-item>
         </a-form>
       </a-col>
@@ -83,6 +83,7 @@ export default {
         phone: { rules: [{ validator: this.validatePhone }] },
         email: {
           rules: [
+            { max: 100, message: '邮箱不能超过100个字符!' },
             {
               validator: this.validateEmail
             }
@@ -127,35 +128,30 @@ export default {
       })
     },
     handleSubmit() {
-      const that = this
-      // that.form.validateFields((err, values) => {
-      //   console.log(err) 
-      //   if (!err) {
-          var values = that.form.getFieldsValue();
-          console.log(values)
-          that.confirmLoading = true
-          // let avatar = that.userInfo.avatar
-          if (!values.birthday) {
-            values.birthday = null
+      if (this.confirmLoading) return
+      this.confirmLoading = true
+      // 手机号码由管理员维护，不参与本人可编辑资料的提交校验。
+      this.form.validateFields(['realname', 'avatar', 'birthday', 'sex', 'email'], (err, values) => {
+        if (err) {
+          this.confirmLoading = false
+          return
+        }
+        const formData = Object.assign({ id: this.userInfo.id }, pick(values, 'realname', 'avatar', 'sex', 'email'), {
+          birthday: values.birthday ? values.birthday.format(this.dateFormat) : null
+        })
+        putAction(this.url.editUser, formData).then(res => {
+          if (res.success) {
+            this.$message.success(res.message)
+            this.$emit('ok')
           } else {
-            values.birthday = values.birthday.format(this.dateFormat)
+            this.$message.warning(res.message)
           }
-          let formData = Object.assign({ id: this.userInfo.id }, pick(values, 'realname', 'avatar', 'birthday', 'sex', 'email'))
-          // formData.avatar = avatar
-          // that.addDepartsToUser(that,formData); // 调用根据当前用户添加部门信息的方法
-          let obj = putAction(that.url.editUser, formData).then(res => {
-              if (res.success) {
-                that.$message.success(res.message)
-                that.$emit('ok')
-              } else {
-                that.$message.warning(res.message)
-              }
-            })
-            .finally(() => {
-              that.confirmLoading = false
-            })
-      //   }
-      // })
+        }).catch(() => {
+          this.$message.warning('个人资料未保存，请重试。')
+        }).finally(() => {
+          this.confirmLoading = false
+        })
+      })
     },
     validatePhone(rule, value, callback) {
       if (!value) {
@@ -184,6 +180,7 @@ export default {
         callback()
       } else {
         if (
+          !/[\u0000-\u001f\u007f-\u009f\uFEFF]/.test(value) &&
           new RegExp(
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           ).test(value)

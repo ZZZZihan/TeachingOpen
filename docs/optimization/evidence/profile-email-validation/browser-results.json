@@ -1,0 +1,47 @@
+{
+  "flow": "full SPA student profile",
+  "results": [
+    {
+      "name": "student UI credential and captcha login",
+      "passed": true
+    },
+    {
+      "name": "profile loaded with real user ID",
+      "passed": true
+    },
+    {
+      "name": "profile named purpose and self ID",
+      "passed": true
+    },
+    {
+      "name": "valid personal email saved",
+      "passed": true
+    },
+    {
+      "name": "valid email persisted",
+      "passed": true
+    },
+    {
+      "name": "invalid format visible in full form",
+      "passed": true
+    },
+    {
+      "name": "invalid email blocked before API write",
+      "passed": true,
+      "writeRequests": 0
+    },
+    {
+      "name": "invalid email leaves MySQL unchanged",
+      "passed": true,
+      "storedEmail": "student-a-browser@e2e.invalid"
+    },
+    {
+      "name": "optional empty email saves",
+      "passed": true
+    },
+    {
+      "name": "optional empty email persists",
+      "passed": true
+    }
+  ]
+}
