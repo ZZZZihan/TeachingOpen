@@ -2,6 +2,7 @@ import os
 import io
 import json
 from pathlib import Path
+import subprocess
 import sys
 import tempfile
 from types import SimpleNamespace
@@ -46,10 +47,24 @@ class CiGuardsTest(unittest.TestCase):
                 (reports / ('TEST-' + name + '.xml')).write_text(
                     '<testsuite name="' + name + '" tests="1" failures="0" errors="0" skipped="0"/>')
             self.assertEqual(java.check(reports)['tests'], len(java.EXPECTED))
-            name = sorted(java.EXPECTED)[0]
-            (reports / ('TEST-' + name + '.xml')).write_text(
-                '<testsuite name="' + name + '" tests="1" skipped="1"/>')
-            with self.assertRaises(RuntimeError): java.check(reports)
+            for name in sorted(java.EXPECTED):
+                path = reports / ('TEST-' + name + '.xml')
+                original = path.read_text()
+                with self.subTest(suite=name, state='missing'):
+                    path.unlink()
+                    with self.assertRaises(RuntimeError): java.check(reports)
+                for result in ('tests="0"', 'tests="1" failures="1"',
+                               'tests="1" errors="1"', 'tests="1" skipped="1"'):
+                    with self.subTest(suite=name, result=result):
+                        path.write_text('<testsuite name="' + name + '" ' + result + '/>')
+                        with self.assertRaises(RuntimeError): java.check(reports)
+                path.write_text(original)
+
+    def test_java_selection_cli_returns_complete_gate_set_without_requiring_reports(self):
+        result = subprocess.run([sys.executable, str(Path(java.__file__).resolve()), '--list'],
+                                check=True, capture_output=True, text=True)
+        self.assertEqual(result.stdout.strip().split(','), sorted(java.EXPECTED))
+        self.assertEqual(result.stderr, '')
 
 
 class ReviewAdapterTest(unittest.TestCase):
@@ -61,6 +76,10 @@ class ReviewAdapterTest(unittest.TestCase):
         self.jar = self.root / 'api/jeecg-boot-module-system/target/teaching-open-2.8.0.jar'
         self.jar.parent.mkdir(parents=True)
         self.jar.write_bytes(b'unit-test candidate')
+        self.dev = self.root / 'api/dev'
+        self.dev.mkdir()
+        for name in review.PROBES:
+            (self.dev / name).touch()
         self.runtime = self.temp / 'private-runtime'
         self.runtime.mkdir(mode=0o700)
         (self.runtime / 'config').mkdir(mode=0o700)
@@ -156,15 +175,52 @@ class ReviewAdapterTest(unittest.TestCase):
         self.assertIs(module.mysql_command, original_sql)
         self.assertIs(local_recovery.mysql_command, original_sql)
 
-    def test_discovery_only_selects_present_probes_and_gates_course_fix(self):
-        dev = self.root / 'api/dev'; dev.mkdir()
-        for name in ('verify-work-stars.py', 'verify-course-update.py'):
-            (dev / name).touch()
-        request = self.root / 'CourseMapUpdateRequest.java'
-        with patch.object(review, 'COURSE_REQUEST', request):
-            self.assertEqual([p.name for p in review.selected_probes()], ['verify-work-stars.py'])
-            request.touch()
-            self.assertEqual([p.name for p in review.selected_probes()], ['verify-work-stars.py', 'verify-course-update.py'])
+    def test_current_baseline_requires_complete_probe_set_including_core_work_flows(self):
+        self.assertEqual([p.name for p in review.selected_probes()], list(review.PROBES))
+        self.assertTrue({'verify-course-update.py', 'verify-work-submission.py',
+                         'verify-feedback-preservation.py'}.issubset(review.PROBES))
+
+    def test_each_missing_or_renamed_required_probe_stops_before_any_runtime_activity(self):
+        for name in review.PROBES:
+            for replacement in (None, '.renamed'):
+                with self.subTest(probe=name, replacement=replacement):
+                    path = self.dev / name
+                    if replacement is None:
+                        path.unlink()
+                    else:
+                        path.rename(path.with_suffix(replacement))
+                    try:
+                        with self.assertRaisesRegex(RuntimeError, 'Missing required probes: ' + name):
+                            review.selected_probes()
+                        with patch.object(review, 'CiFixtureContext') as context, \
+                                patch.object(review.Path, 'mkdir') as mkdir, \
+                                patch.object(review.subprocess, 'Popen') as application, \
+                                patch.object(review.subprocess, 'run') as connect:
+                            with self.assertRaisesRegex(RuntimeError, 'Missing required probes: ' + name):
+                                review.run_reviews(self.runtime, self.jar, '/client/mysql', self.options,
+                                                   '/client/redis-cli', 'synthetic')
+                            context.assert_not_called(); mkdir.assert_not_called()
+                            application.assert_not_called(); connect.assert_not_called()
+                        with patch.object(registration, 'require_hosted_runner'), \
+                                patch.object(registration.tempfile, 'TemporaryDirectory') as temporary, \
+                                patch.object(registration.subprocess, 'Popen') as application, \
+                                patch.object(registration.subprocess, 'run') as connect:
+                            with self.assertRaisesRegex(RuntimeError, 'Missing required probes: ' + name):
+                                registration.main()
+                            temporary.assert_not_called(); application.assert_not_called(); connect.assert_not_called()
+                    finally:
+                        if replacement is not None:
+                            path.with_suffix(replacement).rename(path)
+                        else:
+                            path.touch()
+
+    def test_empty_probe_directory_reports_every_missing_requirement(self):
+        for path in self.dev.iterdir():
+            path.unlink()
+        with self.assertRaisesRegex(RuntimeError, 'Missing required probes:') as failure:
+            review.selected_probes()
+        for name in review.PROBES:
+            self.assertIn(name, str(failure.exception))
 
     def test_existing_database_error_stops_before_seed_or_application(self):
         with patch.object(review.CiFixtureContext, 'sql', side_effect=['3306', RuntimeError('database exists')]) as sql, \
@@ -179,9 +235,16 @@ class ReviewAdapterTest(unittest.TestCase):
         for key, passed in [('cases', True), ('checks', 2)]:
             report = {key: [{'passed': True}, {'passed': True}], 'passed': passed, 'jar_sha256': 'candidate'}
             self.assertEqual(review.validate_report(report, 'candidate'), 2)
-            for bad in ({key: []}, {key: [{'passed': False}]}, {'passed': 1}, {'jar_sha256': 'other'},
-                        {'exception': 'SqlError'}, {'total': 3}, {'failed': 1}):
-                with self.assertRaises(RuntimeError): review.validate_report({**report, **bad}, 'candidate')
+            for bad in ({key: []}, {key: None}, {key: {}}, {key: [None]}, {key: [{}]},
+                        {key: [{'passed': False}]}, {key: [{'passed': 1}]},
+                        {'passed': 1}, {'passed': False}, {'passed': 2.0}, {'passed': '2'},
+                        {'jar_sha256': 'other'}, {'jar_sha256': None}, {'exception': 'SqlError'},
+                        {'total': 3}, {'total': 2.0}, {'failed': 1}, {'expected_legacy': True}):
+                with self.subTest(key=key, bad=bad), self.assertRaises(RuntimeError):
+                    review.validate_report({**report, **bad}, 'candidate')
+        for report in (None, [], 'complete'):
+            with self.subTest(report=report), self.assertRaises(RuntimeError):
+                review.validate_report(report, 'candidate')
 
 
 class FixtureSeedTest(unittest.TestCase):

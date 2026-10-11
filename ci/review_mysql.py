@@ -34,9 +34,14 @@ PROBES = (
     'verify-work-stars.py',
     'verify-work-cloning.py',
     'verify-pagination.py',
+    'verify-course-update.py',
+    'verify-work-submission.py',
+    'verify-feedback-preservation.py',
+    'verify-infrastructure-authorization.py',
+    'verify-announcement-authorization.py',
+    'verify-user-query-boundaries.py',
+    'verify-work-reference-authorization.py',
 )
-COURSE_REQUEST = ROOT / ('api/jeecg-boot-module-system/src/main/java/'
-                         'org/jeecg/modules/teaching/model/CourseMapUpdateRequest.java')
 
 
 def private_file(path, content):
@@ -45,23 +50,27 @@ def private_file(path, content):
 
 
 def selected_probes():
-    names = list(PROBES)
-    if COURSE_REQUEST.is_file():
-        names.append('verify-course-update.py')
-    return [ROOT / 'api/dev' / name for name in names if (ROOT / 'api/dev' / name).is_file()]
+    """Require the complete current baseline, including renamed or deleted probes."""
+    paths = [ROOT / 'api/dev' / name for name in PROBES]
+    missing = [path.name for path in paths if not path.is_file()]
+    if missing:
+        raise RuntimeError('Missing required probes: ' + ', '.join(missing))
+    return paths
 
 
 def validate_report(report, jar_sha256):
+    if not isinstance(report, dict):
+        raise RuntimeError('Review probe evidence must be a JSON object')
     cases = report.get('cases', report.get('checks'))
     if (not isinstance(cases, list) or not cases
-            or any(case.get('passed') is not True for case in cases)
+            or any(not isinstance(case, dict) or case.get('passed') is not True for case in cases)
             or report.get('exception') or report.get('failed', 0) != 0 or report.get('expected_legacy')
             or report.get('jar_sha256') != jar_sha256):
         raise RuntimeError('Review probe did not produce complete passing candidate evidence')
     passed = report.get('passed')
     if passed is not True and (type(passed) is not int or passed != len(cases)):
         raise RuntimeError('Review probe passing count does not match its executed checks')
-    if 'total' in report and report['total'] != len(cases):
+    if 'total' in report and (type(report['total']) is not int or report['total'] != len(cases)):
         raise RuntimeError('Review probe total does not match its executed checks')
     return len(cases)
 
@@ -173,6 +182,7 @@ def probe_adapter(module, context):
 
 def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password):
     require_hosted_runner()  # Before file creation, process start, or a connection.
+    probes = selected_probes()  # Missing coverage must fail before runtime creation.
     parent = Path(parent_runtime).resolve()
     temp = Path(os.environ['RUNNER_TEMP']).resolve()
     if parent == temp or not parent.is_relative_to(temp) or parent.stat().st_mode & 0o077:
@@ -192,8 +202,10 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
     schema = load('review_schema', ROOT / 'api/dev/extract-schema.py').extract_schema(
         (ROOT / 'api/db/teachingopen2.8.sql').read_text())
     context.sql(schema)
+    migrations = ('unit-view-events.sql', 'work-events.sql')
     for _ in range(2):
-        context.sql((ROOT / "api/db/unit-view-events.sql").read_text())
+        for name in migrations:
+            context.sql((ROOT / 'api/db' / name).read_text())
     if context.sql('SELECT COUNT(*) FROM sys_user') != '0':
         raise RuntimeError('Review schema must contain no original accounts')
 
@@ -242,9 +254,6 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
                     time.sleep(1)
                 else:
                     raise RuntimeError('Review application did not become healthy')
-                probes = selected_probes()
-                if not probes:
-                    raise RuntimeError('No review probes are available in this candidate')
                 results = []
                 for path in probes:
                     module = load('ci_' + path.stem.replace('-', '_'), path)
@@ -264,8 +273,9 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
                 summary = {'github_sha': os.environ.get('GITHUB_SHA'), 'jar_sha256': context.jar_sha256,
                     'database': DATABASE, 'original_accounts_imported': 0, 'fixture_accounts': 5,
                     'production_connected': False, 'probes': results,
-                    'unavailable_probes': [name for name in PROBES if not (ROOT / 'api/dev' / name).is_file()],
-                    'course_update_enabled': COURSE_REQUEST.is_file()}
+                    'required_probes': list(PROBES), 'probe_count': len(results),
+                    'checks': sum(result['checks'] for result in results),
+                    'migrations_applied_twice': list(migrations)}
                 private_file(output / 'review-mysql.json', json.dumps(summary, ensure_ascii=False, indent=2) + '\n')
                 print(json.dumps(summary, ensure_ascii=False))
                 return summary
