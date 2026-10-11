@@ -49,7 +49,17 @@ python3 api/dev/verify-global-management-authorization.py \
   --output /path/to/new-evidence.json
 ```
 
-Cloud upload denial probes send an empty multipart request, so even an accidentally unguarded controller cannot obtain a file and invoke a cloud client. HTTP deletion probes use a verified absent OSS ID. Actual existing-object deletion and cloud upload success are therefore **mocked Java coverage only**, not real cloud validation. HTTP probe execution, final integrated packaging and Linux CI are delegated to the parent after combination; this branch did not use the shared runtime or invoke external storage.
+Cloud upload denial probes send an empty multipart request, so even an accidentally unguarded controller cannot obtain a file and invoke a cloud client. HTTP deletion probes use a verified absent OSS ID. Actual existing-object deletion and cloud upload success are therefore **mocked Java coverage only**, not real cloud validation. Final integrated packaging and Linux CI remain coordinated by the parent. The authorized local HTTP follow-up below did not invoke external storage.
+
+### Actual HTTP export follow-up
+
+The initial integrated HTTP run stopped at the administrator agent export because the probe required a MIME value containing `excel` or `octet-stream`. Read-only diagnostics against candidate JAR SHA-256 `0292703db84494798cf5740fc6cd22b26b1e131f5e8f0c01d29cae723bfd74da` established that **both agent and position exports return HTTP 200 with no `Content-Type` header**, and their response bodies are valid XLS workbooks. This was a probe false failure, not evidence of a failed export or a new authorization defect. The diagnostic response metadata and original synthetic files are retained in `evidence/global-management/export-diagnostic-728/`; the previous failed parent report was not overwritten.
+
+The probe now compiles `ReadSpreadsheetCells.java` against the verified candidate's own libraries and parses the body with POI `WorkbookFactory`. Success requires the expected workbook title, column names and fixture marker in actual cells. It records the observed MIME, SHA-256 and parsed cell count and saves each synthetic workbook. JSON and HTML bodies containing the same marker, plus a truncated workbook, must fail parsing. No application MIME behavior changed.
+
+The complete localhost HTTP suite passed **389/389**, with zero failures, against the exact JAR above. It includes legitimate list, CRUD, actual XLSX import and XLS export, ordinary/anonymous denial, same-token live dev grant/revocation, and refused-operation state checks. After logout, all six original management/role/audit table snapshots matched. The exclusive runtime window was then returned to the parent. Evidence and synthetic workbook hashes are in `evidence/global-management/http-fixed-728-export-poi.json`; the raw log and two exported files are retained beside it.
+
+The parser was then moved without changing its parsing logic to a dedicated helper so the existing POI-core-only `verify-work-management.py` remains compatible. The original `ReadXlsCells.java` is unchanged. The final helper was independently recompiled against the same candidate JAR and passed **12/12 offline checks** over the saved actual HTTP XLS files, generated XLSX fixtures, and JSON/HTML/truncated negatives; see `export-diagnostic-728/poi-final-helper.json`. The parent still reruns the frozen combined candidate in its final gate. This probe follow-up changes no backend product code, deployment or persistent security settings.
 
 ## Finite review remainder
 

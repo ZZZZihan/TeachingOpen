@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "case": "actual exported agent XLS title parses",
+      "passed": true,
+      "parsed_cells": 39
+    },
+    {
+      "case": "generated agent XLSX marker parses",
+      "passed": true
+    },
+    {
+      "case": "agent rejects JSON",
+      "passed": true
+    },
+    {
+      "case": "agent rejects HTML",
+      "passed": true
+    },
+    {
+      "case": "agent rejects truncated XLS",
+      "passed": true
+    },
+    {
+      "case": "actual exported position XLS title parses",
+      "passed": true,
+      "parsed_cells": 15
+    },
+    {
+      "case": "generated position XLSX marker parses",
+      "passed": true
+    },
+    {
+      "case": "position rejects JSON",
+      "passed": true
+    },
+    {
+      "case": "position rejects HTML",
+      "passed": true
+    },
+    {
+      "case": "position rejects truncated XLS",
+      "passed": true
+    }
+  ],
+  "passed": 10,
+  "total": 10,
+  "status": "passed"
+}

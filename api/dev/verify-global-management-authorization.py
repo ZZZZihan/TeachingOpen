@@ -7,11 +7,15 @@ upload/delete success is tested with mocked clients in the Java suite. Existing
 OSS objects are never passed to an allowed HTTP deletion. No cloud requests.
 """
 import argparse
+import base64
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
+import shutil
 import subprocess
+from tempfile import TemporaryDirectory
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from xml.sax.saxutils import escape
@@ -23,6 +27,40 @@ from local_runtime import mysql_command
 PREFIX = 'fixture_gm_'
 MARKER = PREFIX + 'private_metadata'
 TABLES = ('sys_user_agent', 'sys_position', 'oss_file', 'sys_user_role', 'sys_role', 'sys_log')
+
+
+def excel_reader(jar, directory, runtime):
+    """Compile the workbook cell reader against this exact candidate's POI runtime."""
+    libraries = directory / 'lib'
+    libraries.mkdir()
+    with ZipFile(jar) as archive:
+        for name in archive.namelist():
+            if name.startswith('BOOT-INF/lib/') and name.endswith('.jar') and name.count('/') == 2:
+                (libraries / Path(name).name).write_bytes(archive.read(name))
+    candidates = sorted((runtime / 'tools').glob('*jdk*/Contents/Home/bin/javac'))
+    javac = (str(Path(os.environ['JAVA_HOME']) / 'bin/javac') if os.environ.get('JAVA_HOME')
+             else str(candidates[0]) if candidates else shutil.which('javac'))
+    if not javac:
+        raise RuntimeError('A local JDK is required to inspect actual exported spreadsheets')
+    built = subprocess.run([javac, '-proc:none', '-encoding', 'UTF-8', '-cp', str(libraries / '*'),
+                            '-d', str(directory), str(Path(__file__).with_name('ReadSpreadsheetCells.java'))],
+                           capture_output=True, timeout=60)
+    if built.returncode:
+        raise RuntimeError('Candidate POI spreadsheet reader did not compile')
+    command = [str(Path(javac).parent / 'java'), '-Djava.awt.headless=true', '-cp',
+               str(directory) + os.pathsep + str(libraries / '*'), 'ReadSpreadsheetCells']
+
+    def read(data):
+        source = directory / 'response-spreadsheet'
+        source.write_bytes(data)
+        parsed = subprocess.run(command + [str(source)], capture_output=True, timeout=30)
+        if parsed.returncode:
+            return None
+        try:
+            return [base64.b64decode(line, validate=True).decode('utf-8') for line in parsed.stdout.splitlines()]
+        except (ValueError, UnicodeDecodeError):
+            return None
+    return read
 
 
 def workbook(kind):
@@ -45,7 +83,7 @@ def workbook(kind):
 def verify(args):
     if args.output.exists():
         raise RuntimeError('Preserve existing global management evidence')
-    cases, error = [], None
+    cases, error, exports = [], None, []
 
     def check(name, passed):
         cases.append({'case': name, 'passed': bool(passed)})
@@ -53,7 +91,8 @@ def verify(args):
         if not passed:
             raise AssertionError(name)
 
-    with FixtureApi(args.runtime.resolve(), args.jar) as api:
+    with FixtureApi(args.runtime.resolve(), args.jar) as api, TemporaryDirectory(prefix='teachingopen-management-export-') as temp:
+        read_spreadsheet = excel_reader(args.jar.resolve(), Path(temp), api.runtime)
         def sql(statement):
             result = subprocess.run(mysql_command(api.runtime) + ['teachingopen_dev'], input=statement,
                                     capture_output=True, text=True, timeout=30)
@@ -184,7 +223,23 @@ def verify(args):
                     column = 'user_name' if kind=='agent' else 'code'
                     check('authorized '+kind+' XLSX insertion persisted',sql('SELECT COUNT(*) FROM '+table+' WHERE '+column+'='+literal(PREFIX+'import_'+kind))=='1')
                     status, _, raw_body, content_type = request('GET',base+'/exportXls','admin')
-                    check('administrator exports '+kind,status==200 and len(raw_body)>100 and ('excel' in content_type or 'octet-stream' in content_type))
+                    cells = read_spreadsheet(raw_body)
+                    title = '用户代理人设置列表数据' if kind == 'agent' else '职务表列表数据'
+                    headers = ('用户名','代理人用户名') if kind == 'agent' else ('职务编码','职务名称')
+                    exports.append({'kind':kind,'status':status,'content_type':content_type,'bytes':len(raw_body),
+                                    'sha256':hashlib.sha256(raw_body).hexdigest(),'parsed_cells':len(cells) if cells is not None else None})
+                    check('administrator exports '+kind,status==200 and cells is not None and title in cells
+                          and all(header in cells for header in headers) and MARKER in cells)
+                    args.output.parent.mkdir(parents=True,exist_ok=True)
+                    artifact = args.output.with_name(args.output.stem+'-'+kind+'.xls')
+                    if artifact.exists():
+                        raise RuntimeError('Preserve existing exported fixture evidence')
+                    artifact.write_bytes(raw_body)
+                    exports[-1]['artifact'] = artifact.name
+                    for invalid_name, invalid in (('JSON error',json.dumps({'success':False,'message':MARKER}).encode()),
+                                                  ('HTML error',('<html>'+MARKER+'</html>').encode()),
+                                                  ('truncated workbook',raw_body[:512])):
+                        check('candidate POI rejects '+kind+' '+invalid_name,read_spreadsheet(invalid) is None)
                     allowed('administrator deletes '+kind,'DELETE',base+'/delete?id='+ident)
                     allowed('administrator batch deletes fixture '+kind,'DELETE',base+'/deleteBatch?ids='+PREFIX+kind)
                 dev = sql("SELECT id FROM sys_role WHERE role_code='dev' LIMIT 1")
@@ -217,6 +272,7 @@ def verify(args):
         report={'status':'passed' if error is None and all(c['passed'] for c in cases) else 'failed',
                 'cases':cases,'passed':sum(c['passed'] for c in cases),'failed':sum(not c['passed'] for c in cases),'total':len(cases),
                 'expected_legacy':bool(args.expect_legacy),'exception':error,'jar_sha256':api.jar_sha256,
+                'exports':exports,
                 'scope':'Synthetic localhost HTTP/MySQL only; no cloud requests. Real cloud upload/delete success covered only by mocked Java clients.'}
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
