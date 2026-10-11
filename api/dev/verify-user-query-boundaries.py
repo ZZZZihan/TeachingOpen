@@ -59,6 +59,48 @@ public class ReadUserExport {
     return [java, '-cp', str(directory) + os.pathsep + str(libraries / '*'), 'ReadUserExport']
 
 
+def verify_department_selection(api, sql, check):
+    def snapshot():
+        return {table: hashlib.sha256(sql('SELECT * FROM ' + table + ' ORDER BY id').encode()).hexdigest()
+                for table in ('sys_user', 'sys_user_depart')}
+
+    def cache_snapshot():
+        return api.cache('EVAL', "local out={}; for _,key in ipairs(KEYS) do "
+                         "table.insert(out,key..':'..redis.sha1hex(redis.call('DUMP',key) or '')) end; "
+                         "return redis.sha1hex(table.concat(out,'|'))", '2',
+                         'sys:cache:user::fixture_student_a', 'sys:cache:user::fixture_student_b')
+
+    for actor in ('student_a', 'student_b'):
+        api.request('GET', '/teaching/user/info', actor)
+    for body in ({'username': 'fixture_student_b', 'orgCode': 'A99A02'},
+                 {'username': 'fixture_student_a', 'orgCode': 'A99A02'},
+                 {'orgCode': 'A99'}, {'orgCode': "A99A01' OR 1=1 --"}):
+        before, cached = snapshot(), cache_snapshot()
+        status, result, _ = api.request('PUT', '/sys/selectDepart', 'student_a', body)
+        check('department selection requires current identity and membership ' + str(body),
+              status == 403 or result is not None and result.get('success') is False and result.get('code') in (403, 510))
+        check('denied department selection preserves database ' + str(body), snapshot() == before)
+        check('denied department selection preserves cache values ' + str(body), cache_snapshot() == cached)
+    member = 'query_select_' + uuid4().hex[:10]
+    original = sql("SELECT IFNULL(HEX(org_code),'NULL') FROM sys_user WHERE id='fixture_student_a'")
+    try:
+        sql("INSERT INTO sys_user_depart(id,user_id,dep_id) VALUES ('" + member + "','fixture_student_a','fixture_class_b')")
+        status, result, _ = api.request('PUT', '/sys/selectDepart', 'student_a', {'orgCode': 'A99A02'})
+        check('own newly joined organization can be selected', status == 200 and result is not None and result.get('success') is True)
+        check('own organization selection is persisted', sql("SELECT org_code FROM sys_user WHERE id='fixture_student_a'") == 'A99A02')
+        sql("DELETE FROM sys_user_depart WHERE id='" + member + "'")
+        before, cached = snapshot(), cache_snapshot()
+        status, result, _ = api.request('PUT', '/sys/selectDepart', 'student_a', {'orgCode': 'A99A02'})
+        check('revoked membership rejects with the same token',
+              status == 403 or result is not None and result.get('success') is False and result.get('code') in (403, 510))
+        check('revoked selection preserves database and cache', snapshot() == before and cache_snapshot() == cached)
+    finally:
+        sql("DELETE FROM sys_user_depart WHERE id='" + member + "'")
+        sql("UPDATE sys_user SET org_code=" + ('NULL' if original == 'NULL' else "CONVERT(X'" + original + "' USING utf8mb4)")
+            + " WHERE id='fixture_student_a'")
+        api.cache('DEL', 'sys:cache:user::fixture_student_a')
+
+
 def verify(args):
     checks = []
     with FixtureApi(args.runtime.resolve(), args.jar) as api, TemporaryDirectory(prefix='query-boundary-') as temporary:
@@ -123,6 +165,7 @@ def verify(args):
             response = read(route('/sys/user/list', **{selector: "x') OR 1=1 --"}), 'admin')
             check('hostile relationship ID is a bound literal ' + selector, response['records'] == [])
 
+        verify_department_selection(api, sql, check)
         prefix = 'query_boundary_' + uuid4().hex[:10]
         directory = Path(temporary)
         jar = (args.jar or Path(__file__).resolve().parents[1] / 'jeecg-boot-module-system/target/teaching-open-2.8.0.jar').resolve()
