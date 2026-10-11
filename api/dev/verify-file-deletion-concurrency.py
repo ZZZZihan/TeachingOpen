@@ -22,6 +22,7 @@ from uuid import uuid4
 
 from local_http import FixtureApi
 from local_runtime import mysql_command
+from media_index_fixture import media_index_snapshot, rebuild_media_index_after_sql
 
 TABLES = ('teaching_work', 'teaching_work_correct', 'teaching_work_comment', 'sys_file',
           'sys_data_log', 'teaching_additional_work', 'teaching_depart_day_log')
@@ -73,6 +74,7 @@ def verify(args):
         raise RuntimeError('Refusing to overwrite an existing evidence report')
     cases, error = [], None
     with FixtureApi(args.runtime.resolve(), args.jar) as api:
+        has_media_index = not args.expect_legacy
         def sql(statement):
             if statement.startswith('CREATE TRIGGER '):
                 statement = 'DELIMITER $$\n' + statement + '$$\nDELIMITER ;'
@@ -80,6 +82,8 @@ def verify(args):
                                     capture_output=True, text=True, timeout=20)
             if output.returncode:
                 raise RuntimeError('Owned file-deletion fixture SQL failed: ' + output.stderr[:500])
+            if has_media_index:
+                rebuild_media_index_after_sql(api, statement)
             return output.stdout.strip()
 
         def literal(value):
@@ -92,7 +96,10 @@ def verify(args):
                 raise AssertionError(name)
 
         def rows():
-            return {table: hashlib.sha256(sql('SELECT * FROM ' + table + ' ORDER BY id').encode()).hexdigest() for table in TABLES}
+            result = {table: hashlib.sha256(sql('SELECT * FROM ' + table + ' ORDER BY id').encode()).hexdigest() for table in TABLES}
+            if has_media_index:
+                result.update(media_index_snapshot(sql))
+            return result
 
         def disk():
             return {str(p.relative_to(api.runtime / 'uploads')): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -280,7 +287,7 @@ def verify(args):
             sql('DELETE FROM sys_file WHERE id=' + literal(ident))
             if folder.exists():
                 shutil.rmtree(folder)
-        check('all original business rows restored', original_rows == rows(), fatal=False)
+        check('all original business rows and media index restored', original_rows == rows(), fatal=False)
         check('all original upload bytes restored', original_disk == disk(), fatal=False)
         check('temporary barrier trigger removed', sql("SELECT COUNT(*) FROM information_schema.triggers WHERE trigger_schema=DATABASE() AND trigger_name=" + literal(trigger)) == '0', fatal=False)
         result = {'cases': cases, 'passed': sum(case['passed'] for case in cases), 'failed': sum(not case['passed'] for case in cases),

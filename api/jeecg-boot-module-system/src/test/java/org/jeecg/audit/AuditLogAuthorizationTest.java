@@ -1,5 +1,6 @@
 package org.jeecg.audit;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -16,9 +17,14 @@ import org.jeecg.modules.system.service.*;
 import org.jeecg.modules.system.service.impl.SysDataLogServiceImpl;
 import org.junit.*;
 import org.mockito.ArgumentCaptor;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.support.AbstractPlatformTransactionManager;
+import org.springframework.transaction.support.DefaultTransactionStatus;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import java.util.*;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -123,12 +129,49 @@ public class AuditLogAuthorizationTest {
     @Test public void trustedStudentSubmissionStillWritesVersionHistory() {
         ordinary("student"); SysDataLogMapper mapper = mock(SysDataLogMapper.class);
         when(mapper.queryMaxDataVer("teaching_work","own-work")).thenReturn("2");
-        when(mapper.insert(any(SysDataLog.class))).thenReturn(1);
+        String content = "{\"workFile\":\"previous-private-file\",\"comment\":\"" + SECRET + "\"}";
+        when(mapper.insert(any(SysDataLog.class))).thenAnswer(call -> {
+            assertTrue(TransactionSynchronizationManager.isActualTransactionActive());
+            ((SysDataLog) call.getArgument(0)).setId("own-history");
+            return 1;
+        });
+        JdbcTemplate jdbc = mock(JdbcTemplate.class);
+        Map<String,Object> state = new HashMap<>();
+        state.put("version",1); state.put("static_domain","/api/sys/common/static");
+        when(jdbc.queryForMap("SELECT version,static_domain FROM sys_local_file_reference_state WHERE id=1 LOCK IN SHARE MODE"))
+                .thenAnswer(call -> {
+                    assertTrue(TransactionSynchronizationManager.isActualTransactionActive());
+                    return state;
+                });
+        Map<String,Object> persisted = new HashMap<>();
+        persisted.put("id","own-history"); persisted.put("data_table","teaching_work"); persisted.put("data_content",content);
+        when(jdbc.queryForList("SELECT * FROM sys_data_log WHERE id=? FOR UPDATE","own-history"))
+                .thenReturn(Collections.singletonList(persisted));
+        LocalMediaReferenceIndex index = new LocalMediaReferenceIndex();
+        HistoryTransactions transactions = new HistoryTransactions();
+        ReflectionTestUtils.setField(index,"jdbc",jdbc); ReflectionTestUtils.setField(index,"json",new ObjectMapper());
+        ReflectionTestUtils.setField(index,"transactionManager",transactions);
+        ReflectionTestUtils.setField(index,"staticDomain","/api/sys/common/static");
         SysDataLogServiceImpl service = new SysDataLogServiceImpl();
         ReflectionTestUtils.setField(service,"logMapper",mapper); ReflectionTestUtils.setField(service,"baseMapper",mapper);
-        service.addDataLog("teaching_work","own-work",SECRET);
+        ReflectionTestUtils.setField(service,"mediaIndex",index);
+        service.addDataLog("teaching_work","own-work",content);
         ArgumentCaptor<SysDataLog> saved = ArgumentCaptor.forClass(SysDataLog.class); verify(mapper).insert(saved.capture());
-        assertEquals("3",saved.getValue().getDataVersion()); assertEquals(SECRET,saved.getValue().getDataContent());
+        assertEquals("3",saved.getValue().getDataVersion()); assertEquals(content,saved.getValue().getDataContent());
         assertEquals("own-work",saved.getValue().getDataId());
+        assertEquals("teaching_work",saved.getValue().getDataTable());
+        verify(jdbc).update(startsWith("INSERT INTO sys_local_file_reference "),eq("sys_data_log"),eq("own-history"),
+                eq("workFile"),eq("file"),eq(LocalMediaReferenceIndex.hash("previous-private-file")),eq("previous-private-file"));
+        assertEquals(1,transactions.commits); assertEquals(0,transactions.rollbacks);
+        assertFalse(TransactionSynchronizationManager.isActualTransactionActive());
+    }
+
+    private static class HistoryTransactions extends AbstractPlatformTransactionManager {
+        int commits, rollbacks;
+        protected Object doGetTransaction() { return new Object(); }
+        protected boolean isExistingTransaction(Object transaction) { return TransactionSynchronizationManager.isActualTransactionActive(); }
+        protected void doBegin(Object transaction, TransactionDefinition definition) { }
+        protected void doCommit(DefaultTransactionStatus status) { commits++; }
+        protected void doRollback(DefaultTransactionStatus status) { rollbacks++; }
     }
 }

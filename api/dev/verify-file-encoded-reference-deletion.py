@@ -18,6 +18,7 @@ from uuid import uuid4
 
 from local_http import FixtureApi
 from local_runtime import mysql_command
+from media_index_fixture import media_index_snapshot, rebuild_media_index_after_sql
 
 
 TABLES = ('sys_file', 'teaching_additional_work', 'teaching_depart_day_log', 'teaching_work',
@@ -29,11 +30,14 @@ def verify(args):
         raise RuntimeError('Refusing to overwrite an existing evidence report')
     cases, error = [], None
     with FixtureApi(args.runtime.resolve(), args.jar) as api:
+        has_media_index = not args.expect_legacy
         def sql(statement):
             result = subprocess.run(mysql_command(api.runtime) + ['teachingopen_dev', '-e', statement],
                                     capture_output=True, text=True, timeout=20)
             if result.returncode:
                 raise RuntimeError('Owned encoded-reference fixture SQL failed: ' + result.stderr[:500])
+            if has_media_index:
+                rebuild_media_index_after_sql(api, statement)
             return result.stdout.strip()
 
         def literal(value):
@@ -55,6 +59,8 @@ def verify(args):
             for department in ('fixture_class_a', 'fixture_class_b'):
                 key = 'departLog:addiWorkAssign:' + department
                 result[key] = hashlib.sha256('\n'.join(sorted(api.cache('SMEMBERS', key).splitlines())).encode()).hexdigest()
+            if has_media_index:
+                result.update(media_index_snapshot(sql))
             return result
 
         def disk():
@@ -164,7 +170,7 @@ def verify(args):
             sql('DELETE FROM sys_file WHERE id=' + literal(file_id))
             if folder.exists():
                 shutil.rmtree(folder)
-        check('all original business rows and assignment counters restored', original_rows == rows(), fatal=False)
+        check('all original business rows, assignment counters and media index restored', original_rows == rows(), fatal=False)
         check('all original upload bytes restored', original_disk == disk(), fatal=False)
         result = {'cases': cases, 'passed': sum(case['passed'] for case in cases), 'failed': sum(not case['passed'] for case in cases),
                   'total': len(cases), 'jar_sha256': api.jar_sha256, 'expected_legacy': args.expect_legacy, 'exception': error,
