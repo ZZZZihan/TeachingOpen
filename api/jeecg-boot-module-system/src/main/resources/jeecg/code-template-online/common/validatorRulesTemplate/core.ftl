@@ -20,7 +20,8 @@
         'sys_fill_rule.rule_code': 'fill_rule_code', 'sys_check_rule.rule_code': 'check_rule_code',
         'sys_data_source.code': 'data_source_code'
       }>
-      <#assign duplicatePurpose = duplicatePurposes[tableName + '.' + po.fieldDbName]!''>
+      <#-- Entry templates select their own table; direct core includes keep the original tableName context. -->
+      <#assign duplicatePurpose = duplicatePurposes[(validatorTableName!tableName) + '.' + po.fieldDbName]!''>
       <#if duplicatePurpose == ''>
         <#stop '未配置此字段的唯一校验用途。请先在服务端配置固定查询、操作权限和编辑对象授权，再更新生成模板。'>
       </#if>
