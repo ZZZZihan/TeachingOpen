@@ -69,9 +69,13 @@ class MySqlSession:
 
 
 def verify(args):
+    if args.output.exists():
+        raise RuntimeError('Refusing to overwrite an existing evidence report')
     cases, error = [], None
     with FixtureApi(args.runtime.resolve(), args.jar) as api:
         def sql(statement):
+            if statement.startswith('CREATE TRIGGER '):
+                statement = 'DELIMITER $$\n' + statement + '$$\nDELIMITER ;'
             output = subprocess.run(mysql_command(api.runtime) + ['teachingopen_dev', '-e', statement],
                                     capture_output=True, text=True, timeout=20)
             if output.returncode:
@@ -131,8 +135,8 @@ def verify(args):
             path.write_bytes(content)
             sql('INSERT INTO sys_file(id,file_name,file_path,file_location,create_by,create_time,del_flag) VALUES ('
                 + ','.join(literal(v) for v in (ident, 'attachment.txt', key, 1, 'fixture_teacher_a', '2026-10-11 00:00:00', 0)) + ')')
-            sql('INSERT INTO teaching_work(id,user_id,depart_id,work_name,work_type,work_status,del_flag,create_by,create_time) VALUES ('
-                + ','.join(literal(v) for v in (work_id, 'fixture_student_a', 'fixture_class_a', prefix, '2', '0', 0,
+            sql('INSERT INTO teaching_work(id,user_id,depart_id,work_name,work_file,work_type,work_status,del_flag,create_by,create_time) VALUES ('
+                + ','.join(literal(v) for v in (work_id, 'fixture_student_a', 'fixture_class_a', prefix, '', '2', '0', 0,
                                                 'fixture_teacher_a', '2026-10-11 00:00:00')) + ')')
 
         def wait_for(query, pending):
@@ -256,6 +260,13 @@ def verify(args):
                 sql('DROP TRIGGER ' + trigger)
                 check('same owner retries missing-object metadata cleanup', success(delete()))
                 check('metadata retry completes', sql('SELECT COUNT(*) FROM sys_file WHERE id=' + literal(ident)) == '0')
+
+                reset()
+                check('ordinary work attaches an owned local file', success(edit()))
+                check('ordinary work deletion succeeds with post-commit attachment cleanup',
+                      success(api.request('DELETE', '/teaching/teachingWork/delete?id=' + work_id, 'teacher_a')))
+                check('nested cleanup transaction reclaims now-unreferenced bytes and metadata',
+                      not path.exists() and sql('SELECT COUNT(*) FROM sys_file WHERE id=' + literal(ident)) == '0')
         except Exception as failure:
             error = type(failure).__name__ + ': ' + str(failure)
         finally:
@@ -275,7 +286,8 @@ def verify(args):
         result = {'cases': cases, 'passed': sum(case['passed'] for case in cases), 'failed': sum(not case['passed'] for case in cases),
                   'total': len(cases), 'jar_sha256': api.jar_sha256, 'expected_legacy': args.expect_legacy, 'exception': error,
                   'created_at': datetime.now(timezone.utc).isoformat(),
-                  'scope': 'Actual HTTP writes/deletes, MySQL triggers and named/row locks (3 repetitions per order), local unlink and metadata SQL failure, retry; owned synthetic runtime only.'}
+                  'scope': ('Actual HTTP writer-first baseline with MySQL triggers and named/row locks, 1 repetition; owned synthetic runtime only.'
+                            if args.expect_legacy else 'Actual HTTP writes/deletes, MySQL named/row locks (3 repetitions per order), unlink and metadata SQL failure, retry and post-commit work cleanup; owned synthetic runtime only.')}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + '\n')
     return error is None and result['failed'] == 0

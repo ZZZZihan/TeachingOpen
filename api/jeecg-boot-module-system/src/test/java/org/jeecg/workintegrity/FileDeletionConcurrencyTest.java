@@ -11,6 +11,8 @@ import org.jeecg.modules.system.service.impl.SysFileServiceImpl;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.service.TeachingAccessService;
 import org.jeecg.modules.teaching.service.TeachingWorkAttachmentAccessService;
+import org.jeecg.modules.teaching.service.TeachingWorkAttachmentService;
+import org.jeecg.modules.teaching.mapper.TeachingWorkMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -191,5 +193,21 @@ public class FileDeletionConcurrencyTest {
     @Test public void successfulUnreferencedLocalDeleteRemovesBytesAndMetadata() {
         assertTrue(files.deleteWithFile("file-a")); assertFalse(Files.exists(bytes)); assertNull(read(false));
         assertTrue(files.deleteWithFile("file-a"));
+    }
+
+    @Test public void postCommitWorkCleanupCanNestItsReadTransactionWithoutSelfLocking() {
+        TeachingWorkAttachmentService cleanup = new TeachingWorkAttachmentService();
+        TeachingWorkMapper works = mock(TeachingWorkMapper.class);
+        when(works.selectCount(any())).thenAnswer(call -> jdbc.queryForObject(
+                "SELECT COUNT(*) FROM teaching_work WHERE work_file='file-a'", Integer.class));
+        ReflectionTestUtils.setField(cleanup, "workMapper", works);
+        ReflectionTestUtils.setField(cleanup, "fileService", files);
+        ReflectionTestUtils.setField(cleanup, "transactionManager", transactions);
+        jdbc.update("INSERT INTO teaching_work VALUES('work-a','file-a')");
+        cleanup.cleanupAfterWorkDeletion("file-a");
+        assertTrue(Files.exists(bytes)); assertNotNull(read(false));
+        jdbc.update("DELETE FROM teaching_work WHERE id='work-a'");
+        cleanup.cleanupAfterWorkDeletion("file-a");
+        assertFalse(Files.exists(bytes)); assertNull(read(false));
     }
 }

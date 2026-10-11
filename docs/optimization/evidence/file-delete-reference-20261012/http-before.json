@@ -1,0 +1,56 @@
+{
+  "cases": [
+    {
+      "case": "writer-first-1 acquires named barrier",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 actual teacher edit reached post-authorization row-write barrier",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 deletion is waiting on the actual referenced file row",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 baseline erases bytes while writer still holds file lock",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 authorized writer completes",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 baseline delete also reports success",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 work stores the committed reference",
+      "passed": true
+    },
+    {
+      "case": "writer-first-1 baseline saved reference points to missing bytes and metadata",
+      "passed": true
+    },
+    {
+      "case": "all original business rows restored",
+      "passed": true
+    },
+    {
+      "case": "all original upload bytes restored",
+      "passed": true
+    },
+    {
+      "case": "temporary barrier trigger removed",
+      "passed": true
+    }
+  ],
+  "passed": 11,
+  "failed": 0,
+  "total": 11,
+  "jar_sha256": "7fc5d65069f9b04ab0d4285bff50a2e19d16b67f43ac2d51e76ea582c25e9ba3",
+  "expected_legacy": true,
+  "exception": null,
+  "created_at": "2026-10-11T10:46:59.549667+00:00",
+  "scope": "Actual HTTP writes/deletes, MySQL triggers and named/row locks (3 repetitions per order), local unlink and metadata SQL failure, retry; owned synthetic runtime only."
+}
