@@ -16,7 +16,10 @@ import org.jeecg.modules.system.service.ISysCategoryService;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.jeecg.modules.system.service.GlobalResourceService;
+import org.jeecg.modules.system.entity.SysUser;
+import java.util.*;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Description: 分类字典
@@ -25,50 +28,51 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
  * @Version: V1.0
  */
 @Service
-public class SysCategoryServiceImpl extends ServiceImpl<SysCategoryMapper, SysCategory> implements ISysCategoryService {
+public class SysCategoryServiceImpl extends GlobalResourceService<SysCategoryMapper, SysCategory> implements ISysCategoryService {
 
-	@Override
-	public void addSysCategory(SysCategory sysCategory) {
-		String categoryCode = "";
-		String categoryPid = ISysCategoryService.ROOT_PID_VALUE;
-		String parentCode = null;
-		if(oConvertUtils.isNotEmpty(sysCategory.getPid())){
-			categoryPid = sysCategory.getPid();
+    @Override protected String entityId(SysCategory value) { return value.getId(); }
+    @Override protected SysCategory writable(SysCategory input, boolean editing, SysUser actor) {
+        if (input == null) throw invalid();
+        SysCategory value = new SysCategory();
+        value.setId(editing ? checkedId(input.getId()) : UUID.randomUUID().toString().replace("-", ""));
+        value.setName(text(input.getName(), 100, true)); value.setValue(text(input.getValue(), 100, false));
+        value.setComment(text(input.getComment(), 200, false));
+        String parent = input.getPid() == null || input.getPid().isEmpty() ? ROOT_PID_VALUE : checkedId(input.getPid());
+        Set<String> visited = new HashSet<>(); String cursor = parent;
+        while (!ROOT_PID_VALUE.equals(cursor)) {
+            if (cursor.equals(value.getId()) || !visited.add(cursor) || visited.size() > 64) throw invalid();
+            SysCategory ancestor = baseMapper.selectById(cursor);
+            if (ancestor == null) throw invalid();
+            cursor = ancestor.getPid() == null || ancestor.getPid().isEmpty() ? ROOT_PID_VALUE : ancestor.getPid();
+        }
+        value.setPid(parent);
+        if (input.getCode() != null && !input.getCode().isEmpty()) {
+            if (!input.getCode().matches("[A-Za-z0-9]{1,100}")) throw invalid();
+            value.setCode(input.getCode());
+        }
+        if (editing) { value.setUpdateBy(actor.getUsername()); value.setUpdateTime(new Date()); }
+        else { value.setCreateBy(actor.getUsername()); value.setCreateTime(new Date()); value.setHasChild("0"); }
+        return value;
+    }
 
-			//PID 不是根节点 说明需要设置父节点 hasChild 为1
-			if(!ISysCategoryService.ROOT_PID_VALUE.equals(categoryPid)){
-				SysCategory parent = baseMapper.selectById(categoryPid);
-				parentCode = parent.getCode();
-				if(parent!=null && !"1".equals(parent.getHasChild())){
-					parent.setHasChild("1");
-					baseMapper.updateById(parent);
-				}
-			}
-		}
-		//update-begin--Author:baihailong  Date:20191209 for：分类字典编码规则生成器做成公用配置
-		JSONObject formData = new JSONObject();
-		formData.put("pid",categoryPid);
-		categoryCode = (String) FillRuleUtil.executeRule(FillRuleConstant.CATEGORY,formData);
-		//update-end--Author:baihailong  Date:20191209 for：分类字典编码规则生成器做成公用配置
-		sysCategory.setCode(categoryCode);
-		sysCategory.setPid(categoryPid);
-		baseMapper.insert(sysCategory);
-	}
-	
-	@Override
-	public void updateSysCategory(SysCategory sysCategory) {
-		if(oConvertUtils.isEmpty(sysCategory.getPid())){
-			sysCategory.setPid(ISysCategoryService.ROOT_PID_VALUE);
-		}else{
-			//如果当前节点父ID不为空 则设置父节点的hasChild 为1
-			SysCategory parent = baseMapper.selectById(sysCategory.getPid());
-			if(parent!=null && !"1".equals(parent.getHasChild())){
-				parent.setHasChild("1");
-				baseMapper.updateById(parent);
-			}
-		}
-		baseMapper.updateById(sysCategory);
-	}
+    @Override protected void insertPrepared(SysCategory value) {
+        if (value.getCode() == null) {
+            JSONObject form = new JSONObject(); form.put("pid", value.getPid());
+            value.setCode((String) FillRuleUtil.executeRule(FillRuleConstant.CATEGORY, form));
+        }
+        super.insertPrepared(value); markParent(value.getPid());
+    }
+    @Override protected void updatePrepared(SysCategory value) { super.updatePrepared(value); markParent(value.getPid()); }
+    private void markParent(String pid) {
+        if (!ROOT_PID_VALUE.equals(pid)) {
+            SysCategory parent = new SysCategory(); parent.setId(pid); parent.setHasChild("1");
+            if (baseMapper.updateById(parent) != 1) throw invalid();
+        }
+    }
+    @Override @Transactional(rollbackFor = Exception.class)
+    public void addSysCategory(SysCategory input) { save(input); }
+    @Override @Transactional(rollbackFor = Exception.class)
+    public void updateSysCategory(SysCategory input) { updateById(input); }
 
 	@Override
 	public List<TreeSelectModel> queryListByCode(String pcode) throws JeecgBootException{
