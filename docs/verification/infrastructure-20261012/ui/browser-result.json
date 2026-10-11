@@ -1,0 +1,464 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "case": "before-1440x1000 edit has a genuinely empty password field",
+      "passed": true
+    },
+    {
+      "case": "before-1440x1000 edit password prompt",
+      "passed": true
+    },
+    {
+      "case": "before-1440x1000 source identity remains disabled",
+      "passed": true
+    },
+    {
+      "case": "before-1440x1000 baseline rejects blank edit password",
+      "passed": true
+    },
+    {
+      "case": "before-1440x1000 existing Cron string binds unchanged",
+      "passed": true
+    },
+    {
+      "case": "before-1440x1000 baseline exposes free class input",
+      "passed": true
+    },
+    {
+      "case": "after-1440x1000 edit has a genuinely empty password field",
+      "passed": true
+    },
+    {
+      "case": "after-1440x1000 edit password prompt",
+      "passed": true
+    },
+    {
+      "case": "after-1440x1000 source identity remains disabled",
+      "passed": true
+    },
+    {
+      "case": "fixed blank password connection test explains the required credential without making a request",
+      "passed": true
+    },
+    {
+      "case": "explicit password connection test retains the real request binding",
+      "passed": true
+    },
+    {
+      "case": "fixed source edit submits PUT with unchanged identity",
+      "passed": true
+    },
+    {
+      "case": "fixed blank password edit sends no stored password or code overwrite",
+      "passed": true
+    },
+    {
+      "case": "fixed source create still requires a password",
+      "passed": true
+    },
+    {
+      "case": "after-1440x1000 existing Cron string binds unchanged",
+      "passed": true
+    },
+    {
+      "case": "after-1440x1000 existing job type is selected and immutable",
+      "passed": true
+    },
+    {
+      "case": "after-1440x1000 no arbitrary class input is rendered",
+      "passed": true
+    },
+    {
+      "case": "existing Quartz edit sends stable type, identity and Cron via PUT",
+      "passed": true
+    },
+    {
+      "case": "real dictionary radioButton binds scalar stopped status",
+      "passed": true
+    },
+    {
+      "case": "after-1440x1000 offers exactly the three reviewed job types",
+      "passed": true
+    },
+    {
+      "case": "new Quartz job submits typed command with scalar status and Cron",
+      "passed": true
+    },
+    {
+      "case": "before-390x1200 edit has a genuinely empty password field",
+      "passed": true
+    },
+    {
+      "case": "before-390x1200 edit password prompt",
+      "passed": true
+    },
+    {
+      "case": "before-390x1200 source identity remains disabled",
+      "passed": true
+    },
+    {
+      "case": "before-390x1200 baseline rejects blank edit password",
+      "passed": true
+    },
+    {
+      "case": "before-390x1200 existing Cron string binds unchanged",
+      "passed": true
+    },
+    {
+      "case": "before-390x1200 baseline exposes free class input",
+      "passed": true
+    },
+    {
+      "case": "after-390x1200 edit has a genuinely empty password field",
+      "passed": true
+    },
+    {
+      "case": "after-390x1200 edit password prompt",
+      "passed": true
+    },
+    {
+      "case": "after-390x1200 source identity remains disabled",
+      "passed": true
+    },
+    {
+      "case": "after-390x1200 existing Cron string binds unchanged",
+      "passed": true
+    },
+    {
+      "case": "after-390x1200 existing job type is selected and immutable",
+      "passed": true
+    },
+    {
+      "case": "after-390x1200 no arbitrary class input is rendered",
+      "passed": true
+    },
+    {
+      "case": "after-390x1200 offers exactly the three reviewed job types",
+      "passed": true
+    },
+    {
+      "case": "browser has no uncaught JavaScript errors",
+      "passed": true
+    },
+    {
+      "case": "browser has no console errors",
+      "passed": true
+    },
+    {
+      "case": "no external service request was attempted",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "before-1440x1000-source-edit.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "width": 1440,
+      "height": 1000,
+      "fullPage": true,
+      "actual_png_width": 1440,
+      "actual_png_height": 1000,
+      "sha256": "907fe5208addde9459bf380806ba7787f31dadede0f89e25472453d434fe7402"
+    },
+    {
+      "file": "before-1440x1000-quartz-existing.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "width": 1440,
+      "height": 1000,
+      "fullPage": true,
+      "actual_png_width": 1440,
+      "actual_png_height": 1000,
+      "sha256": "174a95d9760a04effd9da368e996d69ab898020c3f9c547eb32b861ca889bb87"
+    },
+    {
+      "file": "before-1440x1000-quartz-free-class.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "width": 1440,
+      "height": 1000,
+      "fullPage": true,
+      "actual_png_width": 1440,
+      "actual_png_height": 1000,
+      "sha256": "fbe562435d68df29b36f2746f9e977526c69a9d50bfb6b42cdfca9a3f851daf8"
+    },
+    {
+      "file": "after-1440x1000-source-edit.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "width": 1440,
+      "height": 1000,
+      "fullPage": true,
+      "actual_png_width": 1440,
+      "actual_png_height": 1000,
+      "sha256": "107dd2a6a8e8f9bf3e1eb0ecc880a0214d01f7f59e1dc1f07afd3f46fe4d6482"
+    },
+    {
+      "file": "after-1440x1000-source-test-password-hint.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "width": 1440,
+      "height": 1000,
+      "fullPage": true,
+      "actual_png_width": 1440,
+      "actual_png_height": 1000,
+      "sha256": "14973b63a4ec18c76ebf0275f37217912ad6f60ad6ce7f105b187d592965ff6b"
+    },
+    {
+      "file": "after-1440x1000-source-add-password-required.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "width": 1440,
+      "height": 1000,
+      "fullPage": true,
+      "actual_png_width": 1440,
+      "actual_png_height": 1000,
+      "sha256": "76e36b5afe9d848e2656dab10e10500fb09ecaba2bd54fed83ddb335e4472601"
+    },
+    {
+      "file": "after-1440x1000-quartz-existing.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "width": 1440,
+      "height": 1000,
+      "fullPage": true,
+      "actual_png_width": 1440,
+      "actual_png_height": 1000,
+      "sha256": "fc7cb8dada8b833d19f3b9a29ef86dfcd63b1e3f3d8f66b6dca99b13683be899"
+    },
+    {
+      "file": "after-1440x1000-quartz-type-options.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "width": 1440,
+      "height": 1000,
+      "fullPage": true,
+      "actual_png_width": 1440,
+      "actual_png_height": 1000,
+      "sha256": "59660debd2d02659f1a7bcc69d05496272ca57db102be690488513e8a351b021"
+    },
+    {
+      "file": "before-390x1200-source-edit.png",
+      "viewport": {
+        "width": 390,
+        "height": 1200
+      },
+      "width": 390,
+      "height": 1200,
+      "fullPage": true,
+      "actual_png_width": 390,
+      "actual_png_height": 1200,
+      "sha256": "ecc0d58d1c454b0ce7b9093ada58aa9a2f1de8a23abc7ae37369e89313553288"
+    },
+    {
+      "file": "before-390x1200-quartz-existing.png",
+      "viewport": {
+        "width": 390,
+        "height": 1200
+      },
+      "width": 390,
+      "height": 1200,
+      "fullPage": true,
+      "actual_png_width": 390,
+      "actual_png_height": 1200,
+      "sha256": "76d432365622de82155d031f848d5c70842104627b571dcac26ded755a7b966e"
+    },
+    {
+      "file": "before-390x1200-quartz-free-class.png",
+      "viewport": {
+        "width": 390,
+        "height": 1200
+      },
+      "width": 390,
+      "height": 1200,
+      "fullPage": true,
+      "actual_png_width": 390,
+      "actual_png_height": 1200,
+      "sha256": "0bbe9c1e7d486ccaa2d3d8e1822eab1dacdc52cbf954028586d58d637aaea53f"
+    },
+    {
+      "file": "after-390x1200-source-edit.png",
+      "viewport": {
+        "width": 390,
+        "height": 1200
+      },
+      "width": 390,
+      "height": 1200,
+      "fullPage": true,
+      "actual_png_width": 390,
+      "actual_png_height": 1200,
+      "sha256": "60f440703f8b91260da081a63294ccace27850cf2e6dc305b44b2191670f255c"
+    },
+    {
+      "file": "after-390x1200-quartz-existing.png",
+      "viewport": {
+        "width": 390,
+        "height": 1200
+      },
+      "width": 390,
+      "height": 1200,
+      "fullPage": true,
+      "actual_png_width": 390,
+      "actual_png_height": 1200,
+      "sha256": "faa05487eb88866e668575939b4ba90eb1527f02334a6e5a71e882f35604af10"
+    },
+    {
+      "file": "after-390x1200-quartz-type-options.png",
+      "viewport": {
+        "width": 390,
+        "height": 1200
+      },
+      "width": 390,
+      "height": 1200,
+      "fullPage": true,
+      "actual_png_width": 390,
+      "actual_png_height": 1200,
+      "sha256": "3c07f3c723ca5368658ad28370546db4fb4f71d089b56fc68d97632cca1c556a"
+    }
+  ],
+  "submissions": [
+    {
+      "method": "POST",
+      "path": "/online/cgreport/api/testConnection",
+      "body": {
+        "dbType": "1",
+        "dbDriver": "com.mysql.jdbc.Driver",
+        "dbUrl": "jdbc:synthetic-no-driver",
+        "dbName": "synthetic_db",
+        "dbUsername": "synthetic_user",
+        "dbPassword": "synthetic-connection-test-password"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/sys/dataSource/edit",
+      "body": {
+        "id": "synthetic-source-id",
+        "name": "合成数据源：修改名称",
+        "dbType": "1",
+        "dbDriver": "com.mysql.jdbc.Driver",
+        "dbUrl": "jdbc:synthetic-no-driver",
+        "dbName": "synthetic_db",
+        "dbUsername": "synthetic_user",
+        "remark": "浏览器验证使用合成记录；没有存储密码返回",
+        "dbPassword": ""
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/sys/quartzJob/edit",
+      "body": {
+        "id": "synthetic-job-id",
+        "jobType": "sample",
+        "jobClassName": "org.jeecg.modules.quartz.job.SampleJob",
+        "cronExpression": "0 0 0 1 1 ? 2099",
+        "parameter": "synthetic parameter",
+        "description": "既有任务已编辑：合成记录",
+        "status": "-1"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/sys/quartzJob/add",
+      "body": {
+        "jobType": "sample-parameter",
+        "cronExpression": "* * * * * ? *",
+        "parameter": "synthetic new job parameter",
+        "description": "新增类型化任务：合成记录",
+        "status": "-1"
+      }
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "blocked": [],
+  "passed": 37,
+  "failed": 0,
+  "total": 37,
+  "scope": "Real compiled before/after Vue SFCs and Ant Design, real JCron and JDictSelectTag; API requests and dictionaries are synthetic; browser form verification, not backend persistence or independent Pro acceptance.",
+  "observed_utc": "2026-10-11T09:54:26.555110+00:00",
+  "before_manifest": {
+    "root": "repository root",
+    "ref": "a3f4e10c",
+    "resolved_ref": "a3f4e10ceafcbe405093a3abe06a20225a17d3f6",
+    "files": [
+      {
+        "file": "web/src/views/system/modules/SysDataSourceModal.vue",
+        "sha256": "a07fc1393500e481b3ab105d95f2d2d48a54999c8da9d0f61e2839b5abbae0a7"
+      },
+      {
+        "file": "web/src/views/system/modules/QuartzJobModal.vue",
+        "sha256": "e2d90934fe298bc95a2080a996772a10d987505a71dabcc48d8243d9c254b62e"
+      },
+      {
+        "file": "web/src/components/dict/JDictSelectTag.vue",
+        "sha256": "f87bc06ba17fa6826a643aaedc08df01d82d201830da7b5fd12fc583096b9566"
+      },
+      {
+        "file": "web/src/components/jeecg/JCron.vue",
+        "sha256": "7567040a1431248ef6f3fac7c7adfb02c6837bd5a6e9ce9e1720d05d9f6d6081"
+      },
+      {
+        "file": "web/src/components/jeecg/modal/JCronModal.vue",
+        "sha256": "18b0055a65af620c7c8f88f27198b1f1708b61029a4c3c240f4f278f0c43d0c5"
+      }
+    ]
+  },
+  "after_manifest": {
+    "root": "repository root",
+    "ref": "46c7e4a0",
+    "resolved_ref": "46c7e4a098bf8b3c5edf55efd35aea27296ac0ed",
+    "files": [
+      {
+        "file": "web/src/views/system/modules/SysDataSourceModal.vue",
+        "sha256": "15d308bcd5a91a2a22966e8ba7fa5a7e79f031fd7b2bd4cc5bacf4e24cbfa802"
+      },
+      {
+        "file": "web/src/views/system/modules/QuartzJobModal.vue",
+        "sha256": "1fd5f1e4507b63dd1b51babb22095753116fa35749b6d8b2c483b3a477805417"
+      },
+      {
+        "file": "web/src/components/dict/JDictSelectTag.vue",
+        "sha256": "f87bc06ba17fa6826a643aaedc08df01d82d201830da7b5fd12fc583096b9566"
+      },
+      {
+        "file": "web/src/components/jeecg/JCron.vue",
+        "sha256": "7567040a1431248ef6f3fac7c7adfb02c6837bd5a6e9ce9e1720d05d9f6d6081"
+      },
+      {
+        "file": "web/src/components/jeecg/modal/JCronModal.vue",
+        "sha256": "18b0055a65af620c7c8f88f27198b1f1708b61029a4c3c240f4f278f0c43d0c5"
+      }
+    ]
+  },
+  "runner_files": {
+    "run.py": "26d0b18c1ecb9d99e784bf76fba23cfed8718a571e7646bb99ec44ec18cda06c",
+    "build.cjs": "eef48043fe988eb73f9ca49473bdeee9e461e6cb6d7ca18188a332a0fcdb0c3e",
+    "entry.js": "45312a662a5c70d58450798553b2e27629eee752b85d4982b39a6728649f8b36",
+    "api.js": "3634656f41b0839063347765cb59fe861de7e2faf7db6025d17fd5d49e60a2da",
+    "dict-api.js": "bb9afffde9ef2a13f6bf0347f92fd762a68b553d65e1310922ffefbd08d06df2",
+    "util.js": "b441487a1412c31aa283c596634e30f4411daacd26c6ca3ed645d0e575aec556",
+    "server.py": "f479e63604e5b4c48dc3e7f88a30d8f7bba0db8ce051482d111711c9e1e0fa4d",
+    "verify-browser.js": "0ad4459c56ef2e39e1eb1537491b7bf34e29362f4063e712831d00373548faf2"
+  },
+  "original_report_sha256": "591379764e4dfbe116c2b21ca73db4aa51b5004f19a72203da9b98d5b10fc4c2",
+  "review_copy_note": "Only machine-local repository path fields in the two source manifests are replaced with a repository-relative marker; assertions, counts, fixture requests and screenshot hashes are unchanged."
+}

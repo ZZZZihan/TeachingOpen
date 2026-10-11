@@ -43,8 +43,11 @@ public class QuartzJob implements Serializable {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private java.util.Date updateTime;
 	/**任务类名*/
-	@Excel(name="任务类名",width=40)
-	private java.lang.String jobClassName;
+		private java.lang.String jobClassName;
+    /** Stable server-defined type used by create/import commands. */
+    @TableField(exist = false)
+    @Excel(name="任务类型", width=25)
+    private String jobType;
 	/**cron表达式*/
 	@Excel(name="cron表达式",width=30)
 	private java.lang.String cronExpression;
