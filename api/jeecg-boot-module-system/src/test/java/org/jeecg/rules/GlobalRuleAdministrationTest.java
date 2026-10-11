@@ -15,6 +15,7 @@ import org.jeecg.common.util.SpringContextUtils;
 import org.jeecg.modules.system.controller.*;
 import org.jeecg.modules.system.entity.*;
 import org.jeecg.modules.system.mapper.*;
+import org.jeecg.modules.system.model.TreeSelectModel;
 import org.jeecg.modules.system.service.*;
 import org.jeecg.modules.system.service.impl.*;
 import org.junit.*;
@@ -153,6 +154,75 @@ public class GlobalRuleAdministrationTest {
         when(fills.selectOne(any(Wrapper.class))).thenReturn(fill().setRuleClass("java.lang.String"));
         invalid(() -> FillRuleUtil.executeRule("fixture_fill",new JSONObject()));
         verify(fills,never()).insert(any(SysFillRule.class));verify(checks,never()).insert(any(SysCheckRule.class));verify(categories,never()).insert(any(SysCategory.class));
+    }
+    @Test public void existingFrontendUriEncodedValueIsDecodedExactlyOnce() throws Exception {
+        student();
+        JSONObject row=new JSONObject();row.put("digits","*");row.put("pattern","^A\\+B% C中文$");row.put("message","Exact original value required");
+        when(checks.selectOne(any(Wrapper.class))).thenReturn(check().setRuleJson("["+row.toJSONString()+"]"));
+        // validateCheckRule first uses encodeURIComponent; Axios then transports that string as a query parameter.
+        http.perform(get("/sys/checkRule/checkByCode").param("ruleCode","fixture_check").param("value","A%2BB%25%20C%E4%B8%AD%E6%96%87"))
+                .andExpect(jsonPath("$.success").value(true));
+        http.perform(get("/sys/checkRule/checkByCode").param("ruleCode","fixture_check").param("value","%"))
+                .andExpect(jsonPath("$.success").value(false)).andExpect(jsonPath("$.message").value("校验值编码不正确"));
+        row.put("pattern","^%41$");
+        when(checks.selectOne(any(Wrapper.class))).thenReturn(check().setRuleJson("["+row.toJSONString()+"]"));
+        http.perform(get("/sys/checkRule/checkByCode").param("ruleCode","fixture_check").param("value","%2541"))
+                .andExpect(jsonPath("$.success").value(true));
+    }
+    @Test public void encodedUnicodeLengthIsLimitedAfterDecodingBeforeRuleLookup() throws Exception {
+        student();
+        when(checks.selectOne(any(Wrapper.class))).thenReturn(check().setRuleJson("[{\"digits\":\"*\",\"pattern\":\"^中{256}$\",\"message\":\"Fixture\"}]"));
+        String encoded=String.join("",Collections.nCopies(256,"%E4%B8%AD"));
+        http.perform(get("/sys/checkRule/checkByCode").param("ruleCode","fixture_check").param("value",encoded))
+                .andExpect(jsonPath("$.success").value(true));
+        clearInvocations(checks);
+        for(String value:Arrays.asList(encoded+"%E4%B8%AD",String.join("",Collections.nCopies(257,"a")),"%bad%")) {
+            http.perform(get("/sys/checkRule/checkByCode").param("ruleCode","fixture_check").param("value",value))
+                    .andExpect(jsonPath("$.success").value(false));
+        }
+        verifyZeroInteractions(checks);
+    }
+    @Test public void builtInGeneratorsKeepConfiguredParentFallbackAndFormOverride() {
+        student();
+        ISysDepartService departments=context.getBean(ISysDepartService.class);
+        SysDepart orgParent=new SysDepart();orgParent.setId("org-parent");orgParent.setOrgCode("A01");orgParent.setOrgType("1");
+        when(departments.getById("org-parent")).thenReturn(orgParent);
+        when(fills.selectOne(any(Wrapper.class))).thenReturn(fill().setRuleCode("org_num_role").setRuleParams("{\"parentId\":\"org-parent\"}"));
+        assertArrayEquals(new String[]{"A01A01","2"},(String[])FillRuleUtil.executeRule("org_num_role",null));
+        assertArrayEquals(new String[]{"A01A01","2"},(String[])FillRuleUtil.executeRule("org_num_role",new JSONObject()));
+        assertArrayEquals(new String[]{"A01","1"},(String[])FillRuleUtil.executeRule("org_num_role",JSONObject.parseObject("{\"parentId\":\"\"}")));
+        assertArrayEquals(new String[]{"A01A01","2"},(String[])FillRuleUtil.executeRule("org_num_role",JSONObject.parseObject("{\"parentId\":\"org-parent\"}")));
+        SysCategory catParent=category();catParent.setId("cat-parent");catParent.setCode("A02");
+        when(categories.selectById("cat-parent")).thenReturn(catParent);when(categories.selectList(any(Wrapper.class))).thenReturn(Collections.emptyList());
+        when(fills.selectOne(any(Wrapper.class))).thenReturn(fill().setRuleCode("category_code_rule").setRuleClass(FillRuleUtil.CATEGORY).setRuleParams("{\"pid\":\"cat-parent\"}"));
+        assertEquals("A02A01",FillRuleUtil.executeRule("category_code_rule",null));
+        assertEquals("A02A01",FillRuleUtil.executeRule("category_code_rule",new JSONObject()));
+        assertEquals("A01",FillRuleUtil.executeRule("category_code_rule",JSONObject.parseObject("{\"pid\":\"0\"}")));
+        assertEquals("A02A01",FillRuleUtil.executeRule("category_code_rule",JSONObject.parseObject("{\"pid\":\"cat-parent\"}")));
+        verify(fills,never()).insert(any(SysFillRule.class));verify(categories,never()).insert(any(SysCategory.class));
+    }
+    @Test public void ordinaryCategorySelectorsKeepExistingReadContracts() throws Exception {
+        student();
+        TreeSelectModel node=new TreeSelectModel();node.setKey("existing");node.setTitle("Fixture");node.setValue("value");node.setCode("A99");node.setLeaf(true);
+        when(categories.queryListByPid(anyString(),any())).thenReturn(Collections.singletonList(node));
+        when(categories.selectList(any(Wrapper.class))).thenReturn(Collections.singletonList(category()));
+        for(org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder request:Arrays.asList(
+                get("/sys/category/loadTreeData").param("pcode","0").param("condition","{\"name\":\"Fixture\"}"),
+                get("/sys/category/loadTreeData").param("pid","existing"),
+                get("/sys/category/loadTreeRoot").param("async","true").param("pcode",""),
+                get("/sys/category/loadTreeChildren").param("pid","existing"))) {
+            http.perform(request).andExpect(jsonPath("$.success").value(true)).andExpect(jsonPath("$.result[0].key").value("existing"))
+                    .andExpect(jsonPath("$.result[0].leaf").value(true)).andExpect(jsonPath("$.result[0].title").value("Fixture"));
+        }
+        http.perform(get("/sys/category/loadDictItem").param("ids","existing").param("pcode","0"))
+                .andExpect(jsonPath("$.success").value(true)).andExpect(jsonPath("$.result[0].name").value("Fixture"));
+        for(String field:Arrays.asList("id","code")) {
+            http.perform(get("/sys/category/loadOne").param("field",field).param("val",field.equals("id")?"existing":"A99"))
+                    .andExpect(jsonPath("$.success").value(true)).andExpect(jsonPath("$.result.name").value("Fixture"));
+        }
+        http.perform(get("/sys/category/loadAllData").param("code","0"))
+                .andExpect(jsonPath("$.success").value(true)).andExpect(jsonPath("$.result[0].text").value("Fixture"));
+        verifyZeroInteractions(users,roles);verify(categories,never()).insert(any(SysCategory.class));
     }
     @Test public void normalSeedRulePatternsAndInputBoundsArePreserved() {
         String[] patterns={"^[a-z|A-Z]$","^[0-9|a-z|A-Z|_]{0,}$","^.{3,}$","^.{3,12}$","^\\d{3}$","^[^pP]*$","^@{4}$","^#=$","^O$","^.*。$"};

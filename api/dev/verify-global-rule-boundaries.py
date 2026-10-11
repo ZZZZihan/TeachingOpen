@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 import subprocess
 from tempfile import TemporaryDirectory
-from urllib.parse import urlencode
+from urllib.parse import quote, urlencode
 from uuid import uuid4
 from local_http import FixtureApi
 from local_runtime import mysql_command
@@ -102,6 +102,23 @@ def verify(args):
             check('administrator recreates benign form checker', ok(api.request('POST', '/sys/checkRule/add', 'admin', check_rule)))
             check('ordinary form validation accepts normal input', ok(api.request('GET', '/sys/checkRule/checkByCode?' + urlencode({'ruleCode': prefix, 'value': 'Abc'}), 'student_a')))
             check('ordinary form validation rejects a nonmatching input', not ok(api.request('GET', '/sys/checkRule/checkByCode?' + urlencode({'ruleCode': prefix, 'value': '123'}), 'student_a')))
+            checker_id = sql('SELECT id FROM sys_check_rule WHERE rule_code=' + q(prefix))
+            for label, value, pattern in [('punctuation and Unicode', 'A+B% C中文', r'^A\+B% C中文$'),
+                                           ('literal percent escape', '%41', '^%41$'),
+                                           ('256 Unicode characters', '中' * 256, '^中{256}$')]:
+                configured = dict(check_rule, id=checker_id, ruleJson=json.dumps([
+                    {'digits': '*', 'pattern': pattern, 'message': 'Exact fixture value required'}]))
+                check('administrator configures ' + label + ' checker', ok(api.request('PUT', '/sys/checkRule/edit', 'admin', configured)))
+                # Match validateCheckRule's encodeURIComponent followed by Axios query encoding.
+                parameters = {'ruleCode': prefix, 'value': quote(value, safe="-_.!~*'()")}
+                before = snapshot()
+                check('existing form transport preserves ' + label,
+                      ok(api.request('GET', '/sys/checkRule/checkByCode?' + urlencode(parameters), 'student_a')) and snapshot() == before)
+            for value, message in [('%', '校验值编码不正确'), ('a' * 257, '校验值过长')]:
+                before = snapshot()
+                response = api.request('GET', '/sys/checkRule/checkByCode?' + urlencode({'ruleCode': prefix, 'value': value}), 'student_a')
+                check('malformed or oversized checker input is controlled: ' + message,
+                      not ok(response) and response[1] is not None and response[1].get('message') == message and snapshot() == before)
             before = snapshot()
             response = api.request('POST', '/sys/fillRule/add', 'admin', dict(fill, ruleClass='java.lang.String'))
             check('unsupported rule class is rejected before a write', not ok(response) and snapshot() == before)

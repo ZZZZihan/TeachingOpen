@@ -81,12 +81,21 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
             @RequestParam(name = "ruleCode") String ruleCode,
             @RequestParam(name = "value") String value
     ) throws UnsupportedEncodingException {
-        if (value.length() > 256) throw new JeecgBootException("校验值过长");
+        // validateCheckRule uses encodeURIComponent before Axios serializes its query.
+        // The servlet has removed only the outer transport encoding at this point.
+        if (value.length() > 2304) throw new JeecgBootException("校验值过长");
+        final String decoded;
+        try {
+            decoded = URLDecoder.decode(value, "UTF-8");
+        } catch (IllegalArgumentException invalidEncoding) {
+            throw new JeecgBootException("校验值编码不正确");
+        }
+        if (decoded.length() > 256) throw new JeecgBootException("校验值过长");
         SysCheckRule sysCheckRule = sysCheckRuleService.getByCode(ruleCode);
         if (sysCheckRule == null) {
             return Result.error("该编码不存在");
         }
-        JSONObject errorResult = sysCheckRuleService.checkValue(sysCheckRule, value);
+        JSONObject errorResult = sysCheckRuleService.checkValue(sysCheckRule, decoded);
         if (errorResult == null) {
             return Result.ok();
         } else {
