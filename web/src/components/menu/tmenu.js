@@ -1,5 +1,6 @@
 import Menu from 'ant-design-vue/es/menu'
 import Icon from 'ant-design-vue/es/icon'
+import { teachingMenuLink } from '@/utils/teachingMenuUrl'
 
 const { Item, SubMenu } = Menu
 
@@ -101,16 +102,13 @@ export default {
 
     // render
     renderItem(menu) {
-      if (!menu.hidden) {
+      if (!menu.hidden && !(menu.needLogin && !this.isLogin)) {
         return menu.children ? this.renderSubMenu(menu) : this.renderMenuItem(menu)
       }
       return null
     },
     renderMenuItem(menu) {
-      const tag = (menu.route && !menu.internalOrExternal) ? 'router-link' : 'a'
-      const target = menu.internalOrExternal ? "_blank" : "_self"
-      const props = { to: { path: menu.url } }
-      const attrs = { href: menu.url, target: target }
+      const { tag, props, attrs } = teachingMenuLink(menu)
 
       if(menu.needLogin && !this.isLogin){
         return
@@ -125,10 +123,7 @@ export default {
       )
     },
     renderSubMenu(menu) {
-      const tag = (menu.route && !menu.internalOrExternal) ? 'router-link' : 'a'
-      const props = { to: { path: menu.url } }
-      const target = menu.internalOrExternal ? "_blank" : "_self"
-      const attrs = { href: menu.url, target: target}
+      const { tag, props, attrs } = teachingMenuLink(menu)
       const itemArr = []
       menu.children.forEach(item => itemArr.push(this.renderItem(item)))
       return (
@@ -142,7 +137,7 @@ export default {
       )
     },
     renderIcon(icon) {
-      if (icon === 'none' || icon === undefined) {
+      if (typeof icon !== 'string' || icon === 'none' || !/^[A-Za-z0-9_-]{1,100}$/.test(icon)) {
         return null
       }
       const props = {}

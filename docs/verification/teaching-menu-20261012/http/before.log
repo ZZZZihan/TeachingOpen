@@ -1,0 +1,18 @@
+PASS student starts without management grants
+PASS anonymous public navigation loads
+PASS public navigation contains both synthetic levels
+PASS legacy public navigation exposes dangerous root URL and native same-tab flags
+PASS legacy public navigation exposes dangerous child URL
+PASS legacy public read does not modify state
+PASS legacy student can create global menu
+PASS exactly one synthetic created menu for _new
+PASS legacy ordinary student write persists active URL
+PASS legacy student can edit global menu using PUT
+PASS legacy edit PUT persists
+PASS legacy student can edit global menu using POST
+PASS legacy edit POST persists
+PASS legacy student can delete global menu
+PASS legacy single deletion persists
+PASS legacy student can batch delete global menu tree
+PASS legacy tree deletion persists
+PASS fixture cleanup restores original menu and role-link tables

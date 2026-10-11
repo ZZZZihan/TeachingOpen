@@ -10,6 +10,7 @@ import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.system.entity.SysDataLog;
 import org.jeecg.modules.system.service.ISysDataLogService;
+import org.jeecg.modules.system.service.AuditLogAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,10 +29,12 @@ import lombok.extern.slf4j.Slf4j;
 public class SysDataLogController {
 	@Autowired
 	private ISysDataLogService service;
+	@Autowired private AuditLogAccessService auditLogAccess;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Result<IPage<SysDataLog>> queryPageList(SysDataLog dataLog,@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 									  @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,HttpServletRequest req) {
+		auditLogAccess.requireManager();
 		Result<IPage<SysDataLog>> result = new Result<IPage<SysDataLog>>();
 		QueryWrapper<SysDataLog> queryWrapper = QueryGenerator.initQueryWrapper(dataLog, req.getParameterMap());
 		Page<SysDataLog> page = new Page<SysDataLog>(pageNo, pageSize);
@@ -52,6 +55,7 @@ public class SysDataLogController {
 	 */
 	@RequestMapping(value = "/queryCompareList", method = RequestMethod.GET)
 	public Result<List<SysDataLog>> queryCompareList(HttpServletRequest req) {
+		auditLogAccess.requireManager();
 		Result<List<SysDataLog>> result = new Result<>();
 		String dataId1 = req.getParameter("dataId1");
 		String dataId2 = req.getParameter("dataId2");
@@ -75,6 +79,7 @@ public class SysDataLogController {
 	 */
 	@RequestMapping(value = "/queryDataVerList", method = RequestMethod.GET)
 	public Result<List<SysDataLog>> queryDataVerList(HttpServletRequest req) {
+		auditLogAccess.requireManager();
 		Result<List<SysDataLog>> result = new Result<>();
 		String dataTable = req.getParameter("dataTable");
 		String dataId = req.getParameter("dataId");

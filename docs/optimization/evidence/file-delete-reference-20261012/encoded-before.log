@@ -1,0 +1,565 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] jeecg-boot-parent                                                  [pom]
+[INFO] jeecg-boot-base-common                                             [jar]
+[INFO] teaching-open                                                      [jar]
+[INFO] 
+[INFO] -------------< org.jeecgframework.boot:jeecg-boot-parent >--------------
+[INFO] Building jeecg-boot-parent 2.8.0                                   [1/3]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] -----------< org.jeecgframework.boot:jeecg-boot-base-common >-----------
+[INFO] Building jeecg-boot-base-common 2.8.0                              [2/3]
+[INFO]   from jeecg-boot-base-common/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.1.0:resources (default-resources) @ jeecg-boot-base-common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- compiler:3.8.0:compile (default-compile) @ jeecg-boot-base-common ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.1.0:testResources (default-testResources) @ jeecg-boot-base-common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-base-common/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.8.0:testCompile (default-testCompile) @ jeecg-boot-base-common ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:2.22.1:test (default-test) @ jeecg-boot-base-common ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] ---------------< org.jeecgframework.boot:teaching-open >----------------
+[INFO] Building teaching-open 2.8.0                                       [3/3]
+[INFO]   from jeecg-boot-module-system/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.1.0:resources (default-resources) @ teaching-open ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 518 resources
+[INFO] Copying 67 resources
+[INFO] 
+[INFO] --- compiler:3.8.0:compile (default-compile) @ teaching-open ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 384 source files to /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/target/classes
+[WARNING] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingScratchBackpackController.java:[18,16] sun.misc.BASE64Decoder是内部专用 API, 可能会在未来发行版中删除
+[WARNING] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingScratchBackpackController.java:[18,16] sun.misc.BASE64Decoder是内部专用 API, 可能会在未来发行版中删除
+[WARNING] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingScratchBackpackController.java:[18,16] sun.misc.BASE64Decoder是内部专用 API, 可能会在未来发行版中删除
+[WARNING] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingScratchBackpackController.java:[18,16] sun.misc.BASE64Decoder是内部专用 API, 可能会在未来发行版中删除
+[WARNING] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingScratchBackpackController.java:[38,9] sun.misc.BASE64Decoder是内部专用 API, 可能会在未来发行版中删除
+[WARNING] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingScratchBackpackController.java:[38,37] sun.misc.BASE64Decoder是内部专用 API, 可能会在未来发行版中删除
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/NamedTableDictionaryService.java: 某些输入文件使用或覆盖了已过时的 API。
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/NamedTableDictionaryService.java: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/impl/TeachingAdditionalWorkServiceImpl.java: 某些输入文件使用了未经检查或不安全的操作。
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/impl/TeachingAdditionalWorkServiceImpl.java: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+[INFO] 
+[INFO] --- resources:3.1.0:testResources (default-testResources) @ teaching-open ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.8.0:testCompile (default-testCompile) @ teaching-open ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 34 source files to /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/target/test-classes
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/test/java/org/jeecg/maintenance/VerifyShiroMaintenance.java: 某些输入文件使用或覆盖了已过时的 API。
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/test/java/org/jeecg/maintenance/VerifyShiroMaintenance.java: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/test/java/org/jeecg/workintegrity/WorkCloneServiceTest.java: 某些输入文件使用了未经检查或不安全的操作。
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/test/java/org/jeecg/workintegrity/WorkCloneServiceTest.java: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+[INFO] 
+[INFO] --- surefire:2.22.1:test (default-test) @ teaching-open ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.jeecg.workintegrity.FileEncodedReferenceDeletionTest
+19:05:52.115 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_file(id VARCHAR(64),file_path VARCHAR(255),file_location INT)]
+19:05:52.120 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.196 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_work(id VARCHAR(64),work_file VARCHAR(64),work_cover VARCHAR(64))]
+19:05:52.196 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.196 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course(id VARCHAR(64),course_icon LONGTEXT,course_cover LONGTEXT,course_map LONGTEXT,course_desc LONGTEXT)]
+19:05:52.196 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.197 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_unit(unit_cover LONGTEXT,course_video LONGTEXT,course_case LONGTEXT,course_ppt LONGTEXT,course_work LONGTEXT,course_work_answer LONGTEXT,course_plan LONGTEXT,unit_intro LONGTEXT,media_content LONGTEXT)]
+19:05:52.197 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.198 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_additional_work(id VARCHAR(64),work_cover LONGTEXT,work_document_url LONGTEXT,work_url LONGTEXT,work_desc LONGTEXT,work_dept VARCHAR(64),status INT)]
+19:05:52.198 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.199 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_data_log(data_id VARCHAR(64),data_table VARCHAR(64),data_content LONGTEXT)]
+19:05:52.199 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.199 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_user(avatar LONGTEXT)]
+19:05:52.199 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.200 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_config(config_value LONGTEXT)]
+19:05:52.200 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.200 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_news(news_content LONGTEXT)]
+19:05:52.200 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.201 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_scratch_assets(asset_data LONGTEXT,md5_ext LONGTEXT)]
+19:05:52.201 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.201 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_media(media_path LONGTEXT)]
+19:05:52.201 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.202 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [INSERT INTO teaching_additional_work(id,work_dept,status) VALUES('task-a','class-a',1)]
+19:05:52.202 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.347 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+19:05:52.636 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'baseMapper' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@55f3c410] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [org.apache.ibatis.binding.MapperProxy@7807ac2c]
+19:05:52.717 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'json' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@1e53135d] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [com.fasterxml.jackson.databind.ObjectMapper@7674a051]
+19:05:52.718 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'staticDomain' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@1e53135d] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [/api/sys/common/static]
+19:05:52.718 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+19:05:52.719 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE teaching_additional_work SET work_desc=?]
+19:05:52.719 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.735 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Opening JDBC Connection
+19:05:52.741 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==>  Preparing: SELECT CASE WHEN EXISTS (SELECT 1 FROM teaching_work WHERE work_file=? OR work_cover=?) OR EXISTS (SELECT 1 FROM sys_file WHERE id != ? AND file_path=? AND file_location=?) OR EXISTS ( SELECT 1 FROM ( SELECT CONCAT_WS(',',course_icon,course_cover,course_map,course_desc) AS links FROM teaching_course UNION ALL SELECT CONCAT_WS(',',unit_cover,course_video,course_case,course_ppt,course_work,course_work_answer,course_plan,unit_intro,media_content) FROM teaching_course_unit UNION ALL SELECT CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc) FROM teaching_additional_work UNION ALL SELECT h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id WHERE h.data_table='teaching_work' UNION ALL SELECT avatar FROM sys_user UNION ALL SELECT config_value FROM sys_config UNION ALL SELECT news_content FROM teaching_news UNION ALL SELECT CONCAT_WS(',',asset_data,md5_ext) FROM teaching_scratch_assets ) resource_links WHERE LOCATE(?, links)>0 OR LOCATE(?, links)>0 ) THEN 1 ELSE 0 END 
+19:05:52.762 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==> Parameters: unrelated-file-id(String), unrelated-file-id(String), unrelated-file-id(String), private.txt(String), 1(Integer), private.txt(String), unrelated-file-id(String)
+19:05:52.776 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - <==      Total: 1
+19:05:52.777 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==>  Preparing: SELECT CASE WHEN EXISTS (SELECT 1 FROM teaching_work WHERE work_file=? OR work_cover=?) OR EXISTS (SELECT 1 FROM sys_file WHERE id != ? AND file_path=? AND file_location=?) OR EXISTS ( SELECT 1 FROM ( SELECT CONCAT_WS(',',course_icon,course_cover,course_map,course_desc) AS links FROM teaching_course UNION ALL SELECT CONCAT_WS(',',unit_cover,course_video,course_case,course_ppt,course_work,course_work_answer,course_plan,unit_intro,media_content) FROM teaching_course_unit UNION ALL SELECT CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc) FROM teaching_additional_work UNION ALL SELECT h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id WHERE h.data_table='teaching_work' UNION ALL SELECT avatar FROM sys_user UNION ALL SELECT config_value FROM sys_config UNION ALL SELECT news_content FROM teaching_news UNION ALL SELECT CONCAT_WS(',',asset_data,md5_ext) FROM teaching_scratch_assets ) resource_links WHERE LOCATE(?, links)>0 OR LOCATE(?, links)>0 ) THEN 1 ELSE 0 END 
+19:05:52.778 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==> Parameters: unrelated-file-id(String), unrelated-file-id(String), unrelated-file-id(String), private.txt(String), 2(Integer), private.txt(String), unrelated-file-id(String)
+19:05:52.778 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - <==      Total: 1
+19:05:52.781 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Closing JDBC Connection [conn13: url=jdbc:h2:mem:encoded_aa830d35-a389-41bc-ad15-ab0ecf40feb4 user=]
+19:05:52.782 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_file(id VARCHAR(64),file_path VARCHAR(255),file_location INT)]
+19:05:52.782 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.784 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_work(id VARCHAR(64),work_file VARCHAR(64),work_cover VARCHAR(64))]
+19:05:52.784 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.785 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course(id VARCHAR(64),course_icon LONGTEXT,course_cover LONGTEXT,course_map LONGTEXT,course_desc LONGTEXT)]
+19:05:52.785 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.785 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_unit(unit_cover LONGTEXT,course_video LONGTEXT,course_case LONGTEXT,course_ppt LONGTEXT,course_work LONGTEXT,course_work_answer LONGTEXT,course_plan LONGTEXT,unit_intro LONGTEXT,media_content LONGTEXT)]
+19:05:52.785 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.786 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_additional_work(id VARCHAR(64),work_cover LONGTEXT,work_document_url LONGTEXT,work_url LONGTEXT,work_desc LONGTEXT,work_dept VARCHAR(64),status INT)]
+19:05:52.786 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.786 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_data_log(data_id VARCHAR(64),data_table VARCHAR(64),data_content LONGTEXT)]
+19:05:52.786 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.787 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_user(avatar LONGTEXT)]
+19:05:52.787 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.787 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_config(config_value LONGTEXT)]
+19:05:52.787 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.788 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_news(news_content LONGTEXT)]
+19:05:52.788 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.789 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_scratch_assets(asset_data LONGTEXT,md5_ext LONGTEXT)]
+19:05:52.789 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.789 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_media(media_path LONGTEXT)]
+19:05:52.789 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.790 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [INSERT INTO teaching_additional_work(id,work_dept,status) VALUES('task-a','class-a',1)]
+19:05:52.790 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.800 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'baseMapper' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@7f4d9395] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [org.apache.ibatis.binding.MapperProxy@2f19f2aa]
+19:05:52.800 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'json' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@344b8190] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [com.fasterxml.jackson.databind.ObjectMapper@6a078481]
+19:05:52.800 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'staticDomain' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@344b8190] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [/api/sys/common/static]
+19:05:52.800 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [UPDATE teaching_additional_work SET work_url='["https://external.example/test"]']
+19:05:52.801 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.812 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+19:05:52.812 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE teaching_additional_work SET work_desc=? WHERE id='task-a']
+19:05:52.812 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.813 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Opening JDBC Connection
+19:05:52.813 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==>  Preparing: SELECT CASE WHEN EXISTS (SELECT 1 FROM teaching_work WHERE work_file=? OR work_cover=?) OR EXISTS (SELECT 1 FROM sys_file WHERE id != ? AND file_path=? AND file_location=?) OR EXISTS ( SELECT 1 FROM ( SELECT CONCAT_WS(',',course_icon,course_cover,course_map,course_desc) AS links FROM teaching_course UNION ALL SELECT CONCAT_WS(',',unit_cover,course_video,course_case,course_ppt,course_work,course_work_answer,course_plan,unit_intro,media_content) FROM teaching_course_unit UNION ALL SELECT CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc) FROM teaching_additional_work UNION ALL SELECT h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id WHERE h.data_table='teaching_work' UNION ALL SELECT avatar FROM sys_user UNION ALL SELECT config_value FROM sys_config UNION ALL SELECT news_content FROM teaching_news UNION ALL SELECT CONCAT_WS(',',asset_data,md5_ext) FROM teaching_scratch_assets ) resource_links WHERE LOCATE(?, links)>0 OR LOCATE(?, links)>0 ) THEN 1 ELSE 0 END 
+19:05:52.818 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==> Parameters: unrelated-file-id(String), unrelated-file-id(String), unrelated-file-id(String), private.txt(String), 1(Integer), private.txt(String), unrelated-file-id(String)
+19:05:52.819 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - <==      Total: 1
+19:05:52.826 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Closing JDBC Connection [conn28: url=jdbc:h2:mem:encoded_c2a37e06-a6c2-414f-86b6-b5035399a071 user=]
+19:05:52.828 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_file(id VARCHAR(64),file_path VARCHAR(255),file_location INT)]
+19:05:52.828 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.830 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_work(id VARCHAR(64),work_file VARCHAR(64),work_cover VARCHAR(64))]
+19:05:52.830 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.831 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course(id VARCHAR(64),course_icon LONGTEXT,course_cover LONGTEXT,course_map LONGTEXT,course_desc LONGTEXT)]
+19:05:52.831 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.836 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_unit(unit_cover LONGTEXT,course_video LONGTEXT,course_case LONGTEXT,course_ppt LONGTEXT,course_work LONGTEXT,course_work_answer LONGTEXT,course_plan LONGTEXT,unit_intro LONGTEXT,media_content LONGTEXT)]
+19:05:52.836 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.836 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_additional_work(id VARCHAR(64),work_cover LONGTEXT,work_document_url LONGTEXT,work_url LONGTEXT,work_desc LONGTEXT,work_dept VARCHAR(64),status INT)]
+19:05:52.836 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.837 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_data_log(data_id VARCHAR(64),data_table VARCHAR(64),data_content LONGTEXT)]
+19:05:52.837 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.837 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_user(avatar LONGTEXT)]
+19:05:52.837 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.838 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_config(config_value LONGTEXT)]
+19:05:52.838 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.838 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_news(news_content LONGTEXT)]
+19:05:52.838 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.838 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_scratch_assets(asset_data LONGTEXT,md5_ext LONGTEXT)]
+19:05:52.838 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.839 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_media(media_path LONGTEXT)]
+19:05:52.839 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.839 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [INSERT INTO teaching_additional_work(id,work_dept,status) VALUES('task-a','class-a',1)]
+19:05:52.839 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.848 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'baseMapper' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@3af37506] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [org.apache.ibatis.binding.MapperProxy@4e6d7365]
+19:05:52.849 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'json' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@7c0da600] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [com.fasterxml.jackson.databind.ObjectMapper@d4602a]
+19:05:52.849 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'staticDomain' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@7c0da600] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [/api/sys/common/static]
+19:05:52.849 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+19:05:52.849 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE teaching_additional_work SET work_desc=? WHERE id='task-a']
+19:05:52.849 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.850 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Opening JDBC Connection
+19:05:52.850 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==>  Preparing: SELECT CASE WHEN EXISTS (SELECT 1 FROM teaching_work WHERE work_file=? OR work_cover=?) OR EXISTS (SELECT 1 FROM sys_file WHERE id != ? AND file_path=? AND file_location=?) OR EXISTS ( SELECT 1 FROM ( SELECT CONCAT_WS(',',course_icon,course_cover,course_map,course_desc) AS links FROM teaching_course UNION ALL SELECT CONCAT_WS(',',unit_cover,course_video,course_case,course_ppt,course_work,course_work_answer,course_plan,unit_intro,media_content) FROM teaching_course_unit UNION ALL SELECT CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc) FROM teaching_additional_work UNION ALL SELECT h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id WHERE h.data_table='teaching_work' UNION ALL SELECT avatar FROM sys_user UNION ALL SELECT config_value FROM sys_config UNION ALL SELECT news_content FROM teaching_news UNION ALL SELECT CONCAT_WS(',',asset_data,md5_ext) FROM teaching_scratch_assets ) resource_links WHERE LOCATE(?, links)>0 OR LOCATE(?, links)>0 ) THEN 1 ELSE 0 END 
+19:05:52.854 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==> Parameters: unrelated-file-id(String), unrelated-file-id(String), unrelated-file-id(String), private.txt(String), 1(Integer), private.txt(String), unrelated-file-id(String)
+19:05:52.855 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - <==      Total: 1
+19:05:52.863 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Closing JDBC Connection [conn42: url=jdbc:h2:mem:encoded_140b23ba-5133-44d0-b72b-aa7d04219147 user=]
+19:05:52.864 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_file(id VARCHAR(64),file_path VARCHAR(255),file_location INT)]
+19:05:52.864 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.865 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_work(id VARCHAR(64),work_file VARCHAR(64),work_cover VARCHAR(64))]
+19:05:52.865 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.866 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course(id VARCHAR(64),course_icon LONGTEXT,course_cover LONGTEXT,course_map LONGTEXT,course_desc LONGTEXT)]
+19:05:52.866 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.866 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_unit(unit_cover LONGTEXT,course_video LONGTEXT,course_case LONGTEXT,course_ppt LONGTEXT,course_work LONGTEXT,course_work_answer LONGTEXT,course_plan LONGTEXT,unit_intro LONGTEXT,media_content LONGTEXT)]
+19:05:52.866 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.866 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_additional_work(id VARCHAR(64),work_cover LONGTEXT,work_document_url LONGTEXT,work_url LONGTEXT,work_desc LONGTEXT,work_dept VARCHAR(64),status INT)]
+19:05:52.867 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.867 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_data_log(data_id VARCHAR(64),data_table VARCHAR(64),data_content LONGTEXT)]
+19:05:52.867 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.867 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_user(avatar LONGTEXT)]
+19:05:52.867 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.868 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_config(config_value LONGTEXT)]
+19:05:52.868 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.868 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_news(news_content LONGTEXT)]
+19:05:52.868 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.868 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_scratch_assets(asset_data LONGTEXT,md5_ext LONGTEXT)]
+19:05:52.868 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.869 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_media(media_path LONGTEXT)]
+19:05:52.869 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.869 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [INSERT INTO teaching_additional_work(id,work_dept,status) VALUES('task-a','class-a',1)]
+19:05:52.869 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.876 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'baseMapper' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@c827db] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [org.apache.ibatis.binding.MapperProxy@377c68c6]
+19:05:52.876 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'json' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@538cd0f2] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [com.fasterxml.jackson.databind.ObjectMapper@238ad8c]
+19:05:52.876 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'staticDomain' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@538cd0f2] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [/api/sys/common/static]
+19:05:52.876 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+19:05:52.876 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE teaching_additional_work SET work_desc=?]
+19:05:52.876 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.877 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Opening JDBC Connection
+19:05:52.877 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==>  Preparing: SELECT CASE WHEN EXISTS (SELECT 1 FROM teaching_work WHERE work_file=? OR work_cover=?) OR EXISTS (SELECT 1 FROM sys_file WHERE id != ? AND file_path=? AND file_location=?) OR EXISTS ( SELECT 1 FROM ( SELECT CONCAT_WS(',',course_icon,course_cover,course_map,course_desc) AS links FROM teaching_course UNION ALL SELECT CONCAT_WS(',',unit_cover,course_video,course_case,course_ppt,course_work,course_work_answer,course_plan,unit_intro,media_content) FROM teaching_course_unit UNION ALL SELECT CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc) FROM teaching_additional_work UNION ALL SELECT h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id WHERE h.data_table='teaching_work' UNION ALL SELECT avatar FROM sys_user UNION ALL SELECT config_value FROM sys_config UNION ALL SELECT news_content FROM teaching_news UNION ALL SELECT CONCAT_WS(',',asset_data,md5_ext) FROM teaching_scratch_assets ) resource_links WHERE LOCATE(?, links)>0 OR LOCATE(?, links)>0 ) THEN 1 ELSE 0 END 
+19:05:52.880 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==> Parameters: unrelated-file-id(String), unrelated-file-id(String), unrelated-file-id(String), private.txt(String), 1(Integer), private.txt(String), unrelated-file-id(String)
+19:05:52.880 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - <==      Total: 1
+19:05:52.881 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+19:05:52.881 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE teaching_additional_work SET work_desc=?]
+19:05:52.881 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.881 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==>  Preparing: SELECT CASE WHEN EXISTS (SELECT 1 FROM teaching_work WHERE work_file=? OR work_cover=?) OR EXISTS (SELECT 1 FROM sys_file WHERE id != ? AND file_path=? AND file_location=?) OR EXISTS ( SELECT 1 FROM ( SELECT CONCAT_WS(',',course_icon,course_cover,course_map,course_desc) AS links FROM teaching_course UNION ALL SELECT CONCAT_WS(',',unit_cover,course_video,course_case,course_ppt,course_work,course_work_answer,course_plan,unit_intro,media_content) FROM teaching_course_unit UNION ALL SELECT CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc) FROM teaching_additional_work UNION ALL SELECT h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id WHERE h.data_table='teaching_work' UNION ALL SELECT avatar FROM sys_user UNION ALL SELECT config_value FROM sys_config UNION ALL SELECT news_content FROM teaching_news UNION ALL SELECT CONCAT_WS(',',asset_data,md5_ext) FROM teaching_scratch_assets ) resource_links WHERE LOCATE(?, links)>0 OR LOCATE(?, links)>0 ) THEN 1 ELSE 0 END 
+19:05:52.884 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==> Parameters: unrelated-file-id(String), unrelated-file-id(String), unrelated-file-id(String), private.txt(String), 1(Integer), private.txt(String), unrelated-file-id(String)
+19:05:52.884 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - <==      Total: 1
+19:05:52.884 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Closing JDBC Connection [conn56: url=jdbc:h2:mem:encoded_b94137b7-f29d-426f-b6bf-64a8d1ed4779 user=]
+19:05:52.884 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_file(id VARCHAR(64),file_path VARCHAR(255),file_location INT)]
+19:05:52.884 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.886 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_work(id VARCHAR(64),work_file VARCHAR(64),work_cover VARCHAR(64))]
+19:05:52.886 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.886 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course(id VARCHAR(64),course_icon LONGTEXT,course_cover LONGTEXT,course_map LONGTEXT,course_desc LONGTEXT)]
+19:05:52.886 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.886 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_unit(unit_cover LONGTEXT,course_video LONGTEXT,course_case LONGTEXT,course_ppt LONGTEXT,course_work LONGTEXT,course_work_answer LONGTEXT,course_plan LONGTEXT,unit_intro LONGTEXT,media_content LONGTEXT)]
+19:05:52.886 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.887 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_additional_work(id VARCHAR(64),work_cover LONGTEXT,work_document_url LONGTEXT,work_url LONGTEXT,work_desc LONGTEXT,work_dept VARCHAR(64),status INT)]
+19:05:52.887 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.887 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_data_log(data_id VARCHAR(64),data_table VARCHAR(64),data_content LONGTEXT)]
+19:05:52.887 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.887 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_user(avatar LONGTEXT)]
+19:05:52.887 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.887 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_config(config_value LONGTEXT)]
+19:05:52.887 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.888 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_news(news_content LONGTEXT)]
+19:05:52.888 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.888 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_scratch_assets(asset_data LONGTEXT,md5_ext LONGTEXT)]
+19:05:52.888 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.888 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_media(media_path LONGTEXT)]
+19:05:52.888 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.906 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [INSERT INTO teaching_additional_work(id,work_dept,status) VALUES('task-a','class-a',1)]
+19:05:52.906 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.914 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'baseMapper' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@62315f22] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [org.apache.ibatis.binding.MapperProxy@6e4ea0bd]
+19:05:52.914 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'json' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@56f2bbea] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [com.fasterxml.jackson.databind.ObjectMapper@78f9ed3e]
+19:05:52.914 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'staticDomain' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@56f2bbea] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [/api/sys/common/static]
+19:05:52.917 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+19:05:52.917 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE teaching_additional_work SET work_desc=? WHERE id='task-a']
+19:05:52.917 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.918 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Opening JDBC Connection
+19:05:52.918 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==>  Preparing: SELECT CASE WHEN EXISTS (SELECT 1 FROM teaching_work WHERE work_file=? OR work_cover=?) OR EXISTS (SELECT 1 FROM sys_file WHERE id != ? AND file_path=? AND file_location=?) OR EXISTS ( SELECT 1 FROM ( SELECT CONCAT_WS(',',course_icon,course_cover,course_map,course_desc) AS links FROM teaching_course UNION ALL SELECT CONCAT_WS(',',unit_cover,course_video,course_case,course_ppt,course_work,course_work_answer,course_plan,unit_intro,media_content) FROM teaching_course_unit UNION ALL SELECT CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc) FROM teaching_additional_work UNION ALL SELECT h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id WHERE h.data_table='teaching_work' UNION ALL SELECT avatar FROM sys_user UNION ALL SELECT config_value FROM sys_config UNION ALL SELECT news_content FROM teaching_news UNION ALL SELECT CONCAT_WS(',',asset_data,md5_ext) FROM teaching_scratch_assets ) resource_links WHERE LOCATE(?, links)>0 OR LOCATE(?, links)>0 ) THEN 1 ELSE 0 END 
+19:05:52.920 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==> Parameters: unrelated-file-id(String), unrelated-file-id(String), unrelated-file-id(String), private.txt(String), 1(Integer), private.txt(String), unrelated-file-id(String)
+19:05:52.921 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - <==      Total: 1
+19:05:52.922 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Closing JDBC Connection [conn71: url=jdbc:h2:mem:encoded_c6573a25-dd51-4e5e-89e1-cd8c7be3ca05 user=]
+19:05:52.922 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_file(id VARCHAR(64),file_path VARCHAR(255),file_location INT)]
+19:05:52.922 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.923 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_work(id VARCHAR(64),work_file VARCHAR(64),work_cover VARCHAR(64))]
+19:05:52.923 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.923 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course(id VARCHAR(64),course_icon LONGTEXT,course_cover LONGTEXT,course_map LONGTEXT,course_desc LONGTEXT)]
+19:05:52.923 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.924 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_unit(unit_cover LONGTEXT,course_video LONGTEXT,course_case LONGTEXT,course_ppt LONGTEXT,course_work LONGTEXT,course_work_answer LONGTEXT,course_plan LONGTEXT,unit_intro LONGTEXT,media_content LONGTEXT)]
+19:05:52.924 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.924 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_additional_work(id VARCHAR(64),work_cover LONGTEXT,work_document_url LONGTEXT,work_url LONGTEXT,work_desc LONGTEXT,work_dept VARCHAR(64),status INT)]
+19:05:52.924 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.925 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_data_log(data_id VARCHAR(64),data_table VARCHAR(64),data_content LONGTEXT)]
+19:05:52.925 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.925 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_user(avatar LONGTEXT)]
+19:05:52.925 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.925 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_config(config_value LONGTEXT)]
+19:05:52.925 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.925 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_news(news_content LONGTEXT)]
+19:05:52.925 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.926 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_scratch_assets(asset_data LONGTEXT,md5_ext LONGTEXT)]
+19:05:52.926 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.926 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_media(media_path LONGTEXT)]
+19:05:52.926 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.926 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [INSERT INTO teaching_additional_work(id,work_dept,status) VALUES('task-a','class-a',1)]
+19:05:52.926 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:52.932 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'baseMapper' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@81ff872] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [org.apache.ibatis.binding.MapperProxy@31611954]
+19:05:52.932 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'json' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@3e598df9] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [com.fasterxml.jackson.databind.ObjectMapper@7e31ce0f]
+19:05:52.932 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'staticDomain' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@3e598df9] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [/api/sys/common/static]
+19:05:53.036 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'files' of type [null] on target object [org.jeecg.modules.system.service.LocalDownloadAccessService@7351a16e] or target class [class org.jeecg.modules.system.service.LocalDownloadAccessService] to value [Mock for ISysFileService, hashCode: 1538745405]
+19:05:53.047 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'works' of type [null] on target object [org.jeecg.modules.system.service.LocalDownloadAccessService@7351a16e] or target class [class org.jeecg.modules.system.service.LocalDownloadAccessService] to value [Mock for TeachingWorkMapper, hashCode: 1490434838]
+19:05:53.047 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'access' of type [null] on target object [org.jeecg.modules.system.service.LocalDownloadAccessService@7351a16e] or target class [class org.jeecg.modules.system.service.LocalDownloadAccessService] to value [Mock for TeachingAccessService, hashCode: 2085601983]
+19:05:53.047 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'departments' of type [null] on target object [org.jeecg.modules.system.service.LocalDownloadAccessService@7351a16e] or target class [class org.jeecg.modules.system.service.LocalDownloadAccessService] to value [Mock for ISysUserDepartService, hashCode: 2003961164]
+19:05:53.047 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'jdbc' of type [null] on target object [org.jeecg.modules.system.service.LocalDownloadAccessService@7351a16e] or target class [class org.jeecg.modules.system.service.LocalDownloadAccessService] to value [org.springframework.jdbc.core.JdbcTemplate@2f61f937]
+19:05:53.047 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'references' of type [null] on target object [org.jeecg.modules.system.service.LocalDownloadAccessService@7351a16e] or target class [class org.jeecg.modules.system.service.LocalDownloadAccessService] to value [org.jeecg.modules.system.service.LocalFileReferenceResolver@3e598df9]
+19:05:53.047 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+19:05:53.047 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE teaching_additional_work SET work_desc=?]
+19:05:53.047 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.057 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.057 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM teaching_course WHERE LOCATE(?,CONCAT_WS(',',course_icon,course_cover,course_map,course_desc))>0 OR LOCATE(?,CONCAT_WS(',',course_icon,course_cover,course_map,course_desc))>0 OR LOCATE('%',CONCAT_WS(',',course_icon,course_cover,course_map,course_desc))>0]
+19:05:53.057 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.059 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.059 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM teaching_course_unit WHERE LOCATE(?,CONCAT_WS(',',unit_cover,unit_intro,media_content,course_video,course_case,course_ppt,course_plan,course_work,course_work_answer))>0 OR LOCATE(?,CONCAT_WS(',',unit_cover,unit_intro,media_content,course_video,course_case,course_ppt,course_plan,course_work,course_work_answer))>0 OR LOCATE('%',CONCAT_WS(',',unit_cover,unit_intro,media_content,course_video,course_case,course_ppt,course_plan,course_work,course_work_answer))>0]
+19:05:53.059 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.060 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.060 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM teaching_additional_work WHERE LOCATE(?,CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc))>0 OR LOCATE(?,CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc))>0 OR LOCATE('%',CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc))>0]
+19:05:53.060 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.063 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.063 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM teaching_course WHERE LOCATE(?,CONCAT_WS(',',course_icon,course_cover,course_map,course_desc))>0 OR LOCATE(?,CONCAT_WS(',',course_icon,course_cover,course_map,course_desc))>0 OR LOCATE('%',CONCAT_WS(',',course_icon,course_cover,course_map,course_desc))>0]
+19:05:53.063 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.063 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.063 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM teaching_course_unit WHERE LOCATE(?,CONCAT_WS(',',unit_cover,unit_intro,media_content,course_video,course_case,course_ppt,course_plan,course_work,course_work_answer))>0 OR LOCATE(?,CONCAT_WS(',',unit_cover,unit_intro,media_content,course_video,course_case,course_ppt,course_plan,course_work,course_work_answer))>0 OR LOCATE('%',CONCAT_WS(',',unit_cover,unit_intro,media_content,course_video,course_case,course_ppt,course_plan,course_work,course_work_answer))>0]
+19:05:53.063 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.064 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.064 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM teaching_additional_work WHERE LOCATE(?,CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc))>0 OR LOCATE(?,CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc))>0 OR LOCATE('%',CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc))>0]
+19:05:53.064 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.065 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.065 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM sys_config WHERE LOCATE(?,config_value)>0 OR LOCATE(?,config_value)>0 OR LOCATE('%',config_value)>0]
+19:05:53.065 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.065 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.065 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM teaching_news WHERE LOCATE(?,news_content)>0 OR LOCATE(?,news_content)>0 OR LOCATE('%',news_content)>0]
+19:05:53.065 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.066 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+19:05:53.066 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE teaching_additional_work SET work_desc=?]
+19:05:53.066 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.066 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.066 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM teaching_course WHERE LOCATE(?,CONCAT_WS(',',course_icon,course_cover,course_map,course_desc))>0 OR LOCATE(?,CONCAT_WS(',',course_icon,course_cover,course_map,course_desc))>0 OR LOCATE('%',CONCAT_WS(',',course_icon,course_cover,course_map,course_desc))>0]
+19:05:53.066 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.066 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.066 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM teaching_course_unit WHERE LOCATE(?,CONCAT_WS(',',unit_cover,unit_intro,media_content,course_video,course_case,course_ppt,course_plan,course_work,course_work_answer))>0 OR LOCATE(?,CONCAT_WS(',',unit_cover,unit_intro,media_content,course_video,course_case,course_ppt,course_plan,course_work,course_work_answer))>0 OR LOCATE('%',CONCAT_WS(',',unit_cover,unit_intro,media_content,course_video,course_case,course_ppt,course_plan,course_work,course_work_answer))>0]
+19:05:53.066 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.088 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.088 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM teaching_additional_work WHERE LOCATE(?,CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc))>0 OR LOCATE(?,CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc))>0 OR LOCATE('%',CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc))>0]
+19:05:53.088 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.089 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.089 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM sys_config WHERE LOCATE(?,config_value)>0 OR LOCATE(?,config_value)>0 OR LOCATE('%',config_value)>0]
+19:05:53.089 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.089 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL query
+19:05:53.089 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM teaching_news WHERE LOCATE(?,news_content)>0 OR LOCATE(?,news_content)>0 OR LOCATE('%',news_content)>0]
+19:05:53.089 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.090 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_file(id VARCHAR(64),file_path VARCHAR(255),file_location INT)]
+19:05:53.090 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.091 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_work(id VARCHAR(64),work_file VARCHAR(64),work_cover VARCHAR(64))]
+19:05:53.091 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.091 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course(id VARCHAR(64),course_icon LONGTEXT,course_cover LONGTEXT,course_map LONGTEXT,course_desc LONGTEXT)]
+19:05:53.091 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.092 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_unit(unit_cover LONGTEXT,course_video LONGTEXT,course_case LONGTEXT,course_ppt LONGTEXT,course_work LONGTEXT,course_work_answer LONGTEXT,course_plan LONGTEXT,unit_intro LONGTEXT,media_content LONGTEXT)]
+19:05:53.092 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.092 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_additional_work(id VARCHAR(64),work_cover LONGTEXT,work_document_url LONGTEXT,work_url LONGTEXT,work_desc LONGTEXT,work_dept VARCHAR(64),status INT)]
+19:05:53.092 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.092 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_data_log(data_id VARCHAR(64),data_table VARCHAR(64),data_content LONGTEXT)]
+19:05:53.092 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.092 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_user(avatar LONGTEXT)]
+19:05:53.092 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.093 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_config(config_value LONGTEXT)]
+19:05:53.093 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.093 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_news(news_content LONGTEXT)]
+19:05:53.093 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.093 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_scratch_assets(asset_data LONGTEXT,md5_ext LONGTEXT)]
+19:05:53.093 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.101 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_media(media_path LONGTEXT)]
+19:05:53.101 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.102 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [INSERT INTO teaching_additional_work(id,work_dept,status) VALUES('task-a','class-a',1)]
+19:05:53.102 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.108 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'baseMapper' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@408b87aa] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [org.apache.ibatis.binding.MapperProxy@79b08632]
+19:05:53.108 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'json' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@787f32b7] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [com.fasterxml.jackson.databind.ObjectMapper@6aef4eb8]
+19:05:53.108 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'staticDomain' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@787f32b7] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [/api/sys/common/static]
+19:05:53.109 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+19:05:53.109 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE teaching_additional_work SET work_desc=? WHERE id='task-a']
+19:05:53.109 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.110 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Opening JDBC Connection
+19:05:53.110 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==>  Preparing: SELECT CASE WHEN EXISTS (SELECT 1 FROM teaching_work WHERE work_file=? OR work_cover=?) OR EXISTS (SELECT 1 FROM sys_file WHERE id != ? AND file_path=? AND file_location=?) OR EXISTS ( SELECT 1 FROM ( SELECT CONCAT_WS(',',course_icon,course_cover,course_map,course_desc) AS links FROM teaching_course UNION ALL SELECT CONCAT_WS(',',unit_cover,course_video,course_case,course_ppt,course_work,course_work_answer,course_plan,unit_intro,media_content) FROM teaching_course_unit UNION ALL SELECT CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc) FROM teaching_additional_work UNION ALL SELECT h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id WHERE h.data_table='teaching_work' UNION ALL SELECT avatar FROM sys_user UNION ALL SELECT config_value FROM sys_config UNION ALL SELECT news_content FROM teaching_news UNION ALL SELECT CONCAT_WS(',',asset_data,md5_ext) FROM teaching_scratch_assets ) resource_links WHERE LOCATE(?, links)>0 OR LOCATE(?, links)>0 ) THEN 1 ELSE 0 END 
+19:05:53.115 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==> Parameters: unrelated-file-id(String), unrelated-file-id(String), unrelated-file-id(String), private.txt(String), 1(Integer), private.txt(String), unrelated-file-id(String)
+19:05:53.116 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - <==      Total: 1
+19:05:53.116 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Closing JDBC Connection [conn112: url=jdbc:h2:mem:encoded_4d847c01-93be-4663-9f99-f1e4891eeab4 user=]
+19:05:53.116 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_file(id VARCHAR(64),file_path VARCHAR(255),file_location INT)]
+19:05:53.116 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.117 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_work(id VARCHAR(64),work_file VARCHAR(64),work_cover VARCHAR(64))]
+19:05:53.117 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.117 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course(id VARCHAR(64),course_icon LONGTEXT,course_cover LONGTEXT,course_map LONGTEXT,course_desc LONGTEXT)]
+19:05:53.118 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.118 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_unit(unit_cover LONGTEXT,course_video LONGTEXT,course_case LONGTEXT,course_ppt LONGTEXT,course_work LONGTEXT,course_work_answer LONGTEXT,course_plan LONGTEXT,unit_intro LONGTEXT,media_content LONGTEXT)]
+19:05:53.118 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.118 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_additional_work(id VARCHAR(64),work_cover LONGTEXT,work_document_url LONGTEXT,work_url LONGTEXT,work_desc LONGTEXT,work_dept VARCHAR(64),status INT)]
+19:05:53.118 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.118 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_data_log(data_id VARCHAR(64),data_table VARCHAR(64),data_content LONGTEXT)]
+19:05:53.118 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.119 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_user(avatar LONGTEXT)]
+19:05:53.119 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.119 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_config(config_value LONGTEXT)]
+19:05:53.119 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.119 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_news(news_content LONGTEXT)]
+19:05:53.119 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.119 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_scratch_assets(asset_data LONGTEXT,md5_ext LONGTEXT)]
+19:05:53.119 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.120 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_media(media_path LONGTEXT)]
+19:05:53.120 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.120 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [INSERT INTO teaching_additional_work(id,work_dept,status) VALUES('task-a','class-a',1)]
+19:05:53.120 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.141 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'baseMapper' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@1ab6718] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [org.apache.ibatis.binding.MapperProxy@460510aa]
+19:05:53.141 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'json' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@351e414e] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [com.fasterxml.jackson.databind.ObjectMapper@6fd77352]
+19:05:53.141 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'staticDomain' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@351e414e] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [/api/sys/common/static]
+19:05:53.141 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+19:05:53.141 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [INSERT INTO teaching_course_media VALUES(?)]
+19:05:53.141 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.141 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Opening JDBC Connection
+19:05:53.142 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==>  Preparing: SELECT CASE WHEN EXISTS (SELECT 1 FROM teaching_work WHERE work_file=? OR work_cover=?) OR EXISTS (SELECT 1 FROM sys_file WHERE id != ? AND file_path=? AND file_location=?) OR EXISTS ( SELECT 1 FROM ( SELECT CONCAT_WS(',',course_icon,course_cover,course_map,course_desc) AS links FROM teaching_course UNION ALL SELECT CONCAT_WS(',',unit_cover,course_video,course_case,course_ppt,course_work,course_work_answer,course_plan,unit_intro,media_content) FROM teaching_course_unit UNION ALL SELECT CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc) FROM teaching_additional_work UNION ALL SELECT h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id WHERE h.data_table='teaching_work' UNION ALL SELECT avatar FROM sys_user UNION ALL SELECT config_value FROM sys_config UNION ALL SELECT news_content FROM teaching_news UNION ALL SELECT CONCAT_WS(',',asset_data,md5_ext) FROM teaching_scratch_assets ) resource_links WHERE LOCATE(?, links)>0 OR LOCATE(?, links)>0 ) THEN 1 ELSE 0 END 
+19:05:53.144 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==> Parameters: unrelated-file-id(String), unrelated-file-id(String), unrelated-file-id(String), private.txt(String), 1(Integer), private.txt(String), unrelated-file-id(String)
+19:05:53.154 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - <==      Total: 1
+19:05:53.154 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.courseMediaReferenceCount - ==>  Preparing: SELECT COUNT(*) FROM teaching_course_media WHERE LOCATE(?,media_path)>0 OR LOCATE(?,media_path)>0 
+19:05:53.154 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.courseMediaReferenceCount - ==> Parameters: private.txt(String), unrelated-file-id(String)
+19:05:53.156 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.courseMediaReferenceCount - <==      Total: 1
+19:05:53.156 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Closing JDBC Connection [conn126: url=jdbc:h2:mem:encoded_bf2d048c-7f03-4f97-9eb3-2f3883de46f1 user=]
+19:05:53.156 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_file(id VARCHAR(64),file_path VARCHAR(255),file_location INT)]
+19:05:53.156 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.160 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_work(id VARCHAR(64),work_file VARCHAR(64),work_cover VARCHAR(64))]
+19:05:53.160 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.160 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course(id VARCHAR(64),course_icon LONGTEXT,course_cover LONGTEXT,course_map LONGTEXT,course_desc LONGTEXT)]
+19:05:53.160 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.161 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_unit(unit_cover LONGTEXT,course_video LONGTEXT,course_case LONGTEXT,course_ppt LONGTEXT,course_work LONGTEXT,course_work_answer LONGTEXT,course_plan LONGTEXT,unit_intro LONGTEXT,media_content LONGTEXT)]
+19:05:53.161 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.161 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_additional_work(id VARCHAR(64),work_cover LONGTEXT,work_document_url LONGTEXT,work_url LONGTEXT,work_desc LONGTEXT,work_dept VARCHAR(64),status INT)]
+19:05:53.161 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.161 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_data_log(data_id VARCHAR(64),data_table VARCHAR(64),data_content LONGTEXT)]
+19:05:53.161 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.161 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_user(avatar LONGTEXT)]
+19:05:53.161 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.161 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_config(config_value LONGTEXT)]
+19:05:53.161 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.162 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_news(news_content LONGTEXT)]
+19:05:53.162 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.162 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_scratch_assets(asset_data LONGTEXT,md5_ext LONGTEXT)]
+19:05:53.162 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.162 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_media(media_path LONGTEXT)]
+19:05:53.162 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.162 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [INSERT INTO teaching_additional_work(id,work_dept,status) VALUES('task-a','class-a',1)]
+19:05:53.162 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.171 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'baseMapper' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@1bd0b0e5] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [org.apache.ibatis.binding.MapperProxy@dc7b462]
+19:05:53.171 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'json' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@1f51431] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [com.fasterxml.jackson.databind.ObjectMapper@26a2f7f9]
+19:05:53.171 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'staticDomain' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@1f51431] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [/api/sys/common/static]
+19:05:53.171 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+19:05:53.171 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [INSERT INTO teaching_course(course_desc) VALUES(?)]
+19:05:53.171 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.172 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Opening JDBC Connection
+19:05:53.172 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==>  Preparing: SELECT CASE WHEN EXISTS (SELECT 1 FROM teaching_work WHERE work_file=? OR work_cover=?) OR EXISTS (SELECT 1 FROM sys_file WHERE id != ? AND file_path=? AND file_location=?) OR EXISTS ( SELECT 1 FROM ( SELECT CONCAT_WS(',',course_icon,course_cover,course_map,course_desc) AS links FROM teaching_course UNION ALL SELECT CONCAT_WS(',',unit_cover,course_video,course_case,course_ppt,course_work,course_work_answer,course_plan,unit_intro,media_content) FROM teaching_course_unit UNION ALL SELECT CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc) FROM teaching_additional_work UNION ALL SELECT h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id WHERE h.data_table='teaching_work' UNION ALL SELECT avatar FROM sys_user UNION ALL SELECT config_value FROM sys_config UNION ALL SELECT news_content FROM teaching_news UNION ALL SELECT CONCAT_WS(',',asset_data,md5_ext) FROM teaching_scratch_assets ) resource_links WHERE LOCATE(?, links)>0 OR LOCATE(?, links)>0 ) THEN 1 ELSE 0 END 
+19:05:53.173 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==> Parameters: unrelated-file-id(String), unrelated-file-id(String), unrelated-file-id(String), private.txt(String), 1(Integer), private.txt(String), unrelated-file-id(String)
+19:05:53.175 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - <==      Total: 1
+19:05:53.175 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Closing JDBC Connection [conn140: url=jdbc:h2:mem:encoded_c16fc8ff-9430-4f79-a7b9-e96358161394 user=]
+19:05:53.177 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_file(id VARCHAR(64),file_path VARCHAR(255),file_location INT)]
+19:05:53.177 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.178 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_work(id VARCHAR(64),work_file VARCHAR(64),work_cover VARCHAR(64))]
+19:05:53.178 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.178 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course(id VARCHAR(64),course_icon LONGTEXT,course_cover LONGTEXT,course_map LONGTEXT,course_desc LONGTEXT)]
+19:05:53.178 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.178 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_unit(unit_cover LONGTEXT,course_video LONGTEXT,course_case LONGTEXT,course_ppt LONGTEXT,course_work LONGTEXT,course_work_answer LONGTEXT,course_plan LONGTEXT,unit_intro LONGTEXT,media_content LONGTEXT)]
+19:05:53.178 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.178 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_additional_work(id VARCHAR(64),work_cover LONGTEXT,work_document_url LONGTEXT,work_url LONGTEXT,work_desc LONGTEXT,work_dept VARCHAR(64),status INT)]
+19:05:53.178 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.179 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_data_log(data_id VARCHAR(64),data_table VARCHAR(64),data_content LONGTEXT)]
+19:05:53.179 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.179 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_user(avatar LONGTEXT)]
+19:05:53.179 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.179 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_config(config_value LONGTEXT)]
+19:05:53.179 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.179 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_news(news_content LONGTEXT)]
+19:05:53.179 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.179 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_scratch_assets(asset_data LONGTEXT,md5_ext LONGTEXT)]
+19:05:53.179 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.180 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_course_media(media_path LONGTEXT)]
+19:05:53.180 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.180 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [INSERT INTO teaching_additional_work(id,work_dept,status) VALUES('task-a','class-a',1)]
+19:05:53.180 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.260 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'baseMapper' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@67c119b7] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [org.apache.ibatis.binding.MapperProxy@2ca5f1ed]
+19:05:53.260 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'json' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@6c03fb16] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [com.fasterxml.jackson.databind.ObjectMapper@28348c6]
+19:05:53.260 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'staticDomain' of type [null] on target object [org.jeecg.modules.system.service.LocalFileReferenceResolver@6c03fb16] or target class [class org.jeecg.modules.system.service.LocalFileReferenceResolver] to value [/api/sys/common/static]
+19:05:53.260 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+19:05:53.260 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [UPDATE teaching_additional_work SET work_desc=? WHERE id='task-a']
+19:05:53.260 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+19:05:53.261 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Opening JDBC Connection
+19:05:53.261 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==>  Preparing: SELECT CASE WHEN EXISTS (SELECT 1 FROM teaching_work WHERE work_file=? OR work_cover=?) OR EXISTS (SELECT 1 FROM sys_file WHERE id != ? AND file_path=? AND file_location=?) OR EXISTS ( SELECT 1 FROM ( SELECT CONCAT_WS(',',course_icon,course_cover,course_map,course_desc) AS links FROM teaching_course UNION ALL SELECT CONCAT_WS(',',unit_cover,course_video,course_case,course_ppt,course_work,course_work_answer,course_plan,unit_intro,media_content) FROM teaching_course_unit UNION ALL SELECT CONCAT_WS(',',work_cover,work_document_url,work_url,work_desc) FROM teaching_additional_work UNION ALL SELECT h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id WHERE h.data_table='teaching_work' UNION ALL SELECT avatar FROM sys_user UNION ALL SELECT config_value FROM sys_config UNION ALL SELECT news_content FROM teaching_news UNION ALL SELECT CONCAT_WS(',',asset_data,md5_ext) FROM teaching_scratch_assets ) resource_links WHERE LOCATE(?, links)>0 OR LOCATE(?, links)>0 ) THEN 1 ELSE 0 END 
+19:05:53.263 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - ==> Parameters: unrelated-file-id(String), unrelated-file-id(String), unrelated-file-id(String), private.txt(String), 1(Integer), private.txt(String), unrelated-file-id(String)
+19:05:53.264 [main] DEBUG org.jeecg.modules.system.mapper.SysFileMapper.referenceCount - <==      Total: 1
+19:05:53.264 [main] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction - Closing JDBC Connection [conn154: url=jdbc:h2:mem:encoded_83416fb0-afab-4fa9-88ba-310188620e97 user=]
+[ERROR] Tests run: 10, Failures: 8, Errors: 0, Skipped: 0, Time elapsed: 1.312 s <<< FAILURE! - in org.jeecg.workintegrity.FileEncodedReferenceDeletionTest
+[ERROR] independentJsonFieldsAreNotConcatenatedBeforeParsing(org.jeecg.workintegrity.FileEncodedReferenceDeletionTest)  Time elapsed: 0.046 s  <<< FAILURE!
+java.lang.AssertionError: encoded live reference must prevent deletion
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.references(FileEncodedReferenceDeletionTest.java:95)
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.independentJsonFieldsAreNotConcatenatedBeforeParsing(FileEncodedReferenceDeletionTest.java:106)
+
+[ERROR] nestedJsonUnicodeAndSlashEscapesPreventDeletion(org.jeecg.workintegrity.FileEncodedReferenceDeletionTest)  Time elapsed: 0.035 s  <<< FAILURE!
+java.lang.AssertionError: encoded live reference must prevent deletion
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.references(FileEncodedReferenceDeletionTest.java:95)
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.nestedJsonUnicodeAndSlashEscapesPreventDeletion(FileEncodedReferenceDeletionTest.java:100)
+
+[ERROR] htmlHexEntityAndPercentCombinationPreventsDeletion(org.jeecg.workintegrity.FileEncodedReferenceDeletionTest)  Time elapsed: 0.038 s  <<< FAILURE!
+java.lang.AssertionError: encoded live reference must prevent deletion
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.references(FileEncodedReferenceDeletionTest.java:95)
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.htmlHexEntityAndPercentCombinationPreventsDeletion(FileEncodedReferenceDeletionTest.java:102)
+
+[ERROR] entityAndJsonStudentDownloadsUseTheSameCandidateSemantics(org.jeecg.workintegrity.FileEncodedReferenceDeletionTest)  Time elapsed: 0.168 s  <<< FAILURE!
+java.lang.AssertionError: assigned student can read encoded attachment expected:<200> but was:<403>
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.entityAndJsonStudentDownloadsUseTheSameCandidateSemantics(FileEncodedReferenceDeletionTest.java:159)
+
+[ERROR] percentEncodedUrlPreventsDeletion(org.jeecg.workintegrity.FileEncodedReferenceDeletionTest)  Time elapsed: 0.026 s  <<< FAILURE!
+java.lang.AssertionError: encoded live reference must prevent deletion
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.references(FileEncodedReferenceDeletionTest.java:95)
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.percentEncodedUrlPreventsDeletion(FileEncodedReferenceDeletionTest.java:98)
+
+[ERROR] optionalCourseMediaAndExistingWorkHistoryAreProtected(org.jeecg.workintegrity.FileEncodedReferenceDeletionTest)  Time elapsed: 0.04 s  <<< FAILURE!
+java.lang.AssertionError
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.optionalCourseMediaAndExistingWorkHistoryAreProtected(FileEncodedReferenceDeletionTest.java:122)
+
+[ERROR] everyExistingReferenceFamilyUsesTheSameDecode(org.jeecg.workintegrity.FileEncodedReferenceDeletionTest)  Time elapsed: 0.019 s  <<< FAILURE!
+java.lang.AssertionError: teaching_course
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.everyExistingReferenceFamilyUsesTheSameDecode(FileEncodedReferenceDeletionTest.java:115)
+
+[ERROR] htmlEntityReferencePreventsDeletion(org.jeecg.workintegrity.FileEncodedReferenceDeletionTest)  Time elapsed: 0.088 s  <<< FAILURE!
+java.lang.AssertionError: encoded live reference must prevent deletion
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.references(FileEncodedReferenceDeletionTest.java:95)
+	at org.jeecg.workintegrity.FileEncodedReferenceDeletionTest.htmlEntityReferencePreventsDeletion(FileEncodedReferenceDeletionTest.java:99)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   FileEncodedReferenceDeletionTest.entityAndJsonStudentDownloadsUseTheSameCandidateSemantics:159 assigned student can read encoded attachment expected:<200> but was:<403>
+[ERROR]   FileEncodedReferenceDeletionTest.everyExistingReferenceFamilyUsesTheSameDecode:115 teaching_course
+[ERROR]   FileEncodedReferenceDeletionTest.htmlEntityReferencePreventsDeletion:99->references:95 encoded live reference must prevent deletion
+[ERROR]   FileEncodedReferenceDeletionTest.htmlHexEntityAndPercentCombinationPreventsDeletion:102->references:95 encoded live reference must prevent deletion
+[ERROR]   FileEncodedReferenceDeletionTest.independentJsonFieldsAreNotConcatenatedBeforeParsing:106->references:95 encoded live reference must prevent deletion
+[ERROR]   FileEncodedReferenceDeletionTest.nestedJsonUnicodeAndSlashEscapesPreventDeletion:100->references:95 encoded live reference must prevent deletion
+[ERROR]   FileEncodedReferenceDeletionTest.optionalCourseMediaAndExistingWorkHistoryAreProtected:122
+[ERROR]   FileEncodedReferenceDeletionTest.percentEncodedUrlPreventsDeletion:98->references:95 encoded live reference must prevent deletion
+[INFO] 
+[ERROR] Tests run: 10, Failures: 8, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for jeecg-boot-parent 2.8.0:
+[INFO] 
+[INFO] jeecg-boot-parent .................................. SUCCESS [  0.002 s]
+[INFO] jeecg-boot-base-common ............................. SUCCESS [  0.826 s]
+[INFO] teaching-open ...................................... FAILURE [  8.989 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.960 s
+[INFO] Finished at: 2026-10-11T19:05:53+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.1:test (default-test) on project teaching-open: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :teaching-open

@@ -1,0 +1,144 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] jeecg-boot-parent                                                  [pom]
+[INFO] jeecg-boot-base-common                                             [jar]
+[INFO] teaching-open                                                      [jar]
+[INFO] 
+[INFO] -------------< org.jeecgframework.boot:jeecg-boot-parent >--------------
+[INFO] Building jeecg-boot-parent 2.8.0                                   [1/3]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] -----------< org.jeecgframework.boot:jeecg-boot-base-common >-----------
+[INFO] Building jeecg-boot-base-common 2.8.0                              [2/3]
+[INFO]   from jeecg-boot-base-common/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.1.0:resources (default-resources) @ jeecg-boot-base-common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- compiler:3.8.0:compile (default-compile) @ jeecg-boot-base-common ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.1.0:testResources (default-testResources) @ jeecg-boot-base-common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-base-common/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.8.0:testCompile (default-testCompile) @ jeecg-boot-base-common ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:2.22.1:test (default-test) @ jeecg-boot-base-common ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] ---------------< org.jeecgframework.boot:teaching-open >----------------
+[INFO] Building teaching-open 2.8.0                                       [3/3]
+[INFO]   from jeecg-boot-module-system/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.1.0:resources (default-resources) @ teaching-open ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 518 resources
+[INFO] Copying 67 resources
+[INFO] 
+[INFO] --- compiler:3.8.0:compile (default-compile) @ teaching-open ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 384 source files to /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/target/classes
+[WARNING] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingScratchBackpackController.java:[18,16] sun.misc.BASE64Decoder是内部专用 API, 可能会在未来发行版中删除
+[WARNING] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingScratchBackpackController.java:[18,16] sun.misc.BASE64Decoder是内部专用 API, 可能会在未来发行版中删除
+[WARNING] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingScratchBackpackController.java:[18,16] sun.misc.BASE64Decoder是内部专用 API, 可能会在未来发行版中删除
+[WARNING] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingScratchBackpackController.java:[18,16] sun.misc.BASE64Decoder是内部专用 API, 可能会在未来发行版中删除
+[WARNING] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingScratchBackpackController.java:[38,9] sun.misc.BASE64Decoder是内部专用 API, 可能会在未来发行版中删除
+[WARNING] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/controller/TeachingScratchBackpackController.java:[38,37] sun.misc.BASE64Decoder是内部专用 API, 可能会在未来发行版中删除
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/NamedTableDictionaryService.java: 某些输入文件使用或覆盖了已过时的 API。
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/NamedTableDictionaryService.java: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/impl/TeachingAdditionalWorkServiceImpl.java: 某些输入文件使用了未经检查或不安全的操作。
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/impl/TeachingAdditionalWorkServiceImpl.java: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+[INFO] 
+[INFO] --- resources:3.1.0:testResources (default-testResources) @ teaching-open ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.8.0:testCompile (default-testCompile) @ teaching-open ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 32 source files to /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/target/test-classes
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/test/java/org/jeecg/maintenance/VerifyShiroMaintenance.java: 某些输入文件使用或覆盖了已过时的 API。
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/test/java/org/jeecg/maintenance/VerifyShiroMaintenance.java: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/test/java/org/jeecg/workintegrity/WorkCloneServiceTest.java: 某些输入文件使用了未经检查或不安全的操作。
+[INFO] /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/src/test/java/org/jeecg/workintegrity/WorkCloneServiceTest.java: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+[INFO] 
+[INFO] --- surefire:2.22.1:test (default-test) @ teaching-open ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.jeecg.workintegrity.FileDeletionConcurrencyTest
+18:34:33.172 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE sys_file(id VARCHAR(64) PRIMARY KEY, file_path VARCHAR(255), file_location INT, create_by VARCHAR(64), del_flag INT)]
+18:34:33.179 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+18:34:33.281 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL statement [CREATE TABLE teaching_work(id VARCHAR(64) PRIMARY KEY, work_file VARCHAR(64))]
+18:34:33.281 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+18:34:33.282 [main] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [INSERT INTO sys_file VALUES('file-a','attachment.txt',1,'owner',0)]
+18:34:33.282 [main] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+18:34:33.294 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+18:34:33.664 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'baseMapper' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@70efb718] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [Mock for SysFileMapper, hashCode: 334593716]
+18:34:33.665 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'qiniuUtil' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@70efb718] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [Mock for QiniuUtil, hashCode: 2126723403]
+18:34:33.665 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'uploadpath' of type [null] on target object [org.jeecg.modules.system.service.impl.SysFileServiceImpl@70efb718] or target class [class org.jeecg.modules.system.service.impl.SysFileServiceImpl] to value [/var/folders/kw/drzz5bb1071clqgd558ql42m0000gn/T/file-deletion-test-8633147581023403917]
+18:34:33.690 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'access' of type [null] on target object [org.jeecg.modules.teaching.service.TeachingWorkAttachmentAccessService@183e8023] or target class [class org.jeecg.modules.teaching.service.TeachingWorkAttachmentAccessService] to value [Mock for TeachingAccessService, hashCode: 1173340685]
+18:34:33.691 [main] DEBUG org.springframework.test.util.ReflectionTestUtils - Setting field 'files' of type [null] on target object [org.jeecg.modules.teaching.service.TeachingWorkAttachmentAccessService@183e8023] or target class [class org.jeecg.modules.teaching.service.TeachingWorkAttachmentAccessService] to value [org.jeecg.modules.system.service.impl.SysFileServiceImpl@70efb718]
+18:34:33.694 [pool-1-thread-1] DEBUG org.springframework.jdbc.datasource.DataSourceTransactionManager - Creating new transaction with name [null]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+18:34:33.695 [pool-1-thread-1] DEBUG org.springframework.jdbc.datasource.DataSourceTransactionManager - Acquired Connection [conn3: url=jdbc:h2:mem:files_07a6fc01-3fc7-4b29-8e9f-f5e124237ab0 user=] for JDBC transaction
+18:34:33.697 [pool-1-thread-1] DEBUG org.springframework.jdbc.datasource.DataSourceTransactionManager - Switching JDBC Connection [conn3: url=jdbc:h2:mem:files_07a6fc01-3fc7-4b29-8e9f-f5e124237ab0 user=] to manual commit
+18:34:33.710 [pool-1-thread-1] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL query [SELECT * FROM sys_file WHERE id='file-a' FOR UPDATE]
+18:34:33.725 [deletion] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL query [SELECT * FROM sys_file WHERE id='file-a']
+18:34:33.725 [deletion] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+18:34:33.743 [deletion] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL query [SELECT COUNT(*) FROM teaching_work WHERE work_file='file-a']
+18:34:33.743 [deletion] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+18:34:33.751 [pool-1-thread-1] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing SQL update [INSERT INTO teaching_work VALUES('work-a','file-a')]
+18:34:33.751 [deletion] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL update
+18:34:33.751 [pool-1-thread-1] DEBUG org.springframework.jdbc.datasource.DataSourceTransactionManager - Initiating transaction commit
+18:34:33.751 [pool-1-thread-1] DEBUG org.springframework.jdbc.datasource.DataSourceTransactionManager - Committing JDBC transaction on Connection [conn3: url=jdbc:h2:mem:files_07a6fc01-3fc7-4b29-8e9f-f5e124237ab0 user=]
+18:34:33.751 [deletion] DEBUG org.springframework.jdbc.core.JdbcTemplate - Executing prepared SQL statement [DELETE FROM sys_file WHERE id=?]
+18:34:33.751 [deletion] DEBUG org.springframework.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+18:34:33.753 [pool-1-thread-1] DEBUG org.springframework.jdbc.datasource.DataSourceTransactionManager - Releasing JDBC Connection [conn3: url=jdbc:h2:mem:files_07a6fc01-3fc7-4b29-8e9f-f5e124237ab0 user=] after transaction
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.8 s <<< FAILURE! - in org.jeecg.workintegrity.FileDeletionConcurrencyTest
+[ERROR] firstReferenceWinningTheLockPreservesBytesAndRejectsDeletion(org.jeecg.workintegrity.FileDeletionConcurrencyTest)  Time elapsed: 0.774 s  <<< FAILURE!
+java.lang.AssertionError: a held reference lock must protect the physical bytes
+	at org.jeecg.workintegrity.FileDeletionConcurrencyTest.firstReferenceWinningTheLockPreservesBytesAndRejectsDeletion(FileDeletionConcurrencyTest.java:141)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   FileDeletionConcurrencyTest.firstReferenceWinningTheLockPreservesBytesAndRejectsDeletion:141 a held reference lock must protect the physical bytes
+[INFO] 
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for jeecg-boot-parent 2.8.0:
+[INFO] 
+[INFO] jeecg-boot-parent .................................. SUCCESS [  0.002 s]
+[INFO] jeecg-boot-base-common ............................. SUCCESS [  1.136 s]
+[INFO] teaching-open ...................................... FAILURE [  9.622 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.939 s
+[INFO] Finished at: 2026-10-11T18:34:34+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.1:test (default-test) on project teaching-open: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/xuzihan/Documents/Codex/2026-10-11/task-3/agents/h04-files/api/jeecg-boot-module-system/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :teaching-open

@@ -1,0 +1,29 @@
+PASS Chromium binary exists (browser is required, never skipped)
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+PASS 1440 actual Header contains mounted TMenu
+PASS 1440 unsafe leaf URL has expected baseline/fixed link shape
+PASS 1440 top baseline marker executes once on real click
+PASS 1440 group baseline marker executes once on real click
+PASS 1440 child baseline marker executes once on real click
+PASS 1440 normal SPA route including query and fragment navigates
+PASS 1440 normal submenu title navigates
+PASS 1440 native same-origin editor preserves path and query
+PASS 1440 HTTPS same-tab navigation is preserved
+PASS 1440 HTTPS popup navigates
+PASS 1440 HTTPS popup has no opener
+PASS 390 actual Header contains mounted TMenu
+PASS 390 unsafe leaf URL has expected baseline/fixed link shape
+PASS 390 top baseline marker executes once on real click
+PASS 390 group baseline marker executes once on real click
+PASS 390 child baseline marker executes once on real click
+PASS 390 normal SPA route including query and fragment navigates
+PASS 390 normal submenu title navigates
+PASS 390 native same-origin editor preserves path and query
+PASS 390 HTTPS same-tab navigation is preserved
+PASS 390 HTTPS popup navigates
+PASS 390 HTTPS popup has no opener
+PASS all four synthetic HTTPS navigation requests intercepted before network
+PASS no unexpected outbound request
+PASS no browser runtime or protocol error

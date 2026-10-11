@@ -13,7 +13,9 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 /** Check local references before the new teaching object can confer access to them. */
 @Service
@@ -26,21 +28,31 @@ public class LocalFileReferenceAccessService {
 
     public void requireUse(String... values) {
         if (access.currentUser() == null) throw new UnauthorizedException("请先登录");
-        if (access.isAdministrator()) return;
-        Set<String> keys = new HashSet<>();
+        boolean administrator = access.isAdministrator();
+        Set<String> keys = new TreeSet<>();
         Set<String> localUrls = new HashSet<>();
         for (String value : values) {
             LocalFileReferenceResolver.References found = references.resolve(value);
             keys.addAll(found.keys());
             localUrls.addAll(found.localUrls());
         }
+        if (keys.isEmpty()) return;
+        // Additional-work URL references share the deletion/ID-attachment lock
+        // protocol. Lock every registered object in the same stable ID order.
+        List<SysFile> records = files.list(new QueryWrapper<SysFile>().eq("file_location", 1)
+                .in("file_path", keys).orderByAsc("id").last("FOR UPDATE"));
+        Set<String> registered = new HashSet<>();
+        for (SysFile file : records) {
+            if (!keys.contains(file.getFilePath())) continue;
+            if (!Integer.valueOf(0).equals(file.getDelFlag())) throw new UnauthorizedException("无附件使用权限");
+            registered.add(file.getFilePath());
+        }
         for (String key : keys) {
             // Plain description text and external URLs are not local resources.
             // Also recognize legacy files without a sys_file row, because the
             // existing download resolver supports their course/assignment refs.
-            boolean resource = localUrls.contains(key) || storedLocally(key)
-                    || files.count(new QueryWrapper<SysFile>().eq("file_location", 1).eq("file_path", key)) > 0;
-            if (resource && downloads.status(key) != 200) throw new UnauthorizedException("无附件使用权限");
+            boolean resource = localUrls.contains(key) || storedLocally(key) || registered.contains(key);
+            if (resource && !administrator && downloads.status(key) != 200) throw new UnauthorizedException("无附件使用权限");
         }
     }
 

@@ -1,0 +1,8 @@
+PASS percent URL fixture contains no raw file key or ID
+PASS percent URL teacher saves owned reference through HTTP
+PASS percent URL unauthorized student cannot read bytes
+PASS percent URL anonymous reader cannot read bytes
+PASS percent URL assigned student reads exact bytes
+FAIL percent URL deletion refuses a decoded live reference
+PASS all original business rows and assignment counters restored
+PASS all original upload bytes restored

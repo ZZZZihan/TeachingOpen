@@ -15,6 +15,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.jeecg.common.api.vo.Result;
+import org.jeecg.common.exception.JeecgBootException;
+import org.jeecg.modules.system.service.GlobalResourceAccessService;
+import org.jeecg.modules.system.service.GlobalResourceImport;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.vo.DictModel;
 import org.jeecg.common.system.vo.LoginUser;
@@ -51,6 +54,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SysCategoryController {
 	@Autowired
 	private ISysCategoryService sysCategoryService;
+    @Autowired private GlobalResourceAccessService access;
 	
 	/**
 	  * 分页列表查询
@@ -65,6 +69,7 @@ public class SysCategoryController {
 									  @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 									  @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
 									  HttpServletRequest req) {
+        access.requireAdministrator();
 		if(oConvertUtils.isEmpty(sysCategory.getPid())){
 			sysCategory.setPid("0");
 		}
@@ -88,6 +93,7 @@ public class SysCategoryController {
 	
 	@GetMapping(value = "/childList")
 	public Result<List<SysCategory>> queryPageList(SysCategory sysCategory,HttpServletRequest req) {
+        access.requireAdministrator();
 		if(oConvertUtils.isNotEmpty(sysCategory.getPid())){
 			sysCategory.setCode(null);
 		}
@@ -107,6 +113,7 @@ public class SysCategoryController {
 	 */
 	@PostMapping(value = "/add")
 	public Result<SysCategory> add(@RequestBody SysCategory sysCategory) {
+        access.requireAdministrator();
 		Result<SysCategory> result = new Result<SysCategory>();
 		try {
 			sysCategoryService.addSysCategory(sysCategory);
@@ -125,6 +132,7 @@ public class SysCategoryController {
 	 */
 	@PutMapping(value = "/edit")
 	public Result<SysCategory> edit(@RequestBody SysCategory sysCategory) {
+        access.requireAdministrator();
 		Result<SysCategory> result = new Result<SysCategory>();
 		SysCategory sysCategoryEntity = sysCategoryService.getById(sysCategory.getId());
 		if(sysCategoryEntity==null) {
@@ -143,6 +151,7 @@ public class SysCategoryController {
 	 */
 	@DeleteMapping(value = "/delete")
 	public Result<SysCategory> delete(@RequestParam(name="id",required=true) String id) {
+        access.requireAdministrator();
 		Result<SysCategory> result = new Result<SysCategory>();
 		SysCategory sysCategory = sysCategoryService.getById(id);
 		if(sysCategory==null) {
@@ -164,6 +173,7 @@ public class SysCategoryController {
 	 */
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<SysCategory> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
+        access.requireAdministrator();
 		Result<SysCategory> result = new Result<SysCategory>();
 		if(ids==null || "".equals(ids.trim())) {
 			result.error500("参数不识别！");
@@ -181,6 +191,7 @@ public class SysCategoryController {
 	 */
 	@GetMapping(value = "/queryById")
 	public Result<SysCategory> queryById(@RequestParam(name="id",required=true) String id) {
+        access.requireAdministrator();
 		Result<SysCategory> result = new Result<SysCategory>();
 		SysCategory sysCategory = sysCategoryService.getById(id);
 		if(sysCategory==null) {
@@ -199,6 +210,7 @@ public class SysCategoryController {
    */
   @RequestMapping(value = "/exportXls")
   public ModelAndView exportXls(HttpServletRequest request, SysCategory sysCategory) {
+        access.requireAdministrator();
       // Step.1 组装查询条件查询数据
       QueryWrapper<SysCategory> queryWrapper = QueryGenerator.initQueryWrapper(sysCategory, request.getParameterMap());
       List<SysCategory> pageList = sysCategoryService.list(queryWrapper);
@@ -230,32 +242,9 @@ public class SysCategoryController {
    */
   @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
   public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
-      MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-      Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-      for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
-          MultipartFile file = entity.getValue();// 获取上传文件对象
-          ImportParams params = new ImportParams();
-          params.setTitleRows(2);
-          params.setHeadRows(1);
-          params.setNeedSave(true);
-          try {
-              List<SysCategory> listSysCategorys = ExcelImportUtil.importExcel(file.getInputStream(), SysCategory.class, params);
-              for (SysCategory sysCategoryExcel : listSysCategorys) {
-                  sysCategoryService.save(sysCategoryExcel);
-              }
-              return Result.ok("文件导入成功！数据行数：" + listSysCategorys.size());
-          } catch (Exception e) {
-              log.error(e.getMessage(), e);
-              return Result.error("文件导入失败："+e.getMessage());
-          } finally {
-              try {
-                  file.getInputStream().close();
-              } catch (IOException e) {
-                  e.printStackTrace();
-              }
-          }
-      }
-      return Result.error("文件导入失败！");
+        access.requireAdministrator();
+      sysCategoryService.saveBatch(GlobalResourceImport.read(request, SysCategory.class));
+      return Result.ok("文件导入成功！");
   }
   
   

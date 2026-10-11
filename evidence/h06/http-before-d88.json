@@ -1,0 +1,180 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "case": "teacher grades own class through actual business API",
+      "passed": true
+    },
+    {
+      "case": "unique private feedback is committed",
+      "passed": true
+    },
+    {
+      "case": "student_b cross-class business queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_b cross-class business queryById returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_b cross-class business queryById leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b cross-class business queryTeachingWorkCorrectByMainId is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_b cross-class business queryTeachingWorkCorrectByMainId returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_b cross-class business queryTeachingWorkCorrectByMainId leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cross-class business queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cross-class business queryById returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cross-class business queryById leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cross-class business queryTeachingWorkCorrectByMainId is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cross-class business queryTeachingWorkCorrectByMainId returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cross-class business queryTeachingWorkCorrectByMainId leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a legitimate feedback read",
+      "passed": true
+    },
+    {
+      "case": "student_a receives the committed feedback",
+      "passed": true
+    },
+    {
+      "case": "teacher_a legitimate feedback read",
+      "passed": true
+    },
+    {
+      "case": "teacher_a receives the committed feedback",
+      "passed": true
+    },
+    {
+      "case": "baseline actual grading aspect retained private DTO in audit",
+      "passed": true
+    },
+    {
+      "case": "student_b baseline raw history route /sys/log/list",
+      "passed": true
+    },
+    {
+      "case": "student_b baseline history exposes the same private feedback",
+      "passed": true
+    },
+    {
+      "case": "student_b baseline raw history route /sys/dataLog/list",
+      "passed": true
+    },
+    {
+      "case": "student_b baseline history exposes the same private feedback",
+      "passed": true
+    },
+    {
+      "case": "student_b baseline raw history route /sys/dataLog/queryCompareList",
+      "passed": true
+    },
+    {
+      "case": "student_b baseline history exposes the same private feedback",
+      "passed": true
+    },
+    {
+      "case": "student_b baseline raw history route /sys/dataLog/queryDataVerList",
+      "passed": true
+    },
+    {
+      "case": "student_b baseline history exposes the same private feedback",
+      "passed": true
+    },
+    {
+      "case": "teacher_b baseline raw history route /sys/log/list",
+      "passed": true
+    },
+    {
+      "case": "teacher_b baseline history exposes the same private feedback",
+      "passed": true
+    },
+    {
+      "case": "teacher_b baseline raw history route /sys/dataLog/list",
+      "passed": true
+    },
+    {
+      "case": "teacher_b baseline history exposes the same private feedback",
+      "passed": true
+    },
+    {
+      "case": "teacher_b baseline raw history route /sys/dataLog/queryCompareList",
+      "passed": true
+    },
+    {
+      "case": "teacher_b baseline history exposes the same private feedback",
+      "passed": true
+    },
+    {
+      "case": "teacher_b baseline raw history route /sys/dataLog/queryDataVerList",
+      "passed": true
+    },
+    {
+      "case": "teacher_b baseline history exposes the same private feedback",
+      "passed": true
+    },
+    {
+      "case": "baseline ordinary account deletes one audit row",
+      "passed": true
+    },
+    {
+      "case": "baseline unauthorized single delete persisted",
+      "passed": true
+    },
+    {
+      "case": "baseline ordinary account batch deletes audit rows",
+      "passed": true
+    },
+    {
+      "case": "baseline unauthorized batch delete persisted",
+      "passed": true
+    },
+    {
+      "case": "baseline ordinary account clears every audit row",
+      "passed": true
+    },
+    {
+      "case": "baseline unauthorized allclear persisted",
+      "passed": true
+    },
+    {
+      "case": "all original audit history work feedback statistics and role rows restored",
+      "passed": true
+    }
+  ],
+  "passed": 42,
+  "failed": 0,
+  "total": 42,
+  "expected_legacy": true,
+  "jar_sha256": "7fc5d65069f9b04ab0d4285bff50a2e19d16b67f43ac2d51e76ea582c25e9ba3",
+  "exception": null,
+  "scope": "Exclusive synthetic HTTP/MySQL; actual grading, retained historical DTOs, role grant/revocation and full log restoration; no production"
+}

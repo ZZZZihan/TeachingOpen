@@ -1,0 +1,15 @@
+{
+  "status": "expected_failure",
+  "baseline_commit": "d88f439205d21fb489785c3ee228e4482f5b7d65",
+  "tests": 7,
+  "failures": 5,
+  "errors": 0,
+  "failed_cases": [
+    "ordinarySingleDeleteBatchDeleteAndAllClearDoNotReachPersistence",
+    "samePrincipalLosesReadsAndDestructiveActionsAfterLiveRoleRemoval",
+    "ordinaryUsersCannotReadRawAuditRequests",
+    "disabledDeletedAndMissingAccountsCannotUseAnOldAdministratorPrincipal",
+    "ordinaryUsersCannotReadListCompareOrVersions"
+  ],
+  "note": "New guard dependency was wired but not enforced during this red phase; original route bodies unchanged."
+}

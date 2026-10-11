@@ -1,0 +1,86 @@
+{
+  "observed_utc": "2026-10-11T10:55:25.857297+00:00",
+  "scope": "owned synthetic TeachingMenu HTTP/MySQL; no production connection",
+  "jar_sha256": "7fc5d65069f9b04ab0d4285bff50a2e19d16b67f43ac2d51e76ea582c25e9ba3",
+  "verifier_sha256": "4ffd296dc7bacba3c6d74dac3e803af5b6ecc0de81c510063492076d24e1e01b",
+  "expected_legacy": true,
+  "passed": 16,
+  "failed": 2,
+  "total": 18,
+  "checks": [
+    {
+      "case": "student starts without management grants",
+      "passed": true
+    },
+    {
+      "case": "anonymous public navigation loads",
+      "passed": true
+    },
+    {
+      "case": "public navigation contains both synthetic levels",
+      "passed": true
+    },
+    {
+      "case": "legacy public navigation exposes dangerous root URL and native same-tab flags",
+      "passed": true
+    },
+    {
+      "case": "legacy public navigation exposes dangerous child URL",
+      "passed": true
+    },
+    {
+      "case": "legacy public read does not modify state",
+      "passed": true
+    },
+    {
+      "case": "legacy student can create global menu",
+      "passed": true
+    },
+    {
+      "case": "exactly one synthetic created menu for _new",
+      "passed": true
+    },
+    {
+      "case": "legacy ordinary student write persists active URL",
+      "passed": true
+    },
+    {
+      "case": "legacy student can edit global menu using PUT",
+      "passed": true
+    },
+    {
+      "case": "legacy edit PUT persists",
+      "passed": true
+    },
+    {
+      "case": "legacy student can edit global menu using POST",
+      "passed": true
+    },
+    {
+      "case": "legacy edit POST persists",
+      "passed": true
+    },
+    {
+      "case": "legacy student can delete global menu",
+      "passed": true
+    },
+    {
+      "case": "legacy single deletion persists",
+      "passed": true
+    },
+    {
+      "case": "legacy student can batch delete global menu tree",
+      "passed": false
+    },
+    {
+      "case": "fixture cleanup restores original menu and role-link tables",
+      "passed": true
+    },
+    {
+      "case": "all required operations and cleanup completed",
+      "passed": false
+    }
+  ],
+  "completed": false,
+  "exception_type": "AssertionError"
+}

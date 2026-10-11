@@ -29,9 +29,15 @@ public class LocalDownloadAccessService {
 
     public int status(String key) {
         LoginUser user = access.currentUser();
+        List<SysFile> records = files.list(new QueryWrapper<SysFile>().eq("file_path", key).eq("file_location", 1));
+        // A failed physical cleanup leaves a committed tombstone for retry. It
+        // must not fall through to owner, public-resource or administrator reads.
+        for (SysFile file : records) {
+            if (key.equals(file.getFilePath()) && !Integer.valueOf(0).equals(file.getDelFlag()))
+                return user == null ? 401 : 403;
+        }
         if (user != null && access.isAdministrator()) return 200;
         Map<String, Boolean> courseAccess = new HashMap<>();
-        List<SysFile> records = files.list(new QueryWrapper<SysFile>().eq("file_path", key).eq("file_location", 1).eq("del_flag", 0));
         Set<String> fileIds = new HashSet<>();
         Set<String> uploaders = new HashSet<>();
         for (SysFile file : records) {
