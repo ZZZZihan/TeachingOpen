@@ -170,22 +170,17 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Integer saveMain(SysDict sysDict, List<SysDictItem> sysDictItemList) {
-		int insert=0;
-    	try{
-			 insert = sysDictMapper.insert(sysDict);
-			if (sysDictItemList != null) {
-				for (SysDictItem entity : sysDictItemList) {
-					entity.setDictId(sysDict.getId());
-					entity.setStatus(1);
-					sysDictItemMapper.insert(entity);
-				}
-			}
-		}catch(Exception e){
-			return insert;
-		}
-		return insert;
+        int inserted = sysDictMapper.insert(sysDict);
+        if (sysDictItemList != null) {
+            for (SysDictItem entity : sysDictItemList) {
+                entity.setDictId(sysDict.getId());
+                entity.setStatus(1);
+                sysDictItemMapper.insert(entity);
+            }
+        }
+        return inserted;
     }
 
 	@Override
