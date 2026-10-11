@@ -4,6 +4,7 @@ import argparse
 import base64
 import hashlib
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 import shutil
@@ -16,6 +17,83 @@ from zipfile import ZipFile
 from local_http import FixtureApi
 from local_runtime import mysql_command
 from day_log_boundary import verify_manual_writes
+
+
+def verify_profile_emails(api, sql, check, snapshot):
+    """Bypass the form and exercise both real profile aliases with JSON bodies."""
+    observations = []
+
+    def cache_snapshot():
+        # Compare key membership and serialized values, not ticking TTLs. The
+        # profile service evicts the whole user family only after a valid save.
+        value = api.cache('EVAL', "local keys={}; for _,pattern in ipairs(ARGV) do "
+                         "for _,key in ipairs(redis.call('KEYS',pattern)) do table.insert(keys,key) end end; "
+                         "table.sort(keys); local values={}; for _,key in ipairs(keys) do "
+                         "table.insert(values,key..':'..redis.sha1hex(redis.call('DUMP',key))) end; "
+                         "return redis.sha1hex(table.concat(values,'|'))", '0',
+                         'sys:cache:user::*',
+                         'shiro:cache:org.jeecg.modules.shiro.authc.ShiroRealm.*')
+        if not re.fullmatch(r'[0-9a-f]{40}', value):
+            raise RuntimeError('Profile cache snapshot did not return a valid SHA1 digest')
+        return value
+
+    def sensitive_snapshot():
+        columns = 'id,username,password,salt,phone,status,del_flag,depart_ids,user_identity'
+        return hashlib.sha256(sql('SELECT ' + columns + ' FROM sys_user ORDER BY id').encode()).hexdigest()
+
+    invalid = (
+        ('plain text', 'abc'), ('blank space', ' '), ('blank tab', '\t'),
+        ('missing domain', 'user@'), ('missing local part', '@example.test'),
+        ('missing domain suffix', 'user@example'), ('multiple at signs', 'user@@example.test'),
+        ('local space', 'user name@example.test'), ('leading space', ' user@example.test'),
+        ('trailing space', 'user@example.test '), ('trailing newline', 'user@example.test\n'),
+        ('nonbreaking space', 'user\u00a0name@example.test'), ('embedded BOM', 'u\uFEFFser@example.test'),
+        ('C1 control', 'u\u0085ser@example.test'), ('quoted C0 control', '"u\u0001ser"@example.test'),
+        ('quoted DEL control', '"u\u007Fser"@example.test'),
+        ('over 100 characters', 'a' * 101 + '@example.test'))
+    valid = (('ordinary address', 'candidate@example.test'),
+             ('plus tag and subdomain', 'first.last+tag@sub.example.com'),
+             ('null optional email', None), ('empty optional email', ''))
+
+    for route in ('/sys/user/appEdit', '/teaching/user/edit'):
+        # Warm an authentic cached LoginUser so an erroneous eviction cannot
+        # pass simply because this cache family was empty before the denial.
+        status, result, _ = api.request('GET', '/teaching/user/info', 'student_a')
+        check('email validation warms authenticated profile ' + route,
+              status == 200 and result is not None and result.get('success') is True)
+        check('email validation has a real user cache ' + route,
+              api.cache('EXISTS', 'sys:cache:user::fixture_student_a') == '1')
+        for label, email in invalid:
+            before, cached_before = snapshot(), cache_snapshot()
+            status, result, _ = api.request('PUT', route, 'student_a',
+                                           {'id': 'fixture_student_a', 'realname': 'forged invalid email', 'email': email})
+            after, cached_after = snapshot(), cache_snapshot()
+            name = 'direct HTTP profile rejects ' + label + ' ' + route
+            # JeecgBootException keeps HTTP 200 and reports a business error.
+            check(name, status == 200 and result is not None and result.get('success') is False
+                  and result.get('code') == 500 and result.get('message') == '个人资料格式不正确')
+            check(name + ' changes no account or permission records', after == before)
+            check(name + ' preserves user and Shiro cache keys and values', cached_after == cached_before)
+            observations.append({'route': route, 'case': label, 'http_status': status,
+                                 'business_code': result.get('code'), 'accepted': False,
+                                 'database_before': before, 'database_after': after,
+                                 'cache_before_sha1': cached_before, 'cache_after_sha1': cached_after})
+        for label, email in valid:
+            before = sensitive_snapshot()
+            status, result, _ = api.request('PUT', route, 'student_a',
+                                           {'id': 'fixture_student_a', 'realname': '合成邮箱合法控制', 'email': email})
+            name = 'direct HTTP profile saves ' + label + ' ' + route
+            check(name, status == 200 and result is not None and result.get('success') is True
+                  and result.get('code') == 200)
+            stored = sql("SELECT IF(email IS NULL,'NULL',CONCAT('HEX:',HEX(email))) "
+                         "FROM sys_user WHERE id='fixture_student_a'")
+            expected = 'NULL' if email is None else 'HEX:' + email.encode().hex().upper()
+            check(name + ' persists the exact email including null versus empty', stored == expected)
+            check(name + ' preserves sensitive identity credentials and account state', sensitive_snapshot() == before)
+            observations.append({'route': route, 'case': label, 'http_status': status,
+                                 'business_code': result.get('code'), 'accepted': True,
+                                 'persisted_email': email})
+    return observations
 
 
 def legacy_authorization_payload(runtime, jar):
@@ -340,6 +418,7 @@ def verify(args):
             allowed('own profile updates permitted fields', 'PUT', '/teaching/user/edit', 'student_a',
                     {'id': 'fixture_student_a', 'realname': '合成个人资料', 'avatar': '', 'email': None, 'sex': 1, 'birthday': None})
             check('own profile preserves all sensitive columns', sql('SELECT ' + sensitive + " FROM sys_user WHERE id='fixture_student_a'") == before)
+            profile_email_cases = verify_profile_emails(api, sql, check, snapshot)
             before = sql("SELECT username,realname,status,del_flag,depart_ids,user_identity FROM sys_user WHERE id='fixture_student_b'")
             allowed('reset uses canonical username and only credentials', 'PUT', '/sys/user/changePassword', 'admin',
                     {'id': 'fixture_student_b', 'username': 'forged', 'realname': 'forged', 'status': 0, 'password': 'SecurePassword9!'})
@@ -366,7 +445,9 @@ def verify(args):
                 clear(actor)
         check('original account and permission records restored', snapshot() == original)
         report = {'observed_utc': datetime.now(timezone.utc).isoformat(), 'scope': 'owned synthetic HTTP/MySQL',
-                  'jar_sha256': api.jar_sha256, 'production_connected': False, 'passed': len(checks), 'failed': 0, 'checks': checks}
+                  'jar_sha256': api.jar_sha256, 'verifier_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                  'production_connected': False, 'passed': len(checks), 'failed': 0, 'checks': checks,
+                  'profile_email_cases': profile_email_cases}
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
 
 

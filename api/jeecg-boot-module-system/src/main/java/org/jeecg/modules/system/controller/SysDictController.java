@@ -11,7 +11,6 @@ import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.UnauthorizedException;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.constant.CacheConstant;
 import org.jeecg.common.constant.CommonConstant;
@@ -30,6 +29,7 @@ import org.jeecg.modules.system.model.SysDictTree;
 import org.jeecg.modules.system.model.TreeSelectModel;
 import org.jeecg.modules.system.service.ISysDictItemService;
 import org.jeecg.modules.system.service.ISysDictService;
+import org.jeecg.modules.system.service.DictionaryAdministrationService;
 import org.jeecg.modules.system.service.NamedTableDictionaryService;
 import org.jeecg.modules.system.vo.SysDictPage;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
@@ -39,7 +39,6 @@ import org.jeecgframework.poi.excel.entity.ImportParams;
 import org.jeecgframework.poi.excel.view.JeecgEntityExcelView;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -70,6 +69,8 @@ public class SysDictController {
 
 	@Autowired
 	private ISysDictService sysDictService;
+	@Autowired
+	private DictionaryAdministrationService dictionaryAdministration;
 	@Autowired
 	private NamedTableDictionaryService namedTableDictionaries;
 	@Autowired
@@ -283,15 +284,17 @@ public class SysDictController {
 	 * @param sysDict
 	 * @return
 	 */
-	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Result<SysDict> add(@RequestBody SysDict sysDict) {
+		dictionaryAdministration.requireManager();
 		Result<SysDict> result = new Result<SysDict>();
 		try {
 			sysDict.setCreateTime(new Date());
 			sysDict.setDelFlag(CommonConstant.DEL_FLAG_0);
-			sysDictService.save(sysDict);
+			dictionaryAdministration.addDictionary(sysDict);
 			result.success("保存成功！");
+		} catch (UnauthorizedException e) {
+			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);
 			result.error500("操作失败");
@@ -304,16 +307,16 @@ public class SysDictController {
 	 * @param sysDict
 	 * @return
 	 */
-	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	public Result<SysDict> edit(@RequestBody SysDict sysDict) {
+		dictionaryAdministration.requireManager();
 		Result<SysDict> result = new Result<SysDict>();
 		SysDict sysdict = sysDictService.getById(sysDict.getId());
 		if(sysdict==null) {
 			result.error500("未找到对应实体");
 		}else {
 			sysDict.setUpdateTime(new Date());
-			boolean ok = sysDictService.updateById(sysDict);
+			boolean ok = dictionaryAdministration.editDictionary(sysDict);
 			if(ok) {
 				result.success("编辑成功!");
 			}
@@ -326,12 +329,11 @@ public class SysDictController {
 	 * @param id
 	 * @return
 	 */
-	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	@CacheEvict(value=CacheConstant.SYS_DICT_CACHE, allEntries=true)
 	public Result<SysDict> delete(@RequestParam(name="id",required=true) String id) {
+		dictionaryAdministration.requireManager();
 		Result<SysDict> result = new Result<SysDict>();
-		boolean ok = sysDictService.removeById(id);
+		boolean ok = dictionaryAdministration.deleteDictionary(id);
 		if(ok) {
 			result.success("删除成功!");
 		}else{
@@ -345,15 +347,14 @@ public class SysDictController {
 	 * @param ids
 	 * @return
 	 */
-	//@RequiresRoles({"admin"})
 	@RequestMapping(value = "/deleteBatch", method = RequestMethod.DELETE)
-	@CacheEvict(value= CacheConstant.SYS_DICT_CACHE, allEntries=true)
 	public Result<SysDict> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
+		dictionaryAdministration.requireManager();
 		Result<SysDict> result = new Result<SysDict>();
 		if(oConvertUtils.isEmpty(ids)) {
 			result.error500("参数不识别！");
 		}else {
-			sysDictService.removeByIds(Arrays.asList(ids.split(",")));
+			dictionaryAdministration.deleteDictionaries(Arrays.asList(ids.split(",")));
 			result.success("删除成功!");
 		}
 		return result;
@@ -366,15 +367,7 @@ public class SysDictController {
 	@RequestMapping(value = "/refleshCache")
 	public Result<?> refleshCache() {
 		Result<?> result = new Result<SysDict>();
-		//清空字典缓存
-		Set keys = redisTemplate.keys(CacheConstant.SYS_DICT_CACHE + "*");
-		Set keys2 = redisTemplate.keys(CacheConstant.SYS_DICT_TABLE_CACHE + "*");
-		Set keys3 = redisTemplate.keys(CacheConstant.SYS_DEPARTS_CACHE + "*");
-		Set keys4 = redisTemplate.keys(CacheConstant.SYS_DEPART_IDS_CACHE + "*");
-		redisTemplate.delete(keys);
-		redisTemplate.delete(keys2);
-		redisTemplate.delete(keys3);
-		redisTemplate.delete(keys4);
+		dictionaryAdministration.refreshCache();
 		return result;
 	}
 
@@ -422,6 +415,7 @@ public class SysDictController {
 	 */
 	@RequestMapping(value = "/importExcel", method = RequestMethod.POST)
 	public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
+		dictionaryAdministration.requireManager();
  		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 		for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
@@ -440,7 +434,7 @@ public class SysDictController {
 					BeanUtils.copyProperties(list.get(i), po);
 					po.setDelFlag(CommonConstant.DEL_FLAG_0);
 					try {
-						Integer integer = sysDictService.saveMain(po, list.get(i).getSysDictItemList());
+						Integer integer = dictionaryAdministration.importDictionary(po, list.get(i).getSysDictItemList());
 						if(integer>0){
 							successLines++;
 						}else{
@@ -448,13 +442,17 @@ public class SysDictController {
 							int lineNumber = i + 1;
 							errorMessage.add("第 " + lineNumber + " 行：字典编码已经存在，忽略导入。");
 						}
-					}  catch (Exception e) {
+					} catch (UnauthorizedException e) {
+						throw e;
+					} catch (Exception e) {
 						errorLines++;
 						int lineNumber = i + 1;
 						errorMessage.add("第 " + lineNumber + " 行：字典编码已经存在，忽略导入。");
 					}
 				}
 				return ImportExcelUtil.imporReturnRes(errorLines,successLines,errorMessage);
+			} catch (UnauthorizedException e) {
+				throw e;
 			} catch (Exception e) {
 				log.error(e.getMessage(),e);
 				return Result.error("文件导入失败:"+e.getMessage());
@@ -490,9 +488,12 @@ public class SysDictController {
 	 */
 	@RequestMapping(value = "/deletePhysic/{id}", method = RequestMethod.DELETE)
 	public Result<?> deletePhysic(@PathVariable String id) {
+		dictionaryAdministration.requireManager();
 		try {
-			sysDictService.deleteOneDictPhysically(id);
+			dictionaryAdministration.deleteDictionaryPermanently(id);
 			return Result.ok("删除成功!");
+		} catch (UnauthorizedException e) {
+			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Result.error("删除失败!");
@@ -506,13 +507,21 @@ public class SysDictController {
 	 */
 	@RequestMapping(value = "/back/{id}", method = RequestMethod.PUT)
 	public Result<?> back(@PathVariable String id) {
+		dictionaryAdministration.requireManager();
 		try {
-			sysDictService.updateDictDelFlag(0,id);
+			dictionaryAdministration.restoreDictionary(id);
 			return Result.ok("操作成功!");
+		} catch (UnauthorizedException e) {
+			throw e;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Result.error("操作失败!");
 		}
 	}
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public Result<?> dictionaryManagementDenied(UnauthorizedException exception) {
+        return Result.error(403, "没有字典管理权限");
+    }
 
 }

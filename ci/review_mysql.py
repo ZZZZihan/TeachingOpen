@@ -26,6 +26,7 @@ REDIS_DATABASE = 4
 PROBES = (
     'verify-public-boundaries.py',
     'verify-duplicate-check.py',
+    'verify-dictionary-management.py',
     'verify-unit-view-statistics.py',
     'verify-news-content.py',
     'verify-account-authorization.py',
