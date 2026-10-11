@@ -23,6 +23,10 @@
 
 注册验收结束后，`review_mysql.py` 新建另一套五账号合成数据库，运行 `PROBES` 中的完整 HTTP/MySQL 必需清单，包括课程修改、作品提交、反馈保留与本轮权限回归。注册入口及独立 review 入口都会先检查全部文件；任一探针缺失或改名，在创建运行目录、连接数据库、启动应用前失败。当前门禁不提供静默缩减或历史提交兼容模式。
 
+review fixture 单独使用 JDBC Quartz，真实验证任务增改、暂停、恢复和拒绝操作前后的数据库状态；保持 `auto-startup=false`、`overwrite-existing-jobs=false` 与 `initialize-schema=never`。仅在新建的空合成库中，将历史 DDL 的 11 张小写 Quartz 表名及外键目标规范为 `StdJDBCDelegate` 使用的 `QRTZ_` 大写名称，保留定义及其他表名；同时核验 MySQL 的 `lower_case_table_names=0` 和实际表名。汇总报告记录这一配置。没有修改服务器大小写设置、历史源 SQL 或生产配置。
+
+候选包的上线模板仍为内存 Quartz、禁用自动启动；旧 `dev/prod/test` profile 使用 JDBC 和 `QRTZ_` 前缀。大小写敏感数据库直接导入历史小写 DDL 时，该旧 profile 需要独立的 schema 适配和上线前验证。CI 合成库的规范化不代表已有生产 schema 自动兼容，也不执行生产迁移或启用任务调度。
+
 每份探针报告必须有非空且全部通过的 `cases` 或 `checks`、一致的执行数量以及当前进程候选 JAR 的 SHA-256。汇总保存必需清单、实际探针数、总检查数、候选 JAR 哈希与 CI 提交；拒绝旧版本期望模式、异常报告、空报告、错误计数和其他 JAR 的结果。`unit-view-events.sql` 与 `work-events.sql` 在两个合成库各执行两次，检验迁移幂等性。探针失败即停止，不能把部分结果计作完整验收。
 
 GitHub 仅保留不含真实用户数据的 JSON 测试结果 7 天。运行配置、凭据、数据库和应用日志不作为 artifact 上传，临时容器由 GitHub 在任务结束后回收。CI 不能代替线上运行检查、备份恢复演练或人工验收。
