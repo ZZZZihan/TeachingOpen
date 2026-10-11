@@ -5,6 +5,7 @@ import org.jeecg.modules.common.util.QiniuUtil;
 import org.jeecg.modules.system.entity.SysFile;
 import org.jeecg.modules.system.mapper.SysFileMapper;
 import org.jeecg.modules.system.service.ISysFileService;
+import org.jeecg.modules.system.service.LocalFileReferenceResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
     @Value(value = "${jeecg.path.upload}")
     private String uploadpath;
     @Autowired private PlatformTransactionManager transactionManager;
+    @Autowired private LocalFileReferenceResolver references;
 
     @Override
     @Transactional
@@ -55,9 +57,25 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 
     @Override
     public boolean isReferenced(SysFile file) {
-        return file == null || file.getFilePath() == null || file.getFilePath().trim().isEmpty()
-                || baseMapper.referenceCount(file) > 0
-                || (baseMapper.hasCourseMediaTable() > 0 && baseMapper.courseMediaReferenceCount(file) > 0);
+        if (file == null || file.getFilePath() == null || file.getFilePath().trim().isEmpty()
+                || baseMapper.referenceCount(file) > 0) return true;
+        boolean courseMedia = baseMapper.hasCourseMediaTable() > 0;
+        if (courseMedia && baseMapper.courseMediaReferenceCount(file) > 0) return true;
+        if (!Integer.valueOf(1).equals(file.getFileLocation())) return false;
+        // Raw SQL matches remain conservative, including legacy cloud keys and
+        // IDs. Local URL/HTML/JSON references use exactly the write/read parser;
+        // otherwise an encoded live reference could be erased as "unused".
+        return containsReference(baseMapper.encodedReferenceCandidates(), file.getFilePath())
+                || (courseMedia && containsReference(baseMapper.encodedCourseMediaCandidates(), file.getFilePath()));
+    }
+
+    private boolean containsReference(java.util.List<java.util.Map<String, Object>> candidates, String key) {
+        for (java.util.Map<String, Object> row : candidates) {
+            for (Object value : row.values()) {
+                if (value != null && references.resolve(value.toString()).keys().contains(key)) return true;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "case": "percent URL fixture contains no raw file key or ID",
+      "passed": true
+    },
+    {
+      "case": "percent URL teacher saves owned reference through HTTP",
+      "passed": true
+    },
+    {
+      "case": "percent URL unauthorized student cannot read bytes",
+      "passed": true
+    },
+    {
+      "case": "percent URL anonymous reader cannot read bytes",
+      "passed": true
+    },
+    {
+      "case": "percent URL assigned student reads exact bytes",
+      "passed": true
+    },
+    {
+      "case": "percent URL deletion refuses a decoded live reference",
+      "passed": false
+    },
+    {
+      "case": "all original business rows and assignment counters restored",
+      "passed": true
+    },
+    {
+      "case": "all original upload bytes restored",
+      "passed": true
+    }
+  ],
+  "passed": 7,
+  "failed": 1,
+  "total": 8,
+  "jar_sha256": "7fc5d65069f9b04ab0d4285bff50a2e19d16b67f43ac2d51e76ea582c25e9ba3",
+  "expected_legacy": false,
+  "exception": "AssertionError: percent URL deletion refuses a decoded live reference",
+  "created_at": "2026-10-11T11:09:32.894842+00:00",
+  "scope": "Owned synthetic teacher HTTP edit, assigned/cross-class/anonymous byte reads, encoded-reference deletion; no remote storage."
+}

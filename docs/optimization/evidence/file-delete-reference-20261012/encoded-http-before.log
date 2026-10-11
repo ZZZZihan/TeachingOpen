@@ -1,0 +1,42 @@
+PASS percent URL fixture contains no raw file key or ID
+PASS percent URL teacher saves owned reference through HTTP
+PASS percent URL unauthorized student cannot read bytes
+PASS percent URL anonymous reader cannot read bytes
+PASS percent URL assigned student reads exact bytes
+PASS percent URL baseline wrongly accepts in-use file deletion
+PASS percent URL baseline erases referenced bytes and metadata
+PASS percent URL deletion does not alter task reference
+PASS HTML entity fixture contains no raw file key or ID
+PASS HTML entity teacher saves owned reference through HTTP
+PASS HTML entity unauthorized student cannot read bytes
+PASS HTML entity anonymous reader cannot read bytes
+PASS HTML entity baseline candidate prefilter denies assigned student
+PASS HTML entity baseline wrongly accepts in-use file deletion
+PASS HTML entity baseline erases referenced bytes and metadata
+PASS HTML entity deletion does not alter task reference
+PASS HTML entity and URL encoding fixture contains no raw file key or ID
+PASS HTML entity and URL encoding teacher saves owned reference through HTTP
+PASS HTML entity and URL encoding unauthorized student cannot read bytes
+PASS HTML entity and URL encoding anonymous reader cannot read bytes
+PASS HTML entity and URL encoding baseline candidate prefilter denies assigned student
+PASS HTML entity and URL encoding baseline wrongly accepts in-use file deletion
+PASS HTML entity and URL encoding baseline erases referenced bytes and metadata
+PASS HTML entity and URL encoding deletion does not alter task reference
+PASS nested JSON escapes fixture contains no raw file key or ID
+PASS nested JSON escapes teacher saves owned reference through HTTP
+PASS nested JSON escapes unauthorized student cannot read bytes
+PASS nested JSON escapes anonymous reader cannot read bytes
+PASS nested JSON escapes baseline candidate prefilter denies assigned student
+PASS nested JSON escapes baseline wrongly accepts in-use file deletion
+PASS nested JSON escapes baseline erases referenced bytes and metadata
+PASS nested JSON escapes deletion does not alter task reference
+PASS independent JSON fields fixture contains no raw file key or ID
+PASS independent JSON fields teacher saves owned reference through HTTP
+PASS independent JSON fields unauthorized student cannot read bytes
+PASS independent JSON fields anonymous reader cannot read bytes
+PASS independent JSON fields baseline candidate prefilter denies assigned student
+PASS independent JSON fields baseline wrongly accepts in-use file deletion
+PASS independent JSON fields baseline erases referenced bytes and metadata
+PASS independent JSON fields deletion does not alter task reference
+PASS all original business rows and assignment counters restored
+PASS all original upload bytes restored

@@ -1,0 +1,180 @@
+{
+  "cases": [
+    {
+      "case": "percent URL fixture contains no raw file key or ID",
+      "passed": true
+    },
+    {
+      "case": "percent URL teacher saves owned reference through HTTP",
+      "passed": true
+    },
+    {
+      "case": "percent URL unauthorized student cannot read bytes",
+      "passed": true
+    },
+    {
+      "case": "percent URL anonymous reader cannot read bytes",
+      "passed": true
+    },
+    {
+      "case": "percent URL assigned student reads exact bytes",
+      "passed": true
+    },
+    {
+      "case": "percent URL baseline wrongly accepts in-use file deletion",
+      "passed": true
+    },
+    {
+      "case": "percent URL baseline erases referenced bytes and metadata",
+      "passed": true
+    },
+    {
+      "case": "percent URL deletion does not alter task reference",
+      "passed": true
+    },
+    {
+      "case": "HTML entity fixture contains no raw file key or ID",
+      "passed": true
+    },
+    {
+      "case": "HTML entity teacher saves owned reference through HTTP",
+      "passed": true
+    },
+    {
+      "case": "HTML entity unauthorized student cannot read bytes",
+      "passed": true
+    },
+    {
+      "case": "HTML entity anonymous reader cannot read bytes",
+      "passed": true
+    },
+    {
+      "case": "HTML entity baseline candidate prefilter denies assigned student",
+      "passed": true
+    },
+    {
+      "case": "HTML entity baseline wrongly accepts in-use file deletion",
+      "passed": true
+    },
+    {
+      "case": "HTML entity baseline erases referenced bytes and metadata",
+      "passed": true
+    },
+    {
+      "case": "HTML entity deletion does not alter task reference",
+      "passed": true
+    },
+    {
+      "case": "HTML entity and URL encoding fixture contains no raw file key or ID",
+      "passed": true
+    },
+    {
+      "case": "HTML entity and URL encoding teacher saves owned reference through HTTP",
+      "passed": true
+    },
+    {
+      "case": "HTML entity and URL encoding unauthorized student cannot read bytes",
+      "passed": true
+    },
+    {
+      "case": "HTML entity and URL encoding anonymous reader cannot read bytes",
+      "passed": true
+    },
+    {
+      "case": "HTML entity and URL encoding baseline candidate prefilter denies assigned student",
+      "passed": true
+    },
+    {
+      "case": "HTML entity and URL encoding baseline wrongly accepts in-use file deletion",
+      "passed": true
+    },
+    {
+      "case": "HTML entity and URL encoding baseline erases referenced bytes and metadata",
+      "passed": true
+    },
+    {
+      "case": "HTML entity and URL encoding deletion does not alter task reference",
+      "passed": true
+    },
+    {
+      "case": "nested JSON escapes fixture contains no raw file key or ID",
+      "passed": true
+    },
+    {
+      "case": "nested JSON escapes teacher saves owned reference through HTTP",
+      "passed": true
+    },
+    {
+      "case": "nested JSON escapes unauthorized student cannot read bytes",
+      "passed": true
+    },
+    {
+      "case": "nested JSON escapes anonymous reader cannot read bytes",
+      "passed": true
+    },
+    {
+      "case": "nested JSON escapes baseline candidate prefilter denies assigned student",
+      "passed": true
+    },
+    {
+      "case": "nested JSON escapes baseline wrongly accepts in-use file deletion",
+      "passed": true
+    },
+    {
+      "case": "nested JSON escapes baseline erases referenced bytes and metadata",
+      "passed": true
+    },
+    {
+      "case": "nested JSON escapes deletion does not alter task reference",
+      "passed": true
+    },
+    {
+      "case": "independent JSON fields fixture contains no raw file key or ID",
+      "passed": true
+    },
+    {
+      "case": "independent JSON fields teacher saves owned reference through HTTP",
+      "passed": true
+    },
+    {
+      "case": "independent JSON fields unauthorized student cannot read bytes",
+      "passed": true
+    },
+    {
+      "case": "independent JSON fields anonymous reader cannot read bytes",
+      "passed": true
+    },
+    {
+      "case": "independent JSON fields baseline candidate prefilter denies assigned student",
+      "passed": true
+    },
+    {
+      "case": "independent JSON fields baseline wrongly accepts in-use file deletion",
+      "passed": true
+    },
+    {
+      "case": "independent JSON fields baseline erases referenced bytes and metadata",
+      "passed": true
+    },
+    {
+      "case": "independent JSON fields deletion does not alter task reference",
+      "passed": true
+    },
+    {
+      "case": "all original business rows and assignment counters restored",
+      "passed": true
+    },
+    {
+      "case": "all original upload bytes restored",
+      "passed": true
+    }
+  ],
+  "passed": 42,
+  "failed": 0,
+  "total": 42,
+  "jar_sha256": "7fc5d65069f9b04ab0d4285bff50a2e19d16b67f43ac2d51e76ea582c25e9ba3",
+  "expected_legacy": true,
+  "exception": null,
+  "created_at": "2026-10-11T11:10:03.496729+00:00",
+  "scope": "Owned synthetic teacher HTTP edit, assigned/cross-class/anonymous byte reads, encoded-reference deletion; no remote storage."
+}
