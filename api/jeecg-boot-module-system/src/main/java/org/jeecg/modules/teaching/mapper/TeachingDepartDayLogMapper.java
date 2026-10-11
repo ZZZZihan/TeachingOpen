@@ -19,4 +19,9 @@ public interface TeachingDepartDayLogMapper extends BaseMapper<TeachingDepartDay
     int incrementDayCounter(@Param("id") String id, @Param("departId") String departId,
                                          @Param("day") String day, @Param("counter") String counter);
 
+    String selectUnitViewStateForUpdate(@Param("departId") String departId, @Param("unitId") String unitId);
+
+    int insertUnitViewEvent(@Param("departId") String departId, @Param("unitId") String unitId,
+                           @Param("userId") String userId, @Param("state") String state, @Param("day") String day);
+
 }

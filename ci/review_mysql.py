@@ -27,6 +27,7 @@ PROBES = (
     'verify-public-boundaries.py',
     'verify-duplicate-check.py',
     'verify-dictionary-management.py',
+    'verify-unit-view-statistics.py',
     'verify-news-content.py',
     'verify-account-authorization.py',
     'verify-additional-work-authorization.py',
@@ -191,6 +192,8 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
     schema = load('review_schema', ROOT / 'api/dev/extract-schema.py').extract_schema(
         (ROOT / 'api/db/teachingopen2.8.sql').read_text())
     context.sql(schema)
+    for _ in range(2):
+        context.sql((ROOT / "api/db/unit-view-events.sql").read_text())
     if context.sql('SELECT COUNT(*) FROM sys_user') != '0':
         raise RuntimeError('Review schema must contain no original accounts')
 

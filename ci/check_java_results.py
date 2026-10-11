@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED = {'RichTextSanitizerTest', 'AccountRegistrationServiceTest', 'AccountRecoveryServiceTest', 'CourseMapPositionServiceTest', 'PublicDictionaryBoundaryTest', 'DisabledTransitBoundaryTest', 'AccountAuthorizationTest', 'AdditionalWorkAuthorizationTest', 'AdditionalWorkStatisticsTest', 'PaginationBoundaryTest', 'WorkStarControllerTest', 'WorkCloneServiceTest',
-            'AccountRecoverySessionTest', 'PublicUserDirectoryTest', 'DuplicateCheckSecurityTest', 'DictionaryAdministrationTest', 'TeachingDepartDayLogWriteBoundaryTest', 'UserProfileValidationTest'}
+            'AccountRecoverySessionTest', 'PublicUserDirectoryTest', 'DuplicateCheckSecurityTest', 'DictionaryAdministrationTest', 'TeachingDepartDayLogWriteBoundaryTest', 'UserProfileValidationTest', 'UnitViewStatisticsTest'}
 
 
 def check(reports):

@@ -63,9 +63,14 @@
         limit 1
     </select>
     <select id="getUserDepartIdByUnitId" resultType="java.lang.String">
-        select dept_id from teaching_course_dept
-        where course_id = (select course_id from teaching_course_unit where id = #{unitId})
-         and dept_id in (select dep_id from sys_user_depart where user_id = #{userId}) limit 1
+        SELECT assignment.dept_id FROM teaching_course_unit unit
+        JOIN teaching_course course ON course.id = unit.course_id
+        JOIN teaching_course_dept assignment ON assignment.course_id = course.id
+        JOIN sys_user_depart membership ON membership.dep_id = assignment.dept_id AND membership.user_id = #{userId}
+        JOIN sys_depart department ON department.id = assignment.dept_id
+        WHERE unit.id = #{unitId} AND (unit.del_flag IS NULL OR unit.del_flag = 0)
+          AND (course.del_flag IS NULL OR course.del_flag = 0) AND department.del_flag = '0'
+        ORDER BY assignment.dept_id LIMIT 1
     </select>
     <select id="lockMapUnits" resultType="java.lang.String">
         SELECT id FROM teaching_course_unit

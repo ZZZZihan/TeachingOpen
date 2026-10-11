@@ -13,10 +13,8 @@ import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.system.base.controller.JeecgController;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.vo.LoginUser;
-import org.jeecg.common.util.RedisUtil;
 import org.jeecg.modules.teaching.entity.TeachingDepartDayLog;
-import org.jeecg.modules.teaching.enums.DepartDayLogType;
-import org.jeecg.modules.teaching.service.ITeachingCourseUnitService;
+import org.jeecg.modules.teaching.enums.UnitViewLogResult;
 import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,20 +38,14 @@ import java.util.List;
 public class TeachingDepartDayLogController extends JeecgController<TeachingDepartDayLog, ITeachingDepartDayLogService> {
    @Autowired
    private ITeachingDepartDayLogService teachingDepartDayLogService;
-   @Autowired
-   private ITeachingCourseUnitService teachingCourseUnitService;
-   @Autowired
-   private RedisUtil redisUtil;
 
    @GetMapping("unitViewLog")
    public Result<?> unitViewLog(@RequestParam String unitId){
-       String departId = teachingCourseUnitService.getUserDepartIdByUnitId(getCurrentUser().getId(), unitId);
-       String key = String.format("departLog:unitView:%s", departId);
-       if (getCurrentUser().getUserIdentity().equals(2)){
-            if (!redisUtil.sHasKey(key, unitId)){
-                redisUtil.sSet(key, unitId);
-                teachingDepartDayLogService.addLog(departId, DepartDayLogType.UNIT_OPEN_COUNT);
-            }
+       Object principal = SecurityUtils.getSubject().getPrincipal();
+       if (!(principal instanceof LoginUser)) return Result.error(403, "请先登录");
+       UnitViewLogResult outcome = teachingDepartDayLogService.recordUnitView(((LoginUser) principal).getId(), unitId);
+       if (outcome == UnitViewLogResult.LEGACY_UNRESOLVED) {
+           return Result.error(409, "历史单元浏览统计待核对，课程内容仍可正常阅读");
        }
        return Result.ok();
    }
