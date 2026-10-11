@@ -1,3 +1,4 @@
+import ast
 import os
 import io
 import json
@@ -243,6 +244,43 @@ class ReviewAdapterTest(unittest.TestCase):
         self.assertIs(module.FixtureApi, base)
         self.assertIs(module.mysql_command, original_sql)
         self.assertIs(local_recovery.mysql_command, original_sql)
+
+    def test_actual_probe_interfaces_bind_the_candidate_and_restore_local_clients(self):
+        real_dev = registration.ROOT / 'api/dev'
+        args = review.probe_arguments(self.context, self.root / 'ci-results/fixture.json')
+        self.assertEqual((args.runtime, args.jar, args.expect_legacy), (self.runtime, self.jar, False))
+        with patch.object(sys, 'path', [str(real_dev)] + sys.path):
+            import local_recovery
+            original_sql = local_recovery.mysql_command
+            for name in review.PROBES:
+                with self.subTest(probe=name):
+                    path = real_dev / name
+                    tree = ast.parse(path.read_text())
+                    fields = {node.attr for node in ast.walk(tree) if isinstance(node, ast.Attribute)
+                              and isinstance(node.value, ast.Name) and node.value.id == 'args'}
+                    self.assertTrue(fields.issubset(vars(args)), 'Probe requires unsupported runner arguments: ' + name)
+                    module = registration.load('unit_' + path.stem.replace('-', '_'), path)
+                    self.assertTrue(callable(module.verify))
+                    original_api = module.FixtureApi
+                    original_probe_sql = getattr(module, 'mysql_command', None)
+                    with patch.object(self.context, 'assert_candidate') as validate:
+                        with self.assertRaisesRegex(ValueError, 'injected adapter failure'):
+                            with review.probe_adapter(module, self.context):
+                                api = module.FixtureApi(args.runtime, args.jar)
+                                self.assertEqual(api.ports, {'mysql': 33306, 'redis': 36379, 'backend': 18259})
+                                validate.assert_called_once_with(self.runtime, self.jar)
+                                self.assertEqual(local_recovery.mysql_command(self.runtime), self.context.mysql_command(self.runtime))
+                                if original_probe_sql is not None:
+                                    self.assertEqual(module.mysql_command(self.runtime), self.context.mysql_command(self.runtime))
+                                if name == 'verify-audit-failure.py':
+                                    with patch.object(local_recovery, 'command', return_value='fixture result') as query:
+                                        self.assertEqual(module.sql(self.runtime, 'SELECT 1'), 'fixture result')
+                                        self.assertEqual(query.call_args.args[1], self.context.mysql_command(self.runtime) + ['--raw', '-e', 'SELECT 1'])
+                                raise ValueError('injected adapter failure')
+                    self.assertIs(module.FixtureApi, original_api)
+                    self.assertIs(local_recovery.mysql_command, original_sql)
+                    if original_probe_sql is not None:
+                        self.assertIs(module.mysql_command, original_probe_sql)
 
     def test_current_baseline_requires_complete_probe_set_including_core_work_flows(self):
         self.assertEqual([p.name for p in review.selected_probes()], list(review.PROBES))

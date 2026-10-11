@@ -73,6 +73,29 @@ def one_table(plan):
     return None
 
 
+def download_statement_counts(output):
+    """Classify only the known download SELECT shapes from existing digest counters."""
+    found = {}
+    for line in output.splitlines():
+        identity, text_hex, count, examined, sent = line.split('\t')
+        text = bytes.fromhex(text_hex).decode('utf-8')
+        normalized = re.sub(r'\s+', ' ', text.replace('`', '')).strip().upper()
+        candidate = normalized == ('SELECT SOURCE_TYPE , SOURCE_ID , REFERENCE_VALUE FROM '
+            'SYS_LOCAL_FILE_REFERENCE WHERE REFERENCE_KIND = ? AND REFERENCE_HASH = ?')
+        # The tombstone-aware downloader reads deleted registrations too. Both
+        # versions must retain the exact path/location filters; do not count OR,
+        # partial filters, unions or arbitrary sys_file queries as bounded reads.
+        registration = re.fullmatch(
+            r'SELECT (?:\*|[A-Z_][A-Z0-9_]*(?: , [A-Z_][A-Z0-9_]*)*) FROM SYS_FILE '
+            r'WHERE FILE_PATH = \? AND FILE_LOCATION = \?(?: AND DEL_FLAG = \?)?', normalized) is not None
+        source = any(normalized.startswith('SELECT * FROM ' + table.upper() + ' WHERE ID IN (')
+                     for table in SOURCE_TABLES)
+        if candidate or registration or source:
+            found[identity] = {'digest_text': text, 'category': 'candidate' if candidate else 'registration' if registration else 'source',
+                              'count': int(count), 'rows_examined': int(examined), 'rows_sent': int(sent)}
+    return found
+
+
 def verify(args):
     if args.output.exists():
         raise RuntimeError('Existing probe evidence must be preserved')
@@ -205,20 +228,7 @@ def verify(args):
             query = ('SELECT DIGEST,HEX(DIGEST_TEXT),COUNT_STAR,SUM_ROWS_EXAMINED,SUM_ROWS_SENT '
                 'FROM performance_schema.events_statements_summary_by_digest WHERE SCHEMA_NAME=DATABASE() '
                 "AND DIGEST_TEXT LIKE 'SELECT %'")
-            found = {}
-            for line in sql(query).splitlines():
-                identity, text_hex, count, examined, sent = line.split('\t')
-                text = bytes.fromhex(text_hex).decode('utf-8')
-                normalized = re.sub(r'\s+', ' ', text.replace('`', '')).strip().upper()
-                candidate = normalized == ('SELECT SOURCE_TYPE , SOURCE_ID , REFERENCE_VALUE FROM '
-                    'SYS_LOCAL_FILE_REFERENCE WHERE REFERENCE_KIND = ? AND REFERENCE_HASH = ?')
-                registration = 'FROM SYS_FILE WHERE FILE_PATH = ? AND FILE_LOCATION = ? AND DEL_FLAG = ?' in normalized
-                source = any(normalized.startswith('SELECT * FROM ' + table.upper() + ' WHERE ID IN (')
-                             for table in SOURCE_TABLES)
-                if candidate or registration or source:
-                    found[identity] = {'digest_text': text, 'category': 'candidate' if candidate else 'registration' if registration else 'source',
-                                      'count': int(count), 'rows_examined': int(examined), 'rows_sent': int(sent)}
-            return found
+            return download_statement_counts(sql(query))
 
         def measure_reads(scale, label, key, permitted):
             # Warm-up is outside the 20 measured requests and statement-counter delta.

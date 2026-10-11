@@ -18,6 +18,7 @@ AFFECTED_PROBES = (
     'verify-additional-work-authorization.py', 'verify-work-cloning.py',
     'verify-pagination.py', 'verify-course-update.py',
     'verify-work-submission.py', 'verify-work-reference-authorization.py',
+    'verify-file-deletion-concurrency.py', 'verify-file-encoded-reference-deletion.py',
 )
 
 
@@ -123,7 +124,7 @@ class MediaIndexFixtureTest(unittest.TestCase):
         api.login.assert_not_called()
         api.request.assert_not_called()
 
-    def test_all_eight_existing_wrappers_sync_success_and_leave_sql_failure_visible(self):
+    def test_all_ten_existing_wrappers_sync_success_and_leave_sql_failure_visible(self):
         # Execute just each real wrapper with injected clients, not the HTTP probe.
         # This verifies that a failed SQL call never reaches the repair endpoint.
         for name in AFFECTED_PROBES:

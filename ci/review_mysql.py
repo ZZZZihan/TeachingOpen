@@ -74,6 +74,11 @@ def selected_probes():
     return paths
 
 
+def probe_arguments(context, output):
+    return SimpleNamespace(runtime=context.runtime, jar=context.jar,
+                           output=Path(output), expect_legacy=False)
+
+
 def validate_report(report, jar_sha256):
     if not isinstance(report, dict):
         raise RuntimeError('Review probe evidence must be a JSON object')
@@ -347,7 +352,7 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
                     evidence = output / (path.stem.removeprefix('verify-') + '.json')
                     if evidence.exists():
                         raise RuntimeError('Existing review evidence must be preserved')
-                    args = SimpleNamespace(runtime=runtime, jar=context.jar, output=evidence, expect_legacy=False)
+                    args = probe_arguments(context, evidence)
                     with probe_adapter(module, context):
                         module.verify(args)
                     report = json.loads(evidence.read_text())
