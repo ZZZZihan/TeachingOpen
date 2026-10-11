@@ -1,0 +1,60 @@
+{
+  "helper": "ReadSpreadsheetCells.java",
+  "helper_sha256": "c20130977f910edd7a81b307974cc0db11d1262cac2e3881a4a2f9cb7f2e7b41",
+  "jar_sha256": "0292703db84494798cf5740fc6cd22b26b1e131f5e8f0c01d29cae723bfd74da",
+  "cases": [
+    {
+      "case": "actual exported agent XLS title parses",
+      "passed": true,
+      "parsed_cells": 39
+    },
+    {
+      "case": "complete HTTP agent XLS title headers and fixture marker parse",
+      "passed": true
+    },
+    {
+      "case": "generated agent XLSX marker parses",
+      "passed": true
+    },
+    {
+      "case": "agent rejects JSON",
+      "passed": true
+    },
+    {
+      "case": "agent rejects HTML",
+      "passed": true
+    },
+    {
+      "case": "agent rejects truncated XLS",
+      "passed": true
+    },
+    {
+      "case": "actual exported position XLS title parses",
+      "passed": true,
+      "parsed_cells": 15
+    },
+    {
+      "case": "complete HTTP position XLS title headers and fixture marker parse",
+      "passed": true
+    },
+    {
+      "case": "generated position XLSX marker parses",
+      "passed": true
+    },
+    {
+      "case": "position rejects JSON",
+      "passed": true
+    },
+    {
+      "case": "position rejects HTML",
+      "passed": true
+    },
+    {
+      "case": "position rejects truncated XLS",
+      "passed": true
+    }
+  ],
+  "passed": 12,
+  "total": 12,
+  "status": "passed"
+}
