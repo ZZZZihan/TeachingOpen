@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+import re
 import subprocess
 from queue import Empty, Queue
 from threading import Thread
@@ -90,9 +91,12 @@ def verify(args):
             # Task rows and both kinds of assignment counters are covered.
             state = {table: hashlib.sha256(sql('SELECT * FROM ' + table + ' ORDER BY id').encode()).hexdigest()
                      for table in ('teaching_additional_work', 'teaching_depart_day_log')}
+            state['teaching_unit_view_event'] = hashlib.sha256(sql(
+                'SELECT * FROM teaching_unit_view_event ORDER BY depart_id,unit_id').encode()).hexdigest()
             for department in ('fixture_class_a', 'fixture_class_b'):
-                marker = 'departLog:addiWorkAssign:' + department
-                state[marker] = hashlib.sha256('\n'.join(sorted(api.cache('SMEMBERS', marker).splitlines())).encode()).hexdigest()
+                for family in ('departLog:addiWorkAssign:', 'departLog:unitView:'):
+                    marker = family + department
+                    state[marker] = hashlib.sha256('\n'.join(sorted(api.cache('SMEMBERS', marker).splitlines())).encode()).hexdigest()
             return state
 
         def send(method, route, actor, body=None):
@@ -131,7 +135,26 @@ def verify(args):
                          + " FROM teaching_depart_day_log WHERE depart_id IN ('fixture_class_a','fixture_class_b') ORDER BY id").splitlines()
         unit_marker = 'departLog:unitView:fixture_class_a'
         unit_member = json.dumps('fixture_unit_a')
-        original_unit_marker = api.cache('SISMEMBER', unit_marker, unit_member) == '1'
+        if api.cache('TYPE', unit_marker) not in ('none', 'set') or api.cache('PTTL', unit_marker) not in ('-1', '-2'):
+            raise RuntimeError('Expected a persistent owned unit-view fixture set')
+        dump_script = "local v=redis.call('DUMP',KEYS[1]);if not v then return '' end;return (v:gsub('.',function(c)return string.format('%02x',string.byte(c))end))"
+        def dump_unit_marker():
+            value = api.cache('EVAL', dump_script, '1', unit_marker)
+            if not re.fullmatch(r'(?:[0-9a-fA-F]{2})*', value):
+                raise RuntimeError('Owned unit-view Redis snapshot returned an invalid binary encoding')
+            return value
+        original_unit_dump = dump_unit_marker()
+        # Only this canonical synthetic class/unit is reset between independent
+        # mixed scenarios. Preserve every original column, including event state,
+        # counted day and observed timestamp, then restore the exact original row.
+        unit_event_where = "depart_id='fixture_class_a' AND unit_id='fixture_unit_a'"
+        event_columns = [row.split('\t')[0] for row in sql('SHOW COLUMNS FROM teaching_unit_view_event').splitlines()]
+        if any(not column.replace('_', '').isalnum() for column in event_columns):
+            raise RuntimeError('Unexpected unit event schema')
+        saved_unit_events = sql('SELECT ' + ','.join("IFNULL(HEX(CAST(`" + column + "` AS BINARY)),'NULL')" for column in event_columns)
+                               + ' FROM teaching_unit_view_event WHERE ' + unit_event_where).splitlines()
+        original_events = sql('SELECT * FROM teaching_unit_view_event ORDER BY depart_id,unit_id')
+        original_state = snapshot()
 
         def body(name, department='fixture_class_a', **extra):
             return {'workName': name, 'workDept': department, 'status': 1, 'codeType': 0,
@@ -146,9 +169,9 @@ def verify(args):
 
         def concurrent_assignments(label, initial_count, mixed=False):
             day = business_day()
-            # Both distinct writers establish their role-read RR snapshot before
-            # waiting on this class lock. One cannot publish before both waiters
-            # are observed in actual InnoDB lock metadata.
+            # Both distinct writers read their current actor before waiting on
+            # this class lock. Assignments use RR; unit views now use RC. Neither
+            # can publish before both waiters appear in InnoDB lock metadata.
             sql("DELETE FROM teaching_depart_day_log WHERE depart_id='fixture_class_a' AND create_time=" + day)
             first_day = label in ('first-day', 'mix-first')
             if not first_day:
@@ -158,7 +181,9 @@ def verify(args):
                     + "','fixture_class_a','合成并发验收'," + day + ',' + ('NULL' if initial_count is None else str(initial_count))
                     + ',2,3,4,5,6,7)')
             if mixed:
-                # Exercise the actual legacy addLog caller, preserving its owned marker afterward.
+                # A new scenario needs a fresh lifetime event as well as no old
+                # Redis marker. Never clear events for other units/classes.
+                sql('DELETE FROM teaching_unit_view_event WHERE ' + unit_event_where)
                 api.cache('SREM', unit_marker, unit_member)
             with MySqlSession(runtime) as guard, ThreadPoolExecutor(max_workers=2) as pool:
                 connection_id = guard.run('SELECT CONNECTION_ID()')[0]
@@ -205,6 +230,10 @@ def verify(args):
                       "additional_work_correct_count,additional_work_submit_count FROM teaching_depart_day_log "
                       "WHERE depart_id='fixture_class_a' AND create_time=" + day)
                   == str(expected_units) + ('\t0\t0\t0\t0\t0' if first_day else '\t3\t4\t5\t6\t7'))
+            if mixed:
+                check(label + ' commits one completed unit event for this scenario',
+                      sql('SELECT COUNT(*) FROM teaching_unit_view_event WHERE ' + unit_event_where
+                          + " AND event_state='COUNTED' AND counted_day=" + day) == '1')
             check(label + ' committed assignments have Redis markers',
                   all(api.cache('SISMEMBER', 'departLog:addiWorkAssign:fixture_class_a', json.dumps(task_id)) == '1'
                       for task_id in task_ids))
@@ -287,16 +316,28 @@ def verify(args):
                 sql("DELETE FROM teaching_additional_work WHERE id IN (" + ','.join("'" + item + "'" for item in created) + ')')
                 for department in ('fixture_class_a', 'fixture_class_b'):
                     api.cache('SREM', 'departLog:addiWorkAssign:' + department, *[json.dumps(item) for item in created])
-            if original_unit_marker:
-                api.cache('SADD', unit_marker, unit_member)
-            else:
-                api.cache('SREM', unit_marker, unit_member)
-            sql("DELETE FROM teaching_depart_day_log WHERE depart_id IN ('fixture_class_a','fixture_class_b')")
+            restore = ['START TRANSACTION;',
+                       "DELETE FROM teaching_depart_day_log WHERE depart_id IN ('fixture_class_a','fixture_class_b');",
+                       'DELETE FROM teaching_unit_view_event WHERE ' + unit_event_where + ';']
             if saved_logs:
-                sql('INSERT INTO teaching_depart_day_log (' + ','.join('`' + column + '`' for column in log_columns) + ') VALUES '
-                    + ','.join('(' + ','.join('NULL' if value == 'NULL' else "CONVERT(X'" + value + "' USING utf8mb4)" for value in row.split('\t')) + ')' for row in saved_logs))
+                restore.append('INSERT INTO teaching_depart_day_log (' + ','.join('`' + column + '`' for column in log_columns) + ') VALUES '
+                    + ','.join('(' + ','.join('NULL' if value == 'NULL' else "CONVERT(X'" + value + "' USING utf8mb4)" for value in row.split('\t')) + ')' for row in saved_logs) + ';')
+            if saved_unit_events:
+                restore.append('INSERT INTO teaching_unit_view_event (' + ','.join('`' + column + '`' for column in event_columns) + ') VALUES '
+                    + ','.join('(' + ','.join('NULL' if value == 'NULL' else "CONVERT(X'" + value + "' USING utf8mb4)" for value in row.split('\t')) + ')' for row in saved_unit_events) + ';')
+            sql('\n'.join(restore + ['COMMIT;']))
+            if original_unit_dump:
+                restore_script = "local v=ARGV[1]:gsub('..',function(h)return string.char(tonumber(h,16))end);return redis.call('RESTORE',KEYS[1],0,v,'REPLACE')"
+                if api.cache('EVAL', restore_script, '1', unit_marker, original_unit_dump) != 'OK':
+                    raise RuntimeError('Owned unit-view Redis restore did not confirm success')
+            else:
+                if api.cache('DEL', unit_marker) not in ('0', '1'):
+                    raise RuntimeError('Owned unit-view Redis cleanup did not confirm success')
         check('original additional-work tasks preserved', hashlib.sha256(sql('SELECT * FROM teaching_additional_work ORDER BY id').encode()).hexdigest() == existing_snapshot)
         check('original class statistics restored', sql('SELECT * FROM teaching_depart_day_log ORDER BY id') == original_logs)
+        check('original lifetime unit events restored exactly', sql('SELECT * FROM teaching_unit_view_event ORDER BY depart_id,unit_id') == original_events)
+        check('original unit-view Redis bytes restored exactly', dump_unit_marker() == original_unit_dump)
+        check('original task statistics lifetime events and all marker digests restored', snapshot() == original_state)
         report = {'observed_utc': datetime.now(timezone.utc).isoformat(), 'scope': 'owned synthetic HTTP/MySQL',
                   'jar_sha256': api.jar_sha256, 'business_timezone': 'Asia/Shanghai', 'production_connected': False, 'checks': checks,
                   'passed': len(checks), 'failed': 0}

@@ -66,7 +66,10 @@ def verify(args):
             def dump(key):
                 # Return a binary-safe snapshot without printing business values.
                 script = "local v=redis.call('DUMP',KEYS[1]);if not v then return '' end;return (v:gsub('.',function(c)return string.format('%02x',string.byte(c))end))"
-                return api.cache('EVAL', script, '1', key)
+                value = api.cache('EVAL', script, '1', key)
+                if not re.fullmatch(r'(?:[0-9a-fA-F]{2})*', value):
+                    raise RuntimeError('Owned unit-view Redis snapshot returned an invalid binary encoding')
+                return value
 
             keys = ['departLog:unitView:' + department for department in CLASSES]
             original_cache = {}
@@ -171,9 +174,11 @@ def verify(args):
                 for key, value in original_cache.items():
                     if value:
                         script = "local v=ARGV[1]:gsub('..',function(h)return string.char(tonumber(h,16))end);return redis.call('RESTORE',KEYS[1],0,v,'REPLACE')"
-                        api.cache('EVAL', script, '1', key, value)
+                        if api.cache('EVAL', script, '1', key, value) != 'OK':
+                            raise RuntimeError('Owned unit-view Redis restore did not confirm success')
                     else:
-                        api.cache('DEL', key)
+                        if api.cache('DEL', key) not in ('0', '1'):
+                            raise RuntimeError('Owned unit-view Redis cleanup did not confirm success')
                 report['restored_sha256'] = db_snapshot()
                 report['business_rows_restored'] = report['restored_sha256'] == original
                 report['legacy_cache_restored'] = all(dump(key) == value for key,value in original_cache.items())
