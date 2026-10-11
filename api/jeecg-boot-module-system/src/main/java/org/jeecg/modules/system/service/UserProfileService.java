@@ -12,9 +12,16 @@ import org.jeecg.modules.system.model.UserProfileRequest;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.regex.Pattern;
 
 @Service
 public class UserProfileService {
+    // Keep the optional email format aligned with the existing profile form validator.
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(
+            "^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))"
+                    + "@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$",
+            Pattern.UNICODE_CHARACTER_CLASS);
+    private static final Pattern INVISIBLE_EMAIL_CHARACTERS = Pattern.compile("[\\x00-\\x1F\\x7F-\\x9F\\uFEFF]");
     private final SysUserMapper users;
     public UserProfileService(SysUserMapper users) { this.users = users; }
 
@@ -30,7 +37,9 @@ public class UserProfileService {
         if (request.getRealname() == null || request.getRealname().trim().isEmpty()
                 || request.getRealname().length() > 100
                 || (request.getSex() != null && request.getSex() != 1 && request.getSex() != 2)
-                || (request.getEmail() != null && request.getEmail().length() > 100)
+                || (request.getEmail() != null && (request.getEmail().length() > 100
+                    || INVISIBLE_EMAIL_CHARACTERS.matcher(request.getEmail()).find()
+                    || (!request.getEmail().isEmpty() && !EMAIL_PATTERN.matcher(request.getEmail()).matches())))
                 || (request.getAvatar() != null && request.getAvatar().length() > 255)) {
             throw new JeecgBootException("个人资料格式不正确");
         }
