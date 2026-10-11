@@ -14,6 +14,8 @@ public interface ITeachingAdditionalWorkService extends IService<TeachingAdditio
 
     Result<MineAdditionalWorkModel> getWorkInfo(String id);
 
+    TeachingAdditionalWork getReadableById(String id);
+
     Result<List<MineAdditionalWorkModel>> mineAdditionalWork(String userId);
 
     Result<?> addNewAdditionalWork(TeachingAdditionalWork teachingAdditionalWork);

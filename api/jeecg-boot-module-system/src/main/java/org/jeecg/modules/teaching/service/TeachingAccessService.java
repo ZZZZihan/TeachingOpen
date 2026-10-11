@@ -10,10 +10,12 @@ import org.jeecg.modules.system.service.ISysUserDepartService;
 import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.teaching.entity.TeachingWork;
+import org.jeecg.modules.teaching.entity.TeachingAdditionalWork;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -62,6 +64,33 @@ public class TeachingAccessService {
         LoginUser user = currentUser();
         if (work != null && user != null && Objects.equals(user.getId(), work.getUserId())) return;
         requireManageWork(work);
+    }
+
+    /** Assignment details share the class boundary used by student task lists.
+     * They have no public-course flag: publication makes them visible only to
+     * assigned members; teachers can preview drafts for their current classes. */
+    public boolean canReadAdditionalWork(TeachingAdditionalWork work) {
+        LoginUser principal = currentUser();
+        if (work == null || principal == null || StringUtils.isBlank(principal.getId())) return false;
+        SysUser user = userService.getById(principal.getId());
+        if (user == null || !Objects.equals(principal.getId(), user.getId())
+                || !Integer.valueOf(0).equals(user.getDelFlag()) || !Integer.valueOf(1).equals(user.getStatus())) return false;
+        List<String> roles = userService.getRoleById(user.getId());
+        if (roles == null) roles = Collections.emptyList();
+        if (roles.contains("admin") || roles.contains("dev")) return true;
+        if (StringUtils.isBlank(work.getWorkDept())) return false;
+        Set<String> assigned = Arrays.stream(work.getWorkDept().split(","))
+                .map(String::trim).filter(id -> !id.isEmpty()).collect(Collectors.toSet());
+        if (roles.contains("teacher") && StringUtils.isNotBlank(user.getDepartIds())) {
+            List<String> managed = departService.getMySubDepIdsByDepId(user.getDepartIds());
+            if (managed != null && !Collections.disjoint(assigned, managed)) return true;
+        }
+        List<String> member = userDepartService.userDepartIds(user.getId());
+        return Integer.valueOf(1).equals(work.getStatus()) && member != null && !Collections.disjoint(assigned, member);
+    }
+
+    public void requireReadAdditionalWork(TeachingAdditionalWork work) {
+        if (!canReadAdditionalWork(work)) throw new UnauthorizedException("无附加作业访问权限");
     }
 
     /** Sharing a detail URL does not publish a draft or a graded submission. */
