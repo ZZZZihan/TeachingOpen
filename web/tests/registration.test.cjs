@@ -4,26 +4,52 @@ const vm = require('node:vm')
 const path = require('node:path')
 const { test } = require('node:test')
 const Vue = require('vue')
+const compiler = require('vue-template-compiler')
 const source = file => fs.readFileSync(path.join(__dirname, '../src/', file), 'utf8')
 const helpers = {}; vm.runInNewContext(source('utils/accountRecovery.js').replace(/export /g, ''), helpers)
-function harness (postAction) {
+function harness (postAction, propsData = {}) {
   const context = { ...helpers, postAction }
   vm.runInNewContext(source('views/user/Register.vue').match(/<script>([\s\S]*?)<\/script>/)[1].replace(/^import .*$/gm, '').replace('export default', 'this.component ='), context)
-  const component = new Vue(context.component); const routes = []
+  const component = new Vue({ ...context.component, propsData }); const routes = []
   component.$router = { push: route => { routes.push(route); return Promise.resolve() } }
   return { component, routes }
 }
-const valid = { phone: '13900000001', password: 'Synthetic8!', confirmation: 'Synthetic8!', realname: ' 张同学 ', school: ' 测试学校 ', identity: 'teacher' }
-test('blank registration has no identity default and does not make network requests', async () => {
-  let calls = 0; const h = harness(() => { calls++; }); assert.equal(h.component.form.identity, '')
-  await h.component.submit(); assert.equal(calls, 0); assert.equal(Object.keys(h.component.errors).length, 6)
+const valid = { phone: '13900000001', password: 'Synthetic8!', confirmation: 'Synthetic8!', realname: ' 张同学 ', school: ' 测试学校 ' }
+test('public registration renders only student signup while the separate teacher page explains its permission boundary', () => {
+  const template = compiler.parseComponent(source('views/user/Register.vue')).template.content
+  const compiled = compiler.compile(template)
+  assert.deepEqual(compiled.errors, [])
+  function content (teacherRegistration) {
+    const h = harness(() => {}, { teacherRegistration })
+    h.component.$options.render = new Function(compiled.render)
+    h.component.$options.staticRenderFns = compiled.staticRenderFns.map(fn => new Function(fn))
+    const nodes = []
+    function visit (node) { nodes.push(node); for (const child of node.children || []) visit(child) }
+    visit(h.component._render())
+    assert.equal(nodes.some(node => node.tag === 'input' && node.data.attrs.type === 'radio'), false)
+    return nodes.map(node => node.text || '').join('')
+  }
+  const student = content(false)
+  assert.match(student, /创建学生账号/); assert.doesNotMatch(student, /教师/)
+  const teacher = content(true)
+  assert.match(teacher, /创建教师账号/); assert.match(teacher, /教学管理权限由管理员开通/)
+})
+test('blank student registration validates required fields without an identity selection', async () => {
+  let calls = 0; const h = harness(() => { calls++; }); assert.equal(h.component.teacherRegistration, false)
+  await h.component.submit(); assert.equal(calls, 0); assert.equal(Object.keys(h.component.errors).length, 5)
 })
 test('success sends only registration fields, clears credentials and navigates without password', async () => {
   let body; const h = harness((url, data) => { assert.equal(url, '/sys/user/register'); body = data; return Promise.resolve({ success: true }) })
-  Object.assign(h.component.form, valid); await h.component.submit()
-  assert.equal(body.realname, '张同学'); assert.equal(body.school, '测试学校'); assert.equal(body.identity, 'teacher'); assert.equal(Object.keys(body).length, 5)
+  Object.assign(h.component.form, valid, { identity: 'teacher' }); await h.component.submit()
+  assert.equal(body.realname, '张同学'); assert.equal(body.school, '测试学校'); assert.equal(body.identity, undefined); assert.equal(Object.keys(body).length, 4)
   assert.equal(h.component.form.password, ''); assert.equal(h.component.form.confirmation, '')
   assert.equal(h.routes.length, 1); assert.equal(h.routes[0].params.phone, valid.phone); assert.equal(h.routes[0].params.password, undefined)
+})
+test('dedicated teacher entry registers through its own endpoint without client-selected identity or roles', async () => {
+  let body; const h = harness((url, data) => { assert.equal(url, '/sys/user/register/teacher'); body = data; return Promise.resolve({ success: true }) }, { teacherRegistration: true })
+  Object.assign(h.component.form, valid, { identity: 'student', role: 'teacher' }); await h.component.submit()
+  assert.equal(h.routes.length, 1); assert.equal(body.identity, undefined); assert.equal(body.role, undefined)
+  assert.equal(h.component.form.password, ''); assert.equal(h.component.form.confirmation, '')
 })
 test('duplicate submit is guarded and API failure permits retry', async () => {
   let resolve; let calls = 0; const h = harness(() => { calls++; return new Promise(done => { resolve = done }) }); Object.assign(h.component.form, valid)

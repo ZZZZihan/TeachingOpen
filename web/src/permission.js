@@ -8,7 +8,7 @@ import { generateIndexRouter } from '@/utils/util'
 import { safeRedirect } from '@/utils/session'
 
 NProgress.configure({ showSpinner: false })
-const publicPaths = ['/', '/user/login', '/user/register', '/user/register-result', '/user/alteration', '/home', '/index', '/workList', '/courseList', '/friend-detail', '/work-detail', '/newsList', '/news-detail', '/404']
+const publicPaths = ['/', '/user/login', '/user/register', '/user/teacher-register', '/user/register-result', '/user/alteration', '/home', '/index', '/workList', '/courseList', '/friend-detail', '/work-detail', '/newsList', '/news-detail', '/404']
 let permissionRequest = null
 let permissionToken = null
 function loadPermissions (token) {

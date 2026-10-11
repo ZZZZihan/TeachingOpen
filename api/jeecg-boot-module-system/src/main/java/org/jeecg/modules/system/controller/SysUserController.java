@@ -817,16 +817,16 @@ public class SysUserController extends BaseController {
     
 
 
-	/**
-	 * 用户注册接口
-	 * 
-	 * @param jsonObject
-	 * @param user
-	 * @return
-	 */
+	/** Public registration always creates a student profile. */
 	@PostMapping("/register")
     public Result<JSONObject> userRegister(@RequestBody JSONObject request) {
         return accountRegistrationService.register(request);
+    }
+
+    /** Separate teacher profile entry; privileges still require administrator assignment. */
+    @PostMapping("/register/teacher")
+    public Result<JSONObject> teacherRegister(@RequestBody JSONObject request) {
+        return accountRegistrationService.registerTeacher(request);
     }
 
 	/**

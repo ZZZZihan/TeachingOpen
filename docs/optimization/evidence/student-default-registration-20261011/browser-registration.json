@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "browser_registrations": [
+    {
+      "phone": "19900061021",
+      "profile_identity": "student",
+      "roles": [
+        "student"
+      ]
+    },
+    {
+      "phone": "19900061022",
+      "profile_identity": "teacher",
+      "roles": [
+        "student"
+      ]
+    }
+  ],
+  "student_form": {
+    "heading": "创建学生账号",
+    "identity_selector": false,
+    "teacher_text": false
+  },
+  "teacher_form": {
+    "heading": "创建教师账号",
+    "admin_approval_text": true
+  },
+  "browser_flow": "both entries registered successfully and reached password login page; login itself verified by isolated HTTP probe",
+  "viewport": {
+    "width": 1910,
+    "height": 1075
+  }
+}

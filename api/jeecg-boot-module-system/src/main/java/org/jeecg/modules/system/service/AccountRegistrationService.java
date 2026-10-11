@@ -48,13 +48,19 @@ public class AccountRegistrationService {
     }
 
     public Result<JSONObject> register(JSONObject request) {
+        return register(request, "student");
+    }
+
+    public Result<JSONObject> registerTeacher(JSONObject request) {
+        return register(request, "teacher");
+    }
+
+    private Result<JSONObject> register(JSONObject request, String identity) {
         String phone = text(request, "phone"), name = text(request, "realname"), school = text(request, "school");
-        String identity = PasswordResetService.string(request, "identity");
         String password = PasswordResetService.string(request, "password");
         if (phone == null || !PHONE.matcher(phone).matches()) return failure(400, "请输入正确的11位手机号");
         if (!validText(name, 100)) return failure(400, "请填写姓名，最多100个字符");
         if (!validText(school, 256)) return failure(400, "请填写学校，最多256个字符");
-        if (!"student".equals(identity) && !"teacher".equals(identity)) return failure(400, "请选择教师或学生身份");
         if (!PasswordResetService.validPassword(password)) return failure(400, "密码须为8至64位非空白ASCII字符，并包含字母、数字和特殊符号");
         try {
             if (!"1".equals(config.getConfigItem("allowReg"))) return failure(403, "未开放注册");
@@ -71,6 +77,7 @@ public class AccountRegistrationService {
                     .setDelFlag(CommonConstant.DEL_FLAG_0).setActivitiSync(CommonConstant.ACT_SYNC_0)
                     .setCreateTime(new Date());
                 if (!users.save(user)) throw new IllegalStateException("Registration save failed");
+                // The entry point owns the profile identity; HTTP identity/role fields are ignored.
                 if (profiles.insertProfile(user.getId(), identity) != 1) throw new IllegalStateException("Registration profile failed");
                 users.addUserWithRole(user, role.getId());
                 return null;
