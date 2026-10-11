@@ -1,9 +1,12 @@
 package org.jeecg.additionalwork;
 
 import org.jeecg.modules.teaching.controller.TeachingDepartDayLogController;
-import org.jeecg.modules.teaching.service.ITeachingCourseUnitService;
 import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
-import org.jeecg.common.util.RedisUtil;
+import org.jeecg.modules.teaching.enums.UnitViewLogResult;
+import org.jeecg.common.system.vo.LoginUser;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ThreadContext;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockMultipartFile;
@@ -19,22 +22,37 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TeachingDepartDayLogWriteBoundaryTest {
     private MockMvc http;
     private ITeachingDepartDayLogService logs;
-    private ITeachingCourseUnitService units;
-    private RedisUtil redis;
     private static final String BASE = "/teaching/teachingDepartDayLog";
 
     @Before public void setup() {
         TeachingDepartDayLogController controller = new TeachingDepartDayLogController();
         logs = mock(ITeachingDepartDayLogService.class);
-        units = mock(ITeachingCourseUnitService.class);
-        redis = mock(RedisUtil.class);
         ReflectionTestUtils.setField(controller, "teachingDepartDayLogService", logs);
-        ReflectionTestUtils.setField(controller, "teachingCourseUnitService", units);
-        ReflectionTestUtils.setField(controller, "redisUtil", redis);
         // Inject the inherited import service too, so a regression into importExcel
         // cannot fail merely because the base controller was not wired.
         ReflectionTestUtils.setField(controller, "service", logs);
         http = MockMvcBuilders.standaloneSetup(controller).build();
+    }
+
+    @After public void cleanup() { ThreadContext.remove(); }
+
+    @Test public void legacyConflictIsExplicitAndDoesNotTurnIntoSuccess() throws Exception {
+        LoginUser actor = new LoginUser(); actor.setId("teacher-a");
+        Subject subject = mock(Subject.class); when(subject.getPrincipal()).thenReturn(actor); ThreadContext.bind(subject);
+        when(logs.recordUnitView("teacher-a", "unit-a")).thenReturn(UnitViewLogResult.LEGACY_UNRESOLVED);
+        http.perform(get(BASE + "/unitViewLog").param("unitId", "unit-a"))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.success").value(false))
+                .andExpect(jsonPath("$.code").value(409))
+                .andExpect(jsonPath("$.message").value("历史单元浏览统计待核对，课程内容仍可正常阅读"));
+        verify(logs).recordUnitView("teacher-a", "unit-a"); verifyNoMoreInteractions(logs);
+    }
+
+    @Test public void missingPrincipalCannotReachTheTransactionalWriter() throws Exception {
+        Subject subject = mock(Subject.class); ThreadContext.bind(subject);
+        http.perform(get(BASE + "/unitViewLog").param("unitId", "unit-a"))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.success").value(false))
+                .andExpect(jsonPath("$.code").value(403));
+        verifyZeroInteractions(logs);
     }
 
     @Test public void addCannotCreateAManualDayRow() throws Exception {
@@ -42,26 +60,26 @@ public class TeachingDepartDayLogWriteBoundaryTest {
                 .content("{\"departId\":\"class-a\",\"createTime\":\"2026-10-11\",\"unitOpenCount\":999}"))
                 .andExpect(status().isForbidden()).andExpect(jsonPath("$.success").value(false))
                 .andExpect(jsonPath("$.code").value(403));
-        verifyZeroInteractions(logs, units, redis);
+        verifyZeroInteractions(logs);
     }
 
     @Test public void editCannotRewriteEventCounters() throws Exception {
         http.perform(put(BASE + "/edit").contentType("application/json")
                 .content("{\"id\":\"existing-day\",\"additionalWorkAssignCount\":999}"))
                 .andExpect(status().isForbidden()).andExpect(jsonPath("$.code").value(403));
-        verifyZeroInteractions(logs, units, redis);
+        verifyZeroInteractions(logs);
     }
 
     @Test public void deleteCannotRemoveADayRow() throws Exception {
         http.perform(delete(BASE + "/delete").param("id", "existing-day"))
                 .andExpect(status().isForbidden()).andExpect(jsonPath("$.code").value(403));
-        verifyZeroInteractions(logs, units, redis);
+        verifyZeroInteractions(logs);
     }
 
     @Test public void batchDeleteCannotRemoveDayRows() throws Exception {
         http.perform(delete(BASE + "/deleteBatch").param("ids", "existing-day,another-day"))
                 .andExpect(status().isForbidden()).andExpect(jsonPath("$.code").value(403));
-        verifyZeroInteractions(logs, units, redis);
+        verifyZeroInteractions(logs);
     }
 
     @Test public void importCannotEnterTheInheritedExcelWriter() throws Exception {
@@ -70,6 +88,6 @@ public class TeachingDepartDayLogWriteBoundaryTest {
                 .andExpect(status().isForbidden()).andExpect(jsonPath("$.success").value(false))
                 .andExpect(jsonPath("$.code").value(403))
                 .andExpect(jsonPath("$.message").value("班级每日教学记录由教学事件自动生成，不支持人工修改"));
-        verifyZeroInteractions(logs, units, redis);
+        verifyZeroInteractions(logs);
     }
 }

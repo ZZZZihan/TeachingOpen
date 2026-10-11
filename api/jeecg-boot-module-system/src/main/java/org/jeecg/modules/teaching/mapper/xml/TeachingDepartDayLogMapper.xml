@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.jeecg.modules.teaching.mapper.TeachingDepartDayLogMapper">
+    <select id="selectUnitViewStateForUpdate" resultType="java.lang.String">
+        SELECT event_state FROM teaching_unit_view_event
+        WHERE depart_id = #{departId} AND unit_id = #{unitId} FOR UPDATE
+    </select>
+    <insert id="insertUnitViewEvent">
+        INSERT INTO teaching_unit_view_event (depart_id, unit_id, observed_user_id, event_state, counted_day)
+        VALUES (#{departId}, #{unitId}, #{userId}, #{state}, #{day,javaType=java.lang.String,jdbcType=DATE})
+    </insert>
     <!-- Bind the exact ISO business date as text, avoiding JDBC timestamp conversion. -->
     <insert id="insertDayLog">
         INSERT INTO teaching_depart_day_log

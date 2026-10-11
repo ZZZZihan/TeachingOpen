@@ -18,6 +18,7 @@ from datetime import datetime, timezone
 MIGRATIONS = (
     ('api/db/phone-profile-registration.sql', '01-phone-profile-registration.sql'),
     ('api/db/enable-phone-registration.sql', '02-enable-phone-registration.sql'),
+    ('api/db/unit-view-events.sql', '03-unit-view-events.sql'),
 )
 MANIFEST = 'migration-manifest.json'
 
@@ -111,10 +112,12 @@ def run_mysql(command, sql):
 def preflight(directory, client, option_file, database, manifest_sha256):
     manifest = verify_migrations(directory, manifest_sha256)
     command = mysql_command(client, option_file, database)
-    # The first SQL validates existing columns, indexes, roles and config, but
-    # skips user/table changes. It creates/removes only its reserved procedure.
-    run_mysql(command, 'SET @teachingopen_registration_preflight_only = 1;\n' +
-        (Path(directory) / MIGRATIONS[0][1]).read_text(encoding='utf-8'))
+    # Validate registration metadata and the additive unit-view ledger before
+    # backup. Preflight creates/removes only the reserved migration procedures,
+    # and skips user/table changes; registration activation is not run here.
+    for index in (0, 2):
+        run_mysql(command, 'SET @teachingopen_registration_preflight_only = 1;\n' +
+            (Path(directory) / MIGRATIONS[index][1]).read_text(encoding='utf-8'))
     return manifest
 
 

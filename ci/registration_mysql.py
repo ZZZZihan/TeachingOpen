@@ -80,7 +80,7 @@ def main():
             raise RuntimeError('The CI schema must contain no original accounts')
         sql("INSERT INTO sys_role(id,role_name,role_code) VALUES ('ci-student','CI student','student');"
             "INSERT INTO sys_config(id,config_key,config_value,config_enabled) VALUES ('ci-reg','allowReg','0',1);")
-        migrations = ['phone-profile-registration.sql', 'enable-phone-registration.sql']
+        migrations = ['phone-profile-registration.sql', 'enable-phone-registration.sql', 'unit-view-events.sql']
         # Run twice to also exercise migration idempotency on the real engine.
         for _ in range(2):
             for name in migrations:

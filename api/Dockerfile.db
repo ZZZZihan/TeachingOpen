@@ -6,3 +6,4 @@ FROM mysql:8.0
 COPY db/teachingopen2.8.sql /docker-entrypoint-initdb.d/01-schema-and-legacy-seed.sql
 COPY db/phone-profile-registration.sql /docker-entrypoint-initdb.d/03-phone-profile-registration.sql
 COPY db/enable-phone-registration.sql /docker-entrypoint-initdb.d/04-enable-phone-registration.sql
+COPY db/unit-view-events.sql /docker-entrypoint-initdb.d/05-unit-view-events.sql
