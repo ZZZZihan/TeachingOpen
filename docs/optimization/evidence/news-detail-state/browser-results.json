@@ -1,0 +1,95 @@
+{
+  "flow": "full SPA news",
+  "results": [
+    {
+      "name": "actual editor input",
+      "passed": true
+    },
+    {
+      "name": "OS clipboard paste",
+      "passed": true
+    },
+    {
+      "name": "source editor round trip",
+      "passed": true
+    },
+    {
+      "name": "real local upload",
+      "passed": true,
+      "relativePath": "jeditor/798c59db9b704f70bf31512b3c3ad04b.png"
+    },
+    {
+      "name": "uploaded image inserted",
+      "passed": true
+    },
+    {
+      "name": "full form publishes with real JDict status",
+      "passed": true
+    },
+    {
+      "name": "news persisted in MySQL",
+      "passed": true,
+      "id": "2109142199033495554"
+    },
+    {
+      "name": "record reopened title body and image",
+      "passed": true
+    },
+    {
+      "name": "reopen has isolated undo history",
+      "passed": true
+    },
+    {
+      "name": "record edit saved",
+      "passed": true
+    },
+    {
+      "name": "new record editor empty",
+      "passed": true
+    },
+    {
+      "name": "new record cannot undo prior record",
+      "passed": true
+    },
+    {
+      "name": "anonymous public title",
+      "passed": true
+    },
+    {
+      "name": "anonymous public saved body",
+      "passed": true
+    },
+    {
+      "name": "anonymous uploaded image loads",
+      "passed": true
+    },
+    {
+      "name": "failed detail response is real backend failure",
+      "passed": true
+    },
+    {
+      "name": "failed route clears previous article",
+      "passed": true
+    },
+    {
+      "name": "error retry repeats current request",
+      "passed": true
+    },
+    {
+      "name": "valid route recovers after failure",
+      "passed": true
+    },
+    {
+      "name": "missing id renders empty state",
+      "passed": true
+    },
+    {
+      "name": "loading clears article before response",
+      "passed": true
+    },
+    {
+      "name": "late real success cannot overwrite newer failure",
+      "passed": true
+    }
+  ]
+}
