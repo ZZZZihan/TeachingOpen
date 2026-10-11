@@ -93,8 +93,8 @@ function harness () {
   return { calls, notices, confirms, listeners, form, map }
 }
 const file = uid => ({ uid, name: 'new.png', type: 'image/png', size: 1024 })
-for (const name of ['TeachingCourseModal', 'TeachingCourseUnitModal']) {
-  const field = name === 'TeachingCourseModal' ? 'courseCover' : 'unitCover'
+for (const name of ['TeachingCourseModal', 'TeachingCourseUnitModal', 'TeachingAdditionalWorkModal']) {
+  const field = name === 'TeachingCourseModal' ? 'courseCover' : name === 'TeachingAdditionalWorkModal' ? 'workCover' : 'unitCover'
   test(name + ': business failure preserves old value; retry waits for registration and writes new attachment', async () => {
     const h = harness(), f = await h.form(name, field), first = file('first')
     assert.equal(f.upload.beforeUpload(first), true)
