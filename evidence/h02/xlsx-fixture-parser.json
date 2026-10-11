@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "reader": "actual candidate POI 3.9",
+  "input_sha256": "ceb24118cb537316ac404b70e48634ea21950722012e7b4ae4ccb4b72455afc2",
+  "library_sha256": {
+    "dom4j-2.1.3.jar": "549f3007c6290f6a901e57d1d331b4ed0e6bf7384f78bf10316ffceeca834de6",
+    "commons-codec-1.11.jar": "e599d5318e97aa48f42136a2927e6dfa4e8881dff0e6c8e3109ddbbff51d7b7d",
+    "poi-3.9.jar": "1b0003f3864b3ffb9cca50d3e859d25ffa0e604c80b1e6821447931c740f1db7",
+    "poi-ooxml-3.9.jar": "70afcf888aee418c52ef3056de9a035eb4163312944370030025bd0be976bd83",
+    "dom4j-1.6.1.jar": "593552ffea3c5823c6602478b5002a7c525fd904a3c44f1abe4065c22edfac73",
+    "poi-ooxml-schemas-3.9.jar": "468ff406183250e81fd495a596f58aaf5db097107678ee8674679431a111cf66",
+    "xmlbeans-2.3.0.jar": "c63808344ea50d9741b266362996557bac8587cdc4f3faf13bbec95296d353e3",
+    "poi-scratchpad-3.9.jar": "36bbc76a8081b02a800349439dcd0259764c51796cf7ea80d8e4e05540f34ac4",
+    "stax-api-1.0.1.jar": "d1968436fc216c901fb9b82c7e878b50fd1d30091676da95b2edd3a9c0ccf92e"
+  },
+  "validates": [
+    "XLSX opens with installed POI reader",
+    "title and raw payload reach correct data cells"
+  ],
+  "input_sha256_scope": "Generated workbook opened by actual POI 3.9 during this run; zip timestamps may vary across reruns"
+}

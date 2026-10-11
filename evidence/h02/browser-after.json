@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "mode": "fixed",
+  "component": "ShowAnnouncement.vue",
+  "source_sha256": "d539e381284ffeae152a6f67df75ca19d7a1a6de34c0601250587c85284e58a6",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "checks": {
+    "actualComponent": true,
+    "executed": "",
+    "unsafe": false,
+    "paragraph": true,
+    "table": true,
+    "image": true,
+    "html": "<p>课堂通知 <strong>保留格式</strong></p><table><tbody><tr><td>表格保留</td></tr></tbody></table><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Zl9sAAAAASUVORK5CYII=\" alt=\"正常图片\"><img src=\"data:image/png;base64,broken\"><a>危险链接</a><div style=\"color:red;\">样式</div>"
+  }
+}
