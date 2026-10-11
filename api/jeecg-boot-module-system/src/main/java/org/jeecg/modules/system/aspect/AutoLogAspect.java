@@ -6,7 +6,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,15 +14,13 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.constant.CommonConstant;
 import org.jeecg.common.system.vo.LoginUser;
-import org.jeecg.common.util.IPUtils;
 import org.jeecg.common.util.SpringContextUtils;
 import org.jeecg.modules.system.entity.SysLog;
-import org.jeecg.modules.system.service.ISysLogService;
+import org.jeecg.modules.system.service.AutoLogWriter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.stereotype.Component;
-
-import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -36,8 +33,9 @@ import com.alibaba.fastjson.JSONObject;
 @Aspect
 @Component
 public class AutoLogAspect {
+	private static final Logger LOG = LoggerFactory.getLogger(AutoLogAspect.class);
 	@Autowired
-	private ISysLogService sysLogService;
+	private AutoLogWriter auditWriter;
 	
 	@Pointcut("@annotation(org.jeecg.common.aspect.annotation.AutoLog)")
 	public void logPointCut() { 
@@ -52,14 +50,21 @@ public class AutoLogAspect {
 		//执行时长(毫秒)
 		long time = System.currentTimeMillis() - beginTime;
 
-		//保存日志
-		saveSysLog(point, time);
+		// Non-critical audit must not turn an already completed business write into
+		// a failed response. Never retry the business method or log request/SQL data.
+		String operation = "unavailable";
+		try {
+			MethodSignature signature = (MethodSignature) point.getSignature();
+			operation = signature.getDeclaringTypeName() + "." + signature.getName() + "()";
+			saveSysLog(signature, operation, time);
+		} catch (Exception auditFailure) {
+			LOG.warn("audit_write_failed method={} failureType={}", operation, auditFailure.getClass().getName());
+		}
 
 		return result;
 	}
 
-	private void saveSysLog(ProceedingJoinPoint joinPoint, long time) {
-		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+	private void saveSysLog(MethodSignature signature, String operation, long time) {
 		Method method = signature.getMethod();
 
 		SysLog sysLog = new SysLog();
@@ -72,23 +77,22 @@ public class AutoLogAspect {
 		}
 
 		//请求的方法名
-		String className = joinPoint.getTarget().getClass().getName();
 		String methodName = signature.getName();
-		sysLog.setMethod(className + "." + methodName + "()");
+		sysLog.setMethod(operation);
 		
 		
 		//设置操作类型
-		if (sysLog.getLogType() == CommonConstant.LOG_TYPE_2) {
+		if (Integer.valueOf(CommonConstant.LOG_TYPE_2).equals(sysLog.getLogType())) {
 			sysLog.setOperateType(getOperateType(methodName, syslog.operateType()));
 		}
 
 		//获取request
 		HttpServletRequest request = SpringContextUtils.getHttpServletRequest();
-		//请求的参数
-		sysLog.setRequestParam(getReqestParams(request,joinPoint));
-
-		//设置IP地址
-		sysLog.setIp(IPUtils.getIpAddr(request));
+		// Metadata only: never persist arguments, query strings, bodies, tokens or
+		// forwarded headers. Domain-specific histories have their own access policy.
+		sysLog.setRequestParam(null);
+		sysLog.setRequestType(request.getMethod());
+		sysLog.setIp(request.getRemoteAddr());
 
 		//获取登录用户信息
 		LoginUser sysUser = (LoginUser)SecurityUtils.getSubject().getPrincipal();
@@ -101,7 +105,7 @@ public class AutoLogAspect {
 		sysLog.setCostTime(time);
 		sysLog.setCreateTime(new Date());
 		//保存系统日志
-		sysLogService.save(sysLog);
+		auditWriter.save(sysLog);
 	}
 	/**
 	 * 获取操作类型
@@ -129,36 +133,5 @@ public class AutoLogAspect {
         	return CommonConstant.OPERATE_TYPE_6;
 		}
 		return CommonConstant.OPERATE_TYPE_1;
-	}
-
-	/**
-	* @Description: 获取请求参数
-	* @author: scott
-	* @date: 2020/4/16 0:10
-	* @param request:  request
-	* @param joinPoint:  joinPoint
-	* @Return: java.lang.String
-	*/
-	private String getReqestParams(HttpServletRequest request, JoinPoint joinPoint) {
-		String httpMethod = request.getMethod();
-		String params = "";
-		if ("POST".equals(httpMethod) || "PUT".equals(httpMethod) || "PATCH".equals(httpMethod)) {
-			Object[] paramsArray = joinPoint.getArgs();
-			params = JSONObject.toJSONString(paramsArray);
-		} else {
-			MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-			Method method = signature.getMethod();
-			// 请求的方法参数值
-			Object[] args = joinPoint.getArgs();
-			// 请求的方法参数名称
-			LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
-			String[] paramNames = u.getParameterNames(method);
-			if (args != null && paramNames != null) {
-				for (int i = 0; i < args.length; i++) {
-					params += "  " + paramNames[i] + ": " + args[i];
-				}
-			}
-		}
-		return params;
 	}
 }
