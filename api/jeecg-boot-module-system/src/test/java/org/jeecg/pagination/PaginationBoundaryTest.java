@@ -154,6 +154,7 @@ public class PaginationBoundaryTest {
     private static ModelAndView exportUsers(ISysUserService service) {
         SysUserController controller = new SysUserController();
         ReflectionTestUtils.setField(controller, "sysUserService", service);
+        ReflectionTestUtils.setField(controller, "userQueryAccess", mock(org.jeecg.modules.system.service.UserQueryAccessService.class));
         Subject subject = mock(Subject.class);
         LoginUser principal = new LoginUser();
         principal.setRealname("Synthetic exporter");

@@ -21,6 +21,8 @@ import org.jeecg.modules.system.mapper.*;
 import org.jeecg.modules.system.model.SysUserModel;
 import org.jeecg.modules.system.model.SysUserSysDepartModel;
 import org.jeecg.modules.system.service.ISysUserService;
+import org.jeecg.modules.system.service.UserQueryAccessService;
+import org.jeecg.modules.system.service.UserQueryFilters;
 import org.jeecg.modules.system.vo.SysUserDepVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -42,6 +44,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
     @Autowired private org.jeecg.modules.system.service.AccountAdministrationService accountAdministration;
+    @Autowired private UserQueryAccessService userQueryAccess;
 	
 	@Autowired
 	private SysUserMapper userMapper;
@@ -304,16 +307,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
 	@Override
 	public IPage<SysUser> getUserByDepartIdAndQueryWrapper(Page<SysUser> page, String departId, QueryWrapper<SysUser> queryWrapper) {
-		LambdaQueryWrapper<SysUser> lambdaQueryWrapper = queryWrapper.lambda();
-
-		lambdaQueryWrapper.eq(SysUser::getDelFlag, "0");
-        lambdaQueryWrapper.inSql(SysUser::getId, "SELECT user_id FROM sys_user_depart WHERE dep_id = '" + departId + "'");
-
-        return userMapper.selectPage(page, lambdaQueryWrapper);
+        userQueryAccess.requireDepartment(departId);
+        queryWrapper.eq("sys_user.del_flag", 0);
+        UserQueryFilters.departments(queryWrapper, Collections.singletonList(departId));
+        return userMapper.selectPage(page, queryWrapper);
 	}
 
 	@Override
 	public IPage<SysUserSysDepartModel> queryUserByOrgCode(String orgCode, SysUser userParams, IPage page) {
+        orgCode = userQueryAccess.requireOrganization(orgCode);
 		List<SysUserSysDepartModel> list = baseMapper.getUserByOrgCode(page, orgCode, userParams);
 		Integer total = baseMapper.getUserByOrgCodeTotal(orgCode, userParams);
 

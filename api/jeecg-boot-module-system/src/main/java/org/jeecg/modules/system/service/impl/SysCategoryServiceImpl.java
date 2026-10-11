@@ -99,7 +99,10 @@ public class SysCategoryServiceImpl extends ServiceImpl<SysCategoryMapper, SysCa
 		if(oConvertUtils.isEmpty(pid)) {
 			pid = ROOT_PID_VALUE;
 		}
-		return baseMapper.queryListByPid(pid,condition);
+		Map<String, String> allowed = new java.util.LinkedHashMap<>();
+        if (condition != null) condition.forEach((field, value) -> allowed.put(
+                org.jeecg.common.system.query.QueryGenerator.requireColumn(SysCategory.class, field), value));
+        return baseMapper.queryListByPid(pid, allowed);
 	}
 
 	@Override

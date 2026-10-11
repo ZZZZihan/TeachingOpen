@@ -269,7 +269,7 @@ public class SysCategoryController {
  		try {
  			
  			QueryWrapper<SysCategory> query = new QueryWrapper<SysCategory>();
- 			query.eq(field, val);
+			query.eq(QueryGenerator.requireColumn(SysCategory.class, field), val);
  			List<SysCategory> ls = this.sysCategoryService.list(query);
  			if(ls==null || ls.size()==0) {
  				result.setMessage("查询无果");
