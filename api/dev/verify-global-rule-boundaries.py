@@ -16,6 +16,7 @@ from local_runtime import mysql_command
 helper_spec = importlib.util.spec_from_file_location('shared_resource_probe', Path(__file__).with_name('verify-shared-resource-boundaries.py'))
 helper = importlib.util.module_from_spec(helper_spec)
 helper_spec.loader.exec_module(helper)
+DEPARTMENT_ADD = '/sys/sysDepart/add'
 
 
 def q(value):
@@ -29,6 +30,32 @@ def sql_failure(stderr):
     error = re.search(r'\bERROR ([0-9]{1,5}) \(([A-Z0-9]{5})\)', stderr or '')
     detail = ': MySQL ' + error[1] + ' (' + error[2] + ')' if error else ''
     return RuntimeError('Global-rule synthetic SQL failed' + detail)
+
+
+class OrganizationRuleFixture:
+    """Borrow an existing rule unchanged, or own one exact temporary record."""
+    def __init__(self, sql, prefix):
+        self.sql = sql
+        self.prefix = prefix
+        self.preexisting = None
+        self.created_id = None
+
+    def ensure(self):
+        existing = self.sql("SELECT id FROM sys_fill_rule WHERE rule_code='org_num_role'")
+        self.preexisting = bool(existing)
+        if existing:
+            return existing
+        # Register ownership before the write so an uncertain insert is cleaned too.
+        self.created_id = self.prefix + '_org'
+        self.sql('INSERT INTO sys_fill_rule(id,rule_name,rule_code,rule_class,rule_params) VALUES ('
+                 + q(self.created_id) + ',' + q('Synthetic organization generator')
+                 + ",'org_num_role'," + q('org.jeecg.modules.system.rule.OrgCodeRule') + ",'{}')")
+        return self.created_id
+
+    def cleanup(self):
+        if self.created_id is not None:
+            self.sql('DELETE FROM sys_fill_rule WHERE id=' + q(self.created_id)
+                     + " AND rule_code='org_num_role'")
 
 
 def verify(args):
@@ -79,7 +106,10 @@ def verify(args):
             'category': ('sys_category', 'name', category, ['类型名称', '类型编码', '父级节点'],
                          [prefix + '_import', category['code'] + 'A', '0'])}
         original = snapshot()
+        organization_rule = OrganizationRuleFixture(sql, prefix)
+        class_creation = {}
         try:
+            organization_rule.ensure()
             for actor in ('admin', 'teacher_a', 'student_a'):
                 api.login(actor)
             for resource, (table, lookup, payload, headers, row) in definitions.items():
@@ -105,9 +135,17 @@ def verify(args):
             core = sql("SELECT id FROM sys_fill_rule WHERE rule_code='org_num_role'")
             check('required synthetic organization rule exists', bool(core) and '\n' not in core)
             denied('student cannot remove required class-number rule', lambda: api.request('DELETE', '/sys/fillRule/delete?id=' + core, 'student_a'))
-            created = api.request('POST', '/sys/depart/add', 'admin', {'departName': prefix, 'parentId': 'fixture_school', 'orgCategory': '2'})
+            parent_code = sql("SELECT org_code FROM sys_depart WHERE id='fixture_school'")
+            check('synthetic parent has a single valid organization code', bool(re.fullmatch(r'[A-Za-z0-9]+', parent_code)))
+            created = api.request('POST', DEPARTMENT_ADD, 'admin', {'departName': prefix, 'parentId': 'fixture_school', 'orgCategory': '2'})
+            generated = sql('SELECT id,org_code,parent_id FROM sys_depart WHERE depart_name=' + q(prefix)).splitlines()
+            class_creation = {'http_status': created[0], 'business': {key: created[1].get(key) for key in ('success', 'code', 'message')}
+                              if isinstance(created[1], dict) else None, 'parent_org_code': parent_code, 'generated_rows': generated}
+            print('Synthetic class creation: ' + json.dumps(class_creation, ensure_ascii=False), flush=True)
             check('normal class creation still generates a department code', ok(created)
-                  and sql('SELECT COUNT(*) FROM sys_depart WHERE depart_name=' + q(prefix) + " AND org_code LIKE 'A99%'") == '1')
+                  and sql('SELECT COUNT(*) FROM sys_depart WHERE depart_name=' + q(prefix)
+                          + " AND parent_id='fixture_school' AND org_code LIKE " + q(parent_code + '%')
+                          + ' AND LENGTH(org_code)>' + str(len(parent_code))) == '1')
             check('ordinary fill generator read remains available', ok(api.request('PUT', '/sys/fillRule/executeRuleByCode/org_num_role', 'teacher_a', {'parentId': 'fixture_school'})))
             check('ordinary category picker remains available', ok(api.request('GET', '/sys/category/loadTreeData?pid=0', 'student_a')))
             check('administrator recreates benign form checker', ok(api.request('POST', '/sys/checkRule/add', 'admin', check_rule)))
@@ -150,9 +188,14 @@ def verify(args):
                 sql('DELETE FROM ' + table + ' WHERE ' + column + ' LIKE ' + q(prefix + '%'))
             sql('DELETE FROM sys_user_role WHERE id=' + q(prefix))
             sql('DELETE FROM sys_role WHERE id=' + q(prefix + '_dev'))
+            organization_rule.cleanup()
             check('all synthetic rule and department changes are cleaned', snapshot() == original)
         args.output.write_text(json.dumps({'scope': 'owned synthetic global configuration management and ordinary form/class workflows',
                                            'expected_legacy': False, 'production_connected': False, 'jar_sha256': api.jar_sha256,
+                                           'organization_rule_fixture': {'preexisting': organization_rule.preexisting,
+                                                                        'temporary_created': organization_rule.created_id is not None,
+                                                                        'restored': True},
+                                           'class_creation': class_creation,
                                            'verifier_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                                            'passed': len(results), 'failed': 0, 'checks': results}, ensure_ascii=False, indent=2) + '\n')
 

@@ -62,3 +62,13 @@ python3 api/dev/preflight-rule-config.py \
 探针仅为自身字面量显式指定 `COLLATE utf8mb4_general_ci`，并在 SQL 失败时保留 MySQL 错误号和 SQLSTATE，不输出原语句、字段值或连接凭据。`ci/test_global_rule_sql.py` 的 3 条脱敏守卫通过，命令 `PYTHONPATH=ci python3 -m unittest test_global_rule_sql -v`。原失败与诊断保留在 `evidence/ci-gates/final-r2-38135704244/run.log`、`evidence/final-r2-attempt-1/global-rule-sql-diagnostic.json`。
 
 本代理新建独立 MySQL 的初始化在启动服务前发生 SIGSEGV，已停止该尝试并保留日志，不能声称本次修正的 SQL/HTTP 已实测通过。修复后真实 SQL、完整 global-rule 探针及 CI 由根代理在既有合成环境继续验证。
+
+## 完整合成探针闭环
+
+排序规则修正后的实际运行进一步发现两个探针假设错误：基础 `seed-fixtures.py` 和 CI `review_mysql.py` 不播种 `org_num_role`（它只在另一套 UI fixture 中出现）；班级新增实际路由由 `SysDepartController` 和 `DepartModal.vue` 共同定义为 `/sys/sysDepart/add`，旧探针的 `/sys/depart/add` 返回 HTTP 404。这些失败日志和安全响应诊断已保留，未放宽产品授权或修改产品代码。
+
+探针在原始六表快照之后检查机构规则：已有规则只借用，不覆盖；缺失时用本次随机前缀生成确切 ID，插入标准 OrgCodeRule，finally 仅按该 ID 和 `org_num_role` 删除，之后核对完整原始快照。插入前即登记所有权，写入异常也执行相同精确清理。班级检查改用真实路由，并读取合成父记录的实际组织编号；报告保留安全 HTTP 状态、业务结果和生成的合成行 ID/编号，不记录 token。
+
+根授权独占现有合成 runtime 后，本代理于 JAR SHA `0292703db84494798cf5740fc6cd22b26b1e131f5e8f0c01d29cae723bfd74da` 上完整运行通过 **91/91**，没有失败；`organization_rule_fixture` 明确记录原本缺失、本次临时创建、结束后还原。合法管理员新增班级返回 HTTP 200，生成 `A99A03`；学生删除内建规则拒绝、普通校验编码、真实 Excel、实时 dev 授予/撤销和六表快照还原均通过。证据：`evidence/final-r2-attempt-1/http-global-rule-core-fixture/verify-global-rule-boundaries-r2.json` 和同名日志。此前错误路由失败保留在该目录的首轮日志及 `class-diagnostic.json`，其六表也已还原。
+
+新增 fixture 守卫验证已有配置不写入、缺失配置按确切 ID 清理、异常插入仍可精确清理，以及探针路由与真实 controller/前端一致；全部 CI Python 守卫 **38/38** 通过，记录 `evidence/global-rule-core-fixture-guards-r2.log`。这是指定本地候选的真实验证，不代替后续 Linux CI 和独立 Pro 结论；runtime 已归还根代理。
