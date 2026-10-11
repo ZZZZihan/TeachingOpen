@@ -59,7 +59,9 @@ public class SysFileController extends JeecgController<SysFile, ISysFileService>
 								   HttpServletRequest req) {
 		QueryWrapper<SysFile> queryWrapper = new QueryWrapper<>();
         // Do not let advanced client query/sort parameters widen the ownership scope.
-        queryWrapper.eq("del_flag", 0);
+        // Keep pending cleanup discoverable to its owner for a deletion retry.
+        // This management list never widens the ownership scope below.
+        queryWrapper.in("del_flag", 0, 1);
         if (!fileAccess.administrator()) queryWrapper.eq("create_by", fileAccess.user().getUsername());
         if (sysFile.getFileName() != null) queryWrapper.like("file_name", sysFile.getFileName());
         if (sysFile.getFileTag() != null) queryWrapper.eq("file_tag", sysFile.getFileTag());
@@ -109,7 +111,7 @@ public class SysFileController extends JeecgController<SysFile, ISysFileService>
 	@DeleteMapping(value = "/delete")
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
 		fileAccess.requireDeletion(sysFileService.getById(id));
-        return sysFileService.deleteWithFile(id) ? Result.ok("删除成功!") : Result.error("文件删除失败，请稍后重试");
+        return sysFileService.deleteWithFile(id) ? Result.ok("删除成功!") : Result.error(409, "文件清理未完成，已保留记录，请稍后重试删除");
 	}
 
 	 /**
@@ -143,7 +145,7 @@ public class SysFileController extends JeecgController<SysFile, ISysFileService>
         for (String id : idList) fileAccess.requireDeletion(sysFileService.getById(id));
         int deleted = 0;
         for (String id : idList) {
-            if (!sysFileService.deleteWithFile(id)) return Result.error("已删除 " + deleted + " 个文件，其余未删除，请刷新后重试");
+            if (!sysFileService.deleteWithFile(id)) return Result.error(409, "已删除 " + deleted + " 个文件，其余文件清理未完成，请刷新后重试删除");
             deleted++;
         }
         return Result.ok("批量删除成功!");
