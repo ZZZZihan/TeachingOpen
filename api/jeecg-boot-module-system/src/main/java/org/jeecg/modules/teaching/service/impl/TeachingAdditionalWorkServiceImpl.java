@@ -15,6 +15,7 @@ import org.jeecg.modules.system.model.DepartIdModel;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.system.service.ISysUserDepartService;
+import org.jeecg.modules.system.service.LocalFileReferenceAccessService;
 import org.jeecg.modules.teaching.entity.TeachingAdditionalWork;
 import org.jeecg.modules.teaching.mapper.TeachingAdditionalWorkMapper;
 import org.jeecg.modules.teaching.model.MineAdditionalWorkModel;
@@ -47,6 +48,8 @@ public class TeachingAdditionalWorkServiceImpl extends ServiceImpl<TeachingAddit
     private ITeachingDepartDayLogService teachingDepartDayLogService;
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    private LocalFileReferenceAccessService attachmentAccess;
 
     @Override
     public Result<MineAdditionalWorkModel> getWorkInfo(String id) {
@@ -76,6 +79,7 @@ public class TeachingAdditionalWorkServiceImpl extends ServiceImpl<TeachingAddit
         TeachingAdditionalWork work = editableFields(teachingAdditionalWork);
         Set<String> departments = requireDepartments(work.getWorkDept());
         requireManagedDepartments(writer, departments);
+        attachmentAccess.requireUse(work.getWorkCover(), work.getWorkDocumentUrl(), work.getWorkUrl(), work.getWorkDesc());
         work.setWorkDept(String.join(",", departments));
         work.setCreateBy(writer.user.getUsername());
         work.setCreateTime(new Date());
@@ -98,6 +102,7 @@ public class TeachingAdditionalWorkServiceImpl extends ServiceImpl<TeachingAddit
         TeachingAdditionalWork work = editableFields(request);
         Set<String> departments = requireDepartments(work.getWorkDept());
         requireManagedDepartments(writer, departments);
+        attachmentAccess.requireUse(work.getWorkCover(), work.getWorkDocumentUrl(), work.getWorkUrl(), work.getWorkDesc());
         work.setId(previous.getId());
         work.setWorkDept(String.join(",", departments));
         work.setUpdateBy(writer.user.getUsername());

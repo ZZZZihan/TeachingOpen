@@ -7,6 +7,7 @@ import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.mapper.SysDepartMapper;
 import org.jeecg.modules.system.mapper.SysUserMapper;
 import org.jeecg.modules.teaching.service.TeachingWorkAttachmentService;
+import org.jeecg.modules.teaching.service.TeachingWorkAttachmentAccessService;
 import org.jeecg.modules.teaching.service.TeachingAccessService;
 import org.jeecg.common.exception.JeecgBootException;
 import org.jeecg.modules.teaching.entity.TeachingWork;
@@ -60,6 +61,8 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	@Autowired
 	private TeachingWorkAttachmentService workAttachmentService;
 	@Autowired
+	private TeachingWorkAttachmentAccessService attachmentAccess;
+	@Autowired
 	private TeachingAccessService teachingAccessService;
 	@Autowired
 	private TeachingCourseMapper teachingCourseMapper;
@@ -74,6 +77,8 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	@Override
 	@Transactional
 	public void saveMain(TeachingWork teachingWork, List<TeachingWorkCorrect> teachingWorkCorrectList,List<TeachingWorkComment> teachingWorkCommentList) {
+		teachingAccessService.requireManageWork(teachingWork);
+		attachmentAccess.requireWrite(teachingWork, null);
 		teachingWorkMapper.insert(teachingWork);
 		if(teachingWorkCorrectList!=null && teachingWorkCorrectList.size()>0) {
 			for(TeachingWorkCorrect entity:teachingWorkCorrectList) {
@@ -94,6 +99,20 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	@Override
 	@Transactional
 	public void updateMain(TeachingWork teachingWork,List<TeachingWorkCorrect> teachingWorkCorrectList,List<TeachingWorkComment> teachingWorkCommentList) {
+		TeachingWork existing = teachingWorkMapper.selectOne(new QueryWrapper<TeachingWork>()
+				.eq("id", teachingWork.getId()).last("FOR UPDATE"));
+		teachingAccessService.requireManageWork(existing);
+		if (existing == null || !Objects.equals(teachingWork.getId(), existing.getId())) {
+			throw new JeecgBootException("未找到对应数据");
+		}
+		// Lock, authorize and preserve identity in the same transaction as the write.
+		teachingWork.setUserId(existing.getUserId());
+		teachingWork.setDepartId(existing.getDepartId());
+		teachingWork.setCourseId(existing.getCourseId());
+		teachingWork.setAdditionalId(existing.getAdditionalId());
+		teachingWork.setCreateBy(existing.getCreateBy());
+		teachingWork.setCreateTime(existing.getCreateTime());
+		attachmentAccess.requireWrite(teachingWork, existing);
 		teachingWorkMapper.updateById(teachingWork);
 		
 		// A partial edit must not clear a collection that the caller did not send.

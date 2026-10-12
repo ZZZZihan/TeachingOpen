@@ -1,0 +1,11 @@
+PASS initial teacher access metadata remains forbidden
+PASS initial teacher access actual private bytes remain forbidden
+PASS baseline teacher can attach a previously private file
+PASS baseline forged reference permits file metadata
+PASS baseline forged reference permits exact private bytes
+PASS after baseline reference removed metadata remains forbidden
+PASS after baseline reference removed actual private bytes remain forbidden
+PASS baseline assignment URL can manufacture read access
+PASS baseline assignment reference permits exact private bytes
+PASS all original business rows restored
+PASS all original file bytes restored
