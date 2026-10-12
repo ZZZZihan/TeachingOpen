@@ -2,6 +2,12 @@ package org.jeecg.common.system.query;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import org.jeecg.common.exception.JeecgBootException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.jeecg.common.constant.CommonConstant;
@@ -98,6 +104,7 @@ public class QueryGenerator {
 		//区间条件组装 模糊查询 高级查询组装 简单排序 权限查询
 		PropertyDescriptor origDescriptors[] = PropertyUtils.getPropertyDescriptors(searchObj);
 		Map<String,SysPermissionDataRuleModel> ruleMap = getRuleMap();
+        Map<String, String> columns = persistentColumns(searchObj.getClass());
 		
 		//权限规则自定义SQL表达式
 		for (String c : ruleMap.keySet()) {
@@ -112,30 +119,30 @@ public class QueryGenerator {
 			name = origDescriptors[i].getName();
 			type = origDescriptors[i].getPropertyType().toString();
 			try {
-				if (judgedIsUselessField(name)|| !PropertyUtils.isReadable(searchObj, name)) {
+				if (judgedIsUselessField(name) || !columns.containsKey(name) || !PropertyUtils.isReadable(searchObj, name)) {
 					continue;
 				}
 				
 				//数据权限查询
 				if(ruleMap.containsKey(name)) {
-					addRuleToQueryWrapper(ruleMap.get(name), name, origDescriptors[i].getPropertyType(), queryWrapper);
+					addRuleToQueryWrapper(ruleMap.get(name), columns.get(name), origDescriptors[i].getPropertyType(), queryWrapper);
 				}
 				
 				// 添加 判断是否有区间值
 				String endValue = null,beginValue = null;
 				if (parameterMap != null && parameterMap.containsKey(name + BEGIN)) {
 					beginValue = parameterMap.get(name + BEGIN)[0].trim();
-					addQueryByRule(queryWrapper, name, type, beginValue, QueryRuleEnum.GE);
+					addQueryByRule(queryWrapper, columns.get(name), type, beginValue, QueryRuleEnum.GE);
 					
 				}
 				if (parameterMap != null && parameterMap.containsKey(name + END)) {
 					endValue = parameterMap.get(name + END)[0].trim();
-					addQueryByRule(queryWrapper, name, type, endValue, QueryRuleEnum.LE);
+					addQueryByRule(queryWrapper, columns.get(name), type, endValue, QueryRuleEnum.LE);
 				}
 				//多值查询
 				if (parameterMap != null && parameterMap.containsKey(name + MULTI)) {
 					endValue = parameterMap.get(name + MULTI)[0].trim();
-					addQueryByRule(queryWrapper, name.replace(MULTI,""), type, endValue, QueryRuleEnum.IN);
+					addQueryByRule(queryWrapper, columns.get(name), type, endValue, QueryRuleEnum.IN);
 				}
 
 				//判断单值  参数带不同标识字符串 走不同的查询
@@ -144,7 +151,7 @@ public class QueryGenerator {
 				if (null != value && value.toString().startsWith(COMMA) && value.toString().endsWith(COMMA)) {
 					String multiLikeval = value.toString().replace(",,", COMMA);
 					String[] vals = multiLikeval.substring(1, multiLikeval.length()).split(COMMA);
-					final String field = oConvertUtils.camelToUnderline(name);
+					final String field = columns.get(name);
 					if(vals.length>1) {
 						queryWrapper.and(j -> {
 							j = j.like(field,vals[0]);
@@ -166,7 +173,7 @@ public class QueryGenerator {
 						//rule = QueryRuleEnum.LIKE;
 					//}
 					// add -end 添加判断为字符串时设为全模糊查询
-					addEasyQuery(queryWrapper, name, rule, value);
+					addEasyQuery(queryWrapper, columns.get(name), rule, value);
 				}
 				
 			} catch (Exception e) {
@@ -174,89 +181,108 @@ public class QueryGenerator {
 			}
 		}
 		// 排序逻辑 处理 
-		doMultiFieldsOrder(queryWrapper, parameterMap);
+		doMultiFieldsOrder(queryWrapper, parameterMap, columns);
 				
 		//高级查询
-		doSuperQuery(queryWrapper, parameterMap);
+		doSuperQuery(queryWrapper, parameterMap, columns);
 		
 	}
 	
-	//多字段排序 TODO 需要修改前端
-	public static void doMultiFieldsOrder(QueryWrapper<?> queryWrapper,Map<String, String[]> parameterMap) {
-		String column=null,order=null;
-		if(parameterMap!=null&& parameterMap.containsKey(ORDER_COLUMN)) {
-			column = parameterMap.get(ORDER_COLUMN)[0];
-		}
-		if(parameterMap!=null&& parameterMap.containsKey(ORDER_TYPE)) {
-			order = parameterMap.get(ORDER_TYPE)[0];
-		}
-		log.debug("排序规则>>列:"+column+",排序方式:"+order);
-		if (oConvertUtils.isNotEmpty(column) && oConvertUtils.isNotEmpty(order)) {
-			//字典字段，去掉字典翻译文本后缀
-			if(column.endsWith(CommonConstant.DICT_TEXT_SUFFIX)) {
-				column = column.substring(0, column.lastIndexOf(CommonConstant.DICT_TEXT_SUFFIX));
-			}
-			//去掉自动封装url的后缀
-			if(column.endsWith(CommonConstant.URL_TEXT_SUFFIX)) {
-				column = column.substring(0, column.lastIndexOf(CommonConstant.URL_TEXT_SUFFIX));
-			}
-			//SQL注入check
-			SqlInjectionUtil.filterContent(column); 
-			
-			if (order.toUpperCase().indexOf(ORDER_TYPE_ASC)>=0) {
-				queryWrapper.orderByAsc(oConvertUtils.camelToUnderline(column));
-			} else {
-				queryWrapper.orderByDesc(oConvertUtils.camelToUnderline(column));
-			}
-		}
-	}
-	
-	/**
-	 * 高级查询
-	 * @param queryWrapper
-	 * @param parameterMap
-	 */
-	public static void doSuperQuery(QueryWrapper<?> queryWrapper,Map<String, String[]> parameterMap) {
-		if(parameterMap!=null&& parameterMap.containsKey(SUPER_QUERY_PARAMS)){
-			String superQueryParams = parameterMap.get(SUPER_QUERY_PARAMS)[0];
-			String superQueryMatchType = parameterMap.get(SUPER_QUERY_MATCH_TYPE) != null ? parameterMap.get(SUPER_QUERY_MATCH_TYPE)[0] : MatchTypeEnum.AND.getValue();
-            MatchTypeEnum matchType = MatchTypeEnum.getByValue(superQueryMatchType);
-            // update-begin--Author:sunjianlei  Date:20200325 for：高级查询的条件要用括号括起来，防止和用户的其他条件冲突 -------
-            try {
-                superQueryParams = URLDecoder.decode(superQueryParams, "UTF-8");
-                List<QueryCondition> conditions = JSON.parseArray(superQueryParams, QueryCondition.class);
-                if (conditions == null || conditions.size() == 0) {
-                    return;
-                }
-                log.info("---高级查询参数-->" + conditions.toString());
-                queryWrapper.and(andWrapper -> {
-                    for (int i = 0; i < conditions.size(); i++) {
-                        QueryCondition rule = conditions.get(i);
-                        if (oConvertUtils.isNotEmpty(rule.getField())
-                                && oConvertUtils.isNotEmpty(rule.getRule())
-                                && oConvertUtils.isNotEmpty(rule.getVal())) {
-
-                            log.debug("SuperQuery ==> " + rule.toString());
-                            addEasyQuery(andWrapper, rule.getField(), QueryRuleEnum.getByValue(rule.getRule()), rule.getVal());
-
-                            // 如果拼接方式是OR，就拼接OR
-                            if (MatchTypeEnum.OR == matchType && i < (conditions.size() - 1)) {
-                                andWrapper.or();
-                            }
-                        }
-                    }
-                    return andWrapper;
-                });
-            } catch (UnsupportedEncodingException e) {
-                log.error("--高级查询参数转码失败：" + superQueryParams, e);
-            } catch (Exception e) {
-                log.error("--高级查询拼接失败：" + e.getMessage());
-                e.printStackTrace();
+    /** Resolve client property names only against persisted fields of this entity.
+     * View-model fields, transient properties and SQL expressions are never columns. */
+    private static Map<String, String> persistentColumns(Class<?> requestedType) {
+        Class<?> entityType = requestedType;
+        for (Class<?> type = requestedType; type != null && type != Object.class; type = type.getSuperclass()) {
+            if (type.getDeclaredAnnotation(TableName.class) != null
+                    || Arrays.stream(type.getDeclaredFields()).anyMatch(f -> f.isAnnotationPresent(TableId.class))) {
+                entityType = type;
+                break;
             }
-            // update-end--Author:sunjianlei  Date:20200325 for：高级查询的条件要用括号括起来，防止和用户的其他条件冲突 -------
-		}
-		//log.info(" superQuery getCustomSqlSegment: "+ queryWrapper.getCustomSqlSegment());
-	}
+        }
+        Map<String, String> columns = new HashMap<>();
+        for (Class<?> type = entityType; type != null && type != Object.class; type = type.getSuperclass()) {
+            for (Field field : type.getDeclaredFields()) {
+                TableField mapping = field.getAnnotation(TableField.class);
+                if (Modifier.isStatic(field.getModifiers()) || Modifier.isTransient(field.getModifiers())
+                        || (mapping != null && !mapping.exist())) continue;
+                TableId id = field.getAnnotation(TableId.class);
+                String column = mapping != null && !mapping.value().isEmpty() ? mapping.value()
+                        : id != null && !id.value().isEmpty() ? id.value() : oConvertUtils.camelToUnderline(field.getName());
+                // Mapping metadata is trusted source, but no expression is a sortable field.
+                if (!column.matches("[A-Za-z_][A-Za-z0-9_]*")) continue;
+                columns.putIfAbsent(field.getName(), column);
+                columns.putIfAbsent(column, column);
+            }
+        }
+        return columns;
+    }
+
+    public static String requireColumn(Class<?> entity, String field) {
+        return column(persistentColumns(entity), field);
+    }
+
+    private static String column(Map<String, String> columns, String field) {
+        String name = field;
+        if (name != null && name.endsWith(CommonConstant.DICT_TEXT_SUFFIX))
+            name = name.substring(0, name.length() - CommonConstant.DICT_TEXT_SUFFIX.length());
+        if (name != null && name.endsWith(CommonConstant.URL_TEXT_SUFFIX))
+            name = name.substring(0, name.length() - CommonConstant.URL_TEXT_SUFFIX.length());
+        String result = columns.get(name);
+        if (result == null) throw new JeecgBootException("不支持的查询字段");
+        return result;
+    }
+
+    private static void doMultiFieldsOrder(QueryWrapper<?> queryWrapper, Map<String, String[]> parameters,
+                                           Map<String, String> columns) {
+        if (parameters == null || !parameters.containsKey(ORDER_COLUMN)) return;
+        String field = parameters.get(ORDER_COLUMN)[0];
+        if (oConvertUtils.isEmpty(field)) return;
+        String resolved = column(columns, field);
+        String order = parameters.containsKey(ORDER_TYPE) ? parameters.get(ORDER_TYPE)[0] : "asc";
+        if ("asc".equalsIgnoreCase(order) || "ascend".equalsIgnoreCase(order)) queryWrapper.orderByAsc(resolved);
+        else if ("desc".equalsIgnoreCase(order) || "descend".equalsIgnoreCase(order)) queryWrapper.orderByDesc(resolved);
+        else throw new JeecgBootException("不支持的排序方式");
+    }
+
+    private static void doSuperQuery(QueryWrapper<?> queryWrapper, Map<String, String[]> parameters,
+                                     Map<String, String> columns) {
+        if (parameters == null || !parameters.containsKey(SUPER_QUERY_PARAMS)) return;
+        String encoded = parameters.get(SUPER_QUERY_PARAMS)[0];
+        if (oConvertUtils.isEmpty(encoded)) return;
+        String match = parameters.containsKey(SUPER_QUERY_MATCH_TYPE)
+                ? parameters.get(SUPER_QUERY_MATCH_TYPE)[0] : MatchTypeEnum.AND.getValue();
+        MatchTypeEnum matchType = MatchTypeEnum.getByValue(match);
+        if (matchType == null) throw new JeecgBootException("不支持的高级查询连接方式");
+        List<QueryCondition> conditions;
+        try {
+            conditions = JSON.parseArray(URLDecoder.decode(encoded, "UTF-8"), QueryCondition.class);
+        } catch (Exception e) {
+            throw new JeecgBootException("高级查询参数格式不正确");
+        }
+        if (conditions == null || conditions.isEmpty()) return;
+        if (conditions.size() > 100) throw new JeecgBootException("高级查询条件过多");
+        // Validate the complete batch before changing the wrapper. Do not swallow errors
+        // and silently execute a broader query when a supplied condition is invalid.
+        for (QueryCondition condition : conditions) {
+            if (condition == null) throw new JeecgBootException("高级查询参数格式不正确");
+            column(columns, condition.getField());
+            QueryRuleEnum rule = QueryRuleEnum.getByValue(condition.getRule());
+            if (rule == null || rule == QueryRuleEnum.SQL_RULES)
+                throw new JeecgBootException("不支持的高级查询规则");
+        }
+        queryWrapper.and(nested -> {
+            boolean added = false;
+            for (QueryCondition condition : conditions) {
+                if (oConvertUtils.isEmpty(condition.getVal())) continue;
+                if (added && matchType == MatchTypeEnum.OR) nested.or();
+                addEasyQuery(nested, column(columns, condition.getField()),
+                        QueryRuleEnum.getByValue(condition.getRule()), condition.getVal());
+                added = true;
+            }
+            return nested;
+        });
+    }
+
 	/**
 	 * 根据所传的值 转化成对应的比较方式
 	 * 支持><= like in !

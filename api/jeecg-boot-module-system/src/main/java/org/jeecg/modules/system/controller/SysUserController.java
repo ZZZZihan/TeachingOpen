@@ -68,6 +68,7 @@ import java.util.stream.Collectors;
 public class SysUserController extends BaseController {
     @Autowired private AccountAdministrationService accountAdministration;
     @Autowired private UserProfileService userProfiles;
+    @Autowired private UserQueryAccessService userQueryAccess;
 	@Autowired
 	private ISysBaseAPI sysBaseAPI;
 	@Autowired
@@ -120,33 +121,22 @@ public class SysUserController extends BaseController {
         //departId批量查询条件
         String departId = param.containsKey("departId")?param.get("departId")[0]:null;
         if(StringUtils.isNotEmpty(departId)){
-            departId = "('" + departId.replaceAll(",", "','") + "')";
-            queryWrapper.inSql("sys_user.id","select user_id from sys_user_depart where dep_id in " + departId);
+            UserQueryFilters.departments(queryWrapper, AccountAdministrationService.ids(departId));
         }
         //roleCode查询条件
         if (StringUtils.isNotEmpty(roleCode) && StringUtils.isEmpty(roleId)){
             SysRole sysRole = sysRoleService.getRoleByCode(roleCode);
-            if (sysRole != null)roleId = sysRole.getId();
+            if (sysRole != null) roleId = sysRole.getId();
+            else queryWrapper.apply("1 = 0");
         }
         //roleId批量查询条件
         if (StringUtils.isNotEmpty(roleId)){
-            roleId = "('" + roleId.replaceAll(",", "','") + "')";
-            queryWrapper.inSql("sys_user.id","select user_id from sys_user_role where role_id in " + roleId);
+            UserQueryFilters.roles(queryWrapper, AccountAdministrationService.ids(roleId));
         }
 
         QueryGenerator.installMplus(queryWrapper, user, req.getParameterMap());
 
-        //非admin和dev角色，只显示自己管理的部门下的用户
-        List<String> myDeptIds = new ArrayList<>();
-        if(!hasRole("admin") && !hasRole("dev")){
-            myDeptIds = sysDepartService.getMySubDepIdsByDepId(getCurrentUser().getDepartIds());
-            if (myDeptIds==null || myDeptIds.isEmpty()){
-                result.error500("您没有负责的班级");
-                return result;
-            }
-            String myDeptIdStr = "('" + String.join("','", myDeptIds) + "')";
-            queryWrapper.inSql("sys_user.id","select user_id from sys_user_depart where dep_id in " + myDeptIdStr);
-        }
+        userQueryAccess.limitUsers(queryWrapper);
 
 		Page<SysUser> page = new Page<SysUser>(pageNo, pageSize);
         IPage<SysUser> pageList = sysUserService.getUserList(page, queryWrapper);
@@ -412,11 +402,11 @@ public class SysUserController extends BaseController {
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
 //        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(provinceId), "sys_user.province", provinceId);
 //        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(cityId),"sys_user.city", cityId);
-        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(roleId), "role_id", roleId);
+        if (StringUtils.isNotEmpty(roleId)) UserQueryFilters.roles(queryWrapper, AccountAdministrationService.ids(roleId));
         queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(userSex), "sys_user.sex", userSex);
         queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(status), "sys_user.status", status);
         if(StringUtils.isNotEmpty(departId)){
-            queryWrapper.in("sys_depart.id", Arrays.asList(departId.split(",")));
+            UserQueryFilters.departments(queryWrapper, AccountAdministrationService.ids(departId));
         }
         //TODO 外部模拟登陆临时账号，列表不显示
         queryWrapper.ne("username","_reserve_user_external");
@@ -429,16 +419,7 @@ public class SysUserController extends BaseController {
             queryWrapper.in("sys_user.id",selections.split(","));
         }
 
-        //非admin和dev角色，只显示自己管理的部门下的用户
-        List<String> myDeptIds = new ArrayList<>();
-        if(!hasRole("admin") && !hasRole("dev")){
-            myDeptIds = sysDepartService.getMySubDepIdsByDepId(getCurrentUser().getDepartIds());
-            if (myDeptIds==null || myDeptIds.isEmpty()){
-                return null;
-            }
-            String myDeptIdStr = "('" + String.join("','", myDeptIds) + "')";
-            queryWrapper.inSql("sys_user.id","select user_id from sys_user_depart where dep_id in " + myDeptIdStr);
-        }
+        userQueryAccess.limitUsers(queryWrapper);
 
         QueryGenerator.installMplus(queryWrapper, sysUser, request.getParameterMap());
         // Exports use bounded SQL pages as well, without silently exporting
@@ -665,8 +646,7 @@ public class SysUserController extends BaseController {
             subDepids = sysDepartService.getSubDepIdsByDepId(depId);
         }
         if(subDepids != null && subDepids.size()>0){
-            String myDeptIdStr = "('" + String.join("','", subDepids) + "')";
-            queryWrapper.inSql("sys_user.id","select user_id from sys_user_depart where dep_id in " + myDeptIdStr);
+            UserQueryFilters.departments(queryWrapper, subDepids);
             IPage<SysUser> pageList = sysUserService.getUserList(page,queryWrapper);
             //批量查询用户的所属部门
             //step.1 先拿到全部的 useids
