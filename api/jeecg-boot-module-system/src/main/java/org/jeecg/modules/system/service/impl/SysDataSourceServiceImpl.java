@@ -1,18 +1,16 @@
 package org.jeecg.modules.system.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import org.jeecg.modules.system.entity.SysDataSource;
 import org.jeecg.modules.system.mapper.SysDataSourceMapper;
 import org.jeecg.modules.system.service.ISysDataSourceService;
 import org.springframework.stereotype.Service;
 
-/**
- * @Description: 多数据源管理
- * @Author: jeecg-boot
- * @Date: 2019-12-25
- * @Version: V1.0
- */
+/** This internal read contract deliberately exposes no generic write/import API. */
 @Service
-public class SysDataSourceServiceImpl extends ServiceImpl<SysDataSourceMapper, SysDataSource> implements ISysDataSourceService {
-
+public class SysDataSourceServiceImpl implements ISysDataSourceService {
+    private final SysDataSourceMapper sources;
+    public SysDataSourceServiceImpl(SysDataSourceMapper sources) { this.sources = sources; }
+    @Override public SysDataSource getById(String id) { return sources.selectById(id); }
+    @Override public SysDataSource getOne(Wrapper<SysDataSource> query) { return sources.selectOne(query); }
 }

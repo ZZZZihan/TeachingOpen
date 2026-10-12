@@ -1,0 +1,123 @@
+{
+  "jar_sha256": "3192bcdd90d35a5bf6f867d51a04f2fdbb3dbb3bb5a44a850a2a35f0ed6c8809",
+  "existing_session_reused": false,
+  "network_capable_url": false,
+  "responses": [
+    {
+      "actor": "fixture_student_b",
+      "suffix": "",
+      "http_status": 403,
+      "content_type": "application/json;charset=UTF-8",
+      "result": {
+        "success": false,
+        "code": 403,
+        "message": "没有运维管理权限"
+      }
+    },
+    {
+      "actor": "fixture_student_b",
+      "suffix": "/",
+      "http_status": 403,
+      "content_type": "application/json;charset=UTF-8",
+      "result": {
+        "success": false,
+        "code": 403,
+        "message": "没有运维管理权限"
+      }
+    },
+    {
+      "actor": "fixture_student_b",
+      "suffix": ".json",
+      "http_status": 404,
+      "content_type": "application/json;charset=UTF-8",
+      "result": {
+        "timestamp": "2026-10-11 17:42:34",
+        "status": 404,
+        "error": "Not Found",
+        "message": "No message available",
+        "path": "/api/online/cgreport/api/testConnection.json"
+      }
+    },
+    {
+      "actor": "fixture_student_b",
+      "suffix": ".js",
+      "http_status": 404,
+      "content_type": "application/json;charset=UTF-8",
+      "result": {
+        "timestamp": "2026-10-11 17:42:34",
+        "status": 404,
+        "error": "Not Found",
+        "message": "No message available",
+        "path": "/api/online/cgreport/api/testConnection.js"
+      }
+    },
+    {
+      "actor": "fixture_student_b",
+      "suffix": ";fixture=1",
+      "http_status": 400,
+      "content_type": "application/json;charset=UTF-8",
+      "result": {
+        "timestamp": "2026-10-11 17:42:34",
+        "status": 400,
+        "error": "Bad Request",
+        "message": "Invalid request",
+        "path": "/api/online/cgreport/api/testConnection;fixture=1"
+      }
+    },
+    {
+      "actor": "anonymous",
+      "suffix": "",
+      "http_status": 401,
+      "content_type": "application/json;charset=UTF-8",
+      "result": {
+        "success": false,
+        "code": 401,
+        "message": "Token失效，请重新登录"
+      }
+    },
+    {
+      "actor": "anonymous",
+      "suffix": "/",
+      "http_status": 401,
+      "content_type": "application/json;charset=UTF-8",
+      "result": {
+        "success": false,
+        "code": 401,
+        "message": "Token失效，请重新登录"
+      }
+    },
+    {
+      "actor": "anonymous",
+      "suffix": ".json",
+      "http_status": 401,
+      "content_type": "application/json;charset=UTF-8",
+      "result": {
+        "success": false,
+        "code": 401,
+        "message": "Token失效，请重新登录"
+      }
+    },
+    {
+      "actor": "anonymous",
+      "suffix": ".js",
+      "http_status": 401,
+      "content_type": "application/json;charset=UTF-8",
+      "result": {
+        "success": false,
+        "code": 401,
+        "message": "Token失效，请重新登录"
+      }
+    },
+    {
+      "actor": "anonymous",
+      "suffix": ";fixture=1",
+      "http_status": 401,
+      "content_type": "application/json;charset=UTF-8",
+      "result": {
+        "success": false,
+        "code": 401,
+        "message": "Token失效，请重新登录"
+      }
+    }
+  ]
+}

@@ -59,7 +59,7 @@
           label="密码">
           <a-row :gutter="8">
             <a-col :span="21">
-              <a-input-password placeholder="请输入密码" v-decorator="['dbPassword', validatorRules.dbPassword]"/>
+              <a-input-password :placeholder="model.id ? '留空保留现有密码' : '请输入密码'" v-decorator="['dbPassword', { rules: [{ required: !model.id, message: '请输入密码!' }] }]"/>
             </a-col>
             <a-col :span="3">
               <a-button type="primary" size="small" style="width: 100%" @click="handleTest">测试</a-button>
@@ -209,6 +209,10 @@
         this.$nextTick(() => {
           this.form.validateFields(keys, (errors, values) => {
             if (!errors) {
+              if (!values.dbPassword) {
+                this.$message.warning('测试连接时请填写密码；编辑保存时留空可保留现有密码')
+                return
+              }
               let loading = this.$message.loading('连接中……', 0)
               postAction('/online/cgreport/api/testConnection', fieldsValues).then(res => {
                 if (res.success) {

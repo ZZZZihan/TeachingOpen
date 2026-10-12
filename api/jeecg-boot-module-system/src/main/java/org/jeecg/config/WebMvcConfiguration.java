@@ -2,6 +2,7 @@ package org.jeecg.config;
 
 import org.jeecg.modules.shiro.authc.interceptor.OnlineInterceptor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -20,6 +21,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer {
+
+    @Autowired
+    private InfrastructureManagementInterceptor infrastructureManagement;
 
 	@Value("${jeecg.path.webapp}")
 	private String webAppPath;
@@ -69,6 +73,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(infrastructureManagement).addPathPatterns("/**");
 		registry.addInterceptor(new PaginationRequestInterceptor()).addPathPatterns("/**");
 		String [] exculudes = new String[]{"/*.html","/html/**","/js/**","/css/**","/images/**"};
 		registry.addInterceptor(onlineInterceptor()).excludePathPatterns(exculudes).addPathPatterns("/online/cgform/api/**");
