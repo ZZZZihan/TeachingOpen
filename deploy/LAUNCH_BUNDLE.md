@@ -63,7 +63,7 @@ RUNBOOK.md                            本说明
 
 已有数据库只能在单独授权、备份与回滚材料完成后，执行 manifest 的 `migration_order_existing_database`，禁止导入 `seed.sql`。手机资料注册表升级脚本保留已有注册开关值；随后的 enable 脚本表示操作者显式开启注册，会把有效且唯一的开关值改为开启。注册升级的幂等性、开启步骤和管理员菜单权限由升级 SQL 的专项验证负责。Docker 官方初始化目录仅在数据库数据目录为空时执行，重启已有数据容器不会补跑升级 SQL。
 
-包内升级目录按 `01-phone-profile-registration.sql`、`02-enable-phone-registration.sql`、`03-unit-view-events.sql` 三项排序。原始结构为 69 张表；注册档案和单元浏览事件各新增一张，完整升级后为 71 张。新增单元浏览事件迁移只建持久事件表，不清理旧 Redis 集合、不调整历史统计；旧标记在运行时保留为待核对状态。读取外层 manifest 的 `registration_upgrade_manifest_sha256` 作为 `$UPGRADE_MANIFEST_SHA256`，先执行离线核验：
+包内升级目录按 `01-phone-profile-registration.sql`、`02-enable-phone-registration.sql`、`03-unit-view-events.sql`、`04-work-events.sql` 四项排序。原始结构为 69 张表；注册档案和单元浏览事件各新增一张，作品事件与迁移凭证新增两张，完整升级后为 73 张。新增单元浏览事件迁移只建持久事件表，不清理旧 Redis 集合、不调整历史统计；旧标记在运行时保留为待核对状态。读取外层 manifest 的 `registration_upgrade_manifest_sha256` 作为 `$UPGRADE_MANIFEST_SHA256`，先执行离线核验：
 
 ```sh
 python3 "$BUNDLE_DIR/migrations/registration_upgrade.py" verify \
@@ -101,3 +101,5 @@ java -Xms256m -Xmx1g -jar "$RUNTIME_APP_JAR" \
 早于 v4 的数据包与 `bundle-b245245cbfcc` 留在本机私有目录作历史证据；该 bundle 的包外状态记录为历史候选，不能拿它代替用户修正首页视觉后的最终包。每次正式组合都使用新的目录、最终源码 commit 和当前数据 manifest，不覆盖旧候选。
 
 上线前保存旧 JAR/dist/实际配置、数据库备份、uploads 备份以及目标运行版本。注册升级新增数据后，代码回滚与数据库回滚必须由操作者协调；不要以删除注册表代替备份恢复。发布工具不停止服务、不清理数据、不执行回滚，也不自动推送、合并或发布。
+
+作品提交/批改统计上线前还须按 [作品事件迁移说明](../docs/optimization/work-event-statistics.md) 核对 `LEGACY_REVIEW`，包内 `migrations/work_event_review.py` 提供导出和受控应用。未核对的事件会明确拒绝相关提交/批改并回滚，不能把仅完成 DDL 当作旧库可用。新合成候选在 schema 后、fixture seed 前完成事件切换，不携带旧统计。

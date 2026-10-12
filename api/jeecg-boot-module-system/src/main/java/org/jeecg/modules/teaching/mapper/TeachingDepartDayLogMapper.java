@@ -12,6 +12,16 @@ import org.jeecg.modules.teaching.entity.TeachingDepartDayLog;
  */
 public interface TeachingDepartDayLogMapper extends BaseMapper<TeachingDepartDayLog> {
 
+    int workEventCutoverComplete();
+
+    String selectWorkEventStateForUpdate(@Param("workId") String workId, @Param("eventType") String eventType);
+
+    int insertWorkEvent(@Param("workId") String workId, @Param("eventType") String eventType,
+                        @Param("departId") String departId, @Param("day") String day);
+
+    int countReadyWorkEvent(@Param("workId") String workId, @Param("eventType") String eventType,
+                           @Param("departId") String departId, @Param("day") String day);
+
     String selectDayIdForUpdate(@Param("departId") String departId, @Param("day") String day);
 
     int insertDayLog(@Param("log") TeachingDepartDayLog log, @Param("day") String day);

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Exercise student submission ownership, task scopes and protected fields."""
 import argparse
+from concurrent.futures import ThreadPoolExecutor
+import threading
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -9,7 +11,7 @@ import subprocess
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from local_http import FixtureApi
-from local_runtime import mysql_command
+from local_recovery import mysql_command
 
 PREFIX = 'fixture_sprobe_'
 NAME = 'submission-probe-'
@@ -17,7 +19,7 @@ BASE = '/teaching/teachingWork/'
 TRIGGER = 'fixture_submission_failure'
 TABLES = ('teaching_work', 'teaching_work_correct', 'teaching_work_comment', 'sys_data_log',
           'teaching_additional_work', 'teaching_course_unit', 'teaching_course', 'teaching_course_dept',
-          'sys_file', 'sys_user_depart', 'teaching_depart_day_log')
+          'sys_file', 'sys_user_depart', 'teaching_depart_day_log', 'teaching_work_event')
 
 
 def verify(args):
@@ -31,7 +33,7 @@ def verify(args):
             print(('PASS ' if passed else 'FAIL ') + name, flush=True)
 
         def snapshot():
-            return {table: hashlib.sha256(sql('SELECT * FROM ' + table + ' ORDER BY id').encode()).hexdigest() for table in TABLES}
+            return {table: hashlib.sha256(sql('SELECT * FROM ' + table + (' ORDER BY work_id,event_type' if table == 'teaching_work_event' else ' ORDER BY id')).encode()).hexdigest() for table in TABLES}
 
         def file_snapshot():
             return {str(p.relative_to(api.runtime / 'uploads')): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -77,7 +79,7 @@ def verify(args):
         original_cache = cache_snapshot()
         if sql('SELECT COUNT(*) FROM teaching_depart_day_log') != '0':
             raise RuntimeError('This verifier needs the unused synthetic daily-log fixture')
-        if any(sql("SELECT COUNT(*) FROM " + table + " WHERE id LIKE '" + PREFIX + "%'") != '0' for table in TABLES):
+        if any(sql("SELECT COUNT(*) FROM " + table + " WHERE " + ("work_id" if table == "teaching_work_event" else "id") + " LIKE '" + PREFIX + "%'") != '0' for table in TABLES):
             raise RuntimeError('Existing submission probe rows')
         if sql("SELECT COUNT(*) FROM teaching_work WHERE work_name LIKE '" + NAME + "%'") != '0' or list((api.runtime / 'uploads').glob(NAME + '*')):
             raise RuntimeError('Existing submission probe work or files')
@@ -165,6 +167,32 @@ def verify(args):
                 check('sequential retry keeps one course work and one submission count', sql("SELECT COUNT(*) FROM teaching_work WHERE user_id='fixture_student_a' AND course_id='" + PREFIX + "unit_a'") == '1'
                       and sql("SELECT SUM(course_work_submit_count) FROM teaching_depart_day_log WHERE depart_id='fixture_class_a'") == '1')
 
+                marker = 'departLog:courseWorkSubmit:fixture_class_a'
+                api.cache('SREM', marker, own)
+                allowed('retry after obsolete Redis marker loss', payload('marker_lost', id=own))
+                barrier = threading.Barrier(8)
+                def concurrent_retry(_):
+                    barrier.wait(timeout=10)
+                    return submit(payload('parallel_retry', id=own))
+                with ThreadPoolExecutor(max_workers=8) as pool:
+                    responses = list(pool.map(concurrent_retry, range(8)))
+                check('eight concurrent existing-work retries succeed', all(status == 200 and value and value.get('success') for status, value in responses))
+                check('Redis marker loss and concurrent retry keep one SQL event and one count',
+                      sql("SELECT COUNT(*) FROM teaching_work_event WHERE work_id='" + own + "' AND event_type='SUBMIT' AND event_state='COUNTED'") == '1'
+                      and sql("SELECT SUM(course_work_submit_count) FROM teaching_depart_day_log WHERE depart_id='fixture_class_a'") == '1')
+
+                sql("INSERT INTO teaching_course_unit (id,course_id,unit_name) VALUES ('" + PREFIX + "parallel_new','fixture_course_a','parallel first submission')")
+                barrier = threading.Barrier(8)
+                def concurrent_first(_):
+                    barrier.wait(timeout=10)
+                    return submit(payload('parallel_new', courseId=PREFIX + 'parallel_new'))
+                with ThreadPoolExecutor(max_workers=8) as pool:
+                    responses = list(pool.map(concurrent_first, range(8)))
+                check('eight simultaneous no-ID first submissions succeed', all(status == 200 and value and value.get('success') for status, value in responses))
+                check('no-ID first submissions serialize to one work and event',
+                      sql("SELECT COUNT(*) FROM teaching_work WHERE user_id='fixture_student_a' AND course_id='" + PREFIX + "parallel_new'") == '1'
+                      and sql("SELECT COUNT(*) FROM teaching_work_event WHERE event_type='SUBMIT' AND work_id IN (SELECT id FROM teaching_work WHERE course_id='" + PREFIX + "parallel_new')") == '1')
+
                 for kind in ('2', '3', '4', '0'):
                     allowed('editor/file payload type ' + kind, dict(payload('type_' + kind), workType=kind))
                 new_assignment = allowed('file modal payload submits assigned work', dict(payload('file_modal', additionalId=PREFIX + 'addi_a', departId='fixture_class_b'), workType='0'))
@@ -230,6 +258,7 @@ def verify(args):
             if trigger_created:
                 sql('DROP TRIGGER ' + TRIGGER)
             sql("DELETE FROM sys_data_log WHERE data_table='teaching_work' AND data_id IN (SELECT id FROM teaching_work WHERE work_name LIKE '" + NAME + "%')")
+            sql("DELETE FROM teaching_work_event WHERE work_id IN (SELECT id FROM teaching_work WHERE work_name LIKE '" + NAME + "%')")
             sql("DELETE FROM teaching_work WHERE work_name LIKE '" + NAME + "%'; DELETE FROM teaching_depart_day_log WHERE depart_id IN ('fixture_class_a','fixture_class_b')")
             for table in ('teaching_additional_work', 'teaching_course_unit', 'teaching_course_dept', 'teaching_course', 'sys_file', 'sys_user_depart'):
                 sql("DELETE FROM " + table + " WHERE id LIKE '" + PREFIX + "%'")
@@ -244,7 +273,7 @@ def verify(args):
         check('temporary database failure trigger removed', sql("SELECT COUNT(*) FROM information_schema.TRIGGERS WHERE TRIGGER_SCHEMA=DATABASE() AND TRIGGER_NAME='" + TRIGGER + "'") == '0')
     report = {'observed_utc': datetime.now(timezone.utc).isoformat(), 'jar_sha256': jar_hash, 'expected_legacy': args.expect_legacy,
               'passed': sum(c['passed'] for c in cases), 'total': len(cases), 'cases': cases,
-              'scope': 'actual synthetic HTTP submission and re-read, DB/history/cache/files; editor-shaped payloads are not browser editor acceptance; no concurrency or global file-API acceptance'}
+              'scope': 'actual synthetic HTTP submission and re-read, DB/history/cache/files; editor-shaped payloads are not browser editor acceptance; concurrent same-work retries included; no global file-API acceptance'}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     print(str(report['passed']) + '/' + str(report['total']) + ' checks passed')
