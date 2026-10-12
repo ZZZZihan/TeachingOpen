@@ -25,15 +25,21 @@ public class SysAnnouncementSendServiceImpl extends ServiceImpl<SysAnnouncementS
 	@Resource
 	private SysAnnouncementSendMapper sysAnnouncementSendMapper;
 	
+	@Resource private org.jeecg.modules.system.service.AnnouncementAccessService announcementAccess;
+
 	@Override
 	public List<String> queryByUserId(String userId) {
-		return sysAnnouncementSendMapper.queryByUserId(userId);
+		if (!announcementAccess.currentUser().getId().equals(userId)) throw new org.apache.shiro.authz.UnauthorizedException("只能读取本人的通知");
+        return sysAnnouncementSendMapper.queryByUserId(userId);
 	}
 
 	@Override
 	public Page<AnnouncementSendModel> getMyAnnouncementSendPage(Page<AnnouncementSendModel> page,
 			AnnouncementSendModel announcementSendModel) {
-		 return page.setRecords(sysAnnouncementSendMapper.getMyAnnouncementSendList(page, announcementSendModel));
+		 announcementSendModel.setUserId(announcementAccess.currentUser().getId());
+         List<AnnouncementSendModel> rows = sysAnnouncementSendMapper.getMyAnnouncementSendList(page, announcementSendModel);
+         rows.forEach(org.jeecg.modules.system.service.AnnouncementAccessService::safe);
+         return page.setRecords(rows);
 	}
 
 }

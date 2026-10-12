@@ -227,7 +227,7 @@ public class SysBaseApiImpl implements ISysBaseAPI {
 	public void sendSysAnnouncement(String fromUser, String toUser, String title, String msgContent, String setMsgCategory) {
 		SysAnnouncement announcement = new SysAnnouncement();
 		announcement.setTitile(title);
-		announcement.setMsgContent(msgContent);
+		announcement.setMsgContent(org.jeecg.modules.teaching.util.RichTextSanitizer.sanitize(msgContent));
 		announcement.setSender(fromUser);
 		announcement.setPriority(CommonConstant.PRIORITY_M);
 		announcement.setMsgType(CommonConstant.MSG_TYPE_UESR);
@@ -266,7 +266,7 @@ public class SysBaseApiImpl implements ISysBaseAPI {
 	public void sendSysAnnouncement(String fromUser, String toUser, String title, String msgContent, String setMsgCategory, String busType, String busId) {
 		SysAnnouncement announcement = new SysAnnouncement();
 		announcement.setTitile(title);
-		announcement.setMsgContent(msgContent);
+		announcement.setMsgContent(org.jeecg.modules.teaching.util.RichTextSanitizer.sanitize(msgContent));
 		announcement.setSender(fromUser);
 		announcement.setPriority(CommonConstant.PRIORITY_M);
 		announcement.setMsgType(CommonConstant.MSG_TYPE_UESR);
@@ -313,7 +313,7 @@ public class SysBaseApiImpl implements ISysBaseAPI {
 			LambdaUpdateWrapper<SysAnnouncementSend> updateWrapper = new UpdateWrapper().lambda();
 			updateWrapper.set(SysAnnouncementSend::getReadFlag, CommonConstant.HAS_READ_FLAG);
 			updateWrapper.set(SysAnnouncementSend::getReadTime, new Date());
-			updateWrapper.last("where annt_id ='"+announcement.getId()+"' and user_id ='"+userId+"'");
+			updateWrapper.eq(SysAnnouncementSend::getAnntId, announcement.getId()).eq(SysAnnouncementSend::getUserId, userId);
 			SysAnnouncementSend announcementSend = new SysAnnouncementSend();
 			sysAnnouncementSendMapper.update(announcementSend, updateWrapper);
 		}
@@ -358,7 +358,7 @@ public class SysBaseApiImpl implements ISysBaseAPI {
 
 		SysAnnouncement announcement = new SysAnnouncement();
 		announcement.setTitile(title);
-		announcement.setMsgContent(content);
+		announcement.setMsgContent(org.jeecg.modules.teaching.util.RichTextSanitizer.sanitize(content));
 		announcement.setSender(fromUser);
 		announcement.setPriority(CommonConstant.PRIORITY_M);
 		announcement.setMsgType(CommonConstant.MSG_TYPE_UESR);
@@ -412,7 +412,7 @@ public class SysBaseApiImpl implements ISysBaseAPI {
 		}
 		SysAnnouncement announcement = new SysAnnouncement();
 		announcement.setTitile(title);
-		announcement.setMsgContent(content);
+		announcement.setMsgContent(org.jeecg.modules.teaching.util.RichTextSanitizer.sanitize(content));
 		announcement.setSender(fromUser);
 		announcement.setPriority(CommonConstant.PRIORITY_M);
 		announcement.setMsgType(CommonConstant.MSG_TYPE_UESR);

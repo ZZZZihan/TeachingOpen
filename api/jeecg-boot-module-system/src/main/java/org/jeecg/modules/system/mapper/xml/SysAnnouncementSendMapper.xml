@@ -13,6 +13,7 @@
 		<result column="msg_category" property="msgCategory" jdbcType="VARCHAR"/>
 		<result column="send_time" property="sendTime" jdbcType="TIMESTAMP"/>
 		<result column="bus_id" property="busId" jdbcType="VARCHAR"/>
+		<result column="bus_type" property="busType" jdbcType="VARCHAR"/>
 		<result column="open_type" property="openType" jdbcType="VARCHAR"/>
 		<result column="open_page" property="openPage" jdbcType="VARCHAR"/>
 	</resultMap>
@@ -35,6 +36,7 @@
 	   		sa.msg_category,
 	   		sa.send_time as send_time,
 	   		sa.bus_id as bus_id,
+			sa.bus_type as bus_type,
 			sa.open_type as open_type,
 			sa.open_page as open_page,
 			sa.msg_abstract
@@ -43,6 +45,8 @@
 	   where sa.send_status = '1'
 	   and sa.del_flag = '0'
 	   and sas.user_id = #{announcementSendModel.userId}
+	   and (sa.msg_type = 'USER' or (sa.msg_type = 'ALL' and (sa.end_time is null or sa.end_time >=
+	       COALESCE((select create_time from sys_user where id = #{announcementSendModel.userId}), CURRENT_TIMESTAMP))))
 	   <if test="announcementSendModel.titile !=null and announcementSendModel.titile != ''">
 	   		and sa.titile LIKE concat(concat('%',#{announcementSendModel.titile}),'%')
 	   </if>

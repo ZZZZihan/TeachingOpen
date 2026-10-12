@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "suites": {
+    "org.jeecg.notification.AnnouncementAuthorizationTest": {
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "org.jeecg.news.RichTextSanitizerTest": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  }
+}
