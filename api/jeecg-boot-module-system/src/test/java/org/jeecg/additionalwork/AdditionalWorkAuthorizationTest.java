@@ -11,6 +11,7 @@ import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.system.service.LocalFileReferenceAccessService;
+import org.jeecg.modules.system.service.LocalMediaReferenceIndex;
 import org.jeecg.modules.teaching.entity.TeachingAdditionalWork;
 import org.jeecg.modules.teaching.mapper.TeachingAdditionalWorkMapper;
 import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
@@ -50,6 +51,7 @@ public class AdditionalWorkAuthorizationTest {
         attachments = mock(LocalFileReferenceAccessService.class);
         subject = mock(Subject.class);
         ReflectionTestUtils.setField(service, "baseMapper", works);
+        ReflectionTestUtils.setField(service, "mediaIndex", mock(LocalMediaReferenceIndex.class));
         ReflectionTestUtils.setField(service, "sysUserService", users);
         ReflectionTestUtils.setField(service, "sysDepartService", departments);
         ReflectionTestUtils.setField(service, "teachingDepartDayLogService", logs);

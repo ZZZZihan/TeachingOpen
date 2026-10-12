@@ -33,6 +33,7 @@ EXPECTED = {
     'DepartmentSelectionTest',
     'WorkAttachmentAuthorizationTest',
     'LocalFileReferenceAuthorizationTest',
+    'LocalMediaReferenceIndexTest',
     'WorkEventStatisticsTest',
     'LiveAuthenticationScopeTest',
     'TeachingMenuSecurityTest',

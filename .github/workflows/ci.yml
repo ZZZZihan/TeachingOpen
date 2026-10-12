@@ -100,6 +100,7 @@ jobs:
           python3 -m unittest discover -s deploy -p 'test_monitor_ip_https.py' -v
           python3 -m unittest discover -s deploy -p 'test_traffic_control.py' -v
           python3 -m unittest discover -s api/dev -p 'test_extract_schema.py' -v
+          python3 -m unittest discover -s api/dev -p 'test_local_media_index_probe.py' -v
           python3 -m unittest discover -s ci -p 'test_*.py' -v
       - name: Isolated IP HTTPS and rollback (synthetic CA, loopback only)
         run: |

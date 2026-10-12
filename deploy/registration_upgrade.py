@@ -20,6 +20,7 @@ MIGRATIONS = (
     ('api/db/enable-phone-registration.sql', '02-enable-phone-registration.sql'),
     ('api/db/unit-view-events.sql', '03-unit-view-events.sql'),
     ('api/db/work-events.sql', '04-work-events.sql'),
+    ('api/db/local-media-references.sql', '05-local-media-references.sql'),
 )
 MANIFEST = 'migration-manifest.json'
 
@@ -114,10 +115,10 @@ def run_mysql(command, sql):
 def preflight(directory, client, option_file, database, manifest_sha256):
     manifest = verify_migrations(directory, manifest_sha256)
     command = mysql_command(client, option_file, database)
-    # Validate registration metadata and the additive unit-view ledger before
+    # Validate registration metadata and the additive ledgers/index before
     # backup. Preflight creates/removes only the reserved migration procedures,
     # and skips user/table changes; registration activation is not run here.
-    for index in (0, 2, 3):
+    for index in (0, 2, 3, 4):
         run_mysql(command, 'SET @teachingopen_registration_preflight_only = 1;\n' +
             (Path(directory) / MIGRATIONS[index][1]).read_text(encoding='utf-8'))
     return manifest

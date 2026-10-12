@@ -35,7 +35,7 @@ HELPERS = [
     'api/jeecg-boot-base-common/src/main/java/org/jeecg/common/util/PasswordUtil.java',
     'api/dev/role-flow-assets/lesson.mp4', 'api/dev/role-flow-assets/starter.sb3',
     'api/dev/role-flow-assets/starter.sjr', 'web/nginx/default.conf',
-    'api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql', 'api/db/unit-view-events.sql', 'api/db/work-events.sql',
+    'api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql', 'api/db/unit-view-events.sql', 'api/db/work-events.sql', 'api/db/local-media-references.sql',
     'deploy/registration_upgrade.py', 'deploy/work_event_review.py',
 ]
 
@@ -323,7 +323,7 @@ def verify_bundle(bundle):
         raise ValueError('Invalid artifact input receipt')
     for digest in manifest['artifact_inputs'].values():
         check_digest(digest)
-    if manifest['fixture_counts'] != {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 73}:
+    if manifest['fixture_counts'] != {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 75}:
         raise ValueError('Unexpected synthetic fixture counts')
     fixtures = manifest['fixtures']
     if not isinstance(fixtures, dict) or set(fixtures) != {'database', 'public_media_key', 'private_media_key',
@@ -348,8 +348,8 @@ def verify_bundle(bundle):
         'config/application-localtest.properties', 'config/mysql-root-password',
         'config/mysql-app-password', 'config/mysql-client.cnf', 'config/redis.conf',
         'init/01-schema.sql', 'init/01a-work-events.sql', 'init/02-fixtures.sql', 'init/03-phone-profile-registration.sql',
-        'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql', 'upgrade/01-phone-profile-registration.sql',
-        'upgrade/02-enable-phone-registration.sql', 'upgrade/03-unit-view-events.sql', 'upgrade/04-work-events.sql', 'upgrade/migration-manifest.json',
+        'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql', 'init/07-local-media-references.sql', 'upgrade/01-phone-profile-registration.sql',
+        'upgrade/02-enable-phone-registration.sql', 'upgrade/03-unit-view-events.sql', 'upgrade/04-work-events.sql', 'upgrade/05-local-media-references.sql', 'upgrade/migration-manifest.json',
         'upgrade/registration_upgrade.py', 'upgrade/work_event_review.py', 'compose.json'}
     if not required <= set(expected) or not any(n.startswith('web/dist/') for n in expected):
         raise ValueError('Missing required bundle input')
@@ -363,7 +363,7 @@ def verify_bundle(bundle):
     upgrade_manifest = upgrade.verify_migrations(bundle / 'upgrade')
     expected_upgrade = {'manifest_sha256': expected['upgrade/migration-manifest.json']['sha256'],
         'initialization_order': ['init/01-schema.sql', 'init/01a-work-events.sql', 'init/02-fixtures.sql',
-            'init/03-phone-profile-registration.sql', 'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql'],
+            'init/03-phone-profile-registration.sql', 'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql', 'init/07-local-media-references.sql'],
         'existing_database_requires_explicit_backup_and_apply': True, 'automatic_apply': False, 'ddl_transactional': False}
     if manifest['database_upgrade'] != expected_upgrade:
         raise ValueError('Database upgrade manifest/order changed')
@@ -461,8 +461,8 @@ def create_bundle(source, jar, jar_sha256, dist_manifest, dist_manifest_sha256, 
         row.update(hashed[row['username']])
     records = fixture.expected_after(model, base, fixture.ui_records(assets))
     counts = {'accounts': len(records['sys_user']), 'classes': sum(r['id'].startswith('fixture_class_') for r in records['sys_depart']),
-        'courses': len(records['teaching_course']), 'tables': len(model) + 4}
-    if counts != {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 73}:
+        'courses': len(records['teaching_course']), 'tables': len(model) + 6}
+    if counts != {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 75}:
         raise ValueError('Unexpected synthetic fixture contract')
     sql = ['SET NAMES utf8mb4;', "SET SESSION sql_mode='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';", 'START TRANSACTION;']
     for table, rows in records.items():
@@ -529,7 +529,7 @@ def create_bundle(source, jar, jar_sha256, dist_manifest, dist_manifest_sha256, 
             'images': IMAGES, 'platform': PLATFORM, 'port': port, 'compose_project': project}
         manifest['database_upgrade'] = {'manifest_sha256': files['upgrade/migration-manifest.json']['sha256'],
             'initialization_order': ['init/01-schema.sql', 'init/01a-work-events.sql', 'init/02-fixtures.sql',
-                'init/03-phone-profile-registration.sql', 'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql'],
+                'init/03-phone-profile-registration.sql', 'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql', 'init/07-local-media-references.sql'],
             'existing_database_requires_explicit_backup_and_apply': True, 'automatic_apply': False, 'ddl_transactional': False}
         write_file(output, 'manifest.json', json_bytes(manifest))
         result = verify_bundle(output)

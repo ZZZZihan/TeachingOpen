@@ -47,6 +47,7 @@ PROBES = (
     'verify-announcement-authorization.py',
     'verify-user-query-boundaries.py',
     'verify-work-reference-authorization.py',
+    'verify-local-media-index.py',
     'verify-teaching-menu-security.py',
     'verify-audit-log-authorization.py',
     'verify-file-deletion-concurrency.py',
@@ -71,6 +72,11 @@ def selected_probes():
     if missing:
         raise RuntimeError('Missing required probes: ' + ', '.join(missing))
     return paths
+
+
+def probe_arguments(context, output):
+    return SimpleNamespace(runtime=context.runtime, jar=context.jar,
+                           output=Path(output), expect_legacy=False)
 
 
 def validate_report(report, jar_sha256):
@@ -286,7 +292,7 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
         "WHERE table_schema=DATABASE() AND LEFT(UPPER(table_name),5)='QRTZ_' ORDER BY BINARY table_name").splitlines()
     if quartz_tables != sorted(QUARTZ_TABLES):
         raise RuntimeError('Actual review Quartz table names do not match StdJDBCDelegate')
-    migrations = ('unit-view-events.sql', 'work-events.sql')
+    migrations = ('unit-view-events.sql', 'work-events.sql', 'local-media-references.sql')
     for _ in range(2):
         for name in migrations:
             context.sql((ROOT / 'api/db' / name).read_text())
@@ -346,7 +352,7 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
                     evidence = output / (path.stem.removeprefix('verify-') + '.json')
                     if evidence.exists():
                         raise RuntimeError('Existing review evidence must be preserved')
-                    args = SimpleNamespace(runtime=runtime, jar=context.jar, output=evidence, expect_legacy=False)
+                    args = probe_arguments(context, evidence)
                     with probe_adapter(module, context):
                         module.verify(args)
                     report = json.loads(evidence.read_text())

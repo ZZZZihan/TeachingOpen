@@ -5,10 +5,10 @@ import org.jeecg.modules.system.mapper.SysDataLogMapper;
 import org.jeecg.modules.system.service.ISysDataLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.jeecg.modules.system.service.IndexedLocalMediaService;
 
 @Service
-public class SysDataLogServiceImpl extends ServiceImpl<SysDataLogMapper,SysDataLog> implements ISysDataLogService {
+public class SysDataLogServiceImpl extends IndexedLocalMediaService<SysDataLogMapper,SysDataLog> implements ISysDataLogService {
 	@Autowired
 	private SysDataLogMapper logMapper;
 

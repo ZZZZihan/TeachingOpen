@@ -6,7 +6,7 @@ import org.jeecg.modules.teaching.mapper.TeachingCourseMapper;
 import org.jeecg.modules.teaching.service.ITeachingCourseService;
 import org.springframework.stereotype.Service;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.jeecg.modules.system.service.IndexedLocalMediaService;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @Version: V1.0
  */
 @Service
-public class TeachingCourseServiceImpl extends ServiceImpl<TeachingCourseMapper, TeachingCourse> implements ITeachingCourseService {
+public class TeachingCourseServiceImpl extends IndexedLocalMediaService<TeachingCourseMapper, TeachingCourse> implements ITeachingCourseService {
 
     @Override
     public Result<List<TeachingCourse>> mineCourse(String userId) {

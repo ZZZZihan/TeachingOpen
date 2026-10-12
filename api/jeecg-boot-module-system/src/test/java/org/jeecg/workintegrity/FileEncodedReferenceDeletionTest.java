@@ -19,11 +19,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -48,12 +51,12 @@ public class FileEncodedReferenceDeletionTest {
         jdbc.execute("CREATE TABLE sys_file(id VARCHAR(64),file_path VARCHAR(255),file_location INT)");
         jdbc.execute("CREATE TABLE teaching_work(id VARCHAR(64),work_file VARCHAR(64),work_cover VARCHAR(64))");
         jdbc.execute("CREATE TABLE teaching_course(id VARCHAR(64),course_icon LONGTEXT,course_cover LONGTEXT,course_map LONGTEXT,course_desc LONGTEXT)");
-        jdbc.execute("CREATE TABLE teaching_course_unit(unit_cover LONGTEXT,course_video LONGTEXT,course_case LONGTEXT,course_ppt LONGTEXT,course_work LONGTEXT,course_work_answer LONGTEXT,course_plan LONGTEXT,unit_intro LONGTEXT,media_content LONGTEXT)");
+        jdbc.execute("CREATE TABLE teaching_course_unit(id VARCHAR(64),unit_cover LONGTEXT,course_video LONGTEXT,course_case LONGTEXT,course_ppt LONGTEXT,course_work LONGTEXT,course_work_answer LONGTEXT,course_plan LONGTEXT,unit_intro LONGTEXT,media_content LONGTEXT)");
         jdbc.execute("CREATE TABLE teaching_additional_work(id VARCHAR(64),work_cover LONGTEXT,work_document_url LONGTEXT,work_url LONGTEXT,work_desc LONGTEXT,work_dept VARCHAR(64),status INT)");
-        jdbc.execute("CREATE TABLE sys_data_log(data_id VARCHAR(64),data_table VARCHAR(64),data_content LONGTEXT)");
+        jdbc.execute("CREATE TABLE sys_data_log(id VARCHAR(64),data_id VARCHAR(64),data_table VARCHAR(64),data_content LONGTEXT)");
         jdbc.execute("CREATE TABLE sys_user(avatar LONGTEXT)");
-        jdbc.execute("CREATE TABLE sys_config(config_value LONGTEXT)");
-        jdbc.execute("CREATE TABLE teaching_news(news_content LONGTEXT)");
+        jdbc.execute("CREATE TABLE sys_config(id VARCHAR(64),config_value LONGTEXT)");
+        jdbc.execute("CREATE TABLE teaching_news(id VARCHAR(64),news_content LONGTEXT)");
         jdbc.execute("CREATE TABLE teaching_scratch_assets(asset_data LONGTEXT,md5_ext LONGTEXT)");
         jdbc.execute("CREATE TABLE teaching_course_media(media_path LONGTEXT)");
         jdbc.update("INSERT INTO teaching_additional_work(id,work_dept,status) VALUES('task-a','class-a',1)");
@@ -122,7 +125,7 @@ public class FileEncodedReferenceDeletionTest {
         assertTrue(files.isReferenced(file));
         jdbc.update("DELETE FROM teaching_course_media");
         jdbc.update("INSERT INTO teaching_work(id) VALUES('historical-work')");
-        jdbc.update("INSERT INTO sys_data_log VALUES('historical-work','teaching_work',?)", json());
+        jdbc.update("INSERT INTO sys_data_log(data_id,data_table,data_content) VALUES('historical-work','teaching_work',?)", json());
         session.clearCache();
         assertTrue(files.isReferenced(file));
     }
@@ -141,6 +144,20 @@ public class FileEncodedReferenceDeletionTest {
         verify(mapper, never()).encodedReferenceCandidates();
     }
     @Test public void entityAndJsonStudentDownloadsUseTheSameCandidateSemantics() {
+        jdbc.execute("CREATE TABLE sys_local_file_reference(source_type VARCHAR(64) NOT NULL,source_id VARCHAR(64) NOT NULL,"
+                + "field_name VARCHAR(64) NOT NULL,reference_kind VARCHAR(8) NOT NULL,reference_hash CHAR(64) NOT NULL,"
+                + "reference_value VARCHAR(1024) NOT NULL,PRIMARY KEY(source_type,source_id,field_name,reference_kind,reference_hash))");
+        jdbc.execute("CREATE TABLE sys_local_file_reference_state(id INT PRIMARY KEY,version INT NOT NULL,static_domain VARCHAR(1024))");
+        jdbc.update("INSERT INTO sys_local_file_reference_state(id,version) VALUES(1,0)");
+        LocalMediaReferenceIndex index = new LocalMediaReferenceIndex();
+        ReflectionTestUtils.setField(index,"jdbc",jdbc);
+        ReflectionTestUtils.setField(index,"json",new ObjectMapper());
+        ReflectionTestUtils.setField(index,"resolver",resolver);
+        ReflectionTestUtils.setField(index,"transactionManager",new DataSourceTransactionManager(jdbc.getDataSource()));
+        ReflectionTestUtils.setField(index,"staticDomain",DOMAIN);
+        index.initialize();
+        assertEquals(Integer.valueOf(1),jdbc.queryForObject("SELECT version FROM sys_local_file_reference_state WHERE id=1",Integer.class));
+        assertEquals(DOMAIN,jdbc.queryForObject("SELECT static_domain FROM sys_local_file_reference_state WHERE id=1",String.class));
         LocalDownloadAccessService downloads = new LocalDownloadAccessService();
         ISysFileService records = mock(ISysFileService.class);
         TeachingAccessService access = mock(TeachingAccessService.class);
@@ -153,12 +170,22 @@ public class FileEncodedReferenceDeletionTest {
         ReflectionTestUtils.setField(downloads, "access", access);
         ReflectionTestUtils.setField(downloads, "departments", departments);
         ReflectionTestUtils.setField(downloads, "jdbc", jdbc);
+        ReflectionTestUtils.setField(downloads, "json", new ObjectMapper());
         ReflectionTestUtils.setField(downloads, "references", resolver);
+        ReflectionTestUtils.setField(downloads, "mediaIndex", index);
         for (String value : new String[]{percent(), entity(), json()}) {
             jdbc.update("UPDATE teaching_additional_work SET work_desc=?", value);
+            index.rebuild(true);
+            assertEquals("candidate must belong to the assigned work",Integer.valueOf(1),jdbc.queryForObject(
+                    "SELECT COUNT(*) FROM sys_local_file_reference WHERE source_type='teaching_additional_work' AND source_id='task-a'"
+                            + " AND field_name='work_desc' AND reference_kind='key' AND reference_hash=? AND reference_value=?",
+                    Integer.class,LocalMediaReferenceIndex.hash(file.getFilePath()),file.getFilePath()));
+            List<Map<String,Object>> indexed = jdbc.queryForList("SELECT * FROM sys_local_file_reference ORDER BY reference_hash");
             assertEquals("assigned student can read encoded attachment", 200, downloads.status(file.getFilePath()));
             when(departments.userDepartIds("student-a")).thenReturn(Collections.singletonList("class-b"));
             assertEquals("exact decoding does not bypass assignment scope", 403, downloads.status(file.getFilePath()));
+            assertEquals("denied read must preserve every indexed reference",indexed,
+                    jdbc.queryForList("SELECT * FROM sys_local_file_reference ORDER BY reference_hash"));
             when(departments.userDepartIds("student-a")).thenReturn(Collections.singletonList("class-a"));
         }
     }

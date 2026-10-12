@@ -10,6 +10,7 @@ from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from local_http import FixtureApi
 from local_runtime import mysql_command
+from media_index_fixture import rebuild_media_index_after_sql
 
 PREFIX = 'fixture_dprobe_'
 DIR = 'download-access-probe'
@@ -23,9 +24,19 @@ def verify(args):
         outside = api.runtime / 'download-probe-outside.txt'
         tables = ('sys_file', 'teaching_work', 'teaching_course', 'teaching_course_unit', 'sys_config', 'teaching_news', 'sys_data_log', 'teaching_additional_work')
         def sql(query):
-            return subprocess.check_output(mysql_command(api.runtime) + ['teachingopen_dev','-e',query],text=True).strip()
+            result = subprocess.check_output(mysql_command(api.runtime) + ['teachingopen_dev','-e',query],text=True).strip()
+            # These legacy authorization scenarios inject source rows directly.
+            # Only fixture SQL needs an explicit rebuild; normal API writes must sync themselves.
+            if not args.expect_legacy:
+                rebuild_media_index_after_sql(api, query)
+            return result
         def snapshot():
-            return {t: hashlib.sha256(sql('SELECT * FROM '+t+' ORDER BY id').encode()).hexdigest() for t in tables}
+            rows = {t: hashlib.sha256(sql('SELECT * FROM '+t+' ORDER BY id').encode()).hexdigest() for t in tables}
+            if not args.expect_legacy:
+                for table, order in (('sys_local_file_reference', 'source_type,source_id,field_name,reference_kind,reference_hash'),
+                                     ('sys_local_file_reference_state', 'id')):
+                    rows[table] = hashlib.sha256(sql('SELECT * FROM ' + table + ' ORDER BY ' + order).encode()).hexdigest()
+            return rows
         def check(name, passed):
             cases.append({'case':name,'passed':bool(passed)})
             print(('PASS ' if passed else 'FAIL ')+name,flush=True)

@@ -12,6 +12,7 @@ from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from local_http import FixtureApi
 from local_runtime import mysql_command
+from media_index_fixture import media_index_snapshot, rebuild_media_index_after_sql
 
 PREFIX = 'news_content_probe_'
 BASE = '/teaching/teachingNews/'
@@ -35,8 +36,12 @@ def verify(args):
         cases.append(dict(case=name, passed=bool(passed), **details))
         print(('PASS ' if passed else 'FAIL ') + name, flush=True)
     with FixtureApi(runtime, args.jar) as api:
+        has_media_index = not getattr(args, 'expect_legacy', False)
         def sql(query):
-            return subprocess.check_output(mysql_command(runtime) + ['--default-character-set=utf8mb4', 'teachingopen_dev', '-e', query], text=True).strip()
+            result = subprocess.check_output(mysql_command(runtime) + ['--default-character-set=utf8mb4', 'teachingopen_dev', '-e', query], text=True).strip()
+            if has_media_index:
+                rebuild_media_index_after_sql(api, query)
+            return result
         def snapshot():
             return hashlib.sha256(sql('SELECT * FROM teaching_news ORDER BY id').encode()).hexdigest()
         def ok(reply):
@@ -54,6 +59,7 @@ def verify(args):
             except HTTPError as error: response = error
             with response: return response.status, json.loads(response.read()), response.headers.get('Content-Type')
         original = snapshot()
+        original_media_index = media_index_snapshot(sql) if has_media_index else None
         if sql('SELECT COUNT(*) FROM teaching_news WHERE id LIKE ' + literal(PREFIX + '%') + ' OR news_title LIKE ' + literal(PREFIX + '%')) != '0':
             raise ValueError('Existing probe rows; refusing to overwrite')
         original_role = sql("SELECT role_id FROM sys_user_role WHERE id='role_fixture_admin'")
@@ -124,6 +130,8 @@ def verify(args):
             sql('UPDATE sys_user_role SET role_id=' + literal(original_role) + " WHERE id='role_fixture_admin'; DELETE FROM sys_role WHERE id='news_content_probe_dev'")
             api.request('GET', '/sys/logout', 'admin')
         check('original news rows restored', snapshot() == original)
+        if has_media_index:
+            check('original media reference index and state restored', media_index_snapshot(sql) == original_media_index)
         check('original admin role restored', sql("SELECT role_id FROM sys_user_role WHERE id='role_fixture_admin'") == original_role)
         result = dict(scope='Real login, HTTP CRUD/import/export, synthetic MySQL, Java8; no production access', jar_sha256=api.jar_sha256, passed=sum(case['passed'] for case in cases), total=len(cases), cases=cases)
         args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
