@@ -142,11 +142,15 @@ public class LoginController {
 	    	return Result.error("退出登录失败！");
 	    }
 	    String username = JwtUtil.getUsername(token);
-		LoginUser sysUser = sysBaseAPI.getUserByName(username);
-	    if(sysUser!=null) {
+		// Logout is anonymous so expired/revoked sessions can still clear their
+		// browser cookie. A decoded username alone must not authorize cache writes.
+		SysUser sysUser = username == null ? null : sysUserService.getUserByName(username);
+	    if(sysUser!=null && JwtUtil.verifySignature(token, username, sysUser.getPassword())) {
 	    	sysBaseAPI.addLog("用户名: "+sysUser.getRealname()+",退出成功！", CommonConstant.LOG_TYPE_1, null);
 	    	log.info(" 用户名:  "+sysUser.getRealname()+",退出成功！ ");
-			redisUtil.del(CommonConstant.PREFIX_USER_TOKEN + username);
+			// A delayed logout from an older session must preserve a newer login's
+			// index, which single-session login uses to revoke its predecessor.
+			redisUtil.deleteIfEquals(CommonConstant.PREFIX_USER_TOKEN + username, token);
 	    	//清空用户登录Token缓存
 	    	redisUtil.del(CommonConstant.PREFIX_USER_TOKEN + token);
 	    	//清空用户登录Shiro权限缓存

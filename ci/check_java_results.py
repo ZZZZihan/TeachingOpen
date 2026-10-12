@@ -36,6 +36,7 @@ EXPECTED = {
     'LocalMediaReferenceIndexTest',
     'WorkEventStatisticsTest',
     'LiveAuthenticationScopeTest',
+    'LogoutSessionIsolationTest',
     'TeachingMenuSecurityTest',
     'AuditLogAuthorizationTest',
     'AutoLogSafetyTest',

@@ -1,5 +1,6 @@
 package org.jeecg.common.util;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -9,6 +10,7 @@ import org.jeecg.common.exception.JeecgBootException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -19,6 +21,10 @@ import org.springframework.util.CollectionUtils;
  */
 @Component
 public class RedisUtil {
+
+	private static final DefaultRedisScript<Long> DELETE_IF_EQUALS = new DefaultRedisScript<>(
+			"if redis.call('get', KEYS[1]) == ARGV[1] then "
+			+ "return redis.call('del', KEYS[1]) else return 0 end", Long.class);
 
 	@Autowired
 	private RedisTemplate<String, Object> redisTemplate;
@@ -86,6 +92,13 @@ public class RedisUtil {
 	}
 
 	// ============================String=============================
+
+	/** Delete only the value observed by the caller, without racing a replacement. */
+	public boolean deleteIfEquals(String key, Object expectedValue) {
+		// Use the same template/serializer as set(): token strings are stored as JSON.
+		return Long.valueOf(1L).equals(redisTemplate.execute(
+				DELETE_IF_EQUALS, Collections.singletonList(key), expectedValue));
+	}
 	/**
 	 * 普通缓存获取
 	 * 
