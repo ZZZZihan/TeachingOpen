@@ -15,8 +15,9 @@ import tempfile
 
 FORMAT = 2
 # Reviewed #66 proxy contract plus #92's eight exact public Python CORP exceptions
-# (85e19e8e60444f69d0ddebd86aee9905b239ae72). Keep this pin fixed, not source-derived.
-NGINX_SHA256 = '8ca3498beb006d305e2c632ee7428d5578e83dc89c7560cd1fad4f6c374c59f3'
+# (85e19e8e60444f69d0ddebd86aee9905b239ae72), with upstream API cache policies preserved.
+# Keep this pin fixed, not source-derived.
+NGINX_SHA256 = '27b5d9f201d294905ed924d2a25539ddb21c2e251af7e7655a491f7417446c6c'
 TEMPLATE_SHA256 = '8854226931f4aea3fd076f90ff0c0e73b932fff2ef885a0fb4d19f6034b8ce64'
 PLATFORM = 'linux/arm64'
 IMAGES = {

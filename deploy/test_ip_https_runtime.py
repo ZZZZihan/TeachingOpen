@@ -32,6 +32,10 @@ WRONG_IDENTITY = "8.8.4.4"
 DEFAULT_IMAGE = "nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94"
 RESPONSE_PREVIEW_BYTES = 4096
 DOCKER_LOG_CHARACTERS = 16384
+CACHE_PAYLOAD = b"synthetic-private-media-content"
+CACHE_VALIDATOR = '"synthetic-cache-validator"'
+CUSTOM_CACHE_CONTROL = "private, max-age=37, must-revalidate"
+CUSTOM_EXPIRES = "Thu, 01 Jan 2037 00:00:00 GMT"
 SECURITY_HEADERS = {
     "x-frame-options": "SAMEORIGIN",
     "x-content-type-options": "nosniff",
@@ -102,6 +106,8 @@ host=''
 upgrade=''
 connection=''
 key=''
+range=''
+validator=''
 while IFS= read -r header; do
     header=${header%"$cr"}
     [ -n "$header" ] || break
@@ -120,6 +126,8 @@ while IFS= read -r header; do
         upgrade) upgrade=$value ;;
         connection) connection=$value ;;
         sec-websocket-key) key=$value ;;
+        range) range=$value ;;
+        if-none-match) validator=$value ;;
     esac
 done
 if [ "$uri" = '/api/runtime-websocket?probe=1' ] &&
@@ -131,6 +139,35 @@ if [ "$uri" = '/api/runtime-websocket?probe=1' ] &&
     printf '\201\004ping'
     exit 0
 fi
+case "$uri" in
+    /api/runtime-cache/*)
+        response='synthetic-private-media-content'
+        total=${#response}
+        status='200 OK'
+        case "$uri" in
+            */unauthorized) status='401 Unauthorized'; response='synthetic-unauthorized' ;;
+            *)
+                if [ "$validator" = '"synthetic-cache-validator"' ]; then
+                    status='304 Not Modified'
+                    response=''
+                elif [ "$range" = 'bytes=0-9' ]; then
+                    status='206 Partial Content'
+                    response='synthetic-'
+                fi ;;
+        esac
+        printf 'HTTP/1.1 %s\r\nContent-Type: application/octet-stream\r\nContent-Length: %s\r\nETag: "synthetic-cache-validator"\r\n' "$status" "${#response}"
+        case "$uri" in
+            /api/runtime-cache/no-store*) printf 'Cache-Control: no-store\r\n' ;;
+            /api/runtime-cache/custom*)
+                printf 'Cache-Control: private, max-age=37, must-revalidate\r\nExpires: Thu, 01 Jan 2037 00:00:00 GMT\r\n' ;;
+        esac
+        if [ "$status" = '206 Partial Content' ]; then
+            printf 'Content-Range: bytes 0-9/%s\r\n' "$total"
+        fi
+        printf 'Connection: close\r\n\r\n'
+        [ "$method" = HEAD ] || printf '%s' "$response"
+        exit 0 ;;
+esac
 body=''
 if [ "$length" -gt 0 ]; then
     body=$(dd bs=1 count="$length" 2>/dev/null)
@@ -147,6 +184,12 @@ def command(args, *, check=True):
         raise RuntimeError(f"command failed ({result.returncode}): {' '.join(map(str, args))}\n"
                            f"{result.stdout}{result.stderr}")
     return result
+
+
+def response_headers(response):
+    # Preserve duplicate field values: an extra Cache-Control must not be
+    # hidden by dict(getheaders()) and accidentally satisfy the regression.
+    return {key.lower(): ", ".join(response.headers.get_all(key)) for key in response.headers}
 
 
 class FixtureHTTPSConnection(http.client.HTTPSConnection):
@@ -314,7 +357,7 @@ class Runtime:
         self.report["source_sha256"] = {
             path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
             for path in ("deploy/ip_https.py", "deploy/check_ip_certificate.py",
-                         "deploy/test_ip_https_runtime.py", "web/nginx/default.conf")}
+                         "deploy/test_ip_https_runtime.py", "web/nginx/default.conf", "资料/nginx.example.conf")}
         self.report["renderer_sha256"] = hashlib.sha256((ROOT / "deploy/ip_https.py").read_bytes()).hexdigest()
         self.report["config_sha256"] = {
             mode: hashlib.sha256((self.directory / "rendered" / f"{mode}.conf").read_bytes()).hexdigest()
@@ -394,6 +437,7 @@ sys.exit(result.returncode)
         if self.source_mode == "reviewed-native":
             self.native_business("original native HTTP", original=True)
             self.native_business("original native loopback HTTP", internal=True, original=True)
+            self.cache_stage("original native")
             self.switch("bootstrap")
 
     def worker_permissions(self):
@@ -442,7 +486,7 @@ sys.exit(result.returncode)
         try:
             connection.request(method, path, body=body, headers=merged)
             response = connection.getresponse()
-            return response.status, dict((key.lower(), value) for key, value in response.getheaders()), response.read()
+            return response.status, response_headers(response), response.read()
         finally:
             connection.close()
 
@@ -485,7 +529,7 @@ sys.exit(result.returncode)
                             def makefile(self, *_args):
                                 return io.BytesIO(output)
 
-                        response = http.client.HTTPResponse(ResponseSocket())
+                        response = http.client.HTTPResponse(ResponseSocket(), method=method)
                         try:
                             response.begin()
                             if response.length is not None and len(output) < boundary + 4 + response.length:
@@ -495,7 +539,7 @@ sys.exit(result.returncode)
                             if response.length is None and not response.chunked and chunk:
                                 continue
                             try:
-                                received = response.status, dict((key.lower(), value) for key, value in response.getheaders()), response.read()
+                                received = response.status, response_headers(response), response.read()
                             except http.client.IncompleteRead:
                                 if not chunk:
                                     raise
@@ -681,6 +725,128 @@ sys.exit(result.returncode)
             self.native_business(f"{mode} HTTPS", tls=True)
         self.native_business(f"{mode} loopback HTTP", internal=True)
 
+    def api_cache_responses(self, *, tls=False, internal=False):
+        """Observe upstream policy preservation without assuming every API is private."""
+        rows = []
+        for policy, cache_control, expires in (
+                ("no-store", "no-store", None),
+                ("custom", CUSTOM_CACHE_CONTROL, CUSTOM_EXPIRES),
+                ("absent", None, None)):
+            base = f"/api/runtime-cache/{policy}"
+            for method, path, request_headers, expected_status, expected_body in (
+                    ("GET", base, {}, 200, CACHE_PAYLOAD),
+                    ("GET", base, {"Range": "bytes=0-9"}, 206, CACHE_PAYLOAD[:10]),
+                    ("HEAD", base, {}, 200, b""),
+                    ("GET", base, {"If-None-Match": CACHE_VALIDATOR}, 304, b""),
+                    ("GET", base + "/unauthorized", {}, 401, b"synthetic-unauthorized")):
+                status, headers, body = self.request(method, path, tls=tls, internal=internal,
+                                                     headers=request_headers)
+                payload_preserved = status == expected_status and body == expected_body
+                if method == "HEAD":
+                    payload_preserved = payload_preserved and headers.get("content-length") == str(len(CACHE_PAYLOAD))
+                if expected_status == 206:
+                    payload_preserved = payload_preserved and headers.get("content-range") == f"bytes 0-9/{len(CACHE_PAYLOAD)}"
+                policy_preserved = headers.get("cache-control") == cache_control and headers.get("expires") == expires
+                rows.append({"policy": policy, "method": method, "path": path,
+                             "request_headers": request_headers, "expected_status": expected_status,
+                             "status": status, "expected_cache_control": cache_control,
+                             "cache_control": headers.get("cache-control"), "expected_expires": expires,
+                             "expires": headers.get("expires"), "content_length": headers.get("content-length"),
+                             "content_range": headers.get("content-range"), "body_bytes": len(body),
+                             "payload_preserved": payload_preserved, "cache_policy_preserved": policy_preserved})
+        return rows
+
+    def cache_policies(self, stage, *, tls=False, internal=False):
+        rows = self.api_cache_responses(tls=tls, internal=internal)
+        self.record(f"{stage} API preserves no-store, custom and absent upstream cache policies for 200/206/HEAD/304/401",
+                    all(row["payload_preserved"] and row["cache_policy_preserved"] for row in rows), rows)
+        static = []
+        html_cache_control = "no-cache" if self.source_mode == "reviewed-native" else None
+        for method, path, request_headers, expected_status, expected_body, cache_control in (
+                ("GET", "/python/runner.js", {}, 200, b"/* synthetic runtime asset */\n", None),
+                ("HEAD", "/python/runner.js", {}, 200, b"", None),
+                ("GET", "/courses/cache-fixture", {}, 200, b"<html>synthetic-ip-https-spa</html>\n", html_cache_control),
+                ("GET", "/runtime-video.mp4", {"Range": "bytes=100-199"}, 206, bytes(range(100, 200)), None)):
+            status, headers, body = self.request(method, path, tls=tls, internal=internal, headers=request_headers)
+            preserved = (status == expected_status and body == expected_body
+                         and headers.get("cache-control") == cache_control and "expires" not in headers)
+            if expected_status == 206:
+                preserved = preserved and headers.get("content-range") == "bytes 100-199/4096"
+            static.append({"method": method, "path": path, "status": status,
+                           "cache_control": headers.get("cache-control"), "expires": headers.get("expires"),
+                           "body_bytes": len(body), "preserved": preserved})
+        self.record(f"{stage} HTML, script GET/HEAD and static Range keep their original cache policies",
+                    all(row["preserved"] for row in static), static)
+
+    def cache_stage(self, mode):
+        if mode != "https":
+            self.cache_policies(f"{mode} HTTP")
+        if mode in ("trial", "https"):
+            self.cache_policies(f"{mode} HTTPS", tls=True)
+        if self.source_mode == "reviewed-native":
+            self.cache_policies(f"{mode} loopback HTTP", internal=True)
+
+    def legacy_api_cache_counterexample(self):
+        """Temporarily reproduce expires 0 in this owned bootstrap fixture only."""
+        original = (self.directory / "active.conf").read_text()
+        anchor = "        expires off;"
+        self.record("legacy cache-policy counterexample targets exactly one bootstrap API expires directive",
+                    original.count(anchor) == 1)
+        candidate = self.directory / "legacy-api-cache.conf"
+        candidate.write_text(original.replace(anchor, "        expires 0;", 1))
+        self.report["legacy_api_cache_counterexample"] = {
+            "scope": "temporary synthetic bootstrap API configuration; never a repository or production change",
+            "candidate_sha256": hashlib.sha256(candidate.read_bytes()).hexdigest()}
+        activated = False
+        try:
+            previous_workers = self.workers()
+            self.control("activate", "backup-legacy-api-cache", candidate.name)
+            activated = True
+            self.wait_until(lambda: bool(self.workers()) and not previous_workers.intersection(self.workers()))
+            rows = self.api_cache_responses()
+            self.report["legacy_api_cache_counterexample"]["responses"] = rows
+            self.record("legacy expires 0 violates the same upstream-cache contract for 200/206/HEAD/304 while 401 is unchanged",
+                        all(row["payload_preserved"] for row in rows)
+                        and all(row["cache_policy_preserved"] == (row["expected_status"] == 401) for row in rows)
+                        and all(row["cache_control"] == "max-age=0" for row in rows if row["expected_status"] != 401), rows)
+        finally:
+            if activated:
+                previous_workers = self.workers()
+                self.control("rollback", "backup-legacy-api-cache")
+                self.wait_until(lambda: bool(self.workers()) and not previous_workers.intersection(self.workers()))
+                self.record("legacy cache-policy probe rollback restores the exact fixed bootstrap bytes",
+                            (self.directory / "active.conf").read_text() == original)
+        self.cache_policies("bootstrap HTTP after legacy cache-policy rollback")
+
+    def example_cache_policies(self):
+        """Exercise the documented native example with only fixture destinations."""
+        original = (self.directory / "active.conf").read_bytes()
+        source = (ROOT / "资料/nginx.example.conf").read_text()
+        for old, new in (
+                ("    server_name localhost;", f"    server_name {IDENTITY};"),
+                ("root /www/wwwroot/localhost;", "root /fixture/web;"),
+                ("proxy_pass              http://127.0.0.1:8080;", "proxy_pass              http://127.0.0.1:18080;")):
+            if source.count(old) != 1:
+                raise AssertionError(f"synthetic documented example anchor changed: {old}")
+            source = source.replace(old, new, 1)
+        candidate = self.directory / "native-example.conf"
+        candidate.write_text(source)
+        self.report["synthetic_native_example_sha256"] = hashlib.sha256(candidate.read_bytes()).hexdigest()
+        activated = False
+        try:
+            previous_workers = self.workers()
+            self.control("activate", "backup-native-example", candidate.name)
+            activated = True
+            self.wait_until(lambda: bool(self.workers()) and not previous_workers.intersection(self.workers()))
+            self.cache_policies("documented native example HTTP")
+        finally:
+            if activated:
+                previous_workers = self.workers()
+                self.control("rollback", "backup-native-example")
+                self.wait_until(lambda: bool(self.workers()) and not previous_workers.intersection(self.workers()))
+                self.record("native example probe rollback restores the exact generated bootstrap bytes",
+                            (self.directory / "active.conf").read_bytes() == original)
+
     def api(self, stage, tls=False):
         for method in ("GET", "POST", "PUT", "DELETE"):
             path = f"/api/runtime-echo/item%20one?method={method}&literal=a%2Fb"
@@ -754,10 +920,14 @@ sys.exit(result.returncode)
 
     def verify(self):
         self.native_stage("bootstrap")
+        self.cache_stage("bootstrap")
         self.record("bootstrap HTTP SPA fallback works", b"synthetic-ip-https-spa" in self.request("GET", "/courses/fixture")[2])
         self.acme("bootstrap HTTP")
         self.api("bootstrap HTTP")
         self.api_stability("bootstrap HTTP")
+        self.legacy_api_cache_counterexample()
+        if self.source_mode == "template":
+            self.example_cache_policies()
         original = (self.directory / "active.conf").read_bytes()
         previous_workers = self.workers()
         modified = self.directory / "modified-trial.conf"
@@ -798,6 +968,7 @@ sys.exit(result.returncode)
         self.switch("trial")
         self.no_sni_certificate("trial")
         self.native_stage("trial")
+        self.cache_stage("trial")
         self.acme("trial HTTP")
         self.record("trial keeps HTTP available", self.request("GET", "/")[0] == 200)
         self.record("HTTPS verifies trusted test CA and exact IP SAN", self.request("GET", "/", tls=True)[0] == 200)
@@ -827,6 +998,7 @@ sys.exit(result.returncode)
         self.no_sni_certificate("https-only")
         self.other_tls_vhost(remove=True)
         self.native_stage("https")
+        self.cache_stage("https")
         self.acme("HTTPS-only mode HTTP")
         status, headers, _ = self.request("GET", "/courses/fixture?lesson=1", headers={"Host": "untrusted.invalid"})
         self.record("HTTP page temporarily redirects to fixed configured IP preserving URI",
