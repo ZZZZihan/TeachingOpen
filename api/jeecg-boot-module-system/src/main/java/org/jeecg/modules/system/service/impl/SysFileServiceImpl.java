@@ -5,9 +5,14 @@ import org.jeecg.modules.common.util.QiniuUtil;
 import org.jeecg.modules.system.entity.SysFile;
 import org.jeecg.modules.system.mapper.SysFileMapper;
 import org.jeecg.modules.system.service.ISysFileService;
+import org.jeecg.modules.system.service.LocalFileReferenceResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
@@ -27,11 +32,14 @@ import org.springframework.transaction.annotation.Transactional;
  * @Version: V1.0
  */
 @Service
+@Slf4j
 public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> implements ISysFileService {
     @Autowired
     QiniuUtil qiniuUtil;
     @Value(value = "${jeecg.path.upload}")
     private String uploadpath;
+    @Autowired private PlatformTransactionManager transactionManager;
+    @Autowired private LocalFileReferenceResolver references;
 
     @Override
     @Transactional
@@ -49,48 +57,114 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 
     @Override
     public boolean isReferenced(SysFile file) {
-        return file == null || file.getFilePath() == null || file.getFilePath().trim().isEmpty()
-                || baseMapper.referenceCount(file) > 0
-                || (baseMapper.hasCourseMediaTable() > 0 && baseMapper.courseMediaReferenceCount(file) > 0);
+        if (file == null || file.getFilePath() == null || file.getFilePath().trim().isEmpty()
+                || baseMapper.referenceCount(file) > 0) return true;
+        boolean courseMedia = baseMapper.hasCourseMediaTable() > 0;
+        if (courseMedia && baseMapper.courseMediaReferenceCount(file) > 0) return true;
+        if (!Integer.valueOf(1).equals(file.getFileLocation())) return false;
+        // Raw SQL matches remain conservative, including legacy cloud keys and
+        // IDs. Local URL/HTML/JSON references use exactly the write/read parser;
+        // otherwise an encoded live reference could be erased as "unused".
+        return containsReference(baseMapper.encodedReferenceCandidates(), file.getFilePath())
+                || (courseMedia && containsReference(baseMapper.encodedCourseMediaCandidates(), file.getFilePath()));
+    }
+
+    private boolean containsReference(java.util.List<java.util.Map<String, Object>> candidates, String key) {
+        for (java.util.Map<String, Object> row : candidates) {
+            for (Object value : row.values()) {
+                if (value != null && references.resolve(value.toString()).keys().contains(key)) return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean deleteWithFile(String id) {
-        SysFile file = this.getById(id);
-        if (file == null){
-            return true;
+        try {
+            // The same row lock is held by attachment writers. READ_COMMITTED
+            // makes the reference scan see a writer which committed while this
+            // deletion was waiting, even when invoked from another transaction.
+            Boolean prepared = cleanupTransaction().execute(status -> {
+                SysFile file = lockFile(id);
+                if (file == null) return true;
+                if (!id.equals(file.getId()) || isReferenced(file) || !validStorage(file)) return false;
+                if (!Integer.valueOf(1).equals(file.getDelFlag())
+                        && !updateById(new SysFile().setId(id).setDelFlag(1))) {
+                    throw new JeecgBootException("文件删除登记失败");
+                }
+                return true;
+            });
+            if (!Boolean.TRUE.equals(prepared)) return false;
+            // Commit the tombstone before any irreversible storage operation.
+            // On I/O, SQL or commit failure it remains available to the owner for
+            // retry, while new references and downloads reject it. A failed
+            // cleanup returns false rather than claiming the bytes were erased.
+            return Boolean.TRUE.equals(cleanupTransaction().execute(status -> {
+                SysFile file = lockFile(id);
+                if (file == null) return true;
+                if (!id.equals(file.getId()) || !Integer.valueOf(1).equals(file.getDelFlag())
+                        || isReferenced(file) || !deleteStoredObject(file)) return false;
+                if (!removeById(id)) throw new JeecgBootException("文件清理登记失败");
+                return true;
+            }));
+        } catch (RuntimeException error) {
+            log.warn("File cleanup deferred; fileId={}", id, error);
+            return false;
         }
-        if (isReferenced(file)) return false;
+    }
+
+    private TransactionTemplate cleanupTransaction() {
+        TransactionTemplate transaction = new TransactionTemplate(transactionManager);
+        transaction.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        transaction.setIsolationLevel(TransactionDefinition.ISOLATION_READ_COMMITTED);
+        return transaction;
+    }
+
+    private SysFile lockFile(String id) {
+        return getOne(new QueryWrapper<SysFile>().eq("id", id).last("FOR UPDATE"));
+    }
+
+    private boolean validStorage(SysFile file) {
+        return Integer.valueOf(2).equals(file.getFileLocation())
+                ? file.getFilePath() != null && !file.getFilePath().trim().isEmpty()
+                : Integer.valueOf(1).equals(file.getFileLocation()) && localPath(file) != null;
+    }
+
+    private boolean deleteStoredObject(SysFile file) {
         if (Integer.valueOf(2).equals(file.getFileLocation())){
-            if (qiniuUtil.deleteFileByKey(file.getFilePath())){
-                return this.removeById(id);
-            }else{
-                return false;
-            }
+            return qiniuUtil.deleteFileByKey(file.getFilePath());
         }else if (Integer.valueOf(1).equals(file.getFileLocation())){
             try {
-                if (file.getFilePath() == null || file.getFilePath().trim().isEmpty()) return false;
-                File root = new File(uploadpath).getCanonicalFile();
-                java.nio.file.Path relative = java.nio.file.Paths.get(file.getFilePath());
-                if (relative.isAbsolute() || file.getFilePath().contains("\\") || file.getFilePath().contains(":")) return false;
-                java.nio.file.Path cursor = root.toPath();
-                for (java.nio.file.Path segment : relative) {
-                    if (segment.toString().equals("..") || segment.toString().equals(".")) return false;
-                    cursor = cursor.resolve(segment);
-                    if (Files.isSymbolicLink(cursor)) return false;
-                }
-                File savedFile = cursor.toFile().getCanonicalFile();
-                if (!savedFile.toPath().startsWith(root.toPath()) || savedFile.equals(root)
-                        || (savedFile.exists() && !savedFile.isFile())) return false;
-                // A missing object is already reclaimed; an I/O failure must keep
-                // its metadata for a later retry instead of silently losing it.
-                Files.deleteIfExists(savedFile.toPath());
-                return this.removeById(id);
+                java.nio.file.Path path = localPath(file);
+                if (path == null) return false;
+                Files.deleteIfExists(path);
+                return true;
             }catch (Exception e){
                 return false;
             }
         }
         return false;
+    }
+
+    private java.nio.file.Path localPath(SysFile file) {
+        try {
+            if (file.getFilePath() == null || file.getFilePath().trim().isEmpty()) return null;
+            File root = new File(uploadpath).getCanonicalFile();
+            java.nio.file.Path relative = java.nio.file.Paths.get(file.getFilePath());
+            if (relative.isAbsolute() || file.getFilePath().contains("\\") || file.getFilePath().contains(":")) return null;
+            java.nio.file.Path cursor = root.toPath();
+            for (java.nio.file.Path segment : relative) {
+                if (segment.toString().equals("..") || segment.toString().equals(".")) return null;
+                cursor = cursor.resolve(segment);
+                if (Files.isSymbolicLink(cursor)) return null;
+            }
+            File savedFile = cursor.toFile().getCanonicalFile();
+            if (!savedFile.toPath().startsWith(root.toPath()) || savedFile.equals(root)
+                    || (savedFile.exists() && !savedFile.isFile())) return null;
+            return savedFile.toPath();
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override

@@ -29,8 +29,14 @@ public class LocalDownloadAccessService {
 
     public int status(String key) {
         LoginUser user = access.currentUser();
+        List<SysFile> records = files.list(new QueryWrapper<SysFile>().eq("file_path", key).eq("file_location", 1));
+        // A failed physical cleanup leaves a committed tombstone for retry. It
+        // must not fall through to owner, public-resource or administrator reads.
+        for (SysFile file : records) {
+            if (key.equals(file.getFilePath()) && !Integer.valueOf(0).equals(file.getDelFlag()))
+                return user == null ? 401 : 403;
+        }
         if (user != null && access.isAdministrator()) return 200;
-        List<SysFile> records = files.list(new QueryWrapper<SysFile>().eq("file_path", key).eq("file_location", 1).eq("del_flag", 0));
         for (SysFile file : records) {
             // MySQL collations can be case-insensitive while storage keys are not.
             if (!key.equals(file.getFilePath())) continue;
@@ -96,10 +102,13 @@ public class LocalDownloadAccessService {
     // Table/column arguments are constants above, never caller input. LOCATE only selects
     // candidates; authorization always requires an exact URL/key reference below. A URL can
     // encode any path character, using either hex case, so a single encoded key is not an
-    // exhaustive prefilter. Include values containing '%' and let exact decode the URI once.
+    // exhaustive prefilter. HTML entities and JSON escapes can also encode a key;
+    // include all three candidates and let the shared parser resolve exact keys.
     private List<Map<String,Object>> candidates(String table,String columns,String key) {
-        String expression = "CONCAT_WS(',',"+columns+")";
-        return jdbc.queryForList("SELECT * FROM "+table+" WHERE LOCATE(?,"+expression+")>0 OR LOCATE(?,"+expression+")>0 OR LOCATE('%',"+expression+")>0",key,UriUtils.encodePath(key,"UTF-8"));
+        String expression = columns.contains(",") ? "CONCAT_WS(',',"+columns+")" : columns;
+        return jdbc.queryForList("SELECT * FROM "+table+" WHERE LOCATE(?,"+expression+")>0 OR LOCATE(?,"+expression+")>0"
+                + " OR LOCATE('%',"+expression+")>0 OR LOCATE('&',"+expression+")>0 OR LOCATE(CHAR(92),"+expression+")>0",
+                key,UriUtils.encodePath(key,"UTF-8"));
     }
     private boolean live(Map<String,Object> row) { return row.get("del_flag") == null || "0".equals(text(row,"del_flag")); }
     private boolean one(Map<String,Object> row,String field) { return "1".equals(text(row,field)) || Boolean.TRUE.equals(row.get(field)); }

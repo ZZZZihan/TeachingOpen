@@ -3,6 +3,7 @@ package org.jeecg.workintegrity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.jeecg.common.system.vo.LoginUser;
+import org.jeecg.modules.system.entity.SysFile;
 import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.system.service.LocalDownloadAccessService;
 import org.jeecg.modules.system.service.LocalFileReferenceAccessService;
@@ -13,6 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.springframework.test.util.ReflectionTestUtils;
+import java.util.Collections;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -66,7 +68,8 @@ public class LocalFileReferenceAuthorizationTest {
     }
 
     @Test public void registeredFileIsProtectedWhenLocalBytesAreCurrentlyMissing() {
-        when(files.count(any())).thenReturn(1);
+        when(files.list(any())).thenReturn(Collections.singletonList(new SysFile().setId("file-a")
+                .setFilePath("registered-missing.txt").setDelFlag(0)));
         denied("registered-missing.txt");
         verify(downloads).status("registered-missing.txt");
     }
@@ -102,7 +105,18 @@ public class LocalFileReferenceAuthorizationTest {
     @Test public void administratorRetainsExistingImportPermission() {
         when(access.isAdministrator()).thenReturn(true);
         service.requireUse("private.txt");
-        verifyZeroInteractions(downloads, files);
+        verifyZeroInteractions(downloads);
+        verify(files).list(argThat(q -> q.getSqlSegment().contains("ORDER BY id ASC FOR UPDATE")));
+    }
+
+    @Test public void pendingDeletionCannotBeReferencedEvenByAnAdministrator() {
+        when(files.list(any())).thenReturn(Collections.singletonList(new SysFile().setId("file-a")
+                .setFilePath("private.txt").setDelFlag(1)));
+        when(downloads.status(anyString())).thenReturn(200);
+        denied("private.txt");
+        when(access.isAdministrator()).thenReturn(true);
+        denied(DOMAIN + "/private.txt");
+        verifyZeroInteractions(downloads);
     }
 
     @Test public void rootRelativeConfiguredDomainUsesTheSameAuthorizationRule() {
