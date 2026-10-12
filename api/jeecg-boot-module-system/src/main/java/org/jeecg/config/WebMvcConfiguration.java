@@ -25,6 +25,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Autowired
     private InfrastructureManagementInterceptor infrastructureManagement;
 
+    @Autowired
+    private GlobalManagementInterceptor globalManagement;
+
 	@Value("${jeecg.path.webapp}")
 	private String webAppPath;
 	@Value("${spring.resource.static-locations}")
@@ -74,6 +77,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(infrastructureManagement).addPathPatterns("/**");
+		registry.addInterceptor(globalManagement).addPathPatterns("/**");
 		registry.addInterceptor(new PaginationRequestInterceptor()).addPathPatterns("/**");
 		String [] exculudes = new String[]{"/*.html","/html/**","/js/**","/css/**","/images/**"};
 		registry.addInterceptor(onlineInterceptor()).excludePathPatterns(exculudes).addPathPatterns("/online/cgform/api/**");
