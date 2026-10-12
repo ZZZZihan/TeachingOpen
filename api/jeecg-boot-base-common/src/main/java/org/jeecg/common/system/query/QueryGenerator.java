@@ -203,8 +203,10 @@ public class QueryGenerator {
         for (Class<?> type = entityType; type != null && type != Object.class; type = type.getSuperclass()) {
             for (Field field : type.getDeclaredFields()) {
                 TableField mapping = field.getAnnotation(TableField.class);
+                com.fasterxml.jackson.annotation.JsonProperty json = field.getAnnotation(com.fasterxml.jackson.annotation.JsonProperty.class);
                 if (Modifier.isStatic(field.getModifiers()) || Modifier.isTransient(field.getModifiers())
-                        || (mapping != null && !mapping.exist())) continue;
+                        || (mapping != null && !mapping.exist())
+                        || (json != null && json.access() == com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY)) continue;
                 TableId id = field.getAnnotation(TableId.class);
                 String column = mapping != null && !mapping.value().isEmpty() ? mapping.value()
                         : id != null && !id.value().isEmpty() ? id.value() : oConvertUtils.camelToUnderline(field.getName());

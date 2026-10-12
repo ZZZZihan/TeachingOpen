@@ -10,6 +10,7 @@ import org.jeecg.modules.system.entity.SysUser;
  * @author sunjianlei
  */
 @Data
+@com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL)
 public class SysUserSysDepartModel {
 
     private String id;

@@ -79,7 +79,7 @@ public class QuerySqlBoundaryTest {
         assertEquals(Collections.singletonList("x' OR 1=1 --"),values(sql,parameters));
     }
     @Test public void unknownSqlExpressionAndTransientFieldsFailBeforeQuery() {
-        for(String field:Arrays.asList("realname) OR 1=1 --","unknown","orgCodeTxt","roleTxt","sys_user.id","(select 1)","password, id")) {
+        for(String field:Arrays.asList("realname) OR 1=1 --","unknown","orgCodeTxt","roleTxt","sys_user.id","(select 1)","password, id","password","salt")) {
             try { QueryGenerator.initQueryWrapper(new SysUserModel(),params("column",field)); fail(field); }
             catch(JeecgBootException expected) { assertEquals("不支持的查询字段",expected.getMessage()); }
             try { QueryGenerator.initQueryWrapper(new SysUser(),params("superQueryParams","[{\"field\":\""+field+"\",\"rule\":\"eq\",\"val\":\"v\"}]")); fail(field); }

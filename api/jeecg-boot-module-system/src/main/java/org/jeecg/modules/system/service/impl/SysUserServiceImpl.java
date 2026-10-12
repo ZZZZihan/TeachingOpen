@@ -317,6 +317,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 	public IPage<SysUserSysDepartModel> queryUserByOrgCode(String orgCode, SysUser userParams, IPage page) {
         orgCode = userQueryAccess.requireOrganization(orgCode);
 		List<SysUserSysDepartModel> list = baseMapper.getUserByOrgCode(page, orgCode, userParams);
+        if (!userQueryAccess.isAdministrator(userQueryAccess.currentUser())) {
+            list.forEach(user -> { user.setTelephone(null); user.setEmail(null); user.setPhone(null); });
+        }
 		Integer total = baseMapper.getUserByOrgCodeTotal(orgCode, userParams);
 
 		IPage<SysUserSysDepartModel> result = new Page<>(page.getCurrent(), page.getSize(), total);
