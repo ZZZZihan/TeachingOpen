@@ -1,0 +1,38 @@
+✔ 暖缓存菜单在鉴权拒绝后撤销，导航同步更新且能显示新菜单 (3.248375ms)
+✔ reject unsupported navigation javascript:void(0) (0.885125ms)
+✔ reject unsupported navigation JaVaScRiPt:void(0) (0.087166ms)
+✔ reject unsupported navigation  java
+script:void(0) (0.071583ms)
+✔ reject unsupported navigation data:text/html,synthetic (0.078875ms)
+✔ reject unsupported navigation vbscript:synthetic (0.330875ms)
+✔ reject unsupported navigation //example.invalid/ (0.19725ms)
+✔ reject unsupported navigation /\example.invalid/ (0.064ms)
+✔ reject unsupported navigation https:\example.invalid/ (0.042375ms)
+✔ reject unsupported navigation https://name:secret@example.invalid (0.135125ms)
+✔ reject unsupported navigation http://example.invalid (0.101083ms)
+✔ reject unsupported navigation /%2fexample.invalid (0.142084ms)
+✔ reject unsupported navigation /%5Cexample.invalid (0.051917ms)
+✔ reject unsupported navigation /%0aevil (0.042ms)
+✔ reject unsupported navigation /% (0.035375ms)
+✔ reject unsupported navigation relative (0.06225ms)
+✔ reject unsupported navigation https:// (0.083541ms)
+✔ reject unsupported navigation https://example.invalid:65536/ (0.084083ms)
+✔ reject unsupported navigation https://exa mple.invalid (0.055917ms)
+✔ reject unsupported navigation [object Object] (0.03625ms)
+✔ reject unsupported navigation /index (0.026375ms)
+✔ preserve supported navigation  (0.045625ms)
+✔ preserve supported navigation / (0.023041ms)
+✔ preserve supported navigation /courseList (0.017292ms)
+✔ preserve supported navigation /scratch3/index.html?scene=create (0.029792ms)
+✔ preserve supported navigation /blockly/index.html?lang=zh#synthetic (0.020791ms)
+✔ preserve supported navigation /课程?q=%E5%AD%A6 (0.166667ms)
+✔ preserve supported navigation https://example.invalid:443/a?q=x#fragment (0.033916ms)
+✔ flags never turn HTTPS or blank grouping labels into router links (0.077083ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 151.258
