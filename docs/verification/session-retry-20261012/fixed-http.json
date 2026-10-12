@@ -1,0 +1,124 @@
+{
+  "started_utc": "2026-10-12T05:32:22.724602+00:00",
+  "ended_utc": "2026-10-12T05:32:27.430155+00:00",
+  "ports": {
+    "mysql": 13391,
+    "redis": 16451,
+    "backend": 18191,
+    "frontend": 18192
+  },
+  "jar_sha256": "e4dc7708374b0d41927a833a893197cfc9d25f54efdc281eee79c24fadf625d6",
+  "script_sha256": "c483b9dae46410c076c7923b93247a0d3d6bf5096eda39e6854fe519bf0f28bf",
+  "expected_legacy": false,
+  "synthetic_only": true,
+  "credentials_exported": false,
+  "scope": "Real synthetic CAPTCHA/login, HTTP logout/protected access, Redis session/index/cache observations and success audit counts. Normal audit rows retained; no production or browser acceptance.",
+  "passed": 23,
+  "total": 23,
+  "cases": [
+    {
+      "case": "runtime, exact JAR and selected clean synthetic identities verified",
+      "passed": true
+    },
+    {
+      "case": "control account A has protected access",
+      "passed": true
+    },
+    {
+      "case": "normal distinct single-session login revokes its predecessor",
+      "passed": true
+    },
+    {
+      "case": "invalid-signature logout response matches candidate",
+      "passed": true,
+      "http_status": 200,
+      "returned_success": false
+    },
+    {
+      "case": "invalid-signature logout cache effects match candidate",
+      "passed": true,
+      "victim_username_mapping_deleted": false,
+      "victim_cache_unchanged": true
+    },
+    {
+      "case": "invalid-signature logout success audit matches candidate",
+      "passed": true,
+      "success_audit_delta": 0
+    },
+    {
+      "case": "forgery preserves the victim token and account A caches/access",
+      "passed": true
+    },
+    {
+      "case": "login after forged logout uses a distinct authorized token and current index",
+      "passed": true
+    },
+    {
+      "case": "old victim session after the next login matches candidate",
+      "passed": true,
+      "old_token_still_authorized": false
+    },
+    {
+      "case": "old victim Redis token after the next login matches candidate",
+      "passed": true
+    },
+    {
+      "case": "normal current-session logout succeeds and removes its own cache state",
+      "passed": true
+    },
+    {
+      "case": "normally logged-out token loses protected access",
+      "passed": true
+    },
+    {
+      "case": "repeated signed logout succeeds without recreating session state",
+      "passed": true
+    },
+    {
+      "case": "normal and repeated B logout preserve A caches/access",
+      "passed": true
+    },
+    {
+      "case": "late-logout sequence starts with distinct T1/T2 and revoked T1",
+      "passed": true
+    },
+    {
+      "case": "late valid T1 logout succeeds and removes only its token",
+      "passed": true
+    },
+    {
+      "case": "late T1 logout username index matches candidate",
+      "passed": true,
+      "newer_username_mapping_deleted": false
+    },
+    {
+      "case": "T3 login has a distinct authorized token and owns the username index",
+      "passed": true
+    },
+    {
+      "case": "T3 login revocation of T2 after late T1 logout matches candidate",
+      "passed": true,
+      "t2_still_authorized": false
+    },
+    {
+      "case": "T2 Redis token after T3 login matches candidate",
+      "passed": true
+    },
+    {
+      "case": "all B transitions preserve account A caches/access",
+      "passed": true
+    },
+    {
+      "case": "every actual login token for each account is distinct",
+      "passed": true,
+      "actual_a_sessions": 1,
+      "actual_b_sessions": 6
+    },
+    {
+      "case": "cleanup revoked only the sessions created by this run",
+      "passed": true,
+      "cleanup_errors": []
+    }
+  ],
+  "exception_type": null
+}
