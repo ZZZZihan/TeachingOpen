@@ -10,17 +10,15 @@ import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.system.base.controller.JeecgController;
 import org.jeecg.common.system.query.QueryGenerator;
-import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.teaching.entity.TeachingAdditionalWork;
 import org.jeecg.modules.teaching.model.MineAdditionalWorkModel;
 import org.jeecg.modules.teaching.service.ITeachingAdditionalWorkService;
+import org.jeecg.modules.teaching.service.TeachingAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
 * @Description: 附加作业
@@ -33,7 +31,7 @@ public class TeachingAdditionalWorkController extends JeecgController<TeachingAd
    @Autowired
    private ITeachingAdditionalWorkService teachingAdditionalWorkService;
    @Autowired
-   private ISysDepartService sysDepartService;
+   private TeachingAccessService teachingAccess;
 
    @ApiOperation("获取附加作业详情")
    @GetMapping("getWorkInfo")
@@ -70,48 +68,12 @@ public class TeachingAdditionalWorkController extends JeecgController<TeachingAd
                                   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
                                   HttpServletRequest req) {
        QueryWrapper<TeachingAdditionalWork> queryWrapper = new QueryWrapper<>();
-       //非admin和dev角色，只显示自己管理的部门下的用户
-       List<String> myDeptIds = new ArrayList<>();
-       if(!hasRole("admin") && !hasRole("dev")){
-           myDeptIds = sysDepartService.getMySubDepIdsByDepId(getCurrentUser().getDepartIds());
-           if (myDeptIds==null || myDeptIds.isEmpty()){
-               return Result.error("您没有负责的班级");
-           }
-           List<String> finalMyDeptIds = myDeptIds;
-           queryWrapper.and(q->{
-               for (String depId: finalMyDeptIds){
-                   q.or().like("work_dept",depId);
-               }
-               return q;
-           });
-       }
+       teachingAccess.limitManagedAdditionalWorks(queryWrapper);
        QueryGenerator.installMplus(queryWrapper, teachingAdditionalWork, req.getParameterMap());
        Page<TeachingAdditionalWork> page = new Page<TeachingAdditionalWork>(pageNo, pageSize);
        IPage<TeachingAdditionalWork> pageList = teachingAdditionalWorkService.page(page, queryWrapper);
        return Result.ok(pageList);
    }
-
-    /**
-     * 老师附加作业列表
-     *
-     * @param teachingAdditionalWork
-     * @param pageNo
-     * @param pageSize
-     * @param req
-     * @return
-     */
-    @ApiOperation(value="老师附加作业列表")
-    @GetMapping(value = "/teacherList")
-    public Result<?> teacherPageList(TeachingAdditionalWork teachingAdditionalWork,
-                                   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
-                                   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
-                                   HttpServletRequest req) {
-        QueryWrapper<TeachingAdditionalWork> queryWrapper = QueryGenerator.initQueryWrapper(teachingAdditionalWork, req.getParameterMap());
-        Page<TeachingAdditionalWork> page = new Page<TeachingAdditionalWork>(pageNo, pageSize);
-        queryWrapper.eq("create_by", getCurrentUser().getUsername());
-        IPage<TeachingAdditionalWork> pageList = teachingAdditionalWorkService.page(page, queryWrapper);
-        return Result.ok(pageList);
-    }
 
    /**
     *   添加
