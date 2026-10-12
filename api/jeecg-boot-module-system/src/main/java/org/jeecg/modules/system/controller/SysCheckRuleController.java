@@ -8,6 +8,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.jeecg.common.api.vo.Result;
+import org.jeecg.common.exception.JeecgBootException;
+import org.jeecg.modules.system.service.GlobalResourceAccessService;
+import org.jeecg.modules.system.service.GlobalResourceImport;
 import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.system.base.controller.JeecgController;
 import org.jeecg.common.system.query.QueryGenerator;
@@ -37,6 +40,7 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
 
     @Autowired
     private ISysCheckRuleService sysCheckRuleService;
+    @Autowired private GlobalResourceAccessService access;
 
     /**
      * 分页列表查询
@@ -56,6 +60,7 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
             @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
             HttpServletRequest request
     ) {
+        access.requireAdministrator();
         QueryWrapper<SysCheckRule> queryWrapper = QueryGenerator.initQueryWrapper(sysCheckRule, request.getParameterMap());
         Page<SysCheckRule> page = new Page<>(pageNo, pageSize);
         IPage<SysCheckRule> pageList = sysCheckRuleService.page(page, queryWrapper);
@@ -76,11 +81,21 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
             @RequestParam(name = "ruleCode") String ruleCode,
             @RequestParam(name = "value") String value
     ) throws UnsupportedEncodingException {
+        // validateCheckRule uses encodeURIComponent before Axios serializes its query.
+        // The servlet has removed only the outer transport encoding at this point.
+        if (value.length() > 2304) throw new JeecgBootException("校验值过长");
+        final String decoded;
+        try {
+            decoded = URLDecoder.decode(value, "UTF-8");
+        } catch (IllegalArgumentException invalidEncoding) {
+            throw new JeecgBootException("校验值编码不正确");
+        }
+        if (decoded.length() > 256) throw new JeecgBootException("校验值过长");
         SysCheckRule sysCheckRule = sysCheckRuleService.getByCode(ruleCode);
         if (sysCheckRule == null) {
             return Result.error("该编码不存在");
         }
-        JSONObject errorResult = sysCheckRuleService.checkValue(sysCheckRule, URLDecoder.decode(value, "UTF-8"));
+        JSONObject errorResult = sysCheckRuleService.checkValue(sysCheckRule, decoded);
         if (errorResult == null) {
             return Result.ok();
         } else {
@@ -100,6 +115,7 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
     @ApiOperation(value = "编码校验规则-添加", notes = "编码校验规则-添加")
     @PostMapping(value = "/add")
     public Result add(@RequestBody SysCheckRule sysCheckRule) {
+        access.requireAdministrator();
         sysCheckRuleService.save(sysCheckRule);
         return Result.ok("添加成功！");
     }
@@ -114,6 +130,7 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
     @ApiOperation(value = "编码校验规则-编辑", notes = "编码校验规则-编辑")
     @PutMapping(value = "/edit")
     public Result edit(@RequestBody SysCheckRule sysCheckRule) {
+        access.requireAdministrator();
         sysCheckRuleService.updateById(sysCheckRule);
         return Result.ok("编辑成功!");
     }
@@ -128,6 +145,7 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
     @ApiOperation(value = "编码校验规则-通过id删除", notes = "编码校验规则-通过id删除")
     @DeleteMapping(value = "/delete")
     public Result delete(@RequestParam(name = "id", required = true) String id) {
+        access.requireAdministrator();
         sysCheckRuleService.removeById(id);
         return Result.ok("删除成功!");
     }
@@ -142,6 +160,7 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
     @ApiOperation(value = "编码校验规则-批量删除", notes = "编码校验规则-批量删除")
     @DeleteMapping(value = "/deleteBatch")
     public Result deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
+        access.requireAdministrator();
         this.sysCheckRuleService.removeByIds(Arrays.asList(ids.split(",")));
         return Result.ok("批量删除成功！");
     }
@@ -156,6 +175,7 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
     @ApiOperation(value = "编码校验规则-通过id查询", notes = "编码校验规则-通过id查询")
     @GetMapping(value = "/queryById")
     public Result queryById(@RequestParam(name = "id", required = true) String id) {
+        access.requireAdministrator();
         SysCheckRule sysCheckRule = sysCheckRuleService.getById(id);
         return Result.ok(sysCheckRule);
     }
@@ -168,6 +188,7 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
      */
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, SysCheckRule sysCheckRule) {
+        access.requireAdministrator();
         return super.exportXls(request, sysCheckRule, SysCheckRule.class, "编码校验规则");
     }
 
@@ -180,7 +201,9 @@ public class SysCheckRuleController extends JeecgController<SysCheckRule, ISysCh
      */
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
     public Result importExcel(HttpServletRequest request, HttpServletResponse response) {
-        return super.importExcel(request, response, SysCheckRule.class);
+        access.requireAdministrator();
+        sysCheckRuleService.saveBatch(GlobalResourceImport.read(request, SysCheckRule.class));
+        return Result.ok("文件导入成功！");
     }
 
 }
