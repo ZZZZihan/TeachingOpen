@@ -57,6 +57,7 @@ PROBES = (
     'verify-global-rule-boundaries.py',
     'verify-global-management-authorization.py',
     'verify-audit-failure.py',
+    'verify-minio-demo-disabled.py',
 )
 
 
@@ -85,7 +86,9 @@ def validate_report(report, jar_sha256):
     cases = report.get('cases', report.get('checks'))
     if (not isinstance(cases, list) or not cases
             or any(not isinstance(case, dict) or case.get('passed') is not True for case in cases)
-            or report.get('exception') or report.get('failed', 0) != 0 or report.get('expected_legacy')
+            or report.get('exception') or report.get('cleanup_exception') or report.get('failed', 0) != 0
+            or report.get('expected_legacy') or report.get('expected_legacy_teacher_list')
+            or report.get('expected_legacy_management_list')
             or report.get('completed', True) is not True
             or report.get('jar_sha256') != jar_sha256):
         raise RuntimeError('Review probe did not produce complete passing candidate evidence')

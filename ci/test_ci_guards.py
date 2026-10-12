@@ -290,7 +290,8 @@ class ReviewAdapterTest(unittest.TestCase):
                          'verify-audit-log-authorization.py', 'verify-audit-failure.py',
                          'verify-file-deletion-concurrency.py', 'verify-file-encoded-reference-deletion.py',
                          'verify-additional-work-read-authorization.py', 'verify-shared-resource-boundaries.py',
-                         'verify-global-rule-boundaries.py', 'verify-global-management-authorization.py'
+                         'verify-global-rule-boundaries.py', 'verify-global-management-authorization.py',
+                         'verify-minio-demo-disabled.py'
                          }.issubset(review.PROBES))
 
     def test_each_missing_or_renamed_required_probe_stops_before_any_runtime_activity(self):
@@ -353,6 +354,8 @@ class ReviewAdapterTest(unittest.TestCase):
                         {'passed': 1}, {'passed': False}, {'passed': 2.0}, {'passed': '2'},
                         {'jar_sha256': 'other'}, {'jar_sha256': None}, {'exception': 'SqlError'},
                         {'total': 3}, {'total': 2.0}, {'failed': 1}, {'expected_legacy': True},
+                        {'expected_legacy_teacher_list': True}, {'expected_legacy_management_list': True},
+                        {'cleanup_exception': 'SqlError'},
                         {'completed': False}, {'completed': None}, {'completed': 1}):
                 with self.subTest(key=key, bad=bad), self.assertRaises(RuntimeError):
                     review.validate_report({**report, **bad}, 'candidate')
