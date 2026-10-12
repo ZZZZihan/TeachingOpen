@@ -21,6 +21,8 @@ import org.jeecg.modules.teaching.mapper.TeachingAdditionalWorkMapper;
 import org.jeecg.modules.teaching.model.MineAdditionalWorkModel;
 import org.jeecg.modules.teaching.service.ITeachingAdditionalWorkService;
 import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
+import org.jeecg.modules.teaching.service.TeachingAccessService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,12 +52,26 @@ public class TeachingAdditionalWorkServiceImpl extends ServiceImpl<TeachingAddit
     private RedisUtil redisUtil;
     @Autowired
     private LocalFileReferenceAccessService attachmentAccess;
+    @Autowired
+    private TeachingAccessService teachingAccess;
 
     @Override
     public Result<MineAdditionalWorkModel> getWorkInfo(String id) {
         Result<MineAdditionalWorkModel> result = new Result();
-        result.setResult(this.baseMapper.getWorkInfo(id));
+        MineAdditionalWorkModel model = new MineAdditionalWorkModel();
+        // Return precisely the object that was authorized, without a second
+        // unrestricted mapper fetch that could race a class reassignment.
+        BeanUtils.copyProperties(getReadableById(id), model);
+        result.setResult(model);
         return result;
+    }
+
+    @Override
+    public TeachingAdditionalWork getReadableById(String id) {
+        TeachingAdditionalWork work = baseMapper.selectById(id);
+        if (work == null || !Objects.equals(id, work.getId())) throw new UnauthorizedException("无附加作业访问权限");
+        teachingAccess.requireReadAdditionalWork(work);
+        return work;
     }
 
     @Override

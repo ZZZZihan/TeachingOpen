@@ -175,10 +175,6 @@ public class TeachingAdditionalWorkController extends JeecgController<TeachingAd
    @ApiOperation(value="附加作业-通过id查询", notes="附加作业-通过id查询")
    @GetMapping(value = "/queryById")
    public Result<?> queryById(@RequestParam(name="id",required=true) String id) {
-       TeachingAdditionalWork teachingAdditionalWork = teachingAdditionalWorkService.getById(id);
-       if(teachingAdditionalWork==null) {
-           return Result.error("未找到对应数据");
-       }
-       return Result.ok(teachingAdditionalWork);
+       return Result.ok(teachingAdditionalWorkService.getReadableById(id));
    }
 }
