@@ -1,11 +1,12 @@
-"""Filesystem-only report-target regressions; no Docker or HTTP operations."""
+"""Report and phase regressions using local files and stubs; no Docker or HTTP."""
 import importlib.util
 import os
 from pathlib import Path
 import stat
 import tempfile
+from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 
 SPEC = importlib.util.spec_from_file_location('probe_candidate_runtime', Path(__file__).with_name('probe_candidate_runtime.py'))
@@ -102,6 +103,44 @@ class ReportTargetTests(unittest.TestCase):
                     PROBE.main()
             constructor.assert_not_called()
         self.assertEqual(self.mode(parent), 0o755)
+
+    def static_phase(self, table_count, initialized_count):
+        bundle = (self.root / 'bundle').resolve()
+        dist = bundle / 'web/dist'
+        dist.mkdir(parents=True)
+        index = b'<html><script src="/app.js"></script></html>'
+        script = b'console.log("fixture");'
+        (dist / 'index.html').write_bytes(index)
+        (dist / 'app.js').write_bytes(script)
+        probe = PROBE.Probe(SimpleNamespace(bundle=bundle))
+        probe.api_client = SimpleNamespace(
+            api=Mock(side_effect=[
+                (200, {'status': 'UP'}, {}, b'healthy'),
+                (200, {'success': True, 'result': {'records': [
+                    {'id': name} for name in ('fixture_course_a', 'fixture_course_b', 'fixture_ui_course')
+                ]}}, {}, b'courses'),
+                (401, {'success': False}, {}, b'denied'),
+            ]),
+            sql=Mock(side_effect=[table_count, initialized_count]),
+            http=Mock(side_effect=[(200, None, {}, index), (200, None, {}, script)]),
+        )
+        probe.group('static_and_auth', probe.static_and_auth)
+        return probe
+
+    def test_current_schema_and_media_index_results_do_not_abort_static_phase(self):
+        probe = self.static_phase('75', '1')
+        self.assertEqual(probe.report['exceptions'], [])
+        self.assertEqual(probe.by_name['schema_75_tables']['status'], 'pass')
+        self.assertEqual(probe.by_name['local_media_index_initialized']['status'], 'pass')
+        self.assertEqual(probe.by_name['invalid_api_token_401']['status'], 'pass')
+        self.assertEqual(len(probe.report['cases']), 47)
+
+    def test_wrong_schema_and_uninitialized_index_are_reported_as_failures(self):
+        probe = self.static_phase('73', '0')
+        self.assertEqual(probe.report['exceptions'], [])
+        self.assertEqual(probe.by_name['schema_75_tables']['status'], 'fail')
+        self.assertEqual(probe.by_name['local_media_index_initialized']['status'], 'fail')
+        self.assertEqual(probe.by_name['anonymous_home_courses']['status'], 'pass')
 
 
 if __name__ == '__main__':
