@@ -44,6 +44,7 @@ import java.util.*;
 @Api(tags="用户登录")
 @Slf4j
 public class LoginController {
+    @Autowired private org.jeecg.modules.system.service.DepartmentSelectionService departmentSelection;
     @Autowired private org.jeecg.modules.shiro.authc.aop.MediaCookie mediaCookie;
 	@Autowired
 	private ISysUserService sysUserService;
@@ -219,21 +220,14 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping(value = "/selectDepart", method = RequestMethod.PUT)
-	public Result<JSONObject> selectDepart(@RequestBody SysUser user) {
-		Result<JSONObject> result = new Result<JSONObject>();
-		String username = user.getUsername();
-		if(oConvertUtils.isEmpty(username)) {
-			LoginUser sysUser = (LoginUser)SecurityUtils.getSubject().getPrincipal();
-			username = sysUser.getUsername();
-		}
-		String orgCode= user.getOrgCode();
-		this.sysUserService.updateUserDepart(username, orgCode);
-		SysUser sysUser = sysUserService.getUserByName(username);
-		JSONObject obj = new JSONObject();
-		obj.put("userInfo", sysUser);
-		result.setResult(obj);
-		return result;
-	}
+	public Result<JSONObject> selectDepart(@RequestBody org.jeecg.modules.system.model.DepartmentSelectionRequest request) {
+        SysUser user = departmentSelection.select(request);
+        JSONObject body = new JSONObject();
+        body.put("userInfo", user);
+        Result<JSONObject> result = new Result<>();
+        result.setResult(body);
+        return result;
+    }
 
 	/**
 	 * 短信登录接口
