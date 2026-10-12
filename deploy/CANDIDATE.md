@@ -2,7 +2,11 @@
 
 `candidate_release.py` 把明确指定的可信集成候选、冻结 JAR 和完整前端 dist 复制到一个新的私有目录，并生成合成数据库初始化材料、随机凭据和 Docker Compose 配置。`create` 与 `verify` 都不启动 Docker、服务、HTTP 请求或数据库。这个包用于本机 Linux/arm64 容器验证；生产部署、真实数据迁移和人工验收另有各自的证据与授权。
 
-工具所在的 PR 分支以 Nginx 修复 #66 为基础。这个分支本身不包含全部产品修复和原生夹具工具。`--source` 必须指定已经集成所需产品修复、`api/dev/` 夹具工具及自制素材的候选 Git 工作树。工具要求该工作树的 tracked 文件干净，且实际调用的 helper、模板、原始 schema SQL、自制素材和 Nginx 配置均由该 commit 跟踪；无关 untracked 文件可以保留，构建得到的 `web/dist` 也可以是 untracked。
+`--source` 必须指定已经集成所需产品修复、`api/dev/` 夹具工具及自制素材的候选 Git 工作树。工具要求该工作树的 tracked 文件干净，且实际调用的 helper、模板、原始 schema SQL、自制素材和 Nginx 配置均由该 commit 跟踪；无关 untracked 文件可以保留，构建得到的 `web/dist` 也可以是 untracked。
+
+Nginx 固定契约包含 #66 的代理修复及已合并 #92（`85e19e8e60444f69d0ddebd86aee9905b239ae72`）的 8 个精确公开 Python 运行资源 CORP 例外，SHA256 为 `8ca3498beb006d305e2c632ee7428d5578e83dc89c7560cd1fad4f6c374c59f3`。其余路径仍为 `same-site`，其他安全响应头、API 和附件规则保持原契约。`create` 和 `verify` 均拒绝其他配置，即使操作者重新计算包内库存也不接受。后续配置变化须先审查，再显式更新固定摘要；不能在运行时从 source 自动生成允许值。
+
+CI 的 tools job 使用真实 JDK 8 执行 `test_candidate_release.py`，覆盖仓库配置与固定摘要一致性、合成输入 create/verify、已提交但未经审查的配置拒绝，以及重算库存后的全局 CORP 放宽拒绝。合成 JAR 和小 dist 的测试不代表完整应用候选创建成功；完整 JAR/dist 的离线创建和实际服务运行应分别验证。这个摘要仅约束本工具，`launch_bundle.py` 的正式发布包入口没有此固定 pin。
 
 `--source` 会执行其中的 Python 纯夹具函数，并用其中的 `FixturePassword.java` 与 `PasswordUtil.java` 临时编译密码工具。这里的“可信”是使用者明确选择可信源码的边界，不是对不可信代码的沙箱。工具不调用既有 macOS 运行时的 `create`、`cold_runtime`、`seed` 或服务操作，也不改动其平台守卫。
 
@@ -37,7 +41,7 @@ manifest.json                         冻结输入和不可变文件的 SHA256/b
 compose.json                          四个标准官方镜像的明确隔离配置
 app/app.jar                           原样复制的冻结 JAR
 web/dist/**                           dist manifest 对应的全部公开应用文件
-web/nginx.conf                        #66 的原样 Nginx 配置
+web/nginx.conf                        #66 + #92 固定契约的原样 Nginx 配置
 config/application-localtest.properties
 config/credentials.json
 config/mysql-root-password
