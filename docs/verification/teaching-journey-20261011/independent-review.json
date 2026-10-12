@@ -1,0 +1,46 @@
+{
+  "review": "independent read-only technical review",
+  "production_source_unchanged_since": "e2e88283c19092ab4623baf83c082fd264f16ece",
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "findings_resolved": [
+    "Replace incorrectly labelled desktop reload screenshot with actual submitted feedback view",
+    "Bind each downloaded artifact to the actual student/teacher browser role and observed click",
+    "Reuse PR 134 CI without duplicating or weakening its process/log guards",
+    "Retain strict download query-count bounds while recognizing tombstone-aware file SQL"
+  ],
+  "scope": [
+    "browser records and SQL state consistency",
+    "real download byte comparison",
+    "screenshots and authentication-material exclusion",
+    "CI merge and SQL classifier diff"
+  ],
+  "not_executed_by_reviewer": [
+    "business HTTP probes",
+    "build",
+    "GitHub CI",
+    "deployment"
+  ],
+  "remaining_external_checks": [
+    "GitHub CI on newly pushed final heads"
+  ],
+  "root_followup_checks": {
+    "http_probes": 27,
+    "http_checks": 3985,
+    "download_checks": 88,
+    "ci_offline_checks": 47,
+    "github_ci": "pending new head"
+  },
+  "final_upstream_review": {
+    "base_commit": "728f6aae",
+    "reviewed_head": "2dc7b63e599f05079c018f8c58eabdec33853576",
+    "integration_commit": "99d2d1031ab8dd41754ca4ba79048f7ed9d1a004",
+    "result": "no substantive blockers",
+    "reviewed": [
+      "candidate POI export reader and temporary compilation",
+      "exact synthetic organization-rule ownership and six-table restoration",
+      "SQL literal collation and actual application route",
+      "91/91 and 389/389 reports matching the fixed JAR"
+    ],
+    "reviewer_executed_runtime_tests": false
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "built_product_source_commit": "e2e88283c19092ab4623baf83c082fd264f16ece",
+  "checked_integration_commit": "99d2d1031ab8dd41754ca4ba79048f7ed9d1a004",
+  "paths": [
+    {
+      "path": "api/jeecg-boot-module-system/src/main",
+      "git_object": "163a34437dbda2f8778453d4ee66eeeb247e2059",
+      "unchanged": true
+    },
+    {
+      "path": "web/src",
+      "git_object": "171472b27d9511a7529ce657fab9d07fc73a2e09",
+      "unchanged": true
+    },
+    {
+      "path": "web/public",
+      "git_object": "dc8a84d23f1ec52b1f10ccc7f40eebc1c2bd6c79",
+      "unchanged": true
+    },
+    {
+      "path": "web/package-lock.json",
+      "git_object": "159b5fec61d4f4378f56dbb6312e20175fa600e0",
+      "unchanged": true
+    }
+  ],
+  "reason": "CI and probe-only integration changes do not invalidate the fixed JAR and dist browser run"
+}

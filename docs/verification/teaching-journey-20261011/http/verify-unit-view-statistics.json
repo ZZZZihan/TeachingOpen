@@ -1,0 +1,136 @@
+{
+  "observed_utc": "2026-10-11T11:46:16.715917+00:00",
+  "scope": "ordinary legal Shiro HTTP, synthetic MySQL and Redis; no failure injection",
+  "production_connected": false,
+  "checks": [
+    {
+      "case": "12 concurrent first views across two assigned classes all succeed",
+      "passed": true
+    },
+    {
+      "case": "cross-class concurrency commits one event per class",
+      "passed": true
+    },
+    {
+      "case": "committed cross-class retries all succeed",
+      "passed": true
+    },
+    {
+      "case": "committed cross-class retries do not count twice",
+      "passed": true
+    },
+    {
+      "case": "identity 2 class member first view succeeds",
+      "passed": true
+    },
+    {
+      "case": "first view persists one completed lifetime event",
+      "passed": true
+    },
+    {
+      "case": "first view adds one class counter",
+      "passed": true
+    },
+    {
+      "case": "event and statistics use the same Shanghai DATE",
+      "passed": true
+    },
+    {
+      "case": "ordinary retries and another eligible class member succeed",
+      "passed": true
+    },
+    {
+      "case": "retries and another eligible member leave event and count unchanged",
+      "passed": true
+    },
+    {
+      "case": "ordinary students retain their legal non-counting response",
+      "passed": true
+    },
+    {
+      "case": "ordinary student requests write no business rows",
+      "passed": true
+    },
+    {
+      "case": "12 concurrent first views in one class all succeed",
+      "passed": true
+    },
+    {
+      "case": "same-class concurrency persists one event and one increment",
+      "passed": true
+    },
+    {
+      "case": "new events never write legacy Redis sets",
+      "passed": true
+    },
+    {
+      "case": "same unit in another assigned class succeeds",
+      "passed": true
+    },
+    {
+      "case": "different classes have independent lifetime events",
+      "passed": true
+    },
+    {
+      "case": "old serialized Redis marker produces explicit business 409",
+      "passed": true
+    },
+    {
+      "case": "old marker persists unresolved with no counted day",
+      "passed": true
+    },
+    {
+      "case": "legacy response changes no counters or old Redis bytes",
+      "passed": true
+    },
+    {
+      "case": "ordinary legacy retry remains 409 without changing history",
+      "passed": true
+    },
+    {
+      "case": "course content remains readable after legacy statistics conflict",
+      "passed": true
+    },
+    {
+      "case": "all affected fixture business rows are restored",
+      "passed": true
+    },
+    {
+      "case": "original media reference index and state restored",
+      "passed": true
+    },
+    {
+      "case": "both legacy cache keys are restored byte for byte",
+      "passed": true
+    },
+    {
+      "case": "normal request audit rows are retained",
+      "passed": true
+    }
+  ],
+  "audit_logs_retained": true,
+  "counting_identity": 2,
+  "counting_identity_meaning": "superior; ordinary student identity 1 remains a no-op",
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "baseline_sha256": {
+    "teaching_course_unit": "93b3fcbb8f171cba14b1a6f1757fe6dea1f8c60e0e7fac73674bc1bc9932f6e7",
+    "teaching_course_dept": "7562803d73cdb19e81b2fedd56f3891fd7c7900eb04b748dff8f9ec85415bbc6",
+    "sys_user_depart": "4edca139a00960ce71ec6d11644fdea6a47c20efd88e4cb9639fdf8a6c26ec52",
+    "teaching_depart_day_log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "teaching_unit_view_event": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "initial_ledger_rows": 0,
+  "restored_sha256": {
+    "teaching_course_unit": "93b3fcbb8f171cba14b1a6f1757fe6dea1f8c60e0e7fac73674bc1bc9932f6e7",
+    "teaching_course_dept": "7562803d73cdb19e81b2fedd56f3891fd7c7900eb04b748dff8f9ec85415bbc6",
+    "sys_user_depart": "4edca139a00960ce71ec6d11644fdea6a47c20efd88e4cb9639fdf8a6c26ec52",
+    "teaching_depart_day_log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "teaching_unit_view_event": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "business_rows_restored": true,
+  "media_index_restored": true,
+  "legacy_cache_restored": true,
+  "passed": 26,
+  "failed": 0,
+  "total": 26
+}

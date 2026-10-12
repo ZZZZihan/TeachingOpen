@@ -1,0 +1,118 @@
+{
+  "checked_at": "2026-10-11T11:47:54.189804+00:00",
+  "scope": "synthetic local HTTP and MySQL",
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "cases": [
+    {
+      "case": "public public like succeeds from 0 counter",
+      "passed": true
+    },
+    {
+      "case": "public like changes no other work column",
+      "passed": true
+    },
+    {
+      "case": "public duplicate like does not increment again",
+      "passed": true
+    },
+    {
+      "case": "featured public like succeeds from 0 counter",
+      "passed": true
+    },
+    {
+      "case": "featured like changes no other work column",
+      "passed": true
+    },
+    {
+      "case": "featured duplicate like does not increment again",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot like private",
+      "passed": true
+    },
+    {
+      "case": "admin cannot like private",
+      "passed": true
+    },
+    {
+      "case": "admin cannot like deleted",
+      "passed": true
+    },
+    {
+      "case": "None cannot like missing",
+      "passed": true
+    },
+    {
+      "case": "save HTTP like read precedes the concurrent writer commit",
+      "passed": true
+    },
+    {
+      "case": "save like reports the final publication state",
+      "passed": true
+    },
+    {
+      "case": "save persisted save and audit metadata survive the like",
+      "passed": true
+    },
+    {
+      "case": "save counter reflects only a successful public like",
+      "passed": true
+    },
+    {
+      "case": "save keeps every other work column unchanged",
+      "passed": true
+    },
+    {
+      "case": "withdraw HTTP like read precedes the concurrent writer commit",
+      "passed": true
+    },
+    {
+      "case": "withdraw like reports the final publication state",
+      "passed": true
+    },
+    {
+      "case": "withdraw persisted save and audit metadata survive the like",
+      "passed": true
+    },
+    {
+      "case": "withdraw counter reflects only a successful public like",
+      "passed": true
+    },
+    {
+      "case": "withdraw keeps every other work column unchanged",
+      "passed": true
+    },
+    {
+      "case": "withdrawn failed like does not set a deduplication key",
+      "passed": true
+    },
+    {
+      "case": "32 concurrent distinct-client likes all persist",
+      "passed": true
+    },
+    {
+      "case": "parallel likes preserve every non-like column",
+      "passed": true
+    },
+    {
+      "case": "failed counter write cannot report success or change other fields",
+      "passed": true
+    },
+    {
+      "case": "failed counter write does not set a deduplication key",
+      "passed": true
+    },
+    {
+      "case": "all original work columns restored",
+      "passed": true
+    },
+    {
+      "case": "all original attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "production_verified": false,
+  "browser_verified": false
+}

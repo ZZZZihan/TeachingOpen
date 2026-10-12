@@ -5,7 +5,7 @@
 ## 合并检查
 
 - **Frontend tests and build**：沿用 `web/.nvmrc` 与锁文件，禁用依赖安装脚本，运行前端测试、实际 Chromium 通知组件渲染、上传凭据及 Header/TMenu 导航回归和生产构建；缺少浏览器直接失败，不跳过浏览器检查。获取完整 Git 历史，以运行已有的旧版本回归对照测试。
-- **Backup and migration tools**：执行备份、升级清单、发布包、空表提取以及 CI 守卫的合成测试，不实际运行备份或拉取服务器数据。另运行公网 IP HTTPS 工具单元测试与固定镜像的隔离 Nginx/TLS 验证：临时测试 CA、回环端口、合成 API/WebSocket/媒体、实际配置切换与回退，不请求公网证书、不连接生产。只保存不含私钥的汇总 JSON。
+- **Backup and migration tools**：执行备份、升级清单、发布包、空表提取以及 CI 守卫的合成测试，不实际运行备份或拉取服务器数据。单独执行 `api/dev/test_teaching_journey_fixture.py`，离线检查教学流程夹具的请求、认证材料、限定 SQL、缓存和上传恢复边界；该步骤不启动服务或浏览器。另运行公网 IP HTTPS 工具单元测试与固定镜像的隔离 Nginx/TLS 验证：临时测试 CA、回环端口、合成 API/WebSocket/媒体、实际配置切换与回退，不请求公网证书、不连接生产。只保存不含私钥的汇总 JSON。
 - **Backend and MySQL registration**：Java 8 干净构建并显式开启 `check_java_results.py` 所列的 39 套核心 Java 测试。构建选择与 Surefire 报告校验读取同一清单，缺少或跳过任何核心测试都会失败。CI 自身回归还枚举仓库的 `*Test.java`，防止新增套件遗漏。原 `SampleTest` 依赖固定旧业务样例，`SecurityToolsTest` 仅打印加解密结果，因此不列入核心检查。
 - **CI required**：汇总前三项，只有全部成功才通过；失败、取消或跳过均不能通过。作为分支必需状态检查使用，避免单项路径过滤导致检查缺失。
 

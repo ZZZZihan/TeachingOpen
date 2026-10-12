@@ -1,0 +1,172 @@
+{
+  "cases": [
+    {
+      "case": "edit accepted: workStatus,teachingWorkCorrectList",
+      "passed": true
+    },
+    {
+      "case": "zero-score feedback persisted",
+      "passed": true
+    },
+    {
+      "case": "grade preserves omitted comments including IDs and metadata",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: workName",
+      "passed": true
+    },
+    {
+      "case": "metadata-only edit preserves both child collections",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: teachingWorkCorrectList,teachingWorkCommentList",
+      "passed": true
+    },
+    {
+      "case": "explicit null means unchanged for both collections",
+      "passed": true
+    },
+    {
+      "case": "student discussion accepted through actual endpoint",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: workStatus,teachingWorkCorrectList",
+      "passed": true
+    },
+    {
+      "case": "grading does not erase discussion posted since initial read",
+      "passed": true
+    },
+    {
+      "case": "owner reads committed feedback",
+      "passed": true
+    },
+    {
+      "case": "edit denied for student_a",
+      "passed": true
+    },
+    {
+      "case": "denied mutation preserves parent and children for student_a",
+      "passed": true
+    },
+    {
+      "case": "edit denied for teacher_b",
+      "passed": true
+    },
+    {
+      "case": "denied mutation preserves parent and children for teacher_b",
+      "passed": true
+    },
+    {
+      "case": "edit denied for None",
+      "passed": true
+    },
+    {
+      "case": "denied mutation preserves parent and children for None",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: teachingWorkCommentList",
+      "passed": true
+    },
+    {
+      "case": "explicit comments replace only comments",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: teachingWorkCommentList",
+      "passed": true
+    },
+    {
+      "case": "explicit empty comments clears only comments",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: teachingWorkCorrectList",
+      "passed": true
+    },
+    {
+      "case": "explicit empty feedback clears only feedback",
+      "passed": true
+    },
+    {
+      "case": "edit accepted: teachingWorkCorrectList,teachingWorkCommentList",
+      "passed": true
+    },
+    {
+      "case": "explicit two-collection update persists both",
+      "passed": true
+    },
+    {
+      "case": "second insert fails: teachingWorkCorrectList",
+      "passed": true
+    },
+    {
+      "case": "failed replace restores all parent and child columns: teachingWorkCorrectList",
+      "passed": true
+    },
+    {
+      "case": "second insert fails: teachingWorkCommentList",
+      "passed": true
+    },
+    {
+      "case": "failed replace restores all parent and child columns: teachingWorkCommentList",
+      "passed": true
+    },
+    {
+      "case": "task-bound rename succeeds without correction event",
+      "passed": true
+    },
+    {
+      "case": "real daily SQL failure rejects grading",
+      "passed": true
+    },
+    {
+      "case": "real daily failure rolls back parent feedback event and statistics",
+      "passed": true
+    },
+    {
+      "case": "grading succeeds with unusable obsolete Redis marker",
+      "passed": true
+    },
+    {
+      "case": "eight concurrent grading retries succeed",
+      "passed": true
+    },
+    {
+      "case": "one persistent correction event after concurrent retries",
+      "passed": true
+    },
+    {
+      "case": "original and atomic works each count once",
+      "passed": true
+    },
+    {
+      "case": "statistics never read or write obsolete Redis marker",
+      "passed": true
+    },
+    {
+      "case": "lost Redis marker cannot recount committed correction",
+      "passed": true
+    },
+    {
+      "case": "all 68 non-audit database tables restored",
+      "passed": true
+    },
+    {
+      "case": "all attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 40,
+  "total": 40,
+  "expected_legacy": false,
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "changed_tables": [
+    "sys_log"
+  ],
+  "scope": "Actual synthetic HTTP, MySQL transaction failures and readback. Eight concurrent grading retries and unusable/lost Redis marker covered; no authenticated browser or classroom load test."
+}

@@ -1,0 +1,551 @@
+{
+  "scope": "owned synthetic HTTP/MySQL and actual POI Excel",
+  "production_connected": false,
+  "expected_legacy": false,
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "verifier_sha256": "be61963f6534a8813022c191e2ac1f5172486d459b50e0f887a41a647ff05a63",
+  "passed": 135,
+  "failed": 0,
+  "checks": [
+    {
+      "case": "authorization rejects teacher_a /sys/user/queryByOrgCode?orgCode=A99A01%27+OR+1%3D1+--",
+      "passed": true
+    },
+    {
+      "case": "authorization rejects teacher_a /sys/user/queryByOrgCode?orgCode=A99%25",
+      "passed": true
+    },
+    {
+      "case": "authorization rejects teacher_a /sys/user/queryByOrgCode?orgCode=A99A02",
+      "passed": true
+    },
+    {
+      "case": "authorization rejects teacher_a /sys/user/queryByOrgCode?orgCode=A9",
+      "passed": true
+    },
+    {
+      "case": "authorization rejects student_a /sys/user/queryByOrgCode?orgCode=A99A01",
+      "passed": true
+    },
+    {
+      "case": "allowed teacher_a /sys/user/queryByOrgCode?orgCode=A99A01&pageSize=100",
+      "passed": true
+    },
+    {
+      "case": "authorized canonical organization rows /sys/user/queryByOrgCode",
+      "passed": true
+    },
+    {
+      "case": "authorization rejects teacher_a /sys/user/queryByOrgCodeForAddressList?orgCode=A99A01%27+OR+1%3D1+--",
+      "passed": true
+    },
+    {
+      "case": "authorization rejects teacher_a /sys/user/queryByOrgCodeForAddressList?orgCode=A99%25",
+      "passed": true
+    },
+    {
+      "case": "authorization rejects teacher_a /sys/user/queryByOrgCodeForAddressList?orgCode=A99A02",
+      "passed": true
+    },
+    {
+      "case": "authorization rejects teacher_a /sys/user/queryByOrgCodeForAddressList?orgCode=A9",
+      "passed": true
+    },
+    {
+      "case": "authorization rejects student_a /sys/user/queryByOrgCodeForAddressList?orgCode=A99A01",
+      "passed": true
+    },
+    {
+      "case": "allowed teacher_a /sys/user/queryByOrgCodeForAddressList?orgCode=A99A01&pageSize=100",
+      "passed": true
+    },
+    {
+      "case": "authorized canonical organization rows /sys/user/queryByOrgCodeForAddressList",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/dict/list {'column': 'id) OR 1=1 --', 'order': 'asc'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/dict/list {'superQueryParams': '[{\"field\": \"id) OR 1=1 --\", \"rule\": \"eq\", \"val\": \"x\"}]'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/dict/list {'column': 'nonexistent_field', 'order': 'asc'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/dict/list {'superQueryParams': '[{\"field\": \"nonexistent_field\", \"rule\": \"eq\", \"val\": \"x\"}]'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/dict/list {'column': '(select 1)', 'order': 'asc'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/dict/list {'superQueryParams': '[{\"field\": \"(select 1)\", \"rule\": \"eq\", \"val\": \"x\"}]'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/dict/list {'column': 'sys_user.password', 'order': 'asc'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/dict/list {'superQueryParams': '[{\"field\": \"sys_user.password\", \"rule\": \"eq\", \"val\": \"x\"}]'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/user/list {'column': 'id) OR 1=1 --', 'order': 'asc'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/user/list {'superQueryParams': '[{\"field\": \"id) OR 1=1 --\", \"rule\": \"eq\", \"val\": \"x\"}]'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/user/list {'column': 'nonexistent_field', 'order': 'asc'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/user/list {'superQueryParams': '[{\"field\": \"nonexistent_field\", \"rule\": \"eq\", \"val\": \"x\"}]'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/user/list {'column': '(select 1)', 'order': 'asc'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/user/list {'superQueryParams': '[{\"field\": \"(select 1)\", \"rule\": \"eq\", \"val\": \"x\"}]'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/user/list {'column': 'sys_user.password', 'order': 'asc'}",
+      "passed": true
+    },
+    {
+      "case": "entity columns reject before SQL /sys/user/list {'superQueryParams': '[{\"field\": \"sys_user.password\", \"rule\": \"eq\", \"val\": \"x\"}]'}",
+      "passed": true
+    },
+    {
+      "case": "allowed admin /sys/user/list?column=createTime&order=desc&superQueryParams=%5B%7B%22field%22%3A+%22username%22%2C+%22rule%22%3A+%22eq%22%2C+%22val%22%3A+%22%27+OR+1%3D1+--%22%7D%5D",
+      "passed": true
+    },
+    {
+      "case": "advanced hostile value is a literal and has no matches",
+      "passed": true
+    },
+    {
+      "case": "category single-column query rejects expression id) OR 1=1 --",
+      "passed": true
+    },
+    {
+      "case": "category tree rejects expression before mapper id) OR 1=1 --",
+      "passed": true
+    },
+    {
+      "case": "category single-column query rejects expression (select 1)",
+      "passed": true
+    },
+    {
+      "case": "category tree rejects expression before mapper (select 1)",
+      "passed": true
+    },
+    {
+      "case": "category single-column query rejects expression nonexistent_field",
+      "passed": true
+    },
+    {
+      "case": "category tree rejects expression before mapper nonexistent_field",
+      "passed": true
+    },
+    {
+      "case": "allowed admin /sys/user/list?roleId=x%27%29+OR+1%3D1+--",
+      "passed": true
+    },
+    {
+      "case": "hostile relationship ID is a bound literal roleId",
+      "passed": true
+    },
+    {
+      "case": "allowed admin /sys/user/list?departId=x%27%29+OR+1%3D1+--",
+      "passed": true
+    },
+    {
+      "case": "hostile relationship ID is a bound literal departId",
+      "passed": true
+    },
+    {
+      "case": "department selection requires current identity and membership {'username': 'fixture_student_b', 'orgCode': 'A99A02'}",
+      "passed": true
+    },
+    {
+      "case": "denied department selection preserves database {'username': 'fixture_student_b', 'orgCode': 'A99A02'}",
+      "passed": true
+    },
+    {
+      "case": "denied department selection preserves cache values {'username': 'fixture_student_b', 'orgCode': 'A99A02'}",
+      "passed": true
+    },
+    {
+      "case": "department selection requires current identity and membership {'username': 'fixture_student_a', 'orgCode': 'A99A02'}",
+      "passed": true
+    },
+    {
+      "case": "denied department selection preserves database {'username': 'fixture_student_a', 'orgCode': 'A99A02'}",
+      "passed": true
+    },
+    {
+      "case": "denied department selection preserves cache values {'username': 'fixture_student_a', 'orgCode': 'A99A02'}",
+      "passed": true
+    },
+    {
+      "case": "department selection requires current identity and membership {'orgCode': 'A99'}",
+      "passed": true
+    },
+    {
+      "case": "denied department selection preserves database {'orgCode': 'A99'}",
+      "passed": true
+    },
+    {
+      "case": "denied department selection preserves cache values {'orgCode': 'A99'}",
+      "passed": true
+    },
+    {
+      "case": "department selection requires current identity and membership {'orgCode': \"A99A01' OR 1=1 --\"}",
+      "passed": true
+    },
+    {
+      "case": "denied department selection preserves database {'orgCode': \"A99A01' OR 1=1 --\"}",
+      "passed": true
+    },
+    {
+      "case": "denied department selection preserves cache values {'orgCode': \"A99A01' OR 1=1 --\"}",
+      "passed": true
+    },
+    {
+      "case": "own newly joined organization can be selected",
+      "passed": true
+    },
+    {
+      "case": "own organization selection is persisted",
+      "passed": true
+    },
+    {
+      "case": "revoked membership rejects with the same token",
+      "passed": true
+    },
+    {
+      "case": "revoked selection preserves database and cache",
+      "passed": true
+    },
+    {
+      "case": "profile allowed student_a /sys/user/queryById?id=fixture_student_a",
+      "passed": true
+    },
+    {
+      "case": "own profile has exact allowed fields",
+      "passed": true
+    },
+    {
+      "case": "profile allowed teacher_a /sys/user/queryById?id=fixture_student_a",
+      "passed": true
+    },
+    {
+      "case": "managed student has exact minimal fields",
+      "passed": true
+    },
+    {
+      "case": "profile allowed admin /sys/user/queryById?id=fixture_student_a",
+      "passed": true
+    },
+    {
+      "case": "administrator profile has exact allowed fields",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects student_b /sys/user/queryById?id=fixture_student_a",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects teacher_b /sys/user/queryById?id=fixture_student_a",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects student_a /sys/user/queryById?id=fixture_teacher_a",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects student_a /sys/user/queryByIds?userIds=fixture_student_a,fixture_student_b",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects teacher_a /sys/user/queryByIds?userIds=fixture_student_a,fixture_student_b",
+      "passed": true
+    },
+    {
+      "case": "profile allowed teacher_a /sys/user/queryByIds?userIds=fixture_student_a,fixture_teacher_a",
+      "passed": true
+    },
+    {
+      "case": "authorized batch returns complete known IDs",
+      "passed": true
+    },
+    {
+      "case": "authorized batch does not disclose student contacts",
+      "passed": true
+    },
+    {
+      "case": "oversized profile batch rejected before reads",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects teacher_a /sys/user/departUserList?depId=fixture_class_b",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects student_a /sys/user/departUserList?depId=fixture_class_a",
+      "passed": true
+    },
+    {
+      "case": "profile allowed teacher_a /sys/user/departUserList?depId=fixture_class_a",
+      "passed": true
+    },
+    {
+      "case": "department alias does not disclose contact fields /sys/user/departUserList",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects teacher_a /sys/user/queryUserByDepId?id=fixture_class_b",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects student_a /sys/user/queryUserByDepId?id=fixture_class_a",
+      "passed": true
+    },
+    {
+      "case": "profile allowed teacher_a /sys/user/queryUserByDepId?id=fixture_class_a",
+      "passed": true
+    },
+    {
+      "case": "department alias does not disclose contact fields /sys/user/queryUserByDepId",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects student_a /sys/user/appUserList",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects teacher_a /sys/user/appUserList",
+      "passed": true
+    },
+    {
+      "case": "profile allowed admin /sys/user/appUserList",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects student_a /sys/user/userRoleList?roleId=fixture_role_student",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects teacher_a /sys/user/userRoleList?roleId=fixture_role_student",
+      "passed": true
+    },
+    {
+      "case": "profile allowed admin /sys/user/userRoleList?roleId=fixture_role_student",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects student_a /sys/user/queryUserRole?userid=fixture_student_b",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects teacher_a /sys/user/queryUserRole?userid=fixture_student_b",
+      "passed": true
+    },
+    {
+      "case": "profile allowed admin /sys/user/queryUserRole?userid=fixture_student_b",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects student_a /sys/user/userDepartList?userId=fixture_student_b",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects teacher_a /sys/user/userDepartList?userId=fixture_student_b",
+      "passed": true
+    },
+    {
+      "case": "profile allowed admin /sys/user/userDepartList?userId=fixture_student_b",
+      "passed": true
+    },
+    {
+      "case": "profile allowed student_a /sys/user/getUserSectionInfoByToken?token=not-the-current-user",
+      "passed": true
+    },
+    {
+      "case": "section info always uses authenticated principal",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects teacher_a /sys/user/queryById?id=fixture_student_a",
+      "passed": true
+    },
+    {
+      "case": "private profile authorization rejects teacher_a /sys/user/queryByOrgCode?orgCode=A99A01",
+      "passed": true
+    },
+    {
+      "case": "allowed admin /sys/user/list?pageSize=100",
+      "passed": true
+    },
+    {
+      "case": "list relationship total admin{}",
+      "passed": true
+    },
+    {
+      "case": "actual Excel HTTP success admin{}",
+      "passed": true
+    },
+    {
+      "case": "candidate POI reads actual Excel 0",
+      "passed": true
+    },
+    {
+      "case": "Excel never exposes password column 0",
+      "passed": true
+    },
+    {
+      "case": "actual Excel exact user set admin{}",
+      "passed": true
+    },
+    {
+      "case": "allowed admin /sys/user/list?pageSize=100&roleId=fixture_role_student",
+      "passed": true
+    },
+    {
+      "case": "list relationship total admin{'roleId': 'fixture_role_student'}",
+      "passed": true
+    },
+    {
+      "case": "actual Excel HTTP success admin{'roleId': 'fixture_role_student'}",
+      "passed": true
+    },
+    {
+      "case": "candidate POI reads actual Excel 1",
+      "passed": true
+    },
+    {
+      "case": "Excel never exposes password column 1",
+      "passed": true
+    },
+    {
+      "case": "actual Excel exact user set admin{'roleId': 'fixture_role_student'}",
+      "passed": true
+    },
+    {
+      "case": "allowed admin /sys/user/list?pageSize=100&departId=fixture_class_a",
+      "passed": true
+    },
+    {
+      "case": "list relationship total admin{'departId': 'fixture_class_a'}",
+      "passed": true
+    },
+    {
+      "case": "actual Excel HTTP success admin{'departId': 'fixture_class_a'}",
+      "passed": true
+    },
+    {
+      "case": "candidate POI reads actual Excel 2",
+      "passed": true
+    },
+    {
+      "case": "Excel never exposes password column 2",
+      "passed": true
+    },
+    {
+      "case": "actual Excel exact user set admin{'departId': 'fixture_class_a'}",
+      "passed": true
+    },
+    {
+      "case": "allowed admin /sys/user/list?pageSize=100&roleId=fixture_role_student&departId=fixture_class_a",
+      "passed": true
+    },
+    {
+      "case": "list relationship total admin{'roleId': 'fixture_role_student', 'departId': 'fixture_class_a'}",
+      "passed": true
+    },
+    {
+      "case": "actual Excel HTTP success admin{'roleId': 'fixture_role_student', 'departId': 'fixture_class_a'}",
+      "passed": true
+    },
+    {
+      "case": "candidate POI reads actual Excel 3",
+      "passed": true
+    },
+    {
+      "case": "Excel never exposes password column 3",
+      "passed": true
+    },
+    {
+      "case": "actual Excel exact user set admin{'roleId': 'fixture_role_student', 'departId': 'fixture_class_a'}",
+      "passed": true
+    },
+    {
+      "case": "allowed teacher_a /sys/user/list?pageSize=100&roleId=fixture_role_student",
+      "passed": true
+    },
+    {
+      "case": "list relationship total teacher_a{'roleId': 'fixture_role_student'}",
+      "passed": true
+    },
+    {
+      "case": "actual Excel HTTP success teacher_a{'roleId': 'fixture_role_student'}",
+      "passed": true
+    },
+    {
+      "case": "candidate POI reads actual Excel 4",
+      "passed": true
+    },
+    {
+      "case": "Excel never exposes password column 4",
+      "passed": true
+    },
+    {
+      "case": "teacher Excel omits private contact columns 4",
+      "passed": true
+    },
+    {
+      "case": "actual Excel exact user set teacher_a{'roleId': 'fixture_role_student'}",
+      "passed": true
+    },
+    {
+      "case": "allowed teacher_a /sys/user/list?pageSize=100&departId=fixture_class_b",
+      "passed": true
+    },
+    {
+      "case": "list relationship total teacher_a{'departId': 'fixture_class_b'}",
+      "passed": true
+    },
+    {
+      "case": "actual Excel HTTP success teacher_a{'departId': 'fixture_class_b'}",
+      "passed": true
+    },
+    {
+      "case": "candidate POI reads actual Excel 5",
+      "passed": true
+    },
+    {
+      "case": "Excel never exposes password column 5",
+      "passed": true
+    },
+    {
+      "case": "teacher Excel omits private contact columns 5",
+      "passed": true
+    },
+    {
+      "case": "actual Excel exact user set teacher_a{'departId': 'fixture_class_b'}",
+      "passed": true
+    }
+  ]
+}

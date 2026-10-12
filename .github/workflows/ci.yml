@@ -102,6 +102,8 @@ jobs:
           python3 -m unittest discover -s api/dev -p 'test_extract_schema.py' -v
           python3 -m unittest discover -s api/dev -p 'test_local_media_index_probe.py' -v
           python3 -m unittest discover -s ci -p 'test_*.py' -v
+      - name: Teaching journey fixture offline boundaries (no services)
+        run: python3 -m unittest discover -s api/dev -p 'test_teaching_journey_fixture.py' -v
       - name: Isolated IP HTTPS and rollback (synthetic CA, loopback only)
         run: |
           docker pull nginx@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94

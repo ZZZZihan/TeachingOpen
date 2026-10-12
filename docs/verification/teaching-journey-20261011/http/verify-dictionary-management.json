@@ -1,0 +1,969 @@
+{
+  "scope": "owned synthetic Spring/Shiro HTTP, MySQL and Redis",
+  "production_connected": false,
+  "checks": [
+    {
+      "case": "anonymous add is rejected by authentication",
+      "passed": true
+    },
+    {
+      "case": "student POST /sys/dict/add rejects",
+      "passed": true
+    },
+    {
+      "case": "student POST /sys/dict/add leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "student POST /sys/dict/add preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "student PUT /sys/dict/edit rejects",
+      "passed": true
+    },
+    {
+      "case": "student PUT /sys/dict/edit leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "student PUT /sys/dict/edit preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dict/delete rejects",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dict/delete leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dict/delete preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dict/deleteBatch rejects",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dict/deleteBatch leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dict/deleteBatch preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "student POST /sys/dict/importExcel rejects",
+      "passed": true
+    },
+    {
+      "case": "student POST /sys/dict/importExcel leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "student POST /sys/dict/importExcel preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dict/deletePhysic/dm_82a4a2bd rejects",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dict/deletePhysic/dm_82a4a2bd leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dict/deletePhysic/dm_82a4a2bd preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "student PUT /sys/dict/back/dm_82a4a2bd rejects",
+      "passed": true
+    },
+    {
+      "case": "student PUT /sys/dict/back/dm_82a4a2bd leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "student PUT /sys/dict/back/dm_82a4a2bd preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "student GET /sys/dict/refleshCache rejects",
+      "passed": true
+    },
+    {
+      "case": "student GET /sys/dict/refleshCache leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "student GET /sys/dict/refleshCache preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "student POST /sys/dictItem/add rejects",
+      "passed": true
+    },
+    {
+      "case": "student POST /sys/dictItem/add leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "student POST /sys/dictItem/add preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "student PUT /sys/dictItem/edit rejects",
+      "passed": true
+    },
+    {
+      "case": "student PUT /sys/dictItem/edit leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "student PUT /sys/dictItem/edit preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dictItem/delete rejects",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dictItem/delete leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dictItem/delete preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dictItem/deleteBatch rejects",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dictItem/deleteBatch leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "student DELETE /sys/dictItem/deleteBatch preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "teacher POST /sys/dict/add rejects",
+      "passed": true
+    },
+    {
+      "case": "teacher POST /sys/dict/add leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher POST /sys/dict/add preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "teacher PUT /sys/dict/edit rejects",
+      "passed": true
+    },
+    {
+      "case": "teacher PUT /sys/dict/edit leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher PUT /sys/dict/edit preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dict/delete rejects",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dict/delete leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dict/delete preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dict/deleteBatch rejects",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dict/deleteBatch leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dict/deleteBatch preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "teacher POST /sys/dict/importExcel rejects",
+      "passed": true
+    },
+    {
+      "case": "teacher POST /sys/dict/importExcel leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher POST /sys/dict/importExcel preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dict/deletePhysic/dm_82a4a2bd rejects",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dict/deletePhysic/dm_82a4a2bd leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dict/deletePhysic/dm_82a4a2bd preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "teacher PUT /sys/dict/back/dm_82a4a2bd rejects",
+      "passed": true
+    },
+    {
+      "case": "teacher PUT /sys/dict/back/dm_82a4a2bd leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher PUT /sys/dict/back/dm_82a4a2bd preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "teacher GET /sys/dict/refleshCache rejects",
+      "passed": true
+    },
+    {
+      "case": "teacher GET /sys/dict/refleshCache leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher GET /sys/dict/refleshCache preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "teacher POST /sys/dictItem/add rejects",
+      "passed": true
+    },
+    {
+      "case": "teacher POST /sys/dictItem/add leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher POST /sys/dictItem/add preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "teacher PUT /sys/dictItem/edit rejects",
+      "passed": true
+    },
+    {
+      "case": "teacher PUT /sys/dictItem/edit leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher PUT /sys/dictItem/edit preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dictItem/delete rejects",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dictItem/delete leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dictItem/delete preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dictItem/deleteBatch rejects",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dictItem/deleteBatch leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher DELETE /sys/dictItem/deleteBatch preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "admin POST /sys/dict/add",
+      "passed": true
+    },
+    {
+      "case": "admin create persists one dictionary",
+      "passed": true
+    },
+    {
+      "case": "admin PUT /sys/dict/edit",
+      "passed": true
+    },
+    {
+      "case": "admin edit persists",
+      "passed": true
+    },
+    {
+      "case": "admin POST /sys/dictItem/add",
+      "passed": true
+    },
+    {
+      "case": "admin PUT /sys/dictItem/edit",
+      "passed": true
+    },
+    {
+      "case": "admin item edit persists",
+      "passed": true
+    },
+    {
+      "case": "admin export creates an actual workbook",
+      "passed": true
+    },
+    {
+      "case": "valid Excel parent plus invalid second child reports one failed parent transaction",
+      "passed": true
+    },
+    {
+      "case": "failed child import rolls back the new parent and preceding valid child",
+      "passed": true
+    },
+    {
+      "case": "failed import preserves complete dictionary cache contents",
+      "passed": true
+    },
+    {
+      "case": "failed import preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "same workbook with corrected second child imports successfully",
+      "passed": true
+    },
+    {
+      "case": "corrected workbook persists exactly one parent and two children",
+      "passed": true
+    },
+    {
+      "case": "admin DELETE /sys/dict/deletePhysic/2109249205502517249",
+      "passed": true
+    },
+    {
+      "case": "admin DELETE /sys/dict/delete",
+      "passed": true
+    },
+    {
+      "case": "admin soft delete persists",
+      "passed": true
+    },
+    {
+      "case": "admin PUT /sys/dict/back/dm_82a4a2bd_admin",
+      "passed": true
+    },
+    {
+      "case": "admin restore persists",
+      "passed": true
+    },
+    {
+      "case": "admin DELETE /sys/dictItem/delete",
+      "passed": true
+    },
+    {
+      "case": "admin POST /sys/dictItem/add",
+      "passed": true
+    },
+    {
+      "case": "admin DELETE /sys/dictItem/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "admin DELETE /sys/dict/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "admin DELETE /sys/dict/deletePhysic/dm_82a4a2bd_admin",
+      "passed": true
+    },
+    {
+      "case": "admin permanent delete removes dictionary and children",
+      "passed": true
+    },
+    {
+      "case": "admin exported workbook reimports successfully",
+      "passed": true
+    },
+    {
+      "case": "admin import persists parent and child",
+      "passed": true
+    },
+    {
+      "case": "admin refresh clears all four cache families",
+      "passed": true
+    },
+    {
+      "case": "teacher_b POST /sys/dict/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_b create persists one dictionary",
+      "passed": true
+    },
+    {
+      "case": "teacher_b PUT /sys/dict/edit",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edit persists",
+      "passed": true
+    },
+    {
+      "case": "teacher_b POST /sys/dictItem/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_b PUT /sys/dictItem/edit",
+      "passed": true
+    },
+    {
+      "case": "teacher_b item edit persists",
+      "passed": true
+    },
+    {
+      "case": "teacher_b export creates an actual workbook",
+      "passed": true
+    },
+    {
+      "case": "teacher_b DELETE /sys/dict/delete",
+      "passed": true
+    },
+    {
+      "case": "teacher_b soft delete persists",
+      "passed": true
+    },
+    {
+      "case": "teacher_b PUT /sys/dict/back/dm_82a4a2bd_teacher_b",
+      "passed": true
+    },
+    {
+      "case": "teacher_b restore persists",
+      "passed": true
+    },
+    {
+      "case": "teacher_b DELETE /sys/dictItem/delete",
+      "passed": true
+    },
+    {
+      "case": "teacher_b POST /sys/dictItem/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_b DELETE /sys/dictItem/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "teacher_b DELETE /sys/dict/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "teacher_b DELETE /sys/dict/deletePhysic/dm_82a4a2bd_teacher_b",
+      "passed": true
+    },
+    {
+      "case": "teacher_b permanent delete removes dictionary and children",
+      "passed": true
+    },
+    {
+      "case": "teacher_b exported workbook reimports successfully",
+      "passed": true
+    },
+    {
+      "case": "teacher_b import persists parent and child",
+      "passed": true
+    },
+    {
+      "case": "teacher_b refresh clears all four cache families",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session POST /sys/dict/add rejects",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session POST /sys/dict/add leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session POST /sys/dict/add preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session PUT /sys/dict/edit rejects",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session PUT /sys/dict/edit leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session PUT /sys/dict/edit preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dict/delete rejects",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dict/delete leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dict/delete preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dict/deleteBatch rejects",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dict/deleteBatch leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dict/deleteBatch preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session POST /sys/dict/importExcel rejects",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session POST /sys/dict/importExcel leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session POST /sys/dict/importExcel preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dict/deletePhysic/dm_82a4a2bd rejects",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dict/deletePhysic/dm_82a4a2bd leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dict/deletePhysic/dm_82a4a2bd preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session PUT /sys/dict/back/dm_82a4a2bd rejects",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session PUT /sys/dict/back/dm_82a4a2bd leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session PUT /sys/dict/back/dm_82a4a2bd preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session GET /sys/dict/refleshCache rejects",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session GET /sys/dict/refleshCache leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session GET /sys/dict/refleshCache preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session POST /sys/dictItem/add rejects",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session POST /sys/dictItem/add leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session POST /sys/dictItem/add preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session PUT /sys/dictItem/edit rejects",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session PUT /sys/dictItem/edit leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session PUT /sys/dictItem/edit preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dictItem/delete rejects",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dictItem/delete leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dictItem/delete preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dictItem/deleteBatch rejects",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dictItem/deleteBatch leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "revoked developer same session DELETE /sys/dictItem/deleteBatch preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session POST /sys/dict/add rejects",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session POST /sys/dict/add leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session POST /sys/dict/add preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session PUT /sys/dict/edit rejects",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session PUT /sys/dict/edit leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session PUT /sys/dict/edit preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dict/delete rejects",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dict/delete leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dict/delete preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dict/deleteBatch rejects",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dict/deleteBatch leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dict/deleteBatch preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session POST /sys/dict/importExcel rejects",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session POST /sys/dict/importExcel leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session POST /sys/dict/importExcel preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dict/deletePhysic/dm_82a4a2bd rejects",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dict/deletePhysic/dm_82a4a2bd leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dict/deletePhysic/dm_82a4a2bd preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session PUT /sys/dict/back/dm_82a4a2bd rejects",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session PUT /sys/dict/back/dm_82a4a2bd leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session PUT /sys/dict/back/dm_82a4a2bd preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session GET /sys/dict/refleshCache rejects",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session GET /sys/dict/refleshCache leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session GET /sys/dict/refleshCache preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session POST /sys/dictItem/add rejects",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session POST /sys/dictItem/add leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session POST /sys/dictItem/add preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session PUT /sys/dictItem/edit rejects",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session PUT /sys/dictItem/edit leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session PUT /sys/dictItem/edit preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dictItem/delete rejects",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dictItem/delete leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dictItem/delete preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dictItem/deleteBatch rejects",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dictItem/deleteBatch leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "frozen administrator same session DELETE /sys/dictItem/deleteBatch preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session POST /sys/dict/add rejects",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session POST /sys/dict/add leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session POST /sys/dict/add preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session PUT /sys/dict/edit rejects",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session PUT /sys/dict/edit leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session PUT /sys/dict/edit preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dict/delete rejects",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dict/delete leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dict/delete preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dict/deleteBatch rejects",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dict/deleteBatch leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dict/deleteBatch preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session POST /sys/dict/importExcel rejects",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session POST /sys/dict/importExcel leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session POST /sys/dict/importExcel preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dict/deletePhysic/dm_82a4a2bd rejects",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dict/deletePhysic/dm_82a4a2bd leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dict/deletePhysic/dm_82a4a2bd preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session PUT /sys/dict/back/dm_82a4a2bd rejects",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session PUT /sys/dict/back/dm_82a4a2bd leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session PUT /sys/dict/back/dm_82a4a2bd preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session GET /sys/dict/refleshCache rejects",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session GET /sys/dict/refleshCache leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session GET /sys/dict/refleshCache preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session POST /sys/dictItem/add rejects",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session POST /sys/dictItem/add leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session POST /sys/dictItem/add preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session PUT /sys/dictItem/edit rejects",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session PUT /sys/dictItem/edit leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session PUT /sys/dictItem/edit preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dictItem/delete rejects",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dictItem/delete leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dictItem/delete preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dictItem/deleteBatch rejects",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dictItem/deleteBatch leaves database unchanged",
+      "passed": true
+    },
+    {
+      "case": "deleted administrator same session DELETE /sys/dictItem/deleteBatch preserves all four cache sentinels",
+      "passed": true
+    },
+    {
+      "case": "dictionary business rows restored",
+      "passed": true
+    },
+    {
+      "case": "all five synthetic business tables restored",
+      "passed": true
+    },
+    {
+      "case": "only owned import files removed; unknown files preserved",
+      "passed": true
+    },
+    {
+      "case": "preexisting upload files preserved byte for byte",
+      "passed": true
+    }
+  ],
+  "verifier_sha256": "c55e2374e34265995f1d9cf26c6cbf59eba70f40b3b4a53059ad4681f54ee6df",
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "baseline_fixture_sha256": "af89e0b3ac390a9c236d1368006781fedf9e266d8adebc609b41346126b0e2b6",
+  "baseline_dictionary_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "import_rollback": {
+    "http_status": 200,
+    "business_code": 201,
+    "error_count": 1,
+    "success_count": 0,
+    "dictionary_sha256_before": "dd47da1256234afcfb8eb7387acb3ae6d13ae5a98f143a00e9cb68b53c190d92",
+    "dictionary_sha256_after": "dd47da1256234afcfb8eb7387acb3ae6d13ae5a98f143a00e9cb68b53c190d92",
+    "cache_sha1_before": "4f28c2f954815170824e6b082ea4fa978cca12eb",
+    "cache_sha1_after": "4f28c2f954815170824e6b082ea4fa978cca12eb",
+    "input": "actual exported Excel; new valid parent, valid first child, 101-character second child"
+  },
+  "restored_dictionary_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "restored_fixture_sha256": "af89e0b3ac390a9c236d1368006781fedf9e266d8adebc609b41346126b0e2b6",
+  "upload_cleanup": {
+    "owned_files_removed": [
+      "uploads/logs/20261011/userImportExcelErrorLog202610111946124017.txt"
+    ],
+    "unknown_files_preserved": [],
+    "preexisting_files_verified": 2
+  },
+  "fixture_restored": true,
+  "passed": 234,
+  "failed": 0
+}

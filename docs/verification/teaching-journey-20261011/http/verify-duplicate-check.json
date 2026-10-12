@@ -1,0 +1,1529 @@
+{
+  "observed_utc": "2026-10-11T11:45:58.805180+00:00",
+  "scope": "owned synthetic Spring/Shiro HTTP and MySQL",
+  "production_connected": false,
+  "checks": [
+    {
+      "case": "anonymous is rejected by authentication",
+      "passed": true
+    },
+    {
+      "case": "anonymous is rejected by authentication: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose user_username",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose user_phone",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose user_email",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose user_work_no",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose role_code",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose dict_code",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose dict_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose permission_perms",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose permission_perms: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose position_code",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose position_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose depart_role_code",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose depart_role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose message_template_code",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose message_template_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose fill_rule_code",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose fill_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose check_rule_code",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose check_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose data_source_code",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot use management purpose data_source_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose user_username",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose user_phone",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose user_email",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose user_work_no",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose role_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose dict_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose dict_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose permission_perms",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose permission_perms: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose position_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose position_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose depart_role_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose depart_role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose message_template_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose message_template_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose fill_rule_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose fill_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose check_rule_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose check_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose data_source_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot use management purpose data_source_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot use developer role purpose",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot use developer role purpose: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 0",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 0: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 1",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 1: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 2",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 2: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 3",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 3: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 4",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 4: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 5",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 5: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 6",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 6: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 7",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 7: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 8",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 8: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 9",
+      "passed": true
+    },
+    {
+      "case": "student_a rejects identifier or malformed request 9: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 0",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 0: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 1",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 1: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 2",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 2: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 3",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 3: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 4",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 4: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 5",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 5: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 6",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 6: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 7",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 7: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 8",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 8: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 9",
+      "passed": true
+    },
+    {
+      "case": "admin rejects identifier or malformed request 9: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 0",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 0: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 1",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 1: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 2",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 2: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 3",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 3: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 4",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 4: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 5",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 5: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 6",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 6: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 7",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 7: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 8",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 8: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 9",
+      "passed": true
+    },
+    {
+      "case": "teacher_b rejects identifier or malformed request 9: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "repeated purpose parameters are rejected",
+      "passed": true
+    },
+    {
+      "case": "repeated purpose parameters are rejected: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing user_username",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused user_username",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin excludes authorized user for user_username",
+      "passed": true
+    },
+    {
+      "case": "admin excludes authorized user for user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin cannot exclude away another match for user_username",
+      "passed": true
+    },
+    {
+      "case": "admin cannot exclude away another match for user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing user_username",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused user_username",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b excludes authorized user for user_username",
+      "passed": true
+    },
+    {
+      "case": "teacher_b excludes authorized user for user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot exclude away another match for user_username",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot exclude away another match for user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing user_phone",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused user_phone",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin excludes authorized user for user_phone",
+      "passed": true
+    },
+    {
+      "case": "admin excludes authorized user for user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin cannot exclude away another match for user_phone",
+      "passed": true
+    },
+    {
+      "case": "admin cannot exclude away another match for user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing user_phone",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused user_phone",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b excludes authorized user for user_phone",
+      "passed": true
+    },
+    {
+      "case": "teacher_b excludes authorized user for user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot exclude away another match for user_phone",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot exclude away another match for user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing user_email",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused user_email",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin excludes authorized user for user_email",
+      "passed": true
+    },
+    {
+      "case": "admin excludes authorized user for user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin cannot exclude away another match for user_email",
+      "passed": true
+    },
+    {
+      "case": "admin cannot exclude away another match for user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing user_email",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused user_email",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b excludes authorized user for user_email",
+      "passed": true
+    },
+    {
+      "case": "teacher_b excludes authorized user for user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot exclude away another match for user_email",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot exclude away another match for user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing user_work_no",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused user_work_no",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin excludes authorized user for user_work_no",
+      "passed": true
+    },
+    {
+      "case": "admin excludes authorized user for user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin cannot exclude away another match for user_work_no",
+      "passed": true
+    },
+    {
+      "case": "admin cannot exclude away another match for user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing user_work_no",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused user_work_no",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b excludes authorized user for user_work_no",
+      "passed": true
+    },
+    {
+      "case": "teacher_b excludes authorized user for user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot exclude away another match for user_work_no",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cannot exclude away another match for user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing dict_code",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing dict_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused dict_code",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused dict_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized dict_code",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized dict_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing dict_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing dict_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused dict_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused dict_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized dict_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized dict_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing permission_perms",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing permission_perms: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused permission_perms",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused permission_perms: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized permission_perms",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized permission_perms: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing permission_perms",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing permission_perms: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused permission_perms",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused permission_perms: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized permission_perms",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized permission_perms: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing position_code",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing position_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused position_code",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused position_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized position_code",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized position_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing position_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing position_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused position_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused position_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized position_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized position_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing depart_role_code",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing depart_role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused depart_role_code",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused depart_role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized depart_role_code",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized depart_role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing depart_role_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing depart_role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused depart_role_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused depart_role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized depart_role_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized depart_role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing message_template_code",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing message_template_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused message_template_code",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused message_template_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized message_template_code",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized message_template_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing message_template_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing message_template_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused message_template_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused message_template_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized message_template_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized message_template_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing fill_rule_code",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing fill_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused fill_rule_code",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused fill_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized fill_rule_code",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized fill_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing fill_rule_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing fill_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused fill_rule_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused fill_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized fill_rule_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized fill_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing check_rule_code",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing check_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused check_rule_code",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused check_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized check_rule_code",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized check_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing check_rule_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing check_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused check_rule_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused check_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized check_rule_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized check_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing data_source_code",
+      "passed": true
+    },
+    {
+      "case": "admin detects existing data_source_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused data_source_code",
+      "passed": true
+    },
+    {
+      "case": "admin accepts unused data_source_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized data_source_code",
+      "passed": true
+    },
+    {
+      "case": "admin edits authorized data_source_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing data_source_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b detects existing data_source_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused data_source_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b accepts unused data_source_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized data_source_code",
+      "passed": true
+    },
+    {
+      "case": "teacher_b edits authorized data_source_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "developer detects role code",
+      "passed": true
+    },
+    {
+      "case": "developer detects role code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "developer accepts unused role code",
+      "passed": true
+    },
+    {
+      "case": "developer accepts unused role code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "developer excludes existing role",
+      "passed": true
+    },
+    {
+      "case": "developer excludes existing role: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot exclude higher-level developer for user_username",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot exclude higher-level developer for user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot exclude higher-level developer for user_phone",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot exclude higher-level developer for user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot exclude higher-level developer for user_email",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot exclude higher-level developer for user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot exclude higher-level developer for user_work_no",
+      "passed": true
+    },
+    {
+      "case": "administrator cannot exclude higher-level developer for user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for user_username",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for user_phone",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for user_email",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for user_work_no",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for role_code",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for dict_code",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for dict_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for permission_perms",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for permission_perms: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for position_code",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for position_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for depart_role_code",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for depart_role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for message_template_code",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for message_template_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for fill_rule_code",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for fill_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for check_rule_code",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for check_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for data_source_code",
+      "passed": true
+    },
+    {
+      "case": "missing exclusion record is rejected for data_source_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "exclusion ID must identify exact authorized object FIXTURE_STUDENT_A",
+      "passed": true
+    },
+    {
+      "case": "exclusion ID must identify exact authorized object FIXTURE_STUDENT_A: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "exclusion ID must identify exact authorized object fixture_student_a",
+      "passed": true
+    },
+    {
+      "case": "exclusion ID must identify exact authorized object fixture_student_a: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "SQL-shaped field value is a literal",
+      "passed": true
+    },
+    {
+      "case": "SQL-shaped field value is a literal: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "cache-busting parameter is compatible",
+      "passed": true
+    },
+    {
+      "case": "cache-busting parameter is compatible: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "self-service keeps own unchanged profile_phone",
+      "passed": true
+    },
+    {
+      "case": "self-service keeps own unchanged profile_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "self-service handles other value for profile_phone",
+      "passed": true
+    },
+    {
+      "case": "self-service handles other value for profile_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "self-service handles unused value for profile_phone",
+      "passed": true
+    },
+    {
+      "case": "self-service handles unused value for profile_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "self-service rejects another account exclusion profile_phone",
+      "passed": true
+    },
+    {
+      "case": "self-service rejects another account exclusion profile_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "self-service requires own exclusion ID profile_phone",
+      "passed": true
+    },
+    {
+      "case": "self-service requires own exclusion ID profile_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "self-service keeps own unchanged profile_email",
+      "passed": true
+    },
+    {
+      "case": "self-service keeps own unchanged profile_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "self-service handles other value for profile_email",
+      "passed": true
+    },
+    {
+      "case": "self-service handles other value for profile_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "self-service handles unused value for profile_email",
+      "passed": true
+    },
+    {
+      "case": "self-service handles unused value for profile_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "self-service rejects another account exclusion profile_email",
+      "passed": true
+    },
+    {
+      "case": "self-service rejects another account exclusion profile_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "self-service requires own exclusion ID profile_email",
+      "passed": true
+    },
+    {
+      "case": "self-service requires own exclusion ID profile_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token observes live administrator grant",
+      "passed": true
+    },
+    {
+      "case": "same token observes live administrator grant: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token observes live developer grant",
+      "passed": true
+    },
+    {
+      "case": "same token observes live developer grant: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "authentic legacy role cache seeded",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for user_username",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for user_username: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for user_phone",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for user_phone: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for user_email",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for user_email: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for user_work_no",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for user_work_no: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for role_code",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for dict_code",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for dict_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for permission_perms",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for permission_perms: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for position_code",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for position_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for depart_role_code",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for depart_role_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for message_template_code",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for message_template_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for fill_rule_code",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for fill_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for check_rule_code",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for check_rule_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for data_source_code",
+      "passed": true
+    },
+    {
+      "case": "revocation rejects old cache for data_source_code: protected database rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "old authorization cache remained during all revoked requests",
+      "passed": true
+    },
+    {
+      "case": "all synthetic fixture records restored",
+      "passed": true
+    }
+  ],
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "baseline_sha256": "b2695f2136068e3c9ece35aa8b61c938a1e140130de5b5e32844b12a486a75ca",
+  "restored_sha256": "b2695f2136068e3c9ece35aa8b61c938a1e140130de5b5e32844b12a486a75ca",
+  "passed": 379,
+  "failed": 0,
+  "total": 379
+}
