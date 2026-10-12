@@ -4,7 +4,7 @@
 
 `--source` 必须指定已经集成所需产品修复、`api/dev/` 夹具工具及自制素材的候选 Git 工作树。工具要求该工作树的 tracked 文件干净，且实际调用的 helper、模板、原始 schema SQL、自制素材和 Nginx 配置均由该 commit 跟踪；无关 untracked 文件可以保留，构建得到的 `web/dist` 也可以是 untracked。
 
-Nginx 固定契约包含 #66 的代理修复及已合并 #92（`85e19e8e60444f69d0ddebd86aee9905b239ae72`）的 8 个精确公开 Python 运行资源 CORP 例外，SHA256 为 `8ca3498beb006d305e2c632ee7428d5578e83dc89c7560cd1fad4f6c374c59f3`。其余路径仍为 `same-site`，其他安全响应头、API 和附件规则保持原契约。`create` 和 `verify` 均拒绝其他配置，即使操作者重新计算包内库存也不接受。后续配置变化须先审查，再显式更新固定摘要；不能在运行时从 source 自动生成允许值。
+Nginx 固定契约包含 #66 的代理修复及已合并 #92（`85e19e8e60444f69d0ddebd86aee9905b239ae72`）的 8 个精确公开 Python 运行资源 CORP 例外，SHA256 为 `27b5d9f201d294905ed924d2a25539ddb21c2e251af7e7655a491f7417446c6c`。其余路径仍为 `same-site`，其他安全响应头、API 和附件规则保持原契约。`create` 和 `verify` 均拒绝其他配置，即使操作者重新计算包内库存也不接受。后续配置变化须先审查，再显式更新固定摘要；不能在运行时从 source 自动生成允许值。
 
 CI 的 tools job 使用真实 JDK 8 执行 `test_candidate_release.py`，覆盖仓库配置与固定摘要一致性、合成输入 create/verify、已提交但未经审查的配置拒绝，以及重算库存后的全局 CORP 放宽拒绝。合成 JAR 和小 dist 的测试不代表完整应用候选创建成功；完整 JAR/dist 的离线创建和实际服务运行应分别验证。这个摘要仅约束本工具，`launch_bundle.py` 的正式发布包入口没有此固定 pin。
 
@@ -41,7 +41,7 @@ manifest.json                         冻结输入和不可变文件的 SHA256/b
 compose.json                          四个标准官方镜像的明确隔离配置
 app/app.jar                           原样复制的冻结 JAR
 web/dist/**                           dist manifest 对应的全部公开应用文件
-web/nginx.conf                        #66 + #92 固定契约的原样 Nginx 配置
+web/nginx.conf                        #66 + #92 及 API 缓存策略透传固定契约的原样 Nginx 配置
 config/application-localtest.properties
 config/credentials.json
 config/mysql-root-password
@@ -101,3 +101,5 @@ python3 deploy/probe_candidate_runtime.py \
 报告路径必须全新，父目录若已存在则必须已经私有；探针不改变既有目录权限。报告只记录状态、摘要与证据指纹。探针为五个自制账户读取自有 Redis 的对应挑战值并调用普通登录 API，不能把这一步视为普通浏览器登录验收。管理员课程/单元创建、修改、删除检查会核对数据库；Python 流程只验证个人草稿与上传文件，保留合成草稿和附件作为本包私有证据。再次执行整套探针需新建包，不能在旧数据上冒充首次运行。探针不自动启动或停止容器，完成后仍由操作者执行前述 down。
 
 `verify` 证明当前不可变文件与当前私有 manifest 中的清单一致，同时核对必需文件、权限、固定 Compose、镜像和 Nginx 契约。它不证明 JAR 确由所记 commit 编译，也不抵御一个能同时重写文件和 manifest 的操作者。调用者可以在独立证据中保存返回的 manifest SHA256 作为自身的冻结参考。服务是否真实启动、数据库是否正确初始化、页面和媒体是否可用，以及人工验收是否通过，必须分别报告。
+
+API 代理使用 `expires off`，保留后端为退出登录、私有媒体等响应设置的 `Cache-Control`，不追加或覆盖其缓存策略。HTML 和静态资源缓存规则保持独立。原生站点转换仍严格核对当前模板；旧站点中的 API `expires 0` 必须先作为受审阅的配置差异升级，不能跳过模板匹配。
