@@ -42,6 +42,14 @@ jobs:
       - name: Verify upload credentials against synthetic loopback destinations
         working-directory: web
         run: node tests/upload-credentials.browser.cjs
+      - name: Verify actual Header and TMenu navigation in Chromium
+        working-directory: web
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
+        run: |
+          test ! -e "$GITHUB_WORKSPACE/ci-results/teaching-menu-browser"
+          node tests/teaching-menu-browser.cjs --ref "$GITHUB_SHA" --output "$GITHUB_WORKSPACE/ci-results/teaching-menu-browser"
+          python3 ../ci/check_menu_browser_results.py --sha "$GITHUB_SHA"
       - name: Production build
         working-directory: web
         env:
@@ -53,6 +61,16 @@ jobs:
       - name: Initial JS and CSS budget
         working-directory: web
         run: npm run check:initial-assets
+      - name: Store synthetic menu browser evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: teaching-menu-browser-ci-results
+          path: |
+            ci-results/teaching-menu-browser/*.json
+            ci-results/teaching-menu-browser/*.png
+          if-no-files-found: error
+          retention-days: 7
 
   tools:
     name: Backup and migration tools

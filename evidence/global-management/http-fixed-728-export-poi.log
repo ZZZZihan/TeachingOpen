@@ -1,0 +1,389 @@
+PASS None GET /sys/sysUserAgent/queryById is an authorization refusal
+PASS None GET /sys/sysUserAgent/queryById returns no private metadata
+PASS None GET /sys/sysUserAgent/queryById leaves management, role, and audit rows unchanged
+PASS None GET /sys/sysUserAgent/exportXls is an authorization refusal
+PASS None GET /sys/sysUserAgent/exportXls returns no private metadata
+PASS None GET /sys/sysUserAgent/exportXls leaves management, role, and audit rows unchanged
+PASS None POST /sys/sysUserAgent/add is an authorization refusal
+PASS None POST /sys/sysUserAgent/add returns no private metadata
+PASS None POST /sys/sysUserAgent/add leaves management, role, and audit rows unchanged
+PASS None PUT /sys/sysUserAgent/edit is an authorization refusal
+PASS None PUT /sys/sysUserAgent/edit returns no private metadata
+PASS None PUT /sys/sysUserAgent/edit leaves management, role, and audit rows unchanged
+PASS None DELETE /sys/sysUserAgent/delete is an authorization refusal
+PASS None DELETE /sys/sysUserAgent/delete returns no private metadata
+PASS None DELETE /sys/sysUserAgent/delete leaves management, role, and audit rows unchanged
+PASS None DELETE /sys/sysUserAgent/deleteBatch is an authorization refusal
+PASS None DELETE /sys/sysUserAgent/deleteBatch returns no private metadata
+PASS None DELETE /sys/sysUserAgent/deleteBatch leaves management, role, and audit rows unchanged
+PASS None POST /sys/sysUserAgent/importExcel is an authorization refusal
+PASS None POST /sys/sysUserAgent/importExcel returns no private metadata
+PASS None POST /sys/sysUserAgent/importExcel leaves management, role, and audit rows unchanged
+PASS None GET /sys/position/queryById is an authorization refusal
+PASS None GET /sys/position/queryById returns no private metadata
+PASS None GET /sys/position/queryById leaves management, role, and audit rows unchanged
+PASS None GET /sys/position/exportXls is an authorization refusal
+PASS None GET /sys/position/exportXls returns no private metadata
+PASS None GET /sys/position/exportXls leaves management, role, and audit rows unchanged
+PASS None POST /sys/position/add is an authorization refusal
+PASS None POST /sys/position/add returns no private metadata
+PASS None POST /sys/position/add leaves management, role, and audit rows unchanged
+PASS None PUT /sys/position/edit is an authorization refusal
+PASS None PUT /sys/position/edit returns no private metadata
+PASS None PUT /sys/position/edit leaves management, role, and audit rows unchanged
+PASS None DELETE /sys/position/delete is an authorization refusal
+PASS None DELETE /sys/position/delete returns no private metadata
+PASS None DELETE /sys/position/delete leaves management, role, and audit rows unchanged
+PASS None DELETE /sys/position/deleteBatch is an authorization refusal
+PASS None DELETE /sys/position/deleteBatch returns no private metadata
+PASS None DELETE /sys/position/deleteBatch leaves management, role, and audit rows unchanged
+PASS None POST /sys/position/importExcel is an authorization refusal
+PASS None POST /sys/position/importExcel returns no private metadata
+PASS None POST /sys/position/importExcel leaves management, role, and audit rows unchanged
+PASS None GET /sys/sysUserAgent/list is an authorization refusal
+PASS None GET /sys/sysUserAgent/list returns no private metadata
+PASS None GET /sys/sysUserAgent/list leaves management, role, and audit rows unchanged
+PASS None GET /sys/sysUserAgent/queryByUserName is an authorization refusal
+PASS None GET /sys/sysUserAgent/queryByUserName returns no private metadata
+PASS None GET /sys/sysUserAgent/queryByUserName leaves management, role, and audit rows unchanged
+PASS None GET /oss/file/list is an authorization refusal
+PASS None GET /oss/file/list returns no private metadata
+PASS None GET /oss/file/list leaves management, role, and audit rows unchanged
+PASS None GET /oss/file/queryById is an authorization refusal
+PASS None GET /oss/file/queryById returns no private metadata
+PASS None GET /oss/file/queryById leaves management, role, and audit rows unchanged
+PASS None DELETE /oss/file/delete is an authorization refusal
+PASS None DELETE /oss/file/delete returns no private metadata
+PASS None DELETE /oss/file/delete leaves management, role, and audit rows unchanged
+PASS None POST /oss/file/upload is an authorization refusal
+PASS None POST /oss/file/upload returns no private metadata
+PASS None POST /oss/file/upload leaves management, role, and audit rows unchanged
+PASS None POST /sys/upload/uploadMinio is an authorization refusal
+PASS None POST /sys/upload/uploadMinio returns no private metadata
+PASS None POST /sys/upload/uploadMinio leaves management, role, and audit rows unchanged
+PASS student_a GET /sys/sysUserAgent/queryById is an authorization refusal
+PASS student_a GET /sys/sysUserAgent/queryById returns no private metadata
+PASS student_a GET /sys/sysUserAgent/queryById leaves management, role, and audit rows unchanged
+PASS student_a GET /sys/sysUserAgent/exportXls is an authorization refusal
+PASS student_a GET /sys/sysUserAgent/exportXls returns no private metadata
+PASS student_a GET /sys/sysUserAgent/exportXls leaves management, role, and audit rows unchanged
+PASS student_a POST /sys/sysUserAgent/add is an authorization refusal
+PASS student_a POST /sys/sysUserAgent/add returns no private metadata
+PASS student_a POST /sys/sysUserAgent/add leaves management, role, and audit rows unchanged
+PASS student_a PUT /sys/sysUserAgent/edit is an authorization refusal
+PASS student_a PUT /sys/sysUserAgent/edit returns no private metadata
+PASS student_a PUT /sys/sysUserAgent/edit leaves management, role, and audit rows unchanged
+PASS student_a DELETE /sys/sysUserAgent/delete is an authorization refusal
+PASS student_a DELETE /sys/sysUserAgent/delete returns no private metadata
+PASS student_a DELETE /sys/sysUserAgent/delete leaves management, role, and audit rows unchanged
+PASS student_a DELETE /sys/sysUserAgent/deleteBatch is an authorization refusal
+PASS student_a DELETE /sys/sysUserAgent/deleteBatch returns no private metadata
+PASS student_a DELETE /sys/sysUserAgent/deleteBatch leaves management, role, and audit rows unchanged
+PASS student_a POST /sys/sysUserAgent/importExcel is an authorization refusal
+PASS student_a POST /sys/sysUserAgent/importExcel returns no private metadata
+PASS student_a POST /sys/sysUserAgent/importExcel leaves management, role, and audit rows unchanged
+PASS student_a GET /sys/position/queryById is an authorization refusal
+PASS student_a GET /sys/position/queryById returns no private metadata
+PASS student_a GET /sys/position/queryById leaves management, role, and audit rows unchanged
+PASS student_a GET /sys/position/exportXls is an authorization refusal
+PASS student_a GET /sys/position/exportXls returns no private metadata
+PASS student_a GET /sys/position/exportXls leaves management, role, and audit rows unchanged
+PASS student_a POST /sys/position/add is an authorization refusal
+PASS student_a POST /sys/position/add returns no private metadata
+PASS student_a POST /sys/position/add leaves management, role, and audit rows unchanged
+PASS student_a PUT /sys/position/edit is an authorization refusal
+PASS student_a PUT /sys/position/edit returns no private metadata
+PASS student_a PUT /sys/position/edit leaves management, role, and audit rows unchanged
+PASS student_a DELETE /sys/position/delete is an authorization refusal
+PASS student_a DELETE /sys/position/delete returns no private metadata
+PASS student_a DELETE /sys/position/delete leaves management, role, and audit rows unchanged
+PASS student_a DELETE /sys/position/deleteBatch is an authorization refusal
+PASS student_a DELETE /sys/position/deleteBatch returns no private metadata
+PASS student_a DELETE /sys/position/deleteBatch leaves management, role, and audit rows unchanged
+PASS student_a POST /sys/position/importExcel is an authorization refusal
+PASS student_a POST /sys/position/importExcel returns no private metadata
+PASS student_a POST /sys/position/importExcel leaves management, role, and audit rows unchanged
+PASS student_a GET /sys/sysUserAgent/list is an authorization refusal
+PASS student_a GET /sys/sysUserAgent/list returns no private metadata
+PASS student_a GET /sys/sysUserAgent/list leaves management, role, and audit rows unchanged
+PASS student_a GET /sys/sysUserAgent/queryByUserName is an authorization refusal
+PASS student_a GET /sys/sysUserAgent/queryByUserName returns no private metadata
+PASS student_a GET /sys/sysUserAgent/queryByUserName leaves management, role, and audit rows unchanged
+PASS student_a GET /oss/file/list is an authorization refusal
+PASS student_a GET /oss/file/list returns no private metadata
+PASS student_a GET /oss/file/list leaves management, role, and audit rows unchanged
+PASS student_a GET /oss/file/queryById is an authorization refusal
+PASS student_a GET /oss/file/queryById returns no private metadata
+PASS student_a GET /oss/file/queryById leaves management, role, and audit rows unchanged
+PASS student_a DELETE /oss/file/delete is an authorization refusal
+PASS student_a DELETE /oss/file/delete returns no private metadata
+PASS student_a DELETE /oss/file/delete leaves management, role, and audit rows unchanged
+PASS student_a POST /oss/file/upload is an authorization refusal
+PASS student_a POST /oss/file/upload returns no private metadata
+PASS student_a POST /oss/file/upload leaves management, role, and audit rows unchanged
+PASS student_a POST /sys/upload/uploadMinio is an authorization refusal
+PASS student_a POST /sys/upload/uploadMinio returns no private metadata
+PASS student_a POST /sys/upload/uploadMinio leaves management, role, and audit rows unchanged
+PASS teacher_a GET /sys/sysUserAgent/queryById is an authorization refusal
+PASS teacher_a GET /sys/sysUserAgent/queryById returns no private metadata
+PASS teacher_a GET /sys/sysUserAgent/queryById leaves management, role, and audit rows unchanged
+PASS teacher_a GET /sys/sysUserAgent/exportXls is an authorization refusal
+PASS teacher_a GET /sys/sysUserAgent/exportXls returns no private metadata
+PASS teacher_a GET /sys/sysUserAgent/exportXls leaves management, role, and audit rows unchanged
+PASS teacher_a POST /sys/sysUserAgent/add is an authorization refusal
+PASS teacher_a POST /sys/sysUserAgent/add returns no private metadata
+PASS teacher_a POST /sys/sysUserAgent/add leaves management, role, and audit rows unchanged
+PASS teacher_a PUT /sys/sysUserAgent/edit is an authorization refusal
+PASS teacher_a PUT /sys/sysUserAgent/edit returns no private metadata
+PASS teacher_a PUT /sys/sysUserAgent/edit leaves management, role, and audit rows unchanged
+PASS teacher_a DELETE /sys/sysUserAgent/delete is an authorization refusal
+PASS teacher_a DELETE /sys/sysUserAgent/delete returns no private metadata
+PASS teacher_a DELETE /sys/sysUserAgent/delete leaves management, role, and audit rows unchanged
+PASS teacher_a DELETE /sys/sysUserAgent/deleteBatch is an authorization refusal
+PASS teacher_a DELETE /sys/sysUserAgent/deleteBatch returns no private metadata
+PASS teacher_a DELETE /sys/sysUserAgent/deleteBatch leaves management, role, and audit rows unchanged
+PASS teacher_a POST /sys/sysUserAgent/importExcel is an authorization refusal
+PASS teacher_a POST /sys/sysUserAgent/importExcel returns no private metadata
+PASS teacher_a POST /sys/sysUserAgent/importExcel leaves management, role, and audit rows unchanged
+PASS teacher_a GET /sys/position/queryById is an authorization refusal
+PASS teacher_a GET /sys/position/queryById returns no private metadata
+PASS teacher_a GET /sys/position/queryById leaves management, role, and audit rows unchanged
+PASS teacher_a GET /sys/position/exportXls is an authorization refusal
+PASS teacher_a GET /sys/position/exportXls returns no private metadata
+PASS teacher_a GET /sys/position/exportXls leaves management, role, and audit rows unchanged
+PASS teacher_a POST /sys/position/add is an authorization refusal
+PASS teacher_a POST /sys/position/add returns no private metadata
+PASS teacher_a POST /sys/position/add leaves management, role, and audit rows unchanged
+PASS teacher_a PUT /sys/position/edit is an authorization refusal
+PASS teacher_a PUT /sys/position/edit returns no private metadata
+PASS teacher_a PUT /sys/position/edit leaves management, role, and audit rows unchanged
+PASS teacher_a DELETE /sys/position/delete is an authorization refusal
+PASS teacher_a DELETE /sys/position/delete returns no private metadata
+PASS teacher_a DELETE /sys/position/delete leaves management, role, and audit rows unchanged
+PASS teacher_a DELETE /sys/position/deleteBatch is an authorization refusal
+PASS teacher_a DELETE /sys/position/deleteBatch returns no private metadata
+PASS teacher_a DELETE /sys/position/deleteBatch leaves management, role, and audit rows unchanged
+PASS teacher_a POST /sys/position/importExcel is an authorization refusal
+PASS teacher_a POST /sys/position/importExcel returns no private metadata
+PASS teacher_a POST /sys/position/importExcel leaves management, role, and audit rows unchanged
+PASS teacher_a GET /sys/sysUserAgent/list is an authorization refusal
+PASS teacher_a GET /sys/sysUserAgent/list returns no private metadata
+PASS teacher_a GET /sys/sysUserAgent/list leaves management, role, and audit rows unchanged
+PASS teacher_a GET /sys/sysUserAgent/queryByUserName is an authorization refusal
+PASS teacher_a GET /sys/sysUserAgent/queryByUserName returns no private metadata
+PASS teacher_a GET /sys/sysUserAgent/queryByUserName leaves management, role, and audit rows unchanged
+PASS teacher_a GET /oss/file/list is an authorization refusal
+PASS teacher_a GET /oss/file/list returns no private metadata
+PASS teacher_a GET /oss/file/list leaves management, role, and audit rows unchanged
+PASS teacher_a GET /oss/file/queryById is an authorization refusal
+PASS teacher_a GET /oss/file/queryById returns no private metadata
+PASS teacher_a GET /oss/file/queryById leaves management, role, and audit rows unchanged
+PASS teacher_a DELETE /oss/file/delete is an authorization refusal
+PASS teacher_a DELETE /oss/file/delete returns no private metadata
+PASS teacher_a DELETE /oss/file/delete leaves management, role, and audit rows unchanged
+PASS teacher_a POST /oss/file/upload is an authorization refusal
+PASS teacher_a POST /oss/file/upload returns no private metadata
+PASS teacher_a POST /oss/file/upload leaves management, role, and audit rows unchanged
+PASS teacher_a POST /sys/upload/uploadMinio is an authorization refusal
+PASS teacher_a POST /sys/upload/uploadMinio returns no private metadata
+PASS teacher_a POST /sys/upload/uploadMinio leaves management, role, and audit rows unchanged
+PASS None operational metadata /actuator/redis/info is an authorization refusal
+PASS None operational metadata /actuator/redis/info returns no private metadata
+PASS None operational metadata /actuator/redis/info leaves management, role, and audit rows unchanged
+PASS None operational metadata /actuator/redis/keysSize is an authorization refusal
+PASS None operational metadata /actuator/redis/keysSize returns no private metadata
+PASS None operational metadata /actuator/redis/keysSize leaves management, role, and audit rows unchanged
+PASS None operational metadata /actuator/redis/memoryInfo is an authorization refusal
+PASS None operational metadata /actuator/redis/memoryInfo returns no private metadata
+PASS None operational metadata /actuator/redis/memoryInfo leaves management, role, and audit rows unchanged
+PASS None operational metadata /actuator/redis/queryDiskInfo is an authorization refusal
+PASS None operational metadata /actuator/redis/queryDiskInfo returns no private metadata
+PASS None operational metadata /actuator/redis/queryDiskInfo leaves management, role, and audit rows unchanged
+PASS student_a operational metadata /actuator/redis/info is an authorization refusal
+PASS student_a operational metadata /actuator/redis/info returns no private metadata
+PASS student_a operational metadata /actuator/redis/info leaves management, role, and audit rows unchanged
+PASS student_a operational metadata /actuator/redis/keysSize is an authorization refusal
+PASS student_a operational metadata /actuator/redis/keysSize returns no private metadata
+PASS student_a operational metadata /actuator/redis/keysSize leaves management, role, and audit rows unchanged
+PASS student_a operational metadata /actuator/redis/memoryInfo is an authorization refusal
+PASS student_a operational metadata /actuator/redis/memoryInfo returns no private metadata
+PASS student_a operational metadata /actuator/redis/memoryInfo leaves management, role, and audit rows unchanged
+PASS student_a operational metadata /actuator/redis/queryDiskInfo is an authorization refusal
+PASS student_a operational metadata /actuator/redis/queryDiskInfo returns no private metadata
+PASS student_a operational metadata /actuator/redis/queryDiskInfo leaves management, role, and audit rows unchanged
+PASS teacher_a operational metadata /actuator/redis/info is an authorization refusal
+PASS teacher_a operational metadata /actuator/redis/info returns no private metadata
+PASS teacher_a operational metadata /actuator/redis/info leaves management, role, and audit rows unchanged
+PASS teacher_a operational metadata /actuator/redis/keysSize is an authorization refusal
+PASS teacher_a operational metadata /actuator/redis/keysSize returns no private metadata
+PASS teacher_a operational metadata /actuator/redis/keysSize leaves management, role, and audit rows unchanged
+PASS teacher_a operational metadata /actuator/redis/memoryInfo is an authorization refusal
+PASS teacher_a operational metadata /actuator/redis/memoryInfo returns no private metadata
+PASS teacher_a operational metadata /actuator/redis/memoryInfo leaves management, role, and audit rows unchanged
+PASS teacher_a operational metadata /actuator/redis/queryDiskInfo is an authorization refusal
+PASS teacher_a operational metadata /actuator/redis/queryDiskInfo returns no private metadata
+PASS teacher_a operational metadata /actuator/redis/queryDiskInfo leaves management, role, and audit rows unchanged
+PASS admin operational metadata /actuator/redis/info is an authorization refusal
+PASS admin operational metadata /actuator/redis/info returns no private metadata
+PASS admin operational metadata /actuator/redis/info leaves management, role, and audit rows unchanged
+PASS admin operational metadata /actuator/redis/keysSize is an authorization refusal
+PASS admin operational metadata /actuator/redis/keysSize returns no private metadata
+PASS admin operational metadata /actuator/redis/keysSize leaves management, role, and audit rows unchanged
+PASS admin operational metadata /actuator/redis/memoryInfo is an authorization refusal
+PASS admin operational metadata /actuator/redis/memoryInfo returns no private metadata
+PASS admin operational metadata /actuator/redis/memoryInfo leaves management, role, and audit rows unchanged
+PASS admin operational metadata /actuator/redis/queryDiskInfo is an authorization refusal
+PASS admin operational metadata /actuator/redis/queryDiskInfo returns no private metadata
+PASS admin operational metadata /actuator/redis/queryDiskInfo leaves management, role, and audit rows unchanged
+PASS anonymous alias /sys/sysUserAgent/list.js is an authorization refusal
+PASS anonymous alias /sys/sysUserAgent/list.js returns no private metadata
+PASS anonymous alias /sys/sysUserAgent/list.js leaves management, role, and audit rows unchanged
+PASS anonymous alias /oss/file/list.js is an authorization refusal
+PASS anonymous alias /oss/file/list.js returns no private metadata
+PASS anonymous alias /oss/file/list.js leaves management, role, and audit rows unchanged
+PASS anonymous alias /actuator/redis/info.js is an authorization refusal
+PASS anonymous alias /actuator/redis/info.js returns no private metadata
+PASS anonymous alias /actuator/redis/info.js leaves management, role, and audit rows unchanged
+PASS anonymous alias /sys/sysUserAgent/list.json is an authorization refusal
+PASS anonymous alias /sys/sysUserAgent/list.json returns no private metadata
+PASS anonymous alias /sys/sysUserAgent/list.json leaves management, role, and audit rows unchanged
+PASS anonymous alias /oss/file/list.json is an authorization refusal
+PASS anonymous alias /oss/file/list.json returns no private metadata
+PASS anonymous alias /oss/file/list.json leaves management, role, and audit rows unchanged
+PASS anonymous alias /actuator/redis/info.json is an authorization refusal
+PASS anonymous alias /actuator/redis/info.json returns no private metadata
+PASS anonymous alias /actuator/redis/info.json leaves management, role, and audit rows unchanged
+PASS anonymous alias /sys/sysUserAgent/list/ is an authorization refusal
+PASS anonymous alias /sys/sysUserAgent/list/ returns no private metadata
+PASS anonymous alias /sys/sysUserAgent/list/ leaves management, role, and audit rows unchanged
+PASS anonymous alias /oss/file/list/ is an authorization refusal
+PASS anonymous alias /oss/file/list/ returns no private metadata
+PASS anonymous alias /oss/file/list/ leaves management, role, and audit rows unchanged
+PASS anonymous alias /actuator/redis/info/ is an authorization refusal
+PASS anonymous alias /actuator/redis/info/ returns no private metadata
+PASS anonymous alias /actuator/redis/info/ leaves management, role, and audit rows unchanged
+PASS anonymous alias /sys/sysUserAgent/list;fixture=1 is an authorization refusal
+PASS anonymous alias /sys/sysUserAgent/list;fixture=1 returns no private metadata
+PASS anonymous alias /sys/sysUserAgent/list;fixture=1 leaves management, role, and audit rows unchanged
+PASS anonymous alias /oss/file/list;fixture=1 is an authorization refusal
+PASS anonymous alias /oss/file/list;fixture=1 returns no private metadata
+PASS anonymous alias /oss/file/list;fixture=1 leaves management, role, and audit rows unchanged
+PASS anonymous alias /actuator/redis/info;fixture=1 is an authorization refusal
+PASS anonymous alias /actuator/redis/info;fixture=1 returns no private metadata
+PASS anonymous alias /actuator/redis/info;fixture=1 leaves management, role, and audit rows unchanged
+PASS student_a keeps address-book position list
+PASS student_a receives the required position option
+PASS teacher_a keeps address-book position list
+PASS teacher_a receives the required position option
+PASS admin keeps address-book position list
+PASS admin receives the required position option
+PASS administrator management read /sys/sysUserAgent/list
+PASS administrator management read /sys/sysUserAgent/queryByUserName?userName=fixture_gm_owner
+PASS administrator management read /sys/position/queryById?id=fixture_gm_position
+PASS administrator management read /oss/file/list
+PASS administrator management read /oss/file/queryById?id=fixture_gm_file
+PASS administrator creates agent
+PASS authorized agent creation persisted
+PASS administrator edits agent
+PASS administrator imports actual XLSX agent
+PASS authorized agent XLSX insertion persisted
+PASS administrator exports agent
+PASS candidate POI rejects agent JSON error
+PASS candidate POI rejects agent HTML error
+PASS candidate POI rejects agent truncated workbook
+PASS administrator deletes agent
+PASS administrator batch deletes fixture agent
+PASS administrator creates position
+PASS authorized position creation persisted
+PASS administrator edits position
+PASS administrator imports actual XLSX position
+PASS authorized position XLSX insertion persisted
+PASS administrator exports position
+PASS candidate POI rejects position JSON error
+PASS candidate POI rejects position HTML error
+PASS candidate POI rejects position truncated workbook
+PASS administrator deletes position
+PASS administrator batch deletes fixture position
+PASS same token live developer enters management /sys/sysUserAgent/list
+PASS same token live developer enters management /sys/position/queryById?id=fixture_gm_missing
+PASS same token live developer enters management /oss/file/list
+PASS same token live developer monitoring /actuator/redis/info
+PASS same token live developer monitoring /actuator/redis/keysSize
+PASS same token live developer monitoring /actuator/redis/memoryInfo
+PASS same token live developer monitoring /actuator/redis/queryDiskInfo
+PASS same token after developer revocation GET /sys/sysUserAgent/queryById is an authorization refusal
+PASS same token after developer revocation GET /sys/sysUserAgent/queryById returns no private metadata
+PASS same token after developer revocation GET /sys/sysUserAgent/queryById leaves management, role, and audit rows unchanged
+PASS same token after developer revocation GET /sys/sysUserAgent/exportXls is an authorization refusal
+PASS same token after developer revocation GET /sys/sysUserAgent/exportXls returns no private metadata
+PASS same token after developer revocation GET /sys/sysUserAgent/exportXls leaves management, role, and audit rows unchanged
+PASS same token after developer revocation POST /sys/sysUserAgent/add is an authorization refusal
+PASS same token after developer revocation POST /sys/sysUserAgent/add returns no private metadata
+PASS same token after developer revocation POST /sys/sysUserAgent/add leaves management, role, and audit rows unchanged
+PASS same token after developer revocation PUT /sys/sysUserAgent/edit is an authorization refusal
+PASS same token after developer revocation PUT /sys/sysUserAgent/edit returns no private metadata
+PASS same token after developer revocation PUT /sys/sysUserAgent/edit leaves management, role, and audit rows unchanged
+PASS same token after developer revocation DELETE /sys/sysUserAgent/delete is an authorization refusal
+PASS same token after developer revocation DELETE /sys/sysUserAgent/delete returns no private metadata
+PASS same token after developer revocation DELETE /sys/sysUserAgent/delete leaves management, role, and audit rows unchanged
+PASS same token after developer revocation DELETE /sys/sysUserAgent/deleteBatch is an authorization refusal
+PASS same token after developer revocation DELETE /sys/sysUserAgent/deleteBatch returns no private metadata
+PASS same token after developer revocation DELETE /sys/sysUserAgent/deleteBatch leaves management, role, and audit rows unchanged
+PASS same token after developer revocation POST /sys/sysUserAgent/importExcel is an authorization refusal
+PASS same token after developer revocation POST /sys/sysUserAgent/importExcel returns no private metadata
+PASS same token after developer revocation POST /sys/sysUserAgent/importExcel leaves management, role, and audit rows unchanged
+PASS same token after developer revocation GET /sys/position/queryById is an authorization refusal
+PASS same token after developer revocation GET /sys/position/queryById returns no private metadata
+PASS same token after developer revocation GET /sys/position/queryById leaves management, role, and audit rows unchanged
+PASS same token after developer revocation GET /sys/position/exportXls is an authorization refusal
+PASS same token after developer revocation GET /sys/position/exportXls returns no private metadata
+PASS same token after developer revocation GET /sys/position/exportXls leaves management, role, and audit rows unchanged
+PASS same token after developer revocation POST /sys/position/add is an authorization refusal
+PASS same token after developer revocation POST /sys/position/add returns no private metadata
+PASS same token after developer revocation POST /sys/position/add leaves management, role, and audit rows unchanged
+PASS same token after developer revocation PUT /sys/position/edit is an authorization refusal
+PASS same token after developer revocation PUT /sys/position/edit returns no private metadata
+PASS same token after developer revocation PUT /sys/position/edit leaves management, role, and audit rows unchanged
+PASS same token after developer revocation DELETE /sys/position/delete is an authorization refusal
+PASS same token after developer revocation DELETE /sys/position/delete returns no private metadata
+PASS same token after developer revocation DELETE /sys/position/delete leaves management, role, and audit rows unchanged
+PASS same token after developer revocation DELETE /sys/position/deleteBatch is an authorization refusal
+PASS same token after developer revocation DELETE /sys/position/deleteBatch returns no private metadata
+PASS same token after developer revocation DELETE /sys/position/deleteBatch leaves management, role, and audit rows unchanged
+PASS same token after developer revocation POST /sys/position/importExcel is an authorization refusal
+PASS same token after developer revocation POST /sys/position/importExcel returns no private metadata
+PASS same token after developer revocation POST /sys/position/importExcel leaves management, role, and audit rows unchanged
+PASS same token after developer revocation GET /sys/sysUserAgent/list is an authorization refusal
+PASS same token after developer revocation GET /sys/sysUserAgent/list returns no private metadata
+PASS same token after developer revocation GET /sys/sysUserAgent/list leaves management, role, and audit rows unchanged
+PASS same token after developer revocation GET /sys/sysUserAgent/queryByUserName is an authorization refusal
+PASS same token after developer revocation GET /sys/sysUserAgent/queryByUserName returns no private metadata
+PASS same token after developer revocation GET /sys/sysUserAgent/queryByUserName leaves management, role, and audit rows unchanged
+PASS same token after developer revocation GET /oss/file/list is an authorization refusal
+PASS same token after developer revocation GET /oss/file/list returns no private metadata
+PASS same token after developer revocation GET /oss/file/list leaves management, role, and audit rows unchanged
+PASS same token after developer revocation GET /oss/file/queryById is an authorization refusal
+PASS same token after developer revocation GET /oss/file/queryById returns no private metadata
+PASS same token after developer revocation GET /oss/file/queryById leaves management, role, and audit rows unchanged
+PASS same token after developer revocation DELETE /oss/file/delete is an authorization refusal
+PASS same token after developer revocation DELETE /oss/file/delete returns no private metadata
+PASS same token after developer revocation DELETE /oss/file/delete leaves management, role, and audit rows unchanged
+PASS same token after developer revocation POST /oss/file/upload is an authorization refusal
+PASS same token after developer revocation POST /oss/file/upload returns no private metadata
+PASS same token after developer revocation POST /oss/file/upload leaves management, role, and audit rows unchanged
+PASS same token after developer revocation POST /sys/upload/uploadMinio is an authorization refusal
+PASS same token after developer revocation POST /sys/upload/uploadMinio returns no private metadata
+PASS same token after developer revocation POST /sys/upload/uploadMinio leaves management, role, and audit rows unchanged
+PASS same token revoked operational metadata /actuator/redis/info is an authorization refusal
+PASS same token revoked operational metadata /actuator/redis/info returns no private metadata
+PASS same token revoked operational metadata /actuator/redis/info leaves management, role, and audit rows unchanged
+PASS same token revoked operational metadata /actuator/redis/keysSize is an authorization refusal
+PASS same token revoked operational metadata /actuator/redis/keysSize returns no private metadata
+PASS same token revoked operational metadata /actuator/redis/keysSize leaves management, role, and audit rows unchanged
+PASS same token revoked operational metadata /actuator/redis/memoryInfo is an authorization refusal
+PASS same token revoked operational metadata /actuator/redis/memoryInfo returns no private metadata
+PASS same token revoked operational metadata /actuator/redis/memoryInfo leaves management, role, and audit rows unchanged
+PASS same token revoked operational metadata /actuator/redis/queryDiskInfo is an authorization refusal
+PASS same token revoked operational metadata /actuator/redis/queryDiskInfo returns no private metadata
+PASS same token revoked operational metadata /actuator/redis/queryDiskInfo leaves management, role, and audit rows unchanged
+PASS all original management roles and audit records restored

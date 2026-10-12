@@ -66,6 +66,12 @@ class CiGuardsTest(unittest.TestCase):
         self.assertEqual(result.stdout.strip().split(','), sorted(java.EXPECTED))
         self.assertEqual(result.stderr, '')
 
+    def test_all_current_java_regressions_are_required_except_documented_legacy_suites(self):
+        sources = list((java.ROOT / 'api/jeecg-boot-module-system/src/test/java').rglob('*Test.java'))
+        names = [path.stem for path in sources]
+        self.assertEqual(len(names), len(set(names)), 'Java gate requires unambiguous suite names')
+        self.assertEqual(set(names) - {'SampleTest', 'SecurityToolsTest'}, java.EXPECTED)
+
 
 class ReviewAdapterTest(unittest.TestCase):
     def setUp(self):
@@ -133,6 +139,9 @@ class ReviewAdapterTest(unittest.TestCase):
         self.context.config.write_text('different configuration')
         with self.assertRaises(RuntimeError): self.context.assert_candidate(self.runtime, self.jar)
         self.context.config.write_text(self.context.properties)
+        (self.runtime / 'logs').mkdir(mode=0o700)
+        review.private_file(self.runtime / 'logs/application.log', 'synthetic application log\n')
+        self.context.record_process()
         command = 'java -jar ' + str(self.jar) + ' --spring.config.location=file:' + str(self.context.config)
         names = '\n'.join(['fixture_admin', 'fixture_student_a', 'fixture_student_b', 'fixture_teacher_a', 'fixture_teacher_b'])
         with patch.object(review.subprocess, 'check_output', return_value=command), \
@@ -143,6 +152,66 @@ class ReviewAdapterTest(unittest.TestCase):
             with self.assertRaises(RuntimeError): self.context.assert_candidate(self.runtime, self.jar)
         self.jar.write_bytes(b'rebuilt candidate')
         with self.assertRaises(RuntimeError): self.context.assert_candidate(self.runtime, self.jar)
+
+    def test_private_process_record_binds_audit_log_to_current_candidate_before_connections(self):
+        self.context.properties = 'private configuration\n'
+        review.private_file(self.context.config, self.context.properties)
+        (self.runtime / 'logs').mkdir(mode=0o700)
+        log = self.runtime / 'logs/application.log'
+        review.private_file(log, 'synthetic application log\n')
+        self.context.process = Mock(pid=123)
+        self.context.process.poll.return_value = 0
+        with self.assertRaises(RuntimeError):
+            self.context.record_process()
+        self.assertFalse((self.runtime / 'backend-process.json').exists())
+        self.context.process.poll.return_value = None
+        self.context.record_process()
+        record = self.runtime / 'backend-process.json'
+        expected = {'pid': 123, 'jar_path': str(self.jar), 'jar_sha256': self.context.jar_sha256,
+                    'application_config': str(self.context.config), 'log_path': str(log)}
+        self.assertEqual(json.loads(record.read_text()), expected)
+        self.assertEqual(record.stat().st_mode & 0o777, 0o600)
+        with self.assertRaises(FileExistsError):
+            self.context.record_process()
+        with patch.object(self.context, 'sql') as sql, patch.object(self.context, 'cache') as cache, \
+                patch.object(review.subprocess, 'check_output') as process:
+            for key, value in [('pid', 124), ('jar_path', '/unrelated.jar'),
+                               ('jar_sha256', 'different'), ('application_config', '/unrelated.properties'),
+                               ('log_path', str(self.temp / 'unrelated.log'))]:
+                with self.subTest(key=key):
+                    record.write_text(json.dumps({**expected, key: value}))
+                    with self.assertRaises(RuntimeError):
+                        self.context.assert_candidate(self.runtime, self.jar)
+            record.write_text(json.dumps(expected))
+            for path in (record, log):
+                with self.subTest(public_path=path.name):
+                    path.chmod(0o644)
+                    with self.assertRaises(RuntimeError):
+                        self.context.assert_candidate(self.runtime, self.jar)
+                    path.chmod(0o600)
+            record.write_text('{invalid')
+            with self.assertRaises(RuntimeError):
+                self.context.assert_candidate(self.runtime, self.jar)
+            record.write_text(json.dumps(expected))
+            log.unlink()
+            external = self.temp / 'unrelated.log'
+            review.private_file(external, 'unrelated application log')
+            log.symlink_to(external)
+            with self.assertRaises(RuntimeError):
+                self.context.assert_candidate(self.runtime, self.jar)
+            log.unlink()
+            with self.assertRaises(RuntimeError):
+                self.context.assert_candidate(self.runtime, self.jar)
+            review.private_file(log, 'synthetic application log\n')
+            record.unlink()
+            with self.assertRaises(RuntimeError):
+                self.context.assert_candidate(self.runtime, self.jar)
+            external_record = self.temp / 'unrelated-process.json'
+            review.private_file(external_record, json.dumps(expected))
+            record.symlink_to(external_record)
+            with self.assertRaises(RuntimeError):
+                self.context.assert_candidate(self.runtime, self.jar)
+            sql.assert_not_called(); cache.assert_not_called(); process.assert_not_called()
 
     def test_adapter_reuses_actual_http_client_and_restores_dependencies_on_exception(self):
         with patch.object(sys, 'path', [str(registration.ROOT / 'api/dev')] + sys.path):
@@ -177,8 +246,14 @@ class ReviewAdapterTest(unittest.TestCase):
 
     def test_current_baseline_requires_complete_probe_set_including_core_work_flows(self):
         self.assertEqual([p.name for p in review.selected_probes()], list(review.PROBES))
+        self.assertEqual(len(review.PROBES), len(set(review.PROBES)))
         self.assertTrue({'verify-course-update.py', 'verify-work-submission.py',
-                         'verify-feedback-preservation.py'}.issubset(review.PROBES))
+                         'verify-feedback-preservation.py', 'verify-teaching-menu-security.py',
+                         'verify-audit-log-authorization.py', 'verify-audit-failure.py',
+                         'verify-file-deletion-concurrency.py', 'verify-file-encoded-reference-deletion.py',
+                         'verify-additional-work-read-authorization.py', 'verify-shared-resource-boundaries.py',
+                         'verify-global-rule-boundaries.py', 'verify-global-management-authorization.py'
+                         }.issubset(review.PROBES))
 
     def test_each_missing_or_renamed_required_probe_stops_before_any_runtime_activity(self):
         for name in review.PROBES:
@@ -239,7 +314,8 @@ class ReviewAdapterTest(unittest.TestCase):
                         {key: [{'passed': False}]}, {key: [{'passed': 1}]},
                         {'passed': 1}, {'passed': False}, {'passed': 2.0}, {'passed': '2'},
                         {'jar_sha256': 'other'}, {'jar_sha256': None}, {'exception': 'SqlError'},
-                        {'total': 3}, {'total': 2.0}, {'failed': 1}, {'expected_legacy': True}):
+                        {'total': 3}, {'total': 2.0}, {'failed': 1}, {'expected_legacy': True},
+                        {'completed': False}, {'completed': None}, {'completed': 1}):
                 with self.subTest(key=key, bad=bad), self.assertRaises(RuntimeError):
                     review.validate_report({**report, **bad}, 'candidate')
         for report in (None, [], 'complete'):
