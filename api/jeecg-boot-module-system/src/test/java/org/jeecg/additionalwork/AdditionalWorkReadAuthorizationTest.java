@@ -1,5 +1,7 @@
 package org.jeecg.additionalwork;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ThreadContext;
@@ -18,12 +20,17 @@ import org.jeecg.modules.teaching.service.impl.TeachingAdditionalWorkServiceImpl
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -61,6 +68,7 @@ public class AdditionalWorkReadAuthorizationTest {
         if (ReflectionUtils.findField(TeachingAdditionalWorkServiceImpl.class, "teachingAccess") != null)
             ReflectionTestUtils.setField(service, "teachingAccess", access);
         ReflectionTestUtils.setField(controller, "teachingAdditionalWorkService", service);
+        ReflectionTestUtils.setField(controller, "teachingAccess", access);
         work = new TeachingAdditionalWork().setId("assignment-a").setWorkDept("class-a").setStatus(1)
                 .setCreateBy("teacher_a").setWorkName("Private assigned task").setWorkDesc("private task body");
         when(assignments.selectById(any())).thenAnswer(call -> work);
@@ -85,6 +93,46 @@ public class AdditionalWorkReadAuthorizationTest {
         assertEquals("private task body", controller.getWorkInfo("assignment-a").getResult().getWorkDesc());
     }
 
+    private void deniedList() {
+        try { controller.queryPageList(new TeachingAdditionalWork(), 1, 10, new MockHttpServletRequest());
+            fail("management list must authorize before enumerating assignments"); }
+        catch (UnauthorizedException expected) { }
+        verify(assignments, never()).selectPage(any(), any());
+        verify(assignments, never()).insert(any()); verify(assignments, never()).updateById(any());
+    }
+
+    @SuppressWarnings("unchecked")
+    private QueryWrapper<TeachingAdditionalWork> managementQuery(TeachingAdditionalWork filter, int pageNo,
+                                                                int pageSize, MockHttpServletRequest request) {
+        when(assignments.selectPage(any(Page.class), any(QueryWrapper.class))).thenAnswer(call -> call.getArgument(0));
+        Result<?> result;
+        // QueryGenerator reads data rules from the request bound by Spring MVC.
+        // Exercise the real query builder with that same request context.
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        try {
+            result = controller.queryPageList(filter, pageNo, pageSize, request);
+        } finally {
+            RequestContextHolder.resetRequestAttributes();
+        }
+        assertTrue(result.isSuccess());
+        Page<TeachingAdditionalWork> page = (Page<TeachingAdditionalWork>) result.getResult();
+        assertEquals(pageNo, page.getCurrent()); assertEquals(pageSize, page.getSize());
+        ArgumentCaptor<QueryWrapper> query = ArgumentCaptor.forClass(QueryWrapper.class);
+        verify(assignments, atLeastOnce()).selectPage(any(Page.class), query.capture());
+        return query.getValue();
+    }
+
+    private Pattern classPredicate(QueryWrapper<TeachingAdditionalWork> query) {
+        String sql = query.getSqlSegment();
+        assertTrue("class restriction must precede database pagination", sql.contains("REGEXP_LIKE(work_dept,"));
+        assertTrue("database collation must not introduce case aliases", sql.contains("'c'"));
+        assertFalse("class IDs must be bound values", sql.contains("class-a"));
+        String pattern = query.getParamNameValuePairs().values().stream().filter(String.class::isInstance)
+                .map(String.class::cast).filter(value -> value.startsWith("(\\A|,)")).findFirst()
+                .orElseThrow(() -> new AssertionError("missing bound exact CSV predicate"));
+        return Pattern.compile(pattern);
+    }
+
     @Test public void studentCannotReadAnotherClassThroughEitherDetailRoute() {
         work.setWorkDept("class-b"); deniedBoth();
     }
@@ -100,6 +148,13 @@ public class AdditionalWorkReadAuthorizationTest {
     @Test public void departmentMatchingMustBeExactNotASubstringOrCollationAlias() {
         work.setWorkDept("class-a-extra"); deniedBoth();
         work.setWorkDept("CLASS-A"); deniedBoth();
+    }
+
+    @Test public void detailTrimsOnlyTokenEdgesAndPreservesUnicodeSeparators() {
+        work.setWorkDept(" \tclass-a\r\n ,class-b"); allowedBoth();
+        for (String token : Arrays.asList("cl ass-a", "class-a\u0085", "class-a\u2028", "\u00a0class-a\u00a0")) {
+            work.setWorkDept(token); deniedBoth();
+        }
     }
 
     @Test public void teacherReadsAssignedManagedClassUsingLiveScope() {
@@ -132,5 +187,87 @@ public class AdditionalWorkReadAuthorizationTest {
     @Test public void missingAssignmentAndCaseAliasCannotDiscloseContent() {
         work.setId("ASSIGNMENT-A"); deniedBoth();
         when(assignments.selectById(any())).thenReturn(null); deniedBoth();
+    }
+
+    @Test public void managementListRejectsStudentEvenWithManagedClassesAndStalePrivilegedRoles() {
+        user.setDepartIds("managed-a"); when(subject.hasRole(anyString())).thenReturn(true); deniedList();
+        verify(departments, never()).getMySubDepIdsByDepId(anyString());
+    }
+
+    @Test public void managementListUsesLiveTeacherRootAndDescendantsWithExactCsvTokens() {
+        when(users.getRoleById("student-a")).thenReturn(Collections.singletonList("teacher"));
+        user.setDepartIds("managed-a");
+        when(departments.getMySubDepIdsByDepId("managed-a")).thenReturn(Arrays.asList("class-a", "class-child"));
+        Pattern predicate = classPredicate(managementQuery(new TeachingAdditionalWork(), 1, 10, new MockHttpServletRequest()));
+        for (String value : Arrays.asList("class-a", "class-child", "class-b, class-a ,class-c", " \tclass-a\r\n"))
+            assertTrue(value, predicate.matcher(value).find());
+        for (String value : Arrays.asList("class-a-extra", "CLASS-A", "cl ass-a", "class-a\u0085", "class-a\u2028",
+                "\u00a0class-a\u00a0", "class-b")) assertFalse(value, predicate.matcher(value).find());
+        verify(departments, never()).getMySubDepIdsByDepId("stale-class");
+    }
+
+    @Test public void managementListRetainsEntityFiltersSortingAndRequestedPage() {
+        when(users.getRoleById("student-a")).thenReturn(Collections.singletonList("teacher"));
+        user.setDepartIds("managed-a");
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.addParameter("column", "workName"); request.addParameter("order", "desc");
+        QueryWrapper<TeachingAdditionalWork> query = managementQuery(
+                new TeachingAdditionalWork().setWorkName("Selected task").setStatus(0), 3, 7, request);
+        classPredicate(query);
+        assertTrue(query.getSqlSegment().contains("work_name ="));
+        assertTrue(query.getSqlSegment().contains("status ="));
+        assertTrue(query.getSqlSegment().contains("ORDER BY work_name DESC"));
+        assertTrue(query.getParamNameValuePairs().containsValue("Selected task"));
+        assertTrue(query.getParamNameValuePairs().containsValue(0));
+    }
+
+    @Test public void managementListEscapesRegexMetacharactersInCurrentClassIds() {
+        when(users.getRoleById("student-a")).thenReturn(Collections.singletonList("teacher"));
+        user.setDepartIds("managed-a");
+        String id = "class-a.(x)[0]{1}+?^$|\\E";
+        when(departments.getMySubDepIdsByDepId("managed-a")).thenReturn(Collections.singletonList(id));
+        Pattern predicate = classPredicate(managementQuery(new TeachingAdditionalWork(), 1, 10, new MockHttpServletRequest()));
+        assertTrue(predicate.matcher("other," + id + ",last").find());
+        assertFalse(predicate.matcher("class-aXx0").find());
+        assertFalse(predicate.matcher("class-a").find());
+    }
+
+    @Test public void managementListImmediatelyReflectsClassTransferAndRoleRevocation() {
+        when(users.getRoleById("student-a")).thenReturn(Collections.singletonList("teacher"));
+        user.setDepartIds("managed-b");
+        when(departments.getMySubDepIdsByDepId("managed-b")).thenReturn(Collections.singletonList("class-b"));
+        Pattern predicate = classPredicate(managementQuery(new TeachingAdditionalWork(), 1, 10, new MockHttpServletRequest()));
+        assertTrue(predicate.matcher("class-b").find()); assertFalse(predicate.matcher("class-a").find());
+        clearInvocations(assignments);
+        when(users.getRoleById("student-a")).thenReturn(Collections.singletonList("student")); deniedList();
+    }
+
+    @Test public void managementListRejectsTeacherWithoutCurrentClasses() {
+        when(users.getRoleById("student-a")).thenReturn(Collections.singletonList("teacher"));
+        user.setDepartIds(null); deniedList();
+        user.setDepartIds("managed-missing"); deniedList();
+    }
+
+    @Test public void liveAdministratorsAndDevelopersKeepUnrestrictedFilteredManagementList() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.addParameter("column", "workName"); request.addParameter("order", "asc");
+        for (String role : Arrays.asList("admin", "dev")) {
+            when(users.getRoleById("student-a")).thenReturn(Collections.singletonList(role));
+            QueryWrapper<TeachingAdditionalWork> query = managementQuery(
+                    new TeachingAdditionalWork().setWorkName("Selected task"), 2, 5, request);
+            assertFalse(query.getSqlSegment().contains("REGEXP_LIKE"));
+            assertTrue(query.getSqlSegment().contains("work_name ="));
+            assertTrue(query.getSqlSegment().contains("ORDER BY work_name ASC"));
+            assertTrue(query.getParamNameValuePairs().containsValue("Selected task"));
+        }
+        verify(departments, never()).getMySubDepIdsByDepId(anyString());
+    }
+
+    @Test public void anonymousFrozenDeletedAndMissingUsersCannotEnumerateManagementList() {
+        when(subject.getPrincipal()).thenReturn(null); deniedList();
+        LoginUser principal = new LoginUser(); principal.setId("student-a"); when(subject.getPrincipal()).thenReturn(principal);
+        when(users.getRoleById("student-a")).thenReturn(Collections.singletonList("admin"));
+        user.setStatus(2); deniedList(); user.setStatus(1).setDelFlag(1); deniedList();
+        when(users.getById("student-a")).thenReturn(null); deniedList();
     }
 }
