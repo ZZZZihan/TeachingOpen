@@ -11,7 +11,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.jeecg.common.constant.CommonConstant;
-import org.jeecg.common.system.api.ISysBaseAPI;
 import org.jeecg.common.system.util.JwtUtil;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.RedisUtil;
@@ -45,9 +44,6 @@ public class ShiroRealm extends AuthorizingRealm {
 	@Autowired
 	@Lazy
 	private ISysUserService sysUserService;
-	@Autowired
-	@Lazy
-	private ISysBaseAPI sysBaseAPI;
 	@Autowired
 	@Lazy
 	private RedisUtil redisUtil;
@@ -131,10 +127,6 @@ public class ShiroRealm extends AuthorizingRealm {
         if (!CommonConstant.USER_UNFREEZE.equals(currentUser.getStatus())) {
             throw new AuthenticationException("账号已被锁定,请联系管理员!");
         }
-        LoginUser loginUser = sysBaseAPI.getUserByName(username);
-		if (loginUser == null) {
-			throw new AuthenticationException("用户不存在!");
-		}
 		// Check the original token against the live DB credential before any
 		// refresh. Cache eviction alone cannot revoke the previous password's
 		// sessions: jwtTokenRefresh can otherwise re-sign an old cached token.
@@ -144,6 +136,11 @@ public class ShiroRealm extends AuthorizingRealm {
 			throw new AuthenticationException("Token失效，请重新登录!");
 		}
 
+        // The principal carries authorization scope (departIds/orgCode), not
+        // just profile data. A delayed cache fill may survive a completed
+        // revocation, so construct it from the same live row used above.
+        LoginUser loginUser = new LoginUser();
+        BeanUtils.copyProperties(currentUser, loginUser);
 		return loginUser;
 	}
 
