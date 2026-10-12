@@ -1,12 +1,41 @@
 #!/usr/bin/env python3
 """Do not accept skipped/missing Surefire suites as a green backend build."""
+import argparse
 import json
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED = {'RichTextSanitizerTest', 'AccountRegistrationServiceTest', 'AccountRecoveryServiceTest', 'CourseMapPositionServiceTest', 'PublicDictionaryBoundaryTest', 'DisabledTransitBoundaryTest', 'AccountAuthorizationTest', 'AdditionalWorkAuthorizationTest', 'AdditionalWorkStatisticsTest', 'PaginationBoundaryTest', 'WorkStarControllerTest', 'WorkCloneServiceTest',
-            'AccountRecoverySessionTest', 'PublicUserDirectoryTest', 'DuplicateCheckSecurityTest', 'DictionaryAdministrationTest', 'TeachingDepartDayLogWriteBoundaryTest', 'UserProfileValidationTest', 'UnitViewStatisticsTest'}
+EXPECTED = {
+    'RichTextSanitizerTest',
+    'AccountRegistrationServiceTest',
+    'AccountRecoveryServiceTest',
+    'AccountRecoverySessionTest',
+    'PublicUserDirectoryTest',
+    'CourseMapPositionServiceTest',
+    'PublicDictionaryBoundaryTest',
+    'DisabledTransitBoundaryTest',
+    'AccountAuthorizationTest',
+    'AdditionalWorkAuthorizationTest',
+    'AdditionalWorkStatisticsTest',
+    'PaginationBoundaryTest',
+    'WorkStarControllerTest',
+    'WorkCloneServiceTest',
+    'DuplicateCheckSecurityTest',
+    'DictionaryAdministrationTest',
+    'TeachingDepartDayLogWriteBoundaryTest',
+    'UserProfileValidationTest',
+    'UnitViewStatisticsTest',
+    'InfrastructureAdministrationTest',
+    'AnnouncementAuthorizationTest',
+    'QuerySqlBoundaryTest',
+    'UserReadAuthorizationTest',
+    'DepartmentSelectionTest',
+    'WorkAttachmentAuthorizationTest',
+    'LocalFileReferenceAuthorizationTest',
+    'WorkEventStatisticsTest',
+    'LiveAuthenticationScopeTest',
+}
 
 
 def check(reports):
@@ -26,6 +55,12 @@ def check(reports):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--list', action='store_true', help='Print the exact Surefire selection required by this gate')
+    args = parser.parse_args()
+    if args.list:
+        print(','.join(sorted(EXPECTED)))
+        raise SystemExit(0)
     result = check(ROOT / 'api/jeecg-boot-module-system/target/surefire-reports')
     output = ROOT / 'ci-results'
     output.mkdir(exist_ok=True)

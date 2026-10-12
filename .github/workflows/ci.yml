@@ -36,6 +36,12 @@ jobs:
       - name: Frontend tests
         working-directory: web
         run: npm test
+      - name: Render announcement security regression in Chromium
+        working-directory: web
+        run: node tests/announcement-rendering.browser.cjs
+      - name: Verify upload credentials against synthetic loopback destinations
+        working-directory: web
+        run: node tests/upload-credentials.browser.cjs
       - name: Production build
         working-directory: web
         env:
@@ -132,7 +138,7 @@ jobs:
         run: >-
           mvn -B -ntp -s dev/maven-settings.xml
           -DskipTests=false
-          -Dtest=RichTextSanitizerTest,AccountRegistrationServiceTest,AccountRecoveryServiceTest,AccountRecoverySessionTest,PublicUserDirectoryTest,CourseMapPositionServiceTest,PublicDictionaryBoundaryTest,DisabledTransitBoundaryTest,AccountAuthorizationTest,AdditionalWorkAuthorizationTest,AdditionalWorkStatisticsTest,PaginationBoundaryTest,WorkStarControllerTest,WorkCloneServiceTest,DuplicateCheckSecurityTest,DictionaryAdministrationTest,TeachingDepartDayLogWriteBoundaryTest,UserProfileValidationTest,UnitViewStatisticsTest
+          -Dtest="$(python3 ../ci/check_java_results.py --list)"
           -Dsurefire.failIfNoSpecifiedTests=false
           clean package
       - name: Require executed core tests
