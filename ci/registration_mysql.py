@@ -132,9 +132,10 @@ def main():
                     time.sleep(1)
                 else:
                     raise RuntimeError('Isolated application did not become healthy')
-                result = load('probe', ROOT / 'deploy/verify_registration.py').main(probe_config)
-                if result['passed'] != 32:
-                    raise RuntimeError('Registration acceptance did not execute all 32 checks')
+                probe = load('probe', ROOT / 'deploy/verify_registration.py')
+                result = probe.main(probe_config)
+                if result['passed'] != probe.EXPECTED_CHECKS:
+                    raise RuntimeError('Registration acceptance did not execute all ' + str(probe.EXPECTED_CHECKS) + ' checks')
                 result.update({'mysql_version': sql('SELECT VERSION()'), 'schema_tables': int(sql(
                     'SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE()')),
                     'migrations_applied_twice': migrations, 'original_accounts_imported': 0,

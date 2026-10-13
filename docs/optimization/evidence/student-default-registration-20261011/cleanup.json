@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "isolated_database": "teachingopen_check_student_registration",
+  "test_accounts_removed": 7,
+  "residual_users": 0,
+  "residual_profiles": 0,
+  "residual_roles": 0,
+  "original_user_role_rows_unchanged": true,
+  "isolated_redis_db": 2,
+  "isolated_redis_keys": 0,
+  "production_writes": false
+}

@@ -16,6 +16,13 @@ import sys
 import urllib.error
 import urllib.request
 
+EXPECTED_CHECKS = 83
+STUDENT_ENTRY = '/sys/user/register'
+TEACHER_ENTRY = '/sys/user/register/teacher'
+STATE_TABLES = ('sys_user', 'sys_user_role', 'teaching_registration_profile', 'sys_user_depart',
+                'sys_depart', 'teaching_course', 'teaching_course_dept', 'teaching_course_unit',
+                'teaching_additional_work', 'teaching_work')
+
 
 def main(config_file):
     os.umask(0o077)
@@ -57,6 +64,46 @@ def main(config_file):
         return subprocess.check_output([c['redis_cli'], '-h', '127.0.0.1', '-p', props['spring.redis.port'],
             '--no-auth-warning', '-n', str(c['redis_database']), '--raw', *args], env=env).decode().strip()
 
+    def state_snapshot():
+        # Full-column aggregate hashes cover permission-denial and rollback side effects.
+        # No row contents, password hashes, or tokens are included in the report.
+        snapshot = {}
+        for table in STATE_TABLES:
+            columns = sql("SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema=DATABASE() "
+                          "AND table_name='" + table + "' ORDER BY ORDINAL_POSITION").splitlines()
+            if not columns or not all(re.fullmatch('[A-Za-z0-9_]+', column) for column in columns):
+                raise RuntimeError('Unexpected isolated table columns')
+            count = int(sql('SELECT COUNT(*) FROM `' + table + '`'))
+            if count * 64 > 10000000:
+                raise RuntimeError('Isolated table exceeds digest budget')
+            row = 'SHA2(CAST(JSON_ARRAY(' + ','.join('`' + column + '`' for column in columns) + ') AS CHAR),256)'
+            snapshot[table] = sql('SET SESSION group_concat_max_len=10000000; SELECT COUNT(*),'
+                "COALESCE(SHA2(GROUP_CONCAT(" + row + ' ORDER BY ' + row + " SEPARATOR ''),256),'EMPTY') FROM `" + table + '`')
+        return snapshot
+
+    def profile(phone):
+        return sql("SELECT identity FROM teaching_registration_profile p JOIN sys_user u ON u.id=p.user_id WHERE u.phone='" + phone + "'")
+
+    def account_security(phone):
+        return sql("SELECT CONCAT(username,'|',user_identity,'|',status,'|',del_flag,'|',COALESCE(depart_ids,'')) "
+                   "FROM sys_user WHERE phone='" + phone + "'") == phone + '|1|1|0|'
+
+    def extra_relations(phone):
+        tables = ('sys_user_depart', 'sys_depart_role_user', 'teaching_student', 'teaching_work',
+                  'teaching_work_comment', 'wechat_user')
+        counts = [sql('SELECT COUNT(*) FROM `' + table + "` r JOIN sys_user u ON u.id=r.user_id WHERE u.phone='" + phone + "'") for table in tables]
+        counts.append(sql("SELECT COUNT(*) FROM sys_user_agent WHERE user_name='" + phone + "' OR agent_user_name='" + phone + "'"))
+        return all(count == '0' for count in counts)
+
+    def refuse_management(label, token):
+        before = state_snapshot()
+        for name, path in (('admin', '/teaching/teachingCourse/list'),
+                           ('class management', '/teaching/teachingCourseDept/list'),
+                           ('teacher work management', '/teaching/teachingWork/list')):
+            result = api(path, token=token)
+            check(label + ' ' + name + ' endpoint refused', result.get('success') is False and result.get('code') == 510)
+        check(label + ' permission denial leaves all 10 tables unchanged', state_snapshot() == before)
+
     def login(phone, password):
         nonce = 'registration-check-' + secrets.token_hex(12)
         check('captcha generated', api('/sys/randomImage/' + nonce).get('success') is True)
@@ -74,44 +121,78 @@ def main(config_file):
 
     check('isolated application healthy', api('/actuator/health').get('status') == 'UP')
     base = int(sql('SELECT COUNT(*) FROM sys_user'))
-    phones = ['199' + ''.join(secrets.choice('0123456789') for _ in range(8)) for _ in range(4)]
+    phones = ['199' + ''.join(secrets.choice('0123456789') for _ in range(8)) for _ in range(5)]
     check('synthetic phones unused', sql('SELECT COUNT(*) FROM sys_user WHERE phone IN (' + ','.join("'" + p + "'" for p in phones) + ')') == '0')
     tokens = []
     password = 'Verify9!' + secrets.token_hex(10)
     try:
-        for i, identity in enumerate(('student', 'teacher')):
+        check('one isolated allowReg configuration is enabled', sql("SELECT CONCAT(COUNT(*),'|',COALESCE(MIN(config_value),'missing')) FROM sys_config WHERE config_key='allowReg' AND config_enabled=1") == '1|1')
+        before_disabled = state_snapshot()
+        sql("UPDATE sys_config SET config_value='0' WHERE config_key='allowReg' AND config_enabled=1")
+        try:
+            for label, entry in (('student', STUDENT_ENTRY), ('teacher', TEACHER_ENTRY)):
+                result = api(entry, {'phone': phones[0], 'password': password, 'realname': '开关验收', 'school': '隔离学校'})
+                check(label + ' entry respects disabled allowReg', result.get('success') is False and result.get('code') == 403)
+            check('disabled entries leave all 10 tables unchanged', state_snapshot() == before_disabled)
+        finally:
+            sql("UPDATE sys_config SET config_value='1' WHERE config_key='allowReg' AND config_enabled=1")
+
+        cases = (('public default student', STUDENT_ENTRY, None, 'student'),
+                 ('public forged teacher', STUDENT_ENTRY, 'teacher', 'student'),
+                 ('teacher entry', TEACHER_ENTRY, 'student', 'teacher'))
+        for i, (label, entry, supplied_identity, identity) in enumerate(cases):
             payload = {'phone': phones[i], 'password': password, 'realname': '验收𠮷' + str(i),
-                'school': '数据库隔离验收𠮷学校', 'identity': identity, 'role': 'admin', 'userIdentity': 2, 'status': 2}
-            r = api('/sys/user/register', payload)
-            check(identity + ' registration', r.get('success') is True)
-            check(identity + ' no credentials returned', password not in json.dumps(r) and phones[i] not in json.dumps(r))
-            check(identity + ' exact required fields persisted', sql("SELECT CONCAT(realname,'|',school,'|',phone) FROM sys_user WHERE phone='" + phones[i] + "'") == payload['realname'] + '|' + payload['school'] + '|' + phones[i])
-            check(identity + ' password protected at rest', sql("SELECT COUNT(*) FROM sys_user WHERE phone='" + phones[i] + "' AND password<>'" + password + "' AND password<>'' AND salt<>''") == '1')
-            check(identity + ' profile persisted', sql("SELECT identity FROM teaching_registration_profile p JOIN sys_user u ON u.id=p.user_id WHERE u.phone='" + phones[i] + "'") == identity)
-            check(identity + ' only student role granted', sql("SELECT r.role_code FROM sys_user u JOIN sys_user_role ur ON ur.user_id=u.id JOIN sys_role r ON r.id=ur.role_id WHERE u.phone='" + phones[i] + "'") == 'student')
-            check(identity + ' duplicate rejected', api('/sys/user/register', payload).get('code') == 409)
+                'school': '数据库隔离验收𠮷学校', 'role': 'admin', 'roles': 'teacher,admin',
+                'username': 'admin', 'userIdentity': 2, 'status': 2, 'departIds': 'privileged-depart'}
+            if supplied_identity is not None: payload['identity'] = supplied_identity
+            r = api(entry, payload)
+            check(label + ' registration', r.get('success') is True)
+            check(label + ' no credentials returned', password not in json.dumps(r) and phones[i] not in json.dumps(r))
+            check(label + ' exact required fields persisted', sql("SELECT CONCAT(realname,'|',school,'|',phone) FROM sys_user WHERE phone='" + phones[i] + "'") == payload['realname'] + '|' + payload['school'] + '|' + phones[i])
+            check(label + ' password protected at rest', sql("SELECT COUNT(*) FROM sys_user WHERE phone='" + phones[i] + "' AND password<>'" + password + "' AND password<>'' AND salt<>''") == '1')
+            check(label + ' fixed profile persisted', profile(phones[i]) == identity)
+            check(label + ' only student role granted', sql("SELECT r.role_code FROM sys_user u JOIN sys_user_role ur ON ur.user_id=u.id JOIN sys_role r ON r.id=ur.role_id WHERE u.phone='" + phones[i] + "'") == 'student')
+            check(label + ' security fields are server owned', account_security(phones[i]))
+            check(label + ' no business or department links created', extra_relations(phones[i]))
+            before_duplicate = state_snapshot()
+            check(label + ' duplicate rejected', api(entry, payload).get('code') == 409)
+            opposite_entry = TEACHER_ENTRY if entry == STUDENT_ENTRY else STUDENT_ENTRY
+            check(label + ' cross entry duplicate rejected', api(opposite_entry, payload).get('code') == 409)
+            check(label + ' duplicate leaves profile and all 10 tables unchanged', state_snapshot() == before_duplicate)
             token = login(phones[i], password); tokens.append(token)
-            check(identity + ' admin endpoint refused', api('/teaching/teachingCourse/list', token=token).get('code') == 510)
-        payload = {'phone': phones[2], 'password': password, 'realname': '并发验收', 'school': '隔离学校', 'identity': 'student'}
+            refuse_management(label, token)
+        payload = {'phone': phones[3], 'password': password, 'realname': '并发验收', 'school': '隔离学校',
+                   'identity': 'teacher', 'roles': 'admin,teacher', 'userIdentity': 2, 'departIds': 'privileged-depart', 'status': 2}
         with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
-            results = list(pool.map(lambda _: api('/sys/user/register', payload), range(6)))
+            attempts = list(pool.map(lambda entry: (entry, api(entry, payload)), [STUDENT_ENTRY, TEACHER_ENTRY] * 3))
+        results = [result for _, result in attempts]
         check('six concurrent attempts create one user', sum(r.get('success') is True for r in results) == 1)
         check('other concurrent attempts report duplicate', sum(r.get('code') == 409 for r in results) == 5)
-        check('concurrent profile and role each saved once', sql("SELECT CONCAT((SELECT COUNT(*) FROM sys_user WHERE phone='"+phones[2]+"'),'|',(SELECT COUNT(*) FROM teaching_registration_profile p JOIN sys_user u ON u.id=p.user_id WHERE u.phone='"+phones[2]+"'),'|',(SELECT COUNT(*) FROM sys_user_role r JOIN sys_user u ON u.id=r.user_id WHERE u.phone='"+phones[2]+"'))") == '1|1|1')
+        check('concurrent profile and role each saved once', sql("SELECT CONCAT((SELECT COUNT(*) FROM sys_user WHERE phone='"+phones[3]+"'),'|',(SELECT COUNT(*) FROM teaching_registration_profile p JOIN sys_user u ON u.id=p.user_id WHERE u.phone='"+phones[3]+"'),'|',(SELECT COUNT(*) FROM sys_user_role r JOIN sys_user u ON u.id=r.user_id WHERE u.phone='"+phones[3]+"'))") == '1|1|1')
+        winning_entry = next(entry for entry, result in attempts if result.get('success') is True)
+        check('mixed concurrent winner owns fixed profile', profile(phones[3]) == ('teacher' if winning_entry == TEACHER_ENTRY else 'student'))
+        check('concurrent security fields are server owned', account_security(phones[3]))
+        check('concurrent no business or department links created', extra_relations(phones[3]))
+        token = login(phones[3], password); tokens.append(token)
+        refuse_management('mixed concurrent winner', token)
         trigger = 'backup_check_' + secrets.token_hex(6)
         sql("CREATE TRIGGER " + trigger + " BEFORE INSERT ON teaching_registration_profile FOR EACH ROW SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='isolated registration rollback probe'")
         try:
-            payload['phone'] = phones[3]
-            check('profile write failure reports retryable error', api('/sys/user/register', payload).get('code') == 503)
-            check('failed registration rolls back user', sql("SELECT COUNT(*) FROM sys_user WHERE phone='" + phones[3] + "'") == '0')
+            payload['phone'] = phones[4]
+            for label, entry in (('student', STUDENT_ENTRY), ('teacher', TEACHER_ENTRY)):
+                before_failure = state_snapshot()
+                check(label + ' profile write failure reports retryable error', api(entry, payload).get('code') == 503)
+                check(label + ' failed registration rolls back user', sql("SELECT COUNT(*) FROM sys_user WHERE phone='" + phones[4] + "'") == '0')
+                check(label + ' failed registration leaves all 10 tables unchanged', state_snapshot() == before_failure)
         finally:
             sql('DROP TRIGGER ' + trigger)
-        check('recovery after failure succeeds', api('/sys/user/register', payload).get('success') is True)
-        check('final user count includes exactly four test accounts', int(sql('SELECT COUNT(*) FROM sys_user')) == base + 4)
+        check('recovery after failure succeeds', api(STUDENT_ENTRY, payload).get('success') is True)
+        check('recovery still uses fixed student profile', profile(phones[4]) == 'student')
+        check('final user count includes exactly five test accounts', int(sql('SELECT COUNT(*) FROM sys_user')) == base + 5)
         directory = api('/teaching/user/publicDirectory')['result']
         check('public directory contains only masked safe fields', all(set(row) == {'name', 'school', 'identity'} and '*' in row['name'] for row in directory['records']))
         return {'status': 'passed', 'database': db, 'checks': checks, 'passed': len(checks),
-                'test_accounts': 4, 'production_test_writes': False}
+                'test_accounts': 5, 'production_test_writes': False}
     finally:
         for token in tokens: api('/sys/logout', token=token)
 

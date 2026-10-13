@@ -181,6 +181,11 @@ function guardHarness () {
 test('public routes remain usable while permission service is unavailable', async () => {
   const h = guardHarness(); assert.deepEqual(await h.navigate('/courseList?q=test'), [undefined]); assert.equal(h.requests.length, 0)
 })
+test('both registration entry paths are available before login without permission loading', async () => {
+  const h = guardHarness(); h.setToken(null)
+  for (const path of ['/user/register', '/user/teacher-register']) assert.deepEqual(await h.navigate(path), [undefined])
+  assert.equal(h.requests.length, 0)
+})
 test('protected cold entry keeps query/hash, loads once even with concurrent navigation and empty menu', async () => {
   const h = guardHarness(); const a = h.navigate('/teaching/course?id=x#unit'); const b = h.navigate('/teaching/course?id=x#unit')
   assert.equal(h.requests.length, 1); h.requests[0].resolve({ result: { menu: [] } })

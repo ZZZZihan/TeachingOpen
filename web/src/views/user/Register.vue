@@ -1,13 +1,22 @@
 <template>
   <main class="registration-page">
-    <div class="registration-heading"><span>TeachingOpen · 学习与创作</span><h1>创建你的账号</h1><p>使用手机号和密码登录教学平台。</p></div>
+    <div class="registration-heading"><span>TeachingOpen · 学习与创作</span><h1>{{ teacherRegistration ? '创建教师账号' : '创建学生账号' }}</h1><p>使用手机号和密码登录教学平台。</p></div>
     <form novalidate :aria-busy="submitting" @submit.prevent="submit">
       <div v-for="field in fields" :key="field.key" class="field">
         <label :for="'register-' + field.key">{{ field.label }}</label>
-        <input :id="'register-' + field.key" v-model="form[field.key]" :name="field.key" :type="field.type || 'text'" :autocomplete="field.autocomplete" :maxlength="field.maximum" :inputmode="field.key === 'phone' ? 'tel' : null" :disabled="submitting" :aria-invalid="!!errors[field.key]" :aria-describedby="errors[field.key] ? field.key + '-error' : null">
+        <input
+          :id="'register-' + field.key"
+          v-model="form[field.key]"
+          :name="field.key"
+          :type="field.type || 'text'"
+          :autocomplete="field.autocomplete"
+          :maxlength="field.maximum"
+          :inputmode="field.key === 'phone' ? 'tel' : null"
+          :disabled="submitting"
+          :aria-invalid="!!errors[field.key]"
+          :aria-describedby="errors[field.key] ? field.key + '-error' : null">
         <p v-if="errors[field.key]" :id="field.key + '-error'" class="field-error">{{ errors[field.key] }}</p>
       </div>
-      <fieldset :disabled="submitting"><legend>身份</legend><label><input v-model="form.identity" type="radio" name="identity" value="student"> 学生</label><label><input v-model="form.identity" type="radio" name="identity" value="teacher"> 教师</label><p v-if="errors.identity" class="field-error">{{ errors.identity }}</p></fieldset>
       <p v-if="submitError" role="alert" class="field-error">{{ submitError }}</p>
       <button type="submit" :disabled="submitting">{{ submitting ? '正在注册…' : '注册账号' }}</button>
       <router-link class="login-link" to="/user/login">使用已有账号登录</router-link>
@@ -21,10 +30,15 @@ import { isMainlandPhone, passwordProblem, recoveryError } from '@/utils/account
 
 export default {
     name: 'Register',
+    props: {
+        teacherRegistration: { type: Boolean, default: false }
+    },
     data () {
         return {
-            submitting: false, submitError: '', errors: {},
-            form: { phone: '', password: '', confirmation: '', realname: '', school: '', identity: '' },
+            submitting: false,
+            submitError: '',
+            errors: {},
+            form: { phone: '', password: '', confirmation: '', realname: '', school: '' },
             fields: [
                 { key: 'phone', label: '手机号', autocomplete: 'username', maximum: 11 },
                 { key: 'password', label: '密码（8–64位，包含字母、数字和特殊符号）', type: 'password', autocomplete: 'new-password', maximum: 64 },
@@ -45,15 +59,16 @@ export default {
             if (!form.confirmation || form.password !== form.confirmation) errors.confirmation = '两次输入的密码需一致。'
             if (!form.realname.trim()) errors.realname = '请填写姓名。'
             if (!form.school.trim()) errors.school = '请填写学校。'
-            if (!['student', 'teacher'].includes(form.identity)) errors.identity = '请选择身份。'
             this.errors = errors
             this.submitError = ''
             if (Object.keys(errors).length) return
             this.submitting = true
             try {
-                const response = await postAction('/sys/user/register', {
-                    phone: form.phone.trim(), password: form.password,
-                    realname: form.realname.trim(), school: form.school.trim(), identity: form.identity
+                const response = await postAction(this.teacherRegistration ? '/sys/user/register/teacher' : '/sys/user/register', {
+                    phone: form.phone.trim(),
+                    password: form.password,
+                    realname: form.realname.trim(),
+                    school: form.school.trim()
                 })
                 if (!response.success) {
                     this.submitError = response.message || '注册失败，请稍后重试。'
@@ -81,9 +96,6 @@ h1 { margin: 12px 0; font-size: 30px; }
 .field label { display: block; margin-bottom: 8px; }
 .field input { width: 100%; padding: 12px; border: 1px solid #bec6cc; border-radius: 4px; }
 .field input:focus { outline: 2px solid #146fc2; outline-offset: 2px; }
-fieldset { margin: 20px 0; border: 0; padding: 0; }
-fieldset label { display: inline-block; margin-right: 24px; }
-legend { margin-bottom: 10px; font-size: 14px; }
 .field-error { color: #a12834; margin-top: 8px; }
 button { width: 100%; padding: 12px; background: #146fc2; color: white; border: 0; border-radius: 4px; cursor: pointer; }
 button:disabled { opacity: .65; cursor: wait; }
