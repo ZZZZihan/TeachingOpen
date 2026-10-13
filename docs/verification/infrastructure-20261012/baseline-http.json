@@ -1,0 +1,99 @@
+{
+  "observed_utc": "2026-10-11T09:28:40.522363+00:00",
+  "scope": "owned synthetic legacy HTTP/MySQL/Redis/Quartz; limited read exposure and inert JDBC error",
+  "jar_sha256": "efad54740308684c120895ddfacc5b36ddb6436cc3c4527183cb7d99f00b18c5",
+  "verifier_sha256": "6e35fb5bc53ed3e583b5f78500ab8d472c39e40bf70b8df61422a34ec5773aff",
+  "expected_legacy": true,
+  "production_connected": false,
+  "network_connection_attempted": false,
+  "passed": 14,
+  "failed": 0,
+  "total": 14,
+  "checks": [
+    {
+      "case": "sample task identities are not already configured",
+      "passed": true
+    },
+    {
+      "case": "sample task identities are not already scheduled",
+      "passed": true
+    },
+    {
+      "case": "legacy actor is an ordinary student without infrastructure privileges",
+      "passed": true
+    },
+    {
+      "case": "legacy student reads synthetic source password through /sys/dataSource/queryById",
+      "passed": true
+    },
+    {
+      "case": "legacy student reads synthetic source password through /sys/dataSource/queryById without changing SQL, Redis or Quartz",
+      "passed": true
+    },
+    {
+      "case": "legacy student reads synthetic source password through /sys/dataSource/list",
+      "passed": true
+    },
+    {
+      "case": "legacy student reads synthetic source password through /sys/dataSource/list without changing SQL, Redis or Quartz",
+      "passed": true
+    },
+    {
+      "case": "legacy student reads the inert synthetic Quartz task list",
+      "passed": true
+    },
+    {
+      "case": "legacy Quartz read changes no SQL, Redis or scheduler state",
+      "passed": true
+    },
+    {
+      "case": "legacy student reaches packaged Online JDBC test without a network-capable URL",
+      "passed": true
+    },
+    {
+      "case": "legacy Online JDBC test changes no SQL, Redis or scheduler state",
+      "passed": true
+    },
+    {
+      "case": "legacy verification has not scheduled an executable Quartz task",
+      "passed": true
+    },
+    {
+      "case": "legacy mode restores the original infrastructure state",
+      "passed": true
+    },
+    {
+      "case": "legacy baseline execution and restoration complete",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "route": "/sys/dataSource/queryById",
+      "http_status": 200,
+      "business_code": 200,
+      "synthetic_password_exposed": true
+    },
+    {
+      "route": "/sys/dataSource/list",
+      "http_status": 200,
+      "business_code": 200,
+      "synthetic_password_exposed": true
+    },
+    {
+      "route": "/sys/quartzJob/list",
+      "http_status": 200,
+      "business_code": 200,
+      "inert_task_visible": true
+    },
+    {
+      "route": "/online/cgreport/api/testConnection",
+      "http_status": 200,
+      "business_code": 500,
+      "no_suitable_driver_reached": true,
+      "network_capable_url": false
+    }
+  ],
+  "completed": true,
+  "exception_type": null
+}

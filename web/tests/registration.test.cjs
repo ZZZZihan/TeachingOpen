@@ -15,7 +15,7 @@ function harness (postAction, propsData = {}) {
   return { component, routes }
 }
 const valid = { phone: '13900000001', password: 'Synthetic8!', confirmation: 'Synthetic8!', realname: ' 张同学 ', school: ' 测试学校 ' }
-test('public registration renders only student signup while the separate teacher page explains its permission boundary', () => {
+test('student and teacher registration render their own titles without identity selection or removed explanatory copy', () => {
   const template = compiler.parseComponent(source('views/user/Register.vue')).template.content
   const compiled = compiler.compile(template)
   assert.deepEqual(compiled.errors, [])
@@ -27,12 +27,14 @@ test('public registration renders only student signup while the separate teacher
     function visit (node) { nodes.push(node); for (const child of node.children || []) visit(child) }
     visit(h.component._render())
     assert.equal(nodes.some(node => node.tag === 'input' && node.data.attrs.type === 'radio'), false)
-    return nodes.map(node => node.text || '').join('')
+    const text = nodes.map(node => node.text || '').join('')
+    assert.doesNotMatch(text, /姓名将脱敏展示|学校和身份将展示在首页|教师身份用于个人资料|教学管理权限由管理员开通/)
+    return text
   }
   const student = content(false)
   assert.match(student, /创建学生账号/); assert.doesNotMatch(student, /教师/)
   const teacher = content(true)
-  assert.match(teacher, /创建教师账号/); assert.match(teacher, /教学管理权限由管理员开通/)
+  assert.match(teacher, /创建教师账号/)
 })
 test('blank student registration validates required fields without an identity selection', async () => {
   let calls = 0; const h = harness(() => { calls++; }); assert.equal(h.component.teacherRegistration, false)

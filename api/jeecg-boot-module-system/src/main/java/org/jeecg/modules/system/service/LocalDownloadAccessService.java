@@ -10,20 +10,10 @@ import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.mapper.TeachingWorkMapper;
 import org.jeecg.modules.teaching.service.TeachingAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.HtmlUtils;
-import org.springframework.web.util.UriUtils;
 
-import java.net.URI;
-import java.nio.ByteBuffer;
-import java.nio.charset.CharacterCodingException;
-import java.nio.charset.CodingErrorAction;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /** Resolve local bytes through current authoritative resource relationships on every request. */
 @Service
@@ -34,61 +24,87 @@ public class LocalDownloadAccessService {
     @Autowired private ISysUserDepartService departments;
     @Autowired private JdbcTemplate jdbc;
     @Autowired private ObjectMapper json;
-    @Value("${jeecg.path.staticDomain}") private String staticDomain;
-    private static final Pattern HTML_LINK = Pattern.compile("(?i)\\b(?:src|href|poster)\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))");
+    @Autowired private LocalFileReferenceResolver references;
+    @Autowired private LocalMediaReferenceIndex mediaIndex;
 
     public int status(String key) {
         LoginUser user = access.currentUser();
+        List<SysFile> records = files.list(new QueryWrapper<SysFile>().eq("file_path", key).eq("file_location", 1));
+        // A failed physical cleanup leaves a committed tombstone for retry. It
+        // must not fall through to owner, public-resource or administrator reads.
+        for (SysFile file : records) {
+            if (key.equals(file.getFilePath()) && !Integer.valueOf(0).equals(file.getDelFlag()))
+                return user == null ? 401 : 403;
+        }
         if (user != null && access.isAdministrator()) return 200;
-        List<SysFile> records = files.list(new QueryWrapper<SysFile>().eq("file_path", key).eq("file_location", 1).eq("del_flag", 0));
+        Map<String, Boolean> courseAccess = new HashMap<>();
+        Set<String> fileIds = new HashSet<>();
+        Set<String> uploaders = new HashSet<>();
         for (SysFile file : records) {
             // MySQL collations can be case-insensitive while storage keys are not.
             if (!key.equals(file.getFilePath())) continue;
             if (user != null && user.getUsername().equals(file.getCreateBy())) return 200;
+            fileIds.add(file.getId());
+            uploaders.add(file.getCreateBy());
+        }
+        if (!fileIds.isEmpty()) {
             for (TeachingWork work : works.selectList(new QueryWrapper<TeachingWork>().eq("del_flag", 0)
-                    .and(q -> q.eq("work_file", file.getId()).or().eq("work_cover", file.getId())))) {
+                    .and(q -> q.in("work_file", fileIds).or().in("work_cover", fileIds)))) {
+                // The SQL lookup may use a case-insensitive collation.
+                if (!fileIds.contains(work.getWorkFile()) && !fileIds.contains(work.getWorkCover())) continue;
                 try { access.requireCommunityWork(work); return 200; } catch (AuthorizationException denied) { }
             }
             // Prior versions stay private even when the current work has been published.
-            if (user != null) for (Map<String,Object> row : jdbc.queryForList(
-                    "SELECT h.data_id,h.data_content FROM sys_data_log h JOIN teaching_work w ON w.id=h.data_id "
-                            + "WHERE h.data_table='teaching_work' AND w.del_flag=0 AND LOCATE(?,h.data_content)>0", file.getId())) {
-                try {
-                    JsonNode old = json.readTree(text(row,"data_content"));
-                    if (old == null || !(file.getId().equals(old.path("workFile").asText()) || file.getId().equals(old.path("workCover").asText()))) continue;
-                    access.requireReadWork(works.selectById(text(row,"data_id"))); return 200;
-                } catch (java.io.IOException | AuthorizationException denied) { }
+            if (user != null) {
+                Set<String> historicWorks = new HashSet<>();
+                for (Map<String,Object> row : mediaIndex.candidates("file", fileIds).getOrDefault(LocalMediaSource.HISTORY, Collections.emptyList())) {
+                    if (!"teaching_work".equals(text(row, "data_table"))) continue;
+                    try {
+                        JsonNode old = json.readTree(text(row,"data_content"));
+                        if (old != null && (fileIds.contains(old.path("workFile").asText()) || fileIds.contains(old.path("workCover").asText())))
+                            historicWorks.add(text(row, "data_id"));
+                    } catch (java.io.IOException denied) { }
+                }
+                if (!historicWorks.isEmpty()) for (TeachingWork work : works.selectBatchIds(historicWorks)) {
+                    if (!historicWorks.contains(work.getId()) || !Integer.valueOf(0).equals(work.getDelFlag())) continue;
+                    try { access.requireReadWork(work); return 200; } catch (AuthorizationException denied) { }
+                }
             }
             // A user-controlled avatar path cannot publish another uploader's private file.
-            for (Map<String,Object> row : jdbc.queryForList("SELECT avatar FROM sys_user WHERE username=? AND del_flag=0", file.getCreateBy())) {
-                if (references(text(row,"avatar"),key)) return 200;
+            for (Map<String,Object> row : jdbc.queryForList("SELECT username,avatar FROM sys_user WHERE username IN ("
+                    + String.join(",", Collections.nCopies(uploaders.size(), "?")) + ") AND del_flag=0", uploaders.toArray())) {
+                if (uploaders.contains(text(row, "username")) && references(text(row,"avatar"),key)) return 200;
             }
         }
-        for (Map<String,Object> row : candidates("teaching_course", "course_icon,course_cover,course_map,course_desc", key)) {
+        Map<LocalMediaSource, List<Map<String, Object>>> candidates = mediaIndex.candidates("key", Collections.singleton(key));
+        for (Map<String,Object> row : candidates.getOrDefault(LocalMediaSource.COURSE, Collections.emptyList())) {
             if (!live(row) || !any(row,key,"course_icon","course_cover","course_map","course_desc")) continue;
-            if (one(row,"show_home") || course(text(row,"id"))) return 200;
+            if (one(row,"show_home") || courseAccess.computeIfAbsent(text(row,"id"), this::course)) return 200;
         }
         if (user != null) {
             boolean student = user.getUserIdentity() == null || Integer.valueOf(1).equals(user.getUserIdentity());
-            for (Map<String,Object> row : candidates("teaching_course_unit", "unit_cover,unit_intro,media_content,course_video,course_case,course_ppt,course_plan,course_work,course_work_answer", key)) {
-                if (!live(row) || !course(text(row,"course_id"))) continue;
+            for (Map<String,Object> row : candidates.getOrDefault(LocalMediaSource.UNIT, Collections.emptyList())) {
+                if (!live(row) || !courseAccess.computeIfAbsent(text(row,"course_id"), this::course)) continue;
                 if (any(row,key,"unit_cover","unit_intro","media_content","course_work","course_work_answer")) return 200;
                 for (String field : Arrays.asList("course_video","course_case","course_ppt","course_plan")) {
                     if ((!student || one(row,"show_"+field)) && references(text(row,field),key)) return 200;
                 }
             }
-            for (Map<String,Object> row : candidates("teaching_additional_work", "work_cover,work_document_url,work_url,work_desc", key)) {
+            List<String> managed = null;
+            List<String> member = null;
+            for (Map<String,Object> row : candidates.getOrDefault(LocalMediaSource.ADDITIONAL, Collections.emptyList())) {
                 if (!any(row,key,"work_cover","work_document_url","work_url","work_desc")) continue;
                 Set<String> assigned = new HashSet<>(Arrays.asList(text(row,"work_dept").split(",")));
-                if (!Collections.disjoint(assigned,access.managedDepartIds())) return 200;
-                List<String> member = departments.userDepartIds(user.getId());
+                if (managed == null) managed = access.managedDepartIds();
+                if (!Collections.disjoint(assigned,managed)) return 200;
+                if (member == null) member = departments.userDepartIds(user.getId());
                 if (one(row,"status") && member != null && !Collections.disjoint(assigned,member)) return 200;
             }
         }
-        for (Map<String,Object> row : candidates("sys_config", "config_value", key)) {
+        for (Map<String,Object> row : candidates.getOrDefault(LocalMediaSource.CONFIG, Collections.emptyList())) {
             if (one(row,"config_enabled") && references(text(row,"config_value"),key)) return 200;
         }
-        for (Map<String,Object> row : candidates("teaching_news", "news_content", key)) {
+        for (Map<String,Object> row : candidates.getOrDefault(LocalMediaSource.NEWS, Collections.emptyList())) {
             Object state = row.get("news_status");
             if (state instanceof Number && ((Number) state).intValue() >= 1 && references(text(row,"news_content"),key)) return 200;
         }
@@ -103,14 +119,6 @@ public class LocalDownloadAccessService {
         try { access.requireCourse(id); return true; } catch (AuthorizationException denied) { return false; }
     }
 
-    // Table/column arguments are constants above, never caller input. LOCATE only selects
-    // candidates; authorization always requires an exact URL/key reference below. A URL can
-    // encode any path character, using either hex case, so a single encoded key is not an
-    // exhaustive prefilter. Include values containing '%' and let exact decode the URI once.
-    private List<Map<String,Object>> candidates(String table,String columns,String key) {
-        String expression = "CONCAT_WS(',',"+columns+")";
-        return jdbc.queryForList("SELECT * FROM "+table+" WHERE LOCATE(?,"+expression+")>0 OR LOCATE(?,"+expression+")>0 OR LOCATE('%',"+expression+")>0",key,UriUtils.encodePath(key,"UTF-8"));
-    }
     private boolean live(Map<String,Object> row) { return row.get("del_flag") == null || "0".equals(text(row,"del_flag")); }
     private boolean one(Map<String,Object> row,String field) { return "1".equals(text(row,field)) || Boolean.TRUE.equals(row.get(field)); }
     private String text(Map<String,Object> row,String field) { Object value=row.get(field);return value==null?"":value.toString(); }
@@ -119,62 +127,6 @@ public class LocalDownloadAccessService {
         return false;
     }
     private boolean references(String value,String key) {
-        if (value == null || value.isEmpty()) return false;
-        for (String part:value.split(",")) if (exact(part.trim(),key)) return true;
-        Matcher links = HTML_LINK.matcher(value);
-        while (links.find()) {
-            String link=links.group(1)!=null?links.group(1):links.group(2)!=null?links.group(2):links.group(3);
-            if (exact(HtmlUtils.htmlUnescape(link),key)) return true;
-        }
-        if (value.trim().startsWith("{") || value.trim().startsWith("[")) {
-            try { return jsonReferences(json.readTree(value),key,0); } catch (java.io.IOException invalid) { return false; }
-        }
-        return false;
-    }
-    private boolean jsonReferences(JsonNode node,String key,int depth) {
-        if (node == null || depth > 20) return false;
-        if (node.isTextual()) return exact(node.asText(),key);
-        if (node.isContainerNode()) for (JsonNode child:node) if (jsonReferences(child,key,depth+1)) return true;
-        return false;
-    }
-    private boolean exact(String value,String key) {
-        if (value.equals(key)) return true;
-        String base=staticDomain.replaceAll("/+$","");
-        try {
-            URI reference=new URI(value);
-            URI configured=new URI(base);
-            // Absolute references must match the configured origin, not merely its path.
-            if (!Objects.equals(reference.getScheme(),configured.getScheme())
-                    || !Objects.equals(reference.getRawAuthority(),configured.getRawAuthority())) return false;
-            // URI.getPath replaces malformed UTF-8 with U+FFFD. Reject it instead of
-            // allowing invalid octets to identify a different, valid storage key.
-            if (!validUtf8Escapes(reference.getRawPath())) return false;
-            return Objects.equals(reference.getPath(),configured.getPath()+"/"+key);
-        } catch (java.net.URISyntaxException invalid) { return false; }
-    }
-
-    private boolean validUtf8Escapes(String rawPath) {
-        if (rawPath == null) return false;
-        int index = rawPath.indexOf('%');
-        if (index < 0) return true;
-        byte[] octets = new byte[(rawPath.length()-index)/3];
-        while (index >= 0) {
-            int count = 0;
-            // URI construction already validated every %HH escape. Validate each
-            // contiguous octet run without decoding again or treating '+' as a space.
-            do {
-                octets[count++] = (byte) ((Character.digit(rawPath.charAt(index+1),16) << 4)
-                        | Character.digit(rawPath.charAt(index+2),16));
-                index += 3;
-            } while (index < rawPath.length() && rawPath.charAt(index) == '%');
-            try {
-                StandardCharsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT)
-                        .onUnmappableCharacter(CodingErrorAction.REPORT).decode(ByteBuffer.wrap(octets,0,count));
-            } catch (CharacterCodingException invalid) {
-                return false;
-            }
-            index = rawPath.indexOf('%',index);
-        }
-        return true;
+        return references.resolve(value).keys().contains(key);
     }
 }

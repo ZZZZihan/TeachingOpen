@@ -31,8 +31,8 @@ SOURCE_INPUTS = (
     'api/dev/production_fixture.py', 'api/dev/scratch_cloud_recovery.py',
     'api/dev/FixturePassword.java', 'api/dev/application-localtest.properties.template',
     PASSWORD_UTIL, 'web/nginx/default.conf',
-    'api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql', 'api/db/unit-view-events.sql',
-    'deploy/registration_upgrade.py',
+    'api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql', 'api/db/unit-view-events.sql', 'api/db/work-events.sql', 'api/db/local-media-references.sql',
+    'deploy/registration_upgrade.py', 'deploy/work_event_review.py',
 )
 CANARY = 'DO_NOT_PACKAGE_ORIGINAL_SOURCE_INSERT_9c207eb5'
 
@@ -72,6 +72,13 @@ def inventory(root):
 
 def write_json(path, value):
     Path(path).write_text(json.dumps(value, sort_keys=True, indent=2) + '\n')
+
+
+class CandidateSourceContractTests(unittest.TestCase):
+    def test_repository_nginx_matches_reviewed_pin(self):
+        module = load_module(ROOT / 'deploy/candidate_release.py', 'candidate_source_contract')
+        self.assertEqual(digest(ROOT / 'web/nginx/default.conf'), module.NGINX_SHA256,
+                         'Review the Nginx change and update the fixed candidate pin explicitly')
 
 
 class CandidateReleaseTests(unittest.TestCase):
@@ -284,6 +291,16 @@ class CandidateReleaseTests(unittest.TestCase):
         git(self.source, 'add', 'README.fixture')
         self.rejected_create()
 
+    def test_committed_unreviewed_nginx_is_rejected_before_output_creation(self):
+        path = self.source / 'web/nginx/default.conf'
+        path.write_bytes(path.read_bytes() + b'\n# unreviewed configuration change\n')
+        git(self.source, 'add', 'web/nginx/default.conf')
+        git(self.source, 'commit', '-qm', 'Unreviewed Nginx test change')
+        self.assertEqual(git(self.source, 'status', '--porcelain', '--untracked-files=no'), '')
+        with self.assertRaisesRegex(ValueError, 'Source Nginx differs from reviewed'):
+            self.create()
+        self.assertFalse(self.output.exists())
+
     def test_jar_hash_mismatch_is_rejected(self):
         self.rejected_create(jar_sha256='0' * 64)
 
@@ -480,13 +497,13 @@ class CandidateReleaseTests(unittest.TestCase):
         manifest = json.loads((self.base_bundle / 'manifest.json').read_text())
         self.assertEqual(manifest['fixtures']['initial_upload_files'], len(observed))
         self.assertEqual(manifest['fixture_counts'],
-                         {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 71})
+                         {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 75})
 
     def test_registration_migrations_follow_data_and_match_explicit_upgrade_inputs(self):
         manifest = json.loads((self.base_bundle / 'manifest.json').read_text())
         self.assertEqual(manifest['database_upgrade']['initialization_order'],
-            ['init/01-schema.sql', 'init/02-fixtures.sql', 'init/03-phone-profile-registration.sql',
-             'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql'])
+            ['init/01-schema.sql', 'init/01a-work-events.sql', 'init/02-fixtures.sql', 'init/03-phone-profile-registration.sql',
+             'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql', 'init/07-local-media-references.sql'])
         self.assertIs(manifest['database_upgrade']['automatic_apply'], False)
         self.assertIs(manifest['database_upgrade']['ddl_transactional'], False)
         _, rows = self.parse_fixture_rows(self.base_bundle)
@@ -496,7 +513,9 @@ class CandidateReleaseTests(unittest.TestCase):
         for initial, explicit in (
                 ('init/03-phone-profile-registration.sql', 'upgrade/01-phone-profile-registration.sql'),
                 ('init/04-enable-phone-registration.sql', 'upgrade/02-enable-phone-registration.sql'),
-                ('init/05-unit-view-events.sql', 'upgrade/03-unit-view-events.sql')):
+                ('init/05-unit-view-events.sql', 'upgrade/03-unit-view-events.sql'),
+                ('init/01a-work-events.sql', 'upgrade/04-work-events.sql'),
+                ('init/07-local-media-references.sql', 'upgrade/05-local-media-references.sql')):
             self.assertEqual((self.base_bundle / initial).read_bytes(), (self.base_bundle / explicit).read_bytes())
 
     def test_verify_rejects_registration_sql_tamper_even_with_resealed_file_inventory(self):
@@ -506,7 +525,7 @@ class CandidateReleaseTests(unittest.TestCase):
         self.rejected_verify(bundle)
 
     def test_verify_rejects_upgrade_order_or_backup_boundary_tamper(self):
-        for key, value in (('initialization_order', ['init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql']),
+        for key, value in (('initialization_order', ['init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql', 'init/07-local-media-references.sql']),
                            ('existing_database_requires_explicit_backup_and_apply', False),
                            ('ddl_transactional', True)):
             with self.subTest(key=key):
@@ -533,7 +552,7 @@ class CandidateReleaseTests(unittest.TestCase):
         self.assertEqual(stat.S_IMODE((bundle / 'web/dist').stat().st_mode), 0o755)
         self.assertEqual(stat.S_IMODE((bundle / 'web/dist/js/app.js').stat().st_mode), 0o644)
         for name in ('init/01-schema.sql', 'init/02-fixtures.sql', 'init/03-phone-profile-registration.sql',
-                     'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql', 'config/mysql-root-password',
+                     'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql', 'init/07-local-media-references.sql', 'config/mysql-root-password',
                      'config/mysql-app-password', 'config/redis.conf'):
             self.assertEqual(stat.S_IMODE((bundle / name).stat().st_mode), 0o444)
 
@@ -636,6 +655,19 @@ class CandidateReleaseTests(unittest.TestCase):
         bundle = self.bundle_copy()
         (bundle / 'web/dist/js/app.js').write_text('different')
         self.rejected_verify(bundle)
+
+    def test_verify_rejects_broadened_nginx_even_with_resealed_receipts(self):
+        bundle = self.bundle_copy()
+        path = bundle / 'web/nginx.conf'
+        contents = path.read_text()
+        self.assertIn('$teaching_python_resource_policy always;', contents)
+        self.replace_bundle_file(bundle, 'web/nginx.conf', contents.replace(
+            '$teaching_python_resource_policy always;', '"cross-origin" always;'))
+        self.reseal_inventory(bundle)
+        self.edit_manifest(bundle, lambda manifest: manifest['helper_sha256'].update(
+            {'web/nginx/default.conf': digest(path)}))
+        with self.assertRaisesRegex(ValueError, 'Nginx must be the exact reviewed'):
+            self.module.verify_bundle(bundle)
 
     def test_verify_rejects_file_symlink(self):
         bundle = self.bundle_copy()

@@ -1,0 +1,696 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "case": "teacher grades own class through actual business API",
+      "passed": true
+    },
+    {
+      "case": "unique private feedback is committed",
+      "passed": true
+    },
+    {
+      "case": "student_b cross-class business queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_b cross-class business queryById returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_b cross-class business queryById leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b cross-class business queryTeachingWorkCorrectByMainId is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_b cross-class business queryTeachingWorkCorrectByMainId returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_b cross-class business queryTeachingWorkCorrectByMainId leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cross-class business queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cross-class business queryById returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cross-class business queryById leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cross-class business queryTeachingWorkCorrectByMainId is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cross-class business queryTeachingWorkCorrectByMainId returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_b cross-class business queryTeachingWorkCorrectByMainId leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a legitimate feedback read",
+      "passed": true
+    },
+    {
+      "case": "student_a receives the committed feedback",
+      "passed": true
+    },
+    {
+      "case": "teacher_a legitimate feedback read",
+      "passed": true
+    },
+    {
+      "case": "teacher_a receives the committed feedback",
+      "passed": true
+    },
+    {
+      "case": "None audit read /sys/log/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None audit read /sys/log/list returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "None audit read /sys/log/list leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "None audit read /sys/dataLog/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None audit read /sys/dataLog/list returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "None audit read /sys/dataLog/list leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "None audit read /sys/dataLog/queryCompareList is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None audit read /sys/dataLog/queryCompareList returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "None audit read /sys/dataLog/queryCompareList leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "None audit read /sys/dataLog/queryDataVerList is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None audit read /sys/dataLog/queryDataVerList returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "None audit read /sys/dataLog/queryDataVerList leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "None audit delete /sys/log/delete?id=fixture_h06_historical is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None audit delete /sys/log/delete?id=fixture_h06_historical returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "None audit delete /sys/log/delete?id=fixture_h06_historical leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "None audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "None audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "None audit delete /sys/log/deleteBatch?ids=allclear is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None audit delete /sys/log/deleteBatch?ids=allclear returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "None audit delete /sys/log/deleteBatch?ids=allclear leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a audit read /sys/log/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a audit read /sys/log/list returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_a audit read /sys/log/list leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a audit read /sys/dataLog/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a audit read /sys/dataLog/list returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_a audit read /sys/dataLog/list leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a audit read /sys/dataLog/queryCompareList is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a audit read /sys/dataLog/queryCompareList returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_a audit read /sys/dataLog/queryCompareList leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a audit read /sys/dataLog/queryDataVerList is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a audit read /sys/dataLog/queryDataVerList returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_a audit read /sys/dataLog/queryDataVerList leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a audit delete /sys/log/delete?id=fixture_h06_historical is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a audit delete /sys/log/delete?id=fixture_h06_historical returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_a audit delete /sys/log/delete?id=fixture_h06_historical leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_a audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a audit delete /sys/log/deleteBatch?ids=allclear is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a audit delete /sys/log/deleteBatch?ids=allclear returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_a audit delete /sys/log/deleteBatch?ids=allclear leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b audit read /sys/log/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_b audit read /sys/log/list returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_b audit read /sys/log/list leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b audit read /sys/dataLog/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_b audit read /sys/dataLog/list returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_b audit read /sys/dataLog/list leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b audit read /sys/dataLog/queryCompareList is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_b audit read /sys/dataLog/queryCompareList returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_b audit read /sys/dataLog/queryCompareList leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b audit read /sys/dataLog/queryDataVerList is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_b audit read /sys/dataLog/queryDataVerList returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_b audit read /sys/dataLog/queryDataVerList leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b audit delete /sys/log/delete?id=fixture_h06_historical is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_b audit delete /sys/log/delete?id=fixture_h06_historical returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_b audit delete /sys/log/delete?id=fixture_h06_historical leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_b audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_b audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_b audit delete /sys/log/deleteBatch?ids=allclear is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_b audit delete /sys/log/deleteBatch?ids=allclear returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "student_b audit delete /sys/log/deleteBatch?ids=allclear leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit read /sys/log/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit read /sys/log/list returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit read /sys/log/list leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit read /sys/dataLog/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit read /sys/dataLog/list returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit read /sys/dataLog/list leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit read /sys/dataLog/queryCompareList is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit read /sys/dataLog/queryCompareList returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit read /sys/dataLog/queryCompareList leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit read /sys/dataLog/queryDataVerList is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit read /sys/dataLog/queryDataVerList returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit read /sys/dataLog/queryDataVerList leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit delete /sys/log/delete?id=fixture_h06_historical is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit delete /sys/log/delete?id=fixture_h06_historical returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit delete /sys/log/delete?id=fixture_h06_historical leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit delete /sys/log/deleteBatch?ids=allclear is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit delete /sys/log/deleteBatch?ids=allclear returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_a audit delete /sys/log/deleteBatch?ids=allclear leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit read /sys/log/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit read /sys/log/list returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit read /sys/log/list leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit read /sys/dataLog/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit read /sys/dataLog/list returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit read /sys/dataLog/list leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit read /sys/dataLog/queryCompareList is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit read /sys/dataLog/queryCompareList returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit read /sys/dataLog/queryCompareList leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit read /sys/dataLog/queryDataVerList is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit read /sys/dataLog/queryDataVerList returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit read /sys/dataLog/queryDataVerList leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit delete /sys/log/delete?id=fixture_h06_historical is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit delete /sys/log/delete?id=fixture_h06_historical returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit delete /sys/log/delete?id=fixture_h06_historical leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit delete /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit delete /sys/log/deleteBatch?ids=allclear is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit delete /sys/log/deleteBatch?ids=allclear returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "teacher_b audit delete /sys/log/deleteBatch?ids=allclear leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "administrator keeps historical management /sys/log/list",
+      "passed": true
+    },
+    {
+      "case": "administrator reads retained historical private marker",
+      "passed": true
+    },
+    {
+      "case": "administrator keeps historical management /sys/dataLog/list",
+      "passed": true
+    },
+    {
+      "case": "administrator reads retained historical private marker",
+      "passed": true
+    },
+    {
+      "case": "administrator keeps historical management /sys/dataLog/queryCompareList",
+      "passed": true
+    },
+    {
+      "case": "administrator reads retained historical private marker",
+      "passed": true
+    },
+    {
+      "case": "administrator keeps historical management /sys/dataLog/queryDataVerList",
+      "passed": true
+    },
+    {
+      "case": "administrator reads retained historical private marker",
+      "passed": true
+    },
+    {
+      "case": "same token with live developer grant /sys/log/list",
+      "passed": true
+    },
+    {
+      "case": "authorized developer reads historical marker",
+      "passed": true
+    },
+    {
+      "case": "same token with live developer grant /sys/dataLog/list",
+      "passed": true
+    },
+    {
+      "case": "authorized developer reads historical marker",
+      "passed": true
+    },
+    {
+      "case": "same token with live developer grant /sys/dataLog/queryCompareList",
+      "passed": true
+    },
+    {
+      "case": "authorized developer reads historical marker",
+      "passed": true
+    },
+    {
+      "case": "same token with live developer grant /sys/dataLog/queryDataVerList",
+      "passed": true
+    },
+    {
+      "case": "authorized developer reads historical marker",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/log/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/log/list returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/log/list leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/dataLog/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/dataLog/list returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/dataLog/list leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/dataLog/queryCompareList is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/dataLog/queryCompareList returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/dataLog/queryCompareList leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/dataLog/queryDataVerList is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/dataLog/queryDataVerList returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/dataLog/queryDataVerList leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/log/delete?id=fixture_h06_historical is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/log/delete?id=fixture_h06_historical returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/log/delete?id=fixture_h06_historical leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/log/deleteBatch?ids=fixture_h06_historical,fixture_h06_historical leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/log/deleteBatch?ids=allclear is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/log/deleteBatch?ids=allclear returns no private marker",
+      "passed": true
+    },
+    {
+      "case": "same token after live developer revocation /sys/log/deleteBatch?ids=allclear leaves audit history work feedback and roles unchanged",
+      "passed": true
+    },
+    {
+      "case": "no unreviewed inherited detail/export route /sys/log/queryById",
+      "passed": true
+    },
+    {
+      "case": "no unreviewed inherited detail/export route /sys/log/exportXls",
+      "passed": true
+    },
+    {
+      "case": "no unreviewed inherited detail/export route /sys/dataLog/queryById",
+      "passed": true
+    },
+    {
+      "case": "no unreviewed inherited detail/export route /sys/dataLog/exportXls",
+      "passed": true
+    },
+    {
+      "case": "administrator single deletion remains available",
+      "passed": true
+    },
+    {
+      "case": "authorized single deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "administrator batch deletion remains available",
+      "passed": true
+    },
+    {
+      "case": "authorized batch deletion persisted",
+      "passed": true
+    },
+    {
+      "case": "administrator allclear remains available",
+      "passed": true
+    },
+    {
+      "case": "authorized allclear persisted",
+      "passed": true
+    },
+    {
+      "case": "all original audit history work feedback statistics and role rows restored",
+      "passed": true
+    }
+  ],
+  "passed": 171,
+  "failed": 0,
+  "total": 171,
+  "expected_legacy": false,
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "exception": null,
+  "scope": "Exclusive synthetic HTTP/MySQL; actual grading, retained historical DTOs, role grant/revocation and full log restoration; no production"
+}

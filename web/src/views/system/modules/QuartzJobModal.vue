@@ -15,9 +15,13 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="任务类名"
+          label="任务类型"
           hasFeedback >
-          <a-input placeholder="请输入任务类名" v-decorator="['jobClassName', {rules: [{ required: true, message: '请输入任务类名!' }]}]" />
+          <a-select :disabled="!!model.id" placeholder="请选择任务类型" v-decorator="['jobType', {rules: [{ required: true, message: '请选择任务类型!' }]}]">
+            <a-select-option value="sample">示例任务</a-select-option>
+            <a-select-option value="sample-parameter">带参数示例任务</a-select-option>
+            <a-select-option value="send-message">发送待处理消息</a-select-option>
+          </a-select>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
@@ -111,7 +115,7 @@
         console.log(this.model)
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'jobClassName','cronExpression','parameter','description','status'));
+          this.form.setFieldsValue(pick(this.model,'jobType','cronExpression','parameter','description','status'));
         });
 
       },

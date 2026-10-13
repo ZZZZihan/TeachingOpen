@@ -17,12 +17,13 @@
         :description="'发布人：'+record.sender + ' 发布时间： ' + record.sendTime">
       </a-card-meta>
       <a-divider />
-      <span v-html="record.msgContent" class="article-content"></span>
+      <span v-html="safeMessage" class="article-content"></span>
     </a-card>
   </j-modal>
 </template>
 
 <script>
+  import { sanitizeRichText } from '@/utils/richText'
   export default {
     name: "SysAnnouncementModal",
     components: {
@@ -53,6 +54,11 @@
           style: { top: '20px' },
           fullScreen: false
         }
+      }
+    },
+    computed: {
+      safeMessage () {
+        return sanitizeRichText(this.record.msgContent)
       }
     },
     created () {

@@ -1,0 +1,11 @@
+PASS writer-first-1 acquires named barrier
+PASS writer-first-1 actual teacher edit reached post-authorization row-write barrier
+PASS writer-first-1 deletion is waiting on the actual referenced file row
+PASS writer-first-1 baseline erases bytes while writer still holds file lock
+PASS writer-first-1 authorized writer completes
+PASS writer-first-1 baseline delete also reports success
+PASS writer-first-1 work stores the committed reference
+PASS writer-first-1 baseline saved reference points to missing bytes and metadata
+PASS all original business rows restored
+PASS all original upload bytes restored
+PASS temporary barrier trigger removed

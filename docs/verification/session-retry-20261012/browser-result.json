@@ -1,0 +1,116 @@
+{
+  "jar_sha256": "e4dc7708374b0d41927a833a893197cfc9d25f54efdc281eee79c24fadf625d6",
+  "base_commit": "7ffc6c5081fa8b675500eb7338e79c7ac8076aea",
+  "production_mutated": false,
+  "candidate_deployed": false,
+  "runtime_scope": "loopback full SPA, real HTTP, isolated MySQL/Redis/uploads and synthetic accounts",
+  "lost_response": {
+    "case": "server committed then response lost; real UI retry returns same work and no duplicate count",
+    "passed": true,
+    "assignmentId": "2109517071725621250",
+    "work": {
+      "id": "2109517201342197762",
+      "user_id": "fixture_student_a",
+      "depart_id": "fixture_class_a",
+      "additional_id": "2109517071725621250",
+      "course_id": "",
+      "work_name": "响应丢失修复后验收 20261012",
+      "work_type": "0",
+      "work_status": "1",
+      "work_file": "1a4b0c4104614a6caef2dccce3ceb50e",
+      "work_cover": null,
+      "del_flag": "0"
+    },
+    "uploadedFile": {
+      "id": "1a4b0c4104614a6caef2dccce3ceb50e",
+      "file_name": "student-submission.txt",
+      "file_path": "temp/8fae470698714706947043866a78ba7c.txt",
+      "file_location": "1",
+      "create_by": "fixture_student_a",
+      "del_flag": "0"
+    },
+    "materialDownload": {
+      "status": 200,
+      "url": "http://127.0.0.1:18192/api/sys/common/static/temp/491d1c7c125b4b6982306d93ab1d1ddb.txt",
+      "byteComparisonPassed": true,
+      "bytes": 309
+    },
+    "events": [
+      {
+        "work_id": "2109517201342197762",
+        "event_type": "SUBMIT",
+        "depart_id": "fixture_class_a",
+        "event_state": "COUNTED",
+        "counted_day": "2026-10-12"
+      }
+    ],
+    "statistics": [
+      {
+        "id": "2109517071830478849",
+        "depart_id": "fixture_class_a",
+        "create_time": "2026-10-12",
+        "additional_work_assign_count": "1",
+        "additional_work_submit_count": "1",
+        "additional_work_correct_count": "0",
+        "course_work_submit_count": "0",
+        "course_work_correct_count": "0"
+      }
+    ],
+    "serverReplyWasSuccessBeforeAbort": true,
+    "separateDatabaseReadBeforeAbort": true,
+    "retrySamePayload": true,
+    "retrySameWorkId": true,
+    "retryStatisticsUnchanged": true,
+    "retryFilesUnchanged": true,
+    "submitCountBefore": 0,
+    "submitCountAfterCommit": 1,
+    "submitCountAfterRetry": 1,
+    "historyRowsBeforeRetry": 0,
+    "historyRowsAfterRetry": 1
+  },
+  "logout": {
+    "passed": true,
+    "actor": "student_a",
+    "actualUiLogout": true,
+    "logoutHttpStatus": 200,
+    "originalTokenSent": true,
+    "cookieExpirationHeader": true,
+    "rootDocumentNavigation": true,
+    "publicHomeVisible": true,
+    "localAuthRemoved": true,
+    "sessionAuthRemoved": true,
+    "mediaCookieRemoved": true,
+    "menuCacheMatchesAnonymousResult": true,
+    "oldTokenApiStatus": 401,
+    "oldCookieMediaStatus": 401,
+    "oldCookieRangeStatus": 401,
+    "oldCookieHeadStatus": 401,
+    "protectedRouteRequiresLogin": true,
+    "scope": "Actual synthetic SPA logout plus old-token/API and old-cookie/private-media replay; independent student B and Redis state are separate observations"
+  },
+  "other_account_before": {
+    "passed": true,
+    "actor": "student_b",
+    "beforeOtherAccountLogout": true,
+    "protectedApiStatus": 200,
+    "ownMediaStatus": 200,
+    "originalCredentialCapturedInPageMemory": true,
+    "ownMediaCookiePresent": true
+  },
+  "other_account_after": {
+    "passed": true,
+    "actor": "student_b",
+    "afterOtherAccountLogout": true,
+    "originalSessionUnchanged": true,
+    "originalTokenApiStatus": 200,
+    "ownMediaStatus": 200,
+    "ownMediaCookiePresent": true
+  },
+  "source_sha256": {
+    "api/jeecg-boot-base-common/src/main/java/org/jeecg/common/util/RedisUtil.java": "bd43218d4158ab3f88bc7d08f0f5c5437b57cf3df9a58802b1f15a0bc717520a",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/controller/LoginController.java": "7a6c4a6af481cb610e4515fe63329d62d222e1ea5fc3b953d012a4f98bd0828c",
+    "api/dev/verify-logout-isolation.py": "c483b9dae46410c076c7923b93247a0d3d6bf5096eda39e6854fe519bf0f28bf",
+    "api/jeecg-boot-module-system/src/test/java/org/jeecg/authorization/LogoutSessionIsolationTest.java": "e5d0bf42bd619b3dbe0b4d85ce63b46f830814e5a4b13ce995a2b3c5c2998199",
+    "ci/check_java_results.py": "78dfee1d8c2768bf2c0c3f6f12bd8474c28e2ac02d997c7ab987c41675ba5f23"
+  }
+}

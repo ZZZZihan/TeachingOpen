@@ -1,0 +1,19 @@
+{
+  "status": "expected_failure",
+  "source_commit": "2c6d1574",
+  "suite": "org.jeecg.notification.AnnouncementAuthorizationTest",
+  "tests": 16,
+  "errors": 2,
+  "failures": 0,
+  "failed_cases": [
+    {
+      "test": "legacyAccountWithoutRegistrationTimeReceivesActiveAllButNotExpiredHistory",
+      "type": "org.apache.shiro.authz.UnauthorizedException"
+    },
+    {
+      "test": "legacyAccountSubscriptionBindsNonNullCutoffAndKeepsOwnReceipt",
+      "type": "org.apache.shiro.authz.UnauthorizedException"
+    }
+  ],
+  "actual_xlsx_import_passed": true
+}

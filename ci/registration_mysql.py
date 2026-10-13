@@ -51,6 +51,10 @@ def run(command, **kwargs):
 
 def main():
     require_hosted_runner()
+    # The later review stage shares these containers. Fail its coverage check
+    # before creating either runtime, connecting, or starting any application.
+    from review_mysql import run_reviews, selected_probes
+    selected_probes()
     os.umask(0o077)
     mysql, redis = shutil.which('mysql'), shutil.which('redis-cli')
     if not mysql or not redis:
@@ -80,7 +84,8 @@ def main():
             raise RuntimeError('The CI schema must contain no original accounts')
         sql("INSERT INTO sys_role(id,role_name,role_code) VALUES ('ci-student','CI student','student');"
             "INSERT INTO sys_config(id,config_key,config_value,config_enabled) VALUES ('ci-reg','allowReg','0',1);")
-        migrations = ['phone-profile-registration.sql', 'enable-phone-registration.sql', 'unit-view-events.sql']
+        migrations = ['phone-profile-registration.sql', 'enable-phone-registration.sql',
+                      'unit-view-events.sql', 'work-events.sql', 'local-media-references.sql']
         # Run twice to also exercise migration idempotency on the real engine.
         for _ in range(2):
             for name in migrations:
@@ -148,7 +153,6 @@ def main():
                     process.wait(timeout=5)
         # Reuse only the disposable service containers. The review stage creates
         # another fresh database and a separately scoped application account.
-        from review_mysql import run_reviews
         run_reviews(runtime, jar, mysql, root_options, redis, redis_password)
 
 

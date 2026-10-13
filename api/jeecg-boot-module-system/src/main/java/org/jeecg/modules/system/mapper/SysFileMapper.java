@@ -1,6 +1,7 @@
 package org.jeecg.modules.system.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.jeecg.modules.system.entity.SysFile;
@@ -16,4 +17,6 @@ public interface SysFileMapper extends BaseMapper<SysFile> {
     int hasCourseMediaTable();
     int courseMediaReferenceCount(@Param("file") SysFile file);
     int referenceCount(@Param("file") SysFile file);
+    List<Map<String, Object>> encodedReferenceCandidates();
+    List<Map<String, Object>> encodedCourseMediaCandidates();
 }

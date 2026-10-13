@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "beforeCachePresent": {
+    "student_a": {
+      "token": true,
+      "username": true,
+      "permission": false,
+      "profile": false
+    },
+    "student_b": {
+      "token": true,
+      "username": true,
+      "permission": false,
+      "profile": false
+    }
+  },
+  "aLogoutCacheRemoved": {
+    "token": true,
+    "username": true,
+    "permission": true,
+    "profile": true
+  },
+  "bOriginalCacheUnchanged": {
+    "token": true,
+    "username": true,
+    "permission": true,
+    "profile": true
+  },
+  "businessStateUnchanged": true,
+  "uploadBytesUnchanged": true,
+  "materialDownloadBytes": 309,
+  "materialBytesMatch": true,
+  "jar_sha256": "e4dc7708374b0d41927a833a893197cfc9d25f54efdc281eee79c24fadf625d6",
+  "credentialsExported": false,
+  "auditExcludedFromBusinessComparison": true
+}

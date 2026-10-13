@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.jeecg.modules.system.service.IndexedLocalMediaService;
 
 /**
  * @Description: 课程单元
@@ -29,7 +29,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
  * @Version: V1.0
  */
 @Service
-public class TeachingCourseUnitServiceImpl extends ServiceImpl<TeachingCourseUnitMapper, TeachingCourseUnit> implements ITeachingCourseUnitService {
+public class TeachingCourseUnitServiceImpl extends IndexedLocalMediaService<TeachingCourseUnitMapper, TeachingCourseUnit> implements ITeachingCourseUnitService {
 
     @Autowired private TeachingAccessService teachingAccessService;
 

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.jeecg.modules.teaching.entity.TeachingDepartDayLog;
 import org.jeecg.modules.teaching.enums.DepartDayLogType;
 import org.jeecg.modules.teaching.enums.UnitViewLogResult;
+import org.jeecg.modules.teaching.enums.WorkEventType;
 
 /**
  * @Description: 班级每日教学记录
@@ -19,5 +20,8 @@ public interface ITeachingDepartDayLogService extends IService<TeachingDepartDay
 
     /** Atomically persist the lifetime unit event and its daily counter. */
     UnitViewLogResult recordUnitView(String userId, String unitId);
+
+    /** Caller must hold the work row lock in its business transaction. */
+    void recordWorkEvent(String workId, WorkEventType eventType);
 
 }

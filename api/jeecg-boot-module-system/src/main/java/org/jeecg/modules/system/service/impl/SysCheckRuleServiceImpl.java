@@ -4,7 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.jeecg.modules.system.service.GlobalResourceService;
+import org.jeecg.modules.system.service.CheckRuleValidator;
+import org.jeecg.modules.system.entity.SysUser;
+import org.jeecg.common.exception.JeecgBootException;
+import java.util.Date;
+import java.util.UUID;
 import org.apache.commons.lang.StringUtils;
 import org.jeecg.modules.system.entity.SysCheckRule;
 import org.jeecg.modules.system.mapper.SysCheckRuleMapper;
@@ -20,7 +25,17 @@ import java.util.regex.Pattern;
  * @Version: V1.0
  */
 @Service
-public class SysCheckRuleServiceImpl extends ServiceImpl<SysCheckRuleMapper, SysCheckRule> implements ISysCheckRuleService {
+public class SysCheckRuleServiceImpl extends GlobalResourceService<SysCheckRuleMapper, SysCheckRule> implements ISysCheckRuleService {
+
+    @Override protected String entityId(SysCheckRule value) { return value.getId(); }
+    @Override protected SysCheckRule writable(SysCheckRule input, boolean editing, SysUser actor) {
+        if (input == null) throw invalid();
+        SysCheckRule value = new SysCheckRule().setRuleName(text(input.getRuleName(), 100, true)).setRuleCode(code(input.getRuleCode()))
+                .setRuleJson(CheckRuleValidator.rules(input.getRuleJson()).toJSONString()).setRuleDescription(text(input.getRuleDescription(), 200, false));
+        if (editing) value.setId(checkedId(input.getId())).setUpdateBy(actor.getUsername()).setUpdateTime(new Date());
+        else value.setId(UUID.randomUUID().toString().replace("-", "")).setCreateBy(actor.getUsername()).setCreateTime(new Date());
+        return value;
+    }
 
     /**
      * 位数特殊符号，用于检查整个值，而不是裁剪某一段
@@ -29,6 +44,7 @@ public class SysCheckRuleServiceImpl extends ServiceImpl<SysCheckRuleMapper, Sys
 
     @Override
     public SysCheckRule getByCode(String ruleCode) {
+        code(ruleCode);
         LambdaQueryWrapper<SysCheckRule> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(SysCheckRule::getRuleCode, ruleCode);
         return super.getOne(queryWrapper);
@@ -43,12 +59,13 @@ public class SysCheckRuleServiceImpl extends ServiceImpl<SysCheckRuleMapper, Sys
      */
     @Override
     public JSONObject checkValue(SysCheckRule checkRule, String value) {
+        if (value != null && value.length() > 256) throw new JeecgBootException("校验值过长");
         if (checkRule != null && StringUtils.isNotBlank(value)) {
             String ruleJson = checkRule.getRuleJson();
             if (StringUtils.isNotBlank(ruleJson)) {
                 // 开始截取的下标，根据规则的顺序递增，但是 * 号不计入递增范围
                 int beginIndex = 0;
-                JSONArray rules = JSON.parseArray(ruleJson);
+                JSONArray rules = CheckRuleValidator.rules(ruleJson);
                 for (int i = 0; i < rules.size(); i++) {
                     JSONObject result = new JSONObject();
                     JSONObject rule = rules.getJSONObject(i);

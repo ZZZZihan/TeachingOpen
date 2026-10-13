@@ -1,0 +1,358 @@
+{
+  "observed_utc": "2026-10-11T10:58:17.617Z",
+  "expected_legacy": false,
+  "scope": "real compiled Header + TMenu in isolated Chromium; synthetic menus; intercepted HTTPS destinations",
+  "source": {
+    "ref": "13e215da4970fa4838038cdb6fab27174138c38e",
+    "resolved_ref": "13e215da4970fa4838038cdb6fab27174138c38e",
+    "files": [
+      {
+        "file": "web/src/views/home/modules/Header.vue",
+        "sha256": "5dacc304bd38384b9177783b7b978d1abda17866478ad5e0d78ab13085fa27ae"
+      },
+      {
+        "file": "web/src/components/menu/tmenu.js",
+        "sha256": "2b5e2f7d7adb1db0f2a6bb4ac540e0de1fc8992c1a5e0bde4b9ec5f9a46e0249"
+      },
+      {
+        "file": "web/src/components/brand/CampusMasthead.vue",
+        "sha256": "a184cc67dceedf14a05d49f03293408874bad60db9573745842a1db1db34dd41"
+      },
+      {
+        "file": "web/src/assets/brand/wordmark.svg",
+        "sha256": "e354b36a3c97b4af3a7a30853a390561a6148c1b0fd562181eca1183d3e7cdbd"
+      },
+      {
+        "file": "web/src/store/mutation-types.js",
+        "sha256": "b8691015e7461ca9c27b962bb3afef00d2f0da972051357ef22652179b4e4da6"
+      },
+      {
+        "file": "web/src/utils/teachingMenuUrl.js",
+        "sha256": "8160cf7601788e9c7e30a08148d1effa148d462dd7cb386371da8a7a5e27fbdb"
+      }
+    ]
+  },
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "HeadlessChrome/151.0.7922.34",
+    "revision": "@782af9cb30a53f54487e5d2e44738645a8ec457c",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+    "jsVersion": "15.1.206.8"
+  },
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 390,
+      "height": 1200
+    }
+  ],
+  "passed": 28,
+  "failed": 0,
+  "total": 28,
+  "completed": true,
+  "checks": [
+    {
+      "case": "Chromium binary exists (browser is required, never skipped)",
+      "passed": true
+    },
+    {
+      "case": "1440 actual Header contains mounted TMenu",
+      "passed": true
+    },
+    {
+      "case": "1440 unsafe leaf URL has expected baseline/fixed link shape",
+      "passed": true
+    },
+    {
+      "case": "1440 top dangerous navigation cannot execute on real click",
+      "passed": true
+    },
+    {
+      "case": "1440 group dangerous navigation cannot execute on real click",
+      "passed": true
+    },
+    {
+      "case": "1440 child dangerous navigation cannot execute on real click",
+      "passed": true
+    },
+    {
+      "case": "1440 safe descendants remain navigable",
+      "passed": true
+    },
+    {
+      "case": "1440 normal SPA route including query and fragment navigates",
+      "passed": true
+    },
+    {
+      "case": "1440 normal submenu title navigates",
+      "passed": true
+    },
+    {
+      "case": "1440 native same-origin editor preserves path and query",
+      "passed": true
+    },
+    {
+      "case": "1440 HTTPS same-tab navigation is preserved",
+      "passed": true
+    },
+    {
+      "case": "1440 HTTPS popup navigates",
+      "passed": true
+    },
+    {
+      "case": "1440 HTTPS popup has no opener",
+      "passed": true
+    },
+    {
+      "case": "390 actual Header contains mounted TMenu",
+      "passed": true
+    },
+    {
+      "case": "390 unsafe leaf URL has expected baseline/fixed link shape",
+      "passed": true
+    },
+    {
+      "case": "390 top dangerous navigation cannot execute on real click",
+      "passed": true
+    },
+    {
+      "case": "390 group dangerous navigation cannot execute on real click",
+      "passed": true
+    },
+    {
+      "case": "390 child dangerous navigation cannot execute on real click",
+      "passed": true
+    },
+    {
+      "case": "390 safe descendants remain navigable",
+      "passed": true
+    },
+    {
+      "case": "390 normal SPA route including query and fragment navigates",
+      "passed": true
+    },
+    {
+      "case": "390 normal submenu title navigates",
+      "passed": true
+    },
+    {
+      "case": "390 native same-origin editor preserves path and query",
+      "passed": true
+    },
+    {
+      "case": "390 HTTPS same-tab navigation is preserved",
+      "passed": true
+    },
+    {
+      "case": "390 HTTPS popup navigates",
+      "passed": true
+    },
+    {
+      "case": "390 HTTPS popup has no opener",
+      "passed": true
+    },
+    {
+      "case": "all four synthetic HTTPS navigation requests intercepted before network",
+      "passed": true
+    },
+    {
+      "case": "no unexpected outbound request",
+      "passed": true
+    },
+    {
+      "case": "no browser runtime or protocol error",
+      "passed": true
+    }
+  ],
+  "clicks": [
+    {
+      "case": "1440 top-level unsafe",
+      "title": "历史危险顶级",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 420.171875,
+      "y": 124.53125,
+      "href": null,
+      "tag": "LI"
+    },
+    {
+      "case": "1440 submenu-title unsafe",
+      "title": "历史危险分组",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 544.171875,
+      "y": 124.53125,
+      "href": null,
+      "tag": "DIV"
+    },
+    {
+      "case": "1440 child unsafe",
+      "title": "历史危险子项",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 540,
+      "y": 178.5,
+      "href": null,
+      "tag": "LI"
+    },
+    {
+      "case": "1440 safe child beneath disabled unsafe title",
+      "title": "正常子项",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 526,
+      "y": 226.5,
+      "href": "#/safe-child",
+      "tag": "A"
+    },
+    {
+      "case": "1440 route",
+      "title": "站内课程",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 406.171875,
+      "y": 124.53125,
+      "href": "#/courseList?source=menu#safe",
+      "tag": "A"
+    },
+    {
+      "case": "1440 normal submenu title",
+      "title": "正常分组",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 406.171875,
+      "y": 124.53125,
+      "href": "#/courseList",
+      "tag": "A"
+    },
+    {
+      "case": "1440 static editor",
+      "title": "静态编辑器",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 413.171875,
+      "y": 124.53125,
+      "href": "/scratch3/index.html?scene=create",
+      "tag": "A"
+    },
+    {
+      "case": "1440 HTTPS same tab",
+      "title": "HTTPS 同页",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 416.671875,
+      "y": 124.53125,
+      "href": "https://menu-fixture.invalid/learning",
+      "tag": "A"
+    },
+    {
+      "case": "1440 HTTPS new tab",
+      "title": "HTTPS 新页",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 416.671875,
+      "y": 124.53125,
+      "href": "https://menu-fixture.invalid/learning",
+      "tag": "A"
+    },
+    {
+      "case": "390 top-level unsafe",
+      "title": "历史危险顶级",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 88,
+      "y": 174.828125,
+      "href": null,
+      "tag": "LI"
+    },
+    {
+      "case": "390 submenu-title unsafe",
+      "title": "历史危险分组",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 88,
+      "y": 222.828125,
+      "href": null,
+      "tag": "DIV"
+    },
+    {
+      "case": "390 child unsafe",
+      "title": "历史危险子项",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 112,
+      "y": 270.828125,
+      "href": null,
+      "tag": "LI"
+    },
+    {
+      "case": "390 safe child beneath disabled unsafe title",
+      "title": "正常子项",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 98,
+      "y": 318.828125,
+      "href": "#/safe-child",
+      "tag": "A"
+    },
+    {
+      "case": "390 route",
+      "title": "站内课程",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 74,
+      "y": 174.828125,
+      "href": "#/courseList?source=menu#safe",
+      "tag": "A"
+    },
+    {
+      "case": "390 normal submenu title",
+      "title": "正常分组",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 74,
+      "y": 174.828125,
+      "href": "#/courseList",
+      "tag": "A"
+    },
+    {
+      "case": "390 static editor",
+      "title": "静态编辑器",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 81,
+      "y": 174.828125,
+      "href": "/scratch3/index.html?scene=create",
+      "tag": "A"
+    },
+    {
+      "case": "390 HTTPS same tab",
+      "title": "HTTPS 同页",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 84.5,
+      "y": 174.828125,
+      "href": "https://menu-fixture.invalid/learning",
+      "tag": "A"
+    },
+    {
+      "case": "390 HTTPS new tab",
+      "title": "HTTPS 新页",
+      "input": "Chromium Input.dispatchMouseEvent",
+      "x": 84.5,
+      "y": 174.828125,
+      "href": "https://menu-fixture.invalid/learning",
+      "tag": "A"
+    }
+  ],
+  "external": [
+    {
+      "url": "https://menu-fixture.invalid/learning",
+      "resourceType": "Document",
+      "intercepted_before_network": true
+    },
+    {
+      "url": "https://menu-fixture.invalid/learning",
+      "resourceType": "Document",
+      "intercepted_before_network": true
+    },
+    {
+      "url": "https://menu-fixture.invalid/learning",
+      "resourceType": "Document",
+      "intercepted_before_network": true
+    },
+    {
+      "url": "https://menu-fixture.invalid/learning",
+      "resourceType": "Document",
+      "intercepted_before_network": true
+    }
+  ],
+  "blocked": [],
+  "errors": []
+}

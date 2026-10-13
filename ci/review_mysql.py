@@ -11,6 +11,7 @@ import importlib
 import json
 import os
 from pathlib import Path
+import re
 import secrets
 import subprocess
 import sys
@@ -23,6 +24,11 @@ from registration_mysql import ROOT, load, render_properties, require_hosted_run
 
 DATABASE = 'teachingopen_dev'
 REDIS_DATABASE = 4
+QUARTZ_TABLES = frozenset('QRTZ_' + name for name in (
+    'BLOB_TRIGGERS', 'CALENDARS', 'CRON_TRIGGERS', 'FIRED_TRIGGERS', 'JOB_DETAILS',
+    'LOCKS', 'PAUSED_TRIGGER_GRPS', 'SCHEDULER_STATE', 'SIMPLE_TRIGGERS',
+    'SIMPROP_TRIGGERS', 'TRIGGERS',
+))
 PROBES = (
     'verify-public-boundaries.py',
     'verify-duplicate-check.py',
@@ -34,9 +40,25 @@ PROBES = (
     'verify-work-stars.py',
     'verify-work-cloning.py',
     'verify-pagination.py',
+    'verify-course-update.py',
+    'verify-work-submission.py',
+    'verify-feedback-preservation.py',
+    'verify-infrastructure-authorization.py',
+    'verify-announcement-authorization.py',
+    'verify-user-query-boundaries.py',
+    'verify-work-reference-authorization.py',
+    'verify-local-media-index.py',
+    'verify-teaching-menu-security.py',
+    'verify-audit-log-authorization.py',
+    'verify-file-deletion-concurrency.py',
+    'verify-file-encoded-reference-deletion.py',
+    'verify-additional-work-read-authorization.py',
+    'verify-shared-resource-boundaries.py',
+    'verify-global-rule-boundaries.py',
+    'verify-global-management-authorization.py',
+    'verify-audit-failure.py',
+    'verify-minio-demo-disabled.py',
 )
-COURSE_REQUEST = ROOT / ('api/jeecg-boot-module-system/src/main/java/'
-                         'org/jeecg/modules/teaching/model/CourseMapUpdateRequest.java')
 
 
 def private_file(path, content):
@@ -45,25 +67,70 @@ def private_file(path, content):
 
 
 def selected_probes():
-    names = list(PROBES)
-    if COURSE_REQUEST.is_file():
-        names.append('verify-course-update.py')
-    return [ROOT / 'api/dev' / name for name in names if (ROOT / 'api/dev' / name).is_file()]
+    """Require the complete current baseline, including renamed or deleted probes."""
+    paths = [ROOT / 'api/dev' / name for name in PROBES]
+    missing = [path.name for path in paths if not path.is_file()]
+    if missing:
+        raise RuntimeError('Missing required probes: ' + ', '.join(missing))
+    return paths
+
+
+def probe_arguments(context, output):
+    return SimpleNamespace(runtime=context.runtime, jar=context.jar,
+                           output=Path(output), expect_legacy=False)
 
 
 def validate_report(report, jar_sha256):
+    if not isinstance(report, dict):
+        raise RuntimeError('Review probe evidence must be a JSON object')
     cases = report.get('cases', report.get('checks'))
     if (not isinstance(cases, list) or not cases
-            or any(case.get('passed') is not True for case in cases)
-            or report.get('exception') or report.get('failed', 0) != 0 or report.get('expected_legacy')
+            or any(not isinstance(case, dict) or case.get('passed') is not True for case in cases)
+            or report.get('exception') or report.get('cleanup_exception') or report.get('failed', 0) != 0
+            or report.get('expected_legacy') or report.get('expected_legacy_teacher_list')
+            or report.get('expected_legacy_management_list')
+            or report.get('completed', True) is not True
             or report.get('jar_sha256') != jar_sha256):
         raise RuntimeError('Review probe did not produce complete passing candidate evidence')
     passed = report.get('passed')
     if passed is not True and (type(passed) is not int or passed != len(cases)):
         raise RuntimeError('Review probe passing count does not match its executed checks')
-    if 'total' in report and report['total'] != len(cases):
+    if 'total' in report and (type(report['total']) is not int or report['total'] != len(cases)):
         raise RuntimeError('Review probe total does not match its executed checks')
     return len(cases)
+
+
+def jdbc_review_schema(schema):
+    """Name only the fresh fixture's Quartz tables as StdJDBCDelegate queries them.
+
+    The historical dump uses lowercase names. Linux MySQL resolves table names
+    case-sensitively, while Quartz appends uppercase names to its QRTZ_ prefix.
+    Keep the source dump, every table definition, and all non-Quartz names intact.
+    This does not migrate or certify any existing deployment's schema.
+    """
+    names = re.findall(r'^CREATE TABLE `([^`]+)`', schema, re.MULTILINE)
+    quartz = [name.upper() for name in names if name.upper().startswith('QRTZ_')]
+    if len(quartz) != len(QUARTZ_TABLES) or set(quartz) != QUARTZ_TABLES:
+        raise RuntimeError('Unexpected review Quartz table set')
+    pattern = r'`(' + '|'.join(sorted(QUARTZ_TABLES)) + r')`'
+    # The same exact-identifier replacement includes foreign-key targets, but
+    # leaves constraint identifiers, columns and table definitions unchanged.
+    return re.sub(pattern, lambda match: '`' + match[1].upper() + '`', schema, flags=re.IGNORECASE)
+
+
+def jdbc_review_properties(properties):
+    """Use persisted scheduler state only in the private review application."""
+    pairs = [line.split('=', 1) for line in properties.splitlines() if '=' in line]
+    config = dict(pairs)
+    expected = {'spring.quartz.job-store-type': 'memory', 'spring.quartz.auto-startup': 'false',
+                'spring.quartz.overwrite-existing-jobs': 'false', 'spring.quartz.jdbc.initialize-schema': 'never'}
+    if len(config) != len(pairs) or any(config.get(key) != value for key, value in expected.items()):
+        raise RuntimeError('Unexpected Quartz fixture safety configuration')
+    prefix = 'spring.quartz.properties.org.quartz.jobStore.'
+    if any(key.startswith(prefix) for key in config):
+        raise RuntimeError('Unexpected Quartz fixture JobStore override')
+    return (properties.replace('spring.quartz.job-store-type=memory\n', 'spring.quartz.job-store-type=jdbc\n')
+            + prefix + 'tablePrefix=QRTZ_\n' + prefix + 'isClustered=false\n')
 
 
 class CiFixtureContext:
@@ -77,6 +144,8 @@ class CiFixtureContext:
         self.process = None
         self.jar_sha256 = hashlib.sha256(self.jar.read_bytes()).hexdigest()
         self.config = self.runtime / 'application.properties'
+        self.log_path = self.runtime / 'logs/application.log'
+        self.process_record = self.runtime / 'backend-process.json'
         self.properties = None
 
     def guard(self, runtime=None, jar=None):
@@ -116,6 +185,23 @@ class CiFixtureContext:
                    '-n', str(REDIS_DATABASE)] + list(args)
         return run(command, env=dict(os.environ, REDISCLI_AUTH=self.redis_password)).decode().strip()
 
+    def _process_metadata(self):
+        return {'pid': self.process.pid, 'jar_path': str(self.jar), 'jar_sha256': self.jar_sha256,
+                'application_config': str(self.config), 'log_path': str(self.log_path)}
+
+    def _assert_private_log(self):
+        if (not self.log_path.is_file() or self.log_path.resolve() != self.log_path
+                or self.log_path.stat().st_mode & 0o077):
+            raise RuntimeError('CI candidate log must be the private owned application log')
+
+    def record_process(self):
+        """Expose the actual log to fault probes without publishing its contents."""
+        self.guard()
+        if self.process is None or self.process.poll() is not None:
+            raise RuntimeError('Cannot record a stopped CI candidate process')
+        self._assert_private_log()
+        private_file(self.process_record, json.dumps(self._process_metadata()) + '\n')
+
     def assert_candidate(self, runtime, jar):
         self.guard(runtime, jar or self.jar)
         if (self.process is None or self.process.poll() is not None
@@ -123,6 +209,16 @@ class CiFixtureContext:
                 or self.config.stat().st_mode & 0o077
                 or hashlib.sha256(self.jar.read_bytes()).hexdigest() != self.jar_sha256):
             raise RuntimeError('CI fixture application is not the configured candidate process')
+        self._assert_private_log()
+        if (not self.process_record.is_file() or self.process_record.resolve() != self.process_record
+                or self.process_record.stat().st_mode & 0o077):
+            raise RuntimeError('CI candidate process record must be private and owned')
+        try:
+            metadata = json.loads(self.process_record.read_text())
+        except (OSError, ValueError):
+            raise RuntimeError('CI candidate process record is unreadable') from None
+        if metadata != self._process_metadata():
+            raise RuntimeError('CI candidate process record does not match its process, JAR, configuration and log')
         command = subprocess.check_output(['ps', '-p', str(self.process.pid), '-o', 'command='], text=True)
         if str(self.jar) not in command or '--spring.config.location=file:' + str(self.config) not in command:
             raise RuntimeError('CI candidate process command does not match the private configuration')
@@ -173,6 +269,7 @@ def probe_adapter(module, context):
 
 def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password):
     require_hosted_runner()  # Before file creation, process start, or a connection.
+    probes = selected_probes()  # Missing coverage must fail before runtime creation.
     parent = Path(parent_runtime).resolve()
     temp = Path(os.environ['RUNNER_TEMP']).resolve()
     if parent == temp or not parent.is_relative_to(temp) or parent.stat().st_mode & 0o077:
@@ -191,9 +288,17 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
     context.sql('CREATE DATABASE ' + DATABASE + ' CHARACTER SET utf8mb4', database=False)
     schema = load('review_schema', ROOT / 'api/dev/extract-schema.py').extract_schema(
         (ROOT / 'api/db/teachingopen2.8.sql').read_text())
-    context.sql(schema)
+    context.sql(jdbc_review_schema(schema))
+    if context.sql('SELECT @@lower_case_table_names') != '0':
+        raise RuntimeError('Review requires the case-sensitive Linux MySQL table-name mode')
+    quartz_tables = context.sql("SELECT table_name FROM information_schema.tables "
+        "WHERE table_schema=DATABASE() AND LEFT(UPPER(table_name),5)='QRTZ_' ORDER BY BINARY table_name").splitlines()
+    if quartz_tables != sorted(QUARTZ_TABLES):
+        raise RuntimeError('Actual review Quartz table names do not match StdJDBCDelegate')
+    migrations = ('unit-view-events.sql', 'work-events.sql', 'local-media-references.sql')
     for _ in range(2):
-        context.sql((ROOT / "api/db/unit-view-events.sql").read_text())
+        for name in migrations:
+            context.sql((ROOT / 'api/db' / name).read_text())
     if context.sql('SELECT COUNT(*) FROM sys_user') != '0':
         raise RuntimeError('Review schema must contain no original accounts')
 
@@ -221,15 +326,17 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
             'MULTIPART_DIRECTORY': str(runtime / 'multipart'), 'UPLOAD_DIRECTORY': str(runtime / 'uploads'),
             'WEBAPP_DIRECTORY': str(runtime / 'webapp'),
         }
-        context.properties = render_properties((ROOT / 'deploy/application-launch.properties.template').read_text(), values)
+        context.properties = jdbc_review_properties(render_properties(
+            (ROOT / 'deploy/application-launch.properties.template').read_text(), values))
         private_file(context.config, context.properties)
         output = ROOT / 'ci-results'
         output.mkdir(exist_ok=True)
-        with (runtime / 'logs/application.log').open('wb') as log:
+        with os.fdopen(os.open(context.log_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), 'wb') as log:
             context.process = subprocess.Popen([str(java_home / 'bin/java'), '-Xms256m', '-Xmx1024m',
                 '-jar', str(context.jar), '--spring.config.location=file:' + str(context.config)],
                 cwd=runtime / 'webapp', stdout=log, stderr=log)
             try:
+                context.record_process()
                 for _ in range(120):
                     if context.process.poll() is not None:
                         raise RuntimeError('Review application exited before health check')
@@ -242,16 +349,13 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
                     time.sleep(1)
                 else:
                     raise RuntimeError('Review application did not become healthy')
-                probes = selected_probes()
-                if not probes:
-                    raise RuntimeError('No review probes are available in this candidate')
                 results = []
                 for path in probes:
                     module = load('ci_' + path.stem.replace('-', '_'), path)
                     evidence = output / (path.stem.removeprefix('verify-') + '.json')
                     if evidence.exists():
                         raise RuntimeError('Existing review evidence must be preserved')
-                    args = SimpleNamespace(runtime=runtime, jar=context.jar, output=evidence, expect_legacy=False)
+                    args = probe_arguments(context, evidence)
                     with probe_adapter(module, context):
                         module.verify(args)
                     report = json.loads(evidence.read_text())
@@ -264,8 +368,12 @@ def run_reviews(parent_runtime, jar, mysql, root_options, redis, redis_password)
                 summary = {'github_sha': os.environ.get('GITHUB_SHA'), 'jar_sha256': context.jar_sha256,
                     'database': DATABASE, 'original_accounts_imported': 0, 'fixture_accounts': 5,
                     'production_connected': False, 'probes': results,
-                    'unavailable_probes': [name for name in PROBES if not (ROOT / 'api/dev' / name).is_file()],
-                    'course_update_enabled': COURSE_REQUEST.is_file()}
+                    'required_probes': list(PROBES), 'probe_count': len(results),
+                    'checks': sum(result['checks'] for result in results),
+                    'migrations_applied_twice': list(migrations),
+                    'quartz_review_fixture': {'job_store_type': 'jdbc', 'table_prefix': 'QRTZ_',
+                        'table_names': quartz_tables, 'mysql_lower_case_table_names': 0,
+                        'scheduler_auto_startup': False, 'schema_initialization': 'never'}}
                 private_file(output / 'review-mysql.json', json.dumps(summary, ensure_ascii=False, indent=2) + '\n')
                 print(json.dumps(summary, ensure_ascii=False))
                 return summary

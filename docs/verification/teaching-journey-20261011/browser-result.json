@@ -1,0 +1,323 @@
+{
+  "scope": "Local real Chromium SPA with private synthetic MySQL/Redis; no merge or deployment",
+  "production_source_commit": "e2e88283c19092ab4623baf83c082fd264f16ece",
+  "merge_commit": "c3ab0d67a577e8e4e7fb42052599aa38534c5869",
+  "base_chain_head": "d2bc1cecffd061e9e83f0948d33a81cec8c0c26d",
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "dist_sha256": "93615d1651c6d0144321ed8bc28454d7c9293f882c950c4be8f7c43fe6556cc0",
+  "checks": {
+    "integrated-teacher-readback": {
+      "passed": true,
+      "task": {
+        "id": "2109247511783841793",
+        "work_name": "完整教学流程 20261011 integrated",
+        "work_desc": "请阅读资料，上传你的解答。完成后查看教师评分与完整评语。",
+        "work_dept": "fixture_class_a",
+        "status": "1",
+        "code_type": "0",
+        "create_by": "fixture_teacher_a"
+      },
+      "materialHref": "/api/sys/common/static/temp/482a15a5accd4893906b6c96fd50993d.txt",
+      "reopenUnchanged": true
+    },
+    "final-scripts/02-student-submit": {
+      "case": "integrated student real material read, file upload, failed submit, and retry",
+      "passed": true,
+      "assignmentId": "2109247511783841793",
+      "work": {
+        "id": "2109247885542465538",
+        "user_id": "fixture_student_a",
+        "depart_id": "fixture_class_a",
+        "additional_id": "2109247511783841793",
+        "course_id": "",
+        "work_name": "完整教学流程 20261011 integrated",
+        "work_type": "0",
+        "work_status": "1",
+        "work_file": "bf461ef14bef499287691ba987163b7a",
+        "work_cover": null,
+        "del_flag": "0"
+      },
+      "uploadedFile": {
+        "id": "bf461ef14bef499287691ba987163b7a",
+        "file_name": "student-submission.txt",
+        "file_path": "temp/ee18298d9ce846e497c99a3cf9951dad.txt",
+        "file_location": "1",
+        "create_by": "fixture_student_a",
+        "del_flag": "0"
+      },
+      "materialDownload": {
+        "status": 200,
+        "url": "http://127.0.0.1:18192/api/sys/common/static/temp/482a15a5accd4893906b6c96fd50993d.txt",
+        "byteComparisonRequiredByRoot": false,
+        "downloadBytesMatch": true
+      },
+      "events": [
+        {
+          "work_id": "2109247885542465538",
+          "event_type": "SUBMIT",
+          "depart_id": "fixture_class_a",
+          "event_state": "COUNTED",
+          "counted_day": "2026-10-11"
+        }
+      ],
+      "statistics": [
+        {
+          "id": "2109247511884505089",
+          "depart_id": "fixture_class_a",
+          "create_time": "2026-10-11",
+          "additional_work_assign_count": "1",
+          "additional_work_submit_count": "1",
+          "additional_work_correct_count": "0",
+          "course_work_submit_count": "0",
+          "course_work_correct_count": "0"
+        }
+      ],
+      "failureBusinessStateUnchanged": true
+    },
+    "final-scripts/03-teacher-grade": {
+      "case": "integrated teacher UI query, file preview, zero score, failed save, retry, and reopen",
+      "passed": true,
+      "workId": "2109247885542465538",
+      "feedback": {
+        "id": "2109248201109315585",
+        "work_id": "2109247885542465538",
+        "score": "0",
+        "comment": "完整流程验收：你已说明共同提交与共同回滚。\n下一步请补充唯一事件约束的示例；本次记录 0 分用于验证零分与完整评语能够正确显示。",
+        "create_by": "fixture_teacher_a"
+      },
+      "previewUrl": "http://127.0.0.1:18192/api/sys/common/static/temp/ee18298d9ce846e497c99a3cf9951dad.txt",
+      "previewBytesComparisonRequiredByRoot": false,
+      "events": [
+        {
+          "work_id": "2109247885542465538",
+          "event_type": "CORRECT",
+          "depart_id": "fixture_class_a",
+          "event_state": "COUNTED",
+          "counted_day": "2026-10-11"
+        },
+        {
+          "work_id": "2109247885542465538",
+          "event_type": "SUBMIT",
+          "depart_id": "fixture_class_a",
+          "event_state": "COUNTED",
+          "counted_day": "2026-10-11"
+        }
+      ],
+      "statistics": [
+        {
+          "id": "2109247511884505089",
+          "depart_id": "fixture_class_a",
+          "create_time": "2026-10-11",
+          "additional_work_assign_count": "1",
+          "additional_work_submit_count": "1",
+          "additional_work_correct_count": "1",
+          "course_work_submit_count": "0",
+          "course_work_correct_count": "0"
+        }
+      ],
+      "failureBusinessStateUnchanged": true,
+      "reopened": true,
+      "previewDownloadBytesMatch": true
+    },
+    "final-scripts/04-student-feedback": {
+      "case": "integrated student sees zero score and full feedback, survives failed refresh, retries, and reloads",
+      "passed": true,
+      "workId": "2109247885542465538",
+      "feedback": {
+        "id": "2109248201109315585",
+        "work_id": "2109247885542465538",
+        "score": "0",
+        "comment": "完整流程验收：你已说明共同提交与共同回滚。\n下一步请补充唯一事件约束的示例；本次记录 0 分用于验证零分与完整评语能够正确显示。",
+        "create_by": "fixture_teacher_a"
+      },
+      "events": [
+        {
+          "work_id": "2109247885542465538",
+          "event_type": "CORRECT",
+          "depart_id": "fixture_class_a",
+          "event_state": "COUNTED",
+          "counted_day": "2026-10-11"
+        },
+        {
+          "work_id": "2109247885542465538",
+          "event_type": "SUBMIT",
+          "depart_id": "fixture_class_a",
+          "event_state": "COUNTED",
+          "counted_day": "2026-10-11"
+        }
+      ],
+      "statistics": [
+        {
+          "id": "2109247511884505089",
+          "depart_id": "fixture_class_a",
+          "create_time": "2026-10-11",
+          "additional_work_assign_count": "1",
+          "additional_work_submit_count": "1",
+          "additional_work_correct_count": "1",
+          "course_work_submit_count": "0",
+          "course_work_correct_count": "0"
+        }
+      ],
+      "failureBusinessStateUnchanged": true,
+      "retryRecovered": true,
+      "reloaded": true
+    },
+    "integrated-student-b-list": {
+      "passed": true,
+      "actor": "fixture_student_b",
+      "ownClassVisible": true,
+      "foreignJourneyVisible": false,
+      "businessStateUnchanged": true
+    },
+    "integrated-teacher-b-list": {
+      "passed": true,
+      "actor": "fixture_teacher_b",
+      "ownClassVisible": true,
+      "foreignJourneyVisible": false,
+      "businessStateUnchanged": true
+    },
+    "integrated-teacher-b-boundary": {
+      "passed": true,
+      "actor": "fixture_teacher_b",
+      "workId": "2109247885542465538",
+      "assignmentId": "2109247511783841793",
+      "deniedBusinessStateUnchanged": true,
+      "results": [
+        {
+          "endpoint": "/teaching/teachingAdditionalWork/queryById?id=2109247511783841793",
+          "status": 200,
+          "success": false,
+          "code": 510,
+          "dataPresent": false
+        },
+        {
+          "endpoint": "/teaching/teachingAdditionalWork/getWorkInfo?id=2109247511783841793",
+          "status": 200,
+          "success": false,
+          "code": 510,
+          "dataPresent": false
+        },
+        {
+          "endpoint": "/teaching/teachingWork/queryById?id=2109247885542465538",
+          "status": 200,
+          "success": false,
+          "code": 510,
+          "dataPresent": false
+        },
+        {
+          "endpoint": "/teaching/teachingWork/queryTeachingWorkCorrectByMainId?id=2109247885542465538",
+          "status": 200,
+          "success": false,
+          "code": 510,
+          "dataPresent": false
+        },
+        {
+          "endpoint": "PUT /teaching/teachingWork/edit",
+          "status": 200,
+          "success": false,
+          "code": 510,
+          "dataPresent": false
+        },
+        {
+          "endpoint": "/api/sys/common/static/temp/482a15a5accd4893906b6c96fd50993d.txt",
+          "status": 403,
+          "download": true
+        },
+        {
+          "endpoint": "/api/sys/common/static/temp/ee18298d9ce846e497c99a3cf9951dad.txt",
+          "status": 403,
+          "download": true
+        }
+      ]
+    },
+    "integrated-student-b-boundary": {
+      "passed": true,
+      "actor": "fixture_student_b",
+      "workId": "2109247885542465538",
+      "assignmentId": "2109247511783841793",
+      "deniedBusinessStateUnchanged": true,
+      "results": [
+        {
+          "endpoint": "/teaching/teachingAdditionalWork/queryById?id=2109247511783841793",
+          "status": 200,
+          "success": false,
+          "code": 510,
+          "dataPresent": false
+        },
+        {
+          "endpoint": "/teaching/teachingAdditionalWork/getWorkInfo?id=2109247511783841793",
+          "status": 200,
+          "success": false,
+          "code": 510,
+          "dataPresent": false
+        },
+        {
+          "endpoint": "/teaching/teachingWork/queryById?id=2109247885542465538",
+          "status": 200,
+          "success": false,
+          "code": 510,
+          "dataPresent": false
+        },
+        {
+          "endpoint": "/teaching/teachingWork/queryTeachingWorkCorrectByMainId?id=2109247885542465538",
+          "status": 200,
+          "success": false,
+          "code": 510,
+          "dataPresent": false
+        },
+        {
+          "endpoint": "PUT /teaching/teachingWork/edit",
+          "status": 200,
+          "success": false,
+          "code": 510,
+          "dataPresent": false
+        },
+        {
+          "endpoint": "/api/sys/common/static/temp/482a15a5accd4893906b6c96fd50993d.txt",
+          "status": 403,
+          "download": true
+        },
+        {
+          "endpoint": "/api/sys/common/static/temp/ee18298d9ce846e497c99a3cf9951dad.txt",
+          "status": 403,
+          "download": true
+        }
+      ]
+    },
+    "integrated-mobile-final": {
+      "passed": true,
+      "viewport": 390,
+      "document": 390,
+      "score": "0",
+      "comment": "完整流程验收：你已说明共同提交与共同回滚。\n下一步请补充唯一事件约束的示例；本次记录 0 分用于验证零分与完整评语能够正确显示。"
+    },
+    "assignment-material.txt": {
+      "download": "482a15a5accd4893906b6c96fd50993d.txt",
+      "sha256": "b6bcbdaf3e09f316e26e70127e0719ad495681ceeab440d27ef936b87c443b52",
+      "bytes": 309,
+      "byteForByteMatch": true,
+      "actor": "fixture_student_a",
+      "browserSession": "journey-final-student",
+      "clickEvidence": "02-student-submit.result.txt: materialDownload.status=200 and Downloaded file event",
+      "verification": "root compared actual CLI-downloaded file to original; independent reviewer repeated cmp"
+    },
+    "student-submission.txt": {
+      "download": "ee18298d9ce846e497c99a3cf9951dad.txt",
+      "sha256": "225d946223693052dfb584ee5b247c01e2e61a197341283037a0c84db8b409a5",
+      "bytes": 304,
+      "byteForByteMatch": true,
+      "actor": "fixture_teacher_a",
+      "browserSession": "journey-final-teacher",
+      "clickEvidence": {
+        "method": "Playwright CLI click f3e282",
+        "atUtc": "2026-10-11T11:42:08Z",
+        "linkText": "打开作品文件",
+        "url": "http://127.0.0.1:18192/api/sys/common/static/temp/ee18298d9ce846e497c99a3cf9951dad.txt",
+        "snapshot": "page-2026-10-11T11-42-08-549Z.yml",
+        "downloadEventObservedBy": "root tool result"
+      },
+      "verification": "root compared actual CLI-downloaded file to original; independent reviewer repeated cmp",
+      "scope": "Separate root click after script 03; script 03 preview alone is not counted as a download"
+    }
+  }
+}

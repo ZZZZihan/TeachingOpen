@@ -1,0 +1,26 @@
+{
+  "jar_sha256": "0292703db84494798cf5740fc6cd22b26b1e131f5e8f0c01d29cae723bfd74da",
+  "exports": [
+    {
+      "kind": "agent",
+      "status": 200,
+      "content_type": "",
+      "bytes": 6144,
+      "sha256": "2b2fb4f90e3f6b48d67180e86e80be16189d0b404d98b6ab8f9681f23697596f",
+      "ole_workbook_magic": true,
+      "zip_magic": false,
+      "saved_file": "agent.xls"
+    },
+    {
+      "kind": "position",
+      "status": 200,
+      "content_type": "",
+      "bytes": 5120,
+      "sha256": "fbf5c2519dcc8f054d623e8f1df353f5136f78636b5d290f05ebdedf837bb155",
+      "ole_workbook_magic": true,
+      "zip_magic": false,
+      "saved_file": "position.xls"
+    }
+  ],
+  "original_audit_rows_restored": true
+}

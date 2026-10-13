@@ -9,12 +9,13 @@ from threading import Barrier
 
 from local_http import FixtureApi
 from local_recovery import file_inventory, private_write, quote, sql
+from media_index_fixture import media_index_snapshot, rebuild_media_index_after_sql
 
 PREFIX = 'fixture_cloneprobe_'
 NAME = 'clone-probe-'
 TRIGGER = PREFIX + 'reject_insert'
 TABLES = ('teaching_work', 'teaching_course', 'teaching_course_unit', 'teaching_course_dept',
-          'teaching_additional_work', 'teaching_work_correct', 'teaching_work_comment', 'sys_file', 'sys_user_depart', 'sys_user')
+          'teaching_additional_work', 'teaching_work_correct', 'teaching_work_comment', 'sys_data_log', 'sys_file', 'sys_user_depart', 'sys_user')
 BASE = '/teaching/teachingWork/'
 
 
@@ -29,8 +30,12 @@ def verify(args):
         return response[0] == 200 and response[1] and response[1].get('success') is True
 
     with FixtureApi(args.runtime, args.jar) as api:
+        has_media_index = not getattr(args, 'expect_legacy', False)
         def query(statement):
-            return sql(api.runtime, statement)
+            result = sql(api.runtime, statement)
+            if has_media_index:
+                rebuild_media_index_after_sql(api, statement)
+            return result
 
         columns = {table: [line.split('\t')[0] for line in query('SHOW COLUMNS FROM teachingopen_dev.' + table).splitlines()]
                    for table in TABLES}
@@ -56,6 +61,7 @@ def verify(args):
                   "'2026-09-01 01:02:03','source-editor','2026-09-02 04:05:06')")
 
         original, files = snapshot(), file_inventory(api.runtime / 'uploads')
+        original_media_index = media_index_snapshot(query) if has_media_index else None
         original_teacher_depart = query("SELECT IFNULL(HEX(depart_ids),'~') FROM teachingopen_dev.sys_user WHERE id='fixture_teacher_b'")
         original_org_codes = query("SELECT HEX(id),IFNULL(HEX(org_code),'~') FROM teachingopen_dev.sys_user ORDER BY id").splitlines()
         for table in TABLES:
@@ -222,6 +228,10 @@ def verify(args):
             query('DROP TRIGGER IF EXISTS teachingopen_dev.' + TRIGGER)
             for table in ('teaching_work_correct', 'teaching_work_comment'):
                 query('DELETE FROM teachingopen_dev.' + table + " WHERE id LIKE '" + PREFIX + "%'")
+            # Saving the new clone through the student API also creates history.
+            # Remove only history for this probe's works before removing the IDs.
+            query("DELETE FROM teachingopen_dev.sys_data_log WHERE data_table='teaching_work' AND data_id IN "
+                  "(SELECT id FROM teachingopen_dev.teaching_work WHERE work_name LIKE '" + NAME + "%')")
             query("DELETE FROM teachingopen_dev.teaching_work WHERE work_name LIKE '" + NAME + "%'")
             query("DELETE FROM teachingopen_dev.teaching_course_unit WHERE id LIKE '" + PREFIX + "%'")
             query("DELETE FROM teachingopen_dev.teaching_course_dept WHERE id LIKE '" + PREFIX + "%'")
@@ -235,6 +245,8 @@ def verify(args):
                 query("UPDATE teachingopen_dev.sys_user SET org_code=" + ("NULL" if org_code == '~'
                       else "CONVERT(X'" + org_code + "' USING utf8mb4)") + " WHERE id=CONVERT(X'" + user_id + "' USING utf8mb4)")
         check('all original business rows restored', snapshot() == original)
+        if has_media_index:
+            check('original media reference index and state restored', media_index_snapshot(query) == original_media_index)
         check('all original attachment bytes unchanged', file_inventory(api.runtime / 'uploads') == files)
     result = {'checked_at': datetime.now(timezone.utc).isoformat(), 'scope': 'synthetic local HTTP and MySQL',
               'jar_sha256': jar_hash, 'cases': cases, 'passed': all(case['passed'] for case in cases),

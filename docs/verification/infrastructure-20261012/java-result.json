@@ -1,0 +1,96 @@
+{
+  "name": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+  "tests": "14",
+  "failures": "0",
+  "errors": "0",
+  "skipped": "0",
+  "time": "2.531",
+  "raw_junit_sha256": "0fe17b877f5a92fc19388f5c23456dfe3109ed91fcd5133075496c7539f26b55",
+  "scope": "Agent local isolated InfrastructureAdministrationTest; environment properties and system output omitted from this review summary.",
+  "cases": [
+    {
+      "name": "dataSourceInvalidBatchOrDatabaseFailureCannotInvalidateCache",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.969",
+      "passed": true
+    },
+    {
+      "name": "absentFrozenDeletedAndMismatchedActorsCannotReachServices",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.028",
+      "passed": true
+    },
+    {
+      "name": "dataSourceCacheChangesOnlyAfterCommitAndNotOnRollback",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.204",
+      "passed": true
+    },
+    {
+      "name": "denialPreservesAnInitializedConnectionPoolAndItsRedisEntry",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.104",
+      "passed": true
+    },
+    {
+      "name": "everyPackagedOnlineControllerIsCoveredWithoutTrustingUriPrefixes",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.121",
+      "passed": true
+    },
+    {
+      "name": "passwordIsWriteOnlyForJsonLogsAndExplicitExportSchema",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.295",
+      "passed": true
+    },
+    {
+      "name": "allControllerEntriesDenyBeforeDatabaseCacheSchedulerOrImportParsing",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.041",
+      "passed": true
+    },
+    {
+      "name": "importsUseAuthorizedValidatedCommandsAndNeverGenericSave",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.108",
+      "passed": true
+    },
+    {
+      "name": "realQuartzStateSurvivesDenialsAndSupportsOperatorLifecycle",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.536",
+      "passed": true
+    },
+    {
+      "name": "samePrincipalLosesEveryEntryImmediatelyAfterDatabaseRevocation",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.029",
+      "passed": true
+    },
+    {
+      "name": "unregisteredTaskTypesClassesCronAndBatchMembersFailBeforeSideEffects",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.011",
+      "passed": true
+    },
+    {
+      "name": "studentsTeachersAdminsAndStaleDevGrantsCannotReachServices",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.012",
+      "passed": true
+    },
+    {
+      "name": "compiledOnlineJdbcHandlerAndSpringAliasesUseTheSameLiveBoundary",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.041",
+      "passed": true
+    },
+    {
+      "name": "operatorCanCreateAndEditWhileOmittedPasswordAndAuditIdentityArePreserved",
+      "classname": "org.jeecg.infrastructure.InfrastructureAdministrationTest",
+      "time": "0.013",
+      "passed": true
+    }
+  ]
+}

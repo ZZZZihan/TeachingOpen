@@ -1,0 +1,14 @@
+test_decisions_require_evidence_and_preserve_historical_aggregate (test_work_event_migration.WorkEventMigrationTest.test_decisions_require_evidence_and_preserve_historical_aggregate) ... ok
+test_empty_cutover_and_rerun_do_not_classify_new_works_as_legacy (test_work_event_migration.WorkEventMigrationTest.test_empty_cutover_and_rerun_do_not_classify_new_works_as_legacy) ... ok
+test_existing_work_is_explicitly_pending_and_both_types_are_required (test_work_event_migration.WorkEventMigrationTest.test_existing_work_is_explicitly_pending_and_both_types_are_required) ... ok
+test_extra_unique_key_or_trigger_fails_preflight (test_work_event_migration.WorkEventMigrationTest.test_extra_unique_key_or_trigger_fails_preflight) ... ok
+test_incompatible_state_check_fails_without_repair (test_work_event_migration.WorkEventMigrationTest.test_incompatible_state_check_fails_without_repair) ... ok
+test_lost_ledger_or_lost_cutover_cannot_recreate_history (test_work_event_migration.WorkEventMigrationTest.test_lost_ledger_or_lost_cutover_cannot_recreate_history) ... ok
+test_nontransactional_work_table_fails (test_work_event_migration.WorkEventMigrationTest.test_nontransactional_work_table_fails) ... ok
+test_preflight_creates_no_tables (test_work_event_migration.WorkEventMigrationTest.test_preflight_creates_no_tables) ... ok
+test_unique_key_event_type_state_date_and_binary_ids_enforced (test_work_event_migration.WorkEventMigrationTest.test_unique_key_event_type_state_date_and_binary_ids_enforced) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.816s
+
+OK

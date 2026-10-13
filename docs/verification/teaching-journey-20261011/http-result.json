@@ -1,0 +1,235 @@
+{
+  "status": "passed",
+  "scope": "local isolated real HTTP/MySQL; sequential, fixed candidate JAR",
+  "integration_commit": "99d2d1031ab8dd41754ca4ba79048f7ed9d1a004",
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "required_probes": [
+    "verify-public-boundaries.py",
+    "verify-duplicate-check.py",
+    "verify-dictionary-management.py",
+    "verify-unit-view-statistics.py",
+    "verify-news-content.py",
+    "verify-account-authorization.py",
+    "verify-additional-work-authorization.py",
+    "verify-work-stars.py",
+    "verify-work-cloning.py",
+    "verify-pagination.py",
+    "verify-course-update.py",
+    "verify-work-submission.py",
+    "verify-feedback-preservation.py",
+    "verify-infrastructure-authorization.py",
+    "verify-announcement-authorization.py",
+    "verify-user-query-boundaries.py",
+    "verify-work-reference-authorization.py",
+    "verify-local-media-index.py",
+    "verify-teaching-menu-security.py",
+    "verify-audit-log-authorization.py",
+    "verify-file-deletion-concurrency.py",
+    "verify-file-encoded-reference-deletion.py",
+    "verify-additional-work-read-authorization.py",
+    "verify-shared-resource-boundaries.py",
+    "verify-global-rule-boundaries.py",
+    "verify-global-management-authorization.py",
+    "verify-audit-failure.py"
+  ],
+  "probe_count": 27,
+  "checks": 3985,
+  "reports": [
+    {
+      "probe": "verify-public-boundaries.py",
+      "checks": 160,
+      "report": "http/verify-public-boundaries.json",
+      "report_sha256": "411136096f5019e72f1cdf8b38e2f4f6bcc1645e5792d0be37e530faf62b7b9f",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-duplicate-check.py",
+      "checks": 379,
+      "report": "http/verify-duplicate-check.json",
+      "report_sha256": "248a9fee7ba7393828256a5be39b36dead1b7c76ba84e5731e78cd09530b1360",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-dictionary-management.py",
+      "checks": 234,
+      "report": "http/verify-dictionary-management.json",
+      "report_sha256": "3dc0e270088cb623223bac5b0ba07a717e38e80a2605f4c597b7067ff433becb",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-unit-view-statistics.py",
+      "checks": 26,
+      "report": "http/verify-unit-view-statistics.json",
+      "report_sha256": "c8f735b12ac401a33e08d1cb4f9856e5f7c158b1b65c0a6068c4cd78a62824df",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-news-content.py",
+      "checks": 39,
+      "report": "http/verify-news-content.json",
+      "report_sha256": "16fdfe98345eff99d1b31e220eb70c7a035b38c3bf7cbc5919cfb699c374225d",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-account-authorization.py",
+      "checks": 614,
+      "report": "http/verify-account-authorization.json",
+      "report_sha256": "3c2b4444ca802e30a51204690003c8938c266a9bbf994d92b3933b4167ba1ea9",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-additional-work-authorization.py",
+      "checks": 86,
+      "report": "http/verify-additional-work-authorization.json",
+      "report_sha256": "4c1ffd930b03bea4ca6125adbeebef3146a862c2723678854db7cadd992cb00e",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-work-stars.py",
+      "checks": 27,
+      "report": "http/verify-work-stars.json",
+      "report_sha256": "a2ddb8fab3c862963d001fe022edb5e9e9b8740a97c8564c1306cc99ad8469d1",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-work-cloning.py",
+      "checks": 41,
+      "report": "http/verify-work-cloning.json",
+      "report_sha256": "0748ad46e94cb0c3b22b16751b12d3fe506236e89dfd42f5fd8022cc8ddd1bfb",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-pagination.py",
+      "checks": 50,
+      "report": "http/verify-pagination.json",
+      "report_sha256": "7cb19ade8a841c6282283d9e95ebd97e27d6d567d0091d3afddb7b5326a0e401",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-course-update.py",
+      "checks": 103,
+      "report": "http/verify-course-update.json",
+      "report_sha256": "42bc89a025f8fd5962c4b6859d1bce09ce2273fcebc6fe7cd290e30e5c77e5c4",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-work-submission.py",
+      "checks": 101,
+      "report": "http/verify-work-submission.json",
+      "report_sha256": "f2fe2b28d403dc32422779d6f8060938803450b09751e423fa381b4580264f95",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-feedback-preservation.py",
+      "checks": 40,
+      "report": "http/verify-feedback-preservation.json",
+      "report_sha256": "f4fe1c3d92a816fa7e7ca39cd062145255ba0250762a2e3827737a6270218fc3",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-infrastructure-authorization.py",
+      "checks": 305,
+      "report": "http/verify-infrastructure-authorization.json",
+      "report_sha256": "4bdaa5de6163b4e1e6cca705b107392f31910ee2dff6d0f8a9427bf0b23ed665",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-announcement-authorization.py",
+      "checks": 286,
+      "report": "http/verify-announcement-authorization.json",
+      "report_sha256": "4328ec9df42ed9160bcc11e9eae86ed0478bbb22cf0c631b61f60c48a5bb7243",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-user-query-boundaries.py",
+      "checks": 135,
+      "report": "http/verify-user-query-boundaries.json",
+      "report_sha256": "79672510f2f19a1a25f5b945c6b91779fb58083392aa878788a06f4938f9bcb9",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-work-reference-authorization.py",
+      "checks": 75,
+      "report": "http/verify-work-reference-authorization.json",
+      "report_sha256": "d82d251c254b193645fb96e85aeb4d19e59702c3e983c1bf6c84b176ef04a133",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-local-media-index.py",
+      "checks": 128,
+      "report": "http/verify-local-media-index.json",
+      "report_sha256": "39d0898bf6f75c9f2037bdcd0b4a97ef7473a20fcfb7d02c5e5010127e13c37e",
+      "rerun_after_probe_fix": true
+    },
+    {
+      "probe": "verify-teaching-menu-security.py",
+      "checks": 276,
+      "report": "http/verify-teaching-menu-security.json",
+      "report_sha256": "36a0158848cd0a35c23958c8734e7433931a2a031bb0896a985c7d9b6b4a53c7",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-audit-log-authorization.py",
+      "checks": 171,
+      "report": "http/verify-audit-log-authorization.json",
+      "report_sha256": "e2d276fda36c8fe2265002fae69f812da94e600f8877a638fe8083f097d4bb54",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-file-deletion-concurrency.py",
+      "checks": 70,
+      "report": "http/verify-file-deletion-concurrency.json",
+      "report_sha256": "2ba8f110dbd58efb825c95cd3cc9bafd08e89a0e0689308890243555cbef4c9b",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-file-encoded-reference-deletion.py",
+      "checks": 56,
+      "report": "http/verify-file-encoded-reference-deletion.json",
+      "report_sha256": "cbcd3e0efda0234dfc6c604c9c24fe580e4f79b414102a49e9a0f48d2b9458a3",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-additional-work-read-authorization.py",
+      "checks": 40,
+      "report": "http/verify-additional-work-read-authorization.json",
+      "report_sha256": "5b1f0c542e04e2f552fd0951d0cb08b38e93b8293327c150bb0bf1e23852b1a1",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-shared-resource-boundaries.py",
+      "checks": 47,
+      "report": "http/verify-shared-resource-boundaries.json",
+      "report_sha256": "79c2762c1aa5c90f5783e5c2463fcb7e6a5b152c57aaccb16122aa7fd49794ee",
+      "rerun_after_probe_fix": false
+    },
+    {
+      "probe": "verify-global-rule-boundaries.py",
+      "checks": 91,
+      "report": "http/verify-global-rule-boundaries.json",
+      "report_sha256": "d4815a7e4e5a2a028529a42473f35dd66140bbcd73e826637a275e61de79b0f1",
+      "rerun_after_probe_fix": true
+    },
+    {
+      "probe": "verify-global-management-authorization.py",
+      "checks": 389,
+      "report": "http/verify-global-management-authorization.json",
+      "report_sha256": "2c5da0962eba08b39113fd8ad3d4277d80a2930d7a6cabbfbd118e574778752f",
+      "rerun_after_probe_fix": true
+    },
+    {
+      "probe": "verify-audit-failure.py",
+      "checks": 16,
+      "report": "http/verify-audit-failure.json",
+      "report_sha256": "31bc966bcb628f405b8fad4f53a662dda1773b274fdd31aa62797cb3545b9fa4",
+      "rerun_after_probe_fix": false
+    }
+  ],
+  "production_connected": false,
+  "preserved_failure_reports": [
+    "initial local-media index 95/96 before SQL classifier fix",
+    "initial global-rule SQL error; exact owned leftover row separately removed and recorded",
+    "initial global-management Excel binary assertion failure"
+  ],
+  "original_account_data_imported": false
+}

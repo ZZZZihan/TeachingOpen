@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "mode": "legacy-reproduced",
+  "component": "ShowAnnouncement.vue",
+  "source_sha256": "cbc117e29c6dfb3665cac7b4058a1dddfe751b81ac0d83a1b50e7e946dfa45eb",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "checks": {
+    "actualComponent": true,
+    "executed": "image",
+    "unsafe": true,
+    "paragraph": true,
+    "table": true,
+    "image": true,
+    "html": "<p>课堂通知 <strong>保留格式</strong></p><table><tbody><tr><td>表格保留</td></tr></tbody></table><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Zl9sAAAAASUVORK5CYII=\" alt=\"正常图片\"><img src=\"data:image/png;base64,broken\" onerror=\"document.body.dataset.executed='image'\"><a href=\"javascript:void(document.body.dataset.executed='url')\" onclick=\"document.body.dataset.executed='click'\">危险链接</a><svg onload=\"document.body.dataset.executed='svg'\"></svg><iframe srcdoc=\"&lt;script&gt;parent.document.body.dataset.executed='frame'&lt;/script&gt;\"></iframe><div style=\"background-image:url(javascript:document.body.dataset.executed='css');color:red\">样式</div>"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "cases": [
+    {
+      "case": "audit SQL failure preserves HTTP 200 business success",
+      "passed": true
+    },
+    {
+      "case": "parent business mutation committed exactly once",
+      "passed": true
+    },
+    {
+      "case": "one zero-score feedback row committed despite audit failure",
+      "passed": true
+    },
+    {
+      "case": "one persistent correction event committed",
+      "passed": true
+    },
+    {
+      "case": "daily correction count committed once",
+      "passed": true
+    },
+    {
+      "case": "failing audit insert produced no row",
+      "passed": true
+    },
+    {
+      "case": "audit failure remains observable by stable warning code",
+      "passed": true
+    },
+    {
+      "case": "audit warning excludes body and SQL exception text",
+      "passed": true
+    },
+    {
+      "case": "normal retry succeeds",
+      "passed": true
+    },
+    {
+      "case": "normal retry cannot recount the durable event",
+      "passed": true
+    },
+    {
+      "case": "successful audit writes one metadata row",
+      "passed": true
+    },
+    {
+      "case": "audit does not duplicate any request arguments",
+      "passed": true
+    },
+    {
+      "case": "audit retains operation method and actor metadata",
+      "passed": true
+    },
+    {
+      "case": "probe trigger removed",
+      "passed": true
+    },
+    {
+      "case": "all non-audit database tables restored",
+      "passed": true
+    },
+    {
+      "case": "attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 16,
+  "total": 16,
+  "expected_legacy": false,
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "injected_failure_response": {
+    "status": 200,
+    "success": true,
+    "code": 200
+  },
+  "audit_warning_lines": [
+    "2026-10-11 19:54:45.383 [http-nio-127.0.0.1-18191-exec-2] WARN  org.jeecg.modules.system.aspect.AutoLogAspect:61 - audit_write_failed method=org.jeecg.modules.teaching.controller.TeachingWorkController.edit() failureType=org.springframework.jdbc.UncategorizedSQLException"
+  ],
+  "changed_tables": [
+    "sys_log"
+  ],
+  "scope": "Actual synthetic HTTP/MySQL INSERT trigger failure after committed grading, durable event and daily counter. No production changes and no claim of durable/strongly consistent audit delivery."
+}

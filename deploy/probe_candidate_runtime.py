@@ -30,7 +30,8 @@ CASES = (
     'frozen_bundle_verified', 'four_owned_running_containers',
     'owned_dual_network_isolation', 'only_web_loopback_18190_published',
     'exact_bundle_bind_mounts_with_readonly_jar_dist', 'pinned_linux_images_match_containers',
-    'actual_health_up', 'index_matches_frozen_body', 'referenced_asset_matches_frozen_body',
+    'actual_health_up', 'schema_75_tables', 'local_media_index_initialized',
+    'index_matches_frozen_body', 'referenced_asset_matches_frozen_body',
     'anonymous_home_courses', 'invalid_api_token_401',
     *('fixture_login_and_role_menu_' + a for a in ACTORS),
     'student_same_class_course_read', 'student_foreign_class_course_denied',
@@ -51,7 +52,7 @@ CASES = (
     'media_cookie_cannot_authorize_api', 'logout_revokes_token_and_media_cookie',
     'actual_websocket_upgrade_and_authentication_reply',
 )
-assert len(CASES) == 45
+assert len(CASES) == 47
 
 
 def sha(value):
@@ -461,6 +462,8 @@ class Probe:
         api = self.api_client
         response = api.api('GET', '/actuator/health')
         self.check('actual_health_up', response[0] == 200 and (response[1] or {}).get('status') == 'UP', response)
+        self.check('schema_75_tables', api.sql('SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE()') == '75')
+        self.check('local_media_index_initialized', api.sql('SELECT COUNT(*) FROM sys_local_file_reference_state WHERE id=1 AND version=1') == '1')
         index = (self.bundle / 'web/dist/index.html').read_bytes()
         response = api.http('GET', '/index.html')
         self.check('index_matches_frozen_body', response[0] == 200 and sha(response[3]) == sha(index), response)

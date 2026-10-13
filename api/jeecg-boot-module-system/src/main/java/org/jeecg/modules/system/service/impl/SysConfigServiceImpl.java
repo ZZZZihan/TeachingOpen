@@ -1,7 +1,7 @@
 package org.jeecg.modules.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.jeecg.modules.system.service.IndexedLocalMediaService;
 import org.jeecg.modules.system.entity.SysConfig;
 import org.jeecg.modules.system.mapper.SysConfigMapper;
 import org.jeecg.modules.system.service.ISysConfigService;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig> implements ISysConfigService {
+public class SysConfigServiceImpl extends IndexedLocalMediaService<SysConfigMapper, SysConfig> implements ISysConfigService {
 	@Override
 	public SysConfig getConfigEntity(String key) {
 		return this.getOne(new QueryWrapper<SysConfig>()

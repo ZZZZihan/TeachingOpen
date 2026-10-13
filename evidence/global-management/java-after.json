@@ -1,0 +1,52 @@
+{
+  "phase": "after actual MVC registration",
+  "base": "93d4cfe8e911bccbaf1d20094357fa0b88076a86",
+  "suite": "org.jeecg.management.GlobalManagementAuthorizationTest",
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "cases": [
+    {
+      "name": "developerMonitoringWorksAndSamePrincipalRevocationStopsIt",
+      "passed": true
+    },
+    {
+      "name": "disabledDeletedMissingAndMismatchedManagerAccountsCannotReachManagement",
+      "passed": true
+    },
+    {
+      "name": "redisOperationalMetadataRequiresDeveloperIncludingAdminRefusal",
+      "passed": true
+    },
+    {
+      "name": "samePrincipalLosesAllManagementImmediatelyAfterRoleRevocation",
+      "passed": true
+    },
+    {
+      "name": "addressBookAndPositionSelectorKeepTheirAuthenticatedList",
+      "passed": true
+    },
+    {
+      "name": "disabledDeveloperCannotReadOperationalMetadata",
+      "passed": true
+    },
+    {
+      "name": "activeAdministratorsAndDevelopersRetainAllManagementOperations",
+      "passed": true
+    },
+    {
+      "name": "anonymousAndInactiveAccountsCannotUsePositionListAliases",
+      "passed": true
+    },
+    {
+      "name": "ordinaryManagementReadsWritesImportsAndDeletesAreDeniedBeforeAnyServiceCall",
+      "passed": true
+    },
+    {
+      "name": "anonymousAndSuffixAliasesCannotEnterManagementHandlers",
+      "passed": true
+    }
+  ],
+  "log_sha256": "4499e8c83e25fc8eb0df36b943cb547b8c3cc14af7258cc1b2902b5b9ebeffad",
+  "scope": "Actual application MVC interceptor registration. Mock identity/database services and Minio cloud client; actual XLSX import/export; no shared runtime or external cloud calls."
+}

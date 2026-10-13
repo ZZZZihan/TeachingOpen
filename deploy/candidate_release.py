@@ -14,7 +14,10 @@ import sys
 import tempfile
 
 FORMAT = 2
-NGINX_SHA256 = '93b019f547c36b708d46ac175368aee69a234495e6456b3e48e75d681e799a40'
+# Reviewed #66 proxy contract plus #92's eight exact public Python CORP exceptions
+# (85e19e8e60444f69d0ddebd86aee9905b239ae72), with upstream API cache policies preserved.
+# Keep this pin fixed, not source-derived.
+NGINX_SHA256 = '27b5d9f201d294905ed924d2a25539ddb21c2e251af7e7655a491f7417446c6c'
 TEMPLATE_SHA256 = '8854226931f4aea3fd076f90ff0c0e73b932fff2ef885a0fb4d19f6034b8ce64'
 PLATFORM = 'linux/arm64'
 IMAGES = {
@@ -33,8 +36,8 @@ HELPERS = [
     'api/jeecg-boot-base-common/src/main/java/org/jeecg/common/util/PasswordUtil.java',
     'api/dev/role-flow-assets/lesson.mp4', 'api/dev/role-flow-assets/starter.sb3',
     'api/dev/role-flow-assets/starter.sjr', 'web/nginx/default.conf',
-    'api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql', 'api/db/unit-view-events.sql',
-    'deploy/registration_upgrade.py',
+    'api/db/phone-profile-registration.sql', 'api/db/enable-phone-registration.sql', 'api/db/unit-view-events.sql', 'api/db/work-events.sql', 'api/db/local-media-references.sql',
+    'deploy/registration_upgrade.py', 'deploy/work_event_review.py',
 ]
 
 
@@ -321,7 +324,7 @@ def verify_bundle(bundle):
         raise ValueError('Invalid artifact input receipt')
     for digest in manifest['artifact_inputs'].values():
         check_digest(digest)
-    if manifest['fixture_counts'] != {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 71}:
+    if manifest['fixture_counts'] != {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 75}:
         raise ValueError('Unexpected synthetic fixture counts')
     fixtures = manifest['fixtures']
     if not isinstance(fixtures, dict) or set(fixtures) != {'database', 'public_media_key', 'private_media_key',
@@ -345,10 +348,10 @@ def verify_bundle(bundle):
     required = {'app/app.jar', 'web/nginx.conf', 'config/credentials.json',
         'config/application-localtest.properties', 'config/mysql-root-password',
         'config/mysql-app-password', 'config/mysql-client.cnf', 'config/redis.conf',
-        'init/01-schema.sql', 'init/02-fixtures.sql', 'init/03-phone-profile-registration.sql',
-        'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql', 'upgrade/01-phone-profile-registration.sql',
-        'upgrade/02-enable-phone-registration.sql', 'upgrade/03-unit-view-events.sql', 'upgrade/migration-manifest.json',
-        'upgrade/registration_upgrade.py', 'compose.json'}
+        'init/01-schema.sql', 'init/01a-work-events.sql', 'init/02-fixtures.sql', 'init/03-phone-profile-registration.sql',
+        'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql', 'init/07-local-media-references.sql', 'upgrade/01-phone-profile-registration.sql',
+        'upgrade/02-enable-phone-registration.sql', 'upgrade/03-unit-view-events.sql', 'upgrade/04-work-events.sql', 'upgrade/05-local-media-references.sql', 'upgrade/migration-manifest.json',
+        'upgrade/registration_upgrade.py', 'upgrade/work_event_review.py', 'compose.json'}
     if not required <= set(expected) or not any(n.startswith('web/dist/') for n in expected):
         raise ValueError('Missing required bundle input')
     if any(name not in required and not name.startswith('web/dist/') for name in expected):
@@ -360,13 +363,13 @@ def verify_bundle(bundle):
     upgrade = registration_tool()
     upgrade_manifest = upgrade.verify_migrations(bundle / 'upgrade')
     expected_upgrade = {'manifest_sha256': expected['upgrade/migration-manifest.json']['sha256'],
-        'initialization_order': ['init/01-schema.sql', 'init/02-fixtures.sql',
-            'init/03-phone-profile-registration.sql', 'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql'],
+        'initialization_order': ['init/01-schema.sql', 'init/01a-work-events.sql', 'init/02-fixtures.sql',
+            'init/03-phone-profile-registration.sql', 'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql', 'init/07-local-media-references.sql'],
         'existing_database_requires_explicit_backup_and_apply': True, 'automatic_apply': False, 'ddl_transactional': False}
     if manifest['database_upgrade'] != expected_upgrade:
         raise ValueError('Database upgrade manifest/order changed')
     for index, (source_name, name) in enumerate(upgrade.MIGRATIONS, 3):
-        init_name = 'init/' + str(index).zfill(2) + '-' + name[3:]
+        init_name = 'init/01a-work-events.sql' if source_name == 'api/db/work-events.sql' else 'init/' + str(index).zfill(2) + '-' + name[3:]
         receipt = expected['upgrade/' + name]
         if (receipt != expected[init_name] or receipt['sha256'] != manifest['helper_sha256'][source_name]
                 or receipt != {'bytes': upgrade_manifest['steps'][index - 3]['bytes'],
@@ -374,6 +377,8 @@ def verify_bundle(bundle):
             raise ValueError('Initialization/explicit migration SQL must match the frozen helper receipt')
     if expected['upgrade/registration_upgrade.py']['sha256'] != manifest['helper_sha256']['deploy/registration_upgrade.py']:
         raise ValueError('Upgrade runner differs from frozen helper receipt')
+    if expected['upgrade/work_event_review.py']['sha256'] != manifest['helper_sha256']['deploy/work_event_review.py']:
+        raise ValueError('Work-event review tool differs from frozen helper receipt')
     for name in expected:
         if stat.S_IMODE((bundle / name).stat().st_mode) != expected_mode(name):
             raise ValueError('Unexpected file permissions: ' + name)
@@ -398,7 +403,7 @@ def verify_bundle(bundle):
     if read_json(bundle / 'compose.json') != compose_config(project, port):
         raise ValueError('Compose configuration differs from the bounded contract')
     if expected.get('web/nginx.conf', {}).get('sha256') != NGINX_SHA256:
-        raise ValueError('Nginx must be the exact reviewed #66 configuration')
+        raise ValueError('Nginx must be the exact reviewed candidate configuration (#66 + #92)')
     if expected.get('app/app.jar', {}).get('sha256') != manifest.get('artifact_inputs', {}).get('jar_sha256'):
         raise ValueError('JAR differs from the declared frozen input')
     return {'status': 'verified_immutable', 'bundle': str(bundle), 'source_commit': manifest['source_commit'],
@@ -426,7 +431,7 @@ def create_bundle(source, jar, jar_sha256, dist_manifest, dist_manifest_sha256, 
         raise ValueError('Every trusted helper input must be tracked by the frozen source commit')
     helper_hashes = {name: sha256(checked_path(source / name)) for name in HELPERS}
     if helper_hashes['web/nginx/default.conf'] != NGINX_SHA256:
-        raise ValueError('Source Nginx differs from reviewed #66')
+        raise ValueError('Source Nginx differs from reviewed candidate contract (#66 + #92)')
     if helper_hashes['api/dev/application-localtest.properties.template'] != TEMPLATE_SHA256:
         raise ValueError('Source localtest template differs from reviewed contract')
     if sha256(jar) != jar_sha256 or sha256(dist_manifest) != dist_manifest_sha256:
@@ -457,8 +462,8 @@ def create_bundle(source, jar, jar_sha256, dist_manifest, dist_manifest_sha256, 
         row.update(hashed[row['username']])
     records = fixture.expected_after(model, base, fixture.ui_records(assets))
     counts = {'accounts': len(records['sys_user']), 'classes': sum(r['id'].startswith('fixture_class_') for r in records['sys_depart']),
-        'courses': len(records['teaching_course']), 'tables': len(model) + 2}
-    if counts != {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 71}:
+        'courses': len(records['teaching_course']), 'tables': len(model) + 6}
+    if counts != {'accounts': 5, 'classes': 2, 'courses': 3, 'tables': 75}:
         raise ValueError('Unexpected synthetic fixture contract')
     sql = ['SET NAMES utf8mb4;', "SET SESSION sql_mode='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';", 'START TRANSACTION;']
     for table, rows in records.items():
@@ -478,10 +483,12 @@ def create_bundle(source, jar, jar_sha256, dist_manifest, dist_manifest_sha256, 
         upgrade = registration_tool(source)
         for index, (source_name, name) in enumerate(upgrade.MIGRATIONS, 3):
             contents = (source / source_name).read_bytes()
-            write_file(output, 'init/' + str(index).zfill(2) + '-' + name[3:], contents, 0o444)
+            initial_name = 'init/01a-work-events.sql' if source_name == 'api/db/work-events.sql' else 'init/' + str(index).zfill(2) + '-' + name[3:]
+            write_file(output, initial_name, contents, 0o444)
             write_file(output, 'upgrade/' + name, contents)
         write_file(output, 'upgrade/migration-manifest.json', json_bytes(upgrade.migration_manifest(source)))
         write_file(output, 'upgrade/registration_upgrade.py', (source / 'deploy/registration_upgrade.py').read_bytes())
+        write_file(output, 'upgrade/work_event_review.py', (source / 'deploy/work_event_review.py').read_bytes())
         write_file(output, 'config/credentials.json', json_bytes(credentials))
         write_file(output, 'config/mysql-root-password', credentials['mysql_root_password'] + '\n', 0o444)
         write_file(output, 'config/mysql-app-password', credentials['mysql_app_password'] + '\n', 0o444)
@@ -522,8 +529,8 @@ def create_bundle(source, jar, jar_sha256, dist_manifest, dist_manifest_sha256, 
                 'public_media_bytes': len(assets['cover.png']), 'private_media_bytes': len(assets['lesson.mp4'])},
             'images': IMAGES, 'platform': PLATFORM, 'port': port, 'compose_project': project}
         manifest['database_upgrade'] = {'manifest_sha256': files['upgrade/migration-manifest.json']['sha256'],
-            'initialization_order': ['init/01-schema.sql', 'init/02-fixtures.sql',
-                'init/03-phone-profile-registration.sql', 'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql'],
+            'initialization_order': ['init/01-schema.sql', 'init/01a-work-events.sql', 'init/02-fixtures.sql',
+                'init/03-phone-profile-registration.sql', 'init/04-enable-phone-registration.sql', 'init/05-unit-view-events.sql', 'init/07-local-media-references.sql'],
             'existing_database_requires_explicit_backup_and_apply': True, 'automatic_apply': False, 'ddl_transactional': False}
         write_file(output, 'manifest.json', json_bytes(manifest))
         result = verify_bundle(output)

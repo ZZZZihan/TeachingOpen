@@ -1,7 +1,7 @@
 package org.jeecg.modules.teaching.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.jeecg.modules.system.service.IndexedLocalMediaService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -15,11 +15,14 @@ import org.jeecg.modules.system.model.DepartIdModel;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.system.service.ISysUserDepartService;
+import org.jeecg.modules.system.service.LocalFileReferenceAccessService;
 import org.jeecg.modules.teaching.entity.TeachingAdditionalWork;
 import org.jeecg.modules.teaching.mapper.TeachingAdditionalWorkMapper;
 import org.jeecg.modules.teaching.model.MineAdditionalWorkModel;
 import org.jeecg.modules.teaching.service.ITeachingAdditionalWorkService;
 import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
+import org.jeecg.modules.teaching.service.TeachingAccessService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +37,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
-public class TeachingAdditionalWorkServiceImpl extends ServiceImpl<TeachingAdditionalWorkMapper, TeachingAdditionalWork> implements ITeachingAdditionalWorkService {
+public class TeachingAdditionalWorkServiceImpl extends IndexedLocalMediaService<TeachingAdditionalWorkMapper, TeachingAdditionalWork> implements ITeachingAdditionalWorkService {
 
     @Autowired
     private ISysUserDepartService sysUserDepartService;
@@ -47,12 +50,28 @@ public class TeachingAdditionalWorkServiceImpl extends ServiceImpl<TeachingAddit
     private ITeachingDepartDayLogService teachingDepartDayLogService;
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    private LocalFileReferenceAccessService attachmentAccess;
+    @Autowired
+    private TeachingAccessService teachingAccess;
 
     @Override
     public Result<MineAdditionalWorkModel> getWorkInfo(String id) {
         Result<MineAdditionalWorkModel> result = new Result();
-        result.setResult(this.baseMapper.getWorkInfo(id));
+        MineAdditionalWorkModel model = new MineAdditionalWorkModel();
+        // Return precisely the object that was authorized, without a second
+        // unrestricted mapper fetch that could race a class reassignment.
+        BeanUtils.copyProperties(getReadableById(id), model);
+        result.setResult(model);
         return result;
+    }
+
+    @Override
+    public TeachingAdditionalWork getReadableById(String id) {
+        TeachingAdditionalWork work = baseMapper.selectById(id);
+        if (work == null || !Objects.equals(id, work.getId())) throw new UnauthorizedException("无附加作业访问权限");
+        teachingAccess.requireReadAdditionalWork(work);
+        return work;
     }
 
     @Override
@@ -72,10 +91,12 @@ public class TeachingAdditionalWorkServiceImpl extends ServiceImpl<TeachingAddit
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result<?> addNewAdditionalWork(TeachingAdditionalWork teachingAdditionalWork) {
+        mediaIndex.lockWrites();
         Writer writer = requireWriter();
         TeachingAdditionalWork work = editableFields(teachingAdditionalWork);
         Set<String> departments = requireDepartments(work.getWorkDept());
         requireManagedDepartments(writer, departments);
+        attachmentAccess.requireUse(work.getWorkCover(), work.getWorkDocumentUrl(), work.getWorkUrl(), work.getWorkDesc());
         work.setWorkDept(String.join(",", departments));
         work.setCreateBy(writer.user.getUsername());
         work.setCreateTime(new Date());
@@ -83,6 +104,7 @@ public class TeachingAdditionalWorkServiceImpl extends ServiceImpl<TeachingAddit
         if (baseMapper.insert(work) != 1 || work.getId() == null) {
             throw new JeecgBootException("附加作业保存失败");
         }
+        indexMedia(work.getId());
         recordAssignments(work.getId(), departments);
         return Result.ok("添加成功！");
     }
@@ -90,6 +112,7 @@ public class TeachingAdditionalWorkServiceImpl extends ServiceImpl<TeachingAddit
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result<?> editAdditionalWork(TeachingAdditionalWork request) {
+        mediaIndex.lockWrites();
         Writer writer = requireWriter();
         if (request == null) throw new JeecgBootException("附加作业不能为空");
         List<TeachingAdditionalWork> existing = lockWorks(Collections.singletonList(request.getId()));
@@ -98,12 +121,14 @@ public class TeachingAdditionalWorkServiceImpl extends ServiceImpl<TeachingAddit
         TeachingAdditionalWork work = editableFields(request);
         Set<String> departments = requireDepartments(work.getWorkDept());
         requireManagedDepartments(writer, departments);
+        attachmentAccess.requireUse(work.getWorkCover(), work.getWorkDocumentUrl(), work.getWorkUrl(), work.getWorkDesc());
         work.setId(previous.getId());
         work.setWorkDept(String.join(",", departments));
         work.setUpdateBy(writer.user.getUsername());
         work.setUpdateTime(new Date());
         if (baseMapper.updateById(work) != 1) throw new JeecgBootException("附加作业更新失败");
         departments.removeAll(splitIds(previous.getWorkDept(), "原作业班级"));
+        indexMedia(work.getId());
         recordAssignments(work.getId(), departments);
         return Result.ok("编辑成功!");
     }
@@ -111,12 +136,14 @@ public class TeachingAdditionalWorkServiceImpl extends ServiceImpl<TeachingAddit
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result<?> deleteAdditionalWorks(List<String> requested) {
+        mediaIndex.lockWrites();
         Writer writer = requireWriter();
         List<TeachingAdditionalWork> works = lockWorks(requested);
         // Validate every object before deleting any of them.
         works.forEach(work -> requireOwnership(writer, work));
         List<String> ids = works.stream().map(TeachingAdditionalWork::getId).collect(Collectors.toList());
         if (baseMapper.deleteBatchIds(ids) != ids.size()) throw new JeecgBootException("附加作业删除失败");
+        ids.forEach(this::indexMedia);
         return Result.ok("删除成功!");
     }
 

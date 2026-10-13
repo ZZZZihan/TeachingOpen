@@ -17,6 +17,7 @@ from zipfile import ZipFile
 from local_http import FixtureApi
 from local_runtime import mysql_command
 from day_log_boundary import verify_manual_writes
+from authentication_scope import cache_fixture_user, verify_teacher_revocation
 
 
 def verify_profile_emails(api, sql, check, snapshot):
@@ -56,12 +57,14 @@ def verify_profile_emails(api, sql, check, snapshot):
              ('null optional email', None), ('empty optional email', ''))
 
     for route in ('/sys/user/appEdit', '/teaching/user/edit'):
-        # Warm an authentic cached LoginUser so an erroneous eviction cannot
-        # pass simply because this cache family was empty before the denial.
+        # Authentication now uses a live principal rather than warming this
+        # optional profile cache. Seed its real serialization contract so an
+        # erroneous eviction cannot pass because the cache family was empty.
         status, result, _ = api.request('GET', '/teaching/user/info', 'student_a')
         check('email validation warms authenticated profile ' + route,
               status == 200 and result is not None and result.get('success') is True)
-        check('email validation has a real user cache ' + route,
+        cache_fixture_user(api, sql, 'student_a')
+        check('email validation has a synthetic serialized user cache ' + route,
               api.cache('EXISTS', 'sys:cache:user::fixture_student_a') == '1')
         for label, email in invalid:
             before, cached_before = snapshot(), cache_snapshot()
@@ -218,6 +221,7 @@ def verify(args):
                 api.login(actor)
             jar = (args.jar or Path(__file__).resolve().parents[1] / 'jeecg-boot-module-system/target/teaching-open-2.8.0.jar').resolve()
             verify_manual_writes(api, jar, sql, check, snapshot)
+            verify_teacher_revocation(api, sql, check)
             role_body = {'roleId': 'fixture_role_admin', 'userIdList': ['fixture_student_a']}
             for actor in ('student_a', 'teacher_a'):
                 denied(actor + ' cannot self-grant admin', 'POST', '/sys/user/addSysUserRole', actor, role_body)

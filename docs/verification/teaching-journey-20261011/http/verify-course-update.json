@@ -1,0 +1,695 @@
+{
+  "expected_legacy": false,
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "passed": 103,
+  "total": 103,
+  "exception": null,
+  "changed_tables": [],
+  "cases": [
+    {
+      "case": "fixture creation fixture_update_course_other",
+      "passed": true
+    },
+    {
+      "case": "fixture creation fixture_update_unit_other",
+      "passed": true
+    },
+    {
+      "case": "fixture creation fixture_update_course",
+      "passed": true
+    },
+    {
+      "case": "fixture creation fixture_update_unit_a",
+      "passed": true
+    },
+    {
+      "case": "fixture creation fixture_update_unit_b",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse existing row updates",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse new content persisted",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse identical update remains successful",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse missing target rejected",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse missing target rejected preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse malformed ID rejected None",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse malformed ID rejected None preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse malformed ID rejected ",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse malformed ID rejected  preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse malformed ID rejected   ",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse malformed ID rejected    preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse malformed ID rejected None",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse malformed ID rejected None preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse create then delete fixture accepted",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse actual deletion accepted",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse stale edit after deletion rejected",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse stale edit after deletion rejected preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied teacher_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied update preserves rows teacher_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied teacher_b",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied update preserves rows teacher_b",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied student_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied update preserves rows student_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied None",
+      "passed": true
+    },
+    {
+      "case": "teachingCourse denied update preserves rows None",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit existing row updates",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit new content persisted",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit identical update remains successful",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit missing target rejected",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit missing target rejected preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit malformed ID rejected None",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit malformed ID rejected None preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit malformed ID rejected ",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit malformed ID rejected  preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit malformed ID rejected   ",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit malformed ID rejected    preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit malformed ID rejected None",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit malformed ID rejected None preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit create then delete fixture accepted",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit actual deletion accepted",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit stale edit after deletion rejected",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit stale edit after deletion rejected preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied teacher_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied update preserves rows teacher_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied teacher_b",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied update preserves rows teacher_b",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied student_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied update preserves rows student_a",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied None",
+      "passed": true
+    },
+    {
+      "case": "teachingCourseUnit denied update preserves rows None",
+      "passed": true
+    },
+    {
+      "case": "valid map batch succeeds",
+      "passed": true
+    },
+    {
+      "case": "both map positions persisted",
+      "passed": true
+    },
+    {
+      "case": "map batch preserves every noncoordinate column including content and audit fields",
+      "passed": true
+    },
+    {
+      "case": "identical map batch remains successful",
+      "passed": true
+    },
+    {
+      "case": "missing last rejects entire batch",
+      "passed": true
+    },
+    {
+      "case": "missing last rejects entire batch preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "missing first rejects entire batch",
+      "passed": true
+    },
+    {
+      "case": "missing first rejects entire batch preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "invalid batch empty",
+      "passed": true
+    },
+    {
+      "case": "invalid batch empty preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "invalid batch null entry",
+      "passed": true
+    },
+    {
+      "case": "invalid batch null entry preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "invalid batch missing ID",
+      "passed": true
+    },
+    {
+      "case": "invalid batch missing ID preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "invalid batch blank ID",
+      "passed": true
+    },
+    {
+      "case": "invalid batch blank ID preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "invalid batch duplicate ID",
+      "passed": true
+    },
+    {
+      "case": "invalid batch duplicate ID preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "invalid batch missing coordinate",
+      "passed": true
+    },
+    {
+      "case": "invalid batch missing coordinate preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "cross-course batch rejects all targets",
+      "passed": true
+    },
+    {
+      "case": "cross-course batch rejects all targets preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "wrong declared course rejects existing units",
+      "passed": true
+    },
+    {
+      "case": "wrong declared course rejects existing units preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "deleted target rejects entire map batch",
+      "passed": true
+    },
+    {
+      "case": "deleted target rejects entire map batch preserves all probe columns",
+      "passed": true
+    },
+    {
+      "case": "extra entity fields ignored by map DTO",
+      "passed": true
+    },
+    {
+      "case": "map DTO preserves every unrelated field",
+      "passed": true
+    },
+    {
+      "case": "outer content save after map save accepted",
+      "passed": true
+    },
+    {
+      "case": "outer content edit persisted",
+      "passed": true
+    },
+    {
+      "case": "outer content save cannot overwrite current map coordinates",
+      "passed": true
+    },
+    {
+      "case": "failure trigger name is unoccupied",
+      "passed": true
+    },
+    {
+      "case": "second map SQL write fails with owned trigger marker",
+      "passed": true
+    },
+    {
+      "case": "real SQL batch failure rolls back all columns",
+      "passed": true
+    },
+    {
+      "case": "owned failure trigger removed",
+      "passed": true
+    },
+    {
+      "case": "valid batch recovers after SQL failure",
+      "passed": true
+    },
+    {
+      "case": "batch denied teacher_a",
+      "passed": true
+    },
+    {
+      "case": "denied batch preserves rows teacher_a",
+      "passed": true
+    },
+    {
+      "case": "batch denied teacher_b",
+      "passed": true
+    },
+    {
+      "case": "denied batch preserves rows teacher_b",
+      "passed": true
+    },
+    {
+      "case": "batch denied student_a",
+      "passed": true
+    },
+    {
+      "case": "denied batch preserves rows student_a",
+      "passed": true
+    },
+    {
+      "case": "batch denied None",
+      "passed": true
+    },
+    {
+      "case": "denied batch preserves rows None",
+      "passed": true
+    },
+    {
+      "case": "single update retained course flags and order",
+      "passed": true
+    },
+    {
+      "case": "all non-audit tables restored",
+      "passed": true
+    },
+    {
+      "case": "all attachment bytes unchanged",
+      "passed": true
+    },
+    {
+      "case": "original media reference index and state restored",
+      "passed": true
+    }
+  ],
+  "observations": [
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 404,
+      "success": false
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 404,
+      "success": false
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourse/edit",
+      "http": 401,
+      "code": 401,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 404,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 404,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 401,
+      "code": 401,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 409,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 409,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 400,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 409,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 409,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 409,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/edit",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 500,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 200,
+      "success": true
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 200,
+      "code": 510,
+      "success": false
+    },
+    {
+      "route": "teachingCourseUnit/editBatch",
+      "http": 401,
+      "code": 401,
+      "success": false
+    }
+  ],
+  "scope": "Real synthetic Spring/Shiro/MyBatis/MySQL HTTP, coordinate-only persistence, outer stale content form and real second-write trigger rollback. No production or authenticated browser acceptance."
+}

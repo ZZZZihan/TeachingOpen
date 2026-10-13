@@ -1,0 +1,194 @@
+{
+  "scope": "Real login, HTTP CRUD/import/export, synthetic MySQL, Java8; no production access",
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "passed": 39,
+  "total": 39,
+  "cases": [
+    {
+      "case": "None denied add",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "None denied edit",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "None denied delete",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "None denied deleteBatch",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "None denied importExcel",
+      "passed": true,
+      "http_status": 401,
+      "code": 401
+    },
+    {
+      "case": "None denied requests preserve DB",
+      "passed": true
+    },
+    {
+      "case": "student_a denied add",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied edit",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied deleteBatch",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied importExcel",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "student_a denied requests preserve DB",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied add",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied edit",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied delete",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied deleteBatch",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied importExcel",
+      "passed": true,
+      "http_status": 200,
+      "code": 510
+    },
+    {
+      "case": "teacher_a denied requests preserve DB",
+      "passed": true
+    },
+    {
+      "case": "newsDetail sanitizes historical content",
+      "passed": true
+    },
+    {
+      "case": "queryById sanitizes historical content",
+      "passed": true
+    },
+    {
+      "case": "management list sanitizes historical content",
+      "passed": true
+    },
+    {
+      "case": "anonymous newsList returns no HTML body",
+      "passed": true
+    },
+    {
+      "case": "historical reads do not rewrite stored content",
+      "passed": true
+    },
+    {
+      "case": "admin can add",
+      "passed": true
+    },
+    {
+      "case": "admin add stores sanitized HTML",
+      "passed": true
+    },
+    {
+      "case": "admin can edit",
+      "passed": true
+    },
+    {
+      "case": "admin edit stores sanitized HTML",
+      "passed": true
+    },
+    {
+      "case": "admin can delete",
+      "passed": true
+    },
+    {
+      "case": "dev can add",
+      "passed": true
+    },
+    {
+      "case": "dev add stores sanitized HTML",
+      "passed": true
+    },
+    {
+      "case": "dev can edit",
+      "passed": true
+    },
+    {
+      "case": "dev edit stores sanitized HTML",
+      "passed": true
+    },
+    {
+      "case": "dev can delete",
+      "passed": true
+    },
+    {
+      "case": "dev Excel import uses shared write sanitizer",
+      "passed": true
+    },
+    {
+      "case": "Excel export sanitizes historical HTML",
+      "passed": true
+    },
+    {
+      "case": "dev can batch delete",
+      "passed": true
+    },
+    {
+      "case": "original news rows restored",
+      "passed": true
+    },
+    {
+      "case": "original media reference index and state restored",
+      "passed": true
+    },
+    {
+      "case": "original admin role restored",
+      "passed": true
+    }
+  ]
+}

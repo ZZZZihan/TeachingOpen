@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.jeecg.teaching.TeachingMenuSecurityTest
+-------------------------------------------------------------------------------
+Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.557 s - in org.jeecg.teaching.TeachingMenuSecurityTest

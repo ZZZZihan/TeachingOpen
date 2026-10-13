@@ -16,6 +16,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  * @Version: V1.0
  */
 public interface SysAnnouncementSendMapper extends BaseMapper<SysAnnouncementSend> {
+	@org.apache.ibatis.annotations.Update("UPDATE sys_announcement_send SET read_flag='1', read_time=CURRENT_TIMESTAMP "
+			+ "WHERE user_id=#{userId} AND annt_id IN (SELECT id FROM sys_announcement WHERE send_status='1' AND del_flag='0' "
+			+ "AND (msg_type='USER' OR (msg_type='ALL' AND (end_time IS NULL OR end_time >= "
+			+ "COALESCE((SELECT create_time FROM sys_user WHERE id=#{userId}), CURRENT_TIMESTAMP)))))")
+	int markAllRead(@Param("userId") String userId);
 
 	public List<String> queryByUserId(@Param("userId") String userId);
 

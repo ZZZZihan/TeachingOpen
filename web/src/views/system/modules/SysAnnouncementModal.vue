@@ -220,7 +220,7 @@
           });
         }
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'endTime','startTime','titile','msgContent','sender','priority','msgCategory','msgType','sendStatus','delFlag','msgAbstract'))
+          this.form.setFieldsValue(pick(this.model,'endTime','startTime','titile','msgContent','priority','msgCategory','msgType','msgAbstract'))
         });
       },
       close () {
@@ -248,11 +248,10 @@
               httpurl+=this.url.edit;
                method = 'put';
             }
-            let formData = Object.assign(this.model, values);
+            let formData = Object.assign({ id: this.model.id }, values);
             if(this.userType){
               formData.userIds =  this.userIds;
             }
-            console.log(formData)
             httpAction(httpurl,formData,method).then((res)=>{
               if(res.success){
                 that.$message.success(res.message);

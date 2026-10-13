@@ -1,0 +1,392 @@
+{
+  "scope": "owned synthetic global configuration management and ordinary form/class workflows",
+  "expected_legacy": false,
+  "production_connected": false,
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "organization_rule_fixture": {
+    "preexisting": false,
+    "temporary_created": true,
+    "restored": true
+  },
+  "class_creation": {
+    "http_status": 200,
+    "business": {
+      "success": true,
+      "code": 200,
+      "message": "添加成功！"
+    },
+    "parent_org_code": "A99",
+    "generated_rows": [
+      "43971b9aa7e948c2abe9c284bba05c1f\tA99A03\tfixture_school"
+    ]
+  },
+  "verifier_sha256": "3627f0239b08e7f8cf824e431d5f463df8213d8938dff13aa719a8fcfc61cf97",
+  "passed": 91,
+  "failed": 0,
+  "checks": [
+    {
+      "case": "administrator creates fillRule",
+      "passed": true
+    },
+    {
+      "case": "fillRule fixture created exactly once",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage fillRule/list",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage fillRule/queryById",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage fillRule/exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage fillRule/add",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage fillRule/edit",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage fillRule/delete",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage fillRule/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot import fillRule",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage fillRule/list",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage fillRule/queryById",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage fillRule/exportXls",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage fillRule/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage fillRule/edit",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage fillRule/delete",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage fillRule/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot import fillRule",
+      "passed": true
+    },
+    {
+      "case": "administrator edits fillRule",
+      "passed": true
+    },
+    {
+      "case": "administrator reads fillRule",
+      "passed": true
+    },
+    {
+      "case": "administrator imports Excel for fillRule",
+      "passed": true
+    },
+    {
+      "case": "administrator single deletes fillRule",
+      "passed": true
+    },
+    {
+      "case": "administrator batch deletes fillRule",
+      "passed": true
+    },
+    {
+      "case": "administrator creates checkRule",
+      "passed": true
+    },
+    {
+      "case": "checkRule fixture created exactly once",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage checkRule/list",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage checkRule/queryById",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage checkRule/exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage checkRule/add",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage checkRule/edit",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage checkRule/delete",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage checkRule/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot import checkRule",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage checkRule/list",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage checkRule/queryById",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage checkRule/exportXls",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage checkRule/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage checkRule/edit",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage checkRule/delete",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage checkRule/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot import checkRule",
+      "passed": true
+    },
+    {
+      "case": "administrator edits checkRule",
+      "passed": true
+    },
+    {
+      "case": "administrator reads checkRule",
+      "passed": true
+    },
+    {
+      "case": "administrator imports Excel for checkRule",
+      "passed": true
+    },
+    {
+      "case": "administrator single deletes checkRule",
+      "passed": true
+    },
+    {
+      "case": "administrator batch deletes checkRule",
+      "passed": true
+    },
+    {
+      "case": "administrator creates category",
+      "passed": true
+    },
+    {
+      "case": "category fixture created exactly once",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage category/rootList",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage category/queryById",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage category/exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage category/add",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage category/edit",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage category/delete",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot manage category/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "student_a cannot import category",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage category/rootList",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage category/queryById",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage category/exportXls",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage category/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage category/edit",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage category/delete",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot manage category/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "teacher_a cannot import category",
+      "passed": true
+    },
+    {
+      "case": "administrator edits category",
+      "passed": true
+    },
+    {
+      "case": "administrator reads category",
+      "passed": true
+    },
+    {
+      "case": "administrator imports Excel for category",
+      "passed": true
+    },
+    {
+      "case": "administrator single deletes category",
+      "passed": true
+    },
+    {
+      "case": "administrator batch deletes category",
+      "passed": true
+    },
+    {
+      "case": "required synthetic organization rule exists",
+      "passed": true
+    },
+    {
+      "case": "student cannot remove required class-number rule",
+      "passed": true
+    },
+    {
+      "case": "synthetic parent has a single valid organization code",
+      "passed": true
+    },
+    {
+      "case": "normal class creation still generates a department code",
+      "passed": true
+    },
+    {
+      "case": "ordinary fill generator read remains available",
+      "passed": true
+    },
+    {
+      "case": "ordinary category picker remains available",
+      "passed": true
+    },
+    {
+      "case": "administrator recreates benign form checker",
+      "passed": true
+    },
+    {
+      "case": "ordinary form validation accepts normal input",
+      "passed": true
+    },
+    {
+      "case": "ordinary form validation rejects a nonmatching input",
+      "passed": true
+    },
+    {
+      "case": "administrator configures punctuation and Unicode checker",
+      "passed": true
+    },
+    {
+      "case": "existing form transport preserves punctuation and Unicode",
+      "passed": true
+    },
+    {
+      "case": "administrator configures literal percent escape checker",
+      "passed": true
+    },
+    {
+      "case": "existing form transport preserves literal percent escape",
+      "passed": true
+    },
+    {
+      "case": "administrator configures 256 Unicode characters checker",
+      "passed": true
+    },
+    {
+      "case": "existing form transport preserves 256 Unicode characters",
+      "passed": true
+    },
+    {
+      "case": "malformed or oversized checker input is controlled: 校验值编码不正确",
+      "passed": true
+    },
+    {
+      "case": "malformed or oversized checker input is controlled: 校验值过长",
+      "passed": true
+    },
+    {
+      "case": "unsupported rule class is rejected before a write",
+      "passed": true
+    },
+    {
+      "case": "mixed invalid fill-rule Excel writes no partial records",
+      "passed": true
+    },
+    {
+      "case": "live dev grant enables rule management with same token",
+      "passed": true
+    },
+    {
+      "case": "same token revocation disables global rule management",
+      "passed": true
+    },
+    {
+      "case": "all synthetic rule and department changes are cleaned",
+      "passed": true
+    }
+  ]
+}

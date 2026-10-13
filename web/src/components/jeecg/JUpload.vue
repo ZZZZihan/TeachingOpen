@@ -15,7 +15,7 @@
       :key="session"
       :multiple="multiple"
       :action="getUploadAction()"
-      :headers="headers"
+      :customRequest="sendUploadRequest"
       :data="getUploadData"
       :fileList="fileList"
       :beforeUpload="beforeUpload"
@@ -44,6 +44,7 @@
 <script>
 
   import Vue from 'vue'
+  import uploadTransport from 'ant-design-vue/lib/vc-upload/src/request'
   import { ACCESS_TOKEN,SYS_CONFIG } from "@/store/mutation-types"
   import {getAction , postAction, deleteAction} from "@/api/manage"
   const FILE_TYPE_ALL = "all"
@@ -96,7 +97,6 @@
         tokenAction: {
           qiniu: "/common/qiniu/getToken"
         },
-        headers:{},
         fileList: [],
         uploadToken: '',
         uploadKey: {},
@@ -238,8 +238,6 @@
       }
     },
     created(){
-      const token = Vue.ls.get(ACCESS_TOKEN);
-      this.headers = {"X-Access-Token":token}
       //---------------------------- begin 图片左右换位置 -------------------------------------
       this.containerId = 'container-ty-'+new Date().getTime();
       //---------------------------- end 图片左右换位置 -------------------------------------
@@ -250,6 +248,17 @@
     },
 
     methods:{
+      sendUploadRequest(options) {
+        // Bind credentials to the actual request destination, after any async
+        // beforeUpload/transformFile work. Third-party storage gets only its
+        // own upload credential in form data, never the platform session.
+        const headers = {}
+        if (this.uploadTarget === UPLOAD_TARGET_LOCAL && options.action === this.uploadAction.local) {
+          const token = Vue.ls.get(ACCESS_TOKEN)
+          if (typeof token === 'string' && token) headers['X-Access-Token'] = token
+        }
+        return uploadTransport({ ...options, headers, withCredentials: false })
+      },
       invalidateUploads() {
         this.uploadVersion += 1
         this.uploadOperations = {}

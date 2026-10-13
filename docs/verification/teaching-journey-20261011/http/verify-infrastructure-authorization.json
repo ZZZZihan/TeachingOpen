@@ -1,0 +1,1391 @@
+{
+  "observed_utc": "2026-10-11T11:49:06.587073+00:00",
+  "scope": "owned synthetic HTTP/MySQL/Redis/Quartz",
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "verifier_sha256": "6b64036c5b000567ffb969b11a4e3043a7e44681bd58efd173f29af9af63885e",
+  "production_connected": false,
+  "expected_legacy": false,
+  "passed": 305,
+  "failed": 0,
+  "total": 305,
+  "checks": [
+    {
+      "case": "sample task identities are not already configured",
+      "passed": true
+    },
+    {
+      "case": "sample task identities are not already scheduled",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/list",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/list leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/options",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/options leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/queryById",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/queryById leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/dataSource/exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/dataSource/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/dataSource/importExcel",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/dataSource/importExcel leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/dataSource/add",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/dataSource/add leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied PUT /sys/dataSource/edit",
+      "passed": true
+    },
+    {
+      "case": "student_a denied PUT /sys/dataSource/edit leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/dataSource/delete",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/dataSource/delete leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/dataSource/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/dataSource/deleteBatch leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/list",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/list leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/types",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/types leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/queryById",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/queryById leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/quartzJob/exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/quartzJob/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/quartzJob/importExcel",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/quartzJob/importExcel leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/quartzJob/add",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/quartzJob/add leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied PUT /sys/quartzJob/edit",
+      "passed": true
+    },
+    {
+      "case": "student_a denied PUT /sys/quartzJob/edit leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/quartzJob/delete",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/quartzJob/delete leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/quartzJob/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/quartzJob/deleteBatch leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/pause",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/pause leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/resume",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/resume leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC handler authorization denied 403 ''",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC rejection preserves infrastructure state ''",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC handler authorization denied 403 '/'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC rejection preserves infrastructure state '/'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC unmapped suffix 404 '.json'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC rejection preserves infrastructure state '.json'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC unmapped suffix 404 '.js'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC rejection preserves infrastructure state '.js'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC rejected matrix path 400 ';fixture=1'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC rejection preserves infrastructure state ';fixture=1'",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/dataSource/list",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/dataSource/list leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/dataSource/options",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/dataSource/options leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/dataSource/queryById",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/dataSource/queryById leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/dataSource/exportXls",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/dataSource/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied POST /sys/dataSource/exportXls",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied POST /sys/dataSource/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied POST /sys/dataSource/importExcel",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied POST /sys/dataSource/importExcel leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied POST /sys/dataSource/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied POST /sys/dataSource/add leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied PUT /sys/dataSource/edit",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied PUT /sys/dataSource/edit leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied DELETE /sys/dataSource/delete",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied DELETE /sys/dataSource/delete leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied DELETE /sys/dataSource/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied DELETE /sys/dataSource/deleteBatch leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/quartzJob/list",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/quartzJob/list leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/quartzJob/types",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/quartzJob/types leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/quartzJob/queryById",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/quartzJob/queryById leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/quartzJob/exportXls",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/quartzJob/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied POST /sys/quartzJob/exportXls",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied POST /sys/quartzJob/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied POST /sys/quartzJob/importExcel",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied POST /sys/quartzJob/importExcel leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied POST /sys/quartzJob/add",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied POST /sys/quartzJob/add leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied PUT /sys/quartzJob/edit",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied PUT /sys/quartzJob/edit leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied DELETE /sys/quartzJob/delete",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied DELETE /sys/quartzJob/delete leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied DELETE /sys/quartzJob/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied DELETE /sys/quartzJob/deleteBatch leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/quartzJob/pause",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/quartzJob/pause leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/quartzJob/resume",
+      "passed": true
+    },
+    {
+      "case": "teacher_a denied GET /sys/quartzJob/resume leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a compiled Online JDBC handler authorization denied 403 ''",
+      "passed": true
+    },
+    {
+      "case": "teacher_a compiled Online JDBC rejection preserves infrastructure state ''",
+      "passed": true
+    },
+    {
+      "case": "teacher_a compiled Online JDBC handler authorization denied 403 '/'",
+      "passed": true
+    },
+    {
+      "case": "teacher_a compiled Online JDBC rejection preserves infrastructure state '/'",
+      "passed": true
+    },
+    {
+      "case": "teacher_a compiled Online JDBC unmapped suffix 404 '.json'",
+      "passed": true
+    },
+    {
+      "case": "teacher_a compiled Online JDBC rejection preserves infrastructure state '.json'",
+      "passed": true
+    },
+    {
+      "case": "teacher_a compiled Online JDBC unmapped suffix 404 '.js'",
+      "passed": true
+    },
+    {
+      "case": "teacher_a compiled Online JDBC rejection preserves infrastructure state '.js'",
+      "passed": true
+    },
+    {
+      "case": "teacher_a compiled Online JDBC rejected matrix path 400 ';fixture=1'",
+      "passed": true
+    },
+    {
+      "case": "teacher_a compiled Online JDBC rejection preserves infrastructure state ';fixture=1'",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/list",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/list leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/options",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/options leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/queryById",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/queryById leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/exportXls",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/dataSource/exportXls",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/dataSource/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/dataSource/importExcel",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/dataSource/importExcel leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/dataSource/add",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/dataSource/add leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied PUT /sys/dataSource/edit",
+      "passed": true
+    },
+    {
+      "case": "admin denied PUT /sys/dataSource/edit leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/dataSource/delete",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/dataSource/delete leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/dataSource/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/dataSource/deleteBatch leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/list",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/list leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/types",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/types leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/queryById",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/queryById leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/exportXls",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/quartzJob/exportXls",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/quartzJob/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/quartzJob/importExcel",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/quartzJob/importExcel leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/quartzJob/add",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/quartzJob/add leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied PUT /sys/quartzJob/edit",
+      "passed": true
+    },
+    {
+      "case": "admin denied PUT /sys/quartzJob/edit leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/quartzJob/delete",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/quartzJob/delete leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/quartzJob/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/quartzJob/deleteBatch leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/pause",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/pause leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/resume",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/resume leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC handler authorization denied 403 ''",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC rejection preserves infrastructure state ''",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC handler authorization denied 403 '/'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC rejection preserves infrastructure state '/'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC unmapped suffix 404 '.json'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC rejection preserves infrastructure state '.json'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC unmapped suffix 404 '.js'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC rejection preserves infrastructure state '.js'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC rejected matrix path 400 ';fixture=1'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC rejection preserves infrastructure state ';fixture=1'",
+      "passed": true
+    },
+    {
+      "case": "dev can read source without password",
+      "passed": true
+    },
+    {
+      "case": "source detail contains no password property or credential",
+      "passed": true
+    },
+    {
+      "case": "dev can list sources",
+      "passed": true
+    },
+    {
+      "case": "source list contains no password property or credential",
+      "passed": true
+    },
+    {
+      "case": "dev exports a real XLS without the source password or password column",
+      "passed": true
+    },
+    {
+      "case": "dev creates source with server-generated identity",
+      "passed": true
+    },
+    {
+      "case": "source create ignores caller identity",
+      "passed": true
+    },
+    {
+      "case": "dev creates a fixed task type",
+      "passed": true
+    },
+    {
+      "case": "task create binds allowed class and ignores caller identity",
+      "passed": true
+    },
+    {
+      "case": "dev edits source with omitted password",
+      "passed": true
+    },
+    {
+      "case": "omitted edit password is preserved in SQL",
+      "passed": true
+    },
+    {
+      "case": "successful source edit evicts derived Redis state",
+      "passed": true
+    },
+    {
+      "case": "dev resumes the reviewed sample task",
+      "passed": true
+    },
+    {
+      "case": "actual Quartz has a waiting trigger",
+      "passed": true
+    },
+    {
+      "case": "dev edits an existing task without changing its class",
+      "passed": true
+    },
+    {
+      "case": "task edit keeps a real Quartz trigger",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/list",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/list leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/options",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/options leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/queryById",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/queryById leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/dataSource/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/dataSource/exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/dataSource/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/dataSource/importExcel",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/dataSource/importExcel leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/dataSource/add",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/dataSource/add leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied PUT /sys/dataSource/edit",
+      "passed": true
+    },
+    {
+      "case": "student_a denied PUT /sys/dataSource/edit leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/dataSource/delete",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/dataSource/delete leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/dataSource/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/dataSource/deleteBatch leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/list",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/list leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/types",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/types leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/queryById",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/queryById leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/quartzJob/exportXls",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/quartzJob/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/quartzJob/importExcel",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/quartzJob/importExcel leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/quartzJob/add",
+      "passed": true
+    },
+    {
+      "case": "student_a denied POST /sys/quartzJob/add leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied PUT /sys/quartzJob/edit",
+      "passed": true
+    },
+    {
+      "case": "student_a denied PUT /sys/quartzJob/edit leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/quartzJob/delete",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/quartzJob/delete leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/quartzJob/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "student_a denied DELETE /sys/quartzJob/deleteBatch leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/pause",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/pause leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/resume",
+      "passed": true
+    },
+    {
+      "case": "student_a denied GET /sys/quartzJob/resume leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC handler authorization denied 403 ''",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC rejection preserves infrastructure state ''",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC handler authorization denied 403 '/'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC rejection preserves infrastructure state '/'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC unmapped suffix 404 '.json'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC rejection preserves infrastructure state '.json'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC unmapped suffix 404 '.js'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC rejection preserves infrastructure state '.js'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC rejected matrix path 400 ';fixture=1'",
+      "passed": true
+    },
+    {
+      "case": "student_a compiled Online JDBC rejection preserves infrastructure state ';fixture=1'",
+      "passed": true
+    },
+    {
+      "case": "dev pauses sample task",
+      "passed": true
+    },
+    {
+      "case": "actual Quartz trigger is paused",
+      "passed": true
+    },
+    {
+      "case": "dev cannot submit an arbitrary task class as type",
+      "passed": true
+    },
+    {
+      "case": "invalid task type preserves SQL cache and scheduler",
+      "passed": true
+    },
+    {
+      "case": "dev retains compiled Online connection-test consumer without network access",
+      "passed": true
+    },
+    {
+      "case": "dev control confirms Online alias routing '.json'",
+      "passed": true
+    },
+    {
+      "case": "dev Online alias control preserves infrastructure state '.json'",
+      "passed": true
+    },
+    {
+      "case": "dev control confirms Online alias routing '.js'",
+      "passed": true
+    },
+    {
+      "case": "dev Online alias control preserves infrastructure state '.js'",
+      "passed": true
+    },
+    {
+      "case": "dev control confirms Online alias routing ';fixture=1'",
+      "passed": true
+    },
+    {
+      "case": "dev Online alias control preserves infrastructure state ';fixture=1'",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/list",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/list leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/options",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/options leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/queryById",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/queryById leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/exportXls",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/dataSource/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/dataSource/exportXls",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/dataSource/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/dataSource/importExcel",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/dataSource/importExcel leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/dataSource/add",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/dataSource/add leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied PUT /sys/dataSource/edit",
+      "passed": true
+    },
+    {
+      "case": "admin denied PUT /sys/dataSource/edit leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/dataSource/delete",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/dataSource/delete leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/dataSource/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/dataSource/deleteBatch leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/list",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/list leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/types",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/types leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/queryById",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/queryById leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/exportXls",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/quartzJob/exportXls",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/quartzJob/exportXls leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/quartzJob/importExcel",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/quartzJob/importExcel leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/quartzJob/add",
+      "passed": true
+    },
+    {
+      "case": "admin denied POST /sys/quartzJob/add leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied PUT /sys/quartzJob/edit",
+      "passed": true
+    },
+    {
+      "case": "admin denied PUT /sys/quartzJob/edit leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/quartzJob/delete",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/quartzJob/delete leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/quartzJob/deleteBatch",
+      "passed": true
+    },
+    {
+      "case": "admin denied DELETE /sys/quartzJob/deleteBatch leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/pause",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/pause leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/resume",
+      "passed": true
+    },
+    {
+      "case": "admin denied GET /sys/quartzJob/resume leaves SQL, dynamic Redis, and Quartz state unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC handler authorization denied 403 ''",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC rejection preserves infrastructure state ''",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC handler authorization denied 403 '/'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC rejection preserves infrastructure state '/'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC unmapped suffix 404 '.json'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC rejection preserves infrastructure state '.json'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC unmapped suffix 404 '.js'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC rejection preserves infrastructure state '.js'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC rejected matrix path 400 ';fixture=1'",
+      "passed": true
+    },
+    {
+      "case": "admin compiled Online JDBC rejection preserves infrastructure state ';fixture=1'",
+      "passed": true
+    },
+    {
+      "case": "dev deletes scheduled task",
+      "passed": true
+    },
+    {
+      "case": "task deletion removes actual Quartz job",
+      "passed": true
+    },
+    {
+      "case": "dev deletes source",
+      "passed": true
+    },
+    {
+      "case": "dev batch-deletes created sources",
+      "passed": true
+    },
+    {
+      "case": "dev batch-deletes created tasks",
+      "passed": true
+    },
+    {
+      "case": "original infrastructure state restored",
+      "passed": true
+    }
+  ],
+  "online_route_observations": [
+    {
+      "actor": "student_a",
+      "suffix": "",
+      "classification": "handler authorization denied 403",
+      "http_status": 403
+    },
+    {
+      "actor": "student_a",
+      "suffix": "/",
+      "classification": "handler authorization denied 403",
+      "http_status": 403
+    },
+    {
+      "actor": "student_a",
+      "suffix": ".json",
+      "classification": "unmapped suffix 404",
+      "http_status": 404
+    },
+    {
+      "actor": "student_a",
+      "suffix": ".js",
+      "classification": "unmapped suffix 404",
+      "http_status": 404
+    },
+    {
+      "actor": "student_a",
+      "suffix": ";fixture=1",
+      "classification": "rejected matrix path 400",
+      "http_status": 400
+    },
+    {
+      "actor": "teacher_a",
+      "suffix": "",
+      "classification": "handler authorization denied 403",
+      "http_status": 403
+    },
+    {
+      "actor": "teacher_a",
+      "suffix": "/",
+      "classification": "handler authorization denied 403",
+      "http_status": 403
+    },
+    {
+      "actor": "teacher_a",
+      "suffix": ".json",
+      "classification": "unmapped suffix 404",
+      "http_status": 404
+    },
+    {
+      "actor": "teacher_a",
+      "suffix": ".js",
+      "classification": "unmapped suffix 404",
+      "http_status": 404
+    },
+    {
+      "actor": "teacher_a",
+      "suffix": ";fixture=1",
+      "classification": "rejected matrix path 400",
+      "http_status": 400
+    },
+    {
+      "actor": "admin",
+      "suffix": "",
+      "classification": "handler authorization denied 403",
+      "http_status": 403
+    },
+    {
+      "actor": "admin",
+      "suffix": "/",
+      "classification": "handler authorization denied 403",
+      "http_status": 403
+    },
+    {
+      "actor": "admin",
+      "suffix": ".json",
+      "classification": "unmapped suffix 404",
+      "http_status": 404
+    },
+    {
+      "actor": "admin",
+      "suffix": ".js",
+      "classification": "unmapped suffix 404",
+      "http_status": 404
+    },
+    {
+      "actor": "admin",
+      "suffix": ";fixture=1",
+      "classification": "rejected matrix path 400",
+      "http_status": 400
+    },
+    {
+      "actor": "student_a",
+      "suffix": "",
+      "classification": "handler authorization denied 403",
+      "http_status": 403
+    },
+    {
+      "actor": "student_a",
+      "suffix": "/",
+      "classification": "handler authorization denied 403",
+      "http_status": 403
+    },
+    {
+      "actor": "student_a",
+      "suffix": ".json",
+      "classification": "unmapped suffix 404",
+      "http_status": 404
+    },
+    {
+      "actor": "student_a",
+      "suffix": ".js",
+      "classification": "unmapped suffix 404",
+      "http_status": 404
+    },
+    {
+      "actor": "student_a",
+      "suffix": ";fixture=1",
+      "classification": "rejected matrix path 400",
+      "http_status": 400
+    },
+    {
+      "actor": "admin",
+      "suffix": "",
+      "classification": "handler authorization denied 403",
+      "http_status": 403
+    },
+    {
+      "actor": "admin",
+      "suffix": "/",
+      "classification": "handler authorization denied 403",
+      "http_status": 403
+    },
+    {
+      "actor": "admin",
+      "suffix": ".json",
+      "classification": "unmapped suffix 404",
+      "http_status": 404
+    },
+    {
+      "actor": "admin",
+      "suffix": ".js",
+      "classification": "unmapped suffix 404",
+      "http_status": 404
+    },
+    {
+      "actor": "admin",
+      "suffix": ";fixture=1",
+      "classification": "rejected matrix path 400",
+      "http_status": 400
+    }
+  ],
+  "online_route_counts": {
+    "handler authorization denied 403": 10,
+    "rejected matrix path 400": 5,
+    "unmapped suffix 404": 10
+  },
+  "remaining_scope": "In-process connection-pool state and real XLS import/export are exercised by InfrastructureAdministrationTest; this probe does not inspect those in-process objects."
+}

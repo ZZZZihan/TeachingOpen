@@ -1,178 +1,123 @@
 package org.jeecg.modules.teaching.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import org.jeecg.common.constant.CacheConstant;
-import org.jeecg.common.constant.CommonConstant;
 import org.jeecg.common.exception.JeecgBootException;
-import org.jeecg.common.util.oConvertUtils;
-import org.jeecg.modules.teaching.model.TreeModel;
+import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.teaching.entity.TeachingMenu;
 import org.jeecg.modules.teaching.mapper.TeachingMenuMapper;
+import org.jeecg.modules.teaching.model.TreeModel;
 import org.jeecg.modules.teaching.service.ITeachingMenuService;
+import org.jeecg.modules.teaching.service.TeachingMenuAccessService;
+import org.jeecg.modules.teaching.util.TeachingMenuUrlPolicy;
+import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.*;
+import java.util.stream.Collectors;
 
-import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-/**
- * <p>
- * 菜单权限表 服务实现类
- * </p>
- *
- * @Author scott
- * @since 2018-12-21
- */
 @Service
-public class TeachingMenuServiceImpl extends ServiceImpl<TeachingMenuMapper, TeachingMenu> implements ITeachingMenuService {
+public class TeachingMenuServiceImpl implements ITeachingMenuService {
+    private final TeachingMenuMapper menus;
+    private final TeachingMenuAccessService access;
+    public TeachingMenuServiceImpl(TeachingMenuMapper menus, TeachingMenuAccessService access) { this.menus = menus; this.access = access; }
 
-	@Resource
-	private TeachingMenuMapper teachingMenuMapper;
-
-
-	@Override
-	public List<TreeModel> queryListByParentId(String parentId) {
-		return teachingMenuMapper.queryListByParentId(parentId);
-	}
-
-	/**
-	  * 真实删除
-	 */
-	@Override
-	@Transactional
-	@CacheEvict(value = CacheConstant.TEACHING_MENU_CACHE,allEntries=true)
-	public void deletePermission(String id) throws JeecgBootException {
-		TeachingMenu sysPermission = this.getById(id);
-		if(sysPermission==null) {
-			throw new JeecgBootException("未找到菜单信息");
-		}
-		String pid = sysPermission.getParentId();
-		if(oConvertUtils.isNotEmpty(pid)) {
-			int count = this.count(new QueryWrapper<TeachingMenu>().lambda().eq(TeachingMenu::getParentId, pid));
-			if(count==1) {
-				//若父节点无其他子节点，则该父节点是叶子节点
-				this.teachingMenuMapper.setMenuLeaf(pid, 1);
-			}
-		}
-		teachingMenuMapper.deleteById(id);
-		// 该节点可能是子节点但也可能是其它节点的父节点,所以需要级联删除
-		this.removeChildrenBy(sysPermission.getId());
-		//关联删除
-		Map map = new HashMap<>();
-		map.put("permission_id",id);
-	}
-	
-	/**
-	 * 根据父id删除其关联的子节点数据
-	 * 
-	 * @return
-	 */
-	public void removeChildrenBy(String parentId) {
-		LambdaQueryWrapper<TeachingMenu> query = new LambdaQueryWrapper<>();
-		// 封装查询条件parentId为主键,
-		query.eq(TeachingMenu::getParentId, parentId);
-		// 查出该主键下的所有子级
-		List<TeachingMenu> permissionList = this.list(query);
-		if (permissionList != null && permissionList.size() > 0) {
-			String id = ""; // id
-			int num = 0; // 查出的子级数量
-			// 如果查出的集合不为空, 则先删除所有
-			this.remove(query);
-			// 再遍历刚才查出的集合, 根据每个对象,查找其是否仍有子级
-			for (int i = 0, len = permissionList.size(); i < len; i++) {
-				id = permissionList.get(i).getId();
-				Map map = new HashMap<>();
-				map.put("permission_id",id);
-				num = this.count(new LambdaQueryWrapper<TeachingMenu>().eq(TeachingMenu::getParentId, id));
-				// 如果有, 则递归
-				if (num > 0) {
-					this.removeChildrenBy(id);
-				}
-			}
-		}
-	}
-	
-	/**
-	  * 逻辑删除
-	 */
-	@Override
-	@CacheEvict(value = CacheConstant.TEACHING_MENU_CACHE,allEntries=true)
-	public void deletePermissionLogical(String id) throws JeecgBootException {
-		TeachingMenu sysPermission = this.getById(id);
-		if(sysPermission==null) {
-			throw new JeecgBootException("未找到菜单信息");
-		}
-		String pid = sysPermission.getParentId();
-		int count = this.count(new QueryWrapper<TeachingMenu>().lambda().eq(TeachingMenu::getParentId, pid));
-		if(count==1) {
-			//若父节点无其他子节点，则该父节点是叶子节点
-			this.teachingMenuMapper.setMenuLeaf(pid, 1);
-		}
-		sysPermission.setDelFlag(1);
-		this.updateById(sysPermission);
-	}
-
-	@Override
-	@CacheEvict(value = CacheConstant.TEACHING_MENU_CACHE,allEntries=true)
-	public void addPermission(TeachingMenu sysPermission) throws JeecgBootException {
-		//----------------------------------------------------------------------
-		//判断是否是一级菜单，是的话清空父菜单
-		if(CommonConstant.MENU_TYPE_0.equals(sysPermission.getMenuType())) {
-			sysPermission.setParentId(null);
-		}
-		//----------------------------------------------------------------------
-		String pid = sysPermission.getParentId();
-		if(oConvertUtils.isNotEmpty(pid)) {
-			//设置父节点不为叶子节点
-			this.teachingMenuMapper.setMenuLeaf(pid, 0);
-		}
-		sysPermission.setCreateTime(new Date());
-		sysPermission.setDelFlag(0);
-		sysPermission.setLeaf(true);
-		this.save(sysPermission);
-	}
-
-	@Override
-	@CacheEvict(value = CacheConstant.TEACHING_MENU_CACHE,allEntries=true)
-	public void editPermission(TeachingMenu sysPermission) throws JeecgBootException {
-		TeachingMenu p = this.getById(sysPermission.getId());
-		//TODO 该节点判断是否还有子节点
-		if(p==null) {
-			throw new JeecgBootException("未找到菜单信息");
-		}else {
-			sysPermission.setUpdateTime(new Date());
-			//----------------------------------------------------------------------
-			//Step1.判断是否是一级菜单，是的话清空父菜单ID
-			if(CommonConstant.MENU_TYPE_0.equals(sysPermission.getMenuType())) {
-				sysPermission.setParentId("");
-			}
-			//Step2.判断菜单下级是否有菜单，无则设置为叶子节点
-			int count = this.count(new QueryWrapper<TeachingMenu>().lambda().eq(TeachingMenu::getParentId, sysPermission.getId()));
-			if(count==0) {
-				sysPermission.setLeaf(true);
-			}
-			//----------------------------------------------------------------------
-			this.updateById(sysPermission);
-			
-			//如果当前菜单的父菜单变了，则需要修改新父菜单和老父菜单的，叶子节点状态
-			String pid = sysPermission.getParentId();
-			if((oConvertUtils.isNotEmpty(pid) && !pid.equals(p.getParentId())) || oConvertUtils.isEmpty(pid)&&oConvertUtils.isNotEmpty(p.getParentId())) {
-				//a.设置新的父菜单不为叶子节点
-				this.teachingMenuMapper.setMenuLeaf(pid, 0);
-				//b.判断老的菜单下是否还有其他子菜单，没有的话则设置为叶子节点
-				int cc = this.count(new QueryWrapper<TeachingMenu>().lambda().eq(TeachingMenu::getParentId, p.getParentId()));
-				if(cc==0) {
-					if(oConvertUtils.isNotEmpty(p.getParentId())) {
-						this.teachingMenuMapper.setMenuLeaf(p.getParentId(), 1);
-					}
-				}
-			}
-		}
-	}
+    @Override public List<TeachingMenu> listPublic() {
+        return menus.selectList(new QueryWrapper<TeachingMenu>().eq("hidden", 0).eq("del_flag", 0).orderByAsc("sort_no"))
+                .stream().filter(menu -> Integer.valueOf(0).equals(menu.getDelFlag()) && !menu.isHidden()
+                        && (Integer.valueOf(0).equals(menu.getMenuType()) || Integer.valueOf(1).equals(menu.getMenuType())))
+                .map(TeachingMenuServiceImpl::publicMenu).collect(Collectors.toList());
+    }
+    private static TeachingMenu publicMenu(TeachingMenu stored) {
+        TeachingMenu copy = new TeachingMenu(); BeanUtils.copyProperties(stored, copy);
+        String url = TeachingMenuUrlPolicy.safeUrl(stored.getUrl());
+        copy.setUrl(url == null ? "" : url);
+        copy.setRoute(url != null && TeachingMenuUrlPolicy.local(url) && stored.isRoute());
+        copy.setInternalOrExternal(url != null && !url.isEmpty() && stored.isInternalOrExternal());
+        return copy;
+    }
+    @Override public List<TeachingMenu> listManaged(Wrapper<TeachingMenu> query) { access.requireManager(); return menus.selectList(query); }
+    @Override public List<TreeModel> queryListByParentId(String parentId) {
+        access.requireManager();
+        QueryWrapper<TeachingMenu> query = new QueryWrapper<TeachingMenu>().eq("del_flag", 0).orderByAsc("sort_no");
+        if (parentId == null || parentId.trim().isEmpty()) query.and(root -> root.isNull("parent_id").or().eq("parent_id", ""));
+        else query.eq("parent_id", parentId);
+        return menus.selectList(query).stream().map(TreeModel::new).collect(Collectors.toList());
+    }
+    @Override @Transactional @CacheEvict(value = CacheConstant.TEACHING_MENU_CACHE, allEntries = true)
+    public void addPermission(TeachingMenu input) {
+        SysUser actor = access.requireManager();
+        TeachingMenu value = validated(input, null);
+        value.setId(IdWorker.getIdStr()).setCreateBy(actor.getUsername()).setCreateTime(new Date()).setDelFlag(0).setLeaf(true);
+        if (menus.insert(value) != 1) throw new JeecgBootException("新增菜单失败");
+        refreshLeaf(value.getParentId());
+    }
+    @Override @Transactional @CacheEvict(value = CacheConstant.TEACHING_MENU_CACHE, allEntries = true)
+    public void editPermission(TeachingMenu input) {
+        SysUser actor = access.requireManager();
+        TeachingMenu stored = requireExisting(input == null ? null : input.getId());
+        TeachingMenu value = validated(input, stored.getId());
+        value.setId(stored.getId()).setDelFlag(0).setCreateBy(stored.getCreateBy()).setCreateTime(stored.getCreateTime())
+                .setUpdateBy(actor.getUsername()).setUpdateTime(new Date()).setLeaf(childCount(stored.getId()) == 0);
+        if (menus.updateById(value) != 1) throw new JeecgBootException("修改菜单失败");
+        refreshLeaf(value.getParentId());
+        if (!Objects.equals(value.getParentId(), stored.getParentId())) refreshLeaf(stored.getParentId());
+    }
+    @Override @Transactional @CacheEvict(value = CacheConstant.TEACHING_MENU_CACHE, allEntries = true)
+    public void deletePermission(String id) { deletePermissions(Collections.singletonList(id)); }
+    @Override @Transactional @CacheEvict(value = CacheConstant.TEACHING_MENU_CACHE, allEntries = true)
+    public void deletePermissions(Collection<String> ids) {
+        access.requireManager();
+        if (ids == null || ids.isEmpty()) throw new JeecgBootException("请选择菜单");
+        Set<String> removed = new LinkedHashSet<>();
+        for (String id : ids) removed.add(requireExisting(id).getId());
+        List<TeachingMenu> all = menus.selectList(new QueryWrapper<>());
+        boolean added;
+        do {
+            added = false;
+            for (TeachingMenu row : all) if (removed.contains(row.getParentId())) added |= removed.add(row.getId());
+        } while (added);
+        // Validate every requested identity before the first write; one transaction owns the cascade.
+        if (menus.deleteBatchIds(removed) != removed.size()) throw new JeecgBootException("菜单已变化，请刷新后重试");
+        for (TeachingMenu row : all) if (removed.contains(row.getId()) && !removed.contains(row.getParentId())) refreshLeaf(row.getParentId());
+    }
+    private TeachingMenu validated(TeachingMenu input, String id) {
+        if (input == null) throw new JeecgBootException("菜单信息不能为空");
+        String name = input.getName() == null ? "" : input.getName().trim();
+        if (name.isEmpty() || name.length() > 100) throw new JeecgBootException("菜单名称应为1到100个字符");
+        if (!Integer.valueOf(0).equals(input.getMenuType()) && !Integer.valueOf(1).equals(input.getMenuType())) throw new JeecgBootException("菜单类型无效");
+        String url = TeachingMenuUrlPolicy.safeUrl(input.getUrl());
+        if (url == null) throw new JeecgBootException("菜单路径仅支持站内绝对路径或HTTPS链接");
+        Double sort = input.getSortNo() == null ? 0D : input.getSortNo();
+        if (sort.isNaN() || sort.isInfinite() || Math.abs(sort) > 999999.99) throw new JeecgBootException("菜单排序无效");
+        Integer needLogin = input.getNeedLogin() == null ? 0 : input.getNeedLogin();
+        if (needLogin != 0 && needLogin != 1) throw new JeecgBootException("登录显示设置无效");
+        String icon = input.getIcon();
+        if (icon != null && !icon.isEmpty() && !icon.matches("[A-Za-z0-9_-]{1,100}")) throw new JeecgBootException("菜单图标无效");
+        if (input.getDescription() != null && input.getDescription().length() > 255) throw new JeecgBootException("菜单描述过长");
+        String parent = Integer.valueOf(0).equals(input.getMenuType()) ? "" : input.getParentId();
+        if (input.getMenuType() == 1) {
+            if (parent == null || parent.isEmpty()) throw new JeecgBootException("请选择上级菜单");
+            Set<String> visited = new HashSet<>(); if (id != null) visited.add(id);
+            String ancestor = parent;
+            while (ancestor != null && !ancestor.isEmpty()) {
+                if (!visited.add(ancestor)) throw new JeecgBootException("菜单层级不能形成循环");
+                ancestor = requireExisting(ancestor).getParentId();
+            }
+        }
+        return new TeachingMenu().setName(name).setParentId(parent).setMenuType(input.getMenuType()).setUrl(url).setSortNo(sort)
+                .setIcon(icon).setDescription(input.getDescription()).setHidden(input.isHidden()).setNeedLogin(needLogin)
+                .setRoute(TeachingMenuUrlPolicy.local(url) && input.isRoute()).setInternalOrExternal(!url.isEmpty() && input.isInternalOrExternal());
+    }
+    private TeachingMenu requireExisting(String id) {
+        if (id == null || id.trim().isEmpty()) throw new JeecgBootException("菜单不存在");
+        TeachingMenu value = menus.selectById(id);
+        if (value == null || !Integer.valueOf(0).equals(value.getDelFlag())) throw new JeecgBootException("菜单不存在");
+        return value;
+    }
+    private int childCount(String id) { return menus.selectCount(new QueryWrapper<TeachingMenu>().eq("parent_id", id).eq("del_flag", 0)); }
+    private void refreshLeaf(String id) { if (id != null && !id.isEmpty()) menus.setMenuLeaf(id, childCount(id) == 0 ? 1 : 0); }
 }

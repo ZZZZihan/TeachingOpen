@@ -44,6 +44,7 @@ import java.util.*;
 @Api(tags="用户登录")
 @Slf4j
 public class LoginController {
+    @Autowired private org.jeecg.modules.system.service.DepartmentSelectionService departmentSelection;
     @Autowired private org.jeecg.modules.shiro.authc.aop.MediaCookie mediaCookie;
 	@Autowired
 	private ISysUserService sysUserService;
@@ -141,11 +142,15 @@ public class LoginController {
 	    	return Result.error("退出登录失败！");
 	    }
 	    String username = JwtUtil.getUsername(token);
-		LoginUser sysUser = sysBaseAPI.getUserByName(username);
-	    if(sysUser!=null) {
+		// Logout is anonymous so expired/revoked sessions can still clear their
+		// browser cookie. A decoded username alone must not authorize cache writes.
+		SysUser sysUser = username == null ? null : sysUserService.getUserByName(username);
+	    if(sysUser!=null && JwtUtil.verifySignature(token, username, sysUser.getPassword())) {
 	    	sysBaseAPI.addLog("用户名: "+sysUser.getRealname()+",退出成功！", CommonConstant.LOG_TYPE_1, null);
 	    	log.info(" 用户名:  "+sysUser.getRealname()+",退出成功！ ");
-			redisUtil.del(CommonConstant.PREFIX_USER_TOKEN + username);
+			// A delayed logout from an older session must preserve a newer login's
+			// index, which single-session login uses to revoke its predecessor.
+			redisUtil.deleteIfEquals(CommonConstant.PREFIX_USER_TOKEN + username, token);
 	    	//清空用户登录Token缓存
 	    	redisUtil.del(CommonConstant.PREFIX_USER_TOKEN + token);
 	    	//清空用户登录Shiro权限缓存
@@ -219,21 +224,14 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping(value = "/selectDepart", method = RequestMethod.PUT)
-	public Result<JSONObject> selectDepart(@RequestBody SysUser user) {
-		Result<JSONObject> result = new Result<JSONObject>();
-		String username = user.getUsername();
-		if(oConvertUtils.isEmpty(username)) {
-			LoginUser sysUser = (LoginUser)SecurityUtils.getSubject().getPrincipal();
-			username = sysUser.getUsername();
-		}
-		String orgCode= user.getOrgCode();
-		this.sysUserService.updateUserDepart(username, orgCode);
-		SysUser sysUser = sysUserService.getUserByName(username);
-		JSONObject obj = new JSONObject();
-		obj.put("userInfo", sysUser);
-		result.setResult(obj);
-		return result;
-	}
+	public Result<JSONObject> selectDepart(@RequestBody org.jeecg.modules.system.model.DepartmentSelectionRequest request) {
+        SysUser user = departmentSelection.select(request);
+        JSONObject body = new JSONObject();
+        body.put("userInfo", user);
+        Result<JSONObject> result = new Result<>();
+        result.setResult(body);
+        return result;
+    }
 
 	/**
 	 * 短信登录接口

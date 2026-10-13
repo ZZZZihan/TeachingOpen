@@ -7,7 +7,10 @@ import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.mapper.SysDepartMapper;
 import org.jeecg.modules.system.mapper.SysUserMapper;
 import org.jeecg.modules.teaching.service.TeachingWorkAttachmentService;
+import org.jeecg.modules.teaching.service.TeachingWorkAttachmentAccessService;
 import org.jeecg.modules.teaching.service.TeachingAccessService;
+import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
+import org.jeecg.modules.teaching.enums.WorkEventType;
 import org.jeecg.common.exception.JeecgBootException;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
@@ -31,6 +34,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.util.StringUtils;
@@ -60,6 +64,8 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	@Autowired
 	private TeachingWorkAttachmentService workAttachmentService;
 	@Autowired
+	private TeachingWorkAttachmentAccessService attachmentAccess;
+	@Autowired
 	private TeachingAccessService teachingAccessService;
 	@Autowired
 	private TeachingCourseMapper teachingCourseMapper;
@@ -69,12 +75,16 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	private TeachingCourseDeptMapper teachingCourseDeptMapper;
 	@Autowired
 	private TeachingAdditionalWorkMapper teachingAdditionalWorkMapper;
+	@Autowired
+	private ITeachingDepartDayLogService dailyLog;
 
 
 	@Override
-	@Transactional
+	@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
 	public void saveMain(TeachingWork teachingWork, List<TeachingWorkCorrect> teachingWorkCorrectList,List<TeachingWorkComment> teachingWorkCommentList) {
-		teachingWorkMapper.insert(teachingWork);
+		teachingAccessService.requireManageWork(teachingWork);
+		attachmentAccess.requireWrite(teachingWork, null);
+		if (teachingWorkMapper.insert(teachingWork) != 1) throw new JeecgBootException("作品保存失败");
 		if(teachingWorkCorrectList!=null && teachingWorkCorrectList.size()>0) {
 			for(TeachingWorkCorrect entity:teachingWorkCorrectList) {
 				//外键设置
@@ -89,12 +99,27 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 				teachingWorkCommentMapper.insert(entity);
 			}
 		}
+		if (hasActualFeedback(teachingWorkCorrectList)) dailyLog.recordWorkEvent(teachingWork.getId(), WorkEventType.CORRECT);
 	}
 
 	@Override
-	@Transactional
+	@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
 	public void updateMain(TeachingWork teachingWork,List<TeachingWorkCorrect> teachingWorkCorrectList,List<TeachingWorkComment> teachingWorkCommentList) {
-		teachingWorkMapper.updateById(teachingWork);
+		TeachingWork existing = teachingWorkMapper.selectOne(new QueryWrapper<TeachingWork>()
+				.eq("id", teachingWork.getId()).last("FOR UPDATE"));
+		teachingAccessService.requireManageWork(existing);
+		if (existing == null || !Objects.equals(teachingWork.getId(), existing.getId())) {
+			throw new JeecgBootException("未找到对应数据");
+		}
+		// Lock, authorize and preserve identity in the same transaction as the write.
+		teachingWork.setUserId(existing.getUserId());
+		teachingWork.setDepartId(existing.getDepartId());
+		teachingWork.setCourseId(existing.getCourseId());
+		teachingWork.setAdditionalId(existing.getAdditionalId());
+		teachingWork.setCreateBy(existing.getCreateBy());
+		teachingWork.setCreateTime(existing.getCreateTime());
+		attachmentAccess.requireWrite(teachingWork, existing);
+		if (teachingWorkMapper.updateById(teachingWork) != 1) throw new JeecgBootException("作品保存失败");
 		
 		// A partial edit must not clear a collection that the caller did not send.
 		// Null (including an omitted property) preserves it; [] explicitly clears it.
@@ -115,6 +140,16 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 				teachingWorkCommentMapper.insert(entity);
 			}
 		}
+		// Renaming, changing status, clearing feedback, and discussion writes are
+		// not actual grading. Zero is a valid score; a nonblank comment also grades.
+		if (hasActualFeedback(teachingWorkCorrectList)) {
+			dailyLog.recordWorkEvent(existing.getId(), WorkEventType.CORRECT);
+		}
+	}
+
+	private boolean hasActualFeedback(List<TeachingWorkCorrect> feedback) {
+		return feedback != null && feedback.stream().anyMatch(row -> row != null
+				&& (row.getScore() != null || StringUtils.hasText(row.getComment())));
 	}
 
 	@Override
@@ -182,22 +217,23 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 		}
 		Collections.sort(recipientIds);
 		TeachingWork sourceWork = teachingWorkMapper.selectOne(new QueryWrapper<TeachingWork>()
-				.eq("id", studentWorkSendVO.getSendWorkId()).last("FOR UPDATE"));
-		teachingAccessService.requireReadWork(sourceWork);
-		if (sourceWork == null || !Integer.valueOf(0).equals(sourceWork.getDelFlag())) {
-			throw new JeecgBootException("源作品不存在或已删除");
-		}
-		if (StringUtils.hasText(sourceWork.getCourseId()) && StringUtils.hasText(sourceWork.getAdditionalId())) {
-			throw new JeecgBootException("源作品任务归属异常，不能克隆");
-		}
-		// Validate the entire batch before INSERT. Fixed user-lock order serializes
-		// concurrent clone batches for the same recipients without using names as IDs.
-		Map<String, String> recipientDeparts = new HashMap<>();
+				.eq("id", studentWorkSendVO.getSendWorkId()));
+		requireCloneSource(sourceWork);
+		// Match submission's user -> work order, including an absent target work.
+		// Sorted recipient locks also serialize overlapping clone batches.
 		for (String userId : recipientIds) {
 			SysUser user = sysUserMapper.selectOne(new QueryWrapper<SysUser>().eq("id", userId).last("FOR UPDATE"));
 			if (user == null || !userId.equals(user.getId()) || !Integer.valueOf(0).equals(user.getDelFlag()) || !Integer.valueOf(1).equals(user.getStatus())) {
 				throw new JeecgBootException("接收用户不存在或不可用，本批次未创建作品");
 			}
+		}
+		sourceWork = teachingWorkMapper.selectOne(new QueryWrapper<TeachingWork>()
+				.eq("id", studentWorkSendVO.getSendWorkId()).last("FOR UPDATE"));
+		requireCloneSource(sourceWork);
+		// Validate the entire batch before INSERT. Fixed user-lock order serializes
+		// concurrent clone batches for the same recipients without using names as IDs.
+		Map<String, String> recipientDeparts = new HashMap<>();
+		for (String userId : recipientIds) {
 			TeachingWork recipient = new TeachingWork();
 			recipient.setUserId(userId);
 			recipient.setDepartId(cloneTaskDepart(sourceWork, userId));
@@ -235,6 +271,16 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 			if (teachingWorkMapper.insert(work) != 1) throw new JeecgBootException("作品克隆失败，请稍后重试");
 		}
 		return recipientIds.size();
+	}
+
+	private void requireCloneSource(TeachingWork sourceWork) {
+		teachingAccessService.requireReadWork(sourceWork);
+		if (sourceWork == null || !Integer.valueOf(0).equals(sourceWork.getDelFlag())) {
+			throw new JeecgBootException("源作品不存在或已删除");
+		}
+		if (StringUtils.hasText(sourceWork.getCourseId()) && StringUtils.hasText(sourceWork.getAdditionalId())) {
+			throw new JeecgBootException("源作品任务归属异常，不能克隆");
+		}
 	}
 
 	/** Validate the recipient, independent of the actor's administrative role.

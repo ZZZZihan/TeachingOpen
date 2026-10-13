@@ -24,6 +24,7 @@ class PrivateBundleIntegrityTest(unittest.TestCase):
         for name in release.MIGRATION_NAMES:
             self.write('migrations/' + name, '-- offline test migration\n')
         self.write('migrations/registration_upgrade.py', 'placeholder deploy/registration_upgrade.py')
+        self.write('migrations/work_event_review.py', 'placeholder deploy/work_event_review.py')
         self.write('migrations/Dockerfile.db.reference', '# offline test reference')
         self.write('web/nginx.conf', '# offline test proxy')
         self.write('RUNBOOK.md', 'placeholder deploy/LAUNCH_BUNDLE.md')

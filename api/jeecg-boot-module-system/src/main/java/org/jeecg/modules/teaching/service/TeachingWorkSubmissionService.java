@@ -6,19 +6,17 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.jeecg.common.exception.JeecgBootException;
 import org.jeecg.common.system.vo.LoginUser;
-import org.jeecg.common.util.RedisUtil;
 import org.jeecg.modules.system.service.ISysDataLogService;
-import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.system.service.ISysUserDepartService;
-import org.jeecg.modules.system.entity.SysFile;
+import org.jeecg.modules.system.entity.SysUser;
+import org.jeecg.modules.system.mapper.SysUserMapper;
 import org.jeecg.modules.teaching.entity.*;
-import org.jeecg.modules.teaching.enums.DepartDayLogType;
+import org.jeecg.modules.teaching.enums.WorkEventType;
 import org.jeecg.modules.teaching.vo.StudentWorkSubmission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionSynchronizationAdapter;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.transaction.annotation.Isolation;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,14 +32,21 @@ public class TeachingWorkSubmissionService {
     @Autowired private ITeachingAdditionalWorkService assignments;
     @Autowired private ISysUserDepartService userDeparts;
     @Autowired private ISysDataLogService history;
-    @Autowired private ISysFileService files;
+    @Autowired private TeachingWorkAttachmentAccessService attachmentAccess;
     @Autowired private ITeachingDepartDayLogService dailyLog;
-    @Autowired private RedisUtil redis;
+    @Autowired private SysUserMapper users;
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     public TeachingWork submit(StudentWorkSubmission request) {
         LoginUser user = access.currentUser();
         if (user == null) throw new UnauthorizedException("请先登录");
+        // Serialize the absence check too: two no-ID first submissions must not
+        // create two works/events. Cloning takes recipient user locks before works.
+        SysUser current = users.selectOne(new QueryWrapper<SysUser>().eq("id", user.getId()).last("FOR UPDATE"));
+        if (current == null || !Objects.equals(current.getId(), user.getId())
+                || !Integer.valueOf(0).equals(current.getDelFlag()) || !Integer.valueOf(1).equals(current.getStatus())) {
+            throw new UnauthorizedException("账户不可用");
+        }
         String courseId = StringUtils.trimToEmpty(request.getCourseId());
         String additionalId = StringUtils.trimToEmpty(request.getAdditionalId());
         if (!courseId.isEmpty() && !additionalId.isEmpty()) {
@@ -63,8 +68,8 @@ public class TeachingWorkSubmissionService {
                     .and(q -> q.isNull("course_id").or().eq("course_id", ""))
                     .and(q -> q.isNull("additional_id").or().eq("additional_id", ""));
         }
-        // Existing-row updates serialize with each other. New-work deduplication
-        // across concurrent requests still needs a separate unique-key policy.
+        // The actor lock serializes new-work lookup and the work lock serializes
+        // grading, existing submissions and task clones.
         List<TeachingWork> matches = works.list(lookup.last("FOR UPDATE"));
         if (StringUtils.isNotBlank(request.getId()) && matches.isEmpty()) {
             throw new UnauthorizedException("无作业提交权限");
@@ -95,8 +100,7 @@ public class TeachingWorkSubmissionService {
             throw new JeecgBootException("请提供有效的作品名称、类型和文件");
         }
         saved.setWorkCover(request.getWorkCover());
-        requireAttachment(user, saved.getWorkFile(), existing);
-        if (StringUtils.isNotBlank(saved.getWorkCover())) requireAttachment(user, saved.getWorkCover(), existing);
+        attachmentAccess.requireWrite(saved, existing);
         saved.setHasCloudData(request.getHasCloudData());
         saved.setWorkStatus(status);
         saved.setDepartId(depart);
@@ -124,8 +128,7 @@ public class TeachingWorkSubmissionService {
         }
         if (!changed) throw new JeecgBootException("作品保存失败，请刷新后重试");
         if ("1".equals(status) && StringUtils.isNotBlank(depart)) {
-            if (!additionalId.isEmpty()) recordSubmission(saved, "addiWorkSubmit", DepartDayLogType.ADDITIONAL_WORK_SUBMIT_COUNT);
-            else if (!courseId.isEmpty()) recordSubmission(saved, "courseWorkSubmit", DepartDayLogType.COURSE_WORK_SUBMIT_COUNT);
+            if (!additionalId.isEmpty() || !courseId.isEmpty()) dailyLog.recordWorkEvent(saved.getId(), WorkEventType.SUBMIT);
         }
         return works.getById(saved.getId());
     }
@@ -172,22 +175,4 @@ public class TeachingWorkSubmissionService {
         return eligible.contains(requestedDepart) ? requestedDepart : eligible.get(0);
     }
 
-    private void recordSubmission(TeachingWork work, String kind, DepartDayLogType type) {
-        String key = "departLog:" + kind + ":" + work.getDepartId();
-        if (redis.sHasKey(key, work.getId())) return;
-        dailyLog.addLog(work.getDepartId(), type);
-        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
-            @Override public void afterCommit() { redis.sSet(key, work.getId()); }
-        });
-    }
-
-    private void requireAttachment(LoginUser user, String fileId, TeachingWork existing) {
-        SysFile file = files.getById(fileId);
-        boolean retained = existing != null && (fileId.equals(existing.getWorkFile()) || fileId.equals(existing.getWorkCover()));
-        // Sent works legitimately retain another author's shared attachment.
-        // A replacement must be a registered file uploaded by the current user.
-        if (file == null || (!retained && !user.getUsername().equals(file.getCreateBy()))) {
-            throw new UnauthorizedException("无附件使用权限");
-        }
-    }
 }

@@ -1,0 +1,406 @@
+{
+  "generatedAt": "2026-10-11T09:48:22.142Z",
+  "baseline": "a3f4e10ceafcbe405093a3abe06a20225a17d3f6",
+  "candidate": "a30018b903822b0d7a834e36434101026293cdda",
+  "frontendChanges": "",
+  "boundary": "Actual AdditionalWorkModal, recovery mixin, JUpload, JModal, dictionary and department components; synthetic Axios API, local files, no authenticated backend or database. Legacy comparison replaces only AdditionalWorkModal at the pinned baseline.",
+  "limitations": [
+    "UI guards do not provide backend create idempotency. A connection reset before response headers can cause Chrome to replay a POST; report records the observed count.",
+    "No production requests, full-app authentication/session test, or backend create-idempotency claim."
+  ],
+  "sourceHashes": {
+    "web/src/views/teaching/modules/TeachingAdditionalWorkModal.vue": "a6559a120455824b286f5edaab8fb2cf3aa305d42887a7e95c5a1d91ef038860",
+    "web/src/mixins/CourseFormRecovery.js": "beeb62bd17b36fa52943f860ff7a88b60b49b92f725415302334e2c08ae9aea4",
+    "web/src/components/jeecg/JUpload.vue": "c4d42565678b8c67d067288204c02cb2e769066f72fed06a6123de466121ee06",
+    "web/src/components/jeecg/JModal/index.vue": "bd3f1e7b9ff583afbb264797d3d292403ec7983be38cd46209715815ce8b2688",
+    "web/src/components/dict/JDictSelectTag.vue": "f87bc06ba17fa6826a643aaedc08df01d82d201830da7b5fd12fc583096b9566",
+    "web/src/components/jeecgbiz/JSelectDepart.vue": "aa589a3e9035ed3bcc81e389f94c57de0466b51eafa8e0bd745de59d92b0db1e",
+    "web/src/components/jeecgbiz/modal/JSelectDepartModal.vue": "1e4d2b75ec91753f17222ef38f1d52668a8ab94136c91cca4fec3c5b012d890f"
+  },
+  "scenarios": [
+    {
+      "name": "legacy-forbidden-1440x1100",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "initial": {
+        "visible": true,
+        "busy": false,
+        "values": {
+          "status": "1",
+          "codeType": "0",
+          "workName": "天气观察 · 合成附加作业",
+          "workDesc": "保留这段课堂说明：观察云、风和温度。\n失败后继续编辑，附件仍可用。",
+          "workCover": "attachments/cover.png",
+          "workDocumentUrl": "attachments/instructions.txt",
+          "workUrl": "attachments/starter.txt",
+          "workDept": "class-a"
+        },
+        "saved": 0,
+        "error": "",
+        "alertFocused": false,
+        "filenames": [
+          "cover.png",
+          "instructions.txt",
+          "starter.txt"
+        ]
+      },
+      "after": {
+        "visible": false,
+        "busy": false,
+        "values": {
+          "status": "1",
+          "codeType": "0",
+          "workName": "天气观察 · 合成附加作业",
+          "workDesc": "保留这段课堂说明：观察云、风和温度。\n失败后继续编辑，附件仍可用。",
+          "workCover": "attachments/cover.png",
+          "workDocumentUrl": "attachments/instructions.txt",
+          "workUrl": "attachments/starter.txt",
+          "workDept": "class-a"
+        },
+        "saved": 0,
+        "error": "",
+        "alertFocused": false,
+        "filenames": [
+          "cover.png",
+          "instructions.txt",
+          "starter.txt"
+        ]
+      },
+      "failedSaveClicks": 1,
+      "failureRequestCount": 1,
+      "requests": 1,
+      "uploads": 3,
+      "registrations": 3,
+      "screenshots": [
+        "legacy-forbidden-1440x1100-before-save.png",
+        "legacy-forbidden-1440x1100-after-failure.png",
+        "legacy-forbidden-1440x1100-reopened-empty.png"
+      ],
+      "passed": true
+    },
+    {
+      "name": "fixed-forbidden-1440x1100",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "initial": {
+        "visible": true,
+        "busy": false,
+        "values": {
+          "status": "1",
+          "codeType": "0",
+          "workName": "天气观察 · 合成附加作业",
+          "workDesc": "保留这段课堂说明：观察云、风和温度。\n失败后继续编辑，附件仍可用。",
+          "workCover": "attachments/cover.png",
+          "workDocumentUrl": "attachments/instructions.txt",
+          "workUrl": "attachments/starter.txt",
+          "workDept": "class-a"
+        },
+        "saved": 0,
+        "error": "",
+        "alertFocused": false,
+        "filenames": [
+          "cover.png",
+          "instructions.txt",
+          "starter.txt"
+        ]
+      },
+      "after": {
+        "visible": true,
+        "busy": false,
+        "values": {
+          "status": "1",
+          "codeType": "0",
+          "workName": "天气观察 · 合成附加作业",
+          "workDesc": "保留这段课堂说明：观察云、风和温度。\n失败后继续编辑，附件仍可用。",
+          "workCover": "attachments/cover.png",
+          "workDocumentUrl": "attachments/instructions.txt",
+          "workUrl": "attachments/starter.txt",
+          "workDept": "class-a"
+        },
+        "saved": 0,
+        "error": "未能确认保存结果，填写内容已保留。请先核对列表中的记录，再决定是否重试，避免重复新建。",
+        "alertFocused": true,
+        "filenames": [
+          "cover.png",
+          "instructions.txt",
+          "starter.txt"
+        ]
+      },
+      "failedSaveClicks": 1,
+      "failureRequestCount": 1,
+      "requests": 2,
+      "uploads": 3,
+      "registrations": 3,
+      "screenshots": [
+        "fixed-forbidden-1440x1100-before-save.png",
+        "fixed-forbidden-1440x1100-after-failure.png",
+        "fixed-forbidden-1440x1100-success.png"
+      ],
+      "passed": true
+    },
+    {
+      "name": "fixed-disconnect-1440x1100",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "initial": {
+        "visible": true,
+        "busy": false,
+        "values": {
+          "status": "1",
+          "codeType": "0",
+          "workName": "天气观察 · 合成附加作业",
+          "workDesc": "保留这段课堂说明：观察云、风和温度。\n失败后继续编辑，附件仍可用。",
+          "workCover": "attachments/cover.png",
+          "workDocumentUrl": "attachments/instructions.txt",
+          "workUrl": "attachments/starter.txt",
+          "workDept": "class-a"
+        },
+        "saved": 0,
+        "error": "",
+        "alertFocused": false,
+        "filenames": [
+          "cover.png",
+          "instructions.txt",
+          "starter.txt"
+        ]
+      },
+      "after": {
+        "visible": true,
+        "busy": false,
+        "values": {
+          "status": "1",
+          "codeType": "0",
+          "workName": "天气观察 · 合成附加作业",
+          "workDesc": "保留这段课堂说明：观察云、风和温度。\n失败后继续编辑，附件仍可用。",
+          "workCover": "attachments/cover.png",
+          "workDocumentUrl": "attachments/instructions.txt",
+          "workUrl": "attachments/starter.txt",
+          "workDept": "class-a"
+        },
+        "saved": 0,
+        "error": "未能确认保存结果，填写内容已保留。请先核对列表中的记录，再决定是否重试，避免重复新建。",
+        "alertFocused": true,
+        "filenames": [
+          "cover.png",
+          "instructions.txt",
+          "starter.txt"
+        ]
+      },
+      "failedSaveClicks": 1,
+      "failureRequestCount": 2,
+      "requests": 3,
+      "uploads": 3,
+      "registrations": 3,
+      "screenshots": [
+        "fixed-disconnect-1440x1100-before-save.png",
+        "fixed-disconnect-1440x1100-after-failure.png",
+        "fixed-disconnect-1440x1100-success.png"
+      ],
+      "passed": true
+    },
+    {
+      "name": "fixed-truncated-1440x1100",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "initial": {
+        "visible": true,
+        "busy": false,
+        "values": {
+          "status": "1",
+          "codeType": "0",
+          "workName": "天气观察 · 合成附加作业",
+          "workDesc": "保留这段课堂说明：观察云、风和温度。\n失败后继续编辑，附件仍可用。",
+          "workCover": "attachments/cover.png",
+          "workDocumentUrl": "attachments/instructions.txt",
+          "workUrl": "attachments/starter.txt",
+          "workDept": "class-a"
+        },
+        "saved": 0,
+        "error": "",
+        "alertFocused": false,
+        "filenames": [
+          "cover.png",
+          "instructions.txt",
+          "starter.txt"
+        ]
+      },
+      "after": {
+        "visible": true,
+        "busy": false,
+        "values": {
+          "status": "1",
+          "codeType": "0",
+          "workName": "天气观察 · 合成附加作业",
+          "workDesc": "保留这段课堂说明：观察云、风和温度。\n失败后继续编辑，附件仍可用。",
+          "workCover": "attachments/cover.png",
+          "workDocumentUrl": "attachments/instructions.txt",
+          "workUrl": "attachments/starter.txt",
+          "workDept": "class-a"
+        },
+        "saved": 0,
+        "error": "未能确认保存结果，填写内容已保留。请先核对列表中的记录，再决定是否重试，避免重复新建。",
+        "alertFocused": true,
+        "filenames": [
+          "cover.png",
+          "instructions.txt",
+          "starter.txt"
+        ]
+      },
+      "failedSaveClicks": 1,
+      "failureRequestCount": 1,
+      "requests": 2,
+      "uploads": 3,
+      "registrations": 3,
+      "screenshots": [
+        "fixed-truncated-1440x1100-before-save.png",
+        "fixed-truncated-1440x1100-after-failure.png",
+        "fixed-truncated-1440x1100-success.png"
+      ],
+      "passed": true
+    },
+    {
+      "name": "fixed-forbidden-390x1100",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "initial": {
+        "visible": true,
+        "busy": false,
+        "values": {
+          "status": "1",
+          "codeType": "0",
+          "workName": "天气观察 · 合成附加作业",
+          "workDesc": "保留这段课堂说明：观察云、风和温度。\n失败后继续编辑，附件仍可用。",
+          "workCover": "attachments/cover.png",
+          "workDocumentUrl": "attachments/instructions.txt",
+          "workUrl": "attachments/starter.txt",
+          "workDept": "class-a"
+        },
+        "saved": 0,
+        "error": "",
+        "alertFocused": false,
+        "filenames": [
+          "cover.png",
+          "instructions.txt",
+          "starter.txt"
+        ]
+      },
+      "after": {
+        "visible": true,
+        "busy": false,
+        "values": {
+          "status": "1",
+          "codeType": "0",
+          "workName": "天气观察 · 合成附加作业",
+          "workDesc": "保留这段课堂说明：观察云、风和温度。\n失败后继续编辑，附件仍可用。",
+          "workCover": "attachments/cover.png",
+          "workDocumentUrl": "attachments/instructions.txt",
+          "workUrl": "attachments/starter.txt",
+          "workDept": "class-a"
+        },
+        "saved": 0,
+        "error": "未能确认保存结果，填写内容已保留。请先核对列表中的记录，再决定是否重试，避免重复新建。",
+        "alertFocused": true,
+        "filenames": [
+          "cover.png",
+          "instructions.txt",
+          "starter.txt"
+        ]
+      },
+      "failedSaveClicks": 1,
+      "failureRequestCount": 1,
+      "requests": 2,
+      "uploads": 3,
+      "registrations": 3,
+      "screenshots": [
+        "fixed-forbidden-390x1100-before-save.png",
+        "fixed-forbidden-390x1100-after-failure.png",
+        "fixed-forbidden-390x1100-after-failure-attachments.png",
+        "fixed-forbidden-390x1100-success.png"
+      ],
+      "passed": true
+    },
+    {
+      "name": "fixed-slow",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "locked": {
+        "busy": true,
+        "disabled": true,
+        "closeCount": 0,
+        "uploadDisabled": true
+      },
+      "initial": {
+        "visible": true,
+        "busy": false,
+        "values": {
+          "status": "1",
+          "codeType": "0",
+          "workName": "天气观察 · 合成附加作业",
+          "workDesc": "保留这段课堂说明：观察云、风和温度。\n失败后继续编辑，附件仍可用。",
+          "workCover": "attachments/cover.png",
+          "workDocumentUrl": "attachments/instructions.txt",
+          "workUrl": "attachments/starter.txt",
+          "workDept": "class-a"
+        },
+        "saved": 0,
+        "error": "",
+        "alertFocused": false,
+        "filenames": [
+          "cover.png",
+          "instructions.txt",
+          "starter.txt"
+        ]
+      },
+      "pendingState": {
+        "visible": true,
+        "busy": true,
+        "values": {
+          "status": "1",
+          "codeType": "0",
+          "workName": "天气观察 · 合成附加作业",
+          "workDesc": "保留这段课堂说明：观察云、风和温度。\n失败后继续编辑，附件仍可用。",
+          "workCover": "attachments/cover.png",
+          "workDocumentUrl": "attachments/instructions.txt",
+          "workUrl": "attachments/starter.txt",
+          "workDept": "class-a"
+        },
+        "saved": 0,
+        "error": "",
+        "alertFocused": false,
+        "filenames": [
+          "cover.png",
+          "instructions.txt",
+          "starter.txt"
+        ]
+      },
+      "requests": 1,
+      "screenshots": [
+        "fixed-slow-1440x1100-pending.png",
+        "fixed-slow-1440x1100-success.png"
+      ],
+      "passed": true
+    }
+  ],
+  "blockedExternalRequests": [],
+  "unexpectedRequests": [],
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "HeadlessChrome/151.0.7922.34",
+    "revision": "@782af9cb30a53f54487e5d2e44738645a8ec457c",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+    "jsVersion": "15.1.206.8"
+  },
+  "status": "passed"
+}

@@ -1,0 +1,1588 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "case": "None GET /sys/sysUserAgent/queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/sysUserAgent/queryById returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/sysUserAgent/queryById leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/sysUserAgent/exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/sysUserAgent/exportXls returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/sysUserAgent/exportXls leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/sysUserAgent/add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/sysUserAgent/add returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/sysUserAgent/add leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None PUT /sys/sysUserAgent/edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None PUT /sys/sysUserAgent/edit returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None PUT /sys/sysUserAgent/edit leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /sys/sysUserAgent/delete is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /sys/sysUserAgent/delete returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /sys/sysUserAgent/delete leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /sys/sysUserAgent/deleteBatch is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /sys/sysUserAgent/deleteBatch returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /sys/sysUserAgent/deleteBatch leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/sysUserAgent/importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/sysUserAgent/importExcel returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/sysUserAgent/importExcel leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/position/queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/position/queryById returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/position/queryById leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/position/exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/position/exportXls returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/position/exportXls leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/position/add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/position/add returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/position/add leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None PUT /sys/position/edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None PUT /sys/position/edit returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None PUT /sys/position/edit leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /sys/position/delete is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /sys/position/delete returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /sys/position/delete leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /sys/position/deleteBatch is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /sys/position/deleteBatch returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /sys/position/deleteBatch leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/position/importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/position/importExcel returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/position/importExcel leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/sysUserAgent/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/sysUserAgent/list returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/sysUserAgent/list leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/sysUserAgent/queryByUserName is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/sysUserAgent/queryByUserName returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None GET /sys/sysUserAgent/queryByUserName leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None GET /oss/file/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None GET /oss/file/list returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None GET /oss/file/list leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None GET /oss/file/queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None GET /oss/file/queryById returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None GET /oss/file/queryById leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /oss/file/delete is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /oss/file/delete returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None DELETE /oss/file/delete leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None POST /oss/file/upload is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None POST /oss/file/upload returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None POST /oss/file/upload leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/upload/uploadMinio is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/upload/uploadMinio returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None POST /sys/upload/uploadMinio leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/sysUserAgent/queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/sysUserAgent/queryById returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/sysUserAgent/queryById leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/sysUserAgent/exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/sysUserAgent/exportXls returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/sysUserAgent/exportXls leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/sysUserAgent/add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/sysUserAgent/add returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/sysUserAgent/add leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a PUT /sys/sysUserAgent/edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a PUT /sys/sysUserAgent/edit returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a PUT /sys/sysUserAgent/edit leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /sys/sysUserAgent/delete is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /sys/sysUserAgent/delete returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /sys/sysUserAgent/delete leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /sys/sysUserAgent/deleteBatch is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /sys/sysUserAgent/deleteBatch returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /sys/sysUserAgent/deleteBatch leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/sysUserAgent/importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/sysUserAgent/importExcel returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/sysUserAgent/importExcel leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/position/queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/position/queryById returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/position/queryById leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/position/exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/position/exportXls returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/position/exportXls leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/position/add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/position/add returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/position/add leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a PUT /sys/position/edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a PUT /sys/position/edit returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a PUT /sys/position/edit leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /sys/position/delete is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /sys/position/delete returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /sys/position/delete leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /sys/position/deleteBatch is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /sys/position/deleteBatch returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /sys/position/deleteBatch leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/position/importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/position/importExcel returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/position/importExcel leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/sysUserAgent/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/sysUserAgent/list returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/sysUserAgent/list leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/sysUserAgent/queryByUserName is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/sysUserAgent/queryByUserName returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /sys/sysUserAgent/queryByUserName leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /oss/file/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /oss/file/list returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /oss/file/list leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /oss/file/queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /oss/file/queryById returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a GET /oss/file/queryById leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /oss/file/delete is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /oss/file/delete returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a DELETE /oss/file/delete leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /oss/file/upload is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /oss/file/upload returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /oss/file/upload leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/upload/uploadMinio is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/upload/uploadMinio returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a POST /sys/upload/uploadMinio leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/sysUserAgent/queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/sysUserAgent/queryById returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/sysUserAgent/queryById leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/sysUserAgent/exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/sysUserAgent/exportXls returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/sysUserAgent/exportXls leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/sysUserAgent/add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/sysUserAgent/add returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/sysUserAgent/add leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a PUT /sys/sysUserAgent/edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a PUT /sys/sysUserAgent/edit returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a PUT /sys/sysUserAgent/edit leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /sys/sysUserAgent/delete is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /sys/sysUserAgent/delete returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /sys/sysUserAgent/delete leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /sys/sysUserAgent/deleteBatch is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /sys/sysUserAgent/deleteBatch returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /sys/sysUserAgent/deleteBatch leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/sysUserAgent/importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/sysUserAgent/importExcel returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/sysUserAgent/importExcel leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/position/queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/position/queryById returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/position/queryById leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/position/exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/position/exportXls returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/position/exportXls leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/position/add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/position/add returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/position/add leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a PUT /sys/position/edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a PUT /sys/position/edit returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a PUT /sys/position/edit leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /sys/position/delete is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /sys/position/delete returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /sys/position/delete leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /sys/position/deleteBatch is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /sys/position/deleteBatch returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /sys/position/deleteBatch leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/position/importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/position/importExcel returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/position/importExcel leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/sysUserAgent/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/sysUserAgent/list returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/sysUserAgent/list leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/sysUserAgent/queryByUserName is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/sysUserAgent/queryByUserName returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /sys/sysUserAgent/queryByUserName leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /oss/file/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /oss/file/list returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /oss/file/list leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /oss/file/queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /oss/file/queryById returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a GET /oss/file/queryById leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /oss/file/delete is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /oss/file/delete returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a DELETE /oss/file/delete leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /oss/file/upload is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /oss/file/upload returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /oss/file/upload leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/upload/uploadMinio is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/upload/uploadMinio returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a POST /sys/upload/uploadMinio leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None operational metadata /actuator/redis/info is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None operational metadata /actuator/redis/info returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None operational metadata /actuator/redis/info leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None operational metadata /actuator/redis/keysSize is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None operational metadata /actuator/redis/keysSize returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None operational metadata /actuator/redis/keysSize leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None operational metadata /actuator/redis/memoryInfo is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None operational metadata /actuator/redis/memoryInfo returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None operational metadata /actuator/redis/memoryInfo leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "None operational metadata /actuator/redis/queryDiskInfo is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "None operational metadata /actuator/redis/queryDiskInfo returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "None operational metadata /actuator/redis/queryDiskInfo leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a operational metadata /actuator/redis/info is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a operational metadata /actuator/redis/info returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a operational metadata /actuator/redis/info leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a operational metadata /actuator/redis/keysSize is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a operational metadata /actuator/redis/keysSize returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a operational metadata /actuator/redis/keysSize leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a operational metadata /actuator/redis/memoryInfo is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a operational metadata /actuator/redis/memoryInfo returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a operational metadata /actuator/redis/memoryInfo leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a operational metadata /actuator/redis/queryDiskInfo is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "student_a operational metadata /actuator/redis/queryDiskInfo returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "student_a operational metadata /actuator/redis/queryDiskInfo leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a operational metadata /actuator/redis/info is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a operational metadata /actuator/redis/info returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a operational metadata /actuator/redis/info leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a operational metadata /actuator/redis/keysSize is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a operational metadata /actuator/redis/keysSize returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a operational metadata /actuator/redis/keysSize leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a operational metadata /actuator/redis/memoryInfo is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a operational metadata /actuator/redis/memoryInfo returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a operational metadata /actuator/redis/memoryInfo leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "teacher_a operational metadata /actuator/redis/queryDiskInfo is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "teacher_a operational metadata /actuator/redis/queryDiskInfo returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "teacher_a operational metadata /actuator/redis/queryDiskInfo leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin operational metadata /actuator/redis/info is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "admin operational metadata /actuator/redis/info returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "admin operational metadata /actuator/redis/info leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin operational metadata /actuator/redis/keysSize is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "admin operational metadata /actuator/redis/keysSize returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "admin operational metadata /actuator/redis/keysSize leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin operational metadata /actuator/redis/memoryInfo is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "admin operational metadata /actuator/redis/memoryInfo returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "admin operational metadata /actuator/redis/memoryInfo leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "admin operational metadata /actuator/redis/queryDiskInfo is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "admin operational metadata /actuator/redis/queryDiskInfo returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "admin operational metadata /actuator/redis/queryDiskInfo leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /sys/sysUserAgent/list.js is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /sys/sysUserAgent/list.js returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /sys/sysUserAgent/list.js leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /oss/file/list.js is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /oss/file/list.js returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /oss/file/list.js leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /actuator/redis/info.js is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /actuator/redis/info.js returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /actuator/redis/info.js leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /sys/sysUserAgent/list.json is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /sys/sysUserAgent/list.json returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /sys/sysUserAgent/list.json leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /oss/file/list.json is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /oss/file/list.json returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /oss/file/list.json leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /actuator/redis/info.json is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /actuator/redis/info.json returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /actuator/redis/info.json leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /sys/sysUserAgent/list/ is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /sys/sysUserAgent/list/ returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /sys/sysUserAgent/list/ leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /oss/file/list/ is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /oss/file/list/ returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /oss/file/list/ leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /actuator/redis/info/ is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /actuator/redis/info/ returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /actuator/redis/info/ leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /sys/sysUserAgent/list;fixture=1 is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /sys/sysUserAgent/list;fixture=1 returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /sys/sysUserAgent/list;fixture=1 leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /oss/file/list;fixture=1 is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /oss/file/list;fixture=1 returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /oss/file/list;fixture=1 leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /actuator/redis/info;fixture=1 is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /actuator/redis/info;fixture=1 returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "anonymous alias /actuator/redis/info;fixture=1 leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "student_a keeps address-book position list",
+      "passed": true
+    },
+    {
+      "case": "student_a receives the required position option",
+      "passed": true
+    },
+    {
+      "case": "teacher_a keeps address-book position list",
+      "passed": true
+    },
+    {
+      "case": "teacher_a receives the required position option",
+      "passed": true
+    },
+    {
+      "case": "admin keeps address-book position list",
+      "passed": true
+    },
+    {
+      "case": "admin receives the required position option",
+      "passed": true
+    },
+    {
+      "case": "administrator management read /sys/sysUserAgent/list",
+      "passed": true
+    },
+    {
+      "case": "administrator management read /sys/sysUserAgent/queryByUserName?userName=fixture_gm_owner",
+      "passed": true
+    },
+    {
+      "case": "administrator management read /sys/position/queryById?id=fixture_gm_position",
+      "passed": true
+    },
+    {
+      "case": "administrator management read /oss/file/list",
+      "passed": true
+    },
+    {
+      "case": "administrator management read /oss/file/queryById?id=fixture_gm_file",
+      "passed": true
+    },
+    {
+      "case": "administrator creates agent",
+      "passed": true
+    },
+    {
+      "case": "authorized agent creation persisted",
+      "passed": true
+    },
+    {
+      "case": "administrator edits agent",
+      "passed": true
+    },
+    {
+      "case": "administrator imports actual XLSX agent",
+      "passed": true
+    },
+    {
+      "case": "authorized agent XLSX insertion persisted",
+      "passed": true
+    },
+    {
+      "case": "administrator exports agent",
+      "passed": true
+    },
+    {
+      "case": "candidate POI rejects agent JSON error",
+      "passed": true
+    },
+    {
+      "case": "candidate POI rejects agent HTML error",
+      "passed": true
+    },
+    {
+      "case": "candidate POI rejects agent truncated workbook",
+      "passed": true
+    },
+    {
+      "case": "administrator deletes agent",
+      "passed": true
+    },
+    {
+      "case": "administrator batch deletes fixture agent",
+      "passed": true
+    },
+    {
+      "case": "administrator creates position",
+      "passed": true
+    },
+    {
+      "case": "authorized position creation persisted",
+      "passed": true
+    },
+    {
+      "case": "administrator edits position",
+      "passed": true
+    },
+    {
+      "case": "administrator imports actual XLSX position",
+      "passed": true
+    },
+    {
+      "case": "authorized position XLSX insertion persisted",
+      "passed": true
+    },
+    {
+      "case": "administrator exports position",
+      "passed": true
+    },
+    {
+      "case": "candidate POI rejects position JSON error",
+      "passed": true
+    },
+    {
+      "case": "candidate POI rejects position HTML error",
+      "passed": true
+    },
+    {
+      "case": "candidate POI rejects position truncated workbook",
+      "passed": true
+    },
+    {
+      "case": "administrator deletes position",
+      "passed": true
+    },
+    {
+      "case": "administrator batch deletes fixture position",
+      "passed": true
+    },
+    {
+      "case": "same token live developer enters management /sys/sysUserAgent/list",
+      "passed": true
+    },
+    {
+      "case": "same token live developer enters management /sys/position/queryById?id=fixture_gm_missing",
+      "passed": true
+    },
+    {
+      "case": "same token live developer enters management /oss/file/list",
+      "passed": true
+    },
+    {
+      "case": "same token live developer monitoring /actuator/redis/info",
+      "passed": true
+    },
+    {
+      "case": "same token live developer monitoring /actuator/redis/keysSize",
+      "passed": true
+    },
+    {
+      "case": "same token live developer monitoring /actuator/redis/memoryInfo",
+      "passed": true
+    },
+    {
+      "case": "same token live developer monitoring /actuator/redis/queryDiskInfo",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/sysUserAgent/queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/sysUserAgent/queryById returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/sysUserAgent/queryById leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/sysUserAgent/exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/sysUserAgent/exportXls returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/sysUserAgent/exportXls leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/sysUserAgent/add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/sysUserAgent/add returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/sysUserAgent/add leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation PUT /sys/sysUserAgent/edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation PUT /sys/sysUserAgent/edit returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation PUT /sys/sysUserAgent/edit leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /sys/sysUserAgent/delete is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /sys/sysUserAgent/delete returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /sys/sysUserAgent/delete leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /sys/sysUserAgent/deleteBatch is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /sys/sysUserAgent/deleteBatch returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /sys/sysUserAgent/deleteBatch leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/sysUserAgent/importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/sysUserAgent/importExcel returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/sysUserAgent/importExcel leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/position/queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/position/queryById returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/position/queryById leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/position/exportXls is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/position/exportXls returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/position/exportXls leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/position/add is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/position/add returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/position/add leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation PUT /sys/position/edit is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation PUT /sys/position/edit returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation PUT /sys/position/edit leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /sys/position/delete is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /sys/position/delete returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /sys/position/delete leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /sys/position/deleteBatch is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /sys/position/deleteBatch returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /sys/position/deleteBatch leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/position/importExcel is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/position/importExcel returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/position/importExcel leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/sysUserAgent/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/sysUserAgent/list returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/sysUserAgent/list leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/sysUserAgent/queryByUserName is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/sysUserAgent/queryByUserName returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /sys/sysUserAgent/queryByUserName leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /oss/file/list is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /oss/file/list returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /oss/file/list leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /oss/file/queryById is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /oss/file/queryById returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation GET /oss/file/queryById leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /oss/file/delete is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /oss/file/delete returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation DELETE /oss/file/delete leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /oss/file/upload is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /oss/file/upload returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /oss/file/upload leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/upload/uploadMinio is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/upload/uploadMinio returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token after developer revocation POST /sys/upload/uploadMinio leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token revoked operational metadata /actuator/redis/info is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token revoked operational metadata /actuator/redis/info returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token revoked operational metadata /actuator/redis/info leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token revoked operational metadata /actuator/redis/keysSize is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token revoked operational metadata /actuator/redis/keysSize returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token revoked operational metadata /actuator/redis/keysSize leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token revoked operational metadata /actuator/redis/memoryInfo is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token revoked operational metadata /actuator/redis/memoryInfo returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token revoked operational metadata /actuator/redis/memoryInfo leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "same token revoked operational metadata /actuator/redis/queryDiskInfo is an authorization refusal",
+      "passed": true
+    },
+    {
+      "case": "same token revoked operational metadata /actuator/redis/queryDiskInfo returns no private metadata",
+      "passed": true
+    },
+    {
+      "case": "same token revoked operational metadata /actuator/redis/queryDiskInfo leaves management, role, and audit rows unchanged",
+      "passed": true
+    },
+    {
+      "case": "all original management roles and audit records restored",
+      "passed": true
+    }
+  ],
+  "passed": 389,
+  "failed": 0,
+  "total": 389,
+  "expected_legacy": false,
+  "exception": null,
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "exports": [
+    {
+      "kind": "agent",
+      "status": 200,
+      "content_type": "",
+      "bytes": 6656,
+      "sha256": "f250f90be68f8ab8bb56683652e40bd0dae8ea861cbcb3ff795b5fe5134fcda1",
+      "parsed_cells": 78,
+      "artifact": "verify-global-management-authorization-fixed-agent.xls"
+    },
+    {
+      "kind": "position",
+      "status": 200,
+      "content_type": "",
+      "bytes": 5632,
+      "sha256": "6da2e69470bb0b4cfa62b6ca6b2521361abaa05b08f827093cd6940c3577e7cd",
+      "parsed_cells": 30,
+      "artifact": "verify-global-management-authorization-fixed-position.xls"
+    }
+  ],
+  "scope": "Synthetic localhost HTTP/MySQL only; no cloud requests. Real cloud upload/delete success covered only by mocked Java clients."
+}

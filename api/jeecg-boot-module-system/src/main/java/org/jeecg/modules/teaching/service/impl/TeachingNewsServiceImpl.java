@@ -5,7 +5,7 @@ import org.jeecg.modules.teaching.mapper.TeachingNewsMapper;
 import org.jeecg.modules.teaching.service.ITeachingNewsService;
 import org.springframework.stereotype.Service;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.jeecg.modules.system.service.IndexedLocalMediaService;
 import java.util.Collection;
 import org.jeecg.modules.teaching.util.RichTextSanitizer;
 
@@ -16,7 +16,7 @@ import org.jeecg.modules.teaching.util.RichTextSanitizer;
  * @Version: V1.0
  */
 @Service
-public class TeachingNewsServiceImpl extends ServiceImpl<TeachingNewsMapper, TeachingNews> implements ITeachingNewsService {
+public class TeachingNewsServiceImpl extends IndexedLocalMediaService<TeachingNewsMapper, TeachingNews> implements ITeachingNewsService {
     private void sanitize(TeachingNews news) {
         news.setNewsContent(RichTextSanitizer.sanitize(news.getNewsContent()));
     }

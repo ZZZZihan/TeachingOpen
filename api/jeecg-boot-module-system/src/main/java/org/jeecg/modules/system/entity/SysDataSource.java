@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.alibaba.fastjson.annotation.JSONField;
+import lombok.ToString;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -86,6 +89,9 @@ public class SysDataSource {
      */
     @Excel(name = "密码", width = 15)
     @ApiModelProperty(value = "密码")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JSONField(serialize = false)
+    @ToString.Exclude
     private java.lang.String dbPassword;
     /**
      * 创建人

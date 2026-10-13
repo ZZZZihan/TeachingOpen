@@ -10,6 +10,8 @@ import org.jeecg.modules.system.entity.SysDepart;
 import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysUserService;
+import org.jeecg.modules.system.service.LocalFileReferenceAccessService;
+import org.jeecg.modules.system.service.LocalMediaReferenceIndex;
 import org.jeecg.modules.teaching.entity.TeachingAdditionalWork;
 import org.jeecg.modules.teaching.mapper.TeachingAdditionalWorkMapper;
 import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
@@ -37,6 +39,7 @@ public class AdditionalWorkAuthorizationTest {
     private RedisUtil redis;
     private Subject subject;
     private SysUser teacher;
+    private LocalFileReferenceAccessService attachments;
 
     @Before public void setup() {
         service = new TeachingAdditionalWorkServiceImpl();
@@ -45,12 +48,15 @@ public class AdditionalWorkAuthorizationTest {
         departments = mock(ISysDepartService.class);
         logs = mock(ITeachingDepartDayLogService.class);
         redis = mock(RedisUtil.class);
+        attachments = mock(LocalFileReferenceAccessService.class);
         subject = mock(Subject.class);
         ReflectionTestUtils.setField(service, "baseMapper", works);
+        ReflectionTestUtils.setField(service, "mediaIndex", mock(LocalMediaReferenceIndex.class));
         ReflectionTestUtils.setField(service, "sysUserService", users);
         ReflectionTestUtils.setField(service, "sysDepartService", departments);
         ReflectionTestUtils.setField(service, "teachingDepartDayLogService", logs);
         ReflectionTestUtils.setField(service, "redisUtil", redis);
+        ReflectionTestUtils.setField(service, "attachmentAccess", attachments);
         LoginUser principal = new LoginUser();
         principal.setId("teacher-a"); principal.setUsername("teacher_a"); principal.setDepartIds("stale-other-class");
         when(subject.getPrincipal()).thenReturn(principal);
@@ -104,6 +110,12 @@ public class AdditionalWorkAuthorizationTest {
         denied(() -> service.addNewAdditionalWork(request()));
         denied(() -> service.editAdditionalWork(request()));
         denied(() -> service.deleteAdditionalWorks(Collections.singletonList("work-a")));
+    }
+
+    @Test public void unauthorizedAttachmentRejectsAddAndEditBeforeAnyRowsOrStatistics() {
+        doThrow(new UnauthorizedException("无附件使用权限")).when(attachments).requireUse(any(), any(), any(), any());
+        denied(() -> service.addNewAdditionalWork(request().setWorkCover("private-file")));
+        denied(() -> service.editAdditionalWork(request().setWorkDesc("<img src='private-file'>")));
     }
 
     @Test public void missingPrincipalAndFrozenAccountCannotWrite() {

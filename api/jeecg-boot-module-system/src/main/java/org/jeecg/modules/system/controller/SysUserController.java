@@ -30,6 +30,7 @@ import org.jeecg.modules.common.controller.BaseController;
 import org.jeecg.modules.system.entity.*;
 import org.jeecg.modules.system.model.DepartIdModel;
 import org.jeecg.modules.system.model.UserProfileRequest;
+import org.jeecg.modules.system.model.UserProfileView;
 import org.jeecg.modules.system.model.SysUserModel;
 import org.jeecg.modules.system.model.SysUserSysDepartModel;
 import org.jeecg.modules.system.service.*;
@@ -68,6 +69,8 @@ import java.util.stream.Collectors;
 public class SysUserController extends BaseController {
     @Autowired private AccountAdministrationService accountAdministration;
     @Autowired private UserProfileService userProfiles;
+    @Autowired private UserQueryAccessService userQueryAccess;
+    @Autowired private UserProfileReadService profileReads;
 	@Autowired
 	private ISysBaseAPI sysBaseAPI;
 	@Autowired
@@ -94,9 +97,9 @@ public class SysUserController extends BaseController {
 
     @PermissionData(pageComponent = "system/UserList")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public Result<IPage<SysUser>> queryPageList(SysUser user, @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
+	public Result<IPage<UserProfileView>> queryPageList(SysUser user, @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
                                                 @RequestParam(name="pageSize", defaultValue="10") Integer pageSize, HttpServletRequest req) {
-		Result<IPage<SysUser>> result = new Result<IPage<SysUser>>();
+		Result<IPage<UserProfileView>> result = new Result<>();
 //		QueryWrapper<SysUserModel> queryWrapper = QueryGenerator.initQueryWrapper(user, req.getParameterMap());
         Map<String, String[]> param = req.getParameterMap();
         String[] areaRaw = param.get("area");
@@ -120,33 +123,22 @@ public class SysUserController extends BaseController {
         //departId批量查询条件
         String departId = param.containsKey("departId")?param.get("departId")[0]:null;
         if(StringUtils.isNotEmpty(departId)){
-            departId = "('" + departId.replaceAll(",", "','") + "')";
-            queryWrapper.inSql("sys_user.id","select user_id from sys_user_depart where dep_id in " + departId);
+            UserQueryFilters.departments(queryWrapper, AccountAdministrationService.ids(departId));
         }
         //roleCode查询条件
         if (StringUtils.isNotEmpty(roleCode) && StringUtils.isEmpty(roleId)){
             SysRole sysRole = sysRoleService.getRoleByCode(roleCode);
-            if (sysRole != null)roleId = sysRole.getId();
+            if (sysRole != null) roleId = sysRole.getId();
+            else queryWrapper.apply("1 = 0");
         }
         //roleId批量查询条件
         if (StringUtils.isNotEmpty(roleId)){
-            roleId = "('" + roleId.replaceAll(",", "','") + "')";
-            queryWrapper.inSql("sys_user.id","select user_id from sys_user_role where role_id in " + roleId);
+            UserQueryFilters.roles(queryWrapper, AccountAdministrationService.ids(roleId));
         }
 
         QueryGenerator.installMplus(queryWrapper, user, req.getParameterMap());
 
-        //非admin和dev角色，只显示自己管理的部门下的用户
-        List<String> myDeptIds = new ArrayList<>();
-        if(!hasRole("admin") && !hasRole("dev")){
-            myDeptIds = sysDepartService.getMySubDepIdsByDepId(getCurrentUser().getDepartIds());
-            if (myDeptIds==null || myDeptIds.isEmpty()){
-                result.error500("您没有负责的班级");
-                return result;
-            }
-            String myDeptIdStr = "('" + String.join("','", myDeptIds) + "')";
-            queryWrapper.inSql("sys_user.id","select user_id from sys_user_depart where dep_id in " + myDeptIdStr);
-        }
+        userQueryAccess.limitUsers(queryWrapper);
 
 		Page<SysUser> page = new Page<SysUser>(pageNo, pageSize);
         IPage<SysUser> pageList = sysUserService.getUserList(page, queryWrapper);
@@ -164,8 +156,7 @@ public class SysUserController extends BaseController {
             item.setRoleTxt(roleNames.get(item.getId()));
         });
 		result.setSuccess(true);
-		result.setResult(pageList);
-		log.info(pageList.toString());
+		result.setResult(profileReads.managedPage(pageList));
 		return result;
 	}
 
@@ -240,20 +231,15 @@ public class SysUserController extends BaseController {
     }
 
     @RequestMapping(value = "/queryById", method = RequestMethod.GET)
-    public Result<SysUser> queryById(@RequestParam(name = "id", required = true) String id) {
-        Result<SysUser> result = new Result<SysUser>();
-        SysUser sysUser = sysUserService.getById(id);
-        if (sysUser == null) {
-            result.error500("未找到对应实体");
-        } else {
-            result.setResult(sysUser);
-            result.setSuccess(true);
-        }
+    public Result<UserProfileView> queryById(@RequestParam(name = "id", required = true) String id) {
+        Result<UserProfileView> result = new Result<>();
+        result.setResult(profileReads.read(id));
         return result;
     }
 
     @RequestMapping(value = "/queryUserRole", method = RequestMethod.GET)
     public Result<List<String>> queryUserRole(@RequestParam(name = "userid", required = true) String userid) {
+        profileReads.read(userid);
         Result<List<String>> result = new Result<>();
         List<String> list = new ArrayList<String>();
         List<SysUserRole> userRole = sysUserRoleService.list(new QueryWrapper<SysUserRole>().lambda().eq(SysUserRole::getUserId, userid));
@@ -322,6 +308,7 @@ public class SysUserController extends BaseController {
      */
     @RequestMapping(value = "/userDepartList", method = RequestMethod.GET)
     public Result<List<DepartIdModel>> getUserDepartsList(@RequestParam(name = "userId", required = true) String userId) {
+        profileReads.read(userId);
         Result<List<DepartIdModel>> result = new Result<>();
         try {
             List<DepartIdModel> depIdModelList = this.sysUserDepartService.queryDepartIdsOfUser(userId);
@@ -365,33 +352,21 @@ public class SysUserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/queryUserByDepId", method = RequestMethod.GET)
-    public Result<List<SysUser>> queryUserByDepId(@RequestParam(name = "id", required = true) String id,@RequestParam(name="realname",required=false) String realname) {
-        Result<List<SysUser>> result = new Result<>();
-        //List<SysUser> userList = sysUserDepartService.queryUserByDepId(id);
-        SysDepart sysDepart = sysDepartService.getById(id);
-        List<SysUser> userList = sysUserDepartService.queryUserByDepCode(sysDepart.getOrgCode(),realname);
-
-        //批量查询用户的所属部门
-        //step.1 先拿到全部的 useids
-        //step.2 通过 useids，一次性查询用户的所属部门名字
-        List<String> userIds = userList.stream().map(SysUser::getId).collect(Collectors.toList());
-        if(userIds!=null && userIds.size()>0){
-            Map<String,String>  useDepNames = sysUserService.getDepNamesByUserIds(userIds);
-            userList.forEach(item->{
-                //TODO 临时借用这个字段用于页面展示
-                item.setOrgCode(useDepNames.get(item.getId()));
-            });
+    public Result<List<UserProfileView>> queryUserByDepId(@RequestParam(name = "id", required = true) String id,
+            @RequestParam(name="realname",required=false) String realname) {
+        Set<String> departmentIds = new LinkedHashSet<>();
+        for (String departmentId : AccountAdministrationService.ids(id)) {
+            userQueryAccess.requireDepartment(departmentId);
+            departmentIds.addAll(sysDepartService.getSubDepIdsByDepId(departmentId));
         }
-
-        try {
-            result.setSuccess(true);
-            result.setResult(userList);
-            return result;
-        } catch (Exception e) {
-        	log.error(e.getMessage(), e);
-            result.setSuccess(false);
-            return result;
-        }
+        QueryWrapper<SysUser> query = new QueryWrapper<>();
+        UserQueryFilters.departments(query, departmentIds);
+        userQueryAccess.limitUsers(query);
+        query.like(StringUtils.isNotBlank(realname), "realname", realname);
+        List<SysUser> records = sysUserService.list(query);
+        Result<List<UserProfileView>> result = new Result<>();
+        result.setResult(profileReads.managedViews(records));
+        return result;
     }
 
     /**
@@ -412,11 +387,11 @@ public class SysUserController extends BaseController {
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
 //        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(provinceId), "sys_user.province", provinceId);
 //        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(cityId),"sys_user.city", cityId);
-        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(roleId), "role_id", roleId);
+        if (StringUtils.isNotEmpty(roleId)) UserQueryFilters.roles(queryWrapper, AccountAdministrationService.ids(roleId));
         queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(userSex), "sys_user.sex", userSex);
         queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(status), "sys_user.status", status);
         if(StringUtils.isNotEmpty(departId)){
-            queryWrapper.in("sys_depart.id", Arrays.asList(departId.split(",")));
+            UserQueryFilters.departments(queryWrapper, AccountAdministrationService.ids(departId));
         }
         //TODO 外部模拟登陆临时账号，列表不显示
         queryWrapper.ne("username","_reserve_user_external");
@@ -429,16 +404,7 @@ public class SysUserController extends BaseController {
             queryWrapper.in("sys_user.id",selections.split(","));
         }
 
-        //非admin和dev角色，只显示自己管理的部门下的用户
-        List<String> myDeptIds = new ArrayList<>();
-        if(!hasRole("admin") && !hasRole("dev")){
-            myDeptIds = sysDepartService.getMySubDepIdsByDepId(getCurrentUser().getDepartIds());
-            if (myDeptIds==null || myDeptIds.isEmpty()){
-                return null;
-            }
-            String myDeptIdStr = "('" + String.join("','", myDeptIds) + "')";
-            queryWrapper.inSql("sys_user.id","select user_id from sys_user_depart where dep_id in " + myDeptIdStr);
-        }
+        userQueryAccess.limitUsers(queryWrapper);
 
         QueryGenerator.installMplus(queryWrapper, sysUser, request.getParameterMap());
         // Exports use bounded SQL pages as well, without silently exporting
@@ -491,6 +457,9 @@ public class SysUserController extends BaseController {
         LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         ExportParams exportParams = new ExportParams("用户列表数据", "导出人:"+user.getRealname(), "导出信息");
         exportParams.setImageBasePath(upLoadPath);
+        // Keep the import password column, but never publish it in any export.
+        exportParams.setExclusions(userQueryAccess.isAdministrator(userQueryAccess.currentUser())
+                ? new String[]{"密码"} : new String[]{"密码", "生日", "电子邮件", "电话", "座机号"});
         mv.addObject(NormalExcelConstants.PARAMS, exportParams);
         mv.addObject(NormalExcelConstants.DATA_LIST, pageList.getRecords());
         return mv;
@@ -558,15 +527,11 @@ public class SysUserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/queryByIds", method = RequestMethod.GET)
-	public Result<Collection<SysUser>> queryByIds(@RequestParam String userIds) {
-		Result<Collection<SysUser>> result = new Result<>();
-		String[] userId = userIds.split(",");
-		Collection<String> idList = Arrays.asList(userId);
-		Collection<SysUser> userRole = sysUserService.listByIds(idList);
-		result.setSuccess(true);
-		result.setResult(userRole);
-		return result;
-	}
+    public Result<List<UserProfileView>> queryByIds(@RequestParam String userIds) {
+        Result<List<UserProfileView>> result = new Result<>();
+        result.setResult(profileReads.readAll(AccountAdministrationService.ids(userIds)));
+        return result;
+    }
 
 	/**
 	 * 首页用户重置密码
@@ -583,15 +548,16 @@ public class SysUserController extends BaseController {
     }
 
     @RequestMapping(value = "/userRoleList", method = RequestMethod.GET)
-    public Result<IPage<SysUser>> userRoleList(@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
+    public Result<IPage<UserProfileView>> userRoleList(@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
                                                @RequestParam(name="pageSize", defaultValue="10") Integer pageSize, HttpServletRequest req) {
-        Result<IPage<SysUser>> result = new Result<IPage<SysUser>>();
+        userQueryAccess.requireAdministrator();
+        Result<IPage<UserProfileView>> result = new Result<>();
         Page<SysUser> page = new Page<SysUser>(pageNo, pageSize);
         String roleId = req.getParameter("roleId");
         String username = req.getParameter("username");
         IPage<SysUser> pageList = sysUserService.getUserByRoleId(page,roleId,username);
         result.setSuccess(true);
-        result.setResult(pageList);
+        result.setResult(profileReads.managedPage(pageList));
         return result;
     }
 
@@ -644,47 +610,20 @@ public class SysUserController extends BaseController {
      */
     @PermissionData(pageComponent = "system/DepartList")
     @RequestMapping(value = "/departUserList", method = RequestMethod.GET)
-    public Result<IPage<SysUser>> departUserList(SysUser user, @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
-                                                 @RequestParam(name="pageSize", defaultValue="10") Integer pageSize, HttpServletRequest req) {
-        Result<IPage<SysUser>> result = new Result<IPage<SysUser>>();
-        Page<SysUser> page = new Page<SysUser>(pageNo, pageSize);
-        String depId = req.getParameter("depId");
-        QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
-        QueryGenerator.installMplus(queryWrapper, user, req.getParameterMap());
-
-        //根据部门ID查询,当前和下级所有的部门IDS
-        List<String> subDepids = new ArrayList<>();
-        //部门id为空时，查询我的部门下所有用户
-        if(oConvertUtils.isEmpty(depId)){
-            LoginUser loginUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-            int userIdentity = loginUser.getUserIdentity() != null?loginUser.getUserIdentity():CommonConstant.USER_IDENTITY_1;
-            if(oConvertUtils.isNotEmpty(userIdentity) && userIdentity == CommonConstant.USER_IDENTITY_2 ){
-                subDepids = sysDepartService.getMySubDepIdsByDepId(loginUser.getDepartIds());
-            }
-        }else{
-            subDepids = sysDepartService.getSubDepIdsByDepId(depId);
+    public Result<IPage<UserProfileView>> departUserList(SysUser user, @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
+            @RequestParam(name="pageSize", defaultValue="10") Integer pageSize, HttpServletRequest req) {
+        QueryWrapper<SysUser> query = QueryGenerator.initQueryWrapper(user, req.getParameterMap());
+        userQueryAccess.limitUsers(query);
+        String departmentId = req.getParameter("depId");
+        if (StringUtils.isNotBlank(departmentId)) {
+            userQueryAccess.requireDepartment(departmentId);
+            UserQueryFilters.departments(query, sysDepartService.getSubDepIdsByDepId(departmentId));
         }
-        if(subDepids != null && subDepids.size()>0){
-            String myDeptIdStr = "('" + String.join("','", subDepids) + "')";
-            queryWrapper.inSql("sys_user.id","select user_id from sys_user_depart where dep_id in " + myDeptIdStr);
-            IPage<SysUser> pageList = sysUserService.getUserList(page,queryWrapper);
-            //批量查询用户的所属部门
-            //step.1 先拿到全部的 useids
-            //step.2 通过 useids，一次性查询用户的所属部门名字
-            List<String> userIds = pageList.getRecords().stream().map(SysUser::getId).collect(Collectors.toList());
-            if(userIds!=null && userIds.size()>0){
-                Map<String, String> useDepNames = sysUserService.getDepNamesByUserIds(userIds);
-                pageList.getRecords().forEach(item -> {
-                    //批量查询用户的所属部门
-                    item.setOrgCode(useDepNames.get(item.getId()));
-                });
-            }
-            result.setSuccess(true);
-            result.setResult(pageList);
-        }else{
-            result.setSuccess(true);
-            result.setResult(null);
-        }
+        IPage<SysUser> records = sysUserService.getUserList(new Page<SysUser>(pageNo, pageSize), query);
+        Map<String, String> names = sysUserService.getDepNamesByUserIds(records.getRecords().stream().map(SysUser::getId).collect(Collectors.toList()));
+        records.getRecords().forEach(record -> record.setOrgCodeTxt(names.get(record.getId())));
+        Result<IPage<UserProfileView>> result = new Result<>();
+        result.setResult(profileReads.managedPage(records));
         return result;
     }
 
@@ -897,35 +836,16 @@ public class SysUserController extends BaseController {
 	 * @return
 	 */
 	@GetMapping("/getUserSectionInfoByToken")
-	public Result<?> getUserSectionInfoByToken(HttpServletRequest request, @RequestParam(name = "token", required = false) String token) {
-		try {
-			String username = null;
-			// 如果没有传递token，就从header中获取token并获取用户信息
-			if (oConvertUtils.isEmpty(token)) {
-				 username = JwtUtil.getUserNameByToken(request);
-			} else {
-				 username = JwtUtil.getUsername(token);				
-			}
+    public Result<?> getUserSectionInfoByToken(HttpServletRequest request, @RequestParam(name = "token", required = false) String token) {
+        SysUser user = userQueryAccess.currentUser();
+        Map<String, Object> fields = new HashMap<>();
+        fields.put("sysUserId", user.getId());
+        fields.put("sysUserCode", user.getUsername());
+        fields.put("sysUserName", user.getRealname());
+        fields.put("sysOrgCode", user.getOrgCode());
+        return Result.ok(fields);
+    }
 
-			log.info(" ------ 通过令牌获取部分用户信息，当前用户： " + username);
-
-			// 根据用户名查询用户信息
-			SysUser sysUser = sysUserService.getUserByName(username);
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("sysUserId", sysUser.getId());
-			map.put("sysUserCode", sysUser.getUsername()); // 当前登录用户登录账号
-			map.put("sysUserName", sysUser.getRealname()); // 当前登录用户真实名称
-			map.put("sysOrgCode", sysUser.getOrgCode()); // 当前登录用户部门编号
-
-			log.info(" ------ 通过令牌获取部分用户信息，已获取的用户信息： " + map);
-
-			return Result.ok(map);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			return Result.error(500, "查询失败:" + e.getMessage());
-		}
-	}
-	
 	/**
 	 * 【APP端接口】获取用户列表  根据用户名和真实名 模糊匹配
 	 * @param keyword
@@ -938,6 +858,7 @@ public class SysUserController extends BaseController {
             @RequestParam(name = "username", required = false) String username,
 			@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 			@RequestParam(name="pageSize", defaultValue="10") Integer pageSize) {
+        userQueryAccess.requireAdministrator();
 		try {
 			//TODO 从查询效率上将不要用mp的封装的page分页查询 建议自己写分页语句
 			LambdaQueryWrapper<SysUser> query = new LambdaQueryWrapper<SysUser>();
@@ -950,7 +871,7 @@ public class SysUserController extends BaseController {
             }
 			Page<SysUser> page = new Page<>(pageNo, pageSize);
 			IPage<SysUser> res = this.sysUserService.page(page, query);
-			return Result.ok(res);
+			return Result.ok(profileReads.managedPage(res));
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			return Result.error(500, "查询失败:" + e.getMessage());

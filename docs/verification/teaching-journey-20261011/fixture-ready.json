@@ -1,0 +1,35 @@
+{
+  "format": 1,
+  "kind": "teachingopen-synthetic-teaching-journey",
+  "runtime": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/media-index-1011",
+  "ports": {
+    "mysql": 13391,
+    "redis": 16451,
+    "backend": 18191,
+    "frontend": 18192
+  },
+  "jar_sha256": "bad79e7cf4917f6b056a153cae5bfb09c5a9219ae1fdcffa7f8c8af0891c02fb",
+  "dist_sha256": "93615d1651c6d0144321ed8bc28454d7c9293f882c950c4be8f7c43fe6556cc0",
+  "fixture_tables": [
+    "sys_user",
+    "sys_depart",
+    "sys_permission",
+    "sys_role_permission",
+    "sys_dict",
+    "sys_dict_item",
+    "sys_file",
+    "sys_data_log",
+    "teaching_additional_work",
+    "teaching_work",
+    "teaching_work_correct",
+    "teaching_work_comment",
+    "teaching_depart_day_log",
+    "teaching_work_event",
+    "teaching_unit_view_event",
+    "sys_local_file_reference",
+    "sys_local_file_reference_state"
+  ],
+  "assignment_submission_feedback_precreated": false,
+  "audit_table_excluded_from_restore": "sys_log",
+  "stop": "SIGINT/SIGTERM restores after closing the frontend; --restore recovers after SIGKILL."
+}

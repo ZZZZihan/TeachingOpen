@@ -1,0 +1,62 @@
+{
+  "phase": "before MVC registration",
+  "base": "93d4cfe8e911bccbaf1d20094357fa0b88076a86",
+  "suite": "org.jeecg.management.GlobalManagementAuthorizationTest",
+  "tests": 10,
+  "failures": 8,
+  "errors": 0,
+  "cases": [
+    {
+      "name": "developerMonitoringWorksAndSamePrincipalRevocationStopsIt",
+      "passed": false,
+      "failure": "Status expected:<403> but was:<200>"
+    },
+    {
+      "name": "disabledDeletedMissingAndMismatchedManagerAccountsCannotReachManagement",
+      "passed": false,
+      "failure": "Status expected:<403> but was:<200>"
+    },
+    {
+      "name": "redisOperationalMetadataRequiresDeveloperIncludingAdminRefusal",
+      "passed": false,
+      "failure": "Status expected:<403> but was:<200>"
+    },
+    {
+      "name": "samePrincipalLosesAllManagementImmediatelyAfterRoleRevocation",
+      "passed": false,
+      "failure": "Status expected:<403> but was:<200>"
+    },
+    {
+      "name": "addressBookAndPositionSelectorKeepTheirAuthenticatedList",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "name": "disabledDeveloperCannotReadOperationalMetadata",
+      "passed": false,
+      "failure": "Status expected:<403> but was:<200>"
+    },
+    {
+      "name": "activeAdministratorsAndDevelopersRetainAllManagementOperations",
+      "passed": true,
+      "failure": null
+    },
+    {
+      "name": "anonymousAndInactiveAccountsCannotUsePositionListAliases",
+      "passed": false,
+      "failure": "Status expected:<403> but was:<406>"
+    },
+    {
+      "name": "ordinaryManagementReadsWritesImportsAndDeletesAreDeniedBeforeAnyServiceCall",
+      "passed": false,
+      "failure": "Status expected:<403> but was:<200>"
+    },
+    {
+      "name": "anonymousAndSuffixAliasesCannotEnterManagementHandlers",
+      "passed": false,
+      "failure": "Status expected:<403> but was:<200>"
+    }
+  ],
+  "log_sha256": "d3a63154692b91c618f1a3d1e85c8613f9335a379bdfe26a25337b5f46731bcf",
+  "scope": "Actual MVC registration without the new interceptor; controllers and stateful services unchanged. New interceptor bean was present but unregistered. Cloud service and Minio client mocked."
+}

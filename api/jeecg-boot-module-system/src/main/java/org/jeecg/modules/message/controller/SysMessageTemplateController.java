@@ -41,6 +41,8 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/message/sysMessageTemplate")
 public class SysMessageTemplateController extends JeecgController<SysMessageTemplate, ISysMessageTemplateService> {
+    @Autowired private org.jeecg.modules.system.service.AnnouncementAccessService announcementAccess;
+
 	@Autowired
 	private ISysMessageTemplateService sysMessageTemplateService;
 	@Autowired
@@ -58,6 +60,7 @@ public class SysMessageTemplateController extends JeecgController<SysMessageTemp
 	@GetMapping(value = "/list")
 	public Result<?> queryPageList(SysMessageTemplate sysMessageTemplate, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
 			@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, HttpServletRequest req) {
+        announcementAccess.requireManager();
 		QueryWrapper<SysMessageTemplate> queryWrapper = QueryGenerator.initQueryWrapper(sysMessageTemplate, req.getParameterMap());
 		Page<SysMessageTemplate> page = new Page<SysMessageTemplate>(pageNo, pageSize);
 		IPage<SysMessageTemplate> pageList = sysMessageTemplateService.page(page, queryWrapper);
@@ -72,6 +75,7 @@ public class SysMessageTemplateController extends JeecgController<SysMessageTemp
 	 */
 	@PostMapping(value = "/add")
 	public Result<?> add(@RequestBody SysMessageTemplate sysMessageTemplate) {
+        announcementAccess.requireManager();
 		sysMessageTemplateService.save(sysMessageTemplate);
         return Result.ok("添加成功！");
 	}
@@ -84,6 +88,7 @@ public class SysMessageTemplateController extends JeecgController<SysMessageTemp
 	 */
 	@PutMapping(value = "/edit")
 	public Result<?> edit(@RequestBody SysMessageTemplate sysMessageTemplate) {
+        announcementAccess.requireManager();
 		sysMessageTemplateService.updateById(sysMessageTemplate);
         return Result.ok("更新成功！");
 	}
@@ -96,6 +101,7 @@ public class SysMessageTemplateController extends JeecgController<SysMessageTemp
 	 */
 	@DeleteMapping(value = "/delete")
 	public Result<?> delete(@RequestParam(name = "id", required = true) String id) {
+        announcementAccess.requireManager();
 		sysMessageTemplateService.removeById(id);
         return Result.ok("删除成功!");
 	}
@@ -108,6 +114,7 @@ public class SysMessageTemplateController extends JeecgController<SysMessageTemp
 	 */
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<?> deleteBatch(@RequestParam(name = "ids", required = true) String ids) {
+        announcementAccess.requireManager();
 		this.sysMessageTemplateService.removeByIds(Arrays.asList(ids.split(",")));
         return Result.ok("批量删除成功！");
 	}
@@ -120,6 +127,7 @@ public class SysMessageTemplateController extends JeecgController<SysMessageTemp
 	 */
 	@GetMapping(value = "/queryById")
 	public Result<?> queryById(@RequestParam(name = "id", required = true) String id) {
+        announcementAccess.requireManager();
 		SysMessageTemplate sysMessageTemplate = sysMessageTemplateService.getById(id);
         return Result.ok(sysMessageTemplate);
 	}
@@ -131,6 +139,7 @@ public class SysMessageTemplateController extends JeecgController<SysMessageTemp
 	 */
 	@GetMapping(value = "/exportXls")
 	public ModelAndView exportXls(HttpServletRequest request,SysMessageTemplate sysMessageTemplate) {
+        announcementAccess.requireManager();
 		return super.exportXls(request, sysMessageTemplate, SysMessageTemplate.class,"推送消息模板");
 	}
 
@@ -143,6 +152,7 @@ public class SysMessageTemplateController extends JeecgController<SysMessageTemp
 	 */
 	@PostMapping(value = "/importExcel")
 	public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
+        announcementAccess.requireManager();
 		return super.importExcel(request, response, SysMessageTemplate.class);
 	}
 
@@ -151,6 +161,7 @@ public class SysMessageTemplateController extends JeecgController<SysMessageTemp
 	 */
 	@PostMapping(value = "/sendMsg")
 	public Result<SysMessageTemplate> sendMessage(@RequestBody MsgParams msgParams) {
+        announcementAccess.requireManager();
 		Result<SysMessageTemplate> result = new Result<SysMessageTemplate>();
 		Map<String, String> map = null;
 		try {
