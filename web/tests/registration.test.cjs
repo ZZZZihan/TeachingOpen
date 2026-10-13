@@ -15,6 +15,30 @@ function harness (postAction, propsData = {}) {
   return { component, routes }
 }
 const valid = { phone: '13900000001', password: 'Synthetic8!', confirmation: 'Synthetic8!', realname: ' 张同学 ', school: ' 测试学校 ' }
+test('student and teacher registration accept 8–64 printable characters without a required character mix', async () => {
+  for (const teacherRegistration of [false, true]) {
+    for (const password of ['abcdefgh', '12345678', 'learn123', '[]{}|~!?', 'a'.repeat(64)]) {
+      let sent; const h = harness((url, body) => { sent = { url, body }; return Promise.resolve({ success: true }) }, { teacherRegistration })
+      Object.assign(h.component.form, valid, { password, confirmation: password }); await h.component.submit()
+      assert.equal(sent.url, teacherRegistration ? '/sys/user/register/teacher' : '/sys/user/register')
+      assert.equal(sent.body.password, password); assert.equal(h.routes.length, 1)
+    }
+  }
+})
+test('registration rejects missing, short, long and unsupported passwords before requesting either endpoint', async () => {
+  for (const teacherRegistration of [false, true]) {
+    for (const password of ['', 'abc1234', 'a'.repeat(65), 'abcd123 ', 'abcd1234\n', 'abcd1234\r', 'abcd1234\r\n', '密码abcd123', 'abcd123😊']) {
+      let calls = 0; const h = harness(() => { calls++ }, { teacherRegistration })
+      Object.assign(h.component.form, valid, { password, confirmation: password }); await h.component.submit()
+      assert.equal(calls, 0); assert.ok(h.component.errors.password); assert.equal(h.component.form.password, password)
+    }
+  }
+})
+test('simple registration passwords still require matching confirmation', async () => {
+  let calls = 0; const h = harness(() => { calls++ })
+  Object.assign(h.component.form, valid, { password: 'learn123', confirmation: 'learn124' }); await h.component.submit()
+  assert.equal(calls, 0); assert.ok(h.component.errors.confirmation); assert.equal(h.component.errors.password, undefined)
+})
 test('student and teacher registration render their own titles without identity selection or removed explanatory copy', () => {
   const template = compiler.parseComponent(source('views/user/Register.vue')).template.content
   const compiled = compiler.compile(template)

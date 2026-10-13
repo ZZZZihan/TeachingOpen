@@ -10,6 +10,14 @@ export function passwordProblem (value) {
     return ''
 }
 
+export function registrationPasswordProblem (value) {
+    if (!value) return '请输入密码。'
+    if (value.length < 8 || value.length > 64 || /[^!-~]/.test(value)) {
+        return '密码需为 8–64 位字母、数字或符号，不含空格或中文。'
+    }
+    return ''
+}
+
 // Do not surface arbitrary transport messages: they can contain request details.
 export function recoveryError (error, fallback) {
     if (error && (error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT')) return '连接超时，请检查网络后重试。'

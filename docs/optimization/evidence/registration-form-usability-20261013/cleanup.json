@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "database": "teachingopen_check_registration_form",
+  "removed_test_accounts": 7,
+  "removed_browser_accounts": 2,
+  "removed_probe_accounts": 5,
+  "residual": {
+    "users": 0,
+    "registration_profiles": 0,
+    "user_role_links": 0
+  },
+  "isolated_redis_database": 3,
+  "isolated_redis_keys": 0,
+  "backend_stopped": true,
+  "audit_rows_retained": 9,
+  "audit_rows_unchanged_by_cleanup": true,
+  "original_accounts_imported": 0,
+  "production_test_writes": false,
+  "data_directory_retained": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/reg-form-1013",
+  "cleanup_guard_initial_failure": "UUID32 assumption rejected actual 19-digit MyBatis IDs before any DELETE; task-owned database and Redis restarted, phone ownership plus actual ID format rechecked before deleting exactly seven accounts",
+  "task_services_listening": {
+    "mysql": false,
+    "redis": false,
+    "backend": false
+  },
+  "mysql_and_redis_stopped": true,
+  "verified_source_commit": "47ee8fbc8133c1c0d38c23c46148698e5403dd5e",
+  "source_commit_verified_after_execution": true
+}

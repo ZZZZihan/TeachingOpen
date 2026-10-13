@@ -26,7 +26,7 @@
 
 <script>
 import { postAction } from '@/api/manage'
-import { isMainlandPhone, passwordProblem, recoveryError } from '@/utils/accountRecovery'
+import { isMainlandPhone, registrationPasswordProblem, recoveryError } from '@/utils/accountRecovery'
 
 export default {
     name: 'Register',
@@ -41,7 +41,7 @@ export default {
             form: { phone: '', password: '', confirmation: '', realname: '', school: '' },
             fields: [
                 { key: 'phone', label: '手机号', autocomplete: 'username', maximum: 11 },
-                { key: 'password', label: '密码（8–64位，包含字母、数字和特殊符号）', type: 'password', autocomplete: 'new-password', maximum: 64 },
+                { key: 'password', label: '密码（8–64 位）', type: 'password', autocomplete: 'new-password', maximum: 64 },
                 { key: 'confirmation', label: '确认密码', type: 'password', autocomplete: 'new-password', maximum: 64 },
                 { key: 'realname', label: '姓名', autocomplete: 'name', maximum: 100 },
                 { key: 'school', label: '学校（请填写全称）', autocomplete: 'organization', maximum: 256 }
@@ -54,8 +54,8 @@ export default {
             const form = this.form
             const errors = {}
             if (!isMainlandPhone(form.phone.trim())) errors.phone = '请输入正确的11位手机号。'
-            const passwordError = passwordProblem(form.password)
-            if (passwordError) errors.password = passwordError.replace('新密码', '密码')
+            const passwordError = registrationPasswordProblem(form.password)
+            if (passwordError) errors.password = passwordError
             if (!form.confirmation || form.password !== form.confirmation) errors.confirmation = '两次输入的密码需一致。'
             if (!form.realname.trim()) errors.realname = '请填写姓名。'
             if (!form.school.trim()) errors.school = '请填写学校。'
@@ -97,7 +97,7 @@ h1 { margin: 12px 0; font-size: 30px; }
 .field input { width: 100%; padding: 12px; border: 1px solid #bec6cc; border-radius: 4px; }
 .field input:focus { outline: 2px solid #146fc2; outline-offset: 2px; }
 .field-error { color: #a12834; margin-top: 8px; }
-button { width: 100%; padding: 12px; background: #146fc2; color: white; border: 0; border-radius: 4px; cursor: pointer; }
+button { display: block; width: 100%; margin-top: 24px; padding: 12px; background: #146fc2; color: white; border: 0; border-radius: 4px; cursor: pointer; }
 button:disabled { opacity: .65; cursor: wait; }
 .login-link { display: block; text-align: center; margin-top: 18px; color: #146fc2; }
 </style>
