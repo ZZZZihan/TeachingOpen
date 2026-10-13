@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "database": "teachingopen_check_registration_form",
+  "source": "actual browser registrations followed by real SQL and CAPTCHA/password HTTP login",
+  "production_test_writes": false,
+  "accounts": [
+    {
+      "entry": "student",
+      "name_and_school_equal_to_browser_input": true,
+      "fixed_profile": "student",
+      "roles": [
+        "student"
+      ],
+      "server_owned_security_fields_correct": true,
+      "user_profile_role_counts": "1|1|1",
+      "actual_http_password_login": true,
+      "logout_succeeded": true
+    },
+    {
+      "entry": "teacher",
+      "name_and_school_equal_to_browser_input": true,
+      "fixed_profile": "teacher",
+      "roles": [
+        "student"
+      ],
+      "server_owned_security_fields_correct": true,
+      "user_profile_role_counts": "1|1|1",
+      "actual_http_password_login": true,
+      "logout_succeeded": true
+    }
+  ],
+  "failure_retry": {
+    "browser_action_reported_by_main_agent": "student entry duplicate teacher phone returned409; changing only phone then succeeded",
+    "exactly_one_student_account_created_for_retry": true,
+    "no_duplicate_user_profile_or_role": true
+  },
+  "account_count_after_browser": 7,
+  "jar_sha256": "e3fcdbd39e5c1f273aaf7056a81ad533e997d63e8ab8b1837ca265313cf0b190",
+  "http_probe_sha256": "5b6925eeea398da2fc56a50d0b0032c88bb0dc730460a656074dfb611e4c43d6",
+  "verified_source_commit": "47ee8fbc8133c1c0d38c23c46148698e5403dd5e",
+  "source_commit_verified_after_execution": true
+}

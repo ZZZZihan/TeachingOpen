@@ -1,0 +1,49 @@
+{
+  "product_commit": "47ee8fbc8133c1c0d38c23c46148698e5403dd5e",
+  "base_commit": "fc626aa4f0b68c0543ff9ae19e9c45284f34be4f",
+  "source_sha256": {
+    "web/src/views/user/Register.vue": "9aca29e0715c76a886511189bb0c416a5d4fc1dba628655b770861845c8b5232",
+    "web/src/utils/accountRecovery.js": "765f725693bd3b4016d12078b365a234b96543d26fc28685de6f552dad1e8c8a",
+    "web/tests/registration.test.cjs": "9971464c69ca26173d3658cb631871060c2390f8c4bc52ff686b41a443c6e865",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/AccountRegistrationService.java": "4553a5bee5a2a3eda185e4ee70ad099286ec464097453b9c010a76410da92436",
+    "api/jeecg-boot-module-system/src/test/java/org/jeecg/accountrecovery/AccountRegistrationServiceTest.java": "41360c24efb2d61cca7576cb4e36a62f3022a2c743939536e1c12d44101401a6",
+    "deploy/verify_registration.py": "baee89a49fd6e0b807c18ff0fe70ce12f8bbd4607250beaac3840aed57d6a51c"
+  },
+  "jar_sha256": "e3fcdbd39e5c1f273aaf7056a81ad533e997d63e8ab8b1837ca265313cf0b190",
+  "dist_files": 4909,
+  "dist_inventory_sha256": "6a0dc2c1c9e024e00752e0a09e6574bd8a58a0bc4e4c65bb9a4245298b027086",
+  "frontend_tests": {
+    "passed": 859,
+    "failed": 0,
+    "skipped": 0
+  },
+  "java_tests": {
+    "passed": 374,
+    "failed": 0,
+    "skipped": 0
+  },
+  "http_sql_checks": {
+    "passed": 115,
+    "failed": 0
+  },
+  "ci_guard_tests": {
+    "passed": 19
+  },
+  "independent_review_frontend_tests": {
+    "passed": 52
+  },
+  "frontend_build_warnings": [
+    "Chart MiniArea/MiniBar CSS ordering",
+    "Asset size advisory",
+    "Entrypoint size advisory"
+  ],
+  "initial_assets_budget": "passed",
+  "changed_file_lint": "passed",
+  "production_test_writes": false,
+  "browser_login_submission": false,
+  "browser_registration_entries": [
+    "student",
+    "teacher"
+  ],
+  "real_api_password_login": true
+}

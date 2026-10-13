@@ -1,0 +1,139 @@
+{
+  "observations": [
+    {
+      "label": "student-390-focus",
+      "buttonEnabled": true,
+      "fieldButtonGap": 23.99720001220703,
+      "focusedSchool": true,
+      "height": 1260,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 23.997222900390625,
+      "width": 582
+    },
+    {
+      "label": "student-mobile390-focus",
+      "buttonEnabled": true,
+      "fieldButtonGap": 24,
+      "focusedSchool": true,
+      "height": 844,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 24,
+      "width": 390
+    },
+    {
+      "label": "student-mobile390-errors",
+      "buttonEnabled": true,
+      "fieldButtonGap": 24,
+      "focusedSchool": false,
+      "height": 844,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 24,
+      "width": 390
+    },
+    {
+      "label": "student-mobile390-errors-confirmed",
+      "buttonEnabled": true,
+      "fieldButtonGap": 24,
+      "focusedSchool": false,
+      "height": 844,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 53,
+      "width": 390
+    },
+    {
+      "label": "student-1440-focus",
+      "buttonEnabled": true,
+      "fieldButtonGap": 24,
+      "focusedSchool": true,
+      "height": 1000,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 24,
+      "width": 1440
+    },
+    {
+      "label": "student-1440-errors",
+      "buttonEnabled": true,
+      "fieldButtonGap": 24,
+      "focusedSchool": false,
+      "height": 1000,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 53,
+      "width": 1440
+    },
+    {
+      "label": "teacher-1440-focus",
+      "buttonEnabled": true,
+      "fieldButtonGap": 24,
+      "focusedSchool": true,
+      "height": 1000,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 24,
+      "width": 1440
+    },
+    {
+      "label": "teacher-1440-errors",
+      "buttonEnabled": true,
+      "fieldButtonGap": 24,
+      "focusedSchool": false,
+      "height": 1000,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 53,
+      "width": 1440
+    },
+    {
+      "label": "teacher-390-focus",
+      "buttonEnabled": true,
+      "fieldButtonGap": 24,
+      "focusedSchool": true,
+      "height": 844,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 24,
+      "width": 390
+    },
+    {
+      "label": "teacher-390-errors",
+      "buttonEnabled": true,
+      "fieldButtonGap": 24,
+      "focusedSchool": false,
+      "height": 844,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 53,
+      "width": 390
+    },
+    {
+      "label": "student-390-api-duplicate-error",
+      "buttonEnabled": true,
+      "fieldButtonGap": 53,
+      "focusedSchool": false,
+      "height": 844,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 53,
+      "width": 390
+    },
+    {
+      "label": "production-before-student-390-focus",
+      "buttonEnabled": true,
+      "fieldButtonGap": 0,
+      "focusedSchool": true,
+      "height": 844,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 0,
+      "width": 390
+    },
+    {
+      "label": "production-before-student-1440-focus",
+      "buttonEnabled": true,
+      "fieldButtonGap": 0,
+      "focusedSchool": true,
+      "height": 1000,
+      "horizontalOverflow": 0,
+      "schoolButtonGap": 0,
+      "width": 1440
+    }
+  ],
+  "notes": [
+    "Initial IAB viewport request was affected by existing origin zoom. Final exact 390 and 1440 CSS viewports used documented CDP device metrics; overrides reset after verification.",
+    "First click during emulation adjustment did not submit; confirmed field errors are separately labeled.",
+    "Sensitive-field DOM readbacks are redacted; exact password preservation is covered by component checks and real subsequent API login."
+  ]
+}
