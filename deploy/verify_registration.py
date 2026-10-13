@@ -16,7 +16,7 @@ import sys
 import urllib.error
 import urllib.request
 
-EXPECTED_CHECKS = 83
+EXPECTED_CHECKS = 115
 STUDENT_ENTRY = '/sys/user/register'
 TEACHER_ENTRY = '/sys/user/register/teacher'
 STATE_TABLES = ('sys_user', 'sys_user_role', 'teaching_registration_profile', 'sys_user_depart',
@@ -124,7 +124,7 @@ def main(config_file):
     phones = ['199' + ''.join(secrets.choice('0123456789') for _ in range(8)) for _ in range(5)]
     check('synthetic phones unused', sql('SELECT COUNT(*) FROM sys_user WHERE phone IN (' + ','.join("'" + p + "'" for p in phones) + ')') == '0')
     tokens = []
-    password = 'Verify9!' + secrets.token_hex(10)
+    password = 'abc12345'
     try:
         check('one isolated allowReg configuration is enabled', sql("SELECT CONCAT(COUNT(*),'|',COALESCE(MIN(config_value),'missing')) FROM sys_config WHERE config_key='allowReg' AND config_enabled=1") == '1|1')
         before_disabled = state_snapshot()
@@ -137,19 +137,32 @@ def main(config_file):
         finally:
             sql("UPDATE sys_config SET config_value='1' WHERE config_key='allowReg' AND config_enabled=1")
 
-        cases = (('public default student', STUDENT_ENTRY, None, 'student'),
-                 ('public forged teacher', STUDENT_ENTRY, 'teacher', 'student'),
-                 ('teacher entry', TEACHER_ENTRY, 'student', 'teacher'))
-        for i, (label, entry, supplied_identity, identity) in enumerate(cases):
-            payload = {'phone': phones[i], 'password': password, 'realname': '验收𠮷' + str(i),
+        invalid_passwords = (('', 'empty'), ('1234567', 'seven characters'), ('a' * 65, '65 characters'),
+                             ('abc defg', 'space'), ('abcdefgh中文', 'non-ASCII'),
+                             ('abcdefgh\n', 'newline'), ('abcdefgh\t', 'tab'), ('abcdefgh\x7f', 'DEL'))
+        for entry_label, entry in (('student', STUDENT_ENTRY), ('teacher', TEACHER_ENTRY)):
+            for invalid_password, label in invalid_passwords:
+                before_invalid = state_snapshot()
+                result = api(entry, {'phone': phones[0], 'password': invalid_password,
+                                    'realname': '密码边界验收', 'school': '隔离学校'})
+                check(entry_label + ' rejects password with ' + label,
+                      result.get('success') is False and result.get('code') == 400)
+                check(entry_label + ' invalid password ' + label + ' leaves all 10 tables unchanged',
+                      state_snapshot() == before_invalid)
+
+        cases = (('public default student with digits-only password', STUDENT_ENTRY, None, 'student', '12345678'),
+                 ('public forged teacher with letters-only password', STUDENT_ENTRY, 'teacher', 'student', 'abcdefgh'),
+                 ('teacher entry with 64-character password', TEACHER_ENTRY, 'student', 'teacher', 'a' * 64))
+        for i, (label, entry, supplied_identity, identity, case_password) in enumerate(cases):
+            payload = {'phone': phones[i], 'password': case_password, 'realname': '验收𠮷' + str(i),
                 'school': '数据库隔离验收𠮷学校', 'role': 'admin', 'roles': 'teacher,admin',
                 'username': 'admin', 'userIdentity': 2, 'status': 2, 'departIds': 'privileged-depart'}
             if supplied_identity is not None: payload['identity'] = supplied_identity
             r = api(entry, payload)
             check(label + ' registration', r.get('success') is True)
-            check(label + ' no credentials returned', password not in json.dumps(r) and phones[i] not in json.dumps(r))
+            check(label + ' no credentials returned', case_password not in json.dumps(r) and phones[i] not in json.dumps(r))
             check(label + ' exact required fields persisted', sql("SELECT CONCAT(realname,'|',school,'|',phone) FROM sys_user WHERE phone='" + phones[i] + "'") == payload['realname'] + '|' + payload['school'] + '|' + phones[i])
-            check(label + ' password protected at rest', sql("SELECT COUNT(*) FROM sys_user WHERE phone='" + phones[i] + "' AND password<>'" + password + "' AND password<>'' AND salt<>''") == '1')
+            check(label + ' password protected at rest', sql("SELECT COUNT(*) FROM sys_user WHERE phone='" + phones[i] + "' AND password<>'" + case_password + "' AND password<>'' AND salt<>''") == '1')
             check(label + ' fixed profile persisted', profile(phones[i]) == identity)
             check(label + ' only student role granted', sql("SELECT r.role_code FROM sys_user u JOIN sys_user_role ur ON ur.user_id=u.id JOIN sys_role r ON r.id=ur.role_id WHERE u.phone='" + phones[i] + "'") == 'student')
             check(label + ' security fields are server owned', account_security(phones[i]))
@@ -159,7 +172,7 @@ def main(config_file):
             opposite_entry = TEACHER_ENTRY if entry == STUDENT_ENTRY else STUDENT_ENTRY
             check(label + ' cross entry duplicate rejected', api(opposite_entry, payload).get('code') == 409)
             check(label + ' duplicate leaves profile and all 10 tables unchanged', state_snapshot() == before_duplicate)
-            token = login(phones[i], password); tokens.append(token)
+            token = login(phones[i], case_password); tokens.append(token)
             refuse_management(label, token)
         payload = {'phone': phones[3], 'password': password, 'realname': '并发验收', 'school': '隔离学校',
                    'identity': 'teacher', 'roles': 'admin,teacher', 'userIdentity': 2, 'departIds': 'privileged-depart', 'status': 2}

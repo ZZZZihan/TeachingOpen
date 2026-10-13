@@ -2,6 +2,7 @@ package org.jeecg.accountrecovery;
 
 import com.alibaba.fastjson.JSONObject;
 import org.jeecg.common.api.vo.Result;
+import org.jeecg.common.util.PasswordUtil;
 import org.jeecg.modules.system.entity.SysRole;
 import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.mapper.RegistrationProfileMapper;
@@ -49,6 +50,37 @@ public class AccountRegistrationServiceTest {
                 r = request(); r.put(field, new JSONObject()); failed(register(r, teacher), 400);
             }
             failed(register(null, teacher), 400);
+        }
+        verifyZeroInteractions(users, profiles, roles, config, tx);
+    }
+    @Test public void bothEntriesAcceptBoundedPasswordsWithoutCharacterMixAndPreserveLoginValue() {
+        String[] passwords = {"12345678", "abcdefgh", "!!!!!!!!", "abcd1234",
+                new String(new char[64]).replace('\0', 'a')};
+        for (boolean teacher : new boolean[]{false, true}) {
+            for (String password : passwords) {
+                setup();
+                JSONObject r = request(); r.put("password", password);
+                assertTrue(register(r, teacher).isSuccess());
+                ArgumentCaptor<SysUser> captured = ArgumentCaptor.forClass(SysUser.class);
+                verify(users).save(captured.capture());
+                SysUser user = captured.getValue();
+                assertNotNull(user.getPassword());
+                assertNotEquals(password, user.getPassword());
+                assertEquals(PasswordUtil.encrypt(user.getUsername(), password, user.getSalt()), user.getPassword());
+                verify(profiles).insertProfile("new-user", teacher ? "teacher" : "student");
+                verify(users).addUserWithRole(user, "student-role");
+                verify(tx).commit(any());
+            }
+        }
+    }
+    @Test public void bothEntriesRejectInvalidPasswordBoundariesBeforeAnySideEffect() {
+        String[] passwords = {"", "1234567", new String(new char[65]).replace('\0', 'a'),
+                "abc defg", "abcdefgh中文", "abcdefgh\n", "abcdefgh\t", "abcdefgh\u007f"};
+        for (boolean teacher : new boolean[]{false, true}) {
+            for (String password : passwords) {
+                JSONObject r = request(); r.put("password", password);
+                failed(register(r, teacher), 400);
+            }
         }
         verifyZeroInteractions(users, profiles, roles, config, tx);
     }

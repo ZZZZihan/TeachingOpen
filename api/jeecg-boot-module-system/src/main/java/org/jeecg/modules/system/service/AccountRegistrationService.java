@@ -21,6 +21,8 @@ import java.util.regex.Pattern;
 @Service
 public class AccountRegistrationService {
     private static final Pattern PHONE = Pattern.compile("^1[3-9][0-9]{9}$");
+    // PasswordUtil accepts printable ASCII keys; registration needs no character mix.
+    private static final Pattern PASSWORD = Pattern.compile("[!-~]{8,64}");
     private final ISysUserService users;
     private final ISysRoleService roles;
     private final ISysConfigService config;
@@ -61,7 +63,7 @@ public class AccountRegistrationService {
         if (phone == null || !PHONE.matcher(phone).matches()) return failure(400, "请输入正确的11位手机号");
         if (!validText(name, 100)) return failure(400, "请填写姓名，最多100个字符");
         if (!validText(school, 256)) return failure(400, "请填写学校，最多256个字符");
-        if (!PasswordResetService.validPassword(password)) return failure(400, "密码须为8至64位非空白ASCII字符，并包含字母、数字和特殊符号");
+        if (password == null || !PASSWORD.matcher(password).matches()) return failure(400, "密码须为8至64位，不含空格或中文");
         try {
             if (!"1".equals(config.getConfigItem("allowReg"))) return failure(403, "未开放注册");
             if (profiles.countReservedPhone(phone) != 0) return failure(409, "该手机号已注册或已被账号使用");
