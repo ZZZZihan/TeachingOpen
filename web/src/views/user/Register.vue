@@ -8,7 +8,6 @@
         <p v-if="errors[field.key]" :id="field.key + '-error'" class="field-error">{{ errors[field.key] }}</p>
       </div>
       <fieldset :disabled="submitting"><legend>身份</legend><label><input v-model="form.identity" type="radio" name="identity" value="student"> 学生</label><label><input v-model="form.identity" type="radio" name="identity" value="teacher"> 教师</label><p v-if="errors.identity" class="field-error">{{ errors.identity }}</p></fieldset>
-      <p class="privacy-note">姓名将脱敏展示，学校和身份将展示在首页。教师身份用于个人资料，教学管理权限由管理员开通。</p>
       <p v-if="submitError" role="alert" class="field-error">{{ submitError }}</p>
       <button type="submit" :disabled="submitting">{{ submitting ? '正在注册…' : '注册账号' }}</button>
       <router-link class="login-link" to="/user/login">使用已有账号登录</router-link>
@@ -77,7 +76,7 @@ export default {
 .registration-page { max-width: 480px; margin: 36px auto; padding: 24px; color: #27333b; }
 .registration-heading span { color: #146fc2; font-size: 12px; }
 h1 { margin: 12px 0; font-size: 30px; }
-.registration-heading p, .privacy-note { color: #69747c; line-height: 1.7; }
+.registration-heading p { color: #69747c; line-height: 1.7; }
 .field { margin-top: 18px; }
 .field label { display: block; margin-bottom: 8px; }
 .field input { width: 100%; padding: 12px; border: 1px solid #bec6cc; border-radius: 4px; }
@@ -86,7 +85,6 @@ fieldset { margin: 20px 0; border: 0; padding: 0; }
 fieldset label { display: inline-block; margin-right: 24px; }
 legend { margin-bottom: 10px; font-size: 14px; }
 .field-error { color: #a12834; margin-top: 8px; }
-.privacy-note { font-size: 12px; }
 button { width: 100%; padding: 12px; background: #146fc2; color: white; border: 0; border-radius: 4px; cursor: pointer; }
 button:disabled { opacity: .65; cursor: wait; }
 .login-link { display: block; text-align: center; margin-top: 18px; color: #146fc2; }
