@@ -18,7 +18,7 @@
         <a-row type="flex" justify="space-around">
           <a-col :span="4">
             <a-avatar shape="square" class="avatar" :size="60" :src="workInfo.avatar_url" @click="toFriend(workInfo.userId)"/>
-            <p @click="toFriend(workInfo.userId)">{{ workInfo.realname || workInfo.username }}</p>
+            <p @click="toFriend(workInfo.userId)">发布者：{{ workInfo.realname || workInfo.username }}</p>
           </a-col>
           <a-col :span="14" v-if="!_isMobile()">
             <div class="project-meta">
@@ -50,6 +50,8 @@
           </a-col>
         </a-row>
       </div>
+
+      <showcase-attribution :work="workInfo" />
 
       <!-- 评论区 -->
       <div class="project-comment" v-if="sysConfig.allowComment == 1">
@@ -127,6 +129,7 @@ import Keyboard from '@/components/tools/Keyboard'
 import Header from './modules/Header'
 import Footer from './modules/Footer'
 import UserEnter from './modules/UserEnter'
+import ShowcaseAttribution from './modules/ShowcaseAttribution'
 
 import moment from 'moment'
 import { postAction } from '../../api/manage'
@@ -138,6 +141,7 @@ export default {
     Header,
     Footer,
     UserEnter,
+        ShowcaseAttribution,
   },
   data() {
     return {

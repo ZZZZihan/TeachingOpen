@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "boat-race",
+    "sha256": "79cea250da8ff1c3241b2d67801a08da04662e8a2c912a528ce700e07ea52d7b",
+    "bytes": 35574,
+    "targets": 5,
+    "blocks": 40,
+    "unchanged_upstream_assets": 5,
+    "all_source_block_ids_retained": true,
+    "extension_count": 0,
+    "cloud_variable_count": 0,
+    "archive_crc": "pass",
+    "block_references": "pass",
+    "source_comment": "pass"
+  },
+  {
+    "slug": "catch-the-dots",
+    "sha256": "1f9deec63d7074aae73f7eb430fb2e4937274446eaf68b95f8303e7e423ac1ef",
+    "bytes": 13114,
+    "targets": 8,
+    "blocks": 129,
+    "unchanged_upstream_assets": 7,
+    "all_source_block_ids_retained": true,
+    "extension_count": 0,
+    "cloud_variable_count": 0,
+    "archive_crc": "pass",
+    "block_references": "pass",
+    "source_comment": "pass"
+  }
+]

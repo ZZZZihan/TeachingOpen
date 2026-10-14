@@ -25,8 +25,8 @@
           <a-card class="work-card">
             <div class="work-cover">
               <a @click="toDetail(item.id)" target="_blank" class="img-zoom">
-                <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" />
-                <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
+                <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" :alt="item.workName + '作品封面'" />
+                <img class="work-cover" v-else-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" :alt="item.workName + '作品封面'" />
               </a>
             </div>
             <a-divider></a-divider>

@@ -70,7 +70,7 @@ function caller (name, currentOrigin = origin) {
     .replace(/^\s*import [^\n]*$/gm, '').replace('export default', 'component =')
   const context = {
     component: null, URL, URLSearchParams, window: { location: { origin: currentOrigin } },
-    Vue: {}, mapGetters: () => ({}), QrCode: {}, Keyboard: {}, Header: {}, Footer: {}, UserEnter: {},
+    Vue: {}, mapGetters: () => ({}), QrCode: {}, Keyboard: {}, Header: {}, Footer: {}, UserEnter: {}, ShowcaseAttribution: {},
     moment () {}, getAction () {}, postAction () {}, getFileAccessHttpUrl: value => value,
     getFilePrevew: value => value
   }

@@ -1,0 +1,444 @@
+{
+  "verified_at_utc": "2026-10-14T05:24:37.080054+00:00",
+  "worktree_head_at_verification": "2ead7597f4443dceacc0ba2464bb1bb5f26d3f20",
+  "environment": "Real Chromium, unmodified TeachingOpen Scratch3 player served on local 127.0.0.1:18146; local project files; no production API/database/account writes.",
+  "player_resource_sha256": {
+    "scratch3/player.html": "414e5988be63cbd507db2bb663373a7fe1ea31ee0ad880467f71c34665818ecd",
+    "scratch3/player-bridge.js": "ed90eba4ee089f2f73361964ecf36a6a641140ec2833822c3dd3406ec4ace3c4",
+    "scratch3/player-layout.js": "778f3dc96356fe82b45216e8b0f047ee1dd7637403e35a13fb0bb3abe59f671c",
+    "scratch3/cloud-client.js": "326db0d51748b5ba03499ce8b2da23a61aa82f6676e3280e8628fa2a22ed2e72",
+    "scratch3/lib.min.js": "83a7bb1e001957303c4f609879d094886d1f4c51235161f3c9d9e2e2d28abf40",
+    "scratch3/chunks/player.js": "8eb8ca3e53f34c771c49e31833abc83aef7821506b61beafe46c066399a641f9",
+    "js/common.js": "332fbf27c8626a23db454737fac678a1e13013bcde9c58ebaf2835212c302a6d",
+    "js/jquery.min.js": "fc9a93dd241f6b045cbff0481cf4e1901becd0e12fb45166a8f17f95823f0b1a"
+  },
+  "candidate_files": [
+    {
+      "slug": "boat-race",
+      "file": "boat-race.sb3",
+      "sha256": "79cea250da8ff1c3241b2d67801a08da04662e8a2c912a528ce700e07ea52d7b",
+      "bytes": 35574,
+      "cover": "covers/boat-race.png",
+      "cover_sha256": "b30c666ddbc714d074b47b1d3588dee1ceed85c1b4be8cee9f6867f4dfff4e88",
+      "cover_dimensions": [
+        960,
+        720
+      ]
+    },
+    {
+      "slug": "catch-the-dots",
+      "file": "catch-the-dots.sb3",
+      "sha256": "1f9deec63d7074aae73f7eb430fb2e4937274446eaf68b95f8303e7e423ac1ef",
+      "bytes": 13114,
+      "cover": "covers/catch-the-dots.png",
+      "cover_sha256": "a5317f9bb4a7b317f93055cea165ba572f09fd70086ab34409554dfe850f4174",
+      "cover_dimensions": [
+        960,
+        720
+      ]
+    }
+  ],
+  "tests": {
+    "boat_real_mouse": {
+      "sourceProof": {
+        "url": "/showcase/boat-race.sb3",
+        "status": 200,
+        "bytes": 35574,
+        "sha256": "79cea250da8ff1c3241b2d67801a08da04662e8a2c912a528ce700e07ea52d7b"
+      },
+      "test": "actual player / mouse collision / stop / restart / SB3 export and reopen",
+      "start": {
+        "boat": {
+          "x": -190,
+          "y": -150,
+          "costume": 0
+        },
+        "intro": false,
+        "threads": 3
+      },
+      "hit": {
+        "x": -177,
+        "y": -150,
+        "costume": 1
+      },
+      "reset": {
+        "x": -190,
+        "y": -150,
+        "costume": 0
+      },
+      "stopped": {
+        "threads": 0,
+        "time": 2.800000000000001
+      },
+      "stoppedAgain": {
+        "threads": 0,
+        "time": 2.800000000000001
+      },
+      "restart": {
+        "x": -190,
+        "y": -150,
+        "costume": 0,
+        "time": 0
+      },
+      "reopened": {
+        "bytes": 35568,
+        "targets": [
+          "Stage",
+          "boat",
+          "gate",
+          "原作者署名",
+          "玩法与来源"
+        ],
+        "sourceComment": true
+      },
+      "reopenedStarted": true
+    },
+    "boat_finish_sensor": {
+      "sourceProof": {
+        "url": "/showcase/boat-race.sb3",
+        "status": 200,
+        "bytes": 35574,
+        "sha256": "79cea250da8ff1c3241b2d67801a08da04662e8a2c912a528ce700e07ea52d7b"
+      },
+      "test": "actual runtime finish color sensor and green-flag restart",
+      "setup": "VM boat.setXY(210,-135) to shorten traversal; collision/reset test uses real mouse only",
+      "ended": {
+        "x": 210,
+        "y": -135,
+        "threads": 0,
+        "time": 0.7
+      },
+      "restart": {
+        "x": -190,
+        "y": -150,
+        "threads": 3,
+        "time": 0
+      }
+    },
+    "catch_real_keyboard": {
+      "sourceProof": {
+        "url": "/showcase/catch-the-dots.sb3",
+        "status": 200,
+        "bytes": 13114,
+        "sha256": "1f9deec63d7074aae73f7eb430fb2e4937274446eaf68b95f8303e7e423ac1ef"
+      },
+      "test": "actual player / keyboard controls / scoring / wrong-color lives / end / stop / restart / SB3 export and reopen",
+      "initial": {
+        "values": {
+          "剩余机会": 3,
+          "分数": 0,
+          "生成间隔": 8,
+          "文件内最佳": 0,
+          "start positions": [
+            "-180",
+            "180"
+          ],
+          "showcase-game-over": "showcase-game-over"
+        },
+        "direction": 165,
+        "dots": [],
+        "threads": 6,
+        "intro": false,
+        "endVisible": false
+      },
+      "right": {
+        "values": {
+          "剩余机会": 3,
+          "分数": 0,
+          "生成间隔": 8,
+          "文件内最佳": 0,
+          "start positions": [
+            "-180",
+            "180"
+          ],
+          "showcase-game-over": "showcase-game-over"
+        },
+        "direction": -159,
+        "dots": [],
+        "threads": 6,
+        "intro": false,
+        "endVisible": false
+      },
+      "left": {
+        "values": {
+          "剩余机会": 3,
+          "分数": 0,
+          "生成间隔": 8,
+          "文件内最佳": 0,
+          "start positions": [
+            "-180",
+            "180"
+          ],
+          "showcase-game-over": "showcase-game-over"
+        },
+        "direction": 162,
+        "dots": [],
+        "threads": 6,
+        "intro": false,
+        "endVisible": false
+      },
+      "transitions": [
+        {
+          "elapsed": 7404,
+          "values": {
+            "剩余机会": 3,
+            "分数": 1,
+            "生成间隔": 8,
+            "文件内最佳": 0,
+            "start positions": [
+              "-180",
+              "180"
+            ],
+            "showcase-game-over": "showcase-game-over"
+          },
+          "direction": -78,
+          "dots": [
+            {
+              "name": "red",
+              "x": 39.60980300260479,
+              "y": -39.376962549039135,
+              "distance": 60.094943770698826
+            },
+            {
+              "name": "yellow",
+              "x": -85.95479810218842,
+              "y": 85.95479810218842,
+              "distance": 117.31580054003676
+            },
+            {
+              "name": "blue",
+              "x": 128.23997787469716,
+              "y": -127.52281952565585,
+              "distance": 185.0949437706982
+            }
+          ],
+          "threads": 9,
+          "intro": false,
+          "endVisible": false
+        },
+        {
+          "elapsed": 9155,
+          "values": {
+            "剩余机会": 2,
+            "分数": 1,
+            "生成间隔": 7.5,
+            "文件内最佳": 0,
+            "start positions": [
+              "-180",
+              "180"
+            ],
+            "showcase-game-over": "showcase-game-over"
+          },
+          "direction": 81,
+          "dots": [
+            {
+              "name": "yellow",
+              "x": -45.64971157455506,
+              "y": 45.64971157455506,
+              "distance": 60.31580054003654
+            },
+            {
+              "name": "blue",
+              "x": 90.6607837289301,
+              "y": -90.14897616757037,
+              "distance": 132.09494377069853
+            },
+            {
+              "name": "red",
+              "x": -177.87867965644034,
+              "y": 177.87867965644034,
+              "distance": 247.31580054003783
+            }
+          ],
+          "threads": 9,
+          "intro": false,
+          "endVisible": false
+        },
+        {
+          "elapsed": 11426,
+          "values": {
+            "剩余机会": 1,
+            "分数": 1,
+            "生成间隔": 7.5,
+            "文件内最佳": 0,
+            "start positions": [
+              "-180",
+              "180"
+            ],
+            "showcase-game-over": "showcase-game-over"
+          },
+          "direction": 165,
+          "dots": [
+            {
+              "name": "blue",
+              "x": 39.60980300260479,
+              "y": -39.376962549039135,
+              "distance": 60.094943770698826
+            },
+            {
+              "name": "red",
+              "x": -129.08831175456817,
+              "y": 129.08831175456817,
+              "distance": 178.31580054003726
+            },
+            {
+              "name": "yellow",
+              "x": -172.22182540694791,
+              "y": 172.22182540694791,
+              "distance": 239.31580054003774
+            }
+          ],
+          "threads": 9,
+          "intro": false,
+          "endVisible": false
+        },
+        {
+          "elapsed": 15158,
+          "values": {
+            "剩余机会": 0,
+            "分数": 1,
+            "生成间隔": 7.5,
+            "文件内最佳": 0,
+            "start positions": [
+              "-180",
+              "180"
+            ],
+            "showcase-game-over": "showcase-game-over"
+          },
+          "direction": -135,
+          "dots": [
+            {
+              "name": "red",
+              "x": -46.35681835574161,
+              "y": 46.35681835574161,
+              "distance": 61.31580054003654
+            },
+            {
+              "name": "yellow",
+              "x": -92.3187591328674,
+              "y": 92.3187591328674,
+              "distance": 126.31580054003683
+            },
+            {
+              "name": "blue",
+              "x": 133.9973075899925,
+              "y": 135.50559258704197,
+              "distance": 190.59379411132505
+            }
+          ],
+          "threads": 9,
+          "intro": false,
+          "endVisible": false
+        }
+      ],
+      "ended": {
+        "values": {
+          "剩余机会": 0,
+          "分数": 1,
+          "生成间隔": 7.5,
+          "文件内最佳": 1,
+          "start positions": [
+            "-180",
+            "180"
+          ],
+          "showcase-game-over": "showcase-game-over"
+        },
+        "direction": -135,
+        "dots": [],
+        "threads": 0,
+        "intro": false,
+        "endVisible": true
+      },
+      "restart": {
+        "values": {
+          "剩余机会": 3,
+          "分数": 0,
+          "生成间隔": 8,
+          "文件内最佳": 1,
+          "start positions": [
+            "-180",
+            "180"
+          ],
+          "showcase-game-over": "showcase-game-over"
+        },
+        "direction": 165,
+        "dots": [],
+        "threads": 6,
+        "intro": false,
+        "endVisible": false
+      },
+      "stopped": {
+        "values": {
+          "剩余机会": 3,
+          "分数": 0,
+          "生成间隔": 8,
+          "文件内最佳": 1,
+          "start positions": [
+            "-180",
+            "180"
+          ],
+          "showcase-game-over": "showcase-game-over"
+        },
+        "direction": 165,
+        "dots": [],
+        "threads": 0,
+        "intro": false,
+        "endVisible": false
+      },
+      "reopened": {
+        "bytes": 13114,
+        "sourceComment": true,
+        "best": 1
+      },
+      "reopenedStarted": {
+        "values": {
+          "剩余机会": 3,
+          "分数": 0,
+          "生成间隔": 8,
+          "文件内最佳": 1,
+          "start positions": [
+            "-180",
+            "180"
+          ],
+          "showcase-game-over": "showcase-game-over"
+        },
+        "direction": 165,
+        "dots": [],
+        "threads": 6,
+        "intro": false,
+        "endVisible": false
+      }
+    }
+  },
+  "scope_boundaries": [
+    "Boat collision/reset uses actual browser mouse input.",
+    "Boat finish test uses real color sensor and runtime, with VM boat.setXY(210,-135) fixture after green-flag initialization; no full mouse course traversal claimed.",
+    "Catch scoring and failures use actual ArrowLeft/ArrowRight browser key events; VM read-only inspection observes state.",
+    "Export/reopen bytes are runtime snapshots and can differ from uploaded source candidate bytes; sourceProof binds every behavior test to the uploaded candidate URL bytes and SHA256.",
+    "Complete SPA/API upload, production publication and human acceptance are main-agent integration work, not claimed here."
+  ],
+  "rebuild_note": "The final rebuild only adds manifest cover metadata. SB3 ZIP timestamps/order are fixed by adapt.py; the final SB3 hashes remain byte-for-byte equal to the earlier tested candidates. Behavior tests were rerun with browser WebCrypto SHA256 of actual URL response bytes after that rebuild.",
+  "retained_fixture_failures": [
+    {
+      "file": "boat-browser-check-attempt-title-selector.txt",
+      "reason": "Player flag uses title, not alt; corrected locator to observed title."
+    },
+    {
+      "file": "catch-browser-check-attempt-number-coercion.txt",
+      "reason": "Original Scratch literal variables initially use numeric strings; test coerces to Number before numeric assertions."
+    },
+    {
+      "file": "catch-browser-check-attempt-reused-high-score.txt",
+      "reason": "Previous test left file-session best score; final case reloads the original candidate before asserting high-score update."
+    },
+    {
+      "file": "boat-finish-sensor-attempt-green-flag-race.txt",
+      "reason": "Fixture position was overwritten by original green-flag initialization; final test waits for initialization before fixture injection."
+    }
+  ],
+  "validation_scripts": {
+    "check-catch.browser.js": "c5f3ba8764185a9457830c71a620934c8b742018bbfbdc7ef050443bec387b24",
+    "check-boat.browser.js": "2305f751590613485a53b9a169c7bc021d8a01b7624928790043f7492031ba15",
+    "check-boat-finish.browser.js": "53fbfbf6f860b3be95b22c1265f55b0bba17d1b8ded3fa6fe2e6e72503bc3e63"
+  }
+}

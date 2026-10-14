@@ -21,8 +21,8 @@
           <a-col v-for="(item, index) in datasource" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
             <a-card class="work-card">
               <a @click="toDetail(item.id)" target="_blank">
-                <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" />
-                <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
+                <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" :alt="item.workName + '作品封面'" />
+                <img class="work-cover" v-else-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" :alt="item.workName + '作品封面'" />
               </a>
               <div class="work-info">
                 <a-row type="flex" justify="space-between">

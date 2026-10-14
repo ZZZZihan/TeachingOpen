@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "works": [
+    {
+      "slug": "rainbow-spiral",
+      "title": "彩虹螺旋",
+      "language": "Python",
+      "file": "rainbow_spiral.py",
+      "sha256": "d9c0d8801df6c310814d548c89ee0400ef27788ae0b4a64548654190d91d68fa",
+      "cover": "covers/rainbow_spiral.png",
+      "cover_sha256": "7ac5c89a309588bd95bf624813f36b2f279ca8f3111e781d0ed6c6eb6046cced",
+      "cover_dimensions": [
+        480,
+        360
+      ],
+      "original_authors": "Raspberry Pi Foundation",
+      "source_url": "https://projects.raspberrypi.org/en/projects/turtley-amazing/0",
+      "source_repository": "https://github.com/raspberrypilearning/turtley-amazing",
+      "source_commit": "016d7f426489921e47b31a486b78abe7ce4b3e5f",
+      "source_commit_url": "https://github.com/raspberrypilearning/turtley-amazing/tree/016d7f426489921e47b31a486b78abe7ce4b3e5f",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "adaptation_licence": "CC BY-SA 4.0",
+      "adaptation_summary": "依据教程循环、转角、增长步长及颜色列表取模思路编写；新增深蓝配色、有限动画、等比布局与署名；没有把 Hello World starter 当作完整原作。",
+      "upstream_licence": {
+        "url": "https://github.com/raspberrypilearning/turtley-amazing/blob/016d7f426489921e47b31a486b78abe7ce4b3e5f/LICENCE.md",
+        "local_file": "licenses/turtley-amazing-LICENCE.md",
+        "sha256": "fb7d9f065e022351cd4848ad6162084067aeea98272ed63f91c554bb9a3b4d78",
+        "preserved_verbatim": true
+      },
+      "upstream_files": [
+        {
+          "path": "en/code/complete/main.py",
+          "url": "https://github.com/raspberrypilearning/turtley-amazing/blob/016d7f426489921e47b31a486b78abe7ce4b3e5f/en/code/complete/main.py",
+          "local_file": "provenance/turtley-amazing-main.py.txt",
+          "sha256": "76388dc9b24819319b2def23f485fb7b39e003e379474bdfeb255428bad87ce6",
+          "preserved_verbatim": true
+        },
+        {
+          "path": "en/step_6.md",
+          "url": "https://github.com/raspberrypilearning/turtley-amazing/blob/016d7f426489921e47b31a486b78abe7ce4b3e5f/en/step_6.md",
+          "local_file": "provenance/turtley-amazing-step-6.md",
+          "sha256": "2394d95c1ec72a2624114956d24f46cfb23e370984ce8663f2dc7afd1ee68f45",
+          "preserved_verbatim": true
+        },
+        {
+          "path": "en/step_7.md",
+          "url": "https://github.com/raspberrypilearning/turtley-amazing/blob/016d7f426489921e47b31a486b78abe7ce4b3e5f/en/step_7.md",
+          "local_file": "provenance/turtley-amazing-step-7.md",
+          "sha256": "ee1e77dbbd3d5ff19283ed0557e27cb3d3b41a3cddea0c88e2d69e5505d4d424",
+          "preserved_verbatim": true
+        },
+        {
+          "path": "en/step_8.md",
+          "url": "https://github.com/raspberrypilearning/turtley-amazing/blob/016d7f426489921e47b31a486b78abe7ce4b3e5f/en/step_8.md",
+          "local_file": "provenance/turtley-amazing-step-8.md",
+          "sha256": "c41b3f282e6cd41d93c29c0594e81dbafe0d909d5451072c2129d63f34c5e6c3",
+          "preserved_verbatim": true
+        }
+      ]
+    },
+    {
+      "slug": "colourful-snowflakes",
+      "title": "缤纷雪花",
+      "language": "Python",
+      "file": "colourful_snowflakes.py",
+      "sha256": "b0bc687e06d9dc87f014763b09a7e7e8cfdebe69ec93accf37488263e649158c",
+      "cover": "covers/colourful_snowflakes.png",
+      "cover_sha256": "2c30ec825e9e00fa436f94d3396768722de0b31216f621cfdd6f799028e3717a",
+      "cover_dimensions": [
+        480,
+        360
+      ],
+      "original_authors": "Carrie Anne Philbin / Geek Gurl Diaries + Raspberry Pi Foundation",
+      "source_url": "https://github.com/raspberrypilearning/turtle-snowflakes/blob/master/code/snowflake.py",
+      "source_repository": "https://github.com/raspberrypilearning/turtle-snowflakes",
+      "source_commit": "e80a75fdcbc35b94bf20c52b064aec54a6716d78",
+      "source_commit_url": "https://github.com/raspberrypilearning/turtle-snowflakes/tree/e80a75fdcbc35b94bf20c52b064aec54a6716d78",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "adaptation_licence": "CC BY-SA 4.0",
+      "adaptation_summary": "保留函数与八向重复分枝思路；将枝条改为对称图形，随机20朵改为固定6朵构图；新增有限动画、深蓝配色、等比布局与署名，移除 exitonclick。",
+      "upstream_licence": {
+        "url": "https://github.com/raspberrypilearning/turtle-snowflakes/blob/e80a75fdcbc35b94bf20c52b064aec54a6716d78/LICENCE.md",
+        "local_file": "licenses/turtle-snowflakes-LICENCE.md",
+        "sha256": "b26afad7fe4ea6a56fee2b4e9a975353b5e0b93a8a9cac8658f299d173d9e8ac",
+        "preserved_verbatim": true
+      },
+      "upstream_files": [
+        {
+          "path": "code/snowflake.py",
+          "url": "https://github.com/raspberrypilearning/turtle-snowflakes/blob/e80a75fdcbc35b94bf20c52b064aec54a6716d78/code/snowflake.py",
+          "local_file": "provenance/turtle-snowflakes-original.py.txt",
+          "sha256": "66283b5eac398b2abd282a5a8cd289b6426beca13e9f6d78d51756e9ca96a991",
+          "preserved_verbatim": true
+        }
+      ]
+    },
+    {
+      "slug": "turtle-race",
+      "title": "海龟赛跑",
+      "language": "Python",
+      "file": "turtle_race.py",
+      "sha256": "c5422968733c92c206f42f3984b757da44d3058a7f588c3fb7e8092b7d8d5589",
+      "cover": "covers/turtle_race.png",
+      "cover_sha256": "63660954418817df758a4ed8866548e6757eeac688ef815ce421562adc65c2bd",
+      "cover_dimensions": [
+        480,
+        360
+      ],
+      "original_authors": "Raspberry Pi Foundation",
+      "source_url": "https://github.com/raspberrypilearning/turtle-race/blob/master/en/resources/turtle-race-finished-turtle-race.py",
+      "source_repository": "https://github.com/raspberrypilearning/turtle-race",
+      "source_commit": "8aa4a42fa3cc7460e00776c7d1bcb8818a5b7f21",
+      "source_commit_url": "https://github.com/raspberrypilearning/turtle-race/tree/8aa4a42fa3cc7460e00776c7d1bcb8818a5b7f21",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "adaptation_licence": "CC BY-SA 4.0",
+      "adaptation_summary": "保留4只海龟和随机步长；新增80轮上限、准确终点、胜者提示、赛道、深蓝配色、等比布局与署名。",
+      "upstream_licence": {
+        "url": "https://github.com/raspberrypilearning/turtle-race/blob/8aa4a42fa3cc7460e00776c7d1bcb8818a5b7f21/LICENSE.md",
+        "local_file": "licenses/turtle-race-LICENSE.md",
+        "sha256": "d7e8df7cea058f481c9b10dc9b1c9df69987f052ed9247cd6eddbf3dcd0bd070",
+        "preserved_verbatim": true
+      },
+      "upstream_files": [
+        {
+          "path": "en/resources/turtle-race-finished-turtle-race.py",
+          "url": "https://github.com/raspberrypilearning/turtle-race/blob/8aa4a42fa3cc7460e00776c7d1bcb8818a5b7f21/en/resources/turtle-race-finished-turtle-race.py",
+          "local_file": "provenance/turtle-race-original.py.txt",
+          "sha256": "036b2e9ce6c0f753e254f2b8f75b8f027b452c4870850b989deda7ae4ea42e56",
+          "preserved_verbatim": true
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "browser": "browser-validation.json",
+    "static": "static-checks.json"
+  },
+  "licence_note": "上游3份许可原文均将许可证图片及目标链接指向 /licenses/by-sa/4.0/，正文标签却误写为 Attribution 4.0；这里按明确链接保留 CC BY-SA 4.0，原文不改写。"
+}
