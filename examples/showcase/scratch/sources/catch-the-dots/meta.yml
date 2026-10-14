@@ -1,0 +1,23 @@
+---
+hero_image: images/banner.png
+listed: true
+copyedit: false
+title: Catch the dots
+description: Make a dot-catching game
+version: 4.0.0
+last_tested: 2018-10-16
+steps:
+- title: Introduction
+- title: Create a controller
+- title: Gain points or lose lives
+  completion:
+  - engaged
+- title: More dots
+- title: Increase the difficulty
+- title: 'Challenge: faster dots'
+- title: High score
+  completion:
+  - internal
+- title: 'Challenge: improve your game!'
+  completion:
+  - external

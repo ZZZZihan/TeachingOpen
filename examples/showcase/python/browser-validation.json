@@ -1,0 +1,262 @@
+{
+  "checked_at": "2026-10-14T05:15:11.987003+00:00",
+  "environment": "Owned Chromium desktop session python-showcase; loopback static server 127.0.0.1:18214; shipped player, worker and renderer; no API or production write",
+  "runner_origin": "web/public/python/player.html",
+  "scope": "3 actual source loads; each desktop run then same-page rerun, and mobile reload and run; 9 executions; covers are cropped directly from final desktop drawing area",
+  "covers": {
+    "dimensions": [
+      480,
+      360
+    ],
+    "method": "Playwright screenshot clip of actual final player frame, no redrawing"
+  },
+  "limitations": [
+    "Not a full SPA work-detail flow or production publication check",
+    "No human acceptance or classroom trial"
+  ],
+  "runs": [
+    {
+      "name": "rainbow_spiral",
+      "viewport": {
+        "width": 900,
+        "height": 760
+      },
+      "run": 1,
+      "state": {
+        "runId": "c04fa02e7847b9e7437dbebda2662ef9",
+        "pendingRunId": null,
+        "state": "completed",
+        "remainingMs": 28626
+      },
+      "output": "Original: Turtley Amazing - Raspberry Pi Foundation\nSource: https://projects.raspberrypi.org/en/projects/turtley-amazing/0\nLicence: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/\nFinished. Try changing the turn angle or the colour list, then run again.\n",
+      "frame": {
+        "x": 1,
+        "y": 206.5,
+        "width": 898,
+        "height": 360,
+        "top": 206.5,
+        "right": 899,
+        "bottom": 566.5,
+        "left": 1
+      },
+      "source_sha256": "d9c0d8801df6c310814d548c89ee0400ef27788ae0b4a64548654190d91d68fa",
+      "elapsed_compute_ms": 1374
+    },
+    {
+      "name": "rainbow_spiral",
+      "viewport": {
+        "width": 900,
+        "height": 760
+      },
+      "run": 2,
+      "state": {
+        "runId": "fa956ac0fd92b42f81e1b7936373122a",
+        "pendingRunId": null,
+        "state": "completed",
+        "remainingMs": 28628
+      },
+      "output": "Original: Turtley Amazing - Raspberry Pi Foundation\nSource: https://projects.raspberrypi.org/en/projects/turtley-amazing/0\nLicence: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/\nFinished. Try changing the turn angle or the colour list, then run again.\n",
+      "frame": {
+        "x": 1,
+        "y": 206.5,
+        "width": 898,
+        "height": 360,
+        "top": 206.5,
+        "right": 899,
+        "bottom": 566.5,
+        "left": 1
+      },
+      "source_sha256": "d9c0d8801df6c310814d548c89ee0400ef27788ae0b4a64548654190d91d68fa",
+      "elapsed_compute_ms": 1372
+    },
+    {
+      "name": "rainbow_spiral",
+      "viewport": {
+        "width": 390,
+        "height": 760
+      },
+      "run": 1,
+      "state": {
+        "runId": "71f1b9ab982cfb5af1ed6c9dc80b16ef",
+        "pendingRunId": null,
+        "state": "completed",
+        "remainingMs": 28612
+      },
+      "output": "Original: Turtley Amazing - Raspberry Pi Foundation\nSource: https://projects.raspberrypi.org/en/projects/turtley-amazing/0\nLicence: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/\nFinished. Try changing the turn angle or the colour list, then run again.\n",
+      "frame": {
+        "x": 1,
+        "y": 224.5,
+        "width": 388,
+        "height": 300,
+        "top": 224.5,
+        "right": 389,
+        "bottom": 524.5,
+        "left": 1
+      },
+      "source_sha256": "d9c0d8801df6c310814d548c89ee0400ef27788ae0b4a64548654190d91d68fa",
+      "elapsed_compute_ms": 1388
+    },
+    {
+      "name": "colourful_snowflakes",
+      "viewport": {
+        "width": 900,
+        "height": 760
+      },
+      "run": 1,
+      "state": {
+        "runId": "f8785572fbf1b88eddf07622373fce5c",
+        "pendingRunId": null,
+        "state": "completed",
+        "remainingMs": 24822
+      },
+      "output": "Original: Carrie Anne Philbin / Geek Gurl Diaries + Raspberry Pi Foundation\nSource: https://github.com/raspberrypilearning/turtle-snowflakes/blob/master/code/snowflake.py\nOriginal video: https://www.youtube.com/watch?v=DHmeX7YTHBY\nLicence: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/\nFinished. Change a position, length or colour in the snowflakes list and run again.\n",
+      "frame": {
+        "x": 1,
+        "y": 206.5,
+        "width": 898,
+        "height": 360,
+        "top": 206.5,
+        "right": 899,
+        "bottom": 566.5,
+        "left": 1
+      },
+      "source_sha256": "b0bc687e06d9dc87f014763b09a7e7e8cfdebe69ec93accf37488263e649158c",
+      "elapsed_compute_ms": 5178
+    },
+    {
+      "name": "colourful_snowflakes",
+      "viewport": {
+        "width": 900,
+        "height": 760
+      },
+      "run": 2,
+      "state": {
+        "runId": "fa94c1342e085fc1cb1c7ff7c0dc573f",
+        "pendingRunId": null,
+        "state": "completed",
+        "remainingMs": 24822
+      },
+      "output": "Original: Carrie Anne Philbin / Geek Gurl Diaries + Raspberry Pi Foundation\nSource: https://github.com/raspberrypilearning/turtle-snowflakes/blob/master/code/snowflake.py\nOriginal video: https://www.youtube.com/watch?v=DHmeX7YTHBY\nLicence: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/\nFinished. Change a position, length or colour in the snowflakes list and run again.\n",
+      "frame": {
+        "x": 1,
+        "y": 206.5,
+        "width": 898,
+        "height": 360,
+        "top": 206.5,
+        "right": 899,
+        "bottom": 566.5,
+        "left": 1
+      },
+      "source_sha256": "b0bc687e06d9dc87f014763b09a7e7e8cfdebe69ec93accf37488263e649158c",
+      "elapsed_compute_ms": 5178
+    },
+    {
+      "name": "colourful_snowflakes",
+      "viewport": {
+        "width": 390,
+        "height": 760
+      },
+      "run": 1,
+      "state": {
+        "runId": "ded1c1ae096289b2a9030e5f36140260",
+        "pendingRunId": null,
+        "state": "completed",
+        "remainingMs": 24846
+      },
+      "output": "Original: Carrie Anne Philbin / Geek Gurl Diaries + Raspberry Pi Foundation\nSource: https://github.com/raspberrypilearning/turtle-snowflakes/blob/master/code/snowflake.py\nOriginal video: https://www.youtube.com/watch?v=DHmeX7YTHBY\nLicence: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/\nFinished. Change a position, length or colour in the snowflakes list and run again.\n",
+      "frame": {
+        "x": 1,
+        "y": 224.5,
+        "width": 388,
+        "height": 300,
+        "top": 224.5,
+        "right": 389,
+        "bottom": 524.5,
+        "left": 1
+      },
+      "source_sha256": "b0bc687e06d9dc87f014763b09a7e7e8cfdebe69ec93accf37488263e649158c",
+      "elapsed_compute_ms": 5154
+    },
+    {
+      "name": "turtle_race",
+      "viewport": {
+        "width": 900,
+        "height": 760
+      },
+      "run": 1,
+      "state": {
+        "runId": "12922b75fd59ec16eeb111fbac0ae83c",
+        "pendingRunId": null,
+        "state": "completed",
+        "remainingMs": 26992
+      },
+      "output": "Original: Turtle Race - Raspberry Pi Foundation\nSource: https://github.com/raspberrypilearning/turtle-race/blob/master/en/resources/turtle-race-finished-turtle-race.py\nLicence: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/\nVIOLET wins! Run again for a new race.\n",
+      "frame": {
+        "x": 1,
+        "y": 206.5,
+        "width": 898,
+        "height": 360,
+        "top": 206.5,
+        "right": 899,
+        "bottom": 566.5,
+        "left": 1
+      },
+      "source_sha256": "c5422968733c92c206f42f3984b757da44d3058a7f588c3fb7e8092b7d8d5589",
+      "elapsed_compute_ms": 3008
+    },
+    {
+      "name": "turtle_race",
+      "viewport": {
+        "width": 900,
+        "height": 760
+      },
+      "run": 2,
+      "state": {
+        "runId": "f770df5937c1c4b0fd2ff6294d538872",
+        "pendingRunId": null,
+        "state": "completed",
+        "remainingMs": 26908
+      },
+      "output": "Original: Turtle Race - Raspberry Pi Foundation\nSource: https://github.com/raspberrypilearning/turtle-race/blob/master/en/resources/turtle-race-finished-turtle-race.py\nLicence: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/\nGOLD wins! Run again for a new race.\n",
+      "frame": {
+        "x": 1,
+        "y": 206.5,
+        "width": 898,
+        "height": 360,
+        "top": 206.5,
+        "right": 899,
+        "bottom": 566.5,
+        "left": 1
+      },
+      "source_sha256": "c5422968733c92c206f42f3984b757da44d3058a7f588c3fb7e8092b7d8d5589",
+      "elapsed_compute_ms": 3092
+    },
+    {
+      "name": "turtle_race",
+      "viewport": {
+        "width": 390,
+        "height": 760
+      },
+      "run": 1,
+      "state": {
+        "runId": "43c699c439502bd3fa661233709506b1",
+        "pendingRunId": null,
+        "state": "completed",
+        "remainingMs": 26872
+      },
+      "output": "Original: Turtle Race - Raspberry Pi Foundation\nSource: https://github.com/raspberrypilearning/turtle-race/blob/master/en/resources/turtle-race-finished-turtle-race.py\nLicence: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/\nVIOLET wins! Run again for a new race.\n",
+      "frame": {
+        "x": 1,
+        "y": 224.5,
+        "width": 388,
+        "height": 300,
+        "top": 224.5,
+        "right": 389,
+        "bottom": 524.5,
+        "left": 1
+      },
+      "source_sha256": "c5422968733c92c206f42f3984b757da44d3058a7f588c3fb7e8092b7d8d5589",
+      "elapsed_compute_ms": 3128
+    }
+  ]
+}
