@@ -22,9 +22,10 @@ from media_index_fixture import media_index_snapshot, rebuild_media_index_after_
 
 BASE = '/teaching/teachingDepartDayLog/unitViewLog?'
 CLASSES = ('fixture_class_a', 'fixture_class_b')
-TABLES = {'teaching_course_unit': 'id', 'teaching_course_dept': 'id',
+TABLES = {'teaching_course': 'id', 'teaching_course_unit': 'id', 'teaching_course_dept': 'id',
           'sys_user_depart': 'ID', 'teaching_depart_day_log': 'id',
-          'teaching_unit_view_event': 'depart_id,unit_id'}
+          'teaching_unit_view_event': 'depart_id,unit_id', 'sys_user': 'id',
+          'sys_role': 'id', 'sys_user_role': 'id'}
 
 
 def literal(value):
@@ -42,8 +43,8 @@ def verify(args):
         'production_connected': False, 'checks': checks, 'audit_logs_retained': True,
         'counting_identity': 2, 'counting_identity_meaning': 'superior; ordinary student identity 1 remains a no-op'}
 
-    def check(name, passed):
-        checks.append({'case': name, 'passed': bool(passed)})
+    def check(name, passed, **details):
+        checks.append({'case': name, 'passed': bool(passed), **details})
         print(('PASS ' if passed else 'FAIL ') + name, flush=True)
         if not passed:
             raise AssertionError(name)
@@ -81,13 +82,25 @@ def verify(args):
                 if api.cache('TYPE', key) not in ('none', 'set') or api.cache('PTTL', key) not in ('-1', '-2'):
                     raise RuntimeError('Expected a persistent legacy set or an absent owned fixture key')
                 original_cache[key] = dump(key)
+            for actor in ('admin','teacher_a','teacher_b','student_a','student_b'):
+                api.login(actor)
+            # Real login selects a single department's org_code. Bind the full
+            # account/table baseline after authentication, before fixture writes.
             original = db_snapshot()
             original_media_index = media_index_snapshot(sql) if has_media_index else None
+            report['baseline_phase'] = 'after real fixture logins, before probe fixture writes'
             report['baseline_sha256'] = original
             report['initial_ledger_rows'] = int(sql('SELECT COUNT(*) FROM teaching_unit_view_event'))
             audit_count = int(sql('SELECT COUNT(*) FROM sys_log'))
-            if sql("SELECT id,user_identity FROM sys_user WHERE id IN ('fixture_teacher_a','fixture_teacher_b','fixture_student_a','fixture_student_b') ORDER BY id") != 'fixture_student_a\t1\nfixture_student_b\t1\nfixture_teacher_a\t2\nfixture_teacher_b\t2':
+            if sql("SELECT id,user_identity FROM sys_user WHERE id IN ('fixture_admin','fixture_teacher_a','fixture_teacher_b','fixture_student_a','fixture_student_b') ORDER BY id") != 'fixture_admin\t2\nfixture_student_a\t1\nfixture_student_b\t1\nfixture_teacher_a\t2\nfixture_teacher_b\t2':
                 raise RuntimeError('The canonical fixture identity contract changed')
+            original_admin_role = sql("SELECT role_id FROM sys_user_role WHERE id='role_fixture_admin'")
+            if original_admin_role != 'fixture_role_admin':
+                raise RuntimeError('Expected the canonical synthetic administrator role')
+            if sql("SELECT COUNT(*) FROM teaching_course_dept assignment JOIN sys_user_depart membership "
+                    "ON membership.dep_id=assignment.dept_id WHERE membership.user_id='fixture_admin' "
+                    "AND assignment.course_id='fixture_course_a'") != '0':
+                raise RuntimeError('The administrator preview regression requires no applicable assigned class')
             if sql("SELECT COUNT(*) FROM sys_depart WHERE id IN ('fixture_class_a','fixture_class_b') AND del_flag='0'") != '2':
                 raise RuntimeError('The exact active class fixtures are required')
             fields = [row.split('\t')[0] for row in sql('SHOW COLUMNS FROM teaching_depart_day_log').splitlines()]
@@ -96,7 +109,9 @@ def verify(args):
             saved_logs = sql('SELECT ' + ','.join("IFNULL(HEX(CAST(`" + column + "` AS BINARY)),'NULL')" for column in fields)
                 + " FROM teaching_depart_day_log WHERE depart_id IN ('fixture_class_a','fixture_class_b') ORDER BY id").splitlines()
             prefix = 'unitview_' + uuid4().hex[:12]
-            units = {kind: prefix + '_' + kind for kind in ('first', 'parallel', 'cross', 'legacy')}
+            units = {kind: prefix + '_' + kind for kind in ('first', 'parallel', 'cross', 'legacy', 'shared', 'deleted', 'deleted_course')}
+            shared_course = prefix + '_sc'; deleted_course = prefix + '_dc'
+            dev_role = prefix + '_dev'
             membership = prefix + '_member'; assignment = prefix + '_assignment'
             def counter(department):
                 return int(sql('SELECT COALESCE(SUM(unit_open_count),0) FROM teaching_depart_day_log WHERE depart_id=' + literal(department)))
@@ -111,6 +126,16 @@ def verify(args):
                 return response[0] == 200 and isinstance(response[1], dict) and response[1].get('success') is True and response[1].get('code') == 200
             def conflict(response):
                 return response[0] == 200 and isinstance(response[1], dict) and response[1].get('success') is False and response[1].get('code') == 409
+            def denied(response):
+                return response[0] in (200, 401, 403) and isinstance(response[1], dict) and response[1].get('success') is False
+            def without_writes(name, action, predicate):
+                before = db_snapshot()
+                cache_before = {key: dump(key) for key in keys}
+                response = action()
+                check(name, predicate(response), http_status=response[0],
+                    business_code=response[1].get('code') if isinstance(response[1], dict) else None)
+                check(name + ' changes no business rows or legacy cache', db_snapshot() == before
+                    and all(dump(key) == value for key, value in cache_before.items()))
             def concurrent(unit, actors):
                 barrier = Barrier(len(actors))
                 def request(actor):
@@ -121,11 +146,41 @@ def verify(args):
                 return all(accepted(response) for response in replies)
 
             try:
-                for actor in ('teacher_a','teacher_b','student_a','student_b'):
-                    api.login(actor)
+                sql('INSERT INTO teaching_course(id,course_name,is_shared,del_flag) VALUES('
+                    + literal(shared_course) + ",'共享预览合成课程',1,0),(" + literal(deleted_course) + ",'已删除合成课程',1,1)")
                 for kind, unit in units.items():
+                    course = shared_course if kind == 'shared' else deleted_course if kind == 'deleted_course' else 'fixture_course_a'
                     sql('INSERT INTO teaching_course_unit(id,course_id,unit_name,unit_intro,course_video,show_course_plan,del_flag) VALUES('
-                        + literal(unit) + ",'fixture_course_a'," + literal('合成统计验收 ' + kind) + ",'正文阅读不依赖统计','[]',0,0)")
+                        + literal(unit) + ',' + literal(course) + ',' + literal('合成统计验收 ' + kind)
+                        + ",'正文阅读不依赖统计','[]',0," + ('1' if kind == 'deleted' else '0') + ')')
+
+                # Preview authorization is distinct from choosing a class to count.
+                # These requests run before the second class is assigned below.
+                without_writes('unassigned identity 2 administrator previews private unit successfully',
+                    lambda: send(units['first'], 'admin'), accepted)
+                without_writes('administrator preview retry remains a successful non-counting operation',
+                    lambda: send(units['first'], 'admin'), accepted)
+                for actor in ('teacher_b', 'student_b'):
+                    without_writes(actor + ' may view a shared unassigned unit without invented class counts',
+                        lambda actor=actor: send(units['shared'], actor), accepted)
+                    without_writes(actor + ' cannot log a cross-class private unit',
+                        lambda actor=actor: send(units['first'], actor),
+                        lambda response: denied(response) and response[1].get('code') == 510)
+                without_writes('anonymous unit logging is rejected', lambda: send(units['first'], None),
+                    lambda response: denied(response) and response[0] == 401)
+                for actor in ('admin', 'teacher_a', 'student_a'):
+                    for kind in ('deleted', 'deleted_course'):
+                        without_writes(actor + ' cannot log a ' + kind + ' unit',
+                            lambda actor=actor, kind=kind: send(units[kind], actor), denied)
+                sql('INSERT INTO sys_role(id,role_code,role_name) VALUES (' + literal(dev_role)
+                    + ",'dev','统计预览临时开发角色'); UPDATE sys_user_role SET role_id=" + literal(dev_role)
+                    + " WHERE id='role_fixture_admin'")
+                api.request('GET', '/sys/logout', 'admin'); api.login('admin')
+                without_writes('dev-only identity 2 account previews an unassigned private unit successfully',
+                    lambda: send(units['first'], 'admin'), accepted)
+                sql("UPDATE sys_user_role SET role_id=" + literal(original_admin_role)
+                    + " WHERE id='role_fixture_admin'; DELETE FROM sys_role WHERE id=" + literal(dev_role))
+                api.request('GET', '/sys/logout', 'admin'); api.login('admin')
                 sql('INSERT INTO teaching_course_dept(id,dept_id,course_id,open_time) VALUES (' + literal(assignment)
                     + ",'fixture_class_b','fixture_course_a','2026-01-01 00:00:00')")
 
@@ -169,8 +224,11 @@ def verify(args):
             finally:
                 restore = ['START TRANSACTION;', 'DELETE FROM teaching_unit_view_event WHERE unit_id IN (' + ','.join(map(literal, units.values())) + ');',
                     'DELETE FROM teaching_course_unit WHERE id IN (' + ','.join(map(literal, units.values())) + ');',
+                    'DELETE FROM teaching_course WHERE id IN (' + literal(shared_course) + ',' + literal(deleted_course) + ');',
                     'DELETE FROM teaching_course_dept WHERE id=' + literal(assignment) + ';',
                     'DELETE FROM sys_user_depart WHERE ID=' + literal(membership) + ';',
+                    'UPDATE sys_user_role SET role_id=' + literal(original_admin_role) + " WHERE id='role_fixture_admin';",
+                    'DELETE FROM sys_role WHERE id=' + literal(dev_role) + ';',
                     "DELETE FROM teaching_depart_day_log WHERE depart_id IN ('fixture_class_a','fixture_class_b');"]
                 for row in saved_logs:
                     values = ['NULL' if value == 'NULL' else "CONVERT(X'" + value + "' USING utf8mb4)" for value in row.split('\t')]

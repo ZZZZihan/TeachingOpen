@@ -11,16 +11,19 @@ import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.mapper.SysUserMapper;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.teaching.entity.TeachingDepartDayLog;
+import org.jeecg.modules.teaching.entity.TeachingCourse;
 import org.jeecg.modules.teaching.entity.TeachingCourseUnit;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.enums.DepartDayLogType;
 import org.jeecg.modules.teaching.enums.UnitViewLogResult;
 import org.jeecg.modules.teaching.enums.WorkEventType;
 import org.jeecg.modules.teaching.mapper.TeachingCourseUnitMapper;
+import org.jeecg.modules.teaching.mapper.TeachingCourseMapper;
 import org.jeecg.modules.teaching.mapper.TeachingDepartDayLogMapper;
 import org.jeecg.modules.teaching.mapper.TeachingWorkMapper;
 import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
 import org.jeecg.modules.teaching.service.LegacyUnitViewMarkerStore;
+import org.jeecg.modules.teaching.service.TeachingAccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -50,6 +53,10 @@ public class TeachingDepartDayLogServiceImpl extends ServiceImpl<TeachingDepartD
     private SysUserMapper users;
     @Autowired
     private TeachingCourseUnitMapper units;
+    @Autowired
+    private TeachingCourseMapper courses;
+    @Autowired
+    private TeachingAccessService teachingAccessService;
     @Autowired
     private LegacyUnitViewMarkerStore legacyUnitViews;
     @Autowired
@@ -93,7 +100,6 @@ public class TeachingDepartDayLogServiceImpl extends ServiceImpl<TeachingDepartD
         SysUser actor = users.selectById(userId);
         if (actor == null || !userId.equals(actor.getId()) || !Integer.valueOf(0).equals(actor.getDelFlag())
                 || !Integer.valueOf(1).equals(actor.getStatus())) throw new UnauthorizedException("账户不可用");
-        if (!Integer.valueOf(2).equals(actor.getUserIdentity())) return UnitViewLogResult.NOT_APPLICABLE;
         // Existing IDs use case-insensitive collations; use the canonical ID for
         // the binary ledger key and reject aliases rather than counting twice.
         TeachingCourseUnit unit = units.selectById(unitId);
@@ -101,8 +107,18 @@ public class TeachingDepartDayLogServiceImpl extends ServiceImpl<TeachingDepartD
                 || (unit.getDelFlag() != null && !Integer.valueOf(0).equals(unit.getDelFlag()))) {
             throw new JeecgBootException("未找到目标单元");
         }
+        TeachingCourse course = courses.selectById(unit.getCourseId());
+        if (course == null || (course.getDelFlag() != null && !Integer.valueOf(0).equals(course.getDelFlag()))) {
+            throw new JeecgBootException("未找到目标课程");
+        }
+        // Reading permission and eligibility for a class counter are distinct.
+        // Authorize every caller before a no-op, including ordinary students.
+        teachingAccessService.requireCourse(unit.getCourseId());
+        if (!Integer.valueOf(2).equals(actor.getUserIdentity())) return UnitViewLogResult.NOT_APPLICABLE;
         String departId = units.getUserDepartIdByUnitId(userId, unitId);
-        if (departId == null || departId.isEmpty()) throw new UnauthorizedException("无此单元的班级访问权限");
+        // Admin previews and shared-course reading need not belong to a class.
+        // Do not invent a class association or report these legal reads as failures.
+        if (departId == null || departId.isEmpty()) return UnitViewLogResult.NOT_APPLICABLE;
         // The class row serializes this event and all daily counters. READ_COMMITTED
         // keeps an absent ledger row from gap-locking another class's first insert.
         // Existing ledger checks remain current reads after waiting for the class.
