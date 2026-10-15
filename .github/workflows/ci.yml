@@ -13,8 +13,39 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  changes:
+    name: Select affected PR jobs
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    outputs:
+      # Only canonical, strictly validated strings can authorize a skip.
+      selective: ${{ steps.validated.outputs.selective }}
+      frontend: ${{ steps.validated.outputs.frontend }}
+      backend: ${{ steps.validated.outputs.backend }}
+      tools: ${{ steps.validated.outputs.tools }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Classify the verified PR merge candidate
+        id: plan
+        run: python3 ci/select_jobs.py
+      - name: Normalize missing or malformed plans to the full suite
+        id: validated
+        if: ${{ !cancelled() }}
+        env:
+          CI_PLAN_JSON: ${{ toJSON(steps.plan) }}
+        run: python3 ci/check_required_jobs.py --normalize
+
   frontend:
     name: Frontend tests and build
+    needs: changes
+    if: >-
+      ${{ !cancelled() && (github.event_name != 'pull_request' ||
+          needs.changes.result != 'success' || needs.changes.outputs.selective != 'true' ||
+          needs.changes.outputs.frontend != 'false') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 20
     steps:
@@ -74,6 +105,11 @@ jobs:
 
   tools:
     name: Backup and migration tools
+    needs: changes
+    if: >-
+      ${{ !cancelled() && (github.event_name != 'pull_request' ||
+          needs.changes.result != 'success' || needs.changes.outputs.selective != 'true' ||
+          needs.changes.outputs.tools != 'false') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 10
     steps:
@@ -120,6 +156,11 @@ jobs:
 
   backend:
     name: Backend and MySQL registration
+    needs: changes
+    if: >-
+      ${{ !cancelled() && (github.event_name != 'pull_request' ||
+          needs.changes.result != 'success' || needs.changes.outputs.selective != 'true' ||
+          needs.changes.outputs.backend != 'false') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 35
     services:
@@ -183,13 +224,16 @@ jobs:
   required:
     name: CI required
     if: always()
-    needs: [frontend, tools, backend]
+    needs: [changes, frontend, tools, backend]
     runs-on: ubuntu-22.04
     timeout-minutes: 2
     steps:
-      - name: Require every job to succeed
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: ci
+      - name: Require successful checks and only explicitly planned skips
         env:
-          FRONTEND: ${{ needs.frontend.result }}
-          TOOLS: ${{ needs.tools.result }}
-          BACKEND: ${{ needs.backend.result }}
-        run: test "$FRONTEND" = success && test "$TOOLS" = success && test "$BACKEND" = success
+          CI_EVENT_NAME: ${{ github.event_name }}
+          CI_NEEDS_JSON: ${{ toJSON(needs) }}
+        run: python3 ci/check_required_jobs.py

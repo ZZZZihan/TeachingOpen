@@ -7,7 +7,28 @@
 - **Frontend tests and build**：沿用 `web/.nvmrc` 与锁文件，禁用依赖安装脚本，运行前端测试、实际 Chromium 通知组件渲染、上传凭据及 Header/TMenu 导航回归和生产构建；缺少浏览器直接失败，不跳过浏览器检查。获取完整 Git 历史，以运行已有的旧版本回归对照测试。
 - **Backup and migration tools**：执行备份、升级清单、发布包、空表提取以及 CI 守卫的合成测试，不实际运行备份或拉取服务器数据。单独执行 `api/dev/test_teaching_journey_fixture.py`，离线检查教学流程夹具的请求、认证材料、限定 SQL、缓存和上传恢复边界；该步骤不启动服务或浏览器。另运行公网 IP HTTPS 工具单元测试与固定镜像的隔离 Nginx/TLS 验证：临时测试 CA、回环端口、合成 API/WebSocket/媒体、实际配置切换与回退，不请求公网证书、不连接生产。只保存不含私钥的汇总 JSON。
 - **Backend and MySQL registration**：Java 8 干净构建并显式开启 `check_java_results.py` 所列的 40 套核心 Java 测试。构建选择与 Surefire 报告校验读取同一清单，缺少或跳过任何核心测试都会失败。CI 自身回归还枚举仓库的 `*Test.java`，防止新增套件遗漏。原 `SampleTest` 依赖固定旧业务样例，`SecurityToolsTest` 仅打印加解密结果，因此不列入核心检查。
-- **CI required**：汇总前三项，只有全部成功才通过；失败、取消或跳过均不能通过。作为分支必需状态检查使用，避免单项路径过滤导致检查缺失。
+- **Select affected PR jobs**：只在 PR 上核对实际合并候选并分类改动；主分支等 push 事件不运行分类，直接执行全部检查。
+- **CI required**：始终汇总任务结果，要求所有应执行任务成功；只有有效 PR 分类明确判定不受影响的任务才能跳过。任何重量任务失败、取消或缺少结果都不能通过。分类失败或输出不完整时，不允许跳过，必须三项检查全部成功。保持同一汇总状态名称，避免路径过滤导致检查缺失。
+
+## PR 任务选择与全量兜底
+
+`select_jobs.py` 在 checkout 后核对 `HEAD == GITHUB_SHA`，且该合并提交的两个父提交分别等于事件中的 base/head SHA。只接受唯一 merge-base，以 PR 的三点 diff 得到完整改动，不使用有文件数量上限的 API 列表。路径使用 NUL 分隔，禁用重命名识别，使跨目录重命名同时包含原路径和新路径；删除、中文、空格和换行文件名不会被分行截断。
+
+| 改动输入 | 需要执行的完整任务 |
+| --- | --- |
+| `web/**` | frontend |
+| `examples/**` | frontend（展示页及测试读取示例目录） |
+| `api/**`、`deploy/**` | backend + tools（部署配置、Java 测试枚举、实际探针与合成工具相互依赖） |
+| `ci/**`、`.github/**` | frontend + backend + tools |
+| `web/tests/public-boundaries-live.py` | frontend + backend（API 探针加载该实现） |
+| `web/nginx/**`、`web/src/views/system/modules/DepartModal.vue` | frontend + tools（HTTPS、候选包及全局规则测试读取） |
+| `资料/**` | tools（HTTPS 验证读取历史 Nginx 示例） |
+| `docs/**`、根目录 `evidence/**` | 当前不作为上述任务输入；只有这些改动时仍执行分类和汇总检查 |
+| 其他路径或根目录配置 | frontend + backend + tools |
+
+多个改动取任务并集；每个被选中的任务仍完整运行原有检查，未缩减探针或断言。空 diff、事件缺失、对象不全、候选与事件不一致、Git 执行失败、多个 merge-base 均回退全量。分类任务自身失败或没有完整布尔输出时，三个任务也会全跑；整条工作流取消时不启动新的重量任务。`CI required` 独立再次校验分类状态及三个布尔值，拒绝意外 skipped、failure、cancelled 和缺失结果，不能靠一个不完整计划得到绿色结果。
+
+`main` 和保留的 `codex/registration-acceptance` push 始终要求三个任务成功，不接受 PR 分类作为跳过依据。工作流层不设置 `paths` / `paths-ignore`，因此纯文档 PR 仍会产生 `CI required` 状态。新增跨目录输入时，同步更新分类器和 `test_job_selection.py` 的行为用例；新增未知目录默认执行全部任务。分类回归使用临时 Git 仓库验证真实 diff、rename/delete、损坏事件及全部汇总状态组合，不连接业务服务。
 
 后端构建后还用当前依赖执行 `deploy/test_ip_https_proxy.py`：实际 Spring Boot 配置绑定、Tomcat RemoteIpValve 与原 MediaCookie 源码，核对仅信任 127.0.0.1 的协议转发及 Secure Cookie。该测试无需数据库或监听 socket，不能代替线上登录验收。
 
