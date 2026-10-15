@@ -1,0 +1,59 @@
+{
+  "reviewed_utc": "2026-10-15T12:39:20.394273+00:00",
+  "base_commit": "abb2d01a106916cc1a29cbe2cd43bd0aff0433e9",
+  "binding": "Final clean commit; every listed file hash equals both the reviewed worktree and the committed Git blob.",
+  "files": {
+    "web/src/utils/coursePlan.js": "47d7577972cd82fe2f4901937989572264f31ce8c00a2aa18cbecb0ba91c5477",
+    "web/src/views/account/course/modules/CoursePlanReader.vue": "3198824de9de2fc357ffe0d0f0940f7db5da3173ecb2081e1fcdf77ca75c8f9e",
+    "web/src/views/account/course/modules/UnitViewModal.vue": "767476d4b28a548e73bab2367cf19bab6f4ae74c985f8ce66a343c1c88feace7",
+    "web/src/utils/richText.js": "d11de41dc627a529e24721584ba1b914c0fd3dc981b2b121be5798da3a5c28bb",
+    "web/package.json": "45ce9dfec35afd4c7cece41ff7a6bdbaf23d649ec7ac8bfef27680df0699f72e",
+    "web/package-lock.json": "86451c98b65abe507acf60620dc24037c4b161c484279a071b8b815255356c40",
+    "web/tests/course-plan-reader.test.cjs": "539266240acbb6fcdada5026ee599fbb0458d4be2144f03c24d827923607189e",
+    "web/tests/learning-reader.test.cjs": "b81f1b99dcf00c5c8faea15e897b21c418032001d8c70f73d7890feaf044feac",
+    "web/tests/unit-material-link.test.cjs": "6d7f3a801d744ed82916580e3637a96a29106d57ddddfeba7581a4f601995af4"
+  },
+  "role": "Independent technical reviewer; no implementation edits in repository. Authored only dedicated synthetic environment and out-of-repository evidence.",
+  "scoped_findings": [],
+  "result": "No blocking findings in reviewed frontend implementation and unchanged attachment authorization. Full-SPA/browser behavior remains root validation.",
+  "reviewed_behavior": [
+    "CoursePlan buttons select in-page reader without navigating to an attachment URL",
+    "Raw file URL bypasses external Office viewer wrapping for supported inline reader types",
+    "Markdown raw HTML disabled; rendered Markdown and standalone HTML pass existing DOMPurify policy",
+    "Same-origin fetch uses existing media cookie, external-origin fetch omits user credentials",
+    "HTTP denial and missing-file failures remain visible and retryable",
+    "10MiB bounded response reading, 20-second timeout, abort on replacement/destruction, stale results ignored",
+    "PDF/image object URLs revoked on replacement/destruction",
+    "Unit switch resets plan index and media cleanup continues through existing reader methods",
+    "Original ancillary-resource links retain existing URL/preview/Scratch behavior"
+  ],
+  "independently_executed": {
+    "frontend_targeted": {
+      "command": "node --test tests/course-plan-reader.test.cjs tests/learning-reader.test.cjs tests/unit-material-link.test.cjs",
+      "passed": 37,
+      "total": 37,
+      "coverage": "Pure helper/component method regressions, not browser rendering"
+    },
+    "real_http": {
+      "report": "LOCAL_ARTIFACTS/http-access-result-corrected.json",
+      "passed": 79,
+      "total": 79,
+      "runtime": "course-plan-inline-1015",
+      "jar_sha256": "b747e3b4ba30dea0e01ac075b9ed30529fe1b5117b4a1c908c1b79fbfcf2192c",
+      "coverage": "Five real self-authored attachment formats, own/foreign/anonymous read permissions, token/cookie, hidden teacher plan, GET/HEAD/Range, revoked cookie, real 404, selected business rows and upload bytes unchanged during assertions"
+    }
+  },
+  "initial_probe_failure": {
+    "report": "LOCAL_ARTIFACTS/http-access-result.json",
+    "reason": "Probe expected HTTP403 but existing protected list API returns HTTP200 success=false code510 result=null. Source behavior confirmed, assertion updated and rerun; initial failed evidence retained."
+  },
+  "remaining": "Root full-SPA visual and no-download checks, mandatory check results and PR delivery. No production changes.",
+  "reviewed_commit": "daeb31a9b49b6e9ecf33c758f46154c3be4c4a98",
+  "final_recheck": {
+    "production_source_unchanged_since_initial_review": true,
+    "changed_since_initial_review": [
+      "web/tests/course-plan-reader.test.cjs"
+    ],
+    "changes_reviewed": "Only regression tests strengthened; final targeted run covers 37 tests, including timeout, raw-plan URL use, plan-only initial view, multi-plan switch/reset and video stop."
+  }
+}

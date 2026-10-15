@@ -1,0 +1,10 @@
+{
+  "source_commit": "daeb31a9b49b6e9ecf33c758f46154c3be4c4a98",
+  "base_commit": "abb2d01a106916cc1a29cbe2cd43bd0aff0433e9",
+  "dist_manifest_sha256": "64d2515a779401065c371625feb2174b69ca4df33b60028b4b30161d0fd39f88",
+  "dist_files": 4915,
+  "manifest_definition": "SHA256 of UTF-8 lines sorted by path: relative_path + single space + file_sha256 + LF",
+  "backend_jar_sha256": "b747e3b4ba30dea0e01ac075b9ed30529fe1b5117b4a1c908c1b79fbfcf2192c",
+  "backend_source": "unchanged from base commit",
+  "date": "2026-10-15"
+}

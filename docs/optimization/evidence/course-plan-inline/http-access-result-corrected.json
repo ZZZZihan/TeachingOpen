@@ -1,0 +1,326 @@
+{
+  "runtime": "ISOLATED_RUNTIME",
+  "jar_sha256": "b747e3b4ba30dea0e01ac075b9ed30529fe1b5117b4a1c908c1b79fbfcf2192c",
+  "passed": 79,
+  "total": 79,
+  "cases": [
+    {
+      "case": "Login issues scoped media cookie admin",
+      "passed": true
+    },
+    {
+      "case": "Login issues scoped media cookie teacher_a",
+      "passed": true
+    },
+    {
+      "case": "Login issues scoped media cookie teacher_b",
+      "passed": true
+    },
+    {
+      "case": "Login issues scoped media cookie student_a",
+      "passed": true
+    },
+    {
+      "case": "Login issues scoped media cookie student_b",
+      "passed": true
+    },
+    {
+      "case": "Authorized learning list teacher_a",
+      "passed": true
+    },
+    {
+      "case": "Hidden teacher plan visibility teacher_a",
+      "passed": true
+    },
+    {
+      "case": "Authorized learning list student_a",
+      "passed": true
+    },
+    {
+      "case": "Hidden teacher plan visibility student_a",
+      "passed": true
+    },
+    {
+      "case": "Foreign student learning list denied",
+      "passed": true
+    },
+    {
+      "case": "Authorized token teacher_a lesson.md",
+      "passed": true
+    },
+    {
+      "case": "Authorized cookie teacher_a lesson.md",
+      "passed": true
+    },
+    {
+      "case": "Authorized token student_a lesson.md",
+      "passed": true
+    },
+    {
+      "case": "Authorized cookie student_a lesson.md",
+      "passed": true
+    },
+    {
+      "case": "Existing delivery headers lesson.md",
+      "passed": true
+    },
+    {
+      "case": "Denied None GET lesson.md",
+      "passed": true
+    },
+    {
+      "case": "Denied None HEAD lesson.md",
+      "passed": true
+    },
+    {
+      "case": "Denied student_b GET lesson.md",
+      "passed": true
+    },
+    {
+      "case": "Denied student_b HEAD lesson.md",
+      "passed": true
+    },
+    {
+      "case": "Denied teacher_b GET lesson.md",
+      "passed": true
+    },
+    {
+      "case": "Denied teacher_b HEAD lesson.md",
+      "passed": true
+    },
+    {
+      "case": "Foreign range denied lesson.md",
+      "passed": true
+    },
+    {
+      "case": "Authorized token teacher_a lesson.txt",
+      "passed": true
+    },
+    {
+      "case": "Authorized cookie teacher_a lesson.txt",
+      "passed": true
+    },
+    {
+      "case": "Authorized token student_a lesson.txt",
+      "passed": true
+    },
+    {
+      "case": "Authorized cookie student_a lesson.txt",
+      "passed": true
+    },
+    {
+      "case": "Existing delivery headers lesson.txt",
+      "passed": true
+    },
+    {
+      "case": "Denied None GET lesson.txt",
+      "passed": true
+    },
+    {
+      "case": "Denied None HEAD lesson.txt",
+      "passed": true
+    },
+    {
+      "case": "Denied student_b GET lesson.txt",
+      "passed": true
+    },
+    {
+      "case": "Denied student_b HEAD lesson.txt",
+      "passed": true
+    },
+    {
+      "case": "Denied teacher_b GET lesson.txt",
+      "passed": true
+    },
+    {
+      "case": "Denied teacher_b HEAD lesson.txt",
+      "passed": true
+    },
+    {
+      "case": "Foreign range denied lesson.txt",
+      "passed": true
+    },
+    {
+      "case": "Authorized token teacher_a lesson.pdf",
+      "passed": true
+    },
+    {
+      "case": "Authorized cookie teacher_a lesson.pdf",
+      "passed": true
+    },
+    {
+      "case": "Authorized token student_a lesson.pdf",
+      "passed": true
+    },
+    {
+      "case": "Authorized cookie student_a lesson.pdf",
+      "passed": true
+    },
+    {
+      "case": "Existing delivery headers lesson.pdf",
+      "passed": true
+    },
+    {
+      "case": "Denied None GET lesson.pdf",
+      "passed": true
+    },
+    {
+      "case": "Denied None HEAD lesson.pdf",
+      "passed": true
+    },
+    {
+      "case": "Denied student_b GET lesson.pdf",
+      "passed": true
+    },
+    {
+      "case": "Denied student_b HEAD lesson.pdf",
+      "passed": true
+    },
+    {
+      "case": "Denied teacher_b GET lesson.pdf",
+      "passed": true
+    },
+    {
+      "case": "Denied teacher_b HEAD lesson.pdf",
+      "passed": true
+    },
+    {
+      "case": "Foreign range denied lesson.pdf",
+      "passed": true
+    },
+    {
+      "case": "Authorized token teacher_a lesson.png",
+      "passed": true
+    },
+    {
+      "case": "Authorized cookie teacher_a lesson.png",
+      "passed": true
+    },
+    {
+      "case": "Authorized token student_a lesson.png",
+      "passed": true
+    },
+    {
+      "case": "Authorized cookie student_a lesson.png",
+      "passed": true
+    },
+    {
+      "case": "Existing delivery headers lesson.png",
+      "passed": true
+    },
+    {
+      "case": "Denied None GET lesson.png",
+      "passed": true
+    },
+    {
+      "case": "Denied None HEAD lesson.png",
+      "passed": true
+    },
+    {
+      "case": "Denied student_b GET lesson.png",
+      "passed": true
+    },
+    {
+      "case": "Denied student_b HEAD lesson.png",
+      "passed": true
+    },
+    {
+      "case": "Denied teacher_b GET lesson.png",
+      "passed": true
+    },
+    {
+      "case": "Denied teacher_b HEAD lesson.png",
+      "passed": true
+    },
+    {
+      "case": "Foreign range denied lesson.png",
+      "passed": true
+    },
+    {
+      "case": "Authorized token teacher_a lesson.docx",
+      "passed": true
+    },
+    {
+      "case": "Authorized cookie teacher_a lesson.docx",
+      "passed": true
+    },
+    {
+      "case": "Authorized token student_a lesson.docx",
+      "passed": true
+    },
+    {
+      "case": "Authorized cookie student_a lesson.docx",
+      "passed": true
+    },
+    {
+      "case": "Existing delivery headers lesson.docx",
+      "passed": true
+    },
+    {
+      "case": "Denied None GET lesson.docx",
+      "passed": true
+    },
+    {
+      "case": "Denied None HEAD lesson.docx",
+      "passed": true
+    },
+    {
+      "case": "Denied student_b GET lesson.docx",
+      "passed": true
+    },
+    {
+      "case": "Denied student_b HEAD lesson.docx",
+      "passed": true
+    },
+    {
+      "case": "Denied teacher_b GET lesson.docx",
+      "passed": true
+    },
+    {
+      "case": "Denied teacher_b HEAD lesson.docx",
+      "passed": true
+    },
+    {
+      "case": "Foreign range denied lesson.docx",
+      "passed": true
+    },
+    {
+      "case": "Hidden direct file teacher_a",
+      "passed": true
+    },
+    {
+      "case": "Hidden direct file student_a",
+      "passed": true
+    },
+    {
+      "case": "Hidden direct file student_b",
+      "passed": true
+    },
+    {
+      "case": "Hidden direct file None",
+      "passed": true
+    },
+    {
+      "case": "Authorized missing file is 404",
+      "passed": true
+    },
+    {
+      "case": "Authorized Markdown range bytes",
+      "passed": true
+    },
+    {
+      "case": "Authorized Markdown HEAD has no body",
+      "passed": true
+    },
+    {
+      "case": "Revoked media cookie rejected",
+      "passed": true
+    },
+    {
+      "case": "Selected business rows and attachment bytes unchanged",
+      "passed": true
+    }
+  ],
+  "production_connected": false,
+  "writes": "Only added one synthetic missing-file unit and rebuilt its synthetic media index before assertions; login/logout produce authentication records and metadata. Selected course/unit/assignment/file rows and all upload bytes unchanged during assertions."
+}
