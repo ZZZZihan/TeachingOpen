@@ -8,7 +8,7 @@ function resolve (dir) {
 // vue.config.js
 module.exports = {
   // Tiptap's maintained vanilla API works in Vue 2; transpile its modern JS for webpack 4.
-  transpileDependencies: [/@tiptap/, /prosemirror/, /dompurify/],
+  transpileDependencies: [/@tiptap/, /prosemirror/, /dompurify/, /markdown-it/],
   /*
     Vue-cli3:
     Crashed when using Webpack `import()` #2463

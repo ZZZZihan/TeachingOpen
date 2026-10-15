@@ -52,28 +52,36 @@
           <div v-else class="reader-message"><h3>案例暂时无法打开</h3><p>请联系老师确认案例类型与文件地址。</p></div>
         </section>
         <section v-else-if="activeTab === 'content'" class="reader-rich reader-content" aria-label="课程内容" v-html="unit.mediaContent"></section>
+        <section v-else-if="activeTab === 'plan'" aria-label="课程教案">
+          <div v-if="planFiles.length > 1" class="reader-plan-select"><label for="course-plan-select">选择教案</label><select id="course-plan-select" v-model.number="planIndex"><option v-for="(plan, index) in planFiles" :key="plan.key" :value="index">{{ plan.name }}</option></select></div>
+          <course-plan-reader v-if="selectedPlan" :key="viewVersion + ':' + planIndex" :url="selectedPlan.fileUrl" :title="unit.unitName + ' · ' + selectedPlan.name" />
+        </section>
         <div v-else class="reader-message"><h3>本单元暂无视频或在线内容</h3><p>可以先阅读课程说明，查看已提供的资料与练习。</p></div>
         <section class="reader-description" aria-labelledby="unit-description-title"><p class="reader-eyebrow">ABOUT THIS LESSON</p><h2 id="unit-description-title">课程说明</h2><div v-if="unit.unitIntro" class="reader-rich" v-html="String(unit.unitIntro).replace(/\n/g, '<br>')"></div><p v-else class="reader-muted">老师尚未添加这节课的说明。</p></section>
         <p v-if="logFailed" class="reader-record-note" role="status">本次学习记录暂未同步，仍可继续查看课程内容。</p>
       </div>
       <aside class="reader-sidebar" aria-label="学习资料与练习">
         <section v-if="unit.courseWork_url" class="reader-practice"><p class="reader-eyebrow">PRACTICE</p><h2>把想法付诸实践</h2><p>打开本节课的练习，在动手中巩固所学。</p><a v-if="workUrl" class="reader-primary" :href="workUrl" target="_blank" rel="noopener noreferrer">开始练习 <span aria-hidden="true">↗</span></a><p v-else class="reader-muted">练习地址尚未配置，请联系老师。</p></section>
-        <section class="reader-resources"><h2>学习资料</h2><p v-if="!resources.length" class="reader-muted">本单元暂未提供附加资料。</p><ul v-else><li v-for="resource in resources" :key="resource.key"><span class="reader-resource-kind">{{ resource.kind }}</span><a v-if="resource.url" :href="resource.url" target="_blank" rel="noopener noreferrer">{{ resource.name }} <span aria-hidden="true">↗</span></a><p v-else>{{ resource.name }}<br><span class="reader-muted">地址不可用，请联系老师。</span></p></li></ul><p v-if="resources.length" class="reader-resource-help">资料在新标签页打开。无法查看时，请联系老师确认文件与访问权限。</p></section>
+        <section class="reader-resources"><h2>学习资料</h2><p v-if="!resources.length" class="reader-muted">本单元暂未提供附加资料。</p><ul v-else><li v-for="resource in resources" :key="resource.key"><span class="reader-resource-kind">{{ resource.kind }}</span><button v-if="resource.kind === '课程教案'" type="button" class="reader-plan-open" @click="openPlan(resource.index)">{{ resource.name }} <span aria-hidden="true">→</span></button><a v-else-if="resource.url" :href="resource.url" target="_blank" rel="noopener noreferrer">{{ resource.name }} <span aria-hidden="true">↗</span></a><p v-else>{{ resource.name }}<br><span class="reader-muted">地址不可用，请联系老师。</span></p></li></ul><p v-if="planFiles.length" class="reader-resource-help">点击课程教案即可在此阅读。</p><p v-if="resources.some(resource => resource.kind !== '课程教案')" class="reader-resource-help">其他资料在新标签页打开。</p></section>
       </aside>
     </div>
   </j-modal>
 </template>
 <script>
 import { getFileAccessHttpUrl, getAction, getFilePrevew } from '@/api/manage'
+import CoursePlanReader from './CoursePlanReader'
 export default {
     name: 'UnitViewModal',
+    components: { CoursePlanReader },
     data () {
-        return { visible: false, unit: {}, activeTab: '', videoState: 'loading', mediaVersion: 0, viewVersion: 0, logFailed: false, frameClickTarget: null }
+        return { visible: false, unit: {}, activeTab: '', planIndex: 0, videoState: 'loading', mediaVersion: 0, viewVersion: 0, logFailed: false, frameClickTarget: null }
     },
     computed: {
         tabs () {
-            return [{ key: 'video', label: '视频', show: this.unit.courseVideo }, { key: 'case', label: '案例', show: this.unit.courseCase }, { key: 'content', label: '课程内容', show: this.unit.mediaContent }].filter(tab => tab.show)
+            return [{ key: 'video', label: '视频', show: this.unit.courseVideo }, { key: 'case', label: '案例', show: this.unit.courseCase }, { key: 'content', label: '课程内容', show: this.unit.mediaContent }, { key: 'plan', label: '课程教案', show: this.planFiles.length }].filter(tab => tab.show)
         },
+        planFiles () { return this.resources.filter(resource => resource.kind === '课程教案') },
+        selectedPlan () { return this.planFiles[this.planIndex] },
         videoUrl () { return this.safeUrl(Number(this.unit.courseVideoSource) === 1 ? this.unit.courseVideo_url : this.unit.courseVideo) },
         caseUrl () {
             const url = this.safeUrl(this.getFileAccessHttpUrl(this.unit.courseCase))
@@ -103,7 +111,9 @@ export default {
                     try {
                         url = this.resourceUrl(value)
                     } catch (error) { /* A broken preview configuration must not prevent reading the lesson. */ }
-                    items.push({ key: field + '-' + index, kind, name: kind + ' ' + (index + 1), url })
+                    let fileUrl = ''
+                    try { fileUrl = this.materialFileUrl(value) } catch (error) { /* Invalid individual files stay retryable. */ }
+                    items.push({ key: field + '-' + index, kind, name: kind + ' ' + (index + 1), url, fileUrl, index })
                 })
             }
             return items
@@ -123,6 +133,10 @@ export default {
     },
     methods: {
         getFileAccessHttpUrl,
+        materialFileUrl (value) {
+            const isUrl = value.startsWith('/') || /^[a-z][a-z\d+.-]*:/i.test(value)
+            return this.safeUrl(isUrl ? value : this.getFileAccessHttpUrl(value))
+        },
         resourceUrl (value) {
             if (/^aess?:/.test(value)) return this.safeUrl(getFilePrevew(value))
             const isUrl = value.startsWith('/') || /^[a-z][a-z\d+.-]*:/i.test(value)
@@ -147,6 +161,7 @@ export default {
         view (unit) {
             this.stopMedia()
             this.unit = unit
+            this.planIndex = 0
             this.activeTab = this.tabs.length ? this.tabs[0].key : ''
             this.visible = true
             this.logFailed = false
@@ -166,6 +181,7 @@ export default {
             this.videoState = 'loading'
             this.mediaVersion += 1
         },
+        openPlan (index) { this.planIndex = index; this.selectTab('plan') },
         retryMedia () { this.stopMedia(); this.videoState = 'loading'; this.mediaVersion += 1 },
         handleCancel () {
             this.stopMedia()
@@ -223,6 +239,10 @@ export default {
   .unit-reader { display: grid; grid-template-columns: minmax(0, 1fr) 264px; color: #172d38; }
   .reader-main { padding: 0 28px 28px; min-width: 0; }
   .reader-tabs { display: flex; gap: 24px; border-bottom: 1px solid #e0e6e9; margin-bottom: 24px; }
+  .reader-tabs { flex-wrap: wrap; }
+  .reader-plan-select { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; }
+  .reader-plan-select select { padding: 8px; border: 1px solid #dce3e6; background: white; max-width: 100%; }
+  .reader-plan-open { display: block; padding: 0; border: 0; background: none; color: #344f5e; font: inherit; font-size: 13px; cursor: pointer; text-align: left; }
   .reader-tabs button { padding: 20px 0 16px; border: 0; border-bottom: 2px solid transparent; background: none; color: #637680; font: inherit; cursor: pointer; }
   .reader-tabs button[aria-pressed='true'] { color: #a73542; border-bottom-color: #b63e4b; font-weight: 600; }
   .reader-media video { display: block; width: 100%; max-height: 520px; aspect-ratio: 16/9; background: #152730; }

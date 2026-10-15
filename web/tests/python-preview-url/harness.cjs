@@ -69,7 +69,7 @@ function caller (name, currentOrigin = origin) {
   const script = source.match(/<script>([\s\S]*?)<\/script>/)[1]
     .replace(/^\s*import [^\n]*$/gm, '').replace('export default', 'component =')
   const context = {
-    component: null, URL, URLSearchParams, window: { location: { origin: currentOrigin } },
+    component: null, CoursePlanReader: {}, URL, URLSearchParams, window: { location: { origin: currentOrigin } },
     Vue: {}, mapGetters: () => ({}), QrCode: {}, Keyboard: {}, Header: {}, Footer: {}, UserEnter: {}, ShowcaseAttribution: {},
     moment () {}, getAction () {}, postAction () {}, getFileAccessHttpUrl: value => value,
     getFilePrevew: value => value
