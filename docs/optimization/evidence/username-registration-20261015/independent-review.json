@@ -1,0 +1,121 @@
+{
+  "scope": "independent static review of username registration integration",
+  "candidate_base": "fe96225c4a77b24787a5187984c07118d9e45d0a",
+  "files": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/mapper/RegistrationProfileMapper.java": "1e73b3b55c1d6473c35ae92636f9e14562ddf36b730a152116d8f60be21e2349",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/AccountRegistrationService.java": "eeba50250ddb7128c7c1bcb7f262d6e519a3a65fae49441a7337a60a30fb7fe1",
+    "api/jeecg-boot-module-system/src/test/java/org/jeecg/accountrecovery/AccountRegistrationServiceTest.java": "5848502dddc63e5a95f4fc35dbb6c9b5612e4849b0c9791fc2dc108fd19eb3a2",
+    "ci/README.md": "c9efbd965bc295c4c80f47244992179ba410cb0089390e4630c8a8bb10354c34",
+    "deploy/verify_registration.py": "5dc1a614206929f9439cc90a49b5ad694ef86740f8851ca8277def300266671b",
+    "web/src/utils/accountRecovery.js": "35c4f174622fe9aecc8c512bd23f150dda25810915989cf4d38a33f01cbdff55",
+    "web/src/views/user/Login.vue": "b9ef9b20d7cca0579fcb5079137854b781a404f1d73aa77150e63f8bb49dbbf3",
+    "web/src/views/user/Register.vue": "4c795a5b9b4bbf2f18cd3385c613a07ba3435f3e0721c0bd36aa664800078265",
+    "web/src/views/user/RegisterResult.vue": "590cb4a52c9776ad60f03eed0bea1271ad12e42aefc140df51fb4edd1560f3cd",
+    "web/tests/registration.test.cjs": "ee79a5238f52437d618f7848649d6cd291df28d9ea147e9f11591a7722d4dd5d"
+  },
+  "blocking_findings": [],
+  "reviewed_behaviors": [
+    "full-match username allowlist with trim",
+    "ASCII password compatibility and username-based encryption plaintext",
+    "reservation against existing username and phone including deleted accounts",
+    "server-owned profile identity and base student role",
+    "transaction boundary spans user profile and role",
+    "new phone NULL and legacy phone-only registration refusal",
+    "shared student teacher form and username success/login handoff",
+    "duplicate/network rejection preserves input and enables retry",
+    "legacy numeric username remains unchanged",
+    "probe guards and isolated HTTP SQL side-effect assertions"
+  ],
+  "independent_checks": {
+    "frontend_focused_tests": {
+      "files": [
+        "registration.test.cjs",
+        "registration-entry.test.cjs",
+        "login-session.test.cjs",
+        "account-recovery.test.cjs"
+      ],
+      "passed": 55,
+      "failed": 0,
+      "skipped": 0
+    },
+    "schema_boundary": {
+      "username_varchar": 100,
+      "password_varchar": 255,
+      "phone_nullable": true
+    },
+    "final_username_character_class": {
+      "ascii_characters_exercised": 128,
+      "total_cases": 138,
+      "failed": 0,
+      "scope": "every ASCII character in a 3-character username plus min/max and Unicode/control boundaries"
+    },
+    "final_changed_product_lint": {
+      "files": [
+        "src/utils/accountRecovery.js",
+        "src/views/user/Login.vue",
+        "src/views/user/Register.vue",
+        "src/views/user/RegisterResult.vue"
+      ],
+      "exit_code": 0,
+      "log": "reviewer-final-lint.log"
+    },
+    "final_account_verification_script": "verify_accounts.py: read-only; refuses another MySQL datadir; expects five probe plus two explicitly named browser accounts; no cleanup or shutdown",
+    "final_account_persistence": {
+      "passed": 16,
+      "total": 16,
+      "accounts": 7,
+      "log": "final-account-verification.json",
+      "mutations_performed": false
+    }
+  },
+  "not_yet_executed_by_this_reviewer": [
+    "full SPA browser registration and password login",
+    "CI"
+  ],
+  "coverage_note": "HTTP success usernames were strengthened after reviewer feedback to include 3-character, 100-character mixed-case, and 11-digit numeric values without increasing calls.",
+  "inspected_integration_evidence": {
+    "frontend_full_tests": {
+      "passed": 865,
+      "failed": 0,
+      "skipped": 0,
+      "executed_by": "main agent",
+      "log": "frontend-tests.log"
+    },
+    "frontend_production_build": {
+      "status": "completed",
+      "executed_by": "main agent",
+      "log": "frontend-build.log"
+    },
+    "java_core_gate": {
+      "status": "passed",
+      "suites": 40,
+      "tests": 377,
+      "executed_by": "main agent"
+    },
+    "registration_http_sql_probe": {
+      "passed": 186,
+      "check_count": 186,
+      "executed_by": "main agent",
+      "log": "http-probe.log",
+      "log_sha256": "4f520e582fad39a8c6c747accfc8f327a60e6c82414ff2a7972e765a79aedb4b",
+      "legacy_fixture_accounts_retained": 0
+    },
+    "running_backend": {
+      "recorded_sha256": "b747e3b4ba30dea0e01ac075b9ed30529fe1b5117b4a1c908c1b79fbfcf2192c",
+      "current_jar_sha256": "b747e3b4ba30dea0e01ac075b9ed30529fe1b5117b4a1c908c1b79fbfcf2192c",
+      "unchanged_after_start": true
+    }
+  },
+  "final_delta_review": {
+    "changed_after_initial_review": [
+      "web/src/utils/accountRecovery.js",
+      "ci/README.md"
+    ],
+    "change": "removed redundant escape for a trailing hyphen in the username character class",
+    "behavior_equivalent": true,
+    "blocking_findings": [],
+    "documentation": "Updated 40 core Java suites and 186 HTTP/SQL checks match actual inspected gate and result logs."
+  },
+  "remaining_account_verification": "Completed: exactly seven task-owned accounts; no deletion performed. Main agent will stop task services and retain local evidence.",
+  "conclusion": "No blocking finding in final product diff. Independent focused tests, final character-boundary checks and lint passed. Parent-executed final integration logs were inspected without rerunning the mutating HTTP probe."
+}

@@ -8,18 +8,18 @@
       <div class="intro-bottom"><span class="intro-rule"></span>学习 · 实践 · 创造 · 分享</div>
     </section>
     <section class="login-form-panel" aria-labelledby="login-title">
-      <div class="form-heading"><span class="eyebrow">你的学习空间</span><h2 id="login-title">欢迎回来</h2><p>使用手机号或已有教学平台账号登录。</p></div>
+      <div class="form-heading"><span class="eyebrow">你的学习空间</span><h2 id="login-title">欢迎回来</h2><p>使用用户名和密码登录。已有手机号账号仍可使用。</p></div>
       <p v-if="$route.query.reason === 'expired'" class="session-note" role="status">登录已过期，请重新登录后继续。</p>
       <form novalidate :aria-busy="submitting" @submit.prevent="submit">
         <div class="field">
-          <label for="login-username">手机号或账号</label>
+          <label for="login-username">用户名</label>
           <input
             id="login-username"
             ref="username"
             v-model="username"
             name="username"
             autocomplete="username"
-            placeholder="请输入手机号或已有账号"
+            placeholder="请输入用户名"
             :disabled="submitting"
             :aria-invalid="!!errors.username"
             :aria-describedby="errors.username ? 'username-error' : null">
@@ -120,7 +120,7 @@ export default {
             if (this.submitting || this.captchaLoading || !this.captchaImage) return
             this.errors = {}
             this.submitError = ''
-            if (!this.username.trim()) this.errors.username = '请输入账号。'
+            if (!this.username.trim()) this.errors.username = '请输入用户名。'
             if (!this.password) this.errors.password = '请输入密码。'
             if (!this.captcha.trim()) this.errors.captcha = '请输入验证码。'
             const first = Object.keys(this.errors)[0]

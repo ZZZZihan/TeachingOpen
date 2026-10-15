@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 /** Anonymous registration has an explicit input allowlist and never grants teacher privileges. */
 @Service
 public class AccountRegistrationService {
-    private static final Pattern PHONE = Pattern.compile("^1[3-9][0-9]{9}$");
+    private static final Pattern USERNAME = Pattern.compile("[A-Za-z0-9_@.\\-]{3,100}");
     // PasswordUtil accepts printable ASCII keys; registration needs no character mix.
     private static final Pattern PASSWORD = Pattern.compile("[!-~]{8,64}");
     private final ISysUserService users;
@@ -58,23 +58,24 @@ public class AccountRegistrationService {
     }
 
     private Result<JSONObject> register(JSONObject request, String identity) {
-        String phone = text(request, "phone"), name = text(request, "realname"), school = text(request, "school");
+        String username = text(request, "username"), name = text(request, "realname"), school = text(request, "school");
         String password = PasswordResetService.string(request, "password");
-        if (phone == null || !PHONE.matcher(phone).matches()) return failure(400, "请输入正确的11位手机号");
+        if (username == null || username.isEmpty()) return failure(400, "用户名不能为空，请刷新页面后填写用户名");
+        if (!USERNAME.matcher(username).matches()) return failure(400, "用户名须为3至100位，可使用字母、数字、下划线、@、点或短横线");
         if (!validText(name, 100)) return failure(400, "请填写姓名，最多100个字符");
         if (!validText(school, 256)) return failure(400, "请填写学校，最多256个字符");
         if (password == null || !PASSWORD.matcher(password).matches()) return failure(400, "密码须为8至64位，不含空格或中文");
         try {
             if (!"1".equals(config.getConfigItem("allowReg"))) return failure(403, "未开放注册");
-            if (profiles.countReservedPhone(phone) != 0) return failure(409, "该手机号已注册或已被账号使用");
+            if (profiles.countReservedUsername(username) != 0) return failure(409, "该用户名已注册或已被账号使用");
             SysRole role = roles.getOne(new LambdaQueryWrapper<SysRole>().eq(SysRole::getRoleCode, "student"));
             if (role == null) return failure(503, "注册服务暂时不可用，请联系管理员");
             transactions.execute(status -> {
                 // Do not bind SysUser from HTTP parameters: every security field is server-owned.
                 SysUser user = new SysUser();
                 String salt = oConvertUtils.randomGen(8);
-                user.setUsername(phone).setPhone(phone).setRealname(name).setSchool(school)
-                    .setSalt(salt).setPassword(PasswordUtil.encrypt(phone, password, salt))
+                user.setUsername(username).setRealname(name).setSchool(school)
+                    .setSalt(salt).setPassword(PasswordUtil.encrypt(username, password, salt))
                     .setUserIdentity(1).setDepartIds("").setStatus(CommonConstant.USER_UNFREEZE)
                     .setDelFlag(CommonConstant.DEL_FLAG_0).setActivitiSync(CommonConstant.ACT_SYNC_0)
                     .setCreateTime(new Date());
@@ -84,9 +85,9 @@ public class AccountRegistrationService {
                 users.addUserWithRole(user, role.getId());
                 return null;
             });
-            return new Result<JSONObject>().success("注册成功，请使用手机号和密码登录");
+            return new Result<JSONObject>().success("注册成功，请使用用户名和密码登录");
         } catch (DuplicateKeyException e) {
-            return failure(409, "该手机号已注册或已被账号使用");
+            return failure(409, "该用户名已注册或已被账号使用");
         } catch (RuntimeException e) {
             // Database exceptions can contain private values. Do not log them or return their text.
             return failure(503, "注册服务暂时不可用，请稍后重试");
