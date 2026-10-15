@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, timezone
 import gzip
 import json
 from pathlib import Path
+import sqlite3
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -10,6 +11,64 @@ from unittest.mock import patch
 spec = importlib.util.spec_from_file_location('backup', Path(__file__).with_name('scheduled_backup.py'))
 b = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(b)
+
+
+class RegistrationHealthTests(unittest.TestCase):
+    def setUp(self):
+        self.database = sqlite3.connect(':memory:')
+        self.database.create_function('DATABASE', 0, lambda: 'restored')
+        self.database.executescript('''
+            CREATE TABLE sys_user(id TEXT PRIMARY KEY, username TEXT, realname TEXT,
+                school TEXT, phone TEXT, password TEXT, salt TEXT);
+            CREATE TABLE sys_user_role(id TEXT PRIMARY KEY, user_id TEXT);
+            CREATE TABLE teaching_registration_profile(user_id TEXT PRIMARY KEY, identity TEXT);
+            CREATE TABLE teaching_course(id TEXT PRIMARY KEY);
+            CREATE TABLE teaching_course_unit(id TEXT PRIMARY KEY);
+            CREATE TABLE sys_file(id TEXT PRIMARY KEY);
+            ATTACH DATABASE ':memory:' AS information_schema;
+            CREATE TABLE information_schema.columns(table_schema TEXT, table_name TEXT,
+                column_name TEXT, character_set_name TEXT);
+            INSERT INTO information_schema.columns VALUES
+                ('restored','sys_user','realname','utf8mb4'),
+                ('restored','sys_user','school','utf8mb4');
+            INSERT INTO sys_user VALUES
+                ('public-account','student.one','注册姓名','注册学校',NULL,'encrypted-password','salt');
+            INSERT INTO teaching_registration_profile VALUES ('public-account','student');
+            INSERT INTO sys_user_role VALUES ('role-link','public-account');
+        ''')
+
+    def tearDown(self):
+        self.database.close()
+
+    def sql(self, config, query, database):
+        self.assertEqual(database, 'restored')
+        # SQLite already compares these text values case-sensitively. Only the
+        # MySQL-specific BINARY keyword needs adapting; field checks run as-is.
+        return str(self.database.execute(query.replace('BINARY ', '')).fetchone()[0])
+
+    def test_username_profiles_allow_missing_phone_and_preserve_legacy_phone(self):
+        for identity in ('student', 'teacher'):
+            for phone in (None, '', '13900000001'):
+                with self.subTest(identity=identity, phone=phone):
+                    self.database.execute('UPDATE sys_user SET phone=?', (phone,))
+                    self.database.execute('UPDATE teaching_registration_profile SET identity=?', (identity,))
+                    with patch.object(b, 'mysql', side_effect=self.sql):
+                        result = b.health({}, 'restored')
+                    self.assertEqual(result['counts']['teaching_registration_profile'], 1)
+                    self.assertIn('profile_required_fields', result['checks'])
+
+    def test_missing_registration_required_field_fails_health(self):
+        # An existing phone must not mask a missing username or another field.
+        self.database.execute("UPDATE sys_user SET phone='13900000001'")
+        for field in ('username', 'realname', 'school', 'password', 'salt'):
+            for value in (None, ''):
+                with self.subTest(field=field, value=value):
+                    original = self.database.execute('SELECT ' + field + ' FROM sys_user').fetchone()[0]
+                    self.database.execute('UPDATE sys_user SET ' + field + '=?', (value,))
+                    with patch.object(b, 'mysql', side_effect=self.sql):
+                        with self.assertRaisesRegex(RuntimeError, 'profile_required_fields'):
+                            b.health({}, 'restored')
+                    self.database.execute('UPDATE sys_user SET ' + field + '=?', (original,))
 
 
 class BackupTests(unittest.TestCase):

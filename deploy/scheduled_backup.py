@@ -82,7 +82,7 @@ def health(c, database):
         'profiles_have_users': "SELECT COUNT(*) FROM teaching_registration_profile p LEFT JOIN sys_user u ON u.id=p.user_id WHERE u.id IS NULL",
         'profiles_have_roles': "SELECT COUNT(*) FROM teaching_registration_profile p LEFT JOIN sys_user_role r ON r.user_id=p.user_id WHERE r.id IS NULL",
         'valid_identity': "SELECT COUNT(*) FROM teaching_registration_profile WHERE BINARY identity NOT IN (BINARY 'student',BINARY 'teacher')",
-        'profile_required_fields': "SELECT COUNT(*) FROM teaching_registration_profile p JOIN sys_user u ON u.id=p.user_id WHERE COALESCE(u.phone,'')='' OR COALESCE(u.realname,'')='' OR COALESCE(u.school,'')='' OR COALESCE(u.password,'')='' OR COALESCE(u.salt,'')=''",
+        'profile_required_fields': "SELECT COUNT(*) FROM teaching_registration_profile p JOIN sys_user u ON u.id=p.user_id WHERE COALESCE(u.username,'')='' OR COALESCE(u.realname,'')='' OR COALESCE(u.school,'')='' OR COALESCE(u.password,'')='' OR COALESCE(u.salt,'')=''",
     }
     for name, sql in checks.items():
         if mysql(c, sql, database) != '0':

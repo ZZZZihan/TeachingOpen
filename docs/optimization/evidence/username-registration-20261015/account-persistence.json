@@ -1,0 +1,71 @@
+{
+  "scope": "read-only final task-owned account persistence verification",
+  "database": "teachingopen_check_username_20261015",
+  "accounts": [
+    {
+      "username": "19857369652",
+      "phone": "NULL",
+      "profile": "teacher",
+      "roles": "student"
+    },
+    {
+      "username": "browser_student_1015",
+      "phone": "NULL",
+      "profile": "student",
+      "roles": "student"
+    },
+    {
+      "username": "browser_teacher_1015",
+      "phone": "NULL",
+      "profile": "teacher",
+      "roles": "student"
+    },
+    {
+      "username": "r4d",
+      "phone": "NULL",
+      "profile": "student",
+      "roles": "student"
+    },
+    {
+      "username": "registration_a09122aedb0f0d4f",
+      "phone": "NULL",
+      "profile": "student",
+      "roles": "student"
+    },
+    {
+      "username": "reg_29c490dd@example.edu-cn",
+      "phone": "NULL",
+      "profile": "student",
+      "roles": "student"
+    },
+    {
+      "username": "Reg_916213d9b585b0e922ef7ef532ab1c4d44d0bc7dcfaad747cbce67aa5b0779aa1f66f95bda5184c151a04110ba72d58b",
+      "phone": "NULL",
+      "profile": "teacher",
+      "roles": "student"
+    }
+  ],
+  "checks": {
+    "exactly_seven_accounts": true,
+    "all_new_phones_null": true,
+    "all_accounts_only_base_student_role": true,
+    "all_accounts_have_one_valid_profile": true,
+    "temporary_legacy_fixture_removed": true,
+    "browser_student_1015_exact_fixed_profile": true,
+    "browser_teacher_1015_exact_fixed_profile": true,
+    "probe_account_0_retained_exactly_once": true,
+    "probe_account_0_fixed_profile": true,
+    "probe_account_1_retained_exactly_once": true,
+    "probe_account_1_fixed_profile": true,
+    "probe_account_2_retained_exactly_once": true,
+    "probe_account_2_fixed_profile": true,
+    "probe_account_3_retained_exactly_once": true,
+    "probe_account_4_retained_exactly_once": true,
+    "probe_account_4_fixed_profile": true
+  },
+  "passed": 16,
+  "total": 16,
+  "mutation_performed": false,
+  "production_connected": false,
+  "retention": "All seven synthetic accounts, task data, and private logs retained locally; main agent will stop only task services."
+}

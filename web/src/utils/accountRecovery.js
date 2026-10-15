@@ -18,6 +18,14 @@ export function registrationPasswordProblem (value) {
     return ''
 }
 
+export function registrationUsernameProblem (value) {
+    if (!value) return '请填写用户名。'
+    if (value.length < 3 || value.length > 100 || /[^A-Za-z0-9_@.-]/.test(value)) {
+        return '用户名需为 3–100 位英文字母、数字、下划线、@、点或短横线。'
+    }
+    return ''
+}
+
 // Do not surface arbitrary transport messages: they can contain request details.
 export function recoveryError (error, fallback) {
     if (error && (error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT')) return '连接超时，请检查网络后重试。'

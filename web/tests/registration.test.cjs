@@ -14,7 +14,7 @@ function harness (postAction, propsData = {}) {
   component.$router = { push: route => { routes.push(route); return Promise.resolve() } }
   return { component, routes }
 }
-const valid = { phone: '13900000001', password: 'Synthetic8!', confirmation: 'Synthetic8!', realname: ' 张同学 ', school: ' 测试学校 ' }
+const valid = { username: ' learner_2026 ', password: 'Synthetic8!', confirmation: 'Synthetic8!', realname: ' 张同学 ', school: ' 测试学校 ' }
 test('student and teacher registration accept 8–64 printable characters without a required character mix', async () => {
   for (const teacherRegistration of [false, true]) {
     for (const password of ['abcdefgh', '12345678', 'learn123', '[]{}|~!?', 'a'.repeat(64)]) {
@@ -67,9 +67,9 @@ test('blank student registration validates required fields without an identity s
 test('success sends only registration fields, clears credentials and navigates without password', async () => {
   let body; const h = harness((url, data) => { assert.equal(url, '/sys/user/register'); body = data; return Promise.resolve({ success: true }) })
   Object.assign(h.component.form, valid, { identity: 'teacher' }); await h.component.submit()
-  assert.equal(body.realname, '张同学'); assert.equal(body.school, '测试学校'); assert.equal(body.identity, undefined); assert.equal(Object.keys(body).length, 4)
+  assert.equal(body.username, 'learner_2026'); assert.equal(body.phone, undefined); assert.equal(body.realname, '张同学'); assert.equal(body.school, '测试学校'); assert.equal(body.identity, undefined); assert.equal(Object.keys(body).length, 4)
   assert.equal(h.component.form.password, ''); assert.equal(h.component.form.confirmation, '')
-  assert.equal(h.routes.length, 1); assert.equal(h.routes[0].params.phone, valid.phone); assert.equal(h.routes[0].params.password, undefined)
+  assert.equal(h.routes.length, 1); assert.equal(h.routes[0].params.username, valid.username.trim()); assert.equal(h.routes[0].params.password, undefined)
 })
 test('dedicated teacher entry registers through its own endpoint without client-selected identity or roles', async () => {
   let body; const h = harness((url, data) => { assert.equal(url, '/sys/user/register/teacher'); body = data; return Promise.resolve({ success: true }) }, { teacherRegistration: true })
@@ -80,6 +80,50 @@ test('dedicated teacher entry registers through its own endpoint without client-
 test('duplicate submit is guarded and API failure permits retry', async () => {
   let resolve; let calls = 0; const h = harness(() => { calls++; return new Promise(done => { resolve = done }) }); Object.assign(h.component.form, valid)
   const pending = h.component.submit(); await h.component.submit(); assert.equal(calls, 1)
-  resolve({ success: false, message: '手机号已注册' }); await pending
-  assert.equal(h.component.submitting, false); assert.equal(h.component.submitError, '手机号已注册'); assert.equal(h.routes.length, 0)
+  resolve({ success: false, message: '用户名已注册' }); await pending
+  assert.equal(h.component.submitting, false); assert.equal(h.component.submitError, '用户名已注册'); assert.equal(h.routes.length, 0)
+})
+
+test('both registration routes validate username boundaries before making requests', async () => {
+  for (const teacherRegistration of [false, true]) {
+    for (const username of ['', '  ', 'ab', 'a'.repeat(101), '用户123', 'user name', 'user/name', 'user\nname', 'user😊']) {
+      let calls = 0; const h = harness(() => { calls++ }, { teacherRegistration })
+      Object.assign(h.component.form, valid, { username }); await h.component.submit()
+      assert.equal(calls, 0, username); assert.ok(h.component.errors.username); assert.equal(h.component.form.username, username)
+    }
+    for (const username of ['abc', '20261015', 'User_01@school.edu-test', 'a'.repeat(100), '  learner_01  ']) {
+      let body; const h = harness((url, data) => { body = data; return Promise.resolve({ success: true }) }, { teacherRegistration })
+      Object.assign(h.component.form, valid, { username }); await h.component.submit()
+      assert.equal(body.username, username.trim()); assert.equal(body.phone, undefined)
+      assert.equal(h.routes[0].params.username, username.trim())
+    }
+  }
+})
+test('registration failures preserve all input and allow a corrected username retry', async () => {
+  for (const failure of [() => Promise.resolve({ success: false, message: '用户名已注册' }), () => Promise.reject({ isAxiosError: true })]) {
+    let calls = 0
+    const h = harness(() => ++calls === 1 ? failure() : Promise.resolve({ success: true }))
+    Object.assign(h.component.form, valid); await h.component.submit()
+    assert.deepEqual(JSON.parse(JSON.stringify(h.component.form)), valid)
+    assert.equal(h.component.submitting, false); assert.ok(h.component.submitError); assert.equal(h.routes.length, 0)
+    h.component.form.username = 'another_learner'; await h.component.submit()
+    assert.equal(calls, 2); assert.equal(h.routes[0].params.username, 'another_learner'); assert.equal(h.component.form.password, '')
+  }
+})
+test('registration result forwards the chosen username to login without credentials', () => {
+  const context = {}
+  vm.runInNewContext(source('views/user/RegisterResult.vue').match(/<script>([\s\S]*?)<\/script>/)[1].replace('export default', 'this.component ='), context)
+  const compiled = compiler.compile(compiler.parseComponent(source('views/user/RegisterResult.vue')).template.content)
+  assert.deepEqual(compiled.errors, [])
+  const component = new Vue(context.component)
+  component.$route = { params: { username: 'chosen_learner', password: 'must-not-forward' } }
+  component.$options.render = new Function(compiled.render)
+  component.$options.staticRenderFns = compiled.staticRenderFns.map(fn => new Function(fn))
+  const nodes = []
+  function visit (node) { nodes.push(node); for (const child of node.children || []) visit(child) }
+  visit(component._render())
+  const link = nodes.find(node => node.data && node.data.attrs && node.data.attrs.to && node.data.attrs.to.name === 'login')
+  assert.deepEqual(JSON.parse(JSON.stringify(link.data.attrs.to)), { name: 'login', params: { username: 'chosen_learner' } })
+  assert.match(nodes.map(node => node.text || '').join(''), /chosen_learner/)
+  component.$destroy()
 })

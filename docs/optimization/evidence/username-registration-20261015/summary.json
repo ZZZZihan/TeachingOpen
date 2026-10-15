@@ -1,0 +1,73 @@
+{
+  "base_commit": "fe96225c4a77b24787a5187984c07118d9e45d0a",
+  "source_sha256": {
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/mapper/RegistrationProfileMapper.java": "1e73b3b55c1d6473c35ae92636f9e14562ddf36b730a152116d8f60be21e2349",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/system/service/AccountRegistrationService.java": "eeba50250ddb7128c7c1bcb7f262d6e519a3a65fae49441a7337a60a30fb7fe1",
+    "api/jeecg-boot-module-system/src/test/java/org/jeecg/accountrecovery/AccountRegistrationServiceTest.java": "5848502dddc63e5a95f4fc35dbb6c9b5612e4849b0c9791fc2dc108fd19eb3a2",
+    "ci/README.md": "c9efbd965bc295c4c80f47244992179ba410cb0089390e4630c8a8bb10354c34",
+    "deploy/verify_registration.py": "5dc1a614206929f9439cc90a49b5ad694ef86740f8851ca8277def300266671b",
+    "web/src/utils/accountRecovery.js": "35c4f174622fe9aecc8c512bd23f150dda25810915989cf4d38a33f01cbdff55",
+    "web/src/views/user/Login.vue": "b9ef9b20d7cca0579fcb5079137854b781a404f1d73aa77150e63f8bb49dbbf3",
+    "web/src/views/user/Register.vue": "4c795a5b9b4bbf2f18cd3385c613a07ba3435f3e0721c0bd36aa664800078265",
+    "web/src/views/user/RegisterResult.vue": "590cb4a52c9776ad60f03eed0bea1271ad12e42aefc140df51fb4edd1560f3cd",
+    "web/tests/registration.test.cjs": "ee79a5238f52437d618f7848649d6cd291df28d9ea147e9f11591a7722d4dd5d"
+  },
+  "jar_sha256": "b747e3b4ba30dea0e01ac075b9ed30529fe1b5117b4a1c908c1b79fbfcf2192c",
+  "frontend_tests": {
+    "passed": 865,
+    "failed": 0
+  },
+  "java_core_tests": {
+    "suites": 40,
+    "passed": 377
+  },
+  "ci_contract_tests": {
+    "passed": 47
+  },
+  "http_sql_checks": {
+    "passed": 186,
+    "expected": 186
+  },
+  "browser": {
+    "environment": "complete built SPA + real loopback API + isolated MySQL/Redis",
+    "student": {
+      "registration": true,
+      "success_username": true,
+      "login_prefill": true,
+      "real_image_captcha_login": true,
+      "homepage_authenticated": true,
+      "invalid_username_no_request": true,
+      "transport_failure_keeps_inputs": true
+    },
+    "teacher": {
+      "cross_role_duplicate_refused": true,
+      "duplicate_keeps_inputs": true,
+      "corrected_retry_succeeds": true,
+      "registration": true,
+      "login_prefill": true,
+      "real_image_captcha_login": true,
+      "homepage_authenticated": true
+    },
+    "layouts": {
+      "roles": [
+        "student",
+        "teacher"
+      ],
+      "widths": [
+        390,
+        1440
+      ],
+      "no_horizontal_overflow": true,
+      "school_submit_gap_at_least_24px": true
+    },
+    "console_notes": [
+      "Existing remote errlog.js blocked by CSP",
+      "Student network failure intentionally injected before successful retry"
+    ]
+  },
+  "phone_migration_required": false,
+  "production_connected": false,
+  "human_acceptance": false,
+  "merge_and_deploy": "not performed",
+  "synthetic_accounts_retained": 7
+}

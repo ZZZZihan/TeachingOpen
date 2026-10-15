@@ -36,7 +36,7 @@ public class AccountRegistrationServiceTest {
         service = new AccountRegistrationService(users, roles, config, profiles, tx);
     }
     private JSONObject request() {
-        JSONObject r = new JSONObject(); r.put("phone", "13900000001"); r.put("password", "Synthetic8!");
+        JSONObject r = new JSONObject(); r.put("username", " learner_01 "); r.put("password", "Synthetic8!");
         r.put("realname", " 张同学 "); r.put("school", " 测试学校 "); return r;
     }
     private Result<JSONObject> register(JSONObject request, boolean teacher) {
@@ -45,11 +45,45 @@ public class AccountRegistrationServiceTest {
     private void failed(Result<?> result, int code) { assertFalse(result.isSuccess()); assertEquals(Integer.valueOf(code), result.getCode()); assertNull(result.getResult()); }
     @Test public void requiredFieldsAndTypesNeverWrite() {
         for (boolean teacher : new boolean[]{false, true}) {
-            for (String field : new String[]{"phone", "password", "realname", "school"}) {
+            for (String field : new String[]{"username", "password", "realname", "school"}) {
                 JSONObject r = request(); r.remove(field); failed(register(r, teacher), 400);
                 r = request(); r.put(field, new JSONObject()); failed(register(r, teacher), 400);
             }
             failed(register(null, teacher), 400);
+        }
+        verifyZeroInteractions(users, profiles, roles, config, tx);
+    }
+    @Test public void phoneOnlyLegacyRequestRequiresUsernameBeforeAnySideEffect() {
+        for (boolean teacher : new boolean[]{false, true}) {
+            JSONObject r = request(); r.remove("username"); r.put("phone", "13900000001");
+            Result<?> result = register(r, teacher);
+            failed(result, 400); assertTrue(result.getMessage().contains("用户名"));
+        }
+        verifyZeroInteractions(users, profiles, roles, config, tx);
+    }
+    @Test public void bothEntriesAcceptExistingUsernameCharactersAndTrimSurroundingWhitespace() {
+        for (boolean teacher : new boolean[]{false, true}) {
+            for (String username : new String[]{"abc", "13900000001", "Learner_01@example.edu-cn",
+                    new String(new char[100]).replace('\0', 'a')}) {
+                setup(); JSONObject r = request(); r.put("username", " " + username + " ");
+                // A phone supplied by stale or forged clients is not contact information.
+                r.put("phone", "13900000002");
+                assertTrue(register(r, teacher).isSuccess());
+                ArgumentCaptor<SysUser> captured = ArgumentCaptor.forClass(SysUser.class);
+                verify(users).save(captured.capture());
+                SysUser user = captured.getValue();
+                assertEquals(username, user.getUsername()); assertNull(user.getPhone());
+                assertEquals(PasswordUtil.encrypt(username, "Synthetic8!", user.getSalt()), user.getPassword());
+                verify(profiles).countReservedUsername(username);
+            }
+        }
+    }
+    @Test public void invalidUsernameBoundariesNeverReadOrWrite() {
+        for (boolean teacher : new boolean[]{false, true}) {
+            for (String username : new String[]{"", "  ", "ab", new String(new char[101]).replace('\0', 'a'),
+                    "姓名账号", "abc def", "abc\nxyz", "abc/xyz", "abc'xyz"}) {
+                JSONObject r = request(); r.put("username", username); failed(register(r, teacher), 400);
+            }
         }
         verifyZeroInteractions(users, profiles, roles, config, tx);
     }
@@ -110,11 +144,11 @@ public class AccountRegistrationServiceTest {
         }
     }
     private void assertFixedAccount(JSONObject r, boolean teacher) {
-        r.put("username", "admin"); r.put("roles", "admin,teacher");
+        r.put("phone", "13900000001"); r.put("roles", "admin,teacher");
         r.put("userIdentity", 2); r.put("departIds", "secret"); r.put("status", 2); r.put("id", "admin");
         Result<?> result = register(r, teacher); assertTrue(result.isSuccess()); assertNull(result.getResult());
         ArgumentCaptor<SysUser> capture = ArgumentCaptor.forClass(SysUser.class); verify(users).save(capture.capture());
-        SysUser u = capture.getValue(); assertEquals("13900000001", u.getUsername()); assertEquals("张同学", u.getRealname());
+        SysUser u = capture.getValue(); assertEquals("learner_01", u.getUsername()); assertNull(u.getPhone()); assertEquals("张同学", u.getRealname());
         assertEquals("测试学校", u.getSchool()); assertEquals(Integer.valueOf(1), u.getUserIdentity()); assertEquals("", u.getDepartIds());
         assertEquals(Integer.valueOf(1), u.getStatus()); assertNotEquals("Synthetic8!", u.getPassword());
         assertEquals(Integer.valueOf(0), u.getDelFlag());
@@ -127,12 +161,12 @@ public class AccountRegistrationServiceTest {
         verify(users).addUserWithRole(any(SysUser.class), eq("student-role"));
         verify(tx).commit(any());
     }
-    @Test public void disabledMissingRoleAndReservedPhoneFailClosed() {
+    @Test public void disabledMissingRoleAndReservedUsernameFailClosed() {
         when(config.getConfigItem("allowReg")).thenReturn("0");
         for (boolean teacher : new boolean[]{false, true}) failed(register(request(), teacher), 403);
-        when(config.getConfigItem("allowReg")).thenReturn("1"); when(profiles.countReservedPhone(anyString())).thenReturn(1);
+        when(config.getConfigItem("allowReg")).thenReturn("1"); when(profiles.countReservedUsername(anyString())).thenReturn(1);
         for (boolean teacher : new boolean[]{false, true}) failed(register(request(), teacher), 409);
-        when(profiles.countReservedPhone(anyString())).thenReturn(0); when(roles.getOne(any())).thenReturn(null);
+        when(profiles.countReservedUsername(anyString())).thenReturn(0); when(roles.getOne(any())).thenReturn(null);
         for (boolean teacher : new boolean[]{false, true}) failed(register(request(), teacher), 503);
         verifyZeroInteractions(users, tx);
     }

@@ -1,6 +1,6 @@
 <template>
   <main class="registration-page">
-    <div class="registration-heading"><span>TeachingOpen · 学习与创作</span><h1>{{ teacherRegistration ? '创建教师账号' : '创建学生账号' }}</h1><p>使用手机号和密码登录教学平台。</p></div>
+    <div class="registration-heading"><span>TeachingOpen · 学习与创作</span><h1>{{ teacherRegistration ? '创建教师账号' : '创建学生账号' }}</h1><p>使用用户名和密码登录教学平台。</p></div>
     <form novalidate :aria-busy="submitting" @submit.prevent="submit">
       <div v-for="field in fields" :key="field.key" class="field">
         <label :for="'register-' + field.key">{{ field.label }}</label>
@@ -11,10 +11,12 @@
           :type="field.type || 'text'"
           :autocomplete="field.autocomplete"
           :maxlength="field.maximum"
-          :inputmode="field.key === 'phone' ? 'tel' : null"
+          :autocapitalize="field.key === 'username' ? 'off' : null"
+          :spellcheck="field.key === 'username' ? false : null"
           :disabled="submitting"
           :aria-invalid="!!errors[field.key]"
-          :aria-describedby="errors[field.key] ? field.key + '-error' : null">
+          :aria-describedby="[field.hint ? field.key + '-hint' : '', errors[field.key] ? field.key + '-error' : ''].filter(Boolean).join(' ') || null">
+        <p v-if="field.hint" :id="field.key + '-hint'" class="field-hint">{{ field.hint }}</p>
         <p v-if="errors[field.key]" :id="field.key + '-error'" class="field-error">{{ errors[field.key] }}</p>
       </div>
       <p v-if="submitError" role="alert" class="field-error">{{ submitError }}</p>
@@ -26,7 +28,7 @@
 
 <script>
 import { postAction } from '@/api/manage'
-import { isMainlandPhone, registrationPasswordProblem, recoveryError } from '@/utils/accountRecovery'
+import { registrationUsernameProblem, registrationPasswordProblem, recoveryError } from '@/utils/accountRecovery'
 
 export default {
     name: 'Register',
@@ -38,9 +40,9 @@ export default {
             submitting: false,
             submitError: '',
             errors: {},
-            form: { phone: '', password: '', confirmation: '', realname: '', school: '' },
+            form: { username: '', password: '', confirmation: '', realname: '', school: '' },
             fields: [
-                { key: 'phone', label: '手机号', autocomplete: 'username', maximum: 11 },
+                { key: 'username', label: '用户名', autocomplete: 'username', maximum: 100, hint: '3–100 位，可使用英文字母、数字、下划线、@、点或短横线。' },
                 { key: 'password', label: '密码（8–64 位）', type: 'password', autocomplete: 'new-password', maximum: 64 },
                 { key: 'confirmation', label: '确认密码', type: 'password', autocomplete: 'new-password', maximum: 64 },
                 { key: 'realname', label: '姓名', autocomplete: 'name', maximum: 100 },
@@ -53,7 +55,8 @@ export default {
             if (this.submitting) return
             const form = this.form
             const errors = {}
-            if (!isMainlandPhone(form.phone.trim())) errors.phone = '请输入正确的11位手机号。'
+            const usernameError = registrationUsernameProblem(form.username.trim())
+            if (usernameError) errors.username = usernameError
             const passwordError = registrationPasswordProblem(form.password)
             if (passwordError) errors.password = passwordError
             if (!form.confirmation || form.password !== form.confirmation) errors.confirmation = '两次输入的密码需一致。'
@@ -65,7 +68,7 @@ export default {
             this.submitting = true
             try {
                 const response = await postAction(this.teacherRegistration ? '/sys/user/register/teacher' : '/sys/user/register', {
-                    phone: form.phone.trim(),
+                    username: form.username.trim(),
                     password: form.password,
                     realname: form.realname.trim(),
                     school: form.school.trim()
@@ -76,7 +79,7 @@ export default {
                 }
                 form.password = ''
                 form.confirmation = ''
-                await this.$router.push({ name: 'registerResult', params: { phone: form.phone.trim() } })
+                await this.$router.push({ name: 'registerResult', params: { username: form.username.trim() } })
             } catch (error) {
                 this.submitError = recoveryError(error, '注册请求失败，请稍后重试。')
             } finally {
@@ -97,6 +100,7 @@ h1 { margin: 12px 0; font-size: 30px; }
 .field input { width: 100%; padding: 12px; border: 1px solid #bec6cc; border-radius: 4px; }
 .field input:focus { outline: 2px solid #146fc2; outline-offset: 2px; }
 .field-error { color: #a12834; margin-top: 8px; }
+.field-hint { color: #69747c; margin-top: 8px; font-size: 12px; line-height: 1.6; }
 button { display: block; width: 100%; margin-top: 24px; padding: 12px; background: #146fc2; color: white; border: 0; border-radius: 4px; cursor: pointer; }
 button:disabled { opacity: .65; cursor: wait; }
 .login-link { display: block; text-align: center; margin-top: 18px; color: #146fc2; }
