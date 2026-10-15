@@ -1,0 +1,7 @@
+### Ran Playwright code
+```js
+await (async page => { await page.setViewportSize({width:1440,height:1000}); await page.screenshot({path:"output/playwright/before-1440.png",fullPage:true}); const download = page.waitForEvent("download",{timeout:10000}); await page.getByRole("link",{name:"课程教案 1",exact:true}).click(); const file = await download; console.log(JSON.stringify({baseline:"8db526ee (same source as abb2d01a)",downloadTriggered:true,filename:file.suggestedFilename(),inlinePlanPresent:await page.locator(".course-plan-reader").count()})); })(page);
+```
+### Events
+- Downloading file lesson.md ...
+- Downloaded file lesson.md to ".playwright-cli/lesson.md"

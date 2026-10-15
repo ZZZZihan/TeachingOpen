@@ -1,0 +1,31 @@
+{
+  "candidate": "daeb31a9",
+  "checks": [
+    "Markdown table rendered",
+    "Markdown code rendered",
+    "Markdown list rendered",
+    "Raw script did not run",
+    "No script element",
+    "Mobile dialog fits viewport",
+    "Mobile Markdown readable",
+    "Network fault followed by real retry succeeds",
+    "Text shown inline",
+    "Previous unit content cleared",
+    "PDF displayed using typed memory blob",
+    "Image decoded inline",
+    "Word conversion guidance without download",
+    "Hidden teacher plan not exposed to student",
+    "Real 404 reported",
+    "No document navigation",
+    "Zero downloads during candidate reader actions",
+    "Zero popup tabs during candidate reader actions"
+  ],
+  "downloads": 0,
+  "popups": 0,
+  "viewports": [
+    "1440x1000",
+    "390x844"
+  ],
+  "auth": "real API login imported as private browser state",
+  "network": "real local backend; one deliberate request abort for recovery"
+}

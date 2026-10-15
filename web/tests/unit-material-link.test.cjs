@@ -19,7 +19,7 @@ function reader (config = {}) {
     URL, URLSearchParams,
     window: { location: { origin } }, location: { protocol: 'http:', host: '127.0.0.1:18150' },
     store: { getters: { sysConfig: { uploadType: 'local', staticDomain, filePreview: 'none', ...config } } },
-    axios: () => Promise.resolve({ success: true }), Vue: {}, SYS_CONFIG: 'unused', component: null
+    axios: () => Promise.resolve({ success: true }), Vue: {}, SYS_CONFIG: 'unused', component: null, CoursePlanReader: {}
   }
   vm.createContext(context)
   vm.runInContext(source('src/api/manage.js').replace(/^import .*$/gm, '').replace(/^export default api$/m, '').replace(/\bexport function /g, 'function '), context)
@@ -72,6 +72,17 @@ test('officeapps 预览继续包装根路径与相对 key，嵌套文件只有�
     assert.equal(preview.origin, 'https://view.officeapps.live.com')
     assert.equal(preview.searchParams.get('src'), `${origin}${staticDomain}/role-flow/${name}`)
   }
+})
+
+test('教案在线阅读使用原始已授权文件地址，不把Markdown发送到Office外部预览器', () => {
+  const instance = reader({ filePreview: 'officeapps' })
+  instance.unit = { coursePpt: `${staticDomain}/role-flow/slides.pptx`, coursePlan: `${staticDomain}/role-flow/学习%20教案.md?x=1&y=2,role-flow/second.md` }
+  assert.equal(new URL(instance.resources[0].url).origin, 'https://view.officeapps.live.com')
+  assert.deepEqual(Array.from(instance.planFiles, plan => plan.fileUrl), [
+    new URL(`${origin}${staticDomain}/role-flow/学习%20教案.md?x=1&y=2`).href,
+    `${origin}${staticDomain}/role-flow/second.md`
+  ])
+  assert.equal(instance.selectedPlan.fileUrl, instance.planFiles[0].fileUrl)
 })
 
 test('ow365 加密 aes/aess 地址保持原预览标记与密文', () => {

@@ -36,7 +36,7 @@ function courseEntry (engine) {
     .match(/<script>([\s\S]*?)<\/script>/)[1]
     .replace(/^import .*$/gm, '').replace('export default', 'component =')
   const context = {
-    component: null, URL, URLSearchParams,
+    component: null, CoursePlanReader: {}, URL, URLSearchParams,
     window: { location: { origin: 'https://teaching.test' } },
     getFileAccessHttpUrl: value => value || '',
     getAction: () => { throw new Error('Reader logging is not part of this controlled boundary') },

@@ -9,7 +9,7 @@ function mount () {
   const script = source.match(/<script>([\s\S]*?)<\/script>/)[1].replace(/^import .*$/gm, '').replace('export default', 'component =')
   const requests = []; const listeners = new Map(); const removed = []; let previews = 0
   const doc = { addEventListener: (name, fn) => listeners.set(name, fn), removeEventListener: (name, fn) => { assert.equal(listeners.get(name), fn); removed.push(name); listeners.delete(name) } }
-  const ctx = { component: null, document: doc, URL, URLSearchParams, window: { location: { origin: 'http://localhost:18112' } }, getFileAccessHttpUrl: path => path || undefined, getFilePrevew: path => { previews++; if (new URL(path, 'http://localhost:18112').pathname === '/broken-config') throw new Error('broken preview'); return path }, getAction: (url, params) => new Promise((resolve, reject) => requests.push({ url, params, resolve, reject })) }
+  const ctx = { component: null, CoursePlanReader: {}, document: doc, URL, URLSearchParams, window: { location: { origin: 'http://localhost:18112' } }, getFileAccessHttpUrl: path => path || undefined, getFilePrevew: path => { previews++; if (new URL(path, 'http://localhost:18112').pathname === '/broken-config') throw new Error('broken preview'); return path }, getAction: (url, params) => new Promise((resolve, reject) => requests.push({ url, params, resolve, reject })) }
   vm.createContext(ctx); vm.runInContext(script, ctx)
   const component = ctx.component; const instance = Object.assign(component.data(), { $refs: {} })
   for (const [name, fn] of Object.entries(component.methods)) instance[name] = fn.bind(instance)
@@ -25,6 +25,30 @@ test('阅读器：按实际内容选择初始视图，记录失败不会阻止�
   const h = mount(); h.instance.view({ id: 'a&b', unitName: 'Lesson', mediaContent: '<p>Text</p>' })
   assert.equal(h.instance.activeTab, 'content'); assert.equal(h.requests[0].params.unitId, 'a&b'); assert.equal(h.requests[0].url.includes('?'), false)
   h.requests[0].reject(new Error('offline')); await flush(); assert.equal(h.instance.logFailed, true); assert.equal(h.instance.visible, true)
+})
+test('阅读器：只有教案的单元直接阅读，多个教案在弹窗内切换且新单元从第一份开始', () => {
+  const h = mount()
+  h.instance.view({ id: 'plan-only', coursePlan: '/lesson-one.md,/lesson-two.md' })
+  assert.equal(h.instance.activeTab, 'plan')
+  assert.equal(h.instance.selectedPlan.fileUrl, 'http://localhost:18112/lesson-one.md')
+  h.instance.openPlan(1)
+  assert.equal(h.instance.activeTab, 'plan')
+  assert.equal(h.instance.selectedPlan.fileUrl, 'http://localhost:18112/lesson-two.md')
+  const version = h.instance.viewVersion
+  h.instance.view({ id: 'next', coursePlan: '/next-lesson.md' })
+  assert.equal(h.instance.planIndex, 0)
+  assert.equal(h.instance.selectedPlan.fileUrl, 'http://localhost:18112/next-lesson.md')
+  assert.ok(h.instance.viewVersion > version)
+})
+test('阅读器：从视频打开教案时停播，继续保留单元内其他内容入口', () => {
+  const h = mount(); let paused = 0
+  h.instance.view({ id: 'mixed', courseVideo: '/lesson.mp4', mediaContent: '<p>课程正文</p>', coursePlan: '/lesson.md' })
+  h.instance.$refs.video = { pause: () => paused++, removeAttribute () {}, load () {} }
+  h.instance.openPlan(0)
+  assert.equal(h.instance.activeTab, 'plan')
+  assert.equal(paused, 1)
+  assert.deepEqual(Array.from(h.instance.tabs, item => item.key), ['video', 'content', 'plan'])
+  assert.equal(h.instance.visible, true)
 })
 test('阅读器：旧单元日志失败不污染新单元，关闭后不恢复状态', async () => {
   const h = mount(); h.instance.view({ id: 'a' }); h.instance.view({ id: 'b', courseVideo: 'video' }); h.requests[0].reject(new Error('old')); await flush(); assert.equal(h.instance.logFailed, false)
