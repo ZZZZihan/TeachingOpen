@@ -9,11 +9,14 @@ import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.mapper.SysUserMapper;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.teaching.entity.TeachingCourseUnit;
+import org.jeecg.modules.teaching.entity.TeachingCourse;
 import org.jeecg.modules.teaching.enums.UnitViewLogResult;
 import org.jeecg.modules.teaching.mapper.TeachingCourseUnitMapper;
+import org.jeecg.modules.teaching.mapper.TeachingCourseMapper;
 import org.jeecg.modules.teaching.mapper.TeachingDepartDayLogMapper;
 import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
 import org.jeecg.modules.teaching.service.LegacyUnitViewMarkerStore;
+import org.jeecg.modules.teaching.service.TeachingAccessService;
 import org.jeecg.modules.teaching.service.impl.TeachingDepartDayLogServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,9 +55,12 @@ public class UnitViewStatisticsTest {
     private TeachingCourseUnitMapper units;
     private TeachingCourseUnitMapper actualUnits;
     private SysUserMapper users;
+    private TeachingCourseMapper courses;
+    private TeachingAccessService teachingAccess;
     private LegacyUnitViewMarkerStore legacy;
     private SysUser actor;
     private TeachingCourseUnit unit;
+    private TeachingCourse course;
     private AtomicBoolean failAfterWrite;
     private AtomicBoolean rejectWrite;
 
@@ -100,9 +106,12 @@ public class UnitViewStatisticsTest {
             return rows;
         }).when(logs).incrementDayCounter(anyString(), anyString(), anyString(), anyString());
         users = mock(SysUserMapper.class); units = mock(TeachingCourseUnitMapper.class);
+        courses = mock(TeachingCourseMapper.class); teachingAccess = mock(TeachingAccessService.class);
         legacy = mock(LegacyUnitViewMarkerStore.class);
         actor = new SysUser(); actor.setId("teacher-a"); actor.setStatus(1); actor.setDelFlag(0); actor.setUserIdentity(2);
         unit = new TeachingCourseUnit(); unit.setId("unit-a"); unit.setCourseId("course-a"); unit.setDelFlag(0);
+        course = new TeachingCourse(); course.setId("course-a"); course.setDelFlag(0);
+        when(courses.selectById("course-a")).thenAnswer(call -> course);
         when(users.selectById(anyString())).thenAnswer(call -> {
             SysUser copy = new SysUser(); copy.setId(call.getArgument(0)); copy.setStatus(actor.getStatus());
             copy.setDelFlag(actor.getDelFlag()); copy.setUserIdentity(actor.getUserIdentity()); return copy;
@@ -124,6 +133,8 @@ public class UnitViewStatisticsTest {
         ReflectionTestUtils.setField(target,"sysDepartService",departments);
         ReflectionTestUtils.setField(target,"users",users);
         ReflectionTestUtils.setField(target,"units",units);
+        ReflectionTestUtils.setField(target,"courses",courses);
+        ReflectionTestUtils.setField(target,"teachingAccessService",teachingAccess);
         ReflectionTestUtils.setField(target,"legacyUnitViews",legacy);
         setTime("2026-10-10T16:00:00Z");
         TransactionInterceptor transactions = new TransactionInterceptor(new DataSourceTransactionManager(data), new AnnotationTransactionAttributeSource());
@@ -245,7 +256,7 @@ public class UnitViewStatisticsTest {
         verifyZeroInteractions(legacy);
     }
 
-    @Test public void invalidOrUnassignedUnitAndDeletedDepartmentCannotWrite() {
+    @Test public void invalidOrDeletedUnitAndDeletedDepartmentCannotWrite() {
         fails(() -> service.recordUnitView(null,"unit-a"),JeecgBootException.class);
         fails(() -> service.recordUnitView("teacher-a","unit a"),JeecgBootException.class);
         unit.setDelFlag(1);
@@ -253,12 +264,48 @@ public class UnitViewStatisticsTest {
         unit.setDelFlag(0);
         when(units.selectById("UNIT-A")).thenReturn(unit);
         fails(() -> service.recordUnitView("teacher-a","UNIT-A"),JeecgBootException.class);
-        when(units.getUserDepartIdByUnitId("teacher-a","unit-a")).thenReturn(null);
-        fails(() -> service.recordUnitView("teacher-a","unit-a"),UnauthorizedException.class);
-        when(units.getUserDepartIdByUnitId("teacher-a","unit-a")).thenReturn("class-a");
         jdbc.update("UPDATE sys_depart SET del_flag='1'");
         fails(() -> service.recordUnitView("teacher-a","unit-a"),JeecgBootException.class); noWrites();
         verifyZeroInteractions(legacy);
+    }
+
+    @Test public void readablePreviewWithoutAnApplicableClassSucceedsWithoutInventingStatistics() {
+        when(units.getUserDepartIdByUnitId("teacher-a","unit-a")).thenReturn(null);
+        assertEquals(UnitViewLogResult.NOT_APPLICABLE,service.recordUnitView("teacher-a","unit-a"));
+        assertEquals(UnitViewLogResult.NOT_APPLICABLE,service.recordUnitView("teacher-a","unit-a"));
+        noWrites(); verify(teachingAccess,times(2)).requireCourse("course-a"); verifyZeroInteractions(legacy);
+    }
+
+    @Test public void courseReadDenialPrecedesBothTeacherAndStudentStatisticsBranches() {
+        doThrow(new UnauthorizedException("合成跨班私有课程")).when(teachingAccess).requireCourse("course-a");
+        fails(() -> service.recordUnitView("teacher-a","unit-a"),UnauthorizedException.class);
+        actor.setUserIdentity(1);
+        fails(() -> service.recordUnitView("teacher-a","unit-a"),UnauthorizedException.class);
+        actor.setUserIdentity(null);
+        fails(() -> service.recordUnitView("teacher-a","unit-a"),UnauthorizedException.class);
+        noWrites(); verifyZeroInteractions(legacy);
+        verify(units,never()).getUserDepartIdByUnitId(anyString(),anyString());
+    }
+
+    @Test public void aDeletedOrMissingCourseCannotBecomeASuccessfulNoopForAnyIdentity() {
+        for (Integer identity : new Integer[] {2,1,null}) {
+            actor.setUserIdentity(identity);
+            course.setDelFlag(1);
+            fails(() -> service.recordUnitView("teacher-a","unit-a"),JeecgBootException.class);
+            when(courses.selectById("course-a")).thenReturn(null);
+            fails(() -> service.recordUnitView("teacher-a","unit-a"),JeecgBootException.class);
+            when(courses.selectById("course-a")).thenAnswer(call -> course);
+        }
+        noWrites(); verifyZeroInteractions(teachingAccess,legacy);
+    }
+
+    @Test public void studentValidatesTheUnitBeforeReturningANonCountingResponse() {
+        actor.setUserIdentity(1);
+        unit.setDelFlag(1);
+        fails(() -> service.recordUnitView("teacher-a","unit-a"),JeecgBootException.class);
+        unit.setDelFlag(0);
+        assertEquals(UnitViewLogResult.NOT_APPLICABLE,service.recordUnitView("teacher-a","unit-a"));
+        noWrites(); verify(teachingAccess).requireCourse("course-a"); verifyZeroInteractions(legacy);
     }
 
     @Test public void productionClassAccessQueryRequiresCurrentMembershipAndLiveUnitCourseDepartment() {
