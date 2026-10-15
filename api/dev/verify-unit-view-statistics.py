@@ -82,8 +82,13 @@ def verify(args):
                 if api.cache('TYPE', key) not in ('none', 'set') or api.cache('PTTL', key) not in ('-1', '-2'):
                     raise RuntimeError('Expected a persistent legacy set or an absent owned fixture key')
                 original_cache[key] = dump(key)
+            for actor in ('admin','teacher_a','teacher_b','student_a','student_b'):
+                api.login(actor)
+            # Real login selects a single department's org_code. Bind the full
+            # account/table baseline after authentication, before fixture writes.
             original = db_snapshot()
             original_media_index = media_index_snapshot(sql) if has_media_index else None
+            report['baseline_phase'] = 'after real fixture logins, before probe fixture writes'
             report['baseline_sha256'] = original
             report['initial_ledger_rows'] = int(sql('SELECT COUNT(*) FROM teaching_unit_view_event'))
             audit_count = int(sql('SELECT COUNT(*) FROM sys_log'))
@@ -141,8 +146,6 @@ def verify(args):
                 return all(accepted(response) for response in replies)
 
             try:
-                for actor in ('admin','teacher_a','teacher_b','student_a','student_b'):
-                    api.login(actor)
                 sql('INSERT INTO teaching_course(id,course_name,is_shared,del_flag) VALUES('
                     + literal(shared_course) + ",'共享预览合成课程',1,0),(" + literal(deleted_course) + ",'已删除合成课程',1,1)")
                 for kind, unit in units.items():
