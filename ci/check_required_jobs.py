@@ -2,6 +2,7 @@
 
 import json
 import os
+import re
 import sys
 
 
@@ -19,9 +20,35 @@ def normalize_plan(plan):
             **{name: outputs[name] if valid else 'true' for name in JOBS}}
 
 
-def check(event_name, needs):
+def check(event_name, needs, *, reuse_proof=None, target_sha=None):
     if not isinstance(needs, dict):
         raise ValueError('Missing job results')
+    if all(isinstance(needs.get(name), dict) and needs[name].get('result') == 'success' for name in JOBS):
+        return
+    # A source run is verified again online by main(), never by a boolean alone.
+    if reuse_proof is not None:
+        from ci_reuse import JOB_NAMES, positive, sha
+        reuse = needs.get('reuse', {})
+        proof = reuse_proof if isinstance(reuse_proof, dict) else {}
+        ids = proof.get('source_job_ids', {})
+        outputs = reuse.get('outputs', {}) if isinstance(reuse, dict) else {}
+        valid = (event_name == 'push' and sha(target_sha) and type(proof.get('schema')) is int and proof['schema'] == 1
+                 and proof.get('mode') == 'reused' and proof.get('target_sha') == target_sha
+                 and sha(proof.get('source_sha')) and sha(proof.get('tree'))
+                 and positive(proof.get('source_run_id')) and type(proof.get('source_run_attempt')) is int
+                 and proof['source_run_attempt'] == 1
+                 and isinstance(proof.get('source_url'), str)
+                 and re.fullmatch(r'https://github.com/[\w.-]+/[\w.-]+/actions/runs/'
+                                  + str(proof['source_run_id']), proof['source_url']) is not None
+                 and positive(proof.get('pr_number')) and isinstance(ids, dict)
+                 and set(ids) == set(JOB_NAMES) and all(positive(v) for v in ids.values())
+                 and len(set(ids.values())) == len(JOB_NAMES)
+                 and isinstance(reuse, dict) and reuse.get('result') == 'success'
+                 and isinstance(outputs, dict) and outputs.get('reuse') == 'true')
+        if not valid or any(not isinstance(needs.get(name), dict) or needs[name].get('result') != 'skipped'
+                            for name in JOBS):
+            raise ValueError('CI required rejected invalid or mixed reuse evidence')
+        return
     changes = needs.get('changes', {})
     changes = changes if isinstance(changes, dict) else {}
     outputs = changes.get('outputs', {})
@@ -57,12 +84,19 @@ def main():
                                   for name, value in outputs.items())
         return 0
     try:
-        check(os.environ.get('CI_EVENT_NAME', ''),
-              json.loads(os.environ.get('CI_NEEDS_JSON', '')))
-    except (ValueError, TypeError) as error:
-        print(str(error), file=sys.stderr)
+        event = os.environ.get('CI_EVENT_NAME', '')
+        needs = json.loads(os.environ.get('CI_NEEDS_JSON', ''))
+        proof = None
+        if event == 'push' and isinstance(needs, dict) and any(
+                isinstance(needs.get(name), dict) and needs[name].get('result') == 'skipped'
+                for name in JOBS):
+            from ci_reuse import authorize
+            proof = authorize(needs)
+        check(event, needs, reuse_proof=proof, target_sha=os.environ.get('GITHUB_SHA'))
+    except Exception as error:
+        print(str(error) if isinstance(error, (ValueError, TypeError)) else type(error).__name__, file=sys.stderr)
         return 1
-    print('Every required job succeeded; any skips were explicitly planned.')
+    print('CI required accepted successful jobs, unaffected PR skips, or revalidated full-suite evidence.')
     return 0
 
 

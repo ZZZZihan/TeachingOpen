@@ -39,13 +39,41 @@ jobs:
           CI_PLAN_JSON: ${{ toJSON(steps.plan) }}
         run: python3 ci/check_required_jobs.py --normalize
 
+  reuse:
+    name: Verify identical-tree PR evidence
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      reuse: ${{ steps.validated.outputs.reuse }}
+      source_run_id: ${{ steps.validated.outputs.source_run_id }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Reuse only complete fresh PR evidence for this exact tree
+        id: proof
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 ci/ci_reuse.py
+      - name: Normalize absent or malformed reuse decisions to full checks
+        id: validated
+        if: ${{ !cancelled() }}
+        env:
+          CI_REUSE_STEP: ${{ toJSON(steps.proof) }}
+        run: python3 ci/ci_reuse.py --normalize
+
   frontend:
     name: Frontend tests and build
-    needs: changes
+    needs: [changes, reuse]
     if: >-
       ${{ !cancelled() && (github.event_name != 'pull_request' ||
           needs.changes.result != 'success' || needs.changes.outputs.selective != 'true' ||
-          needs.changes.outputs.frontend != 'false') }}
+          needs.changes.outputs.frontend != 'false') &&
+          (needs.reuse.result != 'success' || needs.reuse.outputs.reuse != 'true') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 20
     steps:
@@ -103,13 +131,26 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      - name: Record original successful frontend execution
+        if: success() && github.event_name == 'pull_request'
+        run: python3 ci/ci_reuse.py --record frontend
+      - name: Store original frontend execution receipt
+        if: success() && github.event_name == 'pull_request'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ci-fresh-frontend-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ci-results/reuse/frontend/receipt.json
+          if-no-files-found: ignore
+          retention-days: 2
+
   tools:
     name: Backup and migration tools
-    needs: changes
+    needs: [changes, reuse]
     if: >-
       ${{ !cancelled() && (github.event_name != 'pull_request' ||
           needs.changes.result != 'success' || needs.changes.outputs.selective != 'true' ||
-          needs.changes.outputs.tools != 'false') }}
+          needs.changes.outputs.tools != 'false') &&
+          (needs.reuse.result != 'success' || needs.reuse.outputs.reuse != 'true') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 10
     steps:
@@ -118,11 +159,11 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: '3.12'
+          python-version: '3.12.15'
       - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
           distribution: temurin
-          java-version: '8'
+          java-version: '8.0.504+1'
       - name: Candidate bundle filesystem contracts (real JDK 8, synthetic artifacts)
         run: python3 -m unittest discover -s deploy -p 'test_candidate_release.py' -v
       - name: Synthetic backup and migration tests (no backup execution)
@@ -154,18 +195,31 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
+      - name: Record original successful tools execution
+        if: success() && github.event_name == 'pull_request'
+        run: python3 ci/ci_reuse.py --record tools
+      - name: Store original tools execution receipt
+        if: success() && github.event_name == 'pull_request'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ci-fresh-tools-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ci-results/reuse/tools/receipt.json
+          if-no-files-found: ignore
+          retention-days: 2
+
   backend:
     name: Backend and MySQL registration
-    needs: changes
+    needs: [changes, reuse]
     if: >-
       ${{ !cancelled() && (github.event_name != 'pull_request' ||
           needs.changes.result != 'success' || needs.changes.outputs.selective != 'true' ||
-          needs.changes.outputs.backend != 'false') }}
+          needs.changes.outputs.backend != 'false') &&
+          (needs.reuse.result != 'success' || needs.reuse.outputs.reuse != 'true') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 35
     services:
       mysql:
-        image: mysql:8.0
+        image: mysql@sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b
         env:
           MYSQL_ROOT_PASSWORD: ci-ephemeral-mysql
           MYSQL_ROOT_HOST: '%'
@@ -175,7 +229,7 @@ jobs:
           --health-cmd="mysqladmin ping -h 127.0.0.1 --silent"
           --health-interval=10s --health-timeout=5s --health-retries=12
       redis:
-        image: redis:7.2
+        image: redis@sha256:46f15cf64fdef63e483dcda99e74e3d51c017b1175547b6bb874152ee2391aad
         ports:
           - 36379:6379
         options: >-
@@ -188,12 +242,12 @@ jobs:
       - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
           distribution: temurin
-          java-version: '8'
+          java-version: '8.0.504+1'
           cache: maven
           cache-dependency-path: '**/pom.xml'
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: '3.12'
+          python-version: '3.12.15'
       - name: Install test clients
         run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends mysql-client redis-tools
       - name: Backend build and core unit tests (explicitly enabled)
@@ -221,19 +275,37 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
+      - name: Record original successful backend execution
+        if: success() && github.event_name == 'pull_request'
+        env:
+          CI_MYSQL_CONTAINER: ${{ job.services.mysql.id }}
+          CI_REDIS_CONTAINER: ${{ job.services.redis.id }}
+        run: python3 ci/ci_reuse.py --record backend
+      - name: Store original backend execution receipt
+        if: success() && github.event_name == 'pull_request'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ci-fresh-backend-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ci-results/reuse/backend/receipt.json
+          if-no-files-found: ignore
+          retention-days: 2
+
   required:
     name: CI required
     if: always()
-    needs: [changes, frontend, tools, backend]
+    needs: [changes, reuse, frontend, tools, backend]
     runs-on: ubuntu-22.04
-    timeout-minutes: 2
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          sparse-checkout: ci
       - name: Require successful checks and only explicitly planned skips
         env:
+          GH_TOKEN: ${{ github.token }}
           CI_EVENT_NAME: ${{ github.event_name }}
           CI_NEEDS_JSON: ${{ toJSON(needs) }}
         run: python3 ci/check_required_jobs.py
