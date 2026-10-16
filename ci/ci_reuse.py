@@ -166,8 +166,11 @@ def _validate_evidence(target, pr, run, jobs, receipts, now):
                         parents=[base_sha, pr['head']['sha']],
                         workflow_blob=target['workflow_blob'], image_os=target['image_os'],
                         image_version=target['image_version'], runtimes=RUNTIMES[key])
-        require(all(type(receipt.get(k)) is type(v) and receipt[k] == v
-                    for k, v in expected.items()), 'Receipt mismatch: ' + key)
+        # Log trusted field names only, never untrusted receipt values or tokens.
+        differences = [k for k, v in expected.items()
+                       if type(receipt.get(k)) is not type(v) or receipt[k] != v]
+        require(not differences, 'Receipt mismatch: ' + key
+                + ' (fields: ' + ', '.join(differences) + ')')
         actual = receipt.get('checkout_sha')
         require(sha(actual) and (source_sha is None or source_sha == actual),
                 'Inconsistent actual tested merge commit')
@@ -385,7 +388,7 @@ def authorize(needs):
     write_summary('Historical full-suite evidence revalidated: [' + str(proof['source_run_id'])
                   + '](' + proof['source_url'] + '). Original tested SHA `' + proof['source_sha']
                   + '` → target SHA `' + proof['target_sha'] + '`, tree `' + proof['tree']
-                  + '`. Tests were not executed again on this push; original reports retain their SHA.')
+                  + '`. Only tools/backend may use historical evidence; frontend must succeed freshly on this push. Original reports retain their SHA.')
     return proof
 
 

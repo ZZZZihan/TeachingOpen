@@ -221,6 +221,22 @@ class EvidenceValidationTests(unittest.TestCase):
         self.target["image_version"] = "newer-image-under-the-same-ubuntu-label"
         self.reject()
 
+    def test_mixed_runner_images_report_the_mismatched_field_without_relaxing_checks(self):
+        self.receipts["tools"]["image_version"] = "20261004.315.1"
+        with self.assertRaisesRegex(ValueError, r"Receipt mismatch: tools \(fields: image_version\)"):
+            self.validate()
+
+    def test_diagnostics_report_all_different_expected_fields_without_echoing_values(self):
+        receipt = self.receipts["tools"]
+        receipt["image_version"] = "untrusted-secret-value\n::warning::injected"
+        receipt["image_os"] = "ubuntu24"
+        receipt["runtimes"] = {}
+        receipt.pop("workflow_blob")
+        with self.assertRaises(ValueError) as caught:
+            self.validate()
+        self.assertEqual(str(caught.exception),
+                         "Receipt mismatch: tools (fields: workflow_blob, image_os, image_version, runtimes)")
+
     def test_actual_runtime_versions_and_service_image_digests_must_match(self):
         for job in HEAVY_JOBS:
             original = deepcopy(self.receipts[job]["runtimes"])
@@ -842,7 +858,8 @@ class OriginalReceiptGitTests(unittest.TestCase):
 
 class PreflightFallbackTests(unittest.TestCase):
     def test_api_failure_produces_explicit_full_suite_outputs_without_reuse(self):
-        for error in (OSError("Synthetic API outage"), ValueError("Missing complete API evidence")):
+        for error in (OSError("Synthetic API outage"), ValueError("Missing complete API evidence"),
+                      ValueError("Receipt mismatch: tools (fields: image_version)")):
             with self.subTest(error=type(error).__name__), tempfile.TemporaryDirectory() as directory:
                 output = Path(directory) / "github-output"
                 summary = Path(directory) / "summary"
@@ -856,6 +873,8 @@ class PreflightFallbackTests(unittest.TestCase):
                 self.assertEqual(dict(line.split("=", 1) for line in output.read_text().splitlines()),
                                  {"reuse": "false", "source_run_id": ""})
                 self.assertIn("Run the complete suite", summary.read_text())
+                if isinstance(error, ValueError):
+                    self.assertIn(str(error), summary.read_text())
 
 
 class ReuseRequiredGateTests(unittest.TestCase):
@@ -864,7 +883,7 @@ class ReuseRequiredGateTests(unittest.TestCase):
         self.proof = reuse.validate_evidence(*self.fixture)
         self.target_sha = self.fixture[0]["sha"]
 
-    def needs(self, states=("skipped", "skipped", "skipped"), result="success", flag="true"):
+    def needs(self, states=("success", "skipped", "skipped"), result="success", flag="true"):
         return {
             "changes": {"result": "skipped", "outputs": {}},
             "reuse": {"result": result, "outputs": {"reuse": flag}},
@@ -878,10 +897,11 @@ class ReuseRequiredGateTests(unittest.TestCase):
             target_sha=self.target_sha if target_sha is None else target_sha,
         )
 
-    def test_verified_push_proof_allows_only_the_complete_skipped_heavy_set(self):
+    def test_verified_push_proof_requires_fresh_frontend_and_success_or_reused_other_jobs(self):
         self.assertIsNone(self.check())
         for states in itertools.product(("success", "skipped", "failure", "cancelled", None), repeat=3):
-            expected = len(set(states)) == 1 and states[0] in ("success", "skipped")
+            expected = states[0] == "success" and all(
+                state in ("success", "skipped") for state in states[1:])
             with self.subTest(states=states):
                 if expected:
                     self.assertIsNone(self.check(self.needs(states)))

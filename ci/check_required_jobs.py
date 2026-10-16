@@ -45,8 +45,14 @@ def check(event_name, needs, *, reuse_proof=None, target_sha=None):
                  and len(set(ids.values())) == len(JOB_NAMES)
                  and isinstance(reuse, dict) and reuse.get('result') == 'success'
                  and isinstance(outputs, dict) and outputs.get('reuse') == 'true')
-        if not valid or any(not isinstance(needs.get(name), dict) or needs[name].get('result') != 'skipped'
-                            for name in JOBS):
+        # Reuse can waive only tools/backend. The live dependency release gate
+        # runs inside frontend and must succeed on this push.
+        fresh_frontend = (isinstance(needs.get('frontend'), dict)
+                          and needs['frontend'].get('result') == 'success')
+        if not valid or not fresh_frontend or any(
+                not isinstance(needs.get(name), dict)
+                or needs[name].get('result') not in ('success', 'skipped')
+                for name in ('backend', 'tools')):
             raise ValueError('CI required rejected invalid or mixed reuse evidence')
         return
     changes = needs.get('changes', {})
@@ -96,7 +102,7 @@ def main():
     except Exception as error:
         print(str(error) if isinstance(error, (ValueError, TypeError)) else type(error).__name__, file=sys.stderr)
         return 1
-    print('CI required accepted successful jobs, unaffected PR skips, or revalidated full-suite evidence.')
+    print('CI required accepted successful jobs, unaffected PR skips, or fresh frontend plus revalidated tools/backend evidence.')
     return 0
 
 
