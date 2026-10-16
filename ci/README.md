@@ -7,8 +7,8 @@
 - **Frontend tests and build**：沿用 `web/.nvmrc` 与锁文件，禁用依赖安装脚本，运行前端测试、实际 Chromium 通知组件渲染、上传凭据及 Header/TMenu 导航回归和生产构建；缺少浏览器直接失败，不跳过浏览器检查。获取完整 Git 历史，以运行已有的旧版本回归对照测试。
 - **Backup and migration tools**：执行备份、升级清单、发布包、空表提取以及 CI 守卫的合成测试，不实际运行备份或拉取服务器数据。单独执行 `api/dev/test_teaching_journey_fixture.py`，离线检查教学流程夹具的请求、认证材料、限定 SQL、缓存和上传恢复边界；该步骤不启动服务或浏览器。另运行公网 IP HTTPS 工具单元测试与固定镜像的隔离 Nginx/TLS 验证：临时测试 CA、回环端口、合成 API/WebSocket/媒体、实际配置切换与回退，不请求公网证书、不连接生产。只保存不含私钥的汇总 JSON。
 - **Backend and MySQL registration**：Java 8 干净构建并显式开启 `check_java_results.py` 所列的 40 套核心 Java 测试。构建选择与 Surefire 报告校验读取同一清单，缺少或跳过任何核心测试都会失败。CI 自身回归还枚举仓库的 `*Test.java`，防止新增套件遗漏。原 `SampleTest` 依赖固定旧业务样例，`SecurityToolsTest` 仅打印加解密结果，因此不列入核心检查。
-- **Select affected PR jobs**：只在 PR 上核对实际合并候选并分类改动；主分支等 push 事件不运行分类，直接执行全部检查。
-- **CI required**：始终汇总任务结果，要求所有应执行任务成功；只有有效 PR 分类明确判定不受影响的任务才能跳过。任何重量任务失败、取消或缺少结果都不能通过。分类失败或输出不完整时，不允许跳过，必须三项检查全部成功。保持同一汇总状态名称，避免路径过滤导致检查缺失。
+- **Select affected PR jobs**：只在 PR 上核对实际合并候选并分类改动；push 事件不使用 PR 路径分类；主分支只在下述完整历史证据复核通过时复用，否则执行全量。
+- **CI required**：始终汇总任务结果，要求所有应执行任务成功；只接受有效 PR 分类明确判定不受影响的跳过，或独立在线复核通过的 main 完整历史证据。任何重量任务失败、取消或缺少结果都不能通过。分类失败或输出不完整时，不允许跳过，必须三项检查全部成功。保持同一汇总状态名称，避免路径过滤导致检查缺失。
 
 ## PR 任务选择与全量兜底
 
@@ -28,13 +28,31 @@
 
 多个改动取任务并集；每个被选中的任务仍完整运行原有检查，未缩减探针或断言。空 diff、事件缺失、对象不全、候选与事件不一致、Git 执行失败、多个 merge-base 均回退全量。分类任务自身失败或没有完整布尔输出时，三个任务也会全跑；整条工作流取消时不启动新的重量任务。`CI required` 独立再次校验分类状态及三个布尔值，拒绝意外 skipped、failure、cancelled 和缺失结果，不能靠一个不完整计划得到绿色结果。
 
-`main` 和保留的 `codex/registration-acceptance` push 始终要求三个任务成功，不接受 PR 分类作为跳过依据。工作流层不设置 `paths` / `paths-ignore`，因此纯文档 PR 仍会产生 `CI required` 状态。新增跨目录输入时，同步更新分类器和 `test_job_selection.py` 的行为用例；新增未知目录默认执行全部任务。分类回归使用临时 Git 仓库验证真实 diff、rename/delete、损坏事件及全部汇总状态组合，不连接业务服务。
+push 不接受 PR 分类作为跳过依据。`codex/registration-acceptance` 始终全量；`main` 在没有合格完整历史证据时也必须全量。工作流层不设置 `paths` / `paths-ignore`，因此纯文档 PR 仍会产生 `CI required` 状态。新增跨目录输入时，同步更新分类器和 `test_job_selection.py` 的行为用例；新增未知目录默认执行全部任务。分类回归使用临时 Git 仓库验证真实 diff、rename/delete、损坏事件及全部汇总状态组合，不连接业务服务。
 
 后端构建后还用当前依赖执行 `deploy/test_ip_https_proxy.py`：实际 Spring Boot 配置绑定、Tomcat RemoteIpValve 与原 MediaCookie 源码，核对仅信任 127.0.0.1 的协议转发及 Secure Cookie。该测试无需数据库或监听 socket，不能代替线上登录验收。
 
-每个 PR 的新提交取消同一 PR 的旧运行。没有定时触发。Node/npm 版本遵循现有项目；Actions 使用完整提交 SHA 固定，任务只有仓库读取权限，不使用生产凭据。
+每个 PR 的新提交取消同一 PR 的旧运行。没有定时触发。Node/npm 版本遵循现有项目；Actions 使用完整提交 SHA 固定，任务只有读取权限；复用检查与最终汇总另有 `actions: read` 用于读取运行状态和收据，不使用生产凭据。
 
 菜单浏览器回归使用 `--ref "$GITHUB_SHA"` 编译真实 Header/TMenu，在 1440×1000 和 390×1200 视口通过 Chromium 鼠标输入测试危险链接、合法子菜单、站内路由、静态编辑器和 HTTPS 同页/新页跳转。HTTPS 目标全部在发起网络连接前拦截为合成响应，任何意外外联或浏览器错误均失败。`check_menu_browser_results.py` 要求本次 checkout 的完整 SHA、6 份源码的 Git blob 哈希、至少完整的 28 项行为和 18 次点击、8 张截图及一致计数；拒绝旧版本模式、其他提交、Node/JSDOM 替代和不完整报告。前端单独保存合成 JSON 与 PNG，不上传编译 bundle 或浏览器用户目录。
+
+## 同树完整 PR 证据复用
+
+`ci_reuse.py` 只为普通 `main` push 寻找该目标提交实际合并的同仓库 PR。PR 本身仍按上述依赖选择任务；其他 push、fork、直接提交、强制推送、没有可确认关联的 squash/rebase 等情况全量运行。**复用历史完整测试证据不等于当前 push 重新执行了测试**：汇总明确列出原始实际 merge checkout SHA、来源 run/attempt、目标 SHA 和共同 tree；原浏览器、Java、HTTP/SQL 报告不改写、不搬成目标提交的执行报告。
+
+所有条件必须同时满足：
+
+- GitHub 当前 workflow/head 的最新 PR run 已成功且为第一次执行，三个重量任务与 `CI required` 均实际执行成功。选择性跳过得到的绿色 PR、重跑、失败、取消、遗漏、未知新任务和不同 attempt 拼接均不可复用。
+- 每个重量任务在成功后生成独立 `fresh` 收据；API artifact 的仓库、run、PR head、唯一名称与 SHA-256 摘要匹配。收据记录实际 checkout、两个父提交、完整 tree、工作流 blob、原始 PR 身份和实际运行时版本。三个收据一致，再用 GitHub Git commit 对象核实原 merge 的 tree/parents，不能拿 PR head 的 tree 代替实际测试树。
+- 目标完整 tree 与实际测试 tree 完全一致，涵盖跨目录源码、锁文件、POM、CI 脚本和工作流。Node/npm、Python、Temurin Java、Actions 提交和 MySQL/Redis/Nginx 镜像均固定；环境契约遇到动态依赖版本或不支持的配置就回退全量。
+- 三个来源 runner 的 `ImageOS`/`ImageVersion` 与当前验证机器一致。来源 backend 记录实际全部 dpkg 包版本的摘要；候选证据初步通过后，验证机器执行同一客户端安装，再比较全部包版本，包含间接依赖变化。最终汇总在另一台机器重新读取来源状态并复核环境。
+- 从来源 run 开始时间到复核不超过 6 小时，且仍为同一上海业务日期；跨日期、过期和未来时间均拒绝。未来增加新的时间/外部可变输入时，需先扩展契约或关闭复用。
+
+主分支的 `Verify identical-tree PR evidence` 默认输出不复用；证据缺失、API 超时/分页不完整、收据损坏、版本漂移等均恢复原有三个完整任务。最终 `CI required` 再次在线校验同一来源，只允许三个任务全部执行成功，或三项全部跳过且证据仍有效。若选中复用后来源发生重跑、过期或复核接口失败，汇总失败；重新运行该目标工作流会重新评估，不能静默放绿。整条工作流取消仍会停止新任务。
+
+依赖契约核对固定的版本声明和已解析系统包，不声称远端 Maven 仓库永远不会替换同版本制品，也不以历史证据证明依赖仓库此刻可用。普通全量 CI 的安装、干净构建、全部浏览器/Java/HTTP/SQL 断言都保留。只有新协议生成的三个完整收据可复用，旧运行不会被追认。收据保留 2 天，有效期仍只有上述 6 小时；不包含凭据、业务数据或构建产物。
+
+本地守卫验证：`python3 -m unittest discover -s ci -p 'test_*.py' -v`；工作流语法用 `actionlint`。升级运行时/镜像或改变检查集合时，同时审查 `reuse_environment.py`、`ci_reuse.py` 和相应回归；未知配置默认增加全量运行，不减少检查。
 
 ## 注册数据库验证
 
