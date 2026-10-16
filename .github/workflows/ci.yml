@@ -66,14 +66,15 @@ jobs:
           CI_REUSE_STEP: ${{ toJSON(steps.proof) }}
         run: python3 ci/ci_reuse.py --normalize
 
+  # Always rerun frontend on pushes: live npm advisories and exception expiry
+  # are time-dependent even when the source tree and runner image match.
   frontend:
     name: Frontend tests and build
     needs: [changes, reuse]
     if: >-
       ${{ !cancelled() && (github.event_name != 'pull_request' ||
           needs.changes.result != 'success' || needs.changes.outputs.selective != 'true' ||
-          needs.changes.outputs.frontend != 'false') &&
-          (needs.reuse.result != 'success' || needs.reuse.outputs.reuse != 'true') }}
+          needs.changes.outputs.frontend != 'false') }}
     runs-on: ubuntu-22.04
     timeout-minutes: 20
     steps:
