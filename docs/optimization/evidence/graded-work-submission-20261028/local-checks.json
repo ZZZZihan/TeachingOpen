@@ -1,0 +1,22 @@
+{
+  "java": {
+    "suites": 40,
+    "passed": 383
+  },
+  "frontend": {
+    "passed": 885
+  },
+  "ci_tools": {
+    "passed": 149
+  },
+  "frontend_production_build": "passed",
+  "changed_lint": "passed",
+  "file_modal_lint": "passed",
+  "initial_asset_budget": "passed",
+  "diff_check": "passed",
+  "probe_and_exception_sha256": {
+    "api/dev/verify-work-submission.py": "11c3efd713b4dddd329935148c6a607030ad57349a4b109015106c103b2840d2",
+    "api/jeecg-boot-module-system/src/main/java/org/jeecg/modules/teaching/service/WorkSubmissionStateException.java": "9d9693678ac5c8ddbc6298adfcb0e96c4e3920d655ed6afc052e7a350152c3e2"
+  },
+  "scope": "local checks; remote CI status is reported separately by the PR"
+}

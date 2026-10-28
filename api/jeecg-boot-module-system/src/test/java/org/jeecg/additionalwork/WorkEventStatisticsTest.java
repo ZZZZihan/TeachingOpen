@@ -3,6 +3,7 @@ package org.jeecg.additionalwork;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.h2.jdbcx.JdbcDataSource;
 import org.jeecg.common.system.vo.LoginUser;
+import org.jeecg.common.exception.JeecgBootException;
 import org.jeecg.modules.system.entity.SysDepart;
 import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.mapper.SysUserMapper;
@@ -158,6 +159,30 @@ public class WorkEventStatisticsTest {
     }
     @Test public void concurrentSubmissionsAndLaterRetriesIgnoreRedis()throws Exception{concurrent(this::submit);submit();assertEquals(1,total("course_work_submit_count"));assertEquals(1,count("teaching_work_event"));verifyZeroInteractions(redis);}
     @Test public void submitAndCorrectHaveIndependentKeysAndSameShanghaiDay(){submit();grade("graded",4,"ok");assertEquals(2,count("teaching_work_event"));assertEquals(1,total("course_work_submit_count"));assertEquals(1,total("course_work_correct_count"));assertEquals("2026-10-12",jdbc.queryForObject("SELECT DISTINCT CAST(counted_day AS VARCHAR) FROM teaching_work_event",String.class));assertEquals("2026-10-12",jdbc.queryForObject("SELECT CAST(create_time AS VARCHAR) FROM teaching_depart_day_log",String.class));}
+    @Test public void staleStudentSaveAndSubmitPreserveGradedWorkAndFeedback(){
+        submit();grade("graded",0,"first line\nsecond line");
+        for(String current:Arrays.asList("2","3","4")){
+            jdbc.update("UPDATE teaching_work SET work_status=?",current);
+            for(String requested:Arrays.asList("0","1")){
+                List<String> before=snapshot();
+                StudentWorkSubmission request=new StudentWorkSubmission();request.setId("work-a");
+                request.setWorkName("stale overwrite");request.setWorkFile("new-file");request.setWorkStatus(requested);
+                try{submission.submit(request);fail("A reviewed work must reject the stale editor");}
+                catch(JeecgBootException expected){assertTrue(expected.getMessage().contains("作业状态已变化"));}
+                assertEquals(before,snapshot());
+            }
+        }
+        assertEquals(1,total("course_work_submit_count"));assertEquals(1,total("course_work_correct_count"));
+    }
+    @Test public void unknownStoredStatusCannotBeChangedByStudent(){
+        for(String status:Arrays.asList(null,"","9")){
+            jdbc.update("UPDATE teaching_work SET work_status=?",status);
+            List<String> before=snapshot();
+            try{submit();fail("Unknown status must not become an editable work");}
+            catch(JeecgBootException expected){assertTrue(expected.getMessage().contains("作业状态已变化"));}
+            assertEquals(before,snapshot());
+        }
+    }
     @Test public void additionalWorkUsesOnlyItsOwnCounter(){jdbc.update("UPDATE teaching_work SET course_id='',additional_id='assignment-a'");grade("additional",0,"zero");assertEquals(1,total("additional_work_correct_count"));assertEquals(0,total("course_work_correct_count"));}
     @Test public void unresolvedLegacyMustBeExplicitlyReviewedBeforeFutureFirstGrade(){
         jdbc.update("INSERT INTO teaching_work_event(work_id,event_type,depart_id,event_state) VALUES('work-a','CORRECT','class-a','LEGACY_REVIEW')");List<String> before=snapshot();fails(()->grade("blocked",4,"not committed"));assertEquals(before,snapshot());

@@ -142,7 +142,12 @@ export default {
             try {
                 const result = await axios({ url: '/teaching/teachingWork/submit', method: 'post', data: { ...this.workInfo, workName: name, workFile: this.fileRecord.id, workStatus: 1 }, localError: true })
                 if (!this.visible || version !== this.version) return
-                if (!result || !result.success || !result.result || !result.result.id) { this.error = '提交未完成，文件已保留。请稍后重试。'; return }
+                if (!result || !result.success || !result.result || !result.result.id) {
+                    this.error = result && !result.success && result.code === 409
+                        ? '作业状态已变化，不能再提交。当前名称和文件已保留，请返回作业列表查看最新状态和反馈。'
+                        : '提交未完成，文件已保留。请稍后重试。'
+                    return
+                }
                 this.dispose()
                 this.$message.success('作业已提交，等待老师批改。')
                 this.$emit('ok', result.result)

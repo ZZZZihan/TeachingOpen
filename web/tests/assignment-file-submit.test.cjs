@@ -74,6 +74,18 @@ test('业务失败与不完整成功响应不关闭；网络失败保留文件�
   const sent = h.instance.handleOk(); h.submits.at(-1).reject(new Error('offline')); await sent
   assert.match(h.instance.error, /未能确认/); assert.equal(h.events.length, 0); assert.equal(h.notices.length, 0)
 })
+test('旧弹窗遇到批改状态冲突时保留输入并提示查看反馈，不假报成功', async () => {
+  const h = mount(); await ready(h)
+  const originalName = h.instance.workInfo.workName
+  const sent = h.instance.handleOk()
+  h.submits[0].resolve({ success: false, code: 409, message: 'private server detail' }); await sent
+  assert.equal(h.instance.visible, true); assert.equal(h.instance.submitting, false)
+  assert.equal(h.instance.workInfo.workName, originalName); assert.equal(h.instance.selectedFile, file)
+  assert.equal(h.instance.fileRecord.id, 'owned-file-a'); assert.equal(h.instance.stage, 'ready')
+  assert.match(h.instance.error, /不能再提交/); assert.match(h.instance.error, /查看最新状态和反馈/)
+  assert.doesNotMatch(h.instance.error, /private server detail|稍后重试/)
+  assert.equal(h.events.length, 0); assert.equal(h.notices.length, 0)
+})
 test('名称与后端 64 字符约束一致；销毁后迟到提交不弹成功或刷新新页面', async () => {
   const h = mount(); await ready(h)
   for (const name of ['  ', '字'.repeat(65)]) { h.instance.workInfo.workName = name; await h.instance.handleOk() }

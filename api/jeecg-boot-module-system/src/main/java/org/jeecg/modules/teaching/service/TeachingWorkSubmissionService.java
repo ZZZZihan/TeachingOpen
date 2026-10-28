@@ -80,6 +80,12 @@ public class TeachingWorkSubmissionService {
             if (!Objects.equals(existing.getUserId(), user.getId()) || Integer.valueOf(1).equals(existing.getDelFlag())) {
                 throw new UnauthorizedException("无作业提交权限");
             }
+            // Check the locked, current row: an editor opened before grading can
+            // still send its old work ID (or retry the original no-ID request).
+            // Reject before changing files, history, feedback or submit counts.
+            if (!"0".equals(existing.getWorkStatus()) && !"1".equals(existing.getWorkStatus())) {
+                throw new WorkSubmissionStateException();
+            }
             if ((!courseId.isEmpty() && !courseId.equals(existing.getCourseId()))
                     || (!additionalId.isEmpty() && !additionalId.equals(existing.getAdditionalId()))) {
                 throw new UnauthorizedException("不能更换作品所属任务");

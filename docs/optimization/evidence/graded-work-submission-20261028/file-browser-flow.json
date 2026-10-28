@@ -1,0 +1,201 @@
+{
+  "environment": "complete production-built SPA, real API/MySQL, synthetic teacher/student, UI CAPTCHA login",
+  "jar_sha256": "1516bbfcbd70731c988a1c9aaa21a539dfa0e38ce403c19b7c553aa576b8161f",
+  "browser": "headed Chrome, 1200x919 CSS px, DPR 2",
+  "cases": [
+    {
+      "case": "integrated teacher actual create, recoverable failure, retry, and reopen",
+      "passed": true,
+      "assignment": {
+        "id": "2115358398234820610",
+        "work_name": "批改后提交保护 20261028",
+        "work_desc": "请阅读资料，上传你的解答。完成后查看教师评分与完整评语。",
+        "work_dept": "fixture_class_a",
+        "status": "1",
+        "code_type": "0",
+        "create_by": "fixture_teacher_a"
+      },
+      "materialHref": "/api/sys/common/static/temp/b9d7b2eec02f43b6a4a5df0c73f792bd.txt",
+      "failureBusinessStateUnchanged": true,
+      "reopened": true
+    },
+    {
+      "case": "integrated student real material read, file upload, failed submit, and retry",
+      "passed": true,
+      "assignmentId": "2115358398234820610",
+      "work": {
+        "id": "2115358486940155905",
+        "user_id": "fixture_student_a",
+        "depart_id": "fixture_class_a",
+        "additional_id": "2115358398234820610",
+        "course_id": "",
+        "work_name": "批改后提交保护 20261028",
+        "work_type": "0",
+        "work_status": "1",
+        "work_file": "e7e8e4d72f5a49539518f27e4a937ce0",
+        "work_cover": null,
+        "del_flag": "0"
+      },
+      "uploadedFile": {
+        "id": "e7e8e4d72f5a49539518f27e4a937ce0",
+        "file_name": "student-submission.txt",
+        "file_path": "temp/f1abd195f7e24d8ba8f52b934c92c3a8.txt",
+        "file_location": "1",
+        "create_by": "fixture_student_a",
+        "del_flag": "0"
+      },
+      "materialDownload": {
+        "status": 200,
+        "url": "http://127.0.0.1:18254/api/sys/common/static/temp/b9d7b2eec02f43b6a4a5df0c73f792bd.txt",
+        "byteComparisonRequiredByRoot": true
+      },
+      "events": [
+        {
+          "work_id": "2115358486940155905",
+          "event_type": "SUBMIT",
+          "depart_id": "fixture_class_a",
+          "event_state": "COUNTED",
+          "counted_day": "2026-10-28"
+        }
+      ],
+      "statistics": [
+        {
+          "id": "2115358398322900994",
+          "depart_id": "fixture_class_a",
+          "create_time": "2026-10-28",
+          "additional_work_assign_count": "1",
+          "additional_work_submit_count": "1",
+          "additional_work_correct_count": "0",
+          "course_work_submit_count": "0",
+          "course_work_correct_count": "0"
+        }
+      ],
+      "failureBusinessStateUnchanged": true
+    },
+    {
+      "case": "real student opens pending submission and prepares a replacement file before teacher grades",
+      "passed": true,
+      "workId": "2115358486940155905",
+      "workStatus": "1",
+      "preparedTitle": "批改后提交保护 20261028 旧页保留输入",
+      "preparedFilename": "stale-student-submission.txt",
+      "modalKeptOpen": true
+    },
+    {
+      "case": "integrated teacher UI query, file preview, zero score, failed save, retry, and reopen",
+      "passed": true,
+      "workId": "2115358486940155905",
+      "feedback": {
+        "id": "2115358617156517889",
+        "work_id": "2115358486940155905",
+        "score": "0",
+        "comment": "完整流程验收：你已说明共同提交与共同回滚。\n下一步请补充唯一事件约束的示例；本次记录 0 分用于验证零分与完整评语能够正确显示。",
+        "create_by": "fixture_teacher_a"
+      },
+      "previewUrl": "http://127.0.0.1:18254/api/sys/common/static/temp/f1abd195f7e24d8ba8f52b934c92c3a8.txt",
+      "previewBytesComparisonRequiredByRoot": true,
+      "events": [
+        {
+          "work_id": "2115358486940155905",
+          "event_type": "CORRECT",
+          "depart_id": "fixture_class_a",
+          "event_state": "COUNTED",
+          "counted_day": "2026-10-28"
+        },
+        {
+          "work_id": "2115358486940155905",
+          "event_type": "SUBMIT",
+          "depart_id": "fixture_class_a",
+          "event_state": "COUNTED",
+          "counted_day": "2026-10-28"
+        }
+      ],
+      "statistics": [
+        {
+          "id": "2115358398322900994",
+          "depart_id": "fixture_class_a",
+          "create_time": "2026-10-28",
+          "additional_work_assign_count": "1",
+          "additional_work_submit_count": "1",
+          "additional_work_correct_count": "1",
+          "course_work_submit_count": "0",
+          "course_work_correct_count": "0"
+        }
+      ],
+      "failureBusinessStateUnchanged": true,
+      "reopened": true
+    },
+    {
+      "case": "student real stale dialog is rejected after teacher grading; input retained and business state unchanged",
+      "passed": true,
+      "httpStatus": 200,
+      "responseCode": 409,
+      "workId": "2115358486940155905",
+      "retainedGrade": "0",
+      "retainedWorkStatus": "2",
+      "inputAndReadyFileRetained": true,
+      "businessStateUnchanged": true
+    },
+    {
+      "case": "integrated student sees zero score and full feedback, survives failed refresh, retries, and reloads",
+      "passed": true,
+      "workId": "2115358486940155905",
+      "feedback": {
+        "id": "2115358617156517889",
+        "work_id": "2115358486940155905",
+        "score": "0",
+        "comment": "完整流程验收：你已说明共同提交与共同回滚。\n下一步请补充唯一事件约束的示例；本次记录 0 分用于验证零分与完整评语能够正确显示。",
+        "create_by": "fixture_teacher_a"
+      },
+      "events": [
+        {
+          "work_id": "2115358486940155905",
+          "event_type": "CORRECT",
+          "depart_id": "fixture_class_a",
+          "event_state": "COUNTED",
+          "counted_day": "2026-10-28"
+        },
+        {
+          "work_id": "2115358486940155905",
+          "event_type": "SUBMIT",
+          "depart_id": "fixture_class_a",
+          "event_state": "COUNTED",
+          "counted_day": "2026-10-28"
+        }
+      ],
+      "statistics": [
+        {
+          "id": "2115358398322900994",
+          "depart_id": "fixture_class_a",
+          "create_time": "2026-10-28",
+          "additional_work_assign_count": "1",
+          "additional_work_submit_count": "1",
+          "additional_work_correct_count": "1",
+          "course_work_submit_count": "0",
+          "course_work_correct_count": "0"
+        }
+      ],
+      "failureBusinessStateUnchanged": true,
+      "retryRecovered": true,
+      "reloaded": true
+    },
+    {
+      "case": "teacher actual preview download click",
+      "passed": true,
+      "url": "http://127.0.0.1:18254/api/sys/common/static/temp/f1abd195f7e24d8ba8f52b934c92c3a8.txt",
+      "status": 200
+    },
+    {
+      "case": "student actual UI material download byte comparison",
+      "passed": true,
+      "bytes": 309,
+      "sha256": "b6bcbdaf3e09f316e26e70127e0719ad495681ceeab440d27ef936b87c443b52"
+    },
+    {
+      "case": "teacher actual UI submission download byte comparison",
+      "passed": true,
+      "bytes": 304,
+      "sha256": "225d946223693052dfb584ee5b247c01e2e61a197341283037a0c84db8b409a5"
+    }
+  ]
+}

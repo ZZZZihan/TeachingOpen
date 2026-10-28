@@ -14,6 +14,9 @@
         data: data ? multipart ? data : JSON.stringify(data) : undefined,
         contentType: multipart ? false : 'application/json', processData: !multipart, dataType: 'json',
         success: function (result) {
+          if (path === '/teaching/teachingWork/submit' && result && result.success === false && result.code === 409) {
+            reject(new Error('作业状态已变化，不能再保存或提交。请返回作业列表查看最新状态和反馈')); return
+          }
           if (!result || result.success === false || result.code !== undefined && result.code !== 0 && result.code !== 200) { reject(new Error('服务未能完成操作')); return }
           resolve(result)
         }, error: function (error) { reject(networkError(error.status)) }
