@@ -37,6 +37,17 @@ test('封面生成失败、登记不匹配或上传 401 不提交且保留编辑
   const h=await mount(overrides);h.nodes['submit-work'].onclick();await flush();assert.equal(h.calls.some(o=>o.url.endsWith('/submit')),false);assert.equal(h.nodes.scratch.inert,false);assert.equal(h.nodes['submit-work'].disabled,false);assert.match(h.nodes['persistence-status'].textContent,/保存未完成/)
  }
 })
+test('旧Scratch页面草稿与提交均显示批改状态拒绝并保留项目和离页提醒',async()=>{
+ for(const button of ['save-draft','submit-work']){
+  const h=await mount({response:o=>o.url.endsWith('/submit')?{success:false,code:409,message:'private detail'}:undefined})
+  h.events.PROJECT_CHANGED();h.title='未保存的名称';h.nodes[button].onclick();await flush()
+  assert.equal(h.reads.length,1);assert.equal(h.title,'未保存的名称');assert.equal(h.history.length,0)
+  assert.equal(h.nodes.scratch.inert,false);assert.equal(h.nodes[button].disabled,false)
+  assert.match(h.nodes['persistence-status'].textContent,/查看最新状态和反馈/)
+  assert.match(h.nodes['persistence-status'].textContent,/作品仍在当前页面/);assert.doesNotMatch(h.nodes['persistence-status'].textContent,/private detail/)
+  let prevented=0;h.context.onbeforeunload({preventDefault:()=>prevented++});assert.equal(prevented,1)
+ }
+})
 test('模拟七牛使用同一组唯一前缀但不同扩展名，不传平台令牌',async()=>{
  const h=await mount({cloud:true});h.nodes['submit-work'].onclick();await flush();assert.equal(h.cloud.length,2)
  assert.deepEqual(h.cloud.map(a=>a[1]),['server-owned/project3/fixture-uuid.sb3','server-owned/project3/fixture-uuid.png'])

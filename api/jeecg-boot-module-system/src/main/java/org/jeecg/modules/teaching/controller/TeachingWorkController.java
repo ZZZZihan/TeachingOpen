@@ -214,6 +214,12 @@ public class TeachingWorkController extends BaseController {
 		 try {
 			 result.setResult(workSubmissionService.submit(submission));
 			 result.success("保存成功！");
+		 } catch (org.jeecg.modules.teaching.service.WorkSubmissionStateException error) {
+			 // Keep the established Result envelope for the file and static editors.
+			 result.setSuccess(false);
+			 result.setCode(409);
+			 result.setMessage(error.getMessage());
+			 return result;
 		 } catch (AuthorizationException | JeecgBootException error) {
 			 throw error;
 		 } catch (RuntimeException error) {

@@ -3,27 +3,76 @@
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 import threading
+import time
 from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
 import subprocess
+from queue import Empty, Queue
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from local_http import FixtureApi
 from local_recovery import mysql_command
 from media_index_fixture import media_index_snapshot, rebuild_media_index_after_sql
+from uuid import uuid4
 
 PREFIX = 'fixture_sprobe_'
 NAME = 'submission-probe-'
 BASE = '/teaching/teachingWork/'
 TRIGGER = 'fixture_submission_failure'
+RACE_TRIGGER = 'fixture_submission_grade_barrier'
+RACE_LOCK = 'fixture_submission_grade_lock'
 TABLES = ('teaching_work', 'teaching_work_correct', 'teaching_work_comment', 'sys_data_log',
           'teaching_additional_work', 'teaching_course_unit', 'teaching_course', 'teaching_course_dept',
           'sys_file', 'sys_user_depart', 'teaching_depart_day_log', 'teaching_work_event')
 
 
+class MySqlSession:
+    """Keep the owned fixture's named lock until a real waiting writer is observed."""
+    def __init__(self, runtime):
+        self.process = subprocess.Popen(mysql_command(runtime) + ['--unbuffered', 'teachingopen_dev'],
+                                        stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                        stderr=subprocess.DEVNULL, text=True, bufsize=1)
+        self.lines = Queue()
+        def receive():
+            for line in self.process.stdout:
+                self.lines.put(line.rstrip('\n'))
+            self.lines.put(None)
+        threading.Thread(target=receive, daemon=True).start()
+
+    def run(self, statement):
+        marker = 'done_' + uuid4().hex
+        self.process.stdin.write(statement + ";\nSELECT '" + marker + "';\n")
+        self.process.stdin.flush()
+        rows, deadline = [], time.monotonic() + 10
+        while True:
+            try:
+                line = self.lines.get(timeout=max(.01, deadline - time.monotonic()))
+            except Empty:
+                raise RuntimeError('Fixture submission lock session timed out')
+            if line is None:
+                raise RuntimeError('Fixture submission lock session failed')
+            if line == marker:
+                return rows
+            rows.append(line)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.process.stdin.close()
+        try:
+            self.process.wait(timeout=3)
+        except subprocess.TimeoutExpired:
+            self.process.kill()
+            self.process.wait(timeout=3)
+        self.process.stdout.close()
+
+
 def verify(args):
+    if args.output.exists():
+        raise RuntimeError('Refusing to overwrite an existing evidence report')
     cases = []
     with FixtureApi(args.runtime.resolve(), args.jar) as api:
         has_media_index = not getattr(args, 'expect_legacy', False)
@@ -61,10 +110,13 @@ def verify(args):
 
         def denied(name, body, actor='student_a', code=510):
             before, before_files, before_cache = snapshot(), file_snapshot(), cache_snapshot()
+            before_media = media_index_snapshot(sql) if has_media_index else None
             status, result = submit(body, actor)
             check(name, status == (200 if actor else 401) and result and result.get('success') is False
                   and result.get('code') == (code if actor else 401) and not result.get('result'))
-            check(name + ' preserves rows files and submission cache', snapshot() == before and file_snapshot() == before_files and cache_snapshot() == before_cache)
+            check(name + ' preserves works feedback history metrics files cache and media references',
+                  snapshot() == before and file_snapshot() == before_files and cache_snapshot() == before_cache
+                  and (not has_media_index or media_index_snapshot(sql) == before_media))
 
         def row(ident):
             fields = ('id', 'user_id', 'depart_id', 'course_id', 'additional_id', 'work_scene', 'work_name', 'work_type',
@@ -79,6 +131,117 @@ def verify(args):
             sql("INSERT INTO teaching_work (id,user_id,depart_id,course_id,work_name,work_type,work_file,work_status,create_by,create_time,view_num,star_num,collect_num) VALUES ('" + ident + "','" + owner + "','fixture_class_a','" + course + "','" + NAME + suffix + "','2','" + file_id + "'," + str(status) + ",'fixture_student_a','2026-01-01 00:00:00',7,8,9)")
             return ident
 
+        def wait_for(query, pending):
+            deadline = time.monotonic() + 6
+            while time.monotonic() < deadline:
+                if int(sql(query) or '0') > 0:
+                    return True
+                if any(future.done() for future in pending):
+                    return False
+                time.sleep(.025)
+            return False
+
+        def graded_write_denials():
+            # Each request gets an independent already-graded fixture. The old
+            # candidate must remain red after the first unintended overwrite.
+            for state in ('2', '3', '4'):
+                for scene in ('course', 'additional', 'create'):
+                    for with_id in (True, False):
+                        for intent in ('0', '1'):
+                            suffix = 'g' + state + {'course': 'c', 'additional': 'a', 'create': 'p'}[scene] + str(int(with_id)) + intent
+                            task = PREFIX + suffix
+                            course = task if scene == 'course' else ''
+                            if course:
+                                sql("INSERT INTO teaching_course_unit(id,course_id,unit_name,course_work_type) VALUES ('"
+                                    + course + "','fixture_course_a','" + NAME + suffix + "',2)")
+                            elif scene == 'additional':
+                                sql("INSERT INTO teaching_additional_work(id,work_name,work_dept,status,code_type) VALUES ('"
+                                    + task + "','" + NAME + suffix + "','fixture_class_a',1,2)")
+                            ident = work(suffix, course=course, status=int(state))
+                            if scene == 'additional':
+                                sql("UPDATE teaching_work SET additional_id='" + task + "' WHERE id='" + ident + "'")
+                            sql("INSERT INTO teaching_work_correct(id,work_id,score,comment,create_by,create_time) VALUES ('"
+                                + ident + "','" + ident + "',4,'feedback must still describe the reviewed file',"
+                                "'fixture_teacher_a','2026-01-01 01:00:00')")
+                            body = dict(payload(suffix), workStatus=intent, workFile=PREFIX + 'file_new')
+                            if with_id:
+                                body['id'] = ident
+                            if scene == 'course':
+                                body['courseId'] = task
+                            elif scene == 'additional':
+                                body['additionalId'] = task
+                            denied('reviewed state ' + state + ' ' + scene + (' ID' if with_id else ' no-ID')
+                                   + (' draft' if intent == '0' else ' submit') + ' rejected', body, code=409)
+
+        def grading_race(teacher_first, with_id):
+            label = ('teacher-first' if teacher_first else 'student-first') + (' ID' if with_id else ' no-ID')
+            suffix = ('rt' if teacher_first else 'rs') + str(int(with_id))
+            unit = PREFIX + suffix
+            sql("INSERT INTO teaching_course_unit(id,course_id,unit_name,course_work_type) VALUES ('"
+                + unit + "','fixture_course_a','" + NAME + suffix + "',2)")
+            created = allowed(label + ' prepares a real submitted work', payload(suffix, courseId=unit))
+            ident = created.get('id')
+            if not ident:
+                raise RuntimeError('Race setup did not return a work ID')
+            student_body = dict(payload(suffix + '_revision', courseId=unit), workFile=PREFIX + 'file_new')
+            if with_id:
+                student_body['id'] = ident
+            grade_body = {'id': ident, 'workStatus': '2',
+                          'teachingWorkCorrectList': [{'score': 4, 'comment': 'reviewed after the committed revision'}]}
+            before_files, before_cache = file_snapshot(), cache_snapshot()
+            before_media = media_index_snapshot(sql)
+            before_history = sql("SELECT COUNT(*) FROM sys_data_log WHERE data_table='teaching_work' AND data_id='" + ident + "'")
+            before_submits = sql("SELECT COALESCE(SUM(course_work_submit_count),0) FROM teaching_depart_day_log")
+            before_grades = int(sql("SELECT COALESCE(SUM(course_work_correct_count),0) FROM teaching_depart_day_log"))
+            condition = "NEW.id='" + ident + "' AND " + ("NEW.work_status=2" if teacher_first
+                        else "NEW.work_file='" + PREFIX + "file_new'")
+            sql('DELIMITER $$\nCREATE TRIGGER ' + RACE_TRIGGER + ' BEFORE UPDATE ON teaching_work FOR EACH ROW BEGIN IF '
+                + condition + " THEN IF GET_LOCK('" + RACE_LOCK + "',8) <> 1 THEN SIGNAL SQLSTATE '45000' "
+                "SET MESSAGE_TEXT='fixture submission barrier timed out'; END IF; DO RELEASE_LOCK('" + RACE_LOCK
+                + "'); END IF; END$$\nDELIMITER ;")
+            try:
+                with MySqlSession(api.runtime) as guard, ThreadPoolExecutor(max_workers=2) as pool:
+                    check(label + ' acquires a bounded named barrier', guard.run("SELECT GET_LOCK('" + RACE_LOCK + "',0)") == ['1'])
+                    first = pool.submit(api.request, 'PUT', BASE + 'edit', 'teacher_a', grade_body) if teacher_first else pool.submit(submit, student_body)
+                    try:
+                        waiting = wait_for("SELECT COUNT(*) FROM performance_schema.metadata_locks WHERE OBJECT_TYPE='USER LEVEL LOCK' "
+                                           "AND OBJECT_NAME='" + RACE_LOCK + "' AND LOCK_STATUS='PENDING'", [first])
+                        check(label + ' actual first writer holds work row at the controlled update barrier', waiting)
+                        if not waiting:
+                            raise RuntimeError('First writer did not reach the controlled row-lock barrier')
+                        second = pool.submit(submit, student_body) if teacher_first else pool.submit(api.request, 'PUT', BASE + 'edit', 'teacher_a', grade_body)
+                        waiting = wait_for('SELECT COUNT(*) FROM performance_schema.data_lock_waits w '
+                                           'JOIN performance_schema.data_locks l ON l.ENGINE_LOCK_ID=w.REQUESTING_ENGINE_LOCK_ID '
+                                           "WHERE l.OBJECT_SCHEMA='teachingopen_dev' AND l.OBJECT_NAME='teaching_work'", [first, second])
+                        check(label + ' actual second writer waits for the same committed work row', waiting)
+                        if not waiting:
+                            raise RuntimeError('Second writer did not wait for the controlled work row')
+                    finally:
+                        guard.run("SELECT RELEASE_LOCK('" + RACE_LOCK + "')")
+                    first_result, second_result = first.result(timeout=15), second.result(timeout=15)
+                teacher_result, student_result = (first_result, second_result) if teacher_first else (second_result, first_result)
+                check(label + ' teacher grading commits', teacher_result[0] == 200 and teacher_result[1] and teacher_result[1].get('success') is True)
+                check(label + (' waiting student receives reviewed-work refusal' if teacher_first else ' legitimate revision commits before grading'),
+                      student_result[0] == 200 and student_result[1] and student_result[1].get('success') is (not teacher_first)
+                      and (not teacher_first or student_result[1].get('code') == 409))
+                stored = row(ident)
+                check(label + ' final reviewed status and file follow the transaction order', stored['work_status'] == 2
+                      and stored['work_file'] == PREFIX + ('file_a' if teacher_first else 'file_new'))
+                feedback = sql("SELECT CONCAT(score,'|',comment) FROM teaching_work_correct WHERE work_id='" + ident + "'")
+                check(label + ' exactly one intact teacher feedback survives', feedback == '4|reviewed after the committed revision')
+                expected_history = int(before_history) + (0 if teacher_first else 1)
+                check(label + ' only the legitimate revision adds history',
+                      sql("SELECT COUNT(*) FROM sys_data_log WHERE data_table='teaching_work' AND data_id='" + ident + "'") == str(expected_history))
+                check(label + ' submit and grade events count once',
+                      sql("SELECT COUNT(*) FROM teaching_work_event WHERE work_id='" + ident + "' AND event_state='COUNTED'") == '2'
+                      and sql("SELECT COALESCE(SUM(course_work_submit_count),0) FROM teaching_depart_day_log") == before_submits
+                      and int(sql("SELECT COALESCE(SUM(course_work_correct_count),0) FROM teaching_depart_day_log")) == before_grades + 1)
+                check(label + ' file bytes and cache are unchanged', file_snapshot() == before_files and cache_snapshot() == before_cache)
+                if teacher_first:
+                    check(label + ' refused revision adds no media history references', media_index_snapshot(sql) == before_media)
+            finally:
+                sql('DROP TRIGGER IF EXISTS ' + RACE_TRIGGER)
+
         original, original_files = snapshot(), file_snapshot()
         original_media_index = media_index_snapshot(sql) if has_media_index else None
         cache_keys = ['departLog:' + kind + ':fixture_class_' + side for kind in ('addiWorkSubmit', 'courseWorkSubmit') for side in ('a', 'b')]
@@ -89,8 +252,9 @@ def verify(args):
             raise RuntimeError('Existing submission probe rows')
         if sql("SELECT COUNT(*) FROM teaching_work WHERE work_name LIKE '" + NAME + "%'") != '0' or list((api.runtime / 'uploads').glob(NAME + '*')):
             raise RuntimeError('Existing submission probe work or files')
-        if sql("SELECT COUNT(*) FROM information_schema.TRIGGERS WHERE TRIGGER_SCHEMA=DATABASE() AND TRIGGER_NAME='" + TRIGGER + "'") != '0':
-            raise RuntimeError('Existing submission failure trigger')
+        if sql("SELECT COUNT(*) FROM information_schema.TRIGGERS WHERE TRIGGER_SCHEMA=DATABASE() AND TRIGGER_NAME IN ('"
+               + TRIGGER + "','" + RACE_TRIGGER + "')") != '0':
+            raise RuntimeError('Existing submission probe trigger')
         trigger_created = False
         owned_paths = []
         try:
@@ -102,6 +266,11 @@ def verify(args):
                 owned_paths.append(path)
                 sql("INSERT INTO sys_file (id,file_name,file_path,file_location,create_by) VALUES ('" + PREFIX + "file_" + side + "','" + path.name + "','" + path.name + "',1,'fixture_student_" + side + "')")
                 sql("INSERT INTO teaching_course_unit (id,course_id,unit_name,course_work_type) VALUES ('" + PREFIX + "unit_" + side + "','fixture_course_" + side + "','" + NAME + side + "',2)")
+            new_path = api.runtime / ('uploads/' + NAME + 'new.txt')
+            new_path.write_text('synthetic revised submission')
+            owned_paths.append(new_path)
+            sql("INSERT INTO sys_file(id,file_name,file_path,file_location,create_by) VALUES ('" + PREFIX
+                + "file_new','" + new_path.name + "','" + new_path.name + "',1,'fixture_student_a')")
             for suffix, departments, state in [('a', 'fixture_class_a', 1), ('b', 'fixture_class_b', 1),
                                                  ('unpublished', 'fixture_class_a', 0), ('ended', 'fixture_class_a', 2),
                                                  ('multi', ' fixture_class_b , fixture_class_a ', 1),
@@ -259,12 +428,18 @@ def verify(args):
                 check('daily-record failure rolls back new work and leaves no cache reservation', snapshot() == before and cache_snapshot() == before_cache)
                 sql('DROP TRIGGER ' + TRIGGER); trigger_created = False
                 allowed('retry new submission after daily-record failure', payload('retried_daily', courseId=PREFIX + 'fault_unit'))
+                graded_write_denials()
+                for with_id in (True, False):
+                    grading_race(teacher_first=True, with_id=with_id)
+                    grading_race(teacher_first=False, with_id=with_id)
             jar_hash = api.jar_sha256
         finally:
             if trigger_created:
                 sql('DROP TRIGGER ' + TRIGGER)
+            sql('DROP TRIGGER IF EXISTS ' + RACE_TRIGGER)
             sql("DELETE FROM sys_data_log WHERE data_table='teaching_work' AND data_id IN (SELECT id FROM teaching_work WHERE work_name LIKE '" + NAME + "%')")
             sql("DELETE FROM teaching_work_event WHERE work_id IN (SELECT id FROM teaching_work WHERE work_name LIKE '" + NAME + "%')")
+            sql("DELETE FROM teaching_work_correct WHERE work_id IN (SELECT id FROM teaching_work WHERE work_name LIKE '" + NAME + "%')")
             sql("DELETE FROM teaching_work WHERE work_name LIKE '" + NAME + "%'; DELETE FROM teaching_depart_day_log WHERE depart_id IN ('fixture_class_a','fixture_class_b')")
             for table in ('teaching_additional_work', 'teaching_course_unit', 'teaching_course_dept', 'teaching_course', 'sys_file', 'sys_user_depart'):
                 sql("DELETE FROM " + table + " WHERE id LIKE '" + PREFIX + "%'")
@@ -278,10 +453,14 @@ def verify(args):
             check('original media reference index and state restored', media_index_snapshot(sql) == original_media_index)
         check('all original file bytes restored', file_snapshot() == original_files)
         check('all original submission cache memberships restored', cache_snapshot() == original_cache)
-        check('temporary database failure trigger removed', sql("SELECT COUNT(*) FROM information_schema.TRIGGERS WHERE TRIGGER_SCHEMA=DATABASE() AND TRIGGER_NAME='" + TRIGGER + "'") == '0')
+        check('temporary database failure and row-lock barrier triggers removed',
+              sql("SELECT COUNT(*) FROM information_schema.TRIGGERS WHERE TRIGGER_SCHEMA=DATABASE() AND TRIGGER_NAME IN ('"
+                  + TRIGGER + "','" + RACE_TRIGGER + "')") == '0')
     report = {'observed_utc': datetime.now(timezone.utc).isoformat(), 'jar_sha256': jar_hash, 'expected_legacy': args.expect_legacy,
+              'probe_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+              'runtime': str(api.runtime), 'ports': api.ports,
               'passed': sum(c['passed'] for c in cases), 'total': len(cases), 'cases': cases,
-              'scope': 'actual synthetic HTTP submission and re-read, DB/history/cache/files; editor-shaped payloads are not browser editor acceptance; concurrent same-work retries included; no global file-API acceptance'}
+              'scope': 'actual synthetic HTTP submission, grading and re-read; DB/feedback/history/events/cache/files/media reference preservation; reviewed/public/featured ID and no-ID draft/submit denials; deterministic teacher-first and student-first work-row races; editor-shaped payloads are not browser editor acceptance; no global file-API acceptance'}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     print(str(report['passed']) + '/' + str(report['total']) + ' checks passed')

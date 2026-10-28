@@ -34,6 +34,14 @@ test('文件返回 HTML 登录页不会作为代码载入；401 有明确提示�
 test('文件登记路径不匹配、业务失败不能进入提交成功状态',async()=>{
  const h=await mount({response:o=>o.url.endsWith('/add')?{success:true,result:{id:'foreign',filePath:'wrong'}}:undefined});await h.context.submitCode('作品','print(1)');assert.equal(h.h.calls.some(o=>o.url.endsWith('/submit')),false);assert.match(h.h.nodes['persistence-status'].textContent,/登记失败/)
 })
+test('旧Python页面提交被批改状态拒绝时保留当前代码并明确提示反馈入口',async()=>{
+ const {h,host,context}=await mount({response:o=>o.url.endsWith('/submit')?{success:false,code:409,message:'private detail'}:undefined})
+ host.code='print("unsaved revision")';await context.submitCode('未保存的名称',host.code)
+ assert.equal(host.code,'print("unsaved revision")');assert.equal(host.persistBusy,false);assert.equal(host.persistReady,true)
+ assert.equal(h.history.length,0);assert.match(h.nodes['persistence-status'].textContent,/查看最新状态和反馈/)
+ assert.match(h.nodes['persistence-status'].textContent,/代码仍保留/);assert.doesNotMatch(h.nodes['persistence-status'].textContent,/private detail/)
+ let prevented=0;h.events.beforeunload({preventDefault:()=>prevented++});assert.equal(prevented,1)
+})
 test('云上传使用服务器前缀和单次凭据，不向云传平台会话；验证返回键后登记',async()=>{
  const h=await mount({cloud:true});await h.context.submitCode('作品','print(1)');const [file,key,token,extra,config]=h.h.cloud[0]
  assert.ok(file instanceof Blob);assert.equal(key,'server-owned/python/fixture-uuid.py');assert.equal(token,'fixture-cloud-credential');assert.equal(JSON.stringify(extra).includes('session-a'),false);assert.equal(JSON.stringify(config).includes('session-a'),false)

@@ -45,6 +45,19 @@ test('封面无效、文件登记不匹配、401 均保留编辑且不业务提�
   const h=await mount(options);await h.nodes['submit-work'].onclick();assert.equal(h.calls.some(o=>o.url.endsWith('/submit')),false);assert.equal(h.nodes['engine-host'].inert,false);assert.match(h.nodes['persistence-status'].textContent,/保存未完成/)
  }
 })
+test('旧ScratchJr页面被批改状态拒绝时保留引擎项目、标题和未保存提醒',async()=>{
+ for(const button of ['save-draft','submit-work']){
+  const h=await mount({response:o=>o.url.endsWith('/submit')?{success:false,code:409,message:'private detail'}:undefined})
+  h.nodes['project-name'].value='未保存的名称';h.nodes['project-name'].oninput()
+  await h.nodes[button].onclick()
+  assert.equal(h.frames.length,1);assert.notEqual(h.frames[0].removed,true);assert.equal(h.name,'未保存的名称')
+  assert.equal(h.nodes['project-name'].value,'未保存的名称');assert.equal(h.history.length,0)
+  assert.equal(h.nodes['engine-host'].inert,false);assert.equal(h.nodes[button].disabled,false)
+  assert.match(h.nodes['persistence-status'].textContent,/查看最新状态和反馈/)
+  assert.match(h.nodes['persistence-status'].textContent,/作品仍在当前页面/);assert.doesNotMatch(h.nodes['persistence-status'].textContent,/private detail/)
+  let n=0;h.context.onbeforeunload({preventDefault(){n++}});assert.equal(n,1)
+ }
+})
 test('预览模式隐藏提交，原生云保存入口也不能写入',async()=>{
  const h=await mount({search:'?mode=look&workFile=/preview.sjr'});assert.equal(h.nodes.actions.hidden,true);assert.equal(h.nodes['project-name'].disabled,true);h.context.TeachingJunior.save(h.frames[0].contentWindow);await flush();assert.equal(h.captures,0);assert.match(h.frames[0].src,/mode=look/)
 })

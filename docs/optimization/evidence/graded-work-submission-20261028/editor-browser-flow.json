@@ -1,0 +1,193 @@
+{
+  "product_source_commit": "37609afb9ec191db23d22af9ef8f3bc2f1e1c194",
+  "jar_sha256": "1516bbfcbd70731c988a1c9aaa21a539dfa0e38ce403c19b7c553aa576b8161f",
+  "checks": {
+    "passed": true,
+    "protectedSqlAndFilesExactMatch": true,
+    "actual409Cases": 3,
+    "nativeBeforeunloadDialogsAndDismissedContentCases": 3,
+    "actualTeacherReadonlyReopens": 3,
+    "studentFeedbackRefreshAndFullReloadCases": 3,
+    "mobileFileFeedback390px": true,
+    "preparedUploadRecordsAdded": [
+      1,
+      2,
+      2
+    ]
+  },
+  "cases": [
+    {
+      "source": "20-python-save-reopen-stale.js",
+      "result": {
+        "passed": true,
+        "actualStudentUi": true,
+        "workId": "2115359413931671553",
+        "submittedSource": "# gs1028 submitted Python\nprint(\"gs1028-submitted-python\")\n",
+        "retainedUnsavedSource": "# gs1028 stale unsaved Python\nprint(\"gs1028-unsaved-python-must-survive\")\n",
+        "reopened": true,
+        "oldPageLeftOpen": true
+      }
+    },
+    {
+      "source": "21-scratch-draft-reopen-submit-stale.js",
+      "result": {
+        "passed": true,
+        "actualStudentUi": true,
+        "workId": "2115359456986202114",
+        "draftX": 100,
+        "reopenedX": 100,
+        "submittedX": -80,
+        "retainedUnsavedX": 120,
+        "oldPageLeftOpen": true
+      }
+    },
+    {
+      "source": "22c-scratchjr-resume-eight-submit-stale.js",
+      "result": {
+        "passed": true,
+        "actualStudentUi": true,
+        "workId": "2115360618909073409",
+        "draftForward": 5,
+        "reopenedForward": 5,
+        "submittedForward": 8,
+        "retainedUnsavedForward": 9,
+        "oldPageLeftOpen": true,
+        "recoveredLocatorOnly": true
+      }
+    },
+    {
+      "source": "32-teacher-feedback-readonly.js",
+      "result": {
+        "passed": true,
+        "cases": [
+          {
+            "engine": "Python",
+            "score": "4",
+            "comment": "Python 合成隔离批改：已核对作品。\n旧页面修改须被拒绝，评分和本条评语应保留。",
+            "actualReadonlyDialogReopen": true
+          },
+          {
+            "engine": "Scratch",
+            "score": "3",
+            "comment": "Scratch 合成隔离批改：已核对作品。\n旧页面修改须被拒绝，评分和本条评语应保留。",
+            "actualReadonlyDialogReopen": true
+          },
+          {
+            "engine": "ScratchJr",
+            "score": "2",
+            "comment": "ScratchJr 合成隔离批改：已核对作品。\n旧页面修改须被拒绝，评分和本条评语应保留。",
+            "actualReadonlyDialogReopen": true
+          }
+        ],
+        "sqlUnchanged": true
+      }
+    },
+    {
+      "source": "41-reject-stale-editors-correct-python-host.js",
+      "result": {
+        "passed": true,
+        "actualEditorStaleSubmissions": true,
+        "cases": [
+          {
+            "engine": "Python",
+            "workId": "2115359413931671553",
+            "httpStatus": 200,
+            "rejected": {
+              "success": false,
+              "message": "作业状态已变化，不能再保存或提交。请返回作业列表查看最新状态和反馈。",
+              "code": 409,
+              "result": null,
+              "timestamp": 1793176734345
+            },
+            "notice": "保存未完成。作业状态已变化，不能再保存或提交。请返回作业列表查看最新状态和反馈；代码仍保留在当前页面，可重试或下载备份。",
+            "contentRetained": true,
+            "departureWarningHandler": {
+              "prevented": true,
+              "returnValue": false
+            },
+            "sqlUnchangedAfterUploads": true,
+            "originalWorkFeedbackEventsHistoryReferencesUnchanged": true,
+            "preparedUploadRecordsAdded": 1,
+            "sentWorkStatus": 1,
+            "sentWorkId": "2115359413931671553"
+          },
+          {
+            "engine": "Scratch",
+            "workId": "2115359456986202114",
+            "httpStatus": 200,
+            "rejected": {
+              "success": false,
+              "message": "作业状态已变化，不能再保存或提交。请返回作业列表查看最新状态和反馈。",
+              "code": 409,
+              "result": null,
+              "timestamp": 1793176734998
+            },
+            "notice": "保存未完成。作业状态已变化，不能再保存或提交。请返回作业列表查看最新状态和反馈；作品仍在当前页面，可重试或保存到电脑。",
+            "contentRetained": true,
+            "departureWarningHandler": {
+              "prevented": true,
+              "returnValue": false
+            },
+            "sqlUnchangedAfterUploads": true,
+            "originalWorkFeedbackEventsHistoryReferencesUnchanged": true,
+            "preparedUploadRecordsAdded": 2,
+            "sentWorkStatus": 1,
+            "sentWorkId": "2115359456986202114"
+          },
+          {
+            "engine": "ScratchJr",
+            "workId": "2115360618909073409",
+            "httpStatus": 200,
+            "rejected": {
+              "success": false,
+              "message": "作业状态已变化，不能再保存或提交。请返回作业列表查看最新状态和反馈。",
+              "code": 409,
+              "result": null,
+              "timestamp": 1793176735944
+            },
+            "notice": "保存未完成。作业状态已变化，不能再保存或提交。请返回作业列表查看最新状态和反馈；作品仍在当前页面，可重试或保存到电脑。",
+            "contentRetained": true,
+            "departureWarningHandler": {
+              "prevented": true,
+              "returnValue": false
+            },
+            "sqlUnchangedAfterUploads": true,
+            "originalWorkFeedbackEventsHistoryReferencesUnchanged": true,
+            "preparedUploadRecordsAdded": 2,
+            "sentWorkStatus": 1,
+            "sentWorkId": "2115360618909073409"
+          }
+        ]
+      }
+    },
+    {
+      "source": "51-student-editor-feedback-refresh.js",
+      "result": {
+        "passed": true,
+        "actualStudentFeedbackAndReload": true,
+        "gradedEditingUnavailable": true
+      }
+    },
+    {
+      "source": "60-mobile-file-feedback.js",
+      "result": {
+        "passed": true,
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "submittedFilter": true,
+        "sidebarClosed": true,
+        "score": 0,
+        "fullCommentVisible": true,
+        "gradedEditingUnavailable": true,
+        "sqlUnchanged": true,
+        "unobscured": {
+          "cardInViewport": true,
+          "hitIsCardContent": true
+        }
+      }
+    }
+  ],
+  "scope": "Complete SPA and real local API/MySQL; synthetic accounts; UI editing and native beforeunload confirmation; not complex project execution or real mobile device acceptance"
+}

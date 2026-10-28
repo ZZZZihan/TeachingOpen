@@ -1,0 +1,320 @@
+{
+  "cases": [
+    {
+      "case": "initial teacher access metadata remains forbidden",
+      "passed": true
+    },
+    {
+      "case": "initial teacher access actual private bytes remain forbidden",
+      "passed": true
+    },
+    {
+      "case": "teacher cannot replace workFile with private file",
+      "passed": true
+    },
+    {
+      "case": "teacher cannot replace workFile with private file preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "after denied workFile metadata remains forbidden",
+      "passed": true
+    },
+    {
+      "case": "after denied workFile actual private bytes remain forbidden",
+      "passed": true
+    },
+    {
+      "case": "teacher cannot replace workCover with private file",
+      "passed": true
+    },
+    {
+      "case": "teacher cannot replace workCover with private file preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "after denied workCover metadata remains forbidden",
+      "passed": true
+    },
+    {
+      "case": "after denied workCover actual private bytes remain forbidden",
+      "passed": true
+    },
+    {
+      "case": "teacher add rejects unauthorized or noncanonical file fixture_rprobe_private",
+      "passed": true
+    },
+    {
+      "case": "teacher add rejects unauthorized or noncanonical file fixture_rprobe_private preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "teacher add rejects unauthorized or noncanonical file FIXTURE_RPROBE_PRIVATE",
+      "passed": true
+    },
+    {
+      "case": "teacher add rejects unauthorized or noncanonical file FIXTURE_RPROBE_PRIVATE preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "teacher add rejects unauthorized or noncanonical file fixture_rprobe_missing",
+      "passed": true
+    },
+    {
+      "case": "teacher add rejects unauthorized or noncanonical file fixture_rprobe_missing preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "teacher import role cannot bypass reference checks",
+      "passed": true
+    },
+    {
+      "case": "teacher import role cannot bypass reference checks preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "student cannot use teacher management edit",
+      "passed": true
+    },
+    {
+      "case": "student cannot use teacher management edit preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "cross-class teacher cannot use management edit",
+      "passed": true
+    },
+    {
+      "case": "cross-class teacher cannot use management edit preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "assignment edit rejects local reference form 0",
+      "passed": true
+    },
+    {
+      "case": "assignment edit rejects local reference form 0 preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "assignment add rejects local reference form 0",
+      "passed": true
+    },
+    {
+      "case": "assignment add rejects local reference form 0 preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "after denied assignment reference 0 metadata remains forbidden",
+      "passed": true
+    },
+    {
+      "case": "after denied assignment reference 0 actual private bytes remain forbidden",
+      "passed": true
+    },
+    {
+      "case": "assignment edit rejects local reference form 1",
+      "passed": true
+    },
+    {
+      "case": "assignment edit rejects local reference form 1 preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "assignment add rejects local reference form 1",
+      "passed": true
+    },
+    {
+      "case": "assignment add rejects local reference form 1 preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "after denied assignment reference 1 metadata remains forbidden",
+      "passed": true
+    },
+    {
+      "case": "after denied assignment reference 1 actual private bytes remain forbidden",
+      "passed": true
+    },
+    {
+      "case": "assignment edit rejects local reference form 2",
+      "passed": true
+    },
+    {
+      "case": "assignment edit rejects local reference form 2 preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "assignment add rejects local reference form 2",
+      "passed": true
+    },
+    {
+      "case": "assignment add rejects local reference form 2 preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "after denied assignment reference 2 metadata remains forbidden",
+      "passed": true
+    },
+    {
+      "case": "after denied assignment reference 2 actual private bytes remain forbidden",
+      "passed": true
+    },
+    {
+      "case": "assignment edit rejects local reference form 3",
+      "passed": true
+    },
+    {
+      "case": "assignment edit rejects local reference form 3 preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "assignment add rejects local reference form 3",
+      "passed": true
+    },
+    {
+      "case": "assignment add rejects local reference form 3 preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "after denied assignment reference 3 metadata remains forbidden",
+      "passed": true
+    },
+    {
+      "case": "after denied assignment reference 3 actual private bytes remain forbidden",
+      "passed": true
+    },
+    {
+      "case": "assignment edit rejects local reference form 4",
+      "passed": true
+    },
+    {
+      "case": "assignment edit rejects local reference form 4 preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "assignment add rejects local reference form 4",
+      "passed": true
+    },
+    {
+      "case": "assignment add rejects local reference form 4 preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "after denied assignment reference 4 metadata remains forbidden",
+      "passed": true
+    },
+    {
+      "case": "after denied assignment reference 4 actual private bytes remain forbidden",
+      "passed": true
+    },
+    {
+      "case": "actual teacher upload registers a file",
+      "passed": true
+    },
+    {
+      "case": "teacher upload belongs to probe directory",
+      "passed": true
+    },
+    {
+      "case": "teacher upload has one canonical owned file ID and exact bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher can replace file and cover with own upload",
+      "passed": true
+    },
+    {
+      "case": "owned upload reference persists",
+      "passed": true
+    },
+    {
+      "case": "normal teacher grading preserves owned attachment",
+      "passed": true
+    },
+    {
+      "case": "normal grade keeps new file and discussion",
+      "passed": true
+    },
+    {
+      "case": "student reads teacher uploaded replacement metadata",
+      "passed": true
+    },
+    {
+      "case": "student reads exact replacement bytes",
+      "passed": true
+    },
+    {
+      "case": "teacher add accepts own registered upload",
+      "passed": true
+    },
+    {
+      "case": "legitimate send clones an accessible source with foreign uploaded attachments",
+      "passed": true
+    },
+    {
+      "case": "send produced a distinct draft and preserved both source references",
+      "passed": true
+    },
+    {
+      "case": "student may save a sent draft with retained foreign attachment",
+      "passed": true
+    },
+    {
+      "case": "teacher can retain a clone attachment while grading",
+      "passed": true
+    },
+    {
+      "case": "student cannot save the graded sent copy even with its retained foreign attachment",
+      "passed": true
+    },
+    {
+      "case": "student cannot save the graded sent copy even with its retained foreign attachment preserves work feedback files statistics and media references",
+      "passed": true
+    },
+    {
+      "case": "clone recipient still reads metadata",
+      "passed": true
+    },
+    {
+      "case": "clone recipient still reads exact shared bytes",
+      "passed": true
+    },
+    {
+      "case": "assignment accepts uploaded local media and external links",
+      "passed": true
+    },
+    {
+      "case": "assignment can retain its authorized local reference",
+      "passed": true
+    },
+    {
+      "case": "all permitted flows preserve unrelated private file metadata remains forbidden",
+      "passed": true
+    },
+    {
+      "case": "all permitted flows preserve unrelated private file actual private bytes remain forbidden",
+      "passed": true
+    },
+    {
+      "case": "all original business rows restored",
+      "passed": true
+    },
+    {
+      "case": "original media reference index and state restored",
+      "passed": true
+    },
+    {
+      "case": "all original file bytes restored",
+      "passed": true
+    }
+  ],
+  "passed": 77,
+  "failed": 0,
+  "total": 77,
+  "jar_sha256": "1516bbfcbd70731c988a1c9aaa21a539dfa0e38ce403c19b7c553aa576b8161f",
+  "expected_legacy": false,
+  "exception": null,
+  "created_at": "2026-10-28T08:44:56.582270+00:00",
+  "scope": "Synthetic HTTP/login, owned MySQL state, upload/send/grade/save, private metadata and exact local bytes; no production or Qiniu execution."
+}

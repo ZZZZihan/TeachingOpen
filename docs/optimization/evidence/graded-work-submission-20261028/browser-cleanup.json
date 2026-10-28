@@ -1,0 +1,38 @@
+{
+  "format": 1,
+  "kind": "teachingopen-synthetic-teaching-journey",
+  "jar_sha256": "1516bbfcbd70731c988a1c9aaa21a539dfa0e38ce403c19b7c553aa576b8161f",
+  "restored": true,
+  "tables": [
+    "sys_user",
+    "sys_depart",
+    "sys_permission",
+    "sys_role_permission",
+    "sys_dict",
+    "sys_dict_item",
+    "sys_file",
+    "sys_data_log",
+    "teaching_additional_work",
+    "teaching_work",
+    "teaching_work_correct",
+    "teaching_work_comment",
+    "teaching_depart_day_log",
+    "teaching_work_event",
+    "teaching_unit_view_event",
+    "sys_local_file_reference",
+    "sys_local_file_reference_state"
+  ],
+  "database_restored": true,
+  "uploads_restored": true,
+  "audit_table_preserved": "sys_log",
+  "selected_business_and_ui_cache_restored": true,
+  "authentication_cache_note": "Normal UI login sessions/CAPTCHA keys are retained until their ordinary expiry.",
+  "removed_new_upload_count": 20,
+  "task_ports_closed": {
+    "13447": true,
+    "16520": true,
+    "18253": true,
+    "18254": true
+  },
+  "retained": "database/configuration/logs/evidence; normal audit logs retained"
+}
