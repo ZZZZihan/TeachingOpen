@@ -50,7 +50,7 @@
 </template>
 
 <script>
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import {addRole,editRole,duplicateCheck } from '@/api/api'
 
   export default {

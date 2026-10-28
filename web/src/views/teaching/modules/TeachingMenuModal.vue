@@ -102,7 +102,7 @@
 <script>
 import { getAction, deleteAction, putAction, postAction } from '@/api/manage'
 import Icons from '../../system/modules/icon/Icons'
-import pick from 'lodash.pick'
+import pick from 'lodash/pick'
 
 export default {
   name: 'TeachingMenuModal',

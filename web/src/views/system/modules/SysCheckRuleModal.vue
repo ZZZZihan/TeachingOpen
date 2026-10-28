@@ -78,7 +78,7 @@
 </template>
 
 <script>
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import { httpAction } from '@/api/manage'
   import { validateDuplicateValue, alwaysResolve, failedSymbol } from '@/utils/util'
   import { FormTypes } from '@/utils/JEditableTableUtil'

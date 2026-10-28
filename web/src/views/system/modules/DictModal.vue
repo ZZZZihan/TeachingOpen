@@ -38,7 +38,7 @@
 </template>
 
 <script>
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import { addDict, editDict, duplicateCheck } from '@/api/api'
 
   export default {

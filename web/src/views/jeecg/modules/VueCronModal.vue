@@ -250,7 +250,7 @@
   </a-modal>
 </template>
 <script>
-    import pick from 'lodash.pick'
+    import pick from 'lodash/pick'
     export default {
         name:'VueCron',
         props:['data','i18n'],

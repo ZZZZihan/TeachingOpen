@@ -141,7 +141,7 @@
 <script>
   import { httpAction,getAction } from '@/api/manage'
   import JDate from '@/components/jeecg/JDate'
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import moment from "moment"
 
   export default {

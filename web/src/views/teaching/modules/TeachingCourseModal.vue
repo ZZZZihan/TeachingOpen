@@ -118,7 +118,7 @@
 <script>
 
 import CourseFormRecovery from '@/mixins/CourseFormRecovery'
-import pick from 'lodash.pick'
+import pick from 'lodash/pick'
 import JUpload from '@/components/jeecg/JUpload'
 import TeachingMapEditor from './TeachingMapEditor'
 import JSelectDepart from '@/components/jeecgbiz/JSelectDepart'

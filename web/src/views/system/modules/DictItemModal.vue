@@ -54,7 +54,7 @@
 </template>
 
 <script>
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import {addDictItem, editDictItem} from '@/api/api'
 
   export default {

@@ -176,7 +176,7 @@
 <script>
   import {addPermission,editPermission,queryTreeList, duplicateCheck} from '@/api/api'
   import Icons from './icon/Icons'
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
 
   export default {
     name: "PermissionModal",
