@@ -55,19 +55,20 @@ def verify(args):
                     for p in (api.runtime / 'uploads').rglob('*') if p.is_file()}
 
         def snapshot():
-            return {'rows': rows(), 'files': files(), 'assignment_cache': api.cache('SMEMBERS', cache_key)}
+            return {'rows': rows(), 'files': files(), 'assignment_cache': api.cache('SMEMBERS', cache_key),
+                    'media_references': media_index_snapshot(sql) if has_media_index else None}
 
         def allowed(name, method, path, body=None, actor='teacher_a'):
             status, response, _ = api.request(method, path, actor, body)
             check(name, status == 200 and response and response.get('success') is True)
             return response.get('result')
 
-        def denied(name, method, path, body=None, actor='teacher_a'):
+        def denied(name, method, path, body=None, actor='teacher_a', code=510):
             before = snapshot()
             status, response, _ = api.request(method, path, actor, body)
             check(name, status == (200 if actor else 401) and response and response.get('success') is False
-                  and response.get('code') == (510 if actor else 401) and not response.get('result'))
-            check(name + ' preserves work feedback files and statistics', before == snapshot())
+                  and response.get('code') == (code if actor else 401) and not response.get('result'))
+            check(name + ' preserves work feedback files statistics and media references', before == snapshot())
 
         def bytes_read(key, actor='teacher_a'):
             headers = {'X-Access-Token': api.tokens[actor]} if actor else {}
@@ -200,11 +201,17 @@ def verify(args):
                 check('send produced a distinct draft and preserved both source references', bool(clone_id) and '\n' not in clone_id
                       and sql('SELECT CONCAT(work_file,\':\',work_cover,\':\',work_status) FROM teaching_work WHERE id=' + literal(clone_id))
                       == PREFIX + 'source:' + PREFIX + 'source:0')
+                # A received draft may retain its shared attachment while editable.
+                # Once graded, the same student save must preserve that reviewed copy.
+                retained_draft = {'id': clone_id, 'workName': NAME + 'clone_retained', 'workFile': PREFIX + 'source',
+                                  'workCover': PREFIX + 'source', 'workType': '2', 'workStatus': '0'}
+                allowed('student may save a sent draft with retained foreign attachment', 'POST', WORK + 'submit',
+                        retained_draft, actor='student_a')
                 allowed('teacher can retain a clone attachment while grading', 'PUT', WORK + 'edit',
                         {'id': clone_id, 'workFile': PREFIX + 'source', 'workCover': PREFIX + 'source', 'workStatus': '2',
                          'teachingWorkCorrectList': [{'score': 4, 'comment': 'retained clone'}]})
-                allowed('student may save a sent draft with retained foreign attachment', 'POST', WORK + 'submit',
-                        {'id': clone_id, 'workName': NAME + 'clone_retained', 'workFile': PREFIX + 'source', 'workCover': PREFIX + 'source', 'workType': '2', 'workStatus': '0'}, actor='student_a')
+                denied('student cannot save the graded sent copy even with its retained foreign attachment',
+                       'POST', WORK + 'submit', retained_draft, actor='student_a', code=409)
                 allowed('clone recipient still reads metadata', 'GET', '/system/sysFile/queryById?id=' + PREFIX + 'source', actor='student_a')
                 status, content = bytes_read(DIRECTORY + '/source.txt', 'student_a')
                 check('clone recipient still reads exact shared bytes', status == 200 and content == (folder / 'source.txt').read_bytes())
