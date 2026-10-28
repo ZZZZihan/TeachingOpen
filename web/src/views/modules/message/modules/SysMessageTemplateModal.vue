@@ -82,7 +82,7 @@
 
 <script>
   import {httpAction} from '@/api/manage'
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import { duplicateCheck } from '@/api/api'
   import JEditor from '@/components/jeecg/JEditor'
 

@@ -93,7 +93,7 @@
 
 <script>
 import { httpAction, getAction } from '@/api/manage'
-import pick from 'lodash.pick'
+import pick from 'lodash/pick'
 import { validateDuplicateValue } from '@/utils/util'
 import JFormContainer from '@/components/jeecg/JFormContainer'
 import JDate from '@/components/jeecg/JDate'

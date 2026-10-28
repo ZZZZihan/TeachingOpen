@@ -16,11 +16,6 @@ import Print from 'vue-print-nb-jeecg'
 import preview from 'vue-photo-preview'
 import 'vue-photo-preview/dist/skin.css'
 
-// swiper
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-// import "swiper/css/swiper.css";
-import 'swiper/dist/css/swiper.css'
-
 import {
     ACCESS_TOKEN,
     DEFAULT_THEME,
@@ -61,7 +56,6 @@ Vue.use(preview)
 Vue.use(vueBus)
 Vue.use(JeecgComponents)
 Vue.use(VueAreaLinkage)
-Vue.use(VueAwesomeSwiper /* { default options with global component } */)
 Vue.use(vcolorpicker)
 
 let cacheTime = 1800000 // 缓存时间

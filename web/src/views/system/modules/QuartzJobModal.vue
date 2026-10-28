@@ -61,7 +61,7 @@
 <script>
   import { httpAction } from '@/api/manage'
   import JCron from "@/components/jeecg/JCron";
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   // import moment from "moment"
 
   export default {

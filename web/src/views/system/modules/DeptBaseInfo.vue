@@ -73,7 +73,7 @@
   </a-card>
 </template>
 <script>
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import {queryIdTree} from '@/api/api'
 
   export default {

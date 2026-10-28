@@ -202,7 +202,7 @@
 </template>
 <script>
 import DepartModal from './modules/DepartModal'
-import pick from 'lodash.pick'
+import pick from 'lodash/pick'
 import { queryMyDepartTreeList, searchByKeywords, deleteByDepartId } from '@/api/api'
 import { httpAction, deleteAction } from '@/api/manage'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'

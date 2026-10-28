@@ -97,7 +97,7 @@
 <script>
   import { httpAction } from '@/api/manage'
   import { queryIdTree } from '@/api/api'
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import ATextarea from 'ant-design-vue/es/input/TextArea'
   export default {
     name: "SysDepartModal",

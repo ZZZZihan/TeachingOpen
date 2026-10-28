@@ -53,7 +53,7 @@ import Vue from 'vue'
 import AvatarModal from './AvatarModal'
 import JUpload from '@/components/jeecg/JUpload'
 import moment from 'moment'
-import pick from 'lodash.pick'
+import pick from 'lodash/pick'
 import { getAction,putAction } from '@/api/manage'
 import { duplicateCheck } from '@/api/api'
 

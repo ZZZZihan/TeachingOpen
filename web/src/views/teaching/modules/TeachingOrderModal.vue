@@ -46,7 +46,7 @@
 <script>
 
   import { httpAction } from '@/api/manage'
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import { validateDuplicateValue } from '@/utils/util'
   import JDate from '@/components/jeecg/JDate'  
   import JDictSelectTag from "@/components/dict/JDictSelectTag"

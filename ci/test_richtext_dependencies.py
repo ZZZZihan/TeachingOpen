@@ -48,6 +48,26 @@ class RichTextDependencyGateTest(unittest.TestCase):
         for inventory in ({}, 'node_modules/editor', [None]):
             with self.assertRaises(ValueError): check(self.lock, self.policy, {'vulnerabilities': {}}, bundled=inventory)
 
+    def test_removed_exceptions_do_not_allow_vulnerable_packages_back_into_browser(self):
+        advisories = {
+            'swiper': 'https://github.com/advisories/GHSA-p3hc-fv2j-rp68',
+            'lodash.pick': 'https://github.com/advisories/GHSA-p6mc-m468-83gw',
+        }
+        for name, url in advisories.items():
+            node = 'node_modules/' + name
+            self.lock['packages'][node] = {}
+            for severity in ('high', 'critical'):
+                with self.subTest(package=name, severity=severity):
+                    self.audit['vulnerabilities'] = {
+                        name: {'severity': severity, 'nodes': [node],
+                               'via': [{'url': url, 'severity': severity}]}}
+                    # A lockfile-only dependency is outside the emitted browser scope.
+                    self.assertEqual(check(self.lock, self.policy, self.audit,
+                                           bundled=['node_modules/editor'])['exceptions'], 0)
+                    # Reintroducing that same package into any browser chunk must fail.
+                    with self.assertRaisesRegex(ValueError, 'High-risk browser runtime dependencies: ' + name):
+                        check(self.lock, self.policy, self.audit, bundled=[node])
+
     def test_missing_locked_dependency_is_not_a_clean_audit(self):
         del self.lock['packages']['node_modules/parser']
         with self.assertRaises(ValueError): check(self.lock, self.policy, self.audit)

@@ -77,7 +77,7 @@
 </template>
 
 <script>
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import {filterObj} from '@/utils/util';
   import DictItemModal from './modules/DictItemModal'
   import {JeecgListMixin} from '@/mixins/JeecgListMixin'

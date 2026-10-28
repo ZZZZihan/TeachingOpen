@@ -78,7 +78,7 @@
 </template>
 
 <script>
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import { httpAction, postAction } from '@/api/manage'
   import { validateDuplicateValue } from '@/utils/util'
 

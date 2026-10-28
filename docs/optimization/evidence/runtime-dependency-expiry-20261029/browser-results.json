@@ -1,0 +1,646 @@
+{
+  "scope": "production SPA + loopback synthetic API + Chromium; no MySQL",
+  "passed": 31,
+  "failed": 0,
+  "build": {
+    "build": "/Users/xuzihan/Documents/Projects/TeachingOpen/.devspace/artifacts/runtime-dependency-expiry-20261029/final-dist",
+    "files": 4910,
+    "inventory_sha256": "b371f024126da26ea754734abe942edd45cd7609917330bde239de86eeb6c39d",
+    "lock_sha256": "fe1366e57692fc71537e41caba975b7566504ca170faddc4057a42488dd92e40",
+    "Banner_sha256": "47d588aa0854e2f4ba8082832af429edca44c36b9e841b5389a5d5097e08b95d"
+  },
+  "reports": {
+    "final-desktop.json": {
+      "scope": "unmodified production SPA + loopback synthetic API; real Chromium; no MySQL",
+      "checks": [
+        {
+          "name": "multi: no premature automatic change at 4.2s",
+          "passed": true,
+          "detail": {
+            "initial": "0",
+            "actual": "0",
+            "ms": 4204
+          }
+        },
+        {
+          "name": "multi: automatic change around 5 seconds",
+          "passed": true,
+          "detail": {
+            "elapsedMs": 5096,
+            "from": "0",
+            "to": "1"
+          }
+        },
+        {
+          "name": "multi: three dots, both direction controls, images loaded",
+          "passed": true,
+          "detail": {
+            "dots": 3
+          }
+        },
+        {
+          "name": "multi: dot selects first configured image",
+          "passed": true,
+          "detail": "http://127.0.0.1:54976/fixture-banner-1.svg"
+        },
+        {
+          "name": "1440 layout: visible banner, height 300, no page overflow",
+          "passed": true,
+          "detail": {
+            "rect": {
+              "x": 769.84375,
+              "y": 229.3203125,
+              "width": 546.15625,
+              "height": 300,
+              "top": 229.3203125,
+              "right": 1316,
+              "bottom": 529.3203125,
+              "left": 769.84375
+            },
+            "overflow": false
+          }
+        },
+        {
+          "name": "multi: next button moves to second image without link",
+          "passed": true,
+          "detail": "http://127.0.0.1:54976/fixture-banner-2.svg"
+        },
+        {
+          "name": "multi: previous button moves to first image",
+          "passed": true,
+          "detail": "http://127.0.0.1:54976/fixture-banner-1.svg"
+        },
+        {
+          "name": "multi: previous wraps first to last",
+          "passed": true,
+          "detail": "http://127.0.0.1:54976/fixture-banner-3.svg"
+        },
+        {
+          "name": "multi: next wraps last to first",
+          "passed": true,
+          "detail": "http://127.0.0.1:54976/fixture-banner-1.svg"
+        },
+        {
+          "name": "multi: image link opens its configured URL in a new tab without opener",
+          "passed": true,
+          "detail": {
+            "popup": "http://127.0.0.1:54976/fixture-link/1",
+            "openerIsNull": true,
+            "original": "http://127.0.0.1:54976/index"
+          }
+        },
+        {
+          "name": "multi: automatic playback continues after dot interaction",
+          "passed": true,
+          "detail": {
+            "from": "1",
+            "to": "2",
+            "elapsedAfterSettleMs": 3641
+          }
+        },
+        {
+          "name": "multi: real mouse drag advances second to third image",
+          "passed": true,
+          "detail": "http://127.0.0.1:54976/fixture-banner-3.svg"
+        },
+        {
+          "name": "multi: automatic playback continues after drag",
+          "passed": true,
+          "detail": {
+            "from": "2",
+            "to": "0",
+            "elapsedAfterSettleMs": 2173
+          }
+        },
+        {
+          "name": "leave page: banner destroyed with no JavaScript exception",
+          "passed": true,
+          "detail": {
+            "url": "http://127.0.0.1:54976/courseList",
+            "errors": []
+          }
+        }
+      ],
+      "qa": {
+        "errors": [],
+        "consoleErrors": [
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+        ],
+        "external": [
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js"
+        ]
+      }
+    },
+    "final-mobile.json": {
+      "scope": "production SPA + loopback synthetic API; Chromium device touch input; no MySQL",
+      "checks": [
+        {
+          "name": "none: original campus illustration replaces absent banner",
+          "passed": true,
+          "detail": {
+            "banners": 0
+          }
+        },
+        {
+          "name": "single: one image, no inactive arrows or pagination",
+          "passed": true,
+          "detail": {
+            "slides": 1
+          }
+        },
+        {
+          "name": "single: remains on same loaded image beyond 5 seconds",
+          "passed": true,
+          "detail": {
+            "from": "0",
+            "to": "0"
+          }
+        },
+        {
+          "name": "390 touch: physical browser touch swipe advances second to third image",
+          "passed": true,
+          "detail": {
+            "current": "2",
+            "touchPoints": 1,
+            "box": {
+              "x": 20,
+              "y": 471.8125,
+              "width": 350,
+              "height": 305.5
+            }
+          }
+        },
+        {
+          "name": "390 layout: banner fits and page has no horizontal overflow",
+          "passed": true,
+          "detail": {
+            "rect": {
+              "x": 20,
+              "y": 471.8125,
+              "width": 350,
+              "height": 300,
+              "top": 471.8125,
+              "right": 370,
+              "bottom": 771.8125,
+              "left": 20
+            },
+            "width": 390,
+            "overflow": false
+          }
+        },
+        {
+          "name": "390 touch: automatic playback continues after touch and dot tap",
+          "passed": true,
+          "detail": {
+            "from": "0",
+            "to": "1",
+            "elapsedAfterSettleMs": 1920
+          }
+        }
+      ],
+      "qa": {
+        "errors": [],
+        "consoleErrors": [
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+        ],
+        "external": [
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js"
+        ]
+      }
+    },
+    "final-lifecycle.json": {
+      "scope": "production SPA lifecycle, old instance references observed; methods wrapped only to count and forward; no MySQL",
+      "checks": [
+        {
+          "name": "cycle 1: old carousel is destroyed and slide/timers stay inactive after resize",
+          "passed": true,
+          "detail": {
+            "afterLeave": [
+              {
+                "destroyed": true,
+                "connected": false,
+                "slide": 0,
+                "resizeCalls": 1,
+                "disconnectCalls": 0,
+                "unobserveCalls": 0,
+                "callbackTimers": 0
+              }
+            ],
+            "afterResize": [
+              {
+                "destroyed": true,
+                "connected": false,
+                "slide": 0,
+                "resizeCalls": 1,
+                "disconnectCalls": 0,
+                "unobserveCalls": 0,
+                "callbackTimers": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "cycle 1: returning renders exactly one active carousel",
+          "passed": true
+        },
+        {
+          "name": "cycle 2: old carousel is destroyed and slide/timers stay inactive after resize",
+          "passed": true,
+          "detail": {
+            "afterLeave": [
+              {
+                "destroyed": true,
+                "connected": false,
+                "slide": 0,
+                "resizeCalls": 1,
+                "disconnectCalls": 0,
+                "unobserveCalls": 0,
+                "callbackTimers": 0
+              },
+              {
+                "destroyed": true,
+                "connected": false,
+                "slide": 0,
+                "resizeCalls": 3,
+                "disconnectCalls": 0,
+                "unobserveCalls": 0,
+                "callbackTimers": 0
+              }
+            ],
+            "afterResize": [
+              {
+                "destroyed": true,
+                "connected": false,
+                "slide": 0,
+                "resizeCalls": 1,
+                "disconnectCalls": 0,
+                "unobserveCalls": 0,
+                "callbackTimers": 0
+              },
+              {
+                "destroyed": true,
+                "connected": false,
+                "slide": 0,
+                "resizeCalls": 3,
+                "disconnectCalls": 0,
+                "unobserveCalls": 0,
+                "callbackTimers": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "cycle 2: returning renders exactly one active carousel",
+          "passed": true
+        },
+        {
+          "name": "cycle 3: old carousel is destroyed and slide/timers stay inactive after resize",
+          "passed": true,
+          "detail": {
+            "afterLeave": [
+              {
+                "destroyed": true,
+                "connected": false,
+                "slide": 0,
+                "resizeCalls": 1,
+                "disconnectCalls": 0,
+                "unobserveCalls": 0,
+                "callbackTimers": 0
+              },
+              {
+                "destroyed": true,
+                "connected": false,
+                "slide": 0,
+                "resizeCalls": 3,
+                "disconnectCalls": 0,
+                "unobserveCalls": 0,
+                "callbackTimers": 0
+              },
+              {
+                "destroyed": true,
+                "connected": false,
+                "slide": 0,
+                "resizeCalls": 3,
+                "disconnectCalls": 0,
+                "unobserveCalls": 0,
+                "callbackTimers": 0
+              }
+            ],
+            "afterResize": [
+              {
+                "destroyed": true,
+                "connected": false,
+                "slide": 0,
+                "resizeCalls": 1,
+                "disconnectCalls": 0,
+                "unobserveCalls": 0,
+                "callbackTimers": 0
+              },
+              {
+                "destroyed": true,
+                "connected": false,
+                "slide": 0,
+                "resizeCalls": 3,
+                "disconnectCalls": 0,
+                "unobserveCalls": 0,
+                "callbackTimers": 0
+              },
+              {
+                "destroyed": true,
+                "connected": false,
+                "slide": 0,
+                "resizeCalls": 3,
+                "disconnectCalls": 0,
+                "unobserveCalls": 0,
+                "callbackTimers": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "cycle 3: returning renders exactly one active carousel",
+          "passed": true
+        },
+        {
+          "name": "lifecycle: no uncaught browser exceptions",
+          "passed": true,
+          "detail": []
+        }
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "afterLeave": [
+            {
+              "destroyed": true,
+              "connected": false,
+              "slide": 0,
+              "resizeCalls": 1,
+              "disconnectCalls": 0,
+              "unobserveCalls": 0,
+              "callbackTimers": 0
+            }
+          ],
+          "afterResize": [
+            {
+              "destroyed": true,
+              "connected": false,
+              "slide": 0,
+              "resizeCalls": 1,
+              "disconnectCalls": 0,
+              "unobserveCalls": 0,
+              "callbackTimers": 0
+            }
+          ]
+        },
+        {
+          "cycle": 2,
+          "afterLeave": [
+            {
+              "destroyed": true,
+              "connected": false,
+              "slide": 0,
+              "resizeCalls": 1,
+              "disconnectCalls": 0,
+              "unobserveCalls": 0,
+              "callbackTimers": 0
+            },
+            {
+              "destroyed": true,
+              "connected": false,
+              "slide": 0,
+              "resizeCalls": 3,
+              "disconnectCalls": 0,
+              "unobserveCalls": 0,
+              "callbackTimers": 0
+            }
+          ],
+          "afterResize": [
+            {
+              "destroyed": true,
+              "connected": false,
+              "slide": 0,
+              "resizeCalls": 1,
+              "disconnectCalls": 0,
+              "unobserveCalls": 0,
+              "callbackTimers": 0
+            },
+            {
+              "destroyed": true,
+              "connected": false,
+              "slide": 0,
+              "resizeCalls": 3,
+              "disconnectCalls": 0,
+              "unobserveCalls": 0,
+              "callbackTimers": 0
+            }
+          ]
+        },
+        {
+          "cycle": 3,
+          "afterLeave": [
+            {
+              "destroyed": true,
+              "connected": false,
+              "slide": 0,
+              "resizeCalls": 1,
+              "disconnectCalls": 0,
+              "unobserveCalls": 0,
+              "callbackTimers": 0
+            },
+            {
+              "destroyed": true,
+              "connected": false,
+              "slide": 0,
+              "resizeCalls": 3,
+              "disconnectCalls": 0,
+              "unobserveCalls": 0,
+              "callbackTimers": 0
+            },
+            {
+              "destroyed": true,
+              "connected": false,
+              "slide": 0,
+              "resizeCalls": 3,
+              "disconnectCalls": 0,
+              "unobserveCalls": 0,
+              "callbackTimers": 0
+            }
+          ],
+          "afterResize": [
+            {
+              "destroyed": true,
+              "connected": false,
+              "slide": 0,
+              "resizeCalls": 1,
+              "disconnectCalls": 0,
+              "unobserveCalls": 0,
+              "callbackTimers": 0
+            },
+            {
+              "destroyed": true,
+              "connected": false,
+              "slide": 0,
+              "resizeCalls": 3,
+              "disconnectCalls": 0,
+              "unobserveCalls": 0,
+              "callbackTimers": 0
+            },
+            {
+              "destroyed": true,
+              "connected": false,
+              "slide": 0,
+              "resizeCalls": 3,
+              "disconnectCalls": 0,
+              "unobserveCalls": 0,
+              "callbackTimers": 0
+            }
+          ]
+        }
+      ],
+      "qa": {
+        "errors": [],
+        "consoleErrors": [
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+        ],
+        "external": [
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js",
+          "http://api.paas.plus/js/errlog.js"
+        ]
+      }
+    },
+    "final-pagination-visual-desktop.json": {
+      "scope": "final production SPA + local synthetic API; pagination visual follow-up",
+      "checks": [
+        {
+          "name": "pagination: third dot remains clickable after style change",
+          "passed": true
+        },
+        {
+          "name": "pagination: visible dark backing within banner bounds",
+          "passed": true,
+          "detail": {
+            "rect": {
+              "x": 1000.921875,
+              "y": 485.8203125,
+              "width": 84,
+              "height": 37,
+              "top": 485.8203125,
+              "right": 1084.921875,
+              "bottom": 522.8203125,
+              "left": 1000.921875
+            },
+            "parent": {
+              "x": 769.84375,
+              "y": 229.3203125,
+              "width": 546.15625,
+              "height": 300,
+              "top": 229.3203125,
+              "right": 1316,
+              "bottom": 529.3203125,
+              "left": 769.84375
+            },
+            "backgroundColor": "rgba(0, 0, 0, 0.5)",
+            "borderRadius": "12px",
+            "padding": "8px",
+            "width": 1440
+          }
+        }
+      ]
+    },
+    "final-pagination-visual-mobile.json": {
+      "scope": "final production SPA + local synthetic API; pagination visual follow-up",
+      "checks": [
+        {
+          "name": "pagination: third dot remains clickable after style change",
+          "passed": true
+        },
+        {
+          "name": "pagination: visible dark backing within banner bounds",
+          "passed": true,
+          "detail": {
+            "rect": {
+              "x": 153,
+              "y": 728.3125,
+              "width": 84,
+              "height": 37,
+              "top": 728.3125,
+              "right": 237,
+              "bottom": 765.3125,
+              "left": 153
+            },
+            "parent": {
+              "x": 20,
+              "y": 471.8125,
+              "width": 350,
+              "height": 300,
+              "top": 471.8125,
+              "right": 370,
+              "bottom": 771.8125,
+              "left": 20
+            },
+            "backgroundColor": "rgba(0, 0, 0, 0.5)",
+            "borderRadius": "12px",
+            "padding": "8px",
+            "width": 390
+          }
+        }
+      ]
+    }
+  }
+}

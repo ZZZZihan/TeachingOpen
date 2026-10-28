@@ -139,7 +139,7 @@
 
 <script>
 
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import { FormTypes,getRefPromise } from '@/utils/JEditableTableUtil'
   import { JEditableTableMixin } from '@/mixins/JEditableTableMixin'
   import { validateDuplicateValue } from '@/utils/util'

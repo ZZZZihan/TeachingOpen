@@ -1,0 +1,44 @@
+[
+  {
+    "candidate": "legacy",
+    "version": "15.0.2",
+    "variant": "title",
+    "inputBytes": 800031,
+    "milliseconds": 5013,
+    "status": null,
+    "error": "ETIMEDOUT",
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "candidate": "legacy",
+    "version": "15.0.2",
+    "variant": "label",
+    "inputBytes": 800023,
+    "milliseconds": 5010,
+    "status": null,
+    "error": "ETIMEDOUT",
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "candidate": "patched",
+    "version": "15.0.3",
+    "variant": "title",
+    "inputBytes": 800031,
+    "milliseconds": 602,
+    "status": 0,
+    "stdout": "parsed",
+    "stderr": ""
+  },
+  {
+    "candidate": "patched",
+    "version": "15.0.3",
+    "variant": "label",
+    "inputBytes": 800023,
+    "milliseconds": 516,
+    "status": 0,
+    "stdout": "parsed",
+    "stderr": ""
+  }
+]

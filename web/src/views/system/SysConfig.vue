@@ -231,7 +231,7 @@
 </template>
 
 <script>
-import pick from 'lodash.pick'
+import pick from 'lodash/pick'
 import { getAction, postAction } from '@/api/manage'
 import JUpload from '@/components/jeecg/JUpload'
 import JSearchSelectTag from '@/components/dict/JSearchSelectTag'
