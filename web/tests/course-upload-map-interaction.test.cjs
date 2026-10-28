@@ -18,7 +18,7 @@ function harness () {
   const context = {
     Vue: { ls: { get: () => ({ uploadType: 'local' }) } }, ACCESS_TOKEN: 'synthetic', SYS_CONFIG: 'config',
     getAction: api('get'), postAction: api('post'), deleteAction: api('delete'), putAction: api('put'), httpAction: api('save'),
-    pick: require('lodash.pick'), JEditor: {}, JDictSelectTag: {}, JSelectDepart: {},
+    pick: require('lodash/pick'), JEditor: {}, JDictSelectTag: {}, JSelectDepart: {},
     window: { _CONFIG: { domianURL: '' }, addEventListener: (type, fn) => listeners.add(fn), removeEventListener: (type, fn) => listeners.delete(fn) },
     console: { log () {} }
   }

@@ -2,6 +2,7 @@ const assert = require('node:assert/strict')
 const { readFileSync } = require('node:fs')
 const { resolve } = require('node:path')
 const { test } = require('node:test')
+const { spawnSync } = require('node:child_process')
 const vm = require('node:vm')
 
 const componentPath = resolve(__dirname, '../src/views/account/course/modules/CoursePlanReader.vue')
@@ -15,7 +16,7 @@ function loader ({ response, sanitize = value => value } = {}) {
   const context = {
     URL, Blob, TextDecoder, Uint8Array, AbortController, Response, ReadableStream,
     window: { location: { origin: 'https://teaching.test', href: 'https://teaching.test/learning' } },
-    MarkdownIt: require('markdown-it'),
+    MarkdownIt: require('markdown-it/browser'),
     sanitizeRichText: html => { sanitized.push(html); return sanitize(html) },
     fetch: async (url, options = {}) => { requests.push({ url, options }); return typeof response === 'function' ? response(url, options) : response }
   }
@@ -161,6 +162,56 @@ test('课程教案：Markdown原始HTML不执行，file图片被拒绝而正常�
   assert.doesNotMatch(doc.content, /<script\b|<img[^>]+file:|<a[^>]+javascript:/i)
   assert.match(doc.content, /href="https:\/\/www.python.org\/?"/)
   assert.match(doc.content, /&lt;script&gt;/)
+})
+
+test('课程教案：多行引用链接保留标题，并根据附件位置解析相对地址', async () => {
+  const markdown = '[课堂文档][guide]\n\n[guide]: ./guide.html\n  "课堂\n  引用标题"\n'
+  const h = loader({ response: new Response(markdown) })
+  const doc = await h.load('https://teaching.test/materials/lesson.md')
+  assert.equal(doc.type, 'html')
+  assert.match(doc.content, /href="https:\/\/teaching\.test\/materials\/guide\.html"/)
+  assert.match(doc.content, /title="课堂\n引用标题"/)
+  assert.match(doc.content, /target="_blank"/)
+  assert.match(doc.content, /rel="noopener noreferrer"/)
+  assert.match(doc.content, />课堂文档<\/a>/)
+  assert.equal(h.sanitized.length, 1)
+})
+
+test('课程教案：未闭合的大型Markdown引用不会阻塞阅读器解析', () => {
+  // GHSA-gfr2-rv44-r23c affects the reference rule even with html:false.
+  // Run outside the test runner so a vulnerable dependency cannot hang the suite.
+  for (const variant of ['title', 'label']) {
+    const script = `
+      const assert = require('node:assert/strict')
+      const { readFileSync } = require('node:fs')
+      const vm = require('node:vm')
+      const source = readFileSync(${JSON.stringify(utilityPath)}, 'utf8')
+        .replace(/^import .*$/gm, '')
+        .replace(/\\bexport\\s+(?=(?:async\\s+)?function|const|let)/g, '')
+      const prefix = ${JSON.stringify(variant)} === 'title' ? '[a]: /u "' : '['
+      const content = '# 正常课堂标题\\n\\n' + prefix + 'x\\n'.repeat(400000)
+      let sanitized = 0
+      const context = {
+        URL, Blob, TextDecoder, Uint8Array,
+        window: { location: { origin: 'https://teaching.test' } },
+        MarkdownIt: require(${JSON.stringify(require.resolve('markdown-it/browser'))}),
+        sanitizeRichText: html => { sanitized++; return html },
+        fetch: async () => new Response(content)
+      }
+      vm.runInNewContext(source + '\\nthis.loadCoursePlan = loadCoursePlan', context)
+      context.loadCoursePlan('https://teaching.test/materials/lesson.md').then(document => {
+        assert.equal(document.type, 'html')
+        assert.match(document.content, /<h1>正常课堂标题<\\/h1>/)
+        assert.ok(document.content.includes('x\\nx'))
+        assert.equal(sanitized, 1)
+        process.stdout.write('parsed')
+      }).catch(error => { console.error(error); process.exitCode = 1 })
+    `
+    const result = spawnSync(process.execPath, ['-e', script], { encoding: 'utf8', timeout: 5000, maxBuffer: 1024 * 1024 })
+    assert.ifError(result.error)
+    assert.equal(result.status, 0, variant + ': ' + result.stderr)
+    assert.equal(result.stdout, 'parsed', variant)
+  }
 })
 
 test('课程教案：同源读取带登录会话，外部文件读取不传用户凭据', async () => {

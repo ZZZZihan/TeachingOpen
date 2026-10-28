@@ -53,7 +53,7 @@
 <script>
 
   import { httpAction,getAction } from '@/api/manage'
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import JTreeSelect from '@/components/jeecg/JTreeSelect'
   
   export default {

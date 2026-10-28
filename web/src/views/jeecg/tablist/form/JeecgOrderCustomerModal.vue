@@ -68,7 +68,7 @@
 
 <script>
   import {httpAction} from '@/api/manage'
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import Vue from 'vue'
   import {ACCESS_TOKEN} from "@/store/mutation-types"
   import JImageUpload from '../../../../components/jeecg/JImageUpload'

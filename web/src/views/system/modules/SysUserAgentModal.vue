@@ -66,7 +66,7 @@
 </template>
 
 <script>
-  import pick from 'lodash.pick'
+  import pick from 'lodash/pick'
   import { httpAction, getAction } from '@/api/manage'
   import JDate from '@/components/jeecg/JDate.vue';
   import JSelectUserByDep from '@/components/jeecgbiz/JSelectUserByDep'

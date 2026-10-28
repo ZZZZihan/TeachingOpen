@@ -3,7 +3,7 @@ const { test } = require('node:test')
 const { readFileSync } = require('node:fs')
 const { resolve } = require('node:path')
 const vm = require('node:vm')
-const pick = require('lodash.pick')
+const pick = require('lodash/pick')
 
 test('个人设置实际保存方法只发送允许字段，不重发完整登录资料', async () => {
   const writes = []
